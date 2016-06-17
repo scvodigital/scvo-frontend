@@ -1,0 +1,513 @@
+@charset "utf-8";
+
+// Base variables ==============================================================
+
+$base-font-family: "Open Sans", "Helvetica", sans-serif;
+
+// Fonts =======================================================================
+
+// Regular Open Sans
+@font-face {
+    font-family: 'Open Sans';
+    src: url('fonts/OpenSans-Regular-webfont.eot');
+    src: url('fonts/OpenSans-Regular-webfont.eot?#iefix') format('embedded-opentype'),
+    url('fonts/OpenSans-Regular-webfont.woff') format('woff'),
+    url('fonts/OpenSans-Regular-webfont.ttf') format('truetype'),
+    url('fonts/OpenSans-Regular-webfont.svg#OpenSansRegular') format('svg');
+    font-weight: normal;
+    font-weight: 400;
+    font-style: normal;
+}
+
+// Italic Open Sans
+@font-face {
+    font-family: 'Open Sans';
+    src: url('fonts/OpenSans-Italic-webfont.eot');
+    src: url('fonts/OpenSans-Italic-webfont.eot?#iefix') format('embedded-opentype'),
+    url('fonts/OpenSans-Italic-webfont.woff') format('woff'),
+    url('fonts/OpenSans-Italic-webfont.ttf') format('truetype'),
+    url('fonts/OpenSans-Italic-webfont.svg#OpenSansItalic') format('svg');
+    font-weight: normal;
+    font-weight: 400;
+    font-style: italic;
+}
+
+// Light Open Sans
+@font-face {
+    font-family: 'Open Sans';
+    src: url('fonts/OpenSans-Regular-webfont.eot');
+    src: url('fonts/OpenSans-Regular-webfont.eot?#iefix') format('embedded-opentype'),
+    url('fonts/OpenSans-Regular-webfont.woff') format('woff'),
+    url('fonts/OpenSans-Regular-webfont.ttf') format('truetype'),
+    url('fonts/OpenSans-Regular-webfont.svg#OpenSansLight') format('svg');
+    font-weight: 200;
+    font-style: normal;
+}
+
+// Light Italic Open Sans
+@font-face {
+    font-family: 'Open Sans';
+    src: url('fonts/OpenSans-LightItalic-webfont.eot');
+    src: url('fonts/OpenSans-LightItalic-webfont.eot?#iefix') format('embedded-opentype'),
+    url('fonts/OpenSans-LightItalic-webfont.woff') format('woff'),
+    url('fonts/OpenSans-LightItalic-webfont.ttf') format('truetype'),
+    url('fonts/OpenSans-LightItalic-webfont.svg#OpenSansLightItalic') format('svg');
+    font-weight: 200;
+    font-style: italic;
+}
+
+// Semibold Open Sans
+@font-face {
+    font-family: 'Open Sans';
+    src: url('fonts/OpenSans-Semibold-webfont.eot');
+    src: url('fonts/OpenSans-Semibold-webfont.eot?#iefix') format('embedded-opentype'),
+    url('fonts/OpenSans-Semibold-webfont.woff') format('woff'),
+    url('fonts/OpenSans-Semibold-webfont.ttf') format('truetype'),
+    url('fonts/OpenSans-Semibold-webfont.svg#OpenSansSemibold') format('svg');
+    font-weight: 500;
+    font-style: normal;
+}
+
+// Semibold Italic Open Sans
+@font-face {
+    font-family: 'Open Sans';
+    src: url('fonts/OpenSans-SemiboldItalic-webfont.eot');
+    src: url('fonts/OpenSans-SemiboldItalic-webfont.eot?#iefix') format('embedded-opentype'),
+    url('fonts/OpenSans-SemiboldItalic-webfont.woff') format('woff'),
+    url('fonts/OpenSans-SemiboldItalic-webfont.ttf') format('truetype'),
+    url('fonts/OpenSans-SemiboldItalic-webfont.svg#OpenSansSemiboldItalic') format('svg');
+    font-weight: 500;
+    font-style: italic;
+}
+
+// Bold Open Sans
+@font-face {
+    font-family: 'Open Sans';
+    src: url('fonts/OpenSans-Bold-webfont.eot');
+    src: url('fonts/OpenSans-Bold-webfont.eot?#iefix') format('embedded-opentype'),
+    url('fonts/OpenSans-Bold-webfont.woff') format('woff'),
+    url('fonts/OpenSans-Bold-webfont.ttf') format('truetype'),
+    url('fonts/OpenSans-Bold-webfont.svg#OpenSansBold') format('svg');
+    font-weight: bold;
+    font-weight: 700;
+    font-style: normal;
+}
+
+// Bold Italic Open Sans
+@font-face {
+    font-family: 'Open Sans';
+    src: url('fonts/OpenSans-BoldItalic-webfont.eot');
+    src: url('fonts/OpenSans-BoldItalic-webfont.eot?#iefix') format('embedded-opentype'),
+    url('fonts/OpenSans-BoldItalic-webfont.woff') format('woff'),
+    url('fonts/OpenSans-BoldItalic-webfont.ttf') format('truetype'),
+    url('fonts/OpenSans-BoldItalic-webfont.svg#OpenSansBoldItalic') format('svg');
+    font-weight: bold;
+    font-weight: 700;
+    font-style: italic;
+}
+
+// Extra Bold Open Sans
+@font-face {
+    font-family: 'Open Sans';
+    src: url('fonts/OpenSans-ExtraBold-webfont.eot');
+    src: url('fonts/OpenSans-ExtraBold-webfont.eot?#iefix') format('embedded-opentype'),
+    url('fonts/OpenSans-ExtraBold-webfont.woff') format('woff'),
+    url('fonts/OpenSans-ExtraBold-webfont.ttf') format('truetype'),
+    url('fonts/OpenSans-ExtraBold-webfont.svg#OpenSansExtrabold') format('svg');
+    font-weight: 900;
+    font-style: normal;
+}
+
+// Extra Bold Italic Open Sans
+@font-face {
+    font-family: 'Open Sans';
+    src: url('fonts/OpenSans-ExtraBoldItalic-webfont.eot');
+    src: url('fonts/OpenSans-ExtraBoldItalic-webfont.eot?#iefix') format('embedded-opentype'),
+    url('fonts/OpenSans-ExtraBoldItalic-webfont.woff') format('woff'),
+    url('fonts/OpenSans-ExtraBoldItalic-webfont.ttf') format('truetype'),
+    url('fonts/OpenSans-ExtraBoldItalic-webfont.svg#OpenSansExtraboldItalic') format('svg');
+    font-weight: 900;
+    font-style: italic;
+}
+
+
+// Layout ======================================================================
+
+header .container-fluid,
+main .container-fluid,
+footer .container-fluid {
+    max-width: 1280px;
+    width: 95%;
+    margin: 0 auto;
+}
+
+
+// General =====================================================================
+
+html {
+    overflow-y: scroll;
+}
+body {
+    padding: 0;
+    font-family: $base-font-family;
+    min-height: 100%;
+    background-color: #263238;
+}
+header,
+main {
+    background-color: #ECEFF1;
+}
+h1, h2, h3, h4, h5, h6 {
+    font-family: $base-font-family;
+    font-weight: 700;
+}
+main {
+    padding: 0.5rem 0;
+    a:link {
+        text-decoration: underline;
+    }
+}
+.spinner-wrapper {
+    position: fixed;
+    top: 45%;
+    left: 50%;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+    .preloader-wrapper {
+        margin-left: -32px;
+        margin-top: -32px;
+    }
+    p {
+        margin-left: -29px;
+    }
+}
+
+// Navbar ======================================================================
+
+header {
+    padding-bottom: 0;
+    nav {
+        box-shadow: none;
+    }
+}
+.row .col.navbar-nav {
+    padding: 0;
+    a {
+        margin-top: -2px;
+    }
+}
+.navbar {
+    .navbar-search {
+        padding-right: 0;
+        input {
+            margin-bottom: 0;
+        }
+    }
+    .brand-logo {
+        padding-left: 3px;
+    }
+}
+
+
+// Footer ======================================================================
+
+footer {
+    padding-top: 15px;
+    small {
+        font-size: 90%;
+    }
+}
+footer,
+footer a {
+    color: rgba(255, 255, 255, 0.84);
+}
+
+
+// a, :focus {
+//     outline: 0;
+// }
+// ul {
+//     padding-left: 0;
+//     list-style-type: none;
+// }
+// blockquote {
+//     font-size: inherit;
+//     margin: 0 0 10px;
+//     padding-top: 0;
+//     padding-bottom: 0;
+// }
+// .loading {
+//     margin: 10em 0;
+// }
+// .header,
+// .content {
+//     background-color: #ECEFF1;
+// }
+// .content {
+//     padding-bottom: 15px;
+// }
+// .panel-success .panel-heading {
+//     color: white;
+// }
+// .progress {
+//     position: relative;
+//     margin-bottom: 0;
+//     height: 1.5em;
+//     span {
+//         position: absolute;
+//         display: block;
+//         width: 100%;
+//         color: white;
+//         padding: 1px 5px;
+//         text-align: left;
+//     }
+// }
+//
+// // Navigation ==================================================================
+//
+// .navbar {
+//     margin-bottom: 0;
+//     background-color: transparent;
+//     .navbar-brand img {
+//         width: 50%;
+//         min-width: 108px;
+//         margin-top: 5px;
+//     }
+//     .navbar-form {
+//         padding: 0;
+//         margin-bottom: 0;
+//         margin-top: 15px;
+//         border: none;
+//         box-shadow: none;
+//         .btn {
+//             padding: 8px 10px;
+//         }
+//         .input-group .input-group-btn {
+//             width: 1%;
+//         }
+//         .glyphicon-search, .glyphicon-search a {
+//             color: #d2d2d2;
+//         }
+//         .btn:active:not(.btn-link):not(.btn-flat):not(.btn-fab),
+//         .btn:hover:not(.btn-link):not(.btn-flat):not(.btn-fab) {
+//             box-shadow: none;
+//         }
+//         .btn.withoutripple .ripple-wrapper {
+//             display: none;
+//         }
+//         .form-control {
+//             background-image: linear-gradient(#fff, #fff), linear-gradient(#d2d2d2, #d2d2d2)
+//         }
+//     }
+//     .navbar-collapse {
+//         padding: 0;
+//     }
+//     .navbar-nav > li > a {
+//         padding-top: 15px;
+//         padding-bottom: 15px;
+//     }
+//     .dropdown-menu li > a:hover,
+//     .dropdown-menu li > a:focus {
+//         color: #666 !important;
+//     }
+//     .form-control:focus, .form-control.focus {
+//         background-image: linear-gradient(#fff, #fff), linear-gradient(#d2d2d2, #d2d2d2);
+//     }
+// }
+//
+// // Page specific ===============================================================
+//
+// .home {
+//     .panel {
+//         margin-top: 15px;
+//         .panel-body {
+//             padding: 0;
+//             img {
+//                 width: 100%;
+//             }
+//             p {
+//                 margin: 15px;
+//             }
+//         }
+//     }
+//     .navbar {
+//         background-color: #00796B;
+//     }
+// }
+//
+// .policy {
+//     .navbar {
+//         background-color: #EF6C00;
+//     }
+// }
+// .jobs {
+//     .navbar {
+//         background-color: #558B2F;
+//     }
+// }
+// .help {
+//     .navbar {
+//         background-color: #0277BD;
+//     }
+// }
+// .support {
+//     .navbar {
+//         background-color: #283593;
+//     }
+// }
+// .about {
+//     .navbar {
+//         background-color: #AD1457;
+//     }
+// }
+// .cjs {
+//     .navbar {
+//         background-color: #a6b830;
+//     }
+// }
+//
+// // Page specific - Search ======================================================
+//
+// .search .page-title h1 {
+//     display: none;
+// }
+//
+// // Page specific - The Gathering ===============================================
+//
+// .gathering {
+//     .navbar {
+//         background-color: #212121;
+//     }
+//     .btn-primary:not(.btn-link):not(.btn-flat),
+//     .page-title {
+//         background: #864cb2;
+//         .container-fluid {
+//             background: url('http://gatherscotland.org.uk/wp-content/themes/ward/img/gathering2016-logo-with-dates.png') no-repeat 15px;
+//             height: 100px;
+//             h1 {
+//                 display: none;
+//             }
+//         }
+//     }
+// }
+//
+// // Page specific - Scottish Charity Awards =====================================
+//
+// .scottish-charity-awards {
+//     .navbar {
+//         background-color: #000;
+//     }
+//     .page-title {
+//         background: linear-gradient(rgba(0, 0, 0, 0.1), rgba(0, 0, 0, 0.7)), url('https://scontent-lhr3-1.xx.fbcdn.net/hphotos-xap1/v/t1.0-9/11168891_10152920500092654_3904128374930610556_n.jpg?oh=ba57c8af3cd869716d6f1fccf66b3975&oe=5767EAB9') bottom;
+//         background-size: cover;
+//         height: 250px;
+//         h1 {
+//             color: white;
+//             margin-top: 160px;
+//             font-size: 4em;
+//         }
+//     }
+//     .panel {
+//         .panel-body {
+//             img {
+//                 width: auto;
+//             }
+//             h3 {
+//                 padding-left: 15px;
+//             }
+//         }
+//     }
+// }
+//
+// // Page specific - Digital Participation =======================================
+//
+// .digital_participation.home {
+//     .page-title {
+//         text-align: center;
+//         padding-top: 30px;
+//         background-color: #b9e0f1;
+//         background-position: center center;
+//         background-size: cover;
+//         background-repeat: no-repeat;
+//         background-image: url('http://digital.scvo.org.uk/images/splash.jpg');
+//         background-size: cover;
+//         height: 400px;
+//         .container-fluid {
+//             background-color: rgba(255, 255, 255, 0.8);
+//             margin-bottom: 15px;
+//             padding: 50px 0;
+//         }
+//         h1 {
+//             font-weight: bold;
+//             color: #345476;
+//             text-shadow: 0px 1px 1px white;
+//             margin-bottom: 20px;
+//             font-size: 63px;
+//             font-weight: 700;
+//             letter-spacing: -0.03em;
+//         }
+//         p {
+//             font-size: 1.4em;
+//         }
+//     }
+// }
+// .digital_participation {
+//     .navbar {
+//         background-color: #009E99;
+//     }
+//     .page-navigation {
+//         background-color: #222;
+//         .container-fluid {
+//             padding: 0;
+//         }
+//         .nav {
+//             li > a {
+//                 color: #9d9d9d;
+//             }
+//             li > a:hover,
+//             li > a:focus,
+//             li > a:active {
+//                 color: #fff;
+//                 background-color: inherit;
+//             }
+//         }
+//     }
+// }
+//
+//
+// // Media queries - responsive ==================================================
+//
+// @media screen and (max-width: 767px) {
+//     .navbar {
+//         .navbar-brand {
+//             padding-left: 0;
+//             margin-left: -15px;
+//         }
+//         .navbar-form {
+//             margin-top: 0;
+//         }
+//         .navbar-header {
+//             padding: 0;
+//             .navbar-toggle {
+//                 margin-right: 0;
+//             }
+//         }
+//         .navbar-collapse,
+//         .navbar-form {
+//             border-color: transparent;
+//             box-shadow: none;
+//         }
+//         .navbar-nav {
+//             margin: 0;
+//             li > a {
+//                 padding: 5px 3px;
+//             }
+//         }
+//         .navbar-form {
+//             .form-control {
+//                 margin-left: 4px;
+//             }
+//         }
+//     }
+// }
