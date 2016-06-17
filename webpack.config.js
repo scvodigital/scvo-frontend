@@ -1,4 +1,6 @@
 var webpack = require('webpack');
+var CopyWebpackPlugin = require('copy-webpack-plugin');
+var HtmlWebpackPlugin = require('html-webpack-plugin');
 var path = require('path');
 
 // Webpack Config
@@ -15,6 +17,15 @@ var webpackConfig = {
 
     plugins: [
         new webpack.optimize.CommonsChunkPlugin({ name: ['app', 'vendor', 'polyfills'], minChunks: Infinity }),
+        // static assets
+        new CopyWebpackPlugin([{ from: 'src/app', to: 'app' }]),
+        // generating html
+        new HtmlWebpackPlugin({ template: 'src/index.html', inject: false }),
+        // new ProvidePlugin({
+        //     jQuery: 'jquery',
+        //     $: 'jquery',
+        //     jquery: 'jquery'
+        // })
     ],
 
     resolve: {
@@ -22,11 +33,15 @@ var webpackConfig = {
             materializecss: 'materialize-css/dist/css/materialize.css',
             materialize: 'materialize-css/dist/js/materialize.js',
         },
-        extensions: ['', '.webpack.js', '.web.js', '.ts', '.js', '.css']
+        extensions: ['', '.webpack.js', '.web.js', '.ts', '.js', '.css', '.html']
     },
 
     module: {
         loaders: [
+            {
+                test: /\.html$/,
+                loader: 'raw-loader'
+            },
             {
                 // .ts files for TypeScript
                 test: /\.ts$/,

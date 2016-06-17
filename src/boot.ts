@@ -6,7 +6,7 @@ import { ROUTER_PROVIDERS } from '@angular/router';
 
 import { App } from './app/scvo-app';
 
-// enableProdMode()
+enableProdMode();
 
 bootstrap(App, [
     HTTP_PROVIDERS,
