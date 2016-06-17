@@ -12,7 +12,7 @@ before_script:
   - echo -e "Host github.com\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
 
 script:
-  - npm build
+  - npm run build
 
 after_success:
   - firebase deploy --token ${FIREBASE_TOKEN}
