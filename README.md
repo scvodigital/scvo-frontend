@@ -1,4 +1,5 @@
-# SCVO Digital Platform (public frontend) [![Build Status](https://travis-ci.org/scvodigital/platform-frontend.svg?branch=master)](https://travis-ci.org/scvodigital/platform-frontend) [![Dependency Status](https://david-dm.org/scvodigital/platform-frontend.svg)](https://david-dm.org/scvodigital/platform-frontend) [![devDependency Status](https://david-dm.org/scvodigital/platform-frontend/dev-status.svg)](https://david-dm.org/scvodigital/platform-frontend#info=devDependencies)
+# SCVO Digital Platform (public frontend) [![Build Status](https://travis-ci.org/scvodigital/platform-frontend.svg?branch=angular2)](https://travis-ci.org/scvodigital/platform-frontend) [![Dependency Status](https://david-dm.org/scvodigital/platform-frontend/angular2.svg)](https://david-dm.org/scvodigital/platform-frontend/angular2) [![devDependency Status](https://david-dm.org/scvodigital/platform-frontend/angular2/dev-status.svg)](https://david-dm.org/scvodigital/platform-frontend/angular2#info=devDependencies)
+
 This is the repository for the new SCVO website project, it contains the codebase for the public website. Development deployment instructions are listed below.
 
 This repository [Wiki](https://github.com/scvodigital/platform-frontend/wiki) contains project documentation.
