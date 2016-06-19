@@ -6,11 +6,14 @@ import { ROUTER_PROVIDERS } from '@angular/router';
 
 import { App } from './app/scvo-app';
 
+import { ElasticSearchService } from "./app/services/elasticsearch.service"
+
 enableProdMode();
 
 bootstrap(App, [
     HTTP_PROVIDERS,
     ROUTER_PROVIDERS,
-    provide(LocationStrategy, {useClass: PathLocationStrategy})
+    provide(LocationStrategy, {useClass: PathLocationStrategy}),
+    ElasticSearchService
 ])
 .catch(err => console.error(err));
