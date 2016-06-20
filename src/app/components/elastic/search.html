@@ -1,6 +1,15 @@
 <h3>Search</h3>
 
-<!-- <input type="text" #searchTerm placeholder="Search SCVO">
-<button class="btn btn-large" (click)="searchForTerm(searchTerm.value)">Search SCVO</button>
-
-<router-outlet></router-outlet> -->
+<section>
+    <div class="row">
+        <div class="col m4">
+        </div>
+        <div class="col m8">
+            <ul>
+                <li *ngFor="#result of results | async">
+                    {{result | json}}
+                </li>
+            </ul>
+        </div>
+    </div>
+</section>

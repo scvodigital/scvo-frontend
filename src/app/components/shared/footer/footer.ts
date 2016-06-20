@@ -9,11 +9,10 @@ import { Component } from '@angular/core';
     pipes: []
 })
 export class Footer {
+    date = new Date();
 
     constructor() {}
 
     ngOnInit() {}
-
-    date = new Date();
 
 }

@@ -6,7 +6,7 @@ import { ROUTER_PROVIDERS } from '@angular/router';
 
 import { App } from './app/app.component';
 
-import { ElasticSearchService } from "./app/components/elastic/elasticsearch.service"
+import { ElasticSearchService } from "./app/components/shared/elasticsearch.service"
 
 enableProdMode();
 

@@ -1,4 +1,4 @@
-import { Injectable } from 'angular2/core';
+import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import * as elasticsearch from "elasticsearch";
 
@@ -17,8 +17,8 @@ export class ElasticSearchService {
                 log: 'trace'
             });
             return Observable.fromPromise(client.search({
-                index: '*',
-                q: `title:${value}`
+                index: '*', // The magic
+                q: `${value}`
             }))
         } else {
             return Observable.of({})

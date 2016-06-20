@@ -13,7 +13,9 @@
     <div class="sb-seachresults" [ngClass]="{hidden:(results?.length === 0 || !active)}">
         <ul class="sb-results-dropdown-menu">
             <li *ngFor="#result of results | async" (mousedown)="resutSelected(result)">
-                <span>{{result.title | uppercase}}</span>
+                <span *ngIf="result.title">{{result.title | uppercase}}</span>
+                <span *ngIf="result.name">{{result.name | uppercase}}</span>
+                <span *ngIf="result.charityNumber">{{result.charityNumber | uppercase}}</span>
             </li>
         </ul>
     </div>

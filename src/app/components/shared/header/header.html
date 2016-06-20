@@ -11,53 +11,76 @@
                     <div class="col hide-on-small-only m4 right navbar-search">
                         <form>
                             <div class="input-field">
-                                <input id="search" type="search">
+                                <input type="search" #searchInput
+                                [(ngModel)]="searchTextModel"
+                                (blur)="active = false"
+                                (focus)="active = true"
+                                [ngFormControl]="searchText">
                                 <label for="search"><i class="material-icons">search</i></label>
-                                <i class="material-icons">close</i>
+                                <i class="material-icons" (click)="searchTextModel = ''">close</i>
                             </div>
                         </form>
+                        <div class="sb-seachresults" [ngClass]="{hidden:(results?.length === 0 || !active)}">
+                            <ul class="sb-results-dropdown-menu">
+                                <li *ngFor="#result of results | async" (mousedown)="resultSelected(result)">
+                                    <span *ngIf="result.title">{{result.title | uppercase}}</span>
+                                    <span *ngIf="result.name">{{result.name | uppercase}}</span>
+                                    <span *ngIf="result.charityNumber">{{result.charityNumber | uppercase}}</span>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
         </nav>
         <nav class="teal darken-2 hide-on-med-and-down">
             <div class="nav-wrapper">
-                <!-- <ul id="dropdown-events" class="dropdown-content">
+                <!--
+                <u l id="dropdown-events" class="dropdown-content">
                 <li><a href="/events">SCVO Events</a></li>
                 <li><a href="/digital_participation">Digital Participation</a></li>
                 <li><a href="/one-digital">One Digital</a></li>
                 <li><a href="/scottish-charity-awards">Scottish Charity Awards</a></li>
                 <li><a href="/gathering">The Gathering</a></li>
-            </ul> -->
-            <div class="row">
-                <div class="col s12 navbar-nav">
-                    <ul>
-                        <li><a [routerLink]="['/']" class="waves-effect waves-dark">Home</a></li>
-                        <li><a [routerLink]="['/help']" class="waves-effect waves-dark">Running a charity</a></li>
-                        <li><a [routerLink]="['/jobs']" class="waves-effect waves-dark">Third sector jobs</a></li>
-                        <li><a [routerLink]="['/policy']" class="waves-effect waves-dark">Policy &amp; news</a></li>
-                        <li><a class="dropdown-toggle" data-activates="dropdown-events">Events &amp; campaigns <i class="material-icons right">arrow_drop_down</i></a></li>
-                        <li><a [routerLink]="['/support']" class="waves-effect waves-dark">Support</a></li>
-                        <li><a [routerLink]="['/about']" class="waves-effect waves-dark">About</a></li>
-                    </ul>
-                    <ul class="side-nav" id="mobile-nav">
-                      <li><a [routerLink]="['/']" class="waves-effect waves-dark">Home</a></li>
-                      <li><a [routerLink]="['/help']" class="waves-effect waves-dark">Running a charity</a></li>
-                      <li><a [routerLink]="['/jobs']" class="waves-effect waves-dark">Third sector jobs</a></li>
-                      <li><a [routerLink]="['/policy']" class="waves-effect waves-dark">Policy &amp; news</a></li>
-                      <li><a [routerLink]="['/events']" class="waves-effect waves-dark">Events &amp; campaigns</a></li>
-                      <li><a [routerLink]="['/support']" class="waves-effect waves-dark">Support</a></li>
-                      <li><a [routerLink]="['/about']" class="waves-effect waves-dark">About</a></li>
-                    </ul>
+                < /ul> -->
+                <div class="row">
+                    <div class="col s12 navbar-nav">
+                        <ul>
+                            <li><a [routerLink]="['/']" class="waves-effect waves-dark">Home</a></li>
+                            <li><a [routerLink]="['/help']" class="waves-effect waves-dark">Running a charity</a></li>
+                            <li><a [routerLink]="['/jobs']" class="waves-effect waves-dark">Third sector jobs</a></li>
+                            <li><a [routerLink]="['/policy']" class="waves-effect waves-dark">Policy &amp; news</a></li>
+                            <li><a class="dropdown-toggle" data-activates="dropdown-events">Events &amp; campaigns <i class="material-icons right">arrow_drop_down</i></a></li>
+                            <li><a [routerLink]="['/support']" class="waves-effect waves-dark">Support</a></li>
+                            <li><a [routerLink]="['/about']" class="waves-effect waves-dark">About</a></li>
+                        </ul>
+                        <ul class="side-nav" id="mobile-nav">
+                            <li><a [routerLink]="['/']" class="waves-effect waves-dark">Home</a></li>
+                            <li><a [routerLink]="['/help']" class="waves-effect waves-dark">Running a charity</a></li>
+                            <li><a [routerLink]="['/jobs']" class="waves-effect waves-dark">Third sector jobs</a></li>
+                            <li><a [routerLink]="['/policy']" class="waves-effect waves-dark">Policy &amp; news</a></li>
+                            <li><a [routerLink]="['/events']" class="waves-effect waves-dark">Events &amp; campaigns</a></li>
+                            <li><a [routerLink]="['/support']" class="waves-effect waves-dark">Support</a></li>
+                            <li><a [routerLink]="['/about']" class="waves-effect waves-dark">About</a></li>
+                        </ul>
+                    </div>
                 </div>
             </div>
-        </div>
-    </nav>
-</div>
-<!-- <div class="page-title">
-<div class="alert alert-danger"></div>
-<h1 ng-show="title !== ''" ng-bind="title"></h1>
-<h2 ng-show="subheading !== ''" ng-bind="subheading"></h2>
-<div ng-show="panel !== ''" ng-bind-html="panel"></div>
-</div> -->
+        </nav>
+    </div>
+    <!-- <div class="sb-seachresults" [ngClass]="{hidden:(results?.length === 0 || !active)}">
+        <ul class="sb-results-dropdown-menu">
+            <li *ngFor="#result of results | async" (mousedown)="resutSelected(result)">
+                <span *ngIf="result.title">{{result.title | uppercase}}</span>
+                <span *ngIf="result.name">{{result.name | uppercase}}</span>
+                <span *ngIf="result.charityNumber">{{result.charityNumber | uppercase}}</span>
+            </li>
+        </ul>
+    </div> -->
+    <!-- <div class="page-title">
+    <div class="alert alert-danger"></div>
+    <h1 ng-show="title !== ''" ng-bind="title"></h1>
+    <h2 ng-show="subheading !== ''" ng-bind="subheading"></h2>
+    <div ng-show="panel !== ''" ng-bind-html="panel"></div>
+    < /div> -->
 </div>
