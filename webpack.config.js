@@ -7,8 +7,8 @@ var path = require('path');
 var webpackConfig = {
     entry: {
         'polyfills': './src/polyfills.ts',
-        'vendor':    './src/vendor.ts',
-        'app':       './src/boot.ts',
+        'vendor':    './src/vendors.ts',
+        'app':       './src/bootstrap.ts',
     },
 
     output: {

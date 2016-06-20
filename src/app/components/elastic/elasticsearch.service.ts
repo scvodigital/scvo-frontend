@@ -4,37 +4,42 @@ import * as elasticsearch from "elasticsearch";
 
 @Injectable()
 export class ElasticSearchService {
+    elastichost: string;
+    constructor() {
+        this.elastichost = 'https://readonly:onlyread@4c19757a0460c764d6e4712b0190cc21.eu-west-1.aws.found.io:9243';
+    }
+
     search(value): Observable<any> {
         if (value) {
             console.log(value)
             var client = new elasticsearch.Client({
-                host: 'http://localhost:9200',
+                host: this.elastichost,
                 log: 'trace'
             });
             return Observable.fromPromise(client.search({
-                index: 'blog',
+                index: '*',
                 q: `title:${value}`
             }))
-        }else{
+        } else {
             return Observable.of({})
         }
 
     }
     addToIndex(value): Observable<any> {
         var client = new elasticsearch.Client({
-            host: 'http://localhost:9200',
+            host: this.elastichost,
             log: 'trace'
         });
         return Observable.fromPromise(client.create(value))
     }
     isAvailable(): Promise<any> {
         var client = new elasticsearch.Client({
-            host: 'http://localhost:9200',
+            host: this.elastichost,
             log: 'trace'
         });
         return client.ping({
             requestTimeout: Infinity,
-            hello: "elasticsearch!"
+            hello: "Elasticsearch!"
         });
     }
 }

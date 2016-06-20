@@ -1,0 +1,20 @@
+<div class="sb-search">
+    <div class="search-input-wrapper">
+        <input class="sb-search-input"
+            #seachInput
+            [(ngModel)]="seachTextModel"
+            (blur)="active = false"
+            (focus)="active = true"
+            [ngFormControl]="seachText"
+            placeholder="Search...">
+    </div>
+    <div class="sb-message" *ngIf="!!message && active"><span>{{message}}</span></div>
+    <!--Search results-->
+    <div class="sb-seachresults" [ngClass]="{hidden:(results?.length === 0 || !active)}">
+        <ul class="sb-results-dropdown-menu">
+            <li *ngFor="#result of results | async" (mousedown)="resutSelected(result)">
+                <span>{{result.title | uppercase}}</span>
+            </li>
+        </ul>
+    </div>
+</div>

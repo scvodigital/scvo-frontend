@@ -4,9 +4,9 @@ import { provide, enableProdMode } from '@angular/core';
 import { HTTP_PROVIDERS } from '@angular/http';
 import { ROUTER_PROVIDERS } from '@angular/router';
 
-import { App } from './app/scvo-app';
+import { App } from './app/app.component';
 
-import { ElasticSearchService } from "./app/services/elasticsearch.service"
+import { ElasticSearchService } from "./app/components/elastic/elasticsearch.service"
 
 enableProdMode();
 

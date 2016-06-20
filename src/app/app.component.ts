@@ -3,6 +3,8 @@ import { Routes, ROUTER_DIRECTIVES } from '@angular/router';
 
 import { MaterializeDirective } from "angular2-materialize";
 
+import { Client } from "elasticsearch";
+
 import { Header, Footer } from './components/shared/shared';
 
 import { Home } from './components/home/home';
@@ -14,7 +16,7 @@ import { Search } from './components/elastic/search';
     providers: [],
     pipes: [],
     directives: [ROUTER_DIRECTIVES, Header, Footer, MaterializeDirective],
-    templateUrl: 'app/scvo-app.html',
+    templateUrl: 'app/app.component.html',
     styleUrls: [require('app/styles/scvo.scss')],
     encapsulation: ViewEncapsulation.None,
 })
@@ -25,10 +27,8 @@ import { Search } from './components/elastic/search';
     { path: '/policy',  component: Home,        },
     { path: '/support', component: Home,        },
     { path: '/about',   component: About,       },
-    { path: '/search',  component: Search,      },
+    { path: '/search', component: Search,     },
 ])
 export class App {
-
     constructor() {}
-
 }

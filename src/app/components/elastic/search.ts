@@ -1,31 +1,38 @@
-import { Component } from '@angular/core';
-import { Router, Routes, ROUTER_DIRECTIVES } from '@angular/router';
-
-import { Results } from '../elastic/results';
-import { Elasticsearch } from '../../services/elasticsearch';
+import { Component } from 'angular2/core';
+import { Http } from 'angular2/http';
+import { Client } from "elasticsearch";
+import { ROUTER_DIRECTIVES } from "@angular/router";
+import { AutoComplete } from "./autocomplete/autocomplete"
 
 @Component({
     selector: 'search',
-    templateUrl: 'app/components/elastic/search.html',
-    styleUrls: ['app/components/elastic/search.css'],
-    providers: [ Elasticsearch ],
-    directives: [ ROUTER_DIRECTIVES ],
-    pipes: []
+    directives: [ROUTER_DIRECTIVES, AutoComplete],
+    template: `
+    <section>
+        <div class="row">
+            <div class="col m4">
+                <div class="wrapper">
+                    <autocomplete (changed)="autocompleteCanged($event)"></autocomplete>
+                </div>
+            </div>
+            <div class="col m8">
+                <div *ngIf='!!selectedValue'>
+                    <div><strong>Selected item:</strong></div>
+                    <br>
+                    <i>
+                        {{selectedValue}}
+                    </i>
+                </div>
+            </div>
+        </div>
+    </section>
+  `
 })
-@Routes([
-    { path: '/:term',        component: Results },
-    { path: '/:term/:name',  component: Results },
-])
+
 export class Search {
-
-    constructor(private router: Router, private elasticsearch: Elasticsearch) {}
-
-    searchForTerm(term: string) {
-        this.elasticsearch.getTerm(term)
-        .subscribe(({name}) => {
-            console.log('Search term: '+name);
-            this.router.navigate(['/search', term]);
-        });
+    selectedValue: string;
+    constructor() {}
+    autocompleteCanged(value) {
+        this.selectedValue = JSON.stringify(value);
     }
-
 }
