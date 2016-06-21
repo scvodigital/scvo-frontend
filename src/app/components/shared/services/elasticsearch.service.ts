@@ -4,10 +4,7 @@ import * as elasticsearch from "elasticsearch";
 
 @Injectable()
 export class ElasticSearchService {
-    elastichost: string;
-    constructor() {
-        this.elastichost = 'https://readonly:onlyread@4c19757a0460c764d6e4712b0190cc21.eu-west-1.aws.found.io:9243';
-    }
+    elastichost = 'https://readonly:onlyread@4c19757a0460c764d6e4712b0190cc21.eu-west-1.aws.found.io:9243';
 
     search(value): Observable<any> {
         if (value) {
@@ -17,7 +14,7 @@ export class ElasticSearchService {
                 log: 'trace'
             });
             return Observable.fromPromise(client.search({
-                index: '*', // The magic
+                index: '*', // The magic (all indices)
                 q: `${value}`
             }))
         } else {
@@ -25,13 +22,13 @@ export class ElasticSearchService {
         }
 
     }
-    addToIndex(value): Observable<any> {
-        var client = new elasticsearch.Client({
-            host: this.elastichost,
-            log: 'trace'
-        });
-        return Observable.fromPromise(client.create(value))
-    }
+    // addToIndex(value): Observable<any> {
+    //     var client = new elasticsearch.Client({
+    //         host: this.elastichost,
+    //         log: 'trace'
+    //     });
+    //     return Observable.fromPromise(client.create(value))
+    // }
     isAvailable(): Promise<any> {
         var client = new elasticsearch.Client({
             host: this.elastichost,
@@ -39,7 +36,7 @@ export class ElasticSearchService {
         });
         return client.ping({
             requestTimeout: Infinity,
-            hello: "Elasticsearch!"
+            hello: "elasticsearch!"
         });
     }
 }

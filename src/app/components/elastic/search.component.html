@@ -3,10 +3,11 @@
 <section>
     <div class="row">
         <div class="col m4">
+            Results: {{resultsChange}}
         </div>
         <div class="col m8">
             <ul>
-                <li *ngFor="#result of results | async">
+                <li *ngFor="let result of results | async">
                     {{result | json}}
                 </li>
             </ul>

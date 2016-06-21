@@ -11,18 +11,19 @@
                     <div class="col hide-on-small-only m4 right navbar-search">
                         <form>
                             <div class="input-field">
-                                <input type="search" #searchInput
+                                <input type="search" />
+                                <!-- <input type="search" [(ngModel)]="search.term" /> -->
+                                <!-- <input type="search" #searchInput
                                 [(ngModel)]="searchTextModel"
-                                (blur)="active = false"
-                                (focus)="active = true"
-                                [ngFormControl]="searchText">
+                                [ngControl]="searchText"> -->
                                 <label for="search"><i class="material-icons">search</i></label>
                                 <i class="material-icons" (click)="searchTextModel = ''">close</i>
+                                <!-- (changed)="autocompleteChanged($event)" -->
                             </div>
                         </form>
-                        <div class="sb-seachresults" [ngClass]="{hidden:(results?.length === 0 || !active)}">
+                        <div class="sb-seachresults" [ngClass]="{hidden:hideAutoComplete}">
                             <ul class="sb-results-dropdown-menu">
-                                <li *ngFor="#result of results | async" (mousedown)="resultSelected(result)">
+                                <li *ngFor="let result of results | async" (mousedown)="resultSelected(result)">
                                     <span *ngIf="result.title">{{result.title | uppercase}}</span>
                                     <span *ngIf="result.name">{{result.name | uppercase}}</span>
                                     <span *ngIf="result.charityNumber">{{result.charityNumber | uppercase}}</span>
