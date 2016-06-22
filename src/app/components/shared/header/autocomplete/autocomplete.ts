@@ -1,7 +1,7 @@
 import { Component, OnInit, EventEmitter, ViewChild, ElementRef, AfterViewInit } from '@angular/core';
 import { CORE_DIRECTIVES, Control, FORM_DIRECTIVES } from '@angular/common';
 import * as rx from 'rxjs';
-import { ElasticSearchService } from '../../elasticsearch.service';
+import { ElasticSearchService } from '../../../../services/elasticsearch.service';
 
 @Component({
     selector: 'autocomplete',

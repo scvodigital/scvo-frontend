@@ -8,7 +8,7 @@ var webpackConfig = {
     entry: {
         'polyfills': './src/polyfills.ts',
         'vendor':    './src/vendors.ts',
-        'app':       './src/bootstrap.ts',
+        'app':       './src/main.ts',
     },
 
     output: {

@@ -11,17 +11,40 @@
                     <div class="col hide-on-small-only m4 right navbar-search">
                         <form>
                             <div class="input-field">
-                                <input type="search" />
+                                <input type="search" name="searchInput" id="searchInput"
+                                    [(ngModel)]="searchTermModel"
+                                    [ngFormControl]="searchTerm" />
+                                <!-- <input type="search" #seachInput
+                                    [(ngModel)]="seachTextModel"
+                                    (blur)="active = false"
+                                    (focus)="active = true"
+                                    [ngFormControl]="seachText" /> -->
+                                <!-- <input type="search" [ngFormControl]="term"/> -->
+                                <!-- <input type="search" /> -->
                                 <!-- <input type="search" [(ngModel)]="search.term" /> -->
                                 <!-- <input type="search" #searchInput
                                 [(ngModel)]="searchTextModel"
                                 [ngControl]="searchText"> -->
                                 <label for="search"><i class="material-icons">search</i></label>
-                                <i class="material-icons" (click)="searchTextModel = ''">close</i>
+                                <i class="material-icons" (click)="searchTermModel = ''">close</i>
                                 <!-- (changed)="autocompleteChanged($event)" -->
                             </div>
                         </form>
-                        <div class="sb-seachresults" [ngClass]="{hidden:hideAutoComplete}">
+                        <!-- Hide dropdown: {{hideAutocomplete}} -->
+                        <!-- Results: {{results?.length}} -->
+                        <div class="sb-seachresults" [ngClass]="{hidden:(results?.length === 0 || hideAutocomplete)}">
+                            <ul class="sb-results-dropdown-menu">
+                                <!-- <li *ngFor="let item of items | async" (mousedown)="selectResult(item)">
+                                    <span>{{item}}</span>
+                                </li> -->
+                                <li *ngFor="let result of results | async" (mousedown)="selectResult(result.title)">
+                                    <span *ngIf="result.title">{{result.title | uppercase}}</span>
+                                    <!-- <span *ngIf="result.name">{{result.name | uppercase}}</span>
+                                    <span *ngIf="result.charityNumber">{{result.charityNumber | uppercase}}</span> -->
+                                </li>
+                            </ul>
+                        </div>
+                        <!-- <div class="sb-seachresults" [ngClass]="{hidden:(results?.length > 0)}">
                             <ul class="sb-results-dropdown-menu">
                                 <li *ngFor="let result of results | async" (mousedown)="resultSelected(result)">
                                     <span *ngIf="result.title">{{result.title | uppercase}}</span>
@@ -29,7 +52,7 @@
                                     <span *ngIf="result.charityNumber">{{result.charityNumber | uppercase}}</span>
                                 </li>
                             </ul>
-                        </div>
+                        </div> -->
                     </div>
                 </div>
             </div>
