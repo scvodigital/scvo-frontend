@@ -9,26 +9,8 @@
                         <a [routerLink]="['/']" class="brand-logo hide-on-large-only">SCVO</a>
                     </div>
                     <div class="col hide-on-small-only m4 right navbar-search">
-                        <form>
-                            <div class="input-field">
-                                <input type="search" name="searchInput" id="searchInput"
-                                    [(ngModel)]="searchTermModel"
-                                    [ngFormControl]="searchTerm" />
-                                <!-- <input type="search" #seachInput
-                                    [(ngModel)]="seachTextModel"
-                                    (blur)="active = false"
-                                    (focus)="active = true"
-                                    [ngFormControl]="seachText" /> -->
-                                <!-- <input type="search" [ngFormControl]="term"/> -->
-                                <!-- <input type="search" /> -->
-                                <!-- <input type="search" [(ngModel)]="search.term" /> -->
-                                <!-- <input type="search" #searchInput
-                                [(ngModel)]="searchTextModel"
-                                [ngControl]="searchText"> -->
-                                <label for="search"><i class="material-icons">search</i></label>
-                                <i class="material-icons" (click)="searchTermModel = ''">close</i>
-                                <!-- (changed)="autocompleteChanged($event)" -->
-                            </div>
+                        <form ngForm="searchForm">
+                            <input-debounce delay="500" (value)="searchChanged($event)"></input-debounce>
                         </form>
                         <!-- Hide dropdown: {{hideAutocomplete}} -->
                         <!-- Results: {{results?.length}} -->

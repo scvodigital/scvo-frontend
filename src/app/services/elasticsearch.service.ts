@@ -11,18 +11,16 @@ export class ElasticSearchService {
             // console.log(value)
             var client = new elasticsearch.Client({
                 host: this.elastichost,
-                log: 'trace'
+                // log: 'trace'
             });
-            // console.log('FOUND THINGS!');
             // Build query here...
             return Observable.fromPromise(client.search({
-                index: '*', // The magic (all indices)
+                index: '_all', // The magic (all indices)
                 q: `${term}`
             }))
         } else {
             return Observable.of({})
         }
-
     }
     // addToIndex(value): Observable<any> {
     //     var client = new elasticsearch.Client({

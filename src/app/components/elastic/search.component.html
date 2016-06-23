@@ -1,16 +1,69 @@
 <h3>Search</h3>
 
+<!-- <p><small>Found {{countResults}} results</small></p> -->
+
 <section>
-    <div class="row">
-        <div class="col m4">
-            Results: {{resultsChange}}
-        </div>
-        <div class="col m8">
-            <ul>
-                <li *ngFor="let result of results | async">
+    <ul>
+        <li *ngFor="let result of results | async">
+            <div [ngSwitch]="result._index">
+                <div *ngSwitchCase="'oscr'">
+                    <div class="card-panel deep-purple darken-3">
+                        <span class="white-text">
+                            <strong>OSCR Organisation</strong>
+                            <h5 *ngIf="result._source.names">{{result._source.names[1]}}</h5>
+                            <p *ngIf="result._source.charityNumber"><strong>Charity Number:</strong> {{result._source.charityNumber}}</p>
+                            <p *ngIf="result._source.address"><strong>Address:</strong> {{result._source.address}} {{result._source.postcode}}</p>
+                        </span>
+                    </div>
+                </div>
+                <div *ngSwitchCase="'volunteer-opportunities'">
+                    <div [ngSwitch]="result._type">
+                        <div *ngSwitchCase="'organisation'">
+                            <div class="card-panel light-blue darken-3">
+                                <span class="white-text">
+                                    <strong>Milo Organisation</strong>
+                                    <h5 *ngIf="result._source.name">{{result._source.name}}</h5>
+                                    <p *ngIf="result._source.address"><strong>Address:</strong> {{result._source.address}} {{result._source.postcode}}</p>
+                                </span>
+                            </div>
+                        </div>
+                        <div *ngSwitchCase="'opportunity'">
+                            <div class="card-panel light-blue accent-4">
+                                <span class="white-text">
+                                    <strong>Milo Voluntary Opportunity</strong>
+                                    <h5 *ngIf="result._source.title">{{result._source.title}}</h5>
+                                    <p *ngIf="result._source.summary">{{result._source.summary}}</p>
+                                    <p *ngIf="result._source.aimsAndObjectives">{{result._source.aimsAndObjectives}}</p>
+                                    <p *ngIf="result._source.mainActivitiesGlobal">{{result._source.mainActivitiesGlobal}}</p>
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div *ngSwitchCase="'goodmoves'">
+                    <div class="card-panel green">
+                        <span class="white-text">
+                            <strong>Goodmoves Job</strong>
+                            <h5 *ngIf="result._source.title">{{result._source.title}}</h5>
+                            <p *ngIf="result._source.description">{{result._source.description}}</p>
+                        </span>
+                    </div>
+                </div>
+                <div *ngSwitchCase="'fundingscotland'">
+                    <div class="card-panel light-green darken-2" *ngIf="result._type == 'fundsalesforcemodel'">
+                        <span class="white-text">
+                            <strong>Funding Scotland Fund</strong>
+                            <h5 *ngIf="result._source.name">{{result._source.name}}</h5>
+                            <p *ngIf="result._source.fundSummary">{{result._source.fundSummary}}</p>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="card-panel black">
+                <span class="white-text">
                     {{result | json}}
-                </li>
-            </ul>
-        </div>
-    </div>
+                </span>
+            </div> -->
+        </li>
+    </ul>
 </section>

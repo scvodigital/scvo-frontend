@@ -1,7 +1,7 @@
 //<reference path="typings/main/ambient/node/node.d.ts"/>
 /**
- * THIS IS NOT OFFICIAL, SEE: https://github.com/elastic/elasticsearch-js/issues/59
- */
+* THIS IS NOT OFFICIAL, SEE: https://github.com/elastic/elasticsearch-js/issues/59
+*/
 declare module "elasticsearch" {
 
     interface Callback {
