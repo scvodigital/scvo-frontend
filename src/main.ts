@@ -5,11 +5,13 @@ import { AppComponent } from './app/app.component';
 import { APP_ROUTER_PROVIDERS } from './app/app.routes';
 import { provideForms, disableDeprecatedForms } from '@angular/forms';
 
+// import 'angular2-materialize';
+
 enableProdMode();
 
 bootstrap(AppComponent, [
     APP_ROUTER_PROVIDERS,
-    // disableDeprecatedForms(),
+    disableDeprecatedForms(),
     provideForms()
 ])
 .catch(err => console.error(err));

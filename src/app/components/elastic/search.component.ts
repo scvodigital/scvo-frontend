@@ -20,6 +20,7 @@ export class SearchComponent {
     results: rx.Observable<any>;
     searchResults: Array<any>;
     countResults: number;
+    resultsFound: boolean = false;
 
     constructor(private router: Router, private _elasticSearchService: ElasticSearchService) {}
 
@@ -40,10 +41,12 @@ export class SearchComponent {
                 if (this.searchResults.length > 0) {
                     // console.log('Returning '+this.searchResults.length+' results for term "'+this.searchTerm+'"!');
                     // return searchResults;
+                    this.resultsFound = true;
                     return this.searchResults;
                     // return this.searchResults.map((hit) => hit._source);
                 } else {
                     if (this.searchTerm && this.searchTerm.trim())
+                    this.resultsFound = false;
                     console.log('Nothing was found for search term');
                     return [];
                 }

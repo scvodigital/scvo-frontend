@@ -17,15 +17,16 @@ var webpackConfig = {
 
     plugins: [
         new webpack.optimize.CommonsChunkPlugin({ name: ['app', 'vendor', 'polyfills'], minChunks: Infinity }),
-        // static assets
+        // Static assets
         new CopyWebpackPlugin([{ from: 'src/app', to: 'app' }]),
-        // generating html
+        // HTML
         new HtmlWebpackPlugin({ template: 'src/index.html', inject: false }),
-        // new ProvidePlugin({
-        //     jQuery: 'jquery',
-        //     $: 'jquery',
-        //     jquery: 'jquery'
-        // })
+        // jQuery
+        new webpack.ProvidePlugin({
+            jQuery: 'jquery',
+            $: 'jquery',
+            jquery: 'jquery'
+        })
     ],
 
     resolve: {

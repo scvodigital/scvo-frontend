@@ -1,5 +1,7 @@
-import { Component, Input, Output, OnInit, EventEmitter, ViewChild, ElementRef, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
+import { Component, AfterViewInit } from '@angular/core';
 import { Control } from '@angular/common';
+
+// declare var $: any;
 
 // import * as rx from 'rxjs';
 // import { Observable } from 'rxjs/Observable';
@@ -8,6 +10,8 @@ import { Control } from '@angular/common';
 // import 'rxjs/add/operator/debounceTime';
 // import 'rxjs/add/operator/distinctUntilChanged';
 // import 'rxjs/add/operator/switchMap';
+
+import { MaterializeDirective } from "angular2-materialize";
 
 import { ROUTER_DIRECTIVES, Router } from '@angular/router';
 
@@ -20,11 +24,25 @@ import { InputDebounceComponent } from "../forms/search.input.component";
     selector: 'header',
     templateUrl: 'app/components/shared/header/header.component.html',
     styleUrls: [require('app/components/shared/header/header.component.scss')],
-    directives: [ROUTER_DIRECTIVES, InputDebounceComponent],
+    directives: [ROUTER_DIRECTIVES, InputDebounceComponent, MaterializeDirective],
     // providers: [ElasticSearchService],
 })
-export class HeaderComponent {
+export class HeaderComponent implements AfterViewInit {
     constructor(private router: Router) {}
+
+    ngAfterViewInit() {
+        // console.log('MENU!');
+        (function($){
+          $(function(){
+
+            $('.side-nav').sideNav();
+
+          }); // end of document ready
+        })(jQuery); // end of jQuery name space
+
+        // $(".side-nav").sideNav();
+        // console.log($(".side-nav"));
+    }
 
     // ngOnInit() {
     //     this.router

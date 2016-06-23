@@ -3,14 +3,14 @@ import { Control } from '@angular/common';
 
 import { ROUTER_DIRECTIVES } from '@angular/router';
 
-import { MaterializeDirective } from "angular2-materialize";
+// import { MaterializeDirective } from "angular2-materialize";
 
 import { HeaderComponent, FooterComponent } from './components/shared/shared';
 
 @Component({
     selector: 'scvo-app',
     providers: [],
-    directives: [ROUTER_DIRECTIVES, HeaderComponent, FooterComponent, MaterializeDirective],
+    directives: [ROUTER_DIRECTIVES, HeaderComponent, FooterComponent],
     templateUrl: 'app/app.component.html',
     styleUrls: [require('app/app.component.scss')],
     encapsulation: ViewEncapsulation.None,
