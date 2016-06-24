@@ -1,4 +1,4 @@
-import { Component, AfterViewInit } from '@angular/core';
+import { Component, AfterViewInit, ViewEncapsulation } from '@angular/core';
 import { Control } from '@angular/common';
 
 // declare var $: any;
@@ -25,6 +25,7 @@ import { InputDebounceComponent } from "../forms/search.input.component";
     templateUrl: 'app/components/shared/header/header.component.html',
     styleUrls: [require('app/components/shared/header/header.component.scss')],
     directives: [ROUTER_DIRECTIVES, InputDebounceComponent, MaterializeDirective],
+    encapsulation: ViewEncapsulation.None
     // providers: [ElasticSearchService],
 })
 export class HeaderComponent implements AfterViewInit {
@@ -33,15 +34,15 @@ export class HeaderComponent implements AfterViewInit {
     ngAfterViewInit() {
         // console.log('MENU!');
         (function($){
-          $(function(){
+            $(function(){
 
-            $('.side-nav').sideNav();
+                // console.log($(".side-nav"));
+                $('.side-nav').sideNav();
 
-          }); // end of document ready
+            }); // end of document ready
         })(jQuery); // end of jQuery name space
 
         // $(".side-nav").sideNav();
-        // console.log($(".side-nav"));
     }
 
     // ngOnInit() {
