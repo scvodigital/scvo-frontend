@@ -23,20 +23,20 @@ import 'elasticsearch';
 
 /** Map relative paths to URLs. */
 const map: any = {
-   "materialize": "vendor/materialize-css",
-   "angular2-materialize": "vendor/angular2-materialize",
-   "jquery": "vendor/jquery"
+    "materialize": "vendor/materialize-css",
+    "angular2-materialize": "vendor/angular2-materialize",
+    "jquery": "vendor/jquery"
 };
 
 /** User packages configuration. */
 const packages: any = {
-  'materialize': {
-    "format": "global",
-    "main": "dist/js/materialize",
-    "defaultExtension": "js"
-  },
-  'angular2-materialize': {
-    "main": "dist/index",
-    "defaultExtension": "js"
-  }
+    'materialize': {
+        "format": "global",
+        "main": "dist/js/materialize",
+        "defaultExtension": "js"
+    },
+    'angular2-materialize': {
+        "main": "dist/index",
+        "defaultExtension": "js"
+    }
 };
