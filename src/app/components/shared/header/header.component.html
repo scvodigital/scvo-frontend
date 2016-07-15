@@ -4,7 +4,18 @@
             <div class="nav-wrapper">
                 <div class="row">
                     <div class="col s12 m8 navbar-brand">
-                        <a href="#" data-activates="mobile-nav" class="button-collapse"><i class="material-icons">menu</i></a>
+                        <ul id="main-menu" class="side-nav" menu-items>
+                            <li><a [routerLink]="['/']" class="waves-effect waves-dark">Home</a></li>
+                            <li><a [routerLink]="['/help']" class="waves-effect waves-dark">Running a charity</a></li>
+                            <li><a [routerLink]="['/jobs']" class="waves-effect waves-dark">Third sector jobs</a></li>
+                            <li><a [routerLink]="['/policy']" class="waves-effect waves-dark">Policy &amp; news</a></li>
+                            <li><a [routerLink]="['/events']" class="waves-effect waves-dark">Events &amp; campaigns</a></li>
+                            <li><a [routerLink]="['/support']" class="waves-effect waves-dark">Support</a></li>
+                            <li><a [routerLink]="['/about']" class="waves-effect waves-dark">About</a></li>
+                        </ul>
+                        <a href="javascript:void(0);" data-activates="main-menu" class="button-collapse">
+                            <i class="material-icons">menu</i>
+                        </a>
                         <a [routerLink]="['/']" class="brand-logo hide-on-med-and-down">Scottish Council for Voluntary Organisations</a>
                         <a [routerLink]="['/']" class="brand-logo hide-on-large-only">SCVO</a>
                     </div>
@@ -58,15 +69,6 @@
                             <li><a [routerLink]="['/policy']" class="waves-effect waves-dark">Policy &amp; news</a></li>
                             <li><a [routerLink]="['/events']" class="waves-effect waves-dark">Events &amp; campaigns</a></li>
                             <!-- <li><a class="dropdown-toggle" data-activates="dropdown-events">Events &amp; campaigns <i class="material-icons right">arrow_drop_down</i></a></li> -->
-                            <li><a [routerLink]="['/support']" class="waves-effect waves-dark">Support</a></li>
-                            <li><a [routerLink]="['/about']" class="waves-effect waves-dark">About</a></li>
-                        </ul>
-                        <ul class="side-nav" id="mobile-nav">
-                            <li><a [routerLink]="['/']" class="waves-effect waves-dark">Home</a></li>
-                            <li><a [routerLink]="['/help']" class="waves-effect waves-dark">Running a charity</a></li>
-                            <li><a [routerLink]="['/jobs']" class="waves-effect waves-dark">Third sector jobs</a></li>
-                            <li><a [routerLink]="['/policy']" class="waves-effect waves-dark">Policy &amp; news</a></li>
-                            <li><a [routerLink]="['/events']" class="waves-effect waves-dark">Events &amp; campaigns</a></li>
                             <li><a [routerLink]="['/support']" class="waves-effect waves-dark">Support</a></li>
                             <li><a [routerLink]="['/about']" class="waves-effect waves-dark">About</a></li>
                         </ul>

@@ -29,14 +29,14 @@ This repository [Wiki](https://github.com/scvodigital/platform-frontend/wiki) co
 ### Development
 This branch uses [Webpack](https://webpack.github.io/) for Development.
 
-    git clone -b angular2 https://github.com/scvodigital/platform-frontend
+    git clone https://github.com/scvodigital/platform-frontend
     cd platform-frontend
-    npm install -g webpack webpack-dev-server typings typescript
+    sudo gem install sass
+    sudo npm install -g webpack webpack-dev-server typings typescript firebase-tools
     npm install
-    npm run typings-install
     npm start
 
-The [website running locally](http://localhost:5000) will then load. As code changes are made they will be reflected in the local website.
+The [website running locally](http://localhost:2000) will then load. As code changes are made they will be reflected in the local website.
 
 ### Production
 Continuous integration via [Travis](https://travis-ci.org).

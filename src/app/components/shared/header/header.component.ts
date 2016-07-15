@@ -1,24 +1,13 @@
 import { Component, AfterViewInit, ViewEncapsulation } from '@angular/core';
 import { Control } from '@angular/common';
 
-// declare var $: any;
-
-// import * as rx from 'rxjs';
-// import { Observable } from 'rxjs/Observable';
-// import 'rxjs/add/operator/map';
-// import 'rxjs/add/operator/catch';
-// import 'rxjs/add/operator/debounceTime';
-// import 'rxjs/add/operator/distinctUntilChanged';
-// import 'rxjs/add/operator/switchMap';
+import { Router, ROUTER_DIRECTIVES } from '@angular/router';
 
 import { MaterializeDirective } from "angular2-materialize";
 
-import { ROUTER_DIRECTIVES, Router } from '@angular/router';
-
 import { InputDebounceComponent } from "../forms/search.input.component";
 
-// import { SearchService } from '../../../services/search.service';
-// import { ElasticSearchService } from '../../../services/elasticsearch.service';
+declare var $: any;
 
 @Component({
     selector: 'header',
@@ -28,31 +17,22 @@ import { InputDebounceComponent } from "../forms/search.input.component";
     encapsulation: ViewEncapsulation.None
     // providers: [ElasticSearchService],
 })
-export class HeaderComponent implements AfterViewInit {
-    constructor(private router: Router) {}
+export class HeaderComponent {
 
-    ngAfterViewInit() {
-        // console.log('MENU!');
-        (function($){
-            $(function(){
-
-                // console.log($(".side-nav"));
-                $('.side-nav').sideNav();
-
-            }); // end of document ready
-        })(jQuery); // end of jQuery name space
-
-        // $(".side-nav").sideNav();
+    constructor(private router: Router) {
+        //HACK: Can't find the correct Lifecycle hook so just sticking this in a timer because trial and error this way ain't good
+        //can work it out after go live when less under pressure
+        setTimeout(() => {
+            // console.log('Initiating Side Nav');
+            $('.button-collapse').sideNav({
+                closeOnClick: true,
+                menuWidth: 350
+            });
+        }, 1000);
     }
 
-    // ngOnInit() {
-    //     this.router
-    //     .routerState
-    //     .queryParams
-    //     .subscribe(params => {
-    //         this.searchChanged(decodeURI(params['s']));
-    //     });
-    // }
+    AfterViewInit (){
+    }
 
     public searchChanged(term) {
         this.router.navigate(['/search'], { queryParams: { s: term } });

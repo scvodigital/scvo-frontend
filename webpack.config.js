@@ -23,9 +23,11 @@ var webpackConfig = {
         new HtmlWebpackPlugin({ template: 'src/index.html', inject: false }),
         // jQuery
         new webpack.ProvidePlugin({
-            jQuery: 'jquery',
-            $: 'jquery',
-            jquery: 'jquery',
+            //jQuery: 'jquery',
+            //$: 'jquery',
+            //jquery: 'jquery',
+            "window.jQuery": "jquery",
+            "root.jQuery": "jquery",
             "Hammer": "hammerjs/hammer"
         })
     ],
@@ -35,7 +37,7 @@ var webpackConfig = {
             materializecss: 'materialize-css/dist/css/materialize.css',
             materialize: 'materialize-css/dist/js/materialize.js',
         },
-        extensions: ['', '.webpack.js', '.web.js', '.ts', '.js', '.css', '.html']
+        extensions: ['', '.webpack.js', '.web.js', '.ts', '.js', '.css', '.html', '.png', '.jpg']
     },
 
     module: {
@@ -60,8 +62,8 @@ var webpackConfig = {
             {
                 // .scss files for Sass
                 test: /\.scss$/,
-                exclude: /node_modules/,
-                loaders: ["style", "css", "sass"]
+                loader: 'style-loader!css-loader!sass-loader?sourceMap',
+                exclude: /node_modules/
             },
             {
                 // Match woff2 in addition to patterns like .woff?v=1.1.1.
