@@ -1,6 +1,6 @@
-import {Component, Input, Output, ElementRef, EventEmitter} from '@angular/core';
-import {CORE_DIRECTIVES} from '@angular/common';
-import {Observable} from 'rxjs/Rx';
+import { Component, Input, Output, ElementRef, EventEmitter } from '@angular/core';
+import { CORE_DIRECTIVES } from '@angular/common';
+import { Observable } from 'rxjs/Rx';
 
 @Component({
     selector: 'input-debounce',
@@ -9,7 +9,7 @@ import {Observable} from 'rxjs/Rx';
 
 export class InputDebounceComponent {
     @Input() placeholder: string;
-    @Input() delay: number = 300;
+    @Input() delay: number = 500;
     @Output() value: EventEmitter<any> = new EventEmitter();
 
     public inputValue: string;

@@ -15,7 +15,6 @@ declare var $: any;
     styleUrls: [require('app/components/shared/header/header.component.scss')],
     directives: [ROUTER_DIRECTIVES, InputDebounceComponent, MaterializeDirective],
     encapsulation: ViewEncapsulation.None
-    // providers: [ElasticSearchService],
 })
 export class HeaderComponent {
 
