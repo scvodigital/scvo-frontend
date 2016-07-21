@@ -4,7 +4,7 @@ import { Router, ROUTER_DIRECTIVES } from '@angular/router';
 
 import * as rx from 'rxjs';
 
-import { ElasticService } from '../../services/elastic.service';
+import { ElasticService } from '../../../services/elastic.service';
 
 // import { Component, NgZone, Output, EventEmitter } from '@angular/core';
 // import { Router, ActivatedRoute } from '@angular/router';
@@ -15,7 +15,7 @@ import { ElasticService } from '../../services/elastic.service';
 
 @Component({
     selector: 'search',
-    templateUrl: 'app/components/elastic/search.component.html',
+    templateUrl: 'app/components/dynamic/elastic/search.component.html',
     directives: [ROUTER_DIRECTIVES, CORE_DIRECTIVES, FORM_DIRECTIVES],
     events: ['newResults']
 })
