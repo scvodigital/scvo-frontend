@@ -11,7 +11,7 @@ import { HeaderComponent, FooterComponent } from './components/shared/shared';
 @Component({
     selector: 'scvo-app',
     templateUrl: 'app/app.component.html',
-    styleUrls: [require('app/app.component.scss')],
+    styles: [require('app/app.component.scss').toString()],
     encapsulation: ViewEncapsulation.None,
     directives: [ROUTER_DIRECTIVES, HeaderComponent, FooterComponent],
     providers: [Angulartics2GoogleAnalytics, Angulartics2Deprecated],

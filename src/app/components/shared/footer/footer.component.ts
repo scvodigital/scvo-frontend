@@ -3,7 +3,7 @@ import { Component } from '@angular/core';
 @Component({
     selector: 'footer',
     templateUrl: 'app/components/shared/footer/footer.component.html',
-    styleUrls: [require('app/components/shared/footer/footer.component.scss')]
+    styles: [require('app/components/shared/footer/footer.component.scss').toString()]
 })
 export class FooterComponent {
     date = new Date();

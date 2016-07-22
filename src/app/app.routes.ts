@@ -4,11 +4,11 @@ import { HomeComponent } from './components/static/home.component';
 import { HelpComponent } from './components/static/help.component';
 import { JobsComponent } from './components/static/jobs.component';
 import { PolicyComponent } from './components/static/policy.component';
-import { EventSearchComponent } from './components/dynamic/events/search.component';
-import { EventResultComponent } from './components/dynamic/events/result.component';
+import { EventSearchComponent } from './components/dynamic/search/events/search-form.component';
+import { EventResultComponent } from './components/dynamic/search/events/result.component';
 import { SupportComponent } from './components/static/support.component';
 import { AboutComponent } from './components/static/about.component';
-import { SearchComponent } from './components/dynamic/elastic/search.component';
+import { SearchComponent } from './components/dynamic/search/site/elastic.component';
 
 export const routes: RouterConfig = [
     { path: '',             component: HomeComponent,        },

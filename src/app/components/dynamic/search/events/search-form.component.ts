@@ -6,10 +6,12 @@ import { MaterializeDirective } from "angular2-materialize";
 
 @Component({
     selector: 'events',
-    templateUrl: 'app/components/dynamic/events/search.component.html',
+    templateUrl: 'app/components/dynamic/search/events/search-form.component.html',
     directives: [ROUTER_DIRECTIVES, MaterializeDirective]
 })
 export class EventSearchComponent {
+    title: string = 'Events';
+
     private selectedCategory = "";
     private selectedLocation = "";
     private selectedCost = "";
@@ -25,27 +27,24 @@ export class EventSearchComponent {
     ngOnInit() {
         window.setTimeout(()=>{
             this.categories = [
-                {value:1,name:"Option 1"},
-                {value:2,name:"Option 2"},
-                {value:3,name:"Option 3"}
+                {value:1,name:"Events"},
+                {value:2,name:"Training"}
             ]
             this.locations = [
-                {value:1,name:"Option 1"},
-                {value:2,name:"Option 2"},
-                {value:3,name:"Option 3"}
+                {value:1,name:"Edinburgh"},
+                {value:2,name:"Glasgow"},
+                {value:3,name:"Other"}
             ]
             this.costs = [
-                {value:1,name:"Option 1"},
-                {value:2,name:"Option 2"},
-                {value:3,name:"Option 3"}
+                {value:1,name:"Free"},
+                {value:2,name:"Paid"}
             ]
             this.months = [
-                {value:1,name:"Option 1"},
-                {value:2,name:"Option 2"},
-                {value:3,name:"Option 3"}
+                {value:1,name:"July 2016"},
+                {value:2,name:"August 2016"},
+                {value:3,name:"September 2016"},
+                {value:3,name:"October 2016"}
             ]
         },100);
-
     }
-
 }

@@ -1,6 +1,6 @@
-<h1>Events</h1>
-<div class="event-search">
-    <form>
+<h1 class="light">Events</h1>
+<div class="event-search card">
+    <form class="card-content">
         <div class="row">
             <div class="input-field col s10">
                 <input type="text" id="keywords" />
@@ -13,34 +13,34 @@
         <div class="row">
             <div class="col s3">
                 <select [(ngModel)]="selectedCategory" materialize="material_select" [materializeSelectOptions]="categories" [ngModelOptions]="{standalone: true}">
-                    <option value="" disabled selected>All categories</option>
+                    <option value="" selected>All categories</option>
                     <option *ngFor="let option of categories" [value]="option.value">{{option.name}}</option>
                 </select>
             </div>
             <div class="col s3">
                 <select [(ngModel)]="selectedLocation" materialize="material_select" [materializeSelectOptions]="locations" [ngModelOptions]="{standalone: true}">
-                    <option value="" disabled selected>All locations</option>
+                    <option value="" selected>All locations</option>
                     <option *ngFor="let option of locations" [value]="option.value">{{option.name}}</option>
                 </select>
             </div>
             <div class="col s3">
                 <select [(ngModel)]="selectedCost" materialize="material_select" [materializeSelectOptions]="costs" [ngModelOptions]="{standalone: true}">
-                    <option value="" disabled selected>Any cost</option>
+                    <option value="" selected>Any cost</option>
                     <option *ngFor="let option of costs" [value]="option.value">{{option.name}}</option>
                 </select>
             </div>
             <div class="col s3">
                 <select [(ngModel)]="selectedMonth" materialize="material_select" [materializeSelectOptions]="months" [ngModelOptions]="{standalone: true}">
-                    <option value="" disabled selected>Any month</option>
+                    <option value="" selected>Any month</option>
                     <option *ngFor="let option of months" [value]="option.value">{{option.name}}</option>
                 </select>
             </div>
         </div>
     </form>
 </div>
-<div class="results">
-    <div class="result">
-        <div class="row">
+<div class="event-results">
+    <div class="result card">
+        <div class="row card-content">
             <div class="col s1">
                 <div style="font-size:20px;text-transform:uppercase;font-weight:bold;">
                     result.day
