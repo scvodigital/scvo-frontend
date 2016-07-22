@@ -8,12 +8,12 @@ import { ElasticService } from '../../../../services/elastic.service';
 
 @Component({
     selector: 'search',
-    templateUrl: 'app/components/dynamic/search/site/elastic.component.html',
+    templateUrl: 'app/components/dynamic/search/site/elastic-results.component.html',
     directives: [ROUTER_DIRECTIVES, CORE_DIRECTIVES, FORM_DIRECTIVES],
     events: ['newResults'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class SearchComponent implements OnInit {
+export class SiteSearchComponent implements OnInit {
     searchText: Control;
     searchTextModel: string;
     results: rx.Observable<any>;

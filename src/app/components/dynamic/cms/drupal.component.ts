@@ -1,6 +1,6 @@
 import { Component, NgZone, OnInit } from '@angular/core';
 import { CORE_DIRECTIVES, Control } from '@angular/common';
-import { Router, ROUTER_DIRECTIVES } from '@angular/router';
+import { Router, ROUTER_DIRECTIVES, ActivatedRoute } from '@angular/router';
 
 import * as rx from 'rxjs';
 
@@ -11,16 +11,14 @@ import * as rx from 'rxjs';
 })
 export class DrupalComponent implements OnInit {
 
-    constructor(private router: Router, private _zone: NgZone) {
-
+    constructor(private router: Router, private route: ActivatedRoute, private _zone: NgZone) {
     }
 
     ngOnInit() {
-        this.router
-        .routerState
-        .queryParams
-        .subscribe(params => {
-
+        this.route
+        .url
+        .subscribe(routeParams => {
+            console.log(routeParams[1].path);
         });
     }
 }

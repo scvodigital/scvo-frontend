@@ -6,7 +6,7 @@ import { MaterializeDirective } from "angular2-materialize";
 
 @Component({
     selector: 'events',
-    templateUrl: 'app/components/dynamic/search/events/search-form.component.html',
+    templateUrl: 'app/components/dynamic/search/events/elastic-results.component.html',
     directives: [ROUTER_DIRECTIVES, MaterializeDirective]
 })
 export class EventSearchComponent {
