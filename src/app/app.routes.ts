@@ -16,10 +16,10 @@ import { EventResultComponent } from './components/dynamic/search/events/elastic
 
 export const routes: RouterConfig = [
     { path: '',             component: HomeComponent,        },
-    { path: 'help',         component: HelpComponent,        },
+    { path: 'help',         component: DrupalComponent,      },
     { path: 'jobs',         component: JobsComponent,        },
     { path: 'policy',       component: PolicyComponent,      },
-    { path: 'policy/:path',   component: DrupalComponent,      },
+    { path: 'policy/:path', component: DrupalComponent,      },
     { path: 'news/:path',   component: DrupalComponent,      },
     { path: 'events',       component: EventSearchComponent, },
     { path: 'events/:id',   component: EventResultComponent, },

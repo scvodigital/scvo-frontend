@@ -5,6 +5,7 @@ import { Angulartics2 } from 'angulartics2';
 
 @Injectable()
 export class Angulartics2Deprecated extends Angulartics2 {
+
     constructor(location: Location, router: Router) {
         super(location);
         this.trackRouter(location, router);

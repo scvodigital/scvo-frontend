@@ -28,6 +28,7 @@ var webpackConfig = {
             //jquery: 'jquery',
             "window.jQuery": "jquery",
             "root.jQuery": "jquery",
+            "markdown": "markdown",
             "Hammer": "hammerjs/hammer"
         })
     ],
