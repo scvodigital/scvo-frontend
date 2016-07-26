@@ -15,6 +15,7 @@ export class ElasticService {
             });
             return Observable.fromPromise(client.search({
                 index: '_all', // The magic (all indices)
+                // type: ['organisation', 'opportunity', 'charity'],
                 q: `${term}`
             }))
         } else {

@@ -58,12 +58,21 @@
                         </span>
                     </div>
                 </div>
+                <div *ngSwitchCase="'elasticsearch_index_main_scvo_public'">
+                    <div class="card-panel orange darken-2" *ngIf="result._type == 'scvo_public'">
+                        <span class="white-text">
+                            <strong>Website Content</strong>
+                            <h5 *ngIf="result._source.title">{{result._source.title}}</h5>
+                            <p *ngIf="result._source.processed" [innerHTML]="result._source.processed"></p>
+                        </span>
+                    </div>
+                </div>
             </div>
-            <!-- <div class="card-panel black">
+            <div class="card-panel black">
                 <span class="white-text">
                     {{result | json}}
                 </span>
-            </div> -->
+            </div>
         </li>
     </ul>
     <div *ngIf="!results">

@@ -4,14 +4,7 @@
             <div class="nav-wrapper">
                 <div class="row">
                     <div class="col s12 m8 navbar-brand">
-                        <ul id="main-menu" class="side-nav" menu-items>
-                            <li><a [routerLink]="['/']" class="waves-effect waves-dark">Home</a></li>
-                            <li><a [routerLink]="['/help']" [routerLinkActive]="['active']" class="waves-effect waves-dark">Running a charity</a></li>
-                            <li><a [routerLink]="['/jobs']" [routerLinkActive]="['active']" class="waves-effect waves-dark">Third sector jobs</a></li>
-                            <li><a [routerLink]="['/policy']" [routerLinkActive]="['active']" class="waves-effect waves-dark">Policy &amp; news</a></li>
-                            <li><a [routerLink]="['/events']" [routerLinkActive]="['active']" class="waves-effect waves-dark">Events</a></li>
-                            <li><a [routerLink]="['/about']" [routerLinkActive]="['active']" class="waves-effect waves-dark">About</a></li>
-                        </ul>
+                        <ul id="main-menu" class="side-nav" menu-items></ul>
                         <a href="javascript:void(0);" data-activates="main-menu" class="button-collapse">
                             <i class="material-icons">menu</i>
                         </a>
@@ -22,71 +15,18 @@
                         <form ngForm="searchForm">
                             <input-debounce delay="500" (value)="searchChanged($event)"></input-debounce>
                         </form>
-                        <!-- Hide dropdown: {{hideAutocomplete}} -->
-                        <!-- Results: {{results?.length}} - ->
-                        <div class="sb-seachresults" [ngClass]="{hidden:(results?.length === 0 || hideAutocomplete)}">
-                            <ul class="sb-results-dropdown-menu">
-                                <!- - <li *ngFor="let item of items | async" (mousedown)="selectResult(item)">
-                                    <span>{{item}}</span>
-                                </li> - ->
-                                <li *ngFor="let result of results | async" (mousedown)="selectResult(result.title)">
-                                    <span *ngIf="result.title">{{result.title | uppercase}}</span>
-                                    <!- - <span *ngIf="result.name">{{result.name | uppercase}}</span>
-                                    <span *ngIf="result.charityNumber">{{result.charityNumber | uppercase}}</span> - ->
-                                </li>
-                            </ul>
-                        </div>
-                        <!- - <div class="sb-seachresults" [ngClass]="{hidden:(results?.length > 0)}">
-                            <ul class="sb-results-dropdown-menu">
-                                <li *ngFor="let result of results | async" (mousedown)="resultSelected(result)">
-                                    <span *ngIf="result.title">{{result.title | uppercase}}</span>
-                                    <span *ngIf="result.name">{{result.name | uppercase}}</span>
-                                    <span *ngIf="result.charityNumber">{{result.charityNumber | uppercase}}</span>
-                                </li>
-                            </ul>
-                        </div> -->
                     </div>
                 </div>
             </div>
         </nav>
         <nav class="{{themeColour}} darken-2 hide-on-med-and-down">
             <div class="nav-wrapper">
-                <!--
-                <u l id="dropdown-events" class="dropdown-content">
-                <li><a href="/events">SCVO Events</a></li>
-                <li><a href="/digital_participation">Digital Participation</a></li>
-                <li><a href="/one-digital">One Digital</a></li>
-                <li><a href="/scottish-charity-awards">Scottish Charity Awards</a></li>
-                <li><a href="/gathering">The Gathering</a></li>
-                < /ul> -->
                 <div class="row">
                     <div class="col s12 navbar-nav">
-                        <ul>
-                            <li><a [routerLink]="['/']" class="waves-effect waves-dark">Home</a></li>
-                            <li><a [routerLink]="['/help']" [routerLinkActive]="['active']" class="waves-effect waves-dark">Running a charity</a></li>
-                            <li><a [routerLink]="['/jobs']" [routerLinkActive]="['active']" class="waves-effect waves-dark">Third sector jobs</a></li>
-                            <li><a [routerLink]="['/policy']" [routerLinkActive]="['active']" class="waves-effect waves-dark">Policy &amp; news</a></li>
-                            <li><a [routerLink]="['/events']" [routerLinkActive]="['active']" class="waves-effect waves-dark">Events</a></li>
-                            <li><a [routerLink]="['/about']" [routerLinkActive]="['active']" class="waves-effect waves-dark">About</a></li>
-                        </ul>
+                        <ul menu-items></ul>
                     </div>
                 </div>
             </div>
         </nav>
     </div>
-    <!-- <div class="sb-seachresults" [ngClass]="{hidden:(results?.length === 0 || !active)}">
-        <ul class="sb-results-dropdown-menu">
-            <li *ngFor="#result of results | async" (mousedown)="resutSelected(result)">
-                <span *ngIf="result.title">{{result.title | uppercase}}</span>
-                <span *ngIf="result.name">{{result.name | uppercase}}</span>
-                <span *ngIf="result.charityNumber">{{result.charityNumber | uppercase}}</span>
-            </li>
-        </ul>
-    </div> -->
-    <!-- <div class="page-title">
-    <div class="alert alert-danger"></div>
-    <h1 ng-show="title !== ''" ng-bind="title"></h1>
-    <h2 ng-show="subheading !== ''" ng-bind="subheading"></h2>
-    <div ng-show="panel !== ''" ng-bind-html="panel"></div>
-    < /div> -->
 </div>

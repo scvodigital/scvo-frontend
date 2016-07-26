@@ -1,6 +1,7 @@
 var webpack = require('webpack');
 var CopyWebpackPlugin = require('copy-webpack-plugin');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
+// var FaviconsWebpackPlugin = require('favicons-webpack-plugin');
 var path = require('path');
 
 // Webpack Config
@@ -16,21 +17,29 @@ var webpackConfig = {
     },
 
     plugins: [
+        // App
         new webpack.optimize.CommonsChunkPlugin({ name: ['app', 'vendor', 'polyfills'], minChunks: Infinity }),
+
         // Static assets
         new CopyWebpackPlugin([{ from: 'src/app', to: 'app' }]),
+
         // HTML
         new HtmlWebpackPlugin({ template: 'src/index.html', inject: false }),
-        // jQuery
+
+        // jQuery & utils
         new webpack.ProvidePlugin({
             //jQuery: 'jquery',
             //$: 'jquery',
             //jquery: 'jquery',
             "window.jQuery": "jquery",
             "root.jQuery": "jquery",
+            "elasticsearch": "elasticsearch",
             "markdown": "markdown",
             "Hammer": "hammerjs/hammer"
-        })
+        }),
+
+        // Favicons
+        // new FaviconsWebpackPlugin('src/app/assets/images/icons/scvo.png')
     ],
 
     resolve: {
