@@ -91,6 +91,9 @@ header {
     padding-bottom: 0;
     nav {
         box-shadow: none;
+        .material-icons {
+            line-height: inherit;
+        }
     }
 }
 .row .col.navbar-nav {
@@ -125,10 +128,21 @@ header {
 }
 // temporary fix for Materialize bug with Mac Chrome -
 // https://github.com/Dogfalo/materialize/issues/3161
-.nav-wrapper, .nav-wrapper form, .nav-wrapper form .input-field{ height: 100%; }
+.nav-wrapper, .nav-wrapper form, .nav-wrapper form .input-field { height: 100%; }
 
-.side-nav a.active {
-    background-color: rgba(0, 0, 0, 0.05);
+.dropdown-content {
+    max-height: 1000px;
+    li a {
+        font-size: 1rem;
+    }
+    li:first-child a {
+        line-height: 36px;
+    }
+}
+.side-nav {
+    a.active {
+        background-color: rgba(0, 0, 0, 0.05);
+    }
 }
 
 // Content =====================================================================
@@ -155,6 +169,30 @@ policy {
     }
 }
 
+.event-results {
+    .day {
+        font-size: 20px;
+        text-transform: uppercase;
+        font-weight: bold;
+    }
+    .date {
+        font-size: 16px;
+        font-weight: bold;
+    }
+    .title {
+        margin-top: 0.1em;
+        margin-bottom: 0.3em;
+    }
+    .description {
+
+    }
+    .cost {
+        font-size: 20px;
+        text-transform: uppercase;
+        font-weight: bold;
+        text-align: center;
+    }
+}
 
 // Footer ======================================================================
 

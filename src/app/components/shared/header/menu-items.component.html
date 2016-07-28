@@ -1,6 +1,77 @@
-<li><a [routerLink]="['/']" class="waves-effect waves-dark">Home</a></li>
-<li><a [routerLink]="['/help']" [routerLinkActive]="['active']" class="waves-effect waves-dark">Running a charity</a></li>
-<li><a [routerLink]="['/jobs']" [routerLinkActive]="['active']" class="waves-effect waves-dark">Third sector jobs</a></li>
-<li><a [routerLink]="['/policy']" [routerLinkActive]="['active']" class="waves-effect waves-dark">Policy &amp; news</a></li>
-<li><a [routerLink]="['/events']" [routerLinkActive]="['active']" class="waves-effect waves-dark">Events</a></li>
-<li><a [routerLink]="['/about']" [routerLinkActive]="['active']" class="waves-effect waves-dark">About</a></li>
+<li *ngIf="menuName == 'mobile'">
+    <div class="userView">
+        <img class="background" src="assets/images/icons/scvo.png">
+        <a href="#!user"><img class="circle" src="assets/images/icons/scvo.png"></a>
+        <a href="#!name"><span class="white-text name">SCVO</span></a>
+        <a href="#!email"><span class="white-text email">scvoteamdigital@gmail.com</span></a>
+    </div>
+</li>
+
+<li>
+    <a [routerLink]="['/']" class="waves-effect waves-dark">Home</a>
+</li>
+
+<li>
+    <a [routerLink]="['/running-your-organisation']" [routerLinkActive]="['active']" class="waves-effect waves-dark" materialize="dropdown" data-activates="running-your-organisation" data-hover="true">Running your organisation<span class="material-icons arrow_drop_down right">arrow_drop_down</span></a>
+</li>
+<ul id="running-your-organisation" class="dropdown-content">
+    <li><a [routerLink]="['/running-your-organisation']">Running your organisation</a></li>
+    <li><a [routerLink]="['/running-your-organisation/finance']" [routerLinkActive]="['active']">Finance</a></li>
+    <li><a [routerLink]="['/running-your-organisation/business-management']" [routerLinkActive]="['active']">Business management</a></li>
+    <li><a [routerLink]="['/running-your-organisation/governance']" [routerLinkActive]="['active']">Governance</a></li>
+    <li><a [routerLink]="['/running-your-organisation/funding']" [routerLinkActive]="['active']">Funding</a></li>
+    <li><a [routerLink]="['/running-your-organisation/legislation-and-regulation']" [routerLinkActive]="['active']">Legislation &amp; regulation</a></li>
+</ul>
+
+<li>
+    <a [routerLinkActive]="['active']" class="waves-effect waves-dark" materialize="dropdown" data-activates="employability" data-hover="true">Employability<span class="material-icons arrow_drop_down right">arrow_drop_down</span></a>
+</li>
+<ul id="employability" class="dropdown-content">
+    <li><a [routerLink]="['/employability']">Employability</a></li>
+    <li><a [routerLink]="['/employability/cjs']">Community Jobs Scotland</a></li>
+    <li><a [routerLink]="['/employability/internships']">Disability equality internships</a></li>
+    <li><a [routerLink]="['/employability/past-schemes']">Past employability schemes</a></li>
+</ul>
+
+<li>
+    <a [routerLinkActive]="['active']" class="waves-effect waves-dark" materialize="dropdown" data-activates="products-and-services" data-hover="true">Products &amp; services<span class="material-icons arrow_drop_down right">arrow_drop_down</span></a>
+</li>
+<ul id="products-and-services" class="dropdown-content">
+    <li><a [routerLink]="['/products-and-services']">Products &amp; services</a></li>
+    <li><a [routerLink]="['/products-and-services/membership']">SCVO membership</a></li>
+    <li><a href="https://goodhq.org">Good HQ</a></li>
+    <li><a [routerLink]="['/products-and-services/office-space']">Office space</a></li>
+    <li><a [routerLink]="['/products-and-services/credit-union']">Credit Union</a></li>
+    <li><a href="https://thirdforcenews.org.uk">Third Force News</a></li>
+    <li><a href="https://goodmoves.com">Goodmoves</a></li>
+    <li><a href="https://fundingscotland.com">Funding Scotland</a></li>
+    <li><a [routerLink]="['/products-and-services/payroll']">Payroll</a></li>
+    <li><a [routerLink]="['/products-and-services/digital']">Digital participation</a></li>
+    <li><a [routerLink]="['/products-and-services/saif']">SAIF</a></li>
+    <li><a [routerLink]="['/products-and-services/professional-networks']">Professional networks</a></li>
+    <li><a [routerLink]="['/products-and-services/affiliate-deals']">Affiliate deals</a></li>
+</ul>
+
+<li>
+    <a [routerLinkActive]="['active']" class="waves-effect waves-dark" materialize="dropdown" data-activates="events-and-training" data-hover="true">Events &amp; training<span class="material-icons arrow_drop_down right">arrow_drop_down</span></a>
+</li>
+<ul id="events-and-training" class="dropdown-content">
+    <li><a [routerLink]="['/events-and-training']">Events &amp; training</a></li>
+    <li><a [routerLink]="['/events-and-training/scottish-charity-awards']">Scottish Charity Awards</a></li>
+    <li><a [routerLink]="['/events-and-training/the-gathering']">The Gathering</a></li>
+    <li class="divider"></li>
+    <li><a [routerLink]="['/events-and-training/training-courses']">Training courses</a></li>
+</ul>
+
+<li>
+    <a [routerLinkActive]="['active']" class="waves-effect waves-dark" materialize="dropdown" data-activates="policy-hub" data-hover="true">Policy hub<span class="material-icons arrow_drop_down right">arrow_drop_down</span></a>
+</li>
+<ul id="policy-hub" class="dropdown-content">
+    <li><a [routerLink]="['/policy-hub']">Policy hub</a></li>
+    <li><a [routerLink]="['/policy-hub/research']">Research</a></li>
+    <li><a [routerLink]="['/policy-hub/briefings-and-reports']">Briefings &amp; reports</a></li>
+    <li><a [routerLink]="['/policy-hub/consultation-responses']">Consultation responses</a></li>
+    <li><a [routerLink]="['/policy-hub/blogs']">Blogs</a></li>
+    <li><a [routerLink]="['/policy-hub/campaigns']">Campaigns</a></li>
+    <li><a [routerLink]="['/policy-hub/policy-committee']">Policy committee</a></li>
+</ul>

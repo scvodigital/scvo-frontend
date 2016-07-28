@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { Control } from '@angular/common';
 
 import { ROUTER_DIRECTIVES } from '@angular/router';
@@ -11,5 +11,7 @@ import { MaterializeDirective } from "angular2-materialize";
     directives: [ROUTER_DIRECTIVES, MaterializeDirective],
 })
 export class MenuItemsComponent {
+    @Input('menu-items') menuName: string = '';
+
     constructor() {}
 }
