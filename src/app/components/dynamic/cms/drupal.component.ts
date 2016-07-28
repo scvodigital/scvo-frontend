@@ -16,6 +16,7 @@ import { MarkdownPipe } from '../../../pipes/markdown.pipe';
     pipes: [MarkdownPipe]
 })
 export class DrupalComponent {
+    loading: Boolean = true;
     content_status: Observable<any>;
     content_nid: Observable<any>;
     content_type: Observable<any>;
@@ -32,6 +33,7 @@ export class DrupalComponent {
         this.router
         .events
         .subscribe(params => {
+            this.loading = true;
             console.log("Asking Drupal for "+this.router.url);
             this._drupalService.loadPage(this.router.url)
                 .subscribe(
@@ -46,9 +48,10 @@ export class DrupalComponent {
                             this.content_body =                 (result.body[0]) ?                  result.body[0].value : '';
                             this.content_body_format =          (result.body[0]) ?                  result.body[0].format : '';
                             this.content =                      (result) ?                          result : {};
+                            this.loading = false;
                         }
                     },
-                    err => { this.error = true; this.error_message = err }
+                    err => { this.error = true; this.error_message = err; this.loading = false; }
                 );
             });
     }
