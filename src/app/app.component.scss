@@ -84,6 +84,10 @@ main {
         margin-left: -29px;
     }
 }
+.z-depth-1, nav, .card-panel, .card, .toast, .btn, .btn-large, .btn-floating, .dropdown-content, .collapsible, .side-nav {
+    box-shadow: none;
+}
+
 
 // Navbar ======================================================================
 
@@ -93,6 +97,9 @@ header {
         box-shadow: none;
         .material-icons {
             line-height: inherit;
+        }
+        ul a:hover {
+            background-color: rgba(0, 0, 0, 0.1);
         }
     }
 }
@@ -128,32 +135,42 @@ header {
     .brand-logo {
         padding-left: 3px;
     }
+
+    .dropdown-content {
+        background-color: #00796b;
+        max-height: 1000px;
+        li a {
+            color: white;
+            font-size: 1rem;
+        }
+        li:first-child a {
+            line-height: 36px;
+        }
+        li:hover, li.active, li.selected {
+            background-color: inherit;
+            color: inherit;
+        }
+    }
+    .dropdown-content li > a, .dropdown-content li > span {
+        padding: 14px 15px;
+    }
+
+    .side-nav {
+        a.active {
+            background-color: rgba(0, 0, 0, 0.05);
+        }
+        .userView {
+            background-color: #333;
+        }
+    }
+    .side-nav .collapsible-body li.active, .side-nav.fixed .collapsible-body li.active {
+        background-color: #777;
+    }
 }
+
 // temporary fix for Materialize bug with Mac Chrome -
 // https://github.com/Dogfalo/materialize/issues/3161
 .nav-wrapper, .nav-wrapper form, .nav-wrapper form .input-field { height: 100%; }
-
-.dropdown-content {
-    max-height: 1000px;
-    li a {
-        font-size: 1rem;
-    }
-    li:first-child a {
-        line-height: 36px;
-    }
-}
-.side-nav {
-    a.active {
-        background-color: rgba(0, 0, 0, 0.05);
-    }
-    .userView {
-        background-color: #333;
-    }
-}
-.side-nav .collapsible-body li.active, .side-nav.fixed .collapsible-body li.active {
-    background-color: #777;
-}
-
 
 // Content =====================================================================
 
@@ -179,6 +196,11 @@ policy {
     }
 }
 
+.event-search {
+    .select-dropdown {
+        border: 1px solid #ccc;
+    }
+}
 .event-results {
     .day {
         font-size: 20px;

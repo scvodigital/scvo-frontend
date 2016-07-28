@@ -15,7 +15,7 @@
         <li *ngIf="menuType == 'desktop' && navigationItem.contents" [routerLinkActive]="['active']">
             <a [routerLink]="navigationItem.link" class="waves-effect waves-dark" materialize="dropdown" [attr.data-activates]="'dropdown' + i" data-hover="true">{{navigationItem.title}}<span class="material-icons arrow_drop_down right">arrow_drop_down</span></a>
             <ul [attr.id]="'dropdown' + i" class="dropdown-content">
-                <li *ngFor="let navigationContentItem of navigationItem.contents"><a [routerLink]="navigationContentItem.link">{{navigationContentItem.title}}</a></li>
+                <li *ngFor="let navigationContentItem of navigationItem.contents" [routerLinkActive]="['active']"><a [routerLink]="navigationContentItem.link">{{navigationContentItem.title}}</a></li>
             </ul>
         </li>
         <li class="no-padding" *ngIf="menuType == 'mobile' && !navigationItem.contents">
