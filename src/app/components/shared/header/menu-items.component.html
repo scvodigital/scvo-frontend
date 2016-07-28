@@ -1,33 +1,41 @@
 <li *ngIf="menuType == 'mobile'">
     <div class="userView">
-        <img class="background" src="assets/images/icons/scvo.png">
-        <a href="#!user"><img class="circle" src="assets/images/icons/scvo.png"></a>
+        <img class="background" src="">
+        <a href="#!user"><img class="circle" src=""></a>
         <a href="#!name"><span class="white-text name">SCVO</span></a>
-        <a href="#!email"><span class="white-text email">scvoteamdigital@gmail.com</span></a>
+        <a href="#!email"><span class="white-text email"></span></a>
     </div>
 </li>
 
-<li>
-    <a [routerLink]="['/']" class="waves-effect waves-dark">Home</a>
-</li>
-
-<ul *ngFor="let navigationItem of navigationMenu, let i = index">
-    <li *ngIf="menuType == 'desktop'">
-        <a [routerLink]="navigationItem.link" [routerLinkActive]="['active']" class="waves-effect waves-dark" materialize="dropdown" [attr.data-activates]="'dropdown' + i" data-hover="true">{{navigationItem.title}}<span class="material-icons arrow_drop_down right">arrow_drop_down</span></a>
-        <ul [attr.id]="'dropdown' + i" class="dropdown-content">
-            <li *ngFor="let navigationContentItem of navigationItem.contents"><a [routerLink]="navigationContentItem.link">{{navigationContentItem.title}}</a></li>
-        </ul>
-    </li>
-    <li class="no-padding" *ngIf="menuType == 'mobile'">
-      <ul class="collapsible collapsible-accordion">
-        <li>
-          <a class="collapsible-header waves-effect waves-dark">{{navigationItem.title}}<span class="material-icons arrow_drop_down right">arrow_drop_down</span></a>
-          <div class="collapsible-body">
-            <ul *ngFor="let navigationContentItem of navigationItem.contents">
-                <li><a [routerLink]="navigationContentItem.link">{{navigationContentItem.title}}</a></li>
-            </ul>
-          </div>
+<li *ngFor="let navigationItem of navigationMenu, let i = index">
+    <ul>
+        <li *ngIf="menuType == 'desktop' && !navigationItem.contents">
+            <a [routerLink]="navigationItem.link" class="waves-effect waves-dark">{{navigationItem.title}}</a>
         </li>
-      </ul>
-    </li>
-</ul>
+        <li *ngIf="menuType == 'desktop' && navigationItem.contents" [routerLinkActive]="['active']">
+            <a [routerLink]="navigationItem.link" class="waves-effect waves-dark" materialize="dropdown" [attr.data-activates]="'dropdown' + i" data-hover="true">{{navigationItem.title}}<span class="material-icons arrow_drop_down right">arrow_drop_down</span></a>
+            <ul [attr.id]="'dropdown' + i" class="dropdown-content">
+                <li *ngFor="let navigationContentItem of navigationItem.contents"><a [routerLink]="navigationContentItem.link">{{navigationContentItem.title}}</a></li>
+            </ul>
+        </li>
+        <li class="no-padding" *ngIf="menuType == 'mobile' && !navigationItem.contents">
+            <ul>
+                <li>
+                    <a [routerLink]="navigationItem.link" class="waves-effect waves-dark">{{navigationItem.title}}</a>
+                </li>
+            </ul>
+        </li>
+        <li class="no-padding" *ngIf="menuType == 'mobile' && navigationItem.contents">
+            <ul class="collapsible collapsible-accordion">
+                <li>
+                    <a class="collapsible-header waves-effect waves-dark">{{navigationItem.title}}<span class="material-icons arrow_drop_down right">arrow_drop_down</span></a>
+                    <div class="collapsible-body">
+                        <ul *ngFor="let navigationContentItem of navigationItem.contents">
+                            <li><a [routerLink]="navigationContentItem.link">{{navigationContentItem.title}}</a></li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </li>
+    </ul>
+</li>

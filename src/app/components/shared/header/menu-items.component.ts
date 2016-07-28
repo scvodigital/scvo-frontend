@@ -17,6 +17,10 @@ export class MenuItemsComponent {
     constructor() {
         this.navigationMenu = [
             {
+                "title": "Home",
+                "link": "/"
+            },
+            {
                 "title": "Running your organisation",
                 "link": "/running-your-organisation",
                 "contents": [
