@@ -86,7 +86,7 @@ export class MenuItemsComponent {
                     },
                     {
                         "title": "Good HQ",
-                        "link": "/products-and-services/good-hq"
+                        "link": "/products-and-services/goodhq"
                     },
                     {
                         "title": "Office space",
