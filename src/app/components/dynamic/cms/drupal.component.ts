@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { Router, ROUTER_DIRECTIVES, ActivatedRoute } from '@angular/router';
+import { Component } from '@angular/core';
+import { Router, ROUTER_DIRECTIVES, NavigationEnd } from '@angular/router';
 
 import { Observable } from 'rxjs/Rx';
 
@@ -30,27 +30,30 @@ export class DrupalComponent {
     error_message: Observable<any>;
 
     constructor(private router: Router, private _drupalService: DrupalService) {
-        this.router.events.subscribe(params => {
-            this.loading = true;
-            // console.log("Asking Drupal for "+this.router.url);
-            this._drupalService.loadPage(this.router.url)
-                .subscribe(
-                    result => {
-                        this.content_status =                   (result.status[0]) ?                result.status[0].value : 0;
-                        if (this.content_status) {
-                            this.content_nid =                  (result.nid[0]) ?                   result.nid[0].value : '';
-                            this.content_type =                 (result.type[0]) ?                  result.type[0].target_id : 'page';
-                            this.content_revision_timestamp =   (result.revision_timestamp[0]) ?    result.revision_timestamp[0].value : '';
-                            this.content_title =                (result.title[0]) ?                 result.title[0].value : '';
-                            this.content_subheading =           (result.field_subheading[0]) ?      result.field_subheading[0].value : '';
-                            this.content_body =                 (result.body[0]) ?                  result.body[0].value : '';
-                            this.content_body_format =          (result.body[0]) ?                  result.body[0].format : '';
-                            this.content =                      (result) ?                          result : {};
-                            this.loading = false;
-                        }
-                    },
-                    err => { this.error = true; this.error_message = err; this.loading = false; }
-                );
-            });
+        this.router.events.subscribe(event => {
+            if(event instanceof NavigationEnd) {
+                this.loading = true;
+                // console.log("Asking Drupal for "+this.router.url);
+                this._drupalService.loadPage(this.router.url).subscribe(result => {
+                    this.content_status =                   (result.status[0]) ?                result.status[0].value : 0;
+                    if (this.content_status) {
+                        this.content_nid =                  (result.nid[0]) ?                   result.nid[0].value : '';
+                        this.content_type =                 (result.type[0]) ?                  result.type[0].target_id : 'page';
+                        this.content_revision_timestamp =   (result.revision_timestamp[0]) ?    result.revision_timestamp[0].value : '';
+                        this.content_title =                (result.title[0]) ?                 result.title[0].value : '';
+                        this.content_subheading =           (result.field_subheading[0]) ?      result.field_subheading[0].value : '';
+                        this.content_body =                 (result.body[0]) ?                  result.body[0].value : '';
+                        this.content_body_format =          (result.body[0]) ?                  result.body[0].format : '';
+                        this.content =                      (result) ?                          result : {};
+                        this.loading = false;
+                    }
+                },
+                err => {
+                    this.error = true;
+                    this.error_message = err;
+                    this.loading = false;
+                });
+            }
+        });
     }
 }
