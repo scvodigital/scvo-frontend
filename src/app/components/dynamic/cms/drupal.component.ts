@@ -34,7 +34,7 @@ export class DrupalComponent implements OnInit {
     ngOnInit() {
         this.route.url.subscribe((params) => {
             this.loading = true;
-            console.log("Asking Drupal for /"+params.join('/'));
+            // console.log("Asking Drupal for /"+params.join('/'));
             this._drupalService.loadPage(params.join('/')).subscribe(result => {
                 this.content_status =                   (result.status[0]) ?                result.status[0].value : 0;
                 if (this.content_status) {

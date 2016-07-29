@@ -16,18 +16,14 @@ import { EventResultComponent } from './components/dynamic/search/events/elastic
 
 export const routes: RouterConfig = [
     { path: '',                               component: HomeComponent,       },
-    // { path: 'running-your-organisation',      component: DrupalComponent,     },
-    { path: 'running-your-organisation/:path',component: DrupalComponent,     },
-    { path: 'employability',                  component: JobsComponent,       },
-    { path: 'employability/:path',            component: DrupalComponent,     },
-    { path: 'products-and-services/:path',    component: DrupalComponent,     },
-    { path: 'events-and-training',            component: EventSearchComponent,},
-    { path: 'events-and-training/:id',        component: EventResultComponent,},
-    { path: 'policy-hub',                     component: PolicyComponent,     },
-    { path: 'policy-hub/:path',               component: DrupalComponent,     },
-    { path: 'policy-hub/campaigns/:path',     component: DrupalComponent,     },
     { path: 'search',                         component: SiteSearchComponent, },
     { path: ':path',                          component: DrupalComponent,     },
+    { path: 'running-your-organisation/:path',component: DrupalComponent,     },
+    { path: 'employability/:path',            component: DrupalComponent,     },
+    { path: 'products-and-services/:path',    component: DrupalComponent,     },
+    { path: 'events-and-training/:id',        component: EventResultComponent,},
+    { path: 'policy-hub/:path',               component: DrupalComponent,     },
+    { path: 'policy-hub/campaigns/:path',     component: DrupalComponent,     },
 ];
 
 export const APP_ROUTER_PROVIDERS = [
