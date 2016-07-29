@@ -9,6 +9,6 @@ export class DrupalService {
     constructor(private http: Http) {}
 
     loadPage(path): Observable<any> {
-        return this.http.get('https://master-o6miopmkpjxjq.eu.platform.sh'+path+'?_format=json').map((res:Response) => res.json());
+        return this.http.get('https://master-o6miopmkpjxjq.eu.platform.sh/'+path+'?_format=json').map((res:Response) => res.json());
     }
 }

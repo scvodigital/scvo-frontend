@@ -22,9 +22,8 @@ export class AppComponent {
         this.router.events.subscribe(event => {
             if (event instanceof NavigationEnd) {
                 window.scrollTo(0, 0);
+                this.pathClasses = this.router.url.replace(/\//g, ' ').trim();
             }
-
-            this.pathClasses = this.router.url.replace(/\//g, ' ').trim();
         });
     }
 }
