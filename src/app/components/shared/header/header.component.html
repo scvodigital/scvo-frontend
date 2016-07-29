@@ -1,15 +1,15 @@
 <div class="container-fluid">
     <div class="navbar navbar-default" role="navigation">
-        <nav class="{{themeColour}} darken-1">
+        <nav class="brand">
             <div class="nav-wrapper">
                 <div class="row">
                     <div class="col s12 m8 navbar-brand">
                         <ul id="main-menu" class="side-nav" menu-items="mobile"></ul>
-                        <a href="javascript:void(0);" data-activates="main-menu" class="button-collapse">
+                        <a href="#" materialize="sideNav" [materializeParams]="[{closeOnClick: true, edge: 'left', menuWidth: 350}]" data-activates="main-menu" class="button-collapse">
                             <i class="material-icons">menu</i>
                         </a>
-                        <a [routerLink]="['/']" class="brand-logo hide-on-med-and-down">Scottish Council for Voluntary Organisations</a>
-                        <a [routerLink]="['/']" class="brand-logo hide-on-large-only">SCVO</a>
+                        <a [routerLink]="['/']" class="brand-logo hide-on-med-and-down"><img src="app/assets/images/logos/scvo-white.png" /> Scottish Council for Voluntary Organisations</a>
+                        <a [routerLink]="['/']" class="brand-logo hide-on-large-only"><img src="app/assets/images/logos/scvo-white.png" /> SCVO</a>
                     </div>
                     <div class="col hide-on-small-only m4 right navbar-search">
                         <form ngForm="searchForm">
@@ -19,11 +19,20 @@
                 </div>
             </div>
         </nav>
-        <nav class="{{themeColour}} darken-2 hide-on-med-and-down">
+        <nav class="navigation hide-on-med-and-down">
             <div class="nav-wrapper">
                 <div class="row">
                     <div class="col s12 navbar-nav">
                         <ul menu-items="desktop"></ul>
+                        <ul class="right">
+                            <li [routerLinkActive]="['active']"><a [routerLink]="['/about']">About</a></li>
+                        </ul>
+                        <ul class="right">
+                            <li [routerLinkActive]="['active']"><a [routerLink]="['/media']">Media</a></li>
+                        </ul>
+                        <ul class="right">
+                            <li [routerLinkActive]="['active']"><a [routerLink]="['/join']">Join us</a></li>
+                        </ul>
                     </div>
                 </div>
             </div>

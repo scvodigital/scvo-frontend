@@ -30,11 +30,9 @@ export class DrupalComponent {
     error_message: Observable<any>;
 
     constructor(private router: Router, private _drupalService: DrupalService) {
-        this.router
-        .events
-        .subscribe(params => {
+        this.router.events.subscribe(params => {
             this.loading = true;
-            console.log("Asking Drupal for "+this.router.url);
+            // console.log("Asking Drupal for "+this.router.url);
             this._drupalService.loadPage(this.router.url)
                 .subscribe(
                     result => {
