@@ -20,8 +20,14 @@ export class AppComponent {
 
     constructor(public router: Router, angulartics2: Angulartics2, angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics) {
         this.router.events.subscribe(event => {
+            // For page navigation (new route)
             if (event instanceof NavigationEnd) {
+                // Go to top of page
                 window.scrollTo(0, 0);
+
+                $('.dropdown-content').hide();
+
+                // Set page classes for styling
                 this.pathClasses = this.router.url.replace(/\//g, ' ').trim();
             }
         });

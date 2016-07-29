@@ -25,10 +25,6 @@ export class MenuItemsComponent {
                 "link": "/running-your-organisation",
                 "contents": [
                     {
-                        "title": "Running your organisation",
-                        "link": "/running-your-organisation"
-                    },
-                    {
                         "title": "Finance",
                         "link": "/running-your-organisation/finance"
                     },
@@ -55,10 +51,6 @@ export class MenuItemsComponent {
                 "link": "/employability",
                 "contents": [
                     {
-                        "title": "Employability",
-                        "link": "/employability"
-                    },
-                    {
                         "title": "Community Jobs Scotland",
                         "link": "/employability/cjs"
                     },
@@ -76,10 +68,6 @@ export class MenuItemsComponent {
                 "title": "Products & services",
                 "link": "/products-and-services",
                 "contents": [
-                    {
-                        "title": "Products & services",
-                        "link": "/products-and-services"
-                    },
                     {
                         "title": "SCVO membership",
                         "link": "/products-and-services/membership"
@@ -135,10 +123,6 @@ export class MenuItemsComponent {
                 "link": "/events-and-training",
                 "contents": [
                     {
-                        "title": "Events & training",
-                        "link": "/events-and-training"
-                    },
-                    {
                         "title": "Scottish Charity Awards",
                         "link": "/events-and-training/scottish-charity-awards"
                     },
@@ -156,10 +140,6 @@ export class MenuItemsComponent {
                 "title": "Policy hub",
                 "link": "/policy-hub",
                 "contents": [
-                    {
-                        "title": "Policy hub",
-                        "link": "/policy-hub"
-                    },
                     {
                         "title": "Research",
                         "link": "/policy-hub/research"
