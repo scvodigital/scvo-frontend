@@ -114,7 +114,7 @@ export class MenuItemsComponent {
                     },
                     {
                         "title": "Digital participation",
-                        "link": "/products-and-services/digital-scotland"
+                        "link": "/products-and-services/digital-participation"
                     },
                     {
                         "title": "Scottish Accessible Information Forum",
