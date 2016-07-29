@@ -20,6 +20,7 @@ export const routes: RouterConfig = [
     { path: 'products-and-services/:path',    component: DrupalComponent,     },
     { path: 'events-and-training',            component: EventSearchComponent,},
     { path: 'events-and-training/:id',        component: EventResultComponent,},
+    { path: 'policy-hub',                     component: PolicyComponent,     },
     { path: 'policy-hub/:path',               component: DrupalComponent,     },
     { path: 'policy-hub/campaigns/:path',     component: DrupalComponent,     },
     { path: ':path',                          component: DrupalComponent,     },
