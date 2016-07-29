@@ -13,7 +13,7 @@ declare var $: any;
 @Component({
     selector: 'header',
     templateUrl: 'app/components/shared/header/header.component.html',
-    styles: [require('app/components/shared/header/header.component.scss').toString()],
+    // styles: [require('app/components/shared/header/header.component.scss').toString()],
     directives: [ROUTER_DIRECTIVES, InputDebounceComponent, MaterializeDirective, MenuItemsComponent],
     encapsulation: ViewEncapsulation.None
 })
