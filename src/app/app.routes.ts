@@ -3,9 +3,7 @@ import { provideRouter, RouterConfig } from '@angular/router';
 // Static components
 import { HomeComponent } from './components/static/home.component';
 import { HelpComponent } from './components/static/help.component';
-import { JobsComponent } from './components/static/jobs.component';
 import { PolicyComponent } from './components/static/policy.component';
-import { SupportComponent } from './components/static/support.component';
 import { AboutComponent } from './components/static/about.component';
 
 // Dynamic components
