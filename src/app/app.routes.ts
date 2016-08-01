@@ -15,19 +15,20 @@ import { EventSearchComponent } from './components/dynamic/search/events/elastic
 import { EventResultComponent } from './components/dynamic/search/events/elastic-result-detail.component';
 
 export const routes: RouterConfig = [
-    { path: '',                               component: HomeComponent },
-    { path: 'search',                         component: SiteSearchComponent },
-    { path: 'privacy-and-cookies',            component: PrivacyAndCookiesComponent },
-    { path: 'terms-and-conditions',           component: TermsAndConditionsComponent },
-    { path: 'running-your-organisation/:path',component: DrupalComponent },
-    { path: 'employability/:path',            component: DrupalComponent },
-    { path: 'products-and-services/:path',    component: DrupalComponent },
-    { path: 'events-and-training',            component: EventSearchComponent },
-    { path: 'events-and-training/:id',        component: EventResultComponent },
-    { path: 'policy-hub',                     component: PolicyComponent },
-    { path: 'policy-hub/:path',               component: DrupalComponent },
-    { path: 'policy-hub/campaigns/:path',     component: DrupalComponent },
-    { path: ':path',                          component: DrupalComponent }
+    { path: '', component: HomeComponent },
+    { path: 'search', component: SiteSearchComponent },
+    { path: 'privacy-and-cookies', component: PrivacyAndCookiesComponent },
+    { path: 'terms-and-conditions', component: TermsAndConditionsComponent },
+    { path: 'running-your-organisation/:path', component: DrupalComponent },
+    { path: 'employability/:path', component: DrupalComponent },
+    { path: 'services/:path', component: DrupalComponent },
+    { path: 'events-and-training', component: EventSearchComponent },
+    { path: 'events-and-training/training-courses', component: EventSearchComponent },
+    { path: 'events-and-training/:id', component: EventResultComponent },
+    { path: 'policy-hub', component: PolicyComponent },
+    { path: 'policy-hub/:path', component: DrupalComponent },
+    { path: 'policy-hub/campaigns/:path', component: DrupalComponent },
+    { path: ':path', component: DrupalComponent }
 ];
 
 export const APP_ROUTER_PROVIDERS = [

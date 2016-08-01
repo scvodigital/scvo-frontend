@@ -65,56 +65,56 @@ export class MenuItemsComponent {
                 ]
             },
             {
-                "title": "Products & services",
-                "link": "/products-and-services",
+                "title": "Services",
+                "link": "/services",
                 "contents": [
                     {
                         "title": "SCVO membership",
-                        "link": "/products-and-services/membership"
+                        "link": "/services/membership"
                     },
                     {
                         "title": "Good HQ",
-                        "link": "/products-and-services/goodhq"
+                        "link": "/services/goodhq"
                     },
                     {
                         "title": "Office space",
-                        "link": "/products-and-services/office-space"
+                        "link": "/services/office-space"
                     },
                     {
                         "title": "Credit Union",
-                        "link": "/products-and-services/credit-union"
+                        "link": "/services/credit-union"
                     },
                     {
                         "title": "Third Force News",
-                        "link": "/products-and-services/tfn"
+                        "link": "/services/tfn"
                     },
                     {
                         "title": "Goodmoves",
-                        "link": "/products-and-services/goodmoves"
+                        "link": "/services/goodmoves"
                     },
                     {
                         "title": "Funding Scotland",
-                        "link": "/products-and-services/funding-scotland"
+                        "link": "/services/funding-scotland"
                     },
                     {
                         "title": "Payroll",
-                        "link": "/products-and-services/payroll"
+                        "link": "/services/payroll"
                     },
                     {
                         "title": "Digital participation",
-                        "link": "/products-and-services/digital-participation"
+                        "link": "/services/digital-participation"
                     },
                     {
                         "title": "Scottish Accessible Information Forum",
-                        "link": "/products-and-services/saif"
+                        "link": "/services/saif"
                     },
                     {
                         "title": "Professional networks",
-                        "link": "/products-and-services/professional-networks"
+                        "link": "/services/professional-networks"
                     },
                     {
                         "title": "Affiliate deals",
-                        "link": "/products-and-services/affiliate-deals"
+                        "link": "/services/affiliate-deals"
                     }
                 ]
             },
