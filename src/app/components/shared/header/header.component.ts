@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, ViewEncapsulation, Input } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Control } from '@angular/common';
 
 import { Router, ROUTER_DIRECTIVES } from '@angular/router';
@@ -19,6 +19,16 @@ declare var $: any;
 })
 export class HeaderComponent {
     constructor (private router: Router) {}
+
+    ngOnInit() {
+        $(window).scroll(function() {
+            if ($(this).scrollTop() > 1) {
+                $('header').addClass("scroll");
+            } else {
+                $('header').removeClass("scroll");
+            }
+        });
+    }
 
     public searchChanged(term) {
         this.router.navigate(['/search'], { queryParams: { s: term } });

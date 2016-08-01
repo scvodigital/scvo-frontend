@@ -22,13 +22,13 @@ export const routes: RouterConfig = [
     { path: 'running-your-organisation/:path', component: DrupalComponent },
     { path: 'employability/:path', component: DrupalComponent },
     { path: 'services/:path', component: DrupalComponent },
-    { path: 'events-and-training', component: EventSearchComponent },
     { path: 'events-and-training/training-courses', component: EventSearchComponent },
     { path: 'events-and-training/:id', component: EventResultComponent },
-    { path: 'policy-hub', component: PolicyComponent },
-    { path: 'policy-hub/:path', component: DrupalComponent },
     { path: 'policy-hub/campaigns/:path', component: DrupalComponent },
-    { path: ':path', component: DrupalComponent }
+    { path: 'policy-hub/campaigns', component: PolicyComponent },
+    { path: 'policy-hub/:path', component: DrupalComponent },
+    { path: ':path', component: DrupalComponent },
+    { path: '**', component: HomeComponent }
 ];
 
 export const APP_ROUTER_PROVIDERS = [
