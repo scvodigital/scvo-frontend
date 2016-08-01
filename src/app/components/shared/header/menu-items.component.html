@@ -30,6 +30,11 @@
                 <li>
                     <a class="collapsible-header">{{navigationItem.title}}<span class="material-icons arrow_drop_down right">arrow_drop_down</span></a>
                     <div class="collapsible-body">
+                        <ul>
+                            <li>
+                                <a [routerLink]="navigationItem.link">{{navigationItem.title}}</a>
+                            </li>
+                        </ul>
                         <ul *ngFor="let navigationContentItem of navigationItem.contents">
                             <li><a [routerLink]="navigationContentItem.link">{{navigationContentItem.title}}</a></li>
                         </ul>
