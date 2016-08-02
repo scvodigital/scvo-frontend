@@ -1,8 +1,9 @@
-<div *ngIf="loading">
+<!-- <div *ngIf="loading">
     <p>Loading...</p>
-</div>
+</div> -->
 
 <div *ngIf="!error" class="drupal content">
+    <p class="right" *ngIf="content_nid"><a href="https://master-o6miopmkpjxjq.eu.platform.sh/node/{{content_nid}}/edit" class="btn btn-primary"><span class="fa fa-edit"></span>&ensp;Edit</a></p>
     <h1 class="light title" [innerHTML]="content_title"></h1>
 
     <h2 class="light subheading" [innerHTML]="content_subheading"></h2>
@@ -13,7 +14,6 @@
     <div class="body" *ngIf="content_body_format == 'basic_html' || content_body_format == 'full_html'" [innerHTML]="content_body"></div>
     <div class="body" *ngIf="content_body_format == 'plaintext'">{{content_body}}</div>
 
-    <p *ngIf="content_nid"><a href="https://master-o6miopmkpjxjq.eu.platform.sh/node/{{content_nid}}/edit" class="btn btn-primary">Edit</a></p>
 
     <!-- <pre>{{content | json}}</pre> -->
 </div>

@@ -5,18 +5,20 @@ import { Observable } from 'rxjs/Rx';
 
 import { DrupalService } from '../../../services/drupal.service';
 
+import { SlimLoadingBarService, SlimLoadingBar } from 'ng2-slim-loading-bar/ng2-slim-loading-bar';
+
 // import { StringToDate } from '../../../pipes/string-to-date.pipe';
 import { MarkdownPipe } from '../../../pipes/markdown.pipe';
 
 @Component({
     selector: 'cms-single',
     templateUrl: 'app/components/dynamic/cms/drupal-single.component.html',
-    directives: [ROUTER_DIRECTIVES],
+    directives: [ROUTER_DIRECTIVES, SlimLoadingBar],
     providers: [DrupalService],
     pipes: [MarkdownPipe]
 })
 export class DrupalSingleComponent implements OnInit {
-    loading: Boolean = true;
+    // loading: Boolean = true;
     content_status: Observable<any>;
     content_nid: Observable<any>;
     content_type: Observable<any>;
@@ -29,11 +31,14 @@ export class DrupalSingleComponent implements OnInit {
     error: Boolean = false;
     error_message: Observable<any>;
 
-    constructor(private router: Router, private route: ActivatedRoute, private _drupalService: DrupalService) {}
+    constructor(private router: Router, private route: ActivatedRoute, private _drupalService: DrupalService, private slimLoadingBarService: SlimLoadingBarService) {}
 
     ngOnInit() {
         this.route.url.subscribe((params) => {
-            this.loading = true;
+
+            this.slimLoadingBarService.start();
+
+            // this.loading = true;
             // console.log("Asking Drupal for /"+params.join('/'));
             this._drupalService.loadPage(params.join('/')).subscribe(result => {
                 this.content_status =                   (result.status[0]) ?                result.status[0].value : 0;
@@ -46,14 +51,17 @@ export class DrupalSingleComponent implements OnInit {
                     this.content_body =                 (result.body[0]) ?                  result.body[0].value : '';
                     this.content_body_format =          (result.body[0]) ?                  result.body[0].format : '';
                     this.content =                      (result) ?                          result : {};
-                    this.loading = false;
+                    // this.loading = false;
                     this.error = false;
+
+                    this.slimLoadingBarService.complete();
                 }
             },
             err => {
                 this.error = true;
                 this.error_message = err;
-                this.loading = false;
+                // this.loading = false;
+                this.slimLoadingBarService.complete();
             });
         });
     }

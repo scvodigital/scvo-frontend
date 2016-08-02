@@ -1,9 +1,9 @@
 import { Component, ViewEncapsulation } from '@angular/core';
 
+import { ROUTER_DIRECTIVES, Router, NavigationEnd } from '@angular/router';
+
 import { Angulartics2 } from 'angulartics2';
 import { Angulartics2GoogleAnalytics } from 'angulartics2/src/providers/angulartics2-google-analytics';
-
-import { ROUTER_DIRECTIVES, Router, NavigationEnd } from '@angular/router';
 
 import { HeaderComponent, FooterComponent } from './components/shared/shared';
 
