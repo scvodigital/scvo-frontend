@@ -42,7 +42,7 @@ export class MenuItemsComponent {
                     },
                     {
                         "title": "Legislation & regulation",
-                        "link": "/running-your-organisation/legislation-and-regulation"
+                        "link": "/running-your-organisation/legislation-regulation"
                     },
                 ]
             },
@@ -52,15 +52,15 @@ export class MenuItemsComponent {
                 "contents": [
                     {
                         "title": "Community Jobs Scotland",
-                        "link": "/employability/cjs"
+                        "link": "/employability/community-jobs-scotland"
                     },
                     {
                         "title": "Disability equality internships",
-                        "link": "/employability/internships"
+                        "link": "/employability/disability-equality-internships"
                     },
                     {
                         "title": "Past employability schemes",
-                        "link": "/employability/past-schemes"
+                        "link": "/employability/past-employability-schemes"
                     }
                 ]
             },
@@ -86,7 +86,7 @@ export class MenuItemsComponent {
                     },
                     {
                         "title": "Third Force News",
-                        "link": "/services/tfn"
+                        "link": "/services/third-force-news"
                     },
                     {
                         "title": "Goodmoves",
@@ -106,16 +106,16 @@ export class MenuItemsComponent {
                     },
                     {
                         "title": "Scottish Accessible Information Forum",
-                        "link": "/services/saif"
+                        "link": "/services/scottish-accessible-information-forum"
                     },
                     {
                         "title": "Professional networks",
                         "link": "/services/professional-networks"
                     },
-                    {
-                        "title": "Affiliate deals",
-                        "link": "/services/affiliate-deals"
-                    }
+                    // {
+                    //     "title": "Affiliate deals",
+                    //     "link": "/services/affiliate-deals"
+                    // }
                 ]
             },
             {
@@ -124,15 +124,15 @@ export class MenuItemsComponent {
                 "contents": [
                     {
                         "title": "Scottish Charity Awards",
-                        "link": "/events-and-training/scottish-charity-awards"
+                        "link": "/events/scottish-charity-awards"
                     },
                     {
                         "title": "The Gathering",
-                        "link": "/events-and-training/the-gathering"
+                        "link": "/events/the-gathering"
                     },
                     {
                         "title": "Training courses",
-                        "link": "/events-and-training/training-courses"
+                        "link": "/training/search"
                     }
                 ]
             },
@@ -141,24 +141,20 @@ export class MenuItemsComponent {
                 "link": "/policy-hub",
                 "contents": [
                     {
-                        "title": "Research",
-                        "link": "/policy-hub/research"
-                    },
-                    {
-                        "title": "Briefings & reports",
-                        "link": "/policy-hub/briefings-and-reports"
+                        "title": "Blogs",
+                        "link": "/policy-hub/blogs"
                     },
                     {
                         "title": "Consultation responses",
                         "link": "/policy-hub/consultation-responses"
                     },
                     {
-                        "title": "Blogs",
-                        "link": "/policy-hub/blogs"
+                        "title": "Briefings & reports",
+                        "link": "/policy-hub/briefings-and-reports"
                     },
                     {
-                        "title": "Campaigns",
-                        "link": "/policy-hub/campaigns"
+                        "title": "Research",
+                        "link": "/policy-hub/research"
                     },
                     {
                         "title": "Policy committee",

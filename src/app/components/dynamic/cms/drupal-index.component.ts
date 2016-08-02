@@ -8,14 +8,16 @@ import { DrupalService } from '../../../services/drupal.service';
 // import { StringToDate } from '../../../pipes/string-to-date.pipe';
 import { MarkdownPipe } from '../../../pipes/markdown.pipe';
 
+import { DrupalSingleComponent } from './drupal-single.component';
+
 @Component({
-    selector: 'search',
-    templateUrl: 'app/components/dynamic/cms/drupal.component.html',
-    directives: [ROUTER_DIRECTIVES],
+    selector: 'cms-index',
+    templateUrl: 'app/components/dynamic/cms/drupal-index.component.html',
+    directives: [ROUTER_DIRECTIVES, DrupalSingleComponent],
     providers: [DrupalService],
     pipes: [MarkdownPipe]
 })
-export class DrupalComponent implements OnInit {
+export class DrupalIndexComponent implements OnInit {
     loading: Boolean = true;
     content_status: Observable<any>;
     content_nid: Observable<any>;
