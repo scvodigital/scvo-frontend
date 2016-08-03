@@ -152,27 +152,27 @@ export class MenuItemsComponent {
                     {
                         'title': 'Blogs',
                         'path': '/policy-hub/blogs',
-                        'term_id': 38
+                        'term_id': 51
                     },
                     {
                         'title': 'Consultation responses',
                         'path': '/policy-hub/consultation-responses',
-                        'term_id': 39
+                        'term_id': 52
                     },
                     {
                         'title': 'Research',
                         'path': '/policy-hub/research',
-                        'term_id': 40
+                        'term_id': 53
                     },
                     {
                         'title': 'Briefings & reports',
                         'path': '/policy-hub/briefings-reports',
-                        'term_id': 41
+                        'term_id': 54
                     },
                     {
                         'title': 'Policy committee',
                         'path': '/policy-hub/policy-committee',
-                        'term_id': 42
+                        'term_id': 55
                     }
                 ]
             },

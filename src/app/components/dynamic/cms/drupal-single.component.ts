@@ -25,6 +25,8 @@ export class DrupalSingleComponent implements OnInit {
     content_body: Observable<any>;
     content_body_format: Observable<any>;
     content: Observable<any>;
+    parent_path: String;
+    parent_title: String;
     error: Boolean = false;
     error_message: Observable<any>;
 
@@ -38,6 +40,17 @@ export class DrupalSingleComponent implements OnInit {
             // console.log("Asking Drupal for page at /"+params.join('/'));
 
             this._drupalService.loadPage(params.join('/')).subscribe(result => {
+                // if (params[1]) {
+                //     this.parent_path = (params[1]) ? params[0].path+'/'+params[1].path : '';
+                //     console.log(this.parent_path);
+                //     console.log(params.join('/'));
+                //     if (this.parent_path != params.join('/')) {
+                //         console.log('Setting link');
+                //         this.parent_title = params[1].path.replace('-', ' ').toLowerCase();
+                //         this.parent_path = '/'+this.parent_path;
+                //     }
+                // }
+
                 this.content_status =                   (result.status[0]) ?                result.status[0].value : 0;
                 if (this.content_status) {
                     this.content_nid =                  (result.nid[0]) ?                   result.nid[0].value : '';
@@ -48,6 +61,7 @@ export class DrupalSingleComponent implements OnInit {
                     this.content_body =                 (result.body[0]) ?                  result.body[0].value : '';
                     this.content_body_format =          (result.body[0]) ?                  result.body[0].format : '';
                     this.content =                      (result) ?                          result : {};
+
                     this.error = false;
                 }
                 this.slimLoadingBarService.complete();

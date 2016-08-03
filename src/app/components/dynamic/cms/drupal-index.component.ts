@@ -20,6 +20,7 @@ import { MenuItemsComponent } from '../../shared/header/menu-items.component';
 })
 export class DrupalIndexComponent implements OnInit {
     content_links: Observable<any>;
+    parent: String;
     error: Boolean = false;
     error_message: Observable<any>;
     public navigationMenu: Object;
@@ -31,6 +32,7 @@ export class DrupalIndexComponent implements OnInit {
     ngOnInit() {
         this.route.url.subscribe((params) => {
             this.slimLoadingBarService.start();
+            this.parent = params[0].path;
 
             var requestPath = params.join('/');
 
@@ -38,6 +40,7 @@ export class DrupalIndexComponent implements OnInit {
 
             console.log('Get term ID for: '+requestPath);
 
+            // This is probably not the best way to do it, but the Drupal API doesn't provide a nice way to get tid from term name or path
             var term_id = 0;
             for (var level1 in this.navigationMenu) {
                 // console.log(level1, this.navigationMenu[level1]);
@@ -59,10 +62,15 @@ export class DrupalIndexComponent implements OnInit {
                 }
             }
 
-            console.log('Asking Drupal for menu with /subpage/'+term_id);
+            var requestType = 'pages';
+            if (this.parent == 'policy-hub') requestType = 'posts';
 
-            this._drupalService.loadPage('subpage/'+term_id).subscribe(subpages => {
-                this.content_links = subpages;
+            console.log('Asking Drupal for menu with /'+requestType+'/'+term_id);
+
+            this._drupalService.loadPage(requestType+'/'+term_id).subscribe(content => {
+
+                this.content_links = content;
+                console.log(this.content_links);
 
                 this.slimLoadingBarService.complete();
             },

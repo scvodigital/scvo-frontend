@@ -20,6 +20,7 @@ export const routes: RouterConfig = [
     { path: 'search', component: SiteSearchComponent },
     // { path: 'media', component: MediaCentreComponent },
     { path: 'about-us', component: DrupalIndexComponent },
+    { path: 'about-us/:path', component: DrupalSingleComponent },
     { path: 'privacy-and-cookies', component: PrivacyAndCookiesComponent },
     { path: 'terms-and-conditions', component: TermsAndConditionsComponent },
     { path: 'running-your-organisation/:path', component: DrupalIndexComponent },
