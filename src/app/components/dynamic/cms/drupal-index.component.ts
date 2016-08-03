@@ -38,25 +38,26 @@ export class DrupalIndexComponent implements OnInit {
 
             console.log('Get term ID for: '+requestPath);
 
-            var term_id = 13;
-
-            // console.log(this.navigationMenu);
+            var term_id = 0;
             for (var level1 in this.navigationMenu) {
-                console.log(level1, this.navigationMenu[level1]);
-                if (this.navigationMenu[level1].path == '/'+requestPath) {
-                    console.log("Match!");
-                    term_id = this.navigationMenu[level1].term_id;
-                } else {
-                    for (var level2 in this.navigationMenu[level1].contents) {
-                        console.log(level2, this.navigationMenu[level1].contents[level2]);
-                        if (this.navigationMenu[level1].contents[level2].path == '/'+requestPath) {
-                            console.log("Match!");
-                            term_id = this.navigationMenu[level1].contents[level2].term_id;
+                // console.log(level1, this.navigationMenu[level1]);
+                if (term_id == 0) {
+                    if (this.navigationMenu[level1].path == '/'+requestPath) {
+                        // console.log("Match!");
+                        term_id = this.navigationMenu[level1].term_id;
+                    } else {
+                        for (var level2 in this.navigationMenu[level1].contents) {
+                            if (term_id == 0) {
+                                // console.log(level2, this.navigationMenu[level1].contents[level2]);
+                                if (this.navigationMenu[level1].contents[level2].path == '/'+requestPath) {
+                                    // console.log("Match!");
+                                    term_id = this.navigationMenu[level1].contents[level2].term_id;
+                                }
+                            }
                         }
                     }
                 }
             }
-
 
             console.log('Asking Drupal for menu with /subpage/'+term_id);
 
