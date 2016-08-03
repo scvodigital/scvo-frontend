@@ -183,12 +183,17 @@ export class MenuItemsComponent {
                 'class': 'right'
             },
             {
+                'title': 'Contact',
+                'path': '/contact-us',
+                'class': 'right'
+            },
+            {
                 'title': 'Media',
                 'path': '/media-centre',
                 'class': 'right'
             },
             {
-                'title': 'Join us',
+                'title': 'Join',
                 'path': '/join-scvo',
                 'class': 'right'
             }
