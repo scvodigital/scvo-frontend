@@ -18,147 +18,161 @@ export class MenuItemsComponent {
         this.navigationMenu = [
             {
                 "title": "Home",
-                "link": "/"
+                "path": "/"
             },
             {
                 "title": "Running your organisation",
-                "link": "/running-your-organisation",
+                "path": "/running-your-organisation",
                 "contents": [
                     {
                         "title": "Finance",
-                        "link": "/running-your-organisation/finance"
+                        "path": "/running-your-organisation/finance",
+                        "term_id": 13
                     },
                     {
                         "title": "Business management",
-                        "link": "/running-your-organisation/business-management"
+                        "path": "/running-your-organisation/business-management",
+                        "term_id": 14
                     },
                     {
                         "title": "Governance",
-                        "link": "/running-your-organisation/governance"
+                        "path": "/running-your-organisation/governance",
+                        "term_id": 15
                     },
                     {
                         "title": "Funding",
-                        "link": "/running-your-organisation/funding"
+                        "path": "/running-your-organisation/funding",
+                        "term_id": 16
                     },
                     {
                         "title": "Legislation & regulation",
-                        "link": "/running-your-organisation/legislation-regulation"
+                        "path": "/running-your-organisation/legislation-regulation",
+                        "term_id": 17
                     },
                 ]
             },
             {
                 "title": "Employability",
-                "link": "/employability",
+                "path": "/employability",
                 "contents": [
                     {
                         "title": "Community Jobs Scotland",
-                        "link": "/employability/community-jobs-scotland"
+                        "path": "/employability/community-jobs-scotland",
+                        "term_id": 19
                     },
                     {
                         "title": "Disability equality internships",
-                        "link": "/employability/disability-equality-internships"
+                        "path": "/employability/disability-equality-internships",
+                        "term_id": 20
                     },
                     {
                         "title": "Past employability schemes",
-                        "link": "/employability/past-employability-schemes"
+                        "path": "/employability/past-employability-schemes",
+                        "term_id": 21
                     }
                 ]
             },
             {
                 "title": "Services",
-                "link": "/services",
+                "path": "/services",
+                "term_id": 43,
                 "contents": [
                     {
                         "title": "SCVO membership",
-                        "link": "/services/membership"
+                        "path": "/services/scvo-membership"
                     },
                     {
                         "title": "Good HQ",
-                        "link": "/services/goodhq"
+                        "path": "/services/good-hq"
                     },
                     {
                         "title": "Office space",
-                        "link": "/services/office-space"
+                        "path": "/services/office-space"
                     },
                     {
                         "title": "Credit Union",
-                        "link": "/services/credit-union"
+                        "path": "/services/credit-union"
                     },
                     {
                         "title": "Third Force News",
-                        "link": "/services/third-force-news"
+                        "path": "/services/third-force-news"
                     },
                     {
                         "title": "Goodmoves",
-                        "link": "/services/goodmoves"
+                        "path": "/services/goodmoves"
                     },
                     {
                         "title": "Funding Scotland",
-                        "link": "/services/funding-scotland"
+                        "path": "/services/funding-scotland"
                     },
                     {
                         "title": "Payroll",
-                        "link": "/services/payroll"
+                        "path": "/services/payroll"
                     },
                     {
                         "title": "Digital participation",
-                        "link": "/services/digital-participation"
+                        "path": "/services/digital-participation"
                     },
                     {
                         "title": "Scottish Accessible Information Forum",
-                        "link": "/services/scottish-accessible-information-forum"
+                        "path": "/services/scottish-accessible-information-forum"
                     },
                     {
                         "title": "Professional networks",
-                        "link": "/services/professional-networks"
+                        "path": "/services/professional-networks"
                     },
                     // {
                     //     "title": "Affiliate deals",
-                    //     "link": "/services/affiliate-deals"
+                    //     "path": "/services/affiliate-deals"
                     // }
                 ]
             },
             {
                 "title": "Events & training",
-                "link": "/events-and-training",
+                "path": "/events",
                 "contents": [
                     {
                         "title": "Scottish Charity Awards",
-                        "link": "/events/scottish-charity-awards"
+                        "path": "/events/scottish-charity-awards"
                     },
                     {
                         "title": "The Gathering",
-                        "link": "/events/the-gathering"
+                        "path": "/events/the-gathering"
                     },
                     {
                         "title": "Training courses",
-                        "link": "/training/search"
+                        "path": "/training/search"
                     }
                 ]
             },
             {
                 "title": "Policy hub",
-                "link": "/policy-hub",
+                "path": "/policy-hub",
                 "contents": [
                     {
                         "title": "Blogs",
-                        "link": "/policy-hub/blogs"
+                        "path": "/policy-hub/blogs",
+                        "term_id": 38
                     },
                     {
                         "title": "Consultation responses",
-                        "link": "/policy-hub/consultation-responses"
-                    },
-                    {
-                        "title": "Briefings & reports",
-                        "link": "/policy-hub/briefings-and-reports"
+                        "path": "/policy-hub/consultation-responses",
+                        "term_id": 39
                     },
                     {
                         "title": "Research",
-                        "link": "/policy-hub/research"
+                        "path": "/policy-hub/research",
+                        "term_id": 40
+                    },
+                    {
+                        "title": "Briefings & reports",
+                        "path": "/policy-hub/briefings-reports",
+                        "term_id": 41
                     },
                     {
                         "title": "Policy committee",
-                        "link": "/policy-hub/policy-committee"
+                        "path": "/policy-hub/policy-committee",
+                        "term_id": 42
                     }
                 ]
             }

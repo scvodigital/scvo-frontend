@@ -3,60 +3,74 @@ import { Router, ROUTER_DIRECTIVES, NavigationEnd, ActivatedRoute } from '@angul
 
 import { Observable } from 'rxjs/Rx';
 
+import { SlimLoadingBarService, SlimLoadingBar } from 'ng2-slim-loading-bar/ng2-slim-loading-bar';
+
+import { MarkdownPipe } from '../../../pipes/markdown.pipe';
 import { DrupalService } from '../../../services/drupal.service';
 
-// import { StringToDate } from '../../../pipes/string-to-date.pipe';
-import { MarkdownPipe } from '../../../pipes/markdown.pipe';
-
 import { DrupalSingleComponent } from './drupal-single.component';
+import { MenuItemsComponent } from '../../shared/header/menu-items.component';
 
 @Component({
     selector: 'cms-index',
     templateUrl: 'app/components/dynamic/cms/drupal-index.component.html',
-    directives: [ROUTER_DIRECTIVES, DrupalSingleComponent],
-    providers: [DrupalService],
+    directives: [ROUTER_DIRECTIVES, SlimLoadingBar, DrupalSingleComponent],
+    providers: [DrupalService, MenuItemsComponent],
     pipes: [MarkdownPipe]
 })
 export class DrupalIndexComponent implements OnInit {
-    loading: Boolean = true;
-    content_status: Observable<any>;
-    content_nid: Observable<any>;
-    content_type: Observable<any>;
-    content_revision_timestamp: Observable<any>;
-    content_title: Observable<any>;
-    content_subheading: Observable<any>;
-    content_body: Observable<any>;
-    content_body_format: Observable<any>;
-    content: Observable<any>;
+    content_links: Observable<any>;
     error: Boolean = false;
     error_message: Observable<any>;
+    public navigationMenu: Object;
 
-    constructor(private router: Router, private route: ActivatedRoute, private _drupalService: DrupalService) {}
+    constructor(private router: Router, private route: ActivatedRoute, private _drupalService: DrupalService, private slimLoadingBarService: SlimLoadingBarService, private _menuItems: MenuItemsComponent) {
+        this.navigationMenu = _menuItems.navigationMenu;
+    }
 
     ngOnInit() {
         this.route.url.subscribe((params) => {
-            this.loading = true;
-            // console.log("Asking Drupal for /"+params.join('/'));
-            this._drupalService.loadPage(params.join('/')).subscribe(result => {
-                this.content_status =                   (result.status[0]) ?                result.status[0].value : 0;
-                if (this.content_status) {
-                    this.content_nid =                  (result.nid[0]) ?                   result.nid[0].value : '';
-                    this.content_type =                 (result.type[0]) ?                  result.type[0].target_id : 'page';
-                    this.content_revision_timestamp =   (result.revision_timestamp[0]) ?    result.revision_timestamp[0].value : '';
-                    this.content_title =                (result.title[0]) ?                 result.title[0].value : '';
-                    this.content_subheading =           (result.field_subheading[0]) ?      result.field_subheading[0].value : '';
-                    this.content_body =                 (result.body[0]) ?                  result.body[0].value : '';
-                    this.content_body_format =          (result.body[0]) ?                  result.body[0].format : '';
-                    this.content =                      (result) ?                          result : {};
-                    this.loading = false;
-                    this.error = false;
+            this.slimLoadingBarService.start();
+
+            var requestPath = params.join('/');
+
+            console.log('Asking Drupal for list of sub-pages from /'+requestPath);
+
+            console.log('Get term ID for: '+requestPath);
+
+            var term_id = 13;
+
+            // console.log(this.navigationMenu);
+            for (var level1 in this.navigationMenu) {
+                console.log(level1, this.navigationMenu[level1]);
+                if (this.navigationMenu[level1].path == '/'+requestPath) {
+                    console.log("Match!");
+                    term_id = this.navigationMenu[level1].term_id;
+                } else {
+                    for (var level2 in this.navigationMenu[level1].contents) {
+                        console.log(level2, this.navigationMenu[level1].contents[level2]);
+                        if (this.navigationMenu[level1].contents[level2].path == '/'+requestPath) {
+                            console.log("Match!");
+                            term_id = this.navigationMenu[level1].contents[level2].term_id;
+                        }
+                    }
                 }
+            }
+
+
+            console.log('Asking Drupal for menu with /subpage/'+term_id);
+
+            this._drupalService.loadPage('subpage/'+term_id).subscribe(subpages => {
+                this.content_links = subpages;
+
+                this.slimLoadingBarService.complete();
             },
             err => {
                 this.error = true;
                 this.error_message = err;
-                this.loading = false;
+                this.slimLoadingBarService.complete();
             });
+
         });
     }
 }

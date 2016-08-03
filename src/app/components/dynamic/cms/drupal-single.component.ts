@@ -3,12 +3,10 @@ import { Router, ROUTER_DIRECTIVES, NavigationEnd, ActivatedRoute } from '@angul
 
 import { Observable } from 'rxjs/Rx';
 
-import { DrupalService } from '../../../services/drupal.service';
-
 import { SlimLoadingBarService, SlimLoadingBar } from 'ng2-slim-loading-bar/ng2-slim-loading-bar';
 
-// import { StringToDate } from '../../../pipes/string-to-date.pipe';
 import { MarkdownPipe } from '../../../pipes/markdown.pipe';
+import { DrupalService } from '../../../services/drupal.service';
 
 @Component({
     selector: 'cms-single',
@@ -18,7 +16,6 @@ import { MarkdownPipe } from '../../../pipes/markdown.pipe';
     pipes: [MarkdownPipe]
 })
 export class DrupalSingleComponent implements OnInit {
-    // loading: Boolean = true;
     content_status: Observable<any>;
     content_nid: Observable<any>;
     content_type: Observable<any>;
@@ -38,8 +35,8 @@ export class DrupalSingleComponent implements OnInit {
 
             this.slimLoadingBarService.start();
 
-            // this.loading = true;
-            // console.log("Asking Drupal for /"+params.join('/'));
+            // console.log("Asking Drupal for page at /"+params.join('/'));
+
             this._drupalService.loadPage(params.join('/')).subscribe(result => {
                 this.content_status =                   (result.status[0]) ?                result.status[0].value : 0;
                 if (this.content_status) {
@@ -51,16 +48,13 @@ export class DrupalSingleComponent implements OnInit {
                     this.content_body =                 (result.body[0]) ?                  result.body[0].value : '';
                     this.content_body_format =          (result.body[0]) ?                  result.body[0].format : '';
                     this.content =                      (result) ?                          result : {};
-                    // this.loading = false;
                     this.error = false;
-
-                    this.slimLoadingBarService.complete();
                 }
+                this.slimLoadingBarService.complete();
             },
             err => {
                 this.error = true;
                 this.error_message = err;
-                // this.loading = false;
                 this.slimLoadingBarService.complete();
             });
         });

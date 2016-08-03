@@ -10,19 +10,19 @@
 <li *ngFor="let navigationItem of navigationMenu, let i = index">
     <ul>
         <li *ngIf="menuType == 'desktop' && !navigationItem.contents">
-            <a [routerLink]="navigationItem.link">{{navigationItem.title}}</a>
+            <a [routerLink]="navigationItem.path">{{navigationItem.title}}</a>
         </li>
         <li *ngIf="menuType == 'desktop' && navigationItem.contents" [routerLinkActive]="['active']">
-            <!-- <a [routerLink]="navigationItem.link" materialize="dropdown" [attr.data-activates]="'dropdown' + i" data-belowOrigin="true" data-constrainwidth="false" data-hover="true">{{navigationItem.title}}<span class="material-icons arrow_drop_down right">arrow_drop_down</span></a> -->
+            <!-- <a [routerLink]="navigationItem.path" materialize="dropdown" [attr.data-activates]="'dropdown' + i" data-belowOrigin="true" data-constrainwidth="false" data-hover="true">{{navigationItem.title}}<span class="material-icons arrow_drop_down right">arrow_drop_down</span></a> -->
             <a materialize="dropdown" [attr.data-activates]="'dropdown' + i" data-belowOrigin="true" data-constrainwidth="false" data-hover="true">{{navigationItem.title}}<span class="material-icons arrow_drop_down right">arrow_drop_down</span></a>
             <ul [attr.id]="'dropdown' + i" class="dropdown-content">
-                <li *ngFor="let navigationContentItem of navigationItem.contents" [routerLinkActive]="['active']"><a [routerLink]="navigationContentItem.link">{{navigationContentItem.title}}</a></li>
+                <li *ngFor="let navigationContentItem of navigationItem.contents" [routerLinkActive]="['active']"><a [routerLink]="navigationContentItem.path">{{navigationContentItem.title}}</a></li>
             </ul>
         </li>
         <li class="no-padding" *ngIf="menuType == 'mobile' && !navigationItem.contents">
             <ul>
                 <li>
-                    <a [routerLink]="navigationItem.link">{{navigationItem.title}}</a>
+                    <a [routerLink]="navigationItem.path">{{navigationItem.title}}</a>
                 </li>
             </ul>
         </li>
@@ -33,11 +33,11 @@
                     <div class="collapsible-body">
                         <ul>
                             <li>
-                                <a [routerLink]="navigationItem.link">{{navigationItem.title}}</a>
+                                <a [routerLink]="navigationItem.path">{{navigationItem.title}}</a>
                             </li>
                         </ul>
                         <ul *ngFor="let navigationContentItem of navigationItem.contents">
-                            <li><a [routerLink]="navigationContentItem.link">{{navigationContentItem.title}}</a></li>
+                            <li><a [routerLink]="navigationContentItem.path">{{navigationContentItem.title}}</a></li>
                         </ul>
                     </div>
                 </li>
