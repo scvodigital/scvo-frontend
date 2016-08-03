@@ -17,10 +17,15 @@ declare var $: any;
     templateUrl: 'app/components/shared/header/header.component.html',
     // styles: [require('app/components/shared/header/header.component.scss').toString()],
     directives: [ROUTER_DIRECTIVES, InputDebounceComponent, MaterializeDirective, MenuItemsComponent, SlimLoadingBar],
+    providers: [MenuItemsComponent],
     encapsulation: ViewEncapsulation.None
 })
 export class HeaderComponent {
-    constructor (private router: Router, private slimLoadingBarService: SlimLoadingBarService) {}
+    public navigationMenu: Object;
+
+    constructor (private router: Router, private slimLoadingBarService: SlimLoadingBarService, private _menuItems: MenuItemsComponent) {
+        this.navigationMenu = _menuItems.navigationMenu;
+    }
 
     ngOnInit() {
         $(window).scroll(function() {

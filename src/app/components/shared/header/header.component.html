@@ -26,10 +26,15 @@
                         <ng2-slim-loading-bar color="rgba(0,0,0,0.1)" height="64px"></ng2-slim-loading-bar>
                         <ul menu-items="desktop"></ul>
                         <ul class="right">
+                            <li *ngFor="let navigationItem of navigationMenu, let i = index" [routerLinkActive]="['active']">
+                                <a *ngIf="navigationItem.class == 'right'" [routerLink]="navigationItem.path">{{navigationItem.title}}</a>
+                            </li>
+                        </ul>
+                        <!-- <ul class="right">
                             <li [routerLinkActive]="['active']"><a [routerLink]="['/about-us']">About</a></li>
                             <li [routerLinkActive]="['active']"><a [routerLink]="['/media-centre']">Media</a></li>
                             <li [routerLinkActive]="['active']"><a [routerLink]="['/join-scvo']">Join us</a></li>
-                        </ul>
+                        </ul> -->
                     </div>
                 </div>
             </div>

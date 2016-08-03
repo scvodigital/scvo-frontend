@@ -2,9 +2,8 @@ import { provideRouter, RouterConfig } from '@angular/router';
 
 // Static components
 import { HomeComponent } from './components/static/home.component';
-import { HelpComponent } from './components/static/help.component';
-import { PolicyComponent } from './components/static/policy.component';
-import { AboutComponent } from './components/static/about.component';
+// import { HelpComponent } from './components/static/help.component';
+// import { PolicyComponent } from './components/static/policy.component';
 // import { MediaCentreComponent } from './components/static/media-centre.component';
 import { PrivacyAndCookiesComponent } from './components/static/privacy-and-cookies.component';
 import { TermsAndConditionsComponent } from './components/static/terms-and-conditions.component';
@@ -20,6 +19,7 @@ export const routes: RouterConfig = [
     { path: '', component: HomeComponent },
     { path: 'search', component: SiteSearchComponent },
     // { path: 'media', component: MediaCentreComponent },
+    { path: 'about-us', component: DrupalIndexComponent },
     { path: 'privacy-and-cookies', component: PrivacyAndCookiesComponent },
     { path: 'terms-and-conditions', component: TermsAndConditionsComponent },
     { path: 'running-your-organisation/:path', component: DrupalIndexComponent },
@@ -27,7 +27,7 @@ export const routes: RouterConfig = [
     { path: 'running-your-organisation/business-management/:path', component: DrupalSingleComponent },
     { path: 'running-your-organisation/governance/:path', component: DrupalSingleComponent },
     { path: 'running-your-organisation/funding/:path', component: DrupalSingleComponent },
-    { path: 'running-your-organisation/legislation-and-regulation/:path', component: DrupalSingleComponent },
+    { path: 'running-your-organisation/legislation-regulation/:path', component: DrupalSingleComponent },
     { path: 'employability/:path', component: DrupalIndexComponent },
     { path: 'employability/community-jobs-scotland/:path', component: DrupalSingleComponent },
     { path: 'employability/internships/:path', component: DrupalSingleComponent },
