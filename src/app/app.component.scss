@@ -69,6 +69,11 @@ main {
         text-decoration: none;
     }
 }
+@media screen and (max-width: 992px) {
+    main {
+        padding-top: 64px;
+    }
+}
 .spinner-wrapper {
     position: fixed;
     top: 45%;
@@ -247,6 +252,7 @@ header.about, header.about .navbar .dropdown-content {
     }
 
     .side-nav {
+        z-index: 999;
         a.active {
             background-color: rgba(0, 0, 0, 0.05);
         }
@@ -257,6 +263,9 @@ header.about, header.about .navbar .dropdown-content {
     .side-nav .collapsible-body li.active, .side-nav.fixed .collapsible-body li.active {
         background-color: #777;
     }
+}
+#sidenav-overlay {
+    z-index: 99;
 }
 
 // temporary fix for Materialize bug with Mac Chrome -
