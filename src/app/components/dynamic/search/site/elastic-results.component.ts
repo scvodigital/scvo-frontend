@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CORE_DIRECTIVES, FORM_DIRECTIVES, Control } from '@angular/common';
 import { ROUTER_DIRECTIVES, Router } from '@angular/router';
 
@@ -15,11 +15,13 @@ export class SiteSearchComponent implements OnInit {
     searchText: Control;
     searchTextModel: string;
 
+    // @Output() searchEvent: EventEmitter<any> = new EventEmitter();
+
     public results: Observable<any>;
 
-    constructor(private router: Router, private es: ElasticService, private cd: ChangeDetectorRef) {
+    constructor(private router: Router, private es: ElasticService) {
         this.searchText = new Control();
-        this.results = new Observable<Array<any>>();
+        // this.results = new Observable<Array<any>>();
     }
 
     ngOnInit() {
@@ -31,18 +33,18 @@ export class SiteSearchComponent implements OnInit {
             if (this.searchTextModel !== '') {
                 console.log('Searching for: '+this.searchTextModel);
 
-                this.results = this.es.search(this.searchTextModel).map((esResult: any) => {
-                    var results = ((esResult.hits || {}).hits || []);
-                    if (results.length > 0) {
-                        return results;
-                    } else {
-                        if (this.searchTextModel && this.searchTextModel.trim())
-                        console.log('Nothing was found for search term: '+this.searchTextModel);
-                        return [];
-                    }
-                });
-
-                this.cd.markForCheck();
+                this.results = this.es.search(this.searchTextModel)
+                    .map((esResult: any) => {
+                        var results = ((esResult.hits || {}).hits || []);
+                        if (results.length > 0) {
+                            // this._results.next(results);
+                            return results;
+                        } else {
+                            if (this.searchTextModel && this.searchTextModel.trim())
+                                console.log('Nothing was found for search term: '+this.searchTextModel);
+                            return [];
+                        }
+                    });
 
                 console.log(this.results);
             }

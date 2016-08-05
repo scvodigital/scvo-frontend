@@ -17,7 +17,7 @@ export class ElasticService {
                 'indices_boost' : {
                     'elasticsearch_index_main_scvo_public' : 1.5
                 },
-                'type': ['scvo_public', 'organisation', 'opportunity', 'signatory', 'fundsalesforcemodel'],
+                'type': ['scvo_public', 'opportunity', 'signatory', 'fundsalesforcemodel'],
                 'q': `${terms}`
             }))
         } else {
