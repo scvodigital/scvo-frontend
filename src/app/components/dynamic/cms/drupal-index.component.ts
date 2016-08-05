@@ -67,10 +67,10 @@ export class DrupalIndexComponent implements OnInit {
 
             console.log('Asking Drupal for menu with /'+requestType+'/'+term_id);
 
-            this._drupalService.loadPage(requestType+'/'+term_id).subscribe(content => {
+            this._drupalService.request(requestType+'/'+term_id).subscribe(content => {
 
                 this.content_links = content;
-                console.log(this.content_links);
+                // console.log(this.content_links);
 
                 this.slimLoadingBarService.complete();
             },

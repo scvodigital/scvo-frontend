@@ -39,7 +39,7 @@ export class DrupalSingleComponent implements OnInit {
 
             // console.log("Asking Drupal for page at /"+params.join('/'));
 
-            this._drupalService.loadPage(params.join('/')).subscribe(result => {
+            this._drupalService.request(params.join('/')).subscribe(result => {
                 // if (params[1]) {
                 //     this.parent_path = (params[1]) ? params[0].path+'/'+params[1].path : '';
                 //     console.log(this.parent_path);
