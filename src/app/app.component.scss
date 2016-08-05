@@ -63,7 +63,8 @@ h6 {
     font-size: 1em;
 }
 main {
-    padding: 128px 0 0.5rem;
+    // padding: 128px 0 0.5rem;
+    padding: 0 0 0.5rem;
     a:link {
         text-decoration: underline;
     }
@@ -71,11 +72,11 @@ main {
         text-decoration: none;
     }
 }
-@media screen and (max-width: 992px) {
-    main {
-        padding-top: 64px;
-    }
-}
+// @media screen and (max-width: 992px) {
+//     main {
+//         padding-top: 64px;
+//     }
+// }
 .spinner-wrapper {
     position: fixed;
     top: 45%;
@@ -103,9 +104,9 @@ h1.parent_title a {
 
 header {
     transition: all 0.5s ease;
-    position: fixed;
-    z-index: 100;
-    width: 100%;
+    // position: fixed;
+    // z-index: 100;
+    // width: 100%;
     padding-bottom: 0;
     nav {
         box-shadow: none;
@@ -163,7 +164,10 @@ header.employability, header.employability .navbar .dropdown-content {
 header.services, header.services .navbar .dropdown-content {
     background-color: #c62828;
 }
-header.events-and-training, header.events-and-training .navbar .dropdown-content {
+header.events, header.events .navbar .dropdown-content {
+    background-color: #263238;
+}
+header.training, header.training .navbar .dropdown-content {
     background-color: #00838f;
 }
 header.policy-hub, header.policy-hub .navbar .dropdown-content {
@@ -219,10 +223,11 @@ header.about, header.about .navbar .dropdown-content {
         font-family: $logo-font-family;
         font-weight: 900;
         padding-left: 3px;
+        margin-top: 3px;
         img {
             width: 42px;
             height: auto;
-            vertical-align: -10px;
+            vertical-align: -8px;
             margin-right: 0;
         }
     }
@@ -251,11 +256,17 @@ header.about, header.about .navbar .dropdown-content {
     li a.active {
         background-color: rgba(0, 0, 0, 0.2);
     }
+    .navbar-brand li.active a {
+        background-color: rgba(0, 0, 0, 0.1);
+    }
     .dropdown-content li > a, .dropdown-content li > span {
         padding: 14px 15px;
     }
     .collapsible-header {
         font-weight: bold;
+        .material-icons {
+            line-height: 48px;
+        }
     }
 
     .side-nav {

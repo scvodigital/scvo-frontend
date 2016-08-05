@@ -31,18 +31,16 @@ export class SiteSearchComponent implements OnInit {
             if (this.searchTextModel !== '') {
                 console.log('Searching for: '+this.searchTextModel);
 
-                this.results = this.es.search(this.searchTextModel)
-                    .map((esResult: any) => {
-                        var results = ((esResult.hits || {}).hits || []);
-                        if (results.length > 0) {
-                            // this._results.next(results);
-                            return results;
-                        } else {
-                            if (this.searchTextModel && this.searchTextModel.trim())
-                                console.log('Nothing was found for search term: '+this.searchTextModel);
-                            return [];
-                        }
-                    });
+                this.results = this.es.search(this.searchTextModel).map((esResult: any) => {
+                    var results = ((esResult.hits || {}).hits || []);
+                    if (results.length > 0) {
+                        return results;
+                    } else {
+                        if (this.searchTextModel && this.searchTextModel.trim())
+                        console.log('Nothing was found for search term: '+this.searchTextModel);
+                        return [];
+                    }
+                });
 
                 this.cd.markForCheck();
 
