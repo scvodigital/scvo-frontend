@@ -290,6 +290,41 @@ header.about, header.about .navbar .dropdown-content {
 // https://github.com/Dogfalo/materialize/issues/3161
 .nav-wrapper, .nav-wrapper form, .nav-wrapper form .input-field { height: 100%; }
 
+
+// Breadcrumb ==================================================================
+
+.breadcrumb {
+    padding: 0 !important;
+    li:first-child {
+        display: none !important;
+    }
+    li a {
+        cursor: pointer;
+    }
+}
+.about-us .breadcrumb li:first-child {
+    display: inline-block !important;
+}
+.events .breadcrumb,
+.training .breadcrumb,
+.services .breadcrumb {
+    display: none;
+}
+// .breadcrumb li:after {
+//     content: "/" !important;
+//     padding: 0 10px 0 5px !important;
+//     color: #999999 !important;
+// }
+.breadcrumb > li + li:last-child:after,
+.breadcrumb > li + li:before {
+    content: " " !important;
+    padding: 0 !important;
+}
+.breadcrumb li.active {
+    display: none !important;
+}
+
+
 // Content =====================================================================
 
 home {
