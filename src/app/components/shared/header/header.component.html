@@ -8,7 +8,7 @@
                         <a href="#" materialize="sideNav" [materializeParams]="[{closeOnClick: true, edge: 'left', menuWidth: 330}]" data-activates="main-menu" class="button-collapse">
                             <i class="material-icons">menu</i>
                         </a>
-                        <a [routerLink]="['/']" class="brand-logo"><img src="app/assets/images/logos/scvo-white.png" /> SCVO</a>
+                        <a [routerLink]="['/']" class="brand-logo"><img src="app/assets/images/logos/scvo-white.png" /> SCVO <span class="version">alpha</span></a>
                         <ul class="right hide-on-med-and-down">
                             <li *ngFor="let navigationItem of navigationMenu, let i = index" [routerLinkActive]="['active']">
                                 <a *ngIf="navigationItem.class == 'right'" [routerLink]="navigationItem.path">{{navigationItem.title}}</a>
