@@ -4,8 +4,8 @@ import { Router, ROUTER_DIRECTIVES, NavigationEnd, ActivatedRoute } from '@angul
 import { Observable } from 'rxjs/Rx';
 
 import { SlimLoadingBarService, SlimLoadingBar } from 'ng2-slim-loading-bar/ng2-slim-loading-bar';
-
 import { MarkdownPipe } from '../../../pipes/markdown.pipe';
+
 import { DrupalService } from '../../../services/drupal.service';
 
 import { DrupalSingleComponent } from './drupal-single.component';

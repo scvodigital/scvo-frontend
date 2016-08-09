@@ -5,15 +5,12 @@
 <div *ngIf="!error" class="drupal content">
     <p class="right" *ngIf="content_nid"><a href="https://master-o6miopmkpjxjq.eu.platform.sh/node/{{content_nid}}/edit" class="btn btn-primary"><span class="fa fa-edit"></span>&ensp;Edit</a></p>
 
-    <div *ngIf="!parent_title">
-        <h1 class="light title" [innerHTML]="content_title"></h1>
-        <h2 class="light subheading" [innerHTML]="content_subheading"></h2>
-    </div>
-    <div *ngIf="parent_title">
-        <h1 class="light parent_title"><a [routerLink]="parent_path" [innerHTML]="parent_title"></a></h1>
-        <h2 class="light title" [innerHTML]="content_title"></h2>
-        <h3 class="light subheading" [innerHTML]="content_subheading"></h3>
-    </div>
+    <h1 [innerHTML]="content_title" class="light title"></h1>
+
+    <p *ngIf="content_tags">Tags: <span *ngFor="let tag of content_tags | mapToIterable"><a [routerLink]="['/tags/'+tag.val]">{{tag.val}}</a> </span></p>
+    <!-- <pre>{{content_tags | json}}</pre> -->
+
+    <h2 *ngIf="content_subheading" [innerHTML]="content_subheading" class="light subheading"></h2>
 
     <!-- <p class="timestamp">Last updated: {{content_revision_timestamp | date:'yyyy-MM-dd H:mm:ss'}}</p> -->
 

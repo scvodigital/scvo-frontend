@@ -6,7 +6,7 @@ declare var markdown: any;
     name: 'markdown'
 })
 export class MarkdownPipe implements PipeTransform {
-    transform(md: string): string{
+    transform(md: string): string {
         if (typeof md === 'string') {
             return markdown.parse(md);
         } else {
