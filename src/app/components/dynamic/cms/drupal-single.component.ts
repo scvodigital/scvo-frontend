@@ -51,16 +51,16 @@ export class DrupalSingleComponent implements OnInit {
                 //     }
                 // }
 
-                this.content_status =                   (result.status[0]) ?                result.status[0].value : 0;
+                this.content_status = (result.status[0]) ? result.status[0].value : 0;
                 if (this.content_status) {
-                    this.content_nid =                  (result.nid[0]) ?                   result.nid[0].value : '';
-                    this.content_type =                 (result.type[0]) ?                  result.type[0].target_id : 'page';
-                    this.content_revision_timestamp =   (result.revision_timestamp[0]) ?    result.revision_timestamp[0].value : '';
-                    this.content_title =                (result.title[0]) ?                 result.title[0].value : '';
-                    this.content_subheading =           (result.field_subheading[0]) ?      result.field_subheading[0].value : '';
-                    this.content_body =                 (result.body[0]) ?                  result.body[0].value : '';
-                    this.content_body_format =          (result.body[0]) ?                  result.body[0].format : '';
-                    this.content =                      (result) ?                          result : {};
+                    this.content_nid = (result.nid[0]) ? result.nid[0].value : '';
+                    this.content_type = (result.type[0]) ? result.type[0].target_id : 'page';
+                    this.content_revision_timestamp = (result.revision_timestamp[0]) ? result.revision_timestamp[0].value : '';
+                    this.content_title = (result.title[0]) ? result.title[0].value : '';
+                    this.content_subheading = (result.field_subheading && result.field_subheading[0]) ? result.field_subheading[0].value : '';
+                    this.content_body = (result.body[0]) ? result.body[0].value : '';
+                    this.content_body_format = (result.body[0]) ? result.body[0].format : '';
+                    this.content = (result) ? result : {};
 
                     this.error = false;
                 }
