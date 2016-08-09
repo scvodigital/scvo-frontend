@@ -20,8 +20,11 @@ import { MenuItemsComponent } from './components/shared/header/menu-items.compon
 })
 export class AppComponent {
     public pathClasses: string;
-    public navigationMenu: Object;
+
+    public cmsCategories: Object;
     public cmsTags: Object;
+
+    public navigationMenu: Object;
 
     constructor(public router: Router, public angulartics2: Angulartics2, public angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics, private breadcrumbService: BreadcrumbService, private _menuItems: MenuItemsComponent, private _drupalService: DrupalService) {
         // On navigation
@@ -50,6 +53,16 @@ export class AppComponent {
             }
         }
 
+        // Get categories from Drupal
+        this.cmsCategories = {};
+        this._drupalService.request('categories').subscribe(categories => {
+            for (var key in categories) {
+                var tid = categories[key].tid[0].value;
+                var name = categories[key].name[0].value;
+                this.cmsCategories[tid] = name;
+            }
+        });
+
         // Get tags from Drupal
         this.cmsTags = {};
         this._drupalService.request('tags').subscribe(tags => {
@@ -58,7 +71,6 @@ export class AppComponent {
                 var name = tags[key].name[0].value;
                 this.cmsTags[tid] = name;
             }
-            // console.log(this.cmsTags);
         });
     }
 }

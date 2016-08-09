@@ -18,6 +18,8 @@ import { AppComponent } from '../../../app.component';
     pipes: [MapToIterablePipe, MarkdownPipe]
 })
 export class DrupalPostComponent implements OnInit {
+    content: Observable<any>;
+
     content_status: Observable<any>;
     content_nid: Observable<any>;
     content_type: Observable<any>;
@@ -26,13 +28,18 @@ export class DrupalPostComponent implements OnInit {
     content_subheading: Observable<any>;
     content_body: Observable<any>;
     content_body_format: Observable<any>;
+    content_category: Observable<any>;
+    content_subcategory: Observable<any>;
     content_tags: Object;
-    content: Observable<any>;
+
     error: Boolean = false;
     error_message: Observable<any>;
+
+    public cmsCategories: Object;
     public cmsTags: Object;
 
     constructor(private router: Router, private route: ActivatedRoute, private _drupalService: DrupalService, private slimLoadingBarService: SlimLoadingBarService, private _appComponent: AppComponent) {
+        this.cmsCategories = _appComponent.cmsCategories;
         this.cmsTags = _appComponent.cmsTags;
     }
 
@@ -57,6 +64,9 @@ export class DrupalPostComponent implements OnInit {
                     this.content_subheading = (result.field_subheading && result.field_subheading[0]) ? result.field_subheading[0].value : '';
                     this.content_body = (result.body[0]) ? result.body[0].value : '';
                     this.content_body_format = (result.body[0]) ? result.body[0].format : '';
+
+                    this.content_category = (result.field_category[0]) ? this.cmsCategories[result.field_category[0].target_id] : '';
+                    this.content_subcategory = (result.field_subcategory[0]) ? this.cmsCategories[result.field_subcategory[0].target_id] : '';
 
                     if (result.field_tags && result.field_tags[0]) {
                         this.content_tags = {};
