@@ -11,13 +11,13 @@ import { DrupalService } from '../../../services/drupal.service';
 import { AppComponent } from '../../../app.component';
 
 @Component({
-    selector: 'cms-single',
-    templateUrl: 'app/components/dynamic/cms/drupal-single.component.html',
+    selector: 'cms-page',
+    templateUrl: 'app/components/dynamic/cms/drupal-page.component.html',
     directives: [ROUTER_DIRECTIVES, SlimLoadingBar],
     providers: [DrupalService, AppComponent],
     pipes: [MapToIterablePipe, MarkdownPipe]
 })
-export class DrupalSingleComponent implements OnInit {
+export class DrupalPageComponent implements OnInit {
     content_status: Observable<any>;
     content_nid: Observable<any>;
     content_type: Observable<any>;
@@ -41,7 +41,7 @@ export class DrupalSingleComponent implements OnInit {
 
             this.slimLoadingBarService.start();
 
-            // console.log("Asking Drupal for page at /"+params.join('/'));
+            console.log("Asking Drupal for page at /"+params.join('/'));
 
             this._drupalService.request(params.join('/')).subscribe(result => {
 
@@ -57,13 +57,6 @@ export class DrupalSingleComponent implements OnInit {
                     this.content_subheading = (result.field_subheading && result.field_subheading[0]) ? result.field_subheading[0].value : '';
                     this.content_body = (result.body[0]) ? result.body[0].value : '';
                     this.content_body_format = (result.body[0]) ? result.body[0].format : '';
-
-                    if (result.field_tags && result.field_tags[0]) {
-                        this.content_tags = {};
-                        for (var tag in result.field_tags) {
-                            this.content_tags[result.field_tags[tag].target_id] = this.cmsTags[result.field_tags[tag].target_id];
-                        }
-                    }
 
                     this.error = false;
                 }

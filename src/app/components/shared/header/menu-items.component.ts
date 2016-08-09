@@ -121,10 +121,10 @@ export class MenuItemsComponent {
                         'title': 'Professional networks',
                         'path': '/services/professional-networks'
                     },
-                    // {
-                    //     'title': 'Affiliate deals',
-                    //     'path': '/services/affiliate-deals'
-                    // }
+                    {
+                        'title': 'Affiliate deals',
+                        'path': '/services/affiliate-deals'
+                    }
                 ]
             },
             {
@@ -146,33 +146,28 @@ export class MenuItemsComponent {
                 ]
             },
             {
-                'title': 'Policy hub',
-                'path': '/policy-hub',
+                'title': 'Policy',
+                'path': '/policy',
                 'contents': [
                     {
                         'title': 'Blogs',
-                        'path': '/policy-hub/blogs',
-                        'term_id': 51
+                        'path': '/policy/blogs',
+                        'term_id': 38
                     },
                     {
                         'title': 'Consultation responses',
-                        'path': '/policy-hub/consultation-responses',
-                        'term_id': 52
-                    },
-                    {
-                        'title': 'Research',
-                        'path': '/policy-hub/research',
-                        'term_id': 53
+                        'path': '/policy/consultation-responses',
+                        'term_id': 39
                     },
                     {
                         'title': 'Briefings & reports',
-                        'path': '/policy-hub/briefings-reports',
-                        'term_id': 54
+                        'path': '/policy/briefings-reports',
+                        'term_id': 41
                     },
                     {
                         'title': 'Policy committee',
-                        'path': '/policy-hub/policy-committee',
-                        'term_id': 55
+                        'path': '/policy/policy-committee',
+                        'term_id': 42
                     }
                 ]
             },

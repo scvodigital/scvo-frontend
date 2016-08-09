@@ -8,18 +8,20 @@ import { MarkdownPipe } from '../../../pipes/markdown.pipe';
 
 import { DrupalService } from '../../../services/drupal.service';
 
-import { DrupalSingleComponent } from './drupal-single.component';
+import { DrupalPageComponent } from './drupal-page.component';
+import { DrupalPostComponent } from './drupal-post.component';
 import { MenuItemsComponent } from '../../shared/header/menu-items.component';
 
 @Component({
     selector: 'cms-index',
     templateUrl: 'app/components/dynamic/cms/drupal-index.component.html',
-    directives: [ROUTER_DIRECTIVES, SlimLoadingBar, DrupalSingleComponent],
+    directives: [ROUTER_DIRECTIVES, SlimLoadingBar, DrupalPageComponent, DrupalPostComponent],
     providers: [DrupalService, MenuItemsComponent],
     pipes: [MarkdownPipe]
 })
 export class DrupalIndexComponent implements OnInit {
-    content_links: Observable<any>;
+    pages: Observable<any>;
+    posts: Observable<any>;
     parent: String;
     error: Boolean = false;
     error_message: Observable<any>;
@@ -36,10 +38,7 @@ export class DrupalIndexComponent implements OnInit {
 
             var requestPath = params.join('/');
 
-            console.log('Asking Drupal for list of sub-pages from /'+requestPath);
-
             console.log('Get term ID for: '+requestPath);
-
             // This is probably not the best way to do it, but the Drupal API doesn't provide a nice way to get tid from term name or path
             var term_id = 0;
             for (var level1 in this.navigationMenu) {
@@ -62,24 +61,24 @@ export class DrupalIndexComponent implements OnInit {
                 }
             }
 
-            var requestType = 'pages';
-            if (this.parent == 'policy-hub') requestType = 'posts';
+            console.log('Asking Drupal for list of sub-pages from /'+requestPath);
 
-            console.log('Asking Drupal for menu with /'+requestType+'/'+term_id);
-
-            this._drupalService.request(requestType+'/'+term_id).subscribe(content => {
-
-                this.content_links = content;
-                // console.log(this.content_links);
-
-                this.slimLoadingBarService.complete();
+            this._drupalService.request('pages/'+term_id).subscribe(content => {
+                this.pages = content;
             },
             err => {
                 this.error = true;
                 this.error_message = err;
-                this.slimLoadingBarService.complete();
+            });
+            this._drupalService.request('posts/'+term_id).subscribe(content => {
+                this.posts = content;
+            },
+            err => {
+                this.error = true;
+                this.error_message = err;
             });
 
+            this.slimLoadingBarService.complete();
         });
     }
 }

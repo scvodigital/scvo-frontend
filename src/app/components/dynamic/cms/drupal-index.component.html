@@ -1,18 +1,18 @@
-<cms-single></cms-single>
+<cms-page></cms-page>
 
-<div class="drupal content" *ngIf="parent != 'policy-hub'">
-    <h3 class="light" *ngIf="content_links"><strong>Sections</strong></h3>
+<div class="drupal page content" *ngIf="pages && pages.length > 0">
+    <h3 class="light"><strong>Sections</strong></h3>
 
-    <ul *ngFor="let link of content_links">
+    <ul *ngFor="let link of pages">
         <li><h4 class="light"><a [routerLink]="link.path">{{link.title}}</a></h4></li>
     </ul>
 </div>
 
-<div class="drupal content" *ngIf="parent == 'policy-hub'">
-    <h3 class="light" *ngIf="content_links"><strong>Posts</strong></h3>
+<div class="drupal post content" *ngIf="posts && posts.length > 0">
+    <h3 class="light"><strong>Posts</strong></h3>
 
     <div class="row">
-        <div class="col s12 m6" *ngFor="let blog of content_links">
+        <div class="col s12 m6" *ngFor="let blog of posts">
             <div class="card small sticky-action">
                 <div class="card-image waves-effect waves-block waves-light">
                     <img class="activator" src="{{blog.field_header_image}}" />
