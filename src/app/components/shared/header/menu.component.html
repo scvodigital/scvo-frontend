@@ -8,7 +8,7 @@
 </li> -->
 
 <li *ngFor="let navigationItem of navigationMenu, let i = index">
-    <ul *ngIf="navigationItem.class != 'right'">
+    <ul *ngIf="navigationItem.position != 'right'">
         <li *ngIf="menuType == 'desktop_main' && !navigationItem.contents">
             <a [routerLink]="navigationItem.path">{{navigationItem.title}}</a>
         </li>
@@ -44,7 +44,7 @@
             </ul>
         </li>
     </ul>
-    <ul *ngIf="navigationItem.class == 'right'">
+    <ul *ngIf="navigationItem.position == 'right'">
         <li *ngIf="menuType == 'desktop_right'">
             <a [routerLink]="navigationItem.path">{{navigationItem.title}}</a>
         </li>

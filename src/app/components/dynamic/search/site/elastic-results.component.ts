@@ -31,7 +31,7 @@ export class SiteSearchComponent implements OnInit {
         .subscribe(params => {
             this.searchTextModel = decodeURI(params['s']);
             if (this.searchTextModel !== '') {
-                console.log('Searching for: '+this.searchTextModel);
+                // console.log('Searching for: '+this.searchTextModel);
 
                 this.results = this.es.search(this.searchTextModel)
                     .map((esResult: any) => {

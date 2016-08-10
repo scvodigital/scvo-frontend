@@ -174,22 +174,22 @@ export class AppService {
                 'title': 'About',
                 'path': '/about-us',
                 'term_id': 50,
-                'class': 'right'
+                'position': 'right'
             },
             {
                 'title': 'Contact',
                 'path': '/contact-us',
-                'class': 'right'
+                'position': 'right'
             },
             {
                 'title': 'Media',
                 'path': '/media-centre',
-                'class': 'right'
+                'position': 'right'
             },
             {
                 'title': 'Join',
                 'path': '/join-scvo',
-                'class': 'right'
+                'position': 'right'
             }
         ];
 
@@ -224,5 +224,7 @@ export class AppService {
                 this.cmsTags[tid] = name;
             }
         });
+
+        console.log("Services run!");
     }
 }

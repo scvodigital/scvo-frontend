@@ -5,12 +5,12 @@ import { ROUTER_DIRECTIVES } from '@angular/router';
 import { MaterializeDirective } from "angular2-materialize";
 
 @Component({
-    selector: 'events',
-    templateUrl: 'app/components/dynamic/search/events/elastic-results.component.html',
+    selector: 'training',
+    templateUrl: 'app/components/dynamic/search/training/elastic-results.component.html',
     directives: [ROUTER_DIRECTIVES, MaterializeDirective]
 })
-export class EventSearchComponent {
-    title: string = 'Events';
+export class TrainingSearchComponent {
+    title: string = 'Training';
 
     private selectedCategory = "";
     private selectedLocation = "";

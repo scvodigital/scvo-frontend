@@ -13,8 +13,9 @@ import { SiteSearchComponent } from './components/dynamic/search/site/elastic-re
 import { DrupalPageComponent } from './components/dynamic/cms/drupal-page.component';
 import { DrupalPostComponent } from './components/dynamic/cms/drupal-post.component';
 import { DrupalIndexComponent } from './components/dynamic/cms/drupal-index.component';
-import { EventSearchComponent } from './components/dynamic/search/events/elastic-results.component';
-import { EventResultComponent } from './components/dynamic/search/events/elastic-result-detail.component';
+import { GoodmovesSearchComponent } from './components/dynamic/search/goodmoves/elastic-results.component';
+import { TrainingSearchComponent } from './components/dynamic/search/training/elastic-results.component';
+import { TrainingResultComponent } from './components/dynamic/search/training/elastic-result-detail.component';
 
 export const routes: RouterConfig = [
     { path: '', component: HomeComponent },
@@ -34,10 +35,11 @@ export const routes: RouterConfig = [
     { path: 'employability/community-jobs-scotland/:path', component: DrupalPageComponent },
     { path: 'employability/internships/:path', component: DrupalPageComponent },
     { path: 'employability/past-employability-schemes/:path', component: DrupalPageComponent },
+    { path: 'services/goodmoves', component: GoodmovesSearchComponent },
     { path: 'services/:path', component: DrupalPageComponent },
     { path: 'events/:path', component: DrupalPageComponent },
-    { path: 'training/search', component: EventSearchComponent },
-    { path: 'training/:id', component: EventResultComponent },
+    { path: 'training/search', component: TrainingSearchComponent },
+    { path: 'training/:id', component: TrainingResultComponent },
     { path: 'policy/:path', component: DrupalIndexComponent },
     { path: 'policy/blogs/:path', component: DrupalPostComponent },
     { path: 'policy/consultation-responses/:path', component: DrupalPostComponent },

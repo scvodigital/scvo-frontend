@@ -40,7 +40,7 @@ export class DrupalIndexComponent implements OnInit {
 
             var requestPath = params.join('/');
 
-            console.log('Get term ID for: '+requestPath);
+            // console.log('Get term ID for: '+requestPath);
             // This is probably not the best way to do it, but the Drupal API doesn't provide a nice way to get tid from term name or path
             var term_id = 0;
             for (var level1 in this.navigationMenu) {
@@ -63,7 +63,7 @@ export class DrupalIndexComponent implements OnInit {
                 }
             }
 
-            console.log('Asking Drupal for list of sub-pages from /'+requestPath);
+            // console.log('Asking Drupal for list of sub-pages from /'+requestPath);
 
             this._drupalService.request('pages/'+term_id).subscribe(content => {
                 this.pages = content;
@@ -72,6 +72,7 @@ export class DrupalIndexComponent implements OnInit {
                 this.error = true;
                 this.error_message = err;
             });
+
             this._drupalService.request('posts/'+term_id).subscribe(content => {
                 this.posts = content;
             },

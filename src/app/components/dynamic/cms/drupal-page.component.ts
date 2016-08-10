@@ -48,7 +48,7 @@ export class DrupalPageComponent implements OnInit {
 
             this.slimLoadingBarService.start();
 
-            console.log("Asking Drupal for page at /"+params.join('/'));
+            // console.log("Asking Drupal for page at /"+params.join('/'));
 
             this._drupalService.request(params.join('/')).subscribe(result => {
 
