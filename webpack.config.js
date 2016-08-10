@@ -34,6 +34,7 @@ var webpackConfig = {
             "window.jQuery": "jquery",
             "root.jQuery": "jquery",
             "elasticsearch": "elasticsearch",
+            "ng2-slim-loading-bar": "ng2-slim-loading-bar",
             "markdown": "markdown",
             "Hammer": "hammerjs/hammer"
         }),
