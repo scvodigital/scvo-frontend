@@ -4,11 +4,10 @@ import { Control } from '@angular/common';
 import { Router, ROUTER_DIRECTIVES } from '@angular/router';
 
 import { SlimLoadingBarService, SlimLoadingBar } from 'ng2-slim-loading-bar/ng2-slim-loading-bar';
-
 import { MaterializeDirective } from "angular2-materialize";
 
-import { InputDebounceComponent } from "./search.input.component";
-import { MenuItemsComponent } from './menu-items.component';
+import { MenuComponent } from './menu.component';
+import { SearchInputComponent } from "./search-input.component";
 
 declare var $: any;
 
@@ -16,16 +15,13 @@ declare var $: any;
     selector: 'header',
     templateUrl: 'app/components/shared/header/header.component.html',
     // styles: [require('app/components/shared/header/header.component.scss').toString()],
-    directives: [ROUTER_DIRECTIVES, InputDebounceComponent, MaterializeDirective, MenuItemsComponent, SlimLoadingBar],
-    providers: [MenuItemsComponent],
+    directives: [ROUTER_DIRECTIVES, MenuComponent, SearchInputComponent, MaterializeDirective, SlimLoadingBar],
+    // providers: [MenuComponent],
     encapsulation: ViewEncapsulation.None
 })
-export class HeaderComponent {
-    public navigationMenu: Object;
+export class HeaderComponent implements OnInit {
 
-    constructor (private router: Router, private slimLoadingBarService: SlimLoadingBarService, private _menuItems: MenuItemsComponent) {
-        this.navigationMenu = _menuItems.navigationMenu;
-    }
+    constructor (private router: Router, private slimLoadingBarService: SlimLoadingBarService) {}
 
     ngOnInit() {
         $(window).scroll(function() {

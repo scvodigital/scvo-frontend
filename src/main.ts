@@ -11,6 +11,7 @@ import { Angulartics2 } from 'angulartics2';
 import { SlimLoadingBarService } from 'ng2-slim-loading-bar/ng2-slim-loading-bar';
 import { BreadcrumbService } from 'ng2-breadcrumb/ng2-breadcrumb';
 
+import { AppService } from "./app/services/app.service"
 import { ElasticService } from "./app/services/elastic.service"
 import { DrupalService } from "./app/services/drupal.service"
 
@@ -24,7 +25,9 @@ bootstrap(AppComponent, [
     // provide(Angulartics2, {useClass: Angulartics2Deprecated}),
     Angulartics2,
     SlimLoadingBarService,
+    AppService,
     BreadcrumbService,
-    ElasticService
+    ElasticService,
+    DrupalService
 ])
 .catch(err => console.error(err));

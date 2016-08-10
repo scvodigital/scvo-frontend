@@ -4,19 +4,21 @@ import { Router, ROUTER_DIRECTIVES, NavigationEnd, ActivatedRoute } from '@angul
 import { Observable } from 'rxjs/Rx';
 
 import { SlimLoadingBarService, SlimLoadingBar } from 'ng2-slim-loading-bar/ng2-slim-loading-bar';
-import { MarkdownPipe } from '../../../pipes/markdown.pipe';
 
 import { DrupalService } from '../../../services/drupal.service';
+import { AppService } from '../../../services/app.service';
+
+import { MarkdownPipe } from '../../../pipes/markdown.pipe';
 
 import { DrupalPageComponent } from './drupal-page.component';
 import { DrupalPostComponent } from './drupal-post.component';
-import { MenuItemsComponent } from '../../shared/header/menu-items.component';
+// import { MenuItemsComponent } from '../../shared/header/menu-items.component';
 
 @Component({
     selector: 'cms-index',
     templateUrl: 'app/components/dynamic/cms/drupal-index.component.html',
+    providers: [AppService, DrupalService],
     directives: [ROUTER_DIRECTIVES, SlimLoadingBar, DrupalPageComponent, DrupalPostComponent],
-    providers: [DrupalService, MenuItemsComponent],
     pipes: [MarkdownPipe]
 })
 export class DrupalIndexComponent implements OnInit {
@@ -27,8 +29,8 @@ export class DrupalIndexComponent implements OnInit {
     error_message: Observable<any>;
     public navigationMenu: Object;
 
-    constructor(private router: Router, private route: ActivatedRoute, private _drupalService: DrupalService, private slimLoadingBarService: SlimLoadingBarService, private _menuItems: MenuItemsComponent) {
-        this.navigationMenu = _menuItems.navigationMenu;
+    constructor(private router: Router, private route: ActivatedRoute, private _drupalService: DrupalService, private slimLoadingBarService: SlimLoadingBarService, private _appService: AppService) {
+        this.navigationMenu = _appService.navigationMenu;
     }
 
     ngOnInit() {

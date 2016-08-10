@@ -9,10 +9,10 @@
 
 <li *ngFor="let navigationItem of navigationMenu, let i = index">
     <ul *ngIf="navigationItem.class != 'right'">
-        <li *ngIf="menuType == 'desktop' && !navigationItem.contents">
+        <li *ngIf="menuType == 'desktop_main' && !navigationItem.contents">
             <a [routerLink]="navigationItem.path">{{navigationItem.title}}</a>
         </li>
-        <li *ngIf="menuType == 'desktop' && navigationItem.contents" [routerLinkActive]="['active']">
+        <li *ngIf="menuType == 'desktop_main' && navigationItem.contents" [routerLinkActive]="['active']">
             <!-- <a [routerLink]="navigationItem.path" materialize="dropdown" [attr.data-activates]="'dropdown' + i" data-belowOrigin="true" data-constrainwidth="false" data-hover="true">{{navigationItem.title}}<span class="material-icons arrow_drop_down right">arrow_drop_down</span></a> -->
             <a materialize="dropdown" [attr.data-activates]="'dropdown' + i" data-belowOrigin="true" data-constrainwidth="false" data-hover="true">{{navigationItem.title}}<span class="material-icons arrow_drop_down right">arrow_drop_down</span></a>
             <ul [attr.id]="'dropdown' + i" class="dropdown-content">
@@ -42,6 +42,11 @@
                     </div>
                 </li>
             </ul>
+        </li>
+    </ul>
+    <ul *ngIf="navigationItem.class == 'right'">
+        <li *ngIf="menuType == 'desktop_right'">
+            <a [routerLink]="navigationItem.path">{{navigationItem.title}}</a>
         </li>
     </ul>
 </li>

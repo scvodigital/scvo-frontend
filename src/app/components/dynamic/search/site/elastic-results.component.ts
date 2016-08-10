@@ -46,7 +46,7 @@ export class SiteSearchComponent implements OnInit {
                         }
                     });
 
-                console.log(this.results);
+                // console.log(this.results);
             }
         });
     }

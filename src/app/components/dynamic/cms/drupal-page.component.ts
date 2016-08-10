@@ -5,16 +5,17 @@ import { Observable } from 'rxjs/Rx';
 
 import { SlimLoadingBarService, SlimLoadingBar } from 'ng2-slim-loading-bar/ng2-slim-loading-bar';
 
+import { DrupalService } from '../../../services/drupal.service';
+import { AppService } from '../../../services/app.service';
+
 import { MapToIterablePipe } from '../../../pipes/map-to-iterable.pipe';
 import { MarkdownPipe } from '../../../pipes/markdown.pipe';
-import { DrupalService } from '../../../services/drupal.service';
-import { AppComponent } from '../../../app.component';
 
 @Component({
     selector: 'cms-page',
     templateUrl: 'app/components/dynamic/cms/drupal-page.component.html',
+    providers: [AppService, DrupalService],
     directives: [ROUTER_DIRECTIVES, SlimLoadingBar],
-    providers: [DrupalService, AppComponent],
     pipes: [MapToIterablePipe, MarkdownPipe]
 })
 export class DrupalPageComponent implements OnInit {
@@ -37,9 +38,9 @@ export class DrupalPageComponent implements OnInit {
     public cmsCategories: Object;
     public cmsTags: Object;
 
-    constructor(private router: Router, private route: ActivatedRoute, private _drupalService: DrupalService, private slimLoadingBarService: SlimLoadingBarService, private _appComponent: AppComponent) {
-        this.cmsCategories = _appComponent.cmsCategories;
-        this.cmsTags = _appComponent.cmsTags;
+    constructor(private router: Router, private route: ActivatedRoute, private _drupalService: DrupalService, private slimLoadingBarService: SlimLoadingBarService, private _appService: AppService) {
+        this.cmsCategories = _appService.cmsCategories;
+        this.cmsTags = _appService.cmsTags;
     }
 
     ngOnInit() {

@@ -10,9 +10,4 @@ import { ROUTER_DIRECTIVES } from '@angular/router';
 })
 export class FooterComponent {
     date = new Date();
-
-    constructor() {}
-
-    ngOnInit() {}
-
 }

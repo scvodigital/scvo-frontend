@@ -1,20 +1,19 @@
-import { Component, Input } from '@angular/core';
-import { Control } from '@angular/common';
+import { Injectable } from '@angular/core';
 
-import { ROUTER_DIRECTIVES } from '@angular/router';
+import { BreadcrumbService } from 'ng2-breadcrumb/ng2-breadcrumb';
 
-import { MaterializeDirective } from 'angular2-materialize';
+import { DrupalService } from './drupal.service';
 
-@Component({
-    selector: '[menu-items]',
-    templateUrl: 'app/components/shared/header/menu-items.component.html',
-    directives: [ROUTER_DIRECTIVES, MaterializeDirective],
-})
-export class MenuItemsComponent {
-    @Input('menu-items') menuType: string = '';
+@Injectable()
+export class AppService {
+
     public navigationMenu: Object;
 
-    constructor() {
+    public cmsCategories: Object;
+    public cmsTags: Object;
+
+    constructor(private _drupalService: DrupalService, private breadcrumbService: BreadcrumbService) {
+
         this.navigationMenu = [
             {
                 'title': 'Home',
@@ -192,6 +191,38 @@ export class MenuItemsComponent {
                 'path': '/join-scvo',
                 'class': 'right'
             }
-        ]
+        ];
+
+        // Set breadcrumb titles
+        // this.navigationMenu = _menuItems.navigationMenu;
+        for (var level1 in this.navigationMenu) {
+            breadcrumbService.addFriendlyNameForRoute(this.navigationMenu[level1].path, this.navigationMenu[level1].title);
+            for (var level2 in this.navigationMenu[level1].contents) {
+                breadcrumbService.addFriendlyNameForRoute(this.navigationMenu[level1].contents[level2].path, this.navigationMenu[level1].contents[level2].title);
+                // for (var level3 in this.navigationMenu[level1].contents[level2]) {
+                //     // breadcrumbService.addFriendlyNameForRoute(this.navigationMenu[level1].contents[level2].contents[level3].path, this.navigationMenu[level1].contents[level2].contents[level3].title);
+                // }
+            }
+        }
+
+        // Get categories from Drupal
+        this.cmsCategories = {};
+        this._drupalService.request('categories').subscribe(categories => {
+            for (var key in categories) {
+                var tid = categories[key].tid[0].value;
+                var name = categories[key].name[0].value;
+                this.cmsCategories[tid] = name;
+            }
+        });
+
+        // Get tags from Drupal
+        this.cmsTags = {};
+        this._drupalService.request('tags').subscribe(tags => {
+            for (var key in tags) {
+                var tid = tags[key].tid[0].value;
+                var name = tags[key].name[0].value;
+                this.cmsTags[tid] = name;
+            }
+        });
     }
 }
