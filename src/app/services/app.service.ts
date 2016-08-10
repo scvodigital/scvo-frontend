@@ -120,10 +120,10 @@ export class AppService {
                         'title': 'Professional networks',
                         'path': '/services/professional-networks'
                     },
-                    {
-                        'title': 'Affiliate deals',
-                        'path': '/services/affiliate-deals'
-                    }
+                    // {
+                    //     'title': 'Affiliate deals',
+                    //     'path': '/services/affiliate-deals'
+                    // }
                 ]
             },
             {
