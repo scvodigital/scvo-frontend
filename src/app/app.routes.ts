@@ -13,6 +13,7 @@ import { SiteSearchComponent } from './components/dynamic/search/site/elastic-re
 import { DrupalPageComponent } from './components/dynamic/cms/drupal-page.component';
 import { DrupalPostComponent } from './components/dynamic/cms/drupal-post.component';
 import { DrupalIndexComponent } from './components/dynamic/cms/drupal-index.component';
+import { DrupalMediaCentreComponent } from './components/dynamic/cms/drupal-media-centre.component';
 import { GoodmovesSearchComponent } from './components/dynamic/search/goodmoves/elastic-results.component';
 import { TrainingSearchComponent } from './components/dynamic/search/training/elastic-results.component';
 import { TrainingResultComponent } from './components/dynamic/search/training/elastic-result-detail.component';
@@ -23,6 +24,7 @@ export const routes: RouterConfig = [
     // { path: 'media', component: MediaCentreComponent },
     { path: 'about-us', component: DrupalIndexComponent },
     { path: 'about-us/:path', component: DrupalPageComponent },
+    { path: 'media-centre', component: DrupalMediaCentreComponent },
     { path: 'privacy-and-cookies', component: PrivacyAndCookiesComponent },
     { path: 'terms-and-conditions', component: TermsAndConditionsComponent },
     { path: 'running-your-organisation/:path', component: DrupalIndexComponent },

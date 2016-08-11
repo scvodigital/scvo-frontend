@@ -1,23 +1,23 @@
 <div *ngIf="!error" class="drupal post content">
     <p class="right" *ngIf="content_nid"><a href="{{content_editLink}}" class="btn btn-primary"><span class="fa fa-edit"></span>&ensp;Edit post</a></p>
 
-    <h1 [innerHTML]="content_title" class="light title"></h1>
+    <h1 [innerHTML]="content_title" class="light drupal post title"></h1>
 
-    <p *ngIf="content_tags">Tags: <span *ngFor="let tag of content_tags | mapToIterable"><a [routerLink]="['/tags/'+tag.val]">{{tag.val}}</a> </span></p>
+    <p *ngIf="content_tags" class="drupal post tags">Tags: <span *ngFor="let tag of content_tags | mapToIterable"><a [routerLink]="['/tags/'+tag.val]">{{tag.val}}</a> </span></p>
     <!-- <pre>{{content_tags | json}}</pre> -->
 
-    <h2 *ngIf="content_subheading" [innerHTML]="content_subheading" class="light subheading"></h2>
+    <h2 *ngIf="content_subheading" [innerHTML]="content_subheading" class="light drupal post subheading"></h2>
 
     <!-- <p class="timestamp">Last updated: {{content_revision_timestamp | date:'yyyy-MM-dd H:mm:ss'}}</p> -->
 
-    <div class="body" *ngIf="content_body_format == 'markdown'" [innerHTML]="content_body | markdown"></div>
-    <div class="body" *ngIf="content_body_format == 'basic_html' || content_body_format == 'full_html'" [innerHTML]="content_body"></div>
-    <div class="body" *ngIf="content_body_format == 'plaintext'">{{content_body}}</div>
+    <div class="drupal post body" *ngIf="content_body_format == 'markdown'" [innerHTML]="content_body | markdown"></div>
+    <div class="drupal post body" *ngIf="content_body_format == 'basic_html' || content_body_format == 'full_html'" [innerHTML]="content_body"></div>
+    <div class="drupal post body" *ngIf="content_body_format == 'plaintext'">{{content_body}}</div>
 
     <!-- <pre>{{content | json}}</pre> -->
 </div>
 
 <div *ngIf="error">
-    <h1 class="light">Page cannot be found (404)</h1>
-    <p>{{error_message}}</p>
+    <h1 class="light drupal post error title">Page cannot be found (404)</h1>
+    <p class="drupal post error message">{{error_message}}</p>
 </div>
