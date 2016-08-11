@@ -13,6 +13,13 @@ export class AppService {
 
     constructor(private _drupalService: DrupalService, private breadcrumbService: BreadcrumbService) {}
 
+    setGlobals() {
+        this.setSettings();
+        this.setNavigation();
+        this.setCategories();
+        this.setTags();
+    }
+
     setSettings() {
         this.settings['cmsAddress'] = 'https://cms.scvo.org.uk/';
     }
@@ -217,7 +224,7 @@ export class AppService {
 
     setCategories() {
         // Get categories from Drupal
-        this._drupalService.request('categories').subscribe(categories => {
+        this._drupalService.request(this.settings['cmsAddress']+'categories').subscribe(categories => {
             for (var key in categories) {
                 var tid = categories[key].tid[0].value;
                 var name = categories[key].name[0].value;
@@ -231,7 +238,7 @@ export class AppService {
 
     setTags() {
         // Get tags from Drupal
-        this._drupalService.request('tags').subscribe(tags => {
+        this._drupalService.request(this.settings['cmsAddress']+'tags').subscribe(tags => {
             for (var key in tags) {
                 var tid = tags[key].tid[0].value;
                 var name = tags[key].name[0].value;
