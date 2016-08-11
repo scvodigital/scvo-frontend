@@ -8,7 +8,7 @@ This repository [Wiki](https://github.com/scvodigital/platform-frontend/wiki) co
 
 ## Websites
 * [Platform frontend](https://alpha.scvo.org.uk) (running on [Firebase](https://firebase.google.com))
-* [Platform backend](https://master-o6miopmkpjxjq.eu.platform.sh) (running on [Platform.sh](https://platform.sh))
+* [Platform backend](https://cms.scvo.org.uk) (running on [Platform.sh](https://platform.sh))
 * [Platform search](http://search.scvo.org.uk:9200) (running on [Elastic Cloud](https://www.elastic.co/cloud))
 
 ## Information
@@ -20,7 +20,7 @@ This repository [Wiki](https://github.com/scvodigital/platform-frontend/wiki) co
     * Uses [Sass](http://sass-lang.com) for styles to extend the capabilities of CSS
     * Uses [LiveReload](http://livereload.com) to automatically reload code changes in development
 * Elasticsearch search engine - [search.scvo.org.uk](http://search.scvo.org.uk:9200)
-* Drupal CMS - [master-o6miopmkpjxjq.eu.platform.sh](http://master-o6miopmkpjxjq.eu.platform.sh)
+* Drupal CMS - [cms.scvo.org.uk](http://cms.scvo.org.uk)
     * Connects independently to Elasticsearch to index content across all web properties
 * Salesforce - [www.salesforce.com](http://www.salesforce.com)
     * Indexed via [Elasticforce](https://github.com/scvodigital/scvo-elasticforce)
