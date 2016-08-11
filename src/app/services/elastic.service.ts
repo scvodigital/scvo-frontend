@@ -13,12 +13,23 @@ export class ElasticService {
                 // log: 'trace'
             });
             return Observable.fromPromise(client.search({
-                'index': '_all', // The magic (all indices)
-                'indices_boost' : {
-                    'elasticsearch_index_main_scvo_public' : 1.5
-                },
-                'type': ['scvo_public', 'opportunity', 'signatory', 'fundsalesforcemodel'],
-                'q': `${terms}`
+                index: '_all', // The magic (all indices)
+                // indices_boost: {
+                //     'elasticsearch_index_main_scvo_public': 1.0
+                // },
+                // 'type': ['scvo_public', 'opportunity', 'signatory', 'fundsalesforcemodel'],
+                // 'q': `${terms}`,
+                type: ['scvo_public'],
+                body: {
+                    query: {
+                        query_string: {
+                            query: `${terms}`
+                        }
+                    },
+                    indices_boost: {
+                        'elasticsearch_index_main_scvo_public': 1.0
+                    }
+                }
             }))
         } else {
             return Observable.of({})

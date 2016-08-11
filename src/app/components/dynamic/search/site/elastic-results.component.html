@@ -3,9 +3,38 @@
 <!-- <p><small>Found {{results}} results</small></p> -->
 
 <section>
-    <ul>
-        <li *ngFor="let result of results | async">
+    <dl>
+        <dt *ngFor="let result of results | async">
             <div [ngSwitch]="result._index">
+                <div *ngSwitchCase="'elasticsearch_index_main_scvo_public'">
+                    <div class="card-panel orange darken-2" *ngIf="result._type == 'scvo_public'">
+                        <span class="white-text">
+                            <strong>Website Content</strong>
+                            <h5 *ngIf="result._source.title">{{result._source.title}}</h5>
+                            <p *ngIf="result._source.field_subheading" [innerHTML]="result._source.field_subheading"></p>
+                            <p *ngIf="result._source.field_summary" [innerHTML]="result._source.field_summary"></p>
+                            <p *ngIf="result._source.nid"><a href="/node/{{result._source.nid}}" class="btn">Open page</a></p>
+                        </span>
+                    </div>
+                </div>
+                <div *ngSwitchCase="'goodmoves'">
+                    <div class="card-panel green">
+                        <span class="white-text">
+                            <strong>Goodmoves Job</strong>
+                            <h5 *ngIf="result._source.title">{{result._source.title}}</h5>
+                            <p *ngIf="result._source.description">{{result._source.description}}</p>
+                        </span>
+                    </div>
+                </div>
+                <div *ngSwitchCase="'fundingscotland'">
+                    <div class="card-panel light-green darken-2" *ngIf="result._type == 'fundsalesforcemodel'">
+                        <span class="white-text">
+                            <strong>Funding Scotland Fund</strong>
+                            <h5 *ngIf="result._source.name">{{result._source.name}}</h5>
+                            <p *ngIf="result._source.fundSummary">{{result._source.fundSummary}}</p>
+                        </span>
+                    </div>
+                </div>
                 <div *ngSwitchCase="'oscr'">
                     <div class="card-panel deep-purple darken-3">
                         <span class="white-text">
@@ -40,41 +69,14 @@
                         </div>
                     </div>
                 </div>
-                <div *ngSwitchCase="'goodmoves'">
-                    <div class="card-panel green">
-                        <span class="white-text">
-                            <strong>Goodmoves Job</strong>
-                            <h5 *ngIf="result._source.title">{{result._source.title}}</h5>
-                            <p *ngIf="result._source.description">{{result._source.description}}</p>
-                        </span>
-                    </div>
-                </div>
-                <div *ngSwitchCase="'fundingscotland'">
-                    <div class="card-panel light-green darken-2" *ngIf="result._type == 'fundsalesforcemodel'">
-                        <span class="white-text">
-                            <strong>Funding Scotland Fund</strong>
-                            <h5 *ngIf="result._source.name">{{result._source.name}}</h5>
-                            <p *ngIf="result._source.fundSummary">{{result._source.fundSummary}}</p>
-                        </span>
-                    </div>
-                </div>
-                <div *ngSwitchCase="'elasticsearch_index_main_scvo_public'">
-                    <div class="card-panel orange darken-2" *ngIf="result._type == 'scvo_public'">
-                        <span class="white-text">
-                            <strong>Website Content</strong>
-                            <h5 *ngIf="result._source.title">{{result._source.title}}</h5>
-                            <p *ngIf="result._source.field_summary" [innerHTML]="result._source.field_summary"></p>
-                        </span>
-                    </div>
-                </div>
             </div>
             <div class="card-panel black">
                 <span class="white-text">
                     {{result | json}}
                 </span>
             </div>
-        </li>
-    </ul>
+        </dt>
+    </dl>
     <div *ngIf="!results">
         <p>No results found</p>
     </div>

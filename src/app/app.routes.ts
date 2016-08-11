@@ -10,6 +10,7 @@ import { TermsAndConditionsComponent } from './components/static/terms-and-condi
 
 // Dynamic components
 import { SiteSearchComponent } from './components/dynamic/search/site/elastic-results.component';
+import { DrupalRedirectComponent } from './components/dynamic/cms/drupal-redirect.component';
 import { DrupalPageComponent } from './components/dynamic/cms/drupal-page.component';
 import { DrupalPostComponent } from './components/dynamic/cms/drupal-post.component';
 import { DrupalIndexComponent } from './components/dynamic/cms/drupal-index.component';
@@ -49,6 +50,7 @@ export const routes: RouterConfig = [
     { path: 'policy/consultation-responses/:path', component: DrupalPostComponent },
     { path: 'policy/briefings-reports/:path', component: DrupalPostComponent },
     { path: 'policy/policy-committee/:path', component: DrupalPostComponent },
+    { path: 'node/:path', component: DrupalRedirectComponent },
     { path: ':path', component: DrupalPageComponent },
     { path: '**', component: HomeComponent }
 ];
