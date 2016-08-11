@@ -22,6 +22,7 @@ export class AppComponent {
 
     constructor(public router: Router, public _appService: AppService, public angulartics2: Angulartics2, public angulartics2GoogleAnalytics: Angulartics2GoogleAnalytics) {
         // Set global variables settings
+        this._appService.setSettings();
         this._appService.setNavigation();
         this._appService.setCategories();
         this._appService.setTags();

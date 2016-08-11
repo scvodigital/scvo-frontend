@@ -22,14 +22,17 @@ import { DrupalPostComponent } from './drupal-post.component';
     pipes: [MarkdownPipe]
 })
 export class DrupalIndexComponent implements OnInit {
+    private settings: Object;
+    private navigation: Object;
+
     pages: Observable<any>;
     posts: Observable<any>;
     parent: String;
     error: Boolean = false;
     error_message: Observable<any>;
-    public navigation: Object;
 
     constructor(private router: Router, private route: ActivatedRoute, private _drupalService: DrupalService, private slimLoadingBarService: SlimLoadingBarService, private _appService: AppService) {
+        this.settings = _appService.getSettings();
         this.navigation = _appService.getNavigation();
     }
 
@@ -65,7 +68,7 @@ export class DrupalIndexComponent implements OnInit {
 
             // console.log('Asking Drupal for list of sub-pages from /'+requestPath);
 
-            this._drupalService.request('pages/'+term_id).subscribe(content => {
+            this._drupalService.request(this.settings['cmsAddress']+'pages/'+term_id).subscribe(content => {
                 this.pages = content;
             },
             err => {
@@ -73,7 +76,7 @@ export class DrupalIndexComponent implements OnInit {
                 this.error_message = err;
             });
 
-            this._drupalService.request('posts/'+term_id).subscribe(content => {
+            this._drupalService.request(this.settings['cmsAddress']+'posts/'+term_id).subscribe(content => {
                 this.posts = content;
             },
             err => {

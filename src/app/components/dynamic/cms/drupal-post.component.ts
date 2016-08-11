@@ -19,6 +19,10 @@ import { MarkdownPipe } from '../../../pipes/markdown.pipe';
     pipes: [MapToIterablePipe, MarkdownPipe]
 })
 export class DrupalPostComponent implements OnInit {
+    private settings: Object;
+    private categories: Object;
+    private tags: Object;
+
     content: Observable<any>;
 
     content_status: Observable<any>;
@@ -32,14 +36,13 @@ export class DrupalPostComponent implements OnInit {
     content_category: Observable<any>;
     content_subcategory: Observable<any>;
     content_tags: Object;
+    content_editLink: String;
 
     error: Boolean = false;
     error_message: Observable<any>;
 
-    public categories: Object;
-    public tags: Object;
-
     constructor(private router: Router, private route: ActivatedRoute, private _drupalService: DrupalService, private slimLoadingBarService: SlimLoadingBarService, private _appService: AppService) {
+        this.settings = _appService.getSettings();
         this.categories = _appService.getCategories();
         this.tags = _appService.getTags();
     }
@@ -51,7 +54,7 @@ export class DrupalPostComponent implements OnInit {
 
             // console.log("Asking Drupal for post at /"+params.join('/'));
 
-            this._drupalService.request(params.join('/')).subscribe(result => {
+            this._drupalService.request(this.settings['cmsAddress']+params.join('/')).subscribe(result => {
 
                 this.content_status = (result.status[0]) ? result.status[0].value : 0;
                 if (this.content_status) {
@@ -75,6 +78,8 @@ export class DrupalPostComponent implements OnInit {
                             this.content_tags[result.field_tags[tag].target_id] = this.tags[result.field_tags[tag].target_id];
                         }
                     }
+
+                    this.content_editLink = (result.nid[0]) ? this.settings['cmsAddress']+'node/'+result.nid[0].value+'/edit' : '';
 
                     this.error = false;
                 }

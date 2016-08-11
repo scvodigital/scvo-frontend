@@ -19,6 +19,10 @@ import { MarkdownPipe } from '../../../pipes/markdown.pipe';
     pipes: [MapToIterablePipe, MarkdownPipe]
 })
 export class DrupalPageComponent implements OnInit {
+    private settings: Object;
+    private categories: Object;
+    private tags: Object;
+
     content: Observable<any>;
 
     content_status: Observable<any>;
@@ -31,14 +35,13 @@ export class DrupalPageComponent implements OnInit {
     content_body_format: Observable<any>;
     content_category: Observable<any>;
     content_subcategory: Observable<any>;
+    content_editLink: String;
 
     error: Boolean = false;
     error_message: Observable<any>;
 
-    public categories: Object;
-    public tags: Object;
-
     constructor(private router: Router, private route: ActivatedRoute, private _drupalService: DrupalService, private slimLoadingBarService: SlimLoadingBarService, private _appService: AppService) {
+        this.settings = _appService.getSettings();
         this.categories = _appService.getCategories();
         this.tags = _appService.getTags();
     }
@@ -50,7 +53,7 @@ export class DrupalPageComponent implements OnInit {
 
             // console.log("Asking Drupal for page at /"+params.join('/'));
 
-            this._drupalService.request(params.join('/')).subscribe(result => {
+            this._drupalService.request(this.settings['cmsAddress']+params.join('/')).subscribe(result => {
 
                 this.content_status = (result.status[0]) ? result.status[0].value : 0;
                 if (this.content_status) {
@@ -67,6 +70,8 @@ export class DrupalPageComponent implements OnInit {
 
                     this.content_category = (result.field_category[0]) ? this.categories[result.field_category[0].target_id] : '';
                     this.content_subcategory = (result.field_subcategory[0]) ? this.categories[result.field_subcategory[0].target_id] : '';
+
+                    this.content_editLink = (result.nid[0]) ? this.settings['cmsAddress']+'node/'+result.nid[0].value+'/edit' : '';
 
                     this.error = false;
                 }

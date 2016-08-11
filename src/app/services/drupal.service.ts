@@ -5,10 +5,11 @@ import { Observable, Observer, Subject } from 'rxjs';
 
 @Injectable()
 export class DrupalService {
+    private settings: Object = {};
 
     constructor(private http: Http) {}
 
     request(path): Observable<any> {
-        return this.http.get('https://cms.scvo.org.uk/'+path+'?_format=json').map((res:Response) => res.json());
+        return this.http.get(path+'?_format=json').map((res:Response) => res.json());
     }
 }

@@ -6,11 +6,19 @@ import { DrupalService } from './drupal.service';
 
 @Injectable()
 export class AppService {
+    private settings: Object = {};
     private navigation: Array<any> = [];
     private categories: Object = {};
     private tags: Object = {};
 
     constructor(private _drupalService: DrupalService, private breadcrumbService: BreadcrumbService) {}
+
+    setSettings() {
+        this.settings['cmsAddress'] = 'https://cms.scvo.org.uk/';
+    }
+    getSettings() {
+        return this.settings;
+    }
 
     setNavigation() {
         this.navigation = [
@@ -204,7 +212,6 @@ export class AppService {
         }
     }
     getNavigation() {
-        console.log(this.navigation);
         return this.navigation;
     }
 
