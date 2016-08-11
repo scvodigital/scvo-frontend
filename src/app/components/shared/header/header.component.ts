@@ -16,7 +16,6 @@ declare var $: any;
     templateUrl: 'app/components/shared/header/header.component.html',
     // styles: [require('app/components/shared/header/header.component.scss').toString()],
     directives: [ROUTER_DIRECTIVES, MenuComponent, SearchInputComponent, MaterializeDirective, SlimLoadingBar],
-    // providers: [MenuComponent],
     encapsulation: ViewEncapsulation.None
 })
 export class HeaderComponent implements OnInit {
@@ -34,6 +33,6 @@ export class HeaderComponent implements OnInit {
     }
 
     public searchChanged(term) {
-        this.router.navigate(['/search'], { queryParams: { s: term } });
+        this.router.navigate(['/search'], { queryParams: { s: term.replace(' ', '+') } });
     }
 }
