@@ -6,15 +6,14 @@ import { DrupalService } from './drupal.service';
 
 @Injectable()
 export class AppService {
+    private navigation: Array<any> = [];
+    private categories: Object = {};
+    private tags: Object = {};
 
-    public navigationMenu: Object;
+    constructor(private _drupalService: DrupalService, private breadcrumbService: BreadcrumbService) {}
 
-    public cmsCategories: Object;
-    public cmsTags: Object;
-
-    constructor(private _drupalService: DrupalService, private breadcrumbService: BreadcrumbService) {
-
-        this.navigationMenu = [
+    setNavigation() {
+        this.navigation = [
             {
                 'title': 'Home',
                 'path': '/'
@@ -194,37 +193,46 @@ export class AppService {
         ];
 
         // Set breadcrumb titles
-        // this.navigationMenu = _menuItems.navigationMenu;
-        for (var level1 in this.navigationMenu) {
-            breadcrumbService.addFriendlyNameForRoute(this.navigationMenu[level1].path, this.navigationMenu[level1].title);
-            for (var level2 in this.navigationMenu[level1].contents) {
-                breadcrumbService.addFriendlyNameForRoute(this.navigationMenu[level1].contents[level2].path, this.navigationMenu[level1].contents[level2].title);
-                // for (var level3 in this.navigationMenu[level1].contents[level2]) {
-                //     // breadcrumbService.addFriendlyNameForRoute(this.navigationMenu[level1].contents[level2].contents[level3].path, this.navigationMenu[level1].contents[level2].contents[level3].title);
+        for (var level1 in this.navigation) {
+            this.breadcrumbService.addFriendlyNameForRoute(this.navigation[level1].path, this.navigation[level1].title);
+            for (var level2 in this.navigation[level1].contents) {
+                this.breadcrumbService.addFriendlyNameForRoute(this.navigation[level1].contents[level2].path, this.navigation[level1].contents[level2].title);
+                // for (var level3 in this.navigation[level1].contents[level2]) {
+                //     // breadcrumbService.addFriendlyNameForRoute(this.navigation[level1].contents[level2].contents[level3].path, this.navigation[level1].contents[level2].contents[level3].title);
                 // }
             }
         }
+    }
+    getNavigation() {
+        console.log(this.navigation);
+        return this.navigation;
+    }
 
+    setCategories() {
         // Get categories from Drupal
-        this.cmsCategories = {};
         this._drupalService.request('categories').subscribe(categories => {
             for (var key in categories) {
                 var tid = categories[key].tid[0].value;
                 var name = categories[key].name[0].value;
-                this.cmsCategories[tid] = name;
+                this.categories[tid] = name;
             }
         });
+    }
+    getCategories() {
+        return this.categories;
+    }
 
+    setTags() {
         // Get tags from Drupal
-        this.cmsTags = {};
         this._drupalService.request('tags').subscribe(tags => {
             for (var key in tags) {
                 var tid = tags[key].tid[0].value;
                 var name = tags[key].name[0].value;
-                this.cmsTags[tid] = name;
+                this.tags[tid] = name;
             }
         });
-
-        console.log("Services run!");
+    }
+    getTags() {
+        return this.tags;
     }
 }

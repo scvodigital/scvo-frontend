@@ -17,7 +17,7 @@ import { DrupalPostComponent } from './drupal-post.component';
 @Component({
     selector: 'cms-index',
     templateUrl: 'app/components/dynamic/cms/drupal-index.component.html',
-    providers: [AppService, DrupalService],
+    providers: [DrupalService],
     directives: [ROUTER_DIRECTIVES, SlimLoadingBar, DrupalPageComponent, DrupalPostComponent],
     pipes: [MarkdownPipe]
 })
@@ -27,10 +27,10 @@ export class DrupalIndexComponent implements OnInit {
     parent: String;
     error: Boolean = false;
     error_message: Observable<any>;
-    public navigationMenu: Object;
+    public navigation: Object;
 
     constructor(private router: Router, private route: ActivatedRoute, private _drupalService: DrupalService, private slimLoadingBarService: SlimLoadingBarService, private _appService: AppService) {
-        this.navigationMenu = _appService.navigationMenu;
+        this.navigation = _appService.getNavigation();
     }
 
     ngOnInit() {
@@ -43,19 +43,19 @@ export class DrupalIndexComponent implements OnInit {
             // console.log('Get term ID for: '+requestPath);
             // This is probably not the best way to do it, but the Drupal API doesn't provide a nice way to get tid from term name or path
             var term_id = 0;
-            for (var level1 in this.navigationMenu) {
-                // console.log(level1, this.navigationMenu[level1]);
+            for (var level1 in this.navigation) {
+                // console.log(level1, this.navigation[level1]);
                 if (term_id == 0) {
-                    if (this.navigationMenu[level1].path == '/'+requestPath) {
+                    if (this.navigation[level1].path == '/'+requestPath) {
                         // console.log("Match!");
-                        term_id = this.navigationMenu[level1].term_id;
+                        term_id = this.navigation[level1].term_id;
                     } else {
-                        for (var level2 in this.navigationMenu[level1].contents) {
+                        for (var level2 in this.navigation[level1].contents) {
                             if (term_id == 0) {
-                                // console.log(level2, this.navigationMenu[level1].contents[level2]);
-                                if (this.navigationMenu[level1].contents[level2].path == '/'+requestPath) {
+                                // console.log(level2, this.navigation[level1].contents[level2]);
+                                if (this.navigation[level1].contents[level2].path == '/'+requestPath) {
                                     // console.log("Match!");
-                                    term_id = this.navigationMenu[level1].contents[level2].term_id;
+                                    term_id = this.navigation[level1].contents[level2].term_id;
                                 }
                             }
                         }

@@ -14,7 +14,7 @@ import { MarkdownPipe } from '../../../pipes/markdown.pipe';
 @Component({
     selector: 'cms-page',
     templateUrl: 'app/components/dynamic/cms/drupal-page.component.html',
-    providers: [AppService, DrupalService],
+    providers: [DrupalService],
     directives: [ROUTER_DIRECTIVES, SlimLoadingBar],
     pipes: [MapToIterablePipe, MarkdownPipe]
 })
@@ -35,12 +35,12 @@ export class DrupalPageComponent implements OnInit {
     error: Boolean = false;
     error_message: Observable<any>;
 
-    public cmsCategories: Object;
-    public cmsTags: Object;
+    public categories: Object;
+    public tags: Object;
 
     constructor(private router: Router, private route: ActivatedRoute, private _drupalService: DrupalService, private slimLoadingBarService: SlimLoadingBarService, private _appService: AppService) {
-        this.cmsCategories = _appService.cmsCategories;
-        this.cmsTags = _appService.cmsTags;
+        this.categories = _appService.getCategories();
+        this.tags = _appService.getTags();
     }
 
     ngOnInit() {
@@ -65,8 +65,8 @@ export class DrupalPageComponent implements OnInit {
                     this.content_body = (result.body[0]) ? result.body[0].value : '';
                     this.content_body_format = (result.body[0]) ? result.body[0].format : '';
 
-                    this.content_category = (result.field_category[0]) ? this.cmsCategories[result.field_category[0].target_id] : '';
-                    this.content_subcategory = (result.field_subcategory[0]) ? this.cmsCategories[result.field_subcategory[0].target_id] : '';
+                    this.content_category = (result.field_category[0]) ? this.categories[result.field_category[0].target_id] : '';
+                    this.content_subcategory = (result.field_subcategory[0]) ? this.categories[result.field_subcategory[0].target_id] : '';
 
                     this.error = false;
                 }

@@ -10,15 +10,14 @@ import { AppService } from '../../../services/app.service';
 @Component({
     selector: '[menu]',
     templateUrl: 'app/components/shared/header/menu.component.html',
-    providers: [AppService],
     directives: [ROUTER_DIRECTIVES, MaterializeDirective]
 })
 export class MenuComponent {
     @Input('menu') menuType: string = '';
 
-    public navigationMenu: Object;
+    public navigation: Object;
 
     constructor(private _appService: AppService) {
-        this.navigationMenu = _appService.navigationMenu;
+        this.navigation = this._appService.getNavigation();
     }
 }
