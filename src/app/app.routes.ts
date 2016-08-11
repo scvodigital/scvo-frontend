@@ -14,6 +14,7 @@ import { DrupalPageComponent } from './components/dynamic/cms/drupal-page.compon
 import { DrupalPostComponent } from './components/dynamic/cms/drupal-post.component';
 import { DrupalIndexComponent } from './components/dynamic/cms/drupal-index.component';
 import { DrupalMediaCentreComponent } from './components/dynamic/cms/drupal-media-centre.component';
+import { CJSSearchComponent } from './components/dynamic/search/cjs/elastic-results.component';
 import { GoodmovesSearchComponent } from './components/dynamic/search/goodmoves/elastic-results.component';
 import { TrainingSearchComponent } from './components/dynamic/search/training/elastic-results.component';
 import { TrainingResultComponent } from './components/dynamic/search/training/elastic-result-detail.component';
@@ -34,6 +35,7 @@ export const routes: RouterConfig = [
     { path: 'running-your-organisation/funding/:path', component: DrupalPageComponent },
     { path: 'running-your-organisation/legislation-regulation/:path', component: DrupalPageComponent },
     { path: 'employability/:path', component: DrupalIndexComponent },
+    { path: 'employability/community-jobs-scotland/latest-cjs-opportunities', component: CJSSearchComponent },
     { path: 'employability/community-jobs-scotland/:path', component: DrupalPageComponent },
     { path: 'employability/internships/:path', component: DrupalPageComponent },
     { path: 'employability/past-employability-schemes/:path', component: DrupalPageComponent },
