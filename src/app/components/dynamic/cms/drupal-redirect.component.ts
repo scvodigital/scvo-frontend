@@ -6,7 +6,7 @@ import { DrupalService } from '../../../services/drupal.service';
 
 @Component({
     selector: 'cms-redirect',
-    template: '',
+    template: '<strong>Loading...</strong>',
     providers: [DrupalService],
     directives: [ROUTER_DIRECTIVES],
 })

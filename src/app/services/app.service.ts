@@ -22,6 +22,11 @@ export class AppService {
 
     setSettings() {
         this.settings['cmsAddress'] = 'https://cms.scvo.org.uk/';
+        //
+        // // Get authentication status
+        // this._drupalService.request(this.settings['cmsAddress']+'auth').subscribe(auth => {
+        //     console.log(auth);
+        // });
     }
     getSettings() {
         return this.settings;

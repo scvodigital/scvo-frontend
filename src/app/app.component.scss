@@ -14,7 +14,7 @@ header .container-fluid,
 main .container-fluid,
 footer .container-fluid {
     max-width: 1280px;
-    width: 95%;
+    width: 96%;
     margin: 0 auto;
 }
 
@@ -39,6 +39,10 @@ strong {
 header,
 main {
     background-color: #ECEFF1;
+}
+main .container-fluid {
+    // background-color: #f5f5f5;
+    position: relative;
 }
 h1, h2, h3, h4, h5, h6 {
     font-family: $base-font-family;
@@ -75,8 +79,10 @@ h6 {
     margin: 0;
 }
 main {
-    // padding: 128px 0 0.5rem;
-    padding: 0 0 0.5rem;
+    .container-fluid {
+        padding: 0 0 0.5rem;
+        // padding: 128px 0 0.5rem;
+    }
     a:link {
         text-decoration: underline;
     }
@@ -260,11 +266,11 @@ main.training a {
 
 header.media-centre, header.media-centre .navbar .dropdown-content, main.media-centre .btn,
 header.policy, header.policy .navbar .dropdown-content, main.policy .btn {
-    background-color: #ef6c00;
+    background-color: #e64a19;
 }
 main.media-centre a,
 main.policy a {
-    color: #ef6c00;
+    color: #e64a19;
 }
 
 a.btn {
@@ -306,36 +312,6 @@ a.btn {
             color: #000;
             background-color: rgba(255, 255, 255, 0.9);
         }
-    }
-    .brand-logo {
-        font-family: $logo-font-family;
-        font-weight: 900;
-        padding-left: 3px;
-        margin-top: 3px;
-        position: absolute;
-        img {
-            width: 42px;
-            height: auto;
-            vertical-align: -8px;
-            margin-right: 0;
-        }
-        .version {
-            position: absolute;
-            top: 12px;
-            right: -20px;
-            line-height: 1em;
-            font-family: $base-font-family;
-            font-size: 0.9rem;
-            font-variant: small-caps;
-            -webkit-transform: rotate(60deg);
-            -moz-transform: rotate(60deg);
-            -ms-transform: rotate(60deg);
-            -o-transform: rotate(60deg);
-        }
-    }
-    .brand-logo.hide-on-med-and-down {
-        top: 0;
-        left: 0;
     }
 
     .dropdown-content {
@@ -387,6 +363,39 @@ a.btn {
 #sidenav-overlay {
     z-index: 99;
 }
+.brand-logo {
+    font-family: $logo-font-family;
+    font-weight: 900;
+    padding-left: 3px;
+    margin-top: 3px;
+    position: relative;
+    font-size: 2.1rem;
+    text-decoration: none;
+    img {
+        width: 42px;
+        height: auto;
+        vertical-align: -8px;
+        margin-right: 0;
+    }
+    .version {
+        position: absolute;
+        top: 12px;
+        right: -20px;
+        line-height: 1em;
+        font-family: $base-font-family;
+        font-size: 0.9rem;
+        font-variant: small-caps;
+        -webkit-transform: rotate(60deg);
+        -moz-transform: rotate(60deg);
+        -ms-transform: rotate(60deg);
+        -o-transform: rotate(60deg);
+    }
+}
+.brand-logo.hide-on-med-and-down {
+    top: 0;
+    left: 0;
+}
+
 
 // temporary fix for Materialize bug with Mac Chrome -
 // https://github.com/Dogfalo/materialize/issues/3161
@@ -433,6 +442,12 @@ a.btn {
 
 .media-centre .drupal.page.title {
     display: none;
+}
+.drupal.edit.link {
+    position: absolute;
+    top: 0.75rem;
+    right: 0.75rem;
+    margin: 0;
 }
 
 home {
