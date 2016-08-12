@@ -2,9 +2,6 @@ import { provideRouter, RouterConfig } from '@angular/router';
 
 // Static components
 import { HomeComponent } from './components/static/home.component';
-// import { HelpComponent } from './components/static/help.component';
-// import { PolicyComponent } from './components/static/policy.component';
-// import { MediaCentreComponent } from './components/static/media-centre.component';
 import { PrivacyAndCookiesComponent } from './components/static/privacy-and-cookies.component';
 import { TermsAndConditionsComponent } from './components/static/terms-and-conditions.component';
 
