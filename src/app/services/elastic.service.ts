@@ -19,7 +19,8 @@ export class ElasticService {
                 // },
                 // 'type': ['scvo_public', 'opportunity', 'signatory', 'fundsalesforcemodel'],
                 // 'q': `${terms}`,
-                type: ['scvo_public'],
+                type: ['scvo_public', 'opportunity', 'fundsalesforcemodel'],
+                // type: ['scvo_public'],
                 body: {
                     query: {
                         query_string: {
@@ -27,7 +28,12 @@ export class ElasticService {
                         }
                     },
                     indices_boost: {
-                        'elasticsearch_index_main_scvo_public': 1.0
+                        'elasticsearch_index_main_scvo_public': 10
+                    }
+                },
+                function_score: {
+                    script_score: {
+                        script: "doc['_type'].value == 'scvo_public' ? _score * 3 : _score"
                     }
                 }
             }))
