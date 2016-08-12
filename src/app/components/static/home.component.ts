@@ -34,7 +34,7 @@ export class HomeComponent implements OnInit {
 
         this._drupalService.request(this.settings['cmsAddress']+'home').subscribe(result => {
 
-            console.log(result);
+            // console.log(result);
 
             this.content_header_image = (result.field_header_image[0]) ? result.field_header_image[0].url : '';
 

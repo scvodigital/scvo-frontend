@@ -17,7 +17,7 @@ import { DrupalPostListComponent } from './drupal-post-list.component';
     selector: 'cms-page',
     templateUrl: 'app/components/dynamic/cms/drupal-page.component.html',
     providers: [DrupalService, DrupalPostListComponent],
-    directives: [ROUTER_DIRECTIVES, SlimLoadingBar],
+    directives: [ROUTER_DIRECTIVES, SlimLoadingBar, DrupalPostListComponent],
     pipes: [MapToIterablePipe, MarkdownPipe]
 })
 export class DrupalPageComponent implements OnInit {
@@ -38,6 +38,7 @@ export class DrupalPageComponent implements OnInit {
     content_category: Observable<any>;
     content_subcategory: Observable<any>;
     content_editLink: String;
+    content_postsTag: Observable<any>;
 
     posts: Observable<any>;
 
@@ -45,6 +46,7 @@ export class DrupalPageComponent implements OnInit {
     error_message: Observable<any>;
 
     constructor(private router: Router, private route: ActivatedRoute, private _drupalService: DrupalService, private slimLoadingBarService: SlimLoadingBarService, private _appService: AppService, private _drupalPostListComponent: DrupalPostListComponent) {
+        //, private _drupalPostListComponent: DrupalPostListComponent
         this.settings = _appService.getSettings();
         this.categories = _appService.getCategories();
         this.tags = _appService.getTags();
@@ -89,8 +91,8 @@ export class DrupalPageComponent implements OnInit {
 
                     if (params[0] && params[0].path != 'tags') {
                         // Set term ID for related posts tagged
-                        var posts_by_tag = (result.field_posts_by_tag && result.field_posts_by_tag[0]) ? result.field_posts_by_tag[0].target_id : '';
-                        this._drupalPostListComponent.getPosts(posts_by_tag);
+                        this.content_postsTag = (result.field_posts_by_tag && result.field_posts_by_tag[0]) ? result.field_posts_by_tag[0].target_id : '';
+                        this._drupalPostListComponent.getPosts(this.content_postsTag);
                     }
 
                     this.error = false;

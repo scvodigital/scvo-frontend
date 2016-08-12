@@ -1,4 +1,4 @@
-import { Component, NgZone } from '@angular/core';
+import { Component, NgZone, Input } from '@angular/core';
 import { Router, ROUTER_DIRECTIVES, NavigationEnd, ActivatedRoute } from '@angular/router';
 
 import { Observable } from 'rxjs/Rx';
@@ -35,7 +35,7 @@ export class DrupalPostListComponent {
                 if (params[1]) {
                     this._drupalService.request(this.settings['cmsAddress']+'tid-by-name/'+params[1].path).subscribe(term => {
                         if (term[0]) {
-                                this.getPosts(term[0].tid);
+                            this.getPosts(term[0].tid);
                         }
                     });
                 }
@@ -45,11 +45,13 @@ export class DrupalPostListComponent {
 
     getPosts(postsTag) {
         this.slimLoadingBarService.start();
+
         if (postsTag != 0) {
             this._drupalService.request(this.settings['cmsAddress']+'posts/'+postsTag).subscribe(posts => {
                 this.zone.run(() => {
                     this.posts = posts;
                     console.log(this.posts);
+                    this.slimLoadingBarService.complete();
                 });
             },
             err => {
@@ -57,6 +59,5 @@ export class DrupalPostListComponent {
                 this.error_message = err;
             });
         }
-        this.slimLoadingBarService.complete();
     }
 }
