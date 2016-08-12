@@ -229,7 +229,7 @@ export class AppService {
 
     setCategories() {
         // Get categories from Drupal
-        this._drupalService.request(this.settings['cmsAddress']+'categories').subscribe(categories => {
+        this._drupalService.request(this.settings['cmsAddress']+'all-categories').subscribe(categories => {
             for (var key in categories) {
                 var tid = categories[key].tid[0].value;
                 var name = categories[key].name[0].value;
@@ -243,7 +243,7 @@ export class AppService {
 
     setTags() {
         // Get tags from Drupal
-        this._drupalService.request(this.settings['cmsAddress']+'tags').subscribe(tags => {
+        this._drupalService.request(this.settings['cmsAddress']+'all-tags').subscribe(tags => {
             for (var key in tags) {
                 var tid = tags[key].tid[0].value;
                 var name = tags[key].name[0].value;

@@ -11,10 +11,12 @@ import { AppService } from '../../../services/app.service';
 import { MapToIterablePipe } from '../../../pipes/map-to-iterable.pipe';
 import { MarkdownPipe } from '../../../pipes/markdown.pipe';
 
+import { DrupalPostListComponent } from './drupal-post-list.component';
+
 @Component({
     selector: 'cms-page',
     templateUrl: 'app/components/dynamic/cms/drupal-page.component.html',
-    providers: [DrupalService],
+    providers: [DrupalService, DrupalPostListComponent],
     directives: [ROUTER_DIRECTIVES, SlimLoadingBar],
     pipes: [MapToIterablePipe, MarkdownPipe]
 })
@@ -37,10 +39,12 @@ export class DrupalPageComponent implements OnInit {
     content_subcategory: Observable<any>;
     content_editLink: String;
 
+    posts: Observable<any>;
+
     error: Boolean = false;
     error_message: Observable<any>;
 
-    constructor(private router: Router, private route: ActivatedRoute, private _drupalService: DrupalService, private slimLoadingBarService: SlimLoadingBarService, private _appService: AppService) {
+    constructor(private router: Router, private route: ActivatedRoute, private _drupalService: DrupalService, private slimLoadingBarService: SlimLoadingBarService, private _appService: AppService, private _drupalPostListComponent: DrupalPostListComponent) {
         this.settings = _appService.getSettings();
         this.categories = _appService.getCategories();
         this.tags = _appService.getTags();
@@ -51,9 +55,19 @@ export class DrupalPageComponent implements OnInit {
 
             this.slimLoadingBarService.start();
 
-            // console.log("Asking Drupal for page at /"+params.join('/'));
+            var requestPath = this.settings['cmsAddress']+params.join('/');
 
-            this._drupalService.request(this.settings['cmsAddress']+params.join('/')).subscribe(result => {
+            // Handle tags meta-page
+            if (params[0] && params[0].path == 'tags') {
+                if (!params[1]) {
+                    this.router.navigate(['/']);
+                } else {
+                    requestPath = this.settings['cmsAddress']+params[0].path;
+                }
+            }
+
+            // console.log("Asking Drupal for page at /"+params.join('/'));
+            this._drupalService.request(requestPath).subscribe(result => {
 
                 this.content_status = (result.status[0]) ? result.status[0].value : 0;
                 if (this.content_status) {
@@ -72,6 +86,12 @@ export class DrupalPageComponent implements OnInit {
                     this.content_subcategory = (result.field_subcategory[0]) ? this.categories[result.field_subcategory[0].target_id] : '';
 
                     this.content_editLink = (result.nid[0]) ? this.settings['cmsAddress']+'node/'+result.nid[0].value+'/edit' : '';
+
+                    if (params[0] && params[0].path != 'tags') {
+                        // Set term ID for related posts tagged
+                        var posts_by_tag = (result.field_posts_by_tag && result.field_posts_by_tag[0]) ? result.field_posts_by_tag[0].target_id : '';
+                        this._drupalPostListComponent.getPosts(posts_by_tag);
+                    }
 
                     this.error = false;
                 }

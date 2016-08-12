@@ -24,6 +24,7 @@ export const routes: RouterConfig = [
     { path: '', component: HomeComponent },
     { path: 'search', component: SiteSearchComponent },
     // { path: 'media', component: MediaCentreComponent },
+    { path: 'tags/:path', component: DrupalPageComponent },
     { path: 'about-us', component: DrupalIndexComponent },
     { path: 'about-us/:path', component: DrupalPageComponent },
     { path: 'media-centre', component: DrupalMediaCentreComponent },

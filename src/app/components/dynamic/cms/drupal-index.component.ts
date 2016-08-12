@@ -12,7 +12,6 @@ import { MarkdownPipe } from '../../../pipes/markdown.pipe';
 
 import { DrupalPageComponent } from './drupal-page.component';
 import { DrupalPostComponent } from './drupal-post.component';
-// import { MenuItemsComponent } from '../../shared/header/menu-items.component';
 
 @Component({
     selector: 'cms-index',
