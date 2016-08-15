@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { Control } from '@angular/common';
+// import { Control } from '@angular/common';
 
 import { Router, ROUTER_DIRECTIVES } from '@angular/router';
 

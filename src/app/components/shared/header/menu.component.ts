@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
-import { Control } from '@angular/common';
+// import { Control } from '@angular/common';
+// import { FormControl } from '@angular/forms';
 
 import { ROUTER_DIRECTIVES } from '@angular/router';
 

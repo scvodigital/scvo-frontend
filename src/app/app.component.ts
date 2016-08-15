@@ -12,7 +12,7 @@ import { HeaderComponent, FooterComponent } from './components/shared/shared';
 @Component({
     selector: 'scvo',
     templateUrl: 'app/app.component.html',
-    styles: [require('app/app.component.scss').toString()],
+    styles: [require('app/app.styles.scss').toString()],
     encapsulation: ViewEncapsulation.None,
     providers: [AppService, Angulartics2GoogleAnalytics],
     directives: [ROUTER_DIRECTIVES, HeaderComponent, FooterComponent, BreadcrumbComponent]
