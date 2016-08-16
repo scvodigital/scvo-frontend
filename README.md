@@ -1,10 +1,10 @@
-# SCVO Digital Platform (public frontend) [![Build Status](https://travis-ci.org/scvodigital/platform-frontend.svg?branch=angular2)](https://travis-ci.org/scvodigital/platform-frontend)
+# SCVO Website (public frontend) [![Build Status](https://travis-ci.org/scvodigital/scvo-frontend.svg?branch=angular2)](https://travis-ci.org/scvodigital/scvo-frontend)
 
-[![Dependency Status](https://david-dm.org/scvodigital/platform-frontend/angular2.svg)](https://david-dm.org/scvodigital/platform-frontend/angular2) [![devDependency Status](https://david-dm.org/scvodigital/platform-frontend/angular2/dev-status.svg)](https://david-dm.org/scvodigital/platform-frontend/angular2#info=devDependencies)
+[![Dependency Status](https://david-dm.org/scvodigital/scvo-frontend/angular2.svg)](https://david-dm.org/scvodigital/scvo-frontend/angular2) [![devDependency Status](https://david-dm.org/scvodigital/scvo-frontend/angular2/dev-status.svg)](https://david-dm.org/scvodigital/scvo-frontend/angular2#info=devDependencies)
 
 This is the repository for the new SCVO website project, it contains the codebase for the public website. Development deployment instructions are listed below.
 
-This repository [Wiki](https://github.com/scvodigital/platform-frontend/wiki) contains project documentation.
+This repository [Wiki](https://github.com/scvodigital/scvo-frontend/wiki) contains project documentation.
 
 ## Websites
 * [Platform frontend](https://alpha.scvo.org.uk) (running on [Firebase](https://firebase.google.com))
@@ -12,8 +12,8 @@ This repository [Wiki](https://github.com/scvodigital/platform-frontend/wiki) co
 * [Platform search](http://search.scvo.org.uk:9200) (running on [Elastic Cloud](https://www.elastic.co/cloud))
 
 ## Information
-* [Documentation](https://github.com/scvodigital/platform-frontend/wiki)
-* [Bug tracker](https://github.com/scvodigital/platform-frontend/issues)
+* [Documentation](https://github.com/scvodigital/scvo-frontend/wiki)
+* [Bug tracker](https://github.com/scvodigital/scvo-frontend/issues)
 
 ## Technical Specs
 * AngularJS app - [alpha.scvo.org.uk](https://alpha.scvo.org.uk) (to become beta.scvo.org.uk then www.scvo.org.uk)
@@ -29,8 +29,8 @@ This repository [Wiki](https://github.com/scvodigital/platform-frontend/wiki) co
 ### Development
 This branch uses [Webpack](https://webpack.github.io/) for Development.
 
-    git clone https://github.com/scvodigital/platform-frontend
-    cd platform-frontend
+    git clone https://github.com/scvodigital/scvo-frontend
+    cd scvo-frontend
     sudo gem install sass
     sudo npm install -g webpack webpack-dev-server typings typescript firebase-tools
     npm install
