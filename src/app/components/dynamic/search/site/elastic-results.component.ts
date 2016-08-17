@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { CORE_DIRECTIVES, FORM_DIRECTIVES, Control } from '@angular/common';
+import { CORE_DIRECTIVES, FORM_DIRECTIVES } from '@angular/common';
+import { FormControl } from '@angular/forms';
 import { ROUTER_DIRECTIVES, Router } from '@angular/router';
 
 import { Observable } from 'rxjs/Rx';
@@ -12,7 +13,7 @@ import { ElasticService } from '../../../../services/elastic.service';
     directives: [ROUTER_DIRECTIVES, CORE_DIRECTIVES, FORM_DIRECTIVES]
 })
 export class SiteSearchComponent implements OnInit {
-    searchText: Control;
+    searchText: FormControl;
     searchTextModel: string;
 
     // @Output() searchEvent: EventEmitter<any> = new EventEmitter();
@@ -20,7 +21,7 @@ export class SiteSearchComponent implements OnInit {
     public results: Observable<any>;
 
     constructor(private router: Router, private es: ElasticService) {
-        this.searchText = new Control();
+        // this.searchText = new FormControl();
         // this.results = new Observable<Array<any>>();
     }
 
