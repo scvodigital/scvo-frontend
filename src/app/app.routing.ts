@@ -29,7 +29,7 @@ export const routes: Routes = [
     { path: 'terms-and-conditions', component: TermsAndConditionsComponent },
     { path: 'running-your-organisation/:path', component: DrupalIndexComponent },
     { path: 'running-your-organisation/finance/:path', component: DrupalPageComponent },
-    { path: 'running-your-organisation/business-management/:path', component: DrupalPageComponent },
+    { path: 'running-your-organisation/managing-your-organisation/:path', component: DrupalPageComponent },
     { path: 'running-your-organisation/governance/:path', component: DrupalPageComponent },
     { path: 'running-your-organisation/funding/:path', component: DrupalPageComponent },
     { path: 'running-your-organisation/legislation-regulation/:path', component: DrupalPageComponent },

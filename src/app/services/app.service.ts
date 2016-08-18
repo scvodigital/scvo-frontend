@@ -48,8 +48,8 @@ export class AppService {
                         'term_id': 13
                     },
                     {
-                        'title': 'Business management',
-                        'path': '/running-your-organisation/business-management',
+                        'title': 'Managing your organisation',
+                        'path': '/running-your-organisation/managing-your-organisation',
                         'term_id': 14
                     },
                     {
