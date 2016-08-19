@@ -9,13 +9,14 @@ node_js:
 before_script:
   - export DISPLAY=:99.0
   - sh -e /etc/init.d/xvfb start
-  - npm install -g webpack webpack-dev-server typings typescript firebase-tools
+  - npm install --global webpack webpack-dev-server typings typescript firebase-tools
   - npm install
   - echo -e "Host github.com\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
 
 script:
   - npm run build
-  - firebase deploy --token ${FIREBASE_TOKEN}
+  - firebase deploy --project scvo-frontend --token ${FIREBASE_TOKEN}
+  - firebase deploy --project platform-frontend --token ${FIREBASE_TOKEN}
 
 notifications:
   slack: scvodigital:BPrM2dvC1icb0UHwglQ5DBfI
