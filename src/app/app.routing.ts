@@ -1,4 +1,4 @@
-import { RouterModule, Routes } from '@angular/router';
+import { Routes } from '@angular/router';
 
 // Static components
 import { HomeComponent } from './components/static/home.component';
@@ -17,7 +17,7 @@ import { GoodmovesSearchComponent } from './components/dynamic/search/goodmoves/
 import { TrainingSearchComponent } from './components/dynamic/search/training/elastic-results.component';
 import { TrainingResultComponent } from './components/dynamic/search/training/elastic-result-detail.component';
 
-export const routes: Routes = [
+export const rootRouterConfig: Routes = [
     { path: '', component: HomeComponent },
     { path: 'search', component: SiteSearchComponent },
     // { path: 'media', component: MediaCentreComponent },
@@ -52,5 +52,3 @@ export const routes: Routes = [
     { path: ':path', component: DrupalPageComponent },
     { path: '**', component: HomeComponent }
 ];
-
-export const routing = RouterModule.forRoot(routes);

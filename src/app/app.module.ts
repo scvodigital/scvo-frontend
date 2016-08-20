@@ -7,6 +7,9 @@ import { Angulartics2 } from 'angulartics2';
 import { SlimLoadingBarService } from 'ng2-slim-loading-bar/ng2-slim-loading-bar';
 import { BreadcrumbService } from 'ng2-breadcrumb/ng2-breadcrumb';
 
+import { RouterModule } from "@angular/router";
+import { rootRouterConfig } from "./app.routing";
+
 import { ElasticService } from "./services/elastic.service"
 import { DrupalService } from "./services/drupal.service"
 import { AppService } from "./services/app.service"
@@ -27,14 +30,12 @@ import { GoodmovesSearchComponent } from './components/dynamic/search/goodmoves/
 import { TrainingSearchComponent } from './components/dynamic/search/training/elastic-results.component';
 import { TrainingResultComponent } from './components/dynamic/search/training/elastic-result-detail.component';
 
-import { routing } from './app.routing';
-
 @NgModule({
     imports: [
         BrowserModule,
         HttpModule,
         FormsModule,
-        routing
+        RouterModule.forRoot(rootRouterConfig)
     ],
     declarations: [
         AppComponent,
