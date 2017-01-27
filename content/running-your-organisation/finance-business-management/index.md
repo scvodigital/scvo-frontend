@@ -4,7 +4,7 @@ Involved in running a voluntary organisation? Find detailed information on a ran
 Have a look at our bank account comparison table and find advice on key things to consider when choosing a bank account.
 ## [Water and sewerage exemption scheme] (water-sewerage-exemption-scheme.md)
 Find out about this scheme which is available to registered charities and community amateur sports clubs (CASCs).
-## [Accounts and reporting]
+## [Accounts and reporting] (charity-accounts-financial-reporting.md)
 Discover the best approach to financial record keeping and reporting. Find out when an auditor is required and much more.
 ## [Tax and VAT]
 Information on VAT, Corporation Tax, Capital Gains Tax, Council Tax, business rates and more. We’ve also got pointers to other relevant sources of information.
