@@ -1,5 +1,5 @@
 # SCVO support to help you manage your organisation
-## Financial & business management
+## [Financial & business management](finance-business-management.md)
 Information on financial responsibilities for charities and business planning
 ## Legislation & regulation
 The legal procedures and licences you need to be aware of
