@@ -2,7 +2,7 @@
 Involved in running a voluntary organisation? Find detailed information on a range of finance and business topics, including financial responsibilities for charities and how to get the most out of your business planning.
 ## [Bank Accounts](bank-accounts.md)
 Have a look at our bank account comparison table and find advice on key things to consider when choosing a bank account.
-## [Water and sewerage exemption scheme]
+## [Water and sewerage exemption scheme] (water-sewerage-exemption-scheme.md)
 Find out about this scheme which is available to registered charities and community amateur sports clubs (CASCs).
 ## [Accounts and reporting]
 Discover the best approach to financial record keeping and reporting. Find out when an auditor is required and much more.
