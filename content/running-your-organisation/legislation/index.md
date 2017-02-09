@@ -1,3 +1,5 @@
+# Legislation and regulation
+
 Find out about the legal procedures and licences you need to be aware of when running a voluntary organisation
 
 ## [Fire Safety](fire-safety.md)
