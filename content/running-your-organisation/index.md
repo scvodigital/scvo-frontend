@@ -3,7 +3,7 @@
 Information on managing charity finances
 ## [Business planning](business-planning/index.md)
 Advice on how to write a business plan and more
-## Legislation & regulation
+## [Legislation & regulation](legislation/index.md) 
 The legal procedures and licences you need to be aware of
 ## Good Governance
 Information for the people in management and control of your organisation
