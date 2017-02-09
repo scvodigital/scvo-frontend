@@ -4,7 +4,7 @@ Trustees have a significant part to play in your organisation. They are there to
 
 ## Roles and responsibilities
 
-Information on who can be a trustee and what’s involved. Find out about collective responsibility, personal liability and the difference between governance and management
+Information on who can be a trustee and what’s involved. Find out about collective responsibility, personal liability and the difference between governance and management.
 
 ## Recruitment & induction
 
@@ -24,4 +24,4 @@ Clear descriptions of common governance words and phrases.
 
 ## Third Sector Mediation
 
-Don’t let things get out of hand, get help to nip conflict in the bud
+Don’t let things get out of hand, get help to nip conflict in the bud.
