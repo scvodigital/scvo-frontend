@@ -2,7 +2,7 @@
 
 Trustees have a significant part to play in your organisation. They are there to oversee and take responsibility for everything your organisation does. Being a trustee is an important role and should not to be taken on without an understanding of what’s involved.
 
-## Roles and responsibilities
+## [Roles and responsibilities](roles-responsibilities.md)
 
 Information on who can be a trustee and what’s involved. Find out about collective responsibility, personal liability and the difference between governance and management.
 
