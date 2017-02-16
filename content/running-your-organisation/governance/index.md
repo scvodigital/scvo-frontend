@@ -22,6 +22,6 @@ Your trustees need to continually evolve and adapt. In order to develop a proble
 
 Clear descriptions of common governance words and phrases.
 
-## [Third Sector Mediation](mediation.md) 
+## [Third sector mediation](mediation.md) 
 
 Don’t let things get out of hand, get help to nip conflict in the bud.
