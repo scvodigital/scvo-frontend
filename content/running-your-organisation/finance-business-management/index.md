@@ -8,7 +8,7 @@ Find out about this scheme which is available to registered charities and commun
 Discover the best approach to financial record keeping and reporting. Find out when an auditor is required and much more.
 ## [Tax and VAT] (tax-VAT.md)
 Information on VAT, Corporation Tax, Capital Gains Tax, Council Tax, business rates and more. We’ve also got pointers to other relevant sources of information.
-## [Business-planning]
+## [Business-planning] (business-planning/index.md)
 Make business planning a core activity for your management committee or trustees and your organisation will feel the benefit of clear planning and goal setting.
 ## [Organisational development] (organisational-development.md)
 Organisational development is the name given to work that helps charities grow and change, such as quality or performance improvement.
