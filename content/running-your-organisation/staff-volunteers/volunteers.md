@@ -51,3 +51,12 @@ Organisations should:
 * provide all volunteers with information about claiming out-of-pocket expenses
 * establish a system for reimbursing expenses which reflects the organisation’s commitment to paying expenses as part of equal opportunities and enables volunteers to claim expenses without embarrassment
 * budget for volunteers’ expenses.
+
+
+## For more information see:
+    
+[Her Majesty’s Revenue & Customs (HMRC)](http://www.hmrc.gov.uk/)
+
+[GOV.UK guide to volunteer placements, rights and expenses](https://www.gov.uk/volunteering) 
+
+[Office of the Scottish Charity Regulator (OSCR)](http://www.oscr.org.uk/) 
