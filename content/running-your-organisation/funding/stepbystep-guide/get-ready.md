@@ -25,7 +25,7 @@ You should have a bank account **(http://www.scvo.org.uk/running-your-organisati
 
 ### 2. Financial Management 
 
-You need to show your finances are well managed and produce regular [financial statements](charity-accounts-financial-reporting.md) including management accounts, cash flow forecasts and an annual budget.
+You need to show your finances are well managed and produce regular [financial statements] **charity-accounts-financial-reporting.md** including management accounts, cash flow forecasts and an annual budget.
 
 ### 3. Annual Report and Accounts
 
@@ -68,7 +68,7 @@ Your position in the community you work in, recognition and effectiveness are al
 
 ## Plan to succeed
 
-It’s important to have an overall organisational plan to fit your fundraising into. If you already have a [business plan](running-your-organisation/business-planning/writing-business-plan.md), this is a good start. If you don’t have a formal plan, here’s a list you should be working on. You need to:
+It’s important to have an overall organisational plan to fit your fundraising into. If you already have a [business plan](https://github.com/scvodigital/scvo-frontend/blob/dev/content/running-your-organisation/business-planning/writing-business-plan.md), this is a good start. If you don’t have a formal plan, here’s a list you should be working on. You need to:
 
 ### 1. Define the vision
 
