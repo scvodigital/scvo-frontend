@@ -9,7 +9,7 @@ The legal procedures and licences you need to be aware of
 Information for the people in management and control of your organisation
 ## [Managing staff & volunteers](staff-volunteers/index.md)
 Resources to help you with HR issues and SJC pay scale information
-## Funding
+## [Funding](funding/index.md)
 Guidance on accessing funds and information on fundraising
 ## Join our hub
 Affordable and flexible office space for third sector organisations
