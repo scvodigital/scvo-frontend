@@ -84,3 +84,7 @@ Once you have your mission statement you can look at setting out your strategic 
 With your aims and objectives clarified you then need to focus on what the projected outcomes, or impact of achieving these objectives will be. Outcomes or impact are the expected changes and / or benefits that will occur as a result of achieving the objectives. This is distinct from outputs, which are measurable and quantifiable activities that have occurred. Outcomes are what the funder wants to ‘invest’ in.
 
 Only once you have these important foundations in place, can you think about a fundraising strategy. Analyse your position, look at your strengths and weaknesses, and what fundraising experience and resources you have. Identify the gaps. This is an integral part of your [business plan](writing-business-plan.md). Remember things change, so aim to review and update your strategy every year.
+
+# Next step
+
+## [Find your funds](find-your-funds.md)
