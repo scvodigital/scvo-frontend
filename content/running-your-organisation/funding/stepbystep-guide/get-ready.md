@@ -25,7 +25,7 @@ You should have a bank account **(http://www.scvo.org.uk/running-your-organisati
 
 ### 2. Financial Management 
 
-You need to show your finances are well managed and produce regular [financial statements](scvo-frontend/content/running-your-organisation/finance-business-management/charity-accounts-financial-reporting.md) including management accounts, cash flow forecasts and an annual budget.
+You need to show your finances are well managed and produce regular [financial statements](scvo-frontend/content/running-your-organisation/finance-business-management/charity-accounts-financial-reporting.md ) including management accounts, cash flow forecasts and an annual budget.
 
 ### 3. Annual Report and Accounts
 
