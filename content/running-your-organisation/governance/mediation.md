@@ -1,6 +1,6 @@
 # Mediation
 
-SCVO’s new mediation service can help nip any thorny issues in the bud
+SCVO’s new mediation service can help nip any thorny issues in the bud.
 
 Do any of these sound familiar?
 
