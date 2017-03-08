@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { CORE_DIRECTIVES, FORM_DIRECTIVES } from '@angular/common';
 import { FormControl } from '@angular/forms';
-import { ROUTER_DIRECTIVES, Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import { Observable } from 'rxjs/Rx';
 
@@ -9,8 +8,7 @@ import { ElasticService } from '../../../../services/elastic.service';
 
 @Component({
     selector: 'search',
-    templateUrl: 'app/components/dynamic/search/site/elastic-results.component.html',
-    directives: [ROUTER_DIRECTIVES, CORE_DIRECTIVES, FORM_DIRECTIVES]
+    templateUrl: './elastic-results.component.html'
 })
 export class SiteSearchComponent implements OnInit {
     searchText: FormControl;
@@ -20,16 +18,13 @@ export class SiteSearchComponent implements OnInit {
 
     public results: Observable<any>;
 
-    constructor(private router: Router, private es: ElasticService) {
+    constructor(private router: Router, private route: ActivatedRoute, private es: ElasticService) {
         // this.searchText = new FormControl();
         // this.results = new Observable<Array<any>>();
     }
 
     ngOnInit() {
-        this.router
-        .routerState
-        .queryParams
-        .subscribe(params => {
+        this.route.queryParams.subscribe(params => {
             this.searchTextModel = decodeURI(params['s']);
             if (this.searchTextModel !== '') {
                 // console.log('Searching for: '+this.searchTextModel);

@@ -4,7 +4,7 @@ import { Observable } from 'rxjs/Rx';
 
 @Component({
     selector: 'input-debounce',
-    templateUrl: 'app/components/shared/header/search-input.component.html'
+    templateUrl: './search-input.component.html'
 })
 export class SearchInputComponent {
     @Input() placeholder: string;

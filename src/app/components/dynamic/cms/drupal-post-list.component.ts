@@ -1,18 +1,17 @@
 import { Component, NgZone, Input } from '@angular/core';
-import { Router, ROUTER_DIRECTIVES, NavigationEnd, ActivatedRoute } from '@angular/router';
+import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 
 import { Observable } from 'rxjs/Rx';
 
-import { SlimLoadingBarService, SlimLoadingBar } from 'ng2-slim-loading-bar/ng2-slim-loading-bar';
+import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
 
 import { DrupalService } from '../../../services/drupal.service';
 import { AppService } from '../../../services/app.service';
 
 @Component({
     selector: 'cms-post-list',
-    templateUrl: 'app/components/dynamic/cms/drupal-post-list.component.html',
-    providers: [DrupalService],
-    directives: [ROUTER_DIRECTIVES, SlimLoadingBar]
+    templateUrl: './drupal-post-list.component.html',
+    // providers: [DrupalService],
 })
 export class DrupalPostListComponent {
     zone: NgZone;

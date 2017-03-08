@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ROUTER_DIRECTIVES, NavigationEnd, ActivatedRoute } from '@angular/router';
+import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 
 import { Observable } from 'rxjs/Rx';
 
-import { SlimLoadingBarService, SlimLoadingBar } from 'ng2-slim-loading-bar/ng2-slim-loading-bar';
+import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
 
 import { AppService } from '../../../services/app.service';
 import { DrupalService } from '../../../services/drupal.service';
@@ -13,10 +13,7 @@ import { MarkdownPipe } from '../../../pipes/markdown.pipe';
 
 @Component({
     selector: 'cms-post',
-    templateUrl: 'app/components/dynamic/cms/drupal-post.component.html',
-    providers: [DrupalService],
-    directives: [ROUTER_DIRECTIVES, SlimLoadingBar],
-    pipes: [MapToIterablePipe, MarkdownPipe]
+    templateUrl: './drupal-post.component.html',
 })
 export class DrupalPostComponent implements OnInit {
     private settings: Object;

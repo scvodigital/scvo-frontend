@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router, ROUTER_DIRECTIVES, ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 import { AppService } from '../../../services/app.service';
 import { DrupalService } from '../../../services/drupal.service';
@@ -8,7 +8,6 @@ import { DrupalService } from '../../../services/drupal.service';
     selector: 'cms-redirect',
     template: '<strong>Loading...</strong>',
     providers: [DrupalService],
-    directives: [ROUTER_DIRECTIVES],
 })
 export class DrupalRedirectComponent {
     private settings: Object;
