@@ -24,6 +24,9 @@ import { HeaderComponent } from './components/shared/header/header.component';
 import { MenuComponent } from './components/shared/header/menu.component';
 import { SearchInputComponent } from './components/shared/header/search-input.component';
 import { FooterComponent } from './components/shared/footer/footer.component';
+import { AboutComponent } from './components/static/about.component';
+import { HelpComponent } from './components/static/help.component';
+import { PolicyComponent } from './components/static/policy.component';
 import { PrivacyAndCookiesComponent } from './components/static/privacy-and-cookies.component';
 import { TermsAndConditionsComponent } from './components/static/terms-and-conditions.component';
 import { SiteSearchComponent } from './components/dynamic/search/site/elastic-results.component';
@@ -40,6 +43,9 @@ import { TrainingResultComponent } from './components/dynamic/search/training/el
 
 /* Pipes */
 import { MarkdownToHtmlModule } from 'markdown-to-html-pipe';
+import { MapToIterablePipe } from './pipes/map-to-iterable.pipe';
+import { MarkdownPipe } from './pipes/markdown.pipe';
+import { StringToDatePipe } from './pipes/string-to-date.pipe';
 
 /* Directives */
 
@@ -72,6 +78,9 @@ export const firebaseConfig = {
         MenuComponent,
         SearchInputComponent,
         FooterComponent,
+        AboutComponent,
+        HelpComponent,
+        PolicyComponent,
         PrivacyAndCookiesComponent,
         TermsAndConditionsComponent,
         SiteSearchComponent,

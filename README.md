@@ -8,8 +8,8 @@ This repository [Wiki](https://github.com/scvodigital/scvo-frontend/wiki) contai
 
 ## Installation
 ```
-git clone https://github.com/scvodigital/charter-frontend
-cd charter-frontend
+git clone https://github.com/scvodigital/scvo-frontend
+cd scvo-frontend
 sudo npm i -g typescript firebase-tools @angular/cli
 npm i
 ```
@@ -39,12 +39,12 @@ npm run deploy
 This builds minified code and deploys via Firebase.
 
 ## Information
-The repository [wiki](https://github.com/scvodigital/charter-frontend/wiki) will contain project documentation.
+The repository [wiki](https://github.com/scvodigital/scvo-frontend/wiki) will contain project documentation.
 
 The website address is [digitalparticipation.scot](https://digitalparticipation.scot).
 
-* [Documentation](https://github.com/scvodigital/charter-frontend/wiki)
-* [Bug tracker](https://github.com/scvodigital/charter-frontend/issues)
+* [Documentation](https://github.com/scvodigital/scvo-frontend/wiki)
+* [Bug tracker](https://github.com/scvodigital/scvo-frontend/issues)
 
 ## Technical Specs
 This is an [Angular](https://angular.io) app using [TypeScript](https://www.typescriptlang.org).
