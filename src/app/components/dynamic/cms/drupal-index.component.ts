@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ROUTER_DIRECTIVES, NavigationEnd, ActivatedRoute } from '@angular/router';
+import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 
 import { Observable } from 'rxjs/Rx';
 
-import { SlimLoadingBarService, SlimLoadingBar } from 'ng2-slim-loading-bar/ng2-slim-loading-bar';
+import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
 
 import { DrupalService } from '../../../services/drupal.service';
 import { AppService } from '../../../services/app.service';
@@ -12,13 +12,11 @@ import { MarkdownPipe } from '../../../pipes/markdown.pipe';
 
 import { DrupalPageComponent } from './drupal-page.component';
 import { DrupalPostComponent } from './drupal-post.component';
+import { DrupalPostListComponent } from './drupal-post-list.component';
 
 @Component({
     selector: 'cms-index',
-    templateUrl: 'app/components/dynamic/cms/drupal-index.component.html',
-    providers: [DrupalService],
-    directives: [ROUTER_DIRECTIVES, SlimLoadingBar, DrupalPageComponent, DrupalPostComponent],
-    pipes: [MarkdownPipe]
+    templateUrl: './drupal-index.component.html'
 })
 export class DrupalIndexComponent implements OnInit {
     private settings: Object;

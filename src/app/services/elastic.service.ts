@@ -30,12 +30,12 @@ export class ElasticService {
                     indices_boost: {
                         'elasticsearch_index_main_scvo_public': 10
                     }
-                },
-                function_score: {
-                    script_score: {
-                        script: "doc['_type'].value == 'scvo_public' ? _score * 3 : _score"
-                    }
                 }
+                // function_score: {
+                //     script_score: {
+                //         script: "doc['_type'].value == 'scvo_public' ? _score * 3 : _score"
+                //     }
+                // }
             }))
         } else {
             return Observable.of({})

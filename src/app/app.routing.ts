@@ -18,7 +18,7 @@ import { TrainingSearchComponent } from './components/dynamic/search/training/el
 import { TrainingResultComponent } from './components/dynamic/search/training/elastic-result-detail.component';
 
 export const rootRouterConfig: Routes = [
-    { path: '', component: HomeComponent },
+    { path: '', component: HomeComponent, pathMatch: 'full' },
     { path: 'search', component: SiteSearchComponent },
     // { path: 'media', component: MediaCentreComponent },
     { path: 'tags/:path', component: DrupalPageComponent },

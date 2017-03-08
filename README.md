@@ -6,37 +6,56 @@ This is the repository for the new SCVO website project, it contains the codebas
 
 This repository [Wiki](https://github.com/scvodigital/scvo-frontend/wiki) contains project documentation.
 
-## Websites
-* [Platform frontend](https://alpha.scvo.org.uk) (running on [Firebase](https://firebase.google.com))
-* [Platform backend](https://cms.scvo.org.uk) (running on [Platform.sh](https://platform.sh))
-* [Platform search](http://search.scvo.org.uk:9200) (running on [Elastic Cloud](https://www.elastic.co/cloud))
+## Installation
+```
+git clone https://github.com/scvodigital/charter-frontend
+cd charter-frontend
+sudo npm i -g typescript firebase-tools @angular/cli
+npm i
+```
+
+## Run Development Server
+```
+npm start
+```
+Navigate to [localhost:9000](http://localhost:9000). The app will automatically reload if you change any of the source files.
+
+## Running unit tests
+Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+
+## Running end-to-end tests
+Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+
+Before running the tests make sure you are serving the app via `ng serve` or `npm start`.
+
+## Live Deployment
+### CI
+There is continuous integration via [Travis](https://travis-ci.org) on `git push` which automatically deploys to [Google Firebase](https://firebase.google.com) CDN hosting.
+
+### Manually
+```
+npm run deploy
+```
+This builds minified code and deploys via Firebase.
 
 ## Information
-* [Documentation](https://github.com/scvodigital/scvo-frontend/wiki)
-* [Bug tracker](https://github.com/scvodigital/scvo-frontend/issues)
+The repository [wiki](https://github.com/scvodigital/charter-frontend/wiki) will contain project documentation.
+
+The website address is [digitalparticipation.scot](https://digitalparticipation.scot).
+
+* [Documentation](https://github.com/scvodigital/charter-frontend/wiki)
+* [Bug tracker](https://github.com/scvodigital/charter-frontend/issues)
 
 ## Technical Specs
-* AngularJS app - [alpha.scvo.org.uk](https://alpha.scvo.org.uk) (to become beta.scvo.org.uk then www.scvo.org.uk)
+This is an [Angular](https://angular.io) app using [TypeScript](https://www.typescriptlang.org).
+
+This project was generated with [angular-cli](https://github.com/angular/angular-cli) version 1.0.0-beta.26.
+
+* Angular2 app - [beta.scvo.org](https://beta.scvo.org)
     * Uses [Sass](http://sass-lang.com) for styles to extend the capabilities of CSS
     * Uses [LiveReload](http://livereload.com) to automatically reload code changes in development
-* Elasticsearch search engine - [search.scvo.org.uk](http://search.scvo.org.uk:9200)
-* Drupal CMS - [cms.scvo.org.uk](http://cms.scvo.org.uk)
+* Elasticsearch search engine
+* Drupal CMS - [cms.scvo.org.uk](http://cms.scvo.org)
     * Connects independently to Elasticsearch to index content across all web properties
 * Salesforce - [www.salesforce.com](http://www.salesforce.com)
-    * Indexed via [Elasticforce](https://github.com/scvodigital/scvo-elasticforce)
-
-## Deployment
-### Development
-This branch uses [Webpack](https://webpack.github.io/) for Development.
-
-    git clone https://github.com/scvodigital/scvo-frontend
-    cd scvo-frontend
-    sudo gem install sass
-    sudo npm install -g webpack webpack-dev-server typings typescript firebase-tools
-    npm install
-    npm start
-
-The [website running locally](http://localhost:2000) will then load. As code changes are made they will be reflected in the local website.
-
-### Production
-Continuous integration via [Travis](https://travis-ci.org).
+* Indexed via [ElasticForce](https://github.com/scvodigital/elasticforce)

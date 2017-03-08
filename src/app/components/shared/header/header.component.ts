@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 // import { Control } from '@angular/common';
 
-import { Router, ROUTER_DIRECTIVES } from '@angular/router';
+import { Router } from '@angular/router';
 
-import { SlimLoadingBarService, SlimLoadingBar } from 'ng2-slim-loading-bar/ng2-slim-loading-bar';
+import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
 import { MaterializeDirective } from "angular2-materialize";
 
 import { MenuComponent } from './menu.component';
@@ -13,10 +13,7 @@ declare var $: any;
 
 @Component({
     selector: 'header',
-    templateUrl: 'app/components/shared/header/header.component.html',
-    // styles: [require('app/components/shared/header/header.component.scss').toString()],
-    directives: [ROUTER_DIRECTIVES, MenuComponent, SearchInputComponent, MaterializeDirective, SlimLoadingBar],
-    encapsulation: ViewEncapsulation.None
+    templateUrl: './header.component.html',
 })
 export class HeaderComponent implements OnInit {
 

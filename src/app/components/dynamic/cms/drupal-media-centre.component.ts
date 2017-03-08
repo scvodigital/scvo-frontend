@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, ROUTER_DIRECTIVES, NavigationEnd, ActivatedRoute } from '@angular/router';
+import { Router, NavigationEnd, ActivatedRoute } from '@angular/router';
 
 import { Observable } from 'rxjs/Rx';
 
-import { SlimLoadingBarService, SlimLoadingBar } from 'ng2-slim-loading-bar/ng2-slim-loading-bar';
+import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
 
 import { DrupalService } from '../../../services/drupal.service';
 import { AppService } from '../../../services/app.service';
@@ -16,10 +16,7 @@ import { DrupalPostComponent } from './drupal-post.component';
 
 @Component({
     selector: 'cms-media-centre',
-    templateUrl: 'app/components/dynamic/cms/drupal-media-centre.component.html',
-    providers: [DrupalService],
-    directives: [ROUTER_DIRECTIVES, SlimLoadingBar, DrupalPageComponent, DrupalPostComponent],
-    pipes: [MarkdownPipe]
+    templateUrl: './drupal-media-centre.component.html'
 })
 export class DrupalMediaCentreComponent implements OnInit {
     private settings: Object;

@@ -1,13 +1,10 @@
 import { Component } from '@angular/core';
 
-import { ROUTER_DIRECTIVES } from '@angular/router';
-
 import { MaterializeDirective } from "angular2-materialize";
 
 @Component({
     selector: 'training',
-    templateUrl: 'app/components/dynamic/search/training/elastic-results.component.html',
-    directives: [ROUTER_DIRECTIVES, MaterializeDirective]
+    templateUrl: './elastic-results.component.html'
 })
 export class TrainingSearchComponent {
     title: string = 'Training';
