@@ -93,7 +93,10 @@ export const firebaseConfig = {
         CJSSearchComponent,
         GoodmovesSearchComponent,
         TrainingSearchComponent,
-        TrainingResultComponent
+        TrainingResultComponent,
+        MapToIterablePipe,
+        MarkdownPipe,
+        StringToDatePipe
     ],
     providers: [
         // Angulartics2,
