@@ -12,31 +12,32 @@ export class ElasticService {
                 host: 'https://readonly:onlyread@4c19757a0460c764d6e4712b0190cc21.eu-west-1.aws.found.io:9243',
                 // log: 'trace'
             });
-            return Observable.fromPromise(client.search({
-                index: '_all', // The magic (all indices)
-                // indices_boost: {
-                //     'elasticsearch_index_main_scvo_public': 1.0
-                // },
-                // 'type': ['scvo_public', 'opportunity', 'signatory', 'fundsalesforcemodel'],
-                // 'q': `${terms}`,
-                type: ['scvo_public', 'opportunity', 'fundsalesforcemodel'],
-                // type: ['scvo_public'],
-                body: {
-                    query: {
-                        query_string: {
-                            query: `${terms}`
-                        }
-                    },
-                    indices_boost: {
-                        'elasticsearch_index_main_scvo_public': 10
-                    }
-                }
-                // function_score: {
-                //     script_score: {
-                //         script: "doc['_type'].value == 'scvo_public' ? _score * 3 : _score"
-                //     }
-                // }
-            }))
+            // return Observable.fromPromise(client.search({
+            //     index: '_all', // The magic (all indices)
+            //     // indices_boost: {
+            //     //     'elasticsearch_index_main_scvo_public': 1.0
+            //     // },
+            //     // 'type': ['scvo_public', 'opportunity', 'signatory', 'fundsalesforcemodel'],
+            //     // 'q': `${terms}`,
+            //     type: ['scvo_public', 'opportunity', 'fundsalesforcemodel'],
+            //     // type: ['scvo_public'],
+            //     body: {
+            //         query: {
+            //             query_string: {
+            //                 query: `${terms}`
+            //             }
+            //         },
+            //         indices_boost: {
+            //             'elasticsearch_index_main_scvo_public': 10
+            //         }
+            //     }
+            //     // function_score: {
+            //     //     script_score: {
+            //     //         script: "doc['_type'].value == 'scvo_public' ? _score * 3 : _score"
+            //     //     }
+            //     // }
+            // }))
+            return null;
         } else {
             return Observable.of({})
         }

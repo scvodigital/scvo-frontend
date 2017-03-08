@@ -11,7 +11,7 @@ import { AppService } from '../../../services/app.service';
 import { MapToIterablePipe } from '../../../pipes/map-to-iterable.pipe';
 import { MarkdownPipe } from '../../../pipes/markdown.pipe';
 
-import { DrupalPostListComponent } from './drupal-post-list.component';
+// import { DrupalPostListComponent } from './drupal-post-list.component';
 
 @Component({
     selector: 'cms-page',
@@ -42,7 +42,7 @@ export class DrupalPageComponent implements OnInit {
     error: Boolean = false;
     error_message: Observable<any>;
 
-    constructor(private router: Router, private route: ActivatedRoute, private _drupalService: DrupalService, private slimLoadingBarService: SlimLoadingBarService, private _appService: AppService, private _drupalPostListComponent: DrupalPostListComponent) {
+    constructor(private router: Router, private route: ActivatedRoute, private _drupalService: DrupalService, private slimLoadingBarService: SlimLoadingBarService, private _appService: AppService) {
         //, private _drupalPostListComponent: DrupalPostListComponent
         this.settings = _appService.getSettings();
         this.categories = _appService.getCategories();
@@ -86,11 +86,11 @@ export class DrupalPageComponent implements OnInit {
 
                     this.content_editLink = (result.nid[0]) ? this.settings['cmsAddress']+'node/'+result.nid[0].value+'/edit' : '';
 
-                    if (params[0] && params[0].path != 'tags') {
-                        // Set term ID for related posts tagged
-                        this.content_postsTag = (result.field_posts_by_tag && result.field_posts_by_tag[0]) ? result.field_posts_by_tag[0].target_id : '';
-                        this._drupalPostListComponent.getPosts(this.content_postsTag);
-                    }
+                    // if (params[0] && params[0].path != 'tags') {
+                    //     // Set term ID for related posts tagged
+                    //     this.content_postsTag = (result.field_posts_by_tag && result.field_posts_by_tag[0]) ? result.field_posts_by_tag[0].target_id : '';
+                    //     // this._drupalPostListComponent.getPosts(this.content_postsTag);
+                    // }
 
                     this.error = false;
                 }
