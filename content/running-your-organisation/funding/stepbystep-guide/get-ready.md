@@ -87,4 +87,4 @@ Only once you have these important foundations in place, can you think about a f
 
 # Next step
 
-## [Find your funds](find-your-funds.md)
+[Find your funds](find-your-funds.md)
