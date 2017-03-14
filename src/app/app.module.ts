@@ -7,7 +7,7 @@ import { FormsModule, FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { rootRouterConfig } from "./app.routing";
 
 import { AngularFireModule } from 'angularfire2';
-// import { Angulartics2 } from 'angulartics2';
+import { Angulartics2Module, Angulartics2GoogleAnalytics } from 'angulartics2';
 import { SlimLoadingBarService, SlimLoadingBarModule } from 'ng2-slim-loading-bar';
 import { BreadcrumbService } from 'ng2-breadcrumb/ng2-breadcrumb';
 import { MaterializeDirective, MaterializeModule } from 'angular2-materialize';
@@ -66,6 +66,7 @@ export const firebaseConfig = {
         HttpModule,
         RouterModule.forRoot(rootRouterConfig),
         AngularFireModule.initializeApp(firebaseConfig),
+        Angulartics2Module.forRoot([Angulartics2GoogleAnalytics]),
         ReactiveFormsModule,
         MarkdownToHtmlModule,
         MaterializeModule,

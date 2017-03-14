@@ -49,7 +49,7 @@ The website address is [digitalparticipation.scot](https://digitalparticipation.
 ## Technical Specs
 This is an [Angular](https://angular.io) app using [TypeScript](https://www.typescriptlang.org).
 
-This project was generated with [angular-cli](https://github.com/angular/angular-cli) version 1.0.0-beta.26.
+This project was generated with [angular-cli](https://github.com/angular/angular-cli) version 1.0.0-rc0.
 
 * Angular2 app - [beta.scvo.org](https://beta.scvo.org)
     * Uses [Sass](http://sass-lang.com) for styles to extend the capabilities of CSS
