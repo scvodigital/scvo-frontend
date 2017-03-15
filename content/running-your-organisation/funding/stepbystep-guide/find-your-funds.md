@@ -62,5 +62,9 @@ If you’re successful make sure you have the right staff to financially manage 
 * Information about European funding is available on [the European Commission website](http://ec.europa.eu/index_en.htm#funding)
 * [European Citizen Action Service](http://www.ecas.org/european-funding-guide-non-profit-sector/) produces an annual funding guide to help give organisations an overview of funds available.
 
+# Next step
+
+[Make-the-ask](make-the-ask.md)
+
 
 
