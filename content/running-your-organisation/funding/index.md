@@ -10,6 +10,10 @@ Finding your way through all the options there are for funding your organisation
 
 Stay ahead of the curve with our handy updates for SCVO members
 
+## [Community Capacity and Resilience Fund](community-capacity-resilience-fund.md)
+
+Dedicated Scottish Government funding for grassroots community action
+
 ## [Useful links](useful-links.md)
 
 Help and advice from other sources.
