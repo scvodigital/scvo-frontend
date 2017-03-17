@@ -1,4 +1,4 @@
-#Funding
+# Funding
 
 You tell us that access to regular, reliable and up-to-date funding information is one of the main benefits of being an SCVO member. It’s hardly surprising, given the tough economic times and continued pressure on the third sector to meet ever growing demand.
 
