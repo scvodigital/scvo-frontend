@@ -1,10 +1,4 @@
-# Affordable office space
-
-We love working in modern offices in the best spots in Glasgow, Edinburgh and Inverness. 
-
-We think everyone in the third sector should have great places to work, so we’ve opened our doors to create shared office spaces for other charities and social enterprises. We’d really like you to keep us company.
-
-## Bright, spacious and central
+# Office rental locations
 
 Choose from one of our superb locations
 
@@ -17,7 +11,3 @@ Choose from one of our superb locations
 [Edward House, Glasgow](edward-house.md)
 
 [Fairways House, Inverness](fairways-house.md)
-
-## Get in touch
-
-We’d love to help find the best office package for you. Call today to arrange an appointment with our tenancy team on 0131 474 8000. 
