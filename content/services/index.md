@@ -1,6 +1,6 @@
 # Services
 
-## [Office Space](office-space.md) 
+## [Office Space](office-space/index.md) 
 
 ## [Managed IT](managed-it.md)
 
