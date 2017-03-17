@@ -1,5 +1,7 @@
 # Mansfield Traquair Centre
 
+**http://www.scvo.org.uk/wp-content/uploads/2016/02/mtc-940x470.jpg**
+
 If you like the idea of working in Edinburgh’s very own ‘Sistine Chapel’, then Mansfield Traquair Centre is the choice for you. Towering over the bottom of Broughton Street since 1885, the office is just a 10-minute walk from Waverley train station and within easy reach of the Scottish Parliament. Stunning architecture and gorgeous decoration murals by Phoebe Anne Traquair combine with modern and flexible office space to create a really special place to work.
 
 We offer four basic packages:
