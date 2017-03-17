@@ -1,5 +1,7 @@
 # Hayweight House
 
+**http://www.scvo.org.uk/wp-content/uploads/2017/03/hayweight-new-940x470.jpg**
+
 Looking for modern, light-filled office space with stunning views of Edinburgh Castle? You’ve found it. Situated right in the heart of the city centre, Hayweight House offers sleek meeting rooms, kitchens with all mod cons and lots of great space to connect with other third sector workers, share ideas and recharge your batteries. Located on Lauriston Street in central Edinburgh, Hayweight House enjoys excellent bus and rail links, and sits among an eclectic selection of cafes, bars and shops.
 
 We offer four basic packages:
