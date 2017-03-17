@@ -1,6 +1,8 @@
 # Affordable office space
 
-We love working in modern offices in the best spots in Glasgow, Edinburgh and Inverness. We think everyone in the third sector should have great places to work, so we’ve opened our doors to create shared office spaces for other charities and social enterprises. We’d really like you to keep us company.
+We love working in modern offices in the best spots in Glasgow, Edinburgh and Inverness. 
+
+We think everyone in the third sector should have great places to work, so we’ve opened our doors to create shared office spaces for other charities and social enterprises. We’d really like you to keep us company.
 
 ## Bright, spacious and central
 
