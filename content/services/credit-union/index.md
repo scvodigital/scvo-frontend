@@ -12,7 +12,7 @@ It’s simple – our ethos. We are a co-operative, accountable only to our memb
 
 ### [Members' guide] **create post from content at http://www.scvo.org.uk/long-form-posts/credit-union-members-guide/**
 
-### [Loan calculator](loan-calculator.md)
+### [Loan calculator](loan-calculator.md) **create content at http://www.scvo.org.uk/running-your-organisation/credit-union/credit-union-loan-repayment-calculator/**
 
 ### [FAQ](faq.md)
 
