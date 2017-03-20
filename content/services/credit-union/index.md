@@ -10,7 +10,7 @@ It’s simple – our ethos. We are a co-operative, accountable only to our memb
 
 ### [Information for employers](information-for-employers.md)
 
-### [Members' guide](members-guide.md)
+### [Members' guide] **create post from content at http://www.scvo.org.uk/long-form-posts/credit-union-members-guide/**
 
 ### [Loan calculator](loan-calculator.md)
 
