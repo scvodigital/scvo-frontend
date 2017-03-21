@@ -8,9 +8,7 @@ By acting as an authoritative and trusted voice for the sector, SCVO's policy an
 
 ## Campaigns
 
-## [Briefings](briefings.md)
-
-## [Consultation responses](consultation-responses.md)
+## [Briefings and consultation responses](briefings-consultation-responses.md)
 
 ## [Policy committee](policy-committee.md)
 
