@@ -6,7 +6,7 @@ SCVO’s professional networks offer great opportunities for you to meet people 
 
 Through seminars, informal events, conferences and bulletins we help you to connect with your peers, share knowledge and catch up with the latest developments in your field of interest.
 
-[Join SCVO](http://www.scvo.org.uk/join-us/) for access to all of these professional networks.#
+[Join SCVO](http://www.scvo.org.uk/join-us/) for access to all of these professional networks.
 
 * Intermediaries Network
 * Comms Network
