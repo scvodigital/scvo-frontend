@@ -4,7 +4,7 @@ The Policy Committee advises us on policies which reflect the best interests of 
 
 Current membership of the Committee:
 
-Convener - Shulah Allan
+Shulah Allan, Convener
 
 Emma Anderson,
 [Bowel Cancer UK](https://www.bowelcanceruk.org.uk/)
