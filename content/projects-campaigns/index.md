@@ -1,6 +1,6 @@
 # Projects and campaigns
 
-## Building healthier and happier communities
+## [Building healthier and happier communities](Building-healthier-happier-communities.md)
 
 Working towards increased physical health and mental wellbeing, and reduced inequality.
 
