@@ -48,4 +48,60 @@ If you’d like to get involved, please contact a member of the team using the c
 
 ### East Dunbartonshire project updates
 
-Find out about nine fantastic projects funded to take forward their new ideas for improving the health and wellbeing of East Dunbartonshire communities, including an allotment for people with limited mobility and drama and digital workshops for those affected by life traumas.
+The following nine projects were funded to take forward their new ideas for improving the health and wellbeing of East Dunbartonshire communities, including an allotment for people with limited mobility and drama and digital workshops for those affected by life traumas.
+
+We continues to support the projects to deliver and evaluate their work until March 2015. All of the projects are committed to sharing their experiences and learning – check out the project updates below!
+
+#### Aftercare through Arts and Technology
+
+Aftercare through Arts and Technology, managed by [Group Recovery Aftercare Community Enterprise (GRACE)](http://www.graceaftercare.co.uk/about), is delivering a series of drama and digital arts workshops to boost the confidence and skills of people affected by life traumas, such as addictions, mental ill-health and homelessness.
+
+Update: [This great new video](http://vimeo.com/118573113) shows the difference GRACE is making, not just to the people who are involved but to their families who are also noticing that they are healthier and happier.
+
+#### Carers’ Wellbeing Reviews
+
+Carers’ Wellbeing Reviews, managed by [Carers Link](http://carerslink.org.uk/), is providing a tailored and more intensive approach to carers’ health and wellbeing, supporting their needs to access other services or change a behaviour.
+
+Update: Being able to talk to someone about their needs is making such a difference to the lives of carers supported by Carers Link.  From simple things, like getting a massage, to more intensive help to quit smoking, all of this support is helping individuals to feel good about themselves.
+
+#### East Dunbartonshire Asset Map Launch
+
+East Dunbartonshire Asset Map Launch, managed by [East Dunbartonshire Association for Mental Health](http://www.edamh.org.uk/), is enabling the local community to find about healthy and enjoyable activities in their area, by helping them to understand and use the Asset Map.
+
+Update: Throughout East Dunbartonshire local people have been able to own the asset map, by identifying and mapping the places that make them feel good. There is a really wide range of suggestions on offer and there truly is something for everyone.
+
+#### East Dunbartonshire Green Gym
+
+East Dunbartonshire Green Gym, managed by [The Conservation Volunteers in Scotland](http://www.tcv.org.uk/scotland/feel-good/green-gyms/community-green-gyms), is applying a tried and tested formula to improve their local environment, getting fit and having fun in the process.
+
+Update: Get down to Merkland Local Nature Reserve or Tintock woods to check out what these Green Gymers have been doing! From woodland thinning, litter picking, removing patches of rhododendron and paths cleared – you can’t fail to notice the difference!
+
+#### Hear to Help
+
+Hear to Help, managed by [Action on Hearing Loss](http://www.actiononhearingloss.org.uk/), is scaling up a successful project that already exists in East Dunbartonshire to support people to operate and look after their hearing aids, so they are able to participate more fully in all aspects of day-to-day life.
+
+Update: [Hear to Help](http://www.actiononhearingloss.org.uk/about-us/scotland/services-in-scotland/hear-to-help.aspx) is powering ahead with drop-ins in sheltered housing and care homes offering help to get residents and care staff supported and trained in keeping hearing aids in tip-top condition and getting folks listening and involved in daily life.
+
+#### Partner-ED
+
+Partner-ED, managed by [Ceartas](http://www.ceartas.org.uk/), are working to improve services by developing the skills, knowledge and confidence of the local community to participate in designing and developing health and social care services, so that they meet the needs of the people who use them.
+
+Update: Sessions for volunteers have started  and will run for  seven weeks. So far the response has been great!
+
+#### Rosebank Allotments Service
+
+Rosebank Allotments Service, managed by [CarrGomm](http://www.carrgomm.org/about-us) aims to improve access to the health and well-being benefits of working in an allotment for people with limited mobility, by installing raised beds.
+
+Update: With the improved weather, building the raised beds is completed and now people with mobility impairment can begin spring planting.
+
+#### Twechar Meal Delivery Service
+
+Twechar Meal Delivery Service, managed by [Twechar Community Action](http://www.twecharhlec.org.uk/index.php?page=ABOUT%20US&cols=1), will use a meal delivery service to give local older and vulnerable people a healthy meal and provide them with information and support to help them participate in community activities.
+
+Update: Older people having been enjoying meals for some weeks now – and mince and tatties is proving to be a very popular choice! The project is starting to identify other unmet needs such a book delivery in partnership with the local library.
+
+#### Youths on Bikes Scheme
+
+Youths on Bikes Scheme (YOBS), managed by [East Dunbartonshire Cycle Co-op](http://www.edscyclecoop.org.uk/), seeks to reduce the social isolation and loneliness of house bound and older people in the community of Auchinairn, through intergenerational opportunities.
+
+Update: With YOBS training underway the focus shifts to organising visits to older people on their bikes and deliver fresh food and groceries.
