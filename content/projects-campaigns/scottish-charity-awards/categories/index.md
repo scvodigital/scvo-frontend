@@ -8,7 +8,7 @@
 
 ### [Pioneering project](pioneering-project.md)
 
-### [Leading light](Leading-light.md)
+### [Leading light](leading-light.md)
 
 ### [Celebrating communities](celebrating-communities.md)
 
