@@ -6,8 +6,7 @@ Simply the best, better than all the rest? We’re looking for charities and oth
 
 Has your organisation stepped up a gear? Have you reached significant goals, celebrated outstanding achievements and taken an innovative approach? If so this award is for you.
 
-Download the application form and apply now
-**http://www.scvo.org.uk/wp-content/uploads/2017/03/Charity-of-the-Year-2017-application-form.doc**
+[Download the application form and apply now]
 
 Closing date: 6 April 2017.
 
