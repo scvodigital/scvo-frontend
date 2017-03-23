@@ -1,0 +1,16 @@
+# Scottish Charity Awards
+
+## Charity of the year
+
+http://www.scvo.org.uk/wp-content/uploads/2017/03/SCA-2017-category-banner-coty-940x400.png
+
+Simply the best, better than all the rest? We’re looking for charities and other third sector organisations that have had a record breaking year over the last 12 months.
+
+Has your organisation stepped up a gear? Have you reached significant goals, celebrated outstanding achievements and taken an innovative approach? If so this award is for you.
+
+Download the application form and apply now
+**http://www.scvo.org.uk/wp-content/uploads/2017/03/Charity-of-the-Year-2017-application-form.doc**
+
+Closing date: 6 April 2017.
+
+Any questions? [Have a look at our FAQs](scottish-charity-awards/faq.md).
