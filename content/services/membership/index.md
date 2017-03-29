@@ -21,5 +21,3 @@ Key benefits
 2. Organisation income over £50,000 - [See our great rates](income-over-50000.md)
 
 3. Private & public sector ASSOCIATE - [Only £100 - £725 per year](private-public-sector.md)
-
-
