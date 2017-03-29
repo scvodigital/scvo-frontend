@@ -26,6 +26,8 @@ Your income band |	Membership fee
 £1million+ |	£450.00
 £5million+ |	£600.00
 
+**[Apply for FREE membership](http://www.scvo.org.uk/MembershipForm.html)** INSERT CORRECT LINK
+
 ## Access to SJC Salary Scales
 
 Members of SCVO can get exclusive access to the COSLA employers’ website, which provides up-to-date information on current Scottish Joint Council hourly pay rates and annual salaries.
