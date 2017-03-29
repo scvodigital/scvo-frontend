@@ -12,10 +12,10 @@ Submit an application to take part in the Community Jobs Scotland initiative.
 
 Information on how to advertise your CJS post, interview the candidates and what to do on their first day.
 
-### [Training & support for your employee](CJS-training.md)
+### [Training & support for your employee](cjs-training.md)
 
 How to support your employee so you both get the most out of Community Jobs Scotland.
 
-### [Post CJS Employment and Training Initiatives](post-CJS.md)
+### [Post CJS Employment and Training Initiatives](post-cjs.md)
 
 What you need to do when your CJS employee leaves.
