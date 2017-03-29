@@ -4,7 +4,7 @@ At a time when unemployment is very high, SCVO is committed to providing jobs th
 
 ## Open programmes
 
-### [Community Jobs Scotland programme](community-jobs-scotland-programme.md)
+### [Community Jobs Scotland](community-jobs-scotland/index.md)
 
 Creating jobs for unemployed young people in Scotland’s third sector.
 
