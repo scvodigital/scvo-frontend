@@ -1,8 +1,8 @@
 # Jobs and employment
 
-## [Community Jobs Scotland](community-jobs-scotland/index.md)
+## [Employability programmes](employability/index.md)
 
-Work experience and internships
+Work experience and internships through our Community Jobs Scotland and other programmes.
 
 ## [Goodmoves](https://goodmoves.org.uk/)
 
