@@ -4,7 +4,7 @@
 
 Find out if you are eligible to apply to host a CJS job and what support you can expect from the initiative.
 
-### Apply to host a CJS employee
+### [Apply to host a CJS employee](become-an-employer.md)
 
 Submit an application to take part in the Community Jobs Scotland initiative.
 
