@@ -14,7 +14,6 @@ import { MaterializeDirective, MaterializeModule } from 'angular2-materialize';
 
 /* Services */
 import { ElasticService } from "./services/elastic.service"
-import { DrupalService } from "./services/drupal.service"
 import { AppService } from "./services/app.service"
 
 /* Components */
@@ -30,12 +29,6 @@ import { PolicyComponent } from './components/static/policy.component';
 import { PrivacyAndCookiesComponent } from './components/static/privacy-and-cookies.component';
 import { TermsAndConditionsComponent } from './components/static/terms-and-conditions.component';
 import { SiteSearchComponent } from './components/dynamic/search/site/elastic-results.component';
-import { DrupalRedirectComponent } from './components/dynamic/cms/drupal-redirect.component';
-import { DrupalPageComponent } from './components/dynamic/cms/drupal-page.component';
-import { DrupalPostComponent } from './components/dynamic/cms/drupal-post.component';
-import { DrupalPostListComponent } from './components/dynamic/cms/drupal-post-list.component';
-import { DrupalIndexComponent } from './components/dynamic/cms/drupal-index.component';
-import { DrupalMediaCentreComponent } from './components/dynamic/cms/drupal-media-centre.component';
 import { CJSSearchComponent } from './components/dynamic/search/cjs/elastic-results.component';
 import { GoodmovesSearchComponent } from './components/dynamic/search/goodmoves/elastic-results.component';
 import { TrainingSearchComponent } from './components/dynamic/search/training/elastic-results.component';
@@ -85,12 +78,6 @@ export const firebaseConfig = {
         PrivacyAndCookiesComponent,
         TermsAndConditionsComponent,
         SiteSearchComponent,
-        DrupalIndexComponent,
-        DrupalMediaCentreComponent,
-        DrupalPageComponent,
-        DrupalPostListComponent,
-        DrupalPostComponent,
-        DrupalRedirectComponent,
         CJSSearchComponent,
         GoodmovesSearchComponent,
         TrainingSearchComponent,
@@ -104,7 +91,6 @@ export const firebaseConfig = {
         SlimLoadingBarService,
         BreadcrumbService,
         ElasticService,
-        DrupalService,
         AppService
     ],
     bootstrap: [AppComponent]

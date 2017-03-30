@@ -2,8 +2,6 @@ import { Injectable } from '@angular/core';
 
 import { BreadcrumbService } from 'ng2-breadcrumb/ng2-breadcrumb';
 
-import { DrupalService } from './drupal.service';
-
 @Injectable()
 export class AppService {
     private settings: Object = {};
@@ -11,17 +9,15 @@ export class AppService {
     private categories: Object = {};
     private tags: Object = {};
 
-    constructor(private _drupalService: DrupalService, private breadcrumbService: BreadcrumbService) {}
+    constructor(private breadcrumbService: BreadcrumbService) {}
 
     setGlobals() {
         this.setSettings();
         this.setNavigation();
-        this.setCategories();
-        this.setTags();
     }
 
     setSettings() {
-        this.settings['cmsAddress'] = 'https://cms.scvo.org.uk/';
+        // this.settings['cmsAddress'] = 'https://cms.scvo.org.uk/';
         //
         // // Get authentication status
         // this._drupalService.request(this.settings['cmsAddress']+'auth').subscribe(auth => {
@@ -225,33 +221,5 @@ export class AppService {
     }
     getNavigation() {
         return this.navigation;
-    }
-
-    setCategories() {
-        // Get categories from Drupal
-        this._drupalService.request(this.settings['cmsAddress']+'all-categories').subscribe(categories => {
-            for (var key in categories) {
-                var tid = categories[key].tid[0].value;
-                var name = categories[key].name[0].value;
-                this.categories[tid] = name;
-            }
-        });
-    }
-    getCategories() {
-        return this.categories;
-    }
-
-    setTags() {
-        // Get tags from Drupal
-        this._drupalService.request(this.settings['cmsAddress']+'all-tags').subscribe(tags => {
-            for (var key in tags) {
-                var tid = tags[key].tid[0].value;
-                var name = tags[key].name[0].value;
-                this.tags[tid] = name;
-            }
-        });
-    }
-    getTags() {
-        return this.tags;
     }
 }
