@@ -2,7 +2,7 @@
 
 Every CJS employee has access to £200 for additional training and/or employability support.
 
-[View the latest CJS training courses](community-jobs-scotland/cjs-training-courses.md)
+[View the latest CJS training courses](cjs-training-courses.md)
 
 The type of activity that potentially can be funded includes:
 
