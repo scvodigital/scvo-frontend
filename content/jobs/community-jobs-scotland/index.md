@@ -2,7 +2,7 @@
 
 ## [Job vacancies](http://jobs.scvo.org.uk/)
 
-## [Become an employer](become-an-employer.md)
+## [Become an employer](information-for-employers/become-an-employer.md)
 
 ## [Information for employers](information-for-employers.md)
 
