@@ -21,7 +21,7 @@ You can help support your employee by:
 
 The CJS training fund can provide £200 for additional training and/or employability support for each CJS employee.
 
-View the latest CJS training courses.
+[View the latest CJS training courses.]
 
 Eligible uses include training course costs, training materials like workbooks and examination costs. You can find out more in our Employer Guidance on CJS Processes & Procedures and take a look at [examples of appropriate training courses](cjs-training-examples.md).
 
