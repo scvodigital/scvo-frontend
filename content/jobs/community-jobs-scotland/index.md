@@ -4,7 +4,7 @@
 
 ## [Become an employer](information-for-employers/become-an-employer.md)
 
-## [Information for employers](community-jobs-scotland/information-for-employers/index.md)
+## [Information for employers](information-for-employers/index.md)
 
 ## [Information for employees](information-for-employees.md)
 
