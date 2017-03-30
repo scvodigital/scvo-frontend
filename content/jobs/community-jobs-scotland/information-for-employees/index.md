@@ -40,6 +40,6 @@ Resources to help you find a job when you move on from Community Jobs Scotland.
 
 Starting a new job is a good time to think about how you manage your money.
 
-### [Full employee eligibility criteria](full-criteria,md)
+### [Full employee eligibility criteria](full-criteria.md)
 
 Detailed information on individual eligibility for the Community Jobs Scotland initiative.
