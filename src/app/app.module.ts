@@ -41,7 +41,7 @@ import { MarkdownPipe } from './pipes/markdown.pipe';
 import { StringToDatePipe } from './pipes/string-to-date.pipe';
 
 /* Directives */
-
+// none
 
 /* Firebase */
 export const firebaseConfig = {
