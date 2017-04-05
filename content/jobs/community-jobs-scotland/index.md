@@ -6,7 +6,7 @@
 
 ## [Information for employers](information-for-employers/index.md)
 
-## [Information for employees](information-for-employees.md)
+## [Information for employees](information-for-employees/index.md)
 
 ## [CJS training courses](CJS-training.md)
 
