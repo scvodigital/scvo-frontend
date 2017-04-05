@@ -8,5 +8,5 @@
 
 ## [Information for employees](information-for-employees/index.md)
 
-## [CJS training courses](CJS-training.md)
+## [CJS training courses](information-for-employees/cjs-training-courses.md)
 
