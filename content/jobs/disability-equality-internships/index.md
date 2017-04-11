@@ -4,6 +4,6 @@ SCVO is working in partnership with [Inclusion Scotland](http://www.inclusionsco
 
 ## [Information for employers](information-for-employers.md)
 
-## Information for interns
+## [Information for interns](information-for-interns.md)
 
 ## Latest vacancies
