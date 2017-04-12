@@ -43,7 +43,7 @@ Chris Martin, Callander Youth Project
 
 ## Attend the awards ceremony
 
-See the options for booking a table at the glittering awards ceremony in Edinburgh on 22 June 2017.
+See the [options for booking a table](http://www.scvo.org.uk/scottish-charity-awards-2017/scottish-charity-awards-2017-book-a-table/) at the glittering awards ceremony in Edinburgh on 22 June 2017.
 
 ## Past winners
 
