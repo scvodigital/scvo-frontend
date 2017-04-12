@@ -1,6 +1,6 @@
 # Scottish Charity Awards
 
-## [Categories](categories/index.md)
+## [Categories](2017/categories.md)
 
 ## [Finalists](finalists
 
