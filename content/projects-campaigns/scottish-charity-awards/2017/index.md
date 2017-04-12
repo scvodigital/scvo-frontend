@@ -2,15 +2,22 @@
 
 http://www.scvo.org.uk/wp-content/uploads/2017/03/SCA2017-hp-awards-banner-MAIN-v2-.png
 
-## Pick a cause that’s close to your heart
+## The entries are in
 
-Which charities and individuals in Scotland have been the best, most innovative and effective this year?
+In March we asked you to tell us which Scottish charities and individuals had been the best, most innovative and effective during the past year. We’ve been blown away with your response!
 
-With so much inspirational work going on across the country, the Scottish Charity Awards gives you the chance to celebrate a special person, organisation or project.
+You’ve made hundreds of nominations, highlighting the huge range of incredible work going on all over the country.
 
-## Make your nominations
+With so many organisations, people and projects in the running, the competition is understandably high. Thankfully our judging panels are more than up for task of shortlisting.
 
-There are [eight categories](categories/index.md) up for grabs.
+
+## What’s next
+
+There are eight award categories. The shortlist for each will be announced on 12 May.
+
+All shortlisted charities and individuals are entered into the People’s Choice Award, sponsored by Charities Aid Foundation. Voting for that opens on 12 May and closes on 26 May.
+
+The winners will be announced at the Scottish Charity Awards ceremony on 22 June.
 
 ## FAQs
 
