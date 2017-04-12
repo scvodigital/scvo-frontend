@@ -6,5 +6,5 @@ We worked with our partners Creative Scotland, Scottish Government, Scottish Dis
 
 The internships covered a variety of areas, with a special focus on digital opportunities in the creative industries.
 
-At present we are supporting Disability Equality Internships. These opportunities are open to graduates with a disability or long-term health condition.
+At present we are supporting [Disability Equality Internships](disability-equality-internships/index.md). These opportunities are open to graduates with a disability or long-term health condition.
 
