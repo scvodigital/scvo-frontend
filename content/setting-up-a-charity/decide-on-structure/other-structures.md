@@ -1,5 +1,13 @@
 # Other structures
 
+## Social enterprise
+
+Karina MacRitchie from Senscot Legal outlines the [issues charities must think about when becoming a social enterprise](http://thirdforcenews.org.uk/tfn-blogs/management/the-difference-between-a-charity-and-a-social-enterprise).
+
+OSCR has answered some [frequently asked questions about social enterprises](http://www.oscr.org.uk/charities/guidance/social-enterprise-faqs).
+
+TFN has a useful article on [everything you need to know about social enterprises](http://thirdforcenews.org.uk/features/everything-you-need-to-know-about-social-enterprises).
+
 ## Community Interest Company (CIC)
 
 Please note that a CIC cannot be a registered charity.
