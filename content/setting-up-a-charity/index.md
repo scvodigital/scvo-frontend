@@ -24,7 +24,7 @@ How to understand the particular circumstances of your organisation and decide w
 
 Conside the types of activity you will be involved in and the level of risk attached. 
 
-## [Decide on a structure](decide-on-structure.md)
+## [Decide on a structure](decide-on-structure/index.md)
 
 Choose the right legal structure for your organisation based on what you plan to do.
 
