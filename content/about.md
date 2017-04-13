@@ -55,6 +55,15 @@ Eliot Stark, [STRiVE](http://strive.me.uk/)
 
 The Policy Committee advises us on policies which reflect the best interests of the third sector in Scotland. It is the job of SCVO to take these policies and represent the shared interests of the third sector to government, local authorities, the private sector and the public at large.
 
+### Recent papers
+
+Related documents
+
+    [application/pdf] SCVO Policy Committee Minutes March 2017
+    [application/pdf] SCVO Policy Committee Papers March 2017
+    [application/pdf] SCVO Policy Committee Scottish Government Social Security Update March 2017
+    [application/pdf] SCVO Policy Committee Review Meeting Jan 2017
+
 ### Current membership of the Policy Committee:
 
 Shulah Allan, Convener
