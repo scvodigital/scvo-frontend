@@ -19,7 +19,7 @@ export class SiteComponent {
         return this.appService.es;
     }
 
-    constructor(@Inject(AppService) protected appService: AppService) {
+    constructor(@Inject(AppService) public appService: AppService) {
         var that = this;
         if (this.appService.ready) {
              setTimeout(() => {

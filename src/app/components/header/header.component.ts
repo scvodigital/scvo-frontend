@@ -29,7 +29,22 @@ export class HeaderComponent implements OnInit {
         });
     }
 
-    public searchChanged(term) {
-        this.router.navigate(['/search'], { queryParams: { s: term.replace(' ', '+') } });
+    // HACK! Having to do it this way because Materialize does not play well with
+    // our menus. They constantly redraw when I init the sidenav using Materialize
+    // and become unoperable. Can't find anyone online with this problem. Hopefully
+    // it'll get fixed with an update or when we move over to 'material2' from the
+    // Angular team
+    public slidein(panel) {
+        $('#sidenav-overlay').fadeIn();
+        $('#mobile-' + panel).removeClass('slide-out').addClass('slide-in');
     }
+
+    public slideout() {
+        $('#sidenav-overlay').fadeOut();
+        $('.side-panel').removeClass('slide-in').addClass('slide-out');
+    }
+
+    // public searchChanged(term) {
+    //     this.router.navigate(['/search'], { queryParams: { s: term.replace(' ', '+') } });
+    // }
 }
