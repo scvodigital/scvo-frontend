@@ -1,0 +1,54 @@
+<button class="btn pull-right" (click)="showEditMenuItem(-1)">New menu item</button>
+<h2>Menu editor: {{ menuName }}</h2>
+
+<p>
+    <i class="fa fa-fw fa-info-circled"></i>
+    Drag and drop menu items to re-order them
+</p>
+
+<ul class="collection" dnd-sortable-container [sortableData]="items">
+    <li *ngFor="let item of items; let i = index" class="collection-item" dnd-sortable [sortableIndex]="i" (onDropSuccess)="save()">
+        <strong>{{ item.name }}</strong>
+        <em>[{{ item.roles.join(', ') }}]</em>
+        <span class="secondary-content">
+            <a role="button" (click)="showEditMenuItem(i)">
+                <i class="fa fa-fw fa-pencil"></i>
+            </a>
+            <a role="button" (click)="showDeleteMenuItem(i)">
+                <i class="fa fa-fw fa-trash-empty"></i>
+            </a>
+        </span>
+    </li>
+</ul>
+
+<div class="modal" materialize="modal" [materializeParams]="[{dismissible: true}]" [materializeActions]="modalDeleteActions">
+    <div class="modal-content">
+        <h3>Are you sure?</h3>
+        <p>Are you sure you want to delete {{ items[selectedItem]?.name }}?</p>
+    </div>
+    <div class="modal-footer">
+        <a role="button" class="modal-action btn red" (click)="deleteMenuItem()">Yes</a>
+        <a role="button" class="modal-action btn-flat" (click)="closeDeleteModal()">Cancel</a>
+    </div>
+</div>
+
+<div class="modal" materialize="modal" [materializeParams]="[{dismissible: true}]" [materializeActions]="modalEditActions">
+    <div class="modal-content">
+        <h3>{{ editCreate }}: {{ items[selectedItem]?.name }}</h3>
+        <div class="row">
+            <div class="input-field col s12 m8">
+                <input placeholder="/path" id="menu-path" type="text" class="validate" [(ngModel)]="selectedItemPath">
+                <label for="menu-path">Path</label>
+            </div>
+            <div class="input-field col s12 m4">
+                <select materialize="material_select" [materializeSelectOptions]="selectedItemRoles" [(ngModel)]="selectedItemRoles" [materializeParams]="[{container: 'body'}]" multiple>
+                    <option *ngFor="let role of roles" [value]="role">{{ role }}</option>
+                </select>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <a role="button" class="modal-action btn" (click)="saveMenuItem()">Save <i class="fa fa-fw fa-floppy"></i></a>
+        <a role="button" class="modal-action btn-flat" (click)="closeEditModal()">Cancel</a>
+    </div>
+</div>

@@ -1,225 +1,338 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Type, Inject } from '@angular/core';
+import { Router, Route } from '@angular/router';
 
-import { BreadcrumbService } from 'ng2-breadcrumb/ng2-breadcrumb';
+import { Observable, Subject, Subscription, Observer } from 'rxjs/Rx';
+import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
+import { Angulartics2GoogleAnalytics } from 'angulartics2';
+
+import { ElasticService } from '../services/elastic.service';
+// import { MetaService } from '../services/meta.service';
+
+import * as md5 from 'md5';
+
+declare function loaded();
+// declare var baseDb: {
+//     sites: ISite,
+//     config: IAppConfig
+// }
 
 @Injectable()
 export class AppService {
-    private settings: Object = {};
-    private navigation: Array<any> = [];
-    private categories: Object = {};
-    private tags: Object = {};
+    private configObs: FirebaseObjectObservable<IAppConfig>;
+    private configSub: Subscription;
+    public config: IAppConfig;// = baseDb.config;
 
-    constructor(private breadcrumbService: BreadcrumbService) {}
+    private translationsObs: FirebaseObjectObservable<ITranslations>;
+    private translationsSub: Subscription;
+    public translations: ITranslations;// = baseDb.translations;
 
-    setGlobals() {
-        this.setSettings();
-        this.setNavigation();
+    // private userObs: FirebaseObjectObservable<IUser>;
+    // private userSub: Subscription;
+    // public user: SiteUser = new SiteUser({});
+    // public userAuth: any;
+
+    public ready: boolean = false;
+    public readySub: Subject<void> = new Subject<void>();
+
+    private get domainKey(): string {
+        return location.hostname.replace(/\./g, '-');
     }
 
-    setSettings() {
-        // this.settings['cmsAddress'] = 'https://cms.scvo.org.uk/';
-        //
-        // // Get authentication status
-        // this._drupalService.request(this.settings['cmsAddress']+'auth').subscribe(auth => {
-        //     console.log(auth);
+    private get siteKey(): string {
+        if (this.config === null) return null;
+        return this.config.domains[this.domainKey];
+    }
+
+    private siteObs: FirebaseObjectObservable<ISite>;
+    private siteSub: Subscription;
+    public site: ISite;// = baseDb.sites[this.siteKey];
+
+    public get sitePath(): string {
+        return '/sites/' + this.siteKey + '/';
+    }
+
+    constructor(@Inject(AngularFire) public af: AngularFire, @Inject(ElasticService) public es: ElasticService, @Inject(Angulartics2GoogleAnalytics) public ga: Angulartics2GoogleAnalytics) {
+
+        //, @Inject(MetaService) public ms: MetaService
+
+        // this.ga.setUserProperties({
+        //     siteKey: this.siteKey
         // });
-    }
-    getSettings() {
-        return this.settings;
+
+        this.loadSiteData();
     }
 
-    setNavigation() {
-        this.navigation = [
-            {
-                'title': 'Home',
-                'path': '/'
-            },
-            {
-                'title': 'Running your organisation',
-                'path': '/running-your-organisation',
-                'contents': [
-                    {
-                        'title': 'Finance',
-                        'path': '/running-your-organisation/finance',
-                        'term_id': 13
-                    },
-                    {
-                        'title': 'Managing your organisation',
-                        'path': '/running-your-organisation/managing-your-organisation',
-                        'term_id': 14
-                    },
-                    {
-                        'title': 'Governance',
-                        'path': '/running-your-organisation/governance',
-                        'term_id': 15
-                    },
-                    {
-                        'title': 'Funding',
-                        'path': '/running-your-organisation/funding',
-                        'term_id': 16
-                    },
-                    {
-                        'title': 'Legislation & regulation',
-                        'path': '/running-your-organisation/legislation-regulation',
-                        'term_id': 17
-                    },
-                ]
-            },
-            {
-                'title': 'Employability',
-                'path': '/employability',
-                'contents': [
-                    {
-                        'title': 'Community Jobs Scotland',
-                        'path': '/employability/community-jobs-scotland',
-                        'term_id': 19
-                    },
-                    {
-                        'title': 'Disability equality internships',
-                        'path': '/employability/disability-equality-internships',
-                        'term_id': 20
-                    },
-                    {
-                        'title': 'Past employability schemes',
-                        'path': '/employability/past-employability-schemes',
-                        'term_id': 21
-                    }
-                ]
-            },
-            {
-                'title': 'Services',
-                'path': '/services',
-                'term_id': 43,
-                'contents': [
-                    {
-                        'title': 'SCVO membership',
-                        'path': '/services/scvo-membership'
-                    },
-                    {
-                        'title': 'Good HQ',
-                        'path': '/services/good-hq'
-                    },
-                    {
-                        'title': 'Office space',
-                        'path': '/services/office-space'
-                    },
-                    {
-                        'title': 'Credit Union',
-                        'path': '/services/credit-union'
-                    },
-                    {
-                        'title': 'Third Force News',
-                        'path': '/services/third-force-news'
-                    },
-                    {
-                        'title': 'Goodmoves',
-                        'path': '/services/goodmoves'
-                    },
-                    {
-                        'title': 'Funding Scotland',
-                        'path': '/services/funding-scotland'
-                    },
-                    {
-                        'title': 'Payroll',
-                        'path': '/services/payroll'
-                    },
-                    {
-                        'title': 'Digital participation',
-                        'path': '/services/digital-participation'
-                    },
-                    {
-                        'title': 'Scottish Accessible Information Forum',
-                        'path': '/services/scottish-accessible-information-forum'
-                    },
-                    {
-                        'title': 'Professional networks',
-                        'path': '/services/professional-networks'
-                    },
-                    // {
-                    //     'title': 'Affiliate deals',
-                    //     'path': '/services/affiliate-deals'
-                    // }
-                ]
-            },
-            {
-                'title': 'Events & training',
-                'path': '/events',
-                'contents': [
-                    {
-                        'title': 'Scottish Charity Awards',
-                        'path': '/events/scottish-charity-awards'
-                    },
-                    {
-                        'title': 'The Gathering',
-                        'path': '/events/the-gathering'
-                    },
-                    {
-                        'title': 'Training courses',
-                        'path': '/training/search'
-                    }
-                ]
-            },
-            {
-                'title': 'Policy',
-                'path': '/policy',
-                'contents': [
-                    {
-                        'title': 'Blogs',
-                        'path': '/policy/blogs',
-                        'term_id': 38
-                    },
-                    {
-                        'title': 'Consultation responses',
-                        'path': '/policy/consultation-responses',
-                        'term_id': 39
-                    },
-                    {
-                        'title': 'Briefings & reports',
-                        'path': '/policy/briefings-reports',
-                        'term_id': 41
-                    },
-                    {
-                        'title': 'Policy committee',
-                        'path': '/policy/policy-committee',
-                        'term_id': 42
-                    }
-                ]
-            },
-            {
-                'title': 'About',
-                'path': '/about-us',
-                'term_id': 50,
-                'position': 'right'
-            },
-            {
-                'title': 'Contact',
-                'path': '/contact-us',
-                'position': 'right'
-            },
-            {
-                'title': 'Media',
-                'path': '/media-centre',
-                'position': 'right'
-            },
-            {
-                'title': 'Join',
-                'path': '/join-scvo',
-                'position': 'right'
-            }
-        ];
+    private loadSiteData(){
+        this.configObs = this.af.database.object('/config', { preserveSnapshot: true });
+        this.configSub = this.configObs.subscribe((configObj: any) => {
+            this.config = configObj.val();
 
-        // Set breadcrumb titles
-        for (var level1 in this.navigation) {
-            this.breadcrumbService.addFriendlyNameForRoute(this.navigation[level1].path, this.navigation[level1].title);
-            for (var level2 in this.navigation[level1].contents) {
-                this.breadcrumbService.addFriendlyNameForRoute(this.navigation[level1].contents[level2].path, this.navigation[level1].contents[level2].title);
-                // for (var level3 in this.navigation[level1].contents[level2]) {
-                //     // breadcrumbService.addFriendlyNameForRoute(this.navigation[level1].contents[level2].contents[level3].path, this.navigation[level1].contents[level2].contents[level3].title);
-                // }
-            }
+            this.translationsObs = this.af.database.object('/translations', { preserveSnapshot: true });
+            this.translationsSub = this.translationsObs.subscribe((translationsObj: any) => {
+                this.translations = translationsObj.val();
+
+                this.siteObs = this.af.database.object(this.sitePath, { preserveSnapshot: true });
+                this.siteSub = this.siteObs.subscribe((siteObj: any) => {
+                    this.site = siteObj.val();
+
+                    this.refreshMenus();
+
+                    this.ready = true;
+                    this.readySub.next();
+
+                    loaded();
+                });
+            });
+        });
+    }
+
+    private _menus: { [key: string]: MenuElement[] } = {};
+    public get menus(): { [key: string]: MenuElement[] } {
+        return this._menus;
+    }
+    public set menus(value: { [key: string]: MenuElement[] }) {
+        this._menus = value;
+    }
+
+    private _allMenus: { [key: string]: MenuElement[] } = {};
+    public get allMenus(): { [key: string]: MenuElement[] } {
+        return this._allMenus;
+    }
+    public set allMenus(value: { [key: string]: MenuElement[] }) {
+        this._allMenus = value;
+    }
+
+    public refreshMenus(){
+        if(!this.site || !this.site.menus || !this.menus){
+            return {};
+        }
+
+        var roles = ['unauthenticated', 'all'];
+        var newMenus = {};
+        var newAllMenus = {};
+
+        Object.keys(this.site.menus).forEach((key) => {
+            newMenus[key] = [];
+            newAllMenus[key] = [];
+            this.site.menus[key].forEach((item) => {
+                newAllMenus[key].push(new MenuElement(item.path, item.roles, item.submenu));
+                var found = roles.some((v: string) => {
+                    return item.roles.indexOf(v) >= 0;
+                });
+                if(found){
+                    newMenus[key].push(new MenuElement(item.path, item.roles, item.submenu));
+                }
+            });
+        });
+
+        this.menus = newMenus;
+        this.allMenus = newAllMenus;
+    }
+
+    public get language(): string {
+        if(!this.ready){
+            return 'en';
+        }
+        return this.site.config.defaultLanguage;
+    }
+
+    public set language(value: string) {
+        if(this.config.languages.indexOf(value) >= 0){
+            // this.user.language = value;
+            // this.updateUser();
         }
     }
-    getNavigation() {
-        return this.navigation;
+
+    public getPhrase(key: string) : string{
+        this.addTranslation(key);
+
+        if(!this.ready || !this.translations || !this.translations.hasOwnProperty(key)){
+            return key;
+        }
+
+        if(this.translations[key].hasOwnProperty(this.language)){
+            return this.translations[key][this.language];
+        }
+
+        if(this.translations[key].hasOwnProperty(this.site.config.defaultLanguage)){
+            return this.translations[key][this.site.config.defaultLanguage];
+        }
+
+        var languages = Object.keys(this.translations[key]);
+        if(languages.length > 0){
+            return this.translations[key][languages[0]];
+        }
+
+        return key;
     }
+
+    public getSpecificPhrase(key: string, language: string){
+        this.addTranslation(key);
+
+        if(!this.ready || !this.translations.hasOwnProperty(key)){
+            return key;
+        }
+
+        if(this.translations[key].hasOwnProperty(language)){
+            return this.translations[key][language];
+        }
+
+        if(this.translations[key].hasOwnProperty(this.language)){
+            return this.translations[key][language];
+        }
+
+        return key;
+    }
+
+    private _unsavedTranslations: boolean = false;
+    public get unsavedTranslations(): boolean {
+        // if(this.user && this.user.roles && this.user.roles.indexOf('Administrator') > -1){
+        //     return this._unsavedTranslations;
+        // }else{
+        //     return false;
+        // }
+        return false;
+    }
+
+    public addTranslation(key){
+        if(this.ready && this.translations && !this.translations.hasOwnProperty(key)){
+            // if(this.user && this.user.roles && this.user.roles.indexOf('Administrator') > -1){
+                this.translations[key] = {};
+                this.config.languages.forEach((language) => {
+                    this.translations[key][language] = key;
+                });
+                this._unsavedTranslations = true;
+            // }
+        }
+    }
+
+    public getPage(path: string) {
+        if (!this.ready) {
+            return '';
+        }
+
+        var key = '_' + path.replace(/\//g, '_');
+
+        if (!this.site.pages.hasOwnProperty(key)) {
+            return '404: Not found';
+        }
+
+        if (this.site.pages[key].hasOwnProperty(this.site.config.defaultLanguage)) {
+            return this.site.pages[key][this.site.config.defaultLanguage];
+        }
+
+        var languages = Object.keys(this.site.pages[key]);
+
+        if (languages.length > 0) {
+            return this.site.pages[key][0];
+        }
+
+        return '';
+    }
+
+    public getSpecificPage(path: string, language: string) {
+        if (!this.ready) {
+            return '';
+        }
+
+        var key = '_' + path.replace(/\//g, '_');
+
+        if (!this.site.pages.hasOwnProperty(key)) {
+            return '404: Not found';
+        }
+
+        if (this.site.pages[key].hasOwnProperty(language)) {
+            return this.site.pages[key][language];
+        }
+
+        return '';
+    }
+
+    public saveMenu(){
+        return new Promise((resolve, reject) => {
+            var menusObs = this.af.database.object(this.sitePath + '/menus', { preserveSnapshot: true });
+            var menusSub = menusObs.set(this.allMenus).then((response) => {
+                this.refreshMenus();
+                resolve();
+            }).catch((err) => {
+                reject(err);
+            });
+        });
+    }
+
+    public savePage(pageName){
+        return new Promise((resolve, reject) => {
+            var pageObs = this.af.database.object(this.sitePath + '/pages/' + pageName, { preserveSnapshot: true });
+            var pageSub = pageObs.set(this.site.pages[pageName]).then((resonse) => {
+                resolve();
+            }).catch((err) => {
+                reject(err);
+            });
+        });
+    }
+
+    public saveTranslations(){
+        return new Promise((resolve, reject) => {
+            this.translationsObs.set(this.translations).then((response) => {
+                this._unsavedTranslations = false;
+                resolve();
+            }).catch((err) => {
+                reject(err);
+            });
+        });
+    }
+
+    public toastSub: Subject<IToast> = new Subject<IToast>();
+    public toast(content: IToast){
+        content.className = content.className || 'green white-text';
+        content.duration = content.duration || 4000;
+        this.toastSub.next(content);
+    }
+}
+
+export interface IToast {
+    message: string;
+    className?: string;
+    duration?: number;
+}
+
+export interface IMenuElement {
+    path: string;
+    roles: string[];
+    submenu: string[];
+}
+
+export class MenuElement {
+    public get name(): string {
+        return this.path.replace(/_/g, '/');
+    }
+    public get label(): string {
+        return 'menu:-' + this.path;
+    }
+    constructor(public path: string, public roles: string[], public submenu: string[]) { }
+}
+
+export interface IAppConfig {
+    domains: { [domain: string]: string };
+    languages: string[];
+    roles: string[];
+}
+
+export interface ITranslations {
+    [key: string]: { [language: string]: string; }
+}
+
+export interface IPage {
+    [language: string]: string;
+}
+
+export interface ISite {
+    config: ISiteConfig;
+    menus: { [key: string]: IMenuElement[] };
+    pages: { [key: string]: IPage };
+}
+
+export interface ISiteConfig {
+    defaultDomain: string;
+    defaultLanguage: string;
 }

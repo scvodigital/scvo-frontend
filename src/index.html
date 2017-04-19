@@ -23,6 +23,7 @@
     <meta property="og:image:height" content="" />
     <meta property="og:title" content="" />
 
+    <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:400,600,700,800" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" />
 
@@ -45,8 +46,8 @@
 </head>
 <body>
     <scvo>
-        <div class="spinner-wrapper">
-            <!-- <div class="preloader-wrapper big active">
+        <!-- <div class="spinner-wrapper">
+              <div class="preloader-wrapper big active">
                 <div class="spinner-layer spinner-blue">
                     <div class="circle-clipper left">
                         <div class="circle"></div>
@@ -91,7 +92,7 @@
                         <div class="circle"></div>
                     </div>
                 </div>
-            </div> -->
+            </div> - ->
             <div class="spinner">
               <i></i>
               <i></i>
@@ -102,14 +103,22 @@
               <i></i>
             </div>
             <p class="white-text"><strong>Loading&hellip;</strong></p>
-        </div>
+        </div> -->
     </scvo>
 
-    <script src="https://cdn.polyfill.io/v2/polyfill.min.js?features=console.*,Intl.~locale.en&amp;gated=1"></script>
+    <div id="loader" style="position:fixed; top:0; left:0; right:0; bottom:0; background-color:#fff; z-index:9999; display:flex; align-items:center; justify-content:center;">
+        <i class="fa fa-fw fa-spinner fa-spin" style="color:black;"></i>
+    </div>
+
+    <script async src="//cdn.polyfill.io/v2/polyfill.min.js?features=Intl.~locale.en"></script>
+    <!-- <script src="//storage.googleapis.com/scvo-frontend.appspot.com/baseDb.js"></script> -->
 
     <!-- Begin Cookie Consent plugin -->
     <script type="text/javascript">
     window.cookieconsent_options = {"message":"This website uses cookies to anonymously track visitor numbers","dismiss":"Continue","learnMore":"Read more","link":"/privacy","theme":"dark-floating"};
+    function loaded() {
+        $('#loader').fadeOut();
+    }
     </script>
     <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/1.0.10/cookieconsent.min.js"></script>
     <!-- End Cookie Consent plugin -->

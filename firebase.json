@@ -1,14 +1,46 @@
 {
-    "hosting": {
-        "public": "dist",
-        "rewrites": [
-            {
-                "source": "**",
-                "destination": "/index.html"
-            }
+  "database": {
+    "rules": "./firebase/database/rules.json"
+  },
+  "hosting": {
+    "public": "dist",
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ],
+    "headers": [
+      {
+        "source": "**/*.@(eot|otf|ttf|ttc|woff|css|js)",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "max-age=86400"
+          },
+          {
+            "key": "Access-Control-Allow-Origin",
+            "value": "*"
+          },
+          {
+            "key": "X-Frame-Options",
+            "value": "ALLOW-FROM ALLOWALL"
+          }
         ]
-    },
-    "database": {
-        "rules": "database.rules.json"
-    }
+      },
+      {
+        "source": "**/**",
+        "headers": [
+          {
+            "key": "Access-Control-Allow-Origin",
+            "value": "*"
+          },
+          {
+            "key": "X-Frame-Options",
+            "value": "ALLOW-FROM ALLOWALL"
+          }
+        ]
+      }
+    ]
+  }
 }
