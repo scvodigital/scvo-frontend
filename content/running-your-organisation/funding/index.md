@@ -1,4 +1,4 @@
-#Funding
+# Funding
 
 You tell us that access to regular, reliable and up-to-date funding information is one of the main benefits of being an SCVO member. It’s hardly surprising, given the tough economic times and continued pressure on the third sector to meet ever growing demand.
 
@@ -9,6 +9,10 @@ Finding your way through all the options there are for funding your organisation
 ## [Forthnightly funding updates](funding-updates.md) 
 
 Stay ahead of the curve with our handy updates for SCVO members
+
+## [Community Capacity and Resilience Fund](community-capacity-resilience-fund.md)
+
+Dedicated Scottish Government funding for grassroots community action
 
 ## [Useful links](useful-links.md)
 

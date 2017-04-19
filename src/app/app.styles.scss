@@ -206,7 +206,7 @@ h1, h2, h3, h4, h5, h6 {
 h1 {
     font-size: 2.7rem;
     font-weight: 600;
-    margin: 0.5em 0;
+    margin: 0 0 0.5em;
 }
 h2 {
     font-size: 2.0rem;
@@ -233,21 +233,47 @@ h6 {
     font-weight: 600;
     margin: 0;
 }
+
+p {
+    margin: 0 0 1rem;
+}
+
 main {
     .container-fluid {
         padding: 0 0 0.5rem;
         // padding: 128px 0 0.5rem;
     }
     a:link {
+        text-decoration: none;
+    }
+    a:hover {
         text-decoration: underline;
+        text-decoration-skip: ink;
+        text-decoration-style: solid;
+    }
+    a[href^="http://"]::after,
+    a[href^="https://"]::after {
+        font-family: 'FontAwesome';
+        content: "\f08e";
+        margin-left: 0.25rem;
+        text-decoration: none;
+        display: inline-block;
     }
     .card a:link, a.btn:link {
         text-decoration: none;
     }
-    ul {
+    ul:not(.browser-default) {
         padding: 0 0 0 1.5rem;
         li {
             list-style-type: disc;
+        }
+    }
+    app-admin {
+        ul:not(.browser-default) {
+            padding: 0;
+            li {
+                list-style-type: none;
+            }
         }
     }
     ul.select-dropdown {
@@ -381,10 +407,10 @@ main.running-your-organisation a {
     color: #303f9f;
 }
 
-header.employability, header.employability .navbar .dropdown-content, main.employability .btn {
+header.jobs, header.jobs .navbar .dropdown-content, main.jobs .btn {
     background-color: #2e7d32;
 }
-main.employability a {
+main.jobs a {
     color: #2e7d32;
 }
 
@@ -393,7 +419,6 @@ header.services, header.services .navbar .dropdown-content, main.services .btn {
     background-color: #880e4f;
 }
 main.join-scvo a,
-main.events.the-gathering a,
 main.services a {
     color: #880e4f;
 }
@@ -412,21 +437,21 @@ main.events a {
     color: #263238;
 }
 
-header.training, header.training .navbar .dropdown-content, main.training .btn {
+header.projects-campaigns, header.projects-campaigns .navbar .dropdown-content, main.projects-campaigns .btn {
     background-color: #00838f;
 }
-main.training a {
+main.projects-campaigns a {
     color: #00838f;
 }
 
-header.media-centre, header.media-centre .navbar .dropdown-content, main.media-centre .btn,
+header.press-media, header.press-media .navbar .dropdown-content, main.press-media .btn,
 header.tags, header.tags .navbar .dropdown-content, main.tags .btn,
-header.policy, header.policy .navbar .dropdown-content, main.policy .btn {
+header.policy-research, header.policy-research .navbar .dropdown-content, main.policy-research .btn {
     background-color: #e64a19;
 }
-main.media-centre a,
+main.press-media a,
 main.tags a,
-main.policy a {
+main.policy-research a {
     color: #e64a19;
 }
 
@@ -537,16 +562,16 @@ a.btn {
     }
     .version {
         position: absolute;
-        top: 20px;
-        right: -30px;
+        top: 18px;
+        left: 27px;
         line-height: 1em;
         font-family: $base-font-family;
         font-size: 0.9rem;
         font-variant: small-caps;
-        -webkit-transform: rotate(60deg);
-        -moz-transform: rotate(60deg);
-        -ms-transform: rotate(60deg);
-        -o-transform: rotate(60deg);
+        -webkit-transform: rotate(66deg);
+        -moz-transform: rotate(66deg);
+        -ms-transform: rotate(66deg);
+        -o-transform: rotate(66deg);
     }
 }
 .brand-logo.hide-on-med-and-down {
@@ -554,96 +579,65 @@ a.btn {
     left: 0;
 }
 
-
 // temporary fix for Materialize bug with Mac Chrome -
 // https://github.com/Dogfalo/materialize/issues/3161
 .nav-wrapper, .nav-wrapper form, .nav-wrapper form .input-field { height: 100%; }
 
-
 // Breadcrumb ==================================================================
 
+.container-breadcrumb.row {
+    margin-bottom: 0;
+}
+.home .container-breadcrumb {
+    display: none;
+}
 .breadcrumb {
     padding: 0 !important;
     li:first-child {
-        display: none !important;
+        // display: none !important;
     }
-    li a {
-        cursor: pointer;
-        text-decoration: underline;
-        font-size: 1.3rem;
+    li {
+        font-size: 0.9rem;
         font-weight: 600;
+        display: inline-block;
+        a {
+            cursor: pointer;
+            font-weight: 600;
+            text-decoration: underline;
+            text-decoration-skip: ink;
+        }
+    }
+    li::after {
+        content: '>';
+        padding: 0 0.5rem;
+        color: #555;
     }
 }
 .about-us .breadcrumb li {
     display: inline-block !important;
 }
-.events .breadcrumb,
-.training .breadcrumb,
-.services .breadcrumb {
-    display: none;
-}
+// .events .breadcrumb,
+// .training .breadcrumb {
+//     display: none;
+// }
 // .breadcrumb li:after {
 //     content: "/" !important;
 //     padding: 0 10px 0 5px !important;
 //     color: #999999 !important;
 // }
-.breadcrumb > li + li:last-child:after,
-.breadcrumb > li + li:before {
+.breadcrumb > li:last-child::after,
+.breadcrumb > li:before {
     content: " " !important;
     padding: 0 !important;
 }
 .breadcrumb li.active {
-    display: none !important;
+    // display: none !important;
+    color: #555;
 }
 
 
 // Content =====================================================================
 
-.media-centre .drupal.page.title {
-    display: none;
-}
-.drupal.edit.link {
-    position: absolute;
-    top: 0.75rem;
-    right: 0.75rem;
-    margin: 0;
-}
-
-.office-space {
-    .content img {
-        width: 100%;
-    }
-}
-
-.event-search {
-    .select-dropdown {
-        border: 1px solid #ccc;
-    }
-}
-.event-results {
-    .day {
-        font-size: 20px;
-        text-transform: uppercase;
-        font-weight: bold;
-    }
-    .date {
-        font-size: 16px;
-        font-weight: bold;
-    }
-    .title {
-        margin-top: 0.1em;
-        margin-bottom: 0.3em;
-    }
-    .description {
-
-    }
-    .cost {
-        font-size: 20px;
-        text-transform: uppercase;
-        font-weight: bold;
-        text-align: center;
-    }
-}
 
 // Footer ======================================================================
 
@@ -662,6 +656,7 @@ footer a {
 }
 footer a {
     text-decoration: underline;
+    text-decoration-skip: ink;
 }
 
 

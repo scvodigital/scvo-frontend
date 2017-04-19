@@ -110,3 +110,7 @@ Funders want to see good value so you may need to give three quotes for capital 
 ## What if you’re unsuccessful?
 
 If you’re turned down by a trust, try to find out why. It may give you clues as to any weakness in your approach, and let you know if it’s worth applying again
+
+# Next step
+
+[Success and sustainability](sucess-and-sustainability.md)

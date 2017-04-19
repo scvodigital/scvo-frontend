@@ -7,57 +7,54 @@ import { FormsModule, FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { rootRouterConfig } from "./app.routing";
 
 import { AngularFireModule } from 'angularfire2';
+import { DndModule } from 'ng2-dnd';
 import { Angulartics2Module, Angulartics2GoogleAnalytics } from 'angulartics2';
 import { SlimLoadingBarService, SlimLoadingBarModule } from 'ng2-slim-loading-bar';
-import { BreadcrumbService } from 'ng2-breadcrumb/ng2-breadcrumb';
+import { Ng2BreadcrumbModule } from 'ng2-breadcrumb/ng2-breadcrumb';
 import { MaterializeDirective, MaterializeModule } from 'angular2-materialize';
+import { DynamicComponentModule } from 'angular2-dynamic-component';
 
 /* Services */
 import { ElasticService } from "./services/elastic.service"
-import { DrupalService } from "./services/drupal.service"
 import { AppService } from "./services/app.service"
+// import { MetaService } from './services/meta.service';
 
 /* Components */
 import { AppComponent } from './app.component';
-import { HomeComponent } from './components/static/home.component';
-import { HeaderComponent } from './components/shared/header/header.component';
-import { MenuComponent } from './components/shared/header/menu.component';
-import { SearchInputComponent } from './components/shared/header/search-input.component';
-import { FooterComponent } from './components/shared/footer/footer.component';
-import { AboutComponent } from './components/static/about.component';
-import { HelpComponent } from './components/static/help.component';
-import { PolicyComponent } from './components/static/policy.component';
+import { HomeComponent } from './components/home/home.component';
+import { PageComponent } from './components/page/page.component';
+import { HeaderComponent } from './components/header/header.component';
+import { MenuComponent } from './components/menu/menu.component';
+// import { SearchInputComponent } from './components/shared/header/search-input.component';
+import { FooterComponent } from './components/footer/footer.component';
 import { PrivacyAndCookiesComponent } from './components/static/privacy-and-cookies.component';
 import { TermsAndConditionsComponent } from './components/static/terms-and-conditions.component';
-import { SiteSearchComponent } from './components/dynamic/search/site/elastic-results.component';
-import { DrupalRedirectComponent } from './components/dynamic/cms/drupal-redirect.component';
-import { DrupalPageComponent } from './components/dynamic/cms/drupal-page.component';
-import { DrupalPostComponent } from './components/dynamic/cms/drupal-post.component';
-import { DrupalPostListComponent } from './components/dynamic/cms/drupal-post-list.component';
-import { DrupalIndexComponent } from './components/dynamic/cms/drupal-index.component';
-import { DrupalMediaCentreComponent } from './components/dynamic/cms/drupal-media-centre.component';
-import { CJSSearchComponent } from './components/dynamic/search/cjs/elastic-results.component';
-import { GoodmovesSearchComponent } from './components/dynamic/search/goodmoves/elastic-results.component';
-import { TrainingSearchComponent } from './components/dynamic/search/training/elastic-results.component';
-import { TrainingResultComponent } from './components/dynamic/search/training/elastic-result-detail.component';
+
+import { InlineEditComponent } from './components/shared/inline-edit/inline-edit.component';
+
+/* Admin Components */
+import { AdminComponent } from './components/admin/admin.component';
+import { MenuListComponent } from './components/admin/menu-list/menu-list.component';
+import { MenuEditorComponent } from './components/admin/menu-editor/menu-editor.component';
+import { PageEditorComponent } from './components/admin/page-editor/page-editor.component';
+import { PageListComponent } from './components/admin/page-list/page-list.component';
+import { TranslationsManagerComponent } from './components/admin/translations-manager/translations-manager.component';
 
 /* Pipes */
 import { MarkdownToHtmlModule } from 'markdown-to-html-pipe';
 import { MapToIterablePipe } from './pipes/map-to-iterable.pipe';
 import { MarkdownPipe } from './pipes/markdown.pipe';
 import { StringToDatePipe } from './pipes/string-to-date.pipe';
+import { TranslatePipe } from './pipes/translate.pipe';
+import { KeysPipe } from './pipes/keys.pipe';
+import { ReplacePipe } from './pipes/replace.pipe';
+import { SlugifyPipe } from './pipes/slugify.pipe';
 
 /* Directives */
+// none
 
-
-/* Firebase */
-export const firebaseConfig = {
-    apiKey: "AIzaSyDQl9Xs3yzgqBEr4dYAeu19NMDh8X9hJ6A",
-    authDomain: "scvo-frontend.firebaseapp.com",
-    databaseURL: "https://scvo-frontend.firebaseio.com",
-    storageBucket: "scvo-frontend.appspot.com",
-    messagingSenderId: "814304031954"
-}
+/* Consiguration */
+import { firebaseConfig } from './configuration/firebase';
 
 @NgModule({
     imports: [
@@ -67,44 +64,43 @@ export const firebaseConfig = {
         RouterModule.forRoot(rootRouterConfig),
         AngularFireModule.initializeApp(firebaseConfig),
         Angulartics2Module.forRoot([Angulartics2GoogleAnalytics]),
+        DndModule.forRoot(),
+        Ng2BreadcrumbModule.forRoot(),
         ReactiveFormsModule,
-        MarkdownToHtmlModule,
         MaterializeModule,
+        MarkdownToHtmlModule,
+        DynamicComponentModule,
         SlimLoadingBarModule.forRoot()
     ],
     declarations: [
         AppComponent,
         HomeComponent,
+        PageComponent,
         HeaderComponent,
         MenuComponent,
-        SearchInputComponent,
+        // SearchInputComponent,
         FooterComponent,
-        AboutComponent,
-        HelpComponent,
-        PolicyComponent,
         PrivacyAndCookiesComponent,
         TermsAndConditionsComponent,
-        SiteSearchComponent,
-        DrupalIndexComponent,
-        DrupalMediaCentreComponent,
-        DrupalPageComponent,
-        DrupalPostListComponent,
-        DrupalPostComponent,
-        DrupalRedirectComponent,
-        CJSSearchComponent,
-        GoodmovesSearchComponent,
-        TrainingSearchComponent,
-        TrainingResultComponent,
+        AdminComponent,
+        MenuListComponent,
+        MenuEditorComponent,
+        PageEditorComponent,
+        InlineEditComponent,
+        PageListComponent,
+        TranslationsManagerComponent,
         MapToIterablePipe,
         MarkdownPipe,
-        StringToDatePipe
+        StringToDatePipe,
+        TranslatePipe,
+        KeysPipe,
+        ReplacePipe,
+        SlugifyPipe
     ],
     providers: [
-        // Angulartics2,
         SlimLoadingBarService,
-        BreadcrumbService,
+        // MetaService,
         ElasticService,
-        DrupalService,
         AppService
     ],
     bootstrap: [AppComponent]

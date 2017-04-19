@@ -1,0 +1,22 @@
+<button type="button" class="btn pull-right" (click)="save()">
+    Save
+    <!-- <i class="fa fa-fw fa-floppy"></i> -->
+</button>
+
+<h2>Page editor: {{ pageName | replace:'/_/':'g':'/' }}</h2>
+
+<div class="input-field">
+    <select [(ngModel)]="selectedLanguage" name="changeLanguage" id="changeLanguage" class="browser-default">
+        <option *ngFor="let language of languages" [value]="language">Language: {{language}}</option>
+    </select>
+</div>
+<div class="input-field">
+    <textarea [(ngModel)]="translations[selectedLanguage]" id="page-editor"></textarea>
+</div>
+
+<button type="button" class="btn right" (click)="save()">
+    Save
+    <!-- <i class="fa fa-fw fa-floppy"></i> -->
+</button>
+
+<div materialize="toast" [materializeActions]="toasterActions"></div>
