@@ -20,6 +20,7 @@ import { AppService } from "./services/app.service"
 // import { MetaService } from './services/meta.service';
 
 /* Components */
+import { SiteComponent } from './common/base.component';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { PageComponent } from './components/page/page.component';
@@ -73,6 +74,7 @@ import { firebaseConfig } from './configuration/firebase';
         SlimLoadingBarModule.forRoot()
     ],
     declarations: [
+        SiteComponent,
         AppComponent,
         HomeComponent,
         PageComponent,

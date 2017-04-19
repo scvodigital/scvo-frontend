@@ -18,7 +18,7 @@ npm i
 ```
 npm start
 ```
-Navigate to [localhost:9000](http://localhost:9000). The app will automatically reload if you change any of the source files.
+Navigate to [localhost:2000](http://localhost:2000). The app will automatically reload if you change any of the source files.
 
 ## Running unit tests
 Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
@@ -41,7 +41,7 @@ This builds minified code and deploys via Firebase.
 ## Information
 The repository [wiki](https://github.com/scvodigital/scvo-frontend/wiki) will contain project documentation.
 
-The website address is [digitalparticipation.scot](https://digitalparticipation.scot).
+The website address is [beta.scvo.org](https://beta.scvo.org).
 
 * [Documentation](https://github.com/scvodigital/scvo-frontend/wiki)
 * [Bug tracker](https://github.com/scvodigital/scvo-frontend/issues)
