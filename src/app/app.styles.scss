@@ -233,13 +233,31 @@ h6 {
     font-weight: 600;
     margin: 0;
 }
+
+p {
+    margin: 0 0 1rem;
+}
+
 main {
     .container-fluid {
         padding: 0 0 0.5rem;
         // padding: 128px 0 0.5rem;
     }
     a:link {
+        text-decoration: none;
+    }
+    a:hover {
         text-decoration: underline;
+        text-decoration-skip: ink;
+        text-decoration-style: solid;
+    }
+    a[href^="http://"]::after,
+    a[href^="https://"]::after {
+        font-family: 'FontAwesome';
+        content: "\f08e";
+        margin-left: 0.25rem;
+        text-decoration: none;
+        display: inline-block;
     }
     .card a:link, a.btn:link {
         text-decoration: none;
@@ -248,6 +266,14 @@ main {
         padding: 0 0 0 1.5rem;
         li {
             list-style-type: disc;
+        }
+    }
+    app-admin {
+        ul:not(.browser-default) {
+            padding: 0;
+            li {
+                list-style-type: none;
+            }
         }
     }
     ul.select-dropdown {
@@ -553,11 +579,9 @@ a.btn {
     left: 0;
 }
 
-
 // temporary fix for Materialize bug with Mac Chrome -
 // https://github.com/Dogfalo/materialize/issues/3161
 .nav-wrapper, .nav-wrapper form, .nav-wrapper form .input-field { height: 100%; }
-
 
 // Breadcrumb ==================================================================
 
@@ -580,6 +604,7 @@ a.btn {
             cursor: pointer;
             font-weight: 600;
             text-decoration: underline;
+            text-decoration-skip: ink;
         }
     }
     li::after {
@@ -613,51 +638,6 @@ a.btn {
 
 // Content =====================================================================
 
-.media-centre .drupal.page.title {
-    display: none;
-}
-.drupal.edit.link {
-    position: absolute;
-    top: 0.75rem;
-    right: 0.75rem;
-    margin: 0;
-}
-
-.office-space {
-    .content img {
-        width: 100%;
-    }
-}
-
-.event-search {
-    .select-dropdown {
-        border: 1px solid #ccc;
-    }
-}
-.event-results {
-    .day {
-        font-size: 20px;
-        text-transform: uppercase;
-        font-weight: bold;
-    }
-    .date {
-        font-size: 16px;
-        font-weight: bold;
-    }
-    .title {
-        margin-top: 0.1em;
-        margin-bottom: 0.3em;
-    }
-    .description {
-
-    }
-    .cost {
-        font-size: 20px;
-        text-transform: uppercase;
-        font-weight: bold;
-        text-align: center;
-    }
-}
 
 // Footer ======================================================================
 
@@ -676,6 +656,7 @@ footer a {
 }
 footer a {
     text-decoration: underline;
+    text-decoration-skip: ink;
 }
 
 

@@ -9,6 +9,8 @@ import { MarkdownToHtmlPipe } from 'markdown-to-html-pipe';
 import { AppService } from '../../services/app.service';
 import { SiteComponent } from '../../common/base.component';
 
+declare var $: any;
+
 @Component({
     selector: 'main-container.content, page-content',
     templateUrl: './page.component.html'
@@ -64,6 +66,9 @@ export class PageComponent extends SiteComponent {
                 this.displayContent(this.router.url.substr(1));
             });
         }
+
+        // $("a[href^='http://']").attr("target","_blank");
+        // $("a[href^='https://']").attr("target","_blank");
     }
 
     displayContent(page: string){
