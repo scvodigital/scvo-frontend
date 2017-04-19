@@ -15,8 +15,7 @@ before_script:
   - echo -e "Host github.com\n\tStrictHostKeyChecking no\n" >> ~/.ssh/config
 
 script:
-  - npm run build
-  - firebase deploy --project scvo-frontend --token ${FIREBASE_TOKEN}
+  - grunt firebase-deploy
 
 notifications:
   slack: scvodigital:BPrM2dvC1icb0UHwglQ5DBfI
