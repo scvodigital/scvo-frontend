@@ -1,15 +1,13 @@
 {
   "name": "scvo-frontend",
   "version": "0.4.0",
-  "description": "SCVO Website",
+  "license": "MIT",
+  "angular-cli": {},
   "scripts": {
     "ng": "ng",
-    "start": "ng serve -p 2000",
+    "start": "grunt build-icons && ng serve -p 2000",
     "lint": "tslint \"src/**/*.ts\" --project src/tsconfig.json --type-check && tslint \"e2e/**/*.ts\" --project e2e/tsconfig.json --type-check",
     "test": "ng test",
-    "build": "rm -rf ./dist && ng build --prod --env=prod",
-    "deploy": "npm run build && npm run firebase-deploy",
-    "firebase-deploy": "firebase deploy --project digital-participation-charter",
     "pree2e": "webdriver-manager update --standalone false --gecko false",
     "e2e": "protractor"
   },
@@ -67,6 +65,9 @@
     "@types/jasmine": "^2.5.47",
     "@types/node": "^7.0.13",
     "codelyzer": "^3.0.0-beta.4",
+    "grunt": "^1.0.1",
+    "grunt-exec": "^2.0.0",
+    "grunt-fontello": "^0.3.3",
     "jasmine-core": "^2.5.2",
     "jasmine-spec-reporter": "^4.0.0",
     "karma": "^1.6.0",
@@ -76,6 +77,7 @@
     "karma-remap-istanbul": "^0.6.0",
     "protractor": "^5.1.1",
     "ts-node": "^3.0.2",
+    "node-async-require": "https://github.com/jaydenlin/node-async-require/tarball/master",
     "tslint": "^5.1.0",
     "typescript": "^2.2.2"
   },
