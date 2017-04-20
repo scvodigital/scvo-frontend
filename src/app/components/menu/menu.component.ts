@@ -2,8 +2,6 @@ import { Component, Input, NgZone, Inject } from '@angular/core';
 import { Subscription, Observable } from 'rxjs/Rx';
 import { AppService, MenuElement } from '../../services/app.service';
 
-// import { TranslatePipe } from '../pipes/translate.pipe';
-
 @Component({
   selector: '[menu]',
   templateUrl: './menu.component.html'

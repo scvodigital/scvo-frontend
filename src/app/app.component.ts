@@ -17,7 +17,7 @@ declare var $: any;
 export class AppComponent {
     public pathClasses: string;
 
-    constructor(public router: Router, public _appService: AppService, private breadcrumbService: BreadcrumbService) {
+    constructor(public router: Router, public _appService: AppService, private breadcrumbService: BreadcrumbService, private translatePipe: TranslatePipe) {
         // On navigation
         this.router.events.subscribe(event => {
             if (event instanceof NavigationEnd) {
@@ -33,16 +33,6 @@ export class AppComponent {
             }
         });
 
-        breadcrumbService.addCallbackForRouteRegex('.*', this.getLabelForBreadcrumb);
-    }
-
-    getLabelForBreadcrumb(breadcrumb:string):string {
-        if (breadcrumb) {
-            // return breadcrumb;
-            return 'breadcrumb:-'+breadcrumb;
-            // return this._translatePipe.transform('breadcrumb:-'+breadcrumb, 'en');
-        } else {
-            return '';
-        }
+        breadcrumbService.addCallbackForRouteRegex('.*', breadcrumb => this.translatePipe.transform('title:-'+breadcrumb, 'en'));
     }
 }
