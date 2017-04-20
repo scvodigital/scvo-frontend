@@ -13,9 +13,9 @@ declare var $: any;
 
 @Component({
     selector: 'main-container.content, page-content',
-    templateUrl: './page.component.html'
+    templateUrl: './post.component.html'
 })
-export class PageComponent extends SiteComponent {
+export class BlogPostComponent extends SiteComponent {
     @Input('embedded') embedded: string;
 
     private _content: string = '';
@@ -66,7 +66,7 @@ export class PageComponent extends SiteComponent {
     }
 
     displayContent(page: string){
-        var md = this.appService.getPage(page);
+        var md = 'test';//this.appService.getPage(page);
         var m2h = new MarkdownToHtmlPipe();
         var html = m2h.transform(md, { renderer: this.renderer });
         this.content = html;

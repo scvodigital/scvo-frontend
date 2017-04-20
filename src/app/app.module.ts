@@ -24,6 +24,8 @@ import { SiteComponent } from './common/base.component';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { PageComponent } from './components/page/page.component';
+import { BlogListComponent } from './components/post/post-list.component';
+import { BlogPostComponent } from './components/post/post.component';
 import { HeaderComponent } from './components/header/header.component';
 import { MenuComponent } from './components/menu/menu.component';
 // import { SearchInputComponent } from './components/shared/header/search-input.component';
@@ -78,6 +80,8 @@ import { firebaseConfig } from './configuration/firebase';
         AppComponent,
         HomeComponent,
         PageComponent,
+        BlogListComponent,
+        BlogPostComponent,
         HeaderComponent,
         MenuComponent,
         // SearchInputComponent,
