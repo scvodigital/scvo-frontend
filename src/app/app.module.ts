@@ -3,6 +3,7 @@ import { HttpModule } from '@angular/http';
 import { RouterModule } from "@angular/router";
 import { BrowserModule, Title } from '@angular/platform-browser';
 import { FormsModule, FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import 'hammerjs';
 
 import { rootRouterConfig } from "./app.routing";
 
@@ -11,8 +12,12 @@ import { DndModule } from 'ng2-dnd';
 import { Angulartics2Module, Angulartics2GoogleAnalytics } from 'angulartics2';
 import { SlimLoadingBarService, SlimLoadingBarModule } from 'ng2-slim-loading-bar';
 import { Ng2BreadcrumbModule } from 'ng2-breadcrumb/ng2-breadcrumb';
-import { MaterializeDirective, MaterializeModule } from 'angular2-materialize';
+// import { MaterializeDirective, MaterializeModule } from 'angular2-materialize';
 import { DynamicComponentModule } from 'angular2-dynamic-component';
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MaterialModule } from '@angular/material';
+import { MdButtonModule, MdCheckboxModule } from '@angular/material';
 
 /* Services */
 import { ElasticService } from "./services/elastic.service"
@@ -24,6 +29,7 @@ import { SiteComponent } from './common/base.component';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { PageComponent } from './components/page/page.component';
+import { CampaignsPageComponent } from './components/campaigns/campaigns-page.component';
 import { BlogListComponent } from './components/post/post-list.component';
 import { BlogPostComponent } from './components/post/post.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -70,7 +76,11 @@ import { firebaseConfig } from './configuration/firebase';
         DndModule.forRoot(),
         Ng2BreadcrumbModule.forRoot(),
         ReactiveFormsModule,
-        MaterializeModule,
+        // MaterializeModule,
+        BrowserAnimationsModule,
+        MaterialModule.forRoot(),
+        MdButtonModule,
+        MdCheckboxModule,
         MarkdownToHtmlModule,
         DynamicComponentModule,
         SlimLoadingBarModule.forRoot()
@@ -80,6 +90,7 @@ import { firebaseConfig } from './configuration/firebase';
         AppComponent,
         HomeComponent,
         PageComponent,
+        CampaignsPageComponent,
         BlogListComponent,
         BlogPostComponent,
         HeaderComponent,

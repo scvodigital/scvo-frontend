@@ -1,7 +1,7 @@
 import { Component, OnInit, EventEmitter } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { MaterializeAction } from 'angular2-materialize';
+// import { MaterializeAction } from 'angular2-materialize';
 
 import { AppService } from '../../../services/app.service';
 import { SiteComponent } from '../../../common/base.component';
@@ -81,15 +81,15 @@ export class TranslationsManagerComponent extends SiteComponent {
     onSiteLoaded() {
     }
 
-    toasterActions = new EventEmitter<string | MaterializeAction>();
+    // toasterActions = new EventEmitter<string | MaterializeAction>();
 
     onEdit(value, key, language){
         this.keys[key][language] = value;
         this.appService.saveTranslations().then(() => {
-            this.toasterActions.emit({ action: 'toast', params: ['Translation saved', 4000, 'green white-text'] });
+            // this.toasterActions.emit({ action: 'toast', params: ['Translation saved', 4000, 'green white-text'] });
         }).catch((err) => {
             console.error('Failed to save translation', key, language, value, err);
-            this.toasterActions.emit({ action: 'toast', params: ['Translation failed to save', 4000, 'red white-text'] });
+            // this.toasterActions.emit({ action: 'toast', params: ['Translation failed to save', 4000, 'red white-text'] });
         });
     }
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 
-import { MaterializeDirective, MaterializeAction } from "angular2-materialize";
+// import { MaterializeDirective, MaterializeAction } from "angular2-materialize";
 
 import { AppService } from '../../../services/app.service';
 import { SiteComponent } from '../../../common/base.component';
@@ -24,14 +24,14 @@ export class PageListComponent extends SiteComponent {
     onSiteLoaded() {
     }
 
-    modalNewActions = new EventEmitter<string | MaterializeAction>();
+    // modalNewActions = new EventEmitter<string | MaterializeAction>();
     newPage: string = null;
     newPageError: string = null;
 
     showNewPage(){
         this.newPage = null;
         this.newPageError = null;
-        this.modalNewActions.emit({ action: "modal", params: ['open'] });
+        // this.modalNewActions.emit({ action: "modal", params: ['open'] });
     }
 
     createPage(){
@@ -58,11 +58,11 @@ export class PageListComponent extends SiteComponent {
 
             this.appService.savePage(path).then(() => {
                 this.router.navigate(['/admin/page-editor', path]);
-                this.modalNewActions.emit({ action: "modal", params: ['close'] });
-                this.modalNewActions.emit({ action: 'toast', params: ['Menu updated', 4000, 'green white-text'] });
+                // this.modalNewActions.emit({ action: "modal", params: ['close'] });
+                // this.modalNewActions.emit({ action: 'toast', params: ['Menu updated', 4000, 'green white-text'] });
             }).catch((err) => {
                 this.newPageError = err;
-                this.modalNewActions.emit({ action: 'toast', params: ['Error creating new page', 4000, 'red white-text'] });
+                // this.modalNewActions.emit({ action: 'toast', params: ['Error creating new page', 4000, 'red white-text'] });
             });
         }
     }

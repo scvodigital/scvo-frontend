@@ -1,6 +1,8 @@
-import { Component, Input, NgZone, Inject } from '@angular/core';
+import { Component, Input, ViewChild, NgZone, Inject } from '@angular/core';
 import { Subscription, Observable } from 'rxjs/Rx';
 import { AppService, MenuElement } from '../../services/app.service';
+
+// import { MdMenuTrigger } from "@angular/material";
 
 @Component({
   selector: '[menu]',
@@ -8,6 +10,7 @@ import { AppService, MenuElement } from '../../services/app.service';
 })
 export class MenuComponent {
     @Input('menu') menuName: string = null;
+    // @ViewChild(MdMenuTrigger) trigger: MdMenuTrigger;
 
     constructor(private appService: AppService) {}
 

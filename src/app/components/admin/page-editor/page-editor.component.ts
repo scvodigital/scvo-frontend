@@ -1,7 +1,7 @@
 import { Component, OnInit, EventEmitter } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { MaterializeAction } from 'angular2-materialize';
+// import { MaterializeAction } from 'angular2-materialize';
 import { MarkdownToHtmlPipe } from 'markdown-to-html-pipe';
 
 import { AppService } from '../../../services/app.service';
@@ -57,7 +57,7 @@ export class PageEditorComponent extends SiteComponent {
     constructor(appService: AppService, private route: ActivatedRoute) { super(appService); }
 
     editor: any;
-    toasterActions = new EventEmitter<string | MaterializeAction>();
+    // toasterActions = new EventEmitter<string | MaterializeAction>();
 
     onSiteLoaded() {
         this.route.params.subscribe(params => {
@@ -74,10 +74,10 @@ export class PageEditorComponent extends SiteComponent {
 
     save(){
         this.appService.savePage(this.pageName).then(() => {
-            this.toasterActions.emit({ action: 'toast', params: ['Page saved', 4000, 'green white-text'] });
+            // this.toasterActions.emit({ action: 'toast', params: ['Page saved', 4000, 'green white-text'] });
         }).catch((err) => {
             console.error('Error saving page', err);
-            this.toasterActions.emit({ action: 'toast', params: ['Error saving page', 4000, 'red white-text'] });
+            // this.toasterActions.emit({ action: 'toast', params: ['Error saving page', 4000, 'red white-text'] });
         });
     }
 

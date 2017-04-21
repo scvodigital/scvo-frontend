@@ -27,7 +27,9 @@ html {
 }
 body {
     padding: 0;
+    margin: 0;
     font-family: $base-font-family;
+    font-size: 1rem;
     min-height: 100%;
     background-color: #263238;
 }
@@ -83,12 +85,17 @@ h6 {
 p {
     margin: 0 0 1rem;
 }
-
-main {
-    .container-fluid {
-        padding: 0 0 0.5rem;
-        // padding: 128px 0 0.5rem;
+.white-text {
+    color: white;
+    a {
+        color: white !important;
     }
+}
+main.projects-campaigns {
+    padding: 0;
+}
+main {
+    padding: 0 0 0.5rem;
     a:link {
         text-decoration: none;
     }
@@ -185,7 +192,12 @@ h1.parent_title a {
     text-transform: capitalize;
 }
 
+
 // Navbar ======================================================================
+
+.mat-menu-panel {
+    margin-top: 64px;
+}
 
 header {
     transition: all 0.5s ease;
@@ -193,23 +205,50 @@ header {
     // z-index: 100;
     // width: 100%;
     padding-bottom: 0;
-    nav {
+    .mat-toolbar {
+        background-color: transparent;
         box-shadow: none;
+        font-size: 1rem;
+        padding: 0;
         .material-icons {
-            line-height: inherit;
+            // line-height: inherit;
+            height: 1.75rem;
+            width: 1rem;
+            vertical-align: middle;
             display: inline-block;
         }
-        ul a {
-            display: inline-block;
+        .mat-button {
+            font-family: $base-font-family !important;
+            min-width: inherit;
         }
-        ul a:hover {
-            background-color: rgba(0, 0, 0, 0.2);
+        ul {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            li {
+                list-style-type: none;
+                display: inline-block;
+                button {
+                    color: white;
+                    min-height: 64px;
+                    line-height: 64px;
+                    padding: 0 1rem;
+                    display: block;
+                    text-decoration: none;
+                }
+                button:hover {
+                    background-color: rgba(0, 0, 0, 0.2);
+                }
+            }
+        }
+        .list-inline.right {
+            text-align: right;
         }
     }
-    nav.brand {
+    .mat-toolbar .brand {
         background-color: transparent;
     }
-    nav.navigation {
+    .mat-toolbar .navigation {
         background-color: rgba(0,0,0,0.1);
     }
 }
@@ -408,8 +447,8 @@ a.btn {
     }
     .version {
         position: absolute;
-        top: 18px;
-        left: 27px;
+        top: 4px;
+        right: -18px;
         line-height: 1em;
         font-family: $base-font-family;
         font-size: 0.9rem;
@@ -434,11 +473,13 @@ a.btn {
 .container-breadcrumb.row {
     margin-bottom: 0;
 }
-.home .container-breadcrumb {
+.home .container-breadcrumb,
+.projects-campaigns .container-breadcrumb {
     display: none;
 }
 .breadcrumb {
-    padding: 0 !important;
+    padding: 1rem 0 !important;
+    margin: 0;
     li:first-child {
         // display: none !important;
     }
