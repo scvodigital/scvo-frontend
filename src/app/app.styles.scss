@@ -195,8 +195,11 @@ h1.parent_title a {
 
 // Navbar ======================================================================
 
-.mat-menu-panel {
-    margin-top: 64px;
+// .mat-menu-panel {
+//     margin-top: 64px;
+// }
+.cdk-overlay-pane {
+    top: 128px !important;
 }
 
 header {
@@ -205,6 +208,9 @@ header {
     // z-index: 100;
     // width: 100%;
     padding-bottom: 0;
+    .mat-toolbar-row {
+        height: auto;
+    }
     .mat-toolbar {
         background-color: transparent;
         box-shadow: none;
@@ -217,28 +223,53 @@ header {
             vertical-align: middle;
             display: inline-block;
         }
-        .mat-button {
-            font-family: $base-font-family !important;
-            min-width: inherit;
-        }
         ul {
             margin: 0;
             padding: 0;
             width: 100%;
+        	list-style: none;
+        	position: relative;
+            transition: all 0.5s ease;
             li {
                 list-style-type: none;
                 display: inline-block;
-                button {
+                a {
                     color: white;
                     min-height: 64px;
                     line-height: 64px;
                     padding: 0 1rem;
                     display: block;
                     text-decoration: none;
+                    font-family: $base-font-family !important;
+                    font-size: 0.92rem !important;
+                    min-width: inherit;
                 }
-                button:hover {
+                a:hover {
                     background-color: rgba(0, 0, 0, 0.2);
                 }
+            }
+            ul {
+                background-color: rgba(0, 0, 0, 0.2);
+            	display: none;
+            	position: absolute;
+            	top: 64px; /* the height of the main nav */
+                li {
+                    min-width: 170px;
+                    float: none;
+                    display: list-item;
+                    position: relative;
+                    padding: 0;
+                }
+                ul li {
+                	position: relative;
+                	top: -60px;
+                	left: 170px;
+                }
+            }
+            li:hover > ul {
+                width: auto;
+            	display: inherit !important;
+                z-index: 100;
             }
         }
         .list-inline.right {
@@ -249,7 +280,7 @@ header {
         background-color: transparent;
     }
     .mat-toolbar .navigation {
-        background-color: rgba(0,0,0,0.1);
+        background-color: rgba(0, 0, 0, 0.2);
     }
 }
 header.scroll {
@@ -384,7 +415,7 @@ a.btn {
     .dropdown-content {
         max-height: 1000px;
         li {
-            background-color: rgba(0, 0, 0, 0.1);
+            background-color: rgba(0, 0, 0, 0.2);
             a {
                 color: white;
                 font-size: 1rem;
@@ -405,7 +436,7 @@ a.btn {
         background-color: rgba(0, 0, 0, 0.1);
     }
     .dropdown-content li > a, .dropdown-content li > span {
-        padding: 14px 15px;
+        // padding: 14px 15px;
     }
     .collapsible-header {
         font-weight: bold;
