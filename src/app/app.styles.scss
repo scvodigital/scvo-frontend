@@ -247,29 +247,42 @@ header {
                 a:hover {
                     background-color: rgba(0, 0, 0, 0.2);
                 }
-            }
-            ul {
-                background-color: rgba(0, 0, 0, 0.2);
-            	display: none;
-            	position: absolute;
-            	top: 64px; /* the height of the main nav */
-                li {
-                    min-width: 170px;
-                    float: none;
-                    display: list-item;
-                    position: relative;
-                    padding: 0;
+                ul#dropdown-menu-main-1 {
+                    min-width: 237.5px;
                 }
-                ul li {
-                	position: relative;
-                	top: -60px;
-                	left: 170px;
+                ul {
+                    width: auto !important;
+                    background-color: rgba(0, 0, 0, 0.2);
+                    display: inherit !important;
+                    position: absolute;
+                    top: 64px; /* the height of the main nav */
+                    z-index:1;
+                    max-height:0;
+                    overflow:hidden;
+                    -webkit-transform:perspective(300) rotate3d(1,0,0,-90deg);
+                    -webkit-transform-origin:50% 0;
+                    -webkit-transition:250ms;
+                    -moz-transition:250ms;
+                    -o-transition:250ms;
+                    transition:250ms;
+                    li {
+                        min-width: 170px;
+                        float: none;
+                        display: list-item;
+                        position: relative;
+                        padding: 0;
+                    }
+                    ul li {
+                        position: relative;
+                        top: -60px;
+                        left: 170px;
+                    }
                 }
             }
             li:hover > ul {
-                width: auto;
-            	display: inherit !important;
                 z-index: 100;
+                max-height: 1000px;
+                -webkit-transform:perspective(100) rotate3d(0,0,0,0);
             }
         }
         .list-inline.right {
@@ -279,7 +292,7 @@ header {
     .mat-toolbar .brand {
         background-color: transparent;
     }
-    .mat-toolbar .navigation {
+    .mat-toolbar .nav {
         background-color: rgba(0, 0, 0, 0.2);
     }
 }

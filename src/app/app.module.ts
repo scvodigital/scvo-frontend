@@ -29,6 +29,7 @@ import { SiteComponent } from './common/base.component';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { PageComponent } from './components/page/page.component';
+import { ServicesPageComponent } from './components/services/services-page.component';
 import { CampaignsPageComponent } from './components/campaigns/campaigns-page.component';
 import { BlogListComponent } from './components/post/post-list.component';
 import { BlogPostComponent } from './components/post/post.component';
@@ -90,6 +91,7 @@ import { firebaseConfig } from './configuration/firebase';
         AppComponent,
         HomeComponent,
         PageComponent,
+        ServicesPageComponent,
         CampaignsPageComponent,
         BlogListComponent,
         BlogPostComponent,

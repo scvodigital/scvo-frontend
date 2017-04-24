@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 
 import { HomeComponent } from './components/home/home.component';
 import { PageComponent } from './components/page/page.component';
+import { ServicesPageComponent } from './components/services/services-page.component';
 import { CampaignsPageComponent } from './components/campaigns/campaigns-page.component';
 import { BlogListComponent } from './components/post/post-list.component';
 import { BlogPostComponent } from './components/post/post.component';
@@ -32,6 +33,7 @@ export const rootRouterConfig: Routes = [
             { path: 'translations', component: TranslationsManagerComponent },
         ]
     },
+    { path: 'services', component: ServicesPageComponent },
     { path: 'projects-campaigns', component: CampaignsPageComponent },
     { path: 'policy-research/blogs', component: BlogListComponent },
     { path: 'policy-research/blogs/:slug', component: BlogPostComponent },
