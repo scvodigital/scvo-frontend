@@ -1,3 +1,7 @@
+/* Routes */
+import { rootRouterConfig } from "./app.routing";
+
+/* Modules */
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
 import { RouterModule } from "@angular/router";
@@ -5,15 +9,12 @@ import { BrowserModule, Title } from '@angular/platform-browser';
 import { FormsModule, FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import 'hammerjs';
 
-import { rootRouterConfig } from "./app.routing";
-
 import { AngularFireModule } from 'angularfire2';
 import { DndModule } from 'ng2-dnd';
 import { Angulartics2Module, Angulartics2GoogleAnalytics } from 'angulartics2';
+import { DynamicComponentModule } from 'angular2-dynamic-component';
 import { SlimLoadingBarService, SlimLoadingBarModule } from 'ng2-slim-loading-bar';
 import { Ng2BreadcrumbModule } from 'ng2-breadcrumb/ng2-breadcrumb';
-// import { MaterializeDirective, MaterializeModule } from 'angular2-materialize';
-import { DynamicComponentModule } from 'angular2-dynamic-component';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from '@angular/material';
@@ -33,6 +34,7 @@ import { ServicesPageComponent } from './components/services/services-page.compo
 import { CampaignsPageComponent } from './components/campaigns/campaigns-page.component';
 import { BlogListComponent } from './components/post/post-list.component';
 import { BlogPostComponent } from './components/post/post.component';
+import { LoanCalculatorComponent } from './components/credit-union/loan-calculator.component';
 import { HeaderComponent } from './components/header/header.component';
 import { MenuComponent } from './components/menu/menu.component';
 // import { SearchInputComponent } from './components/shared/header/search-input.component';
@@ -40,14 +42,13 @@ import { FooterComponent } from './components/footer/footer.component';
 import { PrivacyAndCookiesComponent } from './components/static/privacy-and-cookies.component';
 import { TermsAndConditionsComponent } from './components/static/terms-and-conditions.component';
 
-import { InlineEditComponent } from './components/shared/inline-edit/inline-edit.component';
-
 /* Admin Components */
 import { AdminComponent } from './components/admin/admin.component';
 import { MenuListComponent } from './components/admin/menu-list/menu-list.component';
 import { MenuEditorComponent } from './components/admin/menu-editor/menu-editor.component';
-import { PageEditorComponent } from './components/admin/page-editor/page-editor.component';
 import { PageListComponent } from './components/admin/page-list/page-list.component';
+import { PageEditorComponent } from './components/admin/page-editor/page-editor.component';
+import { InlineEditComponent } from './components/shared/inline-edit/inline-edit.component';
 import { TranslationsManagerComponent } from './components/admin/translations-manager/translations-manager.component';
 
 /* Pipes */
@@ -63,20 +64,20 @@ import { SlugifyPipe } from './pipes/slugify.pipe';
 /* Directives */
 // none
 
-/* Consiguration */
+/* Configuration */
 import { firebaseConfig } from './configuration/firebase';
 
 @NgModule({
     imports: [
         BrowserModule,
         FormsModule,
+        ReactiveFormsModule,
         HttpModule,
         RouterModule.forRoot(rootRouterConfig),
         AngularFireModule.initializeApp(firebaseConfig),
         Angulartics2Module.forRoot([Angulartics2GoogleAnalytics]),
         DndModule.forRoot(),
         Ng2BreadcrumbModule.forRoot(),
-        ReactiveFormsModule,
         // MaterializeModule,
         BrowserAnimationsModule,
         MaterialModule.forRoot(),
@@ -95,6 +96,7 @@ import { firebaseConfig } from './configuration/firebase';
         CampaignsPageComponent,
         BlogListComponent,
         BlogPostComponent,
+        LoanCalculatorComponent,
         HeaderComponent,
         MenuComponent,
         // SearchInputComponent,

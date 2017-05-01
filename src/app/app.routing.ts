@@ -6,6 +6,7 @@ import { ServicesPageComponent } from './components/services/services-page.compo
 import { CampaignsPageComponent } from './components/campaigns/campaigns-page.component';
 import { BlogListComponent } from './components/post/post-list.component';
 import { BlogPostComponent } from './components/post/post.component';
+import { LoanCalculatorComponent } from './components/credit-union/loan-calculator.component';
 import { PrivacyAndCookiesComponent } from './components/static/privacy-and-cookies.component';
 import { TermsAndConditionsComponent } from './components/static/terms-and-conditions.component';
 
@@ -22,6 +23,11 @@ export const rootRouterConfig: Routes = [
     // { path: ':path', component: SiteSearchComponent },
     { path: 'privacy-and-cookies', component: PrivacyAndCookiesComponent },
     { path: 'terms-and-conditions', component: TermsAndConditionsComponent },
+    { path: 'services', component: ServicesPageComponent },
+    { path: 'services/credit-union/loan-calculator', component: LoanCalculatorComponent },
+    { path: 'projects-campaigns', component: CampaignsPageComponent },
+    { path: 'policy-research/blogs', component: BlogListComponent },
+    { path: 'policy-research/blogs/:slug', component: BlogPostComponent },
     {
         path: 'admin',
         component: AdminComponent,
@@ -33,9 +39,5 @@ export const rootRouterConfig: Routes = [
             { path: 'translations', component: TranslationsManagerComponent },
         ]
     },
-    { path: 'services', component: ServicesPageComponent },
-    { path: 'projects-campaigns', component: CampaignsPageComponent },
-    { path: 'policy-research/blogs', component: BlogListComponent },
-    { path: 'policy-research/blogs/:slug', component: BlogPostComponent },
     { path: '**', component: PageComponent }
 ];

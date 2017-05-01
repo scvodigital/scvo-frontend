@@ -1,0 +1,39 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col s12 page-content">
+            <h1>Loan calculator</h1>
+            <p>This calculator is for guidance purposes only. Please contact us for exact figures on 0131 474 8003 or <a href="mailto:credit.union@scvo.org.uk">credit.union@scvo.org.uk</a></p>
+
+            <h3>Enter loan requirements</h3>
+            <form novalidate class="form-group" [formGroup]="loanDetails">
+                <div class="control-group"><label class="control-label">How long would you like to repay the loan?<br>
+                    <small>(from 1 month up to 36 months)</small></label><p></p>
+                    <div class="controls"><input type="number" formControlName="expectedRepaymentTerm" (change)="displayRepayment()" /></div>
+                </div>
+                <div class="control-group"><label class="control-label">How much would you like to borrow?</label><p></p>
+                    <div class="controls">£ <input type="number" formControlName="sumLent" (change)="displayRepayment()" /></div>
+                </div>
+                <div class="control-group"><label class="control-label">Installments:</label><p></p>
+                    <div class="controls">£ <input type="v" formControlName="meanRepayment" (change)="calculateMaxLoan()" /> each <input type="text" formControlName="rPeriodDisp" /></div>
+                </div>
+                <div class="control-group"><label class="control-label">Total repaid:<br>
+                    <small>(amount borrowed + interest)</small></label><p></p>
+                    <div class="controls">£ <input type="number" formControlName="totalRepaid" /></div>
+                </div>
+                <div class="control-group"><label class="control-label">Total cost of loan (interest):</label><p></p>
+                    <div class="controls">£ <input type="number" formControlName="totalInterest" /></div>
+                </div>
+                <div class="well">
+                    <h4>Remember…</h4>
+                    <ul>
+                        <li>there are no hidden charges associated with our loans</li>
+                        <li>the interest is charged on the reducing balance daily</li>
+                        <li>there are no penalties for early full or partial repayments</li>
+                        <li>there is free loan protection Insurance cover on most of our loans*</li>
+                        <li><span style="font-size: 12px; line-height: normal;">(* subject to certain restrictions – please ask the Credit Union office for more details)</span></li>
+                    </ul>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
