@@ -16,10 +16,11 @@ import { Angulartics2Module, Angulartics2GoogleAnalytics } from 'angulartics2';
 import { DynamicComponentModule } from 'angular2-dynamic-component';
 import { SlimLoadingBarService, SlimLoadingBarModule } from 'ng2-slim-loading-bar';
 import { Ng2BreadcrumbModule } from 'ng2-breadcrumb/ng2-breadcrumb';
+import { NguiAutoCompleteModule } from '@ngui/auto-complete';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from '@angular/material';
-import { MdButtonModule, MdCheckboxModule } from '@angular/material';
+import { MdButtonModule, MdCheckboxModule, MdInputModule } from '@angular/material';
 
 /* Services */
 import { ElasticService } from "./services/elastic.service"
@@ -80,8 +81,7 @@ import { firebaseConfig } from './configuration/firebase';
         // MaterializeModule,
         NgbModule.forRoot(),
         MaterialModule.forRoot(),
-        MdButtonModule,
-        MdCheckboxModule,
+        NguiAutoCompleteModule,
         Ng2BreadcrumbModule.forRoot(),
         DndModule.forRoot(),
         BrowserAnimationsModule,

@@ -1,4 +1,4 @@
-import { Component, ViewChild, OnInit, ViewEncapsulation } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 // import { Control } from '@angular/common';
 
 import { Router } from '@angular/router';
@@ -9,6 +9,7 @@ import { MdSidenav } from "@angular/material";
 
 import { MenuComponent } from '../menu/menu.component';
 // import { SearchInputComponent } from "./search-input.component";
+// import { CompleterService, CompleterData } from 'ng2-completer';
 
 // declare var $: any;
 
@@ -16,21 +17,29 @@ import { MenuComponent } from '../menu/menu.component';
     selector: 'header',
     templateUrl: './header.component.html',
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
 
     @ViewChild('sidenav') sidenav: MdSidenav;
 
+    arrayOfNumbers: number[];
+
     constructor (private router: Router, private slimLoadingBarService: SlimLoadingBarService) {}
 
-    ngOnInit() {
-        // $(window).scroll(function() {
-        //     if ($(this).scrollTop() > 1) {
-        //         $('header').addClass("scroll");
-        //     } else {
-        //         $('header').removeClass("scroll");
-        //     }
-        // });
-    }
+    // search(event) {
+    //     this.mylookupservice.getResults(event.query).then(data => {
+    //         this.results = data;
+    //     });
+    // }
+
+    // ngOnInit() {
+    //     // $(window).scroll(function() {
+    //     //     if ($(this).scrollTop() > 1) {
+    //     //         $('header').addClass("scroll");
+    //     //     } else {
+    //     //         $('header').removeClass("scroll");
+    //     //     }
+    //     // });
+    // }
     //
     // // HACK! Having to do it this way because Materialize does not play well with
     // // our menus. They constantly redraw when I init the sidenav using Materialize

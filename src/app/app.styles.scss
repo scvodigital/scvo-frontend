@@ -261,7 +261,7 @@ header {
                     min-width: inherit;
                 }
                 a:hover {
-                    background-color: rgba(0, 0, 0, 0.2);
+                    background-color: rgba(0, 0, 0, 0.1);
                 }
                 ul#dropdown-menu-main-1 {
                     min-width: 237.5px;
@@ -430,20 +430,48 @@ a.btn {
 }
 .navbar {
     padding: 0;
-    .navbar-search {
-        padding-right: 0;
-        .input-field input[type=search] {
-            height: 64px !important;
-            margin-bottom: 0;
-            background-color: rgba(255, 255, 255, 0.1);
-        }
-        .input-field input[type=search]:hover {
-            background-color: rgba(255, 255, 255, 0.2);
-        }
-        // .input-field input[type=search].ng-dirty,
-        .input-field input[type=search]:focus {
-            color: #000;
-            background-color: rgba(255, 255, 255, 0.9);
+    // .navbar-search {
+    //     padding-right: 0;
+    //     .input-field input[type=search] {
+    //         height: 64px !important;
+    //         margin-bottom: 0;
+    //         background-color: rgba(255, 255, 255, 0.1);
+    //     }
+    //     .input-field input[type=search]:hover {
+    //         background-color: rgba(255, 255, 255, 0.2);
+    //     }
+    //     // .input-field input[type=search].ng-dirty,
+    //     .input-field input[type=search]:focus {
+    //         color: #000;
+    //         background-color: rgba(255, 255, 255, 0.9);
+    //     }
+    // }
+    .mat-input-container {
+        width: 25%;
+        .mat-input-wrapper {
+            padding: 0;
+            margin: 0;
+            min-height: 64px;
+            line-height: 64px;
+            .mat-input-element {
+                padding: 0 1rem;
+                font-family: $base-font-family;
+                background-color: rgba(255, 255, 255, 0.6);
+            }
+            .mat-input-placeholder {
+                padding: 1rem 1rem 0;
+                margin: 0;
+                font-family: $base-font-family;
+                // color: white;
+            }
+            .mat-input-underline {
+                margin-top: -1px;
+                border-color: transparent;
+                .mat-input-ripple {
+                    background-color: white;
+                    top: -2px;
+                }
+            }
         }
     }
 
@@ -525,7 +553,8 @@ a.btn {
         -o-transform: rotate(66deg);
     }
 }
-.brand-logo:hover {
+.brand-logo:hover,
+.brand-logo:focus {
     color: #fff;
     text-decoration: none;
 }
@@ -625,12 +654,24 @@ footer {
     .row {
         margin-bottom: 0;
     }
+    ul {
+        padding: 0;
+        margin: 0;
+        li {
+            list-style-type: none;
+        }
+    }
 }
 footer,
-footer a {
+footer a,
+footer a:hover,
+footer a:focus {
     color: rgba(255, 255, 255, 0.84);
 }
 footer a {
     text-decoration: underline;
     text-decoration-skip: ink;
+}
+footer a:hover {
+    color: rgba(255, 255, 255, 0.84);
 }
