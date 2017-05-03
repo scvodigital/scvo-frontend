@@ -33,11 +33,20 @@ body {
     min-height: 100%;
     background-color: #263238;
 }
+.mat-button,
+.mat-card-title,
+.mat-card-subtitle,
+.mat-card-content {
+    font-size: 1rem !important;
+}
 body, p, li, a {
     font-weight: 400;
 }
 strong {
     font-weight: 600;
+}
+.mat-card-title {
+    font-weight: 600 !important;
 }
 header,
 main {
@@ -91,6 +100,13 @@ p {
         color: white !important;
     }
 }
+.center {
+    text-align: center;
+}
+a:not([href]):not([tabindex]) {
+    text-decoration: underline;
+}
+
 main.projects-campaigns {
     padding: 0;
 }
@@ -326,21 +342,21 @@ header.about-us, header.about-us .navbar .dropdown-content, main.about-us .btn {
 }
 main a,
 main.about-us a {
-    color: #009e99;
+    color: #009e99 !important;
 }
 
 header.running-your-organisation, header.running-your-organisation .navbar .dropdown-content, main.running-your-organisation .btn {
     background-color: #303f9f;
 }
 main.running-your-organisation a {
-    color: #303f9f;
+    color: #303f9f !important;
 }
 
 header.jobs, header.jobs .navbar .dropdown-content, main.jobs .btn {
     background-color: #2e7d32;
 }
 main.jobs a {
-    color: #2e7d32;
+    color: #2e7d32 !important;
 }
 
 header.join-scvo, header.join-scvo .navbar .dropdown-content, main.join-scvo .btn,
@@ -348,22 +364,27 @@ header.services, header.services .navbar .dropdown-content, main.services .btn {
     background-color: #880e4f;
 }
 main.join-scvo a,
-main.services a {
-    color: #880e4f;
+main.services a,
+main.services button {
+    color: #880e4f !important;
+}
+main.services a:hover,
+main.services button:hover {
+    text-decoration: none;
 }
 
 header.events.the-gathering, header.events.the-gathering .navbar .dropdown-content, main.events.the-gathering .btn {
     background-color: #4527a0;
 }
 main.events.the-gathering a {
-    color: #4527a0;
+    color: #4527a0 !important;
 }
 
 header.events, header.events .navbar .dropdown-content, main.events .btn {
     background-color: #263238;
 }
 main.events a {
-    color: #263238;
+    color: #263238 !important;
 }
 
 header.projects-campaigns, header.projects-campaigns .navbar .dropdown-content, main.projects-campaigns .btn {
@@ -381,7 +402,7 @@ header.policy-research, header.policy-research .navbar .dropdown-content, main.p
 main.press-media a,
 main.tags a,
 main.policy-research a {
-    color: #e64a19;
+    color: #e64a19 !important;
 }
 
 a.btn {
@@ -408,6 +429,7 @@ a.btn {
     // }
 }
 .navbar {
+    padding: 0;
     .navbar-search {
         padding-right: 0;
         .input-field input[type=search] {
@@ -503,6 +525,10 @@ a.btn {
         -o-transform: rotate(66deg);
     }
 }
+.brand-logo:hover {
+    color: #fff;
+    text-decoration: none;
+}
 .brand-logo.hide-on-med-and-down {
     top: 0;
     left: 0;
@@ -570,6 +596,23 @@ a.btn {
 }
 
 // Content =====================================================================
+
+.services-list {
+    // md-grid-tile {
+    //     h3 {
+    //         text-align: center;
+    //         a {
+    //             display: block;
+    //         }
+    //     }
+    // }
+    .row .col-sm-12 {
+        padding-bottom: 30px;
+        .mat-card {
+            height: 100%;
+        }
+    }
+}
 
 
 // Footer ======================================================================

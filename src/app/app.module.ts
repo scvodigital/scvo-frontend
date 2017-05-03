@@ -8,6 +8,7 @@ import { RouterModule } from "@angular/router";
 import { BrowserModule, Title } from '@angular/platform-browser';
 import { FormsModule, FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import 'hammerjs';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AngularFireModule } from 'angularfire2';
 import { DndModule } from 'ng2-dnd';
@@ -76,13 +77,14 @@ import { firebaseConfig } from './configuration/firebase';
         RouterModule.forRoot(rootRouterConfig),
         AngularFireModule.initializeApp(firebaseConfig),
         Angulartics2Module.forRoot([Angulartics2GoogleAnalytics]),
-        DndModule.forRoot(),
-        Ng2BreadcrumbModule.forRoot(),
         // MaterializeModule,
-        BrowserAnimationsModule,
+        NgbModule.forRoot(),
         MaterialModule.forRoot(),
         MdButtonModule,
         MdCheckboxModule,
+        Ng2BreadcrumbModule.forRoot(),
+        DndModule.forRoot(),
+        BrowserAnimationsModule,
         MarkdownToHtmlModule,
         DynamicComponentModule,
         SlimLoadingBarModule.forRoot()
