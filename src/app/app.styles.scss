@@ -38,6 +38,10 @@ body {
 .mat-card-subtitle,
 .mat-card-content {
     font-size: 1rem !important;
+    font-family: $base-font-family;
+}
+md-button {
+    background-color: transparent;
 }
 body, p, li, a {
     font-weight: 400;
@@ -45,7 +49,8 @@ body, p, li, a {
 strong {
     font-weight: 600;
 }
-.mat-card-title {
+.mat-card-title,
+.mat-card-title a {
     font-weight: 600 !important;
 }
 header,
@@ -66,12 +71,12 @@ h1 {
     margin: 0 0 0.5em;
 }
 h2 {
-    font-size: 2.0rem;
+    font-size: 1.8rem;
     font-weight: 600;
     margin: 0.35em 0;
 }
 h3 {
-    font-size: 1.6rem;
+    font-size: 1.5rem;
     font-weight: 600;
     margin: 0.25em 0;
 }
@@ -163,10 +168,10 @@ main {
         font-size: 2.2rem;
     }
     h2 {
-        font-size: 1.7rem;
+        font-size: 1.6rem;
     }
     h3 {
-        font-size: 1.5rem;
+        font-size: 1.4rem;
     }
     h4 {
         font-size: 1.2rem;
@@ -180,10 +185,10 @@ main {
         font-size: 1.9rem;
     }
     h2 {
-        font-size: 1.6rem;
+        font-size: 1.5rem;
     }
     h3 {
-        font-size: 1.3rem;
+        font-size: 1.2rem;
     }
     h4 {
         font-size: 1.1rem;
@@ -624,6 +629,14 @@ a.btn {
     display: none;
 }
 
+// Admin =======================================================================
+
+.collection {
+    .collection-item {
+        display: block;
+    }
+}
+
 // Content =====================================================================
 
 .services-list {
@@ -661,17 +674,17 @@ footer {
             list-style-type: none;
         }
     }
+    ul.right li {
+        text-align: right;
+    }
 }
 footer,
 footer a,
 footer a:hover,
 footer a:focus {
-    color: rgba(255, 255, 255, 0.84);
-}
-footer a {
-    text-decoration: underline;
-    text-decoration-skip: ink;
+    color: white;
 }
 footer a:hover {
-    color: rgba(255, 255, 255, 0.84);
+    text-decoration: underline;
+    text-decoration-skip: ink;
 }

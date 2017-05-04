@@ -36,6 +36,8 @@ import { ServicesPageComponent } from './components/services/services-page.compo
 import { CampaignsPageComponent } from './components/campaigns/campaigns-page.component';
 import { BlogListComponent } from './components/post/post-list.component';
 import { BlogPostComponent } from './components/post/post.component';
+import { BriefingListComponent } from './components/post/briefing-list.component';
+import { BriefingPostComponent } from './components/post/briefing.component';
 import { LoanCalculatorComponent } from './components/credit-union/loan-calculator.component';
 import { HeaderComponent } from './components/header/header.component';
 import { MenuComponent } from './components/menu/menu.component';
@@ -98,6 +100,8 @@ import { firebaseConfig } from './configuration/firebase';
         CampaignsPageComponent,
         BlogListComponent,
         BlogPostComponent,
+        BriefingListComponent,
+        BriefingPostComponent,
         LoanCalculatorComponent,
         HeaderComponent,
         MenuComponent,
