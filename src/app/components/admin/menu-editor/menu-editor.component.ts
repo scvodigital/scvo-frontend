@@ -1,11 +1,10 @@
 import { Component, OnInit, EventEmitter } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
-import { MaterializeDirective, MaterializeAction } from "angular2-materialize";
+// import { MaterializeDirective, MaterializeAction } from "angular2-materialize";
 
 import { AppService, MenuElement } from '../../../services/app.service';
 import { SiteComponent } from '../../../common/base.component';
-
 
 @Component({
     selector: 'app-menu-editor',
@@ -40,18 +39,18 @@ export class MenuEditorComponent extends SiteComponent {
     save() {
         this.appService.saveMenu().then(() => {
             console.log('Saved menu');
-            this.modalEditActions.emit({ action: 'toast', params: ['Menu updated', 4000, 'green white-text'] });
+            // this.modalEditActions.emit({ action: 'toast', params: ['Menu updated', 4000, 'green white-text'] });
         }).catch((err) => {
             console.error('Error saving menu', err);
         });
     }
 
-    modalDeleteActions = new EventEmitter<string | MaterializeAction>();
-    modalEditActions = new EventEmitter<string | MaterializeAction>();
+    // modalDeleteActions = new EventEmitter<string | MaterializeAction>();
+    // modalEditActions = new EventEmitter<string | MaterializeAction>();
     selectedItem: number = null;
     showDeleteMenuItem(i) {
         this.selectedItem = i;
-        this.modalDeleteActions.emit({ action: "modal", params: ['open'] });
+        // this.modalDeleteActions.emit({ action: "modal", params: ['open'] });
     }
 
     deleteMenuItem() {
@@ -64,7 +63,7 @@ export class MenuEditorComponent extends SiteComponent {
 
     closeDeleteModal() {
         this.selectedItem = null;
-        this.modalDeleteActions.emit({ action: 'modal', params: ['close'] });
+        // this.modalDeleteActions.emit({ action: 'modal', params: ['close'] });
     }
 
     editCreate: string = 'Create';
@@ -82,12 +81,12 @@ export class MenuEditorComponent extends SiteComponent {
             this.selectedItemPath = this.items[this.selectedItem].name;
             this.selectedItemRoles = this.items[this.selectedItem].roles;
         }
-        this.modalEditActions.emit({ action: "modal", params: ['open'] });
+        // this.modalEditActions.emit({ action: "modal", params: ['open'] });
     }
 
     closeEditModal() {
         this.selectedItem = null;
-        this.modalEditActions.emit({ action: 'modal', params: ['close'] });
+        // this.modalEditActions.emit({ action: 'modal', params: ['close'] });
     }
 
     saveMenuItem() {

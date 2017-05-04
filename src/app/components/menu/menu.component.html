@@ -1,9 +1,24 @@
 <li *ngFor="let menuItem of menuItems | keys">
-    <a [routerLink]="[menuItem.value.name]" data-beloworigin="true" data-constrainwidth="false" data-hover="true" materialize="dropdown" [attr.data-activates]="'dropdown-menu-'+[menuName]+'-'+[menuItem.key]">
+    <a [routerLink]="[menuItem.value.name]" data-beloworigin="true" data-constrainwidth="false">
         {{menuItem.value.label | translate}}
         <span *ngIf="menuItem.value.submenu" class="material-icons arrow_drop_down right">arrow_drop_down</span>
     </a>
-    <ul class="dropdown-content" id="dropdown-menu-{{menuName}}-{{menuItem.key}}" *ngIf="menuItem.value.submenu">
+    <!-- [md-menu-trigger-for]="menu" -->
+    <!-- <div *ngIf="menuItem.value.submenu">
+        <button [routerLink]="[menuItem.value.name]" md-button [md-menu-trigger-for]="menu">
+            {{menuItem.value.label | translate}}
+            <span *ngIf="menuItem.value.submenu" class="material-icons arrow_drop_down right">arrow_drop_down</span>
+        </button>
+        <md-menu #menu="mdMenu">
+            <button md-menu-item *ngFor="let subMenuItem of menuItem.value.submenu" [routerLink]="[menuItem.value.name+'/'+subMenuItem.path]" [innerHTML]="menuItem.value.label+'_'+subMenuItem.path | translate"></button>
+        </md-menu>
+    </div>
+    <div *ngIf="!menuItem.value.submenu">
+        <button [routerLink]="[menuItem.value.name]" md-button>
+            {{menuItem.value.label | translate}}
+        </button>
+    </div> -->
+    <ul class="dropdown-content" id="dropdown-menu-{{menuName}}-{{menuItem.key}}">
         <li *ngFor="let subMenuItem of menuItem.value.submenu">
             <a [routerLink]="[menuItem.value.name+'/'+subMenuItem.path]" [innerHTML]="menuItem.value.label+'_'+subMenuItem.path | translate"></a>
         </li>

@@ -1,46 +1,15 @@
 <div class="container-fluid">
-    <div class="navbar navbar-default" role="navigation">
-        <nav class="brand">
-            <div class="nav-wrapper">
-                <div class="row">
-                    <div class="col m8 l9 navbar-brand">
+    <md-toolbar>
+        <md-toolbar-row class="brand navbar">
+            <a [routerLink]="['/']" class="brand-logo"><img src="app/assets/images/logos/scvo-white.png" /> SCVO <span class="version">beta</span></a>
+            <ul menu="top" class="list-inline right menu-top"></ul>
+            <md-input-container>
+                <input mdInput ngui-auto-complete [(ngModel)]="searchQuery" [source]="arrayOfNumbers" placeholder="Search" />
+            </md-input-container>
+        </md-toolbar-row>
 
-                        <a (click)="slidein('menu')" data-activates="mobile-menu" class="button-collapse menu">
-                            <i class="fa fa-fw fa-menu"></i>
-                        </a>
-
-                        <!-- <ul menu="mobile" id="mobile-menu" class="side-nav"></ul>
-                        <a href="#" materialize="sideNav" [materializeParams]="[{closeOnClick: true, edge: 'left', menuWidth: 330}]" data-activates="mobile-menu" class="button-collapse">
-                            <i class="material-icons">menu</i>
-                        </a> -->
-                        <a [routerLink]="['/']" class="brand-logo"><img src="app/assets/images/logos/scvo-white.png" /> SCVO <span class="version">beta</span></a>
-
-                        <ul menu="top" class="list-inline right menu-top"></ul>
-
-                        <!-- <ul menu="desktop_right" class="right hide-on-med-and-down"></ul> -->
-                        <!-- <ul class="right hide-on-med-and-down">
-                            <li *ngFor="let navigationItem of navigationMenu, let i = index" [routerLinkActive]="['active']">
-                                <a *ngIf="navigationItem.class == 'right'" [routerLink]="navigationItem.path">{{navigationItem.title}}</a>
-                            </li>
-                        </ul> -->
-                    </div>
-                    <div class="col hide-on-small-only m4 l3 right navbar-search">
-                        <form ngForm="searchForm">
-                            <!-- <input-debounce delay="500" (value)="searchChanged($event)"></input-debounce> -->
-                        </form>
-                    </div>
-                </div>
-            </div>
-        </nav>
-        <nav class="navigation hide-on-med-and-down">
-            <div class="nav-wrapper">
-                <div class="row">
-                    <div class="col s12 navbar-nav">
-                        <ng2-slim-loading-bar color="rgba(0,0,0,0.1)" height="64px"></ng2-slim-loading-bar>
-                        <ul menu="main" class="list-inline"></ul>
-                    </div>
-                </div>
-            </div>
-        </nav>
-    </div>
+        <md-toolbar-row class="navbar">
+            <ul menu="main" class="list-inline nav"></ul>
+        </md-toolbar-row>
+    </md-toolbar>
 </div>
