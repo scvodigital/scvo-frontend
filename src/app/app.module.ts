@@ -17,6 +17,7 @@ import { DynamicComponentModule } from 'angular2-dynamic-component';
 import { SlimLoadingBarService, SlimLoadingBarModule } from 'ng2-slim-loading-bar';
 import { Ng2BreadcrumbModule } from 'ng2-breadcrumb/ng2-breadcrumb';
 import { NguiAutoCompleteModule } from '@ngui/auto-complete';
+import { DisqusModule } from 'ng2-awesome-disqus';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from '@angular/material';
@@ -82,6 +83,7 @@ import { firebaseConfig } from './configuration/firebase';
         Angulartics2Module.forRoot([Angulartics2GoogleAnalytics]),
         // MaterializeModule,
         NgbModule.forRoot(),
+        DisqusModule,
         MaterialModule.forRoot(),
         NguiAutoCompleteModule,
         Ng2BreadcrumbModule.forRoot(),
