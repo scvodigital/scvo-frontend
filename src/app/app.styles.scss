@@ -111,6 +111,9 @@ p {
 a:not([href]):not([tabindex]) {
     text-decoration: underline;
 }
+a:not([href]):not([tabindex]):hover {
+    text-decoration: underline;
+}
 
 main.projects-campaigns {
     padding: 0;
@@ -225,96 +228,100 @@ h1.parent_title a {
 
 header {
     transition: all 0.5s ease;
-    // position: fixed;
-    // z-index: 100;
-    // width: 100%;
     padding-bottom: 0;
-    .mat-toolbar-row {
-        height: auto;
+}
+.mat-toolbar-row {
+    height: auto !important;
+    max-height: 64px;
+}
+.mat-toolbar {
+    background-color: transparent;
+    box-shadow: none;
+    font-size: 1rem !important;
+    padding: 0 !important;
+    .material-icons {
+        // line-height: inherit;
+        height: 1.75rem;
+        width: 1rem;
+        vertical-align: middle;
+        display: inline-block;
     }
-    .mat-toolbar {
-        background-color: transparent;
-        box-shadow: none;
-        font-size: 1rem;
+    ul {
+        margin: 0;
         padding: 0;
-        .material-icons {
-            // line-height: inherit;
-            height: 1.75rem;
-            width: 1rem;
-            vertical-align: middle;
+        width: 100%;
+        list-style: none;
+        position: relative;
+        transition: all 0.5s ease;
+        li {
+            list-style-type: none;
             display: inline-block;
-        }
-        ul {
-            margin: 0;
-            padding: 0;
-            width: 100%;
-        	list-style: none;
-        	position: relative;
-            transition: all 0.5s ease;
-            li {
-                list-style-type: none;
-                display: inline-block;
-                a {
-                    color: white;
-                    min-height: 64px;
-                    line-height: 64px;
-                    padding: 0 1rem;
-                    display: block;
-                    text-decoration: none;
-                    font-family: $base-font-family !important;
-                    font-size: 0.92rem !important;
-                    min-width: inherit;
+            a {
+                color: white;
+                min-height: 64px;
+                line-height: 64px;
+                padding: 0 1rem;
+                display: block;
+                text-decoration: none;
+                font-family: $base-font-family !important;
+                font-size: 0.92rem !important;
+                min-width: inherit;
+            }
+            a:hover {
+                background-color: rgba(0, 0, 0, 0.1);
+            }
+            ul#dropdown-menu-main-1 {
+                min-width: 237.5px;
+            }
+            ul {
+                width: auto !important;
+                background-color: rgba(0, 0, 0, 0.2);
+                display: inherit !important;
+                position: absolute;
+                top: 64px; /* the height of the main nav */
+                z-index:1;
+                max-height:0;
+                overflow:hidden;
+                -webkit-transform:perspective(300) rotate3d(1,0,0,-90deg);
+                -webkit-transform-origin:50% 0;
+                -webkit-transition:250ms;
+                -moz-transition:250ms;
+                -o-transition:250ms;
+                transition:250ms;
+                li {
+                    min-width: 170px;
+                    float: none;
+                    display: list-item;
+                    position: relative;
+                    padding: 0;
                 }
-                a:hover {
-                    background-color: rgba(0, 0, 0, 0.1);
-                }
-                ul#dropdown-menu-main-1 {
-                    min-width: 237.5px;
-                }
-                ul {
-                    width: auto !important;
-                    background-color: rgba(0, 0, 0, 0.2);
-                    display: inherit !important;
-                    position: absolute;
-                    top: 64px; /* the height of the main nav */
-                    z-index:1;
-                    max-height:0;
-                    overflow:hidden;
-                    -webkit-transform:perspective(300) rotate3d(1,0,0,-90deg);
-                    -webkit-transform-origin:50% 0;
-                    -webkit-transition:250ms;
-                    -moz-transition:250ms;
-                    -o-transition:250ms;
-                    transition:250ms;
-                    li {
-                        min-width: 170px;
-                        float: none;
-                        display: list-item;
-                        position: relative;
-                        padding: 0;
-                    }
-                    ul li {
-                        position: relative;
-                        top: -60px;
-                        left: 170px;
-                    }
+                ul li {
+                    position: relative;
+                    top: -60px;
+                    left: 170px;
                 }
             }
-            li:hover > ul {
-                z-index: 100;
-                max-height: 1000px;
-                -webkit-transform:perspective(100) rotate3d(0,0,0,0);
-            }
         }
-        .list-inline.right {
-            text-align: right;
+        li:hover > ul {
+            z-index: 100;
+            max-height: 1000px;
+            -webkit-transform:perspective(100) rotate3d(0,0,0,0);
         }
     }
-    .mat-toolbar .brand {
-        background-color: transparent;
+    .list-inline.right {
+        text-align: right;
     }
-    .mat-toolbar .nav {
-        background-color: rgba(0, 0, 0, 0.2);
+}
+.mat-toolbar .brand {
+    background-color: transparent;
+}
+.mat-toolbar .nav {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+.mat-toolbar .admin .nav {
+    background-color: rgba(0, 0, 0, 0.8);
+    li a {
+        color: white !important;
     }
 }
 header.scroll {
@@ -578,6 +585,7 @@ a.btn {
     margin-bottom: 0;
 }
 .home .container-breadcrumb,
+.admin .container-breadcrumb,
 .projects-campaigns .container-breadcrumb {
     display: none;
 }

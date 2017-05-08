@@ -3,7 +3,8 @@
     <!-- <i class="fa fa-fw fa-floppy"></i> -->
 </button>
 
-<h2>Page editor: {{ pageName | replace:'/_/':'g':'/' }}</h2>
+<h2>Page editor</h2>
+<h3>Address: <a [routerLink]="[pageName | replace: '_':'g':'/']">{{ pageName | replace: '_':'g':'/' }}</a></h3>
 
 <div class="input-field">
     <select [(ngModel)]="selectedLanguage" name="changeLanguage" id="changeLanguage" class="browser-default">

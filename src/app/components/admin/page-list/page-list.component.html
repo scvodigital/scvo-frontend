@@ -1,8 +1,9 @@
 <button class="btn pull-right" (click)="showNewPage()">New page</button>
-<h2 class="margin-bottom">Page editor</h2>
+
+<h2 class="margin-bottom">Static page editor</h2>
 
 <div class="collection">
-    <a *ngFor="let item of pages" [routerLink]="['/admin/page-editor', item]" class="collection-item">{{ item | replace:'/_/':'g':'/' }}</a>
+    <a *ngFor="let item of pages" [routerLink]="['/admin/page-editor', item]" class="collection-item">{{ item | replace: '_':'g':'/' }}</a>
 </div>
 
 <!-- <div class="modal" materialize="modal" [materializeParams]="[{dismissible: true}]" [materializeActions]="modalNewActions">
