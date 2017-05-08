@@ -14,7 +14,7 @@ import { AngularFireModule } from 'angularfire2';
 import { DndModule } from 'ng2-dnd';
 import { Angulartics2Module, Angulartics2GoogleAnalytics } from 'angulartics2';
 import { DynamicComponentModule } from 'angular2-dynamic-component';
-import { SlimLoadingBarService, SlimLoadingBarModule } from 'ng2-slim-loading-bar';
+// import { SlimLoadingBarService, SlimLoadingBarModule } from 'ng2-slim-loading-bar';
 import { Ng2BreadcrumbModule } from 'ng2-breadcrumb/ng2-breadcrumb';
 import { NguiAutoCompleteModule } from '@ngui/auto-complete';
 import { DisqusModule } from 'ngx-disqus';
@@ -43,7 +43,7 @@ import { BriefingListComponent } from './components/post/briefing-list.component
 import { BriefingPostComponent } from './components/post/briefing.component';
 import { LoanCalculatorComponent } from './components/credit-union/loan-calculator.component';
 import { HeaderComponent } from './components/header/header.component';
-import { MenuComponent } from './components/menu/menu.component';
+import { MenuComponent } from './components/header/menu.component';
 // import { SearchInputComponent } from './components/shared/header/search-input.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { PrivacyAndCookiesComponent } from './components/static/privacy-and-cookies.component';
@@ -113,7 +113,7 @@ export function metaFactory(): MetaLoader {
         BrowserAnimationsModule,
         MarkdownToHtmlModule,
         DynamicComponentModule,
-        SlimLoadingBarModule.forRoot(),
+        // SlimLoadingBarModule.forRoot(),
         ShareButtonsModule.forRoot()
     ],
     declarations: [
@@ -151,7 +151,7 @@ export function metaFactory(): MetaLoader {
         SlugifyPipe
     ],
     providers: [
-        SlimLoadingBarService,
+        // SlimLoadingBarService,
         // MetaService,
         ElasticService,
         AppService

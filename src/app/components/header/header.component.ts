@@ -3,11 +3,11 @@ import { Component, ViewChild } from '@angular/core';
 
 import { Router } from '@angular/router';
 
-import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
+// import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
 // import { MaterializeDirective } from "angular2-materialize";
 import { MdSidenav } from "@angular/material";
 
-import { MenuComponent } from '../menu/menu.component';
+import { MenuComponent } from './menu.component';
 // import { SearchInputComponent } from "./search-input.component";
 // import { CompleterService, CompleterData } from 'ng2-completer';
 
@@ -23,7 +23,10 @@ export class HeaderComponent {
 
     arrayOfNumbers: number[];
 
-    constructor (private router: Router, private slimLoadingBarService: SlimLoadingBarService) {}
+    constructor (
+        private router: Router,
+        // private slimLoadingBarService: SlimLoadingBarService
+    ) {}
 
     // search(event) {
     //     this.mylookupservice.getResults(event.query).then(data => {

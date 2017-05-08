@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs/Rx';
 
 import { MetaService } from '@nglibs/meta';
-import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
+// import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
 import { AppService } from '../../services/app.service';
 
 import { TranslatePipe } from '../../pipes/translate.pipe';

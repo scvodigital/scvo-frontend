@@ -36,10 +36,17 @@ body {
 .mat-button,
 .mat-card-title,
 .mat-card-subtitle,
+.mat-button-wrapper,
 .mat-card-content {
     font-size: 1rem !important;
     font-family: $base-font-family;
 }
+.mat-card-actions .mat-button,
+.mat-button-ripple {
+    outline: none;
+}
+.mat-button,
+.mat-button-focus-overlay,
 md-button {
     background-color: transparent;
 }
@@ -279,15 +286,13 @@ header {
                 display: inherit !important;
                 position: absolute;
                 top: 64px; /* the height of the main nav */
-                z-index:1;
-                max-height:0;
-                overflow:hidden;
-                -webkit-transform:perspective(300) rotate3d(1,0,0,-90deg);
-                -webkit-transform-origin:50% 0;
-                -webkit-transition:250ms;
-                -moz-transition:250ms;
-                -o-transition:250ms;
-                transition:250ms;
+                z-index: 1;
+                max-height: 0;
+                height: 0;
+                overflow: hidden;
+                opacity: 0;
+                transform: translateY(-.5em);
+                transition: all 0.2s ease-in-out 0s, visibility 0s linear 0.3s, z-index 0s linear 0.01s;
                 li {
                     min-width: 170px;
                     float: none;
@@ -304,8 +309,12 @@ header {
         }
         li:hover > ul {
             z-index: 100;
+            opacity: 1;
+            display: block;
+            height: auto;
             max-height: 1000px;
-            -webkit-transform:perspective(100) rotate3d(0,0,0,0);
+            transform: translateY(0%);
+            transition-delay: 0s, 0s, 0.3s; /* this removes the transition delay so the menu will be visible while the other styles transition */
         }
     }
     .list-inline.right {
@@ -380,7 +389,7 @@ main.services a,
 main.services button {
     color: #880e4f !important;
 }
-main.services a:hover,
+main.services a.mat-button:hover,
 main.services button:hover {
     text-decoration: none;
 }
