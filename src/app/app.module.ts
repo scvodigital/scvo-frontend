@@ -18,6 +18,7 @@ import { SlimLoadingBarService, SlimLoadingBarModule } from 'ng2-slim-loading-ba
 import { Ng2BreadcrumbModule } from 'ng2-breadcrumb/ng2-breadcrumb';
 import { NguiAutoCompleteModule } from '@ngui/auto-complete';
 import { DisqusModule } from 'ngx-disqus';
+import { MetaModule, MetaLoader, MetaStaticLoader, PageTitlePositioning } from '@nglibs/meta';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from '@angular/material';
@@ -72,6 +73,21 @@ import { SlugifyPipe } from './pipes/slugify.pipe';
 /* Configuration */
 import { firebaseConfig } from './configuration/firebase';
 
+export function metaFactory(): MetaLoader {
+  return new MetaStaticLoader({
+    pageTitlePositioning: PageTitlePositioning.PrependPageTitle,
+    pageTitleSeparator: ' - ',
+    applicationName: 'SCVO',
+    defaults: {
+      title: 'Scottish Council for Voluntary Organisations',
+      description: 'The membership organisation for Scotland\'s charities, voluntary organisations and social enterprises.',
+      'og:image': '',
+      'og:type': 'website',
+      'og:locale': 'en_GB'
+    }
+  });
+}
+
 @NgModule({
     imports: [
         BrowserModule,
@@ -84,6 +100,10 @@ import { firebaseConfig } from './configuration/firebase';
         // MaterializeModule,
         NgbModule.forRoot(),
         DisqusModule,
+        MetaModule.forRoot({
+          provide: MetaLoader,
+          useFactory: (metaFactory)
+        }),
         MaterialModule.forRoot(),
         NguiAutoCompleteModule,
         Ng2BreadcrumbModule.forRoot(),
