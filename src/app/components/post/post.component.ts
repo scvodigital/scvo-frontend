@@ -16,6 +16,8 @@ declare var $: any;
     templateUrl: './post.component.html'
 })
 export class BlogPostComponent extends SiteComponent {
+    constructor(appService: AppService, private route: ActivatedRoute, private router: Router) { super(appService) }
+
     @Input('embedded') embedded: string;
 
     private _content: string = '';
@@ -27,8 +29,6 @@ export class BlogPostComponent extends SiteComponent {
     }
 
     modules = [RouterModule];
-
-    constructor(appService: AppService, private route: ActivatedRoute, private router: Router) { super(appService) }
 
     private _renderer: MarkedRenderer = null;
     public get renderer(): MarkedRenderer{

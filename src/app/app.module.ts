@@ -19,6 +19,7 @@ import { Ng2BreadcrumbModule } from 'ng2-breadcrumb/ng2-breadcrumb';
 import { NguiAutoCompleteModule } from '@ngui/auto-complete';
 import { DisqusModule } from 'ngx-disqus';
 import { MetaModule, MetaLoader, MetaStaticLoader, PageTitlePositioning } from '@nglibs/meta';
+import { ShareButtonsModule } from 'ngx-sharebuttons';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from '@angular/material';
@@ -47,6 +48,7 @@ import { MenuComponent } from './components/menu/menu.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { PrivacyAndCookiesComponent } from './components/static/privacy-and-cookies.component';
 import { TermsAndConditionsComponent } from './components/static/terms-and-conditions.component';
+import { ShareBlockComponent } from './components/shared/share-block/share-block.component';
 
 /* Admin Components */
 import { AdminComponent } from './components/admin/admin.component';
@@ -111,7 +113,8 @@ export function metaFactory(): MetaLoader {
         BrowserAnimationsModule,
         MarkdownToHtmlModule,
         DynamicComponentModule,
-        SlimLoadingBarModule.forRoot()
+        SlimLoadingBarModule.forRoot(),
+        ShareButtonsModule.forRoot()
     ],
     declarations: [
         SiteComponent,
@@ -131,6 +134,7 @@ export function metaFactory(): MetaLoader {
         FooterComponent,
         PrivacyAndCookiesComponent,
         TermsAndConditionsComponent,
+        ShareBlockComponent,
         AdminComponent,
         MenuListComponent,
         MenuEditorComponent,
