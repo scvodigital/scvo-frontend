@@ -78,8 +78,7 @@ export class TranslationsManagerComponent extends SiteComponent {
 
     constructor(appService: AppService) { super(appService); }
 
-    onSiteLoaded() {
-    }
+    onSiteLoaded() {}
 
     // toasterActions = new EventEmitter<string | MaterializeAction>();
 
