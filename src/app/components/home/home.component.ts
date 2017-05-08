@@ -1,15 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-
+import { ActivatedRoute, Router } from '@angular/router';
 import { Observable } from 'rxjs/Rx';
 
-import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
-
+import { MetaService } from '@nglibs/meta';
+// import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
 import { AppService } from '../../services/app.service';
+
+import { TranslatePipe } from '../../pipes/translate.pipe';
 
 @Component({
     selector: 'home',
-    templateUrl: './home.component.html'
+    templateUrl: './home.component.html',
+    providers: [TranslatePipe]
 })
 export class HomeComponent implements OnInit {
     private settings: Object;
@@ -19,11 +21,16 @@ export class HomeComponent implements OnInit {
     error: Boolean = false;
     error_message: Observable<any>;
 
-    constructor(private router: Router, private slimLoadingBarService: SlimLoadingBarService, private _appService: AppService) {
-        // this.settings = _appService.getSettings();
-    }
+    constructor(
+        // private slimLoadingBarService: SlimLoadingBarService,
+        private _appService: AppService,
+        private route: ActivatedRoute,
+        private router: Router,
+        private translatePipe: TranslatePipe,
+        private readonly meta: MetaService
+    ) {}
 
     ngOnInit() {
-        // this.slimLoadingBarService.start();
+        this.meta.setTitle('Scottish Council for Voluntary Organisations');
     }
 }

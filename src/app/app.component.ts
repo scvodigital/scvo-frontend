@@ -17,7 +17,12 @@ declare var $: any;
 export class AppComponent {
     public pathClasses: string;
 
-    constructor(public router: Router, public _appService: AppService, private breadcrumbService: BreadcrumbService, private translatePipe: TranslatePipe) {
+    constructor(
+        public router: Router,
+        public _appService: AppService,
+        private breadcrumbService: BreadcrumbService,
+        private translatePipe: TranslatePipe
+    ) {
         // On navigation
         this.router.events.subscribe(event => {
             if (event instanceof NavigationEnd) {

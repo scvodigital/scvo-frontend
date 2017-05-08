@@ -14,10 +14,12 @@ import { AngularFireModule } from 'angularfire2';
 import { DndModule } from 'ng2-dnd';
 import { Angulartics2Module, Angulartics2GoogleAnalytics } from 'angulartics2';
 import { DynamicComponentModule } from 'angular2-dynamic-component';
-import { SlimLoadingBarService, SlimLoadingBarModule } from 'ng2-slim-loading-bar';
+// import { SlimLoadingBarService, SlimLoadingBarModule } from 'ng2-slim-loading-bar';
 import { Ng2BreadcrumbModule } from 'ng2-breadcrumb/ng2-breadcrumb';
 import { NguiAutoCompleteModule } from '@ngui/auto-complete';
-import { DisqusModule } from 'ng2-awesome-disqus';
+import { DisqusModule } from 'ngx-disqus';
+import { MetaModule, MetaLoader, MetaStaticLoader, PageTitlePositioning } from '@nglibs/meta';
+import { ShareButtonsModule } from 'ngx-sharebuttons';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from '@angular/material';
@@ -41,11 +43,12 @@ import { BriefingListComponent } from './components/post/briefing-list.component
 import { BriefingPostComponent } from './components/post/briefing.component';
 import { LoanCalculatorComponent } from './components/credit-union/loan-calculator.component';
 import { HeaderComponent } from './components/header/header.component';
-import { MenuComponent } from './components/menu/menu.component';
+import { MenuComponent } from './components/header/menu.component';
 // import { SearchInputComponent } from './components/shared/header/search-input.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { PrivacyAndCookiesComponent } from './components/static/privacy-and-cookies.component';
 import { TermsAndConditionsComponent } from './components/static/terms-and-conditions.component';
+import { ShareBlockComponent } from './components/shared/share-block/share-block.component';
 
 /* Admin Components */
 import { AdminComponent } from './components/admin/admin.component';
@@ -72,6 +75,21 @@ import { SlugifyPipe } from './pipes/slugify.pipe';
 /* Configuration */
 import { firebaseConfig } from './configuration/firebase';
 
+export function metaFactory(): MetaLoader {
+  return new MetaStaticLoader({
+    pageTitlePositioning: PageTitlePositioning.PrependPageTitle,
+    pageTitleSeparator: ' - ',
+    applicationName: 'SCVO',
+    defaults: {
+      title: 'Scottish Council for Voluntary Organisations',
+      description: 'The membership organisation for Scotland\'s charities, voluntary organisations and social enterprises.',
+      'og:image': '',
+      'og:type': 'website',
+      'og:locale': 'en_GB'
+    }
+  });
+}
+
 @NgModule({
     imports: [
         BrowserModule,
@@ -84,6 +102,10 @@ import { firebaseConfig } from './configuration/firebase';
         // MaterializeModule,
         NgbModule.forRoot(),
         DisqusModule,
+        MetaModule.forRoot({
+          provide: MetaLoader,
+          useFactory: (metaFactory)
+        }),
         MaterialModule.forRoot(),
         NguiAutoCompleteModule,
         Ng2BreadcrumbModule.forRoot(),
@@ -91,7 +113,8 @@ import { firebaseConfig } from './configuration/firebase';
         BrowserAnimationsModule,
         MarkdownToHtmlModule,
         DynamicComponentModule,
-        SlimLoadingBarModule.forRoot()
+        // SlimLoadingBarModule.forRoot(),
+        ShareButtonsModule.forRoot()
     ],
     declarations: [
         SiteComponent,
@@ -111,6 +134,7 @@ import { firebaseConfig } from './configuration/firebase';
         FooterComponent,
         PrivacyAndCookiesComponent,
         TermsAndConditionsComponent,
+        ShareBlockComponent,
         AdminComponent,
         MenuListComponent,
         MenuEditorComponent,
@@ -127,7 +151,7 @@ import { firebaseConfig } from './configuration/firebase';
         SlugifyPipe
     ],
     providers: [
-        SlimLoadingBarService,
+        // SlimLoadingBarService,
         // MetaService,
         ElasticService,
         AppService

@@ -1,10 +1,13 @@
 import { Component, ViewChild, ViewContainerRef, Input } from '@angular/core';
 import { NavigationEnd, ActivatedRoute, RouterModule, Router } from '@angular/router';
 
+import { MetaService } from '@nglibs/meta';
+
 import { Subscription } from 'rxjs/Rx';
 import * as marked from 'marked';
 import * as _ from 'lodash';
 import { MarkdownToHtmlPipe } from 'markdown-to-html-pipe';
+import { TranslatePipe } from '../../pipes/translate.pipe';
 
 import { AppService } from '../../services/app.service';
 import { SiteComponent } from '../../common/base.component';
@@ -13,7 +16,8 @@ declare var $: any;
 
 @Component({
     selector: 'main-container.content, page-content',
-    templateUrl: './page.component.html'
+    templateUrl: './page.component.html',
+    providers: [TranslatePipe]
 })
 export class PageComponent extends SiteComponent {
     @Input('embedded') embedded: string;
@@ -28,7 +32,15 @@ export class PageComponent extends SiteComponent {
 
     modules = [RouterModule];
 
-    constructor(appService: AppService, private route: ActivatedRoute, private router: Router) { super(appService) }
+    constructor(
+        appService: AppService,
+        private route: ActivatedRoute,
+        private router: Router,
+        private translatePipe: TranslatePipe,
+        private readonly meta: MetaService
+    ) {
+        super(appService)
+    }
 
     private _renderer: MarkedRenderer = null;
     public get renderer(): MarkedRenderer{
@@ -60,7 +72,15 @@ export class PageComponent extends SiteComponent {
             this.displayContent(this.embedded);
         } else {
             this.route.url.subscribe(url => {
-                this.displayContent(this.router.url.substr(1));
+                // Set title
+                //.replace(/\//g, '_')
+                var slug_full = this.router.url.substr(1);
+                var slug_page = slug_full.substr(slug_full.lastIndexOf('/') + 1);
+                this.meta.setTitle(this.translatePipe.transform('title:-'+slug_page, 'en'));
+                // this.meta.setTag('og:image', this.item.imageUrl);
+
+                // Show content
+                this.displayContent(slug_full);
             });
         }
     }

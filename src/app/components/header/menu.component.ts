@@ -1,10 +1,11 @@
 import { Component, Input, ViewChild, NgZone, Inject } from '@angular/core';
 import { Subscription, Observable } from 'rxjs/Rx';
+
 import { AppService, MenuElement } from '../../services/app.service';
 
 @Component({
-  selector: '[menu]',
-  templateUrl: './menu.component.html'
+    selector: '[menu]',
+    templateUrl: './menu.component.html'
 })
 export class MenuComponent {
     @Input('menu') menuName: string = null;
