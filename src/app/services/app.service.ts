@@ -115,6 +115,7 @@ export class AppService {
             newMenus[key] = [];
             newAllMenus[key] = [];
             this.site.menus[key].forEach((item) => {
+                if (!item.submenu) item.submenu = [];
                 newAllMenus[key].push(new MenuElement(item.path, item.roles, item.submenu));
                 var found = roles.some((v: string) => {
                     return item.roles.indexOf(v) >= 0;
