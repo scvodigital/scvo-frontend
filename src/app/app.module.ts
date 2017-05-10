@@ -41,6 +41,8 @@ import { BlogListComponent } from './components/post/post-list.component';
 import { BlogPostComponent } from './components/post/post.component';
 import { BriefingListComponent } from './components/post/briefing-list.component';
 import { BriefingPostComponent } from './components/post/briefing.component';
+import { ResearchListComponent } from './components/post/research-list.component';
+import { ResearchPostComponent } from './components/post/research.component';
 import { LoanCalculatorComponent } from './components/credit-union/loan-calculator.component';
 import { HeaderComponent } from './components/header/header.component';
 import { MenuComponent } from './components/header/menu.component';
@@ -127,6 +129,8 @@ export function metaFactory(): MetaLoader {
         BlogPostComponent,
         BriefingListComponent,
         BriefingPostComponent,
+        ResearchListComponent,
+        ResearchPostComponent,
         LoanCalculatorComponent,
         HeaderComponent,
         MenuComponent,
