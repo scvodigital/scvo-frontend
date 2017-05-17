@@ -16,7 +16,7 @@ import { Angulartics2Module, Angulartics2GoogleAnalytics } from 'angulartics2';
 import { DynamicComponentModule } from 'angular2-dynamic-component';
 // import { SlimLoadingBarService, SlimLoadingBarModule } from 'ng2-slim-loading-bar';
 import { Ng2BreadcrumbModule } from 'ng2-breadcrumb/ng2-breadcrumb';
-import { NguiAutoCompleteModule } from '@ngui/auto-complete';
+// import { NguiAutoCompleteModule } from '@ngui/auto-complete';
 import { DisqusModule } from 'ngx-disqus';
 import { MetaModule, MetaLoader, MetaStaticLoader, PageTitlePositioning } from '@nglibs/meta';
 import { ShareButtonsModule } from 'ngx-sharebuttons';
@@ -43,6 +43,8 @@ import { BriefingListComponent } from './components/post/briefing-list.component
 import { BriefingPostComponent } from './components/post/briefing.component';
 import { ResearchListComponent } from './components/post/research-list.component';
 import { ResearchPostComponent } from './components/post/research.component';
+import { LibraryComponent } from './components/library/library.component';
+import { LibraryDetailComponent } from './components/library/library-detail.component';
 import { LoanCalculatorComponent } from './components/credit-union/loan-calculator.component';
 import { HeaderComponent } from './components/header/header.component';
 import { MenuComponent } from './components/header/menu.component';
@@ -109,7 +111,7 @@ export function metaFactory(): MetaLoader {
           useFactory: (metaFactory)
         }),
         MaterialModule.forRoot(),
-        NguiAutoCompleteModule,
+        // NguiAutoCompleteModule,
         Ng2BreadcrumbModule.forRoot(),
         DndModule.forRoot(),
         BrowserAnimationsModule,
@@ -131,6 +133,8 @@ export function metaFactory(): MetaLoader {
         BriefingPostComponent,
         ResearchListComponent,
         ResearchPostComponent,
+        LibraryComponent,
+        LibraryDetailComponent,
         LoanCalculatorComponent,
         HeaderComponent,
         MenuComponent,

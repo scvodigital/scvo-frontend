@@ -7,6 +7,7 @@ import { Angulartics2GoogleAnalytics } from 'angulartics2';
 
 import { ElasticService } from '../services/elastic.service';
 // import { MetaService } from '../services/meta.service';
+import { SlugifyPipe } from '../pipes/slugify.pipe';
 
 import * as md5 from 'md5';
 
@@ -283,18 +284,56 @@ export class AppService {
         });
     }
 
-    public toastSub: Subject<IToast> = new Subject<IToast>();
-    public toast(content: IToast){
-        content.className = content.className || 'green white-text';
-        content.duration = content.duration || 4000;
-        this.toastSub.next(content);
+    private _searchFields: ISearchFields = {};
+    public get searchFields(): ISearchFields {
+        return this._searchFields;
+    }
+    public set searchFields(value: ISearchFields) {
+        this._searchFields = value;
+    }
+    public refreshSearchFields(){
+        return new Promise((resolve, reject) => {
+            this.es.getTermCounts().then((response: any) => {
+                if (!response.aggregations) {
+                    resolve({});
+                    return;
+                }
+
+                var fields = { };
+                var slugify = new SlugifyPipe();
+
+                Object.keys(response.aggregations).forEach((field) => {
+                    fields[field] = [];
+                    response.aggregations[field].buckets.forEach((bucket) => {
+                        fields[field].push({
+                            term: bucket.key,
+                            count: bucket.doc_count
+                        });
+                    });
+                });
+
+                this.searchFields = fields;
+                resolve(fields);
+            });
+        });
+    }
+
+    public getTerms(field: string): ISearchTerm[] {
+        if (this.searchFields.hasOwnProperty(field)) {
+            return this.searchFields[field];
+        } else {
+            return [];
+        }
     }
 }
 
-export interface IToast {
-    message: string;
-    className?: string;
-    duration?: number;
+export interface ISearchFields {
+    [field: string]: ISearchTerm[];
+}
+
+export interface ISearchTerm {
+    term: string;
+    count: number;
 }
 
 export interface IMenuElement {
