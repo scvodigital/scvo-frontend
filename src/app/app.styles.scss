@@ -423,9 +423,11 @@ main.projects-campaigns a {
     color: #00838f !important;
 }
 
+header.library, header.library .navbar .dropdown-content, main.library .btn,
 header.setting-up-a-charity, header.setting-up-a-charity .navbar .dropdown-content, main.setting-up-a-charity .btn {
     background-color: #0D47A1;
 }
+main.library a,
 main.setting-up-a-charity a {
     color: #0D47A1 !important;
 }
@@ -642,6 +644,9 @@ a.btn {
 .about-us .breadcrumb li {
     display: inline-block !important;
 }
+// .library .breadcrumb .breadcrumb-item.active {
+//     display: none;
+// }
 // .events .breadcrumb,
 // .training .breadcrumb {
 //     display: none;
@@ -710,13 +715,69 @@ a.btn {
     //     }
     // }
     .row .col-sm-12 {
-        padding-bottom: 30px;
+        padding-bottom: 2rem;
         .mat-card {
             height: 100%;
         }
     }
 }
 
+.document-result {
+    background: white;
+    margin: 1rem 0;
+    padding: 0.66rem 0;
+}
+.document-detail,
+.document-result {
+    dl {
+        margin: 0;
+        clear: both;
+    }
+    dt.inline, dd.inline {
+        float: left;
+    }
+    dt.inline {
+        clear: both;
+    }
+    dd.inline {
+        margin-left: 0.33rem;
+    }
+}
+
+main ul.pagination:not(.browser-default) li {
+    list-style-type: none;
+}
+
+nav.pagination {
+    width: 100%;
+    text-align: center;
+    ul.pagination {
+        margin: 1rem auto;
+        padding: 0;
+        li a,
+        li.active a {
+            cursor: pointer;
+            font-weight: 400;
+        }
+        li a,
+        li.active a,
+        li a:hover {
+            text-decoration: none;
+        }
+        li.page-item.active .page-link {
+            background-color: #888;
+            border-color: #888;
+            color: white !important;
+        }
+        // li.active {
+        //     background-color: red;
+        // }
+        li.disabled a {
+            color: inherit;
+            opacity: 0.5;
+        }
+    }
+}
 
 // Footer ======================================================================
 

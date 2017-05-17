@@ -10,6 +10,8 @@ import { BriefingListComponent } from './components/post/briefing-list.component
 import { BriefingPostComponent } from './components/post/briefing.component';
 import { ResearchListComponent } from './components/post/research-list.component';
 import { ResearchPostComponent } from './components/post/research.component';
+import { LibraryComponent } from './components/library/library.component';
+import { LibraryDetailComponent } from './components/library/library-detail.component';
 import { LoanCalculatorComponent } from './components/credit-union/loan-calculator.component';
 import { PrivacyAndCookiesComponent } from './components/static/privacy-and-cookies.component';
 import { TermsAndConditionsComponent } from './components/static/terms-and-conditions.component';
@@ -36,6 +38,8 @@ export const rootRouterConfig: Routes = [
     { path: 'policy-research/briefings-consultation-responses/:slug', component: BriefingPostComponent },
     { path: 'policy-research/research', component: ResearchListComponent },
     { path: 'policy-research/research/:slug', component: ResearchPostComponent },
+    { path: 'library', component: LibraryComponent },
+    { path: 'library/:slug', component: LibraryDetailComponent },
     {
         path: 'admin',
         component: AdminComponent,

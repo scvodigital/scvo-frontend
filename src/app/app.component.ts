@@ -34,6 +34,7 @@ export class AppComponent {
 
                 // Set page classes for styling
                 this.pathClasses = this.router.url.replace(/\//g, ' ').trim();
+                if (this.pathClasses.indexOf(';')!=-1) this.pathClasses = this.pathClasses.substr(0, this.pathClasses.indexOf(';'));
                 if (!this.pathClasses) this.pathClasses = 'home';
             }
         });

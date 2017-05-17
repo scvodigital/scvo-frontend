@@ -10,7 +10,8 @@ import * as deepmerge from 'deepmerge';
 export class ElasticService {
     public searchRestriction: any;
     public searchFilters: any = [];
-    public index: string = 'goodmoves-test';
+    public index: string = 'library';
+    public type: string = 'evidence';
 
     constructor() { }
 
@@ -37,35 +38,16 @@ export class ElasticService {
         return new Promise((resolve, reject) => {
             this.getClient().then((client: any) => {
                 var payload = {
-                    "size": 0,
                     "aggs": {
-                        "regions": {
+                        "categories": {
                             "terms": {
-                                "field": "region",
-                                "size": 0
-                            }
-                        },
-                        "sectors": {
-                            "terms": {
-                                "field": "sectors",
-                                "order": { "_term": "asc" },
-                                "size": 0
-                            }
-                        },
-                        "roles": {
-                            "terms": {
-                                "field": "roles",
-                                "order": { "_term": "asc" },
-                                "size": 0
-                            }
-                        },
-                        "statuses": {
-                            "terms": {
-                                "field": "status",
+                                "field": "category-na",
+                                "order" : { "_term" : "asc" },
                                 "size": 0
                             }
                         }
-                    }
+                    },
+                    "size": 0
                 };
 
                 this.search(payload, { size: 0 }).then(response => {
@@ -80,9 +62,9 @@ export class ElasticService {
             this.getClient().then((client: any) => {
                 var payload = {
                     index: this.index,
-                    type: 'job',
-                    size: 10,
-                    body: this.applySiteFilter(body)
+                    type: this.type,
+                    size: 25,
+                    body: body
                 };
 
                 for (var p in overrides) {
@@ -91,16 +73,19 @@ export class ElasticService {
                     }
                 }
 
-                if (!allowAll) {
-                    var openOnly = {
-                        query: { bool: { must: [{ term: { vacancy_status: 'vacancy-open' } }] } }
-                    }
-                    payload.body = deepmerge(payload.body, openOnly, {
-                        arrayMerge: (destination, source, options) => {
-                            return destination.concat(source);
-                        }
-                    });
-                }
+                console.log('Search request:');
+                console.log(payload);
+
+                // if (!allowAll) {
+                //     var openOnly = {
+                //         query: { bool: { must: [{ term: { vacancy_status: 'vacancy-open' } }] } }
+                //     }
+                //     payload.body = deepmerge(payload.body, openOnly, {
+                //         arrayMerge: (destination, source, options) => {
+                //             return destination.concat(source);
+                //         }
+                //     });
+                // }
 
                 client.search(payload).then(response => {
                     resolve(response);
@@ -112,55 +97,20 @@ export class ElasticService {
         });
     }
 
-    private applySiteFilter(body: any) {
-        body = deepmerge(body, this.searchRestriction, {
-            arrayMerge: (destination, source, options) => {
-                return destination.concat(source);
-            }
-        });
-        return body;
-    }
-
-    public getCountryCount(): Promise<{ [countryCode: string]: number }> {
-        return new Promise((resolve, reject) => {
-            var body = {
-                aggs: {
-                    items: {
-                        terms: {
-                            'field': 'country_iso3',
-                            'size': 0
-                        }
-                    }
-                }
-            };
-
-            var lookup = {
-                'GBR': 'United Kingdom'
-            }
-
+    getDocumentCount(): Promise<number> {
+        return new Promise<number>((resolve, reject) => {
             this.getClient().then((client: any) => {
-                var payload = {
-                    index: 'goodmoves',
-                    type: 'vacancy',
-                    size: 0,
-                    body: body
-                };
-
-                client.search(payload).then(response => {
-                    var counts = [];
-                    response.aggregations.items.buckets.forEach((item) => {
-                        counts.push([lookup[item.key], item.doc_count]);
-                    });
-                    resolve(counts);
-                }).catch(err => {
-                    console.error('Error searching', payload, err);
-                    reject(err);
-                });
-            }).catch(reject);
+                client.count({ index: this.index }).then((response) => {
+                    resolve(response.count);
+                }).catch((err) => {
+                    console.error('Failed to get document count', err);
+                    resolve(null);
+                })
+            });
         });
     }
 
-    public doSearch(parameters: ISearchParameters): Promise<IHits<any>> {
+    public constructSearch(parameters: ISearchParameters): Promise<IHits<any>> {
         return new Promise((resolve, reject) => {
             var body: any = {
                 query: {
@@ -170,21 +120,38 @@ export class ElasticService {
                 }
             };
 
-            if (parameters.query) { body.query.bool.must.push({ "simple_query_string": { "query": parameters.query } }) }
-            if (parameters.roles) { body.query.bool.must.push({ "term": { "roles_slugs": parameters.roles } }); }
-            if (parameters.sectors) { body.query.bool.must.push({ "term": { "sectors_slugs": parameters.sectors } }); }
-            if (parameters.regions) { body.query.bool.must.push({ "term": { "region_slug": parameters.regions } }); }
-            if (parameters.statuses) { body.query.bool.must.push({ "term": { "status_slug": parameters.statuses } }); }
-            if (parameters.minimumSalary) { body.query.bool.must.push({ "range": { "salary_min": { "gte": parameters.minimumSalary } } }); }
-            if (parameters.top) { body.query.bool.must.push({ "term": { top_job: true } }) }
+            if (parameters.query) {
+                body.query.bool.must.push({ "simple_query_string": { "query": parameters.query } })
+            }
+            // if (parameters.category) {
+            //     body.query.bool.must.push({ "term": { "library_classification_slugs": parameters.category } });
+            // }
+            // if (parameters.roles) { body.query.bool.must.push({ "term": { "roles_slugs": parameters.roles } }); }
+            // if (parameters.sectors) { body.query.bool.must.push({ "term": { "sectors_slugs": parameters.sectors } }); }
+            // if (parameters.regions) { body.query.bool.must.push({ "term": { "region_slug": parameters.regions } }); }
+            // if (parameters.statuses) { body.query.bool.must.push({ "term": { "status_slug": parameters.statuses } }); }
+            // if (parameters.minimumSalary) { body.query.bool.must.push({ "range": { "salary_min": { "gte": parameters.minimumSalary } } }); }
+            // if (parameters.top) { body.query.bool.must.push({ "term": { top_job: true } }) }
+
+            switch(parameters.sort) {
+                case('a-z'):
+                    body.sort = { 'title': { order: 'asc' } };
+                    break;
+                case('z-a'):
+                    body.sort = { 'title': { order: 'desc' } };
+                    break;
+                default:
+                    body.sort = { 'date_posted': { order: 'desc' } };
+                    break;
+            }
 
             var overrides: any = {
                 from: (parameters.page - 1) * 10
             }
 
-            if (parameters.sort) {
-                body.sort = [parameters.sort];
-            }
+            // if (parameters.sort) {
+            //     body.sort = [parameters.sort];
+            // }
 
             this.search(body, overrides).then(response => {
                 resolve(response.hits);
@@ -192,26 +159,23 @@ export class ElasticService {
         });
     }
 
-    public getTheseJobs(ids: string[]): Promise<any[]> {
-        return new Promise<any[]>((resolve, reject) => {
-            if (Array.isArray(ids)) {
-                ids = ids.filter(id => { return id ? true : false });
-            }
-
-            if (!Array.isArray(ids) || ids.length === 0) {
-                resolve([]);
-            }
-
-            var body = {
+    public getDocument(slug: String): Promise<IHits<IDocument>> {
+        return new Promise((resolve, reject) => {
+            var body: any = {
                 filter: {
-                    terms: {
-                        Id: ids
-                    }
+                    term: { "slug": slug }
                 }
+            };
+
+            var overrides: any = {
+                size: 10
             }
 
-            this.search(body, { size: 100 }, true).then(results => {
-                resolve(results.hits.hits.map(hit => hit._source));
+            this.search(body, overrides).then(results => {
+                if (results.hits.total < 1) {
+                    return reject(new Error('Document not found'));
+                }
+                resolve(results.hits);
             }).catch(reject);
         });
     }
@@ -243,15 +207,16 @@ export interface IAsset {
     content_type: string;
 }
 
+export interface IDocument {
+    id: string;
+    title: string;
+    slug: string;
+    abstract: string;
+}
+
 export interface ISearchParameters {
-    sectors: string,
-    roles: string,
-    regions: string,
-    statuses: string,
-    query: string,
-    minimumSalary: string
-    page: number;
-    sortKey: string;
-    sort: { [key: string]: string };
-    top: boolean;
+    query?: string,
+    category?: string,
+    page?: number;
+    sort?: string;
 }
