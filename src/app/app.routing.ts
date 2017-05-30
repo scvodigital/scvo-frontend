@@ -1,18 +1,24 @@
 import { Routes } from '@angular/router';
 
 import { HomeComponent } from './components/home/home.component';
-import { PageComponent } from './components/page/page.component';
+import { LoginComponent } from './components/account/login.component';
+import { LogoutComponent } from './components/account/logout.component';
+
+import { PageComponent } from './components/pages/page.component';
 import { ServicesPageComponent } from './components/services/services-page.component';
 import { CampaignsPageComponent } from './components/campaigns/campaigns-page.component';
-import { BlogListComponent } from './components/post/post-list.component';
-import { BlogPostComponent } from './components/post/post.component';
-import { BriefingListComponent } from './components/post/briefing-list.component';
-import { BriefingPostComponent } from './components/post/briefing.component';
-import { ResearchListComponent } from './components/post/research-list.component';
-import { ResearchPostComponent } from './components/post/research.component';
-import { LibraryComponent } from './components/library/library.component';
+import { BlogListComponent } from './components/posts/post-list.component';
+import { BlogPostComponent } from './components/posts/post-detail.component';
+import { BriefingListComponent } from './components/posts/briefing-list.component';
+import { BriefingPostComponent } from './components/posts/briefing-detail.component';
+import { ResearchListComponent } from './components/posts/research-list.component';
+import { ResearchPostComponent } from './components/posts/research-detail.component';
+import { LibraryListComponent } from './components/library/library-list.component';
 import { LibraryDetailComponent } from './components/library/library-detail.component';
+import { EventListComponent } from './components/events/event-list.component';
+import { EventDetailComponent } from './components/events/event-detail.component';
 import { LoanCalculatorComponent } from './components/credit-union/loan-calculator.component';
+
 import { PrivacyAndCookiesComponent } from './components/static/privacy-and-cookies.component';
 import { TermsAndConditionsComponent } from './components/static/terms-and-conditions.component';
 
@@ -29,8 +35,12 @@ export const rootRouterConfig: Routes = [
     // { path: ':path', component: SiteSearchComponent },
     { path: 'privacy-and-cookies', component: PrivacyAndCookiesComponent },
     { path: 'terms-and-conditions', component: TermsAndConditionsComponent },
+    { path: 'scvo-login', component: LoginComponent },
+    { path: 'scvo-logout', component: LogoutComponent },
     { path: 'services', component: ServicesPageComponent },
     { path: 'services/credit-union/loan-calculator', component: LoanCalculatorComponent },
+    { path: 'services/events', component: EventListComponent },
+    { path: 'services/events/:slug', component: EventDetailComponent },
     { path: 'projects-campaigns', component: CampaignsPageComponent },
     { path: 'policy-research/blogs', component: BlogListComponent },
     { path: 'policy-research/blogs/:slug', component: BlogPostComponent },
@@ -38,7 +48,7 @@ export const rootRouterConfig: Routes = [
     { path: 'policy-research/briefings-consultation-responses/:slug', component: BriefingPostComponent },
     { path: 'policy-research/research', component: ResearchListComponent },
     { path: 'policy-research/research/:slug', component: ResearchPostComponent },
-    { path: 'library', component: LibraryComponent },
+    { path: 'library', component: LibraryListComponent },
     { path: 'library/:slug', component: LibraryDetailComponent },
     {
         path: 'admin',

@@ -6,9 +6,9 @@ import { IHit, IDocument, ISearchParameters } from '../../services/elastic.servi
 
 @Component({
     selector: 'main-container.content',
-    templateUrl: './library.component.html'
+    templateUrl: './library-list.component.html'
 })
-export class LibraryComponent {
+export class LibraryListComponent {
     public hits: IHit<IDocument>[] = [];
     public perPage: number = 12;
     public resultsTotal: number = -1;
@@ -89,6 +89,8 @@ export class LibraryComponent {
 
             this.loading = true;
             this.parameters = {
+                index: 'library',
+                type: 'evidence',
                 query: params.query || '',
                 category: params.category || '',
                 page: !params.page ? 1 : parseInt(params.page),

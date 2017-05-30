@@ -10,8 +10,8 @@ import * as deepmerge from 'deepmerge';
 export class ElasticService {
     public searchRestriction: any;
     public searchFilters: any = [];
-    public index: string = 'library';
-    public type: string = 'evidence';
+    public index: string = '*';
+    public type: string = '*';
 
     constructor() { }
 
@@ -120,6 +120,9 @@ export class ElasticService {
                 }
             };
 
+            this.index = parameters.index;
+            this.type = parameters.type;
+
             if (parameters.query) {
                 body.query.bool.must.push({ "simple_query_string": { "query": parameters.query } })
             }
@@ -215,6 +218,8 @@ export interface IDocument {
 }
 
 export interface ISearchParameters {
+    index?: string,
+    type?: string,
     query?: string,
     category?: string,
     page?: number;

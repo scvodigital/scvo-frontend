@@ -13,7 +13,7 @@ declare var $: any;
 
 @Component({
     selector: 'main-container.content, page-content',
-    templateUrl: './research.component.html'
+    templateUrl: './research-detail.component.html'
 })
 export class ResearchPostComponent extends SiteComponent {
     @Input('embedded') embedded: string;

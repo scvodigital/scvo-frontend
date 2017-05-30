@@ -1,0 +1,121 @@
+<div class="container-fluid">
+    <div class="row title">
+        <div class="col s12">
+            <h1>
+                SCVO Events &amp; Training
+            </h1>
+        </div>
+    </div>
+
+    <div class="row search margin-bottom">
+        <div class="col s12 m4 l6">
+            <div class="form-group">
+                <h4><label class="control-label" for="query">Search</label></h4>
+                <input type="text" id="query" class="form-control validate" [(ngModel)]="query" placeholder="Search for an event" (ngModelChange)="search()" autocomplete="off" />
+            </div>
+        </div>
+        <div class="col s6 m4 l3">
+            <div class="form-group">
+                <h4><label for="category" class="control-label">Category</label></h4>
+                <select class="browser-default" [(ngModel)]="category">
+                    <option value="">All categories</option>
+                    <option *ngFor="let term of categories" [value]="term.term | slugify" [innerHTML]="term.term + ' [' + term.count + ']'"></option>
+                </select>
+            </div>
+            <!-- <div class="form-group">
+                <h4><label for="category" class="control-label">Category</label></h4>
+                <select class="browser-default" [(ngModel)]="category">
+                    <option value="" *ngIf="categories.length > 0">All categories</option>
+                    <option value="" *ngIf="categories.length === 0" disabled>No categories</option>
+                    <option *ngFor="let term of categories" [value]="term.term | slugify" [innerHTML]="term.term + ' [' + term.count + ']'"></option>
+                </select>
+            </div> -->
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col s12 m6 l8" *ngIf="resultsTotal > 0 && !this.loading">
+            <h4 class="margin-bottom">Total documents found: {{resultsTotal}}</h4>
+        </div>
+        <!-- <div class="col s4 m2 l1 right-align" *ngIf="resultsTotal > 0 && !this.loading">
+            <h4 class="margin-bottom"><label for="sort" class="control-label">Sort</label></h4>
+        </div> -->
+        <!-- <div class="col s8 m4 l3" *ngIf="resultsTotal > 0 && !this.loading">
+            <div class="form-group sort">
+                <select class="browser-default" [(ngModel)]="sort">
+                    <option value="signed">Date signed</option>
+                    <option value="a-z">Alphabetical (A-Z)</option>
+                    <option value="z-a">Alphabetical (Z-A)</option>
+                </select>
+            </div>
+        </div> -->
+        <div class="col s12" *ngIf="resultsTotal === 0 && !this.loading">
+            <h4>No documents found</h4>
+        </div>
+        <div class="col s12" *ngIf="this.loading">
+            <h4>Loading documents <i class="fa fa-fw fa-spinner fa-spin"></i></h4>
+        </div>
+    </div>
+
+    <div class="documents" *ngIf="resultsTotal > 0 && !this.loading">
+        <div *ngFor="let document of documents" class="row document-result">
+            <div class="col-sm-12 col-md-6 col-lg-8">
+                <h4 *ngIf="document._source.title != ''">
+                    <a [routerLink]="['/library', document._source.slug]">
+                        {{document._source.title}}
+                    </a>
+                </h4>
+                <dl *ngIf="document._source.comm_org != ''">
+                    <dt class="inline">Commissioner:</dt>
+                    <dd class="inline">
+                        {{document._source.comm_org}}
+                    </dd>
+                </dl>
+                <dl *ngIf="document._source.date_published != ''">
+                    <dt class="inline">Published:</dt>
+                    <dd class="inline">
+                        {{document._source.date_published}}
+                    </dd>
+                </dl>
+            </div>
+            <div class="col-sm-12 col-md-6 col-lg-4">
+                <dl *ngIf="document._source.author != ''">
+                    <dt class="inline">Author:</dt>
+                    <dd class="inline">
+                        {{document._source.author}}
+                        <span *ngIf="document._source.contrib_name != 'NULL'">
+                            (contact: {{document._source.contrib_name}})
+                        </span>
+                    </dd>
+                </dl>
+                <dl *ngIf="document._source.date_posted != ''">
+                    <dt class="inline">Date Created:</dt>
+                    <dd class="inline">
+                        {{document._source.date_posted}}
+                    </dd>
+                </dl>
+                <!-- <pre>{{document._source | json}}</pre> -->
+            </div>
+        </div>
+    </div>
+
+    <nav class="pagination" *ngIf="resultsTotal > 0 && !this.loading">
+        <ul class="pagination">
+            <li class="page-item" [ngClass]="{ disabled: !parameters.page || parameters.page == 1 }">
+                <a class="page-link" (click)="changePage(1)" role="button" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                    <span class="sr-only">Previous</span>
+                </a>
+            </li>
+            <li class="page-item" *ngFor="let page of paging" [ngClass]="{ active: parameters.page == page }">
+                <a class="page-link" (click)="changePage(page)" role="button">{{page}}</a>
+            </li>
+            <li class="page-item" [ngClass]="{ disabled: parameters.page == pageTotal }">
+                <a class="page-link" (click)="changePage(pageTotal)" role="button" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>

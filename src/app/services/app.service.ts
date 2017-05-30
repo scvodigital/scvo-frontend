@@ -27,10 +27,10 @@ export class AppService {
     private translationsSub: Subscription;
     public translations: ITranslations;// = baseDb.translations;
 
-    // private userObs: FirebaseObjectObservable<IUser>;
-    // private userSub: Subscription;
-    // public user: SiteUser = new SiteUser({});
-    // public userAuth: any;
+    private userObs: FirebaseObjectObservable<IUser>;
+    private userSub: Subscription;
+    public user: SiteUser = new SiteUser({});
+    public userAuth: any;
 
     public ready: boolean = false;
     public readySub: Subject<void> = new Subject<void>();
@@ -61,6 +61,7 @@ export class AppService {
         // });
 
         this.loadSiteData();
+        this.handleAuthChange();
     }
 
     private loadSiteData(){
@@ -324,6 +325,114 @@ export class AppService {
         } else {
             return [];
         }
+    }
+
+    public saveUser() {
+        return new Promise((resolve, reject) => {
+            if(this.user && this.user.uid){
+                var data = (<SiteUser>this.user).user;
+                this.userObs.set(data).then((response) => {
+                    resolve();
+                }).catch((err) => {
+                    reject(err);
+                });
+            }else{
+                resolve();
+            }
+        });
+    }
+
+    private handleAuthChange(){
+        this.af.auth.subscribe((userData) => {
+            this.userAuth = userData;
+            if (userData === null) {
+                this.user = new SiteUser(null);
+                this.user.roles = ['unauthenticated', 'all'];
+                this.ga.setUsername('guest');
+            } else {
+                this.ga.setUsername(userData.uid);
+                this.userObs = this.af.database.object('/users/' + userData.uid, { preserveSnapshot: true });
+                this.userSub = this.userObs.subscribe((userObj: any) => {
+                    if (userObj.exists()) {
+                        this.user = new SiteUser(userObj.val());
+                    } else {
+                        this.user = new SiteUser(null);
+                        this.user.email = userData.auth.email;
+                        this.user.name = userData.auth.displayName;
+                        this.saveUser().then(() => {
+                            // console.log('New user profile saved');
+                        }).catch((err) => {
+                            console.error('Failed to set new user profile', err);
+                        });
+                    }
+                    this.user.uid = userData.uid;
+                    this.user.roles = ['authenticated', 'all'];
+                    var rolesObs = this.af.database.object('/roles/' + userData.uid, { preserveSnapshot: true });
+                    var rolesSub = rolesObs.subscribe((rolesObj: any) => {
+                        if (rolesObj.exists()) {
+                            var roles = rolesObj.val();
+                            var roleNames = Object.keys(roles);
+                            this.user.roles = this.user.roles.concat(roleNames);
+                        }
+                    });
+                });
+            }
+
+            setTimeout(() => { this.refreshMenus(); }, 500);
+        },
+        (err) => {
+            console.error('Error in Auth Change', err);
+            setTimeout(() => { this.refreshMenus(); }, 500);
+        },
+        () => {
+            // console.log('Auth Change Sub Completed???');
+            setTimeout(() => { this.refreshMenus(); }, 500);
+        });
+    }
+}
+
+export interface IUser {
+    uid: string;
+    name: string;
+    email: string;
+}
+
+export interface ISiteUser extends IUser {
+    roles: string[];
+}
+
+export class User implements IUser {
+    uid: string;
+    name: string;
+    email: string;
+
+    constructor(user: IUser | any) {
+        user = user || {};
+        this.uid = user.uid || '';
+        this.name = user.name || '';
+        this.email = user.email || '';
+    }
+}
+
+export class SiteUser extends User {
+    roles: string[];
+
+    constructor(user: ISiteUser | any) {
+        super(user);
+        user = user || {};
+        this.roles = user.roles || [];
+    }
+
+    get user(): IUser {
+        return {
+            uid: this.uid,
+            name: this.name,
+            email: this.email,
+        };
+    }
+
+    gravatar(size: number = 16, fallback: string = 'mm'): string {
+        return `//www.gravatar.com/avatar/${md5(this.email)}?s=${size}&d=${fallback}`;
     }
 }
 

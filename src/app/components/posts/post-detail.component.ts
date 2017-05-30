@@ -13,7 +13,7 @@ declare var $: any;
 
 @Component({
     selector: 'main-container.content, page-content',
-    templateUrl: './post.component.html'
+    templateUrl: './post-detail.component.html'
 })
 export class BlogPostComponent extends SiteComponent {
     constructor(appService: AppService, private route: ActivatedRoute, private router: Router) { super(appService) }
