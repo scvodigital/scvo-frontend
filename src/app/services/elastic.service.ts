@@ -12,6 +12,7 @@ export class ElasticService {
     public searchFilters: any = [];
     public index: string = '*';
     public type: string = '*';
+    public limit: number = 25;
 
     constructor() { }
 
@@ -63,7 +64,7 @@ export class ElasticService {
                 var payload = {
                     index: this.index,
                     type: this.type,
-                    size: 25,
+                    size: this.limit,
                     body: body
                 };
 
@@ -143,6 +144,9 @@ export class ElasticService {
                 case('z-a'):
                     body.sort = { 'title': { order: 'desc' } };
                     break;
+                case('start'):
+                    body.sort = { 'dateStart': { order: 'asc' } };
+                    break;
                 default:
                     body.sort = { 'date_posted': { order: 'desc' } };
                     break;
@@ -220,6 +224,7 @@ export interface IDocument {
 export interface ISearchParameters {
     index?: string,
     type?: string,
+    limit?: number,
     query?: string,
     category?: string,
     page?: number;

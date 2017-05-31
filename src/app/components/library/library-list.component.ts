@@ -10,7 +10,7 @@ import { IHit, IDocument, ISearchParameters } from '../../services/elastic.servi
 })
 export class LibraryListComponent {
     public hits: IHit<IDocument>[] = [];
-    public perPage: number = 12;
+    public perPage: number = 25;
     public resultsTotal: number = -1;
     public pageTotal: number = 0;
     public loading: boolean = true;
@@ -91,6 +91,7 @@ export class LibraryListComponent {
             this.parameters = {
                 index: 'library',
                 type: 'evidence',
+                limit: this.perPage,
                 query: params.query || '',
                 category: params.category || '',
                 page: !params.page ? 1 : parseInt(params.page),

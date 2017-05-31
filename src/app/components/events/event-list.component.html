@@ -15,13 +15,13 @@
             </div>
         </div>
         <div class="col s6 m4 l3">
-            <div class="form-group">
+            <!-- <div class="form-group">
                 <h4><label for="category" class="control-label">Category</label></h4>
                 <select class="browser-default" [(ngModel)]="category">
                     <option value="">All categories</option>
                     <option *ngFor="let term of categories" [value]="term.term | slugify" [innerHTML]="term.term + ' [' + term.count + ']'"></option>
                 </select>
-            </div>
+            </div> -->
             <!-- <div class="form-group">
                 <h4><label for="category" class="control-label">Category</label></h4>
                 <select class="browser-default" [(ngModel)]="category">
@@ -35,7 +35,7 @@
 
     <div class="row">
         <div class="col s12 m6 l8" *ngIf="resultsTotal > 0 && !this.loading">
-            <h4 class="margin-bottom">Total documents found: {{resultsTotal}}</h4>
+            <h4 class="margin-bottom">Total events found: {{resultsTotal}}</h4>
         </div>
         <!-- <div class="col s4 m2 l1 right-align" *ngIf="resultsTotal > 0 && !this.loading">
             <h4 class="margin-bottom"><label for="sort" class="control-label">Sort</label></h4>
@@ -50,56 +50,41 @@
             </div>
         </div> -->
         <div class="col s12" *ngIf="resultsTotal === 0 && !this.loading">
-            <h4>No documents found</h4>
+            <h4>No events found</h4>
         </div>
         <div class="col s12" *ngIf="this.loading">
-            <h4>Loading documents <i class="fa fa-fw fa-spinner fa-spin"></i></h4>
+            <h4>Loading events <i class="fa fa-fw fa-spinner fa-spin"></i></h4>
         </div>
     </div>
 
-    <div class="documents" *ngIf="resultsTotal > 0 && !this.loading">
-        <div *ngFor="let document of documents" class="row document-result">
-            <div class="col-sm-12 col-md-6 col-lg-8">
-                <h4 *ngIf="document._source.title != ''">
-                    <a [routerLink]="['/library', document._source.slug]">
-                        {{document._source.title}}
+    <div class="events" *ngIf="resultsTotal > 0 && !this.loading">
+        <div *ngFor="let event of events" class="row event-result">
+            <div class="col-sm-2 col-md-1">
+                <div *ngIf="event._source.dateStart != ''" class="dateStart">
+                    <div class="weekday">{{event._source.dateStart | date:'EEE'}}</div>
+                    <div class="date">{{event._source.dateStart | date:'d MMM'}}</div>
+                </div>
+            </div>
+            <div class="col-sm-8 col-md-10">
+                <h4 *ngIf="event._source.title != ''">
+                    <a [routerLink]="['/services/events', event._source.slug]">
+                        {{event._source.title}}
                     </a>
                 </h4>
-                <dl *ngIf="document._source.comm_org != ''">
-                    <dt class="inline">Commissioner:</dt>
-                    <dd class="inline">
-                        {{document._source.comm_org}}
-                    </dd>
-                </dl>
-                <dl *ngIf="document._source.date_published != ''">
-                    <dt class="inline">Published:</dt>
-                    <dd class="inline">
-                        {{document._source.date_published}}
-                    </dd>
-                </dl>
             </div>
-            <div class="col-sm-12 col-md-6 col-lg-4">
-                <dl *ngIf="document._source.author != ''">
-                    <dt class="inline">Author:</dt>
-                    <dd class="inline">
-                        {{document._source.author}}
-                        <span *ngIf="document._source.contrib_name != 'NULL'">
-                            (contact: {{document._source.contrib_name}})
-                        </span>
-                    </dd>
-                </dl>
-                <dl *ngIf="document._source.date_posted != ''">
-                    <dt class="inline">Date Created:</dt>
-                    <dd class="inline">
-                        {{document._source.date_posted}}
-                    </dd>
-                </dl>
-                <!-- <pre>{{document._source | json}}</pre> -->
+            <div class="col-sm-2 col-md-1">
+                <div *ngIf="event._source.cost > 0" class="cost paid">
+                    &pound;
+                </div>
+                <div *ngIf="event._source.cost == 0" class="cost free">
+                    FREE
+                </div>
             </div>
+            <!-- <pre>{{event._source | json}}</pre> -->
         </div>
     </div>
 
-    <nav class="pagination" *ngIf="resultsTotal > 0 && !this.loading">
+    <nav class="pagination" *ngIf="resultsTotal > 0 && paging > 1 && !this.loading">
         <ul class="pagination">
             <li class="page-item" [ngClass]="{ disabled: !parameters.page || parameters.page == 1 }">
                 <a class="page-link" (click)="changePage(1)" role="button" aria-label="Previous">

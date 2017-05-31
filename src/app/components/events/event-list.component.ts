@@ -10,7 +10,7 @@ import { IHit, IDocument, ISearchParameters } from '../../services/elastic.servi
 })
 export class EventListComponent {
     public hits: IHit<IDocument>[] = [];
-    public perPage: number = 12;
+    public perPage: number = 100;
     public resultsTotal: number = -1;
     public pageTotal: number = 0;
     public loading: boolean = true;
@@ -47,7 +47,7 @@ export class EventListComponent {
         this.search();
     }
 
-    public documents: IHit<IDocument>[];
+    public events: IHit<IDocument>[];
 
     get categories(): any[] {
         return this.appService.getTerms('categories');
@@ -69,7 +69,7 @@ export class EventListComponent {
         if(this.category){
             params.category = this.category;
         }
-        params.sort = this.sort || 'date';
+        params.sort = this.sort || 'start';
         this.router.navigate(['./services/events', params]);
     }
 
@@ -82,16 +82,17 @@ export class EventListComponent {
 
             this.loading = true;
             this.parameters = {
-                type: 'events',
-                index: 'event',
+                index: 'events',
+                type: 'event',
+                limit: this.perPage,
                 query: params.query || '',
                 category: params.category || '',
                 page: !params.page ? 1 : parseInt(params.page),
-                sort: params.sort || 'date'
+                sort: params.sort || 'start'
             };
             this.appService.es.constructSearch(this.parameters).then((results) => {
                 // console.log(results);
-                this.documents = results.hits;
+                this.events = results.hits;
                 this.resultsTotal = results.total;
                 this.pageTotal = Math.ceil(this.resultsTotal / this.perPage);
                 this.loading = false;

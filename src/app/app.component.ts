@@ -8,6 +8,7 @@ import { TranslatePipe } from './pipes/translate.pipe';
 import { AppService } from './services/app.service';
 
 declare var $: any;
+declare var window: any;
 
 @Component({
     selector: 'scvo',
@@ -27,7 +28,7 @@ export class AppComponent {
         this.router.events.subscribe(event => {
             if (event instanceof NavigationEnd) {
                 // Go to top of page
-                window.scrollTo(0, 0);
+                window.scrollTo(0,0);
 
                 // Hide main menu dropdown if still open
                 $('.dropdown-content').hide();

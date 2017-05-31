@@ -130,11 +130,8 @@ a:not([href]):not([tabindex]):hover {
     display:block
 }
 
-main.projects-campaigns {
-    padding: 0;
-    h1 {
-        padding-top: 1rem;
-    }
+main.projects-campaigns h1 {
+    padding-top: 1rem;
 }
 main {
     padding: 0 0 0.5rem;
@@ -153,6 +150,13 @@ main {
         margin-left: 0.25rem;
         text-decoration: none;
         display: inline-block;
+    }
+    a[href^="http://forms.scvo"]::after,
+    a[href^="https://forms.scvo"]::after,
+    a[href^="http://email.scvo"]::after,
+    a[href^="https://email.scvo"]::after {
+        content: " ";
+        margin-left: 0;
     }
     .card a:link, a.btn:link {
         text-decoration: none;
@@ -181,6 +185,7 @@ main {
         margin: 0;
     }
 }
+
 @media screen and (max-width: 992px) {
     body {
         font-size: 0.95rem;
@@ -249,7 +254,13 @@ header {
     padding-bottom: 0;
     box-shadow: 0 2px 5px 0 rgba(0,0,0,0.26);
     z-index: 100;
+    position: fixed;
+    width: 100%;
 }
+main {
+    padding-top: 128px;
+}
+
 .mat-toolbar-row {
     height: auto !important;
     max-height: 64px;
@@ -371,12 +382,12 @@ header.scroll {
 }
 
 header, header .navbar .dropdown-content, main .btn,
-header.about-us, header.about-us .navbar .dropdown-content, main.about-us .btn {
+header.about, header.about .navbar .dropdown-content, main.about .btn {
     background-color: #009e99;
 }
 main a,
-main.about-us a {
-    color: #009e99;
+main.about a {
+    color: #009e99 !important;
 }
 
 header.running-your-organisation, header.running-your-organisation .navbar .dropdown-content, main.running-your-organisation .btn {
@@ -727,11 +738,14 @@ a.btn {
     }
 }
 
+.event-result,
 .document-result {
     background: white;
     margin: 1rem 0;
     padding: 0.66rem 0;
 }
+.event-detail,
+.event-result,
 .document-detail,
 .document-result {
     dl {
