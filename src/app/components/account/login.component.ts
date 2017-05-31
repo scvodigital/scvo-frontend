@@ -25,7 +25,9 @@ export class LoginComponent extends SiteComponent {
 	};
 
 	onSiteLoaded(){
-
+        if (this.appService.user && this.appService.user.roles && this.appService.user.roles.indexOf('Administrator') > -1) {
+            this.router.navigate(['/admin']);
+        }
 	}
 
 	login() {
@@ -42,7 +44,7 @@ export class LoginComponent extends SiteComponent {
 		};
 
 		this.af.auth.login(credentials, config).then(result => {
-			that.router.navigate(['/']);
+			that.router.navigate(['/admin']);
 		}).catch(err => {
 			console.error(err);
 			this.message = err.message;

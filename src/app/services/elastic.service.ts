@@ -98,7 +98,7 @@ export class ElasticService {
         });
     }
 
-    getDocumentCount(): Promise<number> {
+    getResultCount(): Promise<number> {
         return new Promise<number>((resolve, reject) => {
             this.getClient().then((client: any) => {
                 client.count({ index: this.index }).then((response) => {
@@ -166,13 +166,16 @@ export class ElasticService {
         });
     }
 
-    public getDocument(slug: String): Promise<IHits<IDocument>> {
+    public getResult(index: string, type: string, slug: string): Promise<IHits<IDocument>> {
         return new Promise((resolve, reject) => {
             var body: any = {
                 filter: {
                     term: { "slug": slug }
                 }
             };
+
+            this.index = index;
+            this.type = type;
 
             var overrides: any = {
                 size: 10

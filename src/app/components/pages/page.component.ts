@@ -22,6 +22,12 @@ declare var $: any;
 export class PageComponent extends SiteComponent {
     @Input('embedded') embedded: string;
 
+    public slugFull: string = '';
+    public slugId: string = '';
+    public slugPage: string = '';
+
+    public showEdit: boolean = false;
+
     private _content: string = '';
     public get content(): string {
         return this._content;
@@ -74,13 +80,18 @@ export class PageComponent extends SiteComponent {
             this.route.url.subscribe(url => {
                 // Set title
                 //.replace(/\//g, '_')
-                var slug_full = this.router.url.substr(1);
-                var slug_page = slug_full.substr(slug_full.lastIndexOf('/') + 1);
-                this.meta.setTitle(this.translatePipe.transform('title:-'+slug_page, 'en'));
+                this.slugFull = this.router.url.substr(1);
+                this.slugId = this.router.url.replace(/\//g, '_');
+                this.slugPage = this.slugFull.substr(this.slugFull.lastIndexOf('/') + 1);
+                this.meta.setTitle(this.translatePipe.transform('title:-'+this.slugPage, 'en'));
                 // this.meta.setTag('og:image', this.item.imageUrl);
 
                 // Show content
-                this.displayContent(slug_full);
+                this.displayContent(this.slugFull);
+
+                if (this.appService.user && this.appService.user.roles && this.appService.user.roles.indexOf('Administrator') > -1) {
+                    this.showEdit = true;
+                }
             });
         }
     }

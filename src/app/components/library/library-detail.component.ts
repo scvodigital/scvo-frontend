@@ -21,7 +21,7 @@ export class LibraryDetailComponent {
                     var slug = event.url.substr(path.length);
                     var params;
 
-                    this.appService.es.getDocument(slug).then((results) => {
+                    this.appService.es.getResult('library', 'evidence', slug).then((results) => {
                         // console.log(results);
                         this.documents = results.hits;
                     }).catch(err => {

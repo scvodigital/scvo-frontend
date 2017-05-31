@@ -1,6 +1,6 @@
 <div class="container-fluid">
     <div class="row title">
-        <div class="col s12">
+        <div class="col-sm-12">
             <h1>
                 SCVO Events &amp; Training
             </h1>
@@ -8,22 +8,49 @@
     </div>
 
     <div class="row search margin-bottom">
-        <div class="col s12 m4 l6">
+        <div class="col-sm-12">
             <div class="form-group">
-                <h4><label class="control-label" for="query">Search</label></h4>
+                <strong><label class="control-label" for="query">Keyword</label></strong>
                 <input type="text" id="query" class="form-control validate" [(ngModel)]="query" placeholder="Search for an event" (ngModelChange)="search()" autocomplete="off" />
             </div>
         </div>
-        <div class="col s6 m4 l3">
-            <!-- <div class="form-group">
-                <h4><label for="category" class="control-label">Category</label></h4>
+        <div class="col-sm-6 col-md-4 col-lg-3">
+            <div class="form-group">
+                <strong><label for="category" class="control-label">Category</label></strong>
                 <select class="browser-default" [(ngModel)]="category">
-                    <option value="">All categories</option>
+                    <option value="">Any category</option>
                     <option *ngFor="let term of categories" [value]="term.term | slugify" [innerHTML]="term.term + ' [' + term.count + ']'"></option>
                 </select>
-            </div> -->
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-4 col-lg-3">
+            <div class="form-group">
+                <strong><label for="month" class="control-label">Month</label></strong>
+                <select class="browser-default" [(ngModel)]="month">
+                    <option value="">Any month</option>
+                    <option *ngFor="let term of months" [value]="term.term | slugify" [innerHTML]="term.term + ' [' + term.count + ']'"></option>
+                </select>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-4 col-lg-3">
+            <div class="form-group">
+                <strong><label for="location" class="control-label">Location</label></strong>
+                <select class="browser-default" [(ngModel)]="location">
+                    <option value="">Any location</option>
+                    <option *ngFor="let term of locations" [value]="term.term | slugify" [innerHTML]="term.term + ' [' + term.count + ']'"></option>
+                </select>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-4 col-lg-3">
+            <div class="form-group">
+                <strong><label for="cost" class="control-label">Cost</label></strong>
+                <select class="browser-default" [(ngModel)]="cost">
+                    <option value="">Any cost</option>
+                    <option *ngFor="let term of costs" [value]="term.term | slugify" [innerHTML]="term.term + ' [' + term.count + ']'"></option>
+                </select>
+            </div>
             <!-- <div class="form-group">
-                <h4><label for="category" class="control-label">Category</label></h4>
+                <strong><label for="category" class="control-label">Category</label></strong>
                 <select class="browser-default" [(ngModel)]="category">
                     <option value="" *ngIf="categories.length > 0">All categories</option>
                     <option value="" *ngIf="categories.length === 0" disabled>No categories</option>
@@ -34,13 +61,13 @@
     </div>
 
     <div class="row">
-        <div class="col s12 m6 l8" *ngIf="resultsTotal > 0 && !this.loading">
-            <h4 class="margin-bottom">Total events found: {{resultsTotal}}</h4>
+        <div class="col-sm-12 col-md-6 col-lg-8" *ngIf="resultsTotal > 0 && !this.loading">
+            <strong class="margin-bottom">Total events found: {{resultsTotal}}</strong>
         </div>
         <!-- <div class="col s4 m2 l1 right-align" *ngIf="resultsTotal > 0 && !this.loading">
-            <h4 class="margin-bottom"><label for="sort" class="control-label">Sort</label></h4>
+            <h4 class="margin-bottom"><label for="sort" class="control-label">Sort</label></strong>
         </div> -->
-        <!-- <div class="col s8 m4 l3" *ngIf="resultsTotal > 0 && !this.loading">
+        <!-- <div class="col s8 col-md-4 col-lg-3" *ngIf="resultsTotal > 0 && !this.loading">
             <div class="form-group sort">
                 <select class="browser-default" [(ngModel)]="sort">
                     <option value="signed">Date signed</option>
@@ -49,21 +76,21 @@
                 </select>
             </div>
         </div> -->
-        <div class="col s12" *ngIf="resultsTotal === 0 && !this.loading">
-            <h4>No events found</h4>
+        <div class="col-sm-12" *ngIf="resultsTotal === 0 && !this.loading">
+            <strong>No events found</strong>
         </div>
-        <div class="col s12" *ngIf="this.loading">
-            <h4>Loading events <i class="fa fa-fw fa-spinner fa-spin"></i></h4>
+        <div class="col-sm-12" *ngIf="this.loading">
+            <strong>Loading events <i class="fa fa-fw fa-spinner fa-spin"></i></strong>
         </div>
     </div>
 
     <div class="events" *ngIf="resultsTotal > 0 && !this.loading">
         <div *ngFor="let event of events" class="row event-result">
             <div class="col-sm-2 col-md-1">
-                <div *ngIf="event._source.dateStart != ''" class="dateStart">
+                <h4 *ngIf="event._source.dateStart != ''" class="date-detail">
                     <div class="weekday">{{event._source.dateStart | date:'EEE'}}</div>
                     <div class="date">{{event._source.dateStart | date:'d MMM'}}</div>
-                </div>
+                </h4>
             </div>
             <div class="col-sm-8 col-md-10">
                 <h4 *ngIf="event._source.title != ''">
@@ -71,14 +98,20 @@
                         {{event._source.title}}
                     </a>
                 </h4>
+                <p>
+                    {{event._source.dateStart | date:'HH:mm'}} - {{event._source.dateEnd | date:'HH:mm'}}
+                </p>
             </div>
             <div class="col-sm-2 col-md-1">
-                <div *ngIf="event._source.cost > 0" class="cost paid">
+                <h3 *ngIf="event._source.cost > 0" class="cost paid">
                     &pound;
-                </div>
-                <div *ngIf="event._source.cost == 0" class="cost free">
+                </h3>
+                <h3 *ngIf="event._source.cost == 0" class="cost free">
                     FREE
-                </div>
+                </h3>
+                <h3 *ngIf="!event._source.cost || event._source.cost < 0" class="cost free">
+                    ?
+                </h3>
             </div>
             <!-- <pre>{{event._source | json}}</pre> -->
         </div>
