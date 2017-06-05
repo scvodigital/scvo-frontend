@@ -9,7 +9,7 @@ import { AppService } from '../../services/app.service';
 })
 export class LogoutComponent {
 	constructor(private appService: AppService, private router: Router) {
-		this.appService.af.auth.logout();
-        this.router.navigate(['/login']);
+		this.appService.afAuth.auth.signOut();
+        this.router.navigate(['/scvo-login']);
 	};
 }

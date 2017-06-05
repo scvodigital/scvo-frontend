@@ -11,6 +11,8 @@ import 'hammerjs';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireAuthModule } from 'angularfire2/auth';
 import { DndModule } from 'ng2-dnd';
 import { Angulartics2Module, Angulartics2GoogleAnalytics } from 'angulartics2';
 import { DynamicComponentModule } from 'angular2-dynamic-component';
@@ -110,6 +112,8 @@ export function metaFactory(): MetaLoader {
         HttpModule,
         RouterModule.forRoot(rootRouterConfig),
         AngularFireModule.initializeApp(firebaseConfig),
+        AngularFireDatabaseModule,
+        AngularFireAuthModule,
         Angulartics2Module.forRoot([Angulartics2GoogleAnalytics]),
         // MaterializeModule,
         NgbModule.forRoot(),
@@ -118,7 +122,7 @@ export function metaFactory(): MetaLoader {
           provide: MetaLoader,
           useFactory: (metaFactory)
         }),
-        MaterialModule.forRoot(),
+        MaterialModule,
         // NguiAutoCompleteModule,
         Ng2BreadcrumbModule.forRoot(),
         DndModule.forRoot(),
