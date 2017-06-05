@@ -5,6 +5,7 @@ import { LoginComponent } from './components/account/login.component';
 import { LogoutComponent } from './components/account/logout.component';
 
 import { PageComponent } from './components/pages/page.component';
+import { DigitalPageComponent } from './components/digital/page.component';
 import { ServicesPageComponent } from './components/services/services-page.component';
 import { CampaignsPageComponent } from './components/campaigns/campaigns-page.component';
 import { BlogListComponent } from './components/posts/post-list.component';
@@ -41,6 +42,7 @@ export const rootRouterConfig: Routes = [
     { path: 'services/credit-union/loan-calculator', component: LoanCalculatorComponent },
     { path: 'services/events', component: EventListComponent },
     { path: 'services/events/:slug', component: EventDetailComponent },
+    { path: 'services/digital', component: DigitalPageComponent },
     { path: 'projects-campaigns', component: CampaignsPageComponent },
     { path: 'policy-research/blogs', component: BlogListComponent },
     { path: 'policy-research/blogs/:slug', component: BlogPostComponent },
