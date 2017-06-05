@@ -2,7 +2,8 @@ import { Injectable, Type, Inject } from '@angular/core';
 import { Router, Route } from '@angular/router';
 
 import { Observable, Subject, Subscription, Observer } from 'rxjs/Rx';
-import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
+import { AngularFireDatabase, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2/database';
+import { AngularFireAuth } from 'angularfire2/auth';
 import { Angulartics2GoogleAnalytics } from 'angulartics2';
 
 import { ElasticService } from '../services/elastic.service';
@@ -20,17 +21,17 @@ declare function loaded();
 @Injectable()
 export class AppService {
     private configObs: FirebaseObjectObservable<IAppConfig>;
-    private configSub: Subscription;
+    // private configSub: Subscription;
     public config: IAppConfig;// = baseDb.config;
 
     private translationsObs: FirebaseObjectObservable<ITranslations>;
-    private translationsSub: Subscription;
+    // private translationsSub: Subscription;
     public translations: ITranslations;// = baseDb.translations;
 
-    // private userObs: FirebaseObjectObservable<IUser>;
+    private userObs: FirebaseObjectObservable<IUser>;
     // private userSub: Subscription;
-    // public user: SiteUser = new SiteUser({});
-    // public userAuth: any;
+    public user: SiteUser = new SiteUser({});
+    public userAuth: any;
 
     public ready: boolean = false;
     public readySub: Subject<void> = new Subject<void>();
@@ -52,7 +53,7 @@ export class AppService {
         return '/sites/' + this.siteKey + '/';
     }
 
-    constructor(@Inject(AngularFire) public af: AngularFire, @Inject(ElasticService) public es: ElasticService, @Inject(Angulartics2GoogleAnalytics) public ga: Angulartics2GoogleAnalytics) {
+    constructor(@Inject(AngularFireDatabase) public af: AngularFireDatabase, public afAuth: AngularFireAuth, @Inject(ElasticService) public es: ElasticService, @Inject(Angulartics2GoogleAnalytics) public ga: Angulartics2GoogleAnalytics) {
 
         //, @Inject(MetaService) public ms: MetaService
 
@@ -61,19 +62,20 @@ export class AppService {
         // });
 
         this.loadSiteData();
+        this.handleAuthChange();
     }
 
     private loadSiteData(){
-        this.configObs = this.af.database.object('/config', { preserveSnapshot: true });
-        this.configSub = this.configObs.subscribe((configObj: any) => {
+        this.configObs = this.af.object('/config', { preserveSnapshot: true });
+        this.configObs.subscribe((configObj: any) => {
             this.config = configObj.val();
 
-            this.translationsObs = this.af.database.object('/translations', { preserveSnapshot: true });
-            this.translationsSub = this.translationsObs.subscribe((translationsObj: any) => {
+            this.translationsObs = this.af.object('/translations', { preserveSnapshot: true });
+            this.translationsObs.subscribe((translationsObj: any) => {
                 this.translations = translationsObj.val();
 
-                this.siteObs = this.af.database.object(this.sitePath, { preserveSnapshot: true });
-                this.siteSub = this.siteObs.subscribe((siteObj: any) => {
+                this.siteObs = this.af.object(this.sitePath, { preserveSnapshot: true });
+                this.siteObs.subscribe((siteObj: any) => {
                     this.site = siteObj.val();
 
                     this.refreshMenus();
@@ -252,7 +254,7 @@ export class AppService {
 
     public saveMenu(){
         return new Promise((resolve, reject) => {
-            var menusObs = this.af.database.object(this.sitePath + '/menus', { preserveSnapshot: true });
+            var menusObs = this.af.object(this.sitePath + '/menus', { preserveSnapshot: true });
             var menusSub = menusObs.set(this.allMenus).then((response) => {
                 this.refreshMenus();
                 resolve();
@@ -264,7 +266,7 @@ export class AppService {
 
     public savePage(pageName){
         return new Promise((resolve, reject) => {
-            var pageObs = this.af.database.object(this.sitePath + '/pages/' + pageName, { preserveSnapshot: true });
+            var pageObs = this.af.object(this.sitePath + '/pages/' + pageName, { preserveSnapshot: true });
             var pageSub = pageObs.set(this.site.pages[pageName]).then((resonse) => {
                 resolve();
             }).catch((err) => {
@@ -324,6 +326,114 @@ export class AppService {
         } else {
             return [];
         }
+    }
+
+    public saveUser() {
+        return new Promise((resolve, reject) => {
+            if(this.user && this.user.uid){
+                var data = (<SiteUser>this.user).user;
+                this.userObs.set(data).then((response) => {
+                    resolve();
+                }).catch((err) => {
+                    reject(err);
+                });
+            } else {
+                resolve();
+            }
+        });
+    }
+
+    private handleAuthChange(){
+        // this.afAuth.auth.subscribe((userData) => {
+        //     this.userAuth = userData;
+        //     if (userData === null) {
+        //         this.user = new SiteUser(null);
+        //         this.user.roles = ['unauthenticated', 'all'];
+        //         this.ga.setUsername('guest');
+        //     } else {
+        //         this.ga.setUsername(userData.uid);
+        //         this.userObs = this.af.object('/users/' + userData.uid, { preserveSnapshot: true });
+        //         this.userObs.subscribe((userObj: any) => {
+        //             if (userObj.exists()) {
+        //                 this.user = new SiteUser(userObj.val());
+        //             } else {
+        //                 this.user = new SiteUser(null);
+        //                 this.user.email = userData.auth.email;
+        //                 this.user.name = userData.auth.displayName;
+        //                 this.saveUser().then(() => {
+        //                     // console.log('New user profile saved');
+        //                 }).catch((err) => {
+        //                     console.error('Failed to set new user profile', err);
+        //                 });
+        //             }
+        //             this.user.uid = userData.uid;
+        //             this.user.roles = ['authenticated', 'all'];
+        //             var rolesObs = this.af.object('/roles/' + userData.uid, { preserveSnapshot: true });
+        //             var rolesSub = rolesObs.subscribe((rolesObj: any) => {
+        //                 if (rolesObj.exists()) {
+        //                     var roles = rolesObj.val();
+        //                     var roleNames = Object.keys(roles);
+        //                     this.user.roles = this.user.roles.concat(roleNames);
+        //                 }
+        //             });
+        //         });
+        //     }
+        //
+        //     setTimeout(() => { this.refreshMenus(); }, 500);
+        // },
+        // (err) => {
+        //     console.error('Error in Auth Change', err);
+        //     setTimeout(() => { this.refreshMenus(); }, 500);
+        // },
+        // () => {
+        //     // console.log('Auth Change Sub Completed???');
+        //     setTimeout(() => { this.refreshMenus(); }, 500);
+        // });
+    }
+}
+
+export interface IUser {
+    uid: string;
+    name: string;
+    email: string;
+}
+
+export interface ISiteUser extends IUser {
+    roles: string[];
+}
+
+export class User implements IUser {
+    uid: string;
+    name: string;
+    email: string;
+
+    constructor(user: IUser | any) {
+        user = user || {};
+        this.uid = user.uid || '';
+        this.name = user.name || '';
+        this.email = user.email || '';
+    }
+}
+
+export class SiteUser extends User {
+    roles: string[];
+
+    constructor(user: ISiteUser | any) {
+        super(user);
+        user = user || {};
+        this.roles = user.roles || [];
+    }
+
+    get user(): IUser {
+        return {
+            uid: this.uid,
+            name: this.name,
+            email: this.email,
+        };
+    }
+
+    gravatar(size: number = 16, fallback: string = 'mm'): string {
+        return `//www.gravatar.com/avatar/${md5(this.email)}?s=${size}&d=${fallback}`;
     }
 }
 

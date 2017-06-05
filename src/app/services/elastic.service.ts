@@ -10,8 +10,9 @@ import * as deepmerge from 'deepmerge';
 export class ElasticService {
     public searchRestriction: any;
     public searchFilters: any = [];
-    public index: string = 'library';
-    public type: string = 'evidence';
+    public index: string = '*';
+    public type: string = '*';
+    public limit: number = 25;
 
     constructor() { }
 
@@ -63,7 +64,7 @@ export class ElasticService {
                 var payload = {
                     index: this.index,
                     type: this.type,
-                    size: 25,
+                    size: this.limit,
                     body: body
                 };
 
@@ -97,7 +98,7 @@ export class ElasticService {
         });
     }
 
-    getDocumentCount(): Promise<number> {
+    getResultCount(): Promise<number> {
         return new Promise<number>((resolve, reject) => {
             this.getClient().then((client: any) => {
                 client.count({ index: this.index }).then((response) => {
@@ -120,6 +121,9 @@ export class ElasticService {
                 }
             };
 
+            this.index = parameters.index;
+            this.type = parameters.type;
+
             if (parameters.query) {
                 body.query.bool.must.push({ "simple_query_string": { "query": parameters.query } })
             }
@@ -140,6 +144,9 @@ export class ElasticService {
                 case('z-a'):
                     body.sort = { 'title': { order: 'desc' } };
                     break;
+                case('start'):
+                    body.sort = { 'dateStart': { order: 'asc' } };
+                    break;
                 default:
                     body.sort = { 'date_posted': { order: 'desc' } };
                     break;
@@ -159,13 +166,16 @@ export class ElasticService {
         });
     }
 
-    public getDocument(slug: String): Promise<IHits<IDocument>> {
+    public getResult(index: string, type: string, slug: string): Promise<IHits<IDocument>> {
         return new Promise((resolve, reject) => {
             var body: any = {
                 filter: {
                     term: { "slug": slug }
                 }
             };
+
+            this.index = index;
+            this.type = type;
 
             var overrides: any = {
                 size: 10
@@ -215,6 +225,9 @@ export interface IDocument {
 }
 
 export interface ISearchParameters {
+    index?: string,
+    type?: string,
+    limit?: number,
     query?: string,
     category?: string,
     page?: number;

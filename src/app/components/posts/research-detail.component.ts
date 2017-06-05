@@ -13,9 +13,9 @@ declare var $: any;
 
 @Component({
     selector: 'main-container.content, page-content',
-    templateUrl: './briefing.component.html'
+    templateUrl: './research-detail.component.html'
 })
-export class BriefingPostComponent extends SiteComponent {
+export class ResearchPostComponent extends SiteComponent {
     @Input('embedded') embedded: string;
 
     private _content: string = '';

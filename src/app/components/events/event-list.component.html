@@ -1,0 +1,139 @@
+<div class="container-fluid">
+    <div class="row title">
+        <div class="col-sm-12">
+            <h1>
+                SCVO Events &amp; Training
+            </h1>
+        </div>
+    </div>
+
+    <div class="row search margin-bottom">
+        <div class="col-sm-12 col-md-8 col-lg-12">
+            <div class="form-group">
+                <strong><label class="control-label" for="query">Keyword</label></strong>
+                <input type="text" id="query" class="form-control validate" [(ngModel)]="query" placeholder="Search for an event" (ngModelChange)="search()" autocomplete="off" />
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-4 col-lg-3">
+            <div class="form-group">
+                <strong><label for="category" class="control-label">Category</label></strong>
+                <select class="browser-default" [(ngModel)]="category">
+                    <option value="">Any category</option>
+                    <option *ngFor="let term of categories" [value]="term.term | slugify" [innerHTML]="term.term + ' [' + term.count + ']'"></option>
+                </select>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-4 col-lg-3">
+            <div class="form-group">
+                <strong><label for="month" class="control-label">Month</label></strong>
+                <select class="browser-default" [(ngModel)]="month">
+                    <option value="">Any month</option>
+                    <option *ngFor="let term of months" [value]="term.term | slugify" [innerHTML]="term.term + ' [' + term.count + ']'"></option>
+                </select>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-4 col-lg-3">
+            <div class="form-group">
+                <strong><label for="location" class="control-label">Location</label></strong>
+                <select class="browser-default" [(ngModel)]="location">
+                    <option value="">Any location</option>
+                    <option *ngFor="let term of locations" [value]="term.term | slugify" [innerHTML]="term.term + ' [' + term.count + ']'"></option>
+                </select>
+            </div>
+        </div>
+        <div class="col-sm-6 col-md-4 col-lg-3">
+            <div class="form-group">
+                <strong><label for="cost" class="control-label">Cost</label></strong>
+                <select class="browser-default" [(ngModel)]="cost">
+                    <option value="">Any cost</option>
+                    <option *ngFor="let term of costs" [value]="term.term | slugify" [innerHTML]="term.term + ' [' + term.count + ']'"></option>
+                </select>
+            </div>
+            <!-- <div class="form-group">
+                <strong><label for="category" class="control-label">Category</label></strong>
+                <select class="browser-default" [(ngModel)]="category">
+                    <option value="" *ngIf="categories.length > 0">All categories</option>
+                    <option value="" *ngIf="categories.length === 0" disabled>No categories</option>
+                    <option *ngFor="let term of categories" [value]="term.term | slugify" [innerHTML]="term.term + ' [' + term.count + ']'"></option>
+                </select>
+            </div> -->
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-12 col-md-6 col-lg-8" *ngIf="resultsTotal > 0 && !this.loading">
+            <strong class="margin-bottom">Total events found: {{resultsTotal}}</strong>
+        </div>
+        <!-- <div class="col s4 m2 l1 right-align" *ngIf="resultsTotal > 0 && !this.loading">
+            <h4 class="margin-bottom"><label for="sort" class="control-label">Sort</label></strong>
+        </div> -->
+        <!-- <div class="col s8 col-md-4 col-lg-3" *ngIf="resultsTotal > 0 && !this.loading">
+            <div class="form-group sort">
+                <select class="browser-default" [(ngModel)]="sort">
+                    <option value="signed">Date signed</option>
+                    <option value="a-z">Alphabetical (A-Z)</option>
+                    <option value="z-a">Alphabetical (Z-A)</option>
+                </select>
+            </div>
+        </div> -->
+        <div class="col-sm-12" *ngIf="resultsTotal === 0 && !this.loading">
+            <strong>No events found</strong>
+        </div>
+        <div class="col-sm-12" *ngIf="this.loading">
+            <strong>Loading events <i class="fa fa-fw fa-spinner fa-spin"></i></strong>
+        </div>
+    </div>
+
+    <div class="events" *ngIf="resultsTotal > 0 && !this.loading">
+        <div *ngFor="let event of events" class="row event-result">
+            <div class="col-sm-2 col-md-1">
+                <h4 *ngIf="event._source.dateStart != ''" class="date-detail">
+                    <div class="weekday">{{event._source.dateStart | date:'EEE'}}</div>
+                    <div class="date">{{event._source.dateStart | date:'d MMM'}}</div>
+                </h4>
+            </div>
+            <div class="col-sm-8 col-md-10">
+                <h4 *ngIf="event._source.title != ''">
+                    <a [routerLink]="['/services/events', event._source.slug]">
+                        {{event._source.title}}
+                    </a>
+                </h4>
+                <p>
+                    {{event._source.dateStart | date:'HH:mm'}} - {{event._source.dateEnd | date:'HH:mm'}}
+                </p>
+            </div>
+            <div class="col-sm-2 col-md-1">
+                <h3 *ngIf="event._source.cost > 0" class="cost paid">
+                    &pound;
+                </h3>
+                <h3 *ngIf="event._source.cost == 0" class="cost free">
+                    FREE
+                </h3>
+                <h3 *ngIf="!event._source.cost || event._source.cost < 0" class="cost free">
+                    ?
+                </h3>
+            </div>
+            <!-- <pre>{{event._source | json}}</pre> -->
+        </div>
+    </div>
+
+    <nav class="pagination" *ngIf="resultsTotal > 0 && paging > 1 && !this.loading">
+        <ul class="pagination">
+            <li class="page-item" [ngClass]="{ disabled: !parameters.page || parameters.page == 1 }">
+                <a class="page-link" (click)="changePage(1)" role="button" aria-label="Previous">
+                    <span aria-hidden="true">&laquo;</span>
+                    <span class="sr-only">Previous</span>
+                </a>
+            </li>
+            <li class="page-item" *ngFor="let page of paging" [ngClass]="{ active: parameters.page == page }">
+                <a class="page-link" (click)="changePage(page)" role="button">{{page}}</a>
+            </li>
+            <li class="page-item" [ngClass]="{ disabled: parameters.page == pageTotal }">
+                <a class="page-link" (click)="changePage(pageTotal)" role="button" aria-label="Next">
+                    <span aria-hidden="true">&raquo;</span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</div>

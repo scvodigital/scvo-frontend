@@ -1,0 +1,91 @@
+<div class="container-fluid">
+    <div class="row title">
+        <div class="col s12">
+            <h1>
+                SCVO Events &amp; Training
+            </h1>
+        </div>
+    </div>
+
+    <div *ngIf="events && events.length > 1">
+        <h2 style="color:red">Duplicate records:</h2>
+    </div>
+
+    <div *ngFor="let event of events" class="row title event-detail">
+        <div class="col-sm-12 col-md-9">
+            <h2 *ngIf="event._source.title">
+                {{event._source.title}}
+            </h2>
+
+            <h3>Event details</h3>
+
+            <dl *ngIf="event._source.dateStart">
+                <dt class="inline">Starts:</dt>
+                <dd class="inline">
+                    {{event._source.dateStart | date:'d MMMM y HH:mm'}}
+                </dd>
+            </dl>
+
+            <dl *ngIf="event._source.dateEnd">
+                <dt class="inline">Ends:</dt>
+                <dd class="inline">
+                    {{event._source.dateEnd | date:'d MMMM y HH:mm'}}
+                </dd>
+            </dl>
+
+            <dl *ngIf="event._source.venue">
+                <dt class="inline">Venue:</dt>
+                <dd class="inline">
+                    {{event._source.venue}}
+                </dd>
+            </dl>
+
+            <dl *ngIf="event._source.trainer">
+                <dt class="inline">Trainer:</dt>
+                <dd class="inline">
+                    {{event._source.trainer}}
+                </dd>
+            </dl>
+
+            <dl *ngIf="event._source.cost">
+                <dt class="inline">Cost:</dt>
+                <dd class="inline">
+                    &pound;{{event._source.cost}}
+                </dd>
+            </dl>
+
+            <br />
+            <div *ngIf="event._source.placesAvailable">
+                <div *ngIf="event._source.placesAvailable > 0 && event._source.placesAvailable < 5">
+                    <strong>Please note this course is almost fully booked!</strong>
+                </div>
+                <div *ngIf="event._source.placesAvailable <= 0">
+                    <strong>Please note this course is now fully booked!</strong>
+                </div>
+            </div>
+
+            <dl *ngIf="event._source.description">
+                <dt>Event description:</dt>
+                <dd>
+                    {{event._source.description}}
+                </dd>
+            </dl>
+
+            <!-- <dl *ngIf="event._source.notes">
+                <dt>Other information:</dt>
+                <dd>
+                    {{event._source.notes}}
+                </dd>
+            </dl> -->
+
+            <dl *ngIf="event._source.Id">
+                <dt class="inline">SCVO Event (Salesforce):</dt>
+                <dd class="inline">
+                    <strong><a href="https://scvo.my.salesforce.com/{{event._source.Id}}" target="_blank">{{event._source.Id}}</a></strong>
+                </dd>
+            </dl>
+
+            <!-- <small><pre>{{event._source | json}}</pre></small> -->
+        </div>
+    </div>
+</div>

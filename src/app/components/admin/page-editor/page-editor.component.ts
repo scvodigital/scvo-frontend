@@ -38,7 +38,7 @@ export class PageEditorComponent extends SiteComponent {
         }
     }
 
-    _selectedLanguage: string;
+    _selectedLanguage: string = 'en';
     get selectedLanguage(): string {
         return this._selectedLanguage;
     }
@@ -69,11 +69,21 @@ export class PageEditorComponent extends SiteComponent {
             this.editor.codemirror.on('change', () => {
                 this.translations[this.selectedLanguage] = this.editor.value();
             });
+
+            var markdown = "";
+            if (this.appService.site && this.appService.site.pages.hasOwnProperty(this.pageName)) {
+                var page = this.appService.site.pages[this.pageName];
+                if(page.hasOwnProperty(this._selectedLanguage)){
+                    markdown = page[this._selectedLanguage];
+                }
+            }
+            this.editor.value(markdown);
         });
     }
 
     save(){
         this.appService.savePage(this.pageName).then(() => {
+            alert('Page saved');
             // this.toasterActions.emit({ action: 'toast', params: ['Page saved', 4000, 'green white-text'] });
         }).catch((err) => {
             console.error('Error saving page', err);

@@ -6,11 +6,11 @@ import { IHit, IDocument, ISearchParameters } from '../../services/elastic.servi
 
 @Component({
     selector: 'main-container.content',
-    templateUrl: './library.component.html'
+    templateUrl: './event-list.component.html'
 })
-export class LibraryComponent {
+export class EventListComponent {
     public hits: IHit<IDocument>[] = [];
-    public perPage: number = 12;
+    public perPage: number = 100;
     public resultsTotal: number = -1;
     public pageTotal: number = 0;
     public loading: boolean = true;
@@ -47,18 +47,11 @@ export class LibraryComponent {
         this.search();
     }
 
-    public documents: IHit<IDocument>[];
+    public events: IHit<IDocument>[];
 
     get categories(): any[] {
         return this.appService.getTerms('categories');
     };
-    // get categories(): any[]{
-    //     if(this.sector){
-    //         return this.appService.getTerms(this.sector + '-categories')
-    //     }else{
-    //         return this.appService.getTerms('categories');
-    //     }
-    // };
 
     constructor(private appService: AppService, private router: Router, private route: ActivatedRoute) {
         this.onSiteLoaded();
@@ -76,8 +69,8 @@ export class LibraryComponent {
         if(this.category){
             params.category = this.category;
         }
-        params.sort = this.sort || 'date';
-        this.router.navigate(['./library', params]);
+        params.sort = this.sort || 'start';
+        this.router.navigate(['./services/events', params]);
     }
 
     onSiteLoaded() {
@@ -89,14 +82,17 @@ export class LibraryComponent {
 
             this.loading = true;
             this.parameters = {
+                index: 'events',
+                type: 'event',
+                limit: this.perPage,
                 query: params.query || '',
                 category: params.category || '',
                 page: !params.page ? 1 : parseInt(params.page),
-                sort: params.sort || 'date'
+                sort: params.sort || 'start'
             };
             this.appService.es.constructSearch(this.parameters).then((results) => {
                 // console.log(results);
-                this.documents = results.hits;
+                this.events = results.hits;
                 this.resultsTotal = results.total;
                 this.pageTotal = Math.ceil(this.resultsTotal / this.perPage);
                 this.loading = false;

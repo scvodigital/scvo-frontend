@@ -13,9 +13,11 @@ declare var $: any;
 
 @Component({
     selector: 'main-container.content, page-content',
-    templateUrl: './research.component.html'
+    templateUrl: './post-detail.component.html'
 })
-export class ResearchPostComponent extends SiteComponent {
+export class BlogPostComponent extends SiteComponent {
+    constructor(appService: AppService, private route: ActivatedRoute, private router: Router) { super(appService) }
+
     @Input('embedded') embedded: string;
 
     private _content: string = '';
@@ -27,8 +29,6 @@ export class ResearchPostComponent extends SiteComponent {
     }
 
     modules = [RouterModule];
-
-    constructor(appService: AppService, private route: ActivatedRoute, private router: Router) { super(appService) }
 
     private _renderer: MarkedRenderer = null;
     public get renderer(): MarkedRenderer{

@@ -11,6 +11,8 @@ import 'hammerjs';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AngularFireModule } from 'angularfire2';
+import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireAuthModule } from 'angularfire2/auth';
 import { DndModule } from 'ng2-dnd';
 import { Angulartics2Module, Angulartics2GoogleAnalytics } from 'angulartics2';
 import { DynamicComponentModule } from 'angular2-dynamic-component';
@@ -34,25 +36,33 @@ import { AppService } from "./services/app.service"
 import { SiteComponent } from './common/base.component';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
-import { PageComponent } from './components/page/page.component';
-import { ServicesPageComponent } from './components/services/services-page.component';
-import { CampaignsPageComponent } from './components/campaigns/campaigns-page.component';
-import { BlogListComponent } from './components/post/post-list.component';
-import { BlogPostComponent } from './components/post/post.component';
-import { BriefingListComponent } from './components/post/briefing-list.component';
-import { BriefingPostComponent } from './components/post/briefing.component';
-import { ResearchListComponent } from './components/post/research-list.component';
-import { ResearchPostComponent } from './components/post/research.component';
-import { LibraryComponent } from './components/library/library.component';
-import { LibraryDetailComponent } from './components/library/library-detail.component';
-import { LoanCalculatorComponent } from './components/credit-union/loan-calculator.component';
+import { LoginComponent } from './components/account/login.component';
+import { LogoutComponent } from './components/account/logout.component';
+
 import { HeaderComponent } from './components/header/header.component';
 import { MenuComponent } from './components/header/menu.component';
 // import { SearchInputComponent } from './components/shared/header/search-input.component';
 import { FooterComponent } from './components/footer/footer.component';
+import { ShareBlockComponent } from './components/shared/share-block/share-block.component';
+
+import { PageComponent } from './components/pages/page.component';
+import { DigitalPageComponent } from './components/digital/page.component';
+import { EventListComponent } from './components/events/event-list.component';
+import { EventDetailComponent } from './components/events/event-detail.component';
+import { ServicesPageComponent } from './components/services/services-page.component';
+import { CampaignsPageComponent } from './components/campaigns/campaigns-page.component';
+import { BlogListComponent } from './components/posts/post-list.component';
+import { BlogPostComponent } from './components/posts/post-detail.component';
+import { BriefingListComponent } from './components/posts/briefing-list.component';
+import { BriefingPostComponent } from './components/posts/briefing-detail.component';
+import { ResearchListComponent } from './components/posts/research-list.component';
+import { ResearchPostComponent } from './components/posts/research-detail.component';
+import { LibraryListComponent } from './components/library/library-list.component';
+import { LibraryDetailComponent } from './components/library/library-detail.component';
+import { LoanCalculatorComponent } from './components/credit-union/loan-calculator.component';
+
 import { PrivacyAndCookiesComponent } from './components/static/privacy-and-cookies.component';
 import { TermsAndConditionsComponent } from './components/static/terms-and-conditions.component';
-import { ShareBlockComponent } from './components/shared/share-block/share-block.component';
 
 /* Admin Components */
 import { AdminComponent } from './components/admin/admin.component';
@@ -102,6 +112,8 @@ export function metaFactory(): MetaLoader {
         HttpModule,
         RouterModule.forRoot(rootRouterConfig),
         AngularFireModule.initializeApp(firebaseConfig),
+        AngularFireDatabaseModule,
+        AngularFireAuthModule,
         Angulartics2Module.forRoot([Angulartics2GoogleAnalytics]),
         // MaterializeModule,
         NgbModule.forRoot(),
@@ -110,7 +122,7 @@ export function metaFactory(): MetaLoader {
           provide: MetaLoader,
           useFactory: (metaFactory)
         }),
-        MaterialModule.forRoot(),
+        MaterialModule,
         // NguiAutoCompleteModule,
         Ng2BreadcrumbModule.forRoot(),
         DndModule.forRoot(),
@@ -124,7 +136,10 @@ export function metaFactory(): MetaLoader {
         SiteComponent,
         AppComponent,
         HomeComponent,
+        LoginComponent,
+        LogoutComponent,
         PageComponent,
+        DigitalPageComponent,
         ServicesPageComponent,
         CampaignsPageComponent,
         BlogListComponent,
@@ -133,7 +148,9 @@ export function metaFactory(): MetaLoader {
         BriefingPostComponent,
         ResearchListComponent,
         ResearchPostComponent,
-        LibraryComponent,
+        EventListComponent,
+        EventDetailComponent,
+        LibraryListComponent,
         LibraryDetailComponent,
         LoanCalculatorComponent,
         HeaderComponent,

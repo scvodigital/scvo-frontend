@@ -2,6 +2,8 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600,700);
 @import url(https://fonts.googleapis.com/css?family=Lato:900);
 
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+
 
 // Base variables ==============================================================
 
@@ -49,6 +51,9 @@ body {
 .mat-button-focus-overlay,
 md-button {
     background-color: transparent;
+}
+button {
+    cursor: pointer;
 }
 body, p, li, a {
     font-weight: 400;
@@ -128,8 +133,17 @@ a:not([href]):not([tabindex]):hover {
     display:block
 }
 
+.form-group {
+    select {
+        width: 100%;
+    }
+}
+
+main.projects-campaigns h1 {
+    padding-top: 1rem;
+}
 main.projects-campaigns {
-    padding: 0;
+    padding-bottom: 0;
 }
 main {
     padding: 0 0 0.5rem;
@@ -145,9 +159,16 @@ main {
     a[href^="https://"]::after {
         font-family: 'FontAwesome';
         content: "\f08e";
-        margin-left: 0.25rem;
+        margin: 0 0.2rem;
         text-decoration: none;
         display: inline-block;
+    }
+    a[href^="http://forms.scvo"]::after,
+    a[href^="https://forms.scvo"]::after,
+    a[href^="http://email.scvo"]::after,
+    a[href^="https://email.scvo"]::after {
+        content: "";
+        margin: 0;
     }
     .card a:link, a.btn:link {
         text-decoration: none;
@@ -176,6 +197,7 @@ main {
         margin: 0;
     }
 }
+
 @media screen and (max-width: 992px) {
     body {
         font-size: 0.95rem;
@@ -244,13 +266,26 @@ header {
     padding-bottom: 0;
     box-shadow: 0 2px 5px 0 rgba(0,0,0,0.26);
     z-index: 100;
+    position: fixed;
+    width: 100%;
+    height: 128px;
+    transition: height 0.2s ease-in-out;
+    overflow: hidden;
 }
+header.nav-up {
+    height: 64px;
+}
+
+main {
+    padding-top: 128px;
+}
+
 .mat-toolbar-row {
     height: auto !important;
     max-height: 64px;
 }
 .mat-toolbar {
-    background-color: transparent;
+    background-color: transparent !important;
     box-shadow: none;
     font-size: 1rem !important;
     padding: 0 !important;
@@ -328,6 +363,9 @@ header {
     .list-inline.right {
         text-align: right;
     }
+    .menu-top {
+        height: 64px;
+    }
 }
 .mat-toolbar .brand {
     background-color: transparent;
@@ -366,12 +404,12 @@ header.scroll {
 }
 
 header, header .navbar .dropdown-content, main .btn,
-header.about-us, header.about-us .navbar .dropdown-content, main.about-us .btn {
+header.about, header.about .navbar .dropdown-content, main.about .btn {
     background-color: #009e99;
 }
 main a,
-main.about-us a {
-    color: #009e99;
+main.about a {
+    color: #009e99 !important;
 }
 
 header.running-your-organisation, header.running-your-organisation .navbar .dropdown-content, main.running-your-organisation .btn {
@@ -410,17 +448,17 @@ main.events.the-gathering a {
 }
 
 header.events, header.events .navbar .dropdown-content, main.events .btn {
-    background-color: #263238;
+    background-color: #009e99;
 }
 main.events a {
-    color: #263238 !important;
+    color: #009e99 !important;
 }
 
 header.projects-campaigns, header.projects-campaigns .navbar .dropdown-content, main.projects-campaigns .btn {
     background-color: #00838f;
 }
 main.projects-campaigns a {
-    color: #00838f !important;
+    color: #00838f;
 }
 
 header.library, header.library .navbar .dropdown-content, main.library .btn,
@@ -446,7 +484,9 @@ main.policy-research button {
 
 main.policy-research share-button a,
 main.policy-research share-button button,
-a.btn {
+a.btn,
+button,
+main a.btn {
     color: #fff !important;
 }
 
@@ -722,11 +762,14 @@ a.btn {
     }
 }
 
+.event-result,
 .document-result {
     background: white;
     margin: 1rem 0;
     padding: 0.66rem 0;
 }
+.event-detail,
+.event-result,
 .document-detail,
 .document-result {
     dl {
@@ -741,6 +784,40 @@ a.btn {
     }
     dd.inline {
         margin-left: 0.33rem;
+    }
+}
+.event-result {
+    p {
+        margin: 0;
+    }
+    .date-detail {
+        font-weight: bold;
+        .weekday {
+            text-transform: uppercase;
+            font-size: 1.4rem;
+        }
+        .date {
+            font-size: 1.1rem;
+        }
+    }
+    h3.cost {
+        float: right;
+        width: 3.5rem;
+        height: 3.5rem;
+        padding: 1rem 0 0;
+        margin: 0;
+        text-align: center;
+    }
+    h3.cost.paid {
+        color: #fff;
+        background: #009e99;
+    }
+    h3.cost.free {
+        color: #000;
+        background: #ccc;
+        text-transform: uppercase;
+        font-size: 1rem;
+        padding: 1.3rem 0 0;
     }
 }
 
