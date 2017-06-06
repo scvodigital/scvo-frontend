@@ -82,11 +82,9 @@ export class AppComponent implements OnInit {
             // This is necessary so you never see what is "behind" the navbar.
             if (st > lastScrollTop && st > navbarHeight){
                 // Scroll Down
-                console.log('down');
                 $('header').removeClass('nav-down').addClass('nav-up');
             } else {
                 // Scroll Up
-                console.log('up');
                 if(st + $(window).height() < $(document).height()) {
                     $('header').removeClass('nav-up').addClass('nav-down');
                 }

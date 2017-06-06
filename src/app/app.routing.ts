@@ -16,6 +16,8 @@ import { ResearchListComponent } from './components/posts/research-list.componen
 import { ResearchPostComponent } from './components/posts/research-detail.component';
 import { LibraryListComponent } from './components/library/library-list.component';
 import { LibraryDetailComponent } from './components/library/library-detail.component';
+import { StaffListComponent } from './components/staff/staff-list.component';
+import { StaffDetailComponent } from './components/staff/staff-detail.component';
 import { EventListComponent } from './components/events/event-list.component';
 import { EventDetailComponent } from './components/events/event-detail.component';
 import { LoanCalculatorComponent } from './components/credit-union/loan-calculator.component';
@@ -52,6 +54,8 @@ export const rootRouterConfig: Routes = [
     { path: 'policy-research/research/:slug', component: ResearchPostComponent },
     { path: 'library', component: LibraryListComponent },
     { path: 'library/:slug', component: LibraryDetailComponent },
+    { path: 'about/staff', component: StaffListComponent },
+    { path: 'about/staff/:slug', component: StaffDetailComponent },
     {
         path: 'admin',
         component: AdminComponent,

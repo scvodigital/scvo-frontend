@@ -84,7 +84,7 @@ export class EventListComponent {
             this.parameters = {
                 index: 'events',
                 type: 'event',
-                limit: this.perPage,
+                size: this.perPage,
                 query: params.query || '',
                 category: params.category || '',
                 page: !params.page ? 1 : parseInt(params.page),

@@ -47,6 +47,8 @@ import { ShareBlockComponent } from './components/shared/share-block/share-block
 
 import { PageComponent } from './components/pages/page.component';
 import { DigitalPageComponent } from './components/digital/page.component';
+import { StaffListComponent } from './components/staff/staff-list.component';
+import { StaffDetailComponent } from './components/staff/staff-detail.component';
 import { EventListComponent } from './components/events/event-list.component';
 import { EventDetailComponent } from './components/events/event-detail.component';
 import { ServicesPageComponent } from './components/services/services-page.component';
@@ -148,6 +150,8 @@ export function metaFactory(): MetaLoader {
         BriefingPostComponent,
         ResearchListComponent,
         ResearchPostComponent,
+        StaffListComponent,
+        StaffDetailComponent,
         EventListComponent,
         EventDetailComponent,
         LibraryListComponent,

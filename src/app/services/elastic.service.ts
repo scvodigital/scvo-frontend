@@ -12,7 +12,7 @@ export class ElasticService {
     public searchFilters: any = [];
     public index: string = '*';
     public type: string = '*';
-    public limit: number = 25;
+    public size: number = 10;
 
     constructor() { }
 
@@ -64,7 +64,7 @@ export class ElasticService {
                 var payload = {
                     index: this.index,
                     type: this.type,
-                    size: this.limit,
+                    size: this.size,
                     body: body
                 };
 
@@ -88,7 +88,7 @@ export class ElasticService {
                 //     });
                 // }
 
-                client.search(payload).then(response => {
+                client.search(payload, overrides).then(response => {
                     resolve(response);
                 }).catch(err => {
                     console.error('Error searching', payload, err);
@@ -123,6 +123,7 @@ export class ElasticService {
 
             this.index = parameters.index;
             this.type = parameters.type;
+            this.size = parameters.size;
 
             if (parameters.query) {
                 body.query.bool.must.push({ "simple_query_string": { "query": parameters.query } })
@@ -147,8 +148,11 @@ export class ElasticService {
                 case('start'):
                     body.sort = { 'dateStart': { order: 'asc' } };
                     break;
-                default:
+                case('date'):
                     body.sort = { 'date_posted': { order: 'desc' } };
+                    break;
+                default:
+                    body.sort = {};
                     break;
             }
 
@@ -178,7 +182,7 @@ export class ElasticService {
             this.type = type;
 
             var overrides: any = {
-                size: 10
+                size: 1
             }
 
             this.search(body, overrides).then(results => {
@@ -227,7 +231,7 @@ export interface IDocument {
 export interface ISearchParameters {
     index?: string,
     type?: string,
-    limit?: number,
+    size?: number,
     query?: string,
     category?: string,
     page?: number;
