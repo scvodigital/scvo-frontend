@@ -1,3 +1,0 @@
-# Payroll
-
-Awaiting info.
