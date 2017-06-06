@@ -1,1 +1,0 @@
-# SCVO events training courses
