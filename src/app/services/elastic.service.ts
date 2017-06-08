@@ -10,8 +10,8 @@ import * as deepmerge from 'deepmerge';
 export class ElasticService {
     public searchRestriction: any;
     public searchFilters: any = [];
-    public index: string = '*';
-    public type: string = '*';
+    public index: string = '_all';
+    public type: string = '';
     public size: number = 10;
 
     constructor() { }
@@ -89,6 +89,8 @@ export class ElasticService {
                 // }
 
                 client.search(payload, overrides).then(response => {
+                    console.log('Search response:');
+                    console.log(response);
                     resolve(response);
                 }).catch(err => {
                     console.error('Error searching', payload, err);
