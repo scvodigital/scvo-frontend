@@ -5,6 +5,7 @@ import { LoginComponent } from './components/account/login.component';
 import { LogoutComponent } from './components/account/logout.component';
 
 import { PageComponent } from './components/pages/page.component';
+import { SearchListComponent } from './components/search/search-list.component';
 import { DigitalPageComponent } from './components/digital/page.component';
 import { ServicesPageComponent } from './components/services/services-page.component';
 import { CampaignsPageComponent } from './components/campaigns/campaigns-page.component';
@@ -38,6 +39,7 @@ export const rootRouterConfig: Routes = [
     // { path: ':path', component: SiteSearchComponent },
     { path: 'privacy-and-cookies', component: PrivacyAndCookiesComponent },
     { path: 'terms-and-conditions', component: TermsAndConditionsComponent },
+    { path: 'search', component: SearchListComponent },
     { path: 'scvo-login', component: LoginComponent },
     { path: 'scvo-logout', component: LogoutComponent },
     { path: 'services', component: ServicesPageComponent },
