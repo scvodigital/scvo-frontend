@@ -1,4 +1,5 @@
 import { crc16 } from 'js-crc';
+import * as request from 'request';
 
 const typeMap = {
     ['67BA']: 'goodmoves-job',
@@ -60,6 +61,28 @@ export function getRouteParts(referer: string): IAddressParts {
     }
 
     return parts;
+}
+
+export function getRouteContent(addressParts: IAddressParts){
+    return new Promise((resolve, reject) => {
+        console.log('Address parts', addressParts);
+        var elasticUrl = 'https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io/web-content/';
+        if(!addressParts.typeId && !addressParts.querystring){
+            // Static content request
+            var docUrl = elasticUrl + 'static-content/' + addressParts.path.replace(/\//gi, '_') + '/_source';
+            console.log('Document Url', docUrl)
+            request.get(docUrl, (err, resp, body) => {
+                if(err){
+                    console.error('Error fetching static content', addressParts, err);
+                    reject(err);
+                }else{
+                    resolve(body);
+                }
+            });
+        }else{
+
+        }
+    });
 }
 
 export interface IAddressParts {

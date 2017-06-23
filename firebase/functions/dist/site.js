@@ -19,7 +19,13 @@ function compileSite(name, siteConfig) {
                     uploadFile(name + '/loader.js', 'application/javacript', loaderJs, true).then(function () {
                         var json = JSON.stringify(siteConfig, null, 4);
                         uploadFile(name + '/config.json', 'application/json', json, false).then(function () {
-                            resolve(loaderJs);
+                            var siteConfigJs = 'window.scvoConfig = ' + json + ';';
+                            uploadFile(name + '/site.js', 'application/javascript', siteConfigJs, true).then(function () {
+                                resolve(loaderJs);
+                            }).catch(function (err) {
+                                console.error('Failed to upload siteConfigJs', err);
+                                reject(err);
+                            });
                         }).catch(function (err) {
                             console.error('Failed to upload siteConfig', err);
                             reject(err);

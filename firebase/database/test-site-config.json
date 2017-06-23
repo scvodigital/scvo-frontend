@@ -3,6 +3,92 @@
         "template": "<h1>{{ title }}</h1><p>Welcome to our test site</p>\n<script src=\"https://code.getmdl.io/1.3.0/material.min.js\"></script>",
         "sass": "h1{font-size:5rem;}",
         "title": "Test site",
+        "routing": {
+            "main-search": {
+                "pattern": "/search",
+                "searchTemplate": "main_search",
+                "preferredView": ["result"],
+                "title": "Search results",
+                "metaTags": [
+                    {
+                        "name": "description",
+                        "content": "SCVO search results. Find what you are looking for on all of our properties"
+                    }
+                ],
+                "linkTags": [
+                    {
+                        "rel": "icon",
+                        "type": "image/png",
+                        "sizes": "192x192",
+                        "href": "/app/assets/images/icons/search-icon.png",
+                        "name": "search-icon-192"
+                    }
+                ]
+            },
+            "post-categories": {
+                "pattern": "/posts/{category}",
+                "searchTemplate": "post_category",
+                "preferredView": ["summary", "result"],
+                "title": "Posts in {{category}}",
+                "metaTags": [
+                    {
+                        "name": "description",
+                        "content": "See all of our posts in {{category}}"
+                    }
+                ],
+                "linkTags": [
+                    {
+                        "rel": "icon",
+                        "type": "image/png",
+                        "sizes": "192x192",
+                        "href": "/app/assets/images/icons/{{category-icon}}.png",
+                        "name": "search-icon-192"
+                    }
+                ]
+            },
+            "events-category": {
+                "pattern": "/services/events/{category}",
+                "searchTemplate": "events",
+                "preferredView": ["summary", "result"],
+                "title": "SCVO Events in {{category}}",
+                "metaTags": [
+                    {
+                        "name": "description",
+                        "content": "See all events SCVO are hosting in the {{category}} category"
+                    }
+                ],
+                "linkTags": [
+                    {
+                        "rel": "icon",
+                        "type": "image/png",
+                        "sizes": "192x192",
+                        "href": "/app/assets/images/icons/{{category-icon}}.png",
+                        "name": "search-icon-192"
+                    }
+                ]
+            },
+            "events-search": {
+                "pattern": "/services/events",
+                "searchTemplate": "events",
+                "preferredView": ["summary", "result"],
+                "title": "SCVO Events search",
+                "metaTags": [
+                    {
+                        "name": "description",
+                        "content": "Find SCVO events"
+                    }
+                ],
+                "linkTags": [
+                    {
+                        "rel": "icon",
+                        "type": "image/png",
+                        "sizes": "192x192",
+                        "href": "/app/assets/images/icons/events.png",
+                        "name": "search-icon-192"
+                    }
+                ]
+            }
+        },
         "metaTags": [
             {
                 "name": "description",
@@ -23,12 +109,12 @@
         ],
         "menus": {
             "main": [
-                { 
+                {
                     "label": "Home",
                     "path": "/",
                     "subMenu": []
                 },
-                { 
+                {
                     "label": "About",
                     "path": "/about",
                     "subMenu": [
