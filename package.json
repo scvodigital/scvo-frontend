@@ -13,7 +13,7 @@
     "deploy-functions": "npm run build-functions && npm run upload-functions",
     "build-functions": "npm run cleanup-functions && npm run transpile-functions",
     "cleanup-functions": "rm -rf firebase/functions/dist",
-    "transpile-functions": "cd firebase/functions/src;tsc;cp -a ./templates/ ../dist/templates/;cd ../../..",
+    "transpile-functions": "cd firebase/functions/src;tsc;cp -a ./templates/ ../dist/templates/;cp -a ./secrets.json ../dist/;cd ../../..",
     "upload-functions": "firebase deploy --only functions"
   },
   "contributors": [
@@ -57,6 +57,7 @@
     "ng2-slim-loading-bar": "^4.0.0",
     "ngx-disqus": "^2.1.1",
     "ngx-sharebuttons": "^3.0.0",
+    "node-sass": "^4.5.3",
     "reflect-metadata": "^0.1.10",
     "rxjs": "5.4.0",
     "serve-favicon": "^2.4.3",
