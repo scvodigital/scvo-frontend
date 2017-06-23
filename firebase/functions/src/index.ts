@@ -69,7 +69,7 @@ exports.loadSite = functions.https.onRequest((req: functions.Request, res: funct
 exports.loadRoute = functions.https.onRequest((req: functions.Request, res: functions.Response) => {
     var addressParts = Route.getRouteParts(req.get('referer'));
     Route.getRouteContent(addressParts).then((body) => {
-        if (req.query.declare) {
+        if (req.query.type === 'js') {
             // If we see a declare querystring parameters, this is being called before Angular has loaded
             // so it is being included as a script tag and will therefore need to be set to a var
             body = 'window.scvoContent = ' + body;
