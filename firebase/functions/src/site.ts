@@ -19,7 +19,13 @@ export function compileSite(name: string, siteConfig: ISiteConfig): Promise<stri
                     uploadFile(name + '/loader.js', 'application/javacript', loaderJs, true).then(() => {
                         var json = JSON.stringify(siteConfig, null, 4);
                         uploadFile(name + '/config.json', 'application/json', json, false).then(() => {
-                            resolve(loaderJs);
+                            var siteConfigJs = 'window.scvoConfig = ' + json + ';';
+                            uploadFile(name + '/site.js', 'application/javascript', siteConfigJs, true).then(() => {
+                                resolve(loaderJs);
+                            }).catch((err) => {
+                                console.error('Failed to upload siteConfigJs', err);
+                                reject(err);
+                            });
                         }).catch((err) => {
                             console.error('Failed to upload siteConfig', err);
                             reject(err);

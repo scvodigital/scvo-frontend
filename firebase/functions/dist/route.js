@@ -1,5 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+var request = require("request");
 var typeMap = (_a = {},
     _a['67BA'] = 'goodmoves-job',
     _a['0117'] = 'funding-scotland',
@@ -55,5 +56,28 @@ function getRouteParts(referer) {
     return parts;
 }
 exports.getRouteParts = getRouteParts;
+function getRouteContent(addressParts) {
+    return new Promise(function (resolve, reject) {
+        console.log('Address parts', addressParts);
+        var elasticUrl = 'https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io/web-content/';
+        if (!addressParts.typeId && !addressParts.querystring) {
+            // Static content request
+            var docUrl = elasticUrl + 'static-content/' + addressParts.path.replace(/\//gi, '_') + '/_source';
+            console.log('Document Url', docUrl);
+            request.get(docUrl, function (err, resp, body) {
+                if (err) {
+                    console.error('Error fetching static content', addressParts, err);
+                    reject(err);
+                }
+                else {
+                    resolve(body);
+                }
+            });
+        }
+        else {
+        }
+    });
+}
+exports.getRouteContent = getRouteContent;
 var _a;
 //# sourceMappingURL=/home/tonicblue/code/scvo-frontend/firebase/functions/src/route.js.map

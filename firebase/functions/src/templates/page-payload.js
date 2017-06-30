@@ -1,8 +1,4 @@
 var scvoLoader = function (siteConfig) {
-    function loadRoute(path) {
-
-    }
-
     function refreshMenus() {
 
     }
@@ -12,6 +8,9 @@ var scvoLoader = function (siteConfig) {
         if (siteConfig.page.jsonLd) {
             createTag('script', document.head, { type: 'application/ld+json' }, { html: siteConfig.page.jsonLd }, '[type="application/ld+json"]');
         }
+        var metaTags = [];
+        var linkTags = [];
+
         addHeadTags(siteConfig.page.metaTags, siteConfig.page.linkTags);
         contentTag.innerHTML = siteConfig.page.html;
     }
@@ -22,7 +21,7 @@ var scvoLoader = function (siteConfig) {
         });
 
         linkTags.forEach(function (linkTag) {
-            createTag('link', document.head, linkTag, null, (linkTag ? '[name="' + linkTag.name + '"]' : null));
+            createTag('link', document.head, linkTag, null, (linkTag.name ? '[name="' + linkTag.name + '"]' : null));
         });
     }
 
