@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
 
 // import { SlimLoadingBarService } from 'ng2-slim-loading-bar';
 // import { MaterializeDirective } from "angular2-materialize";
-import { MdSidenav } from "@angular/material";
+// import { MdSidenav } from "@angular/material";
 
 import { MenuComponent } from './menu.component';
 // import { SearchInputComponent } from "./search-input.component";
@@ -19,7 +19,7 @@ import { MenuComponent } from './menu.component';
 })
 export class HeaderComponent {
 
-    @ViewChild('sidenav') sidenav: MdSidenav;
+    // @ViewChild('sidenav') sidenav: MdSidenav;
 
     arrayOfNumbers: number[];
 

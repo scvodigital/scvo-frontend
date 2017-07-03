@@ -1,14 +1,56 @@
-<header class="{{pathClasses}}"></header>
-
-<main class="{{pathClasses}}">
-    <div class="container-fluid">
-        <div class="row container-breadcrumb">
-            <div class="col s12">
-                <breadcrumb prefix="SCVO"></breadcrumb>
+<div mdl-shadow="2">
+    <mdl-layout mdl-layout-mode="waterfall" class="{{pathClasses}}">
+        <mdl-layout-header>
+            <div class="container-fluid scvo-layout-waterfall">
+                <mdl-layout-header-row>
+                    <mdl-layout-title>
+                        <a [routerLink]="['/']" class="brand-logo"><img src="app/assets/images/logos/scvo-white.png" /> SCVO <span class="version">beta</span></a>
+                    </mdl-layout-title>
+                    <mdl-layout-spacer></mdl-layout-spacer>
+                    <!-- Navigation. We hide it in small screens. -->
+                    <!-- <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable mdl-textfield--floating-label mdl-textfield--align-right">
+                        <label class="mdl-button mdl-js-button mdl-button--icon" for="waterfall-exp">
+                            <i class="material-icons">search</i>
+                        </label>
+                        <div class="mdl-textfield__expandable-holder">
+                            <input class="mdl-textfield__input" type="text" name="sample" id="waterfall-exp">
+                        </div>
+                    </div> -->
+                    <form action="#">
+                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--expandable">
+                            <label class="mdl-button mdl-js-button mdl-button--icon" for="site-search">
+                                    <i class="material-icons">search</i>
+                                </label>
+                                <div class="mdl-textfield__expandable-holder">
+                                    <input class="mdl-textfield__input" type="search" id="site-search" />
+                                    <label class="mdl-textfield__label" for="site-search">Search</label>
+                                </div>
+                            </div>
+                    </form>
+                </mdl-layout-header-row>
+                <mdl-layout-header-row>
+                    <nav class="mdl-navigation mdl-layout--large-screen-only" menu="main" id="menu-main"></nav>
+                </mdl-layout-header-row>
             </div>
-        </div>
-    </div>
-    <router-outlet></router-outlet>
-</main>
+        </mdl-layout-header>
+        <mdl-layout-drawer>
+            <mdl-layout-title>SCVO</mdl-layout-title>
+            <nav class="mdl-navigation" menu="main" id="menu-mobile"></nav>
+        </mdl-layout-drawer>
 
-<footer></footer>
+        <mdl-layout-content>
+            <main>
+                <div class="container-fluid">
+                    <div class="row container-breadcrumb">
+                        <div class="col s12">
+                            <breadcrumb prefix="SCVO"></breadcrumb>
+                        </div>
+                    </div>
+                </div>
+                <router-outlet></router-outlet>
+            </main>
+
+            <footer></footer>
+        </mdl-layout-content>
+    </mdl-layout>
+</div>

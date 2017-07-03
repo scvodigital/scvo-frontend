@@ -2,7 +2,16 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans:400,600,700);
 @import url(https://fonts.googleapis.com/css?family=Lato:900);
 
-@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+// @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import "~angular2-mdl/scss/color-definitions";
+
+$color-primary: #00838f;
+$color-primary-dark: $palette-blue-700;
+$color-accent: $palette-amber-A200;
+$color-primary-contrast: $color-dark-contrast;
+$color-accent-contrast: $color-dark-contrast;
+
+@import '~angular2-mdl/scss/material-design-lite';
 
 
 // Base variables ==============================================================
@@ -13,20 +22,29 @@ $base-font-family: "Open Sans", "Helvetica", sans-serif;
 
 // Layout ======================================================================
 
-header .container-fluid,
+mdl-layout-header .container-fluid,
 main .container-fluid,
 footer .container-fluid {
     max-width: 1280px;
     width: 96%;
     margin: 0 auto;
 }
-
+.mdl-layout__header-row {
+    padding: 0;
+}
+mdl-layout-header {
+    transition: background-color 0.75s ease;
+}
 
 // General =====================================================================
 
-html {
-    overflow-y: scroll;
+// .mdl-layout__content {
+//     overflow-y: scroll;
+// }
+::-webkit-scrollbar {
+    display: none;
 }
+
 body {
     padding: 0;
     margin: 0;
@@ -48,11 +66,11 @@ body {
 .mat-button-ripple {
     outline: none;
 }
-.mat-button,
-.mat-button-focus-overlay,
-md-button {
-    background-color: transparent;
-}
+// .mat-button,
+// .mat-button-focus-overlay,
+// md-button {
+//     background-color: transparent;
+// }
 button {
     cursor: pointer;
 }
@@ -66,7 +84,7 @@ strong {
 .mat-card-title a {
     font-weight: 600 !important;
 }
-header,
+mdl-layout-header,
 main {
     background-color: #ECEFF1;
 }
@@ -80,37 +98,45 @@ h1, h2, h3, h4, h5, h6 {
 }
 h1 {
     font-size: 2.7rem;
+    line-height: 2.7rem;
     font-weight: 600;
     margin: 0 0 0.5em;
 }
 h2 {
     font-size: 1.8rem;
+    line-height: 1.8rem;
     font-weight: 600;
     margin: 0.35em 0;
 }
 h3 {
     font-size: 1.5rem;
+    line-height: 1.5rem;
     font-weight: 600;
     margin: 0.25em 0;
 }
 h4 {
     font-size: 1.3rem;
+    line-height: 1.5rem;
     font-weight: 600;
     margin: 0.2em 0;
 }
 h5 {
     font-size: 1.1rem;
+    line-height: 1.5rem;
     font-weight: 600;
     margin: 0;
 }
 h6 {
     font-size: 1rem;
+    line-height: 1.5rem;
     font-weight: 600;
     margin: 0;
 }
 
 p {
     margin: 0 0 1rem;
+    font-size: 1rem;
+    line-height: 1.5rem;
 }
 .white-text {
     color: white;
@@ -140,11 +166,11 @@ a:not([href]):not([tabindex]):hover {
     }
 }
 
-main.projects-campaigns h1 {
-    padding-top: 1rem;
-}
-main.projects-campaigns {
+.projects-campaigns main {
     padding-bottom: 0;
+    h1 {
+        padding-top: 1rem;
+    }
 }
 main {
     padding: 0 0 0.5rem;
@@ -262,230 +288,248 @@ h1.parent_title a {
     top: 128px !important;
 }
 
-header {
-    transition: background-color 0.75s ease, height 0.2s ease-in-out;
-    padding-bottom: 0;
-    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.26);
-    z-index: 100;
-    position: fixed;
+// header {
+//     transition: background-color 0.75s ease, height 0.2s ease-in-out;
+//     // padding-bottom: 0;
+//     // box-shadow: 0 2px 5px 0 rgba(0,0,0,0.26);
+//     // z-index: 100;
+//     // position: fixed;
+//     // width: 100%;
+//     // height: 128px;
+//     // overflow: hidden;
+// }
+// .nav-up {
+//     height: 64px;
+// }
+
+// main {
+//     padding-top: 128px;
+// }
+//
+// .row {
+//     padding: 0;
+// }
+
+// .mat-toolbar-row {
+//     height: auto !important;
+//     max-height: 64px;
+// }
+// .mat-toolbar {
+//     background-color: transparent !important;
+//     box-shadow: none;
+//     font-size: 1rem !important;
+//     padding: 0 !important;
+//     .material-icons {
+//         // line-height: inherit;
+//         height: 1.75rem;
+//         width: 1rem;
+//         vertical-align: middle;
+//         display: inline-block;
+//     }
+//     ul {
+//         margin: 0;
+//         padding: 0;
+//         width: 100%;
+//         list-style: none;
+//         position: relative;
+//         transition: all 0.5s ease;
+//         li {
+//             list-style-type: none;
+//             display: inline-block;
+//             a {
+//                 color: white;
+//                 min-height: 64px;
+//                 line-height: 64px;
+//                 padding: 0 1rem;
+//                 display: block;
+//                 text-decoration: none;
+//                 font-family: $base-font-family !important;
+//                 font-size: 0.92rem !important;
+//                 min-width: inherit;
+//             }
+//             a:hover {
+//                 background-color: rgba(0, 0, 0, 0.1);
+//             }
+//             ul#dropdown-menu-main-1 {
+//                 min-width: 237.5px;
+//             }
+//             ul {
+//                 width: auto !important;
+//                 background-color: rgba(0, 0, 0, 0.2);
+//                 display: inherit !important;
+//                 position: absolute;
+//                 top: 64px; /* the height of the main nav */
+//                 z-index: 1;
+//                 max-height: 0;
+//                 height: 0;
+//                 overflow: hidden;
+//                 opacity: 0;
+//                 transform: translateY(-.5em);
+//                 transition: all 0.2s ease-in-out 0s, visibility 0s linear 0.3s, z-index 0s linear 0.01s;
+//                 li {
+//                     min-width: 170px;
+//                     float: none;
+//                     display: list-item;
+//                     position: relative;
+//                     padding: 0;
+//                 }
+//                 ul li {
+//                     position: relative;
+//                     top: -60px;
+//                     left: 170px;
+//                 }
+//             }
+//         }
+//         li:hover > ul {
+//             z-index: 100;
+//             opacity: 1;
+//             display: block;
+//             height: auto;
+//             max-height: 1000px;
+//             transform: translateY(0%);
+//             transition-delay: 0s, 0s, 0.3s; /* this removes the transition delay so the menu will be visible while the other styles transition */
+//         }
+//     }
+//     .list-inline.right {
+//         text-align: right;
+//     }
+//     .menu-top {
+//         height: 64px;
+//     }
+// }
+// .mat-toolbar .brand {
+//     background-color: transparent;
+// }
+.mdl-navigation {
+    a {
+        text-decoration: none;
+    }
+}
+.mdl-layout--large-screen-only {
     width: 100%;
-    height: 128px;
-    overflow: hidden;
-}
-header.nav-up {
-    height: 64px;
-}
-
-main {
-    padding-top: 128px;
-}
-
-.mat-toolbar-row {
-    height: auto !important;
-    max-height: 64px;
-}
-.mat-toolbar {
-    background-color: transparent !important;
-    box-shadow: none;
-    font-size: 1rem !important;
-    padding: 0 !important;
-    .material-icons {
-        // line-height: inherit;
-        height: 1.75rem;
-        width: 1rem;
-        vertical-align: middle;
-        display: inline-block;
-    }
-    ul {
-        margin: 0;
-        padding: 0;
-        width: 100%;
-        list-style: none;
-        position: relative;
-        transition: all 0.5s ease;
-        li {
-            list-style-type: none;
-            display: inline-block;
-            a {
-                color: white;
-                min-height: 64px;
-                line-height: 64px;
-                padding: 0 1rem;
-                display: block;
-                text-decoration: none;
-                font-family: $base-font-family !important;
-                font-size: 0.92rem !important;
-                min-width: inherit;
-            }
-            a:hover {
-                background-color: rgba(0, 0, 0, 0.1);
-            }
-            ul#dropdown-menu-main-1 {
-                min-width: 237.5px;
-            }
-            ul {
-                width: auto !important;
-                background-color: rgba(0, 0, 0, 0.2);
-                display: inherit !important;
-                position: absolute;
-                top: 64px; /* the height of the main nav */
-                z-index: 1;
-                max-height: 0;
-                height: 0;
-                overflow: hidden;
-                opacity: 0;
-                transform: translateY(-.5em);
-                transition: all 0.2s ease-in-out 0s, visibility 0s linear 0.3s, z-index 0s linear 0.01s;
-                li {
-                    min-width: 170px;
-                    float: none;
-                    display: list-item;
-                    position: relative;
-                    padding: 0;
-                }
-                ul li {
-                    position: relative;
-                    top: -60px;
-                    left: 170px;
-                }
-            }
-        }
-        li:hover > ul {
-            z-index: 100;
-            opacity: 1;
-            display: block;
-            height: auto;
-            max-height: 1000px;
-            transform: translateY(0%);
-            transition-delay: 0s, 0s, 0.3s; /* this removes the transition delay so the menu will be visible while the other styles transition */
-        }
-    }
-    .list-inline.right {
-        text-align: right;
-    }
-    .menu-top {
-        height: 64px;
-    }
-}
-.mat-toolbar .brand {
-    background-color: transparent;
-}
-.mat-toolbar .nav {
     background-color: rgba(0, 0, 0, 0.2);
 }
-.mat-toolbar .admin .nav {
-    background-color: rgba(0, 0, 0, 0.8);
-    li a {
-        color: white !important;
-    }
-}
-header.scroll {
-    transition: all 0.3s ease;
-    box-shadow: #333 0 -5px 2em;
-    //     .navbar {
-    //         nav {
-    //             height: 32px;
-    //             line-height: 32px;
-    //             // transition: all 0.1s ease;
-    //         }
-    //         .brand-logo {
-    //             font-size: 1.4em;
-    //             // transition: all 0.1s ease;
-    //             img {
-    //                 width: 30px;
-    //             }
-    //         }
-    //     }
-}
+// .mat-toolbar .admin .nav {
+//     background-color: rgba(0, 0, 0, 0.8);
+//     li a {
+//         color: white !important;
+//     }
+// }
+// .scroll {
+//     transition: all 0.3s ease;
+//     box-shadow: #333 0 -5px 2em;
+//     //     .navbar {
+//     //         nav {
+//     //             height: 32px;
+//     //             line-height: 32px;
+//     //             // transition: all 0.1s ease;
+//     //         }
+//     //         .brand-logo {
+//     //             font-size: 1.4em;
+//     //             // transition: all 0.1s ease;
+//     //             img {
+//     //                 width: 30px;
+//     //             }
+//     //         }
+//     //     }
+// }
 
 .slim-loading-bar-progress {
     position: absolute;
     transition: all 0.2s ease;
 }
+// .scvo-layout-waterfall .row .mdl-navigation__link:last-of-type  {
+//     // padding-left: 0;
+// }
+.row .mdl-navigation__link {
+    padding: 0 15px;
+}
 
-header, header .navbar .dropdown-content, main .btn,
-header.about, header.about .navbar .dropdown-content, main.about .btn {
+mdl-layout-header, .navbar .dropdown-content, main .btn,
+.about mdl-layout-header, .about mdl-layout-header .navbar .dropdown-content, .about main .btn {
     background-color: #00838f;
 }
 main a,
-main.about a {
+.about main a {
     color: #00838f !important;
 }
 
-header.running-a-charity, header.running-a-charity .navbar .dropdown-content, main.running-a-charity .btn,
-header.setting-up-a-charity, header.setting-up-a-charity .navbar .dropdown-content, main.setting-up-a-charity .btn,
-header.running-your-organisation, header.running-your-organisation .navbar .dropdown-content, main.running-your-organisation .btn {
-    background-color: #ab47bc;
-}
-main.running-a-charity a,
-main.setting-up-a-charity a,
-main.running-your-organisation a {
-    color: #ab47bc !important;
-}
-
-header.jobs, header.jobs .navbar .dropdown-content, main.jobs .btn {
-    background-color: #2e7d32;
-}
-main.jobs a {
-    color: #2e7d32 !important;
+.running-your-organisation,
+.setting-up-a-charity,
+.running-a-charity {
+    mdl-layout-header, mdl-layout-header .navbar .dropdown-content, main .btn {
+        background-color: #ab47bc;
+    }
+    main a {
+        color: #ab47bc !important;
+    }
 }
 
-header.join-scvo, header.join-scvo .navbar .dropdown-content, main.join-scvo .btn,
-header.services, header.services .navbar .dropdown-content, main.services .btn {
-    background-color: #1976d2;
-}
-main.join-scvo a,
-main.services a,
-main.services button {
-    color: #1976d2 !important;
-}
-main.services a.mat-button:hover,
-main.services button:hover {
-    text-decoration: none;
+.jobs {
+    mdl-layout-header, mdl-layout-header .navbar .dropdown-content, main .btn {
+        background-color: #2e7d32;
+    }
+    main a {
+        color: #2e7d32 !important;
+    }
 }
 
-header.projects-campaigns, header.projects-campaigns .navbar .dropdown-content, main.projects-campaigns .btn {
-    background-color: #c2185b;
-}
-main.projects-campaigns a {
-    color: #c2185b;
-}
-
-header.events.the-gathering, header.events.the-gathering .navbar .dropdown-content, main.events.the-gathering .btn {
-    background-color: #4527a0;
-}
-main.events.the-gathering a {
-    color: #4527a0 !important;
-}
-
-header.events, header.events .navbar .dropdown-content, main.events .btn {
-    background-color: #ab47bc;
-}
-main.events a {
-    color: #ab47bc !important;
+.join-scvo,
+.services {
+    mdl-layout-header, mdl-layout-header .navbar .dropdown-content, main .btn {
+        background-color: #1976d2;
+    }
+    main a {
+        color: #1976d2 !important;
+    }
+    main a.mat-button:hover,
+    main button:hover {
+        text-decoration: none;
+    }
 }
 
-header.library, header.library .navbar .dropdown-content, main.library .btn {
-    background-color: #dd2c00;
-}
-main.library a {
-    color: #dd2c00 !important;
-}
-
-header.press-media, header.press-media .navbar .dropdown-content, main.press-media .btn,
-header.tags, header.tags .navbar .dropdown-content, main.tags .btn,
-header.policy-research, header.policy-research .navbar .dropdown-content, main.policy-research .btn {
-    background-color: #dd2c00;
-}
-main.press-media a,
-main.tags a,
-main.policy-research a,
-main.policy-research button {
-    color: #dd2c00 !important;
+.projects-campaigns {
+    mdl-layout-header, mdl-layout-header .navbar .dropdown-content, main .btn {
+        background-color: #c2185b;
+    }
+    main a {
+        color: #c2185b;
+    }
 }
 
-main.policy-research share-button a,
-main.policy-research share-button button,
+.events {
+    mdl-layout-header, mdl-layout-header .navbar .dropdown-content, main .btn {
+        background-color: #ab47bc;
+    }
+    main a {
+        color: #ab47bc !important;
+    }
+}
+
+.library {
+    mdl-layout-header, mdl-layout-header .navbar .dropdown-content, main .btn {
+        background-color: #dd2c00;
+    }
+    main a {
+        color: #dd2c00 !important;
+    }
+}
+
+.press-media,
+.tags,
+.policy-research {
+    mdl-layout-header, mdl-layout-header .navbar .dropdown-content, main .btn {
+        background-color: #dd2c00;
+    }
+    main a,
+    main button {
+        color: #dd2c00 !important;
+    }
+    main share-button a,
+    main share-button button {
+        color: #fff !important;
+    }
+}
 a.btn,
 button,
 main a.btn {
@@ -529,80 +573,80 @@ main a.btn {
     //         background-color: rgba(255, 255, 255, 0.9);
     //     }
     // }
-    .mat-input-container {
-        width: 25%;
-        .mat-input-wrapper {
-            padding: 0;
-            margin: 0;
-            min-height: 64px;
-            line-height: 64px;
-            .mat-input-element {
-                padding: 0 1rem;
-                font-family: $base-font-family;
-                background-color: rgba(255, 255, 255, 0.6);
-            }
-            .mat-input-placeholder {
-                padding: 1rem 1rem 0;
-                margin: 0;
-                font-family: $base-font-family;
-                // color: white;
-            }
-            .mat-input-underline {
-                margin-top: -1px;
-                border-color: transparent;
-                .mat-input-ripple {
-                    background-color: white;
-                    top: -2px;
-                }
-            }
-        }
-    }
-
-    .dropdown-content {
-        max-height: 1000px;
-        li {
-            background-color: rgba(0, 0, 0, 0.2);
-            a {
-                color: white;
-                font-size: 1rem;
-            }
-        }
-        // li:first-child a {
-        //     line-height: 36px;
-        // }
-        li:hover, li.active, li.selected {
-            background-color: rgba(0, 0, 0, 0.2);
-            color: inherit;
-        }
-    }
-    li a.active {
-        background-color: rgba(0, 0, 0, 0.2);
-    }
-    .navbar-brand li.active a {
-        background-color: rgba(0, 0, 0, 0.1);
-    }
-    .dropdown-content li > a, .dropdown-content li > span {
-        // padding: 14px 15px;
-    }
-    .collapsible-header {
-        font-weight: bold;
-        .material-icons {
-            line-height: 48px;
-        }
-    }
-
-    .side-nav {
-        z-index: 999;
-        a.active {
-            background-color: rgba(0, 0, 0, 0.05);
-        }
-        .userView {
-            background-color: #333;
-        }
-    }
-    .side-nav .collapsible-body li.active, .side-nav.fixed .collapsible-body li.active {
-        background-color: #777;
-    }
+    // .mat-input-container {
+    //     width: 25%;
+    //     .mat-input-wrapper {
+    //         padding: 0;
+    //         margin: 0;
+    //         min-height: 64px;
+    //         line-height: 64px;
+    //         .mat-input-element {
+    //             padding: 0 1rem;
+    //             font-family: $base-font-family;
+    //             background-color: rgba(255, 255, 255, 0.6);
+    //         }
+    //         .mat-input-placeholder {
+    //             padding: 1rem 1rem 0;
+    //             margin: 0;
+    //             font-family: $base-font-family;
+    //             // color: white;
+    //         }
+    //         .mat-input-underline {
+    //             margin-top: -1px;
+    //             border-color: transparent;
+    //             .mat-input-ripple {
+    //                 background-color: white;
+    //                 top: -2px;
+    //             }
+    //         }
+    //     }
+    // }
+    //
+    // .dropdown-content {
+    //     max-height: 1000px;
+    //     li {
+    //         background-color: rgba(0, 0, 0, 0.2);
+    //         a {
+    //             color: white;
+    //             font-size: 1rem;
+    //         }
+    //     }
+    //     // li:first-child a {
+    //     //     line-height: 36px;
+    //     // }
+    //     li:hover, li.active, li.selected {
+    //         background-color: rgba(0, 0, 0, 0.2);
+    //         color: inherit;
+    //     }
+    // }
+    // li a.active {
+    //     background-color: rgba(0, 0, 0, 0.2);
+    // }
+    // .navbar-brand li.active a {
+    //     background-color: rgba(0, 0, 0, 0.1);
+    // }
+    // .dropdown-content li > a, .dropdown-content li > span {
+    //     // padding: 14px 15px;
+    // }
+    // .collapsible-header {
+    //     font-weight: bold;
+    //     .material-icons {
+    //         line-height: 48px;
+    //     }
+    // }
+    //
+    // .side-nav {
+    //     z-index: 999;
+    //     a.active {
+    //         background-color: rgba(0, 0, 0, 0.05);
+    //     }
+    //     .userView {
+    //         background-color: #333;
+    //     }
+    // }
+    // .side-nav .collapsible-body li.active, .side-nav.fixed .collapsible-body li.active {
+    //     background-color: #777;
+    // }
 }
 #sidenav-overlay {
     z-index: 99;
@@ -611,7 +655,7 @@ main a.btn {
     font-family: $logo-font-family;
     font-weight: 900;
     color: #fff;
-    padding-left: 3px;
+    padding-left: 0;
     margin-top: 3px;
     position: relative;
     font-size: 2.1rem;
@@ -885,7 +929,7 @@ footer a:hover,
 footer a:focus {
     color: white;
 }
-footer a:hover {
+footer a {
     text-decoration: underline;
     text-decoration-skip: ink;
 }

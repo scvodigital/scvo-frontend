@@ -15,7 +15,8 @@
       "main": "main.ts",
       "polyfills": "polyfills.ts",
       "test": "test.ts",
-      "tsconfig": "tsconfig.json",
+      "tsconfig": "tsconfig.app.json",
+      "testTsconfig": "tsconfig.spec.json",
       "prefix": "app",
       "mobile": false,
       "styles": [
@@ -32,6 +33,14 @@
         "dev": "environments/environment.ts",
         "prod": "environments/environment.prod.ts"
       }
+    }
+  ],
+  "lint": [
+    {
+      "project": "src/tsconfig.app.json"
+    },
+    {
+      "project": "src/tsconfig.spec.json"
     }
   ],
   "e2e": {
