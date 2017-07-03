@@ -1,11 +1,10 @@
-<li *ngFor="let menuItem of menuItems | keys">
-    <a [routerLink]="[menuItem.value.name]" data-beloworigin="true" data-constrainwidth="false" class="mat-ripple">
-        {{menuItem.value.label | translate}}
-        <!-- <span *ngIf="menuItem.value.submenu" class="material-icons arrow_drop_down right">arrow_drop_down</span> -->
-    </a>
+<a *ngFor="let menuItem of menuItems | keys" [routerLink]="[menuItem.value.name]" class="mdl-navigation__link">
+    {{menuItem.value.label | translate}}
+    <!-- <span *ngIf="menuItem.value.submenu" class="material-icons arrow_drop_down right">arrow_drop_down</span> -->
+</a>
     <!-- <ul class="dropdown-content" id="dropdown-menu-{{menuName}}-{{menuItem.key}}">
         <li *ngFor="let subMenuItem of menuItem.value.submenu">
             <a [routerLink]="[menuItem.value.name+'/'+subMenuItem.path]" [innerHTML]="menuItem.value.label+'_'+subMenuItem.path | translate"></a>
         </li>
     </ul> -->
-</li>
+<!-- </div> -->

@@ -24,8 +24,11 @@ import { MetaModule, MetaLoader, MetaStaticLoader, PageTitlePositioning } from '
 import { ShareButtonsModule } from 'ngx-sharebuttons';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MaterialModule } from '@angular/material';
-import { MdButtonModule, MdCheckboxModule, MdInputModule } from '@angular/material';
+// import { MaterialModule } from '@angular/material';
+// import { MdButtonModule, MdCheckboxModule, MdInputModule } from '@angular/material';
+import { MdlModule } from '@angular-mdl/core';
+import { MdlSelectModule } from '@angular-mdl/select';
+import { MdlDatePickerModule } from '@angular-mdl/datepicker';
 
 /* Services */
 import { ElasticService } from "./services/elastic.service"
@@ -125,8 +128,11 @@ export function metaFactory(): MetaLoader {
           provide: MetaLoader,
           useFactory: (metaFactory)
         }),
-        MaterialModule,
+        // MaterialModule,
         // NguiAutoCompleteModule,
+        MdlModule,
+        MdlSelectModule,
+        MdlDatePickerModule,
         Ng2BreadcrumbModule.forRoot(),
         DndModule.forRoot(),
         BrowserAnimationsModule,
