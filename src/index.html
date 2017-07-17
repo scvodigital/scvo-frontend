@@ -46,7 +46,6 @@
     <!-- <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Open+Sans:400,600,700" /> -->
     <link rel="stylesheet" href="//fonts.googleapis.com/icon?family=Material+Icons">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
 
     <script src="http://localhost:5002/scvo-net/us-central1/loadSite"></script>
     <script src="http://localhost:5002/scvo-net/us-central1/loadRoute?type=js"></script>
@@ -112,14 +111,15 @@
     <!-- Insert angular app -->
     <script>
         if(isBot()){
-            document.head.querySelector('base').setAttribute('href', 'https://nosuch.com');
+            document.head.querySelector('base').setAttribute('href', '/app/assets/empty/');
             document.addEventListener('DOMContentLoaded', function(){
                 document.head.querySelector('base').setAttribute('href', '/');
             });
-            loaded();
+            document.querySelector('#loader').style.display = 'none';
         }
             
         function isBot(){
+            return true;
             var userAgent = navigator.userAgent;
             var found = userAgent.search(/bot|googlebot|crawler|spider|robot|crawling/i);
             return found > -1;
