@@ -9,12 +9,7 @@
     "lint": "tslint \"src/**/*.ts\" --project src/tsconfig.json --type-check && tslint \"e2e/**/*.ts\" --project e2e/tsconfig.json --type-check",
     "test": "ng test",
     "pree2e": "webdriver-manager update --standalone false --gecko false",
-    "e2e": "protractor",
-    "deploy-functions": "npm run build-functions && npm run upload-functions",
-    "build-functions": "npm run cleanup-functions && npm run transpile-functions",
-    "cleanup-functions": "rm -rf firebase/functions/dist",
-    "transpile-functions": "cd firebase/functions/src;tsc;cp -a ./templates/ ../dist/templates/;cp -a ./secrets.json ../dist/;cd ../../..",
-    "upload-functions": "firebase deploy --only functions"
+    "e2e": "protractor"
   },
   "contributors": [
     "Calum MacÙisdean <calum.macuisdean@scvo.org.uk>"

@@ -48,8 +48,10 @@
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
 
-    <script src="https://us-central1-scvo-frontend.cloudfunctions.net/loadSite"></script>
-    <script src="https://us-central1-scvo-frontend.cloudfunctions.net/loadRoute?type=js"></script>
+    <script src="http://localhost:5002/scvo-net/us-central1/loadSite"></script>
+    <script src="http://localhost:5002/scvo-net/us-central1/loadRoute?type=js"></script>
+
+    
     <script type="text/javascript">
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
         (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -106,5 +108,23 @@
     '//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
     })(window,document,'script','dataLayer','GTM-WSK6DS');</script>
     <!-- End Google Tag Manager -->
+
+    <!-- Insert angular app -->
+    <script>
+        if(isBot()){
+            document.head.querySelector('base').setAttribute('href', 'https://nosuch.com');
+            document.addEventListener('DOMContentLoaded', function(){
+                document.head.querySelector('base').setAttribute('href', '/');
+            });
+            loaded();
+        }
+            
+        function isBot(){
+            var userAgent = navigator.userAgent;
+            var found = userAgent.search(/bot|googlebot|crawler|spider|robot|crawling/i);
+            return found > -1;
+        }
+    </script>
+    <!-- End Insert angular app -->
 </body>
 </html>
