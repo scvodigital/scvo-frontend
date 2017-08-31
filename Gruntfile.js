@@ -7,7 +7,7 @@ module.exports = function (grunt) {
                 cmd: 'grep -roh "\\(fa-[a-z][a-z0-9-]\\+\\)" ./ --include=*.html --include=*.ts --include=*.json | sort -u | node fonts/generate-config.js',
                 maxBuffer: 204800
             },
-            firebase_deploy_hosting: 'firebase deploy --only "hosting"',
+            firebase_deploy_hosting: 'firebase deploy --only "hosting" --non-interactive',
             ng_build: 'ng build -prod -e prod -pr false -aot false',
             ng_build_dev: 'ng build -pr false -aot false',
         },
