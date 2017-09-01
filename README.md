@@ -1,6 +1,6 @@
 # SCVO Website (public frontend) [![Build Status](https://travis-ci.org/scvodigital/scvo-frontend.svg?branch=dev)](https://travis-ci.org/scvodigital/scvo-frontend)
 
-[![Dependency Status](https://david-dm.org/scvodigital/scvo-frontend/dev.svg)](https://david-dm.org/scvodigital/scvo-frontend/dev) [![devDependency Status](https://david-dm.org/scvodigital/scvo-frontend/dev/dev-status.svg)](https://david-dm.org/scvodigital/scvo-frontend/dev#info=devDependencies)
+[![Dependency Status](https://david-dm.org/scvodigital/scvo-frontend/dev.svg)](https://david-dm.org/scvodigital/scvo-frontend/dev) [![devDependency Status](https://david-dm.org/scvodigital/scvo-frontend/dev/dev-status.svg)](https://david-dm.org/scvodigital/scvo-frontend/dev?type=dev)
 
 This is the repository for the new SCVO website project, it contains the codebase for the public website. Development deployment instructions are listed below.
 
