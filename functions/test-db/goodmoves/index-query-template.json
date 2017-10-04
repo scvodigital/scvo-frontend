@@ -1,0 +1,35 @@
+{
+    "size": 1,
+    "aggs": {
+        "regions": {
+            "terms": {
+                "field": "region",
+                "size": 10000
+            }
+        },
+        "sectors": {
+            "terms": {
+                "field": "sectors",
+                "order": {
+                    "_term": "asc"
+                },
+                "size": 10000
+            }
+        },
+        "roles": {
+            "terms": {
+                "field": "roles",
+                "order": {
+                    "_term": "asc"
+                },
+                "size": 10000
+            }
+        },
+        "statuses": {
+            "terms": {
+                "field": "status",
+                "size": 10000
+            }
+        }
+    }
+}

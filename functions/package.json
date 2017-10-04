@@ -1,0 +1,24 @@
+{
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "cleanup": "rm -rf ./dist",
+    "start": "npm run cleanup;npm run deploy-db;tsc;firebase serve --only functions",
+    "json2": "node json2 ./test-db/**/*.json2 ./test-db/json; node json2 ./test-db/db.json2 ./test-db",
+    "deploy-db": "npm run json2; firebase database:set -y / ./test-db/db.json"
+  },
+  "dependencies": {
+    "firebase-admin": "~5.4.0",
+    "firebase-functions": "^0.7.0",
+    "moment": "^2.18.1",
+    "pdfmake": "^0.1.33",
+    "request": "^2.83.0",
+    "string": "^3.3.3"
+  },
+  "private": true,
+  "main": "dist/index.js",
+  "devDependencies": {
+    "chalk": "^2.1.0",
+    "dot-object": "^1.7.0"
+  }
+}

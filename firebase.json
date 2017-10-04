@@ -1,0 +1,30 @@
+{
+  "database": {
+    "rules": "firebase-configuration/database.rules.json"
+  },
+  "firestore": {
+    "rules": "firebase-configuration/firestore.rules",
+    "indexes": "firebase-configuration/firestore.indexes.json"
+  },
+  "hosting": {
+    "public": "dist",
+    "rewrites": [
+      {
+        "source": "**/*.*",
+        "destination": "/"
+      },
+      {
+        "source": "**",
+        "function": "index"
+      }
+    ],
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ]
+  },
+  "storage": {
+    "rules": "firebase-configuration/storage.rules"
+  }
+}

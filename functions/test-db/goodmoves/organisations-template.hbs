@@ -1,0 +1,76 @@
+{{#with this.params.primaryResultSet.aggregations.job_count}}
+    <h1>Organisations</h1>
+    {{#each buckets}}
+        {{#with this.top_hits.hits.hits.[0]._source.organisation}}
+            <div class="container-fluid">
+                <div class="mdc-card">
+                    <section class="mdc-card__primary mdc-theme--primary-bg">
+                        <h3 class="mdc-card__title mdc-card__title--large">
+                            <a href="/organisation/{{slug}}" class="mdc-theme--text-primary-on-primary">
+                                {{name}}
+                                {{#if charity_number}}
+                                    <small>({{charity_number}})</small>
+                                {{/if}}
+                            </a>            
+                        </h3>
+                    </section>
+                    <div class="mdc-card__horizontal-block">
+                        <section class="mdc-card__supporting-text">
+                            {{{profile}}}
+
+                            <ul class="mdc-list">
+                            {{#if website}}
+                                <li class="mdc-list-item">
+                                    <span class="mdc-list-item__text">
+                                        Website:
+                                        <span class="mdc-list-item__text__secondary">
+                                            <a href="{{website}}">
+                                                {{website}}
+                                            </a>
+                                        </span>
+                                    </span>
+                                </li>
+                            {{/if}}
+                            {{#if twitter}}
+                                <li class="mdc-list-item">
+                                    <span class="mdc-list-item__text">
+                                        Twitter
+                                        <span class="mdc-list-item__text__secondary">
+                                            <a href="{{twitter}}">
+                                                {{twitter}}
+                                            </a>
+                                        </span>
+                                    </span>
+                                </li>
+                            {{/if}}
+                            {{#if facebook}}
+                                <li class="mdc-list-item">
+                                    <span class="mdc-list-item__text">
+                                        Facebook
+                                        <span class="mdc-list-item__text__secondary">
+                                            <a href="{{facebook}}">
+                                                {{facebook}}
+                                            </a>
+                                        </span>
+                                    </span>
+                                </li>
+                            {{/if}}
+                            </ul>
+                        </section>
+                        {{#if has_logo}}
+                            <img src="{{logo_url}}" class="mdc-card__media-item mdc-card__media-item--2x">
+                        {{else}}
+                            <img src="https://goodmoves.org.uk/app/assets/images/no-logo.png" class="mdc-card__media-item mdc-card__media-item--2x">
+                        {{/if}}
+                    </div>
+                    <section class="mdc-card__actions action-buttons-right">
+                        <a href="/organisation/{{slug}}" class="mdc-button mdc-button--compact mdc-card__action">
+                         
+                            View Organisation
+                        </a>            
+                    </section>
+                </div>            
+            </div>
+        {{/with}}
+    {{/each}}
+{{/with}}

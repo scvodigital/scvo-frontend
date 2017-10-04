@@ -1,0 +1,43 @@
+<div class="container-fluid">
+    <h1>Welcome to goodmoves</h1>
+    <div class="mdc-layout-grid">
+        <div class="mdc-layout-grid__inner">
+            {{#with this.params.primaryResultSet.aggregations.regions}}
+                <div class="mdc-layout-grid__cell">
+                    <h2>Regions</h2>
+                    <ul class="mdc-list">
+                        {{#each buckets}}
+                            <li class="mdc-list-item">
+                                <a href="/search;regions={{dashcase (decodeURI key)}}">{{{key}}}</a>
+                            </li>
+                        {{/each}}
+                    </ul>
+                </div>
+            {{/with}}
+            {{#with this.params.primaryResultSet.aggregations.sectors}}
+                <div class="mdc-layout-grid__cell">
+                    <h2>Sectors</h2>
+                    <ul class="mdc-list">
+                        {{#each buckets}}
+                            <li class="mdc-list-item">
+                                <a href="/search;roles={{dashcase (decodeURI key)}}">{{{key}}}</a>
+                            </li>
+                        {{/each}}
+                    </ul>
+                </div>
+            {{/with}}
+            {{#with this.params.primaryResultSet.aggregations.roles}}
+                <div class="mdc-layout-grid__cell">
+                    <h2>Roles</h2>
+                    <ul class="mdc-list">
+                        {{#each buckets}}
+                            <li class="mdc-list-item">
+                                <a href="/search;roles={{dashcase (decodeURI key)}}">{{{key}}}</a>
+                            </li>
+                        {{/each}}
+                    </ul>
+                </div>
+            {{/with}}
+        </div>
+    </div>
+</div>

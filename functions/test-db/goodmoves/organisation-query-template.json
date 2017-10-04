@@ -1,0 +1,16 @@
+{
+    "query": {
+        "bool": {
+            "must": [{
+                "term": {
+                    "organisation.slug": "{{slug}}"
+                }
+            }]
+        }
+    },
+    "sort": [{
+        "Id": {
+            "order": "desc"
+        }
+    }]
+}
