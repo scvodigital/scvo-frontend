@@ -4,7 +4,6 @@ import { Observable } from 'rxjs/Rx';
 import { AngularFireDatabase } from 'angularfire2/database';
 
 import { Router, IRoutes, IContext } from 'scvo-router';
-import * as test from '../../assets/handlebars-helpers';
 
 @Injectable()
 export class RouterService {
