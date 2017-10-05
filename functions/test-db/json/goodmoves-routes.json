@@ -25,7 +25,7 @@
     "index": {
         "linkTags": [],
         "metaTags": [],
-        "pattern": "/",
+        "pattern": "/test/test/test",
         "template": "<div class=\"container-fluid\">\n    <h1>Welcome to goodmoves</h1>\n    <div class=\"mdc-layout-grid\">\n        <div class=\"mdc-layout-grid__inner\">\n            {{#with this.params.primaryResultSet.aggregations.regions}}\n                <div class=\"mdc-layout-grid__cell\">\n                    <h2>Regions</h2>\n                    <ul class=\"mdc-list\">\n                        {{#each buckets}}\n                            <li class=\"mdc-list-item\">\n                                <a href=\"/search;regions={{dashcase (decodeURI key)}}\">{{{key}}}</a>\n                            </li>\n                        {{/each}}\n                    </ul>\n                </div>\n            {{/with}}\n            {{#with this.params.primaryResultSet.aggregations.sectors}}\n                <div class=\"mdc-layout-grid__cell\">\n                    <h2>Sectors</h2>\n                    <ul class=\"mdc-list\">\n                        {{#each buckets}}\n                            <li class=\"mdc-list-item\">\n                                <a href=\"/search;roles={{dashcase (decodeURI key)}}\">{{{key}}}</a>\n                            </li>\n                        {{/each}}\n                    </ul>\n                </div>\n            {{/with}}\n            {{#with this.params.primaryResultSet.aggregations.roles}}\n                <div class=\"mdc-layout-grid__cell\">\n                    <h2>Roles</h2>\n                    <ul class=\"mdc-list\">\n                        {{#each buckets}}\n                            <li class=\"mdc-list-item\">\n                                <a href=\"/search;roles={{dashcase (decodeURI key)}}\">{{{key}}}</a>\n                            </li>\n                        {{/each}}\n                    </ul>\n                </div>\n            {{/with}}\n        </div>\n    </div>\n</div>\n",
         "primarySearchTemplate": {
             "type": "goodmoves-job",
@@ -99,7 +99,7 @@
         },
         "elasticsearchConfig": {
             "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
-            "apiVersion": "5.x"
+            "apiVersion": "5.5"
         }
     }
 }

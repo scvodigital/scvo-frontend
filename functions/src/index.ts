@@ -8,6 +8,7 @@ import { Router, RouteMatch } from 'scvo-router';
 
 // Internal imports
 import { fsPdf } from './fs-pdf';
+import { Context } from './context';
 import { Secrets } from './secrets';
 
 const config = {
@@ -20,16 +21,12 @@ const app = admin.initializeApp(<admin.AppOptions>config);
 exports.index = functions.https.onRequest((req: functions.Request, res: functions.Response) => {
     console.log('URL:', req.url);
     return new Promise((resolve, reject) => {
-        console.log('Fetching goodmoves config');
         app.database().ref('/sites/goodmoves').once('value').then((contextObj: admin.database.DataSnapshot) => {
-            var context = contextObj.val();
-            console.log('Goodmoves config:', JSON.stringify(context, null, 4));
-
-            console.log('Creating router');
-            var router = new Router(context.routes);
-            router.execute(req.url).then((routeMatch: RouteMatch) => {
-                console.log('RouteMatch:', routeMatch);
-                res.json(routeMatch);
+            var contextJson = contextObj.val();
+            var context = new Context(contextJson);
+            
+            context.renderPage(req.url).then((html: string) => {
+                res.send(html);
                 res.end();
                 resolve();
             }).catch((err) => {

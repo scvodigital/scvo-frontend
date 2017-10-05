@@ -3,9 +3,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 // Module imports
 var functions = require("firebase-functions");
 var admin = require("firebase-admin");
-var scvo_router_1 = require("scvo-router");
 // Internal imports
 var fs_pdf_1 = require("./fs-pdf");
+var context_1 = require("./context");
 var secrets_1 = require("./secrets");
 var config = {
     credential: admin.credential.cert(secrets_1.Secrets),
@@ -15,15 +15,11 @@ var app = admin.initializeApp(config);
 exports.index = functions.https.onRequest(function (req, res) {
     console.log('URL:', req.url);
     return new Promise(function (resolve, reject) {
-        console.log('Fetching goodmoves config');
         app.database().ref('/sites/goodmoves').once('value').then(function (contextObj) {
-            var context = contextObj.val();
-            console.log('Goodmoves config:', JSON.stringify(context, null, 4));
-            console.log('Creating router');
-            var router = new scvo_router_1.Router(context.routes);
-            router.execute(req.url).then(function (routeMatch) {
-                console.log('RouteMatch:', routeMatch);
-                res.json(routeMatch);
+            var contextJson = contextObj.val();
+            var context = new context_1.Context(contextJson);
+            context.renderPage(req.url).then(function (html) {
+                res.send(html);
                 res.end();
                 resolve();
             }).catch(function (err) {
