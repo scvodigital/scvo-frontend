@@ -6,8 +6,7 @@
     "start": "npm run build;firebase serve --only functions",
     "build": "npm run router;npm run cleanup;npm run deploy-db;tsc",
     "json2": "node json2 ./test-db/**/*.json2 ./test-db/json; node json2 ./test-db/db.json2 ./test-db",
-    "deploy-db": "npm run json2; firebase database:set -y / ./test-db/db.json",
-    "router": "cd ../../scvo-router/ && npm run build && npm link && cd ../scvo-frontend/functions && npm link scvo-router"
+    "deploy-db": "npm run json2; firebase database:set -y / ./test-db/db.json"
   },
   "dependencies": {
     "@types/jsdom": "^11.0.2",
