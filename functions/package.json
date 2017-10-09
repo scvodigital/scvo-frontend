@@ -4,13 +4,14 @@
   "scripts": {
     "cleanup": "rm -rf ./dist",
     "start": "npm run build;firebase serve --only functions",
-    "build": "npm run cleanup;npm run deploy-db;tsc",
+    "build": "npm run cleanup;npm run json2;tsc",
     "json2": "node json2 ./test-db/**/*.json2 ./test-db/json; node json2 ./test-db/db.json2 ./test-db",
     "deploy-db": "npm run json2; firebase database:set -y / ./test-db/db.json"
   },
   "dependencies": {
     "@types/jsdom": "^11.0.2",
     "@types/node-sass": "^3.10.32",
+    "dot-object": "^1.7.0",
     "firebase-admin": "~5.4.0",
     "firebase-functions": "^0.7.0",
     "handlebars": "^4.0.10",

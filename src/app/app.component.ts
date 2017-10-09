@@ -1,6 +1,8 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
+declare var mdc: any;
+
 @Component({
   selector: 'scvo-site',
   templateUrl: './app.component.html',
@@ -18,6 +20,7 @@ export class AppComponent {
     constructor(){
         this.html = (<any>window).startingPoint
             .replace(/(href=\"|\')(\/.*?)(\"|\')/gi, '[routerLink]="[\'$2\']"')
-            .replace(/(\<\/?big\>)|(\<\/?small\>)/g, '')
+            .replace(/(\<\/?big\>)|(\<\/?small\>)/g, '');
+        mdc.autoInit();
     }
 }

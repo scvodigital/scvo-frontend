@@ -19,7 +19,7 @@
             <div class="mdc-toolbar mdc-toolbar--fixed">
                 <div class="mdc-toolbar__row">
                     <section class="mdc-toolbar__section mdc-toolbar__section--align-start">
-                        <button class="demo-menu material-icons mdc-toolbar__icon--menu" onclick="menu_draw.open = true">menu</button>
+                        <button class="demo-menu material-icons mdc-toolbar__icon--menu" onclick="menu_draw.MDCTemporaryDrawer.open = true">menu</button>
                         <span class="mdc-toolbar__title catalog-title">{{title}}</span>
                     </section>
                     <section class="mdc-toolbar__section mdc-toolbar__section--align-end">
@@ -65,41 +65,6 @@
     <script type="text/javascript" src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
     <script type="text/javascript">
         mdc.autoInit();
-        /*
-        var drawerEl = document.querySelector('.mdc-temporary-drawer');
-        var MDCTemporaryDrawer = mdc.drawer.MDCTemporaryDrawer;
-        var drawer = new MDCTemporaryDrawer(drawerEl);
-        document.querySelector('.demo-menu').addEventListener('click', function() {
-            drawer.open = true;
-        });
-        drawerEl.addEventListener('MDCTemporaryDrawer:open', function() {
-            console.log('Received MDCTemporaryDrawer:open');
-        });
-        drawerEl.addEventListener('MDCTemporaryDrawer:close', function() {
-            console.log('Received MDCTemporaryDrawer:close');
-        });
-
-        var search = document.querySelector('#search');
-        search.addEventListener('keypress', function(evt) {
-            if(evt.charCode === 13){
-                var query = search.value;
-                var url = '/search;query=' + encodeURIComponent(query);
-                window.location.href = url;
-            }
-        });
-        (function(){
-            var href = window.location.href;
-            var index = href.indexOf('query=');
-            if(index > -1){
-                var query = href.split('query=')[1];
-                var eoq = query.indexOf(';');
-                if(eoq > -1){
-                    query = afterQuery.substr(0, eoq);
-                }
-                search.value = query;
-            }
-        })();
-        */
     </script>
     <script type="text/javascript" src="inline.bundle.js"></script>
     <script type="text/javascript" src="polyfills.bundle.js"></script>

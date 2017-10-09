@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-// Module imports
 var handlebars = require("handlebars");
 var helpers = require("handlebars-helpers");
 var sass = require("node-sass");
@@ -39,7 +38,7 @@ var Context = /** @class */ (function () {
                     css: _this.compiledCss,
                     route: routeMatch
                 };
-                console.log('TEMPLATE DATA:', JSON.stringify(templateData, null, 4));
+                //console.log('TEMPLATE DATA:', JSON.stringify(templateData, null, 4));
                 var contextHtml = _this.compiledTemplate(templateData);
                 resolve(contextHtml);
             }).catch(function (err) {

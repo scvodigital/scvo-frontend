@@ -2,6 +2,7 @@
 import * as util from 'util';
 
 // Module imports
+import * as admin from 'firebase-admin';
 import * as handlebars from 'handlebars';
 import * as helpers from 'handlebars-helpers';
 import * as sass from 'node-sass';
@@ -46,7 +47,7 @@ export class Context implements IContext {
                     css: this.compiledCss,
                     route: routeMatch
                 };
-                console.log('TEMPLATE DATA:', JSON.stringify(templateData, null, 4));
+                //console.log('TEMPLATE DATA:', JSON.stringify(templateData, null, 4));
                 var contextHtml = this.compiledTemplate(templateData);
                 resolve(contextHtml);
             }).catch((err) => {

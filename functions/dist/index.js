@@ -1,8 +1,11 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
+var fs = require("fs");
+var path = require("path");
 // Module imports
 var functions = require("firebase-functions");
 var admin = require("firebase-admin");
+var Dot = require("dot-object");
 // Internal imports
 var fs_pdf_1 = require("./fs-pdf");
 var context_1 = require("./context");
@@ -12,12 +15,13 @@ var config = {
     databaseURL: "https://scvo-net.firebaseio.com"
 };
 var app = admin.initializeApp(config);
+var dot = new Dot('/');
 exports.index = functions.https.onRequest(function (req, res) {
     return new Promise(function (resolve, reject) {
         var domain = req.hostname.replace(/www\./, '');
         var siteKey = domainMap[domain] ? domainMap[domain] : 'scvo';
-        app.database().ref('/sites/' + siteKey).once('value').then(function (contextObj) {
-            var contextJson = contextObj.val();
+        var path = '/sites/' + siteKey;
+        getJson(path).then(function (contextJson) {
             var context = new context_1.Context(contextJson);
             context.renderPage(req.url).then(function (html) {
                 res.send(html);
@@ -37,6 +41,43 @@ exports.index = functions.https.onRequest(function (req, res) {
         });
     });
 });
+function getJson(jsonPath) {
+    return new Promise(function (resolve, reject) {
+        if (process.env.devmode) {
+            console.log('In dev mode. loading local db');
+            try {
+                var filePath = path.join(__dirname, '../test-db/db.json');
+                console.log('Reading database from', filePath);
+                var jsonString = fs.readFileSync(filePath).toString();
+                var db = JSON.parse(jsonString);
+                console.log('Loaded DB', db);
+                if (jsonPath.indexOf('/') === 0) {
+                    jsonPath = jsonPath.substr(1);
+                }
+                var json = dot.pick(jsonPath, db);
+                console.log('Got JSON', json);
+                resolve(json);
+            }
+            catch (err) {
+                reject(err);
+            }
+        }
+        else {
+            console.log('Not in dev mode, using firebase');
+            app.database().ref(jsonPath).once('value').then(function (obj) {
+                if (obj.exists()) {
+                    var json = obj.val();
+                    resolve(json);
+                }
+                else {
+                    reject(new Error('Path "' + path + '" not found'));
+                }
+            }).catch(function (err) {
+                reject(err);
+            });
+        }
+    });
+}
 var domainMap = {
     "goodmoves.com": "goodmoves",
     "goodmoves.org.uk": "goodmoves",

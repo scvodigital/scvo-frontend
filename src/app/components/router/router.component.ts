@@ -4,7 +4,7 @@ import { RouterModule } from '@angular/router';
 import { RouteMatch } from 'scvo-router';
 import { RouterService } from '../../services/router.service';
 
-declare var componentHandler: any;
+declare var mdc: any;
 
 @Component({
     selector: 'app-router',
@@ -26,6 +26,7 @@ export class RouterComponent implements OnInit {
             this.html = match.rendered
                 .replace(/(href=\"|\')(\/.*?)(\"|\')/gi, '[routerLink]="[\'$2\']"')
                 .replace(/(\<\/?big\>)|(\<\/?small\>)/g, '');
+            mdc.autoInit();
         });  
     }
 
