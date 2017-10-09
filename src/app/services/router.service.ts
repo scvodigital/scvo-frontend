@@ -12,9 +12,8 @@ export class RouterService {
     public routeChanged: Subject<RouteMatch> = new Subject<RouteMatch>();
 
     constructor(private db: AngularFireDatabase, private router: Router) { 
-        var routesRef = db.object('sites/goodmoves/routes');
+        var routesRef = db.object('sites/scvo/routes');
         var routesSub = routesRef.valueChanges().subscribe((routes) => {
-            console.log('Routes:', routes);
             this.scvoRouter = new ScvoRouter(routes);
             this.trackRoute();
         });
@@ -23,8 +22,9 @@ export class RouterService {
     trackRoute(){
         this.router.events.subscribe((event: any) => {
             if(event instanceof NavigationEnd){
-                console.log('NavigationEnd:', event.url);
                 this.scvoRouter.execute(event.url).then((routeMatch: RouteMatch) => {
+                    // This is a hack to allow Angular to take over the pre-rendered site
+                    (<any>window).document.querySelector('router-outlet').innerHTML = '';
                     this.routeChanged.next(routeMatch);
                 });
             }

@@ -16,7 +16,8 @@ export class AppComponent {
     }
     
     constructor(){
-        this.html = (<any>window).startingPoint;
-        console.log(this.html);
+        this.html = (<any>window).startingPoint
+            .replace(/(href=\"|\')(\/.*?)(\"|\')/gi, '[routerLink]="[\'$2\']"')
+            .replace(/(\<\/?big\>)|(\<\/?small\>)/g, '')
     }
 }
