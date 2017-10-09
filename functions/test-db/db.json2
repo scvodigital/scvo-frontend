@@ -1,7 +1,50 @@
 {
     "sites": {
-        "default": {
-
+        "scvo": {
+            "linkTags": [{
+                "href": "https://fonts.googleapis.com/icon?family=Material+Icons",
+                "rel": "stylesheet",
+                "type": "text/css"
+            }, {
+                "href": "https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css",
+                "rel": "stylesheet",
+                "type": "text/css"
+            }, {
+                "href": "https://storage.googleapis.com/scvo-net.appspot.com/goodmoves-material-colours.css",
+                "rel": "stylesheet",
+                "type": "text/css"
+            }],
+            "menus": {
+                "main": [{
+                    "label": "Home",
+                    "path": "/"
+                }, {
+                    "label": "About",
+                    "path": "/about",
+                    "subMenu": [{
+                        "label": "History",
+                        "path": "/about/history"
+                    }, {
+                        "label": "The team",
+                        "path": "/about/the-team"
+                    }]
+                }]
+            },
+            "metaData": {
+                "title": "SCVO"
+            },
+            "metaTags": [{
+                "content": "SCVO",
+                "name": "description"
+            }],
+            "scriptTags": [{
+                "src": "https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"
+            }],
+            "title": "Goodmoves",
+            "routes": {:json/scvo-routes.json},
+            "sass": `{:scvo/sass.scss}`,
+            "template": `{:scvo/template.hbs}`,
+            "javascript": `{:scvo/javascript.js}`
         },
         "goodmoves": {
             "linkTags": [{

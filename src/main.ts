@@ -1,3 +1,5 @@
+(<any>window).startingPoint = window.document.querySelector('scvo-site').innerHTML;
+
 import { enableProdMode } from '@angular/core';
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
 

@@ -1,0 +1,46 @@
+{
+    "_default": {
+        "linkTags": [],
+        "metaTags": [],
+        "pattern": "/",
+        "template": `{:index-template.hbs}`,
+        "primarySearchTemplate": {
+            "index": "web-content-production",
+            "type": "scvo-cms-page",
+            "template": `{:index-query-template.json}`
+        },
+        "elasticsearchConfig": {
+            "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
+            "apiVersion": "5.5",
+            "log": "trace"
+        }
+    },
+    "search": {
+        "linkTags": [],
+        "metaTags": [],
+        "pattern": "/",
+        "template": `{:index-template.hbs}`,
+        "primarySearchTemplate": {
+            "type": "goodmoves-job",
+            "template": `{:index-query-template.json}`
+        },
+        "elasticsearchConfig": {
+            "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
+            "apiVersion": "5.5"
+        }
+    },
+    "posts": {
+        "linkTags": [],
+        "metaTags": [],
+        "pattern": "/",
+        "template": `{:index-template.hbs}`,
+        "primarySearchTemplate": {
+            "type": "goodmoves-job",
+            "template": `{:index-query-template.json}`
+        },
+        "elasticsearchConfig": {
+            "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
+            "apiVersion": "5.5"
+        }
+    }
+}

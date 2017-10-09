@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'scvo-site',
@@ -6,5 +7,16 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app';
+    modules = [RouterModule];
+    html: string = '';
+
+    @ViewChild('appComponent') public viewChild: ElementRef;
+    get element(): HTMLElement {
+        return this.viewChild.nativeElement.nextElementSibling;
+    }
+    
+    constructor(){
+        this.html = (<any>window).startingPoint;
+        console.log(this.html);
+    }
 }

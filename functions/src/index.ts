@@ -19,9 +19,11 @@ const config = {
 const app = admin.initializeApp(<admin.AppOptions>config);
 
 exports.index = functions.https.onRequest((req: functions.Request, res: functions.Response) => {
-    console.log('URL:', req.url);
     return new Promise((resolve, reject) => {
-        app.database().ref('/sites/goodmoves').once('value').then((contextObj: admin.database.DataSnapshot) => {
+        var domain = req.hostname.replace(/www\./, '');
+        var siteKey = domainMap[domain] ? domainMap[domain] : 'scvo';
+
+        app.database().ref('/sites/' + siteKey).once('value').then((contextObj: admin.database.DataSnapshot) => {
             var contextJson = contextObj.val();
             var context = new Context(contextJson);
             
@@ -44,8 +46,14 @@ exports.index = functions.https.onRequest((req: functions.Request, res: function
     }); 
 });
 
-
-
+const domainMap = {
+    "goodmoves.com": "goodmoves",
+    "goodmoves.org.uk": "goodmoves",
+    "localhost": "scvo",
+    "127.0.0.1": "scvo",
+    "scvo.net": "scvo",
+    "beta.scvo.org.uk": "scvo",
+};
 
 // This is only temporarily here while we work out how PDF generation is handled in the future
 exports.getFsPdf = functions.https.onRequest((req: functions.Request, res: functions.Response) => {

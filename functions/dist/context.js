@@ -32,13 +32,14 @@ var Context = (function () {
         return new Promise(function (resolve, reject) {
             _this.router.execute(uriString).then(function (routeMatch) {
                 var templateData = {
-                    routeHtml: routeMatch.rendered,
                     linkTags: _this.linkTags,
                     metaTags: _this.metaTags,
                     scriptTags: _this.scriptTags,
                     menus: _this.menus,
-                    css: _this.compiledCss
+                    css: _this.compiledCss,
+                    route: routeMatch
                 };
+                console.log('TEMPLATE DATA:', JSON.stringify(templateData, null, 4));
                 var contextHtml = _this.compiledTemplate(templateData);
                 resolve(contextHtml);
             }).catch(function (err) {

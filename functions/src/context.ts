@@ -5,7 +5,7 @@ import * as util from 'util';
 import * as handlebars from 'handlebars';
 import * as helpers from 'handlebars-helpers';
 import * as sass from 'node-sass';
-import { IContext, ILinkTag, IMetaTag, IScriptTag, IMenus, IRoutes, Router, RouteMatch } from 'scvo-router';
+import { IContext, ILinkTag, IMetaTag, IScriptTag, IMenus, IRoutes, Router, IRouteMatch } from 'scvo-router';
 
 helpers({ handlebars: handlebars });
 
@@ -37,15 +37,16 @@ export class Context implements IContext {
 
     renderPage(uriString: string): Promise<string>{
         return new Promise<string>((resolve, reject) => {
-            this.router.execute(uriString).then((routeMatch: RouteMatch) => {
+            this.router.execute(uriString).then((routeMatch: IRouteMatch) => {
                 var templateData = {
-                    routeHtml: routeMatch.rendered,
                     linkTags: this.linkTags,
                     metaTags: this.metaTags,
                     scriptTags: this.scriptTags,
                     menus: this.menus,
-                    css: this.compiledCss
+                    css: this.compiledCss,
+                    route: routeMatch
                 };
+                console.log('TEMPLATE DATA:', JSON.stringify(templateData, null, 4));
                 var contextHtml = this.compiledTemplate(templateData);
                 resolve(contextHtml);
             }).catch((err) => {
