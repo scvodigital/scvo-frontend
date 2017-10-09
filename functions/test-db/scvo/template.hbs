@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Scvo</title>
+    <title>Scottish Council for Voluntary Organisations</title>
     <base href="/">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
@@ -20,12 +20,12 @@
                 <div class="mdc-toolbar__row">
                     <section class="mdc-toolbar__section mdc-toolbar__section--align-start">
                         <button class="demo-menu material-icons mdc-toolbar__icon--menu" onclick="menu_draw.MDCTemporaryDrawer.open = true">menu</button>
-                        <span class="mdc-toolbar__title catalog-title">{{title}}</span>
+                        <span class="mdc-toolbar__title catalog-title">SCVO</span>
                     </section>
                     <section class="mdc-toolbar__section mdc-toolbar__section--align-end">
                         <div class="mdc-form-field mdc-form-field--align-end">
-                            <div class="mdc-textfield">
-                                <input type="text" class="mdc-textfield__input" placeholder="Search" id="search">
+                            <div class="mdc-textfield" data-mdc-auto-init="MDCTextfield">
+                                <input type="text" class="mdc-textfield__input" placeholder="Search" id="search" data-search-url="/search/?q=%q">
                             </div>
                         </div>
                     </section>
@@ -36,7 +36,7 @@
                 <nav class="mdc-temporary-drawer__drawer">
                     <header class="mdc-temporary-drawer__header">
                         <div class="mdc-temporary-drawer__header-content mdc-theme--primary-bg mdc-theme--text-primary-on-primary">
-                            {{title}} 
+                            SCVO 
                         </div>
                     </header>
                     <nav class="mdc-temporary-drawer__content mdc-list-group">
@@ -57,7 +57,7 @@
 
             <main class="mdc-toolbar-fixed-adjust">
                 <div class="page-content">
-                    <router-outlet>{{{route.rendered}}}</router-outlet>        
+                    <router-outlet>{{{route.rendered}}}</router-outlet>  
                 </div>
             </main>
         </div>

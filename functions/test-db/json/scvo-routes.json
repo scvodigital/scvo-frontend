@@ -15,18 +15,20 @@
             "log": "trace"
         }
     },
-    "search": {
+    "main-search": {
         "linkTags": [],
         "metaTags": [],
-        "pattern": "/",
-        "template": "<div class=\"container-fluid\">\n    {{#with primaryResponse.hits.hits.[0]._source}}\n        {{{full}}}   \n    {{/with}}\n</div>\n",
+        "pattern": "/search",
+        "template": "<div class=\"container-fluid\">\n    {{#each primaryResponse.hits.hits}}\n        {{#compare _type \"===\" \"goodmoves-job\"}}\n            <h3>Goodmoves Job:</h3>\n        {{/compare}}\n        {{#compare _type \"===\" \"scvo-cms-post\"}}\n            <h3>SCVO Post:</h3>\n        {{/compare}}\n        {{#compare _type \"===\" \"scvo-cms-page\"}}\n            <h3>SCVO Page:</h3>\n        {{/compare}}\n\n        {{#if _source.rendered.search_result_scvo}}\n            {{{_source.rendered.search_result_scvo}}}\n        {{else}}\n            {{#if _source.rendered.search_result}}    \n                {{{_source.rendered.search_result}}}\n            {{/if}}\n        {{/if}}\n    {{/each}}\n</div>\n",
         "primarySearchTemplate": {
-            "type": "goodmoves-job",
-            "template": "{\n    \"size\": 1,\n    \"query\": {\n        \"term\": {\n            \"slug\": \"{{path}}\"\n        }\n    }\n}\n"
+            "index": "web-content-production",
+            "type": "goodmoves-job,scvo-cms-page,scvo-cms-post",
+            "template": "{\n    \"size\": 10,\n    \"query\": {\n        \"query_string\": {\n            \"query\": \"{{query.q}}\",\n            \"default_operator\": \"AND\",\n            \"analyzer\": \"snowball\"\n        }\n    }\n}\n"
         },
         "elasticsearchConfig": {
             "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
-            "apiVersion": "5.5"
+            "apiVersion": "5.5",
+            "log": "trace"
         }
     },
     "posts": {

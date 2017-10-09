@@ -46,16 +46,11 @@ function getJson(jsonPath) {
         if (process.env.devmode) {
             console.log('In dev mode. loading local db');
             try {
+                jsonPath = jsonPath.indexOf('/') === 0 ? jsonPath.substr(1) : jsonPath;
                 var filePath = path.join(__dirname, '../test-db/db.json');
-                console.log('Reading database from', filePath);
                 var jsonString = fs.readFileSync(filePath).toString();
                 var db = JSON.parse(jsonString);
-                console.log('Loaded DB', db);
-                if (jsonPath.indexOf('/') === 0) {
-                    jsonPath = jsonPath.substr(1);
-                }
                 var json = dot.pick(jsonPath, db);
-                console.log('Got JSON', json);
                 resolve(json);
             }
             catch (err) {

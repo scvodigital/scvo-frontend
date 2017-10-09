@@ -15,18 +15,20 @@
             "log": "trace"
         }
     },
-    "search": {
+    "main-search": {
         "linkTags": [],
         "metaTags": [],
-        "pattern": "/",
-        "template": `{:index-template.hbs}`,
+        "pattern": "/search",
+        "template": `{:main-search-template.hbs}`,
         "primarySearchTemplate": {
-            "type": "goodmoves-job",
-            "template": `{:index-query-template.json}`
+            "index": "web-content-production",
+            "type": "goodmoves-job,scvo-cms-page,scvo-cms-post",
+            "template": `{:main-search-query-template.json}`
         },
         "elasticsearchConfig": {
             "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
-            "apiVersion": "5.5"
+            "apiVersion": "5.5",
+            "log": "trace"
         }
     },
     "posts": {

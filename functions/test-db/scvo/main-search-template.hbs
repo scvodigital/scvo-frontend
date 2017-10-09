@@ -1,0 +1,21 @@
+<div class="container-fluid">
+    {{#each primaryResponse.hits.hits}}
+        {{#compare _type "===" "goodmoves-job"}}
+            <h3>Goodmoves Job:</h3>
+        {{/compare}}
+        {{#compare _type "===" "scvo-cms-post"}}
+            <h3>SCVO Post:</h3>
+        {{/compare}}
+        {{#compare _type "===" "scvo-cms-page"}}
+            <h3>SCVO Page:</h3>
+        {{/compare}}
+
+        {{#if _source.rendered.search_result_scvo}}
+            {{{_source.rendered.search_result_scvo}}}
+        {{else}}
+            {{#if _source.rendered.search_result}}    
+                {{{_source.rendered.search_result}}}
+            {{/if}}
+        {{/if}}
+    {{/each}}
+</div>
