@@ -44,6 +44,7 @@ var domainMap = {
     "127.0.0.1": "scvo",
     "scvo.net": "scvo",
     "beta.scvo.org.uk": "scvo",
+    "beta.scvo.org": "scvo"
 };
 // This is only temporarily here while we work out how PDF generation is handled in the future
 exports.getFsPdf = functions.https.onRequest(function (req, res) {

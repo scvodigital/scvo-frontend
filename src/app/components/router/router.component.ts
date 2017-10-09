@@ -4,6 +4,8 @@ import { RouterModule } from '@angular/router';
 import { RouteMatch } from 'scvo-router';
 import { RouterService } from '../../services/router.service';
 
+declare var componentHandler: any;
+
 @Component({
     selector: 'app-router',
     templateUrl: './router.component.html',
@@ -23,7 +25,7 @@ export class RouterComponent implements OnInit {
             console.log(match);
             this.html = match.rendered
                 .replace(/(href=\"|\')(\/.*?)(\"|\')/gi, '[routerLink]="[\'$2\']"')
-                .replace(/(\<\/?big\>)|(\<\/?small\>)/g, '')
+                .replace(/(\<\/?big\>)|(\<\/?small\>)/g, '');
         });  
     }
 

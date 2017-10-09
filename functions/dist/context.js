@@ -6,7 +6,7 @@ var helpers = require("handlebars-helpers");
 var sass = require("node-sass");
 var scvo_router_1 = require("scvo-router");
 helpers({ handlebars: handlebars });
-var Context = (function () {
+var Context = /** @class */ (function () {
     function Context(context) {
         this.name = '';
         this.linkTags = [];

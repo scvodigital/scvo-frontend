@@ -19,7 +19,7 @@
             <div class="mdc-toolbar mdc-toolbar--fixed">
                 <div class="mdc-toolbar__row">
                     <section class="mdc-toolbar__section mdc-toolbar__section--align-start">
-                        <button class="demo-menu material-icons mdc-toolbar__icon--menu">menu</button>
+                        <button class="demo-menu material-icons mdc-toolbar__icon--menu" onclick="menu_draw.open = true">menu</button>
                         <span class="mdc-toolbar__title catalog-title">{{title}}</span>
                     </section>
                     <section class="mdc-toolbar__section mdc-toolbar__section--align-end">
@@ -32,7 +32,7 @@
                 </div>
             </div>
 
-            <aside class="mdc-temporary-drawer" style="">
+            <aside class="mdc-temporary-drawer" id="menu_draw" data-mdc-auto-init="MDCTemporaryDrawer">
                 <nav class="mdc-temporary-drawer__drawer">
                     <header class="mdc-temporary-drawer__header">
                         <div class="mdc-temporary-drawer__header-content mdc-theme--primary-bg mdc-theme--text-primary-on-primary">
@@ -64,6 +64,8 @@
     </scvo-site>
     <script type="text/javascript" src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
     <script type="text/javascript">
+        mdc.autoInit();
+        /*
         var drawerEl = document.querySelector('.mdc-temporary-drawer');
         var MDCTemporaryDrawer = mdc.drawer.MDCTemporaryDrawer;
         var drawer = new MDCTemporaryDrawer(drawerEl);
@@ -97,6 +99,7 @@
                 search.value = query;
             }
         })();
+        */
     </script>
     <script type="text/javascript" src="inline.bundle.js"></script>
     <script type="text/javascript" src="polyfills.bundle.js"></script>
