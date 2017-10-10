@@ -47,14 +47,89 @@ export class Context implements IContext {
                     scriptTags: this.scriptTags,
                     menus: this.menus,
                     css: this.compiledCss,
-                    route: routeMatch
+                    routes: this.routes,
+                    route: routeMatch,
+                    headerTags: this.getHeaderTags(routeMatch)
                 };
-                //console.log('TEMPLATE DATA:', JSON.stringify(templateData, null, 4));
+                console.log('TEMPLATE DATA:', JSON.stringify(templateData, null, 4));
                 var contextHtml = this.compiledTemplate(templateData);
+
+                var closingHeadTag = contextHtml.indexOf('</head>');
+                if(closingHeadTag > -1){
+                    var dataJson = JSON.stringify(templateData, null, 4);
+                    var dataTag = `
+                        <script>
+                            window.contextData = ${dataJson};
+                        </script>
+                    `;
+                    contextHtml = [contextHtml.slice(0, closingHeadTag), dataTag, contextHtml.slice(closingHeadTag)].join('');
+                }
+
                 resolve(contextHtml);
             }).catch((err) => {
-
+                console.error('Failed to render route', err);
+                reject(err);
             });
         });
+    }
+    
+    getHeaderTags(routeMatch: IRouteMatch): string {
+        var linkTags = {};
+        var metaTags = {};
+
+        this.linkTags.forEach((linkTag: ILinkTag) => {
+            var key = linkTag.name || 'clt' + Math.floor(Math.random() * 999999);
+            var tag = this.renderTag('link', linkTag);
+            linkTags[key] = tag;
+        });
+
+        this.metaTags.forEach((metaTag: IMetaTag) => {
+            var key = metaTag.name || 'cmt' + Math.floor(Math.random() * 999999);
+            var tag = this.renderTag('meta', metaTag);
+            metaTags[key] = tag;    
+        });
+
+        routeMatch.linkTags.forEach((linkTag: ILinkTag) => {
+            var key = linkTag.name || 'rlt' + Math.floor(Math.random() * 999999);
+            var tag = this.renderTag('link', linkTag);
+            linkTags[key] = tag;
+        });
+
+        routeMatch.metaTags.forEach((metaTag: IMetaTag) => {
+            var key = metaTag.name || 'rmt' + Math.floor(Math.random() * 999999);
+            var tag = this.renderTag('meta', metaTag);
+            metaTags[key] = tag;    
+        });
+
+        var linkTagsHtml = Object.keys(linkTags).map((key: string) => {
+            return linkTags[key];
+        }).join('\n');
+
+        var metaTagsHtml = Object.keys(metaTags).map((key: string) => {
+            return metaTags[key];
+        }).join('\n');
+
+        //TODO: Add pagination params and link generators to route and include link tags here
+        //TODO: Add some kind of title templating here as well
+        
+        var headerTags = `
+            <!-- Start of Generated Route Header Tags -->
+            ${linkTagsHtml}
+            ${metaTagsHtml}
+            <!-- End of Generated Route Header Tags -->
+        `;
+
+        return headerTags;
+    }
+
+    renderTag(tagName: string, attributes: { [key: string]: string }): string {
+        var keyValuePairs: string[] = [];
+        Object.keys(attributes).forEach((key: string) => {
+            var pair = `${key}="${attributes[key]}"`;
+            keyValuePairs.push(pair);
+        });
+        var attributesString = keyValuePairs.join(' ');
+        var tag = `<${tagName} ${attributesString} data-route-generated="true">`;
+        return tag;
     }
 }

@@ -3,8 +3,8 @@
         "linkTags": [],
         "metaTags": [],
         "pattern": "/",
-        "template": "<div class=\"container-fluid\">\n    {{#with primaryResponse.hits.hits.[0]._source}}\n        {{{full}}}   \n    {{/with}}\n</div>\n",
-        "singleDocument": true,
+        "template": "<div class=\"container-fluid\">\n    {{#with primaryResponse.hits.hits.[0]._source}}\n        {{{rendered.full}}}   \n    {{/with}}\n</div>\n",
+        "jsonLdTemplate": "{{#compare primaryResponse.hits.hits.length \">\" 0}}\n    {{#with primaryResponse.hits.hits.[0]._source}}\n        {{[\"json-ld\"]}}\n    {{/with}}\n{{else}}\n    { \"error\": \"404\" }\n{{/compare}}\n",
         "primarySearchTemplate": {
             "index": "web-content-production",
             "type": "scvo-cms-page",
@@ -21,6 +21,7 @@
         "metaTags": [],
         "pattern": "/search",
         "template": "<div class=\"container-fluid\">\n    {{#each primaryResponse.hits.hits}}\n        {{#compare _type \"===\" \"goodmoves-job\"}}\n            <h3>Goodmoves Job:</h3>\n        {{/compare}}\n        {{#compare _type \"===\" \"scvo-cms-post\"}}\n            <h3>SCVO Post:</h3>\n        {{/compare}}\n        {{#compare _type \"===\" \"scvo-cms-page\"}}\n            <h3>SCVO Page:</h3>\n        {{/compare}}\n\n        {{#if _source.rendered.search_result_scvo}}\n            {{{_source.rendered.search_result_scvo}}}\n        {{else}}\n            {{#if _source.rendered.search_result}}    \n                {{{_source.rendered.search_result}}}\n            {{/if}}\n        {{/if}}\n    {{/each}}\n</div>\n",
+        "jsonLdTemplate": "",
         "primarySearchTemplate": {
             "index": "web-content-production",
             "type": "goodmoves-job,scvo-cms-page,scvo-cms-post",
@@ -36,7 +37,7 @@
         "linkTags": [],
         "metaTags": [],
         "pattern": "/",
-        "template": "<div class=\"container-fluid\">\n    {{#with primaryResponse.hits.hits.[0]._source}}\n        {{{full}}}   \n    {{/with}}\n</div>\n",
+        "template": "<div class=\"container-fluid\">\n    {{#with primaryResponse.hits.hits.[0]._source}}\n        {{{rendered.full}}}   \n    {{/with}}\n</div>\n",
         "primarySearchTemplate": {
             "type": "goodmoves-job",
             "template": "{\n    \"size\": 1,\n    \"query\": {\n        \"term\": {\n            \"slug\": \"{{path}}\"\n        }\n    }\n}\n"

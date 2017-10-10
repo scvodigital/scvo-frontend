@@ -12,11 +12,9 @@ export class RouterService {
     public routeChanged: Subject<RouteMatch> = new Subject<RouteMatch>();
 
     constructor(private db: AngularFireDatabase, private router: Router) { 
-        var routesRef = db.object('sites/scvo/routes');
-        var routesSub = routesRef.valueChanges().subscribe((routes) => {
-            this.scvoRouter = new ScvoRouter(routes);
-            this.trackRoute();
-        });
+        var routes = (<any>window).contextData.routes;
+        this.scvoRouter = new ScvoRouter(routes);
+        this.trackRoute();
     }
 
     trackRoute(){
