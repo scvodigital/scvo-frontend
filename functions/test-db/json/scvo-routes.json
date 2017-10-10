@@ -20,7 +20,7 @@
         "linkTags": [],
         "metaTags": [],
         "pattern": "/search",
-        "template": "<div class=\"container-fluid\">\n    {{#each primaryResponse.hits.hits}}\n        {{#compare _type \"===\" \"goodmoves-job\"}}\n            <h3>Goodmoves Job:</h3>\n        {{/compare}}\n        {{#compare _type \"===\" \"scvo-cms-post\"}}\n            <h3>SCVO Post:</h3>\n        {{/compare}}\n        {{#compare _type \"===\" \"scvo-cms-page\"}}\n            <h3>SCVO Page:</h3>\n        {{/compare}}\n\n        {{#if _source.rendered.search_result_scvo}}\n            {{{_source.rendered.search_result_scvo}}}\n        {{else}}\n            {{#if _source.rendered.search_result}}    \n                {{{_source.rendered.search_result}}}\n            {{/if}}\n        {{/if}}\n    {{/each}}\n</div>\n",
+        "template": "<div class=\"container-fluid\">\n    {{#each primaryResponse.hits.hits}}\n        {{#if _source.rendered.search_result_scvo}}\n            {{{_source.rendered.search_result_scvo}}}\n        {{else}}\n            {{#if _source.rendered.search_result}}\n                {{{_source.rendered.search_result}}}\n            {{/if}}\n        {{/if}}\n    {{/each}}\n</div>\n",
         "jsonLdTemplate": "",
         "primarySearchTemplate": {
             "index": "web-content-production",
