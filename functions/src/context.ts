@@ -14,6 +14,7 @@ export class Context implements IContext {
     name: string = '';
     linkTags: ILinkTag[] = [];
     metaTags: IMetaTag[] = [];
+    metaData: any = {};
     scriptTags: IScriptTag[] = [];
     menus: IMenus = {};
     routes: IRoutes = {};
@@ -42,6 +43,7 @@ export class Context implements IContext {
                 var templateData = {
                     linkTags: this.linkTags,
                     metaTags: this.metaTags,
+                    metaData: this.metaData,
                     scriptTags: this.scriptTags,
                     menus: this.menus,
                     css: this.compiledCss,

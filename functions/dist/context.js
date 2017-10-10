@@ -10,6 +10,7 @@ var Context = /** @class */ (function () {
         this.name = '';
         this.linkTags = [];
         this.metaTags = [];
+        this.metaData = {};
         this.scriptTags = [];
         this.menus = {};
         this.routes = {};
@@ -33,6 +34,7 @@ var Context = /** @class */ (function () {
                 var templateData = {
                     linkTags: _this.linkTags,
                     metaTags: _this.metaTags,
+                    metaData: _this.metaData,
                     scriptTags: _this.scriptTags,
                     menus: _this.menus,
                     css: _this.compiledCss,
