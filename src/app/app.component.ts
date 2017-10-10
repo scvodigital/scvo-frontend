@@ -1,5 +1,8 @@
-import { Component, ViewChild, ElementRef } from '@angular/core';
+import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
+
+import { SearchBoxDirective } from './directives/search-box.directive';
+import { AppModule } from './app.module';
 
 declare var mdc: any;
 
@@ -8,7 +11,7 @@ declare var mdc: any;
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
     modules = [RouterModule];
     html: string = '';
 
@@ -26,24 +29,9 @@ export class AppComponent {
         }, 100);
     }
 
+    ngOnInit() {}
+
     componentSetup(){
         mdc.autoInit();
-
-        var searchBoxes = document.querySelectorAll('input[data-search-url]');
-        [].forEach.call(searchBoxes, (searchBox: HTMLInputElement) => {
-            console.log('Found search input', searchBox);
-            var searchUrlBase = searchBox.getAttribute('data-search-url');
-            console.log('Search Url Base:', searchUrlBase);
-            searchBox.addEventListener('keyup', (event) => {
-                console.log('Search box event', event);
-                if(event.keyCode === 13){
-                    var searchQuery = searchBox.value;
-                    console.log('KeyCode 13!', searchQuery);
-                    var searchUrl = searchUrlBase.replace(/\%q/g, searchQuery);
-                    console.log('Navigating to url:', searchUrl);
-                    window.location.href = searchUrl;
-                }
-            });
-        });
     }
 }

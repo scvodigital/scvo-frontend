@@ -21,6 +21,8 @@ import { RouterService } from './services/router.service';
 import { AppComponent } from './app.component';
 import { RouterComponent } from './components/router/router.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { SearchBoxDirective } from './directives/search-box.directive';
+import { TestComponentComponent } from './components/test-component/test-component.component';
 
 // Directives
 
@@ -29,6 +31,8 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
     AppComponent,
     RouterComponent,
     NotFoundComponent,
+    SearchBoxDirective,
+    TestComponentComponent,
   ],
   imports: [
     BrowserModule,

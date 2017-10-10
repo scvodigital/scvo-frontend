@@ -1,6 +1,6 @@
 {{#compare primaryResponse.hits.hits.length ">" 0}}
     {{#with primaryResponse.hits.hits.[0]._source}}
-        {{{"json_ld"}}}
+        {{{rendered.json_ld}}}
     {{/with}}
 {{else}}
     { "error": "404" }
