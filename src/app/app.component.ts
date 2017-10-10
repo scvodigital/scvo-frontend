@@ -2,7 +2,7 @@ import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { SearchBoxDirective } from './directives/search-box.directive';
-import { AppModule } from './app.module';
+import { LazyModule } from './app.module';
 
 declare var mdc: any;
 
@@ -12,7 +12,7 @@ declare var mdc: any;
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-    modules = [RouterModule];
+    modules = [RouterModule, LazyModule];
     html: string = '';
 
     @ViewChild('appComponent') public viewChild: ElementRef;

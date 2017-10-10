@@ -22,7 +22,6 @@ import { AppComponent } from './app.component';
 import { RouterComponent } from './components/router/router.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { SearchBoxDirective } from './directives/search-box.directive';
-import { TestComponentComponent } from './components/test-component/test-component.component';
 
 // Directives
 
@@ -30,9 +29,7 @@ import { TestComponentComponent } from './components/test-component/test-compone
   declarations: [
     AppComponent,
     RouterComponent,
-    NotFoundComponent,
-    SearchBoxDirective,
-    TestComponentComponent,
+    NotFoundComponent
   ],
   imports: [
     BrowserModule,
@@ -48,3 +45,13 @@ import { TestComponentComponent } from './components/test-component/test-compone
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+
+@NgModule({
+    declarations: [
+        SearchBoxDirective,
+    ],
+    exports: [
+        SearchBoxDirective,
+    ]
+})
+export class LazyModule { }
