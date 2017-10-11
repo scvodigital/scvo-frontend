@@ -57,6 +57,7 @@ export class Context implements IContext {
                 var closingHeadTag = contextHtml.indexOf('</head>');
                 if(closingHeadTag > -1){
                     var dataJson = JSON.stringify(templateData, null, 4);
+                    dataJson = dataJson.replace(/\<\/script/ig, '</scr" + "ipt>');
                     var dataTag = `
                         <script>
                             window.contextData = ${dataJson};
