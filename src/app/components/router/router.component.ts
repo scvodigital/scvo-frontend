@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy, EventEmitter, ViewChild, ContentChild, ElementRef } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
+import { LazyModule } from '../../lazy.module';
 import { RouteMatch } from 'scvo-router';
 import { RouterService } from '../../services/router.service';
 
@@ -12,7 +13,7 @@ declare var mdc: any;
     styleUrls: ['./router.component.css']
 })
 export class RouterComponent implements OnInit {
-    modules = [RouterModule];
+    modules = [RouterModule, LazyModule];
     html: string = '';
 
     @ViewChild('contentContainer') public viewChild: ElementRef;
