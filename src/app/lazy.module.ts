@@ -23,7 +23,7 @@ import { SearchBoxDirective } from './directives/search-box.directive';
         SearchBoxDirective,
     ],
     imports: [
-        RouterModule.forRoot(rootRouterConfig),
+        RouterModule.forChild(rootRouterConfig),
         DynamicComponentModule
     ],
     exports: [
