@@ -64,6 +64,7 @@
                     "template": "<div class=\"container-fluid\">\n    {{#with primaryResponse.hits.hits.[0]._source}}\n        {{{rendered.full}}}   \n    {{/with}}\n</div>\n",
                     "primarySearchTemplate": {
                         "index": "web-content-production",
+<<<<<<< HEAD
                         "type": "scvo-cms-post",
                         "template": "{\n    \"size\": 1,\n    \"query\": {\n        \"term\": {\n            \"slug\": \"{{path}}\"\n        }\n    }\n}\n"
                     },
@@ -78,6 +79,10 @@
                             "type": "scvo-cms-post",
                             "template": "{\n    \"size\": 5,\n    \"query\": {\n        \"term\": {\n            \"author\": \"{{primaryResponse.hits.hits.[0]._source.author}}\"\n        }\n    }\n}\n"
                         }
+=======
+                        "type": "goodmoves-legacy,scvo-cms-page,scvo-cms-post,digital-charter-signatory,funding-scotland-fund,goodhq-organisation,milo-volunteering-opportunity,scvo-document-evidence,scvo-event,scvo-grant-digital,scvo-staff,tfn-news-post,tfn-blog-post",
+                        "template": "{\n    \"size\": 10,\n    \"query\": {\n        \"query_string\": {\n            \"query\": \"{{query.q}}\",\n            \"default_operator\": \"AND\",\n            \"analyzer\": \"snowball\"\n        }\n    }\n}\n"
+>>>>>>> cce44a4c7ca542e76f679c666e5a14998d933250
                     },
                     "elasticsearchConfig": {
                         "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
