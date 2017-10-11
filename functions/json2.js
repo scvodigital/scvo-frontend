@@ -101,17 +101,8 @@ function processFile(path){
     var fancyStrings = after.match(re.fancyStrings) || [];
     console.log(chalk.blueBright(chalk.bold('\tFancyStrings:'), fancyStrings.length));
     after = after.replace(re.fancyStrings, (match) => {
-        //escape quotes
-        match = match.replace(/\"/ig, '\\"');
-
-        //remove line breaks
-        match = match.replace(/\r\n|\r|\n/ig, '\\n');
-
-        //remove tabs
-        match = match.replace(/\t/ig, '    ');
-
-        //change opening and closing quotes
-        match = match.replace(/\`/ig, '"');
+        match = match.replace(/\`/ig, '');
+        match = JSON.stringify(match);
 
         return match;
     });
