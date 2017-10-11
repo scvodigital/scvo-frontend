@@ -2,7 +2,7 @@ import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { SearchBoxDirective } from './directives/search-box.directive';
-import { LazyModule } from './app.module';
+import { LazyModule } from './lazy.module';
 
 declare var mdc: any;
 

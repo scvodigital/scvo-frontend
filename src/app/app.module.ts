@@ -45,13 +45,3 @@ import { SearchBoxDirective } from './directives/search-box.directive';
   bootstrap: [AppComponent]
 })
 export class AppModule { }
-
-@NgModule({
-    declarations: [
-        SearchBoxDirective,
-    ],
-    exports: [
-        SearchBoxDirective,
-    ]
-})
-export class LazyModule { }
