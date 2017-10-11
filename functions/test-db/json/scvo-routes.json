@@ -23,7 +23,7 @@
         "template": "<div class=\"container-fluid\">\n    <div class=\"mdc-layout-grid\">\n        <div class=\"mdc-layout-grid__inner\">\n            <div class=\"mdc-layout-grid__cell\">\n                {{#with primaryResponse.hits.hits.[0]._source}}\n                    {{{rendered.full}}}   \n                {{/with}}\n            </div>\n        </div>\n    </div>\n</div>\n",
         "primarySearchTemplate": {
             "index": "web-content-production",
-            "type": "goodmoves-legacy,scvo-cms-page,scvo-cms-post,digital-charter-signatory,funding-scotland-fund,goodhq-organisation,milo-volunteering-opportunity,scvo-document-evidence,scvo-event,scvo-grant-digital,scvo-staff,tfn-news-post,tfn-blog-post,tfn-event,tfn-poll",
+            "type": "scvo-cms-post",
             "template": "{\n    \"size\": 1,\n    \"query\": {\n        \"term\": {\n            \"slug\": \"{{path}}\"\n        }\n    }\n}\n"
         },
         "supplimentarySearchTemplates": {
@@ -52,7 +52,7 @@
         "jsonLdTemplate": "{{#compare primaryResponse.hits.hits.length \">\" 0}}\n    {{#with primaryResponse.hits.hits.[0]._source}}\n        {{{rendered.json_ld}}}\n    {{/with}}\n{{else}}\n    { \"error\": \"404\" }\n{{/compare}}\n",
         "primarySearchTemplate": {
             "index": "web-content-production",
-            "type": "scvo-cms-page",
+            "type": "goodmoves-legacy,scvo-cms-page,scvo-cms-post,digital-charter-signatory,funding-scotland-fund,goodhq-organisation,milo-volunteering-opportunity,scvo-document-evidence,scvo-event,scvo-grant-digital,scvo-staff,tfn-news-post,tfn-blog-post,tfn-event,tfn-poll",
             "template": "{\n    \"size\": 1,\n    \"query\": {\n        \"term\": {\n            \"slug\": \"{{path}}\"\n        }\n    }\n}\n"
         },
         "elasticsearchConfig": {
