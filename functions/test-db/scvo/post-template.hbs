@@ -1,5 +1,11 @@
 <div class="container-fluid">
-    {{#with primaryResponse.hits.hits.[0]._source}}
-        {{{rendered.full}}}   
-    {{/with}}
+    <div class="mdc-layout-grid">
+        <div class="mdc-layout-grid__inner">
+            <div class="mdc-layout-grid__cell">
+                {{#with primaryResponse.hits.hits.[0]._source}}
+                    {{{rendered.full}}}   
+                {{/with}}
+            </div>
+        </div>
+    </div>
 </div>
