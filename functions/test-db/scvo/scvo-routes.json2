@@ -1,21 +1,4 @@
 {
-    "_default": {
-        "linkTags": [],
-        "metaTags": [],
-        "pattern": "/",
-        "template": `{:index-template.hbs}`,
-        "jsonLdTemplate": `{:index-json-ld-template.hbs}`,
-        "primarySearchTemplate": {
-            "index": "web-content-production",
-            "type": "scvo-cms-page",
-            "template": `{:index-query-template.json}`
-        },
-        "elasticsearchConfig": {
-            "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
-            "apiVersion": "5.5",
-            "log": "trace"
-        }
-    },
     "main-search": {
         "linkTags": [],
         "metaTags": [],
@@ -24,7 +7,7 @@
         "jsonLdTemplate": `{:main-search-json-ld-template.hbs}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
-            "type": "goodmoves-job,scvo-cms-page,scvo-cms-post",
+            "type": "goodmoves-legacy,scvo-cms-page,scvo-cms-post",
             "template": `{:main-search-query-template.json}`
         },
         "elasticsearchConfig": {
@@ -33,18 +16,49 @@
             "log": "trace"
         }
     },
-    "posts": {
+    "post": {
         "linkTags": [],
         "metaTags": [],
-        "pattern": "/",
-        "template": `{:index-template.hbs}`,
+        "pattern": "/blog/*path",
+        "template": `{:post-template.hbs}`,
         "primarySearchTemplate": {
-            "type": "goodmoves-job",
-            "template": `{:index-query-template.json}`
+            "index": "web-content-production",
+            "type": "scvo-cms-post",
+            "template": `{:post-query-template.json}`
+        },
+        "supplimentarySearchTemplates": {
+            "author": {
+                "index": "web-content-production",
+                "type": "scvo-cms-author",
+                "template": `{:post-author-query-template.json}`
+            },
+            "authors-posts": {
+                "index": "web-content-production",
+                "type": "scvo-cms-post",
+                "template": `{:post-author-posts-query-template.json}`
+            }
         },
         "elasticsearchConfig": {
             "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
-            "apiVersion": "5.5"
+            "apiVersion": "5.5",
+            "log": "trace"
+        }
+    },
+    "_default": {
+        "linkTags": [],
+        "metaTags": [],
+        "pattern": "/",
+        "template": `{:default-template.hbs}`,
+        "jsonLdTemplate": `{:default-json-ld-template.hbs}`,
+        "primarySearchTemplate": {
+            "index": "web-content-production",
+            "type": "scvo-cms-page",
+            "template": `{:default-query-template.json}`
+        },
+        "elasticsearchConfig": {
+            "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
+            "apiVersion": "5.5",
+            "log": "trace"
         }
     }
 }

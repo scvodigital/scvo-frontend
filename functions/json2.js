@@ -13,7 +13,7 @@ var input = process.argv.slice(2);
 var output = input.pop();;
     
 const re = {
-    blockComment: /(\/\*(?:.|[\r\n])*?\*\/)/igm,
+    blockComment: /(\/\*(?:.|[\r\n])*?\*\/)(?=([^"]*"[^"]*")*[^"]*$)/igm,
     fancyStrings: /(\`(?:.|[\r\n])*?\`)/igm,
     trailingComma: /(\,)(\s+)(\}|\])/igm,
     fileImport: /(?:\{\:)(.*?)(?:\})/ig,
@@ -88,9 +88,9 @@ function processFile(path){
     });
     
     //remove block comments
-    var blockComments = after.match(re.blockComment) || [];
-    console.log(chalk.blueBright(chalk.bold('\tBlock Comments:'), blockComments.length));
-    var after = after.replace(re.blockComment, '');
+    //var blockComments = after.match(re.blockComment) || [];
+    //console.log(chalk.blueBright(chalk.bold('\tBlock Comments:'), blockComments.length));
+    //var after = after.replace(re.blockComment, '');
 
     //remove trailing commas
     var trailingCommas = after.match(re.trailingComma) || [];

@@ -1,0 +1,7 @@
+{{#compare primaryResponse.hits.hits.length ">" 0}}
+    {{#with primaryResponse.hits.hits.[0]._source}}
+        {{{rendered.json_ld}}}
+    {{/with}}
+{{else}}
+    { "error": "404" }
+{{/compare}}
