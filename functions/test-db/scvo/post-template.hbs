@@ -1,12 +1,12 @@
 <div class="container-fluid">
     <div class="mdc-layout-grid">
         <div class="mdc-layout-grid__inner">
-            <div class="mdc-layout-grid__cell">
+            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-8">
                 {{#with primaryResponse.hits.hits.[0]._source}}
                     {{{rendered.full}}}   
                 {{/with}}
             </div>
-            <div class="mdc-layout-grid__cell">
+            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4">
                 {{#with supplimentaryResponses.author.hits.hits.[0]._source}}
                     {{{rendered.post}}}
                 {{/with}}
