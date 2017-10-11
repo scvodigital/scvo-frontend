@@ -61,7 +61,7 @@
                     "linkTags": [],
                     "metaTags": [],
                     "pattern": "/blog/*path",
-                    "template": "<div class=\"container-fluid\">\n    <div class=\"mdc-layout-grid\">\n        <div class=\"mdc-layout-grid__inner\">\n            <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-8\">\n                {{#with primaryResponse.hits.hits.[0]._source}}\n                    {{{rendered.full}}}   \n                {{/with}}\n            </div>\n            <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-4\">\n                Author info\n                {{#with supplimentaryResponses.author.hits.hits.[0]._source}}\n                    {{{rendered.post}}}\n                {{/with}}\n            </div>\n        </div>\n    </div>\n</div>\n",
+                    "template": "<div class=\"container-fluid\">\n    <div class=\"mdc-layout-grid\">\n        <div class=\"mdc-layout-grid__inner\">\n            <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-8\">\n                {{#with primaryResponse.hits.hits.[0]._source}}\n                    {{{rendered.full}}}   \n                {{/with}}\n            </div>\n            <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-4\">\n                {{#with supplimentaryResponse.author.hits.hits.[0]._source}}\n                    {{{rendered.post}}}\n                {{/with}}\n                {{#each supplimentaryResponse.authors_posts.hits.hits}}\n                    {{{_source.rendered.search_result_scvo}}}\n                {{/each}}\n            </div>\n        </div>\n    </div>\n</div>\n",
                     "primarySearchTemplate": {
                         "index": "web-content-production",
                         "type": "scvo-cms-post",
@@ -73,7 +73,7 @@
                             "type": "scvo-cms-author",
                             "template": "{\n    \"size\": 1,\n    \"query\": {\n        \"term\": {\n            \"wpid\": \"{{primaryResponse.hits.hits.[0]._source.author}}\"\n        }\n    }\n}\n"
                         },
-                        "authors-posts": {
+                        "authors_posts": {
                             "index": "web-content-production",
                             "type": "scvo-cms-post",
                             "template": "{\n    \"size\": 5,\n    \"query\": {\n        \"term\": {\n            \"author\": \"{{primaryResponse.hits.hits.[0]._source.author}}\"\n        }\n    }\n}\n"
