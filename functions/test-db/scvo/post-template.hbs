@@ -7,9 +7,6 @@
                 {{/with}}
             </div>
             <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4">
-                {{#with supplimentaryResponse.author.hits.hits.[0]._source}}
-                    {{{rendered.post}}}
-                {{/with}}
                 {{#each supplimentaryResponse.authors_posts.hits.hits}}
                     {{{_source.rendered.search_result_scvo}}}
                 {{/each}}
