@@ -14,6 +14,7 @@ import { rootRouterConfig } from "./app.routing";
 import { RouterService } from './services/router.service';
 
 // Components
+import { ScriptHackComponent } from './components/script-hack/script-hack.component';
 import { SearchBoxDirective } from './directives/search-box.directive';
 
 // Directives
@@ -21,6 +22,7 @@ import { SearchBoxDirective } from './directives/search-box.directive';
 @NgModule({
     declarations: [
         SearchBoxDirective,
+        ScriptHackComponent,
     ],
     imports: [
         RouterModule.forChild(rootRouterConfig),
@@ -28,6 +30,7 @@ import { SearchBoxDirective } from './directives/search-box.directive';
     ],
     exports: [
         SearchBoxDirective,
+        ScriptHackComponent,
     ]
 })
 export class LazyModule { }

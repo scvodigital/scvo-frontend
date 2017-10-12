@@ -24,6 +24,7 @@ export class AppComponent implements OnInit {
         this.html = (<any>window).startingPoint
             .replace(/(href=\"|\')(\/.*?)(\"|\')/gi, '[routerLink]="[\'$2\']"')
             .replace(/(\<\/?big\>)|(\<\/?small\>)/g, '');
+
         setTimeout(() => {
             this.componentSetup();
         }, 100);

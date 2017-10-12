@@ -47,7 +47,7 @@ var Context = /** @class */ (function () {
                 var closingHeadTag = contextHtml.indexOf('</head>');
                 if (closingHeadTag > -1) {
                     var dataJson = JSON.stringify(templateData, null, 4);
-                    dataJson = dataJson.replace(/\<\/script/ig, '</scr" + "ipt>');
+                    dataJson = dataJson.replace(/\<\/script/ig, '</scr" + "ipt');
                     var dataTag = "\n                        <script>\n                            window.contextData = " + dataJson + ";\n                        </script>\n                    ";
                     contextHtml = [contextHtml.slice(0, closingHeadTag), dataTag, contextHtml.slice(closingHeadTag)].join('');
                 }
