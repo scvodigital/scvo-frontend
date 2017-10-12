@@ -78,25 +78,25 @@ export class Context implements IContext {
         var linkTags = {};
         var metaTags = {};
 
-        this.linkTags.forEach((linkTag: ILinkTag) => {
+        (this.linkTags || []).forEach((linkTag: ILinkTag) => {
             var key = linkTag.name || 'clt' + Math.floor(Math.random() * 999999);
             var tag = this.renderTag('link', linkTag);
             linkTags[key] = tag;
         });
 
-        this.metaTags.forEach((metaTag: IMetaTag) => {
+        (this.metaTags || []).forEach((metaTag: IMetaTag) => {
             var key = metaTag.name || 'cmt' + Math.floor(Math.random() * 999999);
             var tag = this.renderTag('meta', metaTag);
             metaTags[key] = tag;    
         });
 
-        routeMatch.linkTags.forEach((linkTag: ILinkTag) => {
+        (routeMatch.linkTags || []).forEach((linkTag: ILinkTag) => {
             var key = linkTag.name || 'rlt' + Math.floor(Math.random() * 999999);
             var tag = this.renderTag('link', linkTag);
             linkTags[key] = tag;
         });
 
-        routeMatch.metaTags.forEach((metaTag: IMetaTag) => {
+        (routeMatch.metaTags || []).forEach((metaTag: IMetaTag) => {
             var key = metaTag.name || 'rmt' + Math.floor(Math.random() * 999999);
             var tag = this.renderTag('meta', metaTag);
             metaTags[key] = tag;    

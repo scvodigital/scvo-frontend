@@ -62,22 +62,22 @@ var Context = /** @class */ (function () {
         var _this = this;
         var linkTags = {};
         var metaTags = {};
-        this.linkTags.forEach(function (linkTag) {
+        (this.linkTags || []).forEach(function (linkTag) {
             var key = linkTag.name || 'clt' + Math.floor(Math.random() * 999999);
             var tag = _this.renderTag('link', linkTag);
             linkTags[key] = tag;
         });
-        this.metaTags.forEach(function (metaTag) {
+        (this.metaTags || []).forEach(function (metaTag) {
             var key = metaTag.name || 'cmt' + Math.floor(Math.random() * 999999);
             var tag = _this.renderTag('meta', metaTag);
             metaTags[key] = tag;
         });
-        routeMatch.linkTags.forEach(function (linkTag) {
+        (routeMatch.linkTags || []).forEach(function (linkTag) {
             var key = linkTag.name || 'rlt' + Math.floor(Math.random() * 999999);
             var tag = _this.renderTag('link', linkTag);
             linkTags[key] = tag;
         });
-        routeMatch.metaTags.forEach(function (metaTag) {
+        (routeMatch.metaTags || []).forEach(function (metaTag) {
             var key = metaTag.name || 'rmt' + Math.floor(Math.random() * 999999);
             var tag = _this.renderTag('meta', metaTag);
             metaTags[key] = tag;
