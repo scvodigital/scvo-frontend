@@ -30,7 +30,7 @@ exports.index = functions.https.onRequest((req: functions.Request, res: function
 
         getJson<Context>(path).then((contextJson: Context) => {
             var context = new Context(contextJson);
-            
+
             context.renderPage(req.url).then((html: string) => {
                 res.send(html);
                 res.end();
@@ -39,15 +39,15 @@ exports.index = functions.https.onRequest((req: functions.Request, res: function
                 console.error('Failed to execute router', err);
                 res.json(err);
                 res.end();
-                reject(err); 
+                reject(err);
             });
         }).catch((err) => {
             console.error('Failed to get context', err);
             res.json(err);
             res.end();
-            reject(err);  
-        });        
-    }); 
+            reject(err);
+        });
+    });
 });
 
 function getJson<T>(jsonPath: string): Promise<T> {
@@ -74,7 +74,7 @@ function getJson<T>(jsonPath: string): Promise<T> {
                     reject(new Error('Path "' + path + '" not found'));
                 }
             }).catch((err) => {
-                reject(err);  
+                reject(err);
             });
         }
     });
@@ -82,11 +82,14 @@ function getJson<T>(jsonPath: string): Promise<T> {
 
 const domainMap = {
     "goodmoves.com": "goodmoves",
+    "goodmoves.eu": "goodmoves",
+    "goodmoves.scot": "goodmoves",
     "goodmoves.org.uk": "goodmoves",
     "localhost": "scvo",
     "127.0.0.1": "scvo",
     "scvo.net": "scvo",
     "beta.scvo.org.uk": "scvo",
+    "beta.scvo.scot": "scvo",
     "beta.scvo.org": "scvo"
 };
 
@@ -95,7 +98,7 @@ exports.getFsPdf = functions.https.onRequest((req: functions.Request, res: funct
     return new Promise((resolve, reject) => {
         var idsVal = req.query.ids || '';
         var ids = idsVal.split(',');
-        var subdomain = req.query.subdomain || 'www'; 
+        var subdomain = req.query.subdomain || 'www';
         var title = req.query.title || 'Funding Scotland';
         var subtitle = req.query.subtitle || null;
 
