@@ -75,11 +75,14 @@ function getJson(jsonPath) {
 }
 var domainMap = {
     "goodmoves.com": "goodmoves",
+    "goodmoves.eu": "goodmoves",
+    "goodmoves.scot": "goodmoves",
     "goodmoves.org.uk": "goodmoves",
     "localhost": "scvo",
     "127.0.0.1": "scvo",
     "scvo.net": "scvo",
     "beta.scvo.org.uk": "scvo",
+    "beta.scvo.scot": "scvo",
     "beta.scvo.org": "scvo"
 };
 // This is only temporarily here while we work out how PDF generation is handled in the future

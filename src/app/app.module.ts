@@ -1,4 +1,5 @@
 import { environment } from '../environments/environment';
+import 'handlebars/dist/handlebars.min.js';
 
 // Angular Modules
 import { BrowserModule } from '@angular/platform-browser';
