@@ -9,32 +9,48 @@
     <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <link type="text/css" rel="stylesheet" href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css">
     <style type="text/css">
-        {{{this.css}}}
+    {{{this.css}}}
     </style>
     {{{headerTags}}}
     <script type="application/ld+json">
-        {{{route.jsonLd}}}
+    {{{route.jsonLd}}}
     </script>
 </head>
 <body>
     <scvo-site>
-        <div class="mdc-typography demo-body" style="">
-            <div class="mdc-toolbar mdc-toolbar--fixed">
+        <div class="mdc-typography">
+            <header class="mdc-toolbar mdc-toolbar--fixed">
                 <div class="mdc-toolbar__row">
-                    <section class="mdc-toolbar__section mdc-toolbar__section--align-start">
-                        <button class="demo-menu material-icons mdc-toolbar__icon--menu" onclick="menu_draw.MDCTemporaryDrawer.open = true">menu</button>
-                        <span class="mdc-toolbar__title catalog-title">SCVO</span>
-                    </section>
-                    <section class="mdc-toolbar__section mdc-toolbar__section--align-end">
-                        <div class="mdc-form-field mdc-form-field--align-end">
-                            <div class="mdc-textfield" data-mdc-auto-init="MDCTextfield">
-                                <input type="text" class="mdc-textfield__input searchRoute" placeholder="Search" id="search" 
+                    <div class="container-fluid">
+                        <section class="mdc-toolbar__section mdc-toolbar__section--align-start">
+                            <button class="menu mdc-toolbar__icon--menu" onclick="menu_draw.MDCTemporaryDrawer.open = true"><span class="fa fa-2x fa-bars" aria-hidden="true"></span></button>
+                            <span class="mdc-toolbar__title catalog-title">SCVO</span>
+                        </section>
+                        <section class="mdc-toolbar__section mdc-toolbar__section--align-end toolbar-search">
+                            <div class="mdc-form-field mdc-form-field--align-end">
+                                <div class="mdc-textfield" data-mdc-auto-init="MDCTextfield">
+                                    <input type="text" class="mdc-textfield__input white-text searchRoute" placeholder="Search" id="search"
                                     [searchRoute]='"main-search"' [paramsTemplate]='"{ \"queryParams\": { \"q\": %q } }"'>
+                                </div>
                             </div>
-                        </div>
-                    </section>
+                        </section>
+                    </div>
                 </div>
-            </div>
+                <div class="mdc-toolbar__row">
+                    <div class="container-fluid">
+                        <section class="mdc-toolbar__section mdc-toolbar__section--align-start">
+                            <div>
+                                <!-- <nav id="toolbar-tab-bar" class="mdc-tab-bar mdc-tab-bar-upgraded">
+                                    <a class="mdc-tab mdc-ripple-upgraded mdc-tab--active mdc-ripple-upgraded--background-active-fill mdc-ripple-upgraded--foreground-activation" [routerLink]="['/jobs']">Jobs</a>
+                                    <a class="mdc-tab mdc-ripple-upgraded" [routerLink]="['/services']">Services</a>
+                                    <a class="mdc-tab mdc-ripple-upgraded" [routerLink]="['/running-a-charity']">Running a charity</a>
+                                    <span class="mdc-tab-bar__indicator"></span>
+                                </nav> -->
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </header>
 
             <aside class="mdc-temporary-drawer" id="menu_draw" data-mdc-auto-init="MDCTemporaryDrawer">
                 <nav class="mdc-temporary-drawer__drawer">
@@ -65,7 +81,7 @@
     </scvo-site>
     <script type="text/javascript" src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
     <script type="text/javascript">
-        mdc.autoInit();
+    mdc.autoInit();
     </script>
     <script type="text/javascript" src="inline.bundle.js"></script>
     <script type="text/javascript" src="polyfills.bundle.js"></script>

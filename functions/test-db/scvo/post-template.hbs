@@ -7,11 +7,11 @@
         <div class="mdc-layout-grid__inner">
             <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-8">
                 {{#with primaryResponse.hits.hits.[0]._source}}
-                    {{{rendered.full}}}   
+                    {{{rendered.full}}}
                 {{/with}}
             </div>
             <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4">
-                <h3 class="">Other posts by author</h3>
+                <h3 class="">More posts by this author</h3>
                 <ul class="supplimentary-list">
                     {{#each supplimentaryResponse.authors_posts.hits.hits}}
                         {{{_source.rendered.list}}}

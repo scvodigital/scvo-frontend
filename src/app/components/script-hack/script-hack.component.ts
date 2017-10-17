@@ -14,7 +14,7 @@ export class ScriptHackComponent {
     @ViewChild('script') script: ElementRef;
 
     convertToScript() {
-        console.log('SCRIPT-HACK:', this);
+        console.log('SCRIPT:', this);
         var element = this.script.nativeElement;
         var script = document.createElement("script");
         script.type = this.type ? this.type : "text/javascript";

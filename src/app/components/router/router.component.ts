@@ -9,8 +9,7 @@ declare var mdc: any;
 
 @Component({
     selector: 'app-router',
-    templateUrl: './router.component.html',
-    styleUrls: ['./router.component.css']
+    templateUrl: './router.component.html'
 })
 export class RouterComponent implements OnInit {
     modules = [RouterModule, LazyModule];
@@ -20,7 +19,7 @@ export class RouterComponent implements OnInit {
     get element(): HTMLElement {
         return this.viewChild.nativeElement.nextElementSibling;
     }
-    
+
     constructor(private router: RouterService) {
         router.routeChanged.subscribe((match: RouteMatch) => {
             console.log(match);
@@ -28,7 +27,7 @@ export class RouterComponent implements OnInit {
                 .replace(/(href=\"|\')(\/.*?)(\"|\')/gi, '[routerLink]="[\'$2\']"')
                 .replace(/(\<\/?big\>)|(\<\/?small\>)/g, '');
             mdc.autoInit();
-        });  
+        });
     }
 
     ngOnInit() {}
