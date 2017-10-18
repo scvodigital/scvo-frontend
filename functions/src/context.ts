@@ -12,6 +12,7 @@ helpers({ handlebars: handlebars });
 
 export class Context implements IContext {
     name: string = '';
+    domains: string[] = [];
     linkTags: ILinkTag[] = [];
     metaTags: IMetaTag[] = [];
     metaData: any = {};
@@ -32,7 +33,7 @@ export class Context implements IContext {
         
         // Setup our router
         this.router = new Router(this.routes);
-        this.menuProcessor = new MenuProcessor(this.menus);
+        this.menuProcessor = new MenuProcessor(this.menus, this.domains);
 
         // Compile our templates and CSS
         this.compiledTemplate = handlebars.compile(this.template);

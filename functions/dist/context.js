@@ -8,6 +8,7 @@ helpers({ handlebars: handlebars });
 var Context = /** @class */ (function () {
     function Context(context) {
         this.name = '';
+        this.domains = [];
         this.linkTags = [];
         this.metaTags = [];
         this.metaData = {};
@@ -24,7 +25,7 @@ var Context = /** @class */ (function () {
         Object.assign(this, context);
         // Setup our router
         this.router = new scvo_router_1.Router(this.routes);
-        this.menuProcessor = new scvo_router_1.MenuProcessor(this.menus);
+        this.menuProcessor = new scvo_router_1.MenuProcessor(this.menus, this.domains);
         // Compile our templates and CSS
         this.compiledTemplate = handlebars.compile(this.template);
         this.compiledCss = sass.renderSync({ data: this.sass, sourceMap: false, outputStyle: 'compact' }).css.toString('utf8');
