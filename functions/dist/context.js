@@ -16,6 +16,7 @@ var Context = /** @class */ (function () {
         this.routes = {};
         this.sass = '';
         this.template = '';
+        this.menuProcessor = null;
         // Instance specific properties
         this.compiledTemplate = null;
         this.compiledCss = null;
@@ -23,6 +24,7 @@ var Context = /** @class */ (function () {
         Object.assign(this, context);
         // Setup our router
         this.router = new scvo_router_1.Router(this.routes);
+        this.menuProcessor = new scvo_router_1.MenuProcessor(this.menus);
         // Compile our templates and CSS
         this.compiledTemplate = handlebars.compile(this.template);
         this.compiledCss = sass.renderSync({ data: this.sass, sourceMap: false, outputStyle: 'compact' }).css.toString('utf8');
@@ -30,13 +32,14 @@ var Context = /** @class */ (function () {
     Context.prototype.renderPage = function (uriString) {
         var _this = this;
         return new Promise(function (resolve, reject) {
+            var menus = _this.menuProcessor.getMenus(uriString);
             _this.router.execute(uriString).then(function (routeMatch) {
                 var templateData = {
                     linkTags: _this.linkTags,
                     metaTags: _this.metaTags,
                     metaData: _this.metaData,
                     scriptTags: _this.scriptTags,
-                    menus: _this.menus,
+                    menus: menus,
                     css: _this.compiledCss,
                     routes: _this.routes,
                     route: routeMatch,

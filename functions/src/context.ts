@@ -6,7 +6,7 @@ import * as admin from 'firebase-admin';
 import * as handlebars from 'handlebars';
 import * as helpers from 'handlebars-helpers';
 import * as sass from 'node-sass';
-import { IContext, ILinkTag, IMetaTag, IScriptTag, IMenus, IRoutes, Router, IRouteMatch } from 'scvo-router';
+import { IContext, ILinkTag, IMetaTag, IScriptTag, IMenus, IRoutes, Router, IRouteMatch, MenuProcessor } from 'scvo-router';
 
 helpers({ handlebars: handlebars });
 
@@ -20,6 +20,7 @@ export class Context implements IContext {
     routes: IRoutes = {};
     sass: string = '';
     template: string = '';
+    menuProcessor: MenuProcessor = null;
     
     // Instance specific properties
     private compiledTemplate: (obj: any, hbs?: any) => string = null;
@@ -31,7 +32,8 @@ export class Context implements IContext {
         
         // Setup our router
         this.router = new Router(this.routes);
-        
+        this.menuProcessor = new MenuProcessor(this.menus);
+
         // Compile our templates and CSS
         this.compiledTemplate = handlebars.compile(this.template);
         this.compiledCss = sass.renderSync({ data: this.sass, sourceMap: false, outputStyle: 'compact' }).css.toString('utf8');
@@ -39,13 +41,15 @@ export class Context implements IContext {
 
     renderPage(uriString: string): Promise<string>{
         return new Promise<string>((resolve, reject) => {
+            var menus = this.menuProcessor.getMenus(uriString); 
+
             this.router.execute(uriString).then((routeMatch: IRouteMatch) => {
                 var templateData = {
                     linkTags: this.linkTags,
                     metaTags: this.metaTags,
                     metaData: this.metaData,
                     scriptTags: this.scriptTags,
-                    menus: this.menus,
+                    menus: menus,
                     css: this.compiledCss,
                     routes: this.routes,
                     route: routeMatch,

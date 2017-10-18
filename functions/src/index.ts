@@ -31,8 +31,9 @@ exports.index = functions.https.onRequest((req: functions.Request, res: function
 
         getJson<Context>(path).then((contextJson: Context) => {
             var context = new Context(contextJson);
+            var url = req.query.url || req.url;
 
-            context.renderPage(req.url).then((html: string) => {
+            context.renderPage(url).then((html: string) => {
                 res.send(html);
                 res.end();
                 resolve();

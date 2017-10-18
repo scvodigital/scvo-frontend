@@ -24,7 +24,8 @@ exports.index = functions.https.onRequest(function (req, res) {
         var path = '/sites/' + siteKey;
         getJson(path).then(function (contextJson) {
             var context = new context_1.Context(contextJson);
-            context.renderPage(req.url).then(function (html) {
+            var url = req.query.url || req.url;
+            context.renderPage(url).then(function (html) {
                 res.send(html);
                 res.end();
                 resolve();
@@ -49,7 +50,6 @@ exports.menuUpdate = functions.https.onRequest(function (req, res) {
         if (process.env.devmode || postType === 'nav_menu_item') {
             var domain = siteCmsMap[siteKey] || 'cms.scvo.net';
             menus_1.getMenus(domain).then(function (menus) {
-                console.log('Got menus:', menus);
                 putJson('/sites/' + siteKey + '/menus', menus).then(function () {
                     res.end();
                     resolve();
