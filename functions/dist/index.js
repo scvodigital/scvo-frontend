@@ -47,9 +47,10 @@ exports.menuUpdate = functions.https.onRequest(function (req, res) {
     return new Promise(function (resolve, reject) {
         var postType = req.body.post_type || null;
         var siteKey = req.query.site || 'scvo';
-        if (process.env.devmode || postType === 'nav_menu_item') {
+        if (process.env.devmode || req.query.test || postType === 'nav_menu_item') {
             var domain = siteCmsMap[siteKey] || 'cms.scvo.net';
             menus_1.getMenus(domain).then(function (menus) {
+                console.log('Fetched menus:', JSON.stringify(menus, null, 4));
                 putJson('/sites/' + siteKey + '/menus', menus).then(function () {
                     res.end();
                     resolve();
