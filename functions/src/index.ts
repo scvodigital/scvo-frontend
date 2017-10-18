@@ -6,13 +6,14 @@ import * as path from 'path';
 // Module imports
 import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
-import { Router, RouteMatch } from 'scvo-router';
+import { Router, RouteMatch, IMenus } from 'scvo-router';
 import * as Dot from 'dot-object';
 
 // Internal imports
 import { fsPdf } from './fs-pdf';
 import { Context } from './context';
 import { Secrets } from './secrets';
+import { getMenus } from './menus';
 
 const config = {
     credential: admin.credential.cert(<admin.ServiceAccount>Secrets),
@@ -50,10 +51,66 @@ exports.index = functions.https.onRequest((req: functions.Request, res: function
     });
 });
 
+exports.menuUpdate = functions.https.onRequest((req: functions.Request, res: functions.Response) => {
+    return new Promise((resolve, reject) => {
+        var postType = req.body.post_type || null;
+        var siteKey = req.query.site || 'scvo';
+        if(process.env.devmode || postType === 'nav_menu_item'){
+            var domain = siteCmsMap[siteKey] || 'cms.scvo.net';
+            getMenus(domain).then((menus: IMenus) => {
+                console.log('Got menus:', menus);
+                putJson('/sites/' + siteKey + '/menus', menus).then(() => {
+                    res.end();
+                    resolve();  
+                }).catch((err) => {
+                    console.error('Error updating menus:', err);
+                    res.json(err);
+                    res.end();
+                    reject(err);
+                });
+            }).catch((err) => {
+                console.error('Error fetching menus:', err);
+                res.json(err);
+                res.end();
+                reject(err); 
+            });
+        }else{
+            res.end();
+            resolve();
+        }
+    });
+});
+
+function putJson(jsonPath: string, json: any): Promise<void> {
+    return new Promise<void>((resolve, reject) => {
+        if(process.env.devmode){
+            console.log('In dev mode, using local db');
+            try{
+                jsonPath = jsonPath.indexOf('/') === 0 ? jsonPath.substr(1) : jsonPath;
+                var filePath = path.join(__dirname, '../test-db/db.json');
+                var jsonString = fs.readFileSync(filePath).toString();
+                var db = JSON.parse(jsonString);
+                dot.set(jsonPath, json, db, false);
+                fs.writeFileSync(filePath, JSON.stringify(db, null, 4));
+                resolve();
+            }catch(err){
+                reject(err);
+            }
+        }else{
+            console.log('Not in dev mode, using firebase');
+            app.database().ref(jsonPath).update(json).then(() => {
+                resolve();
+            }).catch((err) => {
+                reject(err);  
+            });
+        }
+    });
+}
+
 function getJson<T>(jsonPath: string): Promise<T> {
     return new Promise<T>((resolve, reject) => {
         if(process.env.devmode){
-            console.log('In dev mode. loading local db');
+            console.log('In dev mode, loading local db');
             try{
                 jsonPath = jsonPath.indexOf('/') === 0 ? jsonPath.substr(1) : jsonPath;
                 var filePath = path.join(__dirname, '../test-db/db.json');
@@ -79,6 +136,11 @@ function getJson<T>(jsonPath: string): Promise<T> {
         }
     });
 }
+
+const siteCmsMap = {
+    "goodmoves": "cms.goodmoves.com",
+    "scvo": "cms.scvo.net",
+};
 
 const domainMap = {
     "goodmoves.com": "goodmoves",

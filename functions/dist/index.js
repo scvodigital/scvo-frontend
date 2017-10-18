@@ -10,6 +10,7 @@ var Dot = require("dot-object");
 var fs_pdf_1 = require("./fs-pdf");
 var context_1 = require("./context");
 var secrets_1 = require("./secrets");
+var menus_1 = require("./menus");
 var config = {
     credential: admin.credential.cert(secrets_1.Secrets),
     databaseURL: "https://scvo-net.firebaseio.com"
@@ -41,10 +42,67 @@ exports.index = functions.https.onRequest(function (req, res) {
         });
     });
 });
+exports.menuUpdate = functions.https.onRequest(function (req, res) {
+    return new Promise(function (resolve, reject) {
+        var postType = req.body.post_type || null;
+        var siteKey = req.query.site || 'scvo';
+        if (process.env.devmode || postType === 'nav_menu_item') {
+            var domain = siteCmsMap[siteKey] || 'cms.scvo.net';
+            menus_1.getMenus(domain).then(function (menus) {
+                console.log('Got menus:', menus);
+                putJson('/sites/' + siteKey + '/menus', menus).then(function () {
+                    res.end();
+                    resolve();
+                }).catch(function (err) {
+                    console.error('Error updating menus:', err);
+                    res.json(err);
+                    res.end();
+                    reject(err);
+                });
+            }).catch(function (err) {
+                console.error('Error fetching menus:', err);
+                res.json(err);
+                res.end();
+                reject(err);
+            });
+        }
+        else {
+            res.end();
+            resolve();
+        }
+    });
+});
+function putJson(jsonPath, json) {
+    return new Promise(function (resolve, reject) {
+        if (process.env.devmode) {
+            console.log('In dev mode, using local db');
+            try {
+                jsonPath = jsonPath.indexOf('/') === 0 ? jsonPath.substr(1) : jsonPath;
+                var filePath = path.join(__dirname, '../test-db/db.json');
+                var jsonString = fs.readFileSync(filePath).toString();
+                var db = JSON.parse(jsonString);
+                dot.set(jsonPath, json, db, false);
+                fs.writeFileSync(filePath, JSON.stringify(db, null, 4));
+                resolve();
+            }
+            catch (err) {
+                reject(err);
+            }
+        }
+        else {
+            console.log('Not in dev mode, using firebase');
+            app.database().ref(jsonPath).update(json).then(function () {
+                resolve();
+            }).catch(function (err) {
+                reject(err);
+            });
+        }
+    });
+}
 function getJson(jsonPath) {
     return new Promise(function (resolve, reject) {
         if (process.env.devmode) {
-            console.log('In dev mode. loading local db');
+            console.log('In dev mode, loading local db');
             try {
                 jsonPath = jsonPath.indexOf('/') === 0 ? jsonPath.substr(1) : jsonPath;
                 var filePath = path.join(__dirname, '../test-db/db.json');
@@ -73,6 +131,10 @@ function getJson(jsonPath) {
         }
     });
 }
+var siteCmsMap = {
+    "goodmoves": "cms.goodmoves.com",
+    "scvo": "cms.scvo.net",
+};
 var domainMap = {
     "goodmoves.com": "goodmoves",
     "goodmoves.eu": "goodmoves",

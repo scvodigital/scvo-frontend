@@ -10,6 +10,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "serve": "cd ./functions && npm run build && cd ../ && npm run build && devmode=true firebase serve -p 9000 --only functions,hosting",
+    "serve-f": "cd ./functions && npm run build && cd ../ && devmode=true firebase serve -p 9000 --only functions",
     "deploy": "cd ./functions && npm run build && cd ../ && npm run build && firebase deploy --only functions,hosting"
   },
   "private": true,
@@ -26,11 +27,11 @@
     "angular2-dynamic-component": "^1.6.1",
     "angularfire2": "^5.0.0-rc.1",
     "core-js": "^2.4.1",
-    "font-awesome": "^4.7.0",
     "firebase": "^4.5.0",
+    "font-awesome": "^4.7.0",
     "readline": "^1.3.0",
     "rxjs": "^5.4.2",
-    "scvo-router": "^1.0.8",
+    "scvo-router": "^1.0.9",
     "ts-metadata-helper": "0.0.4",
     "zone.js": "^0.8.14"
   },
