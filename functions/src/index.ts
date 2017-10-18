@@ -58,7 +58,6 @@ exports.menuUpdate = functions.https.onRequest((req: functions.Request, res: fun
         if(process.env.devmode || postType === 'nav_menu_item'){
             var domain = siteCmsMap[siteKey] || 'cms.scvo.net';
             getMenus(domain).then((menus: IMenus) => {
-                console.log('Got menus:', menus);
                 putJson('/sites/' + siteKey + '/menus', menus).then(() => {
                     res.end();
                     resolve();  
