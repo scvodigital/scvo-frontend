@@ -1,4 +1,37 @@
 {
+    "index": {
+        "linkTags": [],
+        "metaTags": [],
+        "pattern": "/",
+        "template": `{:index-template.hbs}`,
+        "primarySearchTemplate": {
+            "index": "web-content-production",
+            "type": "scvo-cms-page,scvo-cms-post",
+            "template": `{:index-query-template.json}`
+        },
+        "supplimentarySearchTemplates": {
+            "goodmoves_latest": {
+                "index": "web-content-production",
+                "type": "goodmoves-legacy",
+                "template": `{:index-goodmoves-query-template.json}`
+            },
+            "blogs_latest": {
+                "index": "web-content-production",
+                "type": "scvo-cms-post",
+                "template": `{:index-blog-query-template.json}`
+            },
+            "tfn_latest": {
+                "index": "web-content-production",
+                "type": "tfn-news-post",
+                "template": `{:index-tfn-query-template.json}`
+            }
+        },
+        "elasticsearchConfig": {
+            "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
+            "apiVersion": "5.5",
+            "log": "trace"
+        }
+    },
     "main-search": {
         "linkTags": [],
         "metaTags": [],
@@ -47,7 +80,7 @@
     "_default": {
         "linkTags": [],
         "metaTags": [],
-        "pattern": "/",
+        "pattern": "/*path",
         "template": `{:default-template.hbs}`,
         "jsonLdTemplate": `{:default-json-ld-template.hbs}`,
         "primarySearchTemplate": {

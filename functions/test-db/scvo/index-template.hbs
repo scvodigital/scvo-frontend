@@ -1,0 +1,29 @@
+<div class="container-fluid">
+    <h1>Featured</h1>
+    {{#each primaryResponse.hits.hits}}
+        {{{_source.rendered.featured}}}   
+    {{/each}}
+
+    <div class="mdc-layout-grid">
+        <div class="mdc-layout-grid__inner">
+            <div class="mdc-layout-grid__cell">
+                <h2>Latest Blog Posts</h2>
+                {{#each supplimentaryResponse.blogs_latest.hits.hits}}
+                    {{{_source.rendered.gist}}}
+                {{/each}}
+            </div>
+            <div class="mdc-layout-grid__cell">
+                <h2>Latest Goodmoves Jobs</h2>
+                {{#each supplimentaryResponse.goodmoves_latest.hits.hits}}
+                    {{{_source.rendered.gist}}}
+                {{/each}}
+            </div>
+            <div class="mdc-layout-grid__cell">
+                <h2>Latest on TFN</h2>
+                {{#each supplimentaryResponse.tfn_latest.hits.hits}}
+                    {{{_source.rendered.gist}}}
+                {{/each}}
+            </div>
+        </div>
+    </div>
+</div>
