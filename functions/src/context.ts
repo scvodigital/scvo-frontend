@@ -33,7 +33,7 @@ export class Context implements IContext {
         
         // Setup our router
         this.router = new Router(this.routes);
-        this.menuProcessor = new MenuProcessor(this.menus, this.domains);
+        this.menuProcessor = new MenuProcessor(this.menus);
 
         // Compile our templates and CSS
         this.compiledTemplate = handlebars.compile(this.template);

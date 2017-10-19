@@ -3,8 +3,15 @@ import * as request from 'request';
 import * as Q from 'q';
 import { IMenus, IMenuItem } from 'scvo-router';
 
-export function getMenus(domain: string): Promise<IMenus> {
+export function getMenus(domain: string, stripDomains: string[]): Promise<IMenus> {
     return new Promise((resolve, reject) => {
+        var domainRegex: RegExp = null;
+        if(stripDomains && stripDomains.length > 0){
+            stripDomains = stripDomains.map((domain: string) => { return domain.replace(/\./g, '\\.'); });
+            var domainRegexString = '((https?)?:\\/\\/)((' + stripDomains.join(')|(') + '))';
+            domainRegex = new RegExp(domainRegexString, 'ig');
+        }
+
         getMenuIds(domain).then((menuIds: number[]) => {
             var promises = menuIds.map((menuId: number) => {
                 return getMenu(domain, menuId);
@@ -14,7 +21,7 @@ export function getMenus(domain: string): Promise<IMenus> {
                 var menus = {};
                 menusArray.forEach((menu: any) => {
                     if(menu.slug){
-                        menus[menu.slug] = menu.items.map(transformWpMenu);
+                        menus[menu.slug] = menu.items.map((item) => { return transformWpMenu(item, domainRegex); });
                     }
                 });
 
@@ -66,8 +73,8 @@ function getMenu(domain: string, menuId: number): Promise<any> {
     });
 }
 
-function transformWpMenu(wpMenuItem: IWPMenuItem): IMenuItem{
-    var children = !wpMenuItem.children ? [] : wpMenuItem.children.map(transformWpMenu);
+function transformWpMenu(wpMenuItem: IWPMenuItem, domainRegex: RegExp): IMenuItem{
+    var children = !wpMenuItem.children ? [] : wpMenuItem.children.map((child) => { return transformWpMenu(child, domainRegex); });
     var metaData = {};
 
     if(wpMenuItem.meta_data){
@@ -82,10 +89,14 @@ function transformWpMenu(wpMenuItem: IWPMenuItem): IMenuItem{
     }
 
     var route = metaData['menu-item-route-pattern'] || null;
+    var path = wpMenuItem.url;
+    if(domainRegex){
+        path = path.replace(domainRegex, '');
+    }
 
     var menuItem: IMenuItem = {
         label: wpMenuItem.title,
-        path: wpMenuItem.url,
+        path: path,
         route: route,
         children: children,
         metaData: metaData,

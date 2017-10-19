@@ -48,20 +48,28 @@ exports.menuUpdate = functions.https.onRequest(function (req, res) {
         var postType = req.body.post_type || null;
         var siteKey = req.query.site || 'scvo';
         if (process.env.devmode || req.query.test || postType === 'nav_menu_item') {
-            var domain = siteCmsMap[siteKey] || 'cms.scvo.net';
-            menus_1.getMenus(domain).then(function (menus) {
-                console.log('Fetched menus:', JSON.stringify(menus, null, 4));
-                putJson('/sites/' + siteKey + '/menus', menus).then(function () {
-                    res.end();
-                    resolve();
+            console.log('UPDATING SITE MENUS:', siteKey);
+            var path = '/sites/' + siteKey;
+            getJson(path).then(function (contextJson) {
+                var domain = siteCmsMap[siteKey] || 'cms.scvo.net';
+                menus_1.getMenus(domain, contextJson.domains).then(function (menus) {
+                    putJson('/sites/' + siteKey + '/menus', menus).then(function () {
+                        res.end();
+                        resolve();
+                    }).catch(function (err) {
+                        console.error('Error updating menus:', err);
+                        res.json(err);
+                        res.end();
+                        reject(err);
+                    });
                 }).catch(function (err) {
-                    console.error('Error updating menus:', err);
+                    console.error('Error fetching menus:', err);
                     res.json(err);
                     res.end();
                     reject(err);
                 });
             }).catch(function (err) {
-                console.error('Error fetching menus:', err);
+                console.error('Error fetching context:', err);
                 res.json(err);
                 res.end();
                 reject(err);
