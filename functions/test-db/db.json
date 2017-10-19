@@ -135,7 +135,7 @@
                     "linkTags": [],
                     "metaTags": [],
                     "pattern": "/",
-                    "template": "<div class=\"container-fluid\">\n    <h1>Featured</h1>\n    {{#each primaryResponse.hits.hits}}\n        {{{_source.rendered.featured}}}   \n    {{/each}}\n\n    <div class=\"mdc-layout-grid\">\n        <div class=\"mdc-layout-grid__inner\">\n            <div class=\"mdc-layout-grid__cell\">\n                <h2>Latest Blog Posts</h2>\n                {{#each supplimentaryResponse.blogs_latest.hits.hits}}\n                    {{{_source.rendered.gist}}}\n                {{/each}}\n            </div>\n            <div class=\"mdc-layout-grid__cell\">\n                <h2>Latest Goodmoves Jobs</h2>\n                {{#each supplimentaryResponse.goodmoves_latest.hits.hits}}\n                    {{{_source.rendered.gist}}}\n                {{/each}}\n            </div>\n            <div class=\"mdc-layout-grid__cell\">\n                <h2>Latest on TFN</h2>\n                {{#each supplimentaryResponse.tfn_latest.hits.hits}}\n                    {{{_source.rendered.gist}}}\n                {{/each}}\n            </div>\n        </div>\n    </div>\n</div>\n",
+                    "template": "<section class=\"v-padding\">\n    <div class=\"container-fluid\">\n        <h1>Featured</h1>\n        {{#each primaryResponse.hits.hits}}\n            {{{_source.rendered.featured}}}   \n        {{/each}}\n    </div>\n</section>\n\n<section class=\"v-padding mdc-theme--primary-light-bg\">\n    <div class=\"container-fluid\">\n        <h2>Latest Blog Posts</h2>\n        <div class=\"mdc-layout-grid\">\n            <div class=\"mdc-layout-grid__inner\">\n                <div class=\"mdc-layout-grid__cell\">\n                    {{{supplimentaryResponse.blogs_latest.hits.hits.[0]._source.rendered.gist}}}\n                </div>\n                <div class=\"mdc-layout-grid__cell\">\n                    {{{supplimentaryResponse.blogs_latest.hits.hits.[1]._source.rendered.gist}}}\n                </div>\n                <div class=\"mdc-layout-grid__cell\">\n                    {{{supplimentaryResponse.blogs_latest.hits.hits.[2]._source.rendered.gist}}}\n                </div>\n            </div>\n        </div>\n        <h2>Latest Goodmoves Jobs</h2>\n        <div class=\"mdc-layout-grid\">\n            <div class=\"mdc-layout-grid__inner\">\n                <div class=\"mdc-layout-grid__cell\">\n                    {{{supplimentaryResponse.goodmoves_latest.hits.hits.[0]._source.rendered.gist}}}\n                </div>\n                <div class=\"mdc-layout-grid__cell\">\n                    {{{supplimentaryResponse.goodmoves_latest.hits.hits.[1]._source.rendered.gist}}}\n                </div>\n                <div class=\"mdc-layout-grid__cell\">\n                    {{{supplimentaryResponse.goodmoves_latest.hits.hits.[2]._source.rendered.gist}}}\n                </div>\n            </div>\n        </div>\n        <h2>Latest on TFN</h2>\n        <div class=\"mdc-layout-grid\">\n            <div class=\"mdc-layout-grid__inner\">\n                <div class=\"mdc-layout-grid__cell\">\n                    {{{supplimentaryResponse.tfn_latest.hits.hits.[0]._source.rendered.gist}}}\n                </div>\n                <div class=\"mdc-layout-grid__cell\">\n                    {{{supplimentaryResponse.tfn_latest.hits.hits.[1]._source.rendered.gist}}}\n                </div>\n                <div class=\"mdc-layout-grid__cell\">\n                    {{{supplimentaryResponse.tfn_latest.hits.hits.[2]._source.rendered.gist}}}\n                </div>\n            </div>\n        </div>\n    </div>\n</section>\n",
                     "primarySearchTemplate": {
                         "index": "web-content-production",
                         "type": "scvo-cms-page,scvo-cms-post",
@@ -145,17 +145,17 @@
                         "goodmoves_latest": {
                             "index": "web-content-production",
                             "type": "goodmoves-legacy",
-                            "template": "{\n\t\"size\": 5,\n\t\"query\": {\n\t\t\"match_all\": { }\n\t},\n\t\"sort\": {\n\t\t\"start_at\": \"desc\"\n\t}\n}\n"
+                            "template": "{\n\t\"size\": 3,\n\t\"query\": {\n\t\t\"match_all\": { }\n\t},\n\t\"sort\": {\n\t\t\"start_at\": \"desc\"\n\t}\n}\n"
                         },
                         "blogs_latest": {
                             "index": "web-content-production",
                             "type": "scvo-cms-post",
-                            "template": "{\n\t\"size\": 5,\n\t\"query\": {\n        \"bool\": {\n            \"must_not\": [\n                {\n    \t\t        \"term\": {\n                        \"featured\": true   \n                    }\n                }\n            ]\n        }\n\t},\n\t\"sort\": {\n\t\t\"publish_on\": \"desc\"\n\t}\n}\n"
+                            "template": "{\n\t\"size\": 3,\n\t\"query\": {\n        \"bool\": {\n            \"must_not\": [\n                {\n    \t\t        \"term\": {\n                        \"featured\": true   \n                    }\n                }\n            ]\n        }\n\t},\n\t\"sort\": {\n\t\t\"publish_on\": \"desc\"\n\t}\n}\n"
                         },
                         "tfn_latest": {
                             "index": "web-content-production",
                             "type": "tfn-news-post",
-                            "template": "{\n\t\"size\": 5,\n\t\"query\": {\n        \"match_all\": { }\n\t},\n\t\"sort\": {\n\t\t\"date_published\": \"desc\"\n\t}\n}\n"
+                            "template": "{\n\t\"size\": 3,\n\t\"query\": {\n        \"match_all\": { }\n\t},\n\t\"sort\": {\n\t\t\"date_published\": \"desc\"\n\t}\n}\n"
                         }
                     },
                     "elasticsearchConfig": {
