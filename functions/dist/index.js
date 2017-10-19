@@ -100,7 +100,7 @@ function putJson(jsonPath, json) {
         }
         else {
             console.log('Not in dev mode, using firebase');
-            app.database().ref(jsonPath).update(json).then(function () {
+            app.database().ref(jsonPath).set(json).then(function () {
                 resolve();
             }).catch(function (err) {
                 reject(err);

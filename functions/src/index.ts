@@ -109,7 +109,7 @@ function putJson(jsonPath: string, json: any): Promise<void> {
             }
         }else{
             console.log('Not in dev mode, using firebase');
-            app.database().ref(jsonPath).update(json).then(() => {
+            app.database().ref(jsonPath).set(json).then(() => {
                 resolve();
             }).catch((err) => {
                 reject(err);  
