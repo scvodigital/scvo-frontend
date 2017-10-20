@@ -3,32 +3,32 @@
         "linkTags": [],
         "metaTags": [],
         "pattern": "/",
-        "template": "<section class=\"v-padding\">\n    <div class=\"container-fluid\">\n        <h1>Featured</h1>\n        {{#each primaryResponse.hits.hits}}\n            {{{_source.rendered.featured}}}   \n        {{/each}}\n    </div>\n</section>\n\n<section class=\"v-padding mdc-theme--primary-light-bg\">\n    <div class=\"container-fluid\">\n        <h2>Latest Blog Posts</h2>\n        <div class=\"mdc-layout-grid\">\n            <div class=\"mdc-layout-grid__inner\">\n                <div class=\"mdc-layout-grid__cell\">\n                    {{{supplimentaryResponse.blogs_latest.hits.hits.[0]._source.rendered.gist}}}\n                </div>\n                <div class=\"mdc-layout-grid__cell\">\n                    {{{supplimentaryResponse.blogs_latest.hits.hits.[1]._source.rendered.gist}}}\n                </div>\n                <div class=\"mdc-layout-grid__cell\">\n                    {{{supplimentaryResponse.blogs_latest.hits.hits.[2]._source.rendered.gist}}}\n                </div>\n            </div>\n        </div>\n        <h2>Latest Goodmoves Jobs</h2>\n        <div class=\"mdc-layout-grid\">\n            <div class=\"mdc-layout-grid__inner\">\n                <div class=\"mdc-layout-grid__cell\">\n                    {{{supplimentaryResponse.goodmoves_latest.hits.hits.[0]._source.rendered.gist}}}\n                </div>\n                <div class=\"mdc-layout-grid__cell\">\n                    {{{supplimentaryResponse.goodmoves_latest.hits.hits.[1]._source.rendered.gist}}}\n                </div>\n                <div class=\"mdc-layout-grid__cell\">\n                    {{{supplimentaryResponse.goodmoves_latest.hits.hits.[2]._source.rendered.gist}}}\n                </div>\n            </div>\n        </div>\n        <h2>Latest on TFN</h2>\n        <div class=\"mdc-layout-grid\">\n            <div class=\"mdc-layout-grid__inner\">\n                <div class=\"mdc-layout-grid__cell\">\n                    {{{supplimentaryResponse.tfn_latest.hits.hits.[0]._source.rendered.gist}}}\n                </div>\n                <div class=\"mdc-layout-grid__cell\">\n                    {{{supplimentaryResponse.tfn_latest.hits.hits.[1]._source.rendered.gist}}}\n                </div>\n                <div class=\"mdc-layout-grid__cell\">\n                    {{{supplimentaryResponse.tfn_latest.hits.hits.[2]._source.rendered.gist}}}\n                </div>\n            </div>\n        </div>\n    </div>\n</section>\n",
+        "template": "<section class=\"v-padding\">\n    <div class=\"container-fluid\">\n        <h1>Featured</h1>\n        {{#each primaryResponse.hits.hits}}\n            {{{_source.rendered.featured}}}   \n        {{/each}}\n    </div>\n</section>\n\n<section class=\"v-padding\">\n    <div class=\"container-fluid\">\n        <h2>Latest Blog Posts</h2>\n        <div class=\"mdc-layout-grid\">\n            <div class=\"mdc-layout-grid__inner\">\n                <div class=\"mdc-layout-grid__cell\">\n                    {{{supplimentaryResponse.blogs_latest.hits.hits.[0]._source.rendered.gist}}}\n                </div>\n                <div class=\"mdc-layout-grid__cell\">\n                    {{{supplimentaryResponse.blogs_latest.hits.hits.[1]._source.rendered.gist}}}\n                </div>\n                <div class=\"mdc-layout-grid__cell\">\n                    {{{supplimentaryResponse.blogs_latest.hits.hits.[2]._source.rendered.gist}}}\n                </div>\n            </div>\n        </div>\n        <h2>Latest Goodmoves Jobs</h2>\n        <div class=\"mdc-layout-grid\">\n            <div class=\"mdc-layout-grid__inner\">\n                <div class=\"mdc-layout-grid__cell\">\n                    {{{supplimentaryResponse.goodmoves_latest.hits.hits.[0]._source.rendered.gist}}}\n                </div>\n                <div class=\"mdc-layout-grid__cell\">\n                    {{{supplimentaryResponse.goodmoves_latest.hits.hits.[1]._source.rendered.gist}}}\n                </div>\n                <div class=\"mdc-layout-grid__cell\">\n                    {{{supplimentaryResponse.goodmoves_latest.hits.hits.[2]._source.rendered.gist}}}\n                </div>\n            </div>\n        </div>\n        <h2>Latest on TFN</h2>\n        <div class=\"mdc-layout-grid\">\n            <div class=\"mdc-layout-grid__inner\">\n                <div class=\"mdc-layout-grid__cell\">\n                    {{{supplimentaryResponse.tfn_latest.hits.hits.[0]._source.rendered.gist}}}\n                </div>\n                <div class=\"mdc-layout-grid__cell\">\n                    {{{supplimentaryResponse.tfn_latest.hits.hits.[1]._source.rendered.gist}}}\n                </div>\n                <div class=\"mdc-layout-grid__cell\">\n                    {{{supplimentaryResponse.tfn_latest.hits.hits.[2]._source.rendered.gist}}}\n                </div>\n            </div>\n        </div>\n    </div>\n</section>\n",
         "primarySearchTemplate": {
             "index": "web-content-production",
             "type": "scvo-cms-page,scvo-cms-post",
-            "template": "{\n\t\"size\": 4,\n\t\"query\": {\n        \"bool\": {\n            \"must\": [\n                {\n    \t\t        \"term\": {\n                        \"featured\": true   \n                    }\n                }   \n            ]\n        }\n\t},\n\t\"sort\": {\n\t\t\"publish_on\": \"desc\"\n\t}\n}\n\n"
+            "template": "{\n    \"size\": 4,\n    \"query\": {\n        \"bool\": {\n            \"must\": [\n                {\n                    \"term\": {\n                        \"featured\": true\n                    }\n                }\n            ]\n        }\n    },\n    \"sort\": {\n        \"publish_on\": \"desc\"\n    }\n}\n"
         },
         "supplimentarySearchTemplates": {
             "goodmoves_latest": {
                 "index": "web-content-production",
                 "type": "goodmoves-legacy",
-                "template": "{\n\t\"size\": 3,\n\t\"query\": {\n\t\t\"match_all\": { }\n\t},\n\t\"sort\": {\n\t\t\"start_at\": \"desc\"\n\t}\n}\n"
+                "template": ""
             },
             "blogs_latest": {
                 "index": "web-content-production",
                 "type": "scvo-cms-post",
-                "template": "{\n\t\"size\": 3,\n\t\"query\": {\n        \"bool\": {\n            \"must_not\": [\n                {\n    \t\t        \"term\": {\n                        \"featured\": true   \n                    }\n                }\n            ]\n        }\n\t},\n\t\"sort\": {\n\t\t\"publish_on\": \"desc\"\n\t}\n}\n"
+                "template": ""
             },
             "tfn_latest": {
                 "index": "web-content-production",
                 "type": "tfn-news-post",
-                "template": "{\n\t\"size\": 3,\n\t\"query\": {\n        \"match_all\": { }\n\t},\n\t\"sort\": {\n\t\t\"date_published\": \"desc\"\n\t}\n}\n"
+                "template": ""
             }
         },
         "elasticsearchConfig": {
             "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
-            "apiVersion": "5.5",
+            "apiVersion": "5.6",
             "log": "trace"
         }
     },
@@ -40,12 +40,12 @@
         "jsonLdTemplate": "",
         "primarySearchTemplate": {
             "index": "web-content-production",
-            "type": "goodmoves-legacy,scvo-cms-page,scvo-cms-post,scvo-member,digital-charter-signatory,funding-scotland-fund,goodhq-organisation,scvo-document-evidence,scvo-event,scvo-grant-digital,scvo-staff,tfn-news-post,tfn-blog-post,tfn-event,tfn-poll",
+            "type": "goodmoves-legacy,scvo-cms-page,scvo-cms-post,scvo-member,digital-charter-signatory,funding-scotland-fund,goodhq-organisation,scvo-document-evidence,scvo-event,scvo-grant-digital,scvo-staff",
             "template": "{\n    \"size\": 10,\n    \"query\": {\n        \"query_string\": {\n            \"query\": \"{{query.q}}\",\n            \"default_operator\": \"AND\",\n            \"analyzer\": \"snowball\"\n        }\n    }\n}\n"
         },
         "elasticsearchConfig": {
             "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
-            "apiVersion": "5.5",
+            "apiVersion": "5.6",
             "log": "trace"
         }
     },
@@ -53,7 +53,7 @@
         "linkTags": [],
         "metaTags": [],
         "pattern": "/blog/*path",
-        "template": "{{#with supplimentaryResponse.splash.hits.hits.[0]._source}}\n    <div class=\"splash-image\" style=\"background-image:url({{original_image}});\"></div>\n{{/with}}\n\n<div class=\"container-fluid\">\n    <div class=\"mdc-layout-grid\">\n        <div class=\"mdc-layout-grid__inner\">\n            <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-8\">\n                {{#with primaryResponse.hits.hits.[0]._source}}\n                    {{{rendered.full}}}\n                {{/with}}\n            </div>\n            <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-4\">\n                <h3 class=\"\">More posts by this author</h3>\n                <ul class=\"supplimentary-list\">\n                    {{#each supplimentaryResponse.authors_posts.hits.hits}}\n                        {{{_source.rendered.list}}}\n                    {{/each}}\n                </ul>\n            </div>\n        </div>\n    </div>\n</div>\n",
+        "template": "{{#with supplimentaryResponse.splash.hits.hits.[0]._source}}\n<div class=\"splash-image\" style=\"background-image: linear-gradient(to bottom left,rgba(0, 77, 65, 0.29),#00796b),url({{original_image}});position: relative;\">\n    <div class=\"container-fluid\">\n        <div class=\"mdc-layout-grid\">\n            <h1 class=\"post-title\">{{#with primaryResponse.hits.hits.[0]._source}}{{sanitize title}}{{/with}}</h1>\n        </div>\n    </div>\n</div>\n{{/with}}\n\n<div class=\"container-fluid\">\n    <div class=\"mdc-layout-grid\">\n        <div class=\"mdc-layout-grid__inner\">\n            <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-8\">\n                {{#with primaryResponse.hits.hits.[0]._source}}\n                {{{rendered.full}}}\n                {{/with}}\n            </div>\n            <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-4\">\n                <h3 class=\"\">More by this author</h3>\n                <ul class=\"supplimentary-list\">\n                    {{#each supplimentaryResponse.authors_posts.hits.hits}}\n                    {{{_source.rendered.list}}}\n                    {{/each}}\n                </ul>\n            </div>\n        </div>\n    </div>\n</div>\n",
         "primarySearchTemplate": {
             "index": "web-content-production",
             "type": "scvo-cms-post",
@@ -68,12 +68,12 @@
             "splash": {
                 "index": "web-content-production",
                 "type": "scvo-cms-media",
-                "template": "{\n\t\"size\": 1,\n\t\"query\": {\n\t\t\"bool\": {\n\t\t\t\"should\": [\n\t\t\t\t{\n\t\t\t\t\t\"terms\": {\n\t\t\t\t\t\t\"categories_id\": [\n                            {{join primaryResponse.hits.hits.[0]._source.categories_id}}\n\t\t\t\t\t\t]\n\t\t\t\t\t}\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"match_all\": { }\n\t\t\t\t}\n\t\t\t]\n\t\t}\n\t}\n}\n"
+                "template": "{\n    \"size\": 1,\n    \"query\": {\n        \"bool\": {\n            \"should\": [\n                {\n                    \"terms\": {\n                        \"categories_id\": [\n                            {{join primaryResponse.hits.hits.[0]._source.categories_id}}\n                        ]\n                    }\n                },\n                {\n                    \"match_all\": { }\n                }\n            ]\n        }\n    }\n}\n"
             }
         },
         "elasticsearchConfig": {
             "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
-            "apiVersion": "5.5",
+            "apiVersion": "5.6",
             "log": "trace"
         }
     },
@@ -90,7 +90,7 @@
         },
         "elasticsearchConfig": {
             "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
-            "apiVersion": "5.5",
+            "apiVersion": "5.6",
             "log": "trace"
         }
     }
