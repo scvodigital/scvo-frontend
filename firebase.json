@@ -1,43 +1,22 @@
 {
   "database": {
-    "rules": "./firebase/database/rules.json"
+    "rules": "firebase-configuration/database.rules.json"
   },
   "hosting": {
     "public": "dist",
     "rewrites": [
       {
         "source": "**",
-        "destination": "/index.html"
+        "function": "index"
       }
     ],
-    "redirects": [
-      {
-        "source": "/join-us",
-        "destination": "/services/membership",
-        "type": 301
-      }
-    ],
-    "headers": [
-      {
-        "source": "**/**",
-        "headers": [
-          {
-            "key": "Cache-Control",
-            "value": "max-age=86400"
-          },
-          {
-            "key": "Access-Control-Allow-Origin",
-            "value": "*"
-          },
-          {
-            "key": "X-Frame-Options",
-            "value": "ALLOW-FROM ALLOWALL"
-          }
-        ]
-      }
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
     ]
   },
-  "functions": {
-    "source": "./firebase/functions/"
+  "storage": {
+    "rules": "firebase-configuration/storage.rules"
   }
 }

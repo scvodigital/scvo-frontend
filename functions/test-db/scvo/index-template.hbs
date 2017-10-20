@@ -1,0 +1,55 @@
+<section class="v-padding">
+    <div class="container-fluid">
+        <h1>Featured</h1>
+        {{#each primaryResponse.hits.hits}}
+            {{{_source.rendered.featured}}}   
+        {{/each}}
+    </div>
+</section>
+
+<section class="v-padding">
+    <div class="container-fluid">
+        <h2>Latest Blog Posts</h2>
+        <div class="mdc-layout-grid">
+            <div class="mdc-layout-grid__inner">
+                <div class="mdc-layout-grid__cell">
+                    {{{supplimentaryResponse.blogs_latest.hits.hits.[0]._source.rendered.gist}}}
+                </div>
+                <div class="mdc-layout-grid__cell">
+                    {{{supplimentaryResponse.blogs_latest.hits.hits.[1]._source.rendered.gist}}}
+                </div>
+                <div class="mdc-layout-grid__cell">
+                    {{{supplimentaryResponse.blogs_latest.hits.hits.[2]._source.rendered.gist}}}
+                </div>
+            </div>
+        </div>
+        <h2>Latest Goodmoves Jobs</h2>
+        <div class="mdc-layout-grid">
+            <div class="mdc-layout-grid__inner">
+                <div class="mdc-layout-grid__cell">
+                    {{{supplimentaryResponse.goodmoves_latest.hits.hits.[0]._source.rendered.gist}}}
+                </div>
+                <div class="mdc-layout-grid__cell">
+                    {{{supplimentaryResponse.goodmoves_latest.hits.hits.[1]._source.rendered.gist}}}
+                </div>
+                <div class="mdc-layout-grid__cell">
+                    {{{supplimentaryResponse.goodmoves_latest.hits.hits.[2]._source.rendered.gist}}}
+                </div>
+            </div>
+        </div>
+        <h2>Latest on TFN</h2>
+        <div class="mdc-layout-grid">
+            <div class="mdc-layout-grid__inner">
+                <div class="mdc-layout-grid__cell">
+                    {{{supplimentaryResponse.tfn_latest.hits.hits.[0]._source.rendered.gist}}}
+                </div>
+                <div class="mdc-layout-grid__cell">
+                    {{{supplimentaryResponse.tfn_latest.hits.hits.[1]._source.rendered.gist}}}
+                </div>
+                <div class="mdc-layout-grid__cell">
+                    {{{supplimentaryResponse.tfn_latest.hits.hits.[2]._source.rendered.gist}}}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

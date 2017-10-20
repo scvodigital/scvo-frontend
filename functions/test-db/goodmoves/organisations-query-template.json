@@ -1,0 +1,35 @@
+{
+    "size": 0,
+    "aggs": {
+        "job_count": {
+            "terms": {
+                "field": "organisation.id",
+                "size": 10000
+            },
+            "aggs": {
+                "top_hits": {
+                    "top_hits": {
+                        "sort": [{
+                            "closing_date": {
+                                "order": "desc"
+                            }
+                        }],
+                        "_source": {
+                            "includes": [
+                                "organisation.name",
+                                "organisation.id",
+                                "organisation.charity_number",
+                                "organisation.profile",
+                                "organisation.slug",
+                                "organisation.logo_url",
+                                "organisation.website",
+                                "organisation.has_logo"
+                            ]
+                        },
+                        "size": 1
+                    }
+                }
+            }
+        }
+    }
+}

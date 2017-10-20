@@ -2,11 +2,13 @@
 
 # compiled output
 /dist
+/functions/dist
 /tmp
+/out-tsc
 
 # dependencies
-**/node_modules
-**/lib
+/node_modules
+/functions/node_modules
 
 # IDEs and editors
 /.idea
@@ -15,19 +17,19 @@
 .c9/
 *.launch
 .settings/
-.npmrc
+*.sublime-workspace
 
 # IDE - VSCode
 .vscode/*
-.vscode/settings.json
-.vscode/tasks.json
-.vscode/launch.json
-.vscode/extensions.json
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
 
 # misc
 /.sass-cache
 /connect.lock
-/coverage/*
+/coverage
 /libpeerconnection.log
 npm-debug.log
 testem.log
@@ -37,14 +39,8 @@ testem.log
 /e2e/*.js
 /e2e/*.map
 
-#System Files
+# System Files
 .DS_Store
 Thumbs.db
 
-**/*.secrets.*
-**/secrets.*
-**/dist/**
-
-/src/app/assets/icons/css/*
-/src/app/assets/icons/font/*
-/fonts/fontello-config.json
+/functions/test-db/**/*.json

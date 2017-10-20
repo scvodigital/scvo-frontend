@@ -1,0 +1,94 @@
+{{#and primaryResultSet primaryResultSet.documents}}
+    {{#forEach primaryResultSet.documents}}
+        <div class="container-fluid">
+            <div class="mdc-card">
+                <section class="mdc-card__primary mdc-theme--primary-bg">
+                    <h3 class="mdc-card__title mdc-card__title--large">
+                        <a href="/vacancy/{{slug}}" class="mdc-theme--text-primary-on-primary">
+                            {{#if top_job}}
+                                <span class="chip">Top Job!</span>
+                            {{/if}}
+                            {{title}}
+                        </a>            
+                    </h3>
+                    <h4 class="mdc-card__subtitle mdc-theme--text-primary-on-primary-dark">
+                        Posted by: <strong>{{organisation.name}}</strong>
+                    </h4>
+                </section>
+                <section class="mdc-card__supporting-text mdc-theme--dark mdc-theme--secondary-dark-bg">
+                    <ul class="mdc-list mdc-list--two-line mdc-list--dense horizontal-list-details">
+                        <li class="mdc-list-item">
+                            <span class="mdc-list-item__text">
+                                Salary:
+                                <span class="mdc-list-item__text__secondary">
+                                    {{#eq remuneration_type "Salaried"}}
+                                        {{#and (not salary_min) (not salary_max)}}
+                                            TBC
+                                        {{else}}
+                                            {{#if salary_circa}} Circa {{/if}} 
+                                            {{#and (gt salary_min 0) (not salary_max)}}
+                                                from &pound;{{addCommas salary_min}}
+                                            {{else}}
+                                                {{#and (not salary_min) (gt salary_max 0)}}
+                                                    up to &pound;{{addCommas salary_max}}
+                                                {{else}}
+                                                    {{#gt salary_max salary_min}}
+                                                        &pound;{{addCommas salary_min}} - &pound;{{addCommas salary_max}}
+                                                    {{else}}
+                                                        &pound;{{addCommas salary_min}}
+                                                    {{/gt}}
+                                                {{/and}}
+                                            {{/and}}
+                                        {{/and}}
+                                        {{#eq status "Part time"}} pro-rata {{/eq}}
+                                    {{else}}
+                                        {{#if remuneration_type}} {{remuneration_type}} {{/if}} 
+                                    {{/eq}}
+                                </span>
+                            </span>
+                        </li>
+                        
+                        <li class="mdc-list-item">
+                            <span class="mdc-list-item__text">
+                                Salary info:
+                                <span class="mdc-list-item__text__secondary">
+                                    {{salary_info}}
+                                </span>
+                            </span>
+                        </li>
+                        
+                        <li class="mdc-list-item">
+                            <span class="mdc-list-item__text">
+                                Closing date:
+                                <span class="mdc-list-item__text__secondary">
+                                    {{moment closing_date "D MMMM YYYY"}}
+                                </span>
+                            </span>
+                        </li>
+                        
+                        <li class="mdc-list-item">
+                            <span class="mdc-list-item__text">
+                                Location:
+                                <span class="mdc-list-item__text__secondary">
+                                    {{location}}
+                                </span>
+                            </span>
+                        </li>
+                    </ul>
+                </section>
+                <section class="mdc-card__supporting-text">
+                        {{ellipsis description 500}}
+                </section>
+                <section class="mdc-card__actions action-buttons-right">
+                    <a href="/vacancy/{{slug}}" class="mdc-button mdc-button--compact mdc-card__action">
+                        View full details
+                    </a>            
+                </section>
+            </div>            
+        </div>
+    {{/forEach}}
+{{else}}
+    <div class="container-fluid">
+        No results
+    </div>
+{{/and}}

@@ -1,11 +1,14 @@
-import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
-import { COMPILER_PROVIDERS } from '@angular/compiler';
+(<any>window).startingPoint = window.document.querySelector('scvo-site').innerHTML;
+
 import { enableProdMode } from '@angular/core';
-import { environment } from './environments/environment';
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+
 import { AppModule } from './app/app.module';
+import { environment } from './environments/environment';
 
 if (environment.production) {
   enableProdMode();
 }
 
-platformBrowserDynamic([COMPILER_PROVIDERS]).bootstrapModule(AppModule);
+platformBrowserDynamic().bootstrapModule(AppModule)
+  .catch(err => console.log(err));
