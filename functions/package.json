@@ -5,7 +5,7 @@
     "cleanup": "rm -rf ./dist",
     "start": "npm run build;firebase serve --only functions",
     "build": "npm run cleanup;npm run json2;tsc",
-    "json2": "node json2 ./test-db/**/*.json2 ./test-db/json; node json2 ./test-db/db.json2 ./test-db",
+    "json2": "node json2 ./test-db/json2/**/*.json2 ./test-db/json; node json2 ./test-db/db.json2 ./test-db",
     "deploy-db": "npm run json2; firebase database:set -y / ./test-db/db.json"
   },
   "dependencies": {
