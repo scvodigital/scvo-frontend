@@ -24,9 +24,9 @@ export class RouterComponent implements OnInit {
         router.routeChanged.subscribe((match: RouteMatch) => {
             console.log(match);
             this.html = match.rendered
+                .replace(this.router.domainStripper, '')
                 .replace(/(href=\"|\')(\/.*?)(\"|\')/gi, '[routerLink]="[\'$2\']"')
-                .replace(/(\<\/?big\>)|(\<\/?small\>)/g, '')
-                .replace(this.router.domainStripper, '');
+                .replace(/(\<\/?big\>)|(\<\/?small\>)/g, '');
             mdc.autoInit();
         });
     }
