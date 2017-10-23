@@ -1,5 +1,16 @@
 <div class="container-fluid">
     {{#with primaryResponse.hits.hits.[0]._source}}
+        {{#if breadcrumb}}
+            <ul class="breadcrumb">
+                <li><a href="/">Home</a></li>
+                {{#each breadcrumb}}
+                    <li>
+                        <a href="{{url}}">{{{striptags title}}}</a>
+                    </li>
+                {{/each}}
+            </ul>
+        {{/if}}
+
         {{{rendered.full}}}   
     {{/with}}
 </div>

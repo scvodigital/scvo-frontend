@@ -18,6 +18,7 @@ var Context = /** @class */ (function () {
         this.sass = '';
         this.template = '';
         this.menuProcessor = null;
+        this._domainStripper = null;
         // Instance specific properties
         this.compiledTemplate = null;
         this.compiledCss = null;
@@ -30,16 +31,29 @@ var Context = /** @class */ (function () {
         this.compiledTemplate = handlebars.compile(this.template);
         this.compiledCss = sass.renderSync({ data: this.sass, sourceMap: false, outputStyle: 'compact' }).css.toString('utf8');
     }
+    Object.defineProperty(Context.prototype, "domainStripper", {
+        get: function () {
+            if (!this._domainStripper) {
+                var stripDomains = this.domains.map(function (domain) { return domain.replace(/\./g, '\\.'); });
+                var domainRegexString = '((https?)?:\\/\\/)((' + stripDomains.join(')|(') + '))';
+                this._domainStripper = new RegExp(domainRegexString, 'ig');
+            }
+            return this._domainStripper;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Context.prototype.renderPage = function (uriString) {
         var _this = this;
         return new Promise(function (resolve, reject) {
-            var menus = _this.menuProcessor.getMenus(uriString);
+            var menus = _this.menuProcessor.getMenus(uriString, 0, 5);
             _this.router.execute(uriString).then(function (routeMatch) {
                 var templateData = {
                     linkTags: _this.linkTags,
                     metaTags: _this.metaTags,
                     metaData: _this.metaData,
                     scriptTags: _this.scriptTags,
+                    domains: _this.domains,
                     menus: menus,
                     css: _this.compiledCss,
                     routes: _this.routes,
@@ -55,6 +69,8 @@ var Context = /** @class */ (function () {
                     var dataTag = "\n                        <script>\n                            window.contextData = " + dataJson + ";\n                        </script>\n                    ";
                     contextHtml = [contextHtml.slice(0, closingHeadTag), dataTag, contextHtml.slice(closingHeadTag)].join('');
                 }
+                console.log('DOMAIN STRIPPER:', _this.domainStripper);
+                contextHtml = contextHtml.replace(_this.domainStripper, '');
                 resolve(contextHtml);
             }).catch(function (err) {
                 console.error('Failed to render route', err);

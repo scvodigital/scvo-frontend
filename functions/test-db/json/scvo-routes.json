@@ -81,7 +81,7 @@
         "linkTags": [],
         "metaTags": [],
         "pattern": "/*path",
-        "template": "<div class=\"container-fluid\">\n    {{#with primaryResponse.hits.hits.[0]._source}}\n        {{{rendered.full}}}   \n    {{/with}}\n</div>\n",
+        "template": "<div class=\"container-fluid\">\n    {{#with primaryResponse.hits.hits.[0]._source}}\n        {{#if breadcrumb}}\n            <ul class=\"breadcrumb\">\n                <li><a href=\"/\">Home</a></li>\n                {{#each breadcrumb}}\n                    <li>\n                        <a href=\"{{url}}\">{{{striptags title}}}</a>\n                    </li>\n                {{/each}}\n            </ul>\n        {{/if}}\n\n        {{{rendered.full}}}   \n    {{/with}}\n</div>\n",
         "jsonLdTemplate": "{{#compare primaryResponse.hits.hits.length \">\" 0}}\n    {{#with primaryResponse.hits.hits.[0]._source}}\n        {{{rendered.json_ld}}}\n    {{/with}}\n{{else}}\n    { \"error\": \"404\" }\n{{/compare}}\n",
         "primarySearchTemplate": {
             "index": "web-content-production",
