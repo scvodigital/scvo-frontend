@@ -16,7 +16,7 @@
     {{{route.jsonLd}}}
     </script>
 </head>
-<body>
+<body class="{{path}}">
     <scvo-site>
         <div class="mdc-typography">
             <header class="mdc-toolbar mdc-toolbar--fixed">
@@ -41,7 +41,7 @@
                         <section class="mdc-toolbar__section mdc-toolbar__section--align-start toolbar-menu">
                             <nav id="basic-tab-bar" class="mdc-tab-bar">
                                 {{#each menus.main}}
-                                    <a class="mdc-tab" href="{{path}}">{{label}}</a>
+                                <a class="mdc-tab" href="{{path}}">{{label}}</a>
                                 {{/each}}
                             </nav>
                         </section>
@@ -74,6 +74,45 @@
                     <router-outlet>{{{route.rendered}}}</router-outlet>
                 </div>
             </main>
+
+            <footer>
+                <div class="footer">
+                    <div class="container-fluid">
+                        <div class="footer-main">
+                            <div class="row">
+                                <div class="col-lg-8 col-md-5 col-sm-12">
+                                    <a href="/" class="brand-logo" title="Scottish Council for Voluntary Organisations">
+                                        <img src="assets/images/scvo-logo.png" />
+                                    </a>
+                                    <p>The <strong>Scottish Council for Voluntary Organisations</strong> is the membership organisation for Scotland's charities, voluntary organisations and social enterprises.</p>
+                                </div>
+                                <div class="col-lg-2 col-md-3 col-sm-6">
+                                    <ul class="right">
+                                        {{#each menus.footer}}
+                                        <li><a class="" href="{{path}}">{{label}}</a></li>
+                                        {{/each}}
+                                    </ul>
+                                </div>
+                                <div class="col-lg-2 col-md-3 col-sm-6">
+                                    <ul class="right">
+                                        <li><a href="mailto:enquiries@scvo.org.uk">enquiries@scvo.org.uk</a></li>
+                                        <li><a href="tel:+441314748000">0131 474 8000</a></li>
+                                        <li><a href="https://www.facebook.com/SCVO1939">Facebook</a></li>
+                                        <li><a href="https://twitter.com/scvotweet">Twitter</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="footer-copyright">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <p><small>&copy; 2017. The Scottish Council for Voluntary Organisations (SCVO) is a Scottish Charitable Incorporated Organisation. Charity registered in Scotland <a href="http://www.oscr.org.uk/charities/search-scottish-charity-register/charity-details?number=SC003558">SC003558</a>.</small></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
         </div>
     </scvo-site>
     <script type="text/javascript" src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>

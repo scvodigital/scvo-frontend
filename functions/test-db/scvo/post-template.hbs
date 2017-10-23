@@ -1,5 +1,11 @@
 {{#with supplimentaryResponse.splash.hits.hits.[0]._source}}
-    <div class="splash-image" style="background-image:url({{original_image}});"></div>
+<div class="splash-image" style="background-image: linear-gradient(to bottom left,rgba(0, 77, 65, 0.29),#00796b),url({{original_image}});position: relative;">
+    <div class="container-fluid">
+        <div class="mdc-layout-grid">
+            <h1 class="post-title">{{#with primaryResponse.hits.hits.[0]._source}}{{sanitize title}}{{/with}}</h1>
+        </div>
+    </div>
+</div>
 {{/with}}
 
 <div class="container-fluid">
@@ -7,14 +13,14 @@
         <div class="mdc-layout-grid__inner">
             <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-8">
                 {{#with primaryResponse.hits.hits.[0]._source}}
-                    {{{rendered.full}}}
+                {{{rendered.full}}}
                 {{/with}}
             </div>
             <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4">
-                <h3 class="">More posts by this author</h3>
+                <h3 class="">More by this author</h3>
                 <ul class="supplimentary-list">
                     {{#each supplimentaryResponse.authors_posts.hits.hits}}
-                        {{{_source.rendered.list}}}
+                    {{{_source.rendered.list}}}
                     {{/each}}
                 </ul>
             </div>
