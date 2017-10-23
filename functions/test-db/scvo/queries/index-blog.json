@@ -1,0 +1,17 @@
+{
+	"size": 3,
+	"query": {
+        "bool": {
+            "must_not": [
+                {
+    		        "term": {
+                        "featured": true   
+                    }
+                }
+            ]
+        }
+	},
+	"sort": {
+		"publish_on": "desc"
+	}
+}

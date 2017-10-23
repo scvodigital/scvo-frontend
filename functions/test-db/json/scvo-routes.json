@@ -7,23 +7,23 @@
         "primarySearchTemplate": {
             "index": "web-content-production",
             "type": "scvo-cms-page,scvo-cms-post",
-            "template": "{\n    \"size\": 4,\n    \"query\": {\n        \"bool\": {\n            \"must\": [\n                {\n                    \"term\": {\n                        \"featured\": true\n                    }\n                }\n            ]\n        }\n    },\n    \"sort\": {\n        \"publish_on\": \"desc\"\n    }\n}\n"
+            "template": "{\n\t\"size\": 4,\n\t\"query\": {\n        \"bool\": {\n            \"must\": [\n                {\n    \t\t        \"term\": {\n                        \"featured\": true   \n                    }\n                }   \n            ]\n        }\n\t},\n\t\"sort\": {\n\t\t\"publish_on\": \"desc\"\n\t}\n}\n\n"
         },
         "supplimentarySearchTemplates": {
             "goodmoves_latest": {
                 "index": "web-content-production",
                 "type": "goodmoves-legacy",
-                "template": ""
+                "template": "{\n\t\"size\": 3,\n\t\"query\": {\n\t\t\"match_all\": { }\n\t},\n\t\"sort\": {\n\t\t\"start_at\": \"desc\"\n\t}\n}\n"
             },
             "blogs_latest": {
                 "index": "web-content-production",
                 "type": "scvo-cms-post",
-                "template": ""
+                "template": "{\n\t\"size\": 3,\n\t\"query\": {\n        \"bool\": {\n            \"must_not\": [\n                {\n    \t\t        \"term\": {\n                        \"featured\": true   \n                    }\n                }\n            ]\n        }\n\t},\n\t\"sort\": {\n\t\t\"publish_on\": \"desc\"\n\t}\n}\n"
             },
             "tfn_latest": {
                 "index": "web-content-production",
                 "type": "tfn-news-post",
-                "template": ""
+                "template": "{\n\t\"size\": 3,\n\t\"query\": {\n        \"match_all\": { }\n\t},\n\t\"sort\": {\n\t\t\"date_published\": \"desc\"\n\t}\n}\n"
             }
         },
         "elasticsearchConfig": {
@@ -68,7 +68,7 @@
             "splash": {
                 "index": "web-content-production",
                 "type": "scvo-cms-media",
-                "template": "{\n    \"size\": 1,\n    \"query\": {\n        \"bool\": {\n            \"should\": [\n                {\n                    \"terms\": {\n                        \"categories_id\": [\n                            {{join primaryResponse.hits.hits.[0]._source.categories_id}}\n                        ]\n                    }\n                },\n                {\n                    \"match_all\": { }\n                }\n            ]\n        }\n    }\n}\n"
+                "template": "{\n\t\"size\": 1,\n\t\"query\": {\n\t\t\"bool\": {\n\t\t\t\"should\": [\n\t\t\t\t{\n\t\t\t\t\t\"terms\": {\n\t\t\t\t\t\t\"categories_id\": [\n                            {{join primaryResponse.hits.hits.[0]._source.categories_id}}\n\t\t\t\t\t\t]\n\t\t\t\t\t}\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"match_all\": { }\n\t\t\t\t}\n\t\t\t]\n\t\t}\n\t}\n}\n"
             }
         },
         "elasticsearchConfig": {

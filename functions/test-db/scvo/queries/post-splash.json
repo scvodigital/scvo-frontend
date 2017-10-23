@@ -1,0 +1,19 @@
+{
+	"size": 1,
+	"query": {
+		"bool": {
+			"should": [
+				{
+					"terms": {
+						"categories_id": [
+                            {{join primaryResponse.hits.hits.[0]._source.categories_id}}
+						]
+					}
+				},
+				{
+					"match_all": { }
+				}
+			]
+		}
+	}
+}
