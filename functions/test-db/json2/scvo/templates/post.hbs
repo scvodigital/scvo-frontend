@@ -1,16 +1,17 @@
-<div class="splash-image" style="background-image: linear-gradient(to bottom left,rgba(230, 74, 25, 0.29),#BF360C),url('{{supplimentaryResponse.splash.hits.hits.[0]._source.original_image}}');position: relative;">
+<!-- <div class="splash-image" style="background-image: linear-gradient(to bottom left,rgba(230, 74, 25, 0.29),#BF360C),url('{ {#with supplimentaryResponse.splash.hits.hits.[0]._source}}{ {original_image}}{ {/with}}');position: relative;">
     <div class="container-fluid">
         <div class="mdc-layout-grid">
-            <h1 class="post-title">{{#with primaryResponse.hits.hits.[0]._source}}{{sanitize title}}{{/with}}</h1>
+            <h1 class="post-title">{ {#with primaryResponse.hits.hits.[0]._source}}{ {title}}{ {/with}}</h1>
         </div>
     </div>
-</div>
+</div> -->
 
 <div class="container-fluid">
     <div class="mdc-layout-grid">
         <div class="mdc-layout-grid__inner">
             <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-8">
                 {{#with primaryResponse.hits.hits.[0]._source}}
+                <h1 class="post-title">{{title}}</h1>
                 {{{rendered.full}}}
                 {{/with}}
             </div>
