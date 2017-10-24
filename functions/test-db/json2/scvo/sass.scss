@@ -90,7 +90,7 @@ a {
             }
             .mdc-textfield {
                 margin: 0;
-                max-height: $spacing-unit*2;
+                max-height: 40px;
                 .mdc-textfield__input,
                 .mdc-textfield__input:focus,
                 .mdc-textfield__input:hover {
@@ -325,12 +325,14 @@ footer {
 }
 
 @media screen and (max-width: 991px) {
-    .mdc-toolbar__icon--menu {
-        visibility: visible;
-        width: auto;
-    }
-    .toolbar-nav {
-        display: none;
+    .mdc-toolbar {
+        .container-fluid .mdc-toolbar__icon--menu {
+            visibility: visible;
+            width: auto;
+        }
+        .mdc-toolbar__row.toolbar-nav {
+            display: none;
+        }
     }
     .mdc-toolbar-fixed-adjust {
         margin-top: 64px;
