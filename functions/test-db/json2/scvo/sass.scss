@@ -1,6 +1,8 @@
 @import url(https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css);
 @import url(//fonts.googleapis.com/css?family=Open+Sans:400,600,700);
 
+$spacing-unit: 1rem;
+
 :root{
     --mdc-theme-primary: #00838F; // Cyan 800
     --mdc-theme-primary-light: #0097A7; // Cyan 700
@@ -10,6 +12,8 @@
     --mdc-theme-secondary-dark: #FF6F00; // Amber 900
     --mdc-theme-background: #ECEFF1; // Blue Grey 50
     --mdc-site-background: #263238; // Blue Grey 900
+    --mdc-layout-grid-margin-desktop: 0;
+    --mdc-layout-grid-margin-tablet: 0;
 }
 .running-a-charity,
 .setting-up-a-charity,
@@ -39,8 +43,6 @@
     --mdc-theme-primary-light: #E64A19; // Deep Orange 700
     --mdc-theme-primary-dark: #BF360C; // Deep Orange 900
 }
-
-$spacing-unit: 1rem;
 
 html {
     overflow-y: scroll;
@@ -213,7 +215,8 @@ footer .mdc-list .mdc-list-item a:hover {
     }
 }
 .mdc-toolbar-fixed-adjust {
-    margin-top: 128px;
+    padding-top: 128px;
+    margin: 0;
 }
 .mdc-temporary-drawer {
     .mdc-list {
@@ -221,6 +224,9 @@ footer .mdc-list .mdc-list-item a:hover {
             display: none;
         }
     }
+}
+.mdc-temporary-drawer__header:before {
+    padding-top: 24%;
 }
 
 .action-buttons-right {
@@ -291,6 +297,7 @@ ul.breadcrumb {
     }
     li:before {
         content: "\203A";
+        font-weight: 800;
         margin-right: $spacing-unit/4;
     }
     li:first-child:before {
@@ -326,6 +333,15 @@ ul.supplimentary-list {
     }
     li.supplimentary-list-item:not(:last-child){
         margin-bottom: 5px;
+    }
+}
+
+.blog {
+    h1.post-title {
+        margin: $spacing-unit/2 0 $spacing-unit;
+    }
+    .post-sidebar h3 {
+        margin: $spacing-unit*(3/4) 0 $spacing-unit;
     }
 }
 
