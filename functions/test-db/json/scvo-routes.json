@@ -18,12 +18,12 @@
             "blogs_latest": {
                 "index": "web-content-production",
                 "type": "scvo-cms-post",
-                "template": "{\n\t\"size\": 3,\n\t\"query\": {\n        \"bool\": {\n            \"must_not\": [\n                {\n    \t\t        \"term\": {\n                        \"featured\": true   \n                    }\n                }\n            ]\n        }\n\t},\n\t\"sort\": {\n\t\t\"publish_on\": \"desc\"\n\t}\n}\n"
+                "template": "{\n\t\"size\": 3,\n    \"_source\": [\"rendered.gist\"],\n\t\"query\": {\n        \"bool\": {\n            \"must_not\": [\n                {\n    \t\t        \"term\": {\n                        \"featured\": true\n                    }\n                }\n            ]\n        }\n\t},\n\t\"sort\": {\n\t\t\"publish_on\": \"desc\"\n\t}\n}\n"
             },
             "tfn_latest": {
                 "index": "web-content-production",
                 "type": "tfn-news-post",
-                "template": "{\n\t\"size\": 3,\n\t\"query\": {\n        \"match_all\": { }\n\t},\n\t\"sort\": {\n\t\t\"date_published\": \"desc\"\n\t}\n}\n"
+                "template": "{\n\t\"size\": 3,\n    \"_source\": [\"rendered.gist\"],\n\t\"query\": {\n        \"match_all\": { }\n\t},\n\t\"sort\": {\n\t\t\"date_published\": \"desc\"\n\t}\n}\n"
             }
         },
         "elasticsearchConfig": {
@@ -81,7 +81,7 @@
         "linkTags": [],
         "metaTags": [],
         "pattern": "/*path",
-        "template": "<div class=\"container-fluid\">\n    {{#with primaryResponse.hits.hits.[0]._source}}\n        {{#if breadcrumb}}\n            <ul class=\"breadcrumb\">\n                <li><a href=\"/\">Home</a></li>\n                {{#each breadcrumb}}\n                    <li>\n                        <a href=\"{{url}}\">{{{striptags title}}}</a>\n                    </li>\n                {{/each}}\n            </ul>\n        {{/if}}\n\n        {{{rendered.full}}}   \n    {{/with}}\n</div>\n",
+        "template": "{{#with primaryResponse.hits.hits.[0]._source}}\n<div class=\"container-fluid\">\n    {{#if breadcrumb}}\n    <ul class=\"breadcrumb\">\n        <li><a href=\"/\">Home</a></li>\n        {{#each breadcrumb}}\n        <li>\n            <a href=\"{{url}}\">{{{striptags title}}}</a>\n        </li>\n        {{/each}}\n    </ul>\n    {{/if}}\n    {{{rendered.full}}}\n</div>\n{{/with}}\n",
         "jsonLdTemplate": "{{#compare primaryResponse.hits.hits.length \">\" 0}}\n    {{#with primaryResponse.hits.hits.[0]._source}}\n        {{{rendered.json_ld}}}\n    {{/with}}\n{{else}}\n    { \"error\": \"404\" }\n{{/compare}}\n",
         "primarySearchTemplate": {
             "index": "web-content-production",

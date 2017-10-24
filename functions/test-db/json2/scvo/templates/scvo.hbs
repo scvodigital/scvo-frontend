@@ -40,10 +40,12 @@
                 <div class="mdc-toolbar__row">
                     <div class="container-fluid">
                         <section class="mdc-toolbar__section mdc-toolbar__section--align-start">
-                            <button class="menu mdc-toolbar__icon--menu" onclick="menu_draw.MDCTemporaryDrawer.open = true">
+                            <button class="menu mdc-toolbar__icon mdc-toolbar__icon--menu" onclick="menu_draw.MDCTemporaryDrawer.open = true">
                                 <span class="fa fa-2x fa-bars" aria-hidden="true"></span>
                             </button>
-                            <span class="mdc-toolbar__title catalog-title">SCVO</span>
+                            <span class="mdc-toolbar__title catalog-title">
+                                <img src="assets/images/scvo-logo.png" />
+                            </span>
                         </section>
                         <section class="mdc-toolbar__section mdc-toolbar__section--align-end toolbar-search">
                             <div class="mdc-form-field mdc-form-field--align-end">
@@ -56,7 +58,7 @@
                         </section>
                     </div>
                 </div>
-                <div class="mdc-toolbar__row">
+                <div class="mdc-toolbar__row toolbar-nav">
                     <div class="container-fluid">
                         <section class="mdc-toolbar__section mdc-toolbar__section--align-start toolbar-menu">
                             <nav id="basic-tab-bar" class="mdc-tab-bar">
@@ -73,17 +75,17 @@
                 <nav class="mdc-temporary-drawer__drawer">
                     <header class="mdc-temporary-drawer__header">
                         <div class="mdc-temporary-drawer__header-content mdc-theme--primary-bg mdc-theme--text-primary-on-primary">
-                            SCVO
+                            <img src="assets/images/scvo-logo.png" />
                         </div>
                     </header>
                     <nav class="mdc-temporary-drawer__content mdc-list-group">
                         <div id="icon-with-text-demo" class="mdc-list">
-                            <a class="mdc-list-item" href="/" data-mdc-tabindex-handled="true" tabindex="-1">
-                                <i class="material-icons mdc-list-item__start-detail" aria-hidden="true">home</i>Home
+                            {{#each menus.main}}
+                            <a class="mdc-list-item" href="{{path}}" data-mdc-tabindex-handled="true" tabindex="-1">
+                                <i class="material-icons mdc-list-item__start-detail" aria-hidden="true">home</i>
+                                {{label}}
                             </a>
-                            <a class="mdc-list-item" href="/search" data-mdc-tabindex-handled="true" tabindex="-1">
-                                <i class="material-icons mdc-list-item__start-detail" aria-hidden="true">search</i>Search
-                            </a>
+                            {{/each}}
                         </div>
                     </nav>
                 </nav>
