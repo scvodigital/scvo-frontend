@@ -33,6 +33,7 @@
     --mdc-theme-primary-light: #C2185B; // Pink 700
     --mdc-theme-primary-dark: #880E4F; // Pink 900
 }
+.blog,
 .policy-research {
     --mdc-theme-primary: #D84315; // Deep Orange 800
     --mdc-theme-primary-light: #E64A19; // Deep Orange 700
@@ -42,15 +43,17 @@
 $spacing-unit: 1rem;
 
 html {
+    background-color: --mdc-site-background;
     overflow-y: scroll;
+    height: 100%;
     font-size: 0.96rem;
     line-height: 1.45;
 }
 body {
+    background-color: --mdc-site-background;
+    min-height: 100%;
     padding: 0;
     margin: 0;
-    min-height: 100%;
-    background-color: --mdc-site-background;
 }
 main {
     background-color: white;
@@ -71,7 +74,23 @@ main {
 }
 a {
     font-weight: 600;
-    color: --mdc-theme-primary-dark;
+    color: var(--mdc-theme-primary-dark, #006064);
+    text-decoration: none;
+    text-decoration-skip: ink;
+}
+a:hover {
+    text-decoration: underline;
+    color: var(--mdc-theme-primary, #00838F);
+}
+.mdc-card__actions a:hover,
+.mdc-toolbar a:hover {
+    text-decoration: none;
+}
+footer a {
+    text-decoration: underline;
+}
+footer a:hover {
+    color: white;
 }
 
 .hero {
@@ -88,12 +107,10 @@ a {
     -webkit-box-pack: center;
     -ms-flex-pack: center;
     justify-content: center;
-    /* height: 360px; */
     min-height: 360px;
     background-color: rgba(0, 0, 0, 0.05);
-
-    .mdc-card{
-        background-color:#fff;
+    .mdc-card {
+        background-color: #fff;
     }
 }
 
@@ -102,11 +119,11 @@ a {
 }
 
 .mdc-toolbar {
-    -webkit-transition: background-color 200ms linear;
-    -moz-transition: background-color 200ms linear;
-    -o-transition: background-color 200ms linear;
-    -ms-transition: background-color 200ms linear;
-    transition: background-color 200ms linear;
+    -webkit-transition: background-color 100ms linear;
+    -moz-transition: background-color 100ms linear;
+    -o-transition: background-color 100ms linear;
+    -ms-transition: background-color 100ms linear;
+    transition: background-color 100ms linear;
     -webkit-animation-direction: alternate; /* Chrome, Safari, Opera */
     animation-direction: alternate;
     -webkit-animation-iteration-count: 2; /* Chrome, Safari, Opera */
@@ -230,6 +247,7 @@ a {
     background-position: center center;
     .mdc-card__primary, .mdc-card__actions {
         background-color: rgba(0, 0, 0, .6);
+        color: white;
     }
 }
 
