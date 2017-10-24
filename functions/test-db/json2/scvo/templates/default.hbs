@@ -1,6 +1,7 @@
 {{#with primaryResponse.hits.hits.[0]._source}}
 <div class="container-fluid">
     {{#if breadcrumb}}
+    {{#compare breadcrumb.length '>=' 1}}
     <ul class="breadcrumb">
         <li><a href="/">Home</a></li>
         {{#each breadcrumb}}
@@ -9,6 +10,7 @@
         </li>
         {{/each}}
     </ul>
+    {{/compare}}
     {{/if}}
     {{{rendered.full}}}
 </div>
