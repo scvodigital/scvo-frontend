@@ -2,27 +2,55 @@
 @import url(//fonts.googleapis.com/css?family=Open+Sans:400,600,700);
 
 :root{
-    --mdc-theme-primary: #00796b;
-    --mdc-theme-primary-light: #48a999;
-    --mdc-theme-primary-dark: #004c40;
-    --mdc-theme-secondary: #546e7a;
-    --mdc-theme-secondary-light: #819ca9;
-    --mdc-theme-secondary-dark: #29434e;
-    --mdc-theme-background: #ededed;
+    --mdc-theme-primary: #00838F; // Cyan 800
+    --mdc-theme-primary-light: #0097A7; // Cyan 700
+    --mdc-theme-primary-dark: #006064; // Cyan 900
+    --mdc-theme-secondary: #FF8F00; // Amber 800
+    --mdc-theme-secondary-light: #FFA000; // Amber 700
+    --mdc-theme-secondary-dark: #FF6F00; // Amber 900
+    --mdc-theme-background: #ECEFF1; // Blue Grey 50
+    --mdc-site-background: #263238; // Blue Grey 900
+}
+.running-a-charity,
+.setting-up-a-charity,
+.running-your-organisation {
+    --mdc-theme-primary: #4527A0; // Deep Purple 800
+    --mdc-theme-primary-light: #512DA8; // Deep Purple 700
+    --mdc-theme-primary-dark: #311B92; // Deep Purple 900
+}
+.jobs {
+    --mdc-theme-primary: #2E7D32; // Green 800
+    --mdc-theme-primary-light: #388E3C; // Green 700
+    --mdc-theme-primary-dark: #1B5E20; // Green 900
+}
+.services {
+    --mdc-theme-primary: #1565C0; // Blue 800
+    --mdc-theme-primary-light: #1976D2; // Blue 700
+    --mdc-theme-primary-dark: #0D47A1; // Blue 900
+}
+.projects-campaigns {
+    --mdc-theme-primary: #AD1457; // Pink 800
+    --mdc-theme-primary-light: #C2185B; // Pink 700
+    --mdc-theme-primary-dark: #880E4F; // Pink 900
+}
+.policy-research {
+    --mdc-theme-primary: #D84315; // Deep Orange 800
+    --mdc-theme-primary-light: #E64A19; // Deep Orange 700
+    --mdc-theme-primary-dark: #BF360C; // Deep Orange 900
 }
 
-$scvo-background-color: #263238;
 $spacing-unit: 1rem;
 
 html {
     overflow-y: scroll;
     font-size: 0.96rem;
+    line-height: 1.45;
 }
 body {
     padding: 0;
     margin: 0;
     min-height: 100%;
-    background-color: $scvo-background-color;
+    background-color: --mdc-site-background;
 }
 main {
     background-color: white;
@@ -43,7 +71,7 @@ main {
 }
 a {
     font-weight: 600;
-    color: --mdc-theme-primary;
+    color: --mdc-theme-primary-dark;
 }
 
 .hero {
@@ -74,6 +102,15 @@ a {
 }
 
 .mdc-toolbar {
+    -webkit-transition: background-color 200ms linear;
+    -moz-transition: background-color 200ms linear;
+    -o-transition: background-color 200ms linear;
+    -ms-transition: background-color 200ms linear;
+    transition: background-color 200ms linear;
+    -webkit-animation-direction: alternate; /* Chrome, Safari, Opera */
+    animation-direction: alternate;
+    -webkit-animation-iteration-count: 2; /* Chrome, Safari, Opera */
+    animation-iteration-count: 2;
     .mdc-toolbar__row {
         height: 64px;
         .container-fluid {
