@@ -81,7 +81,7 @@
         "linkTags": [],
         "metaTags": [],
         "pattern": "/*path",
-        "template": "{{#with primaryResponse.hits.hits.[0]._source}}\n<div class=\"container-fluid\">\n    {{#if breadcrumb}}\n    {{#compare breadcrumb.length '>' 1}}\n    <ul class=\"breadcrumb\">\n        <li><a href=\"/\">Home</a></li>\n        {{#each breadcrumb}}\n        <li>\n            <a href=\"{{url}}\">{{{striptags title}}}</a>\n        </li>\n        {{/each}}\n    </ul>\n    {{/compare}}\n    {{/if}}\n    {{{rendered.full}}}\n</div>\n{{/with}}\n",
+        "template": "{{#with primaryResponse.hits.hits.[0]._source}}\n<div class=\"container-fluid\">\n    {{#if breadcrumb}}\n    {{#compare breadcrumb.length '>=' 1}}\n    <ul class=\"breadcrumb\">\n        <li><a href=\"/\">Home</a></li>\n        {{#each breadcrumb}}\n        <li>\n            <a href=\"{{url}}\">{{{striptags title}}}</a>\n        </li>\n        {{/each}}\n    </ul>\n    {{/compare}}\n    {{/if}}\n    {{{rendered.full}}}\n</div>\n{{/with}}\n",
         "jsonLdTemplate": "{{#compare primaryResponse.hits.hits.length \">\" 0}}\n    {{#with primaryResponse.hits.hits.[0]._source}}\n        {{{rendered.json_ld}}}\n    {{/with}}\n{{else}}\n    { \"error\": \"404\" }\n{{/compare}}\n",
         "primarySearchTemplate": {
             "index": "web-content-production",
