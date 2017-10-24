@@ -17,7 +17,7 @@
                 {{/with}}
             </div>
             <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4">
-                <h3 class="">More by this author</h3>
+                <h3 class="">More by {{primaryResponse.hits.hits.[0]._source.author_name}}</h3>
                 <ul class="supplimentary-list">
                     {{#each supplimentaryResponse.authors_posts.hits.hits}}
                     {{{_source.rendered.list}}}
