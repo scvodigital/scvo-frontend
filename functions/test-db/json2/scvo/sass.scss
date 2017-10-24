@@ -43,14 +43,13 @@
 $spacing-unit: 1rem;
 
 html {
-    background-color: --mdc-site-background;
     overflow-y: scroll;
     height: 100%;
     font-size: 0.96rem;
     line-height: 1.45;
 }
 body {
-    background-color: --mdc-site-background;
+    background-color: var(--mdc-site-background, #263238);
     min-height: 100%;
     padding: 0;
     margin: 0;
@@ -67,6 +66,7 @@ main {
 }
 
 .mdc-typography {
+    background-color: var(--mdc-site-background, #263238);
     font-family: 'Open Sans', Helvetica, sans-serif;
     padding: 0;
     margin: 0;
@@ -180,6 +180,9 @@ footer .mdc-list .mdc-list-item a:hover {
                 }
             }
         }
+        a.mdc-toolbar__icon:hover {
+            color: white !important;
+        }
         .mdc-toolbar__icon--menu {
             background: transparent;
             color: white;
@@ -249,6 +252,9 @@ footer .mdc-list .mdc-list-item a:hover {
     background-position: center center;
     .mdc-card__primary, .mdc-card__actions {
         background-color: rgba(0, 0, 0, .6);
+        color: white;
+    }
+    .mdc-button:not(:disabled) {
         color: white;
     }
 }
@@ -367,9 +373,6 @@ footer {
     background: linear-gradient(to bottom, rgba(55,71,79,1) 0%,rgba(38,50,56,1) 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#37474f', endColorstr='#263238',GradientType=0 );
     padding-top: $spacing-unit*2;
-    small {
-        font-size: 88%;
-    }
     a {
         color: white;
     }
@@ -395,6 +398,7 @@ footer {
         }
     }
     .footer-copyright {
+        font-size: 92%;
         margin-bottom: 3rem;
         .row {
             position: relative;

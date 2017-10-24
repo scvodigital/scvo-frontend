@@ -50,6 +50,8 @@ export class RouterComponent implements OnInit {
             }
             if (match.params.path) {
                 bodyClasses.add(...match.params.path.split('_'));
+            } else {
+                bodyClasses.add('home');
             }
 
             // Rendered content

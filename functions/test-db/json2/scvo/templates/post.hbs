@@ -1,12 +1,10 @@
-{{#with supplimentaryResponse.splash.hits.hits.[0]._source}}
-<div class="splash-image" style="background-image: linear-gradient(to bottom left,rgba(230, 74, 25, 0.29),#BF360C),url({{original_image}});position: relative;">
+<div class="splash-image" style="background-image: linear-gradient(to bottom left,rgba(230, 74, 25, 0.29),#BF360C),url('{{supplimentaryResponse.splash.hits.hits.[0]._source.original_image}}');position: relative;">
     <div class="container-fluid">
         <div class="mdc-layout-grid">
             <h1 class="post-title">{{#with primaryResponse.hits.hits.[0]._source}}{{sanitize title}}{{/with}}</h1>
         </div>
     </div>
 </div>
-{{/with}}
 
 <div class="container-fluid">
     <div class="mdc-layout-grid">
