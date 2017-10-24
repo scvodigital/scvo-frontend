@@ -13,7 +13,7 @@
             "goodmoves_latest": {
                 "index": "web-content-production",
                 "type": "goodmoves-legacy",
-                "template": "{\n\t\"size\": 3,\n\t\"query\": {\n\t\t\"match_all\": { }\n\t},\n\t\"sort\": {\n\t\t\"start_at\": \"desc\"\n\t}\n}\n"
+                "template": "{\n    \"size\": 3,\n    \"_source\": [\"rendered.gist\"],\n    \"query\": {\n        \"bool\": {\n            \"must\": [\n                {\n                    \"term\": {\n                        \"country_iso3\": \"GBR\"\n                    }\n                },\n                {\n                    \"term\": {\n                        \"vacancy_status\": \"vacancy-open\"\n                    }\n                }\n            ],\n            \"should\": [\n                {\n                    \"term\": {\n                        \"top_job\": {\n                            \"value\": true,\n                            \"boost\": 120\n                        }\n                    }\n                }\n            ]\n        }\n    },\n    \"sort\": {\n        \"_score\": \"desc\"\n    }\n}\n"
             },
             "blogs_latest": {
                 "index": "web-content-production",

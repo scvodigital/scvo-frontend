@@ -1,9 +1,33 @@
 {
-	"size": 3,
-	"query": {
-		"match_all": { }
-	},
-	"sort": {
-		"start_at": "desc"
-	}
+    "size": 3,
+    "_source": ["rendered.gist"],
+    "query": {
+        "bool": {
+            "must": [
+                {
+                    "term": {
+                        "country_iso3": "GBR"
+                    }
+                },
+                {
+                    "term": {
+                        "vacancy_status": "vacancy-open"
+                    }
+                }
+            ],
+            "should": [
+                {
+                    "term": {
+                        "top_job": {
+                            "value": true,
+                            "boost": 120
+                        }
+                    }
+                }
+            ]
+        }
+    },
+    "sort": {
+        "_score": "desc"
+    }
 }
