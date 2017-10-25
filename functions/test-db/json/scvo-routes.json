@@ -68,7 +68,7 @@
             "splash": {
                 "index": "web-content-production",
                 "type": "scvo-cms-media",
-                "template": "{\n\t\"size\": 1,\n\t\"query\": {\n\t\t\"bool\": {\n\t\t\t\"should\": [\n\t\t\t\t{\n\t\t\t\t\t\"terms\": {\n\t\t\t\t\t\t\"categories_id\": [\n                            {{join primaryResponse.hits.hits.[0]._source.categories_id}}\n\t\t\t\t\t\t]\n\t\t\t\t\t}\n\t\t\t\t},\n\t\t\t\t{\n\t\t\t\t\t\"match_all\": { }\n\t\t\t\t}\n\t\t\t]\n\t\t}\n\t}\n}\n"
+                "template": "{\n\t\"size\": 1,\n\t\"query\": {\n\t\t\"function_score\": {\n\t\t\t\"query\": {\n\t\t\t\t\"bool\": {\n\t\t\t\t\t\"should\": [{\n\t\t\t\t\t\t\"terms\": {\n\t\t\t\t\t\t\t\"categories_id\": [\n                                {{join primaryResponse.hits.hits.[0]._source.categories_id}}\n                            ]\n\t\t\t\t\t\t}\n\t\t\t\t\t}]\n\t\t\t\t}\n\t\t\t},\n\t\t\t\"random_score\": {},\n\t\t\t\"score_mode\": \"sum\"\n\t\t}\n\t}\n}\n"
             }
         },
         "elasticsearchConfig": {
@@ -81,12 +81,19 @@
         "linkTags": [],
         "metaTags": [],
         "pattern": "/*path",
-        "template": "{{#with primaryResponse.hits.hits.[0]._source}}\n{{#if featured_image}}\n<div class=\"splash-image splash-image-page\" style=\"background-image: linear-gradient(to bottom left,var(--mdc-theme-primary-fade),var(--mdc-theme-primary-dark)),url('{{featured_image.sizes.full.source_url}}');position: relative;\">\n    <div class=\"container-fluid\">\n        <div class=\"mdc-layout-grid\">\n        </div>\n    </div>\n</div>\n{{/if}}\n<div class=\"container-fluid\">\n    {{#if breadcrumb}}\n    {{#compare breadcrumb.length '>=' 1}}\n    <ul class=\"breadcrumb\">\n        <li><a href=\"/\">Home</a></li>\n        {{#each breadcrumb}}\n        <li>\n            <a href=\"{{url}}\">{{{striptags title}}}</a>\n        </li>\n        {{/each}}\n    </ul>\n    {{/compare}}\n    {{/if}}\n    <!-- <div class=\"pull-right\">\n        <a href=\"https://cms.scvo.net/wp-admin/post.php?post={ {wpid} }&action=edit\"><i class=\"material-icons\">mode_edit</i></a>\n    </div> -->\n    {{{rendered.full}}}\n</div>\n{{/with}}\n",
+        "template": "{{#or primaryResponse.hits.hits.[0]._source.featured_image supplimentaryResponse.splash.hits.hits.[0]._source.original_image}}\n<div class=\"splash-image splash-image-page\" style=\"background-image: linear-gradient(to bottom left,var(--mdc-theme-primary-fade),var(--mdc-theme-primary-dark)),url('{{#if primaryResponse.hits.hits.[0]._source.featured_image}}{{featured_image.sizes.full.source_url}}{{else}}{{#if supplimentaryResponse.splash.hits.hits.[0]._source.original_image}}{{supplimentaryResponse.splash.hits.hits.[0]._source.original_image}}{{/if}}{{/if}}');position: relative;\">\n    <div class=\"container-fluid\">\n        <div class=\"mdc-layout-grid\"></div>\n    </div>\n</div>\n{{/or}}\n{{#with primaryResponse.hits.hits.[0]._source}}\n<div class=\"container-fluid\">\n    {{#if breadcrumb}}\n    {{#compare breadcrumb.length '>=' 1}}\n    <ul class=\"breadcrumb\">\n        <li><a href=\"/\">Home</a></li>\n        {{#each breadcrumb}}\n        <li>\n            <a href=\"{{url}}\">{{{striptags title}}}</a>\n        </li>\n        {{/each}}\n    </ul>\n    {{/compare}}\n    {{/if}}\n    <!-- <div class=\"pull-right\">\n        <a href=\"https://cms.scvo.net/wp-admin/post.php?post={ {wpid} }&action=edit\"><i class=\"material-icons\">mode_edit</i></a>\n    </div> -->\n    {{{rendered.full}}}\n</div>\n{{/with}}\n",
         "jsonLdTemplate": "{{#compare primaryResponse.hits.hits.length \">\" 0}}\n    {{#with primaryResponse.hits.hits.[0]._source}}\n        {{{rendered.json_ld}}}\n    {{/with}}\n{{else}}\n    { \"error\": \"404\" }\n{{/compare}}\n",
         "primarySearchTemplate": {
             "index": "web-content-production",
             "type": "scvo-cms-page",
             "template": "{\n    \"size\": 1,\n    \"query\": {\n        \"term\": {\n            \"slug\": \"{{path}}\"\n        }\n    }\n}\n"
+        },
+        "supplimentarySearchTemplates": {
+            "splash": {
+                "index": "web-content-production",
+                "type": "scvo-cms-media",
+                "template": "{\n\t\"size\": 1,\n\t\"query\": {\n\t\t\"function_score\": {\n\t\t\t\"query\": {\n\t\t\t\t\"bool\": {\n\t\t\t\t\t\"should\": [{\n\t\t\t\t\t\t\"term\": {\n\t\t\t\t\t\t\t\"categories_id\": 493\n\t\t\t\t\t\t}\n\t\t\t\t\t}]\n\t\t\t\t}\n\t\t\t},\n\t\t\t\"random_score\": {},\n\t\t\t\"score_mode\": \"sum\"\n\t\t}\n\t}\n}\n"
+            }
         },
         "elasticsearchConfig": {
             "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
