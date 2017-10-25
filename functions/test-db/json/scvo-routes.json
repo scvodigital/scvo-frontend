@@ -68,7 +68,7 @@
             "splash": {
                 "index": "web-content-production",
                 "type": "scvo-cms-media",
-                "template": "{\n\t\"size\": 1,\n\t\"query\": {\n\t\t\"function_score\": {\n\t\t\t\"query\": {\n\t\t\t\t\"bool\": {\n\t\t\t\t\t\"should\": [{\n\t\t\t\t\t\t\"terms\": {\n\t\t\t\t\t\t\t\"categories_id\": [\n                                {{join primaryResponse.hits.hits.[0]._source.categories_id}}\n                            ]\n\t\t\t\t\t\t}\n\t\t\t\t\t}]\n\t\t\t\t}\n\t\t\t},\n\t\t\t\"random_score\": {},\n\t\t\t\"score_mode\": \"sum\"\n\t\t}\n\t}\n}\n"
+                "template": "{\n\t\"size\": 1,\n\t\"query\": {\n\t\t\"function_score\": {\n\t\t\t\"query\": {\n\t\t\t\t\"bool\": {\n                    \"must\": {\n                      \"match_all\": {}\n                    },\n\t\t\t\t\t\"should\": [{\n\t\t\t\t\t\t\"terms\": {\n\t\t\t\t\t\t\t\"categories_id\": [\n                                {{join primaryResponse.hits.hits.[0]._source.categories_id}}\n                            ]\n\t\t\t\t\t\t}\n\t\t\t\t\t}]\n\t\t\t\t}\n\t\t\t},\n\t\t\t\"random_score\": {},\n\t\t\t\"score_mode\": \"sum\"\n\t\t}\n\t}\n}\n"
             }
         },
         "elasticsearchConfig": {
@@ -92,7 +92,7 @@
             "splash": {
                 "index": "web-content-production",
                 "type": "scvo-cms-media",
-                "template": "{\n\t\"size\": 1,\n\t\"query\": {\n\t\t\"function_score\": {\n\t\t\t\"query\": {\n\t\t\t\t\"bool\": {\n\t\t\t\t\t\"should\": [{\n\t\t\t\t\t\t\"term\": {\n\t\t\t\t\t\t\t\"categories_id\": 493\n\t\t\t\t\t\t}\n\t\t\t\t\t}]\n\t\t\t\t}\n\t\t\t},\n\t\t\t\"random_score\": {},\n\t\t\t\"score_mode\": \"sum\"\n\t\t}\n\t}\n}\n"
+                "template": "{\n\t\"size\": 1,\n\t\"query\": {\n\t\t\"function_score\": {\n\t\t\t\"query\": {\n\t\t\t\t\"bool\": {\n                    \"must\": {\n                      \"match_all\": {}\n                    },\n\t\t\t\t\t\"should\": [{\n\t\t\t\t\t\t\"term\": {\n\t\t\t\t\t\t\t\"categories_id\": 493\n\t\t\t\t\t\t}\n\t\t\t\t\t}]\n\t\t\t\t}\n\t\t\t},\n\t\t\t\"random_score\": {},\n\t\t\t\"score_mode\": \"sum\"\n\t\t}\n\t}\n}\n"
             }
         },
         "elasticsearchConfig": {
