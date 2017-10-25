@@ -242,8 +242,24 @@ footer .mdc-list .mdc-list-item a:hover {
 
 .splash-image {
     background-size: cover;
-    height: 33.333vh;
+    height: 25vh;
     background-position: center center;
+    .container-fluid {
+        position: relative;
+        height: 100%;
+        padding: 0;
+        .mdc-layout-grid {
+            position: absolute;
+            left: 0;
+            bottom: $spacing-unit/2;
+            h1.post-title {
+                margin: 0;
+                color: #fff;
+                font-size: 3rem;
+                font-weight: 400;
+            }
+        }
+    }
     // .mdc-layout-grid {
     //     position: relative;
     //     height: 30vh;
@@ -297,8 +313,9 @@ footer .mdc-list .mdc-list-item a:hover {
 
 ul.breadcrumb {
     list-style: none;
-    margin: $spacing-unit/2 0;
-    padding: 0;
+    margin: $spacing-unit/2 0 $spacing-unit*1.5;
+    border-bottom: 1px solid var(--mdc-theme-primary-light);
+    padding-bottom: $spacing-unit;
     li {
         display: inline-block;
         margin: 0;
@@ -359,6 +376,9 @@ p:last-child {
 }
 .full {
     margin-bottom: $spacing-unit*1.5;
+    h1 {
+        display: none;
+    }
 }
 
 .blog {

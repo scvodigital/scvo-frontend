@@ -1,6 +1,8 @@
 <div class="splash-image splash-image-page" style="background-image: linear-gradient(to bottom left,var(--mdc-theme-primary-fade),var(--mdc-theme-primary-dark)),url('{{#if primaryResponse.hits.hits.[0]._source.featured_image}}{{featured_image.sizes.full.source_url}}{{else}}{{#if supplimentaryResponse.splash.hits.hits.[0]._source.original_image}}{{supplimentaryResponse.splash.hits.hits.[0]._source.original_image}}{{/if}}{{/if}}');position: relative;">
     <div class="container-fluid">
-        <div class="mdc-layout-grid"></div>
+        <div class="mdc-layout-grid">
+            <h1 class="post-title">{{{primaryResponse.hits.hits.[0]._source.title}}}</h1>
+        </div>
     </div>
 </div>
 
@@ -18,9 +20,6 @@
     </ul>
     {{/compare}}
     {{/if}}
-    <!-- <div class="pull-right">
-        <a href="https://cms.scvo.net/wp-admin/post.php?post={ {wpid} }&action=edit"><i class="material-icons">mode_edit</i></a>
-    </div> -->
     {{{rendered.full}}}
 </div>
 {{/with}}
