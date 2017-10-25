@@ -1,0 +1,31 @@
+<!-- <div class="splash-image" style="background-image: linear-gradient(to bottom left,rgba(230, 74, 25, 0.29),#BF360C),url('{ {#with supplimentaryResponse.splash.hits.hits.[0]._source}}{ {original_image}}{ {/with}}');position: relative;">
+    <div class="container-fluid">
+        <div class="mdc-layout-grid">
+            <h1 class="post-title">{ {#with primaryResponse.hits.hits.[0]._source}}{ {title}}{ {/with}}</h1>
+        </div>
+    </div>
+</div> -->
+
+<div class="container-fluid">
+    <div class="mdc-layout-grid">
+        <div class="mdc-layout-grid__inner">
+            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-8 post-content">
+                {{#with primaryResponse.hits.hits.[0]._source}}
+                <!-- <div class="pull-right">
+                    <a href="https://cms.scvo.net/wp-admin/post.php?post={ {wpid} }&amp;action=edit"><i class="material-icons">mode_edit</i></a>
+                </div> -->
+                <h1 class="post-title">{{title}}</h1>
+                {{{rendered.full}}}
+                {{/with}}
+            </div>
+            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 post-sidebar">
+                <h3 class="">More by {{primaryResponse.hits.hits.[0]._source.author_name}}</h3>
+                <ul class="supplimentary-list">
+                    {{#each supplimentaryResponse.authors_posts.hits.hits}}
+                    {{{_source.rendered.list}}}
+                    {{/each}}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

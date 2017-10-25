@@ -8,8 +8,7 @@ declare var mdc: any;
 
 @Component({
   selector: 'scvo-site',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css']
+  templateUrl: './app.component.html'
 })
 export class AppComponent implements OnInit {
     modules = [RouterModule, LazyModule];
@@ -19,7 +18,7 @@ export class AppComponent implements OnInit {
     get element(): HTMLElement {
         return this.viewChild.nativeElement.nextElementSibling;
     }
-    
+
     constructor(){
         this.html = (<any>window).startingPoint
             .replace(/(href=\"|\')(\/.*?)(\"|\')/gi, '[routerLink]="[\'$2\']"')

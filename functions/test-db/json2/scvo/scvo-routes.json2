@@ -3,27 +3,27 @@
         "linkTags": [],
         "metaTags": [],
         "pattern": "/",
-        "template": `{:index-template.hbs}`,
+        "template": `{:templates/index.hbs}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
             "type": "scvo-cms-page,scvo-cms-post",
-            "template": `{:index-query-template.json}`
+            "template": `{:queries/index.json}`
         },
         "supplimentarySearchTemplates": {
             "goodmoves_latest": {
                 "index": "web-content-production",
                 "type": "goodmoves-legacy",
-                "template": `{:index-goodmoves-query-template.json}`
+                "template": `{:queries/index-goodmoves.json}`
             },
             "blogs_latest": {
                 "index": "web-content-production",
                 "type": "scvo-cms-post",
-                "template": `{:index-blog-query-template.json}`
+                "template": `{:queries/index-blog.json}`
             },
             "tfn_latest": {
                 "index": "web-content-production",
                 "type": "tfn-news-post",
-                "template": `{:index-tfn-query-template.json}`
+                "template": `{:queries/index-tfn.json}`
             }
         },
         "elasticsearchConfig": {
@@ -36,12 +36,12 @@
         "linkTags": [],
         "metaTags": [],
         "pattern": "/search",
-        "template": `{:main-search-template.hbs}`,
-        "jsonLdTemplate": `{:main-search-json-ld-template.hbs}`,
+        "template": `{:templates/main-search.hbs}`,
+        "jsonLdTemplate": `{:templates/main-search-json-ld.hbs}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
             "type": "goodmoves-legacy,scvo-cms-page,scvo-cms-post,scvo-member,digital-charter-signatory,funding-scotland-fund,goodhq-organisation,scvo-document-evidence,scvo-event,scvo-grant-digital,scvo-staff",
-            "template": `{:main-search-query-template.json}`
+            "template": `{:queries/main-search.json}`
         },
         "elasticsearchConfig": {
             "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
@@ -53,22 +53,22 @@
         "linkTags": [],
         "metaTags": [],
         "pattern": "/blog/*path",
-        "template": `{:post-template.hbs}`,
+        "template": `{:templates/post.hbs}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
             "type": "scvo-cms-post",
-            "template": `{:post-query-template.json}`
+            "template": `{:queries/post.json}`
         },
         "supplimentarySearchTemplates": {
             "authors_posts": {
                 "index": "web-content-production",
                 "type": "scvo-cms-post",
-                "template": `{:post-author-posts-query-template.json}`
+                "template": `{:queries/post-author-posts.json}`
             },
             "splash": {
                 "index": "web-content-production",
                 "type": "scvo-cms-media",
-                "template": `{:post-splash-query-template.json}`
+                "template": `{:queries/post-splash.json}`
             }
         },
         "elasticsearchConfig": {
@@ -81,12 +81,12 @@
         "linkTags": [],
         "metaTags": [],
         "pattern": "/*path",
-        "template": `{:default-template.hbs}`,
-        "jsonLdTemplate": `{:default-json-ld-template.hbs}`,
+        "template": `{:templates/default.hbs}`,
+        "jsonLdTemplate": `{:templates/default-json-ld.hbs}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
             "type": "scvo-cms-page",
-            "template": `{:default-query-template.json}`
+            "template": `{:queries/default.json}`
         },
         "elasticsearchConfig": {
             "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",

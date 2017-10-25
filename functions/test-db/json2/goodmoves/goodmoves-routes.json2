@@ -12,30 +12,30 @@
             "name": "description"
         }],
         "pattern": "/vacancy/:slug",
-        "template": `{:vacancy-template.hbs}`,
+        "template": `{:templates/vacancy.hbs}`,
         "primarySearchTemplate": {
             "type": "goodmoves-job",
-            "template": `{:vacancy-query-template.json}`
+            "template": `{:queries/vacancy.json}`
         }
     },
     "index": {
         "linkTags": [],
         "metaTags": [],
         "pattern": "/test/test/test",
-        "template": `{:index-template.hbs}`,
+        "template": `{:templates/index.hbs}`,
         "primarySearchTemplate": {
             "type": "goodmoves-job",
-            "template": `{:index-query-template.json}`
+            "template": `{:queries/index.json}`
         }
     },
     "all-organisations": {
         "linkTags": [],
         "metaTags": [],
         "pattern": "/organisations",
-        "template": `{:organisations-template.hbs}`,
+        "template": `{:templates/organisations.hbs}`,
         "primarySearchTemplate": {
             "type": "goodmoves-job",
-            "template": `{:organisations-query-template.json}`
+            "template": `{:queries/organisations.json}`
         }
     },
     "organisations": {
@@ -51,10 +51,10 @@
             "name": "description"
         }],
         "pattern": "/organisation/:slug",
-        "template": `{:organisation-template.hbs}`,
+        "template": `{:templates/organisation.hbs}`,
         "primarySearchTemplate": {
             "type": "goodmoves-job",
-            "template": `{:organisation-query-template.json}`
+            "template": `{:queries/organisation.json}`
         }
     },
     "search": {
@@ -70,20 +70,20 @@
             "name": "description"
         }],
         "pattern": "/search",
-        "template": `{:search-template.hbs}`,
+        "template": `{:templates/search.hbs}`,
         "primarySearchTemplate": {
             "type": "goodmoves-job",
-            "template": `{:search-query-template.hbs}`
+            "template": `{:queries/search.hbs}`
         }
     },
     "_default": {
         "linkTags": [],
         "metaTags": [],
         "pattern": "/",
-        "template": `{:index-template.hbs}`,
+        "template": `{:templates/index.hbs}`,
         "primarySearchTemplate": {
             "type": "goodmoves-job",
-            "template": `{:index-query-template.json}`
+            "template": `{:queries/index.json}`
         },
         "elasticsearchConfig": {
             "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",

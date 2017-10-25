@@ -10,9 +10,21 @@ import { Router as ScvoRouter, IRoutes, IContext, RouteMatch } from 'scvo-router
 export class RouterService {
     public scvoRouter: ScvoRouter;
     public routeChanged: Subject<RouteMatch> = new Subject<RouteMatch>();
+    public scvoContext: IContext;
 
+    _domainStripper: RegExp = null; 
+    get domainStripper(): RegExp {
+        if(!this._domainStripper){
+            var stripDomains = this.scvoContext.domains.map((domain: string) => { return domain.replace(/\./g, '\\.'); });
+            var domainRegexString = '((https?)?:\\/\\/)((' + stripDomains.join(')|(') + '))';
+            this._domainStripper = new RegExp(domainRegexString, 'ig');
+        }
+        return this._domainStripper;
+    }
+    
     constructor(private db: AngularFireDatabase, private router: Router) {
-        var routes = (<any>window).contextData.routes;
+        this.scvoContext = (<any>window).contextData;
+        var routes = this.scvoContext.routes;
         this.scvoRouter = new ScvoRouter(routes);
         this.trackRoute();
     }

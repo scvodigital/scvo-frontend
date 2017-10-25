@@ -20,4 +20,26 @@
             {{/if}}
         </div>
     {{/each}}
+
+    <div class="v-margin">
+        <ul class="pagination">
+            {{#if paging.prevPage}}
+                <li>
+                    <a href="">Previous</a>
+                </li>
+            {{/if}}
+            
+            {{#each paging.pageRange}}
+                <li class="{{#compare paging.currentPage "===" this}}current-page{{/compare}}">
+                    <a href="">{{this}}</a>
+                </li>
+            {{/each}}
+
+            {{#if paging.nextPage}}
+                <li>
+                    <a href="">Next</a>
+                </li>
+            {{/if}}
+        </ul>
+    </div>
 </div>

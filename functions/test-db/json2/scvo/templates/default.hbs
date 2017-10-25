@@ -1,0 +1,20 @@
+{{#with primaryResponse.hits.hits.[0]._source}}
+<div class="container-fluid">
+    {{#if breadcrumb}}
+    {{#compare breadcrumb.length '>=' 1}}
+    <ul class="breadcrumb">
+        <li><a href="/">Home</a></li>
+        {{#each breadcrumb}}
+        <li>
+            <a href="{{url}}">{{{striptags title}}}</a>
+        </li>
+        {{/each}}
+    </ul>
+    {{/compare}}
+    {{/if}}
+    <!-- <div class="pull-right">
+        <a href="https://cms.scvo.net/wp-admin/post.php?post={ {wpid} }&action=edit"><i class="material-icons">mode_edit</i></a>
+    </div> -->
+    {{{rendered.full}}}
+</div>
+{{/with}}

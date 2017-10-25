@@ -22,7 +22,17 @@ export class Context implements IContext {
     sass: string = '';
     template: string = '';
     menuProcessor: MenuProcessor = null;
-    
+   
+    _domainStripper: RegExp = null; 
+    get domainStripper(): RegExp {
+        if(!this._domainStripper){
+            var stripDomains = this.domains.map((domain: string) => { return domain.replace(/\./g, '\\.'); });
+            var domainRegexString = '((https?)?:\\/\\/)((' + stripDomains.join(')|(') + '))';
+            this._domainStripper = new RegExp(domainRegexString, 'ig');
+        }
+        return this._domainStripper;
+    }
+
     // Instance specific properties
     private compiledTemplate: (obj: any, hbs?: any) => string = null;
     private compiledCss: string = null;
@@ -42,7 +52,7 @@ export class Context implements IContext {
 
     renderPage(uriString: string): Promise<string>{
         return new Promise<string>((resolve, reject) => {
-            var menus = this.menuProcessor.getMenus(uriString); 
+            var menus = this.menuProcessor.getMenus(uriString, 0, 5); 
 
             this.router.execute(uriString).then((routeMatch: IRouteMatch) => {
                 var templateData = {
@@ -50,6 +60,7 @@ export class Context implements IContext {
                     metaTags: this.metaTags,
                     metaData: this.metaData,
                     scriptTags: this.scriptTags,
+                    domains: this.domains,
                     menus: menus,
                     css: this.compiledCss,
                     routes: this.routes,
@@ -70,6 +81,9 @@ export class Context implements IContext {
                     `;
                     contextHtml = [contextHtml.slice(0, closingHeadTag), dataTag, contextHtml.slice(closingHeadTag)].join('');
                 }
+
+                console.log('DOMAIN STRIPPER:', this.domainStripper);
+                contextHtml = contextHtml.replace(this.domainStripper, '');
 
                 resolve(contextHtml);
             }).catch((err) => {
