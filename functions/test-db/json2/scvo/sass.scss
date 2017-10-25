@@ -24,6 +24,9 @@ $spacing-unit: 1rem;
     --mdc-theme-primary-light: #512DA8; // Deep Purple 700
     --mdc-theme-primary-dark: #311B92; // Deep Purple 900
 }
+.search-result.goodmoves-job,
+.search-result.cjs-job,
+.services.goodmoves,
 .employability,
 .employment,
 .jobs {
@@ -32,6 +35,7 @@ $spacing-unit: 1rem;
     --mdc-theme-primary-light: #388E3C; // Green 700
     --mdc-theme-primary-dark: #1B5E20; // Green 900
 }
+.search-result.funding-scotland-fund,
 .services {
     --mdc-theme-primary: #1565C0; // Blue 800
     --mdc-theme-primary-fade: rgba(21, 101, 192, 0.5);
@@ -46,12 +50,26 @@ $spacing-unit: 1rem;
     --mdc-theme-primary-light: #C2185B; // Pink 700
     --mdc-theme-primary-dark: #880E4F; // Pink 900
 }
+.search-result.scvo-cms-post,
+.search-result.scvo-document,
 .blog,
 .policy-research {
     --mdc-theme-primary: #D84315; // Deep Orange 800
     --mdc-theme-primary-fade: rgba(216, 67, 21, 0.5);
     --mdc-theme-primary-light: #E64A19; // Deep Orange 700
     --mdc-theme-primary-dark: #BF360C; // Deep Orange 900
+}
+.search-result.goodhq-organisation {
+    --mdc-theme-primary: #4033E9;
+    --mdc-theme-primary-fade: #4033E9;
+    --mdc-theme-primary-light: #4033E9;
+    --mdc-theme-primary-dark: #160AAD;
+}
+.search-result.digital-charter-signatory {
+    --mdc-theme-primary: #022347;
+    --mdc-theme-primary-fade: #022347;
+    --mdc-theme-primary-light: #022347;
+    --mdc-theme-primary-dark: #022347;
 }
 
 html {
@@ -263,6 +281,7 @@ footer .mdc-list .mdc-list-item a:hover {
                 color: #fff;
                 font-size: 3rem;
                 font-weight: 400;
+                letter-spacing: -0.08rem;
             }
             h1.post-title {
                 font-size: 2.33rem;
@@ -342,7 +361,7 @@ ul.breadcrumb {
     }
 }
 .post-info {
-    margin: 0;
+    margin: 0 0 $spacing-unit*1.5;
     border-bottom: 1px solid var(--mdc-theme-primary-fade);
     padding: 0 0 $spacing-unit;
     .post-info-item {
