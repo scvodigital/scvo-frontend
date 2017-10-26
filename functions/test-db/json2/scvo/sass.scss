@@ -153,6 +153,17 @@ footer .mdc-list .mdc-list-item a:hover {
     font-size: 1rem;
 }
 
+.splash-image {
+    -webkit-transition: background-image 100ms linear;
+    -moz-transition: background-image 100ms linear;
+    -o-transition: background-image 100ms linear;
+    -ms-transition: background-image 100ms linear;
+    transition: background-image 100ms linear;
+    -webkit-animation-direction: alternate; /* Chrome, Safari, Opera */
+    animation-direction: alternate;
+    -webkit-animation-iteration-count: 2; /* Chrome, Safari, Opera */
+    animation-iteration-count: 2;
+}
 .mdc-toolbar {
     -webkit-transition: background-color 100ms linear;
     -moz-transition: background-color 100ms linear;
@@ -205,6 +216,8 @@ footer .mdc-list .mdc-list-item a:hover {
                 height: 64px;
                 margin: 0;
                 .mdc-tab {
+                    font-variant: all-small-caps;
+                    text-transform: uppercase;
                     color: rgba(255, 255, 255, 0.95);
                     font-size: 1rem;
                     padding: 0 $spacing-unit;
@@ -388,9 +401,6 @@ ul.breadcrumb {
     }
 }
 .post-info {
-    margin: 0 0 $spacing-unit*1.5;
-    border-bottom: 1px solid var(--mdc-theme-primary-fade);
-    padding: 0 0 $spacing-unit;
     .post-info-item {
         display: inline;
         margin-right: 0.5rem;
@@ -411,6 +421,11 @@ ul.breadcrumb {
             vertical-align: text-bottom;
         }
     }
+}
+.full .post-info {
+    margin: 0 0 $spacing-unit*1.5;
+    border-bottom: 1px solid var(--mdc-theme-primary-fade);
+    padding: 0 0 $spacing-unit;
 }
 
 blockquote {
