@@ -22,8 +22,8 @@ export class Context implements IContext {
     sass: string = '';
     template: string = '';
     menuProcessor: MenuProcessor = null;
-   
-    _domainStripper: RegExp = null; 
+
+    _domainStripper: RegExp = null;
     get domainStripper(): RegExp {
         if(!this._domainStripper){
             var stripDomains = this.domains.map((domain: string) => { return domain.replace(/\./g, '\\.'); });
@@ -40,7 +40,7 @@ export class Context implements IContext {
 
     constructor(context: IContext){
         Object.assign(this, context);
-        
+
         // Setup our router
         this.router = new Router(this.routes);
         this.menuProcessor = new MenuProcessor(this.menus);
@@ -52,7 +52,7 @@ export class Context implements IContext {
 
     renderPage(uriString: string): Promise<string>{
         return new Promise<string>((resolve, reject) => {
-            var menus = this.menuProcessor.getMenus(uriString, 0, 5); 
+            var menus = this.menuProcessor.getMenus(uriString, 0, 5);
 
             this.router.execute(uriString).then((routeMatch: IRouteMatch) => {
                 var templateData = {
@@ -92,7 +92,7 @@ export class Context implements IContext {
             });
         });
     }
-    
+
     getHeaderTags(routeMatch: IRouteMatch): string {
         var linkTags = {};
         var metaTags = {};
@@ -106,7 +106,7 @@ export class Context implements IContext {
         (this.metaTags || []).forEach((metaTag: IMetaTag) => {
             var key = metaTag.name || 'cmt' + Math.floor(Math.random() * 999999);
             var tag = this.renderTag('meta', metaTag);
-            metaTags[key] = tag;    
+            metaTags[key] = tag;
         });
 
         (routeMatch.linkTags || []).forEach((linkTag: ILinkTag) => {
@@ -118,7 +118,7 @@ export class Context implements IContext {
         (routeMatch.metaTags || []).forEach((metaTag: IMetaTag) => {
             var key = metaTag.name || 'rmt' + Math.floor(Math.random() * 999999);
             var tag = this.renderTag('meta', metaTag);
-            metaTags[key] = tag;    
+            metaTags[key] = tag;
         });
 
         var linkTagsHtml = Object.keys(linkTags).map((key: string) => {
@@ -131,7 +131,7 @@ export class Context implements IContext {
 
         //TODO: Add pagination params and link generators to route and include link tags here
         //TODO: Add some kind of title templating here as well
-        
+
         var headerTags = `
             <!-- Start of Generated Route Header Tags -->
             ${linkTagsHtml}

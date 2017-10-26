@@ -27,7 +27,7 @@ export class RouterComponent implements OnInit {
         router.routeChanged.subscribe((match: RouteMatch) => {
             window.scrollTo(0, 0);
 
-            //console.log(match);
+            console.log(match);
 
             if (match.jsonLd) {
                 var jsonLd = document.querySelector('script[type="application/ld+json"]');
@@ -71,7 +71,7 @@ export class RouterComponent implements OnInit {
                         replaceString += ` [queryParams]='${queryJson}'`;
                     }
 
-                    return replaceString;                    
+                    return replaceString;
                 })
                 .replace(/(\<\/?big\>)|(\<\/?small\>)/g, '');
 

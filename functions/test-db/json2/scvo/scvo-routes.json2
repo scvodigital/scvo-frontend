@@ -49,21 +49,21 @@
             "log": "error"
         }
     },
-    "event": {
+    "event-search": {
         "linkTags": [],
         "metaTags": [],
-        "pattern": "/services/events/*path",
-        "template": `{:templates/event.hbs}`,
+        "pattern": "/services/events",
+        "template": `{:templates/event-search.hbs}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
             "type": "scvo-event",
-            "template": `{:queries/event.json}`
+            "template": `{:queries/event-search.json}`
         },
         "supplimentarySearchTemplates": {
             "types": {
                 "index": "web-content-production",
                 "type": "scvo-event",
-                "template": `{:queries/events-aggs.json}`
+                "template": `{:queries/event-aggs.json}`
             },
             "splash": {
                 "index": "web-content-production",
@@ -77,22 +77,75 @@
             "log": "error"
         }
     },
-    "events": {
+    "event": {
         "linkTags": [],
         "metaTags": [],
-        "pattern": "/services/events",
-        "template": `{:templates/events.hbs}`,
-        "jsonLdTemplate": `{:templates/events-json-ld.hbs}`,
+        "pattern": "/services/events/*path",
+        "template": `{:templates/event.hbs}`,
+        "jsonLdTemplate": `{:templates/default-json-ld.hbs}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
             "type": "scvo-event",
-            "template": `{:queries/events.json}`
+            "template": `{:queries/event.json}`
         },
         "supplimentarySearchTemplates": {
             "types": {
                 "index": "web-content-production",
                 "type": "scvo-event",
-                "template": `{:queries/events-aggs.json}`
+                "template": `{:queries/event-aggs.json}`
+            },
+            "splash": {
+                "index": "web-content-production",
+                "type": "scvo-cms-media",
+                "template": `{:queries/event-splash.json}`
+            }
+        },
+        "elasticsearchConfig": {
+            "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
+            "apiVersion": "5.6",
+            "log": "error"
+        }
+    },
+    "evidence-library": {
+        "linkTags": [],
+        "metaTags": [],
+        "pattern": "/policy-research/evidence-library",
+        "template": `{:templates/evidence-library-search.hbs}`,
+        "jsonLdTemplate": `{:templates/default-json-ld.hbs}`,
+        "primarySearchTemplate": {
+            "index": "web-content-production",
+            "type": "scvo-document-evidence",
+            "template": `{:queries/evidence-library-search.json}`
+        },
+        "supplimentarySearchTemplates": {
+            "types": {
+                "index": "web-content-production",
+                "type": "scvo-document-evidence",
+                "template": `{:queries/evidence-library-aggs.json}`
+            }
+        },
+        "elasticsearchConfig": {
+            "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
+            "apiVersion": "5.6",
+            "log": "error"
+        }
+    },
+    "evidence-library-document": {
+        "linkTags": [],
+        "metaTags": [],
+        "pattern": "/policy-research/evidence-library/*path",
+        "template": `{:templates/evidence-library-document.hbs}`,
+        "jsonLdTemplate": `{:templates/default-json-ld.hbs}`,
+        "primarySearchTemplate": {
+            "index": "web-content-production",
+            "type": "scvo-document-evidence",
+            "template": `{:queries/evidence-library-document.json}`
+        },
+        "supplimentarySearchTemplates": {
+            "types": {
+                "index": "web-content-production",
+                "type": "scvo-document-evidence",
+                "template": `{:queries/evidence-library-aggs.json}`
             }
         },
         "elasticsearchConfig": {
@@ -106,6 +159,7 @@
         "metaTags": [],
         "pattern": "/blog/*path",
         "template": `{:templates/post.hbs}`,
+        "jsonLdTemplate": `{:templates/default-json-ld.hbs}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
             "type": "scvo-cms-post",
