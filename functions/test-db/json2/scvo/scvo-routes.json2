@@ -29,7 +29,7 @@
         "elasticsearchConfig": {
             "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
             "apiVersion": "5.6",
-            "log": "trace"
+            "log": "error"
         }
     },
     "main-search": {
@@ -46,7 +46,31 @@
         "elasticsearchConfig": {
             "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
             "apiVersion": "5.6",
-            "log": "trace"
+            "log": "error"
+        }
+    },
+    "events": {
+        "linkTags": [],
+        "metaTags": [],
+        "pattern": "/events",
+        "template": `{:templates/events.hbs}`,
+        "jsonLdTemplate": `{:templates/events-json-ld.hbs}`,
+        "primarySearchTemplate": {
+            "index": "web-content-production",
+            "type": "scvo-event",
+            "template": `{:queries/events.json}`
+        },
+        "supplimentarySearchTemplates": {
+            "types": {
+                "index": "web-content-production",
+                "type": "scvo-event",
+                "template": `{:queries/events-aggs.json}`
+            }
+        },
+        "elasticsearchConfig": {
+            "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
+            "apiVersion": "5.6",
+            "log": "error"
         }
     },
     "post": {
@@ -74,7 +98,7 @@
         "elasticsearchConfig": {
             "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
             "apiVersion": "5.6",
-            "log": "trace"
+            "log": "error"
         }
     },
     "_default": {
@@ -98,7 +122,7 @@
         "elasticsearchConfig": {
             "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
             "apiVersion": "5.6",
-            "log": "trace"
+            "log": "error"
         }
     }
 }
