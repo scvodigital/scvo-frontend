@@ -1,4 +1,4 @@
-<div class="splash-image splash-image-page" style="background-image: linear-gradient(20deg, var(--mdc-theme-primary-dark) 5%, var(--mdc-theme-primary) 25%, var(--mdc-theme-primary-fade) 100%),url('{{#if primaryResponse.hits.hits.[0]._source.featured_image}}{{primaryResponse.hits.hits.[0]._source.featured_image.sizes.full.source_url}}{{else}}{{#if supplimentaryResponse.splash.hits.hits.[0]._source.original_image}}{{supplimentaryResponse.splash.hits.hits.[0]._source.original_image}}{{/if}}{{/if}}');position: relative;">
+<div class="splash-image splash-image-page" style="background-image: linear-gradient(10deg, var(--mdc-theme-primary-dark) 0%, var(--mdc-theme-primary-fade) 50%, rgba(0,0,0,0.2) 100%),url('{{#if primaryResponse.hits.hits.[0]._source.featured_image}}{{primaryResponse.hits.hits.[0]._source.featured_image.sizes.full.source_url}}{{else}}{{#if supplimentaryResponse.splash.hits.hits.[0]._source.original_image}}{{supplimentaryResponse.splash.hits.hits.[0]._source.original_image}}{{/if}}{{/if}}');position: relative;">
     <div class="container-fluid">
         <div class="mdc-layout-grid">
             <h1 class="page-title">{{{primaryResponse.hits.hits.[0]._source.title}}}</h1>
@@ -6,8 +6,8 @@
     </div>
 </div>
 
-{{#with primaryResponse.hits.hits.[0]._source}}
 <div class="container-fluid">
+    {{#with primaryResponse.hits.hits.[0]._source}}
     {{#if breadcrumb}}
     {{#compare breadcrumb.length '>=' 1}}
     <ul class="breadcrumb">
@@ -20,6 +20,17 @@
     </ul>
     {{/compare}}
     {{/if}}
-    {{{rendered.full}}}
+    {{/with}}
+    <div class="mdc-layout-grid">
+        <div class="mdc-layout-grid__inner">
+            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-8 content page-content">
+                {{#with primaryResponse.hits.hits.[0]._source}}
+                {{{rendered.full}}}
+                {{/with}}
+            </div>
+            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 sidebar page-sidebar">
+                <!-- TBC -->
+            </div>
+        </div>
+    </div>
 </div>
-{{/with}}
