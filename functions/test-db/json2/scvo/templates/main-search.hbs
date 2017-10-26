@@ -3,8 +3,9 @@
         <div class="mdc-card ">
             <section class="mdc-card__primary">
                 <h2 class="mdc-card__title mdc-card__title--large">Search SCVO</h2>
-                <input type="text" class="mdc-textfield__input searchRoute" placeholder="Search" 
-                    [searchroute]='"main-search"' [paramstemplate]='"{ \"queryParams\": { \"q\": %q } }"'>
+                <form [searchroute]="'main-search'">
+                    <input type="text" class="mdc-textfield__input searchRoute" placeholder="Search" value="{{params.query.q}}">
+                </form>
             </section>
         </div>
     </div>
