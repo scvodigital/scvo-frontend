@@ -485,6 +485,7 @@ h2,
 h3,
 h4 {
     margin-bottom: $spacing-unit/4;
+    font-weight: 600;
 }
 p {
     margin: 0 0 $spacing-unit/2;
@@ -505,6 +506,21 @@ p:last-child {
     }
     .post-sidebar h3 {
         margin: $spacing-unit*(3/4) 0 $spacing-unit;
+    }
+}
+
+.page-content,
+.post-content {
+    a[href^="http://"]::after,
+    a[href^="https://"]::after {
+        font-family: 'Material Icons';
+        content: "open_in_new";
+        margin-left: 0.25rem;
+        text-decoration: none;
+        display: inline-block;
+        position: relative;
+        vertical-align: bottom;
+        font-weight: 400;
     }
 }
 
