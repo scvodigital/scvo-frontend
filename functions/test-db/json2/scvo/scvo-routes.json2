@@ -122,6 +122,11 @@
                 "index": "web-content-production",
                 "type": "scvo-document-evidence",
                 "template": `{:queries/evidence-library-aggs.json}`
+            },
+            "splash": {
+                "index": "web-content-production",
+                "type": "scvo-cms-media",
+                "template": `{:queries/page-splash.json}`
             }
         },
         "elasticsearchConfig": {
@@ -146,6 +151,40 @@
                 "index": "web-content-production",
                 "type": "scvo-document-evidence",
                 "template": `{:queries/evidence-library-aggs.json}`
+            },
+            "splash": {
+                "index": "web-content-production",
+                "type": "scvo-cms-media",
+                "template": `{:queries/page-splash.json}`
+            }
+        },
+        "elasticsearchConfig": {
+            "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
+            "apiVersion": "5.6",
+            "log": "error"
+        }
+    },
+    "general-document": {
+        "linkTags": [],
+        "metaTags": [],
+        "pattern": "/documents/*path",
+        "template": `{:templates/document.hbs}`,
+        "jsonLdTemplate": `{:templates/default-json-ld.hbs}`,
+        "primarySearchTemplate": {
+            "index": "web-content-production",
+            "type": "scvo-document-general",
+            "template": `{:queries/document.json}`
+        },
+        "supplimentarySearchTemplates": {
+            "types": {
+                "index": "web-content-production",
+                "type": "scvo-document-general",
+                "template": `{:queries/document-aggs.json}`
+            },
+            "splash": {
+                "index": "web-content-production",
+                "type": "scvo-cms-media",
+                "template": `{:queries/page-splash.json}`
             }
         },
         "elasticsearchConfig": {

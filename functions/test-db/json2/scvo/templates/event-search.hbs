@@ -1,18 +1,8 @@
 <div class="container-fluid">
-    {{#with primaryResponse.hits.hits.[0]._source}}
-    {{#if breadcrumb}}
-    {{#compare breadcrumb.length '>=' 1}}
     <ul class="breadcrumb">
         <li><a href="/">Home</a></li>
-        {{#each breadcrumb}}
-        <li>
-            <a href="{{url}}">{{{striptags title}}}</a>
-        </li>
-        {{/each}}
+        <li><a href="/services">Services</a></li>
     </ul>
-    {{/compare}}
-    {{/if}}
-    {{/with}}
     <div class="v-margin">
         <div class="mdc-card">
             <section class="mdc-card__primary">

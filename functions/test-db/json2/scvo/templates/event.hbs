@@ -7,20 +7,11 @@
 </div>
 
 <div class="container-fluid">
-    {{#with primaryResponse.hits.hits.[0]._source}}
-    {{#if breadcrumb}}
-    {{#compare breadcrumb.length '>=' 1}}
     <ul class="breadcrumb">
         <li><a href="/">Home</a></li>
-        {{#each breadcrumb}}
-        <li>
-            <a href="{{url}}">{{{striptags title}}}</a>
-        </li>
-        {{/each}}
+        <li><a href="/services">Services</a></li>
+        <li><a href="/services/events">Events</a></li>
     </ul>
-    {{/compare}}
-    {{/if}}
-    {{/with}}
     <div class="mdc-layout-grid">
         <div class="mdc-layout-grid__inner">
             <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-8 content event-content">
