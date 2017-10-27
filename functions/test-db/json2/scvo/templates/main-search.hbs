@@ -1,6 +1,6 @@
 <div class="container-fluid">
     <div class="v-margin">
-        <div class="mdc-card ">
+        <div class="mdc-card">
             <section class="mdc-card__primary">
                 <h2 class="mdc-card__title mdc-card__title--large">Search SCVO</h2>
                 <form [searchroute]="'main-search'">
@@ -29,7 +29,7 @@
                     <a class="mdc-button mdc-button--compact" href="/search?q={{../params.query.q}}&page={{paging.prevPage}}">Previous</a>
                 </li>
             {{/if}}
-            
+
             {{#each paging.pageRange}}
                 <li class="{{#compare ../paging.currentPage "===" this.pageNumber}}current-page{{/compare}} pagination-distance-{{this.distance}}">
                     <a  class="mdc-button mdc-button--compact" href="/search?q={{../params.query.q}}&page={{this}}">{{this.pageNumber}}</a>
