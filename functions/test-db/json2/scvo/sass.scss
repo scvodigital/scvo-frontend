@@ -165,6 +165,17 @@ footer .mdc-list .mdc-list-item a:hover {
 .mdc-form-field {
     font-size: 1rem;
 }
+.mdc-select,
+.mdc-textfield {
+    width: 100%;
+    margin: 0 0 $spacing-unit/2;
+}
+
+.sidebar {
+    .mdc-button {
+        width: 100%;
+    }
+}
 
 .splash-image {
     -webkit-transition: background-image 100ms linear;
@@ -430,6 +441,7 @@ footer .mdc-list .mdc-list-item a:hover {
 }
 
 .inline-dl {
+    margin: 0;
     dt, dd {
         float: left;
     }
@@ -466,14 +478,18 @@ ul.breadcrumb {
         content: "\203A";
         font-weight: 800;
         margin-right: $spacing-unit/4;
-        width: $spacing-unit*(3/4);
+        width: $spacing-unit/2;
         display: inline-block;
     }
+    li.pull-right:before,
     li:first-child:before {
         content: "" !important;
         font-weight: 800;
         margin-right: 0 !important;
         width: 0 !important;
+    }
+    li.pull-right a:after {
+        content: "";
     }
     li:not(:last-child) {
         margin-right: $spacing-unit/4;

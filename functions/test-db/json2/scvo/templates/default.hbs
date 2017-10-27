@@ -14,9 +14,12 @@
         <li><a href="/">Home</a></li>
         {{#each breadcrumb}}
         <li>
-            <a href="{{url}}">{{{striptags title}}}</a>
+            <a href="{{replace url 'https://cms.scvo.net' ''}}">{{{striptags title}}}</a>
         </li>
         {{/each}}
+        <li class="pull-right">
+            <a href="https://cms.scvo.net/wp-admin/post.php?post={{wpid}}&action=edit"><i class="material-icons">border_color</i></a>
+        </li>
     </ul>
     {{/compare}}
     {{/if}}
