@@ -2,6 +2,7 @@
 import * as stream from 'stream';
 import * as fs from 'fs';
 import * as path from 'path';
+import * as util from 'util';
 
 // Module imports
 import * as functions from 'firebase-functions';
