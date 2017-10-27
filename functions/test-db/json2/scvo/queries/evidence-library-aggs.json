@@ -3,7 +3,10 @@
     "aggs": {
         "types": {
             "terms": {
-                "field": "type",
+                "field": "library_classification",
+                "order": {
+                    "_term": "asc"
+                },
                 "size": 10000
             }
         }

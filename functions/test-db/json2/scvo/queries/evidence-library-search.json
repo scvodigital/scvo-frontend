@@ -4,10 +4,10 @@
     "query": {
         "bool": {
             "must": [
-                {{#if query.type}}
+                {{#if query.library_classification}}
                     {
                         "term": {
-                            "type": "{{query.type}}"
+                            "library_classification": "{{query.library_classification}}"
                         }
                     }
                     {{#if query.q}},{{/if}}
