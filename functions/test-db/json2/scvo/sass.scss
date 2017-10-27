@@ -99,12 +99,20 @@ main {
     overflow: auto;
     padding: $spacing-unit/2;
 }
-.mdc-typography--subheading2 {
+
+.mdc-typography,
+.mdc-button,
+.mdc-textfield__input,
+.mdc-card__subtitle,
+.mdc-typography--subheading2,
+.mdc-card__title--large,
+.mdc-card__supporting-text,
+.mdc-list {
     font-family: 'Open Sans', Helvetica, sans-serif;
 }
+
 .mdc-typography {
     background-color: var(--mdc-site-background, #263238);
-    font-family: 'Open Sans', Helvetica, sans-serif;
     padding: 0;
     margin: 0;
     box-sizing: border-box;
@@ -169,6 +177,7 @@ footer .mdc-list .mdc-list-item a:hover {
     -webkit-animation-iteration-count: 2; /* Chrome, Safari, Opera */
     animation-iteration-count: 2;
 }
+
 .mdc-toolbar {
     -webkit-transition: background-color 100ms linear;
     -moz-transition: background-color 100ms linear;
@@ -226,6 +235,8 @@ footer .mdc-list .mdc-list-item a:hover {
                     color: rgba(255, 255, 255, 0.95);
                     font-size: 1rem;
                     padding: 0 $spacing-unit;
+                    font-variant: all-small-caps;
+                    text-transform: uppercase;
                 }
                 .mdc-tab:after {
                     top: 62px;
@@ -353,6 +364,27 @@ footer .mdc-list .mdc-list-item a:hover {
     .mdc-button:not(:disabled) {
         color: white;
     }
+}
+.mdc-form-field,
+.mdc-button,
+.mdc-card__supporting-text,
+.mdc-card__subtitle {
+    font-size: 1rem;
+}
+.mdc-card__title--large {
+    font-size: 1.2rem;
+    letter-spacing: normal;
+    line-height: 1.7rem;
+    margin: 0;
+    padding: 0 0 $spacing-unit/2;
+    font-weight: 600 !important;
+}
+.mdc-card__actions .mdc-card__action {
+    font-weight: 800;
+    font-size: 0.9rem;
+}
+.mdc-card__media-item {
+    border-radius: 50%;
 }
 
 .credit-union {
