@@ -1,0 +1,21 @@
+{
+	"size": 1,
+	"query": {
+		"function_score": {
+			"query": {
+				"bool": {
+                    "must": {
+                      "match_all": {}
+                    },
+					"should": [{
+						"term": {
+							"categories_id": 493
+						}
+					}]
+				}
+			},
+			"random_score": {},
+			"score_mode": "sum"
+		}
+	}
+}

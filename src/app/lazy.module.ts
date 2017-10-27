@@ -16,6 +16,7 @@ import { RouterService } from './services/router.service';
 // Components
 import { ScriptHackComponent } from './components/script-hack/script-hack.component';
 import { SearchBoxDirective } from './directives/search-box.directive';
+import { RouterFormDirective } from './directives/router-form.directive';
 
 // Directives
 
@@ -23,6 +24,7 @@ import { SearchBoxDirective } from './directives/search-box.directive';
     declarations: [
         SearchBoxDirective,
         ScriptHackComponent,
+        RouterFormDirective,
     ],
     imports: [
         RouterModule.forChild(rootRouterConfig),
@@ -31,6 +33,7 @@ import { SearchBoxDirective } from './directives/search-box.directive';
     exports: [
         SearchBoxDirective,
         ScriptHackComponent,
+        RouterFormDirective,
     ]
 })
 export class LazyModule { }

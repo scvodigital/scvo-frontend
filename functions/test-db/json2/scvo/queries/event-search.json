@@ -1,0 +1,36 @@
+{
+    "size": 10,
+    "from": {{multiply (subtract (default query.page 1) 1) 10}},
+    "query": {
+        "bool": {
+            {{#if query.free}}
+                "must_not": [
+                    {
+                        "exists": {
+                            "field": "cost"
+                        }
+                    }
+                ],
+            {{/if}}
+            "must": [
+                {{#if query.type}}
+                    {
+                        "term": {
+                            "type": "{{query.type}}"
+                        }
+                    }
+                    {{#if query.q}},{{/if}}
+                {{/if}}
+                {{#if query.q}}
+                    {
+                        "query_string": {
+                            "query": "{{query.q}}",
+                            "default_operator": "AND",
+                            "analyzer": "snowball"
+                        }
+                    }
+                {{/if}}
+            ]
+        }
+    }
+}

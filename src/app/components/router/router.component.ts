@@ -1,6 +1,8 @@
 import { Component, OnInit, OnDestroy, EventEmitter, ViewChild, ContentChild, ElementRef } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
+import * as querystring from 'querystring';
+
 import { LazyModule } from '../../lazy.module';
 import { RouteMatch } from 'scvo-router';
 import { RouterService } from '../../services/router.service';
@@ -57,9 +59,25 @@ export class RouterComponent implements OnInit {
             // Rendered content
             this.html = match.rendered
                 .replace(this.router.domainStripper, '')
-                .replace(/(href=\"|\')(\/.*?)(\"|\')/gi, '[routerLink]="[\'$2\']"')
+                .replace(/(href=\"|\')(\/.*?)(\"|\')/gi, (match, p1, p2, p3) => {
+                    var parts = p2.split('?');
+                    var url = parts[0];
+                    var replaceString = `[routerLink]="'${url}'"`;
+
+                    var query = {};
+                    if(parts.length > 1){
+                        query = querystring.parse(parts[1]);
+                        var queryJson = JSON.stringify(query);
+                        replaceString += ` [queryParams]='${queryJson}'`;
+                    }
+
+                    return replaceString;
+                })
                 .replace(/(\<\/?big\>)|(\<\/?small\>)/g, '');
-            mdc.autoInit();
+
+            setTimeout(() => {
+                mdc.autoInit();
+            }, 500);
         });
     }
 

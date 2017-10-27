@@ -42,6 +42,11 @@ $spacing-unit: 1rem;
     --mdc-theme-primary-light: #1976D2; // Blue 700
     --mdc-theme-primary-dark: #0D47A1; // Blue 900
 }
+.services.credit-union {
+    --mdc-theme-primary: #1976D2;
+    --mdc-theme-primary-light: #1976D2;
+    --mdc-theme-primary-dark: #1976D2;
+}
 .project,
 .campaigns,
 .projects-campaigns {
@@ -99,6 +104,7 @@ main {
 .mdc-button,
 .mdc-textfield__input,
 .mdc-card__subtitle,
+.mdc-typography--subheading2,
 .mdc-card__title--large,
 .mdc-card__supporting-text,
 .mdc-list {
@@ -156,6 +162,22 @@ footer .mdc-list .mdc-list-item a:hover {
     }
 }
 
+.mdc-form-field {
+    font-size: 1rem;
+}
+
+.splash-image {
+    -webkit-transition: background-image 100ms linear;
+    -moz-transition: background-image 100ms linear;
+    -o-transition: background-image 100ms linear;
+    -ms-transition: background-image 100ms linear;
+    transition: background-image 100ms linear;
+    -webkit-animation-direction: alternate; /* Chrome, Safari, Opera */
+    animation-direction: alternate;
+    -webkit-animation-iteration-count: 2; /* Chrome, Safari, Opera */
+    animation-iteration-count: 2;
+}
+
 .mdc-toolbar {
     -webkit-transition: background-color 100ms linear;
     -moz-transition: background-color 100ms linear;
@@ -203,9 +225,13 @@ footer .mdc-list .mdc-list-item a:hover {
                 }
             }
             .mdc-tab-bar {
+                overflow: hidden;
+                text-transform: none;
                 height: 64px;
                 margin: 0;
                 .mdc-tab {
+                    font-variant: all-small-caps;
+                    text-transform: uppercase;
                     color: rgba(255, 255, 255, 0.95);
                     font-size: 1rem;
                     padding: 0 $spacing-unit;
@@ -254,14 +280,20 @@ footer .mdc-list .mdc-list-item a:hover {
     margin: 0;
 }
 .mdc-temporary-drawer {
+    .mdc-temporary-drawer__header-content {
+        padding: $spacing-unit;
+    }
+    .mdc-temporary-drawer__header:before {
+        padding-top: 24%;
+    }
     .mdc-list {
+        .mdc-list-item {
+            padding: 0 $spacing-unit;
+        }
         .mdc-list-item__start-detail {
             display: none;
         }
     }
-}
-.mdc-temporary-drawer__header:before {
-    padding-top: 24%;
 }
 
 .action-buttons-right {
@@ -270,6 +302,7 @@ footer .mdc-list .mdc-list-item a:hover {
 }
 
 .splash-image {
+    position: relative;
     background-size: cover;
     height: 25vh;
     background-position: center center;
@@ -281,14 +314,14 @@ footer .mdc-list .mdc-list-item a:hover {
             position: absolute;
             left: 0;
             bottom: $spacing-unit/2;
-            h1.page-title,
-            h1.post-title {
+            h1 {
                 margin: 0;
                 color: #fff;
                 font-size: 3rem;
                 font-weight: 400;
                 letter-spacing: -0.08rem;
             }
+            h1.event-title,
             h1.post-title {
                 font-size: 2.33rem;
             }
@@ -305,6 +338,18 @@ footer .mdc-list .mdc-list-item a:hover {
     //         color: white;
     //     }
     // }
+}
+.splash-image-featured {
+    height: 30vw;
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-clip: content-box;
+    background-size: cover;
+    max-width: 1280px;
+    margin: 0 auto;
+    h1 {
+        display: none;
+    }
 }
 
 .featured.mdc-card {
@@ -342,6 +387,22 @@ footer .mdc-list .mdc-list-item a:hover {
     border-radius: 50%;
 }
 
+.credit-union {
+    .mdc-layout-grid {
+        margin-top: $spacing-unit*1.5;
+        .mdc-button {
+            width: 100%;
+            background-color: var(--mdc-theme-primary);
+            color: white;
+            margin-bottom: $spacing-unit;
+        }
+        .mdc-button:hover {
+            background-color: var(--mdc-theme-primary-dark);
+            text-decoration: none;
+        }
+    }
+}
+
 .latest-grid {
     h2 {
         font-weight: 600;
@@ -363,35 +424,12 @@ footer .mdc-list .mdc-list-item a:hover {
     }
 }
 
-.pagination {
-    padding-top: $spacing-unit/4;
-    li {
-        width: 30px;
-        border-radius: 50%;
-        margin: 0 $spacing-unit/5;
-    }
-    li a {
-        padding: 0;
-        margin: 0;
-    }
-    li:first-child a {
-        padding-left: 0;
-    }
-    li:last-child a {
-        padding-right: 0;
-    }
-    li.active {
-        background-color: var(--mdc-theme-primary);
-        border-radius: 50%;
-    }
-    li:hover,
-    li.active:hover {
-        background-color: var(--mdc-theme-primary-dark);
-        a {
-            color: white;
-            text-decoration: none;
-        }
-    }
+hr {
+    margin: $spacing-unit 0;
+    height: 1px;
+    background-color: white;
+    border: none;
+    border-bottom: 1px solid var(--mdc-theme-primary-fade);
 }
 
 ul.breadcrumb {
@@ -419,9 +457,6 @@ ul.breadcrumb {
     }
 }
 .post-info {
-    margin: 0 0 $spacing-unit*1.5;
-    border-bottom: 1px solid var(--mdc-theme-primary-fade);
-    padding: 0 0 $spacing-unit;
     .post-info-item {
         display: inline;
         margin-right: 0.5rem;
@@ -442,6 +477,11 @@ ul.breadcrumb {
             vertical-align: text-bottom;
         }
     }
+}
+.full .post-info {
+    margin: 0 0 $spacing-unit*1.5;
+    border-bottom: 1px solid var(--mdc-theme-primary-fade);
+    padding: 0 0 $spacing-unit;
 }
 
 blockquote {
@@ -501,6 +541,7 @@ h2,
 h3,
 h4 {
     margin-bottom: $spacing-unit/4;
+    font-weight: 600;
 }
 p {
     margin: 0 0 $spacing-unit/2;
@@ -521,6 +562,21 @@ p:last-child {
     }
     .post-sidebar h3 {
         margin: $spacing-unit*(3/4) 0 $spacing-unit;
+    }
+}
+
+.page-content,
+.post-content {
+    a[href^="http://"]::after,
+    a[href^="https://"]::after {
+        font-family: 'Material Icons';
+        content: "open_in_new";
+        margin-left: 0.25rem;
+        text-decoration: none;
+        display: inline-block;
+        position: relative;
+        vertical-align: bottom;
+        font-weight: 400;
     }
 }
 
@@ -620,6 +676,6 @@ footer {
         }
     }
     .mdc-toolbar-fixed-adjust {
-        margin-top: 64px;
+        padding-top: 64px;
     }
 }

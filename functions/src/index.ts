@@ -66,7 +66,7 @@ exports.menuUpdate = functions.https.onRequest((req: functions.Request, res: fun
                 getMenus(domain, contextJson.domains).then((menus: IMenus) => {
                     putJson('/sites/' + siteKey + '/menus', menus).then(() => {
                         res.end();
-                        resolve();  
+                        resolve();
                     }).catch((err) => {
                         console.error('Error updating menus:', err);
                         res.json(err);
@@ -77,11 +77,11 @@ exports.menuUpdate = functions.https.onRequest((req: functions.Request, res: fun
                     console.error('Error fetching menus:', err);
                     res.json(err);
                     res.end();
-                    reject(err); 
+                    reject(err);
                 });
             }).catch((err) => {
                 console.error('Error fetching context:', err);
-                res.json(err);  
+                res.json(err);
                 res.end();
                 reject(err);
             });
@@ -112,7 +112,7 @@ function putJson(jsonPath: string, json: any): Promise<void> {
             app.database().ref(jsonPath).set(json).then(() => {
                 resolve();
             }).catch((err) => {
-                reject(err);  
+                reject(err);
             });
         }
     });
