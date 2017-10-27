@@ -22,6 +22,7 @@ export class Context implements IContext {
     sass: string = '';
     template: string = '';
     menuProcessor: MenuProcessor = null;
+    uaId: string = '';
 
     _domainStripper: RegExp = null;
     get domainStripper(): RegExp {
@@ -42,7 +43,7 @@ export class Context implements IContext {
         Object.assign(this, context);
 
         // Setup our router
-        this.router = new Router(this.routes);
+        this.router = new Router(this.routes, this.uaId, '6a14abda-6b12-4578-bf66-43c754eaeda9');
         this.menuProcessor = new MenuProcessor(this.menus);
 
         // Compile our templates and CSS
@@ -67,7 +68,7 @@ export class Context implements IContext {
                     route: routeMatch,
                     headerTags: this.getHeaderTags(routeMatch)
                 };
-                console.log('TEMPLATE DATA:', JSON.stringify(templateData, null, 4));
+                //console.log('TEMPLATE DATA:', JSON.stringify(templateData, null, 4));
                 var contextHtml = this.compiledTemplate(templateData);
 
                 var closingHeadTag = contextHtml.indexOf('</head>');
@@ -82,7 +83,6 @@ export class Context implements IContext {
                     contextHtml = [contextHtml.slice(0, closingHeadTag), dataTag, contextHtml.slice(closingHeadTag)].join('');
                 }
 
-                console.log('DOMAIN STRIPPER:', this.domainStripper);
                 contextHtml = contextHtml.replace(this.domainStripper, '');
 
                 resolve(contextHtml);

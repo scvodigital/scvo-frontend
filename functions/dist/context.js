@@ -18,6 +18,7 @@ var Context = /** @class */ (function () {
         this.sass = '';
         this.template = '';
         this.menuProcessor = null;
+        this.uaId = '';
         this._domainStripper = null;
         // Instance specific properties
         this.compiledTemplate = null;
@@ -25,7 +26,7 @@ var Context = /** @class */ (function () {
         this.router = null;
         Object.assign(this, context);
         // Setup our router
-        this.router = new scvo_router_1.Router(this.routes);
+        this.router = new scvo_router_1.Router(this.routes, this.uaId, '6a14abda-6b12-4578-bf66-43c754eaeda9');
         this.menuProcessor = new scvo_router_1.MenuProcessor(this.menus);
         // Compile our templates and CSS
         this.compiledTemplate = handlebars.compile(this.template);
@@ -60,7 +61,7 @@ var Context = /** @class */ (function () {
                     route: routeMatch,
                     headerTags: _this.getHeaderTags(routeMatch)
                 };
-                console.log('TEMPLATE DATA:', JSON.stringify(templateData, null, 4));
+                //console.log('TEMPLATE DATA:', JSON.stringify(templateData, null, 4));
                 var contextHtml = _this.compiledTemplate(templateData);
                 var closingHeadTag = contextHtml.indexOf('</head>');
                 if (closingHeadTag > -1) {
@@ -69,7 +70,6 @@ var Context = /** @class */ (function () {
                     var dataTag = "\n                        <script>\n                            window.contextData = " + dataJson + ";\n                        </script>\n                    ";
                     contextHtml = [contextHtml.slice(0, closingHeadTag), dataTag, contextHtml.slice(closingHeadTag)].join('');
                 }
-                console.log('DOMAIN STRIPPER:', _this.domainStripper);
                 contextHtml = contextHtml.replace(_this.domainStripper, '');
                 resolve(contextHtml);
             }).catch(function (err) {
