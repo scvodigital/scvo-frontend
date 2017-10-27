@@ -1,0 +1,179 @@
+[debug] [2017-10-27T15:34:54.987Z] ----------------------------------------------------------------------
+[debug] [2017-10-27T15:34:54.989Z] Command:       /home/calum/.nvm/versions/node/v6.11.4/bin/node /usr/local/bin/firebase deploy --only functions,hosting
+[debug] [2017-10-27T15:34:54.989Z] CLI Version:   3.13.1
+[debug] [2017-10-27T15:34:54.989Z] Platform:      linux
+[debug] [2017-10-27T15:34:54.989Z] Node Version:  v6.11.4
+[debug] [2017-10-27T15:34:54.990Z] Time:          Fri Oct 27 2017 16:34:54 GMT+0100 (BST)
+[debug] [2017-10-27T15:34:54.990Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2017-10-27T15:34:55.000Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2017-10-27T15:34:55.000Z] > authorizing via signed-in user
+[debug] [2017-10-27T15:34:55.002Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/scvo-net  
+ Fri Oct 27 2017 16:34:55 GMT+0100 (BST)
+[debug] [2017-10-27T15:34:55.725Z] <<< HTTP RESPONSE 200
+[debug] [2017-10-27T15:34:55.728Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/scvo-net/tokens  
+ Fri Oct 27 2017 16:34:55 GMT+0100 (BST)
+[debug] [2017-10-27T15:34:56.308Z] <<< HTTP RESPONSE 200
+[info] 2
+[info] 
+[info] === Deploying to 'scvo-net'...
+[info] 
+[info] i  deploying functions, hosting
+[debug] [2017-10-27T15:34:57.829Z] > [functions] package.json contents: {
+  "name": "functions",
+  "description": "Cloud Functions for Firebase",
+  "scripts": {
+    "cleanup": "rm -rf ./dist",
+    "start": "npm run build;firebase serve --only functions",
+    "build": "npm run cleanup;npm run json2;tsc",
+    "json2": "node json2 ./test-db/json2/**/*.json2 ./test-db/json; node json2 ./test-db/db.json2 ./test-db",
+    "deploy-db": "npm run json2; firebase database:set -y / ./test-db/db.json"
+  },
+  "dependencies": {
+    "@types/jsdom": "^11.0.2",
+    "@types/node-sass": "^3.10.32",
+    "@types/q": "^1.0.5",
+    "@types/request": "^2.0.6",
+    "dot-object": "^1.7.0",
+    "firebase-admin": "5.4.0",
+    "firebase-functions": "0.7.0",
+    "handlebars": "^4.0.10",
+    "handlebars-helpers": "^0.9.8",
+    "jsdom": "^11.3.0",
+    "moment": "^2.18.1",
+    "node-sass": "^4.5.3",
+    "pdfmake": "^0.1.33",
+    "q": "^1.5.0",
+    "request": "^2.83.0",
+    "scvo-router": "^1.0.16",
+    "string": "^3.3.3"
+  },
+  "private": true,
+  "main": "dist/index.js",
+  "devDependencies": {
+    "chalk": "^2.1.0",
+    "dot-object": "^1.7.0",
+    "typescript": "^2.5.3"
+  }
+}
+[info] i  functions: ensuring necessary APIs are enabled...
+[info] i  runtimeconfig: ensuring necessary APIs are enabled...
+[debug] [2017-10-27T15:34:57.831Z] >>> HTTP REQUEST GET https://servicemanagement.googleapis.com/v1/services/cloudfunctions.googleapis.com/projectSettings/scvo-net?view=CONSUMER_VIEW  
+ Fri Oct 27 2017 16:34:57 GMT+0100 (BST)
+[debug] [2017-10-27T15:34:57.832Z] >>> HTTP REQUEST GET https://servicemanagement.googleapis.com/v1/services/runtimeconfig.googleapis.com/projectSettings/scvo-net?view=CONSUMER_VIEW  
+ Fri Oct 27 2017 16:34:57 GMT+0100 (BST)
+[debug] [2017-10-27T15:34:58.822Z] <<< HTTP RESPONSE 200
+[info] ✔  runtimeconfig: all necessary APIs are enabled
+[debug] [2017-10-27T15:34:58.853Z] <<< HTTP RESPONSE 200
+[info] ✔  functions: all necessary APIs are enabled
+[debug] [2017-10-27T15:34:58.855Z] >>> HTTP REQUEST GET https://appengine.googleapis.com/v1/apps/scvo-net  
+ Fri Oct 27 2017 16:34:58 GMT+0100 (BST)
+[debug] [2017-10-27T15:34:58.856Z] >>> HTTP REQUEST GET https://apikeys.googleapis.com/v1/projects/scvo-net/apiKeys  
+ Fri Oct 27 2017 16:34:58 GMT+0100 (BST)
+[debug] [2017-10-27T15:34:59.549Z] <<< HTTP RESPONSE 200
+[debug] [2017-10-27T15:34:59.730Z] <<< HTTP RESPONSE 200
+[info] i  functions: preparing functions directory for uploading...
+[debug] [2017-10-27T15:35:01.188Z] >>> HTTP REQUEST GET https://runtimeconfig.googleapis.com/v1beta1/projects/scvo-net/configs  
+ Fri Oct 27 2017 16:35:01 GMT+0100 (BST)
+[debug] [2017-10-27T15:35:01.459Z] <<< HTTP RESPONSE 200
+[info] i  functions: packaged functions (535.69 KB) for uploading
+[debug] [2017-10-27T15:35:06.845Z] >>> HTTP REQUEST GET https://www.googleapis.com/storage/v1/b/staging.scvo-net.appspot.com  
+ Fri Oct 27 2017 16:35:06 GMT+0100 (BST)
+[debug] [2017-10-27T15:35:07.007Z] <<< HTTP RESPONSE 200
+[debug] [2017-10-27T15:35:07.008Z] >>> HTTP REQUEST POST https://www.googleapis.com/upload/storage/v1/b/staging.scvo-net.appspot.com/o?uploadType=media&name=firebase-functions-source ReadStream {
+  _readableState: 
+   ReadableState {
+     objectMode: false,
+     highWaterMark: 65536,
+     buffer: BufferList { head: [Object], tail: [Object], length: 1 },
+     length: 65536,
+     pipes: null,
+     pipesCount: 0,
+     flowing: null,
+     ended: false,
+     endEmitted: false,
+     reading: false,
+     sync: false,
+     needReadable: false,
+     emittedReadable: true,
+     readableListening: false,
+     resumeScheduled: false,
+     defaultEncoding: 'utf8',
+     ranOut: false,
+     awaitDrain: 0,
+     readingMore: false,
+     decoder: null,
+     encoding: null },
+  readable: true,
+  domain: null,
+  _events: { end: [Function] },
+  _eventsCount: 1,
+  _maxListeners: undefined,
+  path: '/tmp/firebase-functions-10963lOIJWDG33Bus.zip',
+  fd: 15,
+  flags: 'r',
+  mode: 438,
+  start: undefined,
+  end: undefined,
+  autoClose: true,
+  pos: undefined,
+  bytesRead: 65536 } 
+ Fri Oct 27 2017 16:35:07 GMT+0100 (BST)
+[debug] [2017-10-27T15:35:07.403Z] <<< HTTP RESPONSE 200
+[info] ✔  functions: functions folder uploaded successfully
+[info] i  hosting: preparing dist directory for upload...
+[warn] ⚠  Warning: Public directory does not contain index.html
+[debug] [2017-10-27T15:35:08.061Z] >>> HTTP REQUEST PUT https://deploy.firebase.com/v1/hosting/scvo-net/uploads/-KxTTChKFe_ZObnrMHSA?fileCount=48&message=  
+ Fri Oct 27 2017 16:35:08 GMT+0100 (BST)
+[debug] [2017-10-27T15:35:13.088Z] <<< HTTP RESPONSE 200
+[debug] [2017-10-27T15:35:13.089Z] [hosting] .tgz uploaded successfully, waiting for extraction
+[info] ✔  hosting: 48 files uploaded successfully
+[info] i  starting release process (may take several minutes)...
+[debug] [2017-10-27T15:35:53.876Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1beta2/projects/scvo-net/locations/us-central1/functions  
+ Fri Oct 27 2017 16:35:53 GMT+0100 (BST)
+[debug] [2017-10-27T15:35:54.164Z] <<< HTTP RESPONSE 200
+[info] i  functions: updating function index...
+[debug] [2017-10-27T15:35:54.169Z] Trigger is: 
+[info] i  functions: updating function menuUpdate...
+[debug] [2017-10-27T15:35:54.170Z] Trigger is: 
+[info] i  functions: updating function getFsPdf...
+[debug] [2017-10-27T15:35:54.171Z] Trigger is: 
+[debug] [2017-10-27T15:35:54.173Z] >>> HTTP REQUEST PUT https://cloudfunctions.googleapis.com/v1beta2/projects/scvo-net/locations/us-central1/functions/index { sourceArchiveUrl: 'gs://staging.scvo-net.appspot.com/firebase-functions-source',
+  name: 'projects/scvo-net/locations/us-central1/functions/index',
+  entryPoint: 'index',
+  timeout: '60s',
+  availableMemoryMb: 256,
+  httpsTrigger: {} } 
+ Fri Oct 27 2017 16:35:54 GMT+0100 (BST)
+[debug] [2017-10-27T15:35:54.174Z] >>> HTTP REQUEST PUT https://cloudfunctions.googleapis.com/v1beta2/projects/scvo-net/locations/us-central1/functions/menuUpdate { sourceArchiveUrl: 'gs://staging.scvo-net.appspot.com/firebase-functions-source',
+  name: 'projects/scvo-net/locations/us-central1/functions/menuUpdate',
+  entryPoint: 'menuUpdate',
+  timeout: '60s',
+  availableMemoryMb: 256,
+  httpsTrigger: {} } 
+ Fri Oct 27 2017 16:35:54 GMT+0100 (BST)
+[debug] [2017-10-27T15:35:54.176Z] >>> HTTP REQUEST PUT https://cloudfunctions.googleapis.com/v1beta2/projects/scvo-net/locations/us-central1/functions/getFsPdf { sourceArchiveUrl: 'gs://staging.scvo-net.appspot.com/firebase-functions-source',
+  name: 'projects/scvo-net/locations/us-central1/functions/getFsPdf',
+  entryPoint: 'getFsPdf',
+  timeout: '60s',
+  availableMemoryMb: 256,
+  httpsTrigger: {} } 
+ Fri Oct 27 2017 16:35:54 GMT+0100 (BST)
+[debug] [2017-10-27T15:35:54.491Z] <<< HTTP RESPONSE 200
+[debug] [2017-10-27T15:35:54.555Z] <<< HTTP RESPONSE 200
+[debug] [2017-10-27T15:35:54.684Z] <<< HTTP RESPONSE 200
+[debug] [2017-10-27T15:35:54.688Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1beta2/projects/scvo-net/locations/us-central1/functions  
+ Fri Oct 27 2017 16:35:54 GMT+0100 (BST)
+[debug] [2017-10-27T15:35:54.689Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1beta2/operations/c2N2by1uZXQvdXMtY2VudHJhbDEvaW5kZXgvcE4ySkJ3cGdEcEk  
+ Fri Oct 27 2017 16:35:54 GMT+0100 (BST)
+[debug] [2017-10-27T15:35:54.691Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1beta2/operations/c2N2by1uZXQvdXMtY2VudHJhbDEvbWVudVVwZGF0ZS9hNkFRVXBhODVmRQ  
+ Fri Oct 27 2017 16:35:54 GMT+0100 (BST)
+[debug] [2017-10-27T15:35:54.692Z] >>> HTTP REQUEST GET https://cloudfunctions.googleapis.com/v1beta2/operations/c2N2by1uZXQvdXMtY2VudHJhbDEvZ2V0RnNQZGYvRF9jbmxRZmNyRHM  
+ Fri Oct 27 2017 16:35:54 GMT+0100 (BST)
+[debug] [2017-10-27T15:35:54.925Z] <<< HTTP RESPONSE 200
+[debug] [2017-10-27T15:35:54.927Z] <<< HTTP RESPONSE 200
+[debug] [2017-10-27T15:35:54.937Z] <<< HTTP RESPONSE 200
+[debug] [2017-10-27T15:35:55.140Z] <<< HTTP RESPONSE 200
+[debug] [2017-10-27T15:35:55.142Z] [functions] operation poll: index: update operations/c2N2by1uZXQvdXMtY2VudHJhbDEvaW5kZXgvcE4ySkJ3cGdEcEk is not done.
+[debug] [2017-10-27T15:35:55.142Z] [functions] operation poll: menuUpdate: update operations/c2N2by1uZXQvdXMtY2VudHJhbDEvbWVudVVwZGF0ZS9hNkFRVXBhODVmRQ is not done.
+[debug] [2017-10-27T15:35:55.142Z] [functions] operation poll: getFsPdf: update operations/c2N2by1uZXQvdXMtY2VudHJhbDEvZ2V0RnNQZGYvRF9jbmxRZmNyRHM is not done.
