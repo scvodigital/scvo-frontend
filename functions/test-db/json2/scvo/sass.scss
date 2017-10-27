@@ -429,6 +429,21 @@ footer .mdc-list .mdc-list-item a:hover {
     }
 }
 
+.inline-dl {
+    dt, dd {
+        float: left;
+    }
+    dt {
+        font-weight: bold;
+        clear: both;
+        width: 30%;
+    }
+    dd {
+        width: 70%;
+        margin: 0;
+    }
+}
+
 hr {
     margin: $spacing-unit 0;
     height: 1px;
@@ -525,9 +540,6 @@ ul.supplimentary-list {
         list-style:none;
         margin: 0;
         padding: 0;
-        span {
-            display:block;
-        }
         span.supplimentary-list-title {
             font-size: 1.3em;
         }
@@ -535,12 +547,9 @@ ul.supplimentary-list {
             font-size: 0.9em;
             color: #555555;
         }
-        span.supplimentary-list-text {
-
-        }
     }
     li.supplimentary-list-item:not(:last-child){
-        margin-bottom: 5px;
+        margin-bottom: $spacing-unit;
     }
 }
 
