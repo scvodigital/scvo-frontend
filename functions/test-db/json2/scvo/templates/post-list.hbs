@@ -4,7 +4,7 @@
             <h1 class="post-title">
                 {{#with primaryResponse.hits.hits.[0]._source}}
                 {{#each categories_slug}}
-                {{#compare path '==' this}}
+                {{#compare path this}}
                 {{{categories.[@index]}}}
                 {{/compare}}
                 {{/each}}
