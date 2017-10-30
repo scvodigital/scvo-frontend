@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 
 import { Observable, Subject } from 'rxjs/Rx';
-import { AngularFireDatabase } from 'angularfire2/database';
 
 import { Router as ScvoRouter, IRoutes, IContext, RouteMatch } from 'scvo-router';
 
@@ -22,7 +21,7 @@ export class RouterService {
         return this._domainStripper;
     }
     
-    constructor(private db: AngularFireDatabase, private router: Router) {
+    constructor(private router: Router) {
         this.scvoContext = (<any>window).contextData;
         var routes = this.scvoContext.routes;
         this.scvoRouter = new ScvoRouter(routes);
