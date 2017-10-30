@@ -192,6 +192,52 @@
             "log": "error"
         }
     },
+    "post-author": {
+        "linkTags": [],
+        "metaTags": [],
+        "pattern": "/post/author/*path",
+        "template": `{:templates/post-author.hbs}`,
+        "primarySearchTemplate": {
+            "index": "web-content-production",
+            "type": "scvo-cms-post",
+            "template": `{:queries/post-author.json}`
+        },
+        "supplimentarySearchTemplates": {
+            "splash": {
+                "index": "web-content-production",
+                "type": "scvo-cms-media",
+                "template": `{:queries/page-splash.json}`
+            }
+        },
+        "elasticsearchConfig": {
+            "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
+            "apiVersion": "5.6",
+            "log": "error"
+        }
+    },
+    "post-category": {
+        "linkTags": [],
+        "metaTags": [],
+        "pattern": "/post/categories/*path",
+        "template": `{:templates/post-list.hbs}`,
+        "primarySearchTemplate": {
+            "index": "web-content-production",
+            "type": "scvo-cms-post",
+            "template": `{:queries/post-category.json}`
+        },
+        "supplimentarySearchTemplates": {
+            "splash": {
+                "index": "web-content-production",
+                "type": "scvo-cms-media",
+                "template": `{:queries/page-splash.json}`
+            }
+        },
+        "elasticsearchConfig": {
+            "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
+            "apiVersion": "5.6",
+            "log": "error"
+        }
+    },
     "post-briefings": {
         "linkTags": [],
         "metaTags": [],
@@ -241,7 +287,7 @@
     "post": {
         "linkTags": [],
         "metaTags": [],
-        "pattern": "/blog/*path",
+        "pattern": "/post/*path",
         "template": `{:templates/post.hbs}`,
         "jsonLdTemplate": `{:templates/default-json-ld.hbs}`,
         "primarySearchTemplate": {
