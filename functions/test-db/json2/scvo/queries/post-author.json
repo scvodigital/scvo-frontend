@@ -1,6 +1,10 @@
 {
     "size": 10,
     "from": {{multiply (subtract (default query.page 1) 1) 10}},
+    "_source": [
+        "categories_id",
+        "rendered.list"
+    ],
     "query": {
         "term": {
             "author_slug": "{{lastItem (split path '_')}}"
