@@ -39,11 +39,11 @@ export class Context implements IContext {
     private compiledCss: string = null;
     private router: Router = null;
 
-    constructor(context: IContext){
+    constructor(context: IContext, public userId: any){
         Object.assign(this, context);
 
         // Setup our router
-        this.router = new Router(this.routes, this.uaId, '6a14abda-6b12-4578-bf66-43c754eaeda9');
+        this.router = new Router(this.routes, this.uaId, userId);
         this.menuProcessor = new MenuProcessor(this.menus);
 
         // Compile our templates and CSS

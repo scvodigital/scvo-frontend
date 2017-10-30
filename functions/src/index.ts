@@ -9,6 +9,8 @@ import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
 import { Router, RouteMatch, IMenus } from 'scvo-router';
 import * as Dot from 'dot-object';
+import * as uuid from 'uuid';
+import * as cookieParser from 'cookie-parser';
 
 // Internal imports
 import { fsPdf } from './fs-pdf';
@@ -24,31 +26,35 @@ const config = {
 const app = admin.initializeApp(<admin.AppOptions>config);
 const dot = new Dot('/');
 
+const cp = cookieParser();
+    
 exports.index = functions.https.onRequest((req: functions.Request, res: functions.Response) => {
     return new Promise((resolve, reject) => {
-        var domain = req.hostname.replace(/www\./, '');
-        var siteKey = domainMap[domain] ? domainMap[domain] : 'scvo';
-        var path = '/sites/' + siteKey;
+        userId(req, res, () => {
+            var domain = req.hostname.replace(/www\./, '');
+            var siteKey = domainMap[domain] ? domainMap[domain] : 'scvo';
+            var path = '/sites/' + siteKey;
 
-        getJson<Context>(path).then((contextJson: Context) => {
-            var context = new Context(contextJson);
-            var url = req.query.url || req.url;
+            getJson<Context>(path).then((contextJson: Context) => {
+                var context = new Context(contextJson, req.cookies.__session);
+                var url = req.query.url || req.url;
 
-            context.renderPage(url).then((html: string) => {
-                res.send(html);
-                res.end();
-                resolve();
+                context.renderPage(url).then((html: string) => {
+                    res.send(html);
+                    res.end();
+                    resolve();
+                }).catch((err) => {
+                    console.error('Failed to execute router', err);
+                    res.json(err);
+                    res.end();
+                    reject(err);
+                });
             }).catch((err) => {
-                console.error('Failed to execute router', err);
+                console.error('Failed to get context', err);
                 res.json(err);
                 res.end();
                 reject(err);
             });
-        }).catch((err) => {
-            console.error('Failed to get context', err);
-            res.json(err);
-            res.end();
-            reject(err);
         });
     });
 });
@@ -93,10 +99,21 @@ exports.menuUpdate = functions.https.onRequest((req: functions.Request, res: fun
     });
 });
 
+function userId(req: functions.Request, res: functions.Response, callback: Function) {
+    cp(req, res, () => {
+        var userId = req.cookies && req.cookies.__session ? req.cookies.__session : uuid.v4();
+        var maxAge = 24 * 60 * 60 * 1000;
+        
+        req.cookies.__session = userId;
+        res.cookie('__session', userId, { maxAge: maxAge });
+
+        callback(req, res);
+    });
+}
+
 function putJson(jsonPath: string, json: any): Promise<void> {
     return new Promise<void>((resolve, reject) => {
         if(process.env.devmode){
-            console.log('In dev mode, using local db');
             try{
                 jsonPath = jsonPath.indexOf('/') === 0 ? jsonPath.substr(1) : jsonPath;
                 var filePath = path.join(__dirname, '../test-db/db.json');
@@ -109,7 +126,6 @@ function putJson(jsonPath: string, json: any): Promise<void> {
                 reject(err);
             }
         }else{
-            console.log('Not in dev mode, using firebase');
             app.database().ref(jsonPath).set(json).then(() => {
                 resolve();
             }).catch((err) => {
@@ -122,7 +138,6 @@ function putJson(jsonPath: string, json: any): Promise<void> {
 function getJson<T>(jsonPath: string): Promise<T> {
     return new Promise<T>((resolve, reject) => {
         if(process.env.devmode){
-            console.log('In dev mode, loading local db');
             try{
                 jsonPath = jsonPath.indexOf('/') === 0 ? jsonPath.substr(1) : jsonPath;
                 var filePath = path.join(__dirname, '../test-db/db.json');
@@ -134,7 +149,6 @@ function getJson<T>(jsonPath: string): Promise<T> {
                 reject(err);
             }
         }else{
-            console.log('Not in dev mode, using firebase');
             app.database().ref(jsonPath).once('value').then((obj: admin.database.DataSnapshot) => {
                 if(obj.exists()){
                     var json = obj.val();
@@ -159,9 +173,11 @@ const domainMap = {
     "goodmoves.eu": "goodmoves",
     "goodmoves.scot": "goodmoves",
     "goodmoves.org.uk": "goodmoves",
+    "scvo-net.firebaseapp.com": "scvo",
     "localhost": "scvo",
     "127.0.0.1": "scvo",
     "scvo.net": "scvo",
+    "test.scvo.org.uk": "scvo",
     "beta.scvo.org.uk": "scvo",
     "beta.scvo.scot": "scvo",
     "beta.scvo.org": "scvo"

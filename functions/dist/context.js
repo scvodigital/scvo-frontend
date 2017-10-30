@@ -6,7 +6,8 @@ var sass = require("node-sass");
 var scvo_router_1 = require("scvo-router");
 helpers({ handlebars: handlebars });
 var Context = /** @class */ (function () {
-    function Context(context) {
+    function Context(context, userId) {
+        this.userId = userId;
         this.name = '';
         this.domains = [];
         this.linkTags = [];
@@ -26,7 +27,7 @@ var Context = /** @class */ (function () {
         this.router = null;
         Object.assign(this, context);
         // Setup our router
-        this.router = new scvo_router_1.Router(this.routes, this.uaId, '6a14abda-6b12-4578-bf66-43c754eaeda9');
+        this.router = new scvo_router_1.Router(this.routes, this.uaId, userId);
         this.menuProcessor = new scvo_router_1.MenuProcessor(this.menus);
         // Compile our templates and CSS
         this.compiledTemplate = handlebars.compile(this.template);
