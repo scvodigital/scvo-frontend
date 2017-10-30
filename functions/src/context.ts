@@ -66,7 +66,8 @@ export class Context implements IContext {
                     css: this.compiledCss,
                     routes: this.routes,
                     route: routeMatch,
-                    headerTags: this.getHeaderTags(routeMatch)
+                    headerTags: this.getHeaderTags(routeMatch),
+                    uaId: this.uaId
                 };
                 //console.log('TEMPLATE DATA:', JSON.stringify(templateData, null, 4));
                 var contextHtml = this.compiledTemplate(templateData);

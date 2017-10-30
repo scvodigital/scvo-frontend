@@ -28,7 +28,7 @@ export class RouterService {
         var routes = this.scvoContext.routes;
         var uid = this.cookieService.get('__session');
         if(uid){
-            console.log('GOT UID:', uid);
+            console.log('GOT UID:', this.scvoContext.uaId, uid);
             this.scvoRouter = new ScvoRouter(routes, this.scvoContext.uaId, uid, true);
         }else{
             this.scvoRouter = new ScvoRouter(routes);
