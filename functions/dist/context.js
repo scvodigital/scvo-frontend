@@ -27,7 +27,7 @@ var Context = /** @class */ (function () {
         this.router = null;
         Object.assign(this, context);
         // Setup our router
-        this.router = new scvo_router_1.Router(this.routes, this.uaId, userId);
+        this.router = new scvo_router_1.Router(this.routes, this.uaId, userId, true);
         this.menuProcessor = new scvo_router_1.MenuProcessor(this.menus);
         // Compile our templates and CSS
         this.compiledTemplate = handlebars.compile(this.template);
