@@ -9,6 +9,7 @@ import { HttpModule } from '@angular/http';
 
 // External Modules
 import { DynamicComponentModule } from 'angular2-dynamic-component/index';
+import { CookieModule } from 'ngx-cookie';
 
 // Internal Modules
 import { rootRouterConfig } from "./app.routing";
@@ -34,6 +35,7 @@ import { SearchBoxDirective } from './directives/search-box.directive';
     BrowserModule,
     HttpModule,
     RouterModule.forRoot(rootRouterConfig),
+    CookieModule.forRoot(),
     DynamicComponentModule
   ],
   providers: [

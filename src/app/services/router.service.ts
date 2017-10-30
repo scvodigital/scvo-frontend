@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 
 import { Observable, Subject } from 'rxjs/Rx';
+import { CookieService } from 'ngx-cookie';
 
 import { Router as ScvoRouter, IRoutes, IContext, RouteMatch } from 'scvo-router';
 
@@ -22,10 +23,16 @@ export class RouterService {
         return this._domainStripper;
     }
     
-    constructor(private router: Router) {
+    constructor(private router: Router, private cookieService: CookieService) {
         this.scvoContext = (<any>window).contextData;
         var routes = this.scvoContext.routes;
-        this.scvoRouter = new ScvoRouter(routes);
+        var uid = this.cookieService.get('__session');
+        if(uid){
+            console.log('GOT UID:', uid);
+            this.scvoRouter = new ScvoRouter(routes, this.scvoContext.uaId, uid, true);
+        }else{
+            this.scvoRouter = new ScvoRouter(routes);
+        }
         this.trackRoute();
     }
 
