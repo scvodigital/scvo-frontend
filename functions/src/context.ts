@@ -43,7 +43,7 @@ export class Context implements IContext {
         Object.assign(this, context);
 
         // Setup our router
-        this.router = new Router(this.routes, this.uaId, userId);
+        this.router = new Router(this.routes, this.uaId, userId, true);
         this.menuProcessor = new MenuProcessor(this.menus);
 
         // Compile our templates and CSS
