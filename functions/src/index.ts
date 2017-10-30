@@ -165,7 +165,7 @@ function getJson<T>(jsonPath: string): Promise<T> {
 
 const siteCmsMap = {
     "goodmoves": "cms.goodmoves.com",
-    "scvo": "cms.scvo.net",
+    "scvo": "cms.scvo.org",
 };
 
 const domainMap = {
