@@ -320,6 +320,10 @@ footer .mdc-list .mdc-list-item a:hover {
             position: absolute;
             left: 0;
             bottom: $spacing-unit/2;
+            img.header-text {
+                max-width: 100%;
+                max-height: 18vh;
+            }
             h1 {
                 margin: 0;
                 color: #fff;
@@ -341,7 +345,7 @@ footer .mdc-list .mdc-list-item a:hover {
             h1.post-title {
                 padding-left: 0.75rem;
                 font-size: 2rem;
-                line-height: 3.1rem;
+                line-height: 3rem;
             }
         }
     }
@@ -403,6 +407,18 @@ footer .mdc-list .mdc-list-item a:hover {
 }
 .mdc-card__media-item {
     border-radius: 50%;
+}
+.mdc-card__primary {
+    padding: $spacing-unit;
+}
+.mdc-card__supporting-text {
+    padding: 0 $spacing-unit $spacing-unit/2;
+}
+.scvo-cms-post .mdc-card__actions {
+    padding: $spacing-unit/2 $spacing-unit;
+    .post-info {
+        padding: 0;
+    }
 }
 
 .credit-union {
@@ -535,12 +551,13 @@ ul.breadcrumb {
     .post-info-categories {
         .inline-list {
             li {
-                background: var(--mdc-theme-primary-dark);
-                padding: 0.1rem 0.4rem 0.05rem;
-                border-radius: 1rem;
                 display: inline-block;
                 font-size: 90%;
+                margin: 0 0 0.25rem 0.1rem;
                 a {
+                    background: var(--mdc-theme-primary-dark);
+                    padding: 0.05rem 0.4rem 0.1rem;
+                    border-radius: 1rem;
                     color: #fff;
                 }
                 a:hover {
@@ -661,6 +678,9 @@ p:last-child {
         position: relative;
         vertical-align: bottom;
         font-weight: 400;
+    }
+    a[href^="https://members.scvocreditunion"]::after {
+        content: " ";
     }
 }
 

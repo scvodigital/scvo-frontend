@@ -2,7 +2,11 @@
     <div class="container-fluid">
         <div class="mdc-layout-grid">
             <h1 class="page-title">
-                {{primaryResponse.hits.hits.[0]._source.categories.[0]}}
+                <!-- { {#each primaryResponse.hits.hits.[0]._source.categories_slug}}
+                { {#compare (lastItem (split ../params.path '_')) this operator="=="}}
+                { { {primaryResponse.hits.hits.[0]._source.categories.[@index]}}}
+                { {/compare}}
+                { {/each}} -->
                 <!-- { {#each primaryResponse.hits.hits.[0]._source.categories_slug}}
                 { {#compare (lastItem (split ../params.path '_')) '==' this}}
                 category: { {../categories.[@index]}}
