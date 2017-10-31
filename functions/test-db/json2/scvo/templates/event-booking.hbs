@@ -1,21 +1,34 @@
 <div class="splash-image splash-image-event{{#if primaryResponse.hits.hits.[0]._source.featured_image}} splash-image-featured{{/if}}" style="background-image: {{#if primaryResponse.hits.hits.[0]._source.featured_image}}{{else}}linear-gradient(10deg, var(--mdc-theme-primary-dark) 10%, var(--mdc-theme-primary-fade) 75%, rgba(0,0,0,0.2) 100%),{{/if}}url('{{#if primaryResponse.hits.hits.[0]._source.featured_image}}{{primaryResponse.hits.hits.[0]._source.featured_image.sizes.full.source_url}}{{else}}{{#if supplimentaryResponse.splash.hits.hits.[0]._source.original_image}}{{supplimentaryResponse.splash.hits.hits.[0]._source.original_image}}{{/if}}{{/if}}');{{#if primaryResponse.hits.hits.[0]._source.featured_image}} max-height:{{primaryResponse.hits.hits.[0]._source.featured_image.sizes.full.height}}px;{{/if}}">
     <div class="container-fluid">
         <div class="mdc-layout-grid">
-            <h1 class="event-title"><span class="highlight">{{{primaryResponse.hits.hits.[0]._source.title}}}</span></h1>
+            <h1 class="event-title"><span class="highlight">Booking: {{{primaryResponse.hits.hits.[0]._source.title}}}</span></h1>
         </div>
     </div>
 </div>
 
+{{#with primaryResponse.hits.hits.[0]._source}}
 <div class="container-fluid">
     <ul class="breadcrumb">
         <li><a href="/">Home</a></li>
         <li><a href="/services">Services</a></li>
         <li><a href="/services/events">Events</a></li>
+        <li><a href="/services/events/{{slug}}">{{{title}}}</a></li>
     </ul>
     <div class="mdc-layout-grid">
         <div class="mdc-layout-grid__inner">
             <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-8 content event-content">
-                {{{primaryResponse.hits.hits.[0]._source.rendered.full}}}
+                <iframe src="https://www.surveygizmo.eu/s3/90055302/Events-Booking-Training-Events?sfid={{Id}}&title={{title}}" frameborder="0" width="100%" height="400" style="overflow:hidden"></iframe>
+                <script type="text/javascript">
+                window.addEventListener("message", (event) => {
+                    if (event.data.hasOwnProperty('event')) {
+                        switch (event.data.event) {
+                            case ('resize'):
+                                $('iframe[src*="' + event.origin + '"]').css('height', event.data.height + 60);
+                                break;
+                        }
+                    }
+                }, false);
+                </script>
             </div>
             <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 sidebar event-sidebar">
                 <!-- TBC -->
@@ -23,3 +36,4 @@
         </div>
     </div>
 </div>
+{{/with}}
