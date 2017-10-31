@@ -6,18 +6,20 @@
 	"query": {
         "bool": {
             "must": {
-              "match_all": {}
+                "match_all": {}
             },
             "should": [
                 {
-                    "query_string": {
-                        "query": "{{primaryResponse.hits.hits.[0]._source.title}}",
-                        "default_operator": "AND",
+		            "simple_query_string": {
+		                "query": "{{primaryResponse.hits.hits.[0]._source.title}}",
+                        "default_operator": "and",
+                        "fields": ["text_bag"],
                         "analyzer": "snowball"
-                    }
-                }
+		            }
+	            }
             ],
             "minimum_should_match": 1
         }
-	}
+	},
+
 }

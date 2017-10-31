@@ -49,6 +49,11 @@
                             </span>
                         </section>
                         <section class="mdc-toolbar__section mdc-toolbar__section--align-end toolbar-search">
+                            <nav id="upper-tab-bar" class="mdc-tab-bar">
+                                {{#each menus.upper}}
+                                <a class="mdc-tab" href="{{path}}">{{{label}}}</a>
+                                {{/each}}
+                            </nav>
                             <div class="mdc-form-field mdc-form-field--align-end">
                                 <div class="mdc-textfield" data-mdc-auto-init="MDCTextfield">
                                     <input type="text" class="mdc-textfield__input white-text searchRoute" placeholder="Search" id="search"
@@ -64,9 +69,9 @@
                 <div class="mdc-toolbar__row toolbar-nav">
                     <div class="container-fluid">
                         <section class="mdc-toolbar__section mdc-toolbar__section--align-start toolbar-menu">
-                            <nav id="basic-tab-bar" class="mdc-tab-bar">
+                            <nav id="main-tab-bar" class="mdc-tab-bar">
                                 {{#each menus.main}}
-                                <a class="mdc-tab" href="{{path}}">{{label}}</a>
+                                <a class="mdc-tab" href="{{path}}">{{{label}}}</a>
                                 {{/each}}
                             </nav>
                         </section>
@@ -85,8 +90,12 @@
                         <div id="icon-with-text-demo" class="mdc-list">
                             {{#each menus.main}}
                             <a class="mdc-list-item" href="{{path}}" data-mdc-tabindex-handled="true" tabindex="-1">
-                                <i class="material-icons mdc-list-item__start-detail" aria-hidden="true">home</i>
-                                {{label}}
+                                {{{label}}}
+                            </a>
+                            {{/each}}
+                            {{#each menus.upper}}
+                            <a class="mdc-list-item" href="{{path}}" data-mdc-tabindex-handled="true" tabindex="-1">
+                                {{{label}}}
                             </a>
                             {{/each}}
                         </div>
