@@ -1,0 +1,36 @@
+{
+    "size": 10,
+    "from": {{multiply (subtract (default query.page 1) 1) 10}},
+    "query": {
+        "function_score": {
+            "query": {
+                "bool": {
+                    "must": [
+                        {{#if query.library_classification}}
+                            {
+                                "term": {
+                                    "library_classification": "{{query.library_classification}}"
+                                }
+                            }
+                            {{#if query.q}},{{/if}}
+                        {{/if}}
+                        {{#if query.q}}
+                            {
+                                "query_string": {
+                                    "query": "{{query.q}}",
+                                    "default_operator": "AND",
+                                    "analyzer": "snowball"
+                                }
+                            }
+                        {{/if}}
+                    ]
+                }
+            },
+            "gauss": {
+                "date_posted": {
+                    "scale": "6m"
+                }
+            }
+        }
+    }
+}

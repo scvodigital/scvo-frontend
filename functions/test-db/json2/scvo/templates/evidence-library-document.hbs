@@ -1,0 +1,25 @@
+<div class="splash-image splash-image-evidence-library{{#if primaryResponse.hits.hits.[0]._source.featured_image}} splash-image-featured{{/if}}" style="background-image: {{#if primaryResponse.hits.hits.[0]._source.featured_image}}{{else}}linear-gradient(10deg, var(--mdc-theme-primary-dark) 10%, var(--mdc-theme-primary-fade) 75%, rgba(0,0,0,0.2) 100%),{{/if}}url('{{#if primaryResponse.hits.hits.[0]._source.featured_image}}{{primaryResponse.hits.hits.[0]._source.featured_image.sizes.full.source_url}}{{else}}{{#if supplimentaryResponse.splash.hits.hits.[0]._source.original_image}}{{supplimentaryResponse.splash.hits.hits.[0]._source.original_image}}{{/if}}{{/if}}');{{#if primaryResponse.hits.hits.[0]._source.featured_image}} max-height:{{primaryResponse.hits.hits.[0]._source.featured_image.sizes.full.height}}px;{{/if}}">
+    <div class="container-fluid">
+        <div class="mdc-layout-grid">
+            <h1 class="evidence-library-title"><span class="highlight">{{{primaryResponse.hits.hits.[0]._source.title}}}</span></h1>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <ul class="breadcrumb">
+        <li><a href="/">Home</a></li>
+        <li><a href="/policy-research">Policy &amp; research</a></li>
+        <li><a href="/policy-research/evidence-library">Evidence library</a></li>
+    </ul>
+    <div class="mdc-layout-grid">
+        <div class="mdc-layout-grid__inner">
+            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3 sidebar library-sidebar">
+                &nbsp;
+            </div>
+            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-9 content library-content">
+                {{{primaryResponse.hits.hits.[0]._source.rendered.full}}}
+            </div>
+        </div>
+    </div>
+</div>

@@ -22,8 +22,9 @@ export class Context implements IContext {
     sass: string = '';
     template: string = '';
     menuProcessor: MenuProcessor = null;
-   
-    _domainStripper: RegExp = null; 
+    uaId: string = '';
+
+    _domainStripper: RegExp = null;
     get domainStripper(): RegExp {
         if(!this._domainStripper){
             var stripDomains = this.domains.map((domain: string) => { return domain.replace(/\./g, '\\.'); });
@@ -38,11 +39,11 @@ export class Context implements IContext {
     private compiledCss: string = null;
     private router: Router = null;
 
-    constructor(context: IContext){
+    constructor(context: IContext, public userId: any){
         Object.assign(this, context);
-        
+
         // Setup our router
-        this.router = new Router(this.routes);
+        this.router = new Router(this.routes, this.uaId, userId, true);
         this.menuProcessor = new MenuProcessor(this.menus);
 
         // Compile our templates and CSS
@@ -52,7 +53,7 @@ export class Context implements IContext {
 
     renderPage(uriString: string): Promise<string>{
         return new Promise<string>((resolve, reject) => {
-            var menus = this.menuProcessor.getMenus(uriString, 0, 5); 
+            var menus = this.menuProcessor.getMenus(uriString, 0, 5);
 
             this.router.execute(uriString).then((routeMatch: IRouteMatch) => {
                 var templateData = {
@@ -65,9 +66,10 @@ export class Context implements IContext {
                     css: this.compiledCss,
                     routes: this.routes,
                     route: routeMatch,
-                    headerTags: this.getHeaderTags(routeMatch)
+                    headerTags: this.getHeaderTags(routeMatch),
+                    uaId: this.uaId
                 };
-                console.log('TEMPLATE DATA:', JSON.stringify(templateData, null, 4));
+                //console.log('TEMPLATE DATA:', JSON.stringify(templateData, null, 4));
                 var contextHtml = this.compiledTemplate(templateData);
 
                 var closingHeadTag = contextHtml.indexOf('</head>');
@@ -82,7 +84,6 @@ export class Context implements IContext {
                     contextHtml = [contextHtml.slice(0, closingHeadTag), dataTag, contextHtml.slice(closingHeadTag)].join('');
                 }
 
-                console.log('DOMAIN STRIPPER:', this.domainStripper);
                 contextHtml = contextHtml.replace(this.domainStripper, '');
 
                 resolve(contextHtml);
@@ -92,7 +93,7 @@ export class Context implements IContext {
             });
         });
     }
-    
+
     getHeaderTags(routeMatch: IRouteMatch): string {
         var linkTags = {};
         var metaTags = {};
@@ -106,7 +107,7 @@ export class Context implements IContext {
         (this.metaTags || []).forEach((metaTag: IMetaTag) => {
             var key = metaTag.name || 'cmt' + Math.floor(Math.random() * 999999);
             var tag = this.renderTag('meta', metaTag);
-            metaTags[key] = tag;    
+            metaTags[key] = tag;
         });
 
         (routeMatch.linkTags || []).forEach((linkTag: ILinkTag) => {
@@ -118,7 +119,7 @@ export class Context implements IContext {
         (routeMatch.metaTags || []).forEach((metaTag: IMetaTag) => {
             var key = metaTag.name || 'rmt' + Math.floor(Math.random() * 999999);
             var tag = this.renderTag('meta', metaTag);
-            metaTags[key] = tag;    
+            metaTags[key] = tag;
         });
 
         var linkTagsHtml = Object.keys(linkTags).map((key: string) => {
@@ -131,7 +132,7 @@ export class Context implements IContext {
 
         //TODO: Add pagination params and link generators to route and include link tags here
         //TODO: Add some kind of title templating here as well
-        
+
         var headerTags = `
             <!-- Start of Generated Route Header Tags -->
             ${linkTagsHtml}

@@ -1,0 +1,25 @@
+{
+	"size": 8,
+    "_source": [
+        "rendered.gist"
+    ],
+	"query": {
+        "bool": {
+            "must": {
+                "match_all": {}
+            },
+            "should": [
+                {
+		            "simple_query_string": {
+		                "query": "{{primaryResponse.hits.hits.[0]._source.title}}",
+                        "default_operator": "and",
+                        "fields": ["text_bag"],
+                        "analyzer": "snowball"
+		            }
+	            }
+            ],
+            "minimum_should_match": 1
+        }
+	},
+
+}

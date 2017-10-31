@@ -2,10 +2,20 @@
     "size": 10,
     "from": {{multiply (subtract (default query.page 1) 1) 10}},
     "query": {
-        "query_string": {
-            "query": "{{query.q}}",
-            "default_operator": "AND",
-            "analyzer": "snowball"
+        "bool": {
+            "should": [
+                {
+                    "query_string": {
+                        "query": "{{query.q}}",
+                        "default_operator": "AND",
+                        "analyzer": "snowball"
+                    }
+                },
+                { "term" : { "_type" : {"value" : "scvo-cms-post", "boost" : 5.0} } },
+                { "term" : { "_type" : {"value" : "scvo-event", "boost" : 4.0} } },
+                { "term" : { "_type" : {"value" : "scvo-cms-page", "boost" : 3.0} } },
+                { "term" : { "_type" : {"value" : "goodhq-organisation", "boost" : 1.5} } }
+            ]
         }
     }
 }

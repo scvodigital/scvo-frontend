@@ -1,0 +1,90 @@
+<div class="container-fluid">
+    <ul class="breadcrumb">
+        <li><a href="/">Home</a></li>
+        <li><a href="/services">Services</a></li>
+    </ul>
+    <div class="v-margin">
+        <div class="mdc-card">
+            <section class="mdc-card__primary">
+                <h2 class="mdc-card__title mdc-card__title--large">Find Events</h2>
+                <form [searchroute]="'events'">
+                    <div class="mdc-layout-grid">
+                        <div class="mdc-layout-grid__inner">
+                            <div class="mdc-layout-grid__cell">
+                                <div class="mdc-textfield mdc-textfield--upgraded" data-mdc-auto-init="MDCTextfield">
+                                    <input type="text" class="mdc-textfield__input" name="q" id="events-keywords" value="{{params.query.q}}">
+                                    <label class="mdc-textfield__label" for="events-keywords">Keywords</label>
+                                    <div class="mdc-textfield__bottom-line"></div>
+                                </div>
+                            </div>
+                            <div class="mdc-layout-grid__cell">
+                                <div class="mdc-form-field">
+                                    <select class="mdc-select" role="listbox" id="events-type" name="type">
+                                        <option value="" {{#if params.query.type}}{{else}}selected{{/if}}>Select event type</option>
+                                        {{#each supplimentaryResponse.types.aggregations.types.buckets}}
+                                            <option value="{{key}}" {{#compare ../params.query.type "===" key}}selected{{/compare}}>{{key}} ({{doc_count}})</option>
+                                        {{/each}}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="mdc-layout-grid__cell">
+                                <div class="mdc-form-field">
+                                    <div class="mdc-checkbox">
+                                        <input type="checkbox" class="mdc-checkbox__native-control" id="events-free" name="free" {{#if params.query.free}}checked{{/if}} />
+                                        <div class="mdc-checkbox__background">
+                                            <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
+                                                <path class="mdc-checkbox__checkmark__path"
+                                                    fill="none"
+                                                    stroke="white"
+                                                    d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                            </svg>
+                                            <div class="mdc-checkbox__mixedmark"></div>
+                                        </div>
+                                    </div>
+                                    <label for="events-free">Only free events</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="mdc-button mdc-button--raised" type="submit">
+                        Search
+                    </button>
+                </form>
+            </section>
+        </div>
+    </div>
+
+    {{#each primaryResponse.hits.hits}}
+        <div class="v-margin">
+            {{#if _source.rendered.search_result_scvo}}
+                {{{_source.rendered.search_result_scvo}}}
+            {{else}}
+                {{#if _source.rendered.search_result}}
+                    {{{_source.rendered.search_result}}}
+                {{/if}}
+            {{/if}}
+        </div>
+    {{/each}}
+
+    <div class="v-margin">
+        <ul class="pagination inline-list">
+            {{#if paging.prevPage}}
+                <li>
+                    <a class="mdc-button mdc-button--compact" href="/search?q={{../params.query.q}}&page={{paging.prevPage}}">Previous</a>
+                </li>
+            {{/if}}
+
+            {{#each paging.pageRange}}
+                <li class="{{#compare ../paging.currentPage "===" this.pageNumber}}current-page{{/compare}} pagination-distance-{{this.distance}}">
+                    <a  class="mdc-button mdc-button--compact" href="/search?q={{../params.query.q}}&page={{this.pageNumber}}">{{this.pageNumber}}</a>
+                </li>
+            {{/each}}
+
+            {{#if paging.nextPage}}
+                <li>
+                    <a class="mdc-button mdc-button--compact" href="/search?q={{../params.query.q}}&page={{paging.nextPage}}">Next</a>
+                </li>
+            {{/if}}
+        </ul>
+    </div>
+</div>

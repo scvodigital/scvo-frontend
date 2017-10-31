@@ -1,0 +1,68 @@
+<div class="splash-image splash-image-evidence-library" style="background-image: linear-gradient(10deg, var(--mdc-theme-primary-dark) 10%, var(--mdc-theme-primary-fade) 75%, rgba(0,0,0,0.2) 100%),url('{{#if supplimentaryResponse.splash.hits.hits.[0]._source.original_image}}{{supplimentaryResponse.splash.hits.hits.[0]._source.original_image}}{{/if}}');">
+    <div class="container-fluid">
+        <div class="mdc-layout-grid">
+            <h1 class="page-title">Evidence Library</h1>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <ul class="breadcrumb">
+        <li><a href="/">Home</a></li>
+        <li><a href="/policy-research">Policy &amp; research</a></li>
+    </ul>
+
+    <div class="mdc-layout-grid">
+        <div class="mdc-layout-grid__inner">
+            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3 sidebar library-sidebar">
+                <form [searchroute]="'evidence-library'">
+                    <div class="mdc-textfield mdc-textfield--upgraded" data-mdc-auto-init="MDCTextfield">
+                        <input type="text" class="mdc-textfield__input" name="q" id="evidence-library-keywords" value="{{params.query.q}}">
+                        <label class="mdc-textfield__label" for="evidence-library-keywords">Keywords</label>
+                        <div class="mdc-textfield__bottom-line"></div>
+                    </div>
+                    <div class="mdc-form-field">
+                        <select class="mdc-select" role="listbox" id="evidence-library-classification" name="library_classification">
+                            <option value="" {{#if params.query.library_classification}}{{else}}selected{{/if}}>All categories</option>
+                            {{#each supplimentaryResponse.types.aggregations.types.buckets}}
+                            <option value="{{key}}" {{#compare ../params.query.library_classification "===" key}}selected{{/compare}}>{{key}} ({{doc_count}})</option>
+                            {{/each}}
+                        </select>
+                    </div>
+                    <button class="mdc-button mdc-button--raised" type="submit">
+                        Search
+                    </button>
+                </form>
+            </div>
+            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-9 content library-content">
+                {{#each primaryResponse.hits.hits}}
+                {{#if _source.rendered.search_result_scvo}}
+                {{{_source.rendered.search_result_scvo}}}
+                {{else}}
+                {{#if _source.rendered.search_result}}
+                {{{_source.rendered.search_result}}}
+                {{/if}}
+                {{/if}}
+                {{/each}}
+
+                <ul class="pagination inline-list">
+                    {{#if paging.prevPage}}
+                    <li>
+                        <a class="mdc-button mdc-button--compact" href="/search?q={{../params.query.q}}&page={{paging.prevPage}}">Previous</a>
+                    </li>
+                    {{/if}}
+                    {{#each paging.pageRange}}
+                    <li class="{{#compare ../paging.currentPage "===" this.pageNumber}}current-page{{/compare}} pagination-distance-{{this.distance}}">
+                        <a  class="mdc-button mdc-button--compact" href="/search?q={{../params.query.q}}&page={{this.pageNumber}}">{{this.pageNumber}}</a>
+                    </li>
+                    {{/each}}
+                    {{#if paging.nextPage}}
+                    <li>
+                        <a class="mdc-button mdc-button--compact" href="/search?q={{../params.query.q}}&page={{paging.nextPage}}">Next</a>
+                    </li>
+                    {{/if}}
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

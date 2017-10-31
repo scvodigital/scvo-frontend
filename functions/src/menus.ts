@@ -91,6 +91,8 @@ function transformWpMenu(wpMenuItem: IWPMenuItem, domainRegex: RegExp): IMenuIte
     var route = metaData['menu-item-route-pattern'] || null;
     var path = wpMenuItem.url;
     if(domainRegex){
+        var found = domainRegex.exec(path);
+        console.log('DOMAIN REPLACE:', path, '| FOUND:', found);
         path = path.replace(domainRegex, '');
     }
 

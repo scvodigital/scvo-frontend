@@ -1,7 +1,7 @@
-<div class="splash-image splash-image-post" style="background-image: linear-gradient(20deg, var(--mdc-theme-primary-dark) 5%, var(--mdc-theme-primary) 25%, var(--mdc-theme-primary-fade) 100%),url('{{#if primaryResponse.hits.hits.[0]._source.featured_image}}{{primaryResponse.hits.hits.[0]._source.featured_image.sizes.full.source_url}}{{else}}{{#if supplimentaryResponse.splash.hits.hits.[0]._source.original_image}}{{supplimentaryResponse.splash.hits.hits.[0]._source.original_image}}{{/if}}{{/if}}');position: relative;">
+<div class="splash-image splash-image-post{{#if primaryResponse.hits.hits.[0]._source.featured_image}} splash-image-featured{{/if}}" style="background-image: {{#if primaryResponse.hits.hits.[0]._source.featured_image}}{{else}}linear-gradient(10deg, var(--mdc-theme-primary-dark) 10%, var(--mdc-theme-primary-fade) 75%, rgba(0,0,0,0.2) 100%),{{/if}}url('{{#if primaryResponse.hits.hits.[0]._source.featured_image}}{{primaryResponse.hits.hits.[0]._source.featured_image.sizes.full.source_url}}{{else}}{{#if supplimentaryResponse.splash.hits.hits.[0]._source.original_image}}{{supplimentaryResponse.splash.hits.hits.[0]._source.original_image}}{{/if}}{{/if}}');{{#if primaryResponse.hits.hits.[0]._source.featured_image}} max-height:{{primaryResponse.hits.hits.[0]._source.featured_image.sizes.full.height}}px;{{/if}}">
     <div class="container-fluid">
         <div class="mdc-layout-grid">
-            <h1 class="post-title">{{{primaryResponse.hits.hits.[0]._source.title}}}</h1>
+            <h1 class="post-title"><span class="highlight">{{{primaryResponse.hits.hits.[0]._source.title}}}</span></h1>
         </div>
     </div>
 </div>
@@ -9,18 +9,27 @@
 <div class="container-fluid">
     <div class="mdc-layout-grid">
         <div class="mdc-layout-grid__inner">
-            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-8 post-content">
-                {{#with primaryResponse.hits.hits.[0]._source}}
-                {{{rendered.full}}}
-                {{/with}}
+            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-8 content post-content">
+                {{{primaryResponse.hits.hits.[0]._source.rendered.full}}}
             </div>
-            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 post-sidebar">
+            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 sidebar post-sidebar">
                 <h3 class="author">More by {{primaryResponse.hits.hits.[0]._source.author_name}}</h3>
                 <ul class="supplimentary-list">
                     {{#each supplimentaryResponse.authors_posts.hits.hits}}
-                    {{{_source.rendered.list}}}
+                    {{{_source.rendered.sidebar}}}
                     {{/each}}
                 </ul>
+            </div>
+            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 related post-related">
+                <div class="mdc-layout-grid">
+                    <div class="mdc-layout-grid__inner">
+                        {{#each supplimentaryResponse.tfn_related_posts.hits.hits}}
+                        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3">
+                            {{{_source.rendered.gist}}}
+                        </div>
+                        {{/each}}
+                    </div>
+                </div>
             </div>
         </div>
     </div>

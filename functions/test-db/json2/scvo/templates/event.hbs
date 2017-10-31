@@ -1,0 +1,25 @@
+<div class="splash-image splash-image-event{{#if primaryResponse.hits.hits.[0]._source.featured_image}} splash-image-featured{{/if}}" style="background-image: {{#if primaryResponse.hits.hits.[0]._source.featured_image}}{{else}}linear-gradient(10deg, var(--mdc-theme-primary-dark) 10%, var(--mdc-theme-primary-fade) 75%, rgba(0,0,0,0.2) 100%),{{/if}}url('{{#if primaryResponse.hits.hits.[0]._source.featured_image}}{{primaryResponse.hits.hits.[0]._source.featured_image.sizes.full.source_url}}{{else}}{{#if supplimentaryResponse.splash.hits.hits.[0]._source.original_image}}{{supplimentaryResponse.splash.hits.hits.[0]._source.original_image}}{{/if}}{{/if}}');{{#if primaryResponse.hits.hits.[0]._source.featured_image}} max-height:{{primaryResponse.hits.hits.[0]._source.featured_image.sizes.full.height}}px;{{/if}}">
+    <div class="container-fluid">
+        <div class="mdc-layout-grid">
+            <h1 class="event-title"><span class="highlight">{{{primaryResponse.hits.hits.[0]._source.title}}}</span></h1>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <ul class="breadcrumb">
+        <li><a href="/">Home</a></li>
+        <li><a href="/services">Services</a></li>
+        <li><a href="/services/events">Events</a></li>
+    </ul>
+    <div class="mdc-layout-grid">
+        <div class="mdc-layout-grid__inner">
+            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-8 content event-content">
+                {{{primaryResponse.hits.hits.[0]._source.rendered.full}}}
+            </div>
+            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 sidebar event-sidebar">
+                <!-- TBC -->
+            </div>
+        </div>
+    </div>
+</div>

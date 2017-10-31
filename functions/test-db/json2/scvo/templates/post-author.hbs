@@ -1,0 +1,50 @@
+<div class="splash-image splash-image-post{{#if primaryResponse.hits.hits.[0]._source.featured_image}} splash-image-featured{{/if}}" style="background-image: {{#if primaryResponse.hits.hits.[0]._source.featured_image}}{{else}}linear-gradient(10deg, var(--mdc-theme-primary-dark) 10%, var(--mdc-theme-primary-fade) 75%, rgba(0,0,0,0.2) 100%),{{/if}}url('{{#if primaryResponse.hits.hits.[0]._source.featured_image}}{{primaryResponse.hits.hits.[0]._source.featured_image.sizes.full.source_url}}{{else}}{{#if supplimentaryResponse.splash.hits.hits.[0]._source.original_image}}{{supplimentaryResponse.splash.hits.hits.[0]._source.original_image}}{{/if}}{{/if}}');{{#if primaryResponse.hits.hits.[0]._source.featured_image}} max-height:{{primaryResponse.hits.hits.[0]._source.featured_image.sizes.full.height}}px;{{/if}}">
+    <div class="container-fluid">
+        <div class="mdc-layout-grid">
+            <h1 class="page-title">{{supplimentaryResponse.staff_profile.hits.hits.[0]._source.scvo_staff.full_name}}</h1>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="mdc-layout-grid">
+        <div class="mdc-layout-grid__inner">
+            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-8 content post-content">
+                <ul class="supplimentary-list">
+                    {{#each primaryResponse.hits.hits}}
+                    {{{_source.rendered.list}}}
+                    {{/each}}
+                </ul>
+
+                <ul class="pagination inline-list">
+                    {{#if paging.prevPage}}
+                    <li>
+                        <a class="mdc-button mdc-button--compact" href="/search?q={{../params.query.q}}&page={{paging.prevPage}}">Previous</a>
+                    </li>
+                    {{/if}}
+                    {{#each paging.pageRange}}
+                    <li class="{{#compare ../paging.currentPage "===" this.pageNumber}}current-page{{/compare}} pagination-distance-{{this.distance}}">
+                        <a  class="mdc-button mdc-button--compact" href="/search?q={{../params.query.q}}&page={{this.pageNumber}}">{{this.pageNumber}}</a>
+                    </li>
+                    {{/each}}
+                    {{#if paging.nextPage}}
+                    <li>
+                        <a class="mdc-button mdc-button--compact" href="/search?q={{../params.query.q}}&page={{paging.nextPage}}">Next</a>
+                    </li>
+                    {{/if}}
+                </ul>
+            </div>
+            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 sidebar post-sidebar">
+                <h3 class="author">{{primaryResponse.hits.hits.[0]._source.author_name}}</h3>
+                <div class="author_about">
+                    {{#with supplimentaryResponse.staff_profile.hits.hits.[0]._source.scvo_staff}}
+                    <p>{{first_name}} is {{job_title}} at SCVO.</p>
+                    {{#if about}}
+                    <p>{{about}}</p>
+                    {{/if}}
+                    {{/with}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

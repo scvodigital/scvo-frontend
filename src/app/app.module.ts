@@ -8,9 +8,8 @@ import { RouterModule } from "@angular/router";
 import { HttpModule } from '@angular/http';
 
 // External Modules
-import { AngularFireModule } from 'angularfire2';
-import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { DynamicComponentModule } from 'angular2-dynamic-component/index';
+import { CookieModule } from 'ngx-cookie';
 
 // Internal Modules
 import { rootRouterConfig } from "./app.routing";
@@ -36,8 +35,7 @@ import { SearchBoxDirective } from './directives/search-box.directive';
     BrowserModule,
     HttpModule,
     RouterModule.forRoot(rootRouterConfig),
-    AngularFireModule.initializeApp(environment.firebase),
-    AngularFireDatabaseModule,
+    CookieModule.forRoot(),
     DynamicComponentModule
   ],
   providers: [

@@ -8,10 +8,8 @@
                       "match_all": {}
                     },
 					"should": [{
-						"terms": {
-							"categories_id": [
-                                {{join primaryResponse.hits.hits.[0]._source.categories_id}}
-                            ]
+						"term": {
+							"categories_id": 35
 						}
 					}],
                     "minimum_should_match": 1
