@@ -1,0 +1,25 @@
+{
+	"size": 8,
+    "_source": [
+        "rendered.gist"
+    ],
+	"query": {
+        "bool": {
+            "must": {
+              "match_all": {}
+            },
+            "should": [
+                {
+                    "query_string": {
+                        "query": "{{primaryResponse.hits.hits.[0]._source.text_bag}}",
+                        "default_operator": "AND",
+                        "analyzer": "snowball"
+                    }
+                }
+            ]
+        }
+	},
+	"sort": {
+		"publish_on": "desc"
+	}
+}

@@ -208,6 +208,11 @@
                 "index": "web-content-production",
                 "type": "scvo-cms-media",
                 "template": `{:queries/page-splash.json}`
+            },
+            "staff_profile": {
+                "index": "web-content-production",
+                "type": "scvo-cms-author",
+                "template": `{:queries/post-author-profile.json}`
             }
         },
         "elasticsearchConfig": {
@@ -301,6 +306,11 @@
                 "index": "web-content-production",
                 "type": "scvo-cms-post",
                 "template": `{:queries/post-author-posts.json}`
+            },
+            "tfn_related_posts": {
+                "index": "web-content-production",
+                "type": "tfn-news-post,tfn-blog-post",
+                "template": `{:queries/tfn-related.json}`
             },
             "splash": {
                 "index": "web-content-production",
