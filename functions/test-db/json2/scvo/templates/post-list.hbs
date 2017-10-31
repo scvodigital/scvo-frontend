@@ -2,17 +2,14 @@
     <div class="container-fluid">
         <div class="mdc-layout-grid">
             <h1 class="page-title">
+                {{primaryResponse.hits.hits.[0]._source.categories.[0]}}
                 <!-- { {#each primaryResponse.hits.hits.[0]._source.categories_slug}}
-                { {#compare (lastItem (split ../params.path '_')) this}}
+                { {#compare (lastItem (split ../params.path '_')) '==' this}}
                 category: { {../categories.[@index]}}
                 <br />index: { {@index}}
                 { {else}}
                 this: { {this}}<br />
                 path: { {params.path}}
-                path: { {../params.path}}
-                path: { {../../params.path}}
-                path: { {../../../../params.path}}
-                path: { {../../../../../params.path}}
                 { {/compare}}
                 { {/each}} -->
             </h1>

@@ -11,15 +11,13 @@
             "should": [
                 {
                     "query_string": {
-                        "query": "{{primaryResponse.hits.hits.[0]._source.text_bag}}",
+                        "query": "{{primaryResponse.hits.hits.[0]._source.title}}",
                         "default_operator": "AND",
                         "analyzer": "snowball"
                     }
                 }
-            ]
+            ],
+            "minimum_should_match": 1
         }
-	},
-	"sort": {
-		"publish_on": "desc"
 	}
 }
