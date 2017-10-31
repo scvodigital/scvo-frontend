@@ -11,7 +11,8 @@ export class RouterService {
     public scvoRouter: ScvoRouter;
     public routeChanged: Subject<RouteMatch> = new Subject<RouteMatch>();
     public scvoContext: IContext;
-    loaded: boolean = false;
+    public currentRoute: RouteMatch = null;
+    public loaded: boolean = false;
 
     _domainStripper: RegExp = null; 
     get domainStripper(): RegExp {
@@ -33,21 +34,23 @@ export class RouterService {
         }else{
             this.scvoRouter = new ScvoRouter(routes);
         }
+        this.currentRoute = this.scvoContext.route;
         this.trackRoute();
     }
 
     trackRoute(){
         this.router.events.subscribe((event: any) => {
             if(event instanceof NavigationEnd){
+                // HACK: To wait not execute a route on first load as we already have that info
                 if(!this.loaded){
+                    (<any>window).document.querySelector('router-outlet').innerHTML = '';
                     this.loaded = true;
-                    this.routeChanged.next(this.scvoContext.route);
                     return;
                 }
                 
                 this.scvoRouter.execute(event.url).then((routeMatch: RouteMatch) => {
-                    // This is a hack to allow Angular to take over the pre-rendered site
-                    (<any>window).document.querySelector('router-outlet').innerHTML = '';
+                    // HACK: To allow Angular to take over the pre-rendered site
+                    this.currentRoute = routeMatch;
                     this.routeChanged.next(routeMatch);
                 });
             }
