@@ -1,10 +1,14 @@
-<div class="splash-image splash-image-page{{#if primaryResponse.hits.hits.[0]._source.header_background}} splash-image-background{{/if}}" style="background-image: {{#if primaryResponse.hits.hits.[0]._source.header_background_gradient}}linear-gradient(10deg, var(--mdc-theme-primary-dark) 10%, var(--mdc-theme-primary-fade) 75%, rgba(0,0,0,0.2) 100%),{{else}}{{#if primaryResponse.hits.hits.[0]._source.header_background}}{{else}}linear-gradient(10deg, var(--mdc-theme-primary-dark) 10%, var(--mdc-theme-primary-fade) 75%, rgba(0,0,0,0.2) 100%),{{/if}}{{/if}}url('{{#if primaryResponse.hits.hits.[0]._source.header_background}}{{primaryResponse.hits.hits.[0]._source.header_background}}{{else}}{{#if supplimentaryResponse.splash.hits.hits.[0]._source.original_image}}{{supplimentaryResponse.splash.hits.hits.[0]._source.original_image}}{{/if}}{{/if}}');">
+<div class="splash-image splash-image-{{primaryResponse.hits.hits.[0]._type}}{{#if primaryResponse.hits.hits.[0]._source.header_background}} splash-image-background{{/if}}" style="background-image: {{#if primaryResponse.hits.hits.[0]._source.header_background_gradient}}linear-gradient(10deg, var(--mdc-theme-primary-dark) 10%, var(--mdc-theme-primary-fade) 75%, rgba(0,0,0,0.2) 100%),{{else}}{{#if primaryResponse.hits.hits.[0]._source.header_background}}{{else}}linear-gradient(10deg, var(--mdc-theme-primary-dark) 10%, var(--mdc-theme-primary-fade) 75%, rgba(0,0,0,0.2) 100%),{{/if}}{{/if}}url('{{#if primaryResponse.hits.hits.[0]._source.header_background}}{{primaryResponse.hits.hits.[0]._source.header_background}}{{else}}{{#if supplimentaryResponse.splash.hits.hits.[0]._source.original_image}}{{supplimentaryResponse.splash.hits.hits.[0]._source.original_image}}{{/if}}{{/if}}');">
     <div class="container-fluid">
         <div class="mdc-layout-grid">
             {{#if primaryResponse.hits.hits.[0]._source.header_text}}
             <img src="{{primaryResponse.hits.hits.[0]._source.header_text}}" alt="{{primaryResponse.hits.hits.[0]._source.title}}" class="header-text" />
             {{else}}
-            <h1 class="page-title">{{{primaryResponse.hits.hits.[0]._source.title}}}</h1>
+            <h1 class="header-text">
+                <span class="header-text-banner">
+                    {{{primaryResponse.hits.hits.[0]._source.title}}}
+                </span>
+            </h1>
             {{/if}}
         </div>
     </div>
@@ -28,21 +32,22 @@
     {{else}}
     <div class="spacer"></div>
     {{/if}}
+    {{/with}}
     <div class="mdc-layout-grid">
         <div class="mdc-layout-grid__inner">
             <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-8 content page-content">
+                {{#with primaryResponse.hits.hits.[0]._source}}
                 {{{rendered.full}}}
+                {{/with}}
             </div>
             <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 sidebar page-sidebar">
-
-                <h3 class="blogs">Blogs</h3>
+                <h3 class="blogs">Our blog posts</h3>
                 <ul class="supplimentary-list">
-                    {{#each supplimentaryResponse.authors_posts.hits.hits}}
+                    {{#each supplimentaryResponse.blog_posts.hits.hits}}
                     {{{_source.rendered.sidebar}}}
                     {{/each}}
                 </ul>
             </div>
         </div>
     </div>
-    {{/with}}
 </div>

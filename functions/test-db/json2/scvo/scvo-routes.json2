@@ -361,19 +361,19 @@
         "jsonLdTemplate": `{:templates/default-json-ld.hbs}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
-            "type": "scvo-cms-post",
-            "template": `{:queries/post.json}`
+            "type": "scvo-cms-page",
+            "template": `{:queries/default.json}`
         },
         "supplimentarySearchTemplates": {
-            "posts": {
+            "blog_posts": {
                 "index": "web-content-production",
                 "type": "scvo-cms-post",
-                "template": `{:queries/post-author-posts.json}`
+                "template": `{:queries/page-posts.json}`
             },
             "splash": {
                 "index": "web-content-production",
                 "type": "scvo-cms-media",
-                "template": `{:queries/post-splash.json}`
+                "template": `{:queries/page-splash.json}`
             }
         },
         "elasticsearchConfig": {

@@ -1,7 +1,15 @@
-<div class="splash-image splash-image-post{{#if primaryResponse.hits.hits.[0]._source.header_background}} splash-image-background{{/if}}" style="background-image: {{#if primaryResponse.hits.hits.[0]._source.header_background_gradient}}linear-gradient(10deg, var(--mdc-theme-primary-dark) 10%, var(--mdc-theme-primary-fade) 75%, rgba(0,0,0,0.2) 100%),{{else}}{{#if primaryResponse.hits.hits.[0]._source.header_background}}{{else}}linear-gradient(10deg, var(--mdc-theme-primary-dark) 10%, var(--mdc-theme-primary-fade) 75%, rgba(0,0,0,0.2) 100%),{{/if}}{{/if}}url('{{#if primaryResponse.hits.hits.[0]._source.header_background}}{{primaryResponse.hits.hits.[0]._source.header_background}}{{else}}{{#if supplimentaryResponse.splash.hits.hits.[0]._source.original_image}}{{supplimentaryResponse.splash.hits.hits.[0]._source.original_image}}{{/if}}{{/if}}');">
+<div class="splash-image splash-image-{{primaryResponse.hits.hits.[0]._type}}{{#if primaryResponse.hits.hits.[0]._source.header_background}} splash-image-background{{/if}}" style="background-image: {{#if primaryResponse.hits.hits.[0]._source.header_background_gradient}}linear-gradient(10deg, var(--mdc-theme-primary-dark) 10%, var(--mdc-theme-primary-fade) 75%, rgba(0,0,0,0.2) 100%),{{else}}{{#if primaryResponse.hits.hits.[0]._source.header_background}}{{else}}linear-gradient(10deg, var(--mdc-theme-primary-dark) 10%, var(--mdc-theme-primary-fade) 75%, rgba(0,0,0,0.2) 100%),{{/if}}{{/if}}url('{{#if primaryResponse.hits.hits.[0]._source.header_background}}{{primaryResponse.hits.hits.[0]._source.header_background}}{{else}}{{#if supplimentaryResponse.splash.hits.hits.[0]._source.original_image}}{{supplimentaryResponse.splash.hits.hits.[0]._source.original_image}}{{/if}}{{/if}}');">
     <div class="container-fluid">
         <div class="mdc-layout-grid">
-            <h1 class="page-title">{{supplimentaryResponse.staff_profile.hits.hits.[0]._source.scvo_staff.full_name}}</h1>
+            {{#if primaryResponse.hits.hits.[0]._source.header_text}}
+            <img src="{{primaryResponse.hits.hits.[0]._source.header_text}}" alt="{{primaryResponse.hits.hits.[0]._source.title}}" class="header-text" />
+            {{else}}
+            <h1 class="header-text">
+                <span class="header-text-banner">
+                    {{supplimentaryResponse.staff_profile.hits.hits.[0]._source.scvo_staff.full_name}}
+                </span>
+            </h1>
+            {{/if}}
         </div>
     </div>
 </div>
