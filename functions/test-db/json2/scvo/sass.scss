@@ -25,6 +25,7 @@ $spacing-unit: 1rem;
     --mdc-theme-primary-dark: #311B92; // Deep Purple 900
 }
 .search-result.goodmoves-job,
+.gist.goodmoves-job,
 .search-result.cjs-job,
 .services.goodmoves,
 .employability,
@@ -56,6 +57,7 @@ $spacing-unit: 1rem;
     --mdc-theme-primary-dark: #880E4F; // Pink 900
 }
 .search-result.scvo-cms-post,
+.gist.scvo-cms-post,
 .search-result.scvo-document,
 .post,
 .policy-research {
@@ -75,6 +77,13 @@ $spacing-unit: 1rem;
     --mdc-theme-primary-fade: #022347;
     --mdc-theme-primary-light: #022347;
     --mdc-theme-primary-dark: #022347;
+}
+.search-result.tnf-post,
+.gist.tnf-post {
+    --mdc-theme-primary: #3b9db1;
+    --mdc-theme-primary-fade: #3b9db1;
+    --mdc-theme-primary-light: #3b9db1;
+    --mdc-theme-primary-dark: #3b9db1;
 }
 
 html {
@@ -339,7 +348,7 @@ footer .mdc-list .mdc-list-item a:hover {
             img.header-text {
                 max-width: 100%;
                 height: auto;
-                max-height: 6rem;
+                max-height: 18vh;
             }
             h1 {
                 margin: 0;
@@ -389,6 +398,9 @@ footer .mdc-list .mdc-list-item a:hover {
     h1 {
         display: none;
     }
+}
+.credit-union .splash-image .header-text {
+    max-height: 6rem;
 }
 
 .featured.mdc-card {
@@ -677,6 +689,14 @@ p:last-child {
         margin-top: 0 !important;
     }
 }
+.sidebar {
+    h1:first-child,
+    h2:first-child,
+    h2:first-child,
+    h4:first-child {
+        margin-top: 0 !important;
+    }
+}
 
 .post {
     h1.post-title {
@@ -776,6 +796,9 @@ footer {
     background: linear-gradient(to bottom, rgba(55,71,79,1) 0%,rgba(38,50,56,1) 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#37474f', endColorstr='#263238',GradientType=0 );
     padding-top: $spacing-unit*2;
+    .footer {
+        opacity: 0.8;
+    }
     a {
         color: white;
     }

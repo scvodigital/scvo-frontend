@@ -3,27 +3,27 @@
         "linkTags": [],
         "metaTags": [],
         "pattern": "/",
-        "template": `{:templates/index.hbs}`,
+        "template": `{:templates/home.hbs}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
             "type": "scvo-cms-page,scvo-cms-post",
-            "template": `{:queries/index.json}`
+            "template": `{:queries/home.json}`
         },
         "supplimentarySearchTemplates": {
             "goodmoves_latest": {
                 "index": "web-content-production",
                 "type": "goodmoves-legacy",
-                "template": `{:queries/index-goodmoves.json}`
+                "template": `{:queries/home-goodmoves-jobs.json}`
             },
             "blogs_latest": {
                 "index": "web-content-production",
                 "type": "scvo-cms-post",
-                "template": `{:queries/index-blog.json}`
+                "template": `{:queries/home-blog-posts.json}`
             },
             "tfn_latest": {
                 "index": "web-content-production",
                 "type": "tfn-news-post",
-                "template": `{:queries/index-tfn.json}`
+                "template": `{:queries/home-tfn-posts.json}`
             }
         },
         "elasticsearchConfig": {
@@ -36,12 +36,12 @@
         "linkTags": [],
         "metaTags": [],
         "pattern": "/search",
-        "template": `{:templates/main-search.hbs}`,
-        "jsonLdTemplate": `{:templates/main-search-json-ld.hbs}`,
+        "template": `{:templates/default-search.hbs}`,
+        "jsonLdTemplate": `{:templates/json-ld-search.hbs}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
             "type": "scvo-cms-page,scvo-cms-post,scvo-member,digital-charter-signatory,goodmoves-legacy,funding-scotland-fund,goodhq-organisation,scvo-document-evidence,scvo-event,scvo-grant-digital,scvo-staff",
-            "template": `{:queries/main-search.json}`
+            "template": `{:queries/search-all.json}`
         },
         "elasticsearchConfig": {
             "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
@@ -140,17 +140,17 @@
         "linkTags": [],
         "metaTags": [],
         "pattern": "/policy-research/evidence-library",
-        "template": `{:templates/evidence-library-search.hbs}`,
+        "template": `{:templates/evidence-library-document-search.hbs}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
             "type": "scvo-document-evidence",
-            "template": `{:queries/evidence-library-search.json}`
+            "template": `{:queries/evidence-library-document-search.json}`
         },
         "supplimentarySearchTemplates": {
             "types": {
                 "index": "web-content-production",
                 "type": "scvo-document-evidence",
-                "template": `{:queries/evidence-library-aggs.json}`
+                "template": `{:queries/evidence-library-document-aggs.json}`
             },
             "splash": {
                 "index": "web-content-production",
@@ -179,7 +179,7 @@
             "types": {
                 "index": "web-content-production",
                 "type": "scvo-document-evidence",
-                "template": `{:queries/evidence-library-aggs.json}`
+                "template": `{:queries/evidence-library-document-aggs.json}`
             },
             "splash": {
                 "index": "web-content-production",
@@ -197,18 +197,18 @@
         "linkTags": [],
         "metaTags": [],
         "pattern": "/documents/*path",
-        "template": `{:templates/document.hbs}`,
+        "template": `{:templates/evidence-library-document.hbs}`,
         "jsonLdTemplate": `{:templates/default-json-ld.hbs}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
             "type": "scvo-document-general",
-            "template": `{:queries/document.json}`
+            "template": `{:queries/evidence-library-document.json}`
         },
         "supplimentarySearchTemplates": {
             "types": {
                 "index": "web-content-production",
                 "type": "scvo-document-general",
-                "template": `{:queries/document-aggs.json}`
+                "template": `{:queries/evidence-library-document-aggs.json}`
             },
             "splash": {
                 "index": "web-content-production",
@@ -254,7 +254,7 @@
         "linkTags": [],
         "metaTags": [],
         "pattern": "/post/categories/*path",
-        "template": `{:templates/post-list.hbs}`,
+        "template": `{:templates/list-posts.hbs}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
             "type": "scvo-cms-post",
@@ -277,7 +277,7 @@
         "linkTags": [],
         "metaTags": [],
         "pattern": "/policy-research/briefings-consultation-responses",
-        "template": `{:templates/post-list.hbs}`,
+        "template": `{:templates/list-posts.hbs}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
             "type": "scvo-cms-post",
@@ -300,7 +300,7 @@
         "linkTags": [],
         "metaTags": [],
         "pattern": "/policy-research/research",
-        "template": `{:templates/post-list.hbs}`,
+        "template": `{:templates/list-posts.hbs}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
             "type": "scvo-cms-post",
@@ -340,6 +340,35 @@
                 "index": "web-content-production",
                 "type": "tfn-news-post,tfn-blog-post",
                 "template": `{:queries/tfn-related.json}`
+            },
+            "splash": {
+                "index": "web-content-production",
+                "type": "scvo-cms-media",
+                "template": `{:queries/post-splash.json}`
+            }
+        },
+        "elasticsearchConfig": {
+            "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
+            "apiVersion": "5.6",
+            "log": "debug"
+        }
+    },
+    "page_posts": {
+        "linkTags": [],
+        "metaTags": [],
+        "pattern": "/policy-research",
+        "template": `{:templates/page-posts.hbs}`,
+        "jsonLdTemplate": `{:templates/default-json-ld.hbs}`,
+        "primarySearchTemplate": {
+            "index": "web-content-production",
+            "type": "scvo-cms-post",
+            "template": `{:queries/post.json}`
+        },
+        "supplimentarySearchTemplates": {
+            "posts": {
+                "index": "web-content-production",
+                "type": "scvo-cms-post",
+                "template": `{:queries/post-author-posts.json}`
             },
             "splash": {
                 "index": "web-content-production",
