@@ -6,7 +6,12 @@
             {{else}}
             <h1 class="header-text">
                 <span class="header-text-banner">
-                    [title missing]
+                    {{#each primaryResponse.hits.hits.[0]._source.categories_slug}}
+                    {{#compare this "===" (lastItem (split ../params.path '_'))}}
+                    Category title ID: {{@index}}
+                    {{../primaryResponse.hits.hits.[0]._source.categories.[(@index)]}}
+                    {{/compare}}
+                    {{/each}}
                 </span>
             </h1>
             {{/if}}
