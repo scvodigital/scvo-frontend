@@ -6,7 +6,7 @@
             {{else}}
             <h1 class="header-text">
                 <span class="header-text-banner">
-                    {{supplimentaryResponse.staff_profile.hits.hits.[0]._source.scvo_staff.full_name}}
+                    {{supplimentaryResponse.staff_profile.hits.hits.[0]._source.rendered.scvo_header}}
                 </span>
             </h1>
             {{/if}}
@@ -45,9 +45,7 @@
             <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 sidebar post-sidebar">
                 <h3 class="author">{{primaryResponse.hits.hits.[0]._source.author_name}}</h3>
                 <div class="author_about">
-                    {{#with supplimentaryResponse.staff_profile.hits.hits.[0]._source.scvo_staff}}
-                    {{{rendered.full}}}
-                    {{/with}}
+                    {{supplimentaryResponse.staff_profile.hits.hits.[0]._source.rendered.scvo_profile}}
                 </div>
             </div>
         </div>
