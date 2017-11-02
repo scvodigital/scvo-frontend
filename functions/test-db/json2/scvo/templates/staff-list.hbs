@@ -22,7 +22,8 @@
     <div class="mdc-layout-grid">
         <div class="mdc-layout-grid__inner">
             <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3 sidebar library-sidebar">
-                <form [searchroute]="'staff-list'">
+                <form [searchroute]="'staff_list'">
+                    <h2>Filters</h2>
                     <div class="mdc-form-field">
                         <select class="mdc-select" role="listbox" id="office" name="office">
                             <option value="" {{#if params.query.office}}{{else}}selected{{/if}}>All offices</option>
@@ -32,10 +33,28 @@
                         </select>
                     </div>
                     <div class="mdc-form-field">
-                        <label for="grouping">Grouping</label>
+                        <select class="mdc-select" role="listbox" id="directorate" name="directorate">
+                            <option value="" {{#if params.query.directorate}}{{else}}selected{{/if}}>All directorates</option>
+                            {{#each supplimentaryResponse.offices.aggregations.directorates.buckets}}
+                            <option value="{{slugify key}}" {{#compare ../params.query.directorate "===" (slugify key)}}selected{{/compare}}>{{key}} ({{doc_count}})</option>
+                            {{/each}}
+                        </select>
+                    </div>
+                    <div class="mdc-form-field">
+                        <select class="mdc-select" role="listbox" id="department" name="department">
+                            <option value="" {{#if params.query.department}}{{else}}selected{{/if}}>All departments</option>
+                            {{#each supplimentaryResponse.offices.aggregations.departments.buckets}}
+                            <option value="{{slugify key}}" {{#compare ../params.query.department "===" (slugify key)}}selected{{/compare}}>{{key}} ({{doc_count}})</option>
+                            {{/each}}
+                        </select>
+                    </div>
+                    <h2>Grouping</h2>
+                    <div class="mdc-form-field">
                         <select class="mdc-select" role="listbox" id="grouping" name="grouping">
-                            <option value="" {{#if params.query.grouping}}{{else}}selected{{/if}}>Office &gt; Department</option>
-                            <option value="department-first" {{#compare params.query.grouping "===" "department-first"}}selected{{/compare}}>Department &gt; Office</option>
+                            <option value="office-directorate" {{#compare params.query.grouping "===" "office-directorate"}}selected{{/compare}}>Office &gt; Directorate</option>
+                            <option value="directorate-office" {{#compare params.query.grouping "===" "directorate-office"}}selected{{/compare}}>Directorate &gt; Office</option>
+                            <option value="office-department" {{#compare params.query.grouping "===" "office-department"}}selected{{/compare}}>Office  &gt; Department</option>
+                            <option value="department-office" {{#compare params.query.grouping "===" "department-office"}}selected{{/compare}}>Department &gt; Office</option>
                         </select>
                     </div>
                     <button class="mdc-button mdc-button--raised" type="submit">

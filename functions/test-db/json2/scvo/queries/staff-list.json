@@ -6,11 +6,23 @@
 				{
 					"term": { "is_active": true }
 				}
+                {{#ifAny query.office query.directorate query.department}},{{/ifAny}}
                 {{#if query.office}}
-                ,
-				{
-					"term": { "office_slug": "{{query.office}}" }
-				}
+                    {
+                        "term": { "office_slug": "{{query.office}}" }
+                    }
+                    {{#ifAny query.directorate query.department}},{{/ifAny}}
+                {{/if}}
+                {{#if query.directorate}}
+                    {
+                        "term": { "directorate_slug": "{{query.directorate}}" }
+                    }
+                    {{#ifAny query.department}},{{/ifAny}}
+                {{/if}}
+                {{#if query.department}}
+                    {
+                        "term": { "department_slug": "{{query.department}}" }
+                    }
                 {{/if}}
 			]
 		}
@@ -18,13 +30,13 @@
 	"aggs": {
 		"query": {
 			"terms": {
-				"field": "{{#compare query.grouping "===" "department-first"}}department{{else}}office{{/compare}}",
+				"field": "{{firstItem (split query.grouping '-')}}",
 				"order": { "_term": "asc" }
 			},
 			"aggs": {
 				"departments": {
 					"terms": {
-                        "field": "{{#compare query.grouping "===" "department-first"}}office{{else}}department{{/compare}}",
+                        "field": "{{lastItem (split query.grouping '-')}}",
 						"order": { "_term": "asc" }
 					},
 					"aggs": {
