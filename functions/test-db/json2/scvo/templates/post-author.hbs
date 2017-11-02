@@ -46,10 +46,7 @@
                 <h3 class="author">{{primaryResponse.hits.hits.[0]._source.author_name}}</h3>
                 <div class="author_about">
                     {{#with supplimentaryResponse.staff_profile.hits.hits.[0]._source.scvo_staff}}
-                    <p>{{first_name}} is {{job_title}} at SCVO.</p>
-                    {{#if about}}
-                    <p>{{about}}</p>
-                    {{/if}}
+                    {{{rendered.full}}}
                     {{/with}}
                 </div>
             </div>
