@@ -2,14 +2,15 @@ import { environment } from '../environments/environment';
 import 'handlebars/dist/handlebars.min.js';
 
 // Angular Modules
-import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
 import { RouterModule } from "@angular/router";
 import { HttpModule } from '@angular/http';
 
 // External Modules
 import { DynamicComponentModule } from 'angular2-dynamic-component/index';
 import { CookieModule } from 'ngx-cookie';
+import { DisqusModule } from "ngx-disqus";
 
 // Internal Modules
 import { rootRouterConfig } from "./app.routing";
@@ -26,21 +27,22 @@ import { SearchBoxDirective } from './directives/search-box.directive';
 // Directives
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    RouterComponent,
-    NotFoundComponent
-  ],
-  imports: [
-    BrowserModule,
-    HttpModule,
-    RouterModule.forRoot(rootRouterConfig),
-    CookieModule.forRoot(),
-    DynamicComponentModule
-  ],
-  providers: [
-    RouterService
-  ],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        RouterComponent,
+        NotFoundComponent
+    ],
+    imports: [
+        BrowserModule,
+        HttpModule,
+        RouterModule.forRoot(rootRouterConfig),
+        CookieModule.forRoot(),
+        DisqusModule.forRoot('scottish-council-for-voluntary-organisations'),
+        DynamicComponentModule
+    ],
+    providers: [
+        RouterService
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }

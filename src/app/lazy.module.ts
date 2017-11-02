@@ -6,6 +6,7 @@ import { RouterModule } from "@angular/router";
 
 // External Modules
 import { DynamicComponentModule } from 'angular2-dynamic-component/index';
+import { DisqusModule } from "ngx-disqus";
 
 // Internal Modules
 import { rootRouterConfig } from "./app.routing";
@@ -28,6 +29,7 @@ import { RouterFormDirective } from './directives/router-form.directive';
     ],
     imports: [
         RouterModule.forChild(rootRouterConfig),
+        DisqusModule.forRoot('scottish-council-for-voluntary-organisations'),
         DynamicComponentModule
     ],
     exports: [

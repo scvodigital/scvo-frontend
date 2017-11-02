@@ -50,6 +50,7 @@ export class RouterComponent implements OnInit {
         }
 
         if (match.primaryResponse.hits && match.primaryResponse.hits.hits[0]) {
+            document.title = 'SCVO – ' + match.primaryResponse.hits.hits[0]._source.og_title;
             var metaTitle = document.querySelector('meta[name="title"]');
             if (metaTitle) {
                 metaTitle.setAttribute('content', match.primaryResponse.hits.hits[0]._source.og_title);
@@ -83,11 +84,11 @@ export class RouterComponent implements OnInit {
 
                 var query = parts.length > 1 ? querystring.parse(parts[1]) : {};
                 if (match.multipleResults) {
-                    console.log('Multiple results before, query:', query, '| params:', match.params); 
+                    console.log('Multiple results before, query:', query, '| params:', match.params);
                     var combined = {};
                     Object.assign(combined, match.params.query, query);
                     query = combined;
-                    console.log('Multiple results after, query:', query); 
+                    console.log('Multiple results after, query:', query);
                 }
                 if (Object.keys(query).length > 0) {
                     var queryJson = JSON.stringify(query);

@@ -18,10 +18,13 @@
     <div class="mdc-layout-grid">
         <div class="mdc-layout-grid__inner">
             <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-8 content post-content">
-                {{{primaryResponse.hits.hits.[0]._source.rendered.full}}}
+                {{#with primaryResponse.hits.hits.[0]._source}}
+                {{{rendered.full}}}
+                <!-- <disqus [identifier]="'{{Id}}'" [url]="/{{replace slug '_' '/'}}"></disqus> -->
+                {{/with}}
             </div>
             <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 sidebar post-sidebar">
-                <h3 class="author">More by {{primaryResponse.hits.hits.[0]._source.author_name}}</h3>
+                <h3 class="author">More by {{primaryResponse.hits.hits.[0]._source.author_name_full}}</h3>
                 <ul class="supplimentary-list">
                     {{#each supplimentaryResponse.authors_posts.hits.hits}}
                     {{{_source.rendered.sidebar}}}
@@ -42,3 +45,4 @@
         </div>
     </div>
 </div>
+<script id="dsq-count-scr" src="//scottish-council-for-voluntary-organisations.disqus.com/count.js" async></script>

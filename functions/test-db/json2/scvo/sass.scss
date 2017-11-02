@@ -360,8 +360,13 @@ footer .mdc-list .mdc-list-item a:hover {
         letter-spacing: -0.08rem;
         line-height: 3rem;
         margin-bottom: $spacing-unit/4;
+        .mdc-typography--caption {
+            font-size: 1.2rem;
+        }
         .photo-wee {
-            vertical-align: text-bottom;
+            max-height: 45px;
+            max-width: 45px;
+            vertical-align: bottom;
         }
     }
 }
@@ -562,6 +567,9 @@ ul.breadcrumb {
         }
     }
     .post-info-categories {
+        .fa {
+            color: var(--mdc-theme-primary-dark);
+        }
         .inline-list {
             li {
                 display: inline-block;
@@ -685,9 +693,9 @@ p:last-child {
     h1.post-title {
         margin: $spacing-unit/2 0 $spacing-unit;
     }
-    .post-sidebar h3 {
-        margin: $spacing-unit*(3/4) 0 $spacing-unit;
-    }
+}
+.post-sidebar h3 {
+    margin: $spacing-unit*1.5 0 $spacing-unit/4 !important;
 }
 
 .page-content,
