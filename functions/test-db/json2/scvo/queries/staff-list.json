@@ -1,0 +1,47 @@
+{
+	"size": 0,
+	"query": {
+		"bool": {
+			"must": [
+				{
+					"term": { "is_active": true }
+				}
+                {{#if query.office}}
+                ,
+				{
+					"term": { "office_slug": "{{query.office}}" }
+				}
+                {{/if}}
+			]
+		}
+	},
+	"aggs": {
+		"query": {
+			"terms": {
+				"field": "{{#compare query.grouping "===" "department-first"}}department{{else}}office{{/compare}}",
+				"order": { "_term": "asc" }
+			},
+			"aggs": {
+				"departments": {
+					"terms": {
+                        "field": "{{#compare query.grouping "===" "department-first"}}office{{else}}department{{/compare}}",
+						"order": { "_term": "asc" }
+					},
+					"aggs": {
+						"documents": {
+							"top_hits": {
+								"size": 100,
+								"sort": {
+									"last_name": "asc"
+								},
+								"_source": {
+									"includes": [ "rendered.search_result_scvo" ]
+								}
+							}
+						}
+					}
+				}
+			}
+		}	
+	}
+}
