@@ -21,7 +21,7 @@
                                 <div class="mdc-form-field">
                                     <select class="mdc-select" role="listbox" id="events-type" name="type">
                                         <option value="" {{#if params.query.type}}{{else}}selected{{/if}}>Select event type</option>
-                                        {{#each supplimentaryResponse.types.aggregations.types.buckets}}
+                                        {{#each supplimentaryResponses.types.aggregations.types.buckets}}
                                             <option value="{{key}}" {{#compare ../params.query.type "===" key}}selected{{/compare}}>{{key}} ({{doc_count}})</option>
                                         {{/each}}
                                     </select>
