@@ -387,8 +387,7 @@
             "campaign_datawareness": "/projects-campaigns/datawareness",
             "campaign_open_government": "/projects-campaigns/open-government",
             "campaign_right_approach": "/projects-campaigns/right-approach",
-            "campaign_welfare_reform": "/projects-campaigns/welfare-reform",
-            "press_media": "/press-media"
+            "campaign_welfare_reform": "/projects-campaigns/welfare-reform"
         },
         "linkTags": [],
         "metaTags": [],
@@ -486,6 +485,37 @@
             "log": "debug"
         }
     },
+    "page_full_width": {
+        "pattern": {
+            "credit_union": "/credit-union",
+            "credit_union_employers": "/credit-union/employers-guide",
+            "credit_union_members": "/credit-union/members-guide",
+            "credit_union_faqs": "/credit-union/faqs",
+            "credit_union_calculator": "/credit-union/loan-calculator",
+        },
+        "linkTags": [],
+        "metaTags": [],
+        "template": `{:templates/default-full-width.hbs}`,
+        "titleTemplate": `{:templates/default-title.hbs}`,
+        "jsonLdTemplate": `{:templates/default-json-ld.hbs}`,
+        "primarySearchTemplate": {
+            "index": "web-content-production",
+            "type": "scvo-cms-page",
+            "template": `{:queries/default.json}`
+        },
+        "supplimentarySearchTemplates": {
+            "splash": {
+                "index": "web-content-production",
+                "type": "scvo-cms-media",
+                "template": `{:queries/page-splash.json}`
+            }
+        },
+        "elasticsearchConfig": {
+            "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
+            "apiVersion": "5.6",
+            "log": "debug"
+        }
+    }
     "_default": {
         "pattern": "/*path",
         "linkTags": [],
