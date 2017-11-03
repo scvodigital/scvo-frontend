@@ -10,7 +10,6 @@ import { HttpModule } from '@angular/http';
 // External Modules
 import { DynamicComponentModule } from 'angular2-dynamic-component/index';
 import { CookieModule } from 'ngx-cookie';
-import { DisqusModule } from "ngx-disqus";
 
 // Internal Modules
 import { rootRouterConfig } from "./app.routing";
@@ -37,7 +36,6 @@ import { SearchBoxDirective } from './directives/search-box.directive';
         HttpModule,
         RouterModule.forRoot(rootRouterConfig),
         CookieModule.forRoot(),
-        DisqusModule.forRoot('scottish-council-for-voluntary-organisations'),
         DynamicComponentModule
     ],
     providers: [
