@@ -1,7 +1,5 @@
-{{#compare primaryResponse.hits.hits.length ">" 0}}
-    {{#with primaryResponse.hits.hits.[0]._source}}
-        {{{rendered.json_ld}}}
-    {{/with}}
-{{else}}
+{{#if multipleResults}}
     { "error": "404" }
-{{/compare}}
+{{else}}
+    {{{primaryResponse.hits.hits.[0]._source.rendered.json_ld}}}
+{{/if}}
