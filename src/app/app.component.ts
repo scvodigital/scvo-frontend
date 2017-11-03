@@ -20,6 +20,27 @@ export class AppComponent implements OnInit {
     }
 
     constructor(){
+        window.addEventListener("message", (event) => {
+            if (event.data.hasOwnProperty('event')) {
+                /*
+                 * EMBED THIS SCRIPT IN THE HTML OF THE SURVEY
+                <script>
+                    document.addEventListener("DOMContentLoaded", function() {
+                        var height = document.body.scrollHeight;
+                        parent.postMessage({ event: 'resize', height: height }, '*');
+                    })
+                </script>
+                 * THIS NEED TESTING
+                 */
+                console.log('Post Message Event', event.data);
+                switch (event.data.event) {
+                    case ('resize'):
+                        (<HTMLIFrameElement>document.querySelector('iframe[src*="' + event.origin + '"]')).style.height = event.data.height + 'px';
+                        break;
+                }
+            }
+        }, false);
+
         this.html = (<any>window).startingPoint
             .replace(/(href=\"|\')(\/.*?)(\"|\')/gi, '[routerLink]="[\'$2\']"')
             .replace(/(\<\/?big\>)|(\<\/?small\>)/g, '');
