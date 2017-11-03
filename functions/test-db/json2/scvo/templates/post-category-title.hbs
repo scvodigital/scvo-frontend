@@ -1,0 +1,6 @@
+SCVO – Posts in
+{{#each primaryResponse.hits.hits.[0]._source.categories_slug}}
+{{#compare this "===" (lastItem (split ../params.path '_'))}}
+{{{lookup ../primaryResponse.hits.hits.[0]._source.categories @index}}}
+{{/compare}}
+{{/each}}
