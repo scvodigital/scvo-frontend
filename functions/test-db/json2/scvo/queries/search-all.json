@@ -3,6 +3,11 @@
     "from": {{multiply (subtract (default query.page 1) 1) 10}},
     "query": {
         "bool": {
+            {{#if query.type}}
+            "must": [
+                { "term": { "_type": { "value" : "{{query.type}}" } } }
+            ],
+            {{/if}}
             "should": [
                 {
                     "query_string": {
