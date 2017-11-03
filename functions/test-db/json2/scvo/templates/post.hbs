@@ -23,7 +23,14 @@
                 {{/with}}
             </div>
             <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 sidebar post-sidebar">
-                <h3 class="author">More by {{primaryResponse.hits.hits.[0]._source.author_name_full}}</h3>
+                <h3 class="author">{{primaryResponse.hits.hits.[0]._source.author_name_full}}</h3>
+                <div class="author_about">
+                    {{#if supplimentaryResponses.staff_profile.hits.hits.[0]}}
+                    {{{supplimentaryResponses.staff_profile.hits.hits.[0]._source.rendered.scvo_profile}}}
+                    {{else}}
+                    {{{supplimentaryResponses.author_profile.hits.hits.[0]._source.rendered.scvo_profile}}}
+                    {{/if}}
+                </div>
                 <ul class="supplimentary-list">
                     {{#each supplimentaryResponses.authors_posts.hits.hits}}
                     {{{_source.rendered.sidebar}}}
