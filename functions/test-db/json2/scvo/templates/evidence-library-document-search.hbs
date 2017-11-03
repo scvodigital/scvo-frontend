@@ -30,10 +30,10 @@
                         <div class="mdc-textfield__bottom-line"></div>
                     </div>
                     <div class="mdc-form-field">
-                        <select class="mdc-select" role="listbox" id="evidence-library-classification" name="library_classification">
-                            <option value="" {{#if params.query.library_classification}}{{else}}selected{{/if}}>All categories</option>
-                            {{#each supplimentaryResponses.types.aggregations.types.buckets}}
-                            <option value="{{key}}" {{#compare ../params.query.library_classification "===" key}}selected{{/compare}}>{{key}} ({{doc_count}})</option>
+                        <select class="mdc-select" role="listbox" id="evidence-library-classification" name="classification">
+                            <option value="" {{#if params.query.classification}}{{else}}selected{{/if}}>All categories</option>
+                            {{#each supplimentaryResponse.types.aggregations.types.buckets}}
+                            <option value="{{slugify key}}" {{#compare ../params.query.classification "===" (slugify key)}}selected{{/compare}}>{{key}} ({{doc_count}})</option>
                             {{/each}}
                         </select>
                     </div>
@@ -44,6 +44,9 @@
             </div>
             <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-9 content library-content">
                 {{#each primaryResponse.hits.hits}}
+                    <p>
+                        <strong>SCORE: {{_score}}</strong>
+                    </p>
                 {{#if _source.rendered.search_result_scvo}}
                 {{{_source.rendered.search_result_scvo}}}
                 {{else}}
@@ -56,17 +59,17 @@
                 <ul class="pagination inline-list">
                     {{#if paging.prevPage}}
                     <li>
-                        <a class="mdc-button mdc-button--compact" href="/search?q={{../params.query.q}}&page={{paging.prevPage}}">Previous</a>
+                        <a class="mdc-button mdc-button--compact" href="/policy-research/evidence-library/?{{{querystringify ../params.query page=paging.prevPage}}}">Previous</a>
                     </li>
                     {{/if}}
                     {{#each paging.pageRange}}
                     <li class="{{#compare ../paging.currentPage "===" this.pageNumber}}current-page{{/compare}} pagination-distance-{{this.distance}}">
-                        <a  class="mdc-button mdc-button--compact" href="/search?q={{../params.query.q}}&page={{this.pageNumber}}">{{this.pageNumber}}</a>
+                        <a  class="mdc-button mdc-button--compact" href="/policy-research/evidence-library/?{{{querystringify ../params.query page=this.pageNumber}}}">{{this.pageNumber}}</a>
                     </li>
                     {{/each}}
                     {{#if paging.nextPage}}
                     <li>
-                        <a class="mdc-button mdc-button--compact" href="/search?q={{../params.query.q}}&page={{paging.nextPage}}">Next</a>
+                        <a class="mdc-button mdc-button--compact" href="/policy-research/evidence-library/?{{{querystringify ../params.query page=paging.nextPage}}}">Next</a>
                     </li>
                     {{/if}}
                 </ul>

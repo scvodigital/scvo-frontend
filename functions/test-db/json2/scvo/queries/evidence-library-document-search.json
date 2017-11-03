@@ -5,16 +5,13 @@
         "function_score": {
             "query": {
                 "bool": {
-                    "must": [
-                        {{#if query.library_classification}}
-                            {
-                                "term": {
-                                    "library_classification": "{{query.library_classification}}"
-                                }
-                            }
-                            {{#if query.q}},{{/if}}
-                        {{/if}}
-                        {{#if query.q}}
+                    {{#if query.library_classification}}
+                        "filter": [
+                            "term": { "library_classification_slug": "{{query.classification}}" }
+                        ]{{#if query.q}},{{/if}}
+                    {{/if}}
+                    {{#if query.q}}
+                        "must": [
                             {
                                 "query_string": {
                                     "query": "{{query.q}}",
@@ -22,13 +19,15 @@
                                     "analyzer": "snowball"
                                 }
                             }
-                        {{/if}}
-                    ]
+                        ]
+                    {{/if}}
                 }
             },
             "gauss": {
                 "date_posted": {
-                    "scale": "6m"
+                    "origin": "now",
+                    "scale": "1m",
+                    "decay": 0.5
                 }
             }
         }
