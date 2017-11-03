@@ -2,34 +2,30 @@
     "size": 10,
     "from": {{multiply (subtract (default query.page 1) 1) 10}},
     "query": {
-        "function_score": {
-            "query": {
-                "bool": {
-                    {{#if query.library_classification}}
-                        "filter": [
-                            "term": { "library_classification_slug": "{{query.classification}}" }
-                        ]{{#if query.q}},{{/if}}
-                    {{/if}}
-                    {{#if query.q}}
-                        "must": [
-                            {
-                                "query_string": {
-                                    "query": "{{query.q}}",
-                                    "default_operator": "AND",
-                                    "analyzer": "snowball"
-                                }
-                            }
-                        ]
-                    {{/if}}
-                }
-            },
-            "gauss": {
-                "date_posted": {
-                    "origin": "now",
-                    "scale": "1m",
-                    "decay": 0.5
-                }
-            }
+        "bool": {
+            {{#if query.library_classification}}
+                "filter": [
+                    "term": { "library_classification_slug": "{{query.classification}}" }
+                ]{{#if query.q}},{{/if}}
+            {{/if}}
+            {{#if query.q}}
+                "must": [
+                    {
+                        "query_string": {
+                            "query": "{{query.q}}",
+                            "default_operator": "AND",
+                            "analyzer": "snowball"
+                        }
+                    }
+                ]
+            {{/if}}
         }
     }
+    {{#if query.q}}
+    {{else}}
+        ,
+        "sort": {
+            "date_posted": "desc"
+        }
+    {{/if}}
 }

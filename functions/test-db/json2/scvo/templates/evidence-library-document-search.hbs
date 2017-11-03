@@ -32,7 +32,7 @@
                     <div class="mdc-form-field">
                         <select class="mdc-select" role="listbox" id="evidence-library-classification" name="classification">
                             <option value="" {{#if params.query.classification}}{{else}}selected{{/if}}>All categories</option>
-                            {{#each supplimentaryResponse.types.aggregations.types.buckets}}
+                            {{#each supplimentaryResponses.types.aggregations.types.buckets}}
                             <option value="{{slugify key}}" {{#compare ../params.query.classification "===" (slugify key)}}selected{{/compare}}>{{key}} ({{doc_count}})</option>
                             {{/each}}
                         </select>
@@ -44,9 +44,6 @@
             </div>
             <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-9 content library-content">
                 {{#each primaryResponse.hits.hits}}
-                    <p>
-                        <strong>SCORE: {{_score}}</strong>
-                    </p>
                 {{#if _source.rendered.search_result_scvo}}
                 {{{_source.rendered.search_result_scvo}}}
                 {{else}}
