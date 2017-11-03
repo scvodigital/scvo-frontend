@@ -54,15 +54,14 @@
                                 <a class="mdc-tab" href="{{path}}">{{{label}}}</a>
                                 {{/each}}
                             </nav>
-                            <div class="mdc-form-field mdc-form-field--align-end">
+                            <form [searchroute]="'main-search'" class="mdc-form-field mdc-form-field--align-end">
                                 <div class="mdc-textfield" data-mdc-auto-init="MDCTextfield">
-                                    <input type="text" class="mdc-textfield__input white-text searchRoute" placeholder="Search" id="search"
-                                    [searchRoute]='"main-search"' [paramsTemplate]='"{ \"queryParams\": { \"q\": %q } }"'>
+                                    <input type="text" class="mdc-textfield__input white-text searchRoute" placeholder="Search" id="q" name="q">
                                 </div>
-                                <a href="#" class="mdc-toolbar__icon" aria-label="Search" alt="Search">
+                                <button type="submit" class="mdc-toolbar__icon" aria-label="Search" alt="Search">
                                     <span class="fa fa-search" aria-hidden="true"></span>
-                                </a>
-                            </div>
+                                </button>
+                            </form>
                         </section>
                     </div>
                 </div>
