@@ -1,6 +1,10 @@
 {
     "size": 10,
     "from": {{multiply (subtract (default query.page 1) 1) 10}},
+    "_source": [
+        "rendered.list",
+        "rendered.json_ld"
+    ],
     "query": {
         "bool": {
             {{#if query.library_classification}}

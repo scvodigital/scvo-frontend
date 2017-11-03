@@ -1,7 +1,9 @@
 {
     "size": 10,
     "from": {{multiply (subtract (default query.page 1) 1) 10}},
-    "_source": "rendered.list",
+    "_source": [
+        "rendered.list"
+    ],
     "query": {
         "bool": {
             "must": {

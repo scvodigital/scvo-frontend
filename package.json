@@ -11,7 +11,7 @@
     "e2e": "ng e2e",
     "serve": "cd ./functions && npm run build && cd ../ && npm run build && devmode=true firebase serve -p 9000 --only functions,hosting",
     "serve-f": "cd ./functions && npm run build && cd ../ && devmode=true firebase serve -p 9000 --only functions",
-    "deploy": "cd ./functions && npm run build && cd ../ && npm run build && firebase deploy --only functions,hosting",
+    "deploy": "cd ./functions && npm run build && npm run deploy-db && cd ../ && npm run build && firebase deploy --only functions,hosting",
     "deploy-h": "npm run build && firebase deploy --only hosting",
     "deploy-f": "cd ./functions && npm run build && cd ../ && firebase deploy --only functions"
   },
