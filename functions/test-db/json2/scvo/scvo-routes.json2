@@ -418,6 +418,39 @@
             "log": "debug"
         }
     },
+    "posts_page": {
+        "pattern": {
+            "press_media": "/press-media",
+            "blogs": "/blogs"
+        },
+        "linkTags": [],
+        "metaTags": [],
+        "template": `{:templates/posts-page.hbs}`,
+        "titleTemplate": `{:templates/default-title.hbs}`,
+        "jsonLdTemplate": `{:templates/default-json-ld.hbs}`,
+        "primarySearchTemplate": {
+            "index": "web-content-production",
+            "type": "scvo-cms-page",
+            "template": `{:queries/default.json}`
+        },
+        "supplimentarySearchTemplates": {
+            "related_posts": {
+                "index": "web-content-production",
+                "type": "scvo-cms-post",
+                "template": `{:queries/posts-page.json}`
+            },
+            "splash": {
+                "index": "web-content-production",
+                "type": "scvo-cms-media",
+                "template": `{:queries/page-splash.json}`
+            }
+        },
+        "elasticsearchConfig": {
+            "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
+            "apiVersion": "5.6",
+            "log": "debug"
+        }
+    },
     "staff_list": {
         "pattern": "/staff-directory",
         "linkTags": [],
