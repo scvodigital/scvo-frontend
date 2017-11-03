@@ -50,7 +50,7 @@ export class RouterComponent implements OnInit {
         }
 
         if (match.primaryResponse.hits && match.primaryResponse.hits.hits[0]) {
-            document.title = 'SCVO – ' + match.primaryResponse.hits.hits[0]._source.og_title;
+            document.title = match.title;
             var metaTitle = document.querySelector('meta[name="title"]');
             if (metaTitle) {
                 metaTitle.setAttribute('content', match.primaryResponse.hits.hits[0]._source.og_title);
