@@ -27,7 +27,7 @@ const app = admin.initializeApp(<admin.AppOptions>config);
 const dot = new Dot('/');
 
 const cp = cookieParser();
-    
+
 exports.index = functions.https.onRequest((req: functions.Request, res: functions.Response) => {
     return new Promise((resolve, reject) => {
         userId(req, res, () => {
@@ -103,7 +103,7 @@ function userId(req: functions.Request, res: functions.Response, callback: Funct
     cp(req, res, () => {
         var userId = req.cookies && req.cookies.__session ? req.cookies.__session : uuid.v4();
         var maxAge = 24 * 60 * 60 * 1000;
-        
+
         req.cookies.__session = userId;
         res.cookie('__session', userId, { maxAge: maxAge });
 
@@ -169,13 +169,18 @@ const siteCmsMap = {
 };
 
 const domainMap = {
+    "goodhq.org": "goodhq",
     "goodmoves.com": "goodmoves",
+    "goodmoves.wales": "goodmoves",
+    "goodmoves.cymru": "goodmoves",
+    "goodmoves.be": "goodmoves",
     "goodmoves.eu": "goodmoves",
+    "goodmovesjobs.de": "goodmoves",
     "goodmoves.scot": "goodmoves",
     "goodmoves.org.uk": "goodmoves",
-    "scvo-net.firebaseapp.com": "scvo",
-    "localhost": "scvo",
+    "localhost": "goodhq",
     "127.0.0.1": "scvo",
+    "scvo-net.firebaseapp.com": "scvo",
     "scvo.net": "scvo",
     "test.scvo.org.uk": "scvo",
     "beta.scvo.org.uk": "scvo",
