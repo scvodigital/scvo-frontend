@@ -450,8 +450,36 @@
             "log": "debug"
         }
     },
+    "page_about": {
+        "pattern": {
+            "about": "/about",
+            "about_trustees": "/about/board-of-trustees"
+        },
+        "linkTags": [],
+        "metaTags": [],
+        "template": `{:templates/about.hbs}`,
+        "titleTemplate": `{:templates/default-title.hbs}`,
+        "jsonLdTemplate": `{:templates/default-json-ld.hbs}`,
+        "primarySearchTemplate": {
+            "index": "web-content-production",
+            "type": "scvo-cms-page",
+            "template": `{:queries/default.json}`
+        },
+        "supplimentarySearchTemplates": {
+            "splash": {
+                "index": "web-content-production",
+                "type": "scvo-cms-media",
+                "template": `{:queries/page-splash.json}`
+            }
+        },
+        "elasticsearchConfig": {
+            "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
+            "apiVersion": "5.6",
+            "log": "debug"
+        }
+    },
     "staff_list": {
-        "pattern": "/staff-directory",
+        "pattern": "/about/staff-team",
         "linkTags": [],
         "metaTags": [],
         "template": `{:templates/staff-list.hbs}`,
@@ -459,7 +487,7 @@
         "jsonLdTemplate": `{:templates/default-json-ld.hbs}`,
         "defaultParams": {
             "query": {
-                "grouping": "office-directorate"
+                "grouping": "directorate-office"
             }
         },
         "primarySearchTemplate": {
@@ -485,13 +513,40 @@
             "log": "debug"
         }
     },
+    "page_credit_union": {
+        "pattern": {
+            "credit_union": "/services/credit-union",
+            "credit_union_employers": "/services/credit-union/employers-guide",
+            "credit_union_members": "/services/credit-union/members-guide",
+            "credit_union_faqs": "/services/credit-union/faqs",
+            "credit_union_calculator": "/services/credit-union/loan-calculator"
+        },
+        "linkTags": [],
+        "metaTags": [],
+        "template": `{:templates/credit-union.hbs}`,
+        "titleTemplate": `{:templates/default-title.hbs}`,
+        "jsonLdTemplate": `{:templates/default-json-ld.hbs}`,
+        "primarySearchTemplate": {
+            "index": "web-content-production",
+            "type": "scvo-cms-page",
+            "template": `{:queries/default.json}`
+        },
+        "supplimentarySearchTemplates": {
+            "splash": {
+                "index": "web-content-production",
+                "type": "scvo-cms-media",
+                "template": `{:queries/page-splash.json}`
+            }
+        },
+        "elasticsearchConfig": {
+            "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
+            "apiVersion": "5.6",
+            "log": "debug"
+        }
+    },
     "page_full_width": {
         "pattern": {
-            "credit_union": "/credit-union",
-            "credit_union_employers": "/credit-union/employers-guide",
-            "credit_union_members": "/credit-union/members-guide",
-            "credit_union_faqs": "/credit-union/faqs",
-            "credit_union_calculator": "/credit-union/loan-calculator",
+            "test": "/full-width-test"
         },
         "linkTags": [],
         "metaTags": [],
@@ -515,7 +570,7 @@
             "apiVersion": "5.6",
             "log": "debug"
         }
-    }
+    },
     "_default": {
         "pattern": "/*path",
         "linkTags": [],
