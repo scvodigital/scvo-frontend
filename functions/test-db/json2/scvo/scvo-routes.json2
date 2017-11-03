@@ -1,8 +1,8 @@
 {
     "index": {
+        "pattern": "/",
         "linkTags": [],
         "metaTags": [],
-        "pattern": "/",
         "template": `{:templates/home.hbs}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
@@ -33,9 +33,9 @@
         }
     },
     "main-search": {
+        "pattern": "/search",
         "linkTags": [],
         "metaTags": [],
-        "pattern": "/search",
         "template": `{:templates/default-search.hbs}`,
         "jsonLdTemplate": `{:templates/json-ld-search.hbs}`,
         "primarySearchTemplate": {
@@ -51,9 +51,9 @@
         "multipleResults": true
     },
     "event-search": {
+        "pattern": "/services/events",
         "linkTags": [],
         "metaTags": [],
-        "pattern": "/services/events",
         "template": `{:templates/event-search.hbs}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
@@ -79,9 +79,9 @@
         }
     },
     "event_booking": {
+        "pattern": "/services/events/booking/*path",
         "linkTags": [],
         "metaTags": [],
-        "pattern": "/services/events/booking/*path",
         "template": `{:templates/event-booking.hbs}`,
         "jsonLdTemplate": `{:templates/default-json-ld.hbs}`,
         "primarySearchTemplate": {
@@ -108,9 +108,9 @@
         }
     },
     "event": {
+        "pattern": "/services/events/*path",
         "linkTags": [],
         "metaTags": [],
-        "pattern": "/services/events/*path",
         "template": `{:templates/event.hbs}`,
         "jsonLdTemplate": `{:templates/default-json-ld.hbs}`,
         "primarySearchTemplate": {
@@ -137,9 +137,9 @@
         }
     },
     "evidence-library": {
+        "pattern": "/policy-research/evidence-library",
         "linkTags": [],
         "metaTags": [],
-        "pattern": "/policy-research/evidence-library",
         "template": `{:templates/evidence-library-document-search.hbs}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
@@ -165,9 +165,9 @@
         }
     },
     "evidence-library-document": {
+        "pattern": "/policy-research/evidence-library/*path",
         "linkTags": [],
         "metaTags": [],
-        "pattern": "/policy-research/evidence-library/*path",
         "template": `{:templates/evidence-library-document.hbs}`,
         "jsonLdTemplate": `{:templates/default-json-ld.hbs}`,
         "primarySearchTemplate": {
@@ -194,9 +194,9 @@
         }
     },
     "general-document": {
+        "pattern": "/documents/*path",
         "linkTags": [],
         "metaTags": [],
-        "pattern": "/documents/*path",
         "template": `{:templates/evidence-library-document.hbs}`,
         "jsonLdTemplate": `{:templates/default-json-ld.hbs}`,
         "primarySearchTemplate": {
@@ -223,9 +223,9 @@
         }
     },
     "post-author": {
+        "pattern": "/post/author/*path",
         "linkTags": [],
         "metaTags": [],
-        "pattern": "/post/author/*path",
         "template": `{:templates/post-author.hbs}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
@@ -256,9 +256,9 @@
         }
     },
     "post-category": {
+        "pattern": "/post/categories/*path",
         "linkTags": [],
         "metaTags": [],
-        "pattern": "/post/categories/*path",
         "template": `{:templates/list-posts.hbs}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
@@ -279,9 +279,9 @@
         }
     },
     "post-briefings": {
+        "pattern": "/policy-research/briefings-consultation-responses",
         "linkTags": [],
         "metaTags": [],
-        "pattern": "/policy-research/briefings-consultation-responses",
         "template": `{:templates/list-posts.hbs}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
@@ -302,9 +302,9 @@
         }
     },
     "post-reports": {
+        "pattern": "/policy-research/research",
         "linkTags": [],
         "metaTags": [],
-        "pattern": "/policy-research/research",
         "template": `{:templates/list-posts.hbs}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
@@ -325,9 +325,9 @@
         }
     },
     "post": {
+        "pattern": "/post/*path",
         "linkTags": [],
         "metaTags": [],
-        "pattern": "/post/*path",
         "template": `{:templates/post.hbs}`,
         "jsonLdTemplate": `{:templates/default-json-ld.hbs}`,
         "primarySearchTemplate": {
@@ -358,155 +358,17 @@
             "log": "debug"
         }
     },
-    "policy_research": {
+    "project_campaign": {
+        "pattern": [
+            "/policy-research",
+            "/projects-campaigns/datawareness",
+            "/projects-campaigns/open-government",
+            "/projects-campaigns/right-approach",
+            "/projects-campaigns/welfare-reform",
+            "/press-media"
+        ],
         "linkTags": [],
         "metaTags": [],
-        "pattern": "/policy-research",
-        "template": `{:templates/page-posts.hbs}`,
-        "jsonLdTemplate": `{:templates/default-json-ld.hbs}`,
-        "primarySearchTemplate": {
-            "index": "web-content-production",
-            "type": "scvo-cms-page",
-            "template": `{:queries/default.json}`
-        },
-        "supplimentarySearchTemplates": {
-            "related_posts": {
-                "index": "web-content-production",
-                "type": "scvo-cms-post",
-                "template": `{:queries/page-posts.json}`
-            },
-            "splash": {
-                "index": "web-content-production",
-                "type": "scvo-cms-media",
-                "template": `{:queries/page-splash.json}`
-            }
-        },
-        "elasticsearchConfig": {
-            "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
-            "apiVersion": "5.6",
-            "log": "debug"
-        }
-    },
-    "campaign_datawareness": {
-        "linkTags": [],
-        "metaTags": [],
-        "pattern": "/projects-campaigns/datawareness",
-        "template": `{:templates/page-posts.hbs}`,
-        "jsonLdTemplate": `{:templates/default-json-ld.hbs}`,
-        "primarySearchTemplate": {
-            "index": "web-content-production",
-            "type": "scvo-cms-page",
-            "template": `{:queries/default.json}`
-        },
-        "supplimentarySearchTemplates": {
-            "related_posts": {
-                "index": "web-content-production",
-                "type": "scvo-cms-post",
-                "template": `{:queries/page-posts.json}`
-            },
-            "splash": {
-                "index": "web-content-production",
-                "type": "scvo-cms-media",
-                "template": `{:queries/page-splash.json}`
-            }
-        },
-        "elasticsearchConfig": {
-            "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
-            "apiVersion": "5.6",
-            "log": "debug"
-        }
-    },
-    "campaign_open_government": {
-        "linkTags": [],
-        "metaTags": [],
-        "pattern": "/projects-campaigns/open-government",
-        "template": `{:templates/page-posts.hbs}`,
-        "jsonLdTemplate": `{:templates/default-json-ld.hbs}`,
-        "primarySearchTemplate": {
-            "index": "web-content-production",
-            "type": "scvo-cms-page",
-            "template": `{:queries/default.json}`
-        },
-        "supplimentarySearchTemplates": {
-            "related_posts": {
-                "index": "web-content-production",
-                "type": "scvo-cms-post",
-                "template": `{:queries/page-posts.json}`
-            },
-            "splash": {
-                "index": "web-content-production",
-                "type": "scvo-cms-media",
-                "template": `{:queries/page-splash.json}`
-            }
-        },
-        "elasticsearchConfig": {
-            "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
-            "apiVersion": "5.6",
-            "log": "debug"
-        }
-    },
-    "campaign_right_approach": {
-        "linkTags": [],
-        "metaTags": [],
-        "pattern": "/projects-campaigns/right-approach",
-        "template": `{:templates/page-posts.hbs}`,
-        "jsonLdTemplate": `{:templates/default-json-ld.hbs}`,
-        "primarySearchTemplate": {
-            "index": "web-content-production",
-            "type": "scvo-cms-page",
-            "template": `{:queries/default.json}`
-        },
-        "supplimentarySearchTemplates": {
-            "related_posts": {
-                "index": "web-content-production",
-                "type": "scvo-cms-post",
-                "template": `{:queries/page-posts.json}`
-            },
-            "splash": {
-                "index": "web-content-production",
-                "type": "scvo-cms-media",
-                "template": `{:queries/page-splash.json}`
-            }
-        },
-        "elasticsearchConfig": {
-            "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
-            "apiVersion": "5.6",
-            "log": "debug"
-        }
-    },
-    "campaign_welfare_reform": {
-        "linkTags": [],
-        "metaTags": [],
-        "pattern": "/projects-campaigns/welfare-reform",
-        "template": `{:templates/page-posts.hbs}`,
-        "jsonLdTemplate": `{:templates/default-json-ld.hbs}`,
-        "primarySearchTemplate": {
-            "index": "web-content-production",
-            "type": "scvo-cms-page",
-            "template": `{:queries/default.json}`
-        },
-        "supplimentarySearchTemplates": {
-            "related_posts": {
-                "index": "web-content-production",
-                "type": "scvo-cms-post",
-                "template": `{:queries/page-posts.json}`
-            },
-            "splash": {
-                "index": "web-content-production",
-                "type": "scvo-cms-media",
-                "template": `{:queries/page-splash.json}`
-            }
-        },
-        "elasticsearchConfig": {
-            "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
-            "apiVersion": "5.6",
-            "log": "debug"
-        }
-    },
-    "press_media": {
-        "linkTags": [],
-        "metaTags": [],
-        "pattern": "/press-media",
         "template": `{:templates/page-posts.hbs}`,
         "jsonLdTemplate": `{:templates/default-json-ld.hbs}`,
         "primarySearchTemplate": {
@@ -533,9 +395,9 @@
         }
     },
     "staff_list": {
+        "pattern": "/staff-directory",
         "linkTags": [],
         "metaTags": [],
-        "pattern": "/staff-directory",
         "template": `{:templates/staff-list.hbs}`,
         "jsonLdTemplate": `{:templates/default-json-ld.hbs}`,
         "defaultParams": {
@@ -567,9 +429,9 @@
         }
     },
     "_default": {
+        "pattern": "/*path",
         "linkTags": [],
         "metaTags": [],
-        "pattern": "/*path",
         "template": `{:templates/default.hbs}`,
         "jsonLdTemplate": `{:templates/default-json-ld.hbs}`,
         "primarySearchTemplate": {
