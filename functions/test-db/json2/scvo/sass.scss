@@ -118,13 +118,21 @@ main {
     padding: $spacing-unit/2;
 }
 
-.mdc-typography,
+.brand-logo {
+    margin-left: -$spacing-unit/2;
+    img {
+        max-height: $spacing-unit*3.5;
+    }
+}
+
+.mdc-tab,
 .mdc-button,
-.mdc-textfield__input,
+.mdc-typography,
 .mdc-card__subtitle,
-.mdc-typography--subheading2,
+.mdc-textfield__input,
 .mdc-card__title--large,
 .mdc-card__supporting-text,
+.mdc-typography--subheading2,
 .mdc-list {
     font-family: 'Open Sans', Helvetica, sans-serif;
 }
@@ -196,7 +204,11 @@ footer .mdc-list .mdc-list-item a:hover {
     }
 }
 
+.mdc-toolbar.mdc-toolbar--fixed {
+    padding-top: $spacing-unit;
+}
 .mdc-toolbar {
+    background-color: var(--mdc-theme-primary-light);
     // -webkit-transition: background-color 100ms linear;
     // -moz-transition: background-color 100ms linear;
     // -o-transition: background-color 100ms linear;
@@ -206,13 +218,24 @@ footer .mdc-list .mdc-list-item a:hover {
     // animation-direction: alternate;
     // -webkit-animation-iteration-count: 2; /* Chrome, Safari, Opera */
     // animation-iteration-count: 2;
-    .mdc-toolbar__row,
+    #upper-tab-bar,
     .mdc-toolbar__icon,
-    .mdc-form-field {
-        height: 64px;
+    .mdc-toolbar__row,
+    .mdc-form-field,
+    .mdc-toolbar__section {
+        height: $spacing-unit*6;
         padding: 0;
     }
+    .mdc-toolbar__section.toolbar-menu,
+    .mdc-toolbar__row.toolbar-nav {
+        height: $spacing-unit*2;
+    }
+    .toolbar-nav {
+        background-color: var(--mdc-theme-primary-dark);
+        min-height: $spacing-unit*2;
+    }
     .mdc-toolbar__row {
+        min-height: $spacing-unit*2;
         .container-fluid {
             display: -webkit-box;
             display: -ms-flexbox;
@@ -222,17 +245,19 @@ footer .mdc-list .mdc-list-item a:hover {
             box-sizing: border-box;
             padding: 0;
             .mdc-toolbar__title {
-                margin-left: $spacing-unit/2;
-                padding: 5px 0 0;
+                padding: $spacing-unit/4 0 0;
+                margin-left: 0;
             }
             .mdc-textfield {
-                margin: 0;
-                max-height: 34px;
+                margin: 0 -1.7rem 0 0;
+                max-height: $spacing-unit*2.2;
+                height: auto;
                 .mdc-textfield__input,
                 .mdc-textfield__input:focus,
                 .mdc-textfield__input:hover {
                     color: rgba(255,255,255,.87);
-                    border-bottom-color: rgba(255,255,255,.5);
+                    border: $spacing-unit/10 solid rgba(255,255,255,.75);
+                    padding: $spacing-unit/2;
                 }
                 ::-webkit-input-placeholder {
                     color: rgba(255, 255, 255, 0.6);
@@ -247,30 +272,33 @@ footer .mdc-list .mdc-list-item a:hover {
                     color: rgba(255, 255, 255, 0.6);
                 }
             }
+            .mdc-toolbar__icon {
+                height: $spacing-unit*2;
+                z-index: 100;
+            }
             .mdc-tab-bar {
                 overflow: hidden;
                 text-transform: none;
-                height: 64px;
+                height: $spacing-unit*2;
                 margin: 0;
                 .mdc-tab {
-                    font-variant: all-small-caps;
-                    text-transform: uppercase;
                     color: rgba(255, 255, 255, 0.95);
                     font-size: 1rem;
                     font-weight: 600;
                     padding: 0 $spacing-unit;
-                    font-variant: all-small-caps;
-                    text-transform: uppercase;
                 }
-                .mdc-tab:after {
-                    top: 62px;
+                .mdc-tab:first-child {
+                    padding-left: 0;
+                }
+                .mdc-tab::after {
+                    display: none;
                 }
             }
             #upper-tab-bar {
                 margin-right: $spacing-unit;
                 .mdc-tab {
                     min-width: auto;
-                    font-weight: 500;
+                    font-weight: 600;
                 }
             }
         }
@@ -298,9 +326,6 @@ footer .mdc-list .mdc-list-item a:hover {
         .mdc-toolbar__icon:last-of-type {
             padding-right: 0;
         }
-        .mdc-toolbar__section {
-            height: 64px;
-        }
         .mdc-toolbar__section.toolbar-search {
             vertical-align: middle;
             .fa-search {
@@ -308,7 +333,6 @@ footer .mdc-list .mdc-list-item a:hover {
             }
         }
         .mdc-toolbar__section.toolbar-menu {
-            background: rgba(0, 0, 0, 0.15);
             .mdc-tab {
                 min-width: auto;
             }
@@ -316,7 +340,7 @@ footer .mdc-list .mdc-list-item a:hover {
     }
 }
 .mdc-toolbar-fixed-adjust {
-    padding-top: 128px;
+    padding-top: $spacing-unit*9;
     margin: 0;
 }
 .mdc-temporary-drawer {
@@ -394,7 +418,7 @@ footer .mdc-list .mdc-list-item a:hover {
     }
 }
 .credit-union .splash-image img.header-text {
-    max-height: 6rem;
+    max-height: $spacing-unit*6;
 }
 .blogs .page-sidebar .page-info,
 .press-media .sidebar h3.blogs {
@@ -540,7 +564,7 @@ ul.breadcrumb {
         margin-right: 0 !important;
         width: 0 !important;
     }
-    li.pull-right a:after {
+    li.pull-right a::after {
         content: "";
     }
     li:not(:last-child) {
@@ -588,7 +612,7 @@ ul.breadcrumb {
                 a {
                     background: var(--mdc-theme-primary-dark);
                     padding: 0.05rem 0.4rem 0.1rem;
-                    border-radius: 1rem;
+                    border-radius: $spacing-unit;
                     color: #fff;
                 }
                 a:hover {
@@ -628,10 +652,10 @@ blockquote {
 blockquote:before {
     color: var(--mdc-theme-primary-dark);
     content: open-quote;
-    font-size: 4em;
-    line-height: 0.1em;
-    margin-right: 0.25em;
-    vertical-align: -0.4em;
+    font-size: 3rem;
+    line-height: 0.1rem;
+    margin-right: 0.25rem;
+    vertical-align: -0.4rem;
 }
 blockquote p {
     display: inline;
@@ -745,21 +769,21 @@ p:last-child {
 }
 /* makes the font 33% larger relative to the icon container */
 .fa-lg {
-    font-size: 1.33333333em;
-    line-height: 0.75em;
+    font-size: 1.33333333rem;
+    line-height: 0.75rem;
     vertical-align: -15%;
 }
 .fa-2x {
-    font-size: 2em;
+    font-size: 2rem;
 }
 .fa-3x {
-    font-size: 3em;
+    font-size: 3rem;
 }
 .fa-4x {
-    font-size: 4em;
+    font-size: 4rem;
 }
 .fa-5x {
-    font-size: 5em;
+    font-size: 5rem;
 }
 
 .inline-icon {
@@ -835,7 +859,7 @@ footer {
     }
     .footer-copyright {
         font-size: 92%;
-        margin-bottom: 3rem;
+        margin-bottom: $spacing-unit*3;
         .row {
             position: relative;
         }
@@ -862,6 +886,6 @@ footer {
         }
     }
     .mdc-toolbar-fixed-adjust {
-        padding-top: 64px;
+        padding-top: $spacing-unit*6;
     }
 }
