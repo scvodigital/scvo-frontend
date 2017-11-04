@@ -1,2 +1,89 @@
-Home
-<img src="{{primaryResponse.hits.hits.[0]._source.original_image}}" />
+<div class="home-splash home-splash-1" style="background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url({{primaryResponse.hits.hits.[0]._source.original_image}}) no-repeat center center; background-size: cover;">
+    <div class="container-fluid splash-nav">
+        <div class="row">
+            <div class="col-md-offset-3 col-sm-offset-2 col-md-6 col-sm-8">
+                <div class="home-spacer"></div>
+                <div class="home-brand" title="Good HQ"></div>
+                <div class="home-intro">
+                    <h2>Find the causes you care about</h2>
+                    <h3>Share your experiences and get involved</h3>
+                </div>
+                <div class="home-search row">
+                    <form>
+                        <div class="col-xs-9 tight">
+                            <div class="searchbar ng-pristine ng-valid ng-valid-pattern" name="searchForm" role="form" novalidate="">
+                                <input aria-label="Search Bar" title="Search Bar" id="searchbar" name="search" type="text" ng-pattern="/^[a-zA-ZÀ-ÿ0-9&amp;+@#'!\?_\-() ]+$/" class="" ng-model="homequery" placeholder="Search">
+                            </div>
+                        </div>
+                        <div class="col-xs-3 tight">
+                            <button class="btn btn-icon" type="submit" href="/search">
+                                <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                <div class="row">
+                    <p>or explore other ways to get involved</p>
+                </div>
+                <div class="home-buttons row">
+                    <div class="col-xs-12 col-sm-4 tight">
+                        <button class="btn btn-icon btn-inverse" href="/search?type=causes">
+                            <span class="glyphicon glyphicon-edit left" aria-hidden="true"></span>
+                            Review
+                        </button>
+                    </div>
+                    <div class="col-xs-12 col-sm-4 tight">
+                        <button class="btn btn-icon btn-inverse" href="/search?type=volopps">
+                            <span class="glyphicon glyphicon-thumbs-up left" aria-hidden="true"></span>
+                            Volunteer
+                        </button>
+                    </div>
+                    <div class="col-xs-12 col-sm-4 tight">
+                        <button class="btn btn-icon btn-inverse" href="/search?type=jobs">
+                            <span class="glyphicon glyphicon-briefcase left" aria-hidden="true"></span>
+                            Work
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid container-home ng-scope" ng-class="{unauthenticated: !login}">
+    <div class="row">
+        <div class="col-xs-12">
+            <h1>Featured reviews</h1>
+            <h2>Find out what people are saying about their favourite good causes and charities - <a href="/reviews">more reviews</a></h2>
+        </div>
+    </div>
+    <div class="row">
+        <ul class="media-list">
+            <li class="media">
+                {{#each supplimentaryResponses.latest_reviews.hits.hits}}
+                <div class="col-md-4 col-sm-12">
+                    {{{this._source.rendered.ghq_list}}}
+                </div>
+                {{/each}}
+            </li>
+        </ul>
+    </div>
+
+    <div class="row">
+        <div class="col-xs-12">
+            <h1>Featured posts</h1>
+            <h2>Find out what good causes and charities are talking about - <a href="search({mode:'post'})">more posts</a></h2>
+        </div>
+    </div>
+    <div class="row">
+        <ul class="media-list">
+            <li class="media">
+                {{#each supplimentaryResponses.latest_posts.hits.hits}}
+                <div class="col-md-4 col-sm-12">
+                    {{{this._source.rendered.ghq_list}}}
+                </div>
+                {{/each}}
+            </li>
+        </ul>
+    </div>
+</div>
