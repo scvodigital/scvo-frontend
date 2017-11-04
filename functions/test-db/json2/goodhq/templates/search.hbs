@@ -2,20 +2,20 @@
     <div class="v-margin">
         <div class="mdc-card">
             <section class="mdc-card__primary">
-                <h2 class="mdc-card__title mdc-card__title--large">Search SCVO</h2>
-                <form [searchroute]="'main-search'">
+                <h2 class="mdc-card__title mdc-card__title--large">Search Good HQ</h2>
+                <form [searchroute]="'search'">
                     <div class="mdc-textfield">
-                        <input type="text" class="mdc-textfield__input searchRoute" placeholder="Search" value="{{params.query.q}}" name="q" id="main-q">
+                        <input type="text" class="mdc-textfield__input searchRoute" placeholder="Search" value="{{params.query.q}}" name="q" id="q">
                         <div class="mdc-textfield__bottom-line"></div>
                     </div>
                     <div class="mdc-form-field">
-                        <label class="mdc-select__label" for="main-type">Show me</label>
-                        <select class="mdc-select" role="listbox" id="main-type" name="type">
+                        <label class="mdc-select__label" for="type">Show me</label>
+                        <select class="mdc-select" role="listbox" id="type" name="type">
                             <option value="" {{#if ../params.query.type}}{{else}}selected{{/if}}>Everything</option>
-                            <option value="scvo-cms-post" {{#compare ../params.query.type "===" "goodhq-organisation"}}selected{{/compare}}>Causes</option>
-                            <option value="scvo-cms-post" {{#compare ../params.query.type "===" "goodhq-post"}}selected{{/compare}}>Posts</option>
-                            <option value="scvo-cms-page" {{#compare ../params.query.type "===" "milo-volunteering-opportunity"}}selected{{/compare}}>Volunteering opportunities</option>
-                            <option value="scvo-cms-page" {{#compare ../params.query.type "===" "goodmoves-legacy"}}selected{{/compare}}>Jobs</option>
+                            <option value="goodhq-organisation" {{#compare ../params.query.type "===" "goodhq-organisation"}}selected{{/compare}}>Causes</option>
+                            <option value="goodhq-post" {{#compare ../params.query.type "===" "goodhq-post"}}selected{{/compare}}>Posts</option>
+                            <option value="milo-volunteering-opportunity" {{#compare ../params.query.type "===" "milo-volunteering-opportunity"}}selected{{/compare}}>Volunteering opportunities</option>
+                            <option value="goodmoves-legacy" {{#compare ../params.query.type "===" "goodmoves-legacy"}}selected{{/compare}}>Jobs</option>
                         </select>
                     </div>
                     <button type="submit" class="mdc-button mdc-button--raised" aria-label="Search" alt="Search">

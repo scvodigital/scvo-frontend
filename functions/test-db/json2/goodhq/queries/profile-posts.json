@@ -5,9 +5,16 @@
         "rendered.ghq_list"
     ],
     "query": {
-        "term": {
-            "author_xid": "{{primaryResponse.hits.hits.[0]._source.xid}}"
-        }
+        "bool": {
+	        "should": [
+                {
+                    "term": {
+                        "author_xid": "{{primaryResponse.hits.hits.[0]._source.xid}}"
+                    }
+                }
+            ],
+            "minimum_should_match": 1
+	    }
     },
     "sort": {
         "date_posted": "desc"

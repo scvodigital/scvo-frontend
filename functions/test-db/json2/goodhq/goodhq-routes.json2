@@ -32,13 +32,18 @@
         "pattern": "/search",
         "linkTags": [],
         "metaTags": [],
-        "template": `{:templates/page-search.hbs}`,
-        "titleTemplate": `{:templates/page-search-title.hbs}`,
+        "template": `{:templates/search.hbs}`,
+        "titleTemplate": `{:templates/search-title.hbs}`,
         "jsonLdTemplate": `{:templates/search-json-ld.hbs}`,
+        "defaultParams": {
+            "query": {
+                "type": ""
+            }
+        },
         "primarySearchTemplate": {
             "index": "web-content-production",
             "type": "goodhq-organisation,goodhq-post,goodmoves-legacy,milo-volunteering-opportunity",
-            "template": `{:queries/search-all.json}`
+            "template": `{:queries/search.json}`
         },
         "elasticsearchConfig": {
             "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
