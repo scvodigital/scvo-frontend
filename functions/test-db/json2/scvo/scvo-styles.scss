@@ -12,7 +12,10 @@ $spacing-unit: 1rem;
     --mdc-theme-secondary-light: #FFA000; // Amber 700
     --mdc-theme-secondary-dark: #FF6F00; // Amber 900
     --mdc-theme-background: #ECEFF1; // Blue Grey 50
-    --mdc-site-background: #263238; // Blue Grey 900
+    --mdc-footer-primary: #4A148C; // Purple 900
+    --mdc-footer-primary-light: #D81B60; // Pink 600
+    --mdc-footer-primary-dark: #290b4d;
+    --mdc-site-background: #290b4d; // was #263238 Blue Grey 900
     --mdc-layout-grid-margin-desktop: 0;
     --mdc-layout-grid-margin-tablet: 0;
 }
@@ -129,6 +132,7 @@ main {
 .mdc-card__subtitle,
 .mdc-textfield__input,
 .mdc-card__title--large,
+.mdc-typography--headline,
 .mdc-card__supporting-text,
 .mdc-typography--subheading2,
 .mdc-list {
@@ -155,15 +159,6 @@ a:hover {
 .mdc-button a:hover,
 .mdc-toolbar a:hover {
     text-decoration: none;
-}
-footer a {
-    text-decoration: underline;
-}
-footer a:hover {
-    color: white;
-}
-footer .mdc-list .mdc-list-item a:hover {
-    text-decoration: underline !important;
 }
 
 .hero {
@@ -255,7 +250,8 @@ footer .mdc-list .mdc-list-item a:hover {
                 .mdc-textfield__input:hover {
                     color: rgba(255,255,255,.87);
                     border: $spacing-unit/10 solid rgba(255,255,255,.75);
-                    padding: $spacing-unit/2;
+                    padding: 0 $spacing-unit/2;
+                    line-height: $spacing-unit*2;
                 }
                 ::-webkit-input-placeholder {
                     color: rgba(255, 255, 255, 0.6);
@@ -273,6 +269,9 @@ footer .mdc-list .mdc-list-item a:hover {
             .mdc-toolbar__icon {
                 height: $spacing-unit*2;
                 z-index: 100;
+            }
+            .mdc-toolbar__icon:focus {
+                outline: none;
             }
             .mdc-tab-bar {
                 overflow: hidden;
@@ -338,8 +337,11 @@ footer .mdc-list .mdc-list-item a:hover {
     }
 }
 .mdc-toolbar-fixed-adjust {
-    padding: $spacing-unit*9.5 0 0;
+    padding: $spacing-unit*9.5 0 $spacing-unit*2;
     margin: 0;
+}
+.home .mdc-toolbar-fixed-adjust {
+    padding-bottom: 0;
 }
 .mdc-temporary-drawer {
     .mdc-temporary-drawer__header-content {
@@ -455,11 +457,25 @@ footer .mdc-list .mdc-list-item a:hover {
             }
         }
         h3.mdc-card__title {
-            font-size: 1.3rem;
+            font-size: 1.2rem;
+            line-height: 1.4;
         }
         .gist {
             margin-top: $spacing-unit*1.5;
             box-shadow: none;
+            a.thumbnail:after {
+                content: "";
+                display: none;
+            }
+            .thumbnail {
+                margin-top: $spacing-unit/2;
+                img {
+                    border-radius: 50%;
+                    width: 64px;
+                    height: 64px;
+                    object-fit: cover;
+                }
+            }
             .post-info-item {
                 line-height: 1.8;
             }
@@ -776,7 +792,8 @@ p:last-child {
     a[href^="https://"]::after {
         font-family: 'FontAwesome';
         content: "\f08e";
-        margin-left: 0.25rem;
+        top: 0.12rem;
+        margin-left: 0.3rem;
         text-decoration: none;
         display: inline-block;
         position: relative;
@@ -853,17 +870,20 @@ p:last-child {
 
 footer {
     color: white;
-    background: rgb(55,71,79);
-    background: -moz-linear-gradient(top, rgba(55,71,79,1) 0%, rgba(38,50,56,1) 100%);
-    background: -webkit-linear-gradient(top, rgba(55,71,79,1) 0%,rgba(38,50,56,1) 100%);
-    background: linear-gradient(to bottom, rgba(55,71,79,1) 0%,rgba(38,50,56,1) 100%);
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#37474f', endColorstr='#263238',GradientType=0 );
-    padding-top: $spacing-unit*2;
-    .footer {
-        opacity: 0.8;
+    background-color: var(--mdc-footer-primary);
+    border-top: 0.6rem solid var(--mdc-footer-primary-light);
+    .footer-main {
+        padding: $spacing-unit*2.5 0 $spacing-unit*2;
     }
     a {
         color: white;
+        text-decoration: underline;
+    }
+    a:hover {
+        color: white;
+    }
+    .mdc-list .mdc-list-item a:hover {
+        text-decoration: underline !important;
     }
     .brand-logo {
         img {
@@ -887,8 +907,8 @@ footer {
         }
     }
     .footer-copyright {
-        font-size: 92%;
-        margin-bottom: $spacing-unit*3;
+        background-color: var(--mdc-footer-primary-dark);
+        font-size: 0.85rem;
         .row {
             position: relative;
         }
