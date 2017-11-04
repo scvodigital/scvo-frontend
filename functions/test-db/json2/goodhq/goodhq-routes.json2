@@ -7,15 +7,10 @@
         "titleTemplate": `{:templates/home-title.hbs}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
-            "type": "goodhq-organisations",
-            "template": `{:queries/home.json}`
+            "type": "scvo-cms-media",
+            "template": `{:queries/home-splash.json}`
         },
         "supplimentarySearchTemplates": {
-            "splash": {
-                "index": "web-content-production",
-                "type": "scvo-cms-media",
-                "template": `{:queries/home-splash.json}`
-            },
             "latest_reviews": {
                 "index": "web-content-production",
                 "type": "goodhq-reviews",
@@ -39,10 +34,10 @@
         "metaTags": [],
         "template": `{:templates/page-search.hbs}`,
         "titleTemplate": `{:templates/page-search-title.hbs}`,
-        "jsonLdTemplate": `{:templates/json-ld-search.hbs}`,
+        "jsonLdTemplate": `{:templates/search-json-ld.hbs}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
-            "type": "scvo-cms-page,scvo-cms-post,scvo-member,digital-charter-signatory,goodmoves-legacy,funding-scotland-fund,goodhq-organisation,scvo-document-evidence,scvo-event,scvo-grant-digital,scvo-staff",
+            "type": "goodhq-organisation,goodhq-post,goodmoves-legacy,milo-volunteering-opportunity",
             "template": `{:queries/search-all.json}`
         },
         "elasticsearchConfig": {
@@ -52,8 +47,16 @@
         },
         "multipleResults": true
     },
-    "_default": {
-        "pattern": "/*path",
+    "page": {
+        "pattern": {
+            "about": "/about",
+            "signin": "/signin",
+            "signup": "/signup",
+            "help": "/help",
+            "terms": "/terms",
+            "privacy": "/privacy",
+            "contact": "/contact"
+        },
         "linkTags": [],
         "metaTags": [],
         "template": `{:templates/page.hbs}`,
@@ -64,7 +67,46 @@
             "type": "scvo-cms-page",
             "template": `{:queries/page.json}`
         },
-        "supplimentarySearchTemplates": {},
+        "elasticsearchConfig": {
+            "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
+            "apiVersion": "5.6",
+            "log": "debug"
+        }
+    },
+    "_default": {
+        "pattern": "/*path",
+        "linkTags": [],
+        "metaTags": [],
+        "template": `{:templates/profile.hbs}`,
+        "titleTemplate": `{:templates/profile-title.hbs}`,
+        "jsonLdTemplate": `{:templates/profile-json-ld.hbs}`,
+        "primarySearchTemplate": {
+            "index": "web-content-production",
+            "type": "goodhq-organisation",
+            "template": `{:queries/profile.json}`
+        },
+        "supplimentarySearchTemplates": {
+            "reviews": {
+                "index": "web-content-production",
+                "type": "goodhq-review",
+                "template": `{:queries/profile-reviews.json}`
+            },
+            "posts": {
+                "index": "web-content-production",
+                "type": "goodhq-post",
+                "template": `{:queries/profile-posts.json}`
+            },
+            "volopps": {
+                "index": "web-content-production",
+                "type": "milo-volunteering-opportunity",
+                "template": `{:queries/profile-volopps.json}`
+            },
+            "jobs": {
+                "index": "web-content-production",
+                "type": "goodmoves-legacy",
+                "template": `{:queries/profile-jobs.json}`
+            }
+        },
         "elasticsearchConfig": {
             "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
             "apiVersion": "5.6",

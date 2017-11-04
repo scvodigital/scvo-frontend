@@ -1,0 +1,27 @@
+{
+    "size": 10,
+    "from": {{multiply (subtract (default query.page 1) 1) 10}},
+    "_source": [
+        "rendered.ghq_list"
+    ],
+    "query": {
+	    "bool": {
+	        "should": [
+	        	{
+	            	"term": {
+	                	"organisation_good_hq_xid": "{{primaryResponse.hits.hits.[0]._source.xid}}"
+                	}
+            	},
+            	{
+            		"term": {
+		                "organisation_charity_number": "{{primaryResponse.hits.hits.[0]._source.charity_number}}"
+	                }
+	            }
+            ],
+            "minimum_should_match": 1
+	    }
+    },
+    "sort": {
+        "start_date": "desc"
+    }
+}

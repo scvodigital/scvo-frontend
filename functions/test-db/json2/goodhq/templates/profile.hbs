@@ -1,0 +1,25 @@
+<h1>Profile:</h1>
+{{#with primaryResponse.hits.hits.[0]._source}}
+{{{rendered.ghq_profile_header}}}
+{{{rendered.ghq_profile_info}}}
+{{/with}}
+
+<h2>Reviews</h2>
+{{#each supplimentaryResponses.reviews.hits.hits}}
+{{{this._source.rendered.ghq_list}}}
+{{/each}}
+
+<h2>Posts</h2>
+{{#each supplimentaryResponses.posts.hits.hits}}
+{{{this._source.rendered.ghq_list}}}
+{{/each}}
+
+<h2>Volunteering opportunities</h2>
+{{#each supplimentaryResponses.volopps.hits.hits}}
+{{{this._source.rendered.ghq_list}}}
+{{/each}}
+
+<h2>Jobs</h2>
+{{#each supplimentaryResponses.jobs.hits.hits}}
+{{{this._source.rendered.ghq_list}}}
+{{/each}}

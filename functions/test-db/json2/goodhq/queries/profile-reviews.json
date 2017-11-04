@@ -1,0 +1,15 @@
+{
+    "size": 10,
+    "from": {{multiply (subtract (default query.page 1) 1) 10}},
+    "_source": [
+        "rendered.ghq_list"
+    ],
+    "query": {
+        "term": {
+            "target_xid": "{{primaryResponse.hits.hits.[0]._source.xid}}"
+        }
+    },
+    "sort": {
+        "date_posted": "desc"
+    }
+}
