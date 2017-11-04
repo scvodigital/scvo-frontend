@@ -165,11 +165,15 @@ function getJson<T>(jsonPath: string): Promise<T> {
 
 const siteCmsMap = {
     "goodmoves": "cms.goodmoves.com",
-    "scvo": "cms.scvo.org",
+    "goodhq": "merida.goodhq.org",
+    "scvo": "cms.scvo.org"
 };
 
 const domainMap = {
     "goodhq.org": "goodhq",
+    "test.goodhq.org": "goodhq",
+    "scvolabs.org": "goodhq",
+    "ghqtest.scvo.org": "goodhq",
     "goodmoves.com": "goodmoves",
     "goodmoves.wales": "goodmoves",
     "goodmoves.cymru": "goodmoves",
@@ -178,14 +182,14 @@ const domainMap = {
     "goodmovesjobs.de": "goodmoves",
     "goodmoves.scot": "goodmoves",
     "goodmoves.org.uk": "goodmoves",
-    "localhost": "goodhq",
-    "127.0.0.1": "scvo",
     "scvo-net.firebaseapp.com": "scvo",
+    "localhost": "scvo",
+    "127.0.0.1": "scvo",
     "scvo.net": "scvo",
+    "scvo.org": "scvo",
+    "scvo.org.uk": "scvo",
     "test.scvo.org.uk": "scvo",
-    "beta.scvo.org.uk": "scvo",
-    "beta.scvo.scot": "scvo",
-    "beta.scvo.org": "scvo"
+    "test.scvo.org": "scvo"
 };
 
 // This is only temporarily here while we work out how PDF generation is handled in the future
