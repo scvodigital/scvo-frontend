@@ -82,6 +82,7 @@ $spacing-unit: 1rem;
     --mdc-theme-primary-light: #022347;
     --mdc-theme-primary-dark: #022347;
 }
+.gist.tfn-post,
 .search-result.tfn-post {
     --mdc-theme-primary: #3b9db1;
     --mdc-theme-primary-fade: #3b9db1;
@@ -445,42 +446,44 @@ a:hover {
     .latest-content {
         background-color: var(--mdc-theme-background);
         padding: $spacing-unit/2 0 $spacing-unit*2;
+        h2 {
+            color: var(--mdc-theme-primary) !important;
+        }
         .mdc-card__primary {
             padding: 0;
         }
-        h2 {
-            font-size: 1.8rem;
-            color: var(--mdc-theme-primary);
-            a {
-                font-size: 1.1rem;
-                display: block;
-            }
+    }
+}
+.gist {
+    margin-top: $spacing-unit*1.5;
+    box-shadow: none;
+    h2 {
+        font-size: 1.8rem;
+        a {
+            font-size: 1.1rem;
+            display: block;
         }
-        h3.mdc-card__title {
-            font-size: 1.2rem;
-            line-height: 1.4;
+    }
+    h3.mdc-card__title {
+        font-size: 1.2rem;
+        line-height: 1.4;
+    }
+    a.thumbnail:after {
+        content: "" !important;
+        display: none !important;
+    }
+    .thumbnail {
+        margin-top: $spacing-unit/2;
+        display: block;
+        img {
+            border-radius: 50%;
+            width: 64px;
+            height: 64px;
+            object-fit: cover;
         }
-        .gist {
-            margin-top: $spacing-unit*1.5;
-            box-shadow: none;
-            a.thumbnail:after {
-                content: "";
-                display: none;
-            }
-            .thumbnail {
-                margin-top: $spacing-unit/2;
-                display: block;
-                img {
-                    border-radius: 50%;
-                    width: 64px;
-                    height: 64px;
-                    object-fit: cover;
-                }
-            }
-            .post-info-item {
-                line-height: 1.8;
-            }
-        }
+    }
+    .post-info-item {
+        line-height: 1.8;
     }
 }
 
