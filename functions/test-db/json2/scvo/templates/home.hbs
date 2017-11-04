@@ -1,4 +1,4 @@
-<section class="v-padding">
+<section class="featured-content">
     <div class="container-fluid">
         {{#each primaryResponse.hits.hits}}
         {{{_source.rendered.featured}}}
@@ -6,24 +6,33 @@
     </div>
 </section>
 
-<section class="v-padding">
+<section class="latest-content">
     <div class="container-fluid">
         <div class="latest-grid">
             <div class="mdc-layout-grid__inner">
                 <div class="mdc-layout-grid__cell">
-                    <h2>Latest blog posts</h2>
+                    <h2>
+                        Latest SCVO blog posts
+                        <a href="/blogs">Read more</a>
+                    </h2>
                     {{#each supplimentaryResponses.blogs_latest.hits.hits}}
                     {{{_source.rendered.gist}}}
                     {{/each}}
                 </div>
                 <div class="mdc-layout-grid__cell">
-                    <h2>Top <a href="http://goodmoves.com"><strong>good</strong>moves</a> jobs</h2>
+                    <h2>
+                        Top third sector jobs
+                        <a href="https://goodmoves.com">See more on <strong>good</strong>moves</a>
+                    </h2>
                     {{#each supplimentaryResponses.goodmoves_latest.hits.hits}}
                     {{{_source.rendered.gist}}}
                     {{/each}}
                 </div>
                 <div class="mdc-layout-grid__cell">
-                    <h2>Latest <a href="http://thirdforcenews.org.uk">TFN</a> news</h2>
+                    <h2>
+                        Latest TFN news
+                        <a href="http://thirdforcenews.org.uk">Read more</a>
+                    </h2>
                     {{#each supplimentaryResponses.tfn_latest.hits.hits}}
                     {{{_source.rendered.gist}}}
                     {{/each}}

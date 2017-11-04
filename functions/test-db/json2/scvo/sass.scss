@@ -26,7 +26,6 @@ $spacing-unit: 1rem;
     --mdc-theme-primary-dark: #311B92; // Deep Purple 900
 }
 .search-result.goodmoves-job,
-.gist.goodmoves-job,
 .search-result.cjs-job,
 .services.goodmoves,
 .employability,
@@ -37,6 +36,7 @@ $spacing-unit: 1rem;
     --mdc-theme-primary-light: #388E3C; // Green 700
     --mdc-theme-primary-dark: #1B5E20; // Green 900
 }
+.home .latest-content,
 .services {
     --mdc-theme-primary: #1565C0; // Blue 800
     --mdc-theme-primary-fade: rgba(21, 101, 192, 0.85);
@@ -59,7 +59,6 @@ $spacing-unit: 1rem;
 .search-result.scvo-document,
 .search-result.scvo-cms-post,
 .list.scvo-cms-post,
-.gist.scvo-cms-post,
 .blogs,
 .post,
 .policy-research {
@@ -80,8 +79,7 @@ $spacing-unit: 1rem;
     --mdc-theme-primary-light: #022347;
     --mdc-theme-primary-dark: #022347;
 }
-.search-result.tnf-post,
-.gist.tnf-post {
+.search-result.tfn-post {
     --mdc-theme-primary: #3b9db1;
     --mdc-theme-primary-fade: #3b9db1;
     --mdc-theme-primary-light: #3b9db1;
@@ -340,7 +338,7 @@ footer .mdc-list .mdc-list-item a:hover {
     }
 }
 .mdc-toolbar-fixed-adjust {
-    padding: $spacing-unit*9.5 0 $spacing-unit*1.5;
+    padding: $spacing-unit*9.5 0 0;
     margin: 0;
 }
 .mdc-temporary-drawer {
@@ -425,19 +423,36 @@ footer .mdc-list .mdc-list-item a:hover {
     display: none;
 }
 
-.featured.mdc-card {
-    height: 20rem;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center center;
-    .mdc-card__primary, .mdc-card__actions {
-        background-image: linear-gradient(90deg, var(--mdc-theme-primary-dark) 0%, var(--mdc-theme-primary) 33%, var(--mdc-theme-primary-fade) 100%);
-        color: white;
+.home {
+    .featured-content {
+        .featured.mdc-card {
+            height: 20rem;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center center;
+            .mdc-card__primary, .mdc-card__actions {
+                background-image: linear-gradient(90deg, var(--mdc-theme-primary-dark) 0%, var(--mdc-theme-primary) 33%, var(--mdc-theme-primary-fade) 100%);
+                color: white;
+            }
+            .mdc-button:not(:disabled) {
+                color: white;
+            }
+        }
     }
-    .mdc-button:not(:disabled) {
-        color: white;
+
+    .latest-content {
+        background-color: var(--mdc-theme-background);
+        padding: $spacing-unit 0 $spacing-unit*1.5;
+        h2 {
+            font-size: 1.8rem;
+            color: var(--mdc-theme-primary);
+        }
+        .gist {
+            box-shadow: none;
+        }
     }
 }
+
 .mdc-form-field,
 .mdc-button,
 .mdc-card__supporting-text,
