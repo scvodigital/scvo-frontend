@@ -39,18 +39,6 @@ $spacing-unit: 1rem;
     --mdc-theme-primary-light: #388E3C; // Green 700
     --mdc-theme-primary-dark: #1B5E20; // Green 900
 }
-.home .latest-content,
-.services {
-    --mdc-theme-primary: #1565C0; // Blue 800
-    --mdc-theme-primary-fade: rgba(21, 101, 192, 0.85);
-    --mdc-theme-primary-light: #1976D2; // Blue 700
-    --mdc-theme-primary-dark: #0D47A1; // Blue 900
-}
-.services.credit-union {
-    --mdc-theme-primary: #1976D2;
-    --mdc-theme-primary-light: #1976D2;
-    --mdc-theme-primary-dark: #1976D2;
-}
 .project,
 .campaigns,
 .projects-campaigns {
@@ -95,6 +83,19 @@ $spacing-unit: 1rem;
     --mdc-theme-primary-fade: #6FB744;
     --mdc-theme-primary-light: #6FB744;
     --mdc-theme-primary-dark: #6FB744;
+}
+.home .latest-content,
+.home .gist.tfn-post,
+.services {
+    --mdc-theme-primary: #1565C0; // Blue 800
+    --mdc-theme-primary-fade: rgba(21, 101, 192, 0.85);
+    --mdc-theme-primary-light: #1976D2; // Blue 700
+    --mdc-theme-primary-dark: #0D47A1; // Blue 900
+}
+.services.credit-union {
+    --mdc-theme-primary: #1976D2;
+    --mdc-theme-primary-light: #1976D2;
+    --mdc-theme-primary-dark: #1976D2;
 }
 
 html {
@@ -447,7 +448,12 @@ a:hover {
         background-color: var(--mdc-theme-background);
         padding: $spacing-unit/2 0 $spacing-unit*2;
         h2 {
+            font-size: 1.8rem;
             color: var(--mdc-theme-primary) !important;
+            a {
+                font-size: 1.1rem;
+                display: block;
+            }
         }
         .mdc-card__primary {
             padding: 0;
@@ -457,13 +463,6 @@ a:hover {
 .gist {
     margin-top: $spacing-unit*1.5;
     box-shadow: none;
-    h2 {
-        font-size: 1.8rem;
-        a {
-            font-size: 1.1rem;
-            display: block;
-        }
-    }
     h3.mdc-card__title {
         font-size: 1.2rem;
         line-height: 1.4;
