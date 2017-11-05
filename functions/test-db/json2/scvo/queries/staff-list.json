@@ -1,0 +1,63 @@
+{
+	"size": 0,
+    "_source": [
+        "rendered.search_result",
+        "rendered.list"
+    ],
+	"query": {
+		"bool": {
+			"must": [
+				{
+					"term": { "is_active": true }
+				}
+                {{#ifAny query.office query.directorate query.department}},{{/ifAny}}
+                {{#if query.office}}
+                    {
+                        "term": { "office_slug": "{{query.office}}" }
+                    }
+                    {{#ifAny query.directorate query.department}},{{/ifAny}}
+                {{/if}}
+                {{#if query.directorate}}
+                    {
+                        "term": { "directorate_slug": "{{query.directorate}}" }
+                    }
+                    {{#ifAny query.department}},{{/ifAny}}
+                {{/if}}
+                {{#if query.department}}
+                    {
+                        "term": { "department_slug": "{{query.department}}" }
+                    }
+                {{/if}}
+			]
+		}
+	},
+	"aggs": {
+		"query": {
+			"terms": {
+				"field": "{{firstItem (split query.grouping '-')}}",
+				"order": { "_term": "asc" }
+			},
+			"aggs": {
+				"departments": {
+					"terms": {
+                        "field": "{{lastItem (split query.grouping '-')}}",
+						"order": { "_term": "asc" }
+					},
+					"aggs": {
+						"documents": {
+							"top_hits": {
+								"size": 100,
+								"sort": {
+									"last_name": "asc"
+								},
+								"_source": {
+									"includes": [ "rendered.search_result_scvo" ]
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

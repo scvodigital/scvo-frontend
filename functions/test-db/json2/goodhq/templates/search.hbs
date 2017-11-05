@@ -1,0 +1,57 @@
+<div class="container-fluid">
+    <div class="v-margin">
+        <div class="mdc-card">
+            <section class="mdc-card__primary">
+                <h2 class="mdc-card__title mdc-card__title--large">Search Good HQ</h2>
+                <form [searchroute]="'search'">
+                    <div class="mdc-textfield">
+                        <input type="text" class="mdc-textfield__input searchRoute" placeholder="Search" value="{{params.query.q}}" name="q" id="q">
+                        <div class="mdc-textfield__bottom-line"></div>
+                    </div>
+                    <div class="mdc-form-field">
+                        <label class="mdc-select__label" for="type">Show me</label>
+                        <select class="mdc-select" role="listbox" id="type" name="type">
+                            <option value="" {{#if ../params.query.type}}{{else}}selected{{/if}}>Everything</option>
+                            <option value="goodhq-organisation" {{#compare ../params.query.type "===" "goodhq-organisation"}}selected{{/compare}}>Causes</option>
+                            <option value="goodhq-post" {{#compare ../params.query.type "===" "goodhq-post"}}selected{{/compare}}>Posts</option>
+                            <option value="milo-volunteering-opportunity" {{#compare ../params.query.type "===" "milo-volunteering-opportunity"}}selected{{/compare}}>Volunteering opportunities</option>
+                            <option value="goodmoves-legacy" {{#compare ../params.query.type "===" "goodmoves-legacy"}}selected{{/compare}}>Jobs</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="mdc-button mdc-button--raised" aria-label="Search" alt="Search">
+                        <span class="fa fa-search" aria-hidden="true"></span>
+                        Search
+                    </button>
+                </form>
+            </section>
+        </div>
+    </div>
+
+    {{#each primaryResponse.hits.hits}}
+    {{#if _source.rendered.ghq_search_result}}
+    {{{_source.rendered.ghq_search_result}}}
+    {{/if}}
+    {{/each}}
+
+    <div class="v-margin">
+        <ul class="pagination inline-list">
+            {{#if paging.prevPage}}
+            <li>
+                <a class="mdc-button mdc-button--compact" href="/search?q={{../params.query.q}}&page={{paging.prevPage}}">Previous</a>
+            </li>
+            {{/if}}
+
+            {{#each paging.pageRange}}
+            <li class="{{#compare ../paging.currentPage "===" this.pageNumber}}current-page{{/compare}} pagination-distance-{{this.distance}}">
+                <a  class="mdc-button mdc-button--compact" href="/search?q={{../params.query.q}}&page={{this.pageNumber}}">{{this.pageNumber}}</a>
+            </li>
+            {{/each}}
+
+            {{#if paging.nextPage}}
+            <li>
+                <a class="mdc-button mdc-button--compact" href="/search?q={{../params.query.q}}&page={{paging.nextPage}}">Next</a>
+            </li>
+            {{/if}}
+        </ul>
+    </div>
+</div>

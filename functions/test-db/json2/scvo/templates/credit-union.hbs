@@ -1,0 +1,52 @@
+<div class="splash-image splash-image-{{primaryResponse.hits.hits.[0]._type}}{{#if primaryResponse.hits.hits.[0]._source.header_background}} splash-image-background{{/if}}" style="background-image: {{#if primaryResponse.hits.hits.[0]._source.header_background_gradient}}linear-gradient(185deg,var(--mdc-theme-primary-fade),var(--mdc-theme-primary-dark)75%),{{else}}{{#if primaryResponse.hits.hits.[0]._source.header_background}}{{else}}linear-gradient(var(--mdc-theme-primary-fade),var(--mdc-theme-primary-fade)),{{/if}}{{/if}}url('{{#if primaryResponse.hits.hits.[0]._source.header_background}}{{primaryResponse.hits.hits.[0]._source.header_background}}{{else}}{{#if supplimentaryResponses.splash.hits.hits.[0]._source.original_image}}{{supplimentaryResponses.splash.hits.hits.[0]._source.original_image}}{{/if}}{{/if}}');">
+    <div class="container-fluid">
+        <div class="mdc-layout-grid">
+            {{#if primaryResponse.hits.hits.[0]._source.header_text}}
+            <img src="{{primaryResponse.hits.hits.[0]._source.header_text}}" alt="{{primaryResponse.hits.hits.[0]._source.title}}" class="header-text" />
+            {{else}}
+            <h1 class="header-text">
+                <span class="header-text-banner">
+                    {{{primaryResponse.hits.hits.[0]._source.title}}}
+                </span>
+            </h1>
+            {{/if}}
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    {{#with primaryResponse.hits.hits.[0]._source}}
+    {{#if breadcrumb}}
+    {{#compare breadcrumb.length '>=' 1}}
+    <ul class="breadcrumb">
+        <li><a href="/">Home</a></li>
+        {{#each breadcrumb}}
+        <li>
+            <a href="{{replace url 'https://cms.scvo.org' ''}}">{{{striptags title}}}</a>
+        </li>
+        {{/each}}
+    </ul>
+    {{else}}
+    <div class="spacer"></div>
+    {{/compare}}
+    {{else}}
+    <div class="spacer"></div>
+    {{/if}}
+    {{/with}}
+    <div class="mdc-layout-grid">
+        <div class="mdc-layout-grid__inner">
+            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-8 content page-content">
+                {{#with primaryResponse.hits.hits.[0]._source}}
+                {{{rendered.full}}}
+                {{/with}}
+            </div>
+            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 sidebar page-sidebar">
+                <nav id="credit-union-tab-bar" class="mdc-tab-bar">
+                    {{#each menus.credit_union}}
+                    <a class="mdc-tab" href="{{path}}">{{{label}}}</a>
+                    {{/each}}
+                </nav>
+            </div>
+        </div>
+    </div>
+</div>

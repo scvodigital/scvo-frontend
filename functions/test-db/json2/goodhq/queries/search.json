@@ -1,0 +1,40 @@
+{
+    "size": 10,
+    "from": {{multiply (subtract (default query.page 1) 1) 10}},
+    "_source": [
+        "title",
+        "rendered.ghq_search_result"
+    ],
+    "query": {
+        "bool": {
+            {{#if query.type}}
+            "must": [
+                {
+                    "term": {
+                        "_type": {
+                            "value" : "{{query.type}}"
+                        }
+                    }
+                }
+            ],
+            {{/if}}
+            "should": [
+                {
+                    "query_string": {
+                        "query": "{{query.q}}",
+                        "default_operator": "AND",
+                        "analyzer": "snowball"
+                    }
+                },
+                {
+                    "term" : {
+                        "_type" : {
+                            "value" : "goodhq-organisation",
+                            "boost" : 2
+                        }
+                    }
+                }
+            ]
+        }
+    }
+}

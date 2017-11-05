@@ -1,0 +1,26 @@
+{
+    "size": 5,
+    "_source": [
+        "rendered.sidebar_mini"
+    ],
+    "query": {
+        "bool": {
+            "must": {
+                "match_all": {}
+            },
+            "should": [
+                {
+                    "terms": {
+                        "categories_id": [
+                            {{join primaryResponse.hits.hits.[0]._source.categories_id}}
+                        ]
+                    }
+                }
+            ],
+            "minimum_should_match": 1
+        }
+    },
+    "sort": {
+        "publish_on": "desc"
+    }
+}

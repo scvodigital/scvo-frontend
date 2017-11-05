@@ -7,7 +7,7 @@
         <div class="mdc-card">
             <section class="mdc-card__primary">
                 <h2 class="mdc-card__title mdc-card__title--large">Find Events</h2>
-                <form [searchroute]="'events'">
+                <form [searchroute]="'event-search'">
                     <div class="mdc-layout-grid">
                         <div class="mdc-layout-grid__inner">
                             <div class="mdc-layout-grid__cell">
@@ -21,7 +21,7 @@
                                 <div class="mdc-form-field">
                                     <select class="mdc-select" role="listbox" id="events-type" name="type">
                                         <option value="" {{#if params.query.type}}{{else}}selected{{/if}}>Select event type</option>
-                                        {{#each supplimentaryResponse.types.aggregations.types.buckets}}
+                                        {{#each supplimentaryResponses.types.aggregations.types.buckets}}
                                             <option value="{{key}}" {{#compare ../params.query.type "===" key}}selected{{/compare}}>{{key}} ({{doc_count}})</option>
                                         {{/each}}
                                     </select>
@@ -56,13 +56,7 @@
 
     {{#each primaryResponse.hits.hits}}
         <div class="v-margin">
-            {{#if _source.rendered.search_result_scvo}}
-                {{{_source.rendered.search_result_scvo}}}
-            {{else}}
-                {{#if _source.rendered.search_result}}
-                    {{{_source.rendered.search_result}}}
-                {{/if}}
-            {{/if}}
+            {{{_source.rendered.list}}}
         </div>
     {{/each}}
 

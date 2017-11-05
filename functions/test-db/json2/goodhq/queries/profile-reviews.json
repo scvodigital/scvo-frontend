@@ -1,0 +1,22 @@
+{
+    "size": 10,
+    "from": {{multiply (subtract (default query.page 1) 1) 10}},
+    "_source": [
+        "rendered.ghq_list"
+    ],
+    "query": {
+        "bool": {
+	        "should": [
+                {
+                    "term": {
+                        "target_xid": "{{primaryResponse.hits.hits.[0]._source.xid}}"
+                    }
+                }
+            ],
+            "minimum_should_match": 1
+	    }
+    },
+    "sort": {
+        "date_posted": "desc"
+    }
+}

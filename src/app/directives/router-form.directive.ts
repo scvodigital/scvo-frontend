@@ -31,7 +31,7 @@ export class RouterFormDirective {
                 val = val === 'on' ? true : val === 'off' ? false : val;
             }
 
-            if(val){
+            if(val && val !== ''){
                 if(params.hasOwnProperty(key)){
                     if(!Array.isArray(params[key])){
                         params[key] = [params[key]];

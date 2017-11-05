@@ -1,18 +1,19 @@
 {
 	"size": 1,
+    "_source": [
+        "original_image"
+    ],
 	"query": {
 		"function_score": {
 			"query": {
 				"bool": {
-                    "must": {
-                      "match_all": {}
-                    },
-					"should": [{
-						"term": {
-							"categories_id": 35
-						}
-					}],
-                    "minimum_should_match": 1
+					"must": [
+                            {
+    						"term": {
+    							"categories_id": 1
+    						}
+    					}
+                    ]
 				}
 			},
 			"random_score": {},

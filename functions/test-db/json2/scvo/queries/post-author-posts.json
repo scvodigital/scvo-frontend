@@ -1,9 +1,25 @@
 {
     "size": 5,
-    "_source": "rendered.sidebar",
+    "_source": [
+        "rendered.sidebar"
+    ],
     "query": {
-        "term": {
-            "author": "{{primaryResponse.hits.hits.[0]._source.author}}"
+        "bool": {
+            "must": {
+                "term": {
+                    "author": {{primaryResponse.hits.hits.[0]._source.author}}
+                }
+            },
+            "should": {
+                "bool": {
+                    "must_not": {
+                        "match": {
+                            "wpid": {{primaryResponse.hits.hits.[0]._source.wpid}}
+                        }
+                    }
+                }
+            },
+            "minimum_should_match": 1
         }
     },
     "sort": {
