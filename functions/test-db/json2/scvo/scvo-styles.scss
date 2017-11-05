@@ -19,7 +19,6 @@ $spacing-unit: 1rem;
     --mdc-layout-grid-margin-desktop: 0;
     --mdc-layout-grid-margin-tablet: 0;
 }
-.funding,
 .running-a-charity,
 .setting-up-a-charity,
 .running-your-organisation {
@@ -84,6 +83,7 @@ $spacing-unit: 1rem;
     --mdc-theme-primary-light: #6FB744;
     --mdc-theme-primary-dark: #6FB744;
 }
+.home .cta-content,
 .home .latest-content,
 .home .gist.tfn-post,
 .services {
@@ -444,6 +444,40 @@ a:hover {
         }
     }
 
+    .cta-content.splash-image {
+        background-image: linear-gradient(var(--mdc-theme-primary-fade),var(--mdc-theme-primary-fade)),url('https://storage.googleapis.com/scvo-cms/wp-content/uploads/2017/10/Drake-Music-03.jpg');
+        height: auto;
+        padding: $spacing-unit 0 $spacing-unit*3.25;
+        h2, h3, a, .fa {
+            color: white;
+        }
+        h2 {
+            font-size: 1.8rem;
+        }
+        .mdc-layout-grid__cell--span-4-desktop {
+            text-align: center;
+            h3 {
+                margin: 0;
+                .fa {
+                    border: $spacing-unit/5 solid white;
+                    border-radius: 50%;
+                    padding: $spacing-unit*1.75;
+                    margin-bottom: $spacing-unit;
+                }
+                a:hover {
+                    text-decoration: none;
+                    .underline {
+                        text-decoration: underline;
+                    }
+                }
+                a .underline {
+                    display: block;
+                    padding-top: $spacing-unit/2;
+                }
+            }
+        }
+    }
+
     .latest-content {
         background-color: var(--mdc-theme-background);
         padding: $spacing-unit/2 0 $spacing-unit*2;
@@ -456,15 +490,14 @@ a:hover {
             }
         }
         .gist {
-            box-shadow: none;
-        }
-        .mdc-card__primary {
-            padding: 0;
+            margin-top: $spacing-unit*1.5;
+            .mdc-card__subtitle {
+                margin-top: $spacing-unit/4;
+            }
         }
     }
 }
 .gist {
-    margin-top: $spacing-unit*1.5;
     h3.mdc-card__title {
         font-size: 1.2rem;
         line-height: 1.4;
@@ -486,6 +519,10 @@ a:hover {
     .post-info-item {
         line-height: 1.8;
     }
+}
+.home .latest-content .gist,
+.post-related .gist {
+    box-shadow: none;
 }
 
 .mdc-form-field,
@@ -937,6 +974,26 @@ footer {
         #upper-tab-bar,
         .mdc-toolbar__row.toolbar-nav {
             display: none;
+        }
+    }
+    .mdc-toolbar.mdc-toolbar--fixed {
+        padding-top: 0;
+    }
+    .mdc-toolbar__icon--menu {
+        height: 4rem;
+    }
+    .mdc-toolbar #upper-tab-bar,
+    .mdc-toolbar .mdc-toolbar__icon,
+    .mdc-toolbar .mdc-toolbar__row,
+    .mdc-toolbar .mdc-form-field,
+    .mdc-toolbar .mdc-toolbar__section {
+        max-height: 4rem;
+    }
+    .mdc-temporary-drawer__header-content,
+    .brand-logo {
+        margin-left: 0;
+        img {
+            max-height: 2.5rem;
         }
     }
     .mdc-toolbar-fixed-adjust {

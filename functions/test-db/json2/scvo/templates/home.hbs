@@ -19,11 +19,49 @@
     </div>
 </section>
 
+<section class="cta-content splash-image">
+    <div class="container-fluid">
+        <div class="cta-grid">
+            <div class="mdc-layout-grid__inner">
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-desktop">
+                    <h2>
+                        Find information on...
+                    </h2>
+                </div>
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-4-desktop">
+                    <h3>
+                        <a href="/setting-up-a-charity">
+                            <span class="fa fa-3x fa-file-text" aria-hidden="true"></span>
+                            <span class="underline">Setting up an organisation</span>
+                        </a>
+                    </h3>
+                </div>
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-4-desktop">
+                    <h3>
+                        <a href="/funding">
+                            <span class="fa fa-3x fa-money" aria-hidden="true"></span>
+                            <span class="underline">Funding for my project</span>
+                        </a>
+                    </h3>
+                </div>
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-4-desktop">
+                    <h3>
+                        <a href="/jobs">
+                            <span class="fa fa-3x fa-address-card" aria-hidden="true"></span>
+                            <span class="underline">Jobs in the sector</span>
+                        </a>
+                    </h3>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
 <section class="latest-content">
     <div class="container-fluid">
         <div class="latest-grid">
             <div class="mdc-layout-grid__inner">
-                <div class="mdc-layout-grid__cell">
+                <div class="mdc-layout-grid__cell--span-4-desktop">
                     <h2>
                         Latest SCVO blog posts
                         <a href="/blogs">Read more</a>
@@ -32,21 +70,21 @@
                     {{{_source.rendered.gist}}}
                     {{/each}}
                 </div>
-                <div class="mdc-layout-grid__cell">
-                    <h2>
-                        Top third sector jobs
-                        <a href="https://goodmoves.com">See more on <strong>good</strong>moves</a>
-                    </h2>
-                    {{#each supplimentaryResponses.goodmoves_latest.hits.hits}}
-                    {{{_source.rendered.gist}}}
-                    {{/each}}
-                </div>
-                <div class="mdc-layout-grid__cell">
+                <div class="mdc-layout-grid__cell--span-4-desktop">
                     <h2>
                         Latest TFN news
                         <a href="http://thirdforcenews.org.uk">Read more</a>
                     </h2>
                     {{#each supplimentaryResponses.tfn_latest.hits.hits}}
+                    {{{_source.rendered.gist}}}
+                    {{/each}}
+                </div>
+                <div class="mdc-layout-grid__cell--span-4-desktop">
+                    <h2>
+                        Top third sector jobs
+                        <a href="https://goodmoves.com">See more on <strong>good</strong>moves</a>
+                    </h2>
+                    {{#each supplimentaryResponses.goodmoves_latest.hits.hits}}
                     {{{_source.rendered.gist}}}
                     {{/each}}
                 </div>
