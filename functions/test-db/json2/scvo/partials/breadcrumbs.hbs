@@ -1,0 +1,18 @@
+{{#with primaryResponse.hits.hits.[0]._source}}
+{{#if breadcrumb}}
+{{#compare breadcrumb.length '>=' 1}}
+<ul class="breadcrumb">
+    <li><a href="/">Home</a></li>
+    {{#each breadcrumb}}
+    <li>
+        <a href="{{replace url 'https://cms.scvo.org' ''}}">{{{striptags title}}}</a>
+    </li>
+    {{/each}}
+</ul>
+{{else}}
+<div class="spacer"></div>
+{{/compare}}
+{{else}}
+<div class="spacer"></div>
+{{/if}}
+{{/with}}
