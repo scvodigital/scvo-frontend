@@ -1,0 +1,46 @@
+{{#with primaryResponse.hits.hits.[0]._source}}
+{{{rendered.ghq_profile_header}}}
+{{/with}}
+
+<div class="container-fluid">
+    <div class="mdc-layout-grid">
+        <div class="mdc-layout-grid__inner">
+            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4">
+                    <a href="/{{params.path}}">About</a>
+                </div>
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4">
+                    <a href="/{{params.path}}/volopps">Get involved</a>
+                </div>
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4">
+                    <a href="/{{params.path}}/reviews">Reviews</a>
+                </div>
+            </div>
+        </div>
+        <div class="mdc-layout-grid__inner">
+            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4">
+                    <a href="/{{params.path}}/volopps">Volunteer</a>
+                </div>
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4">
+                    <a href="/{{params.path}}/jobs">Work</a>
+                </div>
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4">
+                    &nbsp;
+                </div>
+            </div>
+        </div>
+        <div class="mdc-layout-grid__inner">
+            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 sidebar profile-sidebar">
+                {{#with primaryResponse.hits.hits.[0]._source}}
+                {{{rendered.ghq_profile_info}}}
+                {{/with}}
+            </div>
+            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-8 content profile-content">
+                {{#each supplimentaryResponses.jobs.hits.hits}}
+                {{{this._source.rendered.ghq_list}}}
+                {{/each}}
+            </div>
+        </div>
+    </div>
+</div>

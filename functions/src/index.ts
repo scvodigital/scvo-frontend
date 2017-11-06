@@ -183,7 +183,7 @@ const domainMap = {
     "goodmoves.scot": "goodmoves",
     "goodmoves.org.uk": "goodmoves",
     "scvo-net.firebaseapp.com": "scvo",
-    "localhost": "scvo",
+    "localhost": "goodhq",
     "127.0.0.1": "scvo",
     "scvo.net": "scvo",
     "scvo.org": "scvo",
