@@ -506,7 +506,7 @@ a:hover {
     }
 }
 .splash-image-scvo-event h1.header-text,
-.splash-image-scvo-cms-post h1.header-text,
+.splash-image-scvo-cms-post:not(.post.author) h1.header-text,
 .splash-image-scvo-document-general h1.header-text,
 .splash-image-scvo-document-evidence h1.header-text {
     padding-left: 0.75rem;
@@ -782,9 +782,12 @@ ul.supplimentary-list {
             margin-bottom: $spacing-unit/2;
             display: block;
         }
+        .supplimentary-list-text {
+            letter-spacing: normal;
+        }
         .post-info {
             display: block;
-            margin-bottom: $spacing-unit/4;
+            margin-bottom: $spacing-unit*(3/4);
         }
     }
     li.supplimentary-list-item:not(:last-child){
