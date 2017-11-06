@@ -21,10 +21,10 @@
         <li><a href="/services/events">Events</a></li>
     </ul>
     <div class="mdc-layout-grid">
-        <div class="mdc-layout-grid__inner">
-            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-8 content event-content">
-                {{{primaryResponse.hits.hits.[0]._source.rendered.full}}}
+        {{{primaryResponse.hits.hits.[0]._source.rendered.full}}}
 
+        <div class="mdc-layout-grid__inner">
+            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
                 {{#if supplimentaryResponses.related_events.hits.hits}}
                 <h3 class="author">Similar events</h3>
                 <ul class="supplimentary-list">
@@ -33,9 +33,6 @@
                     {{/each}}
                 </ul>
                 {{/if}}
-            </div>
-            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 sidebar event-sidebar">
-
             </div>
         </div>
     </div>
