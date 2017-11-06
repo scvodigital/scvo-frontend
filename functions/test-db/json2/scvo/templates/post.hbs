@@ -31,12 +31,16 @@
                     {{/if}}
                 </div>
                 {{#if supplimentaryResponses.staff_profile.hits.hits}}
+                {{#if primaryResponse.hits.hits.[0]._source.categories}}
+                {{#compare primaryResponse.hits.hits.[0]._source.categories.[0] '!=' 'Press releases'}}
                 <h3 class="author">More posts by {{primaryResponse.hits.hits.[0]._source.author_name_full}}</h3>
                 <ul class="supplimentary-list">
                     {{#each supplimentaryResponses.authors_posts.hits.hits}}
                     {{{_source.rendered.sidebar}}}
                     {{/each}}
                 </ul>
+                {{/compare}}
+                {{/if}}
                 {{/if}}
             </div>
             <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 related post-related">
