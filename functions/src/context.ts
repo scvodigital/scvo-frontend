@@ -6,7 +6,7 @@ import * as admin from 'firebase-admin';
 import * as handlebars from 'handlebars';
 import * as helpers from 'handlebars-helpers';
 import * as sass from 'node-sass';
-import { IContext, ILinkTag, IMetaTag, IScriptTag, IMenus, IRoutes, Router, IRouteMatch, MenuProcessor } from 'scvo-router';
+import { IContext, ILinkTag, IMetaTag, IScriptTag, IMenus, IRoutes, Router, IRouteMatch, MenuProcessor, IPartials } from 'scvo-router';
 
 helpers({ handlebars: handlebars });
 
@@ -22,6 +22,7 @@ export class Context implements IContext {
     sass: string = '';
     template: string = '';
     menuProcessor: MenuProcessor = null;
+    templatePartials: IPartials = {};
     uaId: string = '';
 
     _domainStripper: RegExp = null;
@@ -47,7 +48,8 @@ export class Context implements IContext {
             sass: this.sass,
             template: this.template,
             uaId: this.uaId,
-            userId: this.userId
+            userId: this.userId,
+            templatePartials: this.templatePartials
         }
     }
 
@@ -65,6 +67,7 @@ export class Context implements IContext {
 
         // Compile our templates and CSS
         this.compiledTemplate = handlebars.compile(this.template);
+        handlebars.registerPartial(this.templatePartials);
         this.compiledCss = sass.renderSync({ data: this.sass, sourceMap: false, outputStyle: 'compact' }).css.toString('utf8');
     }
 
@@ -84,7 +87,8 @@ export class Context implements IContext {
                     routes: this.routes,
                     route: routeMatch,
                     headerTags: this.getHeaderTags(routeMatch),
-                    uaId: this.uaId
+                    uaId: this.uaId,
+                    templatePartials: this.templatePartials,
                 };
                 //console.log('TEMPLATE DATA:', JSON.stringify(templateData, null, 4));
                 var contextHtml = this.compiledTemplate(templateData);
