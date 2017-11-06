@@ -67,7 +67,9 @@ export class Context implements IContext {
 
         // Compile our templates and CSS
         this.compiledTemplate = handlebars.compile(this.template);
-        handlebars.registerPartial(this.templatePartials);
+        Object.keys(context.templatePartials).forEach((name: string) => {
+            handlebars.registerPartial(name, context.templatePartials[name]);
+        });
         this.compiledCss = sass.renderSync({ data: this.sass, sourceMap: false, outputStyle: 'compact' }).css.toString('utf8');
     }
 

@@ -26,20 +26,16 @@ export class RouterComponent implements OnInit {
     }
 
     constructor(private router: RouterService) {
-        console.log('RouterComponent.constructor()');
         this.routerSub = router.routeChanged.subscribe((match: RouteMatch) => {
-            console.log('RouterComponent.constructor().routeChanged()');
             this.handleRoute(match);
         });
     }
 
     ngOnInit() {
-        console.log('RouterComponent.ngOnInit()');
         this.handleRoute(this.router.currentRoute);
     }
 
     handleRoute(match: RouteMatch) {
-        console.log('RouterComponent.handleRoute()');
         window.scrollTo(0, 0);
 
         console.log(match);
