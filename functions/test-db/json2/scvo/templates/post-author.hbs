@@ -28,23 +28,25 @@
                     {{/each}}
                 </ul>
 
+                {{#compare paging.totalPages ">" 1}}
                 <ul class="pagination inline-list">
                     {{#if paging.prevPage}}
                     <li>
-                        <a class="mdc-button mdc-button--compact" href="/search?q={{../params.query.q}}&page={{paging.prevPage}}">Previous</a>
+                        <a class="mdc-button mdc-button--compact" href="/{{replace params.path '_' '/'}}/?{{{querystringify ../params.query page=paging.prevPage}}}">Previous</a>
                     </li>
                     {{/if}}
                     {{#each paging.pageRange}}
                     <li class="{{#compare ../paging.currentPage "===" this.pageNumber}}current-page{{/compare}} pagination-distance-{{this.distance}}">
-                        <a  class="mdc-button mdc-button--compact" href="/search?q={{../params.query.q}}&page={{this.pageNumber}}">{{this.pageNumber}}</a>
+                        <a  class="mdc-button mdc-button--compact" href="/{{replace params.path '_' '/'}}/?{{{querystringify ../params.query page=this.pageNumber}}}">{{this.pageNumber}}</a>
                     </li>
                     {{/each}}
                     {{#if paging.nextPage}}
                     <li>
-                        <a class="mdc-button mdc-button--compact" href="/search?q={{../params.query.q}}&page={{paging.nextPage}}">Next</a>
+                        <a class="mdc-button mdc-button--compact" href="/{{replace params.path '_' '/'}}/?{{{querystringify ../params.query page=paging.nextPage}}}">Next</a>
                     </li>
                     {{/if}}
                 </ul>
+                {{/compare}}
             </div>
             <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 sidebar post-sidebar">
                 <h3 class="author">{{primaryResponse.hits.hits.[0]._source.author_name}}</h3>
