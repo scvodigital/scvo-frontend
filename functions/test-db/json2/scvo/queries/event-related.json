@@ -1,0 +1,31 @@
+{
+	"size": 3,
+    "_source": [
+        "rendered.list"
+    ],
+	"query": {
+        "bool": {
+            "must": {
+                "simple_query_string": {
+                    "query": "{{primaryResponse.hits.hits.[0]._source.title}} {{primaryResponse.hits.hits.[0]._source.type}} {{primaryResponse.hits.hits.[0]._source.trainer}}",
+                    "default_operator": "or",
+                    "fields": ["text_bag"],
+                    "analyzer": "snowball"
+                }
+            },
+            "should": [
+                {
+                    "bool": {
+                        "must_not": {
+                            "match": {
+                                "Id": "{{primaryResponse.hits.hits.[0]._source.Id}}"
+                            }
+                        }
+                    }
+                }
+            ],
+            "minimum_should_match": 1
+        }
+	},
+
+}
