@@ -34,6 +34,23 @@ export class Context implements IContext {
         return this._domainStripper;
     }
 
+    get toJSON(): IContext {
+        return {
+            name: this.name,
+            domains: this.domains,
+            linkTags: this.linkTags,
+            metaTags: this.metaTags,
+            metaData: this.metaData,
+            scriptTags: this.scriptTags,
+            menus: this.menus,
+            routes: this.routes,
+            sass: this.sass,
+            template: this.template,
+            uaId: this.uaId,
+            userId: this.userId
+        }
+    }
+
     // Instance specific properties
     private compiledTemplate: (obj: any, hbs?: any) => string = null;
     private compiledCss: string = null;
@@ -43,7 +60,7 @@ export class Context implements IContext {
         Object.assign(this, context);
 
         // Setup our router
-        this.router = new Router(this.routes, this.uaId, userId, true);
+        this.router = new Router(this.toJSON, this.uaId, userId, true);
         this.menuProcessor = new MenuProcessor(this.menus);
 
         // Compile our templates and CSS
