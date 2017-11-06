@@ -23,6 +23,9 @@
                 {{/with}}
             </div>
             <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 sidebar post-sidebar">
+                {{#if primaryResponse.hits.hits.[0]._source.categories}}
+                {{#compare primaryResponse.hits.hits.[0]._source.categories.[0] "===" 'Press releases'}}
+                {{else}}
                 <div class="author_about">
                     {{#if supplimentaryResponses.staff_profile.hits.hits.[0]}}
                     {{{supplimentaryResponses.staff_profile.hits.hits.[0]._source.rendered.scvo_profile}}}
@@ -31,8 +34,6 @@
                     {{/if}}
                 </div>
                 {{#if supplimentaryResponses.staff_profile.hits.hits}}
-                {{#if primaryResponse.hits.hits.[0]._source.categories}}
-                {{#compare primaryResponse.hits.hits.[0]._source.categories.[0] '!=' 'Press releases'}}
                 <h3 class="author">More posts by {{primaryResponse.hits.hits.[0]._source.author_name_full}}</h3>
                 <ul class="supplimentary-list">
                     {{#each supplimentaryResponses.authors_posts.hits.hits}}
