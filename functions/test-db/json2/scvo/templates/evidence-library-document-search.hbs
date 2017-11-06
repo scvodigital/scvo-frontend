@@ -44,13 +44,7 @@
             </div>
             <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-9 content library-content">
                 {{#each primaryResponse.hits.hits}}
-                {{#if _source.rendered.search_result_scvo}}
-                {{{_source.rendered.search_result_scvo}}}
-                {{else}}
-                {{#if _source.rendered.search_result}}
-                {{{_source.rendered.search_result}}}
-                {{/if}}
-                {{/if}}
+                {{{_source.rendered.list}}}
                 {{/each}}
 
                 <ul class="pagination inline-list">
