@@ -170,26 +170,30 @@ const siteCmsMap = {
 };
 
 const domainMap = {
-    "goodhq.org": "goodhq",
-    "test.goodhq.org": "goodhq",
-    "scvolabs.org": "goodhq",
-    "ghqtest.scvo.org": "goodhq",
-    "goodmoves.com": "goodmoves",
-    "goodmoves.wales": "goodmoves",
-    "goodmoves.cymru": "goodmoves",
-    "goodmoves.be": "goodmoves",
-    "goodmoves.eu": "goodmoves",
-    "goodmovesjobs.de": "goodmoves",
-    "goodmoves.scot": "goodmoves",
-    "goodmoves.org.uk": "goodmoves",
-    "scvo-net.firebaseapp.com": "scvo",
     "localhost": "scvo",
     "127.0.0.1": "scvo",
     "scvo.net": "scvo",
     "scvo.org": "scvo",
     "scvo.org.uk": "scvo",
+    "test.scvo.org": "scvo",
     "test.scvo.org.uk": "scvo",
-    "test.scvo.org": "scvo"
+    "goodhq.org": "goodhq",
+    "scvolabs.org": "goodhq",
+    "test.goodhq.org": "goodhq",
+    "ghqtest.scvo.org": "goodhq",
+    "humanrightsdeclaration.scot": "humanrightsdeclaration",
+    "test.humanrightsdeclaration.scot": "humanrightsdeclaration",
+    "digitalparticipation.scot": "digitalparticipation",
+    "test.digitalparticipation.scot": "digitalparticipation",
+    "goodmoves.eu": "goodmoves",
+    "goodmoves.be": "goodmoves",
+    "goodmoves.com": "goodmoves",
+    "goodmoves.scot": "goodmoves",
+    "goodmoves.wales": "goodmoves",
+    "goodmoves.cymru": "goodmoves",
+    "goodmovesjobs.de": "goodmoves",
+    "goodmoves.org.uk": "goodmoves",
+    "scvo-net.firebaseapp.com": "scvo"
 };
 
 // This is only temporarily here while we work out how PDF generation is handled in the future
