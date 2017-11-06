@@ -78,39 +78,117 @@
             "log": "debug"
         }
     },
-    "_default": {
-        "pattern": "/*path",
+    "profile_posts": {
+        "pattern": "/:xid/posts",
         "linkTags": [],
         "metaTags": [],
-        "template": `{:templates/profile.hbs}`,
+        "template": `{:templates/profile-posts.hbs}`,
         "titleTemplate": `{:templates/profile-title.hbs}`,
         "jsonLdTemplate": `{:templates/profile-json-ld.hbs}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
             "type": "goodhq-organisation",
-            "template": `{:queries/profile.json}`
+            "template": `{:queries/profile-info.json}`
+        },
+        "supplimentarySearchTemplates": {
+            "posts": {
+                "index": "web-content-production",
+                "type": "goodhq-post",
+                "template": `{:queries/profile-posts.json}`
+            }
+        },
+        "elasticsearchConfig": {
+            "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
+            "apiVersion": "5.6",
+            "log": "debug"
+        }
+    },
+    "profile_volopps": {
+        "pattern": "/:xid/volopps",
+        "linkTags": [],
+        "metaTags": [],
+        "template": `{:templates/profile-volopps.hbs}`,
+        "titleTemplate": `{:templates/profile-title.hbs}`,
+        "jsonLdTemplate": `{:templates/profile-json-ld.hbs}`,
+        "primarySearchTemplate": {
+            "index": "web-content-production",
+            "type": "goodhq-organisation",
+            "template": `{:queries/profile-info.json}`
+        },
+        "supplimentarySearchTemplates": {
+            "posts": {
+                "index": "web-content-production",
+                "type": "milo-volunteering-opportunity",
+                "template": `{:queries/profile-volopps.json}`
+            }
+        },
+        "elasticsearchConfig": {
+            "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
+            "apiVersion": "5.6",
+            "log": "debug"
+        }
+    },
+    "profile_jobs": {
+        "pattern": "/:xid/jobs",
+        "linkTags": [],
+        "metaTags": [],
+        "template": `{:templates/profile-jobs.hbs}`,
+        "titleTemplate": `{:templates/profile-title.hbs}`,
+        "jsonLdTemplate": `{:templates/profile-json-ld.hbs}`,
+        "primarySearchTemplate": {
+            "index": "web-content-production",
+            "type": "goodhq-organisation",
+            "template": `{:queries/profile-info.json}`
+        },
+        "supplimentarySearchTemplates": {
+            "posts": {
+                "index": "web-content-production",
+                "type": "goodmoves-legacy",
+                "template": `{:queries/profile-jobs.json}`
+            }
+        },
+        "elasticsearchConfig": {
+            "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
+            "apiVersion": "5.6",
+            "log": "debug"
+        }
+    },
+    "profile_reviews": {
+        "pattern": "/:xid/reviews",
+        "linkTags": [],
+        "metaTags": [],
+        "template": `{:templates/profile-reviews.hbs}`,
+        "titleTemplate": `{:templates/profile-title.hbs}`,
+        "jsonLdTemplate": `{:templates/profile-json-ld.hbs}`,
+        "primarySearchTemplate": {
+            "index": "web-content-production",
+            "type": "goodhq-organisation",
+            "template": `{:queries/profile-info.json}`
         },
         "supplimentarySearchTemplates": {
             "reviews": {
                 "index": "web-content-production",
                 "type": "goodhq-review",
                 "template": `{:queries/profile-reviews.json}`
-            },
-            "posts": {
-                "index": "web-content-production",
-                "type": "goodhq-post",
-                "template": `{:queries/profile-posts.json}`
-            },
-            "volopps": {
-                "index": "web-content-production",
-                "type": "milo-volunteering-opportunity",
-                "template": `{:queries/profile-volopps.json}`
-            },
-            "jobs": {
-                "index": "web-content-production",
-                "type": "goodmoves-legacy",
-                "template": `{:queries/profile-jobs.json}`
             }
+        },
+        "elasticsearchConfig": {
+            "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
+            "apiVersion": "5.6",
+            "log": "debug"
+        }
+    },
+    "_default": {
+        "pattern": "/*path",
+        "linkTags": [],
+        "metaTags": [],
+        "template": `{:templates/profile-about.hbs}`,
+        "titleTemplate": `{:templates/profile-title.hbs}`,
+        "jsonLdTemplate": `{:templates/profile-json-ld.hbs}`,
+        "primarySearchTemplate": {
+            "index": "web-content-production",
+            "type": "goodhq-organisation",
+            "template": `{:queries/profile.json}`
         },
         "elasticsearchConfig": {
             "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
