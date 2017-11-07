@@ -6,9 +6,13 @@
     ],
     "query": {
         "bool": {
-            "must": {
-                "match_all": {}
-            },
+            "must": [
+                {
+                    "term": {
+                        "is_press_release": {{#compare path "===" "press-media"}}true{{else}}false{{/compare}}
+                    }
+                }
+            ],
             "should": [
                 {
                     "terms": {

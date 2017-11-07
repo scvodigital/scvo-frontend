@@ -5,11 +5,18 @@
     ],
     "query": {
         "bool": {
-            "must": {
-                "term": {
-                    "author": {{primaryResponse.hits.hits.[0]._source.author}}
+            "must": [
+                {
+                    "term": {
+                        "author": {{primaryResponse.hits.hits.[0]._source.author}}
+                    }
+                },
+                {
+                    "term": {
+                        "is_press_release": false
+                    }
                 }
-            },
+            ],
             "should": {
                 "bool": {
                     "must_not": {
