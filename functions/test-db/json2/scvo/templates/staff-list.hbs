@@ -67,15 +67,13 @@
                     <div class="v-margin">
                         <h2>{{key}}</h2>
                         {{#each departments.buckets}}
-                            <h3>{{key}}</h3>
+                            <p><strong>Office: {{key}}</strong></p>
                             {{#each documents.hits.hits}}
-                                {{{_source.rendered.search_result_scvo}}}
+                                {{{_source.rendered.list}}}
                             {{/each}}
                         {{/each}}
                     </div>
                 {{/each}}
-
-                {{> pagination paging=paging params=params }}
             </div>
             <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 sidebar page-sidebar">
                 <nav id="about-tab-bar" class="mdc-tab-bar">

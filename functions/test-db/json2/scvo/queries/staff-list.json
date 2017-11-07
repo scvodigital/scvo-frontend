@@ -1,7 +1,6 @@
 {
 	"size": 0,
     "_source": [
-        "rendered.search_result",
         "rendered.list"
     ],
 	"query": {
@@ -46,12 +45,12 @@
 					"aggs": {
 						"documents": {
 							"top_hits": {
-								"size": 100,
+								"size": 1000,
 								"sort": {
 									"last_name": "asc"
 								},
 								"_source": {
-									"includes": [ "rendered.search_result_scvo" ]
+									"includes": [ "rendered.list" ]
 								}
 							}
 						}
