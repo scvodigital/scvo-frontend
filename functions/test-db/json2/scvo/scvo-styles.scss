@@ -118,6 +118,7 @@ main {
     width: 95%;
     margin: 0 auto;
     overflow: auto;
+    overflow: -webkit-paged-x;
     padding: $spacing-unit/2;
 }
 
@@ -296,6 +297,23 @@ a:hover {
     .mdc-select,
     .mdc-button {
         width: 100%;
+    }
+}
+
+#about-tab-bar {
+    display: block;
+    .mdc-tab {
+        width: 100%;
+        display: block;
+        text-transform: none;
+        font-weight: 600;
+        color: var(--mdc-theme-primary-dark);
+    }
+    .mdc-tab:hover {
+        color: var(--mdc-theme-primary);
+    }
+    .mdc-tab:hover:after {
+        display: none;
     }
 }
 

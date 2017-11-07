@@ -28,6 +28,9 @@
                 <nav id="about-tab-bar" class="mdc-tab-bar">
                     {{#each context.menus.about}}
                     <a class="mdc-tab" href="{{path}}">{{{label}}}</a>
+                    {{#each this.children}}
+                    <a class="mdc-tab" href="{{path}}">{{{label}}}</a>
+                    {{/each}}
                     {{/each}}
                 </nav>
             </div>

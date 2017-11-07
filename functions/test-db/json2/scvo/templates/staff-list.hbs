@@ -17,11 +17,12 @@
 <div class="container-fluid">
     <ul class="breadcrumbs">
         <li><a href="/">Home</a></li>
+        <li><a href="/about">About SCVO</a></li>
     </ul>
 
     <div class="mdc-layout-grid">
         <div class="mdc-layout-grid__inner">
-            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3 sidebar library-sidebar">
+            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-8 content page-content">
                 <form [searchroute]="'staff_list'">
                     <h2>Filters</h2>
                     <div class="mdc-form-field">
@@ -48,7 +49,7 @@
                             {{/each}}
                         </select>
                     </div>
-                    <h2>Grouping</h2>
+                    <!-- <h2>Grouping</h2>
                     <div class="mdc-form-field">
                         <select class="mdc-select" role="listbox" id="grouping" name="grouping">
                             <option value="directorate-office" {{#compare params.query.grouping "===" "directorate-office"}}selected{{/compare}}>Directorate &gt; Office</option>
@@ -56,13 +57,12 @@
                             <option value="department-office" {{#compare params.query.grouping "===" "department-office"}}selected{{/compare}}>Department &gt; Office</option>
                             <option value="office-department" {{#compare params.query.grouping "===" "office-department"}}selected{{/compare}}>Office  &gt; Department</option>
                         </select>
-                    </div>
+                    </div> -->
                     <button class="mdc-button mdc-button--raised" type="submit">
                         Search
                     </button>
                 </form>
-            </div>
-            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-9 content library-content">
+
                 {{#each primaryResponse.aggregations.query.buckets}}
                     <div class="v-margin">
                         <h2>{{key}}</h2>
@@ -76,6 +76,16 @@
                 {{/each}}
 
                 {{> pagination paging=paging params=params }}
+            </div>
+            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 sidebar page-sidebar">
+                <nav id="about-tab-bar" class="mdc-tab-bar">
+                    {{#each context.menus.about}}
+                    <a class="mdc-tab" href="{{path}}">{{{label}}}</a>
+                    {{#each this.children}}
+                    <a class="mdc-tab" href="{{path}}">{{{label}}}</a>
+                    {{/each}}
+                    {{/each}}
+                </nav>
             </div>
         </div>
     </div>
