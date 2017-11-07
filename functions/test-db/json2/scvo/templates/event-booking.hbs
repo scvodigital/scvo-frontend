@@ -1,4 +1,4 @@
-<div class="splash-image splash-image-{{primaryResponse.hits.hits.[0]._type}}{{#if primaryResponse.hits.hits.[0]._source.header_background}} splash-image-background{{/if}}" style="background-image: {{#if primaryResponse.hits.hits.[0]._source.header_background_gradient}}linear-gradient(185deg,var(--mdc-theme-primary-fade),var(--mdc-theme-primary-dark)75%),{{else}}{{#if primaryResponse.hits.hits.[0]._source.header_background}}{{else}}linear-gradient(var(--mdc-theme-primary-fade),var(--mdc-theme-primary-fade)),{{/if}}{{/if}}url('{{#if primaryResponse.hits.hits.[0]._source.header_background}}{{primaryResponse.hits.hits.[0]._source.header_background}}{{else}}{{#if supplimentaryResponses.splash.hits.hits.[0]._source.original_image}}{{supplimentaryResponses.splash.hits.hits.[0]._source.original_image}}{{/if}}{{/if}}');">
+<div class="splash-image {{> header_splash}}">
     <div class="container-fluid">
         <div class="mdc-layout-grid">
             {{#if primaryResponse.hits.hits.[0]._source.header_text}}
@@ -16,19 +16,17 @@
 
 {{#with primaryResponse.hits.hits.[0]._source}}
 <div class="container-fluid">
-    <ul class="breadcrumb">
+    <ul class="breadcrumbs">
         <li><a href="/">Home</a></li>
         <li><a href="/services">Services</a></li>
         <li><a href="/services/events">Events</a></li>
         <li><a href="/services/events/{{slug}}">{{{title}}}</a></li>
     </ul>
+
     <div class="mdc-layout-grid">
         <div class="mdc-layout-grid__inner">
-            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-8 content event-content">
+            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 content event-content">
                 <iframe src="https://www.surveygizmo.eu/s3/90055302/Events-Booking-Training-Events?sfid={{Id}}&title={{title}}" frameborder="0" width="100%" height="400" style="overflow:hidden"></iframe>
-            </div>
-            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 sidebar event-sidebar">
-                <!-- TBC -->
             </div>
         </div>
     </div>

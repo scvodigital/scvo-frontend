@@ -1,4 +1,4 @@
-<div class="splash-image splash-image-{{primaryResponse.hits.hits.[0]._type}}{{#if primaryResponse.hits.hits.[0]._source.header_background}} splash-image-background{{/if}}" style="background-image: {{#if primaryResponse.hits.hits.[0]._source.header_background_gradient}}linear-gradient(185deg,var(--mdc-theme-primary-fade),var(--mdc-theme-primary-dark)75%),{{else}}{{#if primaryResponse.hits.hits.[0]._source.header_background}}{{else}}linear-gradient(var(--mdc-theme-primary-fade),var(--mdc-theme-primary-fade)),{{/if}}{{/if}}url('{{#if primaryResponse.hits.hits.[0]._source.header_background}}{{primaryResponse.hits.hits.[0]._source.header_background}}{{else}}{{#if supplimentaryResponses.splash.hits.hits.[0]._source.original_image}}{{supplimentaryResponses.splash.hits.hits.[0]._source.original_image}}{{/if}}{{/if}}');">
+<div class="splash-image {{> header_splash}}">
     <div class="container-fluid">
         <div class="mdc-layout-grid">
             {{#if primaryResponse.hits.hits.[0]._source.header_text}}
@@ -15,7 +15,7 @@
 </div>
 
 <div class="container-fluid">
-    <ul class="breadcrumb">
+    <ul class="breadcrumbs">
         <li><a href="/">Home</a></li>
         <li><a href="/policy-research">Policy &amp; research</a></li>
     </ul>
@@ -44,32 +44,10 @@
             </div>
             <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-9 content library-content">
                 {{#each primaryResponse.hits.hits}}
-                {{#if _source.rendered.search_result_scvo}}
-                {{{_source.rendered.search_result_scvo}}}
-                {{else}}
-                {{#if _source.rendered.search_result}}
-                {{{_source.rendered.search_result}}}
-                {{/if}}
-                {{/if}}
+                {{{_source.rendered.list}}}
                 {{/each}}
 
-                <ul class="pagination inline-list">
-                    {{#if paging.prevPage}}
-                    <li>
-                        <a class="mdc-button mdc-button--compact" href="/policy-research/evidence-library/?{{{querystringify ../params.query page=paging.prevPage}}}">Previous</a>
-                    </li>
-                    {{/if}}
-                    {{#each paging.pageRange}}
-                    <li class="{{#compare ../paging.currentPage "===" this.pageNumber}}current-page{{/compare}} pagination-distance-{{this.distance}}">
-                        <a  class="mdc-button mdc-button--compact" href="/policy-research/evidence-library/?{{{querystringify ../params.query page=this.pageNumber}}}">{{this.pageNumber}}</a>
-                    </li>
-                    {{/each}}
-                    {{#if paging.nextPage}}
-                    <li>
-                        <a class="mdc-button mdc-button--compact" href="/policy-research/evidence-library/?{{{querystringify ../params.query page=paging.nextPage}}}">Next</a>
-                    </li>
-                    {{/if}}
-                </ul>
+                {{> pagination paging=paging params=params }}
             </div>
         </div>
     </div>

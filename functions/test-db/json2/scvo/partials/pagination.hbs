@@ -1,0 +1,25 @@
+{{#compare paging.totalPages ">" 1}}
+<ul class="pagination inline-list">
+    {{#if paging.prevPage}}
+        <li>
+            <a class="mdc-button mdc-button--compact" href="{{params.uri.pathname}}?{{{querystringify ../params.query page=paging.prevPage}}}">Previous</a>
+        </li>
+    {{/if}}
+
+    {{#each paging.pageRange}}
+        <li class="{{#compare ../paging.currentPage "===" this.pageNumber}}current-page{{/compare}} pagination-distance-{{this.distance}}">
+            <a class="mdc-button mdc-button--compact" href="{{../params.uri.pathname}}?{{{querystringify ../params.query page=this.pageNumber}}}">
+                {{this.pageNumber}}
+            </a>
+        </li>
+    {{/each}}
+
+    {{#if paging.nextPage}}
+        <li>
+            <a class="mdc-button mdc-button--compact" href="{{params.uri.pathname}}?{{{querystringify ../params.query page=paging.nextPage}}}">
+                Next
+            </a>
+        </li>
+    {{/if}}
+</ul>
+{{/compare}}

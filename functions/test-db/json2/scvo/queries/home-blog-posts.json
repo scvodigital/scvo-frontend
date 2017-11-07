@@ -1,14 +1,19 @@
 {
-	"size": 5,
+	"size": 4,
     "_source": [
         "rendered.gist"
     ],
 	"query": {
         "bool": {
-            "must_not": [
+            "must": [
                 {
     		        "term": {
-                        "featured": true
+                        "categories_slug": "posts"
+                    }
+                },
+                {
+                    "term": {
+                        "is_press_release": false
                     }
                 }
             ]

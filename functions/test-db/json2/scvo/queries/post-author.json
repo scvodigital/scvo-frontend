@@ -4,15 +4,28 @@
     "_source": [
         "author",
         "author_sfid",
+        "author_name",
         "categories",
         "categories_id",
         "categories_slug",
         "rendered.list"
     ],
     "query": {
-        "term": {
-            "author_slug": "{{lastItem (split path '_')}}"
+        "bool": {
+            "must": [
+                {
+                    "term": {
+                        "author_slug": "{{author_slug}}"
+                    }
+                },
+                {
+                    "term": {
+                        "is_press_release": false
+                    }
+                }
+            ]
         }
+
     },
     "sort": {
         "publish_on": "desc"

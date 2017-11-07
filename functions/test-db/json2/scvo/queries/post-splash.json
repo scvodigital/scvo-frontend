@@ -7,9 +7,13 @@
 		"function_score": {
 			"query": {
 				"bool": {
-                    "must": {
-                        "match_all": {}
-                    },
+                    "must": [
+                        {
+                            "term": {
+                                "is_press_release": false
+                            }
+                        }
+                    ],
 					"should": [{
 						"terms": {
 							"categories_id": [

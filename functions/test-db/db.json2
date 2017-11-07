@@ -510,18 +510,23 @@
             "routes": {:json/scvo-routes.json},
             "sass": `{:json2/scvo/scvo-styles.scss}`,
             "template": `{:json2/scvo/templates/scvo.hbs}`,
-            "javascript": `{:json2/scvo/javascript.js}`
+            "javascript": `{:json2/scvo/javascript.js}`,
+            "templatePartials": {
+                "header_splash": `{:json2/scvo/partials/header-splash.hbs}`,
+                "breadcrumbs": `{:json2/scvo/partials/breadcrumbs.hbs}`,
+                "pagination": `{:json2/scvo/partials/pagination.hbs}`
+            }
         },
         "goodmoves": {
             "domains": [
                 "localhost",
                 "127.0.0.1",
-                "goodmoves.com",
                 "goodmoves.eu",
+                "goodmoves.be",
+                "goodmoves.com",
                 "goodmoves.scot",
                 "goodmoves.wales",
                 "goodmoves.cymru",
-                "goodmoves.be",
                 "goodmovesjobs.de",
                 "goodmoves.org.uk"
             ],
@@ -576,7 +581,9 @@
                 "localhost",
                 "127.0.0.1",
                 "goodhq.org",
-                "www.goodhq.org"
+                "www.goodhq.org",
+                "test.goodhq.org",
+                "ghqtest.scvo.org"
             ],
             "linkTags": [],
             "menus": {},
@@ -601,6 +608,72 @@
             "sass": `{:json2/goodhq/goodhq-styles.scss}`,
             "template": `{:json2/goodhq/templates/goodhq.hbs}`,
             "javascript": `{:json2/goodhq/javascript.js}`
+        },
+        "digitalparticipation": {
+            "uaId": "",
+            "domains": [
+                "localhost",
+                "127.0.0.1",
+                "test.digitalparticipation.scot",
+                "digitalparticipation.scot",
+                "www.digitalparticipation.scot"
+            ],
+            "linkTags": [],
+            "menus": {},
+            "metaData": {
+                "title": "Scotland's Digital Participation Charter"
+            },
+            "metaTags": [
+                {
+                    "content": "Scotland's Digital Participation Charter",
+                    "name": "title"
+                },
+                {
+                    "content": "",
+                    "name": "description"
+                },
+            ],
+            "scriptTags": [{
+                "src": "https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"
+            }],
+            "title": "Scotland's Digital Participation Charter",
+            "routes": {:json/digitalparticipation-routes.json},
+            "sass": `{:json2/digitalparticipation/digitalparticipation-styles.scss}`,
+            "template": `{:json2/digitalparticipation/templates/digitalparticipation.hbs}`,
+            "javascript": `{:json2/digitalparticipation/javascript.js}`
+        },
+        "humanrightsdeclaration": {
+            "uaId": "",
+            "domains": [
+                "localhost",
+                "127.0.0.1",
+                "test.humanrightsdeclaration.scot",
+                "humanrightsdeclaration.scot",
+                "www.humanrightsdeclaration.scot"
+            ],
+            "linkTags": [],
+            "menus": {},
+            "metaData": {
+                "title": "Scotland Declaration on Human Rights"
+            },
+            "metaTags": [
+                {
+                    "content": "Scotland Declaration on Human Rights",
+                    "name": "title"
+                },
+                {
+                    "content": "",
+                    "name": "description"
+                },
+            ],
+            "scriptTags": [{
+                "src": "https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"
+            }],
+            "title": "Good HQ",
+            "routes": {:json/humanrightsdeclaration-routes.json},
+            "sass": `{:json2/humanrightsdeclaration/humanrightsdeclaration-styles.scss}`,
+            "template": `{:json2/humanrightsdeclaration/templates/humanrightsdeclaration.hbs}`,
+            "javascript": `{:json2/humanrightsdeclaration/javascript.js}`
         }
     }
 }
