@@ -6,7 +6,7 @@
             {{else}}
             <h1 class="header-text">
                 <span class="header-text-banner">
-                    Staff Directory
+                    Staff team
                 </span>
             </h1>
             {{/if}}
@@ -24,38 +24,38 @@
         <div class="mdc-layout-grid__inner">
             <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-8 content page-content">
                 <form [searchroute]="'staff_list'">
-                    <h2>Filters</h2>
-                    <div class="mdc-form-field">
-                        <select class="mdc-select" role="listbox" id="office" name="office">
-                            <option value="" {{#if params.query.office}}{{else}}selected{{/if}}>All offices</option>
-                            {{#each supplimentaryResponses.offices.aggregations.offices.buckets}}
-                            <option value="{{slugify key}}" {{#compare ../params.query.office "===" (slugify key)}}selected{{/compare}}>{{key}} ({{doc_count}})</option>
-                            {{/each}}
-                        </select>
-                    </div>
-                    <div class="mdc-form-field">
-                        <select class="mdc-select" role="listbox" id="directorate" name="directorate">
-                            <option value="" {{#if params.query.directorate}}{{else}}selected{{/if}}>All directorates</option>
-                            {{#each supplimentaryResponses.offices.aggregations.directorates.buckets}}
-                            <option value="{{slugify key}}" {{#compare ../params.query.directorate "===" (slugify key)}}selected{{/compare}}>{{key}} ({{doc_count}})</option>
-                            {{/each}}
-                        </select>
-                    </div>
+                    <h2>Filter by</h2>
                     <div class="mdc-form-field">
                         <select class="mdc-select" role="listbox" id="department" name="department">
                             <option value="" {{#if params.query.department}}{{else}}selected{{/if}}>All departments</option>
-                            {{#each supplimentaryResponses.offices.aggregations.departments.buckets}}
+                            {{#each supplimentaryResponses.departments.aggregations.departments.buckets}}
                             <option value="{{slugify key}}" {{#compare ../params.query.department "===" (slugify key)}}selected{{/compare}}>{{key}} ({{doc_count}})</option>
                             {{/each}}
                         </select>
                     </div>
+                    <div class="mdc-form-field">
+                        <select class="mdc-select" role="listbox" id="city" name="city">
+                            <option value="" {{#if params.query.city}}{{else}}selected{{/if}}>All cities</option>
+                            {{#each supplimentaryResponses.departments.aggregations.cities.buckets}}
+                            <option value="{{slugify key}}" {{#compare ../params.query.city "===" (slugify key)}}selected{{/compare}}>{{key}} ({{doc_count}})</option>
+                            {{/each}}
+                        </select>
+                    </div>
+                    <!-- <div class="mdc-form-field">
+                        <select class="mdc-select" role="listbox" id="directorate" name="directorate">
+                            <option value="" { {#if params.query.directorate}}{ {else}}selected{ {/if}}>All directorates</option>
+                            { {#each supplimentaryResponses.cities.aggregations.directorates.buckets}}
+                            <option value="{ {slugify key}}" { {#compare ../params.query.directorate "===" (slugify key)}}selected{ {/compare}}>{ {key}} ({ {doc_count}})</option>
+                            { {/each}}
+                        </select>
+                    </div> -->
                     <!-- <h2>Grouping</h2>
                     <div class="mdc-form-field">
                         <select class="mdc-select" role="listbox" id="grouping" name="grouping">
-                            <option value="directorate-office" {{#compare params.query.grouping "===" "directorate-office"}}selected{{/compare}}>Directorate &gt; Office</option>
-                            <option value="office-directorate" {{#compare params.query.grouping "===" "office-directorate"}}selected{{/compare}}>Office &gt; Directorate</option>
-                            <option value="department-office" {{#compare params.query.grouping "===" "department-office"}}selected{{/compare}}>Department &gt; Office</option>
-                            <option value="office-department" {{#compare params.query.grouping "===" "office-department"}}selected{{/compare}}>Office  &gt; Department</option>
+                            <option value="directorate-city" { {#compare params.query.grouping "===" "directorate-city"}}selected{ {/compare}}>Directorate &gt; city</option>
+                            <option value="city-directorate" { {#compare params.query.grouping "===" "city-directorate"}}selected{ {/compare}}>city &gt; Directorate</option>
+                            <option value="department-city" { {#compare params.query.grouping "===" "department-city"}}selected{ {/compare}}>Department &gt; city</option>
+                            <option value="city-department" { {#compare params.query.grouping "===" "city-department"}}selected{ {/compare}}>city  &gt; Department</option>
                         </select>
                     </div> -->
                     <button class="mdc-button mdc-button--raised" type="submit">
@@ -66,24 +66,14 @@
                 {{#each primaryResponse.aggregations.query.buckets}}
                     <div class="v-margin">
                         <h2>{{key}}</h2>
-                        {{#each departments.buckets}}
-                            <p><strong>Office: {{key}}</strong></p>
-                            {{#each documents.hits.hits}}
-                                {{{_source.rendered.list}}}
-                            {{/each}}
+                        {{#each documents.hits.hits}}
+                            {{{_source.rendered.list}}}
                         {{/each}}
                     </div>
                 {{/each}}
             </div>
             <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 sidebar page-sidebar">
-                <nav id="about-tab-bar" class="mdc-tab-bar">
-                    {{#each context.menus.about}}
-                    <a class="mdc-tab" href="{{path}}">{{{label}}}</a>
-                    {{#each this.children}}
-                    <a class="mdc-tab" href="{{path}}">{{{label}}}</a>
-                    {{/each}}
-                    {{/each}}
-                </nav>
+                {{> menu_about}}
             </div>
         </div>
     </div>
