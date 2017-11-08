@@ -311,6 +311,15 @@ a:hover {
         transform: translateY(-50%);
     }
 }
+.scvo-staff.list {
+    .name_full {
+        font-weight: 600;
+        color: var(--mdc-theme-primary);
+    }
+    .fa {
+        font-size: 1.4rem;
+    }
+}
 
 .mdc-toolbar.mdc-toolbar--fixed {
     padding-top: $spacing-unit;
@@ -471,6 +480,60 @@ a:hover {
         }
         .mdc-list-item__start-detail {
             display: none;
+        }
+    }
+}
+
+// Pagination ==================================================================
+
+.pagination {
+    text-align: center;
+    display: block !important;
+    padding-top: $spacing-unit !important;
+    li {
+        height: $spacing-unit*2;
+        width: $spacing-unit*2;
+        border-radius: 50%;
+        margin: 0 $spacing-unit/5;
+        vertical-align: bottom;
+        a {
+            font-size: 1rem;
+            line-height: $spacing-unit*2;
+            height: $spacing-unit*2;
+            width: $spacing-unit*2;
+            color: #000;
+            padding: 0;
+            margin: 0;
+            font-weight: 600;
+        }
+        a.pagination-arrow {
+            color: #000;
+            vertical-align: middle;
+        }
+    }
+    li.disabled a.pagination-arrow {
+        cursor: default;
+        color: #999;
+    }
+    li:first-child a {
+        padding-left: 0;
+    }
+    li:last-child a {
+        padding-right: 0;
+    }
+    li.current-page {
+        background-color: var(--mdc-theme-primary-dark);
+        border-radius: 50%;
+        a {
+            color: white;
+        }
+    }
+    li .mdc-button--compact:hover,
+    li.current-page:hover {
+        background-color: var(--mdc-theme-primary);
+        a {
+            color: white;
+            text-decoration: none;
         }
     }
 }
