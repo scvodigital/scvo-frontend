@@ -3,12 +3,21 @@
     "from": {{multiply (subtract (default query.page 1) 1) 10}},
     "_source": [
         "rendered.list",
+        "rendered.search_result",
         "rendered.json_ld"
     ],
     "query": {
         "bool": {
             "must": [
-                {{#if query.tags}}
+                {{#if query.call}}
+                    {
+                        "term": {
+                            "call": "{{query.call}}"
+                        }
+                    }
+                    {{#if query.tag}},{{/if}}
+                {{/if}}
+                {{#if query.tag}}
                     {
                         "term": {
                             "individuals_supported": "{{query.tag}}"
