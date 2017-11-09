@@ -52,6 +52,71 @@
         },
         "multipleResults": true
     },
+    "grant_search": {
+        "pattern": "/services/digital/participation/projects",
+        "linkTags": [],
+        "metaTags": [],
+        "template": `{:templates/grant-digital-search.hbs}`,
+        "titleTemplate": `{:templates/page-title.hbs}`,
+        "jsonLdTemplate": `{:templates/page-json-ld.hbs}`,
+        "primarySearchTemplate": {
+            "index": "web-content-production",
+            "type": "scvo-cms-page",
+            "template": `{:queries/page.json}`
+        },
+        "supplimentarySearchTemplates": {
+            "results": {
+                "index": "web-content-production",
+                "type": "scvo-grant-digital",
+                "template": `{:queries/grant-digital-search.json}`
+            },
+            "tags": {
+                "index": "web-content-production",
+                "type": "scvo-grant-digital",
+                "template": `{:queries/grant-digital-aggs.json}`
+            },
+            "splash": {
+                "index": "web-content-production",
+                "type": "scvo-cms-media",
+                "template": `{:queries/event-splash.json}`
+            }
+        },
+        "elasticsearchConfig": {
+            "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
+            "apiVersion": "5.6",
+            "log": "debug"
+        }
+    },
+    "grant": {
+        "pattern": "/services/digital/participation/projects/:project_slug",
+        "linkTags": [],
+        "metaTags": [],
+        "template": `{:templates/grant-digital.hbs}`,
+        "titleTemplate": `{:templates/page-title.hbs}`,
+        "jsonLdTemplate": `{:templates/page-json-ld.hbs}`,
+        "primarySearchTemplate": {
+            "index": "web-content-production",
+            "type": "scvo-grant-digital",
+            "template": `{:queries/grant.json}`
+        },
+        "supplimentarySearchTemplates": {
+            "tags": {
+                "index": "web-content-production",
+                "type": "scvo-grant-digital",
+                "template": `{:queries/grant-digital-aggs.json}`
+            },
+            "splash": {
+                "index": "web-content-production",
+                "type": "scvo-cms-media",
+                "template": `{:queries/event-splash.json}`
+            }
+        },
+        "elasticsearchConfig": {
+            "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
+            "apiVersion": "5.6",
+            "log": "debug"
+        }
+    },
     "event-search": {
         "pattern": "/services/events",
         "linkTags": [],

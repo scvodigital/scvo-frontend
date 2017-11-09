@@ -1,0 +1,31 @@
+{
+    "size": 10,
+    "from": {{multiply (subtract (default query.page 1) 1) 10}},
+    "_source": [
+        "rendered.list",
+        "rendered.json_ld"
+    ],
+    "query": {
+        "bool": {
+            "must": [
+                {{#if query.tags}}
+                    {
+                        "term": {
+                            "individuals_supported": "{{query.tag}}"
+                        }
+                    }
+                    {{#if query.q}},{{/if}}
+                {{/if}}
+                {{#if query.q}}
+                    {
+                        "query_string": {
+                            "query": "{{query.q}}",
+                            "default_operator": "AND",
+                            "analyzer": "snowball"
+                        }
+                    }
+                {{/if}}
+            ]
+        }
+    }
+}

@@ -1,0 +1,50 @@
+<div class="splash-image {{> header_splash}}">
+    <div class="container-fluid">
+        <div class="mdc-layout-grid">
+            {{#if primaryResponse.hits.hits.[0]._source.header_text}}
+            <img src="{{primaryResponse.hits.hits.[0]._source.header_text}}" alt="{{primaryResponse.hits.hits.[0]._source.title}}" class="header-text" />
+            {{else}}
+            <h1 class="header-text">
+                <span class="header-text-banner">
+                    {{{primaryResponse.hits.hits.[0]._source.title}}}
+                </span>
+            </h1>
+            {{/if}}
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    {{> breadcrumbs}}
+
+    <div class="mdc-layout-grid">
+        <div class="mdc-layout-grid__inner">
+            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 content library-content">
+                <form [searchroute]="'grant_search'">
+                    <div class="mdc-textfield mdc-textfield--upgraded" data-mdc-auto-init="MDCTextfield">
+                        <input type="text" class="mdc-textfield__input" name="q" id="grant-digital-keywords" value="{{params.query.q}}">
+                        <label class="mdc-textfield__label" for="grant-digital-keywords">Keywords</label>
+                        <div class="mdc-textfield__bottom-line"></div>
+                    </div>
+                    <div class="mdc-form-field">
+                        <select class="mdc-select" role="listbox" id="grant-digital-classification" name="classification">
+                            <option value="" {{#if params.query.classification}}{{else}}selected{{/if}}>All categories</option>
+                            {{#each supplimentaryResponses.types.aggregations.types.buckets}}
+                            <option value="{{slugify key}}" {{#compare ../params.query.classification "===" (slugify key)}}selected{{/compare}}>{{key}} ({{doc_count}})</option>
+                            {{/each}}
+                        </select>
+                    </div>
+                    <button class="mdc-button mdc-button--raised" type="submit">
+                        Search
+                    </button>
+                </form>
+
+                {{#each supplimentaryResponses.results.hits.hits}}
+                {{{_source.rendered.list}}}
+                {{/each}}
+
+                {{> pagination paging=paging params=params}}
+            </div>
+        </div>
+    </div>
+</div>
