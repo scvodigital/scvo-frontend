@@ -61,16 +61,16 @@
         "jsonLdTemplate": `{:templates/page-json-ld.hbs}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
-            "type": "scvo-cms-page",
-            "template": `{:queries/page.json}`
+            "type": "scvo-grant-digital",
+            "template": `{:queries/grant-digital-search.json}`
         },
         "supplimentarySearchTemplates": {
-            "results": {
+            "page": {
                 "index": "web-content-production",
-                "type": "scvo-grant-digital",
-                "template": `{:queries/grant-digital-search.json}`
+                "type": "scvo-cms-page",
+                "template": `{:queries/page.json}`
             },
-            "tags": {
+            "types": {
                 "index": "web-content-production",
                 "type": "scvo-grant-digital",
                 "template": `{:queries/grant-digital-aggs.json}`
@@ -100,7 +100,7 @@
             "template": `{:queries/grant-digital.json}`
         },
         "supplimentarySearchTemplates": {
-            "tags": {
+            "types": {
                 "index": "web-content-production",
                 "type": "scvo-grant-digital",
                 "template": `{:queries/grant-digital-aggs.json}`

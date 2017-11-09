@@ -20,7 +20,7 @@
     <div class="mdc-layout-grid">
         <div class="mdc-layout-grid__inner">
             <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 content library-content">
-                {{#with primaryResponse.hits.hits.[0]._source}}
+                {{#with supplimentaryResponses.page.hits.hits.[0]._source}}
                 {{{rendered.full}}}
                 {{/with}}
 
@@ -35,7 +35,7 @@
                     <div class="mdc-form-field">
                         <select class="mdc-select" role="listbox" id="grant-digital-call" name="call">
                             <option value="" {{#if params.query.call}}{{else}}selected{{/if}}>All funding rounds</option>
-                            {{#each supplimentaryResponses.calls.aggregations.calls.buckets}}
+                            {{#each supplimentaryResponses.types.aggregations.calls.buckets}}
                             <option value="{{slugify key}}" {{#compare ../params.query.call "===" (slugify key)}}selected{{/compare}}>{{key}} ({{doc_count}})</option>
                             {{/each}}
                         </select>
@@ -43,7 +43,7 @@
                     <div class="mdc-form-field">
                         <select class="mdc-select" role="listbox" id="grant-digital-tag" name="tag">
                             <option value="" {{#if params.query.tag}}{{else}}selected{{/if}}>All tags</option>
-                            {{#each supplimentaryResponses.tags.aggregations.tags.buckets}}
+                            {{#each supplimentaryResponses.types.aggregations.tags.buckets}}
                             <option value="{{slugify key}}" {{#compare ../params.query.tag "===" (slugify key)}}selected{{/compare}}>{{key}} ({{doc_count}})</option>
                             {{/each}}
                         </select>
@@ -55,9 +55,15 @@
 
                 <hr />
 
-                {{#each supplimentaryResponses.results.hits.hits}}
-                {{{_source.rendered.search_result}}}
-                {{/each}}
+                <div class="mdc-layout-grid">
+                    <div class="mdc-layout-grid__inner">
+                        {{#each primaryResponse.hits.hits}}
+                        <div class="mdc-layout-grid__cell mdc-layout-grid__cell">
+                            {{{_source.rendered.scvo_card}}}
+                        </div>
+                        {{/each}}
+                    </div>
+                </div>
 
                 {{> pagination paging=paging params=params}}
             </div>

@@ -3,16 +3,17 @@
     "from": {{multiply (subtract (default query.page 1) 1) 10}},
     "_source": [
         "rendered.list",
-        "rendered.search_result",
+        "rendered.scvo_card",
         "rendered.json_ld"
     ],
     "query": {
         "bool": {
             "must": [
+                {{#ifAny query.call query.tag query.q}}
                 {{#if query.call}}
                     {
                         "term": {
-                            "call": "{{query.call}}"
+                            "call-slug": "{{query.call}}"
                         }
                     }
                     {{#if query.tag}},{{/if}}
@@ -20,7 +21,7 @@
                 {{#if query.tag}}
                     {
                         "term": {
-                            "individuals_supported": "{{query.tag}}"
+                            "individuals_supported-slugs": "{{query.tag}}"
                         }
                     }
                     {{#if query.q}},{{/if}}
@@ -34,7 +35,15 @@
                         }
                     }
                 {{/if}}
+                {{else}}
+                {
+                    "match_all": {}
+                }
+                {{/ifAny}}
             ]
         }
+    },
+    "sort": {
+        "recipient_name": "asc"
     }
 }
