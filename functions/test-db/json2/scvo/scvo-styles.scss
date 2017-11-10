@@ -2,6 +2,7 @@
 @import url(//fonts.googleapis.com/css?family=Open+Sans:400,600,700);
 
 $spacing-unit: 1rem;
+$nav-height: 2.5rem;
 
 :root{
     --mdc-theme-primary: #00838F; // Cyan 800
@@ -357,14 +358,14 @@ a:hover {
     }
     .mdc-toolbar__section.toolbar-menu,
     .mdc-toolbar__row.toolbar-nav {
-        height: $spacing-unit*2.5;
+        height: $nav-height;
     }
     .toolbar-nav {
         background-color: var(--mdc-theme-primary-dark);
-        min-height: $spacing-unit*2.5;
+        min-height: $nav-height;
     }
     .mdc-toolbar__row {
-        min-height: $spacing-unit*2.5;
+        min-height: $nav-height;
         .container-fluid {
             display: -webkit-box;
             display: -ms-flexbox;
@@ -415,7 +416,7 @@ a:hover {
             .mdc-tab-bar {
                 overflow: hidden;
                 text-transform: none;
-                height: $spacing-unit*2.5;
+                height: $nav-height;
                 margin: 0;
                 .mdc-tab {
                     color: rgba(255, 255, 255, 0.95);
@@ -612,8 +613,11 @@ a:hover {
         box-shadow: 0.75rem 0 0 rgba(0,0,0,0.3), -0.75rem 0 0 rgba(0,0,0,0.3);
     }
 }
-.credit-union .splash-image img.header-text {
-    max-height: $spacing-unit*6;
+.credit-union .splash-image {
+    min-height: $spacing-unit*11;
+    img.header-text {
+        max-height: $spacing-unit*6;
+    }
 }
 .digital.participation.projects .page-info,
 .blogs .page-sidebar .page-info,
@@ -689,20 +693,8 @@ a:hover {
     padding: 0;
 }
 
-.credit-union {
-    .mdc-layout-grid {
-        margin-top: $spacing-unit*1.5;
-        .mdc-button {
-            width: 100%;
-            background-color: var(--mdc-theme-primary);
-            color: white;
-            margin-bottom: $spacing-unit;
-        }
-        .mdc-button:hover {
-            background-color: var(--mdc-theme-primary-dark);
-            text-decoration: none;
-        }
-    }
+.menu-sidebar {
+    margin-top: $spacing-unit;
 }
 
 .scvo-document.full {
@@ -753,10 +745,12 @@ hr {
 }
 
 ul.breadcrumbs {
+    margin: 0;
+    padding: 0;
+    height: $nav-height;
+    line-height: $nav-height;
     list-style: none;
-    margin: $spacing-unit 0 $spacing-unit*1.5;
     border-bottom: 1px solid white;
-    padding: 0 0 $spacing-unit;
     li {
         display: inline-block;
         margin: 0;
