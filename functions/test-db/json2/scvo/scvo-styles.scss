@@ -269,6 +269,9 @@ a:hover {
 .home .latest-content .gist,
 .post-related .gist {
     box-shadow: none;
+    .post-info-published {
+        font-weight: 400;
+    }
 }
 
 .hero {
@@ -560,6 +563,7 @@ a:hover {
     position: relative;
     background-size: cover;
     height: 25vh;
+    min-height: $spacing-unit*9;
     background-position: center center;
     .container-fluid {
         position: relative;
@@ -750,13 +754,17 @@ hr {
 
 ul.breadcrumbs {
     list-style: none;
-    margin: $spacing-unit/2 0 $spacing-unit*1.5;
-    border-bottom: 1px solid var(--mdc-theme-primary-fade);
+    margin: $spacing-unit 0 $spacing-unit*1.5;
+    border-bottom: 1px solid white;
     padding: 0 0 $spacing-unit;
     li {
         display: inline-block;
         margin: 0;
         padding: 0;
+        a,
+        a:hover {
+            color: white;
+        }
     }
     li:before {
         content: "\203A";
@@ -764,6 +772,7 @@ ul.breadcrumbs {
         margin-right: $spacing-unit/4;
         width: $spacing-unit/2;
         display: inline-block;
+        color: white;
     }
     li.pull-right:before,
     li:first-child:before {

@@ -70,7 +70,8 @@
                         <section class="mdc-toolbar__section mdc-toolbar__section--align-start toolbar-menu">
                             <nav id="main-tab-bar" class="mdc-tab-bar">
                                 {{#each menus.main}}
-                                <a class="mdc-tab" href="{{path}}">{{{label}}}</a>
+
+                                <a class="mdc-tab" href="{{path}}">{{{label}}} {{route.params.path.[0]}}</a>
                                 {{/each}}
                             </nav>
                         </section>
