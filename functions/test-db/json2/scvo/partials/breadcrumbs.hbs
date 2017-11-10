@@ -1,6 +1,4 @@
 {{#with primaryResponse.hits.hits.[0]._source}}
-{{#if breadcrumb}}
-{{#compare breadcrumb.length '>=' 0}}
 <ul class="breadcrumbs">
     <li><a href="/">Home</a></li>
     {{#each breadcrumb}}
@@ -9,10 +7,4 @@
     </li>
     {{/each}}
 </ul>
-{{else}}
-<div class="spacer"></div>
-{{/compare}}
-{{else}}
-<div class="spacer"></div>
-{{/if}}
 {{/with}}
