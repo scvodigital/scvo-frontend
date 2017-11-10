@@ -171,6 +171,7 @@ const siteCmsMap = {
 
 const domainMap = {
     "localhost": "scvo",
+    "scvo.local": "scvo",
     "127.0.0.1": "scvo",
     "scvo.net": "scvo",
     "scvo.org": "scvo",
@@ -181,8 +182,11 @@ const domainMap = {
     "scvolabs.org": "goodhq",
     "test.goodhq.org": "goodhq",
     "ghqtest.scvo.org": "goodhq",
+    "goodhq.local": "goodhq",
+    "humanrightsdeclaration.local": "humanrightsdeclaration",
     "humanrightsdeclaration.scot": "humanrightsdeclaration",
     "test.humanrightsdeclaration.scot": "humanrightsdeclaration",
+    "digitalparticipation.local": "digitalparticipation",
     "digitalparticipation.scot": "digitalparticipation",
     "test.digitalparticipation.scot": "digitalparticipation",
     "goodmoves.eu": "goodmoves",
@@ -193,6 +197,9 @@ const domainMap = {
     "goodmoves.cymru": "goodmoves",
     "goodmovesjobs.de": "goodmoves",
     "goodmoves.org.uk": "goodmoves",
+    "fundingscotland.com": "fundingscotland",
+    "test.fundingscotland.com": "fundingscotland",
+    "fundingscotland.local": "fundingscotland",
     "scvo-net.firebaseapp.com": "scvo"
 };
 

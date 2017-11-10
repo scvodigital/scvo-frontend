@@ -5,7 +5,7 @@ $spacing-unit: 1rem;
 
 :root{
     --mdc-theme-primary: #00838F; // Cyan 800
-    --mdc-theme-primary-fade: rgba(0, 131, 143, 0.85);
+    --mdc-theme-primary-fade: rgba(0, 131, 143, 0.89);
     --mdc-theme-primary-light: #008D9B; // Cyan 750
     --mdc-theme-primary-dark: #006064; // Cyan 900
     --mdc-theme-secondary: #FF8F00; // Amber 800
@@ -23,7 +23,7 @@ $spacing-unit: 1rem;
 .setting-up-a-charity,
 .running-your-organisation {
     --mdc-theme-primary: #4527A0; // Deep Purple 800
-    --mdc-theme-primary-fade: rgba(69, 39, 160, 0.85);
+    --mdc-theme-primary-fade: rgba(69, 39, 160, 0.89);
     --mdc-theme-primary-light: #512DA8; // Deep Purple 700
     --mdc-theme-primary-dark: #311B92; // Deep Purple 900
 }
@@ -34,7 +34,7 @@ $spacing-unit: 1rem;
 .employment,
 .jobs {
     --mdc-theme-primary: #2E7D32; // Green 800
-    --mdc-theme-primary-fade: rgba(46, 125, 50, 0.85);
+    --mdc-theme-primary-fade: rgba(46, 125, 50, 0.89);
     --mdc-theme-primary-light: #388E3C; // Green 700
     --mdc-theme-primary-dark: #1B5E20; // Green 900
 }
@@ -42,7 +42,7 @@ $spacing-unit: 1rem;
 .campaigns,
 .projects-campaigns {
     --mdc-theme-primary: #AD1457; // Pink 800
-    --mdc-theme-primary-fade: rgba(173, 20, 87, 0.85);
+    --mdc-theme-primary-fade: rgba(173, 20, 87, 0.89);
     --mdc-theme-primary-light: #C2185B; // Pink 700
     --mdc-theme-primary-dark: #880E4F; // Pink 900
 }
@@ -53,7 +53,7 @@ $spacing-unit: 1rem;
 .post,
 .policy-research {
     --mdc-theme-primary: #D84315; // Deep Orange 800
-    --mdc-theme-primary-fade: rgba(216, 67, 21, 0.85);
+    --mdc-theme-primary-fade: rgba(216, 67, 21, 0.89);
     --mdc-theme-primary-light: #E64A19; // Deep Orange 700
     --mdc-theme-primary-dark: #BF360C; // Deep Orange 900
 }
@@ -88,14 +88,19 @@ $spacing-unit: 1rem;
 .home .gist.tfn-post,
 .services {
     --mdc-theme-primary: #1565C0; // Blue 800
-    --mdc-theme-primary-fade: rgba(21, 101, 192, 0.85);
+    --mdc-theme-primary-fade: rgba(21, 101, 192, 0.89);
     --mdc-theme-primary-light: #1976D2; // Blue 700
     --mdc-theme-primary-dark: #0D47A1; // Blue 900
 }
 .services.credit-union {
     --mdc-theme-primary: #1976D2;
     --mdc-theme-primary-light: #1976D2;
-    --mdc-theme-primary-dark: #1976D2;
+    --mdc-theme-primary-dark: #145ea8;
+}
+.services.digital {
+    --mdc-theme-primary: #0063AF;
+    --mdc-theme-primary-light: #0063AF;
+    --mdc-theme-primary-dark: #004f8c;
 }
 
 html {
@@ -231,11 +236,9 @@ a:hover {
             .mdc-card__subtitle {
                 margin-top: $spacing-unit/4;
             }
-            .thumbnail {
-                img {
-                    height: 64px;
-                    width: 64px;
-                }
+            img.photo-wee {
+                height: 64px;
+                width: 64px;
             }
         }
     }
@@ -372,7 +375,7 @@ a:hover {
                 margin-left: 0;
             }
             .mdc-textfield {
-                margin: 0 -1.7rem 0 0;
+                margin: 0;
                 max-height: $spacing-unit*2.2;
                 height: auto;
                 .mdc-textfield__input,
@@ -402,6 +405,9 @@ a:hover {
             }
             .mdc-toolbar__icon:focus {
                 outline: none;
+            }
+            .mdc-toolbar__search {
+                margin-left: -1.7rem;
             }
             .mdc-tab-bar {
                 overflow: hidden;
@@ -623,6 +629,9 @@ a:hover {
 .mdc-card__subtitle {
     font-size: 1rem;
 }
+.mdc-card__subtitle {
+    font-weight: 600;
+}
 .mdc-card__title--large {
     font-size: 1.2rem;
     letter-spacing: normal;
@@ -638,6 +647,10 @@ a:hover {
 .photo-wee,
 .mdc-card__media-item {
     border-radius: 50%;
+}
+.photo-full {
+    border-radius: 2px;
+    box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
 }
 .mdc-card__primary {
     padding: $spacing-unit;
@@ -883,9 +896,9 @@ ul.supplimentary-list {
         display: none;
     }
 }
-
+.sidebar .author_about,
 .content .supplimentary-list {
-    margin-top: $spacing-unit*1.5;
+    margin-top: $spacing-unit/2;
 }
 
 h1,
@@ -903,9 +916,7 @@ p:last-child {
 }
 .full {
     margin: 0 0 $spacing-unit*1.5;
-    h1 {
-        display: none;
-    }
+    h1:first-child,
     h2:first-child,
     h3:first-child,
     h4:first-child {
