@@ -4,6 +4,7 @@
             "uaId": "UA-3467930-27",
             "domains": [
                 "localhost",
+                "scvo.local",
                 "127.0.0.1",
                 "scvo.net",
                 "scvo.org.uk",
@@ -501,7 +502,7 @@
                 {
                     "content": "",
                     "name": "description"
-                },
+                }
             ],
             "scriptTags": [{
                 "src": "https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"
@@ -520,8 +521,10 @@
             }
         },
         "goodmoves": {
+            "uaId": "UA-3467930-6",
             "domains": [
                 "localhost",
+                "goodmoves.local",
                 "127.0.0.1",
                 "goodmoves.eu",
                 "goodmoves.be",
@@ -546,41 +549,55 @@
                 "type": "text/css"
             }],
             "menus": {
-                "main": [{
-                    "label": "Home",
-                    "path": "/"
-                }, {
-                    "label": "About",
-                    "path": "/about",
-                    "subMenu": [{
-                        "label": "History",
-                        "path": "/about/history"
-                    }, {
-                        "label": "The team",
-                        "path": "/about/the-team"
-                    }]
-                }]
+                "main": [
+                    {
+                        "label": "Home",
+                        "path": "/"
+                    },
+                    {
+                        "label": "About",
+                        "path": "/about",
+                        "subMenu": [
+                            {
+                                "label": "History",
+                                "path": "/about/history"
+                            },
+                            {
+                                "label": "The team",
+                                "path": "/about/the-team"
+                            }
+                        ]
+                    }
+                ]
             },
             "metaData": {
                 "title": "Goodmoves - charity and voluntary sector recruitment"
             },
-            "metaTags": [{
-                "content": "Goodmoves - Charity and voluntary sector recruitment",
-                "name": "description"
-            }],
-            "scriptTags": [{
-                "src": "https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"
-            }],
+            "metaTags": [
+                {
+                    "content": "Goodmoves - Charity and voluntary sector recruitment",
+                    "name": "description"
+                }
+            ],
+            "scriptTags": [
+                {
+                    "src": "https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"
+                }
+            ],
             "title": "Goodmoves",
             "routes": {:json/goodmoves-routes.json},
             "sass": `{:json2/goodmoves/goodmoves-styles.scss}`,
             "template": `{:json2/goodmoves/templates/goodmoves.hbs}`,
+            "templatePartials": {
+                "pagination": `{:json2/goodmoves/partials/pagination.hbs}`
+            },
             "javascript": `{:json2/goodmoves/javascript.js}`
         },
         "goodhq": {
-            "uaId": "",
+            "uaId": "UA-3467930-11",
             "domains": [
                 "localhost",
+                "goodhq.local",
                 "127.0.0.1",
                 "goodhq.org",
                 "www.goodhq.org",
@@ -600,7 +617,7 @@
                 {
                     "content": "",
                     "name": "description"
-                },
+                }
             ],
             "scriptTags": [{
                 "src": "https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"
@@ -609,12 +626,16 @@
             "routes": {:json/goodhq-routes.json},
             "sass": `{:json2/goodhq/goodhq-styles.scss}`,
             "template": `{:json2/goodhq/templates/goodhq.hbs}`,
+            "templatePartials": {
+                "pagination": `{:json2/goodhq/partials/pagination.hbs}`
+            },
             "javascript": `{:json2/goodhq/javascript.js}`
         },
         "digitalparticipation": {
-            "uaId": "",
+            "uaId": "UA-3467930-19",
             "domains": [
                 "localhost",
+                "digitalparticipation.local",
                 "127.0.0.1",
                 "test.digitalparticipation.scot",
                 "digitalparticipation.scot",
@@ -633,7 +654,7 @@
                 {
                     "content": "",
                     "name": "description"
-                },
+                }
             ],
             "scriptTags": [{
                 "src": "https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"
@@ -642,12 +663,16 @@
             "routes": {:json/digitalparticipation-routes.json},
             "sass": `{:json2/digitalparticipation/digitalparticipation-styles.scss}`,
             "template": `{:json2/digitalparticipation/templates/digitalparticipation.hbs}`,
+            "templatePartials": {
+                "pagination": `{:json2/digitalparticipation/partials/pagination.hbs}`
+            },
             "javascript": `{:json2/digitalparticipation/javascript.js}`
         },
         "humanrightsdeclaration": {
-            "uaId": "",
+            "uaId": "UA-3467930-28",
             "domains": [
                 "localhost",
+                "humanrightsdeclaration.local",
                 "127.0.0.1",
                 "test.humanrightsdeclaration.scot",
                 "humanrightsdeclaration.scot",
@@ -666,7 +691,7 @@
                 {
                     "content": "",
                     "name": "description"
-                },
+                }
             ],
             "scriptTags": [{
                 "src": "https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"
@@ -675,6 +700,9 @@
             "routes": {:json/humanrightsdeclaration-routes.json},
             "sass": `{:json2/humanrightsdeclaration/humanrightsdeclaration-styles.scss}`,
             "template": `{:json2/humanrightsdeclaration/templates/humanrightsdeclaration.hbs}`,
+            "templatePartials": {
+                "pagination": `{:json2/humanrightsdeclaration/partials/pagination.hbs}`
+            },
             "javascript": `{:json2/humanrightsdeclaration/javascript.js}`
         }
     }

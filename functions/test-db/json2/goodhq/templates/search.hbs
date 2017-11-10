@@ -31,25 +31,5 @@
     {{{_source.rendered.ghq_search_result}}}
     {{/each}}
 
-    <div class="v-margin">
-        <ul class="pagination inline-list">
-            {{#if paging.prevPage}}
-            <li>
-                <a class="mdc-button mdc-button--compact" href="/search?q={{../params.query.q}}&page={{paging.prevPage}}">Previous</a>
-            </li>
-            {{/if}}
-
-            {{#each paging.pageRange}}
-            <li class="{{#compare ../paging.currentPage "===" this.pageNumber}}current-page{{/compare}} pagination-distance-{{this.distance}}">
-                <a  class="mdc-button mdc-button--compact" href="/search?q={{../params.query.q}}&page={{this.pageNumber}}">{{this.pageNumber}}</a>
-            </li>
-            {{/each}}
-
-            {{#if paging.nextPage}}
-            <li>
-                <a class="mdc-button mdc-button--compact" href="/search?q={{../params.query.q}}&page={{paging.nextPage}}">Next</a>
-            </li>
-            {{/if}}
-        </ul>
-    </div>
+    {{> pagination paging=paging params=params}}
 </div>

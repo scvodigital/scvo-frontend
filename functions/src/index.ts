@@ -38,7 +38,6 @@ exports.index = functions.https.onRequest((req: functions.Request, res: function
             getJson<Context>(path).then((contextJson: Context) => {
                 var context = new Context(contextJson, req.cookies.__session);
                 var url = req.query.url || req.url;
-
                 context.renderPage(url).then((html: string) => {
                     res.send(html);
                     res.end();
@@ -170,7 +169,7 @@ const siteCmsMap = {
 };
 
 const domainMap = {
-    "localhost": "scvo",
+    "localhost": "goodhq",
     "scvo.local": "scvo",
     "127.0.0.1": "scvo",
     "scvo.net": "scvo",
