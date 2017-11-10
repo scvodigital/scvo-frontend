@@ -27,9 +27,15 @@
         </div>
     </div>
 
+    <div class="mdc-layout-grid">
+    <div class="mdc-layout-grid__inner">
     {{#each primaryResponse.hits.hits}}
+    <div class="mdc-layout-grid__cell mdc-layout-grid__cell">
     {{{_source.rendered.ghq_search_result}}}
+    </div>
     {{/each}}
+    </div>
+    </div>
 
     {{> pagination paging=paging params=params}}
 </div>

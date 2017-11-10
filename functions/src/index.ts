@@ -169,7 +169,7 @@ const siteCmsMap = {
 };
 
 const domainMap = {
-    "localhost": "goodhq",
+    "localhost": "scvo",
     "scvo.local": "scvo",
     "127.0.0.1": "scvo",
     "scvo.net": "scvo",
