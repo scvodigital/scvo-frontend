@@ -275,6 +275,7 @@ a:hover {
 .home .latest-content .gist,
 .post-related .gist {
     box-shadow: none;
+    .post-info-closing-date,
     .post-info-published {
         font-weight: 400;
     }
@@ -674,6 +675,7 @@ a:hover {
     .mdc-card__media {
         background-size: contain;
         background-repeat: no-repeat;
+        height: 64px;
     }
     .mdc-card__media.goodmoves {
         background-color: #58a934;
@@ -718,6 +720,11 @@ a:hover {
         }
     }
 }
+.post-info-categories {
+    ul {
+        padding: 0;
+    }
+}
 .photo-wee,
 .mdc-card__media-item {
     border-radius: 50%;
@@ -725,6 +732,8 @@ a:hover {
 .photo-full {
     border-radius: 2px;
     box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
+    margin: 0 auto $spacing-unit;
+    display: block;
 }
 .mdc-card__primary {
     padding: $spacing-unit;
@@ -900,23 +909,10 @@ ul.breadcrumbs {
 }
 
 blockquote {
-    float: right;
-    width: 33%;
-    background-image: linear-gradient(166deg,var(--mdc-theme-primary-fade) 0%, #fff 80%);
-    border-left: 10px solid var(--mdc-theme-primary-dark);
-    margin: $spacing-unit/4 0 $spacing-unit/4 $spacing-unit/2;
-    padding: $spacing-unit $spacing-unit*(3/4) $spacing-unit/4;
-    font-size: 150%;
-    font-weight: lighter;
-    quotes: "\201C""\201D""\2018""\2019";
-}
-blockquote:before {
-    color: var(--mdc-theme-primary-dark);
-    content: open-quote;
-    font-size: 3rem;
-    line-height: 0.1rem;
-    margin-right: 0.25rem;
-    vertical-align: -0.4rem;
+    border-left: 0.2rem solid var(--mdc-theme-primary-dark);
+    margin: 0 0 0.75rem;
+    padding: 0 0.75rem;
+    font-size: 125%;
 }
 blockquote p {
     display: inline;
@@ -996,6 +992,7 @@ p:last-child {
             margin: $spacing-unit*1.5 0 $spacing-unit/2;
             border-top: 1px solid #aaa;
             padding: $spacing-unit 0 0;
+            font-size: 95%;
         }
     }
 }
@@ -1016,6 +1013,7 @@ p:last-child {
         margin: $spacing-unit/2 0 $spacing-unit;
     }
 }
+.page-sidebar h3:first-child ,
 .post-sidebar h3:first-child {
     margin: $spacing-unit*1.5 0 $spacing-unit/4 !important;
 }

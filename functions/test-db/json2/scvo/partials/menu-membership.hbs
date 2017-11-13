@@ -1,0 +1,8 @@
+<nav class="menu-sidebar" id="membership-menu">
+    {{#each context.menus.membership}}
+    <a class="mdc-button mdc-button--raised" href="{{path}}">{{{label}}}</a>
+    {{#each this.children}}
+    <a class="mdc-button mdc-button--raised" href="{{path}}">{{{label}}}</a>
+    {{/each}}
+    {{/each}}
+</nav>
