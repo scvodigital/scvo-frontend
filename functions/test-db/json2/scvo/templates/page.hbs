@@ -1,12 +1,18 @@
 <div class="splash-image {{> header_splash}}">
     <div class="container-fluid">
+        {{> breadcrumbs}}
+
         <div class="mdc-layout-grid">
             {{#if primaryResponse.hits.hits.[0]._source.header_text}}
             <img src="{{primaryResponse.hits.hits.[0]._source.header_text}}" alt="{{primaryResponse.hits.hits.[0]._source.title}}" class="header-text" />
             {{else}}
             <h1 class="header-text">
                 <span class="header-text-banner">
+                    {{#if primaryResponse.hits.hits.[0]}}
                     {{{primaryResponse.hits.hits.[0]._source.title}}}
+                    {{else}}
+                    404: Not found
+                    {{/if}}
                 </span>
             </h1>
             {{/if}}
@@ -15,14 +21,17 @@
 </div>
 
 <div class="container-fluid">
-    {{> breadcrumbs}}
-
     <div class="mdc-layout-grid">
         <div class="mdc-layout-grid__inner">
             <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-8 content page-content">
+                {{#if primaryResponse.hits.hits.[0]}}
                 {{#with primaryResponse.hits.hits.[0]._source}}
                 {{{rendered.full}}}
                 {{/with}}
+                {{else}}
+                <h2>Page not found</h2>
+                Please try searching.
+                {{/if}}
             </div>
             <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 sidebar page-sidebar">
                 <!-- TBC -->

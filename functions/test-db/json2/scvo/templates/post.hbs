@@ -1,5 +1,7 @@
 <div class="splash-image {{> header_splash}}">
     <div class="container-fluid">
+        {{> breadcrumbs_posts}}
+
         <div class="mdc-layout-grid">
             {{#if primaryResponse.hits.hits.[0]._source.header_text}}
             <img src="{{primaryResponse.hits.hits.[0]._source.header_text}}" alt="{{primaryResponse.hits.hits.[0]._source.title}}" class="header-text" />

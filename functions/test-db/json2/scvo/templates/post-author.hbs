@@ -1,5 +1,7 @@
 <div class="splash-image {{> header_splash}}">
     <div class="container-fluid">
+        {{> breadcrumbs_posts}}
+        
         <div class="mdc-layout-grid">
             {{#if primaryResponse.hits.hits.[0]._source.header_text}}
             <img src="{{primaryResponse.hits.hits.[0]._source.header_text}}" alt="{{primaryResponse.hits.hits.[0]._source.title}}" class="header-text" />
@@ -27,11 +29,9 @@
                     {{{_source.rendered.list}}}
                     {{/each}}
                 </ul>
-
                 {{> pagination paging=paging params=params}}
             </div>
             <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 sidebar post-sidebar">
-                <h3 class="author">{{primaryResponse.hits.hits.[0]._source.author_name}}</h3>
                 <div class="author_about">
                     {{#if supplimentaryResponses.staff_profile.hits.hits.[0]}}
                     {{{supplimentaryResponses.staff_profile.hits.hits.[0]._source.rendered.scvo_profile}}}

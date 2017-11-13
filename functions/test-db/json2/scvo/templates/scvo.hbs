@@ -58,7 +58,7 @@
                                 <div class="mdc-textfield" data-mdc-auto-init="MDCTextfield">
                                     <input type="text" class="mdc-textfield__input white-text searchRoute" placeholder="Search" id="q" name="q">
                                 </div>
-                                <button type="submit" class="mdc-toolbar__icon" aria-label="Search" alt="Search">
+                                <button type="submit" class="mdc-toolbar__icon mdc-toolbar__search" aria-label="Search" alt="Search">
                                     <span class="fa fa-search" aria-hidden="true"></span>
                                 </button>
                             </form>
@@ -70,7 +70,8 @@
                         <section class="mdc-toolbar__section mdc-toolbar__section--align-start toolbar-menu">
                             <nav id="main-tab-bar" class="mdc-tab-bar">
                                 {{#each menus.main}}
-                                <a class="mdc-tab" href="{{path}}">{{{label}}}</a>
+
+                                <a class="mdc-tab" href="{{path}}">{{{label}}} {{route.params.path.[0]}}</a>
                                 {{/each}}
                             </nav>
                         </section>
@@ -163,7 +164,7 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <p>
-                                    &copy; 2017. The Scottish Council for Voluntary Organisations (SCVO) is a Scottish Charitable Incorporated Organisation. Charity registered in Scotland <a href="http://www.oscr.org.uk/charities/search-scottish-charity-register/charity-details?number=SC003558">SC003558</a>.
+                                    &copy; 2017. The Scottish Council for Voluntary Organisations (SCVO) is a Scottish Charitable Incorporated Organisation. Charity registered in Scotland <a href="http://www.oscr.org.uk/charities/search-scottish-charity-register/charity-details?number=SC003558">SC003558</a>. Registered office Mansfield Traquair Centre, 15 Mansfield Place, Edinburgh EH3 6BB.
                                 </p>
                             </div>
                         </div>
@@ -172,21 +173,27 @@
             </footer>
         </div>
     </scvo-site>
-    <script type="text/javascript" src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+    <script type="text/javascript" src="//unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
     <script type="text/javascript">
-    // Material Design Components
-    mdc.autoInit();
+        // Cookie Consent
+        window.cookieconsent_options = {
+            learnMore: 'More info',
+            link: '/privacy-cookies-policy'
+        };
+        // Material Design Components
+        mdc.autoInit();
 
-    // Browser Update
-    var $buoop = {notify:{i:-4,f:-4,o:-4,s:-2,c:-4},unsecure:true,api:5};
-    function $buo_f(){
-     var e = document.createElement("script");
-     e.src = "//browser-update.org/update.min.js";
-     document.body.appendChild(e);
-    };
-    try {document.addEventListener("DOMContentLoaded", $buo_f,false)}
-    catch(e){window.attachEvent("onload", $buo_f)}
+        // Browser Update
+        var $buoop = {notify:{i:-4,f:-4,o:-4,s:-2,c:-4},unsecure:true,api:5};
+        function $buo_f(){
+            var e = document.createElement("script");
+            e.src = "//browser-update.org/update.min.js";
+            document.body.appendChild(e);
+        };
+        try {document.addEventListener("DOMContentLoaded", $buo_f,false)}
+        catch(e){window.attachEvent("onload", $buo_f)}
     </script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/cookieconsent2/1.0.9/cookieconsent.min.js"></script>
     <script type="text/javascript" src="inline.bundle.js"></script>
     <script type="text/javascript" src="polyfills.bundle.js"></script>
     <script type="text/javascript" src="styles.bundle.js"></script>

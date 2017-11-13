@@ -2,20 +2,20 @@
     "size": 0,
     "_source": false,
     "aggs": {
-        "cities": {
+        "tags": {
             "terms": {
-                "field": "city",
+                "field": "individuals_supported",
                 "order": {
                     "_term": "asc"
                 },
                 "size": 10000
             }
         },
-        "departments": {
+        "calls": {
             "terms": {
-                "field": "department",
+                "field": "call",
                 "order": {
-                    "_term": "asc"
+                    "_term": "desc"
                 },
                 "size": 10000
             }
