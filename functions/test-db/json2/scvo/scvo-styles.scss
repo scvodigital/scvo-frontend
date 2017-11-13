@@ -50,6 +50,7 @@ $nav-height: 2.5rem;
 .search-result.scvo-document,
 .search-result.scvo-cms-post,
 .list.scvo-cms-post,
+.press-media,
 .blogs,
 .post,
 .policy-research {
@@ -166,6 +167,7 @@ a:hover {
 }
 .mdc-card__actions a:hover,
 .mdc-button a:hover,
+.mdc-button:hover,
 .mdc-toolbar a:hover {
     text-decoration: none;
 }
@@ -432,11 +434,16 @@ a:hover {
                 }
             }
             #upper-tab-bar {
+                width: 50%;
                 margin-right: $spacing-unit;
                 .mdc-tab {
                     min-width: auto;
                     font-weight: 600;
+                    padding: 0;
                 }
+            }
+            .mdc-form-field--align-end {
+                width: 40%;
             }
         }
         a.mdc-toolbar__icon:hover {
@@ -695,6 +702,9 @@ a:hover {
 
 .menu-sidebar {
     margin-top: $spacing-unit;
+    .mdc-button {
+        margin-bottom: $spacing-unit/2;
+    }
 }
 
 .scvo-document.full {
@@ -755,6 +765,7 @@ ul.breadcrumbs {
         display: inline-block;
         margin: 0;
         padding: 0;
+        color: white;
         a,
         a:hover {
             color: white;
