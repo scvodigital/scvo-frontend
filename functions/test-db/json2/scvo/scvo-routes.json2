@@ -33,7 +33,7 @@
             "log": "debug"
         }
     },
-    "main-search": {
+    "main_search": {
         "pattern": "/search",
         "linkTags": [],
         "metaTags": [],
@@ -53,7 +53,7 @@
         "multipleResults": true
     },
     "grant_search": {
-        "pattern": "/services/digital/participation/projects",
+        "pattern": "/digital/participation/projects",
         "linkTags": [],
         "metaTags": [],
         "template": `{:templates/grant-digital-search.hbs}`,
@@ -88,7 +88,7 @@
         }
     },
     "grant": {
-        "pattern": "/services/digital/participation/projects/:project_slug",
+        "pattern": "/digital/participation/projects/:project_slug",
         "linkTags": [],
         "metaTags": [],
         "template": `{:templates/grant-digital.hbs}`,
@@ -454,9 +454,8 @@
     "page_posts": {
         "pattern": {
             "policy_research": "/policy-research",
-            "projects_campaigns": "/projects-campaigns",
             "campaign_datawareness": "/projects-campaigns/datawareness",
-            "campaign_open_government": "/projects-campaigns/open-government",
+            "campaign_open_government": "/open-government",
             "campaign_right_approach": "/projects-campaigns/right-approach",
             "campaign_charity_awards": "/projects-campaigns/scottish-charity-awards",
             "campaign_welfare_reform": "/projects-campaigns/welfare-reform"
@@ -646,7 +645,10 @@
         }
     },
     "page_digital_participation": {
-        "pattern": "/services/digital/participation/:path",
+        "pattern": {
+            "index": "/digital/participation",
+            "section": "/digital/participation/:path"
+        },
         "linkTags": [],
         "metaTags": [],
         "template": `{:templates/digital-participation.hbs}`,
@@ -670,8 +672,11 @@
             "log": "debug"
         }
     },
-    "page_digital_participation": {
-        "pattern": "/services/digital/evolution/:path",
+    "page_digital_evolution": {
+        "pattern": {
+            "index": "/digital/evolution",
+            "section": "/digital/evolution/:path"
+        },
         "linkTags": [],
         "metaTags": [],
         "template": `{:templates/digital-evolution.hbs}`,
@@ -696,7 +701,10 @@
         }
     },
     "page_digital_innovation": {
-        "pattern": "/services/digital/innovation/:path",
+        "pattern": {
+            "index": "/digital/innovation",
+            "section": "/digital/innovation/:path"
+        },
         "linkTags": [],
         "metaTags": [],
         "template": `{:templates/digital-innovation.hbs}`,
@@ -723,7 +731,8 @@
     "page_full_width": {
         "pattern": {
             "services": "/services",
-            "services_digital": "/services/digital"
+            "services_digital": "/digital",
+            "projects_campaigns": "/projects-campaigns"
         },
         "linkTags": [],
         "metaTags": [],

@@ -41,6 +41,7 @@ $nav-height: 2.5rem;
 }
 .project,
 .campaigns,
+.open-government,
 .projects-campaigns {
     --mdc-theme-primary: #AD1457; // Pink 800
     --mdc-theme-primary-fade: rgba(173, 20, 87, 0.89);
@@ -96,11 +97,13 @@ $nav-height: 2.5rem;
 }
 .services.credit-union {
     --mdc-theme-primary: #1976D2;
+    --mdc-theme-primary-fade: rgba(21, 101, 192, 0.89);
     --mdc-theme-primary-light: #1976D2;
     --mdc-theme-primary-dark: #145ea8;
 }
-.services.digital {
+.digital {
     --mdc-theme-primary: #0063AF;
+    --mdc-theme-primary-fade: rgba(21, 101, 192, 0.89);
     --mdc-theme-primary-light: #0063AF;
     --mdc-theme-primary-dark: #004f8c;
 }
@@ -573,6 +576,7 @@ a:hover {
     height: 25vh;
     min-height: $spacing-unit*9;
     background-position: center center;
+    padding-bottom: $spacing-unit;
     .container-fluid {
         position: relative;
         height: 100%;
@@ -580,7 +584,7 @@ a:hover {
         .mdc-layout-grid {
             position: absolute;
             left: 0;
-            bottom: $spacing-unit;
+            bottom: 0;
         }
     }
     img.header-text {
@@ -957,6 +961,9 @@ p:last-child {
     }
 }
 .sidebar {
+    .blogs {
+        margin-top: $spacing-unit;
+    }
     h1:first-child,
     h2:first-child,
     h3:first-child,

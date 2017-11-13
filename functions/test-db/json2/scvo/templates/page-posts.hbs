@@ -25,6 +25,7 @@
                 {{/with}}
             </div>
             <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 sidebar page-sidebar">
+                {{#if supplimentaryResponses.related_posts.hits}}
                 <h3 class="blogs">Our blog posts</h3>
                 <ul class="v-margin supplimentary-list">
                     {{#each supplimentaryResponses.related_posts.hits.hits}}
@@ -32,6 +33,7 @@
                     {{/each}}
                 </ul>
                 <a class="v-margin mdc-button mdc-button--raised" href="/post/categories/{{primaryResponse.hits.hits.[0]._source.categories_slug.[0]}}">Read more</a>
+                {{/if}}
             </div>
         </div>
     </div>

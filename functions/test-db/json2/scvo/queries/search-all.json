@@ -11,7 +11,13 @@
         "bool": {
             {{#if query.type}}
             "must": [
-                { "term": { "_type": { "value" : "{{query.type}}" } } }
+                {
+                    "term": {
+                        "_type": {
+                            "value" : "{{query.type}}"
+                        }
+                    }
+                }
             ],
             {{/if}}
             "should": [
@@ -22,10 +28,34 @@
                         "analyzer": "snowball"
                     }
                 },
-                { "term" : { "_type" : {"value" : "scvo-cms-post", "boost" : 5.0} } },
-                { "term" : { "_type" : {"value" : "scvo-event", "boost" : 4.0} } },
-                { "term" : { "_type" : {"value" : "scvo-cms-page", "boost" : 3.0} } },
-                { "term" : { "_type" : {"value" : "goodhq-organisation", "boost" : 1.5} } }
+                {
+                    "term" : {
+                        "_type" : {
+                            "value" : "scvo-cms-post", "boost" : 5.0
+                        }
+                    }
+                },
+                {
+                    "term" : {
+                        "_type" : {
+                            "value" : "scvo-event", "boost" : 4.0
+                        }
+                    }
+                },
+                {
+                    "term" : {
+                        "_type" : {
+                            "value" : "scvo-cms-page", "boost" : 3.0
+                        }
+                    }
+                },
+                {
+                    "term" : {
+                        "_type" : {
+                            "value" : "goodhq-organisation", "boost" : 1.5
+                        }
+                    }
+                }
             ]
         }
     }
