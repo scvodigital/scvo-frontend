@@ -30,18 +30,20 @@
                 {{/with}}
                 {{else}}
                 <h2>Page not found</h2>
-                Please try searching.
+                <!-- Please try searching. -->
                 {{/if}}
             </div>
             <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 sidebar page-sidebar">
                 {{#compare supplimentaryResponses.related_posts.hits.total ">" 0}}
-                <h3 class="blogs">Related posts</h3>
-                <ul class="v-margin supplimentary-list">
-                    {{#each supplimentaryResponses.related_posts.hits.hits}}
-                    {{{_source.rendered.sidebar_mini}}}
-                    {{/each}}
-                </ul>
-                <a class="v-margin mdc-button mdc-button--raised" href="/post/categories/{{primaryResponse.hits.hits.[0]._source.categories_slug.[0]}}">Read more</a>
+                <div class="related-posts">
+                    <h3 class="blogs">Related posts</h3>
+                    <ul class="v-margin supplimentary-list">
+                        {{#each supplimentaryResponses.related_posts.hits.hits}}
+                        {{{_source.rendered.sidebar_mini}}}
+                        {{/each}}
+                    </ul>
+                    <a class="v-margin mdc-button mdc-button--raised" href="/post/categories/{{primaryResponse.hits.hits.[0]._source.categories_slug.[0]}}">Read more</a>
+                </div>
                 {{/compare}}
             </div>
         </div>
