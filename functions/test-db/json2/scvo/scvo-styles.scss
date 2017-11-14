@@ -112,7 +112,7 @@ $nav-height: 2.5rem;
 }
 .digital {
     --mdc-theme-primary: #0063AF;
-    --mdc-theme-primary-fade: rgba(21, 101, 192, 0.89);
+    --mdc-theme-primary-fade: rgba(0, 99, 175, 0.89);
     --mdc-theme-primary-light: #0063AF;
     --mdc-theme-primary-dark: #004f8c;
 }
@@ -265,6 +265,7 @@ a:hover {
     a.thumbnail:after {
         content: "" !important;
         display: none !important;
+        margin: 0;
     }
     .thumbnail {
         margin-top: $spacing-unit/2;
@@ -324,6 +325,11 @@ a:hover {
     .mdc-select,
     .mdc-button {
         width: 100%;
+    }
+}
+.related-posts {
+    .mdc-button {
+        margin: $spacing-unit 0;
     }
 }
 .v-align-img {
@@ -903,9 +909,13 @@ h1.mdc-typography--title {
         li::before {
             content: "";
             padding: 0;
+            margin: 0;
             font-size: unset;
         }
     }
+}
+.mdc-card__actions ul {
+    padding: 0;
 }
 
 hr {
@@ -946,11 +956,12 @@ ul.breadcrumbs {
     li:first-child:before {
         content: "" !important;
         font-weight: 800;
-        margin-right: 0 !important;
+        margin: 0 !important;
         width: 0 !important;
     }
     li.pull-right a::after {
         content: "";
+        margin: 0;
     }
     li:not(:last-child) {
         margin-right: $spacing-unit/4;
@@ -963,6 +974,7 @@ ul.breadcrumbs {
     .mdc-layout-grid__cell--span-3-desktop {
         a:after {
             content: "" !important;
+            margin: 0;
             display: none;
         }
     }
@@ -1084,7 +1096,7 @@ p:last-child {
     margin-bottom: 0;
 }
 .full {
-    margin: $spacing-unit 0 $spacing-unit*1.5;
+    margin: $spacing-unit 0;
     h1:first-child,
     h2:first-child,
     h3:first-child,
@@ -1110,6 +1122,9 @@ p:last-child {
         }
     }
 }
+.post-content .full {
+    margin-top: $spacing-unit/2;
+}
 .sidebar {
     .blogs {
         margin-top: $spacing-unit;
@@ -1129,7 +1144,7 @@ p:last-child {
 }
 .page-sidebar h3:first-child ,
 .post-sidebar h3:first-child {
-    margin: $spacing-unit*1.5 0 $spacing-unit/4 !important;
+    margin: $spacing-unit 0 $spacing-unit/4 !important;
 }
 
 .page-content,
@@ -1320,6 +1335,12 @@ footer {
     .mdc-toolbar-fixed-adjust {
         padding-top: $spacing-unit*4;
     }
+    .pagination-distance-9,
+    .pagination-distance-8,
+    .pagination-distance-7,
+    .pagination-distance-6 {
+        display: none !important;
+    }
 }
 
 @media screen and (max-width: 839px) {
@@ -1330,11 +1351,23 @@ footer {
     .breadcrumbs {
         font-size: 85%;
     }
+    .pagination-distance-5 {
+        display: none !important;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .pagination-distance-4 {
+        display: none !important;
+    }
 }
 
 @media screen and (max-width: 376px) {
     .mdc-toolbar__title {
         width: 38px;
         overflow: hidden;
+    }
+    .pagination-distance-3 {
+        display: none !important;
     }
 }

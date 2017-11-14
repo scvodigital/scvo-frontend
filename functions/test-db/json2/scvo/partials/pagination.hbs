@@ -5,7 +5,7 @@
     </li>
 
     {{#each paging.pageRange}}
-        <li class="{{#compare ../paging.currentPage "===" this.pageNumber}}current-page{{/compare}} pagination-distance-{{this.distance}}">
+        <li class="{{#compare ../paging.currentPage "===" this.pageNumber}}current-page {{/compare}}pagination-distance-{{this.distance}}">
             <a class="pagination-page" href="{{../params.uri.pathname}}?{{{querystringify ../params.query page=this.pageNumber}}}">
                 {{this.pageNumber}}
             </a>
