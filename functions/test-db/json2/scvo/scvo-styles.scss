@@ -275,6 +275,7 @@ a:hover {
 .home .latest-content .gist,
 .post-related .gist {
     box-shadow: none;
+    .post-info-closing-date,
     .post-info-published {
         font-weight: 400;
     }
@@ -394,6 +395,7 @@ a:hover {
                     border: $spacing-unit/10 solid rgba(255,255,255,.75);
                     padding: 0 $spacing-unit/2;
                     line-height: $spacing-unit*2;
+                    background: transparent;
                 }
                 ::-webkit-input-placeholder {
                     color: rgba(255, 255, 255, 0.6);
@@ -416,7 +418,9 @@ a:hover {
                 outline: none;
             }
             .mdc-toolbar__search {
-                margin-left: -1.7rem;
+                position: absolute;
+                right: $spacing-unit/2;
+                bottom: $spacing-unit*2;
             }
             .mdc-tab-bar {
                 overflow: hidden;
@@ -437,16 +441,12 @@ a:hover {
                 }
             }
             #upper-tab-bar {
-                width: 50%;
                 margin-right: $spacing-unit;
                 .mdc-tab {
                     min-width: auto;
                     font-weight: 600;
-                    padding: 0;
+                    padding: 0 $spacing-unit/2;
                 }
-            }
-            .mdc-form-field--align-end {
-                width: 40%;
             }
         }
         a.mdc-toolbar__icon:hover {
@@ -598,8 +598,8 @@ a:hover {
         font-size: 3rem;
         font-weight: 400;
         letter-spacing: -0.08rem;
-        line-height: 3rem;
-        margin-bottom: $spacing-unit/4;
+        line-height: $spacing-unit*3;
+        margin-bottom: $spacing-unit/2;
         .mdc-typography--caption {
             font-size: 1.2rem;
         }
@@ -660,6 +660,46 @@ a:hover {
     padding: 0 0 $spacing-unit/2;
     font-weight: 600 !important;
 }
+.scvo-cms-page-20090 {
+    h1 {
+        margin-bottom: $spacing-unit;
+    }
+}
+.support.support-sector {
+    .mdc-card__media {
+        h1 {
+            display: none;
+        }
+    }
+    .mdc-card__media {
+        background-size: contain;
+        background-repeat: no-repeat;
+        height: 64px;
+    }
+    .mdc-card__media.goodmoves {
+        background-color: #58a934;
+        background-image: url('https://storage.cloud.google.com/scvo-cms/scvo-cms-content/images/banners/goodmoves-banner.png');
+    }
+    .mdc-card__media.funding-scotland {
+        background-color: #8AC645;
+        background-image: url('https://storage.cloud.google.com/scvo-cms/scvo-cms-content/images/banners/funding-scotland-banner.png');
+    }
+    .mdc-card__media.goodhq {
+        background-color: #4033E9;
+        background-image: url('https://storage.cloud.google.com/scvo-cms/scvo-cms-content/images/banners/goodhq-banner.png');
+    }
+    .mdc-card__media.tfn {
+        background-color: #3b9db1;
+        background-image: url('https://storage.cloud.google.com/scvo-cms/scvo-cms-content/images/banners/tfn-banner.png');
+    }
+    .mdc-card__media.credit-union {
+        background-color: #1976D2;
+        background-image: url('https://storage.cloud.google.com/scvo-cms/scvo-cms-content/images/banners/credit-union-banner.png');
+    }
+    .mdc-card__supporting-text {
+        padding-top: $spacing-unit;
+    }
+}
 .mdc-card__actions {
     .mdc-card__action {
         font-weight: 800;
@@ -679,6 +719,11 @@ a:hover {
         }
     }
 }
+.post-info-categories {
+    ul {
+        padding: 0;
+    }
+}
 .photo-wee,
 .mdc-card__media-item {
     border-radius: 50%;
@@ -686,6 +731,8 @@ a:hover {
 .photo-full {
     border-radius: 2px;
     box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
+    margin: 0 auto $spacing-unit;
+    display: block;
 }
 .mdc-card__primary {
     padding: $spacing-unit;
@@ -861,23 +908,10 @@ ul.breadcrumbs {
 }
 
 blockquote {
-    float: right;
-    width: 33%;
-    background-image: linear-gradient(166deg,var(--mdc-theme-primary-fade) 0%, #fff 80%);
-    border-left: 10px solid var(--mdc-theme-primary-dark);
-    margin: $spacing-unit/4 0 $spacing-unit/4 $spacing-unit/2;
-    padding: $spacing-unit $spacing-unit*(3/4) $spacing-unit/4;
-    font-size: 150%;
-    font-weight: lighter;
-    quotes: "\201C""\201D""\2018""\2019";
-}
-blockquote:before {
-    color: var(--mdc-theme-primary-dark);
-    content: open-quote;
-    font-size: 3rem;
-    line-height: 0.1rem;
-    margin-right: 0.25rem;
-    vertical-align: -0.4rem;
+    border-left: 0.2rem solid var(--mdc-theme-primary-dark);
+    margin: 0 0 0.75rem;
+    padding: 0 0.75rem;
+    font-size: 125%;
 }
 blockquote p {
     display: inline;
@@ -957,6 +991,7 @@ p:last-child {
             margin: $spacing-unit*1.5 0 $spacing-unit/2;
             border-top: 1px solid #aaa;
             padding: $spacing-unit 0 0;
+            font-size: 95%;
         }
     }
 }
@@ -977,6 +1012,7 @@ p:last-child {
         margin: $spacing-unit/2 0 $spacing-unit;
     }
 }
+.page-sidebar h3:first-child ,
 .post-sidebar h3:first-child {
     margin: $spacing-unit*1.5 0 $spacing-unit/4 !important;
 }
@@ -1118,6 +1154,15 @@ footer {
     }
 }
 
+@media screen and (max-width: 1140px) {
+    .mdc-toolbar.mdc-toolbar--fixed {
+        padding-top: 0;
+    }
+    .mdc-toolbar-fixed-adjust {
+        padding-top: $spacing-unit*8.5;
+    }
+}
+
 @media screen and (max-width: 991px) {
     .mdc-toolbar {
         .container-fluid .mdc-toolbar__icon--menu {
@@ -1127,6 +1172,9 @@ footer {
         #upper-tab-bar,
         .mdc-toolbar__row.toolbar-nav {
             display: none;
+        }
+        .mdc-toolbar__row .container-fluid .mdc-toolbar__search {
+            bottom: 0;
         }
     }
     .latest-content {
@@ -1156,5 +1204,22 @@ footer {
     }
     .mdc-toolbar-fixed-adjust {
         padding-top: $spacing-unit*4;
+    }
+}
+
+@media screen and (max-width: 839px) {
+    html {
+        font-size: 0.92rem;
+        line-height: 1.25;
+    }
+    .breadcrumbs {
+        font-size: 85%;
+    }
+}
+
+@media screen and (max-width: 376px) {
+    .mdc-toolbar__title {
+        width: 38px;
+        overflow: hidden;
     }
 }

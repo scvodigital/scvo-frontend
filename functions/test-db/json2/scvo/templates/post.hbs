@@ -35,10 +35,18 @@
                     {{{supplimentaryResponses.author_profile.hits.hits.[0]._source.rendered.scvo_profile}}}
                     {{/if}}
                 </div>
+                {{#if supplimentaryResponses.authors_posts.hits}}
                 {{#if supplimentaryResponses.staff_profile.hits.hits}}
                 <h3 class="author">More posts by {{primaryResponse.hits.hits.[0]._source.author_name_full}}</h3>
+                {{/if}}
                 <ul class="supplimentary-list">
                     {{#each supplimentaryResponses.authors_posts.hits.hits}}
+                    {{{_source.rendered.sidebar}}}
+                    {{/each}}
+                </ul>
+                {{else}}
+                <ul class="supplimentary-list">
+                    {{#each supplimentaryResponses.category_posts.hits.hits}}
                     {{{_source.rendered.sidebar}}}
                     {{/each}}
                 </ul>
@@ -46,6 +54,7 @@
                 {{/compare}}
                 {{/if}}
             </div>
+            {{#if supplimentaryResponses.tfn_related_posts.hits}}
             <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 related post-related">
                 <div class="mdc-layout-grid">
                     <div class="mdc-layout-grid__inner">
@@ -57,6 +66,7 @@
                     </div>
                 </div>
             </div>
+            {{/if}}
         </div>
     </div>
 </div>
