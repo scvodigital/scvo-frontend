@@ -26,8 +26,7 @@
             </div>
             <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 sidebar post-sidebar">
                 {{#if primaryResponse.hits.hits.[0]._source.categories}}
-                {{#compare primaryResponse.hits.hits.[0]._source.categories.[0] "===" 'Press releases'}}
-                {{else}}
+                {{#compare primaryResponse.hits.hits.[0]._source.categories.[0] "!==" 'Press releases'}}
                 <div class="author_about">
                     {{#if supplimentaryResponses.staff_profile.hits.hits.[0]}}
                     {{{supplimentaryResponses.staff_profile.hits.hits.[0]._source.rendered.scvo_profile}}}
@@ -35,10 +34,10 @@
                     {{{supplimentaryResponses.author_profile.hits.hits.[0]._source.rendered.scvo_profile}}}
                     {{/if}}
                 </div>
-                {{#if supplimentaryResponses.authors_posts.hits}}
-                {{#if supplimentaryResponses.staff_profile.hits.hits}}
+                {{#compare supplimentaryResponses.authors_posts.hits.total ">" 0}}
+                {{#compare supplimentaryResponses.staff_profile.hits.total ">" 0}}
                 <h3 class="author">More posts by {{primaryResponse.hits.hits.[0]._source.author_name_full}}</h3>
-                {{/if}}
+                {{/compare}}
                 <ul class="supplimentary-list">
                     {{#each supplimentaryResponses.authors_posts.hits.hits}}
                     {{{_source.rendered.sidebar}}}
@@ -50,11 +49,11 @@
                     {{{_source.rendered.sidebar}}}
                     {{/each}}
                 </ul>
-                {{/if}}
+                {{/compare}}
                 {{/compare}}
                 {{/if}}
             </div>
-            {{#if supplimentaryResponses.tfn_related_posts.hits}}
+            {{#compare supplimentaryResponses.tfn_related_posts.hits.total ">" 0}}
             <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 related post-related">
                 <div class="mdc-layout-grid">
                     <div class="mdc-layout-grid__inner">
@@ -66,7 +65,7 @@
                     </div>
                 </div>
             </div>
-            {{/if}}
+            {{/compare}}
         </div>
     </div>
 </div>

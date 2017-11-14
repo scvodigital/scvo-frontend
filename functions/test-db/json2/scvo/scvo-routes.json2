@@ -754,6 +754,33 @@
             "log": "debug"
         }
     },
+    "page_funding_guide": {
+        "pattern": {
+            "section": "/running-your-organisation/funding/step-by-step-guide/:path"
+        },
+        "linkTags": [],
+        "metaTags": [],
+        "template": `{:templates/funding-guide.hbs}`,
+        "titleTemplate": `{:templates/page-title.hbs}`,
+        "jsonLdTemplate": `{:templates/page-json-ld.hbs}`,
+        "primarySearchTemplate": {
+            "index": "web-content-production",
+            "type": "scvo-cms-page",
+            "template": `{:queries/page.json}`
+        },
+        "supplimentarySearchTemplates": {
+            "splash": {
+                "index": "web-content-production",
+                "type": "scvo-cms-media",
+                "template": `{:queries/page-splash.json}`
+            }
+        },
+        "elasticsearchConfig": {
+            "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
+            "apiVersion": "5.6",
+            "log": "debug"
+        }
+    },
     "page_full_width": {
         "pattern": {
             "services": "/services",
