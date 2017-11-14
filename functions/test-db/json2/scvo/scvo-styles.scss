@@ -395,6 +395,7 @@ a:hover {
                     border: $spacing-unit/10 solid rgba(255,255,255,.75);
                     padding: 0 $spacing-unit/2;
                     line-height: $spacing-unit*2;
+                    background: transparent;
                 }
                 ::-webkit-input-placeholder {
                     color: rgba(255, 255, 255, 0.6);
@@ -417,7 +418,9 @@ a:hover {
                 outline: none;
             }
             .mdc-toolbar__search {
-                margin-left: -1.7rem;
+                position: absolute;
+                right: $spacing-unit/2;
+                bottom: $spacing-unit*2;
             }
             .mdc-tab-bar {
                 overflow: hidden;
@@ -438,16 +441,12 @@ a:hover {
                 }
             }
             #upper-tab-bar {
-                width: 50%;
                 margin-right: $spacing-unit;
                 .mdc-tab {
                     min-width: auto;
                     font-weight: 600;
-                    padding: 0;
+                    padding: 0 $spacing-unit/2;
                 }
-            }
-            .mdc-form-field--align-end {
-                width: 40%;
             }
         }
         a.mdc-toolbar__icon:hover {
@@ -1155,6 +1154,15 @@ footer {
     }
 }
 
+@media screen and (max-width: 1140px) {
+    .mdc-toolbar.mdc-toolbar--fixed {
+        padding-top: 0;
+    }
+    .mdc-toolbar-fixed-adjust {
+        padding-top: $spacing-unit*8.5;
+    }
+}
+
 @media screen and (max-width: 991px) {
     .mdc-toolbar {
         .container-fluid .mdc-toolbar__icon--menu {
@@ -1164,6 +1172,9 @@ footer {
         #upper-tab-bar,
         .mdc-toolbar__row.toolbar-nav {
             display: none;
+        }
+        .mdc-toolbar__row .container-fluid .mdc-toolbar__search {
+            bottom: 0;
         }
     }
     .latest-content {
@@ -1203,5 +1214,12 @@ footer {
     }
     .breadcrumbs {
         font-size: 85%;
+    }
+}
+
+@media screen and (max-width: 376px) {
+    .mdc-toolbar__title {
+        width: 38px;
+        overflow: hidden;
     }
 }
