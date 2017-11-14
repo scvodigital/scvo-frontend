@@ -1,0 +1,33 @@
+{
+	"size": 100,
+    "_source": [
+        "rendered.card"
+    ],
+	"query": {
+		"bool": {
+			"must": [
+				{
+					"term": {
+                        "is_active": true
+                    }
+				}
+            ],
+            "should": [
+                {
+                    "term": {
+                        "department_slug": "digital"
+                    }
+                },
+                {
+                    "term": {
+                        "job_title": "Director of Digital"
+                    }
+                }
+			],
+            "minimum_should_match": 1
+        }
+	},
+    "sort": {
+        "name_last": "asc"
+    }
+}

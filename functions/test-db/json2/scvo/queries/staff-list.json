@@ -14,13 +14,17 @@
                 {{#ifAny query.city query.department}},{{/ifAny}}
                 {{#if query.city}}
                     {
-                        "term": { "city_slug": "{{query.city}}" }
+                        "term": {
+                            "city_slug": "{{query.city}}"
+                        }
                     }
                     {{#ifAny query.department}},{{/ifAny}}
                 {{/if}}
                 {{#if query.department}}
                     {
-                        "term": { "department_slug": "{{query.department}}" }
+                        "term": {
+                            "department_slug": "{{query.department}}"
+                        }
                     }
                 {{/if}}
 			]
@@ -42,7 +46,9 @@
     						"name_last": "asc"
     					},
     					"_source": {
-    						"includes": [ "rendered.list" ]
+    						"includes": [
+                                "rendered.list"
+                            ]
     					}
                     }
 				}
