@@ -111,10 +111,10 @@ $nav-height: 2.5rem;
     --mdc-theme-primary-dark: #145ea8;
 }
 .digital {
-    --mdc-theme-primary: #0063AF;
-    --mdc-theme-primary-fade: rgba(0, 99, 175, 0.89);
-    --mdc-theme-primary-light: #0063AF;
-    --mdc-theme-primary-dark: #004f8c;
+    --mdc-theme-primary: #1976d2;
+    --mdc-theme-primary-fade: rgba(13, 71, 161, 0.89);
+    --mdc-theme-primary-light: #1976D2;
+    --mdc-theme-primary-dark: #0D47A1;
 }
 
 html {
@@ -503,6 +503,7 @@ a:hover {
     padding: $spacing-unit*9.5 0 $spacing-unit*2;
     margin: 0;
 }
+.setting-up-a-charity .mdc-toolbar-fixed-adjust,
 .home .mdc-toolbar-fixed-adjust {
     padding-bottom: 0;
 }
@@ -583,21 +584,40 @@ a:hover {
     border-top: 1px solid #dddddd;
 }
 
+.setting-up-a-charity .footer-image {
+    position: relative;
+    background-size: cover;
+    background-position: center center;
+    background-image: linear-gradient(var(--mdc-theme-primary-fade), var(--mdc-theme-primary-fade)),url('https://storage.googleapis.com/scvo-cms/wp-content/uploads/2017/10/Drake-Music-06.jpg');
+    text-align: center;
+    color: white;
+    padding: $spacing-unit $spacing-unit*2.5;
+    h3 {
+        font-weight: 800;
+        padding-bottom: $spacing-unit/2;
+    }
+    .mdc-button {
+        color: white;
+        border: 2px solid white;
+        margin-top: $spacing-unit;
+    }
+}
 .splash-image {
     position: relative;
     background-size: cover;
     height: 25vh;
     min-height: $spacing-unit*9;
     background-position: center center;
-    padding-bottom: $spacing-unit;
+    // padding-bottom: $spacing-unit;
     .container-fluid {
         position: relative;
         height: 100%;
         padding: 0;
         .mdc-layout-grid {
             position: absolute;
-            left: 0;
-            bottom: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 44%;
         }
     }
     img.header-text {
@@ -608,10 +628,10 @@ a:hover {
     h1.header-text {
         margin: 0;
         color: #fff;
+        font-weight: 800;
         font-size: 3rem;
-        font-weight: 400;
-        letter-spacing: -0.08rem;
         line-height: $spacing-unit*3;
+        letter-spacing: -0.08rem;
         margin-bottom: $spacing-unit/2;
         .mdc-typography--caption {
             font-size: 1.2rem;
@@ -624,18 +644,18 @@ a:hover {
     }
 }
 .splash-image-scvo-event h1.header-text,
-.splash-image-scvo-cms-post:not(.post.author) h1.header-text,
+.splash-image-scvo-cms-post h1.header-text,
 .splash-image-scvo-document-general h1.header-text,
 .splash-image-scvo-document-evidence h1.header-text {
-    padding-left: 0.75rem;
     font-size: 2rem;
-    line-height: 3rem;
-    .header-text-banner {
-        display: inline;
-        background: rgba(0,0,0,0.3);
-        padding: 0 0 0.3rem 0;
-        box-shadow: 0.75rem 0 0 rgba(0,0,0,0.3), -0.75rem 0 0 rgba(0,0,0,0.3);
-    }
+    line-height: 2rem;
+    // padding-left: 0.75rem;
+    // .header-text-banner {
+    //     display: inline;
+    //     background: rgba(0,0,0,0.3);
+    //     padding: 0 0 0.3rem 0;
+    //     box-shadow: 0.75rem 0 0 rgba(0,0,0,0.3), -0.75rem 0 0 rgba(0,0,0,0.3);
+    // }
 }
 .credit-union .splash-image {
     min-height: $spacing-unit*11;
@@ -927,21 +947,21 @@ hr {
 }
 
 ul.breadcrumbs {
-    margin: 0;
-    padding: 0;
+    margin: 0 0 $spacing-unit/2;
+    padding: 0 0 $spacing-unit/2;
     height: $nav-height;
     line-height: $nav-height;
     list-style: none;
-    border-bottom: 1px solid white;
+    border-bottom: 1px solid var(--mdc-theme-primary-fade);
     li {
         display: inline-block;
         margin: 0;
         padding: 0;
-        color: white;
-        a,
-        a:hover {
-            color: white;
-        }
+        // color: white;
+        // a,
+        // a:hover {
+        //     color: white;
+        // }
     }
     li:before {
         content: "\203A";
@@ -950,7 +970,7 @@ ul.breadcrumbs {
         width: $spacing-unit/2;
         display: inline-block;
         padding: 0;
-        color: white;
+        // color: white;
     }
     li.pull-right:before,
     li:first-child:before {

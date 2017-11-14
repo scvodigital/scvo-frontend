@@ -1,10 +1,5 @@
 <div class="splash-image {{> header_splash}}">
     <div class="container-fluid">
-        <ul class="breadcrumbs">
-            <li><a href="/">Home</a></li>
-            <li><a href="/policy-research">Policy &amp; research</a></li>
-        </ul>
-
         <div class="mdc-layout-grid">
             {{#if primaryResponse.hits.hits.[0]._source.header_text}}
             <img src="{{primaryResponse.hits.hits.[0]._source.header_text}}" alt="{{primaryResponse.hits.hits.[0]._source.title}}" class="header-text" />
@@ -20,6 +15,11 @@
 </div>
 
 <div class="container-fluid">
+    <ul class="breadcrumbs">
+        <li><a href="/">SCVO</a></li>
+        <li><a href="/policy-research">Policy &amp; research</a></li>
+    </ul>
+
     <div class="mdc-layout-grid">
         <div class="mdc-layout-grid__inner">
             <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3 sidebar library-sidebar">
