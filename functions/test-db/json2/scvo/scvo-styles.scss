@@ -265,6 +265,7 @@ a:hover {
     a.thumbnail:after {
         content: "" !important;
         display: none !important;
+        margin: 0;
     }
     .thumbnail {
         margin-top: $spacing-unit/2;
@@ -908,6 +909,7 @@ h1.mdc-typography--title {
         li::before {
             content: "";
             padding: 0;
+            margin: 0;
             font-size: unset;
         }
     }
@@ -954,11 +956,12 @@ ul.breadcrumbs {
     li:first-child:before {
         content: "" !important;
         font-weight: 800;
-        margin-right: 0 !important;
+        margin: 0 !important;
         width: 0 !important;
     }
     li.pull-right a::after {
         content: "";
+        margin: 0;
     }
     li:not(:last-child) {
         margin-right: $spacing-unit/4;
@@ -971,6 +974,7 @@ ul.breadcrumbs {
     .mdc-layout-grid__cell--span-3-desktop {
         a:after {
             content: "" !important;
+            margin: 0;
             display: none;
         }
     }
@@ -1331,6 +1335,12 @@ footer {
     .mdc-toolbar-fixed-adjust {
         padding-top: $spacing-unit*4;
     }
+    .pagination-distance-9,
+    .pagination-distance-8,
+    .pagination-distance-7,
+    .pagination-distance-6 {
+        display: none !important;
+    }
 }
 
 @media screen and (max-width: 839px) {
@@ -1341,11 +1351,23 @@ footer {
     .breadcrumbs {
         font-size: 85%;
     }
+    .pagination-distance-5 {
+        display: none !important;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .pagination-distance-4 {
+        display: none !important;
+    }
 }
 
 @media screen and (max-width: 376px) {
     .mdc-toolbar__title {
         width: 38px;
         overflow: hidden;
+    }
+    .pagination-distance-3 {
+        display: none !important;
     }
 }
