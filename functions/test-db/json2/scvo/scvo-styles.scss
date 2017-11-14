@@ -797,6 +797,32 @@ a:hover {
     }
 }
 
+.page-content {
+    ul {
+        padding-left: 0;
+        li {
+            list-style: none;
+        }
+        li::before {
+            color: var(--mdc-theme-primary);
+            content: "\25A0";
+            font-size: 1rem;
+            padding-right: 0.75rem;
+            position: relative;
+            top: 0em;
+        }
+    }
+    .mdc-card__actions ul,
+    ul.supplimentary-list,
+    ul.inline-list {
+        li::before {
+            content: "";
+            padding: 0;
+            font-size: unset;
+        }
+    }
+}
+
 hr {
     margin: $spacing-unit 0;
     height: 1px;
@@ -828,6 +854,7 @@ ul.breadcrumbs {
         margin-right: $spacing-unit/4;
         width: $spacing-unit/2;
         display: inline-block;
+        padding: 0;
         color: white;
     }
     li.pull-right:before,
