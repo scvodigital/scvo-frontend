@@ -71,7 +71,7 @@ export class RouterComponent implements OnInit {
         console.log('Multiple results:', match.multipleResults);
 
         // Rendered content
-        this.html = match.rendered
+        var html = match.rendered
             .replace(this.router.domainStripper, '')
             .replace(/(href=\"|\')(\/.*?)(\"|\')/gi, (m, p1, p2, p3) => {
                 var parts = p2.split('?');
@@ -94,6 +94,9 @@ export class RouterComponent implements OnInit {
                 return replaceString;
             })
             .replace(/(\<\/?big\>)|(\<\/?small\>)/g, '');
+
+        console.log('HTML:', html);
+        this.html = html;
 
         setTimeout(() => {
             mdc.autoInit();
