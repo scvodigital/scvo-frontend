@@ -1,5 +1,3 @@
-console.log('I\'M JAVASCRIPT.JS');
-
 mdc.textField.MDCTextField.attachTo(document.querySelector('.mdc-text-field'));
 var drawerEl = document.querySelector('.mdc-temporary-drawer');
 var drawer = mdc.drawer.MDCTemporaryDrawer.attachTo(drawerEl);
