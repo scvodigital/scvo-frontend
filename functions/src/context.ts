@@ -6,6 +6,7 @@ import * as admin from 'firebase-admin';
 import * as handlebars from 'handlebars';
 import * as helpers from 'handlebars-helpers';
 import * as sass from 'node-sass';
+import * as uglify from 'uglify-js';
 import { IContext, ILinkTag, IMetaTag, IScriptTag, IMenus, IRoutes, Router, IRouteMatch, MenuProcessor, IPartials } from 'scvo-router';
 
 helpers({ handlebars: handlebars });
@@ -24,6 +25,7 @@ export class Context implements IContext {
     menuProcessor: MenuProcessor = null;
     templatePartials: IPartials = {};
     uaId: string = '';
+    javascript: string = '';
 
     _domainStripper: RegExp = null;
     get domainStripper(): RegExp {
@@ -79,8 +81,6 @@ export class Context implements IContext {
 
             this.router.execute(uriString).then((routeMatch: IRouteMatch) => {
                 var templateData = {
-                    linkTags: this.linkTags,
-                    metaTags: this.metaTags,
                     metaData: this.metaData,
                     scriptTags: this.scriptTags,
                     domains: this.domains,
@@ -88,7 +88,6 @@ export class Context implements IContext {
                     css: this.compiledCss,
                     routes: this.routes,
                     route: routeMatch,
-                    headerTags: this.getHeaderTags(routeMatch),
                     uaId: this.uaId,
                     templatePartials: this.templatePartials,
                 };
@@ -99,12 +98,19 @@ export class Context implements IContext {
                 if(closingHeadTag > -1){
                     var dataJson = JSON.stringify(templateData, null, 4);
                     dataJson = dataJson.replace(/\<\/script/ig, '</scr" + "ipt');
-                    var dataTag = `
+                    var headerTags = this.getHeaderTags(routeMatch);
+                    var tags = `
                         <script>
                             window.contextData = ${dataJson};
                         </script>
+                        ${headerTags}
+                        <script>
+                            document.addEventListener("DOMContentLoaded", function(event) {
+                                ${this.javascript}
+                            });
+                        </script>
                     `;
-                    contextHtml = [contextHtml.slice(0, closingHeadTag), dataTag, contextHtml.slice(closingHeadTag)].join('');
+                    contextHtml = [contextHtml.slice(0, closingHeadTag), tags, contextHtml.slice(closingHeadTag)].join('');
                 }
 
                 contextHtml = contextHtml.replace(this.domainStripper, '');
