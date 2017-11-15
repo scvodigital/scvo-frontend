@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 
+import * as querystring from 'querystring';
 import { Observable, Subject } from 'rxjs/Rx';
 import { CookieService } from 'ngx-cookie';
 
@@ -55,5 +56,31 @@ export class RouterService {
                 });
             }
         });
+    }
+    
+    cleanHtml(html: string, paramsQuery: any = {}, multipleResults: boolean = false): string {
+        html = html
+            .replace(this.domainStripper, '')
+            .replace(/(href=\"|\')(\/.*?)(\"|\')/gi, (m, p1, p2, p3) => {
+                var parts = p2.split('?');
+                var url = parts[0];
+                var replaceString = `[routerLink]="'${url}'"`;
+
+                var query = parts.length > 1 ? querystring.parse(parts[1]) : {};
+                if (multipleResults) {
+                    var combined = {};
+                    Object.assign(combined, paramsQuery, query);
+                    query = combined;
+                }
+                if (Object.keys(query).length > 0) {
+                    var queryJson = JSON.stringify(query);
+                    replaceString += ` [queryParams]='${queryJson}'`;
+                }
+
+                return replaceString;
+            })
+            .replace(/(\<\/?big\>)|(\<\/?small\>)/g, '');
+        console.log('HTML:', html);
+        return html;
     }
 }
