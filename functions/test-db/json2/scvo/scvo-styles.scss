@@ -95,6 +95,7 @@ $nav-height: 2.5rem;
     --mdc-theme-primary-light: #6FB744;
     --mdc-theme-primary-dark: #6FB744;
 }
+.page-content,
 .home .cta-content,
 .home .latest-content,
 .home .gist.tfn-post,
@@ -591,15 +592,17 @@ a:hover {
     background-image: linear-gradient(var(--mdc-theme-primary-fade), var(--mdc-theme-primary-fade)),url('https://storage.googleapis.com/scvo-cms/wp-content/uploads/2017/10/Drake-Music-06.jpg');
     text-align: center;
     color: white;
-    padding: $spacing-unit $spacing-unit*2.5;
+    padding: $spacing-unit 0 $spacing-unit*2.5;
     h3 {
         font-weight: 800;
-        padding-bottom: $spacing-unit/2;
+        padding-bottom: $spacing-unit;
     }
     .mdc-button {
         color: white;
         border: 2px solid white;
         margin-top: $spacing-unit;
+        text-transform: none;
+        background: transparent;
     }
 }
 .splash-image {
@@ -633,14 +636,28 @@ a:hover {
         line-height: $spacing-unit*3;
         letter-spacing: -0.08rem;
         margin-bottom: $spacing-unit/2;
-        .mdc-typography--caption {
-            font-size: 1.2rem;
-        }
         .photo-wee {
             max-height: 45px;
             max-width: 45px;
             vertical-align: bottom;
+            margin-right: $spacing-unit;
+            float: left;
         }
+        .mdc-typography--caption {
+            font-size: 1.2rem;
+            margin-top: -$spacing-unit/10;
+            display: block;
+        }
+    }
+    p.header-extra {
+        font-weight: 600;
+        color: white;
+        font-size: 1.1rem;
+        padding: $spacing-unit 0;
+    }
+    .mdc-button {
+        text-transform: none;
+        border: 2px solid white;
     }
 }
 .splash-image-scvo-event h1.header-text,
@@ -656,6 +673,19 @@ a:hover {
     //     padding: 0 0 0.3rem 0;
     //     box-shadow: 0.75rem 0 0 rgba(0,0,0,0.3), -0.75rem 0 0 rgba(0,0,0,0.3);
     // }
+}
+.home {
+    .splash-image {
+        height: 300px;
+        .mdc-layout-grid {
+            margin-left: 5%;
+            width: 39%;
+        }
+        h1.header-text {
+            font-size: 5rem;
+            line-height: 4rem;
+        }
+    }
 }
 .credit-union .splash-image {
     min-height: $spacing-unit*11;
@@ -908,7 +938,7 @@ h1.mdc-typography--title {
     }
 }
 
-.page-content {
+.container-content {
     ul {
         padding-left: 0;
         li {
