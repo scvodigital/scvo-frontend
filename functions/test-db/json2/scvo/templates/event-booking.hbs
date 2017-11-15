@@ -1,34 +1,34 @@
-<div class="splash-image {{> header_splash}}">
-    <div class="container-fluid">
-        <div class="mdc-layout-grid">
-            {{#if primaryResponse.hits.hits.[0]._source.header_text}}
-            <img src="{{primaryResponse.hits.hits.[0]._source.header_text}}" alt="{{primaryResponse.hits.hits.[0]._source.title}}" class="header-text" />
-            {{else}}
-            <h1 class="header-text">
-                <span class="header-text-banner">
-                    Booking: {{{primaryResponse.hits.hits.[0]._source.title}}}
-                </span>
-            </h1>
-            {{/if}}
-        </div>
-    </div>
-</div>
-
-{{#with primaryResponse.hits.hits.[0]._source}}
-<div class="container-fluid">
-    <ul class="breadcrumbs">
-        <li><a href="/">SCVO</a></li>
-        <li><a href="/services">Services</a></li>
-        <li><a href="/services/events">Events</a></li>
-        <li><a href="/services/events/{{slug}}">{{{title}}}</a></li>
-    </ul>
-
-    <div class="mdc-layout-grid">
-        <div class="mdc-layout-grid__inner">
-            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 content event-content">
-                <iframe src="https://www.surveygizmo.eu/s3/90055302/Events-Booking-Training-Events?sfid={{Id}}&title={{title}}" frameborder="0" width="100%" height="400" style="overflow:hidden"></iframe>
+<div class="event event-booking">
+    <div class="splash-image {{> header_splash}}">
+        <div class="container-fluid">
+            <div class="mdc-layout-grid">
+                {{#if primaryResponse.hits.hits.[0]._source.header_text}}
+                <img src="{{primaryResponse.hits.hits.[0]._source.header_text}}" alt="{{primaryResponse.hits.hits.[0]._source.title}}" class="header-text" />
+                {{else}}
+                <h1 class="header-text">
+                    <span class="header-text-banner">
+                        Booking: {{{primaryResponse.hits.hits.[0]._source.title}}}
+                    </span>
+                </h1>
+                {{/if}}
             </div>
         </div>
     </div>
+    {{#with primaryResponse.hits.hits.[0]._source}}
+    <div class="container-fluid">
+        <ul class="breadcrumbs">
+            <li><a href="/">SCVO</a></li>
+            <li><a href="/services">Services</a></li>
+            <li><a href="/services/events">Events</a></li>
+            <li><a href="/services/events/{{slug}}">{{{title}}}</a></li>
+        </ul>
+        <div class="mdc-layout-grid">
+            <div class="mdc-layout-grid__inner">
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 content event-content">
+                    <iframe src="https://www.surveygizmo.eu/s3/90055302/Events-Booking-Training-Events?sfid={{Id}}&title={{title}}" frameborder="0" width="100%" height="400" style="overflow:hidden"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{/with}}
 </div>
-{{/with}}

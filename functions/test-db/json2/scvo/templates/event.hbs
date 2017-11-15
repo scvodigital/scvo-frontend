@@ -1,39 +1,38 @@
-<div class="splash-image {{> header_splash}}">
-    <div class="container-fluid">
-        <div class="mdc-layout-grid">
-            {{#if primaryResponse.hits.hits.[0]._source.header_text}}
-            <img src="{{primaryResponse.hits.hits.[0]._source.header_text}}" alt="{{primaryResponse.hits.hits.[0]._source.title}}" class="header-text" />
-            {{else}}
-            <h1 class="header-text">
-                <span class="header-text-banner">
-                    {{{primaryResponse.hits.hits.[0]._source.title}}}
-                </span>
-            </h1>
-            {{/if}}
+<div class="event">
+    <div class="splash-image {{> header_splash}}">
+        <div class="container-fluid">
+            <div class="mdc-layout-grid">
+                {{#if primaryResponse.hits.hits.[0]._source.header_text}}
+                <img src="{{primaryResponse.hits.hits.[0]._source.header_text}}" alt="{{primaryResponse.hits.hits.[0]._source.title}}" class="header-text" />
+                {{else}}
+                <h1 class="header-text">
+                    <span class="header-text-banner">
+                        {{{primaryResponse.hits.hits.[0]._source.title}}}
+                    </span>
+                </h1>
+                {{/if}}
+            </div>
         </div>
     </div>
-</div>
-
-<div class="container-fluid">
-    <ul class="breadcrumbs">
-        <li><a href="/">SCVO</a></li>
-        <li><a href="/services">Services</a></li>
-        <li><a href="/services/events">Events</a></li>
-    </ul>
-
-    <div class="mdc-layout-grid">
-        {{{primaryResponse.hits.hits.[0]._source.rendered.full}}}
-
-        <div class="mdc-layout-grid__inner">
-            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
-                {{#if supplimentaryResponses.related_events.hits.hits}}
-                <h2 class="author">Similar events</h2>
-                <ul class="supplimentary-list">
-                    {{#each supplimentaryResponses.related_events.hits.hits}}
-                    {{{_source.rendered.list}}}
-                    {{/each}}
-                </ul>
-                {{/if}}
+    <div class="container-fluid">
+        <ul class="breadcrumbs">
+            <li><a href="/">SCVO</a></li>
+            <li><a href="/services">Services</a></li>
+            <li><a href="/services/events">Events</a></li>
+        </ul>
+        <div class="mdc-layout-grid">
+            {{{primaryResponse.hits.hits.[0]._source.rendered.full}}}
+            <div class="mdc-layout-grid__inner">
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
+                    {{#if supplimentaryResponses.related_events.hits.hits}}
+                    <h2 class="author">Similar events</h2>
+                    <ul class="supplimentary-list">
+                        {{#each supplimentaryResponses.related_events.hits.hits}}
+                        {{{_source.rendered.list}}}
+                        {{/each}}
+                    </ul>
+                    {{/if}}
+                </div>
             </div>
         </div>
     </div>
