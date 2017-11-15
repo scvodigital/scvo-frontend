@@ -1,11 +1,16 @@
 console.log('I\'M JAVASCRIPT.JS');
 
-var drawerEl = document.querySelector('#menu_drawer');
-var MDCTemporaryDrawer = mdc.drawer.MDCTemporaryDrawer;
-var drawer = new MDCTemporaryDrawer(drawerEl);
+mdc.textField.MDCTextField.attachTo(document.querySelector('.mdc-text-field'));
+var drawerEl = document.querySelector('.mdc-temporary-drawer');
+var drawer = mdc.drawer.MDCTemporaryDrawer.attachTo(drawerEl);
+console.log('DRAWER:', drawer);
+document.querySelector('#menu_button').addEventListener('click', function() {
+    drawer.open = true;
+});
 drawerEl.addEventListener('MDCTemporaryDrawer:open', function() {
     console.log('Received MDCTemporaryDrawer:open');
 });
 drawerEl.addEventListener('MDCTemporaryDrawer:close', function() {
     console.log('Received MDCTemporaryDrawer:close');
 });
+

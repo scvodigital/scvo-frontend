@@ -38,7 +38,7 @@
                 <div class="mdc-toolbar__row">
                     <div class="container-fluid">
                         <section class="mdc-toolbar__section mdc-toolbar__section--align-start">
-                            <button class="menu mdc-toolbar__icon mdc-toolbar__icon--menu" onclick="document.querySelector('#menu_draw').MDCTemporaryDrawer.open = true">
+                            <button class="menu mdc-toolbar__icon mdc-toolbar__icon--menu" id="menu_button">
                                 <span class="fa fa-2x fa-bars" aria-hidden="true"></span>
                             </button>
                             <span class="mdc-toolbar__title catalog-title">
@@ -54,8 +54,8 @@
                                 {{/each}}
                             </nav>
                             <form [searchroute]="'main_search'" class="mdc-form-field mdc-form-field--align-end">
-                                <div class="mdc-textfield" data-mdc-auto-init="MDCTextField">
-                                    <input type="text" class="mdc-textfield__input white-text searchRoute" placeholder="Search" id="q" name="q">
+                                <div class="mdc-textfield">
+                                    <input type="text" class="mdc-textfield__input white-text mdc-text-field searchRoute" placeholder="Search" id="q" name="q">
                                 </div>
                                 <button type="submit" class="mdc-toolbar__icon mdc-toolbar__search" aria-label="Search" alt="Search">
                                     <span class="fa fa-search" aria-hidden="true"></span>
@@ -69,7 +69,6 @@
                         <section class="mdc-toolbar__section mdc-toolbar__section--align-start toolbar-menu">
                             <nav id="main-tab-bar" class="mdc-tab-bar">
                                 {{#each menus.main}}
-
                                 <a class="mdc-tab" href="{{path}}">{{{label}}} {{route.params.path.[0]}}</a>
                                 {{/each}}
                             </nav>
@@ -78,7 +77,7 @@
                 </div>
             </header>
 
-            <aside class="mdc-temporary-drawer" id="menu_draw" data-mdc-auto-init="MDCTemporaryDrawer">
+            <aside class="mdc-temporary-drawer" id="menu_draw">
                 <nav class="mdc-temporary-drawer__drawer">
                     <header class="mdc-temporary-drawer__header">
                         <div class="mdc-temporary-drawer__header-content mdc-theme--primary-bg mdc-theme--text-primary-on-primary">
