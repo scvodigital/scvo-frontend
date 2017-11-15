@@ -1,72 +1,79 @@
-<div class="splash-image {{> header_splash}}">
-    <div class="container-fluid">
-        <div class="mdc-layout-grid">
-            {{#if primaryResponse.hits.hits.[0]._source.header_text}}
-            <img src="{{primaryResponse.hits.hits.[0]._source.header_text}}" alt="{{primaryResponse.hits.hits.[0]._source.title}}" class="header-text" />
-            {{else}}
-            <h1 class="header-text">
-                <span class="header-text-banner">
-                    {{{primaryResponse.hits.hits.[0]._source.title}}}
-                </span>
-            </h1>
-            {{/if}}
-        </div>
-    </div>
-</div>
-
-<div class="container-fluid">
-    {{> breadcrumbs_posts}}
-
-    <div class="mdc-layout-grid">
-        <div class="mdc-layout-grid__inner">
-            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-8 content post-content">
-                {{#with primaryResponse.hits.hits.[0]._source}}
-                {{{rendered.full}}}
-                {{/with}}
-            </div>
-            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 sidebar post-sidebar">
-                {{#if primaryResponse.hits.hits.[0]._source.categories}}
-                {{#compare primaryResponse.hits.hits.[0]._source.categories.[0] "!==" 'Press releases'}}
-                <div class="author_about">
-                    {{#if supplimentaryResponses.staff_profile.hits.hits.[0]}}
-                    {{{supplimentaryResponses.staff_profile.hits.hits.[0]._source.rendered.scvo_profile}}}
-                    {{else}}
-                    {{{supplimentaryResponses.author_profile.hits.hits.[0]._source.rendered.scvo_profile}}}
-                    {{/if}}
-                </div>
-                {{#compare supplimentaryResponses.authors_posts.hits.total ">" 0}}
-                {{#compare supplimentaryResponses.staff_profile.hits.total ">" 0}}
-                <h3 class="author">More posts by {{primaryResponse.hits.hits.[0]._source.author_name_full}}</h3>
-                {{/compare}}
-                <ul class="supplimentary-list">
-                    {{#each supplimentaryResponses.authors_posts.hits.hits}}
-                    {{{_source.rendered.sidebar}}}
-                    {{/each}}
-                </ul>
+<div class="post">
+    <div class="splash-image {{> header_splash}}">
+        <div class="container-fluid">
+            <div class="mdc-layout-grid">
+                {{#if primaryResponse.hits.hits.[0]._source.header_text}}
+                <img src="{{primaryResponse.hits.hits.[0]._source.header_text}}" alt="{{primaryResponse.hits.hits.[0]._source.title}}" class="header-text" />
                 {{else}}
-                <ul class="supplimentary-list">
-                    {{#each supplimentaryResponses.category_posts.hits.hits}}
-                    {{{_source.rendered.sidebar}}}
-                    {{/each}}
-                </ul>
-                {{/compare}}
-                {{/compare}}
+                <h1 class="header-text">
+                    <span class="header-text-banner">
+                        {{{primaryResponse.hits.hits.[0]._source.title}}}
+                    </span>
+                </h1>
                 {{/if}}
             </div>
-            {{#compare supplimentaryResponses.tfn_related_posts.hits.total ">" 0}}
-            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 related post-related">
-                <div class="mdc-layout-grid">
-                    <div class="mdc-layout-grid__inner">
-                        {{#each supplimentaryResponses.tfn_related_posts.hits.hits}}
-                        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4">
-                            {{{_source.rendered.gist}}}
-                        </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        {{> breadcrumbs_posts}}
+        <div class="mdc-layout-grid">
+            <div class="mdc-layout-grid__inner">
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-8 content post-content">
+                    {{#with primaryResponse.hits.hits.[0]._source}}
+                    {{{rendered.full}}}
+                    {{/with}}
+                </div>
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 sidebar post-sidebar">
+                    {{#if primaryResponse.hits.hits.[0]._source.is_press_release}}
+                    <ul class="supplimentary-list">
+                        {{#each supplimentaryResponses.category_posts.hits.hits}}
+                        {{{_source.rendered.sidebar}}}
                         {{/each}}
+                    </ul>
+                    {{else}}
+                    {{#if primaryResponse.hits.hits.[0]._source.categories}}
+                    {{#compare primaryResponse.hits.hits.[0]._source.categories.[0] "!==" 'Press releases'}}
+                    <div class="author_about">
+                        {{#if supplimentaryResponses.staff_profile.hits.hits.[0]}}
+                        {{{supplimentaryResponses.staff_profile.hits.hits.[0]._source.rendered.scvo_profile}}}
+                        {{else}}
+                        {{{supplimentaryResponses.author_profile.hits.hits.[0]._source.rendered.scvo_profile}}}
+                        {{/if}}
+                    </div>
+                    {{#compare supplimentaryResponses.authors_posts.hits.total ">" 0}}
+                    {{#compare supplimentaryResponses.staff_profile.hits.total ">" 0}}
+                    <h3 class="author">More posts by {{primaryResponse.hits.hits.[0]._source.author_name_full}}</h3>
+                    {{/compare}}
+                    <ul class="supplimentary-list">
+                        {{#each supplimentaryResponses.authors_posts.hits.hits}}
+                        {{{_source.rendered.sidebar}}}
+                        {{/each}}
+                    </ul>
+                    {{else}}
+                    <ul class="supplimentary-list">
+                        {{#each supplimentaryResponses.category_posts.hits.hits}}
+                        {{{_source.rendered.sidebar}}}
+                        {{/each}}
+                    </ul>
+                    {{/compare}}
+                    {{/compare}}
+                    {{/if}}
+                    {{/if}}
+                </div>
+                {{#compare supplimentaryResponses.tfn_related_posts.hits.total ">" 0}}
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 related post-related">
+                    <div class="mdc-layout-grid">
+                        <div class="mdc-layout-grid__inner">
+                            {{#each supplimentaryResponses.tfn_related_posts.hits.hits}}
+                            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4">
+                                {{{_source.rendered.gist}}}
+                            </div>
+                            {{/each}}
+                        </div>
                     </div>
                 </div>
+                {{/compare}}
             </div>
-            {{/compare}}
         </div>
     </div>
 </div>
-<script id="dsq-count-scr" src="//scottish-council-for-voluntary-organisations.disqus.com/count.js" async></script>

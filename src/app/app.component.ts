@@ -2,6 +2,7 @@ import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
 import { SearchBoxDirective } from './directives/search-box.directive';
+import { RouterService } from './services/router.service';
 import { LazyModule } from './lazy.module';
 
 declare var mdc: any;
@@ -19,7 +20,7 @@ export class AppComponent implements OnInit {
         return this.viewChild.nativeElement.nextElementSibling;
     }
 
-    constructor(){
+    constructor(private router: RouterService){
         window.addEventListener("message", (event) => {
             if (event.data.hasOwnProperty('event')) {
                 /*
@@ -41,9 +42,8 @@ export class AppComponent implements OnInit {
             }
         }, false);
 
-        this.html = (<any>window).startingPoint
-            .replace(/(href=\"|\')(\/.*?)(\"|\')/gi, '[routerLink]="[\'$2\']"')
-            .replace(/(\<\/?big\>)|(\<\/?small\>)/g, '');
+        var html = (<any>window).startingPoint; 
+        this.html = this.router.cleanHtml(html, this.router.currentRoute.params, this.router.currentRoute.multipleResults);
 
         setTimeout(() => {
             this.componentSetup();

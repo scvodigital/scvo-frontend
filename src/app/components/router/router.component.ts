@@ -68,32 +68,8 @@ export class RouterComponent implements OnInit {
             bodyClasses.add('home');
         }
 
-        console.log('Multiple results:', match.multipleResults);
-
         // Rendered content
-        this.html = match.rendered
-            .replace(this.router.domainStripper, '')
-            .replace(/(href=\"|\')(\/.*?)(\"|\')/gi, (m, p1, p2, p3) => {
-                var parts = p2.split('?');
-                var url = parts[0];
-                var replaceString = `[routerLink]="'${url}'"`;
-
-                var query = parts.length > 1 ? querystring.parse(parts[1]) : {};
-                if (match.multipleResults) {
-                    console.log('Multiple results before, query:', query, '| params:', match.params);
-                    var combined = {};
-                    Object.assign(combined, match.params.query, query);
-                    query = combined;
-                    console.log('Multiple results after, query:', query);
-                }
-                if (Object.keys(query).length > 0) {
-                    var queryJson = JSON.stringify(query);
-                    replaceString += ` [queryParams]='${queryJson}'`;
-                }
-
-                return replaceString;
-            })
-            .replace(/(\<\/?big\>)|(\<\/?small\>)/g, '');
+        this.html = this.router.cleanHtml(match.rendered, match.params.query, match.multipleResults);
 
         setTimeout(() => {
             mdc.autoInit();

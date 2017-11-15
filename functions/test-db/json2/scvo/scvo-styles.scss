@@ -1,5 +1,5 @@
-@import url(https://cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css);
-@import url(//fonts.googleapis.com/css?family=Open+Sans:400,600,700);
+@import url('//cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css');
+@import url('//fonts.googleapis.com/css?family=Open+Sans:400,600,700');
 
 $spacing-unit: 1rem;
 $nav-height: 2.5rem;
@@ -137,6 +137,7 @@ body {
 main {
     background-color: white;
 }
+.scvo-cms-page-21696 .page-info,
 .container-fluid {
     max-width: 1280px;
     width: 95%;
@@ -530,6 +531,18 @@ a:hover {
     }
 }
 
+// Grid Cards ==================================================================
+
+.mdc-layout-grid.equal-height .mdc-layout-grid__cell {
+    display: flex;
+    .mdc-card {
+        justify-content: start;
+        .mdc-card__supporting-text {
+            flex: 1 0 auto;
+        }
+    }
+}
+
 // Pagination ==================================================================
 
 .pagination {
@@ -537,6 +550,7 @@ a:hover {
     display: block !important;
     padding-top: $spacing-unit !important;
     li {
+        padding: 0 !important;
         height: $spacing-unit*2;
         width: $spacing-unit*2;
         border-radius: 50%;
@@ -610,6 +624,21 @@ a:hover {
         background: transparent;
     }
 }
+.digital .callout-image {
+    position: relative;
+    background-size: cover;
+    background-position: center center;
+    background-image: linear-gradient(var(--mdc-theme-primary-fade), var(--mdc-theme-primary-fade)),url('https://storage.googleapis.com/scvo-cms/wp-content/uploads/2017/11/Dunaverty-Hall.jpg');
+    color: white;
+    padding: $spacing-unit*1.5 0 $spacing-unit*1.5;
+    margin: $spacing-unit 0;
+    .mdc-card__actions a,
+    .mdc-card__supporting-text,
+    .mdc-card__supporting-text a,
+    .mdc-card__title {
+        color: white;
+    }
+}
 .splash-image {
     position: relative;
     background-size: cover;
@@ -642,10 +671,10 @@ a:hover {
         letter-spacing: -0.08rem;
         margin-bottom: $spacing-unit/2;
         .photo-wee {
-            max-height: 45px;
-            max-width: 45px;
+            max-height: 64px;
+            max-width: 64px;
             vertical-align: bottom;
-            margin: $spacing-unit/3 0 $spacing-unit*2 $spacing-unit;
+            margin: -$spacing-unit/5 $spacing-unit $spacing-unit 0;
             float: left;
         }
         .mdc-typography--caption {
@@ -699,6 +728,8 @@ a:hover {
         max-height: $spacing-unit*6;
     }
 }
+.projects-campaigns .breadcrumbs-length-0,
+.services .breadcrumbs-length-0,
 .digital.participation.projects .page-info,
 .blogs .page-sidebar .page-info,
 .press-media .sidebar h3.blogs {
@@ -753,9 +784,11 @@ h1.mdc-typography--title {
         }
     }
     .mdc-card__media {
-        height: 64px;
+        height: 80px;
+        padding: $spacing-unit*(3/4) $spacing-unit;
         background-size: contain;
         background-repeat: no-repeat;
+        background-origin: content-box;
         background-color: var(--mdc-theme-primary);
         a {
             color: var(--mdc-theme-primary-dark);
@@ -804,13 +837,13 @@ h1.mdc-typography--title {
             color: var(--mdc-theme-primary-dark);
         }
     }
-    .digital .mdc-card__media {
+    .project-digital .mdc-card__media {
         background-image: url('https://storage.cloud.google.com/scvo-cms/scvo-cms-content/images/banners/digital.png');
     }
-    .open-government .mdc-card__media {
+    .project-open-government .mdc-card__media {
         background-image: url('https://storage.cloud.google.com/scvo-cms/scvo-cms-content/images/banners/open-government.png');
     }
-    .cjs .mdc-card__media {
+    .project-cjs .mdc-card__media {
         background-image: url('https://storage.cloud.google.com/scvo-cms/scvo-cms-content/images/banners/cjs.png');
     }
 }
@@ -896,6 +929,9 @@ h1.mdc-typography--title {
 
 .mdc-layout-grid {
     padding: 0;
+    .mdc-card {
+        width: 100%;
+    }
 }
 
 .menu-sidebar {
@@ -945,16 +981,18 @@ h1.mdc-typography--title {
 }
 
 .container-content {
-    ul {
+    ul:not(.breadcrumbs) {
         padding-left: 0;
         li {
             list-style: none;
+            padding-left: $spacing-unit*1.5;
         }
         li::before {
             color: var(--mdc-theme-primary);
             content: "\25A0";
             font-size: 1rem;
-            padding-right: 0.75rem;
+            margin-left: -$spacing-unit*1.5;
+            padding-right: 0.95rem;
             position: relative;
             top: 0em;
         }
@@ -1072,6 +1110,7 @@ ul.breadcrumbs {
                 display: inline-block;
                 font-size: 90%;
                 margin: 0 0 0.25rem 0.1rem;
+                padding: 0 !important;
                 a {
                     background: var(--mdc-theme-primary-dark);
                     padding: 0.05rem 0.4rem 0.1rem;
