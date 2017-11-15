@@ -11,4 +11,3 @@ drawerEl.addEventListener('MDCTemporaryDrawer:open', function() {
 drawerEl.addEventListener('MDCTemporaryDrawer:close', function() {
     console.log('Received MDCTemporaryDrawer:close');
 });
-
