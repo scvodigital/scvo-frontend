@@ -7,20 +7,20 @@
 		"function_score": {
 			"query": {
 				"bool": {
-                    "must": [
+					"should": [
                         {
-                            "term": {
-                                "is_press_release": false
-                            }
-                        }
+    						"terms": {
+    							"categories_id": [
+                                    {{join primaryResponse.hits.hits.[0]._source.categories_id}}
+                                ]
+    						}
+    					},
+                        {
+    						"term": {
+    							"categories_id": 1
+    						}
+    					}
                     ],
-					"should": [{
-						"terms": {
-							"categories_id": [
-                                {{join primaryResponse.hits.hits.[0]._source.categories_id}}
-                            ]
-						}
-					}],
                     "minimum_should_match": 1
 				}
 			},
