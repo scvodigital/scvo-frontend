@@ -7,7 +7,7 @@
                 {{else}}
                 <h1 class="header-text">
                     <span class="header-text-banner">
-                        SCVO Members
+                        SCVO member organisations
                     </span>
                 </h1>
                 {{/if}}
@@ -20,16 +20,18 @@
             <li><a href="/about">About</a></li>
         </ul>
         <div class="mdc-layout-grid">
-            <div class="mdc-layout-grid__inner">
-                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3 sidebar library-sidebar">
-                    [Filters TBC]
-                </div>
-                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-9 content library-content">
-                    {{#each primaryResponse.hits.hits}}
-                    {{{_source.rendered.list}}}
-                    {{/each}}
+            <div class="mdc-layout-grid">
+                <div class="mdc-layout-grid__inner">
+                    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-9 content page-content">
+                        <p>[Search filters TBC]</p>
 
-                    {{> pagination paging=paging params=params}}
+                        {{#with primaryResponse.hits.hits.[0]._source}}
+                        {{{rendered.full}}}
+                        {{/with}}
+                    </div>
+                    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3 sidebar page-sidebar">
+                        {{> menu_about}}
+                    </div>
                 </div>
             </div>
         </div>
