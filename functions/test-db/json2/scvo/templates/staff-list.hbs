@@ -41,23 +41,6 @@
                             {{/each}}
                         </select>
                     </div>
-                    <!-- <div class="mdc-form-field">
-                        <select class="mdc-select" role="listbox" id="directorate" name="directorate">
-                            <option value="" { {#if params.query.directorate}}{ {else}}selected{ {/if}}>All directorates</option>
-                            { {#each supplimentaryResponses.cities.aggregations.directorates.buckets}}
-                            <option value="{ {slugify key}}" { {#compare ../params.query.directorate "===" (slugify key)}}selected{ {/compare}}>{ {key}} ({ {doc_count}})</option>
-                            { {/each}}
-                        </select>
-                    </div> -->
-                    <!-- <h2>Grouping</h2>
-                    <div class="mdc-form-field">
-                        <select class="mdc-select" role="listbox" id="grouping" name="grouping">
-                            <option value="directorate-city" { {#compare params.query.grouping "===" "directorate-city"}}selected{ {/compare}}>Directorate &gt; city</option>
-                            <option value="city-directorate" { {#compare params.query.grouping "===" "city-directorate"}}selected{ {/compare}}>city &gt; Directorate</option>
-                            <option value="department-city" { {#compare params.query.grouping "===" "department-city"}}selected{ {/compare}}>Department &gt; city</option>
-                            <option value="city-department" { {#compare params.query.grouping "===" "city-department"}}selected{ {/compare}}>city  &gt; Department</option>
-                        </select>
-                    </div> -->
                     <button class="mdc-button mdc-button--raised" type="submit">
                         Search
                     </button>
