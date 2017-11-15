@@ -1,36 +1,36 @@
-<div class="splash-image {{> header_splash}}">
-    <div class="container-fluid">
-        <div class="mdc-layout-grid">
-            {{#if primaryResponse.hits.hits.[0]._source.header_text}}
-            <img src="{{primaryResponse.hits.hits.[0]._source.header_text}}" alt="{{primaryResponse.hits.hits.[0]._source.title}}" class="header-text" />
-            {{else}}
-            <h1 class="header-text">
-                <span class="header-text-banner">
-                    {{{primaryResponse.hits.hits.[0]._source.title}}}
-                </span>
-            </h1>
-            {{/if}}
+<div class="page posts-page">
+    <div class="splash-image {{> header_splash}}">
+        <div class="container-fluid">
+            <div class="mdc-layout-grid">
+                {{#if primaryResponse.hits.hits.[0]._source.header_text}}
+                <img src="{{primaryResponse.hits.hits.[0]._source.header_text}}" alt="{{primaryResponse.hits.hits.[0]._source.title}}" class="header-text" />
+                {{else}}
+                <h1 class="header-text">
+                    <span class="header-text-banner">
+                        {{{primaryResponse.hits.hits.[0]._source.title}}}
+                    </span>
+                </h1>
+                {{/if}}
+            </div>
         </div>
     </div>
-</div>
-
-<div class="container-fluid">
-    {{> breadcrumbs_posts}}
-
-    <div class="mdc-layout-grid">
-        <div class="mdc-layout-grid__inner">
-            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-8 content page-content">
-                <ul class="supplimentary-list">
-                    {{#each supplimentaryResponses.related_posts.hits.hits}}
-                    {{{_source.rendered.list}}}
-                    {{/each}}
-                </ul>
-                {{> pagination paging=paging params=params}}
-            </div>
-            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 sidebar page-sidebar">
-                {{#with primaryResponse.hits.hits.[0]._source}}
-                {{{rendered.full}}}
-                {{/with}}
+    <div class="container-fluid">
+        {{> breadcrumbs_posts}}
+        <div class="mdc-layout-grid">
+            <div class="mdc-layout-grid__inner">
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-8 content page-content">
+                    <ul class="supplimentary-list">
+                        {{#each supplimentaryResponses.related_posts.hits.hits}}
+                        {{{_source.rendered.list}}}
+                        {{/each}}
+                    </ul>
+                    {{> pagination paging=paging params=params}}
+                </div>
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 sidebar page-sidebar">
+                    {{#with primaryResponse.hits.hits.[0]._source}}
+                    {{{rendered.full}}}
+                    {{/with}}
+                </div>
             </div>
         </div>
     </div>

@@ -1,77 +1,77 @@
-<div class="splash-image {{> header_splash}}">
-    <div class="container-fluid">
-        <div class="mdc-layout-grid">
-            {{#if primaryResponse.hits.hits.[0]._source.header_text}}
-            <img src="{{primaryResponse.hits.hits.[0]._source.header_text}}" alt="{{primaryResponse.hits.hits.[0]._source.title}}" class="header-text" />
-            {{else}}
-            <h1 class="header-text">
-                <span class="header-text-banner">
-                    Training &amp; events
-                </span>
-            </h1>
-            {{/if}}
+<div class="event event-search">
+    <div class="splash-image {{> header_splash}}">
+        <div class="container-fluid">
+            <div class="mdc-layout-grid">
+                {{#if primaryResponse.hits.hits.[0]._source.header_text}}
+                <img src="{{primaryResponse.hits.hits.[0]._source.header_text}}" alt="{{primaryResponse.hits.hits.[0]._source.title}}" class="header-text" />
+                {{else}}
+                <h1 class="header-text">
+                    <span class="header-text-banner">
+                        Training &amp; events
+                    </span>
+                </h1>
+                {{/if}}
+            </div>
         </div>
     </div>
-</div>
-
-<div class="container-fluid">
-    <ul class="breadcrumbs">
-        <li><a href="/">SCVO</a></li>
-        <li><a href="/services">Services</a></li>
-    </ul>
-
-    <div class="mdc-card">
-        <section class="mdc-card__primary">
-            <h2 class="mdc-card__title mdc-card__title--large">Find Events</h2>
-            <form [searchroute]="'event-search'">
-                <div class="mdc-layout-grid">
-                    <div class="mdc-layout-grid__inner">
-                        <div class="mdc-layout-grid__cell">
-                            <div class="mdc-textfield mdc-textfield--upgraded" data-mdc-auto-init="MDCTextfield">
-                                <input type="text" class="mdc-textfield__input" name="q" id="events-keywords" value="{{params.query.q}}">
-                                <label class="mdc-textfield__label" for="events-keywords">Keywords</label>
-                                <div class="mdc-textfield__bottom-line"></div>
-                            </div>
-                        </div>
-                        <div class="mdc-layout-grid__cell">
-                            <div class="mdc-form-field">
-                                <select class="mdc-select" role="listbox" id="events-type" name="type">
-                                    <option value="" {{#if params.query.type}}{{else}}selected{{/if}}>Select event type</option>
-                                    {{#each supplimentaryResponses.types.aggregations.types.buckets}}
-                                    <option value="{{key}}" {{#compare ../params.query.type "===" key}}selected{{/compare}}>{{key}} ({{doc_count}})</option>
-                                    {{/each}}
-                                </select>
-                            </div>
-                        </div>
-                        <div class="mdc-layout-grid__cell">
-                            <div class="mdc-form-field">
-                                <div class="mdc-checkbox">
-                                    <input type="checkbox" class="mdc-checkbox__native-control" id="events-free" name="free" {{#if params.query.free}}checked{{/if}} />
-                                    <div class="mdc-checkbox__background">
-                                        <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
-                                            <path class="mdc-checkbox__checkmark__path"
-                                            fill="none"
-                                            stroke="white"
-                                            d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
-                                        </svg>
-                                        <div class="mdc-checkbox__mixedmark"></div>
-                                    </div>
+    <div class="container-fluid">
+        <ul class="breadcrumbs">
+            <li><a href="/">SCVO</a></li>
+            <li><a href="/services">Services</a></li>
+        </ul>
+        <div class="mdc-card">
+            <section class="mdc-card__primary">
+                <h2 class="mdc-card__title mdc-card__title--large">Find Events</h2>
+                <form [searchroute]="'event-search'">
+                    <div class="mdc-layout-grid">
+                        <div class="mdc-layout-grid__inner">
+                            <div class="mdc-layout-grid__cell">
+                                <div class="mdc-textfield mdc-textfield--upgraded" data-mdc-auto-init="MDCTextfield">
+                                    <input type="text" class="mdc-textfield__input" name="q" id="events-keywords" value="{{params.query.q}}">
+                                    <label class="mdc-textfield__label" for="events-keywords">Keywords</label>
+                                    <div class="mdc-textfield__bottom-line"></div>
                                 </div>
-                                <label for="events-free">Only free events</label>
+                            </div>
+                            <div class="mdc-layout-grid__cell">
+                                <div class="mdc-form-field">
+                                    <select class="mdc-select" role="listbox" id="events-type" name="type">
+                                        <option value="" {{#if params.query.type}}{{else}}selected{{/if}}>Select event type</option>
+                                        {{#each supplimentaryResponses.types.aggregations.types.buckets}}
+                                        <option value="{{key}}" {{#compare ../params.query.type "===" key}}selected{{/compare}}>{{key}} ({{doc_count}})</option>
+                                        {{/each}}
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="mdc-layout-grid__cell">
+                                <div class="mdc-form-field">
+                                    <div class="mdc-checkbox">
+                                        <input type="checkbox" class="mdc-checkbox__native-control" id="events-free" name="free" {{#if params.query.free}}checked{{/if}} />
+                                        <div class="mdc-checkbox__background">
+                                            <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
+                                                <path class="mdc-checkbox__checkmark__path"
+                                                fill="none"
+                                                stroke="white"
+                                                d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                                            </svg>
+                                            <div class="mdc-checkbox__mixedmark"></div>
+                                        </div>
+                                    </div>
+                                    <label for="events-free">Only free events</label>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-                <button class="mdc-button mdc-button--raised" type="submit">
-                    Search
-                </button>
-            </form>
-        </section>
+                    <button class="mdc-button mdc-button--raised" type="submit">
+                        Search
+                    </button>
+                </form>
+            </section>
+        </div>
+
+        {{#each primaryResponse.hits.hits}}
+        {{{_source.rendered.list}}}
+        {{/each}}
+
+        {{> pagination paging=paging params=params}}
     </div>
-
-    {{#each primaryResponse.hits.hits}}
-    {{{_source.rendered.list}}}
-    {{/each}}
-
-    {{> pagination paging=paging params=params}}
 </div>

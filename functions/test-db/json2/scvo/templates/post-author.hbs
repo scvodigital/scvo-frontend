@@ -1,43 +1,43 @@
-<div class="splash-image {{> header_splash}}">
-    <div class="container-fluid">
-        <div class="mdc-layout-grid">
-            {{#if primaryResponse.hits.hits.[0]._source.header_text}}
-            <img src="{{primaryResponse.hits.hits.[0]._source.header_text}}" alt="{{primaryResponse.hits.hits.[0]._source.title}}" class="header-text" />
-            {{else}}
-            <h1 class="header-text">
-                <span class="header-text-banner">
-                    {{#if supplimentaryResponses.staff_profile.hits.hits.[0]}}
-                    {{{supplimentaryResponses.staff_profile.hits.hits.[0]._source.rendered.scvo_header}}}
-                    {{else}}
-                    {{{supplimentaryResponses.author_profile.hits.hits.[0]._source.rendered.scvo_header}}}
-                    {{/if}}
-                </span>
-            </h1>
-            {{/if}}
+<div class="post post-author">
+    <div class="splash-image {{> header_splash}}">
+        <div class="container-fluid">
+            <div class="mdc-layout-grid">
+                {{#if primaryResponse.hits.hits.[0]._source.header_text}}
+                <img src="{{primaryResponse.hits.hits.[0]._source.header_text}}" alt="{{primaryResponse.hits.hits.[0]._source.title}}" class="header-text" />
+                {{else}}
+                <h1 class="header-text">
+                    <span class="header-text-banner">
+                        {{#if supplimentaryResponses.staff_profile.hits.hits.[0]}}
+                        {{{supplimentaryResponses.staff_profile.hits.hits.[0]._source.rendered.scvo_header}}}
+                        {{else}}
+                        {{{supplimentaryResponses.author_profile.hits.hits.[0]._source.rendered.scvo_header}}}
+                        {{/if}}
+                    </span>
+                </h1>
+                {{/if}}
+            </div>
         </div>
     </div>
-</div>
-
-<div class="container-fluid">
-    {{> breadcrumbs_posts}}
-
-    <div class="mdc-layout-grid">
-        <div class="mdc-layout-grid__inner">
-            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-8 content post-content">
-                <ul class="supplimentary-list">
-                    {{#each primaryResponse.hits.hits}}
-                    {{{_source.rendered.list}}}
-                    {{/each}}
-                </ul>
-                {{> pagination paging=paging params=params}}
-            </div>
-            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 sidebar post-sidebar">
-                <div class="author_about">
-                    {{#if supplimentaryResponses.staff_profile.hits.hits.[0]}}
-                    {{{supplimentaryResponses.staff_profile.hits.hits.[0]._source.rendered.scvo_profile}}}
-                    {{else}}
-                    {{{supplimentaryResponses.author_profile.hits.hits.[0]._source.rendered.scvo_profile}}}
-                    {{/if}}
+    <div class="container-fluid">
+        {{> breadcrumbs_posts}}
+        <div class="mdc-layout-grid">
+            <div class="mdc-layout-grid__inner">
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-8 content post-content">
+                    <ul class="supplimentary-list">
+                        {{#each primaryResponse.hits.hits}}
+                        {{{_source.rendered.list}}}
+                        {{/each}}
+                    </ul>
+                    {{> pagination paging=paging params=params}}
+                </div>
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 sidebar post-sidebar">
+                    <div class="author_about">
+                        {{#if supplimentaryResponses.staff_profile.hits.hits.[0]}}
+                        {{{supplimentaryResponses.staff_profile.hits.hits.[0]._source.rendered.scvo_profile}}}
+                        {{else}}
+                        {{{supplimentaryResponses.author_profile.hits.hits.[0]._source.rendered.scvo_profile}}}
+                        {{/if}}
+                    </div>
                 </div>
             </div>
         </div>

@@ -1,33 +1,33 @@
-<div class="splash-image {{> header_splash}}">
-    <div class="container-fluid">
-        <div class="mdc-layout-grid">
-            {{#if primaryResponse.hits.hits.[0]._source.header_text}}
-            <img src="{{primaryResponse.hits.hits.[0]._source.header_text}}" alt="{{primaryResponse.hits.hits.[0]._source.title}}" class="header-text" />
-            {{else}}
-            <h1 class="header-text">
-                <span class="header-text-banner">
-                    {{{primaryResponse.hits.hits.[0]._source.title}}}
-                </span>
-            </h1>
-            {{/if}}
+<div class="library">
+    <div class="splash-image {{> header_splash}}">
+        <div class="container-fluid">
+            <div class="mdc-layout-grid">
+                {{#if primaryResponse.hits.hits.[0]._source.header_text}}
+                <img src="{{primaryResponse.hits.hits.[0]._source.header_text}}" alt="{{primaryResponse.hits.hits.[0]._source.title}}" class="header-text" />
+                {{else}}
+                <h1 class="header-text">
+                    <span class="header-text-banner">
+                        {{{primaryResponse.hits.hits.[0]._source.title}}}
+                    </span>
+                </h1>
+                {{/if}}
+            </div>
         </div>
     </div>
-</div>
-
-<div class="container-fluid">
-    <ul class="breadcrumbs">
-        <li><a href="/">SCVO</a></li>
-        <li><a href="/policy-research">Policy &amp; research</a></li>
-        <li><a href="/policy-research/evidence-library">Evidence library</a></li>
-    </ul>
-
-    <div class="mdc-layout-grid">
-        <div class="mdc-layout-grid__inner">
-            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3 sidebar library-sidebar">
-                &nbsp;
-            </div>
-            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-9 content library-content">
-                {{{primaryResponse.hits.hits.[0]._source.rendered.full}}}
+    <div class="container-fluid">
+        <ul class="breadcrumbs">
+            <li><a href="/">SCVO</a></li>
+            <li><a href="/policy-research">Policy &amp; research</a></li>
+            <li><a href="/policy-research/evidence-library">Evidence library</a></li>
+        </ul>
+        <div class="mdc-layout-grid">
+            <div class="mdc-layout-grid__inner">
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3 sidebar library-sidebar">
+                    &nbsp;
+                </div>
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-9 content library-content">
+                    {{{primaryResponse.hits.hits.[0]._source.rendered.full}}}
+                </div>
             </div>
         </div>
     </div>
