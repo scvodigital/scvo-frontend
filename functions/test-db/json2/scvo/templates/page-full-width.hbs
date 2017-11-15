@@ -16,14 +16,8 @@
     </div><!-- /splash-image -->
     <div class="container-fluid">
         {{> breadcrumbs}}
-        <div class="mdc-layout-grid">
-            <div class="mdc-layout-grid__inner">
-                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 content page-content">
-                    {{#with primaryResponse.hits.hits.[0]._source}}
-                    {{{rendered.full}}}
-                    {{/with}}
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+        <div class="content page-content">
+            {{{with primaryResponse.hits.hits.[0]._source.rendered.full}}}
+        </div><!-- /content -->
+    </div><!-- /container-fluid -->
+</div><!-- /page page-full-width -->
