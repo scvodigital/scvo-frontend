@@ -23,11 +23,11 @@
             <div class="mdc-layout-grid">
                 <div class="mdc-layout-grid__inner">
                     <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-9 content page-content">
-                        <p>[Search filters TBC]</p>
+                        <p>[Search filters TBC, currently showing 5 random]</p>
 
-                        {{#with primaryResponse.hits.hits.[0]._source}}
-                        {{{rendered.list}}}
-                        {{/with}}
+                        {{#each primaryResponse.hits.hits}}
+                        {{{this._source.rendered.list}}}
+                        {{/each}}
                     </div>
                     <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3 sidebar page-sidebar">
                         {{> menu_about}}
