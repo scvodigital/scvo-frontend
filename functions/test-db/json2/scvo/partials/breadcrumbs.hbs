@@ -1,6 +1,5 @@
 {{#with primaryResponse.hits.hits.[0]._source}}
-{{#compare breadcrumb.length ">" 0}}
-<ul class="breadcrumbs">
+<ul class="breadcrumbs breadcrumbs-length-{{breadcrumb.length}}">
     <li><a href="/">SCVO</a></li>
     {{#each breadcrumb}}
     <li>
@@ -8,5 +7,4 @@
     </li>
     {{/each}}
 </ul>
-{{/compare}}
 {{/with}}
