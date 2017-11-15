@@ -3,14 +3,13 @@
         <div class="container-fluid">
             <div class="mdc-layout-grid">
                 {{#if primaryResponse.hits.hits.[0]._source.header_text}}
-                <img src="{{primaryResponse.hits.hits.[0]._source.header_text}}" alt="{{primaryResponse.hits.hits.[0]._source.title}}" class="header-text" />
-                {{else}}
+                <img src="{{primaryResponse.hits.hits.[0]._source.header_text}}" alt="{{primaryResponse.hits.hits.[0]._source.title}}"
+                    class="header-text" /> {{else}}
                 <h1 class="header-text">
                     <span class="header-text-banner">
                         {{{supplimentaryResponses.page.hits.hits.[0]._source.title}}}
                     </span>
-                </h1>
-                {{/if}}
+                </h1> {{/if}}
             </div>
         </div>
     </div>
@@ -23,15 +22,15 @@
         <div class="mdc-layout-grid">
             <div class="mdc-layout-grid__inner">
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 content grant-content">
-                    {{#with supplimentaryResponses.page.hits.hits.[0]._source}}
-                    {{{rendered.full}}}
+                    {{#with supplimentaryResponses.page.hits.hits.[0]._source}} {{{rendered.full}}}
                     {{/with}}
 
                     <hr />
 
                     <form [searchroute]="'grant_search'">
-                        <div class="mdc-textfield mdc-textfield--upgraded" data-mdc-auto-init="MDCTextField">
-                            <input type="text" class="mdc-textfield__input" name="q" id="grant-digital-keywords" value="{{params.query.q}}">
+                        <div class="mdc-textfield mdc-textfield--upgraded">
+                            <input type="text" class="mdc-textfield__input" name="q" id="grant-digital-keywords"
+                                value="{{params.query.q}}">
                             <label class="mdc-textfield__label" for="grant-digital-keywords">Keywords</label>
                             <div class="mdc-textfield__bottom-line"></div>
                         </div>
