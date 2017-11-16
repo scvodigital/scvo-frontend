@@ -46,7 +46,7 @@ $nav-height: 2.5rem;
     --mdc-theme-primary-dark: #58a934;
 }
 .project,
-.campaigns,
+.campaign,
 .open-government,
 .projects-campaigns {
     --mdc-theme-primary: #AD1457; // Pink 800
@@ -190,6 +190,15 @@ a:hover {
 .mdc-button:hover,
 .mdc-toolbar a:hover {
     text-decoration: none;
+}
+.mdc-button:after,
+.mdc-button:before {
+    background-color: var(--mdc-theme-primary-fade);
+}
+.mdc-button:not(.mdc-ripple-upgraded):active:after,
+.mdc-button:not(.mdc-ripple-upgraded):focus:before,
+.mdc-button:not(.mdc-ripple-upgraded):hover:before {
+    opacity: 0.1;
 }
 
 .home {
@@ -710,15 +719,19 @@ a:hover {
     // }
 }
 .home {
-    .splash-image {
-        height: 300px;
-        .mdc-layout-grid {
-            margin-left: 5%;
-            width: 39%;
-        }
-        h1.header-text {
-            font-size: 5rem;
-            line-height: 4rem;
+    .splash-image.hello {
+        padding: $spacing-unit*3 0;
+        min-height: 330px;
+        .container-fluid {
+            overflow: visible;
+            .mdc-layout-grid {
+                margin-left: 5%;
+                width: 39%;
+                h1.header-text {
+                    font-size: 5rem;
+                    line-height: 4rem;
+                }
+            }
         }
     }
 }
@@ -826,7 +839,7 @@ h1.mdc-typography--title {
         background-position: center center;
     }
 }
-.projects {
+.section-projects {
     .mdc-card__media {
         height: 128px;
         background-size: cover;
@@ -847,7 +860,7 @@ h1.mdc-typography--title {
         background-image: url('https://storage.cloud.google.com/scvo-cms/scvo-cms-content/images/banners/cjs.png');
     }
 }
-.campaigns {
+.section-campaigns {
     .mdc-card__media {
         height: 128px;
         background-size: cover;
@@ -981,17 +994,17 @@ h1.mdc-typography--title {
 }
 
 .container-content {
-    ul:not(.breadcrumbs) {
+    ul {
         padding-left: 0;
         li {
             list-style: none;
-            padding-left: $spacing-unit*1.5;
+            padding-left: $spacing-unit*1.4;
         }
         li::before {
             color: var(--mdc-theme-primary);
             content: "\25A0";
             font-size: 1rem;
-            margin-left: -$spacing-unit*1.5;
+            margin-left: -$spacing-unit*1.4;
             padding-right: 0.95rem;
             position: relative;
             top: 0em;
@@ -999,7 +1012,11 @@ h1.mdc-typography--title {
     }
     .mdc-card__actions ul,
     ul.supplimentary-list,
+    ul.breadcrumbs,
     ul.inline-list {
+        li {
+            padding-left: 0;
+        }
         li::before {
             content: "";
             padding: 0;
@@ -1038,7 +1055,7 @@ ul.breadcrumbs {
         // }
     }
     li:before {
-        content: "\203A";
+        content: "\203A" !important;
         font-weight: 800;
         margin-right: $spacing-unit/4;
         width: $spacing-unit/2;
@@ -1385,6 +1402,17 @@ footer {
     }
     .mdc-toolbar-fixed-adjust {
         padding-top: $spacing-unit*8.5;
+    }
+    .mdc-toolbar .mdc-toolbar__row .container-fluid #upper-tab-bar {
+        margin-right: 0;
+    }
+    .mdc-toolbar .mdc-toolbar__row .container-fluid .mdc-tab-bar .mdc-tab {
+        padding: 0 $spacing-unit/2;
+    }
+    .home .latest-content .gist img.photo-wee,
+    .gist .thumbnail img {
+        height: 50px;
+        width: 50px;
     }
 }
 
