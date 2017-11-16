@@ -46,7 +46,7 @@ $nav-height: 2.5rem;
     --mdc-theme-primary-dark: #58a934;
 }
 .project,
-.campaigns,
+.campaign,
 .open-government,
 .projects-campaigns {
     --mdc-theme-primary: #AD1457; // Pink 800
@@ -190,6 +190,13 @@ a:hover {
 .mdc-button:hover,
 .mdc-toolbar a:hover {
     text-decoration: none;
+}
+.mdc-button:after,
+.mdc-button:before {
+    background-color: var(--mdc-theme-primary-fade);
+}
+.mdc-button:not(.mdc-ripple-upgraded):active:after, .mdc-button:not(.mdc-ripple-upgraded):focus:before, .mdc-button:not(.mdc-ripple-upgraded):hover:before {
+    opacity: 0.2;
 }
 
 .home {
@@ -827,7 +834,7 @@ h1.mdc-typography--title {
         background-position: center center;
     }
 }
-.projects {
+.section-projects {
     .mdc-card__media {
         height: 128px;
         background-size: cover;
@@ -848,7 +855,7 @@ h1.mdc-typography--title {
         background-image: url('https://storage.cloud.google.com/scvo-cms/scvo-cms-content/images/banners/cjs.png');
     }
 }
-.campaigns {
+.section-campaigns {
     .mdc-card__media {
         height: 128px;
         background-size: cover;
