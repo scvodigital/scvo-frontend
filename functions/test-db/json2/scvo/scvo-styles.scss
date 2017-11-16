@@ -711,6 +711,7 @@ a:hover {
 }
 .home {
     .splash-image {
+        padding: $spacing-unit*3 0;
         height: 300px;
         .mdc-layout-grid {
             margin-left: 5%;
@@ -981,17 +982,17 @@ h1.mdc-typography--title {
 }
 
 .container-content {
-    ul:not(.breadcrumbs) {
+    ul {
         padding-left: 0;
         li {
             list-style: none;
-            padding-left: $spacing-unit*1.5;
+            padding-left: $spacing-unit*1.4;
         }
         li::before {
             color: var(--mdc-theme-primary);
             content: "\25A0";
             font-size: 1rem;
-            margin-left: -$spacing-unit*1.5;
+            margin-left: -$spacing-unit*1.4;
             padding-right: 0.95rem;
             position: relative;
             top: 0em;
@@ -999,7 +1000,11 @@ h1.mdc-typography--title {
     }
     .mdc-card__actions ul,
     ul.supplimentary-list,
+    ul.breadcrumbs,
     ul.inline-list {
+        li {
+            padding-left: 0;
+        }
         li::before {
             content: "";
             padding: 0;
@@ -1038,7 +1043,7 @@ ul.breadcrumbs {
         // }
     }
     li:before {
-        content: "\203A";
+        content: "\203A" !important;
         font-weight: 800;
         margin-right: $spacing-unit/4;
         width: $spacing-unit/2;
