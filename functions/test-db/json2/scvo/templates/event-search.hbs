@@ -19,7 +19,6 @@
     <div class="container-fluid page-content">
         <ul class="breadcrumbs">
             <li><a href="/">Home</a></li>
-            <li><a href="/services">Services</a></li>
         </ul>
         <div class="mdc-card">
             <section class="mdc-card__primary">
@@ -36,10 +35,10 @@
                             </div>
                             <div class="mdc-layout-grid__cell">
                                 <div class="mdc-form-field">
-                                    <select class="mdc-select" role="listbox" id="events-type" name="type">
-                                        <option value="" {{#if params.query.type}}{{else}}selected{{/if}}>Select event type</option>
+                                    <select class="mdc-select" role="listbox" id="events-type" name="course_type">
+                                        <option value="" {{#if params.query.course_type}}{{else}}selected{{/if}}>Select event type</option>
                                         {{#each supplimentaryResponses.types.aggregations.types.buckets}}
-                                        <option value="{{key}}" {{#compare ../params.query.type "===" key}}selected{{/compare}}>{{key}} ({{doc_count}})</option>
+                                        <option value="{{key}}" {{#compare ../params.query.course_type "===" key}}selected{{/compare}}>{{key}} ({{doc_count}})</option>
                                         {{/each}}
                                     </select>
                                 </div>
