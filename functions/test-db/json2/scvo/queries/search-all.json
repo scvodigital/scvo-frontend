@@ -24,35 +24,49 @@
                 {
                     "query_string": {
                         "query": "{{query.q}}",
+                        "default_field": "text_bag",
                         "default_operator": "AND",
                         "analyzer": "snowball"
                     }
                 },
                 {
+                    "query_string": {
+                        "query": "{{query.q}}",
+                        "default_field": "text_bag_boost",
+                        "default_operator": "AND",
+                        "analyzer": "snowball",
+                        "boost": 10
+                    }
+                },
+                {
                     "term" : {
                         "_type" : {
-                            "value" : "scvo-cms-post", "boost" : 5.0
+                            "value" : "scvo-cms-post",
+                            "boost" : 5.0
                         }
                     }
                 },
                 {
                     "term" : {
                         "_type" : {
-                            "value" : "scvo-event", "boost" : 4.0
+                            "value" : "scvo-event",
+                            "boost" : 4.0
                         }
                     }
                 },
                 {
                     "term" : {
                         "_type" : {
-                            "value" : "scvo-cms-page", "boost" : 3.0
+                            "value" : "scvo-cms-page",
+                            "boost" : 8.0
                         }
                     }
                 },
                 {
                     "term" : {
                         "_type" : {
-                            "value" : "goodhq-organisation", "boost" : 1.5
+                            "value" : "goodhq-organisation",
+                            "boost" : 1.5
                         }
                     }
                 }

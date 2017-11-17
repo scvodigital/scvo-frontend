@@ -13,9 +13,10 @@ $nav-height: 2.5rem;
     --mdc-theme-secondary-light: #FFA000; // Amber 700
     --mdc-theme-secondary-dark: #FF6F00; // Amber 900
     --mdc-theme-background: #ECEFF1; // Blue Grey 50
-    --mdc-footer-primary: #4A148C; // Purple 900
-    --mdc-footer-primary-light: #D81B60; // Pink 600
-    --mdc-footer-primary-dark: #290b4d;
+    --mdc-footer-primary: #371448;
+    --mdc-footer-primary-highlight: #B3185B;
+    --mdc-footer-primary-light: #592864;
+    --mdc-footer-primary-dark: #251032;
     --mdc-site-background: #290b4d; // was #263238 Blue Grey 900
     --mdc-layout-grid-margin-desktop: 0;
     --mdc-layout-grid-margin-tablet: 0;
@@ -97,7 +98,9 @@ $nav-height: 2.5rem;
     --mdc-theme-primary-light: #6FB744;
     --mdc-theme-primary-dark: #6FB744;
 }
+.breadcrumbs,
 .page-content,
+.page-sidebar,
 .home .cta-content,
 .home .latest-content,
 .home .gist.scvo-cms-post,
@@ -202,6 +205,11 @@ a:hover {
 }
 
 .home {
+    .splash-image {
+        .mdc-button {
+            background: white;
+        }
+    }
     .featured-content {
         .featured.mdc-card {
             height: 20rem;
@@ -217,7 +225,7 @@ a:hover {
             }
         }
     }
-    .cta-content.splash-image {
+    .cta-content.callout-image {
         background-image: linear-gradient(var(--mdc-theme-primary-fade),var(--mdc-theme-primary-fade)),url('https://storage.googleapis.com/scvo-cms/wp-content/uploads/2017/10/Drake-Music-03.jpg');
         height: auto;
         padding: $spacing-unit 0 $spacing-unit*3.25;
@@ -304,6 +312,10 @@ a:hover {
     .post-info-published {
         font-weight: 400;
     }
+}
+.post-related {
+    padding-top: $spacing-unit*1.5;
+    border-top: 1px solid rgba(0,0,0,.2);
 }
 
 .hero {
@@ -610,27 +622,30 @@ a:hover {
 
 .action-buttons-right {
     flex-direction: row-reverse;
-    border-top: 1px solid #dddddd;
+    border-top: 1px solid rgba(0,0,0,.2);
 }
 
-.setting-up-a-charity .footer-image {
-    position: relative;
-    background-size: cover;
-    background-position: center center;
-    background-image: linear-gradient(var(--mdc-theme-primary-fade), var(--mdc-theme-primary-fade)),url('https://storage.googleapis.com/scvo-cms/wp-content/uploads/2017/10/Drake-Music-06.jpg');
-    text-align: center;
-    color: white;
-    padding: $spacing-unit 0 $spacing-unit*2.5;
-    h3 {
-        font-weight: 800;
-        padding-bottom: $spacing-unit;
-    }
-    .mdc-button {
-        color: white;
-        border: 2px solid white;
+.setting-up-a-charity {
+    .page-content .mdc-layout-grid {
         margin-top: $spacing-unit;
-        text-transform: none;
-        background: transparent;
+    }
+    .footer-image {
+        position: relative;
+        background-size: cover;
+        background-position: center center;
+        background-image: linear-gradient(rgba(173, 20, 87, 0.89), rgba(173, 20, 87, 0.89)),url('https://storage.googleapis.com/scvo-cms/wp-content/uploads/2017/10/Drake-Music-06.jpg');
+        text-align: center;
+        color: white;
+        padding: $spacing-unit 0 $spacing-unit*2.5;
+        h2 {
+            font-weight: 800;
+            padding-bottom: $spacing-unit;
+        }
+        .mdc-button {
+            color: white;
+            background: transparent;
+            border: 2px solid white;
+        }
     }
 }
 .digital .callout-image {
@@ -676,7 +691,7 @@ a:hover {
         color: #fff;
         font-weight: 800;
         font-size: 3rem;
-        line-height: $spacing-unit*3;
+        line-height: $spacing-unit*3.5;
         letter-spacing: -0.08rem;
         margin-bottom: $spacing-unit/2;
         .photo-wee {
@@ -709,7 +724,7 @@ a:hover {
 .splash-image-scvo-document-general h1.header-text,
 .splash-image-scvo-document-evidence h1.header-text {
     font-size: 2rem;
-    line-height: 2rem;
+    line-height: 2.2rem;
     // padding-left: 0.75rem;
     // .header-text-banner {
     //     display: inline;
@@ -1001,7 +1016,7 @@ h1.mdc-typography--title {
             padding-left: $spacing-unit*1.4;
         }
         li::before {
-            color: var(--mdc-theme-primary);
+            color: var(--mdc-theme-primary-dark);
             content: "\25A0";
             font-size: 1rem;
             margin-left: -$spacing-unit*1.4;
@@ -1010,9 +1025,27 @@ h1.mdc-typography--title {
             top: 0em;
         }
     }
+    .mdc-button {
+        color: var(--mdc-theme-primary);
+        background: white;
+        border: 2px solid var(--mdc-theme-primary);
+        margin-top: $spacing-unit;
+        text-transform: none;
+        background: transparent;
+    }
+    .scvo-cms-page-20114 .mdc-button {
+        margin-top: 0;
+    }
+    .menu-sidebar,
+    .mdc-card {
+        .mdc-button {
+            color: white;
+            margin-top: 0;
+            background: var(--mdc-theme-primary);
+        }
+    }
     .mdc-card__actions ul,
     ul.supplimentary-list,
-    ul.breadcrumbs,
     ul.inline-list {
         li {
             padding-left: 0;
@@ -1034,7 +1067,7 @@ hr {
     height: 1px;
     background-color: white;
     border: none;
-    border-bottom: 1px solid var(--mdc-theme-primary-fade);
+    border-bottom: 1px solid rgba(0,0,0,.2);
 }
 
 ul.breadcrumbs {
@@ -1043,11 +1076,13 @@ ul.breadcrumbs {
     height: $nav-height;
     line-height: $nav-height;
     list-style: none;
-    border-bottom: 1px solid var(--mdc-theme-primary-fade);
+    border-bottom: 1px solid rgba(0,0,0,.2);
+    font-size: 0;
     li {
         display: inline-block;
         margin: 0;
         padding: 0;
+        font-size: 1rem;
         // color: white;
         // a,
         // a:hover {
@@ -1057,11 +1092,11 @@ ul.breadcrumbs {
     li:before {
         content: "\203A" !important;
         font-weight: 800;
-        margin-right: $spacing-unit/4;
-        width: $spacing-unit/2;
-        display: inline-block;
+        width: auto;
         padding: 0;
-        // color: white;
+        margin: 0 $spacing-unit/2;
+        display: inline-block;
+        color: rgba(0,0,0,.6);
     }
     li.pull-right:before,
     li:first-child:before {
@@ -1074,9 +1109,9 @@ ul.breadcrumbs {
         content: "";
         margin: 0;
     }
-    li:not(:last-child) {
-        margin-right: $spacing-unit/4;
-    }
+    // li:not(:last-child) {
+    //     margin-right: $spacing-unit/4;
+    // }
 }
 .spacer {
     margin: 0 0 $spacing-unit*1.5;
@@ -1142,6 +1177,9 @@ ul.breadcrumbs {
         }
     }
 }
+// .mdc-card .post-info .post-info-author img {
+//     margin-top: -0.02rem;
+// }
 
 blockquote {
     border-left: 0.2rem solid var(--mdc-theme-primary-dark);
@@ -1220,7 +1258,7 @@ p:last-child {
     }
     .post-info {
         margin: $spacing-unit/2 0 $spacing-unit*1.5;
-        border-bottom: 1px solid var(--mdc-theme-primary-fade);
+        border-bottom: 1px solid rgba(0,0,0,.2);
         padding: 0 0 $spacing-unit;
     }
     .page-info {
@@ -1228,7 +1266,7 @@ p:last-child {
         color: #777;
         .page-info-updated {
             margin: $spacing-unit*1.5 0 $spacing-unit/2;
-            border-top: 1px solid #aaa;
+            border-top: 1px solid rgba(0,0,0,.2);
             padding: $spacing-unit 0 0;
             font-size: 95%;
         }
@@ -1344,7 +1382,7 @@ p:last-child {
 footer {
     color: white;
     background-color: var(--mdc-footer-primary);
-    border-top: 0.6rem solid var(--mdc-footer-primary-light);
+    border-top: 0.6rem solid var(--mdc-footer-primary-highlight);
     .footer-main {
         padding: $spacing-unit*2.5 0 $spacing-unit*2;
     }
@@ -1477,11 +1515,39 @@ footer {
     .pagination-distance-5 {
         display: none !important;
     }
+    .splash-image {
+        .container-fluid {
+            .mdc-layout-grid {
+                width: 100%;
+                img.header-text {
+                    max-height: auto;
+                }
+            }
+        }
+    }
 }
 
 @media screen and (max-width: 450px) {
     .pagination-distance-4 {
         display: none !important;
+    }
+    .splash-image {
+        background-image: linear-gradient(66deg, var(--mdc-theme-primary-dark), var(--mdc-theme-primary)) !important;
+        h1.header-text {
+            font-size: 2rem;
+            line-height: 2.2rem;
+        }
+    }
+    .home .splash-image.hello {
+        padding: 0;
+        .container-fluid .mdc-layout-grid {
+            width: 100%;
+            margin: 0;
+            h1.header-text {
+                font-size: 3rem;
+                line-height: 3.3rem;
+            }
+        }
     }
 }
 

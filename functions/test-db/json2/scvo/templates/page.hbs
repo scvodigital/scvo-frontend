@@ -22,7 +22,7 @@
         {{> breadcrumbs}}
         <div class="mdc-layout-grid">
             <div class="mdc-layout-grid__inner">
-                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-8 content page-content">
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-8-desktop mdc-layout-grid__cell--span-12-tablet content page-content">
                     {{#if primaryResponse.hits.hits.[0]}}
                     {{#with primaryResponse.hits.hits.[0]._source}}
                     {{{rendered.full}}}
@@ -31,7 +31,7 @@
                     <h2>Page not found</h2>
                     {{/if}}
                 </div>
-                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 sidebar page-sidebar">
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-12-tablet sidebar page-sidebar">
                     {{#compare supplimentaryResponses.related_posts.hits.total ">" 0}}
                     <div class="related-posts">
                         <h3 class="blogs">Related posts</h3>
