@@ -24,31 +24,14 @@
         <div class="mdc-layout-grid">
             <div class="mdc-layout-grid__inner">
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3 sidebar library-sidebar">
-                    <form [searchroute]="'evidence-library'">
-                        <div class="mdc-textfield mdc-textfield--upgraded" data-mdc-auto-init="MDCTextfield">
-                            <input type="text" class="mdc-textfield__input" name="q" id="evidence-library-keywords" value="{{params.query.q}}">
-                            <label class="mdc-textfield__label" for="evidence-library-keywords">Keywords</label>
-                            <div class="mdc-textfield__bottom-line"></div>
-                        </div>
-                        <div class="mdc-form-field">
-                            <select class="mdc-select" role="listbox" id="evidence-library-classification" name="classification">
-                                <option value="" {{#if params.query.classification}}{{else}}selected{{/if}}>All categories</option>
-                                {{#each supplimentaryResponses.types.aggregations.types.buckets}}
-                                <option value="{{slugify key}}" {{#compare ../params.query.classification "===" (slugify key)}}selected{{/compare}}>{{key}} ({{doc_count}})</option>
-                                {{/each}}
-                            </select>
-                        </div>
-                        <button class="mdc-button mdc-button--raised" type="submit">
-                            Search
-                        </button>
-                    </form>
+                    {{> library_search}}
                 </div>
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-9 content library-content">
                     {{#each primaryResponse.hits.hits}}
                     {{{_source.rendered.list}}}
                     {{/each}}
 
-                    {{> pagination paging=paging params=params }}
+                    {{> pagination}}
                 </div>
             </div>
         </div>

@@ -1,9 +1,10 @@
 {
-    "size": 5,
+    "size": 4,
     "from": {{multiply (subtract (default query.page 1) 1) 10}},
     "_source": [
         "slug",
-        "title"
+        "title",
+        "date_start"
     ],
     "query": {
         "bool": {
@@ -15,5 +16,8 @@
                 }
             ]
         }
-    }
+    },
+    "sort": {
+		"date_start": "asc"
+	}
 }

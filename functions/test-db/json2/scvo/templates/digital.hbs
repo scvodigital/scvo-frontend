@@ -38,14 +38,25 @@
                     <h2>Events</h2>
                     <ul class="v-margin supplimentary-list">
                         {{#each supplimentaryResponses.related_events.hits.hits}}
-                        <li><a href="{{replace _source.slug "_" "/"}}">{{{_source.title}}}</a></li>
+                        <li>
+                            <a href="/events/{{replace _source.slug "_" "/"}}">{{{_source.title}}}</a><br />
+                            <span aria-hidden="true" class="fa fa-calendar"></span> {{moment _source.date_start "Do MMM YYYY"}}
+                        </li>
                         {{/each}}
                     </ul>
                     <a class="mdc-button mdc-button--raised" href="/events?type=digital">Find more events</a>
                 </div>
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4">
                     <h2>Digital Pioneers</h2>
-                    <div>[ 1 preview ]</div>
+                    <div class="mdc-card">
+                        <section class="mdc-card__primary">
+                            <h1 class="mdc-card__title mdc-card__title--large">iConnect North East</h1>
+                        </section>
+                        <section class="mdc-card__supporting-text">
+                            <p><strong>From Facebook campaigns to Google Analytics, iConnect North East tell us what digital has to offer.</strong></p>
+                            <p>We’ve always used digital as an organisation; it plays an important role for us to get the day to day work done. <a href="/digital/evolution/pioneers/iconnect-north-east">Read more</a></p>
+                        </section>
+                    </div>
                     <a class="mdc-button mdc-button--raised" href="/digital/evolution/digital-pioneers">Read more case studies</a>
                 </div>
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4">
