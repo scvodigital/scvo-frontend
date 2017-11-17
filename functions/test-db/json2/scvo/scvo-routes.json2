@@ -57,7 +57,7 @@
         },
         "multipleResults": true
     },
-    "grant_search": {
+    "grant_charter_search": {
         "pattern": "/digital/charter-fund/projects",
         "linkTags": [],
         "metaTags": [],
@@ -95,7 +95,7 @@
             "log": "debug"
         }
     },
-    "grant": {
+    "grant_charter": {
         "pattern": "/digital/charter-fund/projects/:project_slug",
         "linkTags": [],
         "metaTags": [],
@@ -112,6 +112,74 @@
                 "index": "web-content-production",
                 "type": "scvo-grant-charter",
                 "template": `{:queries/grant-charter-aggs.json}`
+            },
+            "splash": {
+                "index": "web-content-production",
+                "type": "scvo-cms-media",
+                "template": `{:queries/event-splash.json}`
+            }
+        },
+        "elasticsearchConfig": {
+            "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
+            "apiVersion": "5.6",
+            "log": "debug"
+        }
+    },
+    "grant_cyber_search": {
+        "pattern": "/digital/cyber-resilience/projects",
+        "linkTags": [],
+        "metaTags": [],
+        "template": `{:templates/grant-cyber-search.hbs}`,
+        "titleTemplate": `{:templates/page-title.hbs}`,
+        "jsonLdTemplate": `{:templates/page-json-ld.hbs}`,
+        "defaultParams": {
+            "pageSize": 12
+        },
+        "primarySearchTemplate": {
+            "index": "web-content-production",
+            "type": "scvo-grant-cyber",
+            "template": `{:queries/grant-cyber-search.json}`
+        },
+        "supplimentarySearchTemplates": {
+            "page": {
+                "index": "web-content-production",
+                "type": "scvo-cms-page",
+                "template": `{:queries/page.json}`
+            },
+            "types": {
+                "index": "web-content-production",
+                "type": "scvo-grant-cyber",
+                "template": `{:queries/grant-cyber-aggs.json}`
+            },
+            "splash": {
+                "index": "web-content-production",
+                "type": "scvo-cms-media",
+                "template": `{:queries/event-splash.json}`
+            }
+        },
+        "elasticsearchConfig": {
+            "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
+            "apiVersion": "5.6",
+            "log": "debug"
+        }
+    },
+    "grant_cyber": {
+        "pattern": "/digital/cyber-resilience/projects/:project_slug",
+        "linkTags": [],
+        "metaTags": [],
+        "template": `{:templates/grant-cyber.hbs}`,
+        "titleTemplate": `{:templates/page-title.hbs}`,
+        "jsonLdTemplate": `{:templates/page-json-ld.hbs}`,
+        "primarySearchTemplate": {
+            "index": "web-content-production",
+            "type": "scvo-grant-cyber",
+            "template": `{:queries/grant-cyber.json}`
+        },
+        "supplimentarySearchTemplates": {
+            "types": {
+                "index": "web-content-production",
+                "type": "scvo-grant-cyber",
+                "template": `{:queries/grant-cyber-aggs.json}`
             },
             "splash": {
                 "index": "web-content-production",
