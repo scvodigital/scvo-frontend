@@ -99,6 +99,7 @@ $nav-height: 2.5rem;
 }
 .breadcrumbs,
 .page-content,
+.page-sidebar,
 .home .cta-content,
 .home .latest-content,
 .home .gist.scvo-cms-post,
@@ -618,24 +619,35 @@ a:hover {
     border-top: 1px solid rgba(0,0,0,.2);
 }
 
-.setting-up-a-charity .footer-image {
-    position: relative;
-    background-size: cover;
-    background-position: center center;
-    background-image: linear-gradient(var(--mdc-theme-primary-fade), var(--mdc-theme-primary-fade)),url('https://storage.googleapis.com/scvo-cms/wp-content/uploads/2017/10/Drake-Music-06.jpg');
-    text-align: center;
-    color: white;
-    padding: $spacing-unit 0 $spacing-unit*2.5;
-    h3 {
-        font-weight: 800;
-        padding-bottom: $spacing-unit;
+.setting-up-a-charity {
+    .mdc-layout-grid {
+        margin-top: $spacing-unit;
     }
     .mdc-button {
-        color: white;
-        border: 2px solid white;
+        color: var(--mdc-theme-primary);
+        background: white;
+        border: 2px solid var(--mdc-theme-primary);
         margin-top: $spacing-unit;
         text-transform: none;
         background: transparent;
+    }
+    .footer-image {
+        position: relative;
+        background-size: cover;
+        background-position: center center;
+        background-image: linear-gradient(rgba(173, 20, 87, 0.89), rgba(173, 20, 87, 0.89)),url('https://storage.googleapis.com/scvo-cms/wp-content/uploads/2017/10/Drake-Music-06.jpg');
+        text-align: center;
+        color: white;
+        padding: $spacing-unit 0 $spacing-unit*2.5;
+        h2 {
+            font-weight: 800;
+            padding-bottom: $spacing-unit;
+        }
+        .mdc-button {
+            color: white;
+            background: transparent;
+            border: 2px solid white;
+        }
     }
 }
 .digital .callout-image {
@@ -1017,7 +1029,6 @@ h1.mdc-typography--title {
     }
     .mdc-card__actions ul,
     ul.supplimentary-list,
-    ul.breadcrumbs,
     ul.inline-list {
         li {
             padding-left: 0;
@@ -1049,10 +1060,12 @@ ul.breadcrumbs {
     line-height: $nav-height;
     list-style: none;
     border-bottom: 1px solid rgba(0,0,0,.2);
+    font-size: 0;
     li {
         display: inline-block;
         margin: 0;
         padding: 0;
+        font-size: 1rem;
         // color: white;
         // a,
         // a:hover {
@@ -1062,11 +1075,11 @@ ul.breadcrumbs {
     li:before {
         content: "\203A" !important;
         font-weight: 800;
-        margin-right: $spacing-unit/4;
-        width: $spacing-unit;
-        display: inline-block;
+        width: auto;
         padding: 0;
-        // color: white;
+        margin: 0 $spacing-unit/2;
+        display: inline-block;
+        color: rgba(0,0,0,.6);
     }
     li.pull-right:before,
     li:first-child:before {
@@ -1079,9 +1092,9 @@ ul.breadcrumbs {
         content: "";
         margin: 0;
     }
-    li:not(:last-child) {
-        margin-right: $spacing-unit/4;
-    }
+    // li:not(:last-child) {
+    //     margin-right: $spacing-unit/4;
+    // }
 }
 .spacer {
     margin: 0 0 $spacing-unit*1.5;
@@ -1119,7 +1132,7 @@ ul.breadcrumbs {
             margin-right: $spacing-unit/2;
             vertical-align: text-bottom;
             float: left;
-            margin-top: -0.15rem;
+            margin-top: -0.02rem;
         }
     }
     .post-info-share,
