@@ -83,6 +83,7 @@ $nav-height: 2.5rem;
     --mdc-theme-primary-dark: #022347;
 }
 .tfn,
+.post-related-tfn,
 .gist.tfn-post,
 .search-result.tfn-post {
     --mdc-theme-primary: #3b9db1;
@@ -101,6 +102,8 @@ $nav-height: 2.5rem;
 .breadcrumbs,
 .page-content,
 .page-sidebar,
+.library-content,
+.library-sidebar,
 .home .cta-content,
 .home .latest-content,
 .home .gist.scvo-cms-post,
@@ -314,8 +317,10 @@ a:hover {
     }
 }
 .post-related {
-    padding-top: $spacing-unit*1.5;
     border-top: 1px solid rgba(0,0,0,.2);
+    h3 {
+        margin-bottom: $spacing-unit;
+    }
 }
 
 .hero {
@@ -769,7 +774,8 @@ a:hover {
 }
 .projects-campaigns .breadcrumbs-length-0,
 .services .breadcrumbs-length-0,
-.digital.participation.projects .page-info,
+.digital.charter-fund.projects .page-info,
+.digital.cyber-resilience.projects .page-info,
 .blogs .page-sidebar .page-info,
 .press-media .sidebar h3.blogs {
     display: none;
