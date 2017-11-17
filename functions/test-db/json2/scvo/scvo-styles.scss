@@ -55,12 +55,14 @@ $nav-height: 2.5rem;
     --mdc-theme-primary-light: #C2185B; // Pink 700
     --mdc-theme-primary-dark: #880E4F; // Pink 900
 }
+.digital .callout-image,
 .related-posts,
 .search-result.scvo-document,
 .search-result.scvo-cms-post,
 .gist.scvo-cms-post,
 .list.scvo-cms-post,
 .press-media,
+.digital.blogs,
 .blogs,
 .post,
 .policy-research {
@@ -143,7 +145,6 @@ body {
 main {
     background-color: white;
 }
-.scvo-cms-page-21696 .page-info,
 .container-fluid {
     max-width: 1280px;
     width: 95%;
@@ -183,13 +184,13 @@ main {
 }
 a {
     font-weight: 600;
-    color: var(--mdc-theme-primary-dark, #006064);
+    color: var(--mdc-theme-primary, #00838F);
     text-decoration: none;
     text-decoration-skip: ink;
 }
 a:hover {
     text-decoration: underline;
-    color: var(--mdc-theme-primary, #00838F);
+    color: var(--mdc-theme-primary-dark, #006064);
 }
 .mdc-card__actions a:hover,
 .mdc-button a:hover,
@@ -659,15 +660,26 @@ a:hover {
     background-position: center center;
     background-image: linear-gradient(var(--mdc-theme-primary-fade), var(--mdc-theme-primary-fade)),url('https://storage.googleapis.com/scvo-cms/wp-content/uploads/2017/11/Dunaverty-Hall.jpg');
     color: white;
-    padding: $spacing-unit*1.5 0 $spacing-unit*1.5;
+    padding: $spacing-unit 0 $spacing-unit*1.5;
     margin: $spacing-unit 0;
+    li {
+        margin-top: $spacing-unit/2;
+    }
+    .mdc-card__actions {
+        display: none;
+    }
+    .mdc-card__supporting-text {
+        padding-bottom: $spacing-unit;
+    }
+    li a,
+    .post-info,
     .mdc-card__actions a,
     .mdc-card__supporting-text,
     .mdc-card__supporting-text a,
     .mdc-card__title {
         color: white;
     }
-    .mdc-card .mdc-button {
+    .mdc-button {
         border: 2px solid white;
         background: transparent;
         color: white;
@@ -858,6 +870,10 @@ h1.mdc-typography--title {
     .credit-union .mdc-card__media {
         background-color: #1976D2;
         background-image: url('https://storage.cloud.google.com/scvo-cms/scvo-cms-content/images/banners/credit-union.png');
+    }
+    .milo .mdc-card__media {
+        background-color: #4475A0;
+        background-image: url('https://storage.cloud.google.com/scvo-cms/scvo-cms-content/images/banners/milo.png');
     }
     .mdc-card__supporting-text {
         padding-top: $spacing-unit;

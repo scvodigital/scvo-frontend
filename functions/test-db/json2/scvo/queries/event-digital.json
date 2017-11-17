@@ -1,0 +1,19 @@
+{
+    "size": 5,
+    "from": {{multiply (subtract (default query.page 1) 1) 10}},
+    "_source": [
+        "slug",
+        "title"
+    ],
+    "query": {
+        "bool": {
+            "must": [
+                {
+                    "term": {
+                        "course_type": "Training Course"
+                    }
+                }
+            ]
+        }
+    }
+}

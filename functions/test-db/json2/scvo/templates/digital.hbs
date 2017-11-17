@@ -17,5 +17,48 @@
 </div>
 <div class="container-fluid">
     {{> breadcrumbs}}
+    <div class="mdc-layout-grid">
+        <div class="mdc-layout-grid__inner">
+            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-9 content page-content">
+                <h1>Helping people and third sector organisations in Scotland develop their digital potential</h1>
+                <a href="/digital/about">Find out more</a>
+            </div>
+            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3 cta page-cta">
+                <a href="/digital/about" class="mdc-button mdc-button--raised pull-right">Sign up for our e:bulletin&ensp;<i class="fa fa-envelope-open-o" aria-hidden="true"></i></a>
+                <a href="https://twitter.com/digiscot" class="mdc-button mdc-button--raised pull-right" target="_blank">Follow us on Twitter&ensp;<i class="fa fa-twitter" aria-hidden="true"></i></a>
+            </div>
+        </div>
+    </div>
 </div>
-{{{primaryResponse.hits.hits.[0]._source.rendered.full}}}
+<div class="callout-image inspiration">
+    <div class="container-fluid">
+        <div class="mdc-layout-grid">
+            <div class="mdc-layout-grid__inner">
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4">
+                    <h2>Events</h2>
+                    <ul class="v-margin supplimentary-list">
+                        {{#each supplimentaryResponses.related_events.hits.hits}}
+                        <li><a href="{{replace _source.slug "_" "/"}}">{{{_source.title}}}</a></li>
+                        {{/each}}
+                    </ul>
+                    <a class="mdc-button mdc-button--raised" href="/events?type=digital">Find more events</a>
+                </div>
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4">
+                    <h2>Digital Pioneers</h2>
+                    <div>[ 1 preview ]</div>
+                    <a class="mdc-button mdc-button--raised" href="/digital/evolution/digital-pioneers">Read more case studies</a>
+                </div>
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4">
+                    <h2>Blogs</h2>
+                    <ul class="v-margin supplimentary-list">
+                        {{{supplimentaryResponses.related_posts.hits.hits.[0]._source.rendered.list}}}
+                    </ul>
+                    <a class="mdc-button mdc-button--raised" href="/digital/blogs">Explore our blog posts</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    {{{primaryResponse.hits.hits.[0]._source.rendered.full}}}
+</div>
