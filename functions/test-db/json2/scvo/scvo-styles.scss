@@ -55,12 +55,14 @@ $nav-height: 2.5rem;
     --mdc-theme-primary-light: #C2185B; // Pink 700
     --mdc-theme-primary-dark: #880E4F; // Pink 900
 }
+.digital .callout-image,
 .related-posts,
 .search-result.scvo-document,
 .search-result.scvo-cms-post,
 .gist.scvo-cms-post,
 .list.scvo-cms-post,
 .press-media,
+.digital.blogs,
 .blogs,
 .post,
 .policy-research {
@@ -83,6 +85,7 @@ $nav-height: 2.5rem;
     --mdc-theme-primary-dark: #022347;
 }
 .tfn,
+.post-related-tfn,
 .gist.tfn-post,
 .search-result.tfn-post {
     --mdc-theme-primary: #3b9db1;
@@ -101,6 +104,8 @@ $nav-height: 2.5rem;
 .breadcrumbs,
 .page-content,
 .page-sidebar,
+.library-content,
+.library-sidebar,
 .home .cta-content,
 .home .latest-content,
 .home .gist.scvo-cms-post,
@@ -140,7 +145,6 @@ body {
 main {
     background-color: white;
 }
-.scvo-cms-page-21696 .page-info,
 .container-fluid {
     max-width: 1280px;
     width: 95%;
@@ -180,13 +184,13 @@ main {
 }
 a {
     font-weight: 600;
-    color: var(--mdc-theme-primary-dark, #006064);
+    color: var(--mdc-theme-primary, #00838F);
     text-decoration: none;
     text-decoration-skip: ink;
 }
 a:hover {
     text-decoration: underline;
-    color: var(--mdc-theme-primary, #00838F);
+    color: var(--mdc-theme-primary-dark, #006064);
 }
 .mdc-card__actions a:hover,
 .mdc-button a:hover,
@@ -314,8 +318,10 @@ a:hover {
     }
 }
 .post-related {
-    padding-top: $spacing-unit*1.5;
     border-top: 1px solid rgba(0,0,0,.2);
+    h3 {
+        margin-bottom: $spacing-unit;
+    }
 }
 
 .hero {
@@ -654,20 +660,40 @@ a:hover {
     background-position: center center;
     background-image: linear-gradient(var(--mdc-theme-primary-fade), var(--mdc-theme-primary-fade)),url('https://storage.googleapis.com/scvo-cms/wp-content/uploads/2017/11/Dunaverty-Hall.jpg');
     color: white;
-    padding: $spacing-unit*1.5 0 $spacing-unit*1.5;
+    padding: $spacing-unit 0 $spacing-unit*1.5;
     margin: $spacing-unit 0;
+    li {
+        margin-top: $spacing-unit/2;
+    }
+    .mdc-card__actions {
+        display: none;
+    }
+    .mdc-card__supporting-text {
+        padding-bottom: $spacing-unit;
+    }
+    a,
+    li a,
+    .post-info,
     .mdc-card__actions a,
     .mdc-card__supporting-text,
     .mdc-card__supporting-text a,
     .mdc-card__title {
         color: white;
     }
+    .mdc-button {
+        border: 2px solid white;
+        background: transparent;
+        color: white;
+    }
 }
+.splash-overlay,
 .splash-image {
     position: relative;
-    background-size: cover;
     height: 25vh;
     min-height: $spacing-unit*9;
+}
+.splash-image {
+    background-size: cover;
     background-position: center center;
     // padding-bottom: $spacing-unit;
     .container-fluid {
@@ -734,9 +760,12 @@ a:hover {
     // }
 }
 .home {
+    .splash-image.hello .splash-overlay,
     .splash-image.hello {
-        padding: $spacing-unit*3 0;
-        min-height: 330px;
+        height: 40vh;
+        min-height: 300px;
+    }
+    .splash-image.hello {
         .container-fluid {
             overflow: visible;
             .mdc-layout-grid {
@@ -758,7 +787,8 @@ a:hover {
 }
 .projects-campaigns .breadcrumbs-length-0,
 .services .breadcrumbs-length-0,
-.digital.participation.projects .page-info,
+.digital.charter-fund.projects .page-info,
+.digital.cyber-resilience.projects .page-info,
 .blogs .page-sidebar .page-info,
 .press-media .sidebar h3.blogs {
     display: none;
@@ -841,6 +871,10 @@ h1.mdc-typography--title {
     .credit-union .mdc-card__media {
         background-color: #1976D2;
         background-image: url('https://storage.cloud.google.com/scvo-cms/scvo-cms-content/images/banners/credit-union.png');
+    }
+    .milo .mdc-card__media {
+        background-color: #4475A0;
+        background-image: url('https://storage.cloud.google.com/scvo-cms/scvo-cms-content/images/banners/milo.png');
     }
     .mdc-card__supporting-text {
         padding-top: $spacing-unit;
@@ -1531,8 +1565,8 @@ footer {
     .pagination-distance-4 {
         display: none !important;
     }
-    .splash-image {
-        background-image: linear-gradient(66deg, var(--mdc-theme-primary-dark), var(--mdc-theme-primary)) !important;
+    .splash-overlay {
+        background-image: linear-gradient(66deg, var(--mdc-theme-primary-fade), var(--mdc-theme-primary-fade)) !important;
         h1.header-text {
             font-size: 2rem;
             line-height: 2.2rem;

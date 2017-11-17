@@ -1,0 +1,78 @@
+<div class="grant-cyber-search">
+    <div class="splash-image splash-image-{{primaryResponse.hits.hits.[0]._type}}" style="{{> header_splash_image}}">
+        <div class="splash-overlay" style="{{> header_splash_overlay}}">
+            <div class="container-fluid">
+                <div class="mdc-layout-grid">
+                    {{#if primaryResponse.hits.hits.[0]._source.header_text}}
+                    <img src="{{primaryResponse.hits.hits.[0]._source.header_text}}" alt="{{primaryResponse.hits.hits.[0]._source.title}}"
+                        class="header-text" /> {{else}}
+                    <h1 class="header-text">
+                        <span class="header-text-banner">
+                            {{{supplimentaryResponses.page.hits.hits.[0]._source.title}}}
+                        </span>
+                    </h1> {{/if}}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <ul class="breadcrumbs">
+            <li><a href="/">Home</a></li>
+            <li><a href="/digital">Digital</a></li>
+            <li><a href="/digital/cyber-resilience">Cyber Resilience</a></li>
+        </ul>
+        <div class="mdc-layout-grid">
+            <div class="mdc-layout-grid__inner">
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 content grant-content">
+                    {{#with supplimentaryResponses.page.hits.hits.[0]._source}}
+                    {{{rendered.full}}}
+                    {{/with}}
+
+                    <hr />
+
+                    <!-- <form [searchroute]="'grant_search'">
+                        <div class="mdc-textfield mdc-textfield--upgraded">
+                            <input type="text" class="mdc-textfield__input" name="q" id="grant-cyber-keywords"
+                                value="{{params.query.q}}">
+                            <label class="mdc-textfield__label" for="grant-cyber-keywords">Keywords</label>
+                            <div class="mdc-textfield__bottom-line"></div>
+                        </div>
+                        <div class="mdc-form-field">
+                            <select class="mdc-select" role="listbox" id="grant-cyber-call" name="call">
+                                <option value="" {{#if params.query.call}}{{else}}selected{{/if}}>All funding rounds</option>
+                                {{#each supplimentaryResponses.types.aggregations.calls.buckets}}
+                                <option value="{{slugify key}}" {{#compare ../params.query.call "===" (slugify key)}}selected{{/compare}}>{{key}} ({{doc_count}})</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                        <div class="mdc-form-field">
+                            <select class="mdc-select" role="listbox" id="grant-cyber-tag" name="tag">
+                                <option value="" {{#if params.query.tag}}{{else}}selected{{/if}}>All tags</option>
+                                {{#each supplimentaryResponses.types.aggregations.tags.buckets}}
+                                <option value="{{slugify key}}" {{#compare ../params.query.tag "===" (slugify key)}}selected{{/compare}}>{{key}} ({{doc_count}})</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                        <button class="mdc-button mdc-button--raised" type="submit">
+                            Search
+                        </button>
+                    </form>
+
+                    <hr /> -->
+
+                    <div class="mdc-layout-grid equal-height">
+                        <div class="mdc-layout-grid__inner">
+                            {{#each primaryResponse.hits.hits}}
+                            <div class="mdc-layout-grid__cell mdc-layout-grid__cell">
+                                {{{_source.rendered.scvo_card}}}
+                            </div>
+                            {{/each}}
+                        </div>
+                    </div>
+
+                    {{> pagination paging=paging params=params}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

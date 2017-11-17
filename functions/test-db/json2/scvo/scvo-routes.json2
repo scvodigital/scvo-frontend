@@ -47,7 +47,7 @@
         "jsonLdTemplate": `{:templates/json-ld-search.hbs}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
-            "type": "scvo-cms-page,scvo-cms-post,scvo-member,digital-charter-signatory,goodmoves-legacy,funding-scotland-fund,goodhq-organisation,scvo-document-evidence,scvo-event,scvo-grant-digital,scvo-staff",
+            "type": "scvo-cms-page,scvo-cms-post,scvo-member,digital-charter-signatory,goodmoves-legacy,funding-scotland-fund,goodhq-organisation,scvo-document-evidence,scvo-event,scvo-grant-charter,scvo-staff",
             "template": `{:queries/search-all.json}`
         },
         "elasticsearchConfig": {
@@ -57,11 +57,11 @@
         },
         "multipleResults": true
     },
-    "grant_search": {
-        "pattern": "/digital/projects",
+    "grant_charter_search": {
+        "pattern": "/digital/charter-fund/projects",
         "linkTags": [],
         "metaTags": [],
-        "template": `{:templates/grant-digital-search.hbs}`,
+        "template": `{:templates/grant-charter-search.hbs}`,
         "titleTemplate": `{:templates/page-title.hbs}`,
         "jsonLdTemplate": `{:templates/page-json-ld.hbs}`,
         "defaultParams": {
@@ -69,8 +69,8 @@
         },
         "primarySearchTemplate": {
             "index": "web-content-production",
-            "type": "scvo-grant-digital",
-            "template": `{:queries/grant-digital-search.json}`
+            "type": "scvo-grant-charter",
+            "template": `{:queries/grant-charter-search.json}`
         },
         "supplimentarySearchTemplates": {
             "page": {
@@ -80,8 +80,8 @@
             },
             "types": {
                 "index": "web-content-production",
-                "type": "scvo-grant-digital",
-                "template": `{:queries/grant-digital-aggs.json}`
+                "type": "scvo-grant-charter",
+                "template": `{:queries/grant-charter-aggs.json}`
             },
             "splash": {
                 "index": "web-content-production",
@@ -95,23 +95,91 @@
             "log": "debug"
         }
     },
-    "grant": {
-        "pattern": "/digital/projects/:project_slug",
+    "grant_charter": {
+        "pattern": "/digital/charter-fund/projects/:project_slug",
         "linkTags": [],
         "metaTags": [],
-        "template": `{:templates/grant-digital.hbs}`,
+        "template": `{:templates/grant-charter.hbs}`,
         "titleTemplate": `{:templates/page-title.hbs}`,
         "jsonLdTemplate": `{:templates/page-json-ld.hbs}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
-            "type": "scvo-grant-digital",
-            "template": `{:queries/grant-digital.json}`
+            "type": "scvo-grant-charter",
+            "template": `{:queries/grant-charter.json}`
         },
         "supplimentarySearchTemplates": {
             "types": {
                 "index": "web-content-production",
-                "type": "scvo-grant-digital",
-                "template": `{:queries/grant-digital-aggs.json}`
+                "type": "scvo-grant-charter",
+                "template": `{:queries/grant-charter-aggs.json}`
+            },
+            "splash": {
+                "index": "web-content-production",
+                "type": "scvo-cms-media",
+                "template": `{:queries/event-splash.json}`
+            }
+        },
+        "elasticsearchConfig": {
+            "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
+            "apiVersion": "5.6",
+            "log": "debug"
+        }
+    },
+    "grant_cyber_search": {
+        "pattern": "/digital/cyber-resilience/projects",
+        "linkTags": [],
+        "metaTags": [],
+        "template": `{:templates/grant-cyber-search.hbs}`,
+        "titleTemplate": `{:templates/page-title.hbs}`,
+        "jsonLdTemplate": `{:templates/page-json-ld.hbs}`,
+        "defaultParams": {
+            "pageSize": 12
+        },
+        "primarySearchTemplate": {
+            "index": "web-content-production",
+            "type": "scvo-grant-cyber",
+            "template": `{:queries/grant-cyber-search.json}`
+        },
+        "supplimentarySearchTemplates": {
+            "page": {
+                "index": "web-content-production",
+                "type": "scvo-cms-page",
+                "template": `{:queries/page.json}`
+            },
+            "types": {
+                "index": "web-content-production",
+                "type": "scvo-grant-cyber",
+                "template": `{:queries/grant-cyber-aggs.json}`
+            },
+            "splash": {
+                "index": "web-content-production",
+                "type": "scvo-cms-media",
+                "template": `{:queries/event-splash.json}`
+            }
+        },
+        "elasticsearchConfig": {
+            "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
+            "apiVersion": "5.6",
+            "log": "debug"
+        }
+    },
+    "grant_cyber": {
+        "pattern": "/digital/cyber-resilience/projects/:project_slug",
+        "linkTags": [],
+        "metaTags": [],
+        "template": `{:templates/grant-cyber.hbs}`,
+        "titleTemplate": `{:templates/page-title.hbs}`,
+        "jsonLdTemplate": `{:templates/page-json-ld.hbs}`,
+        "primarySearchTemplate": {
+            "index": "web-content-production",
+            "type": "scvo-grant-cyber",
+            "template": `{:queries/grant-cyber.json}`
+        },
+        "supplimentarySearchTemplates": {
+            "types": {
+                "index": "web-content-production",
+                "type": "scvo-grant-cyber",
+                "template": `{:queries/grant-cyber-aggs.json}`
             },
             "splash": {
                 "index": "web-content-production",
@@ -126,7 +194,7 @@
         }
     },
     "event-search": {
-        "pattern": "/services/events",
+        "pattern": "/events",
         "linkTags": [],
         "metaTags": [],
         "template": `{:templates/event-search.hbs}`,
@@ -155,7 +223,7 @@
         }
     },
     "event_booking": {
-        "pattern": "/services/events/:event_slug/book",
+        "pattern": "/events/:event_slug/book",
         "linkTags": [],
         "metaTags": [],
         "template": `{:templates/event-booking.hbs}`,
@@ -185,7 +253,7 @@
         }
     },
     "event": {
-        "pattern": "/services/events/:event_slug",
+        "pattern": "/events/:event_slug",
         "linkTags": [],
         "metaTags": [],
         "template": `{:templates/event.hbs}`,
@@ -366,6 +434,30 @@
             "log": "debug"
         }
     },
+    "post-digital": {
+        "pattern": "/digital/blogs",
+        "linkTags": [],
+        "metaTags": [],
+        "template": `{:templates/post-category.hbs}`,
+        "titleTemplate": `{:templates/post-category-title.hbs}`,
+        "primarySearchTemplate": {
+            "index": "web-content-production",
+            "type": "scvo-cms-post",
+            "template": `{:queries/post-digital.json}`
+        },
+        "supplimentarySearchTemplates": {
+            "splash": {
+                "index": "web-content-production",
+                "type": "scvo-cms-media",
+                "template": `{:queries/post-splash.json}`
+            }
+        },
+        "elasticsearchConfig": {
+            "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
+            "apiVersion": "5.6",
+            "log": "debug"
+        }
+    },
     "post-briefings": {
         "pattern": "/policy-research/briefings-consultation-responses",
         "linkTags": [],
@@ -477,6 +569,16 @@
             "template": `{:queries/page.json}`
         },
         "supplimentarySearchTemplates": {
+            "related_posts": {
+                "index": "web-content-production",
+                "type": "scvo-cms-post",
+                "template": `{:queries/post-digital-single.json}`
+            },
+            "related_events": {
+                "index": "web-content-production",
+                "type": "scvo-event",
+                "template": `{:queries/event-digital.json}`
+            },
             "splash": {
                 "index": "web-content-production",
                 "type": "scvo-cms-media",
