@@ -626,7 +626,7 @@ a:hover {
 }
 
 .setting-up-a-charity {
-    .mdc-layout-grid {
+    .page-content .mdc-layout-grid {
         margin-top: $spacing-unit;
     }
     .footer-image {
@@ -1016,7 +1016,7 @@ h1.mdc-typography--title {
             padding-left: $spacing-unit*1.4;
         }
         li::before {
-            color: var(--mdc-theme-primary);
+            color: var(--mdc-theme-primary-dark);
             content: "\25A0";
             font-size: 1rem;
             margin-left: -$spacing-unit*1.4;
@@ -1032,6 +1032,9 @@ h1.mdc-typography--title {
         margin-top: $spacing-unit;
         text-transform: none;
         background: transparent;
+    }
+    .scvo-cms-page-20114 .mdc-button {
+        margin-top: 0;
     }
     .menu-sidebar,
     .mdc-card {
@@ -1146,7 +1149,7 @@ ul.breadcrumbs {
             margin-right: $spacing-unit/2;
             vertical-align: text-bottom;
             float: left;
-            margin-top: -0.02rem;
+            margin-top: -0.15rem;
         }
     }
     .post-info-share,
@@ -1174,6 +1177,9 @@ ul.breadcrumbs {
         }
     }
 }
+// .mdc-card .post-info .post-info-author img {
+//     margin-top: -0.02rem;
+// }
 
 blockquote {
     border-left: 0.2rem solid var(--mdc-theme-primary-dark);
@@ -1509,14 +1515,30 @@ footer {
     .pagination-distance-5 {
         display: none !important;
     }
+    .splash-image {
+        .container-fluid {
+            .mdc-layout-grid {
+                width: 100%;
+                img.header-text {
+                    max-height: auto;
+                }
+            }
+        }
+    }
 }
 
 @media screen and (max-width: 450px) {
     .pagination-distance-4 {
         display: none !important;
     }
+    .splash-image {
+        background-image: linear-gradient(66deg, var(--mdc-theme-primary-dark), var(--mdc-theme-primary)) !important;
+        h1.header-text {
+            font-size: 2rem;
+            line-height: 2.2rem;
+        }
+    }
     .home .splash-image.hello {
-        background-image: linear-gradient(var(--mdc-theme-primary-fade), var(--mdc-theme-primary-fade)) !important;
         padding: 0;
         .container-fluid .mdc-layout-grid {
             width: 100%;

@@ -69,7 +69,7 @@
                         <section class="mdc-toolbar__section mdc-toolbar__section--align-start toolbar-menu">
                             <nav id="main-tab-bar" class="mdc-tab-bar">
                                 {{#each menus.main}}
-                                <a class="mdc-tab" href="{{path}}">{{{label}}} {{route.params.path.[0]}}</a>
+                                <a class="mdc-tab" href="{{path}}">{{{label}}}</a>
                                 {{/each}}
                             </nav>
                         </section>
@@ -86,6 +86,7 @@
                     </header>
                     <nav class="mdc-temporary-drawer__content mdc-list-group">
                         <div id="icon-with-text-demo" class="mdc-list">
+                            <a class="mdc-tab" href="/">Home</a>
                             {{#each menus.main}}
                             <a class="mdc-list-item" href="{{path}}" data-mdc-tabindex-handled="true" tabindex="-1" onclick="menu_draw.MDCTemporaryDrawer.open = false">
                                 {{{label}}}
