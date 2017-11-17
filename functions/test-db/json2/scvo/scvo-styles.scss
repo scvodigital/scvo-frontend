@@ -663,11 +663,14 @@ a:hover {
         color: white;
     }
 }
+.splash-overlay,
 .splash-image {
     position: relative;
-    background-size: cover;
     height: 25vh;
     min-height: $spacing-unit*9;
+}
+.splash-image {
+    background-size: cover;
     background-position: center center;
     // padding-bottom: $spacing-unit;
     .container-fluid {
@@ -734,9 +737,12 @@ a:hover {
     // }
 }
 .home {
+    .splash-overlay.hello,
     .splash-image.hello {
         padding: $spacing-unit*3 0;
         min-height: 330px;
+    }
+    .splash-image.hello {
         .container-fluid {
             overflow: visible;
             .mdc-layout-grid {

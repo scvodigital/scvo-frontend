@@ -1,4 +1,4 @@
-<div class="page about">
+<div class="grant-charter">
     <div class="splash-image splash-image-{{primaryResponse.hits.hits.[0]._type}}" style="{{> header_splash_image}}">
         <div class="splash-overlay" style="{{> header_splash_overlay}}">
             <div class="container-fluid">
@@ -17,16 +17,18 @@
         </div>
     </div>
     <div class="container-fluid">
-        {{> breadcrumbs}}
+        <ul class="breadcrumbs">
+            <li><a href="/">Home</a></li>
+            <li><a href="/digital">Digital</a></li>
+            <li><a href="/digital/participation">Participation</a></li>
+            <li><a href="/digital/participation/projects">Projects</a></li>
+        </ul>
         <div class="mdc-layout-grid">
             <div class="mdc-layout-grid__inner">
-                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-9 content page-content">
-                    {{#with primaryResponse.hits.hits.[0]._source}}
-                    {{{rendered.full}}}
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 content grant-content">
+                    {{#with primaryResponse.hits.hits.[0]}}
+                    {{{_source.rendered.scvo_full}}}
                     {{/with}}
-                </div>
-                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3 sidebar page-sidebar">
-                    {{> menu_about}}
                 </div>
             </div>
         </div>

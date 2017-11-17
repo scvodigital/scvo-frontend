@@ -47,7 +47,7 @@
         "jsonLdTemplate": `{:templates/json-ld-search.hbs}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
-            "type": "scvo-cms-page,scvo-cms-post,scvo-member,digital-charter-signatory,goodmoves-legacy,funding-scotland-fund,goodhq-organisation,scvo-document-evidence,scvo-event,scvo-grant-digital,scvo-staff",
+            "type": "scvo-cms-page,scvo-cms-post,scvo-member,digital-charter-signatory,goodmoves-legacy,funding-scotland-fund,goodhq-organisation,scvo-document-evidence,scvo-event,scvo-grant-charter,scvo-staff",
             "template": `{:queries/search-all.json}`
         },
         "elasticsearchConfig": {
@@ -61,7 +61,7 @@
         "pattern": "/digital/projects",
         "linkTags": [],
         "metaTags": [],
-        "template": `{:templates/grant-digital-search.hbs}`,
+        "template": `{:templates/grant-charter-search.hbs}`,
         "titleTemplate": `{:templates/page-title.hbs}`,
         "jsonLdTemplate": `{:templates/page-json-ld.hbs}`,
         "defaultParams": {
@@ -69,8 +69,8 @@
         },
         "primarySearchTemplate": {
             "index": "web-content-production",
-            "type": "scvo-grant-digital",
-            "template": `{:queries/grant-digital-search.json}`
+            "type": "scvo-grant-charter",
+            "template": `{:queries/grant-charter-search.json}`
         },
         "supplimentarySearchTemplates": {
             "page": {
@@ -80,8 +80,8 @@
             },
             "types": {
                 "index": "web-content-production",
-                "type": "scvo-grant-digital",
-                "template": `{:queries/grant-digital-aggs.json}`
+                "type": "scvo-grant-charter",
+                "template": `{:queries/grant-charter-aggs.json}`
             },
             "splash": {
                 "index": "web-content-production",
@@ -99,19 +99,19 @@
         "pattern": "/digital/projects/:project_slug",
         "linkTags": [],
         "metaTags": [],
-        "template": `{:templates/grant-digital.hbs}`,
+        "template": `{:templates/grant-charter.hbs}`,
         "titleTemplate": `{:templates/page-title.hbs}`,
         "jsonLdTemplate": `{:templates/page-json-ld.hbs}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
-            "type": "scvo-grant-digital",
-            "template": `{:queries/grant-digital.json}`
+            "type": "scvo-grant-charter",
+            "template": `{:queries/grant-charter.json}`
         },
         "supplimentarySearchTemplates": {
             "types": {
                 "index": "web-content-production",
-                "type": "scvo-grant-digital",
-                "template": `{:queries/grant-digital-aggs.json}`
+                "type": "scvo-grant-charter",
+                "template": `{:queries/grant-charter-aggs.json}`
             },
             "splash": {
                 "index": "web-content-production",

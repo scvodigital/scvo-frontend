@@ -1,20 +1,22 @@
 <div class="post post-category">
-    <div class="splash-image {{> header_splash}}">
-        <div class="container-fluid">
-            <div class="mdc-layout-grid">
-                {{#if primaryResponse.hits.hits.[0]._source.header_text}}
-                <img src="{{primaryResponse.hits.hits.[0]._source.header_text}}" alt="{{primaryResponse.hits.hits.[0]._source.title}}" class="header-text" />
-                {{else}}
-                <h1 class="header-text">
-                    <span class="header-text-banner">
-                        {{#each primaryResponse.hits.hits.[0]._source.categories_slug}}
-                        {{#compare this "===" (lastItem (split ../params.path '_'))}}
-                        {{{lookup ../primaryResponse.hits.hits.[0]._source.categories @index}}}
-                        {{/compare}}
-                        {{/each}}
-                    </span>
-                </h1>
-                {{/if}}
+    <div class="splash-image" style="{{> header_splash_image}}">
+        <div class="splash-overlay" style="{{> header_splash_overlay}}">
+            <div class="container-fluid">
+                <div class="mdc-layout-grid">
+                    {{#if primaryResponse.hits.hits.[0]._source.header_text}}
+                    <img src="{{primaryResponse.hits.hits.[0]._source.header_text}}" alt="{{primaryResponse.hits.hits.[0]._source.title}}" class="header-text" />
+                    {{else}}
+                    <h1 class="header-text">
+                        <span class="header-text-banner">
+                            {{#each primaryResponse.hits.hits.[0]._source.categories_slug}}
+                            {{#compare this "===" (lastItem (split ../params.path '_'))}}
+                            {{{lookup ../primaryResponse.hits.hits.[0]._source.categories @index}}}
+                            {{/compare}}
+                            {{/each}}
+                        </span>
+                    </h1>
+                    {{/if}}
+                </div>
             </div>
         </div>
     </div>
