@@ -1,27 +1,25 @@
 <div class="page page-full-width">
-    <div class="splash-image {{> header_splash}}">
-        <div class="container-fluid">
-            <div class="mdc-layout-grid">
-                {{#if primaryResponse.hits.hits.[0]._source.header_text}}
-                <img src="{{primaryResponse.hits.hits.[0]._source.header_text}}" alt="{{primaryResponse.hits.hits.[0]._source.title}}" class="header-text" />
-                {{else}}
-                <h1 class="header-text">
-                    <span class="header-text-banner">
-                        {{{primaryResponse.hits.hits.[0]._source.title}}}
-                    </span>
-                </h1>
-                {{/if}}
+    <div class="splash-image splash-image-{{primaryResponse.hits.hits.[0]._type}}" style="{{> header_splash_image}}">
+        <div class="splash-overlay{{#if primaryResponse.hits.hits.[0]._source.hide_overlay}} splash-overlay-hidden{{/if}}">
+            <div class="container-fluid">
+                <div class="mdc-layout-grid">
+                    {{#if primaryResponse.hits.hits.[0]._source.header_text}}
+                    <img src="{{primaryResponse.hits.hits.[0]._source.header_text}}" alt="{{primaryResponse.hits.hits.[0]._source.title}}" class="header-text" />
+                    {{else}}
+                    <h1 class="header-text">
+                        <span class="header-text-banner">
+                            {{{primaryResponse.hits.hits.[0]._source.title}}}
+                        </span>
+                    </h1>
+                    {{/if}}
+                </div>
             </div>
         </div>
     </div>
     <div class="container-fluid">
         {{> breadcrumbs}}
-        <div class="mdc-layout-grid equal-height">
-            <div class="mdc-layout-grid__inner">
-                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 content page-content">
-                    {{{primaryResponse.hits.hits.[0]._source.rendered.full}}}
-                </div>
-            </div>
+        <div class="content page-content">
+            {{{primaryResponse.hits.hits.[0]._source.rendered.full}}}
         </div>
     </div>
 </div>

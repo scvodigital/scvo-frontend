@@ -13,9 +13,10 @@ $nav-height: 2.5rem;
     --mdc-theme-secondary-light: #FFA000; // Amber 700
     --mdc-theme-secondary-dark: #FF6F00; // Amber 900
     --mdc-theme-background: #ECEFF1; // Blue Grey 50
-    --mdc-footer-primary: #4A148C; // Purple 900
-    --mdc-footer-primary-light: #D81B60; // Pink 600
-    --mdc-footer-primary-dark: #290b4d;
+    --mdc-footer-primary: #371448;
+    --mdc-footer-primary-highlight: #B3185B;
+    --mdc-footer-primary-light: #592864;
+    --mdc-footer-primary-dark: #251032;
     --mdc-site-background: #290b4d; // was #263238 Blue Grey 900
     --mdc-layout-grid-margin-desktop: 0;
     --mdc-layout-grid-margin-tablet: 0;
@@ -46,7 +47,7 @@ $nav-height: 2.5rem;
     --mdc-theme-primary-dark: #58a934;
 }
 .project,
-.campaigns,
+.campaign,
 .open-government,
 .projects-campaigns {
     --mdc-theme-primary: #AD1457; // Pink 800
@@ -54,12 +55,14 @@ $nav-height: 2.5rem;
     --mdc-theme-primary-light: #C2185B; // Pink 700
     --mdc-theme-primary-dark: #880E4F; // Pink 900
 }
+.digital .callout-image,
 .related-posts,
 .search-result.scvo-document,
 .search-result.scvo-cms-post,
 .gist.scvo-cms-post,
 .list.scvo-cms-post,
 .press-media,
+.digital.blogs,
 .blogs,
 .post,
 .policy-research {
@@ -82,6 +85,7 @@ $nav-height: 2.5rem;
     --mdc-theme-primary-dark: #022347;
 }
 .tfn,
+.post-related-tfn,
 .gist.tfn-post,
 .search-result.tfn-post {
     --mdc-theme-primary: #3b9db1;
@@ -97,7 +101,11 @@ $nav-height: 2.5rem;
     --mdc-theme-primary-light: #6FB744;
     --mdc-theme-primary-dark: #6FB744;
 }
+.breadcrumbs,
 .page-content,
+.page-sidebar,
+.library-content,
+.library-sidebar,
 .home .cta-content,
 .home .latest-content,
 .home .gist.scvo-cms-post,
@@ -129,7 +137,7 @@ html {
     line-height: 1.45;
 }
 body {
-    background-color: var(--mdc-site-background, #263238);
+    background-color: var(--mdc-footer-primary-dark, #263238);
     min-height: 100%;
     padding: 0;
     margin: 0;
@@ -137,7 +145,6 @@ body {
 main {
     background-color: white;
 }
-.scvo-cms-page-21696 .page-info,
 .container-fluid {
     max-width: 1280px;
     width: 95%;
@@ -177,13 +184,13 @@ main {
 }
 a {
     font-weight: 600;
-    color: var(--mdc-theme-primary-dark, #006064);
+    color: var(--mdc-theme-primary, #00838F);
     text-decoration: none;
     text-decoration-skip: ink;
 }
 a:hover {
     text-decoration: underline;
-    color: var(--mdc-theme-primary, #00838F);
+    color: var(--mdc-theme-primary-dark, #006064);
 }
 .mdc-card__actions a:hover,
 .mdc-button a:hover,
@@ -191,8 +198,23 @@ a:hover {
 .mdc-toolbar a:hover {
     text-decoration: none;
 }
+.mdc-button:after,
+.mdc-button:before {
+    background-color: var(--mdc-theme-primary-fade);
+}
+.mdc-button:not(.mdc-ripple-upgraded):active:after,
+.mdc-button:not(.mdc-ripple-upgraded):focus:before,
+.mdc-button:not(.mdc-ripple-upgraded):hover:before {
+    opacity: 0.1;
+}
 
 .home {
+    .splash-image {
+        .mdc-button {
+            color: white;
+            border-color: white;
+        }
+    }
     .featured-content {
         .featured.mdc-card {
             height: 20rem;
@@ -208,7 +230,7 @@ a:hover {
             }
         }
     }
-    .cta-content.splash-image {
+    .cta-content.callout-image {
         background-image: linear-gradient(var(--mdc-theme-primary-fade),var(--mdc-theme-primary-fade)),url('https://storage.googleapis.com/scvo-cms/wp-content/uploads/2017/10/Drake-Music-03.jpg');
         height: auto;
         padding: $spacing-unit 0 $spacing-unit*3.25;
@@ -294,6 +316,12 @@ a:hover {
     .post-info-closing-date,
     .post-info-published {
         font-weight: 400;
+    }
+}
+.post-related {
+    border-top: 1px solid rgba(0,0,0,.2);
+    h3 {
+        margin-bottom: $spacing-unit;
     }
 }
 
@@ -413,7 +441,7 @@ a:hover {
                 .mdc-textfield__input:focus,
                 .mdc-textfield__input:hover {
                     color: rgba(255,255,255,.87);
-                    border: $spacing-unit/10 solid rgba(255,255,255,.75);
+                    border: 2px solid rgba(255,255,255,.75);
                     padding: 0 $spacing-unit/2;
                     line-height: $spacing-unit*2;
                     background: transparent;
@@ -438,10 +466,16 @@ a:hover {
             .mdc-toolbar__icon:focus {
                 outline: none;
             }
-            .mdc-toolbar__search {
-                position: absolute;
-                right: $spacing-unit/2;
-                bottom: $spacing-unit*2;
+            .mdc-toolbar__icon--menu {
+                display: none;
+            }
+            .search_form {
+                position: relative;
+                .mdc-toolbar__search {
+                    position: absolute;
+                    right: $spacing-unit/2;
+                    bottom: $spacing-unit*2;
+                }
             }
             .mdc-tab-bar {
                 overflow: hidden;
@@ -601,27 +635,30 @@ a:hover {
 
 .action-buttons-right {
     flex-direction: row-reverse;
-    border-top: 1px solid #dddddd;
+    border-top: 1px solid rgba(0,0,0,.2);
 }
 
-.setting-up-a-charity .footer-image {
-    position: relative;
-    background-size: cover;
-    background-position: center center;
-    background-image: linear-gradient(var(--mdc-theme-primary-fade), var(--mdc-theme-primary-fade)),url('https://storage.googleapis.com/scvo-cms/wp-content/uploads/2017/10/Drake-Music-06.jpg');
-    text-align: center;
-    color: white;
-    padding: $spacing-unit 0 $spacing-unit*2.5;
-    h3 {
-        font-weight: 800;
-        padding-bottom: $spacing-unit;
-    }
-    .mdc-button {
-        color: white;
-        border: 2px solid white;
+.setting-up-a-charity {
+    .page-content .mdc-layout-grid {
         margin-top: $spacing-unit;
-        text-transform: none;
-        background: transparent;
+    }
+    .footer-image {
+        position: relative;
+        background-size: cover;
+        background-position: center center;
+        background-image: linear-gradient(rgba(173, 20, 87, 0.89), rgba(173, 20, 87, 0.89)),url('https://storage.googleapis.com/scvo-cms/wp-content/uploads/2017/10/Drake-Music-06.jpg');
+        text-align: center;
+        color: white;
+        padding: $spacing-unit 0 $spacing-unit*2.5;
+        h2 {
+            font-weight: 800;
+            padding-bottom: $spacing-unit;
+        }
+        .mdc-button {
+            color: white;
+            background: transparent;
+            border: 2px solid white;
+        }
     }
 }
 .digital .callout-image {
@@ -630,20 +667,46 @@ a:hover {
     background-position: center center;
     background-image: linear-gradient(var(--mdc-theme-primary-fade), var(--mdc-theme-primary-fade)),url('https://storage.googleapis.com/scvo-cms/wp-content/uploads/2017/11/Dunaverty-Hall.jpg');
     color: white;
-    padding: $spacing-unit*1.5 0 $spacing-unit*1.5;
+    padding: $spacing-unit 0 $spacing-unit*1.5;
     margin: $spacing-unit 0;
+    li {
+        margin-top: $spacing-unit/2;
+    }
+    .mdc-card__actions {
+        display: none;
+    }
+    .mdc-card__supporting-text {
+        padding-bottom: $spacing-unit;
+    }
+    a,
+    li a,
+    .post-info,
     .mdc-card__actions a,
     .mdc-card__supporting-text,
     .mdc-card__supporting-text a,
     .mdc-card__title {
         color: white;
     }
+    .mdc-button {
+        border: 2px solid white;
+        background: transparent;
+        color: white;
+    }
 }
+.splash-overlay,
 .splash-image {
     position: relative;
-    background-size: cover;
     height: 25vh;
     min-height: $spacing-unit*9;
+}
+.splash-overlay {
+    background-image: linear-gradient(66deg, var(--mdc-theme-primary-fade), var(--mdc-theme-primary-fade) 47%, transparent 47.1%, transparent);
+}
+.splash-overlay.splash-overlay-hidden {
+    background-image: none;
+}
+.splash-image {
+    background-size: cover;
     background-position: center center;
     // padding-bottom: $spacing-unit;
     .container-fluid {
@@ -667,7 +730,7 @@ a:hover {
         color: #fff;
         font-weight: 800;
         font-size: 3rem;
-        line-height: $spacing-unit*3;
+        line-height: $spacing-unit*3.5;
         letter-spacing: -0.08rem;
         margin-bottom: $spacing-unit/2;
         .photo-wee {
@@ -700,7 +763,7 @@ a:hover {
 .splash-image-scvo-document-general h1.header-text,
 .splash-image-scvo-document-evidence h1.header-text {
     font-size: 2rem;
-    line-height: 2rem;
+    line-height: 2.2rem;
     // padding-left: 0.75rem;
     // .header-text-banner {
     //     display: inline;
@@ -710,16 +773,22 @@ a:hover {
     // }
 }
 .home {
-    .splash-image {
-        padding: $spacing-unit*3 0;
-        height: 300px;
-        .mdc-layout-grid {
-            margin-left: 5%;
-            width: 39%;
-        }
-        h1.header-text {
-            font-size: 5rem;
-            line-height: 4rem;
+    .splash-image.hello .splash-overlay,
+    .splash-image.hello {
+        height: 40vh;
+        min-height: 300px;
+    }
+    .splash-image.hello {
+        .container-fluid {
+            overflow: visible;
+            .mdc-layout-grid {
+                margin-left: 5%;
+                width: 39%;
+                h1.header-text {
+                    font-size: 5rem;
+                    line-height: 4rem;
+                }
+            }
         }
     }
 }
@@ -731,8 +800,12 @@ a:hover {
 }
 .projects-campaigns .breadcrumbs-length-0,
 .services .breadcrumbs-length-0,
-.digital.participation.projects .page-info,
+.digital.charter-fund.projects .page-info,
+.digital.cyber-resilience.projects .page-info,
 .blogs .page-sidebar .page-info,
+.policy-research.briefings-consultation-responses .mdc-card__actions,
+.policy-research.research .mdc-card__actions,
+.press-media .mdc-card__actions,
 .press-media .sidebar h3.blogs {
     display: none;
 }
@@ -751,6 +824,11 @@ a:hover {
     .mdc-layout-grid__inner {
         margin-bottom: $spacing-unit/2;
     }
+}
+.policy-research.briefings-consultation-responses .mdc-card__supporting-text,
+.policy-research.research .mdc-card__supporting-text,
+.press-media .mdc-card__supporting-text {
+    padding-bottom: $spacing-unit;
 }
 
 .mdc-form-field,
@@ -815,6 +893,10 @@ h1.mdc-typography--title {
         background-color: #1976D2;
         background-image: url('https://storage.cloud.google.com/scvo-cms/scvo-cms-content/images/banners/credit-union.png');
     }
+    .milo .mdc-card__media {
+        background-color: #4475A0;
+        background-image: url('https://storage.cloud.google.com/scvo-cms/scvo-cms-content/images/banners/milo.png');
+    }
     .mdc-card__supporting-text {
         padding-top: $spacing-unit;
     }
@@ -827,7 +909,7 @@ h1.mdc-typography--title {
         background-position: center center;
     }
 }
-.projects {
+.section-projects {
     .mdc-card__media {
         height: 128px;
         background-size: cover;
@@ -848,7 +930,7 @@ h1.mdc-typography--title {
         background-image: url('https://storage.cloud.google.com/scvo-cms/scvo-cms-content/images/banners/cjs.png');
     }
 }
-.campaigns {
+.section-campaigns {
     .mdc-card__media {
         height: 128px;
         background-size: cover;
@@ -882,6 +964,7 @@ h1.mdc-typography--title {
     }
 }
 .mdc-card__actions {
+    padding: $spacing-unit/2 $spacing-unit $spacing-unit;
     .mdc-card__action {
         font-weight: 800;
         font-size: 0.9rem;
@@ -989,7 +1072,7 @@ h1.mdc-typography--title {
             padding-left: $spacing-unit*1.4;
         }
         li::before {
-            color: var(--mdc-theme-primary);
+            color: var(--mdc-theme-primary-dark);
             content: "\25A0";
             font-size: 1rem;
             margin-left: -$spacing-unit*1.4;
@@ -998,9 +1081,27 @@ h1.mdc-typography--title {
             top: 0em;
         }
     }
+    .mdc-button {
+        color: var(--mdc-theme-primary);
+        background: white;
+        border: 2px solid var(--mdc-theme-primary);
+        margin-top: $spacing-unit;
+        text-transform: none;
+        background: transparent;
+    }
+    .scvo-cms-page-20114 .mdc-button {
+        margin-top: 0;
+    }
+    .menu-sidebar,
+    .mdc-card {
+        .mdc-button {
+            margin-top: 0;
+            // color: white;
+            // background: var(--mdc-theme-primary);
+        }
+    }
     .mdc-card__actions ul,
     ul.supplimentary-list,
-    ul.breadcrumbs,
     ul.inline-list {
         li {
             padding-left: 0;
@@ -1022,7 +1123,7 @@ hr {
     height: 1px;
     background-color: white;
     border: none;
-    border-bottom: 1px solid var(--mdc-theme-primary-fade);
+    border-bottom: 1px solid rgba(0,0,0,.2);
 }
 
 ul.breadcrumbs {
@@ -1031,11 +1132,13 @@ ul.breadcrumbs {
     height: $nav-height;
     line-height: $nav-height;
     list-style: none;
-    border-bottom: 1px solid var(--mdc-theme-primary-fade);
+    border-bottom: 1px solid rgba(0,0,0,.2);
+    font-size: 0;
     li {
         display: inline-block;
         margin: 0;
         padding: 0;
+        font-size: 1rem;
         // color: white;
         // a,
         // a:hover {
@@ -1045,11 +1148,11 @@ ul.breadcrumbs {
     li:before {
         content: "\203A" !important;
         font-weight: 800;
-        margin-right: $spacing-unit/4;
-        width: $spacing-unit/2;
-        display: inline-block;
+        width: auto;
         padding: 0;
-        // color: white;
+        margin: 0 $spacing-unit/2;
+        display: inline-block;
+        color: rgba(0,0,0,.6);
     }
     li.pull-right:before,
     li:first-child:before {
@@ -1062,9 +1165,9 @@ ul.breadcrumbs {
         content: "";
         margin: 0;
     }
-    li:not(:last-child) {
-        margin-right: $spacing-unit/4;
-    }
+    // li:not(:last-child) {
+    //     margin-right: $spacing-unit/4;
+    // }
 }
 .spacer {
     margin: 0 0 $spacing-unit*1.5;
@@ -1108,7 +1211,7 @@ ul.breadcrumbs {
     .post-info-share,
     .post-info-categories {
         .fa {
-            color: var(--mdc-theme-primary-dark);
+            color: var(--mdc-theme-primary);
         }
         .inline-list {
             li {
@@ -1117,19 +1220,22 @@ ul.breadcrumbs {
                 margin: 0 0 0.25rem 0.1rem;
                 padding: 0 !important;
                 a {
-                    background: var(--mdc-theme-primary-dark);
+                    background: var(--mdc-theme-primary);
                     padding: 0.05rem 0.4rem 0.1rem;
                     border-radius: $spacing-unit;
                     color: #fff;
                 }
                 a:hover {
-                    background: var(--mdc-theme-primary);
+                    background: var(--mdc-theme-primary-dark);
                     text-decoration: none;
                 }
             }
         }
     }
 }
+// .mdc-card .post-info .post-info-author img {
+//     margin-top: -0.02rem;
+// }
 
 blockquote {
     border-left: 0.2rem solid var(--mdc-theme-primary-dark);
@@ -1208,7 +1314,7 @@ p:last-child {
     }
     .post-info {
         margin: $spacing-unit/2 0 $spacing-unit*1.5;
-        border-bottom: 1px solid var(--mdc-theme-primary-fade);
+        border-bottom: 1px solid rgba(0,0,0,.2);
         padding: 0 0 $spacing-unit;
     }
     .page-info {
@@ -1216,7 +1322,7 @@ p:last-child {
         color: #777;
         .page-info-updated {
             margin: $spacing-unit*1.5 0 $spacing-unit/2;
-            border-top: 1px solid #aaa;
+            border-top: 1px solid rgba(0,0,0,.2);
             padding: $spacing-unit 0 0;
             font-size: 95%;
         }
@@ -1332,7 +1438,7 @@ p:last-child {
 footer {
     color: white;
     background-color: var(--mdc-footer-primary);
-    border-top: 0.6rem solid var(--mdc-footer-primary-light);
+    border-top: 0.6rem solid var(--mdc-footer-primary-highlight);
     .footer-main {
         padding: $spacing-unit*2.5 0 $spacing-unit*2;
     }
@@ -1391,21 +1497,44 @@ footer {
     .mdc-toolbar-fixed-adjust {
         padding-top: $spacing-unit*8.5;
     }
+    .splash-overlay {
+        background-image: linear-gradient(66deg, var(--mdc-theme-primary-fade), var(--mdc-theme-primary-fade) 52%, transparent 52.1%, transparent);
+    }
+    .mdc-toolbar .mdc-toolbar__row .container-fluid #upper-tab-bar {
+        margin-right: 0;
+    }
+    .mdc-toolbar .mdc-toolbar__row .container-fluid .mdc-tab-bar .mdc-tab {
+        padding: 0 $spacing-unit/2;
+    }
+    .home .latest-content .gist img.photo-wee,
+    .gist .thumbnail img {
+        height: 50px;
+        width: 50px;
+    }
 }
 
 @media screen and (max-width: 991px) {
     .mdc-toolbar {
-        .container-fluid .mdc-toolbar__icon--menu {
-            visibility: visible;
-            width: auto;
-        }
         #upper-tab-bar,
         .mdc-toolbar__row.toolbar-nav {
             display: none;
         }
-        .mdc-toolbar__row .container-fluid .mdc-toolbar__search {
-            bottom: 0;
+        .mdc-toolbar__row .container-fluid {
+            .mdc-toolbar__icon--menu {
+                visibility: visible;
+                width: auto;
+                display: block;
+            }
+            .search_form {
+                margin-right: $spacing-unit;
+                .mdc-toolbar__search {
+                    bottom: 0;
+                }
+            }
         }
+    }
+    .splash-overlay {
+        background-image: linear-gradient(66deg, var(--mdc-theme-primary-fade), var(--mdc-theme-primary-fade) 57%, transparent 57.1%, transparent);
     }
     .latest-content {
         .mdc-layout-grid {
@@ -1448,11 +1577,24 @@ footer {
         font-size: 0.92rem;
         line-height: 1.25;
     }
+    .splash-overlay {
+        background-image: linear-gradient(66deg, var(--mdc-theme-primary-fade), var(--mdc-theme-primary-fade) 67%, transparent 67.1%, transparent);
+    }
     .breadcrumbs {
         font-size: 85%;
     }
     .pagination-distance-5 {
         display: none !important;
+    }
+    .splash-image {
+        .container-fluid {
+            .mdc-layout-grid {
+                width: 100%;
+                img.header-text {
+                    max-height: auto;
+                }
+            }
+        }
     }
 }
 
@@ -1460,9 +1602,27 @@ footer {
     .pagination-distance-4 {
         display: none !important;
     }
+    .splash-overlay {
+        background-image: linear-gradient(66deg, var(--mdc-theme-primary-fade), var(--mdc-theme-primary-fade)) !important;
+        h1.header-text {
+            font-size: 2rem;
+            line-height: 2.2rem;
+        }
+    }
+    .home .splash-image.hello {
+        padding: 0;
+        .container-fluid .mdc-layout-grid {
+            width: 100%;
+            margin: 0;
+            h1.header-text {
+                font-size: 3rem;
+                line-height: 3.3rem;
+            }
+        }
+    }
 }
 
-@media screen and (max-width: 376px) {
+@media screen and (max-width: 395px) {
     .mdc-toolbar__title {
         width: 38px;
         overflow: hidden;

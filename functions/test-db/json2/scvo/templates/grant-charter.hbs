@@ -1,4 +1,4 @@
-<div class="members">
+<div class="grant-charter">
     <div class="splash-image splash-image-{{primaryResponse.hits.hits.[0]._type}}" style="{{> header_splash_image}}">
         <div class="splash-overlay{{#if primaryResponse.hits.hits.[0]._source.hide_overlay}} splash-overlay-hidden{{/if}}">
             <div class="container-fluid">
@@ -8,7 +8,7 @@
                     {{else}}
                     <h1 class="header-text">
                         <span class="header-text-banner">
-                            SCVO member organisations
+                            {{{primaryResponse.hits.hits.[0]._source.title}}}
                         </span>
                     </h1>
                     {{/if}}
@@ -19,21 +19,16 @@
     <div class="container-fluid">
         <ul class="breadcrumbs">
             <li><a href="/">Home</a></li>
-            <li><a href="/about">About SCVO</a></li>
+            <li><a href="/digital">Digital</a></li>
+            <li><a href="/digital/charter-fund">Charter fund</a></li>
+            <li><a href="/digital/charter-fund/projects">Projects</a></li>
         </ul>
         <div class="mdc-layout-grid">
-            <div class="mdc-layout-grid">
-                <div class="mdc-layout-grid__inner">
-                    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-9 content page-content">
-                        <p>[Search filters TBC, currently showing 5 random]</p>
-
-                        {{#each primaryResponse.hits.hits}}
-                        {{{this._source.rendered.list}}}
-                        {{/each}}
-                    </div>
-                    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3 sidebar page-sidebar">
-                        {{> menu_about}}
-                    </div>
+            <div class="mdc-layout-grid__inner">
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 content grant-content">
+                    {{#with primaryResponse.hits.hits.[0]}}
+                    {{{_source.rendered.scvo_full}}}
+                    {{/with}}
                 </div>
             </div>
         </div>

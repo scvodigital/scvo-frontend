@@ -1,0 +1,29 @@
+{
+    "size": 1,
+    "_source": [
+        "rendered.list"
+    ],
+    "query": {
+		"function_score": {
+            "query": {
+                "bool": {
+                    "must": {
+                        "match_all": {}
+                    },
+                    "should": [
+                        {
+                            "terms": {
+                                "categories_id": [
+                                    {{join primaryResponse.hits.hits.[0]._source.categories_id}}
+                                ]
+                            }
+                        }
+                    ],
+                    "minimum_should_match": 1
+                }
+            },
+            "random_score": {},
+			"score_mode": "sum"
+        }
+    }
+}

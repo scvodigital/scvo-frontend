@@ -15,7 +15,7 @@ export class RouterService {
     public currentRoute: RouteMatch = null;
     public loaded: boolean = false;
 
-    _domainStripper: RegExp = null; 
+    _domainStripper: RegExp = null;
     get domainStripper(): RegExp {
         if(!this._domainStripper){
             var stripDomains = this.scvoContext.domains.map((domain: string) => { return domain.replace(/\./g, '\\.'); });
@@ -24,7 +24,7 @@ export class RouterService {
         }
         return this._domainStripper;
     }
-    
+
     constructor(private router: Router, private cookieService: CookieService) {
         this.scvoContext = (<any>window).contextData;
         var routes = this.scvoContext.routes;
@@ -48,7 +48,7 @@ export class RouterService {
                     this.loaded = true;
                     return;
                 }
-                
+
                 this.scvoRouter.execute(event.url).then((routeMatch: RouteMatch) => {
                     // HACK: To allow Angular to take over the pre-rendered site
                     this.currentRoute = routeMatch;
@@ -57,7 +57,7 @@ export class RouterService {
             }
         });
     }
-    
+
     cleanHtml(html: string, paramsQuery: any = {}, multipleResults: boolean = false): string {
         html = html
             .replace(this.domainStripper, '')

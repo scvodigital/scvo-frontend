@@ -1,19 +1,75 @@
-<div class="splash-image {{> header_splash}}">
-    <div class="container-fluid">
-        <div class="mdc-layout-grid">
-            {{#if primaryResponse.hits.hits.[0]._source.header_text}}
-            <img src="{{primaryResponse.hits.hits.[0]._source.header_text}}" alt="{{primaryResponse.hits.hits.[0]._source.title}}" class="header-text" />
-            {{else}}
-            <h1 class="header-text">
-                <span class="header-text-banner">
-                    {{{primaryResponse.hits.hits.[0]._source.title}}}
-                </span>
-            </h1>
-            {{/if}}
+<div class="splash-image splash-image-{{primaryResponse.hits.hits.[0]._type}}" style="{{> header_splash_image}}">
+    <div class="splash-overlay{{#if primaryResponse.hits.hits.[0]._source.hide_overlay}} splash-overlay-hidden{{/if}}">
+        <div class="container-fluid">
+            <div class="mdc-layout-grid">
+                {{#if primaryResponse.hits.hits.[0]._source.header_text}}
+                <img src="{{primaryResponse.hits.hits.[0]._source.header_text}}" alt="{{primaryResponse.hits.hits.[0]._source.title}}" class="header-text" />
+                {{else}}
+                <h1 class="header-text">
+                    <span class="header-text-banner">
+                        {{{primaryResponse.hits.hits.[0]._source.title}}}
+                    </span>
+                </h1>
+                {{/if}}
+            </div>
         </div>
     </div>
 </div>
 <div class="container-fluid">
     {{> breadcrumbs}}
+    <div class="mdc-layout-grid">
+        <div class="mdc-layout-grid__inner">
+            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-9 content page-content">
+                <h1>Helping people and third sector organisations in Scotland develop their digital potential</h1>
+                <a href="/digital/about">Find out more</a>
+            </div>
+            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3 cta page-cta">
+                <a href="/digital/about" class="mdc-button mdc-button--raised pull-right">Sign up for our e:bulletin&ensp;<i class="fa fa-envelope-open-o" aria-hidden="true"></i></a>
+                <a href="https://twitter.com/digiscot" class="mdc-button mdc-button--raised pull-right" target="_blank">Follow us on Twitter&ensp;<i class="fa fa-twitter" aria-hidden="true"></i></a>
+            </div>
+        </div>
+    </div>
 </div>
-{{{primaryResponse.hits.hits.[0]._source.rendered.full}}}
+<div class="callout-image inspiration">
+    <div class="container-fluid">
+        <div class="mdc-layout-grid">
+            <div class="mdc-layout-grid__inner">
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4">
+                    <h2>Events</h2>
+                    <ul class="v-margin supplimentary-list">
+                        {{#each supplimentaryResponses.related_events.hits.hits}}
+                        <li>
+                            <a href="/events/{{replace _source.slug "_" "/"}}">{{{_source.title}}}</a><br />
+                            <span aria-hidden="true" class="fa fa-calendar"></span> {{moment _source.date_start "Do MMM YYYY"}}
+                        </li>
+                        {{/each}}
+                    </ul>
+                    <a class="mdc-button mdc-button--raised" href="/events?type=digital">Find more events</a>
+                </div>
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4">
+                    <h2>Digital Pioneers</h2>
+                    <div class="mdc-card">
+                        <section class="mdc-card__primary">
+                            <h1 class="mdc-card__title mdc-card__title--large">iConnect North East</h1>
+                        </section>
+                        <section class="mdc-card__supporting-text">
+                            <p><strong>From Facebook campaigns to Google Analytics, iConnect North East tell us what digital has to offer.</strong></p>
+                            <p>We’ve always used digital as an organisation; it plays an important role for us to get the day to day work done. <a href="/digital/evolution/pioneers/iconnect-north-east">Read more</a></p>
+                        </section>
+                    </div>
+                    <a class="mdc-button mdc-button--raised" href="/digital/evolution/digital-pioneers">Read more case studies</a>
+                </div>
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4">
+                    <h2>Blogs</h2>
+                    <ul class="v-margin supplimentary-list">
+                        {{{supplimentaryResponses.related_posts.hits.hits.[0]._source.rendered.list}}}
+                    </ul>
+                    <a class="mdc-button mdc-button--raised" href="/digital/blogs">Explore our blog posts</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="container-fluid">
+    {{{primaryResponse.hits.hits.[0]._source.rendered.full}}}
+</div>

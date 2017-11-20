@@ -3,6 +3,7 @@ import * as stream from 'stream';
 import * as fs from 'fs';
 import * as path from 'path';
 import * as util from 'util';
+import * as url from 'url';
 
 // Module imports
 import * as functions from 'firebase-functions';
@@ -32,6 +33,9 @@ exports.index = functions.https.onRequest((req: functions.Request, res: function
     return new Promise((resolve, reject) => {
         userId(req, res, () => {
             var domain = req.hostname.replace(/www\./, '');
+            if (domain === 'localhost') {
+                domain = req.get('x-forwarded-host').split(":")[0];
+            }
             var siteKey = domainMap[domain] ? domainMap[domain] : 'scvo';
             var path = '/sites/' + siteKey;
 
@@ -169,7 +173,7 @@ const siteCmsMap = {
 };
 
 const domainMap = {
-    "localhost": "scvo",
+    "localhost": "humanrightsdeclaration",
     "scvo.local": "scvo",
     "127.0.0.1": "scvo",
     "scvo.net": "scvo",
