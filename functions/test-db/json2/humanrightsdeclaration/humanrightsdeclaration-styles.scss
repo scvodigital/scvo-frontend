@@ -21,10 +21,20 @@ body {
     margin: 0;
     font-family: "Rubik";
 }
+.mdc-temporary-drawer__header-content,
 header.mdc-toolbar,
 main {
     color: $brand-colour;
     background-color: white;
+}
+.mdc-temporary-drawer__header-content img.brand-logo-mobile {
+    max-width: 100%;
+}
+.mdc-temporary-drawer__header:before {
+    padding-top: 34%;
+}
+.mdc-list-item {
+    direction: ltr;
 }
 main {
     padding-bottom: $spacing-unit;
@@ -32,6 +42,18 @@ main {
 footer {
     background: $brand-colour;
 }
+a {
+    text-decoration-skip: ink;
+}
+::-moz-selection {
+    color: white;
+    background: $brand-colour;
+}
+::selection {
+    color: white;
+    background: $brand-colour;
+}
+
 .container-fluid {
     max-width: 1280px;
     width: 95%;
@@ -62,6 +84,9 @@ footer {
             }
         }
     }
+    .mdc-toolbar__icon--menu {
+        display: none;
+    }
     .mdc-toolbar__section--align-end {
         display: block;
     }
@@ -89,6 +114,8 @@ footer {
     display: block;
     width: 50%;
     margin: 0 auto;
+    padding: 10px 15px;
+    height: auto;
 }
 
 .mdc-tab,
@@ -101,6 +128,11 @@ li,
 div {
     font-family: "Rubik";
     font-weight: 700;
+    color: $brand-colour;
+}
+.mdc-toolbar__icon,
+a {
+    color: $brand-colour;
 }
 em {
     font-family: "Rubik";
@@ -113,6 +145,10 @@ p, li, div {
 p.quote {
     text-align: center;
     font-size: 1.3rem;
+}
+
+.mdc-toolbar__icon {
+    float: right;
 }
 
 .signatories {
@@ -261,6 +297,19 @@ footer {
                     display: none;
                 }
             }
+        }
+        .mdc-tab-bar {
+            display: none;
+        }
+        .mdc-toolbar__icon--menu {
+            display: block;
+            position: absolute;
+            top: 0;
+            right: 0;
+            z-index: 3;
+        }
+        .mdc-toolbar__icon--menu:focus {
+            outline: none;
         }
     }
     .mdc-button {
