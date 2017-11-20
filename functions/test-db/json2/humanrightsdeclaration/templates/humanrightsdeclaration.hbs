@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>Scotland Declaration on Human Rights</title>
+    <title>The Scotland Declaration on Human Rights</title>
     <base href="/">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
@@ -35,40 +35,54 @@
 <body class="{{replace route.params.path '_' ' '}}">
     <scvo-site>
         <div class="mdc-typography">
-            <header class="mdc-toolbar mdc-toolbar--fixed">
+            <header class="mdc-toolbar">
                 <div class="mdc-toolbar__row">
                     <div class="container-fluid">
                         <section class="mdc-toolbar__section mdc-toolbar__section--align-start">
-                            <button class="menu mdc-toolbar__icon mdc-toolbar__icon--menu" onclick="menu_draw.MDCTemporaryDrawer.open = true">
-                                <span class="fa fa-2x fa-bars" aria-hidden="true"></span>
-                            </button>
                             <span class="mdc-toolbar__title catalog-title">
-                                <a href="/" class="brand-logo" title="SCVO">
-                                    <img src="assets/images/scvo-logo.png" />
+                                <a href="/" class="brand-logo" title="The Scotland Declaration on Human Rights">
+                                    <img src="https://storage.cloud.google.com/humanrightsdeclaration/SDHR-logo-RGB-TALL-LARGE.PNG" class="brand-logo-mobile" />
+                                    <img src="https://storage.cloud.google.com/humanrightsdeclaration/SDHR-logo-RGB-WIDE-LARGE.PNG" class="brand-logo-desktop" />
                                 </a>
                             </span>
                         </section>
-                        <section class="mdc-toolbar__section mdc-toolbar__section--align-end toolbar-search">
-                            <nav id="upper-tab-bar" class="mdc-tab-bar">
-                                <a class="mdc-tab" href="/signin">Sign in</a>
-                                <a class="mdc-tab" href="/signup">Sign up</a>
-                                <a class="mdc-tab" href="/about">About</a>
+                        <section class="mdc-toolbar__section mdc-toolbar__section--align-end">
+                            <nav id="main-tab-bar" class="mdc-tab-bar">
+                                <a class="mdc-tab" href="/">Home</a>
+                                <a class="mdc-tab" href="/the-declaration">The Declaration</a>
+                                <a class="mdc-tab" href="/why-sign">Why sign?</a>
+                                <a class="mdc-tab" href="/sign-up">Sign up</a>
+                                <!-- <a class="mdc-tab" href="/signatories">Signatories</a> -->
                             </nav>
-                            <form [searchroute]="'search'" class="mdc-form-field mdc-form-field--align-end">
-                                <div class="mdc-textfield" data-mdc-auto-init="MDCTextfield">
-                                    <input type="text" class="mdc-textfield__input white-text searchRoute" placeholder="Search" id="q" name="q">
-                                </div>
-                                <button type="submit" class="mdc-toolbar__icon" aria-label="Search" alt="Search">
-                                    <span class="fa fa-search" aria-hidden="true"></span>
-                                </button>
-                            </form>
+                            <button id="menu_button" class="menu mdc-toolbar__icon mdc-toolbar__icon--menu" onclick="menu_draw.MDCTemporaryDrawer.open = true">
+                                <span class="fa fa-2x fa-bars" aria-hidden="true"></span>
+                            </button>
                         </section>
                     </div>
                 </div>
             </header>
 
-            <main class="mdc-toolbar-fixed-adjust">
-                <div class="page-content">
+            <aside class="mdc-temporary-drawer" id="menu_draw" dir="rtl">
+                <nav class="mdc-temporary-drawer__drawer">
+                    <header class="mdc-temporary-drawer__header">
+                        <div class="mdc-temporary-drawer__header-content mdc-theme--text-primary-on-primary">
+                            <img src="https://storage.cloud.google.com/humanrightsdeclaration/SDHR-logo-RGB-TALL-LARGE.PNG" class="brand-logo-mobile" />
+                        </div>
+                    </header>
+                    <nav class="mdc-temporary-drawer__content mdc-list-group">
+                        <div id="icon-with-text-demo" class="mdc-list">
+                            <a class="mdc-list-item" href="/" data-mdc-tabindex-handled="true" tabindex="-1" onclick="menu_draw.MDCTemporaryDrawer.open = false">Home</a>
+                            <a class="mdc-list-item" href="/the-declaration" data-mdc-tabindex-handled="true" tabindex="-1" onclick="menu_draw.MDCTemporaryDrawer.open = false">The Declaration</a>
+                            <a class="mdc-list-item" href="/why-sign" data-mdc-tabindex-handled="true" tabindex="-1" onclick="menu_draw.MDCTemporaryDrawer.open = false">Why sign?</a>
+                            <a class="mdc-list-item" href="/sign-up" data-mdc-tabindex-handled="true" tabindex="-1" onclick="menu_draw.MDCTemporaryDrawer.open = false">Sign up</a>
+                            <!-- <a class="mdc-list-item" href="/signatories" data-mdc-tabindex-handled="true" tabindex="-1" onclick="menu_draw.MDCTemporaryDrawer.open = false">Signatories</a> -->
+                        </div>
+                    </nav>
+                </nav>
+            </aside>
+
+            <main>
+                <div class="container-fluid">
                     <router-outlet>{{{route.rendered}}}</router-outlet>
                 </div>
             </main>
@@ -77,43 +91,11 @@
                 <div class="footer">
                     <div class="container-fluid">
                         <div class="footer-main">
-                            <div class="mdc-layout-grid">
-                                <div class="mdc-layout-grid__inner">
-                                    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-7-desktop mdc-layout-grid__cell--span-5-tablet">
-                                        <a href="/" class="brand-logo" title="SCVO">
-                                            <img src="assets/images/scvo-logo.png" />
-                                        </a>
-                                        <p>Scotland Declaration on Human Rights</p>
-                                    </div>
-                                    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-1-desktop mdc-layout-grid__cell--span-1-tablet">
-                                        &nbsp;
-                                    </div>
-                                    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-2-desktop mdc-layout-grid__cell--span-3-tablet">
-                                        <ul class="mdc-list">
-                                            <li class="mdc-list-item"><a href=""></a></li>
-                                        </ul>
-                                    </div>
-                                    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-2-desktop mdc-layout-grid__cell--span-3-tablet">
-                                        <ul class="mdc-list">
-                                            <li class="mdc-list-item">
-                                                <a href="mailto:enquiries@scvo.org.uk">
-                                                </a>
-                                            </li>
-                                            <li class="mdc-list-item">
-                                                <a href="tel:+441314748000">
-                                                </a>
-                                            </li>
-                                            <li class="mdc-list-item">
-                                                <a href="https://www.facebook.com/SCVO1939">
-                                                </a>
-                                            </li>
-                                            <li class="mdc-list-item">
-                                                <a href="https://twitter.com/scvotweet">
-                                                </a>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
+                            <div class="footer-brand">
+                                <a href="http://scvo.org" class="brand-logo" title="The Scotland Declaration on Human Rights">
+                                    <img src="assets/images/scvo-logo.png" />
+                                </a>
+                                <p>The Scotland Declaration on Human Rights is supported by the Scottish Council for Voluntary Organisations</p>
                             </div>
                             <div class="footer-copyright">
                                 <div class="row">

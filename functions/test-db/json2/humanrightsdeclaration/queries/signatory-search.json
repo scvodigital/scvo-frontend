@@ -1,0 +1,31 @@
+{
+    "size": 12,
+    "from": {{multiply (subtract (default query.page 1) 1) 12}},
+    "_source": [
+        "slug",
+        "title",
+        "rendered.search_result_logo"
+    ],
+    "query": {
+        "bool": {
+            "must": [
+            {{#if query.course_type}}
+                {
+                    "term": {
+                        "type": "{{query.type}}"
+                    }
+                }{{#if query.q}},{{/if}}
+            {{/if}}
+            {{#if query.q}}
+                {
+                    "query_string": {
+                        "query": "{{query.q}}",
+                        "default_operator": "AND",
+                        "analyzer": "snowball"
+                    }
+                }
+            {{/if}}
+            ]
+        }
+    }
+}
