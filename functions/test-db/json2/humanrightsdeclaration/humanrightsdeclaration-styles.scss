@@ -91,10 +91,18 @@ a {
         display: block;
     }
     .mdc-tab-bar {
+        margin: 0;
+        .mdc-tab:first-child {
+            padding-left: 0;
+        }
         .mdc-tab {
             min-width: 0;
             font-size: 1rem;
             padding: $spacing-unit;
+            text-transform: none;
+        }
+        .mdc-tab:hover {
+            text-decoration: underline;
         }
         .mdc-tab,
         .mdc-tab:hover {
