@@ -1,6 +1,6 @@
 <div class="event event-search">
     <div class="splash-image splash-image-{{primaryResponse.hits.hits.[0]._type}}" style="{{> header_splash_image}}">
-        <div class="splash-overlay" style="{{> header_splash_overlay}}">
+        <div class="splash-overlay{{#if primaryResponse.hits.hits.[0]._source.hide_overlay}} splash-overlay-hidden{{/if}}">
             <div class="container-fluid">
                 <div class="mdc-layout-grid">
                     {{#if primaryResponse.hits.hits.[0]._source.header_text}}
@@ -19,7 +19,6 @@
     <div class="container-fluid page-content">
         <ul class="breadcrumbs">
             <li><a href="/">Home</a></li>
-            <li><a href="/services">Services</a></li>
         </ul>
         <div class="mdc-card">
             <section class="mdc-card__primary">
@@ -36,10 +35,10 @@
                             </div>
                             <div class="mdc-layout-grid__cell">
                                 <div class="mdc-form-field">
-                                    <select class="mdc-select" role="listbox" id="events-type" name="type">
-                                        <option value="" {{#if params.query.type}}{{else}}selected{{/if}}>Select event type</option>
+                                    <select class="mdc-select" role="listbox" id="events-type" name="course_type">
+                                        <option value="" {{#if params.query.course_type}}{{else}}selected{{/if}}>Select event type</option>
                                         {{#each supplimentaryResponses.types.aggregations.types.buckets}}
-                                        <option value="{{key}}" {{#compare ../params.query.type "===" key}}selected{{/compare}}>{{key}} ({{doc_count}})</option>
+                                        <option value="{{key}}" {{#compare ../params.query.course_type "===" key}}selected{{/compare}}>{{key}} ({{doc_count}})</option>
                                         {{/each}}
                                     </select>
                                 </div>

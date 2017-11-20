@@ -38,9 +38,6 @@
                 <div class="mdc-toolbar__row">
                     <div class="container-fluid">
                         <section class="mdc-toolbar__section mdc-toolbar__section--align-start">
-                            <button class="menu mdc-toolbar__icon mdc-toolbar__icon--menu" id="menu_button" aria-label="Menu" alt="Menu">
-                                <span class="fa fa-2x fa-bars" aria-hidden="true"></span>
-                            </button>
                             <span class="mdc-toolbar__title catalog-title">
                                 <a href="/" class="brand-logo" title="Scottish Council for Voluntary Organisations">
                                     <img src="assets/images/scvo-logo.png" />
@@ -53,7 +50,7 @@
                                 <a class="mdc-tab" href="{{path}}">{{{label}}}</a>
                                 {{/each}}
                             </nav>
-                            <form [searchroute]="'main_search'" class="mdc-form-field mdc-form-field--align-end">
+                            <form [searchroute]="'main_search'" class="mdc-form-field mdc-form-field--align-end search_form">
                                 <div class="mdc-textfield">
                                     <input type="text" class="mdc-textfield__input white-text mdc-text-field searchRoute" placeholder="Search" id="q" name="q" aria-label="Search keywords">
                                 </div>
@@ -61,6 +58,9 @@
                                     <span class="fa fa-search" aria-hidden="true"></span>
                                 </button>
                             </form>
+                            <button class="menu mdc-toolbar__icon mdc-toolbar__icon--menu" id="menu_button" aria-label="Menu" alt="Menu">
+                                <span class="fa fa-2x fa-bars" aria-hidden="true"></span>
+                            </button>
                         </section>
                     </div>
                 </div>
@@ -77,7 +77,7 @@
                 </div>
             </header>
 
-            <aside class="mdc-temporary-drawer" id="menu_draw">
+            <aside class="mdc-temporary-drawer" id="menu_draw" dir="rtl">
                 <nav class="mdc-temporary-drawer__drawer">
                     <header class="mdc-temporary-drawer__header">
                         <div class="mdc-temporary-drawer__header-content mdc-theme--primary-bg mdc-theme--text-primary-on-primary">
