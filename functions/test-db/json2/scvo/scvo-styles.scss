@@ -137,7 +137,7 @@ html {
     line-height: 1.45;
 }
 body {
-    background-color: var(--mdc-site-background, #263238);
+    background-color: var(--mdc-footer-primary-dark, #263238);
     min-height: 100%;
     padding: 0;
     margin: 0;
@@ -440,7 +440,7 @@ a:hover {
                 .mdc-textfield__input:focus,
                 .mdc-textfield__input:hover {
                     color: rgba(255,255,255,.87);
-                    border: $spacing-unit/10 solid rgba(255,255,255,.75);
+                    border: 2px solid rgba(255,255,255,.75);
                     padding: 0 $spacing-unit/2;
                     line-height: $spacing-unit*2;
                     background: transparent;
@@ -465,10 +465,16 @@ a:hover {
             .mdc-toolbar__icon:focus {
                 outline: none;
             }
-            .mdc-toolbar__search {
-                position: absolute;
-                right: $spacing-unit/2;
-                bottom: $spacing-unit*2;
+            .mdc-toolbar__icon--menu {
+                display: none;
+            }
+            .search_form {
+                position: relative;
+                .mdc-toolbar__search {
+                    position: absolute;
+                    right: $spacing-unit/2;
+                    bottom: $spacing-unit*2;
+                }
             }
             .mdc-tab-bar {
                 overflow: hidden;
@@ -790,6 +796,9 @@ a:hover {
 .digital.charter-fund.projects .page-info,
 .digital.cyber-resilience.projects .page-info,
 .blogs .page-sidebar .page-info,
+.policy-research.briefings-consultation-responses .mdc-card__actions,
+.policy-research.research .mdc-card__actions,
+.press-media .mdc-card__actions,
 .press-media .sidebar h3.blogs {
     display: none;
 }
@@ -808,6 +817,11 @@ a:hover {
     .mdc-layout-grid__inner {
         margin-bottom: $spacing-unit/2;
     }
+}
+.policy-research.briefings-consultation-responses .mdc-card__supporting-text,
+.policy-research.research .mdc-card__supporting-text,
+.press-media .mdc-card__supporting-text {
+    padding-bottom: $spacing-unit;
 }
 
 .mdc-form-field,
@@ -1490,16 +1504,22 @@ footer {
 
 @media screen and (max-width: 991px) {
     .mdc-toolbar {
-        .container-fluid .mdc-toolbar__icon--menu {
-            visibility: visible;
-            width: auto;
-        }
         #upper-tab-bar,
         .mdc-toolbar__row.toolbar-nav {
             display: none;
         }
-        .mdc-toolbar__row .container-fluid .mdc-toolbar__search {
-            bottom: 0;
+        .mdc-toolbar__row .container-fluid {
+            .mdc-toolbar__icon--menu {
+                visibility: visible;
+                width: auto;
+                display: block;
+            }
+            .search_form {
+                margin-right: $spacing-unit;
+                .mdc-toolbar__search {
+                    bottom: 0;
+                }
+            }
         }
     }
     .latest-content {
@@ -1585,7 +1605,7 @@ footer {
     }
 }
 
-@media screen and (max-width: 376px) {
+@media screen and (max-width: 395px) {
     .mdc-toolbar__title {
         width: 38px;
         overflow: hidden;
