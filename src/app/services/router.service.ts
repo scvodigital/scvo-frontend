@@ -80,7 +80,7 @@ export class RouterService {
                 return replaceString;
             })
             .replace(/(\<\/?big\>)|(\<\/?small\>)/g, '');
-        console.log('HTML:', html);
+        //console.log('HTML:', html);
         return html;
     }
 }
