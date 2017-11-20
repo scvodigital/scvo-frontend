@@ -6,16 +6,21 @@ $spacing-unit: 1rem;
 html {
     overflow-y: scroll;
     height: 100%;
-    font-size: 0.96rem;
+    font-size: 1.1rem;
     line-height: 1.45;
 }
 body {
+    background: black;
     min-height: 100%;
     padding: 0;
     margin: 0;
 }
+header.mdc-toolbar,
 main {
     background-color: white;
+}
+footer {
+    background: black;
 }
 .container-fluid {
     max-width: 1280px;
@@ -24,4 +29,156 @@ main {
     overflow: auto;
     overflow: -webkit-paged-x;
     padding: $spacing-unit/2;
+}
+.mdc-toolbar {
+    box-shadow: none;
+    .mdc-tab-bar {
+        .mdc-tab,
+        .mdc-tab:hover {
+            color: black;
+        }
+    }
+    .mdc-toolbar__title {
+        margin: 0;
+        padding: $spacing-unit 0;
+        .brand-logo img {
+            max-width: 400px;
+        }
+    }
+}
+
+p.quote {
+    text-align: center;
+    font-size: 1.3rem;
+}
+
+.signatories {
+    margin: 0 0.75rem;
+    .mdc-layout-grid__cell {
+        background: white;
+        margin: 0 -0.75rem;
+        padding: $spacing-unit;
+        vertical-align: middle;
+        a {
+            display: inline-block;
+            vertical-align: middle;
+            height: 12rem;
+            line-height: 12rem;
+            display: block;
+            padding: 0;
+            vertical-align: middle;
+            position: relative;
+            text-align: center;
+            overflow: hidden;
+            font-size: 1rem;
+            font-weight: bold;
+            color: black;
+            span {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                margin-top: 3rem;
+                text-align: center;
+                display: block;
+                width: 100%;
+                font-weight: bold;
+                font-size: 1.1rem;
+                color: black;
+            }
+            img.resize-fit-center {
+                max-width: 90%;
+                max-height: 90%;
+                vertical-align: middle;
+            }
+        }
+    }
+
+    .mdc-layout-grid__cell--span-3 {
+        border: 2px solid black;
+        border-right: none;
+        border-bottom: none;
+    }
+    .mdc-layout-grid__cell--span-3:nth-child(4n + 1) {
+        border-left: none;
+        .inner {
+            padding-left: 0;
+        }
+    }
+    .mdc-layout-grid__cell--span-3:nth-child(4n + 4) {
+        border-right: none;
+        padding-right: 0;
+        .inner {
+            margin-right: 0;
+        }
+    }
+    .mdc-layout-grid__cell--span-3:nth-child(4n+1):nth-last-child(-n+4),
+    .mdc-layout-grid__cell--span-3:nth-child(4n+1):nth-last-child(-n+4) ~ .mdc-layout-grid__cell--span-3 {
+        border-bottom: 2px solid black;
+    }
+}
+
+// Pagination ==================================================================
+
+.pagination {
+    text-align: center;
+    display: block !important;
+    padding-top: $spacing-unit !important;
+    li {
+        padding: 0 !important;
+        height: $spacing-unit*2;
+        width: $spacing-unit*2;
+        border-radius: 50%;
+        margin: 0 $spacing-unit/5;
+        vertical-align: bottom;
+        a {
+            font-size: 1.2rem;
+            line-height: $spacing-unit*2;
+            height: $spacing-unit*2;
+            width: $spacing-unit*2;
+            color: #000;
+            padding: 0;
+            margin: 0;
+            font-weight: 600;
+            display: block;
+        }
+        a.pagination-arrow {
+            color: #000;
+            vertical-align: middle;
+        }
+    }
+    li.disabled a.pagination-arrow {
+        cursor: default;
+        color: #999;
+    }
+    li:first-child a {
+        padding-left: 0;
+    }
+    li:last-child a {
+        padding-right: 0;
+    }
+    li.current-page {
+        background-color: var(--mdc-theme-primary-dark);
+        border-radius: 50%;
+        a {
+            color: white;
+        }
+    }
+    li:hover,
+    li.current-page:hover {
+        background-color: var(--mdc-theme-primary);
+        a {
+            color: white;
+            text-decoration: none;
+        }
+    }
+}
+
+footer {
+    p {
+        color: white;
+        a {
+            color: white;
+            text-decoration: underline;
+        }
+    }
 }
