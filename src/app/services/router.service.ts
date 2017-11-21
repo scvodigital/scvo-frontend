@@ -67,11 +67,11 @@ export class RouterService {
                 var replaceString = `[routerLink]="'${url}'"`;
 
                 var query = parts.length > 1 ? querystring.parse(parts[1]) : {};
-                if (multipleResults) {
-                    var combined = {};
-                    Object.assign(combined, paramsQuery, query);
-                    query = combined;
-                }
+//                if (multipleResults) {
+//                    var combined = {};
+//                    Object.assign(combined, paramsQuery, query);
+//                    query = combined;
+//                }
                 if (Object.keys(query).length > 0) {
                     var queryJson = JSON.stringify(query);
                     replaceString += ` [queryParams]='${queryJson}'`;
