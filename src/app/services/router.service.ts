@@ -46,13 +46,20 @@ export class RouterService {
                 if(!this.loaded){
                     (<any>window).document.querySelector('router-outlet').innerHTML = '';
                     this.loaded = true;
+                    console.log('First load, router "loaded" set to true');
                     return;
                 }
-
+                console.log('Calling router.execute:', event.url);
                 this.scvoRouter.execute(event.url).then((routeMatch: RouteMatch) => {
                     // HACK: To allow Angular to take over the pre-rendered site
                     this.currentRoute = routeMatch;
                     this.routeChanged.next(routeMatch);
+
+                    setTimeout(() => {
+                        var scriptTag = document.createElement('script');
+                        scriptTag.innerHTML = routeMatch.javascript;
+                        document.body.appendChild(scriptTag);
+                    }, 500);
                 });
             }
         });

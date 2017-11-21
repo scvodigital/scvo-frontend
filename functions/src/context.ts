@@ -106,7 +106,11 @@ export class Context implements IContext {
                         ${headerTags}
                         <script>
                             document.addEventListener("DOMContentLoaded", function(event) {
+                                //Context Javascript
                                 ${this.javascript}
+
+                                //Route Javascript
+                                ${routeMatch.javascript}
                             });
                         </script>
                     `;
