@@ -11,6 +11,7 @@
        url('//storage.cloud.google.com/digitalparticipation/fonts/GilroyExtraBold.ttf')  format('truetype'), /* Safari, Android, iOS */
        url('//storage.cloud.google.com/digitalparticipation/fonts/GilroyExtraBold.svg#svgFontName') format('svg'); /* Legacy iOS */
 }
+@import url('//fonts.googleapis.com/css?family=Poppins:700');
 
 $spacing-unit: 1rem;
 
@@ -29,18 +30,21 @@ $scvo-background:                   #263238;
 // Base variables
 
 $base-font-family:                  "Roboto", Helvetica, Arial, sans-serif;
-$base-font-size:                    1rem;
+$base-font-size:                    0.96rem;
 $base-font-weight:                  300;
 
 $base-line-height:                  1.5;
 
-$heading-font-family:               "Gilroy", Helvetica, Arial, sans-serif;
+$heading-font-family:               "Poppins", Helvetica, Arial, sans-serif;
 $heading-font-size:                 3rem;
 $heading-font-weight:               700;
 $heading-font-color:                #000000;
 
 $brand-border-width:                0.2rem;
 
+:root {
+    --mdc-layout-grid-margin-desktop: 0;
+}
 
 html, body {
     height: 100%;
@@ -352,7 +356,7 @@ hr {
 //             font-size: 1.4rem;
 //             font-weight: 400;
 //         }
-//         .btn {
+//         .mdc-button {
 //             position: relative;
 //             margin: 6rem auto;
 //             padding: 0.8rem 0;
@@ -369,7 +373,7 @@ hr {
 //             box-shadow: -0.5rem 0.5rem 0 $brand-typography;
 //         }
 //     }
-//     .description.commitments .btn {
+//     .description.commitments .mdc-button {
 //         margin: 1rem 0;
 //     }
 //     .title,
@@ -794,6 +798,7 @@ body {
 }
 header.mdc-toolbar {
     background-color: transparent;
+    margin-bottom: $spacing-unit*2;
 }
 .mdc-temporary-drawer__header-content,
 main {
@@ -830,12 +835,11 @@ a {
     margin: 0 auto;
     overflow: auto;
     overflow: -webkit-paged-x;
-    padding: $spacing-unit 0;
+    padding: $spacing-unit/2 0;
 }
 .mdc-toolbar {
     box-shadow: none;
     .container-fluid {
-        padding-bottom: $spacing-unit;
         border-bottom: 3px solid $brand-typography;
     }
     .mdc-toolbar__title {
@@ -845,7 +849,9 @@ a {
         .brand-logo {
             display: block;
             font-size: 1.5rem;
-            font-weight: 700;
+            letter-spacing: -0.06rem;
+            font-weight: $heading-font-weight;
+            font-family: $heading-font-family;
             text-decoration: none;
             text-transform: uppercase;
             color: $brand-typography;
@@ -863,8 +869,8 @@ a {
                 display: inline-block;
                 text-decoration: inherit;
                 position: absolute;
-                bottom: 0.4rem;
-                right: 3.1rem;
+                bottom: 1.5rem;
+                right: 3.2rem;
                 font-size: 1.7rem;
                 content: "\f245";
             }
@@ -881,15 +887,18 @@ a {
     }
     .mdc-toolbar__section--align-end {
         float: right;
+        margin: 2.5rem 0 0;
     }
     .mdc-tab-bar {
         margin: 0;
         // .mdc-tab:last-child {
         //     padding-right: 0;
         // }
+        height: auto;
         .mdc-tab {
+            letter-spacing: normal;
             min-width: 0;
-            font-size: 1rem;
+            font-size: 1.4rem;
             border-radius: 0.15rem;
             padding: 0.1rem 0.5rem;
             text-transform: uppercase;
@@ -1027,7 +1036,9 @@ main {
     h4 {
         font-size: 2rem;
     }
-
+    img {
+        max-width: 100%;
+    }
     label {
         font-size: inherit;
         color: inherit;
@@ -1071,8 +1082,8 @@ main {
 
     .title {
         h1 {
-            font-size: 5.8rem;
-            line-height: 5.9rem;
+            font-size: 5.4rem;
+            line-height: 6.2rem;
             letter-spacing: -0.1rem;
             margin: 2rem 0 2rem;
             padding-right: 2rem;
@@ -1109,16 +1120,17 @@ main {
             margin-bottom: -6px;
         }
         h2 {
-            font-size: 3.2rem;
+            font-size: 3.1rem;
+            line-height: 3.5rem;
             margin: 4rem 0;
         }
         p {
             font-size: 1.4rem;
             font-weight: 400;
         }
-        .btn {
+        .mdc-button.mdc-button--raised {
             position: relative;
-            margin: 6rem auto;
+            margin: 3rem auto 6rem;
             padding: 0.8rem 0;
             height: auto;
             display: block;
@@ -1131,9 +1143,14 @@ main {
             color: $brand-typography;
             border: $brand-border-width solid $brand-typography;
             box-shadow: -0.5rem 0.5rem 0 $brand-typography;
+            min-width: 26rem;
+            max-width: 60%;
+        }
+        .mdc-button:hover {
+            color: $brand-typography;
         }
     }
-    .description.commitments .btn {
+    .description.commitments .mdc-button {
         margin: 1rem 0;
     }
     .title,
@@ -1377,20 +1394,20 @@ main {
     }
 }
 
-.mdc-button {
-    background-color: white !important;
-    border: 2px solid $brand-typography;
-    color: $brand-typography !important;
-    text-transform: none;
-    line-height: 1.75rem;
-    font-size: 1.25rem;
-    text-align: center;
-    display: block;
-    width: 50%;
-    margin: 0 auto;
-    padding: 10px 15px;
-    height: auto;
-}
+// .mdc-button {
+//     background-color: white !important;
+//     border: 2px solid $brand-typography;
+//     color: $brand-typography !important;
+//     text-transform: none;
+//     line-height: 1.75rem;
+//     font-size: 1.25rem;
+//     text-align: center;
+//     display: block;
+//     width: 50%;
+//     margin: 0 auto;
+//     padding: 10px 15px;
+//     height: auto;
+// }
 
 .mdc-tab,
 h1,
@@ -1553,22 +1570,47 @@ footer {
     background: -webkit-linear-gradient(top, rgba(55,71,79,1) 0%,rgba(38,50,56,1) 100%);
     background: linear-gradient(to bottom, rgba(55,71,79,1) 0%,rgba(38,50,56,1) 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#37474f', endColorstr='#263238',GradientType=0 );
-    font-family: "Open Sans", Helvetica, Arial, sans-serif;
-    font-weight: 400;
-    font-size: 1.03rem;
     padding: $spacing-unit*2 0 $spacing-unit;
+    position: relative;
     .brand-logo img {
         max-width: 180px;
     }
     p {
+        font-family: "Open Sans", Helvetica, Arial, sans-serif;
+        font-weight: 400;
+        font-size: 1.03rem;
         color: white;
-        a {
-            color: white;
-            text-decoration: underline;
+        small {
+            font-size: 88%;
         }
+        a {
+            color: white !important;
+            text-decoration: underline;
+            text-decoration-skip: ink;
+        }
+    }
+    .description p {
+        margin: 0 0 1rem;
+    }
+    .logo.scvo {
+        position: absolute;
+        bottom: 8px;
+        right: 0.75rem;
+    }
+    .logo.digital-scotland {
+        height: 50px;
+        position: absolute;
+        bottom: 6px;
+        right: 160px;
+    }
+    .menu ul {
+        margin-top: 0;
     }
 }
 
+.hide-on-med-and-up {
+    display: none;
+}
 
 @media only screen and (max-width: 1245px) {
     .mdc-tab-bar .mdc-tab {
@@ -1661,7 +1703,7 @@ footer {
                 padding: 0 1rem 0;
                 margin-bottom: -7px;
             }
-            .btn {
+            .mdc-button {
                 margin: 3rem 0;
             }
         }
@@ -1777,6 +1819,12 @@ footer {
     .mdc-button {
         width: 100%;
     }
+    .hide-on-med-and-up {
+        display: block;
+    }
+    .hide-on-small-only {
+        display: none;
+    }
 }
 
 @media only screen and (max-width: 600px) {
@@ -1824,7 +1872,7 @@ footer {
             p {
                 font-size: 1.1rem;
             }
-            .btn {
+            .mdc-button {
                 margin: 0 auto 0.5rem;
                 font-size: 1.3rem;
                 width: 90%;
@@ -1958,7 +2006,7 @@ footer {
             right: auto;
         }
         .logo.digital-scotland {
-            margin-right: 1.5rem;
+            margin-right: 1rem;
         }
     }
 }
