@@ -891,11 +891,16 @@ a {
     }
     .mdc-tab-bar {
         margin: 0;
+        height: auto;
+        min-height: auto;
         // .mdc-tab:last-child {
         //     padding-right: 0;
         // }
-        height: auto;
         .mdc-tab {
+            margin: 0 0 0 .4rem;
+            display: inline-block;
+            height: auto;
+            min-height: auto;
             letter-spacing: normal;
             min-width: 0;
             font-size: 1.4rem;
@@ -905,6 +910,7 @@ a {
             border: $brand-border-width solid transparent;
             background: transparent;
         }
+        .mdc-tab.active,
         .mdc-tab:hover {
             border: $brand-border-width solid $brand-typography;
             background: white;
@@ -951,13 +957,15 @@ a {
             .button-collapse {
                 color: white;
             }
-            .mdc-tab-bar .mdc-tab {
-                color: white;
-            }
-            .mdc-tab-bar .mdc-tab:hover,
-            .mdc-tab-bar .mdc-tab.active {
-                background-color: $brand-typography;
-                border-color: white;
+            .mdc-tab-bar {
+                .mdc-tab {
+                    color: white;
+                }
+                .mdc-tab:hover,
+                .mdc-tab.active {
+                    background-color: $brand-typography;
+                    border-color: white;
+                }
             }
         }
     }
@@ -1030,6 +1038,10 @@ main {
 
 main {
     padding-bottom: 4rem;
+    h1 {
+        font-size: 4rem;
+        line-height: 4.5rem;
+    }
     h3 {
         font-size: 2.5rem;
     }
