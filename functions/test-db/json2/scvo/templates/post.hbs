@@ -1,4 +1,4 @@
-<div class="post">
+<div class="">
     <div class="splash-image splash-image-{{primaryResponse.hits.hits.[0]._type}}" style="{{> header_splash_image}}">
         <div class="splash-overlay{{#if primaryResponse.hits.hits.[0]._source.hide_overlay}} splash-overlay-hidden{{/if}}">
             <div class="container-fluid">
@@ -34,7 +34,6 @@
                     </ul>
                     {{else}}
                     {{#if primaryResponse.hits.hits.[0]._source.categories}}
-                    {{#compare primaryResponse.hits.hits.[0]._source.categories.[0] "!==" 'Press releases'}}
                     <div class="author_about">
                         {{#if supplimentaryResponses.staff_profile.hits.hits.[0]}}
                         {{{supplimentaryResponses.staff_profile.hits.hits.[0]._source.rendered.scvo_profile}}}
@@ -57,7 +56,6 @@
                         {{{_source.rendered.sidebar}}}
                         {{/each}}
                     </ul>
-                    {{/compare}}
                     {{/compare}}
                     {{/if}}
                     {{/if}}
