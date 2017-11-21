@@ -1,2 +1,502 @@
 @import url("//cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css");
-@import url("//fonts.googleapis.com/css?family=Open+Sans:300,400,500,700,800");
+@import url("//fonts.googleapis.com/css?family=Open+Sans:300,400,700|Roboto:300,400,700");
+@import url("//fonts.googleapis.com/icon?family=Material+Icons");
+@font-face {
+    font-family: "Gilroy";
+    font-weight: 700;
+  src: url('assets/fonts/GilroyExtraBold.eot'); /* IE9 Compat Modes */
+  src: url('assets/fonts/GilroyExtraBold.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+       url('assets/fonts/GilroyExtraBold.woff2') format('woff2'), /* Super Modern Browsers */
+       url('assets/fonts/GilroyExtraBold.woff') format('woff'), /* Pretty Modern Browsers */
+       url('assets/fonts/GilroyExtraBold.ttf')  format('truetype'), /* Safari, Android, iOS */
+       url('assets/fonts/GilroyExtraBold.svg#svgFontName') format('svg'); /* Legacy iOS */
+}
+
+$spacing-unit: 1rem;
+
+// Brand colours
+
+$brand-typography:                  #022347;
+$brand-primary:                     #a8b7ff;
+$brand-charter:                     #ffa8b8;
+$brand-signup:                      #6dede5;
+// $brand-other:                       #fce882; // Brand Guidelines - too light
+$brand-other:                       #fee972; // Templates-Desktop PDF
+$brand-skills:                      #6beda0;
+
+$scvo-background:                   #263238;
+
+// Base variables
+
+$base-font-family:                  "Roboto", Helvetica, Arial, sans-serif;
+$base-font-size:                    1rem;
+$base-font-weight:                  300;
+
+$base-line-height:                  1.5;
+
+$heading-font-family:               "Gilroy", Helvetica, Arial, sans-serif;
+$heading-font-size:                 3rem;
+$heading-font-weight:               700;
+$heading-font-color:                #000000;
+
+$brand-border-width:                0.2rem;
+
+
+html {
+    --mdc-theme-primary: $brand-typography;
+}
+
+html {
+    overflow-y: scroll;
+    height: 100%;
+    font-size: $base-font-size;
+    line-height: $base-line-height;
+}
+body {
+    font-family: $base-font-family;
+    font-size: $base-font-size;
+    font-weight: $base-font-weight;
+    color: $brand-typography;
+    background-color: $scvo-background;
+    min-height: 100%;
+    padding: 0;
+    margin: 0;
+}
+header.mdc-toolbar {
+    background-color: transparent;
+}
+.mdc-temporary-drawer__header-content,
+main {
+    color: $brand-typography;
+    background-color: white;
+}
+.mdc-temporary-drawer__header-content img.brand-logo-mobile {
+    max-width: 100%;
+}
+.mdc-temporary-drawer__header:before {
+    padding-top: 34%;
+}
+.mdc-list-item {
+    direction: ltr;
+}
+main {
+    padding-bottom: $spacing-unit;
+}
+a {
+    text-decoration-skip: ink;
+}
+::-moz-selection {
+    color: white;
+    background: $brand-typography;
+}
+::selection {
+    color: white;
+    background: $brand-typography;
+}
+
+.container-fluid {
+    max-width: 1280px;
+    width: 95%;
+    margin: 0 auto;
+    overflow: auto;
+    overflow: -webkit-paged-x;
+    padding: $spacing-unit 0;
+}
+.mdc-toolbar {
+    box-shadow: none;
+    .container-fluid {
+        padding-bottom: $spacing-unit;
+        border-bottom: 3px solid $brand-typography;
+    }
+    .mdc-toolbar__title {
+        margin: 0;
+        padding: $spacing-unit 0;
+        position: relative;
+        .brand-logo {
+            display: block;
+            font-size: 1.5rem;
+            font-weight: 700;
+            text-decoration: none;
+            text-transform: uppercase;
+            color: $brand-typography;
+            span {
+                display: block;
+                line-height: 1.5rem;
+            }
+            .digital, .charter {
+                margin-left: 0.5rem;
+            }
+            .participation::after {
+                font-family: FontAwesome;
+                font-weight: normal;
+                font-style: normal;
+                display: inline-block;
+                text-decoration: inherit;
+                position: absolute;
+                bottom: 0.4rem;
+                right: 3.1rem;
+                font-size: 1.7rem;
+                content: "\f245";
+            }
+            .participation {
+                background: white;
+                border: $brand-border-width solid $brand-typography;
+                border-radius: 0.15rem;
+                padding: 0.1rem 0.33rem;
+            }
+        }
+    }
+    .mdc-toolbar__icon--menu {
+        display: none;
+    }
+    .mdc-toolbar__section--align-end {
+        float: right;
+    }
+    .mdc-tab-bar {
+        margin: 0;
+        // .mdc-tab:last-child {
+        //     padding-right: 0;
+        // }
+        .mdc-tab {
+            min-width: 0;
+            font-size: 1rem;
+            padding: $spacing-unit;
+            text-transform: uppercase;
+        }
+        .mdc-tab:hover {
+            text-decoration: underline;
+        }
+        .mdc-tab,
+        .mdc-tab:hover {
+            color: $brand-typography;
+        }
+    }
+}
+
+
+main {
+    padding-bottom: 4rem;
+}
+
+main.detail {
+    background: $brand-typography;
+    hr {
+        border-bottom-color: white;
+    }
+    h1, h2, h3, h4, p {
+        color: white;
+    }
+    nav {
+        .brand-logo {
+            color: white;
+            .participation {
+                background-color: $brand-typography;
+                border-color: white;
+            }
+            .participation::after {
+                color: white;
+                text-shadow: 0.1rem 0 0 $brand-typography, 0 -0.1rem 0 $brand-typography, 0 0.1rem 0 $brand-typography, -0.1rem 0 0 $brand-typography;
+            }
+        }
+        .button-collapse {
+            color: white;
+        }
+        ul li a {
+            color: white;
+        }
+        ul li a:hover,
+        ul li a.active {
+            background-color: $brand-typography;
+            border-color: white;
+        }
+    }
+}
+
+main {
+    background: $brand-primary;
+}
+.home {
+    main {
+        background: $brand-primary;
+        background: -moz-linear-gradient(top, $brand-primary 10%, $brand-charter 90%);
+        background: -webkit-linear-gradient(top, $brand-primary 10%, $brand-charter 90%);
+        background: linear-gradient(to bottom, $brand-primary 10%, $brand-charter 90%);
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$brand-primary', endColorstr='$brand-charter',GradientType=0 );
+    }
+}
+.stories {
+    main {
+        background: $brand-charter;
+    }
+}
+.the-charter {
+    main {
+        background: $brand-charter;
+        background: -moz-linear-gradient(top, $brand-charter 10%, $brand-other 70%);
+        background: -webkit-linear-gradient(top, $brand-charter 10%, $brand-other 70%);
+        background: linear-gradient(to bottom, $brand-charter 10%, $brand-other 70%);
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$brand-charter', endColorstr='$brand-other',GradientType=0 );
+    }
+}
+// main.signup {
+//     background: $brand-signup;
+// }
+.sign-up {
+    main {
+        padding-bottom: 1rem;
+        background: $brand-signup;
+        background: -moz-linear-gradient(top, $brand-signup 10%, $brand-primary 90%);
+        background: -webkit-linear-gradient(top, $brand-signup 10%, $brand-primary 90%);
+        background: linear-gradient(to bottom, $brand-signup 10%, $brand-primary 90%);
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$brand-signup', endColorstr='$brand-primary',GradientType=0 );
+    }
+}
+// main.other {
+//     background: $brand-other;
+// }
+.signatories,
+.resources {
+    main {
+        background: $brand-other;
+        background: -moz-linear-gradient(top, $brand-other 10%, $brand-skills 70%);
+        background: -webkit-linear-gradient(top, $brand-other 10%, $brand-skills 70%);
+        background: linear-gradient(to bottom, $brand-other 10%, $brand-skills 70%);
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$brand-other', endColorstr='$brand-skills',GradientType=0 );
+    }
+}
+// main.skills {
+//     background: $brand-skills;
+// }
+.skill-up {
+    main {
+        background: $brand-skills;
+        background: -moz-linear-gradient(top, $brand-skills 10%, $brand-primary 80%);
+        background: -webkit-linear-gradient(top, $brand-skills 10%, $brand-primary 80%);
+        background: linear-gradient(to bottom, $brand-skills 10%, $brand-primary 80%);
+        filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$brand-skills', endColorstr='$brand-primary',GradientType=0 );
+    }
+}
+
+.mdc-button {
+    background-color: white !important;
+    border: 2px solid $brand-typography;
+    color: $brand-typography !important;
+    text-transform: none;
+    line-height: 1.75rem;
+    font-size: 1.25rem;
+    text-align: center;
+    display: block;
+    width: 50%;
+    margin: 0 auto;
+    padding: 10px 15px;
+    height: auto;
+}
+
+.mdc-tab,
+h1,
+h2,
+h3,
+h4 {
+    font-family: $heading-font-family;
+    font-weight: $heading-font-weight;
+    color: $brand-typography;
+}
+.mdc-toolbar__icon,
+a {
+    color: $brand-typography;
+}
+
+p, li, div {
+    font-family: $base-font-family;
+    font-weight: $base-font-weight;
+    font-size: $base-font-size;
+}
+p.quote {
+    text-align: center;
+    font-size: 1.3rem;
+}
+
+.mdc-toolbar__icon {
+    float: right;
+}
+
+hr {
+    background: transparent;
+    border: none;
+    border-bottom: $brand-border-width solid $brand-typography;
+    margin: 3rem 0;
+}
+
+.signatories main {
+    .mdc-layout-grid__cell {
+        background: white;
+        margin: 0 -0.75rem;
+        padding: $spacing-unit;
+        vertical-align: middle;
+        a {
+            display: inline-block;
+            vertical-align: middle;
+            height: 12rem;
+            line-height: 12rem;
+            display: block;
+            padding: 0;
+            vertical-align: middle;
+            position: relative;
+            text-align: center;
+            overflow: hidden;
+            font-size: 1rem;
+            font-weight: bold;
+            color: $brand-typography;
+            span {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                margin-top: 3rem;
+                text-align: center;
+                display: block;
+                width: 100%;
+                font-weight: bold;
+                font-size: 1.1rem;
+                color: $brand-typography;
+            }
+            img.resize-fit-center {
+                max-width: 90%;
+                max-height: 90%;
+                vertical-align: middle;
+            }
+        }
+    }
+
+    .mdc-layout-grid__cell--span-3 {
+        border: 2px solid $brand-typography;
+        border-right: none;
+        border-bottom: none;
+    }
+    .mdc-layout-grid__cell--span-3:nth-child(4n + 1) {
+        border-left: none;
+        .inner {
+            padding-left: 0;
+        }
+    }
+    .mdc-layout-grid__cell--span-3:nth-child(4n + 4) {
+        border-right: none;
+        padding-right: 0;
+        .inner {
+            margin-right: 0;
+        }
+    }
+    .mdc-layout-grid__cell--span-3:nth-child(4n+1):nth-last-child(-n+4),
+    .mdc-layout-grid__cell--span-3:nth-child(4n+1):nth-last-child(-n+4) ~ .mdc-layout-grid__cell--span-3 {
+        border-bottom: 2px solid $brand-typography;
+    }
+}
+
+// Pagination ==================================================================
+
+.pagination {
+    text-align: center;
+    display: block !important;
+    padding-top: $spacing-unit !important;
+    li {
+        padding: 0 !important;
+        height: $spacing-unit*2;
+        width: $spacing-unit*2;
+        border-radius: 50%;
+        margin: 0 $spacing-unit/5;
+        vertical-align: bottom;
+        a {
+            font-size: 1.2rem;
+            line-height: $spacing-unit*2;
+            height: $spacing-unit*2;
+            width: $spacing-unit*2;
+            color: $brand-typography;
+            padding: 0;
+            margin: 0;
+            font-weight: 600;
+            display: block;
+        }
+        a.pagination-arrow {
+            color: $brand-typography;
+            vertical-align: middle;
+        }
+    }
+    li.disabled a.pagination-arrow {
+        cursor: default;
+        color: $brand-typography;
+    }
+    li:first-child a {
+        padding-left: 0;
+    }
+    li:last-child a {
+        padding-right: 0;
+    }
+    li.current-page {
+        background-color: $brand-typography;
+        border-radius: 50%;
+        a {
+            color: white;
+        }
+    }
+    li:hover,
+    li.current-page:hover {
+        background-color: $brand-typography;
+        a {
+            color: white;
+            text-decoration: none;
+        }
+    }
+}
+
+footer {
+    background: rgb(55,71,79);
+    background: -moz-linear-gradient(top, rgba(55,71,79,1) 0%, rgba(38,50,56,1) 100%);
+    background: -webkit-linear-gradient(top, rgba(55,71,79,1) 0%,rgba(38,50,56,1) 100%);
+    background: linear-gradient(to bottom, rgba(55,71,79,1) 0%,rgba(38,50,56,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#37474f', endColorstr='#263238',GradientType=0 );
+    font-family: "Open Sans", Helvetica, Arial, sans-serif;
+    font-weight: 400;
+    font-size: 1.03rem;
+    padding: $spacing-unit*2 0 $spacing-unit;
+    .brand-logo img {
+        max-width: 180px;
+    }
+    p {
+        color: white;
+        a {
+            color: white;
+            text-decoration: underline;
+        }
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .mdc-toolbar {
+        .mdc-toolbar__title {
+            .brand-logo {
+                .brand-logo-mobile {
+                    display: block;
+                    max-width: 100%;
+                }
+                .brand-logo-desktop {
+                    display: none;
+                }
+            }
+        }
+        .mdc-tab-bar {
+            display: none;
+        }
+        .mdc-toolbar__icon--menu {
+            display: block;
+            position: absolute;
+            top: 0;
+            right: 0;
+            z-index: 3;
+        }
+        .mdc-toolbar__icon--menu:focus {
+            outline: none;
+        }
+    }
+    .mdc-button {
+        width: 100%;
+    }
+}
