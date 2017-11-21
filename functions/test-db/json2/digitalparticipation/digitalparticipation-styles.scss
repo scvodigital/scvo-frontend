@@ -44,6 +44,11 @@ $brand-border-width:                0.2rem;
 
 :root {
     --mdc-layout-grid-margin-desktop: 0;
+    --mdc-layout-grid-gutter-desktop: 0;
+    --mdc-layout-grid-margin-tablet: 0;
+    --mdc-layout-grid-gutter-tablet: 0;
+    --mdc-layout-grid-margin-phone: 0;
+    --mdc-layout-grid-gutter-phone: 0;
 }
 
 html, body {
@@ -71,6 +76,9 @@ p a {
     color: $brand-typography;
     text-decoration: underline;
     text-decoration-skip: ink;
+}
+h4 a {
+    text-decoration: none;
 }
 
 .container-fluid {
@@ -176,23 +184,6 @@ hr {
 // }
 .button-collapse {
     float: right;
-}
-
-.pagination {
-    margin-top: 3rem;
-    li a,
-    li.active a {
-        cursor: pointer;
-        color: $brand-typography;
-        font-weight: 400;
-    }
-    li.active {
-        background-color: $brand-primary;
-    }
-    li.disabled a {
-        color: inherit;
-        opacity: 0.5;
-    }
 }
 
 // Sidenav ====================================================================
@@ -1047,6 +1038,7 @@ main {
     }
     h4 {
         font-size: 2rem;
+        margin: 1rem 0 0;
     }
     img {
         max-width: 100%;
@@ -1219,11 +1211,11 @@ main {
                 text-align: center;
                 background: #fff;
                 border-radius: 3rem;
-                height: 4.5rem;
+                height: 4rem;
+                width: 4rem;
                 line-height: 4rem;
                 border: $brand-border-width solid $brand-typography;
-                margin-top: -1rem;
-                width: 4.5rem;
+                margin-top: -0.333rem;
             }
         }
         h4 {
@@ -1237,6 +1229,7 @@ main {
                 font-size: 1.5rem;
                 .text {
                     width: 77%;
+                    display: block;
                 }
                 .material-icons {
                     font-weight: bold;
@@ -1258,11 +1251,12 @@ main {
         }
     }
     .pledges h1 {
-        margin-top: 10.4rem;
+        margin-top: 3rem;
     }
     .detail.title {
         h2 {
             margin-bottom: 2rem;
+            font-size: 2rem;
         }
     }
     .detail {
@@ -1300,6 +1294,9 @@ main {
             width: 50%;
             padding: 0;
             margin: 0;
+        }
+        li {
+            list-style-type: none;
         }
         li,
         dt,
@@ -1354,6 +1351,7 @@ main {
         h3 {
             text-align: center;
             a {
+                text-decoration: none;
                 float: none;
                 display: inline-block;
                 .number {
@@ -1457,9 +1455,9 @@ hr {
 }
 
 .signatories main {
-    .mdc-layout-grid__cell {
+    .signatory {
         background: white;
-        margin: 0 -0.75rem;
+        // margin: 0 -0.75rem;
         padding: $spacing-unit;
         vertical-align: middle;
         a {
@@ -1496,27 +1494,27 @@ hr {
         }
     }
 
-    .mdc-layout-grid__cell--span-3 {
-        border: 2px solid $brand-typography;
+    .signatory {
+        border: $brand-border-width solid $brand-typography;
         border-right: none;
         border-bottom: none;
     }
-    .mdc-layout-grid__cell--span-3:nth-child(4n + 1) {
+    .signatory:nth-child(4n + 1) {
         border-left: none;
         .inner {
             padding-left: 0;
         }
     }
-    .mdc-layout-grid__cell--span-3:nth-child(4n + 4) {
+    .signatory:nth-child(4n + 4) {
         border-right: none;
         padding-right: 0;
         .inner {
             margin-right: 0;
         }
     }
-    .mdc-layout-grid__cell--span-3:nth-child(4n+1):nth-last-child(-n+4),
-    .mdc-layout-grid__cell--span-3:nth-child(4n+1):nth-last-child(-n+4) ~ .mdc-layout-grid__cell--span-3 {
-        border-bottom: 2px solid $brand-typography;
+    .signatory:nth-child(4n+1):nth-last-child(-n+4),
+    .signatory:nth-child(4n+1):nth-last-child(-n+4) ~ .mdc-layout-grid__cell--span-3 {
+        border-bottom: $brand-border-width solid $brand-typography;
     }
 }
 
@@ -1526,7 +1524,24 @@ hr {
     text-align: center;
     display: block !important;
     padding-top: $spacing-unit !important;
+    margin-top: 3rem;
+    list-style-type: none;
+    li a,
+    li.active a {
+        cursor: pointer;
+        color: $brand-typography;
+        font-weight: 400;
+        text-decoration: none;
+    }
+    li.active {
+        background-color: $brand-primary;
+    }
+    li.disabled a {
+        color: inherit;
+        opacity: 0.5;
+    }
     li {
+        display: inline-block;
         padding: 0 !important;
         height: $spacing-unit*2;
         width: $spacing-unit*2;
@@ -1534,7 +1549,7 @@ hr {
         margin: 0 $spacing-unit/5;
         vertical-align: bottom;
         a {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             line-height: $spacing-unit*2;
             height: $spacing-unit*2;
             width: $spacing-unit*2;
@@ -1566,7 +1581,7 @@ hr {
             color: white;
         }
     }
-    li:hover,
+    li:hover:not(.disabled),
     li.current-page:hover {
         background-color: $brand-typography;
         a {
@@ -1582,24 +1597,27 @@ footer {
     background: -webkit-linear-gradient(top, rgba(55,71,79,1) 0%,rgba(38,50,56,1) 100%);
     background: linear-gradient(to bottom, rgba(55,71,79,1) 0%,rgba(38,50,56,1) 100%);
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#37474f', endColorstr='#263238',GradientType=0 );
-    padding: $spacing-unit*2 0 $spacing-unit;
-    position: relative;
+    padding: $spacing-unit*2 0 $spacing-unit*2;
     .brand-logo img {
         max-width: 180px;
+    }
+    .container-fluid {
+        position: relative;
     }
     p {
         font-family: "Open Sans", Helvetica, Arial, sans-serif;
         font-weight: 400;
         font-size: 1.03rem;
         color: white;
-        small {
-            font-size: 88%;
-        }
         a {
             color: white !important;
             text-decoration: underline;
             text-decoration-skip: ink;
         }
+    }
+    p.copyright {
+        font-size: 0.92rem;
+        margin-bottom: 0;
     }
     .description p {
         margin: 0 0 1rem;

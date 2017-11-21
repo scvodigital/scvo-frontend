@@ -1,40 +1,42 @@
-<h1>Signatories</h1>
+<div class="signatories">
+    <h1>Signatories</h1>
 
-<form [searchroute]="'signatory_search'">
-    <div class="mdc-layout-grid">
+    <form [searchroute]="'signatory_search'">
+        <div class="mdc-layout-grid">
+            <div class="mdc-layout-grid__inner">
+                <div class="mdc-layout-grid__cell-span-6">
+                    <div class="mdc-textfield mdc-textfield--upgraded" data-mdc-auto-init="MDCTextField">
+                        <input type="text" class="mdc-textfield__input" name="q" id="events-keywords" value="{{params.query.q}}">
+                        <label class="mdc-textfield__label" for="events-keywords">Keywords</label>
+                        <div class="mdc-textfield__bottom-line"></div>
+                    </div>
+                </div>
+                <div class="mdc-layout-grid__cell-span-6">
+                    <div class="mdc-form-field">
+                        <select class="mdc-select" role="listbox" id="events-type" name="course_type">
+                            <option value="" {{#if params.query.type}}{{else}}selected{{/if}}>Select type</option>
+                            {{#each supplimentaryResponses.types.aggregations.types.buckets}}
+                            <option value="{{key}}" {{#compare ../params.query.type "===" key}}selected{{/compare}}>{{key}} ({{doc_count}})</option>
+                            {{/each}}
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="mdc-button mdc-button--raised" type="submit">
+            Search
+        </button>
+    </form>
+
+    <div class="mdc-layout-grid signatories-search">
         <div class="mdc-layout-grid__inner">
-            <div class="mdc-layout-grid__cell">
-                <div class="mdc-textfield mdc-textfield--upgraded" data-mdc-auto-init="MDCTextField">
-                    <input type="text" class="mdc-textfield__input" name="q" id="events-keywords" value="{{params.query.q}}">
-                    <label class="mdc-textfield__label" for="events-keywords">Keywords</label>
-                    <div class="mdc-textfield__bottom-line"></div>
-                </div>
+            {{#each primaryResponse.hits.hits}}
+            <div class="mdc-layout-grid__cell signatory inner mdc-layout-grid__cell--span-3">
+                {{{_source.rendered.search_result_logo}}}
             </div>
-            <div class="mdc-layout-grid__cell">
-                <div class="mdc-form-field">
-                    <select class="mdc-select" role="listbox" id="events-type" name="course_type">
-                        <option value="" {{#if params.query.type}}{{else}}selected{{/if}}>Select type</option>
-                        {{#each supplimentaryResponses.types.aggregations.types.buckets}}
-                        <option value="{{key}}" {{#compare ../params.query.type "===" key}}selected{{/compare}}>{{key}} ({{doc_count}})</option>
-                        {{/each}}
-                    </select>
-                </div>
-            </div>
+            {{/each}}
         </div>
     </div>
-    <button class="mdc-button mdc-button--raised" type="submit">
-        Search
-    </button>
-</form>
 
-<div class="mdc-layout-grid signatories">
-    <div class="mdc-layout-grid__inner">
-        {{#each primaryResponse.hits.hits}}
-        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3">
-            {{{_source.rendered.search_result_logo}}}
-        </div>
-        {{/each}}
-    </div>
+    {{> pagination paging=paging params=params}}
 </div>
-
-{{> pagination paging=paging params=params}}
