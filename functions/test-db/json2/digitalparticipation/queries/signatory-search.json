@@ -9,26 +9,33 @@
     "query": {
         "bool": {
             "must": [
-            {{#if query.course_type}}
-                {
-                    "term": {
-                        "type": "{{query.type}}"
+                {{#if query.sector}}
+                    {
+                        "term": {
+                            "sector": "{{query.sector}}"
+                        }
+                    }{{#if query.category}},{{/if}}
+                {{/if}}
+                {{#if query.category}}
+                    {
+                        "term": {
+                            "category": "{{query.category}}"
+                        }
+                    }{{#if query.q}},{{/if}}
+                {{/if}}
+                {{#if query.q}}
+                    {
+                        "query_string": {
+                            "query": "{{query.q}}",
+                            "default_operator": "AND",
+                            "analyzer": "snowball"
+                        }
                     }
-                }{{#if query.q}},{{/if}}
-            {{/if}}
-            {{#if query.q}}
-                {
-                    "query_string": {
-                        "query": "{{query.q}}",
-                        "default_operator": "AND",
-                        "analyzer": "snowball"
-                    }
-                }
-            {{/if}}
+                {{/if}}
             ]
         }
     },
     "sort": {
-        "date_signed": "desc"
+        {{#if query.sort}}"slug": "asc"{{else}}"date_signed": "desc"{{/if}}
     }
 }

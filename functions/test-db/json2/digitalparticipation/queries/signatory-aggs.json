@@ -2,9 +2,21 @@
     "size": 0,
     "_source": false,
     "aggs": {
-        "types": {
+        "sectors": {
             "terms": {
-                "field": "type",
+                "field": "sector",
+                "order": {
+                    "_term": "asc"
+                },
+                "size": 10000
+            }
+        },
+        "categories": {
+            "terms": {
+                "field": "category",
+                "order": {
+                    "_term": "asc"
+                },
                 "size": 10000
             }
         }
