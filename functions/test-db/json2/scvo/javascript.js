@@ -1,8 +1,7 @@
-var drawerEl = document.querySelector('.mdc-temporary-drawer');
-var drawer = mdc.drawer.MDCTemporaryDrawer.attachTo(drawerEl);
-console.log('DRAWER:', drawer);
+window.drawerEl = document.querySelector('.mdc-temporary-drawer');
+window.drawer = mdc.drawer.MDCTemporaryDrawer.attachTo(drawerEl);
 document.querySelector('#menu_button').addEventListener('click', function() {
-    drawer.open = true;
+    window.drawer.open = true;
 });
 drawerEl.addEventListener('MDCTemporaryDrawer:open', function() {
     console.log('Received MDCTemporaryDrawer:open');
@@ -10,3 +9,5 @@ drawerEl.addEventListener('MDCTemporaryDrawer:open', function() {
 drawerEl.addEventListener('MDCTemporaryDrawer:close', function() {
     console.log('Received MDCTemporaryDrawer:close');
 });
+
+
