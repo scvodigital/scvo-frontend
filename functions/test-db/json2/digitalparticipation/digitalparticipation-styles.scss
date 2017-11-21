@@ -1057,12 +1057,31 @@ main {
         }
     }
 
+    .sort {
+        margin-top: 1.5rem;
+    }
+    .mdc-select,
+    .mdc-form-field {
+        width: 100%;
+    }
+    .mdc-textfield__input,
+    .mdc-select {
+        line-height: 2rem;
+        height: 3rem;
+        background-color: white;
+        padding: 0 $spacing-unit/2;
+        border: $brand-border-width solid $brand-typography;
+        border-radius: 0.15rem;
+    }
+    .mdc-textfield__input {
+        width: 95%;
+        height: 2.6rem;
+    }
+
     .form-group {
         input[type=text],
-        input[type=text].valid,
-        input[type=text].invalid,
-        input[type=text]:focus:not([readonly]),
         input[type=search],
+        .mdc-select,
         select,
         select:focus {
             font-size: 1.2rem;
@@ -1975,10 +1994,8 @@ footer {
         }
         .form-group {
             input[type=text],
-            input[type=text].valid,
-            input[type=text].invalid,
-            input[type=text]:focus:not([readonly]),
             input[type=search],
+            .mdc-select,
             select,
             select:focus {
                 font-size: 1rem;

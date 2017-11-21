@@ -6,15 +6,14 @@
             <div class="mdc-layout-grid__inner">
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6">
                     <h4>Search</h4>
-                    <div class="mdc-textfield mdc-textfield--upgraded" data-mdc-auto-init="MDCTextField">
+                    <div class="mdc-textfield mdc-textfield--upgraded keywords" data-mdc-auto-init="MDCTextField">
                         <input type="text" class="mdc-textfield__input" name="q" id="charter-keywords" value="{{params.query.q}}">
-                        <label class="mdc-textfield__label" for="charter-keywords">Keywords</label>
                         <div class="mdc-textfield__bottom-line"></div>
                     </div>
                 </div>
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3">
                     <h4>Sector</h4>
-                    <div class="mdc-form-field">
+                    <div class="mdc-form-field sector">
                         <select class="mdc-select" role="listbox" id="charter-sector" name="sector">
                             <option value="" {{#if params.query.sector}}{{else}}selected{{/if}}>All sectors</option>
                             {{#each supplimentaryResponses.types.aggregations.sectors.buckets}}
@@ -25,7 +24,7 @@
                 </div>
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3">
                     <h4>Category</h4>
-                    <div class="mdc-form-field">
+                    <div class="mdc-form-field category">
                         <select class="mdc-select" role="listbox" id="charter-category" name="category">
                             <option value="" {{#if params.query.category}}{{else}}selected{{/if}}>All categories</option>
                             {{#each supplimentaryResponses.types.aggregations.categories.buckets}}
@@ -43,7 +42,7 @@
                     <h4>Sort</h4>
                 </div>
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3">
-                    <div class="mdc-form-field">
+                    <div class="mdc-form-field sort">
                         <select class="mdc-select" role="listbox" id="charter-sort" name="sort">
                             <option value="" {{#if params.query.sort}}{{else}}selected{{/if}}>Date signed</option>
                             <option value="AZ" {{#if params.query.sort}}selected{{else}}{{/if}}>Alphabetical</option>
