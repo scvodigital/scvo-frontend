@@ -80,6 +80,9 @@ p a {
 h4 a {
     text-decoration: none;
 }
+:focus {
+    outline: none;
+}
 
 .container-fluid {
     max-width: 1280px;
@@ -972,6 +975,14 @@ main {
         background: -webkit-linear-gradient(top, $brand-primary 10%, $brand-charter 90%);
         background: linear-gradient(to bottom, $brand-primary 10%, $brand-charter 90%);
         filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='$brand-primary', endColorstr='$brand-charter',GradientType=0 );
+        .cta {
+            .cta-left {
+                margin-right: $spacing-unit/2;
+            }
+            .cta-right {
+                margin-left: $spacing-unit/2;
+            }
+        }
     }
 }
 .stories {
@@ -1066,12 +1077,25 @@ main {
     }
     .mdc-textfield__input,
     .mdc-select {
+        font-size: 1.1rem;
+        font-weight: bold;
+        color: $brand-typography;
         line-height: 2rem;
         height: 3rem;
         background-color: white;
         padding: 0 $spacing-unit/2;
         border: $brand-border-width solid $brand-typography;
         border-radius: 0.15rem;
+        max-width: 100%;
+        letter-spacing: 0;
+    }
+    .sector .mdc-select {
+        margin-right: $spacing-unit/2;
+    }
+    .mdc-textfield__input:focus,
+    .mdc-select:focus {
+        background-color: white;
+        border-bottom-color: $brand-typography;
     }
     .mdc-textfield__input {
         width: 95%;
@@ -1270,7 +1294,7 @@ main {
         }
     }
     .pledges h1 {
-        margin-top: 3rem;
+        margin-top: 10.4rem;
     }
     .detail.title {
         h2 {
@@ -1475,14 +1499,23 @@ hr {
 
 .signatories main {
     h1 {
-        font-size: 5.8rem;
-        line-height: 5.9rem;
+        font-size: 5.3rem;
+        line-height: 5.5rem;
         letter-spacing: -.1rem;
         margin: 2rem 0 2rem;
         padding-right: 2rem;
         .small {
-            font-size: 4rem;
+            font-size: 3.8rem;
+            letter-spacing: -.25rem;
         }
+    }
+    h4 {
+        margin: 1.5rem 0 0.25rem;
+        font-size: 1.8rem;
+    }
+    h4.sort {
+        text-align: right;
+        margin-right: $spacing-unit/2;
     }
     .signatory {
         background: white;
