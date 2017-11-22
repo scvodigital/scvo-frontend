@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>SCVO – Scottish Council for Voluntary Organisations</title>
+    <title>{{{route.title}}}</title>
     <base href="/">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
@@ -77,7 +77,7 @@
                 </div>
             </header>
 
-            <aside class="mdc-temporary-drawer" id="menu_draw" dir="rtl">
+            <aside class="mdc-temporary-drawer" id="menu_drawer" dir="rtl">
                 <nav class="mdc-temporary-drawer__drawer">
                     <header class="mdc-temporary-drawer__header">
                         <div class="mdc-temporary-drawer__header-content mdc-theme--primary-bg mdc-theme--text-primary-on-primary">
@@ -88,12 +88,12 @@
                         <div id="icon-with-text-demo" class="mdc-list">
                             <a class="mdc-list-item" href="/">Home</a>
                             {{#each menus.main}}
-                            <a class="mdc-list-item" href="{{path}}" data-mdc-tabindex-handled="true" tabindex="-1" onclick="menu_draw.MDCTemporaryDrawer.open = false">
+                            <a class="mdc-list-item" href="{{path}}" data-mdc-tabindex-handled="true" tabindex="-1" onclick="window.drawer.open = false">
                                 {{{label}}}
                             </a>
                             {{/each}}
                             {{#each menus.upper}}
-                            <a class="mdc-list-item" href="{{path}}" data-mdc-tabindex-handled="true" tabindex="-1" onclick="menu_draw.MDCTemporaryDrawer.open = false">
+                            <a class="mdc-list-item" href="{{path}}" data-mdc-tabindex-handled="true" tabindex="-1" onclick="window.drawer.open = false">
                                 {{{label}}}
                             </a>
                             {{/each}}
@@ -172,6 +172,7 @@
         </div>
     </scvo-site>
     <script type="text/javascript" src="//unpkg.com/material-components-web@latest/dist/material-components-web.js"></script>
+    <script type="text/javascript" src="//npmcdn.com/headroom.js/dist/headroom.min.js"></script>
     <script type="text/javascript">
     // Cookie Consent
     window.cookieconsent_options = {

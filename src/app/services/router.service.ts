@@ -46,13 +46,20 @@ export class RouterService {
                 if(!this.loaded){
                     (<any>window).document.querySelector('router-outlet').innerHTML = '';
                     this.loaded = true;
+                    console.log('First load, router "loaded" set to true');
                     return;
                 }
-
+                console.log('Calling router.execute:', event.url);
                 this.scvoRouter.execute(event.url).then((routeMatch: RouteMatch) => {
                     // HACK: To allow Angular to take over the pre-rendered site
                     this.currentRoute = routeMatch;
                     this.routeChanged.next(routeMatch);
+
+                    setTimeout(() => {
+                        var scriptTag = document.createElement('script');
+                        scriptTag.innerHTML = routeMatch.javascript;
+                        document.body.appendChild(scriptTag);
+                    }, 500);
                 });
             }
         });
@@ -67,11 +74,11 @@ export class RouterService {
                 var replaceString = `[routerLink]="'${url}'"`;
 
                 var query = parts.length > 1 ? querystring.parse(parts[1]) : {};
-                if (multipleResults) {
-                    var combined = {};
-                    Object.assign(combined, paramsQuery, query);
-                    query = combined;
-                }
+//                if (multipleResults) {
+//                    var combined = {};
+//                    Object.assign(combined, paramsQuery, query);
+//                    query = combined;
+//                }
                 if (Object.keys(query).length > 0) {
                     var queryJson = JSON.stringify(query);
                     replaceString += ` [queryParams]='${queryJson}'`;
@@ -80,7 +87,7 @@ export class RouterService {
                 return replaceString;
             })
             .replace(/(\<\/?big\>)|(\<\/?small\>)/g, '');
-        // console.log('HTML:', html);
+        //console.log('HTML:', html);
         return html;
     }
 }

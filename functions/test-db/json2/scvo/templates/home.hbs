@@ -35,22 +35,26 @@
         <p>&nbsp;</p>
         <p>&nbsp;</p>
         <p>&nbsp;</p>
-        <!-- { {#each primaryResponse.hits.hits}}
-        { { {_source.rendered.featured}}}
-        { {/each}} -->
     </div>
+    {{#each supplimentaryResponses.featured.hits.hits}}
+    <div {{#if _source.header_background}}class="featured-background-image" style="background-image: url('{{_source.header_background}}');"{{else}}class="featured-text"{{/if}}>
+        <div class="container-fluid">
+            {{{_source.rendered.featured}}}
+        </div>
+    </div>
+    {{/each}}
 </section>
 
 <section class="callout-image cta-content">
     <div class="container-fluid">
         <div class="cta-grid mdc-layout-grid">
             <div class="mdc-layout-grid__inner">
-                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-desktop">
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
                     <h2>
                         Find information on...
                     </h2>
                 </div>
-                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-4-desktop">
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 mdc-layout-grid__cell--span-12-tablet">
                     <h3>
                         <a href="/setting-up-a-charity">
                             <span class="fa fa-3x fa-file-text" aria-hidden="true"></span>
@@ -58,7 +62,7 @@
                         </a>
                     </h3>
                 </div>
-                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-4-desktop">
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 mdc-layout-grid__cell--span-12-tablet">
                     <h3>
                         <a href="/funding">
                             <span class="fa fa-3x fa-money" aria-hidden="true"></span>
@@ -66,7 +70,7 @@
                         </a>
                     </h3>
                 </div>
-                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-4-desktop">
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 mdc-layout-grid__cell--span-12-tablet">
                     <h3>
                         <a href="/jobs">
                             <span class="fa fa-3x fa-address-card" aria-hidden="true"></span>

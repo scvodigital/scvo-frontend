@@ -7,10 +7,15 @@
         "titleTemplate": `{:templates/home-title.hbs}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
-            "type": "scvo-cms-page,scvo-cms-post",
-            "template": `{:queries/home.json}`
+            "type": "scvo-cms-page",
+            "template": `{:queries/none.json}`
         },
         "supplimentarySearchTemplates": {
+            "featured": {
+                "index": "web-content-production",
+                "type": "scvo-cms-page,scvo-cms-post",
+                "template": `{:queries/home.json}`
+            },
             "goodmoves_latest": {
                 "index": "web-content-production",
                 "type": "goodmoves-legacy",
@@ -511,6 +516,7 @@
         "linkTags": [],
         "metaTags": [],
         "template": `{:templates/post.hbs}`,
+        "javascript": `{:javascript/post.js}`,
         "titleTemplate": `{:templates/page-title.hbs}`,
         "jsonLdTemplate": `{:templates/page-json-ld.hbs}`,
         "primarySearchTemplate": {
@@ -747,6 +753,34 @@
             "log": "debug"
         }
     },
+    "credit_union_loan_calculator": {
+        "pattern": {
+            "index": "/credit-union/loan-calculator"
+        },
+        "linkTags": [],
+        "metaTags": [],
+        "template": `{:templates/credit-union-loan-calculator.hbs}`,
+        "javascript": `{:javascript/credit-union-loan-calculator.js}`,
+        "titleTemplate": `{:templates/page-title.hbs}`,
+        "jsonLdTemplate": `{:templates/page-json-ld.hbs}`,
+        "primarySearchTemplate": {
+            "index": "web-content-production",
+            "type": "scvo-cms-page",
+            "template": `{:queries/none.json}`
+        },
+        "supplimentarySearchTemplates": {
+            "splash": {
+                "index": "web-content-production",
+                "type": "scvo-cms-media",
+                "template": `{:queries/page-splash.json}`
+            }
+        },
+        "elasticsearchConfig": {
+            "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
+            "apiVersion": "5.6",
+            "log": "debug"
+        }
+    },
     "page_membership": {
         "pattern": {
             "index": "/services/membership",
@@ -805,6 +839,7 @@
     "page_full_width": {
         "pattern": {
             "setting_up_faq": "/setting-up-a-charity/frequently-asked-questions",
+            "digital_about": "/digital/about",
             "services": "/services",
             "projects_campaigns": "/projects-campaigns",
             "bank_comparison": "/running-your-organisation/finance-business-management/bank-accounts/comparison"

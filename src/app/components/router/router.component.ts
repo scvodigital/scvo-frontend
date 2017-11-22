@@ -32,10 +32,12 @@ export class RouterComponent implements OnInit {
     }
 
     ngOnInit() {
+        console.log('Router Component Init');
         this.handleRoute(this.router.currentRoute);
     }
 
     handleRoute(match: RouteMatch) {
+        console.log('Handle Route:', match.name);
         window.scrollTo(0, 0);
 
         console.log(match);

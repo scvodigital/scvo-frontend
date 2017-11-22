@@ -155,7 +155,9 @@ main {
     overflow: -webkit-paged-x;
     padding: $spacing-unit/2;
 }
-
+:focus {
+    outline: none;
+}
 .brand-logo {
     margin-left: -$spacing-unit/2;
     img {
@@ -218,17 +220,37 @@ a:hover {
         }
     }
     .featured-content {
-        .featured.mdc-card {
-            height: 20rem;
+        .featured {
+            h1,
+            p {
+                font-size: 1.1rem;
+                color: black;
+            }
+            h1.header-text {
+                font-size: 1.3rem;
+                line-height: 1.5rem;
+                margin: 0;
+            }
+        }
+        .featured-text,
+        .featured-background-image {
+            padding: $spacing-unit*2 0;
+        }
+        .featured-background-image {
             background-size: cover;
             background-repeat: no-repeat;
             background-position: center center;
-            .mdc-card__primary, .mdc-card__actions {
-                background-image: linear-gradient(90deg, var(--mdc-theme-primary-dark) 0%, var(--mdc-theme-primary) 33%, var(--mdc-theme-primary-fade) 100%);
+            p {
+                font-size: 1.4rem;
+                margin-left: 3rem;
+            }
+            h1,
+            p,
+            a {
                 color: white;
             }
-            .mdc-button:not(:disabled) {
-                color: white;
+            img.header-text {
+                max-width: 100%;
             }
         }
     }
@@ -242,7 +264,7 @@ a:hover {
         h2 {
             font-size: 1.8rem;
         }
-        .mdc-layout-grid__cell--span-4-desktop {
+        .mdc-layout-grid__cell--span-4 {
             text-align: center;
             h3 {
                 margin: 0;
@@ -569,6 +591,17 @@ a:hover {
     }
 }
 
+.headroom {
+    will-change: transform;
+    transition: transform 200ms linear;
+}
+.headroom--pinned {
+    transform: translateY(0%);
+}
+.headroom--unpinned {
+    transform: translateY(-100%);
+}
+
 // Grid Cards ==================================================================
 
 .mdc-layout-grid.equal-height .mdc-layout-grid__cell {
@@ -802,8 +835,6 @@ a:hover {
         max-height: $spacing-unit*6;
     }
 }
-.projects-campaigns .breadcrumbs-length-0,
-.services .breadcrumbs-length-0,
 .digital.charter-fund.projects .page-info,
 .digital.cyber-resilience.projects .page-info,
 .blogs .page-sidebar .page-info,
@@ -973,7 +1004,6 @@ h1.mdc-typography--title {
     padding: $spacing-unit/2 $spacing-unit $spacing-unit;
     .mdc-card__action {
         font-weight: 800;
-        // font-size: 0.9rem;
     }
     ul {
         width: 100%;
@@ -983,6 +1013,7 @@ h1.mdc-typography--title {
         li .mdc-card__action {
             width: 100%;
             margin-bottom: $spacing-unit/2;
+            display: block;
         }
         li:last-child .mdc-card__action {
             margin-bottom: 0;
@@ -1214,6 +1245,16 @@ ul.breadcrumbs {
             vertical-align: text-bottom;
             float: left;
             margin-top: -0.15rem;
+        }
+    }
+    #share-menu-button {
+        color: var(--mdc-theme-primary);
+        font-weight: 600;
+    }
+    #share-menu-button:hover {
+        cursor: pointer;
+        .underline {
+            text-decoration: underline;
         }
     }
     .post-info-share,

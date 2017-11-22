@@ -1,0 +1,41 @@
+{
+    "size": 12,
+    "from": {{multiply (subtract (default query.page 1) 1) 12}},
+    "_source": [
+        "slug",
+        "title",
+        "rendered.charter_search_result"
+    ],
+    "query": {
+        "bool": {
+            "must": [
+                {{#if query.sector}}
+                    {
+                        "term": {
+                            "sector": "{{query.sector}}"
+                        }
+                    }{{#if query.category}},{{/if}}
+                {{/if}}
+                {{#if query.category}}
+                    {
+                        "term": {
+                            "category": "{{query.category}}"
+                        }
+                    }{{#if query.q}},{{/if}}
+                {{/if}}
+                {{#if query.q}}
+                    {
+                        "query_string": {
+                            "query": "{{query.q}}",
+                            "default_operator": "AND",
+                            "analyzer": "snowball"
+                        }
+                    }
+                {{/if}}
+            ]
+        }
+    },
+    "sort": {
+        {{#if query.sort}}"slug": "asc"{{else}}"date_signed": "desc"{{/if}}
+    }
+}
