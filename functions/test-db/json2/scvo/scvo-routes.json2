@@ -7,10 +7,15 @@
         "titleTemplate": `{:templates/home-title.hbs}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
-            "type": "scvo-cms-page,scvo-cms-post",
-            "template": `{:queries/home.json}`
+            "type": "scvo-cms-page",
+            "template": `{:queries/none.json}`
         },
         "supplimentarySearchTemplates": {
+            "featured": {
+                "index": "web-content-production",
+                "type": "scvo-cms-page,scvo-cms-post",
+                "template": `{:queries/home.json}`
+            },
             "goodmoves_latest": {
                 "index": "web-content-production",
                 "type": "goodmoves-legacy",
@@ -834,6 +839,7 @@
     "page_full_width": {
         "pattern": {
             "setting_up_faq": "/setting-up-a-charity/frequently-asked-questions",
+            "digital_about": "/digital/about",
             "services": "/services",
             "projects_campaigns": "/projects-campaigns",
             "bank_comparison": "/running-your-organisation/finance-business-management/bank-accounts/comparison"
