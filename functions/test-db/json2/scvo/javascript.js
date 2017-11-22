@@ -10,6 +10,13 @@ drawerEl.addEventListener('MDCTemporaryDrawer:close', function() {
     console.log('Received MDCTemporaryDrawer:close');
 });
 
+var header = document.querySelector("header.mdc-toolbar");
+var headroom  = new Headroom(header, {
+    "offset": 205,
+    "tolerance": 5
+});
+headroom.init();
+
 window.share = function(where) {
     var ogTitleEl = document.head.querySelector('meta[property="og:title"]');
     var ogDescriptionEl = document.head.querySelector('meta[property="og:description"]');

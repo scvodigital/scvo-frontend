@@ -571,6 +571,17 @@ a:hover {
     }
 }
 
+.headroom {
+    will-change: transform;
+    transition: transform 200ms linear;
+}
+.headroom--pinned {
+    transform: translateY(0%);
+}
+.headroom--unpinned {
+    transform: translateY(-100%);
+}
+
 // Grid Cards ==================================================================
 
 .mdc-layout-grid.equal-height .mdc-layout-grid__cell {
@@ -973,7 +984,6 @@ h1.mdc-typography--title {
     padding: $spacing-unit/2 $spacing-unit $spacing-unit;
     .mdc-card__action {
         font-weight: 800;
-        // font-size: 0.9rem;
     }
     ul {
         width: 100%;
@@ -983,6 +993,7 @@ h1.mdc-typography--title {
         li .mdc-card__action {
             width: 100%;
             margin-bottom: $spacing-unit/2;
+            display: block;
         }
         li:last-child .mdc-card__action {
             margin-bottom: 0;
@@ -1214,6 +1225,16 @@ ul.breadcrumbs {
             vertical-align: text-bottom;
             float: left;
             margin-top: -0.15rem;
+        }
+    }
+    #share-menu-button {
+        color: var(--mdc-theme-primary);
+        font-weight: 600;
+    }
+    #share-menu-button:hover {
+        cursor: pointer;
+        .underline {
+            text-decoration: underline;
         }
     }
     .post-info-share,
