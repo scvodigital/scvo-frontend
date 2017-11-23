@@ -21,7 +21,6 @@ import { RouterService } from './services/router.service';
 import { AppComponent } from './app.component';
 import { RouterComponent } from './components/router/router.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
-import { SearchBoxDirective } from './directives/search-box.directive';
 
 // Directives
 

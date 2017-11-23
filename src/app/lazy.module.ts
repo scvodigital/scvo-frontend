@@ -14,16 +14,12 @@ import { rootRouterConfig } from "./app.routing";
 import { RouterService } from './services/router.service';
 
 // Components
-import { ScriptHackComponent } from './components/script-hack/script-hack.component';
-import { SearchBoxDirective } from './directives/search-box.directive';
 import { RouterFormDirective } from './directives/router-form.directive';
 
 // Directives
 
 @NgModule({
     declarations: [
-        SearchBoxDirective,
-        ScriptHackComponent,
         RouterFormDirective,
     ],
     imports: [
@@ -31,8 +27,6 @@ import { RouterFormDirective } from './directives/router-form.directive';
         DynamicComponentModule
     ],
     exports: [
-        SearchBoxDirective,
-        ScriptHackComponent,
         RouterFormDirective,
     ]
 })

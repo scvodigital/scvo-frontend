@@ -1,7 +1,6 @@
 import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 
-import { SearchBoxDirective } from './directives/search-box.directive';
 import { RouterService } from './services/router.service';
 import { LazyModule } from './lazy.module';
 
