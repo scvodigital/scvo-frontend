@@ -72,6 +72,7 @@ export class Context implements IContext {
         Object.keys(context.templatePartials).forEach((name: string) => {
             handlebars.registerPartial(name, context.templatePartials[name]);
         });
+
         this.compiledCss = sass.renderSync({ data: this.sass, sourceMap: false, outputStyle: 'compact' }).css.toString('utf8');
     }
 
@@ -80,6 +81,10 @@ export class Context implements IContext {
             var menus = this.menuProcessor.getMenus(uriString, 0, 5);
 
             this.router.execute(uriString).then((routeMatch: IRouteMatch) => {
+                if(routeMatch.templateName !== 'default'){
+                    return resolve(routeMatch.rendered);
+                }
+                
                 var templateData = {
                     metaData: this.metaData,
                     scriptTags: this.scriptTags,
@@ -91,6 +96,7 @@ export class Context implements IContext {
                     uaId: this.uaId,
                     templatePartials: this.templatePartials,
                 };
+
                 //console.log('TEMPLATE DATA:', JSON.stringify(templateData, null, 4));
                 var contextHtml = this.compiledTemplate(templateData);
 

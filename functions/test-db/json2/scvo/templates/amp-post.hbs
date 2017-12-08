@@ -1,0 +1,29 @@
+{{#> amp_layout}}
+<div class="">
+    {{> breadcrumbs_posts}}
+
+    {{#with primaryResponse.hits.hits.[0]._source}}
+        {{{amped_content}}}
+    {{/with}}
+
+    <div class="">
+        {{#if primaryResponse.hits.hits.[0]._source.is_press_release}}
+            <ul class="supplimentary-list">
+                {{#each supplimentaryResponses.category_posts.hits.hits}}
+                    {{{_source.rendered.sidebar}}}
+                {{/each}}
+            </ul>
+        {{else}}
+            {{#if primaryResponse.hits.hits.[0]._source.categories}}
+                <div class="author_about">
+                    {{#if supplimentaryResponses.staff_profile.hits.hits.[0]}}
+                        {{{supplimentaryResponses.staff_profile.hits.hits.[0]._source.rendered.scvo_profile}}}
+                    {{else}}
+                        {{{supplimentaryResponses.author_profile.hits.hits.[0]._source.rendered.scvo_profile}}}
+                    {{/if}}
+                </div>
+            {{/if}}
+        {{/if}}
+    </div>
+</div>
+{{/amp_layout}}

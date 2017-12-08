@@ -1,5 +1,5 @@
 import { Component, ViewChild, ElementRef, OnInit } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 
 import { RouterService } from './services/router.service';
 import { LazyModule } from './lazy.module';
@@ -19,23 +19,17 @@ export class AppComponent implements OnInit {
         return this.viewChild.nativeElement.nextElementSibling;
     }
 
-    constructor(private router: RouterService){
+    constructor(private router: RouterService, private ngRouter: Router){
         window.addEventListener("message", (event) => {
             if (event.data.hasOwnProperty('event')) {
-                /*
-                 * EMBED THIS SCRIPT IN THE HTML OF THE SURVEY
-                <script>
-                    document.addEventListener("DOMContentLoaded", function() {
-                        var height = document.body.scrollHeight;
-                        parent.postMessage({ event: 'resize', height: height }, '*');
-                    })
-                </script>
-                 * THIS NEED TESTING
-                 */
                 console.log('Post Message Event', event.data);
                 switch (event.data.event) {
                     case ('resize'):
                         (<HTMLIFrameElement>document.querySelector('iframe[src*="' + event.origin + '"]')).style.height = event.data.height + 'px';
+                        break;
+                    case ('redirect'):
+                        var url = event.data.url;
+                        ngRouter.navigateByUrl(url); 
                         break;
                 }
             }

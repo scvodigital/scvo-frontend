@@ -43,6 +43,19 @@ exports.index = functions.https.onRequest((req: functions.Request, res: function
                 var context = new Context(contextJson, req.cookies.__session);
                 var url = req.query.url || req.url;
                 context.renderPage(url).then((html: string) => {
+                    //HACK for setting content type
+                    if (html.indexOf('<?xml') === 0) {
+                        if (html.indexOf('<rss') > -1) {
+                            res.contentType('application/rss+xml');
+                        } else {
+                            res.contentType('application/xml');
+                        }
+                    } else if (html.indexOf('{') === 0 || html.indexOf('[') === 0) {
+                        res.contentType('application/json');
+                    } else {
+                        //res.contentType('text/html');
+                    }
+
                     res.send(html);
                     res.end();
                     resolve();

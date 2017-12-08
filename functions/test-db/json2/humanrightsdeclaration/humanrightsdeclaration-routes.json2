@@ -3,7 +3,9 @@
         "pattern": "/",
         "linkTags": [],
         "metaTags": [],
-        "template": `{:templates/home.hbs}`,
+        "templates": {
+            "default": `{:templates/home.hbs}`
+        },
         "titleTemplate": `{:templates/home-title.hbs}`,
         "jsonLdTemplate": `{:templates/home-json-ld.hbs}`,
         "primarySearchTemplate": {
@@ -22,7 +24,9 @@
         "pattern": "/the-declaration",
         "linkTags": [],
         "metaTags": [],
-        "template": `{:templates/declaration.hbs}`,
+        "templates": {
+            "default": `{:templates/declaration.hbs}`
+        },
         "titleTemplate": `{:templates/home-title.hbs}`,
         "jsonLdTemplate": `{:templates/home-json-ld.hbs}`,
         "primarySearchTemplate": {
@@ -41,7 +45,9 @@
         "pattern": "/why-sign",
         "linkTags": [],
         "metaTags": [],
-        "template": `{:templates/why-sign.hbs}`,
+        "templates": {
+            "default": `{:templates/why-sign.hbs}`
+        },
         "titleTemplate": `{:templates/home-title.hbs}`,
         "jsonLdTemplate": `{:templates/home-json-ld.hbs}`,
         "primarySearchTemplate": {
@@ -60,7 +66,51 @@
         "pattern": "/sign-up",
         "linkTags": [],
         "metaTags": [],
-        "template": `{:templates/sign-up.hbs}`,
+        "templates": {
+            "default": `{:templates/sign-up.hbs}`
+        },
+        "titleTemplate": `{:templates/home-title.hbs}`,
+        "jsonLdTemplate": `{:templates/home-json-ld.hbs}`,
+        "primarySearchTemplate": {
+            "index": "web-content-production",
+            "type": "scvo-cms-page",
+            "template": `{:queries/none.json}`
+        },
+        "supplimentarySearchTemplates": {},
+        "elasticsearchConfig": {
+            "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
+            "apiVersion": "5.6",
+            "log": "debug"
+        }
+    },
+    "sign_up_thank_you": {
+        "pattern": "/sign-up-thank-you",
+        "linkTags": [],
+        "metaTags": [],
+        "templates": {
+            "default": `{:templates/sign-up-thank-you.hbs}`
+        },
+        "titleTemplate": `{:templates/home-title.hbs}`,
+        "jsonLdTemplate": `{:templates/home-json-ld.hbs}`,
+        "primarySearchTemplate": {
+            "index": "web-content-production",
+            "type": "scvo-cms-page",
+            "template": `{:queries/none.json}`
+        },
+        "supplimentarySearchTemplates": {},
+        "elasticsearchConfig": {
+            "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
+            "apiVersion": "5.6",
+            "log": "debug"
+        }
+    },
+    "faq": {
+        "pattern": "/faq",
+        "linkTags": [],
+        "metaTags": [],
+        "templates": {
+            "default": `{:templates/faq.hbs}`
+        },
         "titleTemplate": `{:templates/home-title.hbs}`,
         "jsonLdTemplate": `{:templates/home-json-ld.hbs}`,
         "primarySearchTemplate": {
@@ -79,7 +129,9 @@
         "pattern": "/signatories",
         "linkTags": [],
         "metaTags": [],
-        "template": `{:templates/signatory-search.hbs}`,
+        "templates": {
+            "default": `{:templates/signatory-search.hbs}`
+        },
         "titleTemplate": `{:templates/home-title.hbs}`,
         "jsonLdTemplate": `{:templates/home-json-ld.hbs}`,
         "primarySearchTemplate": {
@@ -104,7 +156,9 @@
         "pattern": "/signatories/:slug",
         "linkTags": [],
         "metaTags": [],
-        "template": `{:templates/signatory.hbs}`,
+        "templates": {
+            "default": `{:templates/signatory.hbs}`
+        },
         "titleTemplate": `{:templates/home-title.hbs}`,
         "jsonLdTemplate": `{:templates/home-json-ld.hbs}`,
         "primarySearchTemplate": {
@@ -129,7 +183,9 @@
         "pattern": "/*path",
         "linkTags": [],
         "metaTags": [],
-        "template": `{:templates/404.hbs}`,
+        "templates": {
+            "default": `{:templates/404.hbs}`
+        },
         "titleTemplate": `{:templates/home-title.hbs}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
