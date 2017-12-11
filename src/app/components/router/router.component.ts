@@ -46,8 +46,14 @@ export class RouterComponent implements OnInit {
         headTags.forEach((el) => {
             el.parentElement.removeChild(el);
         });
+
+        var tempHead = document.createElement('head');
         var headTag = document.querySelector('head');
-        headTag.innerHTML = headTag.innerHTML + match.headTags;
+        tempHead.innerHTML = match.headTags;
+
+        while (tempHead.hasChildNodes()) {
+            headTag.appendChild(tempHead.removeChild(tempHead.firstChild));
+        }
 
         // Body classes
         var bodyClasses = document.querySelector('body').classList;
