@@ -4,6 +4,7 @@
     "_source": [
         "slug",
         "title",
+        "date_start",
         "rendered.list",
         "rendered.json_ld"
     ],
@@ -19,23 +20,33 @@
             ],
             {{/if}}
             "must": [
-            {{#if query.course_type}}
+                {{#if query.course_type}}
                 {
                     "term": {
                         "course_type": "{{query.course_type}}"
                     }
                 }{{#if query.q}},{{/if}}
-            {{/if}}
-            {{#if query.q}}
+                {{/if}}
+                {{#if query.q}}
                 {
                     "query_string": {
                         "query": "{{query.q}}",
                         "default_operator": "AND",
                         "analyzer": "snowball"
                     }
+                },
+                {{/if}}
+                {
+                    "range" : {
+                        "date_start" : {
+                            "gte" : "now/d"
+                        }
+                    }
                 }
-            {{/if}}
             ]
         }
-    }
+    },
+    "sort": {
+		"date_start": "asc"
+	}
 }

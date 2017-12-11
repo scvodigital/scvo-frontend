@@ -1,9 +1,8 @@
 {
-    "size": 4,
+    "size": 3,
     "from": {{multiply (subtract (default query.page 1) 1) 10}},
     "_source": [
-        "slug",
-        "title",
+        "rendered.mini",
         "date_start"
     ],
     "query": {
@@ -12,6 +11,13 @@
                 {
                     "term": {
                         "course_type": "Training Course"
+                    }
+                },
+                {
+                    "range" : {
+                        "date_start" : {
+                            "gte" : "now/d"
+                        }
                     }
                 }
             ]
