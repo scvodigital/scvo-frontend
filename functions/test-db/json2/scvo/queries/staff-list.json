@@ -36,12 +36,12 @@
 				"field": "{{firstItem (split query.grouping '-')}}",
 				"order": {
                     "_term": "asc"
-                }
+                },
+                "size": 1000
 			},
 			"aggs": {
-    			"documents": {
-    				"top_hits": {
-    					"size": 1000,
+    			"staff": {
+                    "top_hits": {
     					"sort": {
     						"name_last": "asc"
     					},
