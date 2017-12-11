@@ -33,8 +33,8 @@
 </head>
 <body class="mdc-theme--site-bg {{replace route.params.path '_' ' '}}">
     <scvo-site>
-        <div class="mdc-typography">
-            <header class="mdc-toolbar mdc-toolbar--fixed">
+        <div class="mdc-typography mdc-theme--site-bg">
+            <header class="mdc-toolbar mdc-toolbar--fixed mdc-theme--primary-light-bg">
                 <div class="mdc-toolbar__row">
                     <div class="container-fluid">
                         <section class="mdc-toolbar__section mdc-toolbar__section--align-start">
@@ -47,7 +47,7 @@
                         <section class="mdc-toolbar__section mdc-toolbar__section--align-end toolbar-search">
                             <nav id="upper-tab-bar" class="mdc-tab-bar">
                                 {{#each menus.upper}}
-                                <a class="mdc-tab" href="{{path}}">{{{label}}}</a>
+                                <a class="mdc-tab" href="{{path}}"{{#if match}} class="active"{{/if}}>{{{label}}}</a>
                                 {{/each}}
                             </nav>
                             <form [searchroute]="'main_search'" class="mdc-form-field mdc-form-field--align-end search_form">
@@ -64,12 +64,12 @@
                         </section>
                     </div>
                 </div>
-                <div class="mdc-toolbar__row toolbar-nav">
+                <div class="mdc-toolbar__row toolbar-nav mdc-theme--primary-dark-bg">
                     <div class="container-fluid">
                         <section class="mdc-toolbar__section mdc-toolbar__section--align-start toolbar-menu">
                             <nav id="main-tab-bar" class="mdc-tab-bar">
                                 {{#each menus.main}}
-                                <a class="mdc-tab" href="{{path}}">{{{label}}}</a>
+                                <a class="mdc-tab" href="{{path}}"{{#if match}} class="active"{{/if}}>{{{label}}}</a>
                                 {{/each}}
                             </nav>
                         </section>
@@ -102,7 +102,7 @@
                 </nav>
             </aside>
 
-            <main class="mdc-toolbar-fixed-adjust">
+            <main class="mdc-toolbar-fixed-adjust mdc-theme--background">
                 <div class="container-content">
                     <router-outlet>{{{route.rendered}}}</router-outlet>
                 </div>
