@@ -4,18 +4,16 @@ import * as util from 'util';
 // Module imports
 import * as admin from 'firebase-admin';
 import * as handlebars from 'handlebars';
-import * as helpers from 'handlebars-helpers';
+const hbs = require('nymag-handlebars')();
 import * as sass from 'node-sass';
 import * as uglify from 'uglify-js';
-import { IContext, ILinkTag, IMetaTag, IScriptTag, IMenus, IRoutes, Router, IRouteMatch, MenuProcessor, IPartials } from 'scvo-router';
+import { IContext, ILinkTag, IMetaTag, IScriptTag, IMenus, IRoutes, Router, IRouteMatch, MenuProcessor, IPartials, Helpers } from 'scvo-router';
 
-helpers({ handlebars: handlebars });
+Helpers.register(handlebars);
 
 export class Context implements IContext {
     name: string = '';
     domains: string[] = [];
-    linkTags: ILinkTag[] = [];
-    metaTags: IMetaTag[] = [];
     metaData: any = {};
     scriptTags: IScriptTag[] = [];
     menus: IMenus = {};
@@ -41,8 +39,6 @@ export class Context implements IContext {
         return {
             name: this.name,
             domains: this.domains,
-            linkTags: this.linkTags,
-            metaTags: this.metaTags,
             metaData: this.metaData,
             scriptTags: this.scriptTags,
             menus: this.menus,
@@ -104,12 +100,10 @@ export class Context implements IContext {
                 if(closingHeadTag > -1){
                     var dataJson = JSON.stringify(templateData, null, 4);
                     dataJson = dataJson.replace(/\<\/script/ig, '</scr" + "ipt');
-                    var headerTags = this.getHeaderTags(routeMatch);
                     var tags = `
                         <script>
                             window.contextData = ${dataJson};
                         </script>
-                        ${headerTags}
                         <script>
                             document.addEventListener("DOMContentLoaded", function(event) {
                                 //Context Javascript
@@ -119,6 +113,7 @@ export class Context implements IContext {
                                 ${routeMatch.javascript}
                             });
                         </script>
+                        ${routeMatch.headTags}
                     `;
                     contextHtml = [contextHtml.slice(0, closingHeadTag), tags, contextHtml.slice(closingHeadTag)].join('');
                 }
@@ -131,55 +126,6 @@ export class Context implements IContext {
                 reject(err);
             });
         });
-    }
-
-    getHeaderTags(routeMatch: IRouteMatch): string {
-        var linkTags = {};
-        var metaTags = {};
-
-        (this.linkTags || []).forEach((linkTag: ILinkTag) => {
-            var key = linkTag.name || 'clt' + Math.floor(Math.random() * 999999);
-            var tag = this.renderTag('link', linkTag);
-            linkTags[key] = tag;
-        });
-
-        (this.metaTags || []).forEach((metaTag: IMetaTag) => {
-            var key = metaTag.name || 'cmt' + Math.floor(Math.random() * 999999);
-            var tag = this.renderTag('meta', metaTag);
-            metaTags[key] = tag;
-        });
-
-        (routeMatch.linkTags || []).forEach((linkTag: ILinkTag) => {
-            var key = linkTag.name || 'rlt' + Math.floor(Math.random() * 999999);
-            var tag = this.renderTag('link', linkTag);
-            linkTags[key] = tag;
-        });
-
-        (routeMatch.metaTags || []).forEach((metaTag: IMetaTag) => {
-            var key = metaTag.name || 'rmt' + Math.floor(Math.random() * 999999);
-            var tag = this.renderTag('meta', metaTag);
-            metaTags[key] = tag;
-        });
-
-        var linkTagsHtml = Object.keys(linkTags).map((key: string) => {
-            return linkTags[key];
-        }).join('\n');
-
-        var metaTagsHtml = Object.keys(metaTags).map((key: string) => {
-            return metaTags[key];
-        }).join('\n');
-
-        //TODO: Add pagination params and link generators to route and include link tags here
-        //TODO: Add some kind of title templating here as well
-
-        var headerTags = `
-            <!-- Start of Generated Route Header Tags -->
-            ${linkTagsHtml}
-            ${metaTagsHtml}
-            <!-- End of Generated Route Header Tags -->
-        `;
-
-        return headerTags;
     }
 
     renderTag(tagName: string, attributes: { [key: string]: string }): string {

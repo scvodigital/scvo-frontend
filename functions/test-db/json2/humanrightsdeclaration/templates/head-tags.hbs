@@ -1,0 +1,19 @@
+{{#if metaData.title}}
+    <title>The Scotland Declaration on Human Rights - {{{metaData.title}}}</title>
+    <meta property="og:title" content="The Scotland Declaration on Human Rights - {{{title}}}" data-dynamic="true">
+{{/if}}
+
+{{#if metaData.og_image}}
+    <meta property="og:image" content="{{metaData.og_image}}" data-dynamic="true">
+{{/if}}
+
+{{#ifAny metaData.og_summary metaData.description}}
+    <meta property="og:summary" content="{{{default metaData.og_summary metaData.description}}}" data-dynamic="true">
+    <meta name="description" content="{{{default metaData.description metaData.og_summary}}}" data-dynamic="true">
+{{/ifAny}}
+
+{{#if rendered.json_ld}}
+    <script type="application/ld+json" data-dynamic="true">
+        {{{json_ld}}}
+    </script>
+{{/if}}

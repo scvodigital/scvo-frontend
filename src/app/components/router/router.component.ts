@@ -42,22 +42,12 @@ export class RouterComponent implements OnInit {
 
         console.log(match);
 
-        if (match.jsonLd) {
-            var jsonLd = document.querySelector('script[type="application/ld+json"]');
-            jsonLd.innerHTML = match.jsonLd;
-        }
-
-        if (match.primaryResponse.hits && match.primaryResponse.hits.hits[0]) {
-            document.title = match.title;
-            var metaTitle = document.querySelector('meta[name="title"]');
-            if (metaTitle) {
-                metaTitle.setAttribute('content', match.primaryResponse.hits.hits[0]._source.og_title);
-            }
-            var metaDescription = document.querySelector('meta[name="description"]');
-            if (metaDescription) {
-                metaDescription.setAttribute('content', match.primaryResponse.hits.hits[0]._source.og_summary);
-            }
-        }
+        var headTags = Array.prototype.slice.call(document.querySelectorAll('[data-dynamic="true"],title'));
+        headTags.forEach((el) => {
+            el.parentElement.removeChild(el);
+        });
+        var headTag = document.querySelector('head');
+        headTag.innerHTML = headTag.innerHTML + match.headTags;
 
         // Body classes
         var bodyClasses = document.querySelector('body').classList;
