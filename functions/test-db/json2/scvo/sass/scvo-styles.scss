@@ -18,7 +18,7 @@ footer-primary: #371448,
 footer-primary-highlight: #B3185B,
 footer-primary-light: #592864,
 footer-primary-dark: #251032,
-site-background: #290b4d
+site-background: #251032
 ),
 charity: (
 primary: #4527A0,
@@ -33,7 +33,7 @@ footer-primary: #371448,
 footer-primary-highlight: #B3185B,
 footer-primary-light: #592864,
 footer-primary-dark: #251032,
-site-background: #290b4d
+site-background: #251032
 ),
 jobs: (
 primary: #2e7d32,
@@ -48,7 +48,7 @@ footer-primary: #371448,
 footer-primary-highlight: #B3185B,
 footer-primary-light: #592864,
 footer-primary-dark: #251032,
-site-background: #290b4d
+site-background: #251032
 ),
 goodmoves: (
 primary: #58a934,
@@ -63,7 +63,7 @@ footer-primary: #371448,
 footer-primary-highlight: #B3185B,
 footer-primary-light: #592864,
 footer-primary-dark: #251032,
-site-background: #290b4d
+site-background: #251032
 ),
 funding: (
 primary: #00838F,
@@ -78,7 +78,7 @@ footer-primary: #371448,
 footer-primary-highlight: #B3185B,
 footer-primary-light: #592864,
 footer-primary-dark: #251032,
-site-background: #290b4d
+site-background: #251032
 ),
 projects: (
 primary: #AD1457,
@@ -93,7 +93,7 @@ footer-primary: #371448,
 footer-primary-highlight: #B3185B,
 footer-primary-light: #592864,
 footer-primary-dark: #251032,
-site-background: #290b4d
+site-background: #251032
 ),
 posts: (
 primary: #D84315,
@@ -108,7 +108,7 @@ footer-primary: #371448,
 footer-primary-highlight: #B3185B,
 footer-primary-light: #592864,
 footer-primary-dark: #251032,
-site-background: #290b4d
+site-background: #251032
 ),
 goodhq: (
 primary: #4033E9,
@@ -123,7 +123,7 @@ footer-primary: #371448,
 footer-primary-highlight: #B3185B,
 footer-primary-light: #592864,
 footer-primary-dark: #251032,
-site-background: #290b4d
+site-background: #251032
 ),
 digital-charter: (
 primary: #022347,
@@ -138,7 +138,7 @@ footer-primary: #371448,
 footer-primary-highlight: #B3185B,
 footer-primary-light: #592864,
 footer-primary-dark: #251032,
-site-background: #290b4d
+site-background: #251032
 ),
 tfn: (
 primary: #3b9db1,
@@ -153,7 +153,7 @@ footer-primary: #371448,
 footer-primary-highlight: #B3185B,
 footer-primary-light: #592864,
 footer-primary-dark: #251032,
-site-background: #290b4d
+site-background: #251032
 ),
 funding-scotland: (
 primary: #6FB744,
@@ -168,7 +168,7 @@ footer-primary: #371448,
 footer-primary-highlight: #B3185B,
 footer-primary-light: #592864,
 footer-primary-dark: #251032,
-site-background: #290b4d
+site-background: #251032
 ),
 credit-union: (
 primary: #1976D2,
@@ -183,7 +183,7 @@ footer-primary: #371448,
 footer-primary-highlight: #B3185B,
 footer-primary-light: #592864,
 footer-primary-dark: #251032,
-site-background: #290b4d
+site-background: #251032
 ),
 digital: (
 primary: #1976d2,
@@ -198,7 +198,7 @@ footer-primary: #371448,
 footer-primary-highlight: #B3185B,
 footer-primary-light: #592864,
 footer-primary-dark: #251032,
-site-background: #290b4d
+site-background: #251032
 ),
 services: (
 primary: #1565C0,
@@ -213,7 +213,7 @@ footer-primary: #371448,
 footer-primary-highlight: #B3185B,
 footer-primary-light: #592864,
 footer-primary-dark: #251032,
-site-background: #290b4d
+site-background: #251032
 )
 );
 
@@ -239,26 +239,26 @@ site-background: #290b4d
     blockquote {
         border-left-color: map-get($theme, 'primary') !important;
     }
-    .container-content {
+    .mdc-button,
+    .mdc-button--raised:not(:disabled) {
+        color: map-get($theme, 'primary');
+        border-color: map-get($theme, 'primary');
+    }
+    .mdc-button:hover,
+    .mdc-button--raised:not(:disabled):hover {
+        color: white;
+        border-color: map-get($theme, 'primary-dark');
+        background-color: map-get($theme, 'primary');
+    }
+    .splash-image {
         .mdc-button {
-            color: map-get($theme, 'primary');
-            border-color: map-get($theme, 'primary');
+            border-color: white !important;
+            color: white !important;
         }
         .mdc-button:hover {
-            color: white;
-            border-color: map-get($theme, 'primary-dark');
-            background-color: map-get($theme, 'primary');
-        }
-        .splash-image {
-            .mdc-button {
-                border-color: white !important;
-                color: white !important;
-            }
-            .mdc-button:hover {
-                background-color: white !important;
-                border-color: map-get($theme, 'primary-dark') !important;
-                color: map-get($theme, 'primary') !important;
-            }
+            background-color: white !important;
+            border-color: map-get($theme, 'primary-dark') !important;
+            color: map-get($theme, 'primary') !important;
         }
     }
 
@@ -295,6 +295,7 @@ site-background: #290b4d
     .mdc-theme--primary-bg {
         background-color: map-get($theme, 'primary');
     }
+    body,
     .mdc-theme--site-bg {
         background-color: map-get($theme, 'site-background');
     }
@@ -433,7 +434,8 @@ site-background: #290b4d
         .footer-copyright {
             background-color: map-get($theme, 'footer-primary-dark');
         }
-        a {
+        a,
+        a:hover {
             color: white;
         }
     }
@@ -466,6 +468,8 @@ site-background: #290b4d
 .projects-campaigns {
     @include theme-colours('projects');
 }
+.search-result.scvo-cms-post,
+.related-posts,
 .post,
 .blogs,
 .press-media,
@@ -497,11 +501,11 @@ site-background: #290b4d
     @include theme-colours('digital');
 }
 .services,
+.search-result.scvo-cms-page,
 .breadcrumbs,
 .page-content,
-.page-sidebar,
+.posts-page .page-sidebar,
 .post-content,
-.post-sidebar,
 .library-content,
 .library-sidebar,
 .home .cta-content,
@@ -1233,6 +1237,7 @@ a:hover {
 }
 .splash-overlay,
 .splash-image {
+    overflow: hidden;
     position: relative;
     height: 25vh;
     min-height: $spacing-unit*9;
@@ -1369,6 +1374,9 @@ a:hover {
 .mdc-button,
 .mdc-card__subtitle {
     font-weight: 600;
+}
+.mdc-card__subtitle .post-info-item {
+    font-weight: 500;
 }
 .mdc-card__title--large {
     font-size: 1.2rem;
@@ -1521,11 +1529,23 @@ h1.mdc-typography--title {
     //     padding-bottom: 0;
     // }
 }
+.mdc-card__primary:last-child {
+    padding-bottom: 0;
+}
+.mdc-card-search {
+    margin: 0 0 $spacing-unit;
+    .mdc-card__primary {
+        padding-bottom: $spacing-unit;
+    }
+}
 .mdc-card__supporting-text {
     padding: 0 $spacing-unit $spacing-unit/2;
+    h4 {
+        margin-top: 0;
+    }
 }
 .scvo-cms-post .mdc-card__actions {
-    padding: $spacing-unit/2 $spacing-unit;
+    // padding: $spacing-unit/2 $spacing-unit;
     .post-info {
         padding: 0;
     }
@@ -1617,6 +1637,16 @@ h1.mdc-typography--title {
             top: 0em;
         }
     }
+    ul.fa-ul {
+        li {
+            padding-left: 0;
+        }
+        li::before {
+            content: " ";
+            padding: 0;
+            margin: 0;
+        }
+    }
     .mdc-button {
         background: white;
         border-width: $spacing-unit/8;
@@ -1662,9 +1692,9 @@ hr {
 
 ul.breadcrumbs {
     margin: 0 0 $spacing-unit/2;
-    padding: 0 0 $spacing-unit/2;
-    height: $nav-height;
-    line-height: $nav-height;
+    padding: $spacing-unit/2 0 $spacing-unit;
+    // height: $nav-height;
+    // line-height: $nav-height;
     list-style: none;
     border-bottom: 1px solid rgba(0,0,0,.2);
     font-size: 0;
@@ -1683,7 +1713,7 @@ ul.breadcrumbs {
         padding: 0;
         margin: 0 $spacing-unit/2;
         display: inline-block;
-        color: rgba(0,0,0,.6);
+        color: rgba(0,0,0,.6) !important;
     }
     li.pull-right:before,
     li:first-child:before {
@@ -1798,7 +1828,7 @@ ul.supplimentary-list {
         }
         .post-info {
             display: block;
-            margin-bottom: $spacing-unit/2;
+            // margin-bottom: $spacing-unit/2;
         }
     }
     li.supplimentary-list-item:not(:last-child){
@@ -1824,6 +1854,9 @@ h3,
 h4 {
     margin-bottom: $spacing-unit/4;
     font-weight: 600;
+    strong {
+        font-weight: 600;
+    }
 }
 p {
     margin: 0 0 $spacing-unit/2;
@@ -1845,7 +1878,7 @@ p:last-child {
     .post-info {
         margin: $spacing-unit/2 0 $spacing-unit*1.5;
         border-bottom: 1px solid rgba(0,0,0,.2);
-        padding: 0 0 $spacing-unit;
+        padding: 0 0 $spacing-unit/2;
     }
     .page-info {
         font-size: 0.9rem;
@@ -1914,6 +1947,8 @@ p:last-child {
     a[href^="http://fundingscotland"]::after,
     a[href^="https://fundingscotland"]::after {
         content: " ";
+        margin: 0;
+        top: 0;
     }
 }
 

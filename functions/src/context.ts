@@ -9,7 +9,7 @@ import * as sass from 'node-sass';
 import * as uglify from 'uglify-js';
 import { IContext, ILinkTag, IMetaTag, IScriptTag, IMenus, IRoutes, Router, IRouteMatch, MenuProcessor, IPartials, Helpers } from 'scvo-router';
 
-Helpers.register(handlebars);
+Helpers.register(hbs);
 
 export class Context implements IContext {
     name: string = '';
@@ -64,9 +64,9 @@ export class Context implements IContext {
         this.menuProcessor = new MenuProcessor(this.menus);
 
         // Compile our templates and CSS
-        this.compiledTemplate = handlebars.compile(this.template);
+        this.compiledTemplate = hbs.compile(this.template);
         Object.keys(context.templatePartials).forEach((name: string) => {
-            handlebars.registerPartial(name, context.templatePartials[name]);
+            hbs.registerPartial(name, context.templatePartials[name]);
         });
 
         this.compiledCss = sass.renderSync({ data: this.sass, sourceMap: false, outputStyle: 'compact' }).css.toString('utf8');

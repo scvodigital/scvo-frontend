@@ -10,7 +10,7 @@
                             <div class="mdc-textfield__bottom-line"></div>
                         </div>
                         <div class="mdc-form-field">
-                            <label class="mdc-select__label" for="main-type">Show me</label>
+                            <!-- <label class="mdc-select__label" for="main-type">Show me</label> -->
                             <select class="mdc-select" role="listbox" id="main-type" name="type">
                                 <option value="" {{#unless params.query.type}}selected{{/unless}}>Everything</option>
                                 <option value="scvo-cms-post" {{#compare params.query.type "===" "scvo-cms-post"}}selected{{/compare}}>Posts</option>
@@ -22,7 +22,7 @@
                 </section>
             </div>
         </div>
-        
+
         {{#each primaryResponse.hits.hits}}
         <div class="v-margin">
             {{#if _source.rendered.search_result_scvo}}

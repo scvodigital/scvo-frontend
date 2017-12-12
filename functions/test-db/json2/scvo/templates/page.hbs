@@ -9,7 +9,10 @@
                     <h1 class="header-text">
                         <span class="header-text-banner">
                             {{#if primaryResponse.hits.hits.[0]}}
+                            {{#if primaryResponse.hits.hits.[0]._source.hide_overlay}}
+                            {{else}}
                             {{{primaryResponse.hits.hits.[0]._source.title}}}
+                            {{/if}}
                             {{else}}
                             404: Not found
                             {{/if}}
