@@ -4,7 +4,7 @@ import * as util from 'util';
 // Module imports
 import * as admin from 'firebase-admin';
 import * as handlebars from 'handlebars';
-const hbs = require('nymag-handlebars')();
+const hbs = require('clayhandlebars')();
 import * as sass from 'node-sass';
 import * as uglify from 'uglify-js';
 import { IContext, ILinkTag, IMetaTag, IScriptTag, IMenus, IRoutes, Router, IRouteMatch, MenuProcessor, IPartials, Helpers } from 'scvo-router';
