@@ -26,11 +26,37 @@
             <div class="mdc-layout-grid">
                 <div class="mdc-layout-grid__inner">
                     <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-9 content page-content">
-                        <p>[Search filters TBC, currently showing 5 random]</p>
-
+                        <div class="v-margin">
+                            <div class="mdc-card">
+                                <section class="mdc-card__primary">
+                                    <h2 class="mdc-card__title mdc-card__title--large">Search SCVO</h2>
+                                    <form [searchroute]="'members'" data-auto-search="true">
+                                        <div class="mdc-textfield">
+                                            <input type="text" class="mdc-textfield__input searchRoute" placeholder="Search" value="{{params.query.q}}" name="q">
+                                            <div class="mdc-textfield__bottom-line"></div>
+                                        </div>
+                                        <!--
+                                        <div class="mdc-form-field">
+                                            <select class="mdc-select" role="listbox" name="type">
+                                                <option value="" {{#unless params.query.type}}selected{{/unless}}>All membership types</option>
+                                                {{#each supplimentaryResponses.types.aggregations.types.buckets}}
+                                                <option value="{{slugify key}}" {{#compare ../params.query.type "===" (slugify key)}}selected{{/compare}}>{{key}} ({{doc_count}})</option>
+                                                {{/each}}
+                                            </select>
+                                        </div>
+                                        -->
+                                    </form>
+                                </section>
+                            </div>
+                        </div>
+                        
                         {{#each primaryResponse.hits.hits}}
                         {{{this._source.rendered.list}}}
                         {{/each}}
+
+                        {{#ifAny params.query.q params.query.type}}
+                            {{> pagination paging=paging params=params}}
+                        {{/ifAny}}
                     </div>
                     <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3 sidebar page-sidebar">
                         {{> menu_about}}

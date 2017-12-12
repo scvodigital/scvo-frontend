@@ -7,7 +7,7 @@
     ],
     "query": {
         "bool": {
-            {{#if query.library_classification}}
+            {{#if query.classification}}
                 "filter": [
                     "term": { "library_classification_slug": "{{query.classification}}" }
                 ]{{#if query.q}},{{/if}}

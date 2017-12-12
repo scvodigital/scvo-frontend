@@ -1,8 +1,8 @@
 <nav class="menu-sidebar" id="credit-union-menu">
     {{#each context.menus.credit-union}}
-    <a class="mdc-button mdc-button--raised" href="{{path}}">{{{label}}}</a>
+    <a class="mdc-button mdc-button--raised" href="{{path}}"{{#if match}} class="active"{{/if}}>{{{label}}}</a>
     {{#each this.children}}
-    <a class="mdc-button mdc-button--raised" href="{{path}}">{{{label}}}</a>
+    <a class="mdc-button mdc-button--raised" href="{{path}}"{{#if match}} class="active"{{/if}}>{{{label}}}</a>
     {{/each}}
     {{/each}}
 </nav>

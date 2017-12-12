@@ -4,114 +4,497 @@
 $spacing-unit: 1rem;
 $nav-height: 2.5rem;
 
-:root{
-    --mdc-theme-primary: #AD1457; // Pink 800
-    --mdc-theme-primary-fade: rgba(173, 20, 87, 0.89);
-    --mdc-theme-primary-light: #C2185B; // Pink 700
-    --mdc-theme-primary-dark: #880E4F; // Pink 900
-    --mdc-theme-secondary: #FF8F00; // Amber 800
-    --mdc-theme-secondary-light: #FFA000; // Amber 700
-    --mdc-theme-secondary-dark: #FF6F00; // Amber 900
-    --mdc-theme-background: #ECEFF1; // Blue Grey 50
-    --mdc-footer-primary: #371448;
-    --mdc-footer-primary-highlight: #B3185B;
-    --mdc-footer-primary-light: #592864;
-    --mdc-footer-primary-dark: #251032;
-    --mdc-site-background: #290b4d; // was #263238 Blue Grey 900
-    --mdc-layout-grid-margin-desktop: 0;
-    --mdc-layout-grid-margin-tablet: 0;
+$colours: (
+default: (
+primary: #AD1457,
+primary-fade: rgba(173,20,87,0.89),
+primary-light: #C2185B,
+primary-dark: #880E4F,
+secondary: #FF8F00,
+secondary-light: #FFA000,
+secondary-dark: #FF6F00,
+background: #ffffff,
+footer-primary: #371448,
+footer-primary-highlight: #B3185B,
+footer-primary-light: #592864,
+footer-primary-dark: #251032,
+site-background: #290b4d
+),
+charity: (
+primary: #4527A0,
+primary-fade: rgba(69,39,160,0.89),
+primary-light: #512DA8,
+primary-dark: #311B92,
+secondary: #FF8F00,
+secondary-light: #FFA000,
+secondary-dark: #FF6F00,
+background: #ffffff,
+footer-primary: #371448,
+footer-primary-highlight: #B3185B,
+footer-primary-light: #592864,
+footer-primary-dark: #251032,
+site-background: #290b4d
+),
+jobs: (
+primary: #2e7d32,
+primary-fade: rgba(46,125,50,0.89),
+primary-light: #388E3C,
+primary-dark: #1b5e20,
+secondary: #ff8f00,
+secondary-light: #ffa000,
+secondary-dark: #FF6F00,
+background: #ffffff,
+footer-primary: #371448,
+footer-primary-highlight: #B3185B,
+footer-primary-light: #592864,
+footer-primary-dark: #251032,
+site-background: #290b4d
+),
+goodmoves: (
+primary: #58a934,
+primary-fade: #58a934,
+primary-light: #58a934,
+primary-dark: #58a934,
+secondary: #FF8F00,
+secondary-light: #FFA000,
+secondary-dark: #FF6F00,
+background: #ffffff,
+footer-primary: #371448,
+footer-primary-highlight: #B3185B,
+footer-primary-light: #592864,
+footer-primary-dark: #251032,
+site-background: #290b4d
+),
+funding: (
+primary: #00838F,
+primary-fade: rgba(0,131,143,0.89),
+primary-light: #008D9B,
+primary-dark: #006064,
+secondary: #FF8F00,
+secondary-light: #FFA000,
+secondary-dark: #FF6F00,
+background: #ffffff,
+footer-primary: #371448,
+footer-primary-highlight: #B3185B,
+footer-primary-light: #592864,
+footer-primary-dark: #251032,
+site-background: #290b4d
+),
+projects: (
+primary: #AD1457,
+primary-fade: rgba(173,20,87,0.89),
+primary-light: #C2185B,
+primary-dark: #880E4F,
+secondary: #FF8F00,
+secondary-light: #FFA000,
+secondary-dark: #FF6F00,
+background: #ffffff,
+footer-primary: #371448,
+footer-primary-highlight: #B3185B,
+footer-primary-light: #592864,
+footer-primary-dark: #251032,
+site-background: #290b4d
+),
+posts: (
+primary: #D84315,
+primary-fade: rgba(216,67,21,0.89),
+primary-light: #E64A19,
+primary-dark: #BF360C,
+secondary: #FF8F00,
+secondary-light: #FFA000,
+secondary-dark: #FF6F00,
+background: #ffffff,
+footer-primary: #371448,
+footer-primary-highlight: #B3185B,
+footer-primary-light: #592864,
+footer-primary-dark: #251032,
+site-background: #290b4d
+),
+goodhq: (
+primary: #4033E9,
+primary-fade: #4033E9,
+primary-light: #4033E9,
+primary-dark: #160AAD,
+secondary: #FF8F00,
+secondary-light: #FFA000,
+secondary-dark: #FF6F00,
+background: #ffffff,
+footer-primary: #371448,
+footer-primary-highlight: #B3185B,
+footer-primary-light: #592864,
+footer-primary-dark: #251032,
+site-background: #290b4d
+),
+digital-charter: (
+primary: #022347,
+primary-fade: #022347,
+primary-light: #022347,
+primary-dark: #022347,
+secondary: #FF8F00,
+secondary-light: #FFA000,
+secondary-dark: #FF6F00,
+background: #ffffff,
+footer-primary: #371448,
+footer-primary-highlight: #B3185B,
+footer-primary-light: #592864,
+footer-primary-dark: #251032,
+site-background: #290b4d
+),
+tfn: (
+primary: #3b9db1,
+primary-fade: #3b9db1,
+primary-light: #3b9db1,
+primary-dark: #3b9db1,
+secondary: #FF8F00,
+secondary-light: #FFA000,
+secondary-dark: #FF6F00,
+background: #ffffff,
+footer-primary: #371448,
+footer-primary-highlight: #B3185B,
+footer-primary-light: #592864,
+footer-primary-dark: #251032,
+site-background: #290b4d
+),
+funding-scotland: (
+primary: #6FB744,
+primary-fade: #6FB744,
+primary-light: #6FB744,
+primary-dark: #6FB744,
+secondary: #FF8F00,
+secondary-light: #FFA000,
+secondary-dark: #FF6F00,
+background: #ffffff,
+footer-primary: #371448,
+footer-primary-highlight: #B3185B,
+footer-primary-light: #592864,
+footer-primary-dark: #251032,
+site-background: #290b4d
+),
+credit-union: (
+primary: #1976D2,
+primary-fade: rgba(21,101,192,0.89),
+primary-light: #1976D2,
+primary-dark: #145ea8,
+secondary: #FF8F00,
+secondary-light: #FFA000,
+secondary-dark: #FF6F00,
+background: #ffffff,
+footer-primary: #371448,
+footer-primary-highlight: #B3185B,
+footer-primary-light: #592864,
+footer-primary-dark: #251032,
+site-background: #290b4d
+),
+digital: (
+primary: #1976d2,
+primary-fade: rgba(13,71,161,0.89),
+primary-light: #1976D2,
+primary-dark: #0D47A1,
+secondary: #FF8F00,
+secondary-light: #FFA000,
+secondary-dark: #FF6F00,
+background: #ffffff,
+footer-primary: #371448,
+footer-primary-highlight: #B3185B,
+footer-primary-light: #592864,
+footer-primary-dark: #251032,
+site-background: #290b4d
+),
+services: (
+primary: #1565C0,
+primary-fade: rgba(21,101,192,0.89),
+primary-light: #1976D2,
+primary-dark: #0D47A1,
+secondary: #FF8F00,
+secondary-light: #FFA000,
+secondary-dark: #FF6F00,
+background: #ffffff,
+footer-primary: #371448,
+footer-primary-highlight: #B3185B,
+footer-primary-light: #592864,
+footer-primary-dark: #251032,
+site-background: #290b4d
+)
+);
+
+@mixin theme-colours($themeName: 'default') {
+    // @if map-has-key($colours, $themeName) {
+    //     $themeName: 'default';
+    // }
+
+    $theme: map-get($colours, $themeName);
+    $themeDefault: map-get($colours, 'default');
+    $themePosts: map-get($colours, 'posts');
+    $themeServices: map-get($colours, 'services');
+
+    a,
+    .post-info .post-info-categories .fa,
+    #share-menu-button,
+    .mdc-simple-menu .mdc-list-item,
+    .container-content ul li::before,
+    blockquote p strong,
+    .mdc-theme--primary {
+        color: map-get($theme, 'primary');
+    }
+    blockquote {
+        border-left-color: map-get($theme, 'primary') !important;
+    }
+    .container-content {
+        .mdc-button {
+            color: map-get($theme, 'primary');
+            border-color: map-get($theme, 'primary');
+        }
+        .mdc-button:hover {
+            color: white;
+            border-color: map-get($theme, 'primary-dark');
+            background-color: map-get($theme, 'primary');
+        }
+        .splash-image {
+            .mdc-button {
+                border-color: white !important;
+                color: white !important;
+            }
+            .mdc-button:hover {
+                background-color: white !important;
+                border-color: map-get($theme, 'primary-dark') !important;
+                color: map-get($theme, 'primary') !important;
+            }
+        }
+    }
+
+    .mdc-button:after,
+    .mdc-button:before,
+    .mdc-theme--primary-fade {
+        color: map-get($theme, 'primary-fade');
+    }
+    .mdc-theme--primary-light {
+        color: map-get($theme, 'primary-light');
+    }
+    a:hover,
+    #share-menu-button:hover,
+    .mdc-theme--primary-dark {
+        color: map-get($theme, 'primary-dark');
+    }
+    .mdc-theme--secondary {
+        color: map-get($theme, 'secondary');
+    }
+    .mdc-theme--secondary-light {
+        color: map-get($theme, 'secondary-light');
+    }
+    .mdc-theme--secondary-dark {
+        color: map-get($theme, 'secondary-dark');
+    }
+    .mdc-theme--background {
+        background-color: map-get($theme, 'background');
+    }
+    .support.support-organisation .mdc-card__media,
+    .section-projects .mdc-card__media,
+    .section-campaigns .mdc-card__media,
+    .post-info .post-info-categories .inline-list li a,
+    .pagination li.current-page,
+    .mdc-theme--primary-bg {
+        background-color: map-get($theme, 'primary');
+    }
+    .mdc-theme--site-bg {
+        background-color: map-get($theme, 'site-background');
+    }
+    .mdc-simple-menu .mdc-list-item:after,
+    .mdc-simple-menu .mdc-list-item:before,
+    .mdc-theme--primary-fade-bg {
+        background-color: map-get($theme, 'primary-fade');
+    }
+    .mdc-theme--primary-light-bg {
+        background-color: map-get($theme, 'primary-light') !important;
+    }
+    .pagination li:hover,
+    .pagination li.current-page:hover,
+    .post-info .post-info-categories .inline-list li a:hover,
+    .mdc-theme--primary-dark-bg {
+        background-color: map-get($theme, 'primary-dark') !important;
+    }
+    .mdc-theme--secondary-bg {
+        background-color: map-get($theme, 'secondary');
+    }
+    .mdc-theme--secondary-light-bg {
+        background-color: map-get($theme, 'secondary-light');
+    }
+    .mdc-theme--secondary-dark-bg {
+        background-color: map-get($theme, 'secondary-dark');
+    }
+    .mdc-theme--text-primary-on-primary { }
+    .mdc-theme--text-primary-on-primary-light { }
+    .mdc-theme--text-primary-on-primary-dark { }
+    .mdc-theme--text-secondary-on-primary { }
+    .mdc-theme--text-secondary-on-primary-light { }
+    .mdc-theme--text-secondary-on-primary-dark { }
+    .mdc-theme--text-hint-on-primary { }
+    .mdc-theme--text-hint-on-primary-light { }
+    .mdc-theme--text-hint-on-primary-dark { }
+    .mdc-theme--text-disabled-on-primary { }
+    .mdc-theme--text-disabled-on-primary-light { }
+    .mdc-theme--text-disabled-on-primary-dark { }
+    .mdc-theme--text-icon-on-primary { }
+    .mdc-theme--text-icon-on-primary-light { }
+    .mdc-theme--text-icon-on-primary-dark { }
+
+    .splash-overlay {
+        background-image: linear-gradient(
+        66deg,
+        map-get($theme, 'primary-fade'),
+        map-get($theme, 'primary-fade') 47%,
+        transparent 47.1%,
+        transparent
+        );
+    }
+    @media screen and (max-width: 1140px) {
+        .splash-overlay {
+            background-image: linear-gradient(
+            66deg,
+            map-get($theme, 'primary-fade'),
+            map-get($theme, 'primary-fade') 52%,
+            transparent 52.1%,
+            transparent
+            );
+        }
+    }
+    @media screen and (max-width: 991px) {
+        .splash-overlay {
+            background-image: linear-gradient(
+            66deg,
+            map-get($theme, 'primary-fade'),
+            map-get($theme, 'primary-fade') 57%,
+            transparent 57.1%,
+            transparent
+            );
+        }
+    }
+    @media screen and (max-width: 839px) {
+        .splash-overlay {
+            background-image: linear-gradient(
+            66deg,
+            map-get($theme, 'primary-fade'),
+            map-get($theme, 'primary-fade') 67%,
+            transparent 67.1%,
+            transparent
+            );
+        }
+    }
+    @media screen and (max-width: 450px) {
+        .splash-overlay {
+            background-image: linear-gradient(
+            66deg,
+            map-get($theme, 'primary-fade'),
+            map-get($theme, 'primary-fade')
+            ) !important;
+        }
+    }
+    .home .cta-content.callout-image {
+        background-image: linear-gradient(
+        map-get($themeServices, 'primary-fade'),
+        map-get($themeServices, 'primary-fade')
+        ),
+        url('https://storage.googleapis.com/scvo-cms/wp-content/uploads/2017/10/Drake-Music-03.jpg');
+        .mdc-layout-grid__cell--span-4 h3 a:hover .fa {
+            background-color: map-get($themeServices, 'primary') !important;
+        }
+    }
+    .digital .callout-image {
+        background-image: linear-gradient(
+        map-get($themeDefault, 'primary-fade'),
+        map-get($themeDefault, 'primary-fade')
+        ),
+        url('https://storage.googleapis.com/scvo-cms/wp-content/uploads/2017/11/Dunaverty-Hall.jpg');
+        .mdc-button {
+            border-color: white !important;
+            color: white !important;
+        }
+        .mdc-button:hover {
+            background-color: white !important;
+            border-color: map-get($themeDefault, 'primary-dark') !important;
+            color: map-get($themeDefault, 'primary') !important;
+        }
+    }
+    .setting-up-a-charity .footer-image {
+        .mdc-button {
+            border-color: white !important;
+            color: white !important;
+        }
+        .mdc-button:hover {
+            background-color: white !important;
+            border-color: map-get($themeDefault, 'primary-dark') !important;
+            color: map-get($themeDefault, 'primary') !important;
+        }
+    }
+
+    footer {
+        color: white;
+        background-color: map-get($theme, 'footer-primary');
+        border-top: 0.6rem solid map-get($theme, 'footer-primary-highlight');
+        .footer-copyright {
+            background-color: map-get($theme, 'footer-primary-dark');
+        }
+        a {
+            color: white;
+        }
+    }
 }
+
+@include theme-colours('default');
+
 .running-a-charity,
 .setting-up-a-charity,
 .running-your-organisation {
-    --mdc-theme-primary: #4527A0; // Deep Purple 800
-    --mdc-theme-primary-fade: rgba(69, 39, 160, 0.89);
-    --mdc-theme-primary-light: #512DA8; // Deep Purple 700
-    --mdc-theme-primary-dark: #311B92; // Deep Purple 900
+    @include theme-colours('charity');
 }
 .search-result.cjs-job,
 .employability,
 .employment,
 .jobs {
-    --mdc-theme-primary: #2E7D32; // Green 800
-    --mdc-theme-primary-fade: rgba(46, 125, 50, 0.89);
-    --mdc-theme-primary-light: #388E3C; // Green 700
-    --mdc-theme-primary-dark: #1B5E20; // Green 900
+    @include theme-colours('jobs');
 }
 .goodmoves,
 .search-result.goodmoves-job,
 .services.goodmoves {
-    --mdc-theme-primary: #58a934;
-    --mdc-theme-primary-fade: #58a934;
-    --mdc-theme-primary-light: #58a934;
-    --mdc-theme-primary-dark: #58a934;
+    @include theme-colours('goodmoves');
 }
 .funding {
-    --mdc-theme-primary: #00838F; // Cyan 800
-    --mdc-theme-primary-fade: rgba(0, 131, 143, 0.89);
-    --mdc-theme-primary-light: #008D9B; // Cyan 750
-    --mdc-theme-primary-dark: #006064; // Cyan 900
+    @include theme-colours('funding');
 }
 .project,
 .campaign,
 .open-government,
 .projects-campaigns {
-    --mdc-theme-primary: #AD1457; // Pink 800
-    --mdc-theme-primary-fade: rgba(173, 20, 87, 0.89);
-    --mdc-theme-primary-light: #C2185B; // Pink 700
-    --mdc-theme-primary-dark: #880E4F; // Pink 900
+    @include theme-colours('projects');
 }
-.digital .callout-image,
 .post,
 .blogs,
 .press-media,
 .policy-research {
-    --mdc-theme-primary: #D84315; // Deep Orange 800
-    --mdc-theme-primary-fade: rgba(216, 67, 21, 0.89);
-    --mdc-theme-primary-light: #E64A19; // Deep Orange 700
-    --mdc-theme-primary-dark: #BF360C; // Deep Orange 900
+    @include theme-colours('posts');
 }
 .goodhq,
 .search-result.goodhq-organisation {
-    --mdc-theme-primary: #4033E9;
-    --mdc-theme-primary-fade: #4033E9;
-    --mdc-theme-primary-light: #4033E9;
-    --mdc-theme-primary-dark: #160AAD;
+    @include theme-colours('goodhq');
 }
 .search-result.digital-charter-signatory {
-    --mdc-theme-primary: #022347;
-    --mdc-theme-primary-fade: #022347;
-    --mdc-theme-primary-light: #022347;
-    --mdc-theme-primary-dark: #022347;
+    @include theme-colours('digital-charter');
 }
 .tfn,
 .post-related-tfn,
 .gist.tfn-post,
 .search-result.tfn-post {
-    --mdc-theme-primary: #3b9db1;
-    --mdc-theme-primary-fade: #3b9db1;
-    --mdc-theme-primary-light: #3b9db1;
-    --mdc-theme-primary-dark: #3b9db1;
+    @include theme-colours('tfn');
 }
 .funding-scotland,
 .search-result.funding-scotland-fund,
 .services.funding-scotland {
-    --mdc-theme-primary: #6FB744;
-    --mdc-theme-primary-fade: #6FB744;
-    --mdc-theme-primary-light: #6FB744;
-    --mdc-theme-primary-dark: #6FB744;
+    @include theme-colours('funding-scotland');
 }
 .credit-union {
-    --mdc-theme-primary: #1976D2;
-    --mdc-theme-primary-fade: rgba(21, 101, 192, 0.89);
-    --mdc-theme-primary-light: #1976D2;
-    --mdc-theme-primary-dark: #145ea8;
+    @include theme-colours('credit-union');
 }
 .digital {
-    --mdc-theme-primary: #1976d2;
-    --mdc-theme-primary-fade: rgba(13, 71, 161, 0.89);
-    --mdc-theme-primary-light: #1976D2;
-    --mdc-theme-primary-dark: #0D47A1;
+    @include theme-colours('digital');
 }
 .services,
 .breadcrumbs,
@@ -126,11 +509,141 @@ $nav-height: 2.5rem;
 .home .gist.scvo-cms-post,
 .home .gist.goodmoves-job,
 .home .gist.tfn-post {
-    --mdc-theme-primary: #1565C0; // Blue 800
-    --mdc-theme-primary-fade: rgba(21, 101, 192, 0.89);
-    --mdc-theme-primary-light: #1976D2; // Blue 700
-    --mdc-theme-primary-dark: #0D47A1; // Blue 900
+    @include theme-colours('services');
 }
+
+
+
+//
+// :root{
+//     --mdc-theme-primary: #AD1457; // Pink 800
+//     --mdc-theme-primary-fade: rgba(173, 20, 87, 0.89);
+//     --mdc-theme-primary-light: #C2185B; // Pink 700
+//     --mdc-theme-primary-dark: #880E4F; // Pink 900
+//     --mdc-theme-secondary: #FF8F00; // Amber 800
+//     --mdc-theme-secondary-light: #FFA000; // Amber 700
+//     --mdc-theme-secondary-dark: #FF6F00; // Amber 900
+//     --mdc-theme-background: #ECEFF1; // Blue Grey 50
+//     --mdc-footer-primary: #371448;
+//     --mdc-footer-primary-highlight: #B3185B;
+//     --mdc-footer-primary-light: #592864;
+//     --mdc-footer-primary-dark: #251032;
+//     --mdc-site-background: #290b4d; // was #263238 Blue Grey 900
+//     --mdc-layout-grid-margin-desktop: 0;
+//     --mdc-layout-grid-margin-tablet: 0;
+// }
+// .running-a-charity,
+// .setting-up-a-charity,
+// .running-your-organisation {
+//     --mdc-theme-primary: #4527A0; // Deep Purple 800
+//     --mdc-theme-primary-fade: rgba(69, 39, 160, 0.89);
+//     --mdc-theme-primary-light: #512DA8; // Deep Purple 700
+//     --mdc-theme-primary-dark: #311B92; // Deep Purple 900
+// }
+// .search-result.cjs-job,
+// .employability,
+// .employment,
+// .jobs {
+//     --mdc-theme-primary: #2E7D32; // Green 800
+//     --mdc-theme-primary-fade: rgba(46, 125, 50, 0.89);
+//     --mdc-theme-primary-light: #388E3C; // Green 700
+//     --mdc-theme-primary-dark: #1B5E20; // Green 900
+// }
+// .goodmoves,
+// .search-result.goodmoves-job,
+// .services.goodmoves {
+//     --mdc-theme-primary: #58a934;
+//     --mdc-theme-primary-fade: #58a934;
+//     --mdc-theme-primary-light: #58a934;
+//     --mdc-theme-primary-dark: #58a934;
+// }
+// .funding {
+//     --mdc-theme-primary: #00838F; // Cyan 800
+//     --mdc-theme-primary-fade: rgba(0, 131, 143, 0.89);
+//     --mdc-theme-primary-light: #008D9B; // Cyan 750
+//     --mdc-theme-primary-dark: #006064; // Cyan 900
+// }
+// .project,
+// .campaign,
+// .open-government,
+// .projects-campaigns {
+//     --mdc-theme-primary: #AD1457; // Pink 800
+//     --mdc-theme-primary-fade: rgba(173, 20, 87, 0.89);
+//     --mdc-theme-primary-light: #C2185B; // Pink 700
+//     --mdc-theme-primary-dark: #880E4F; // Pink 900
+// }
+// .digital .callout-image,
+// .post,
+// .blogs,
+// .press-media,
+// .policy-research {
+//     --mdc-theme-primary: #D84315; // Deep Orange 800
+//     --mdc-theme-primary-fade: rgba(216, 67, 21, 0.89);
+//     --mdc-theme-primary-light: #E64A19; // Deep Orange 700
+//     --mdc-theme-primary-dark: #BF360C; // Deep Orange 900
+// }
+// .goodhq,
+// .search-result.goodhq-organisation {
+//     --mdc-theme-primary: #4033E9;
+//     --mdc-theme-primary-fade: #4033E9;
+//     --mdc-theme-primary-light: #4033E9;
+//     --mdc-theme-primary-dark: #160AAD;
+// }
+// .search-result.digital-charter-signatory {
+//     --mdc-theme-primary: #022347;
+//     --mdc-theme-primary-fade: #022347;
+//     --mdc-theme-primary-light: #022347;
+//     --mdc-theme-primary-dark: #022347;
+// }
+// .tfn,
+// .post-related-tfn,
+// .gist.tfn-post,
+// .search-result.tfn-post {
+//     --mdc-theme-primary: #3b9db1;
+//     --mdc-theme-primary-fade: #3b9db1;
+//     --mdc-theme-primary-light: #3b9db1;
+//     --mdc-theme-primary-dark: #3b9db1;
+// }
+// .funding-scotland,
+// .search-result.funding-scotland-fund,
+// .services.funding-scotland {
+//     --mdc-theme-primary: #6FB744;
+//     --mdc-theme-primary-fade: #6FB744;
+//     --mdc-theme-primary-light: #6FB744;
+//     --mdc-theme-primary-dark: #6FB744;
+// }
+// .credit-union {
+//     --mdc-theme-primary: #1976D2;
+//     --mdc-theme-primary-fade: rgba(21, 101, 192, 0.89);
+//     --mdc-theme-primary-light: #1976D2;
+//     --mdc-theme-primary-dark: #145ea8;
+// }
+// .digital {
+//     --mdc-theme-primary: #1976d2;
+//     --mdc-theme-primary-fade: rgba(13, 71, 161, 0.89);
+//     --mdc-theme-primary-light: #1976D2;
+//     --mdc-theme-primary-dark: #0D47A1;
+// }
+// .services,
+// .breadcrumbs,
+// .page-content,
+// .page-sidebar,
+// .post-content,
+// .post-sidebar,
+// .library-content,
+// .library-sidebar,
+// .home .cta-content,
+// .home .latest-content,
+// .home .gist.scvo-cms-post,
+// .home .gist.goodmoves-job,
+// .home .gist.tfn-post {
+//     --mdc-theme-primary: #1565C0; // Blue 800
+//     --mdc-theme-primary-fade: rgba(21, 101, 192, 0.89);
+//     --mdc-theme-primary-light: #1976D2; // Blue 700
+//     --mdc-theme-primary-dark: #0D47A1; // Blue 900
+// }
+
+
 
 html {
     overflow-y: scroll;
@@ -139,20 +652,14 @@ html {
     line-height: 1.45;
 }
 body {
-    background-color: var(--mdc-footer-primary-dark, #263238);
     min-height: 100%;
     padding: 0;
     margin: 0;
-}
-main {
-    background-color: white;
 }
 .container-fluid {
     max-width: 1280px;
     width: 95%;
     margin: 0 auto;
-    overflow: auto;
-    overflow: -webkit-paged-x;
     padding: $spacing-unit/2;
 }
 :focus {
@@ -176,35 +683,32 @@ main {
 .mdc-typography--headline,
 .mdc-card__supporting-text,
 .mdc-typography--subheading2,
+.mdc-simple-menu .mdc-list-item,
+.mdc-temporary-drawer .mdc-list-item,
 .mdc-list {
     font-family: 'Open Sans', Helvetica, sans-serif;
 }
-
+.mdc-temporary-drawer .mdc-list-item {
+    font-weight: 600;
+}
 .mdc-typography {
-    background-color: var(--mdc-site-background, #263238);
     padding: 0;
     margin: 0;
     box-sizing: border-box;
 }
 a {
     font-weight: 600;
-    color: var(--mdc-theme-primary, #00838F);
     text-decoration: none;
     text-decoration-skip: ink;
 }
 a:hover {
     text-decoration: underline;
-    color: var(--mdc-theme-primary-dark, #006064);
 }
 .mdc-card__actions a:hover,
 .mdc-button a:hover,
 .mdc-button:hover,
 .mdc-toolbar a:hover {
     text-decoration: none;
-}
-.mdc-button:after,
-.mdc-button:before {
-    background-color: var(--mdc-theme-primary-fade);
 }
 .mdc-button:not(.mdc-ripple-upgraded):active:after,
 .mdc-button:not(.mdc-ripple-upgraded):focus:before,
@@ -213,12 +717,6 @@ a:hover {
 }
 
 .home {
-    .splash-image {
-        .mdc-button {
-            color: white;
-            border-color: white;
-        }
-    }
     .featured-content {
         .featured {
             h1,
@@ -231,6 +729,16 @@ a:hover {
                 line-height: 1.5rem;
                 margin: 0;
             }
+            .photo-wee {
+                max-width: 96px;
+                margin-right: 1.5rem;
+            }
+            .post-info .photo-wee {
+                display: none;
+            }
+            .post-info {
+                padding-bottom: $spacing-unit/2;
+            }
         }
         .featured-text,
         .featured-background-image {
@@ -242,7 +750,6 @@ a:hover {
             background-position: center center;
             p {
                 font-size: 1.4rem;
-                margin-left: 3rem;
             }
             h1,
             p,
@@ -250,12 +757,15 @@ a:hover {
                 color: white;
             }
             img.header-text {
+                margin-right: 3rem;
                 max-width: 100%;
             }
         }
     }
     .cta-content.callout-image {
-        background-image: linear-gradient(var(--mdc-theme-primary-fade),var(--mdc-theme-primary-fade)),url('https://storage.googleapis.com/scvo-cms/wp-content/uploads/2017/10/Drake-Music-03.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
         height: auto;
         padding: $spacing-unit 0 $spacing-unit*3.25;
         h2, h3, a, .fa {
@@ -269,10 +779,10 @@ a:hover {
             h3 {
                 margin: 0;
                 .fa {
-                    border: $spacing-unit/5 solid white;
+                    border: $spacing-unit/8 solid white;
                     border-radius: 50%;
                     padding: $spacing-unit*1.75;
-                    margin-bottom: $spacing-unit;
+                    box-shadow: 1px 2px 5rem rgba(255,255,255,0.15);
                 }
                 a:hover {
                     text-decoration: none;
@@ -282,17 +792,15 @@ a:hover {
                 }
                 a .underline {
                     display: block;
-                    padding-top: $spacing-unit/2;
+                    padding-top: $spacing-unit;
                 }
             }
         }
     }
     .latest-content {
-        background-color: var(--mdc-theme-background);
         padding: $spacing-unit/2 0 $spacing-unit*2;
         h2 {
             font-size: 1.8rem;
-            color: var(--mdc-theme-primary) !important;
             a {
                 font-size: 1.1rem;
                 display: block;
@@ -406,7 +914,6 @@ a:hover {
 .scvo-staff.list {
     .name_full {
         font-weight: 600;
-        color: var(--mdc-theme-primary);
     }
     .fa {
         font-size: 1.4rem;
@@ -417,16 +924,6 @@ a:hover {
     padding-top: $spacing-unit;
 }
 .mdc-toolbar {
-    background-color: var(--mdc-theme-primary-light);
-    // -webkit-transition: background-color 100ms linear;
-    // -moz-transition: background-color 100ms linear;
-    // -o-transition: background-color 100ms linear;
-    // -ms-transition: background-color 100ms linear;
-    // transition: background-color 100ms linear;
-    // -webkit-animation-direction: alternate; /* Chrome, Safari, Opera */
-    // animation-direction: alternate;
-    // -webkit-animation-iteration-count: 2; /* Chrome, Safari, Opera */
-    // animation-iteration-count: 2;
     #upper-tab-bar,
     .mdc-toolbar__icon,
     .mdc-toolbar__row,
@@ -440,7 +937,6 @@ a:hover {
         height: $nav-height;
     }
     .toolbar-nav {
-        background-color: var(--mdc-theme-primary-dark);
         min-height: $nav-height;
     }
     .mdc-toolbar__row {
@@ -465,7 +961,9 @@ a:hover {
                 .mdc-textfield__input:focus,
                 .mdc-textfield__input:hover {
                     color: rgba(255,255,255,.87);
-                    border: 2px solid rgba(255,255,255,.75);
+                    border-width: $spacing-unit/8;
+                    border-style: solid;
+                    border-color: rgba(255,255,255,.75);
                     padding: 0 $spacing-unit/2;
                     line-height: $spacing-unit*2;
                     background: transparent;
@@ -580,13 +1078,16 @@ a:hover {
     .mdc-temporary-drawer__header:before {
         padding-top: 24%;
     }
-    .mdc-list {
-        .mdc-list-item {
-            direction: ltr;
-            padding: 0 $spacing-unit;
-        }
-        .mdc-list-item__start-detail {
-            display: none;
+    .mdc-list-group {
+        direction: ltr;
+        .mdc-list {
+            .mdc-list-item {
+                direction: ltr;
+                padding: 0 $spacing-unit;
+            }
+            .mdc-list-item__start-detail {
+                display: none;
+            }
         }
     }
 }
@@ -654,7 +1155,6 @@ a:hover {
         padding-right: 0;
     }
     li.current-page {
-        background-color: var(--mdc-theme-primary-dark);
         border-radius: 50%;
         a {
             color: white;
@@ -662,7 +1162,6 @@ a:hover {
     }
     li:hover,
     li.current-page:hover {
-        background-color: var(--mdc-theme-primary);
         a {
             color: white;
             text-decoration: none;
@@ -682,8 +1181,13 @@ a:hover {
     .footer-image {
         position: relative;
         background-size: cover;
+        background-repeat: no-repeat;
         background-position: center center;
-        background-image: linear-gradient(rgba(173, 20, 87, 0.89), rgba(173, 20, 87, 0.89)),url('https://storage.googleapis.com/scvo-cms/wp-content/uploads/2017/10/Drake-Music-06.jpg');
+        background-image: linear-gradient(
+            rgba(173, 20, 87, 0.89),
+            rgba(173, 20, 87, 0.89)
+        ),
+        url('https://storage.googleapis.com/scvo-cms/wp-content/uploads/2017/10/Drake-Music-06.jpg');
         text-align: center;
         color: white;
         padding: $spacing-unit 0 $spacing-unit*2.5;
@@ -691,18 +1195,13 @@ a:hover {
             font-weight: 800;
             padding-bottom: $spacing-unit;
         }
-        .mdc-button {
-            color: white;
-            background: transparent;
-            border: 2px solid white;
-        }
     }
 }
 .digital .callout-image {
     position: relative;
     background-size: cover;
+    background-repeat: no-repeat;
     background-position: center center;
-    background-image: linear-gradient(var(--mdc-theme-primary-fade), var(--mdc-theme-primary-fade)),url('https://storage.googleapis.com/scvo-cms/wp-content/uploads/2017/11/Dunaverty-Hall.jpg');
     color: white;
     padding: $spacing-unit 0 $spacing-unit*1.5;
     margin: $spacing-unit 0;
@@ -716,6 +1215,7 @@ a:hover {
         padding-bottom: $spacing-unit;
     }
     a,
+    a:hover,
     li a,
     .post-info,
     .mdc-card__actions a,
@@ -725,7 +1225,8 @@ a:hover {
         color: white;
     }
     .mdc-button {
-        border: 2px solid white;
+        border-width: $spacing-unit/8;
+        border-style: solid;
         background: transparent;
         color: white;
     }
@@ -735,9 +1236,6 @@ a:hover {
     position: relative;
     height: 25vh;
     min-height: $spacing-unit*9;
-}
-.splash-overlay {
-    background-image: linear-gradient(66deg, var(--mdc-theme-primary-fade), var(--mdc-theme-primary-fade) 47%, transparent 47.1%, transparent);
 }
 .splash-overlay.splash-overlay-hidden {
     background-image: none;
@@ -771,10 +1269,10 @@ a:hover {
         letter-spacing: -0.08rem;
         margin-bottom: $spacing-unit/2;
         .photo-wee {
-            max-height: 64px;
-            max-width: 64px;
+            height: 64px;
+            width: 64px;
             vertical-align: bottom;
-            margin: -$spacing-unit/5 $spacing-unit $spacing-unit 0;
+            margin: -$spacing-unit/5 $spacing-unit $spacing-unit*2 0;
             float: left;
         }
         .mdc-typography--caption {
@@ -787,12 +1285,13 @@ a:hover {
     p.header-extra {
         font-weight: 600;
         color: white;
-        font-size: 1.1rem;
+        font-size: 1.5rem;
         padding: $spacing-unit 0;
     }
     .mdc-button {
         text-transform: none;
-        border: 2px solid white;
+        border-width: $spacing-unit/8;
+        border-style: solid;
     }
 }
 .splash-image-scvo-event h1.header-text,
@@ -801,13 +1300,6 @@ a:hover {
 .splash-image-scvo-document-evidence h1.header-text {
     font-size: 2rem;
     line-height: 2.2rem;
-    // padding-left: 0.75rem;
-    // .header-text-banner {
-    //     display: inline;
-    //     background: rgba(0,0,0,0.3);
-    //     padding: 0 0 0.3rem 0;
-    //     box-shadow: 0.75rem 0 0 rgba(0,0,0,0.3), -0.75rem 0 0 rgba(0,0,0,0.3);
-    // }
 }
 .home {
     .splash-image.hello .splash-overlay,
@@ -905,34 +1397,30 @@ h1.mdc-typography--title {
         background-size: contain;
         background-repeat: no-repeat;
         background-origin: content-box;
-        background-color: var(--mdc-theme-primary);
-        a {
-            color: var(--mdc-theme-primary-dark);
-        }
     }
     .goodmoves .mdc-card__media {
         background-color: #58a934;
-        background-image: url('https://storage.cloud.google.com/scvo-cms/scvo-cms-content/images/banners/goodmoves.png');
+        background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/goodmoves.png');
     }
     .funding-scotland .mdc-card__media {
         background-color: #8AC645;
-        background-image: url('https://storage.cloud.google.com/scvo-cms/scvo-cms-content/images/banners/funding-scotland.png');
+        background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/funding-scotland.png');
     }
     .goodhq .mdc-card__media {
         background-color: #4033E9;
-        background-image: url('https://storage.cloud.google.com/scvo-cms/scvo-cms-content/images/banners/goodhq.png');
+        background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/goodhq.png');
     }
     .tfn .mdc-card__media {
         background-color: #3b9db1;
-        background-image: url('https://storage.cloud.google.com/scvo-cms/scvo-cms-content/images/banners/tfn.png');
+        background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/tfn.png');
     }
     .credit-union .mdc-card__media {
         background-color: #1976D2;
-        background-image: url('https://storage.cloud.google.com/scvo-cms/scvo-cms-content/images/banners/credit-union.png');
+        background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/credit-union.png');
     }
     .milo .mdc-card__media {
         background-color: #4475A0;
-        background-image: url('https://storage.cloud.google.com/scvo-cms/scvo-cms-content/images/banners/milo.png');
+        background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/milo.png');
     }
     .mdc-card__supporting-text {
         padding-top: $spacing-unit;
@@ -952,19 +1440,15 @@ h1.mdc-typography--title {
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center center;
-        background-color: var(--mdc-theme-primary);
-        a {
-            color: var(--mdc-theme-primary-dark);
-        }
     }
     .project-digital .mdc-card__media {
-        background-image: url('https://storage.cloud.google.com/scvo-cms/scvo-cms-content/images/banners/digital.png');
+        background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/digital.png');
     }
     .project-open-government .mdc-card__media {
-        background-image: url('https://storage.cloud.google.com/scvo-cms/scvo-cms-content/images/banners/open-government.png');
+        background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/open-government.png');
     }
     .project-cjs .mdc-card__media {
-        background-image: url('https://storage.cloud.google.com/scvo-cms/scvo-cms-content/images/banners/cjs.png');
+        background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/cjs.png');
     }
 }
 .section-campaigns {
@@ -973,28 +1457,24 @@ h1.mdc-typography--title {
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center center;
-        background-color: var(--mdc-theme-primary);
-        a {
-            color: var(--mdc-theme-primary-dark);
-        }
     }
     .europe-and-the-third-sector .mdc-card__media {
         background-image: url('https://storage.googleapis.com/scvo-cms/wp-content/uploads/2017/10/europe-and-the-third-sector-bg-1400x400.jpg');
     }
     .eu-are-valued .mdc-card__media {
-        background-image: url('https://storage.cloud.google.com/scvo-cms/scvo-cms-content/images/banners/eu-are-valued.png');
+        background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/eu-are-valued.png');
     }
     .building-healthier-happier-communities .mdc-card__media {
-        background-image: url('https://storage.cloud.google.com/scvo-cms/scvo-cms-content/images/banners/building-healthier-happier-communities.png');
+        background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/building-healthier-happier-communities.png');
     }
     .datawareness .mdc-card__media {
-        background-image: url('https://storage.cloud.google.com/scvo-cms/scvo-cms-content/images/banners/datawareness.png');
+        background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/datawareness.png');
     }
     .right-approach .mdc-card__media {
         background-image: url('https://storage.googleapis.com/scvo-cms/wp-content/uploads/2017/06/right-approach-strapline-hires-1024x337.jpg');
     }
     .scottish-charity-awards .mdc-card__media {
-        background-image: url('https://storage.cloud.google.com/scvo-cms/scvo-cms-content/images/banners/scottish-charity-awards.png');
+        background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/scottish-charity-awards.png');
     }
     .welfare-reform .mdc-card__media {
         background-image: url('https://storage.googleapis.com/scvo-cms/wp-content/uploads/2017/10/welfare-reform-bg-1400x400.jpg');
@@ -1037,6 +1517,9 @@ h1.mdc-typography--title {
 }
 .mdc-card__primary {
     padding: $spacing-unit;
+    // .mdc-card__title {
+    //     padding-bottom: 0;
+    // }
 }
 .mdc-card__supporting-text {
     padding: 0 $spacing-unit $spacing-unit/2;
@@ -1059,6 +1542,23 @@ h1.mdc-typography--title {
     margin-top: $spacing-unit;
     .mdc-button {
         margin-bottom: $spacing-unit/2;
+    }
+}
+.mdc-simple-menu {
+    .fa-fw {
+        margin-right: $spacing-unit/2;
+    }
+    .mdc-list-item {
+        font-weight: 600;
+    }
+    .mdc-list-item:after,
+    .mdc-list-item:before {
+        margin-left: 0;
+    }
+    .mdc-list-item:not(.mdc-ripple-upgraded):active:after,
+    .mdc-list-item:not(.mdc-ripple-upgraded):focus:before,
+    .mdc-list-item:not(.mdc-ripple-upgraded):hover:before {
+        opacity: 0.1;
     }
 }
 
@@ -1109,7 +1609,6 @@ h1.mdc-typography--title {
             padding-left: $spacing-unit*1.4;
         }
         li::before {
-            color: var(--mdc-theme-primary-dark);
             content: "\25A0";
             font-size: 1rem;
             margin-left: -$spacing-unit*1.4;
@@ -1119,9 +1618,9 @@ h1.mdc-typography--title {
         }
     }
     .mdc-button {
-        color: var(--mdc-theme-primary);
         background: white;
-        border: 2px solid var(--mdc-theme-primary);
+        border-width: $spacing-unit/8;
+        border-style: solid;
         margin-top: $spacing-unit;
         text-transform: none;
         background: transparent;
@@ -1133,8 +1632,6 @@ h1.mdc-typography--title {
     .mdc-card {
         .mdc-button {
             margin-top: 0;
-            // color: white;
-            // background: var(--mdc-theme-primary);
         }
     }
     .mdc-card__actions ul,
@@ -1178,11 +1675,6 @@ ul.breadcrumbs {
         font-size: 1rem;
         color: rgba(0,0,0,0.75);
         font-weight: 600;
-        // color: white;
-        // a,
-        // a:hover {
-        //     color: white;
-        // }
     }
     li:before {
         content: "\203A" !important;
@@ -1225,8 +1717,9 @@ ul.breadcrumbs {
     font-size: 0.9rem;
     color: #333;
     .post-info-item {
-        display: inline;
-        margin-right: 0.5rem;
+        display: inline-block;
+        margin-right: $spacing-unit/2;
+        margin-bottom: $spacing-unit/2;
     }
     .post-info-item:last-child {
         margin-right: 0;
@@ -1248,7 +1741,6 @@ ul.breadcrumbs {
         }
     }
     #share-menu-button {
-        color: var(--mdc-theme-primary);
         font-weight: 600;
     }
     #share-menu-button:hover {
@@ -1259,9 +1751,6 @@ ul.breadcrumbs {
     }
     .post-info-share,
     .post-info-categories {
-        .fa {
-            color: var(--mdc-theme-primary);
-        }
         .inline-list {
             li {
                 display: inline-block;
@@ -1269,34 +1758,26 @@ ul.breadcrumbs {
                 margin: 0 0 0.25rem 0.1rem;
                 padding: 0 !important;
                 a {
-                    background: var(--mdc-theme-primary);
                     padding: 0.05rem 0.4rem 0.1rem;
                     border-radius: $spacing-unit;
                     color: #fff;
                 }
                 a:hover {
-                    background: var(--mdc-theme-primary-dark);
                     text-decoration: none;
                 }
             }
         }
     }
 }
-// .mdc-card .post-info .post-info-author img {
-//     margin-top: -0.02rem;
-// }
 
 blockquote {
-    border-left: 0.2rem solid var(--mdc-theme-primary-dark);
+    border-left: 0.2rem solid white;
     margin: 0 0 0.75rem;
     padding: 0 0.75rem;
     font-size: 125%;
 }
 blockquote p {
     display: inline;
-    strong {
-        color: var(--mdc-theme-primary-dark);
-    }
 }
 
 ul.supplimentary-list {
@@ -1418,8 +1899,14 @@ p:last-child {
     }
     a[href^="http://goodhq.org"]::after,
     a[href^="https://goodhq.org"]::after,
+    a[href^="http://digitalparticipation.scot"]::after,
+    a[href^="https://digitalparticipation.scot"]::after,
+    a[href^="http://getinvolved.scot"]::after,
+    a[href^="https://getinvolved.scot"]::after,
     a[href^="http://thirdforcenews.org.uk"]::after,
     a[href^="https://thirdforcenews.org.uk"]::after,
+    a[href^="http://www.thirdforcenews.org.uk"]::after,
+    a[href^="https://www.thirdforcenews.org.uk"]::after,
     a[href^="https://scvocreditunion"]::after,
     a[href^="https://members.scvocreditunion"]::after,
     a[href^="http://goodmoves"]::after,
@@ -1494,9 +1981,6 @@ p:last-child {
 }
 
 footer {
-    color: white;
-    background-color: var(--mdc-footer-primary);
-    border-top: 0.6rem solid var(--mdc-footer-primary-highlight);
     .footer-main {
         padding: $spacing-unit*2.5 0 $spacing-unit*2;
     }
@@ -1532,7 +2016,6 @@ footer {
         }
     }
     .footer-copyright {
-        background-color: var(--mdc-footer-primary-dark);
         font-size: 0.85rem;
         .row {
             position: relative;
@@ -1554,9 +2037,6 @@ footer {
     }
     .mdc-toolbar-fixed-adjust {
         padding-top: $spacing-unit*8.5;
-    }
-    .splash-overlay {
-        background-image: linear-gradient(66deg, var(--mdc-theme-primary-fade), var(--mdc-theme-primary-fade) 52%, transparent 52.1%, transparent);
     }
     .mdc-toolbar .mdc-toolbar__row .container-fluid #upper-tab-bar {
         margin-right: 0;
@@ -1590,9 +2070,6 @@ footer {
                 }
             }
         }
-    }
-    .splash-overlay {
-        background-image: linear-gradient(66deg, var(--mdc-theme-primary-fade), var(--mdc-theme-primary-fade) 57%, transparent 57.1%, transparent);
     }
     .latest-content {
         .mdc-layout-grid {
@@ -1635,9 +2112,6 @@ footer {
         font-size: 0.92rem;
         line-height: 1.25;
     }
-    .splash-overlay {
-        background-image: linear-gradient(66deg, var(--mdc-theme-primary-fade), var(--mdc-theme-primary-fade) 67%, transparent 67.1%, transparent);
-    }
     .breadcrumbs {
         font-size: 85%;
     }
@@ -1661,7 +2135,6 @@ footer {
         display: none !important;
     }
     .splash-overlay {
-        background-image: linear-gradient(66deg, var(--mdc-theme-primary-fade), var(--mdc-theme-primary-fade)) !important;
         h1.header-text {
             font-size: 2rem;
             line-height: 2.2rem;
@@ -1675,6 +2148,9 @@ footer {
             h1.header-text {
                 font-size: 3rem;
                 line-height: 3.3rem;
+            }
+            p.header-extra {
+                font-size: 1.1rem;
             }
         }
     }

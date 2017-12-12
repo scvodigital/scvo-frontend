@@ -1,0 +1,23 @@
+<div class="mdc-card">
+    <section class="mdc-card__primary">
+        <h2 class="mdc-card__title mdc-card__title--large">{{title}}</h2>
+        <form [searchroute]="'{{searchRoute}}'">
+            <div class="mdc-layout-grid">
+                <div class="mdc-layout-grid__inner">
+                    <div class="mdc-layout-grid__cell">
+                        <div class="mdc-textfield mdc-textfield--upgraded">
+                            <input type="text" class="mdc-textfield__input" name="q" id="wee-query" value="{{params.query.q}}">
+                            <div class="mdc-textfield__bottom-line"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{#each (keyValue (parse extraParams))}}
+            <input type="hidden" name="{{key}}" value="{{value}}">
+            {{/each}}
+            <button class="mdc-button mdc-button--raised" type="submit">
+                Search
+            </button>
+        </form>
+    </section>
+</div>

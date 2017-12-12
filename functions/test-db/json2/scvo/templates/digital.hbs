@@ -39,8 +39,7 @@
                     <ul class="v-margin supplimentary-list">
                         {{#each supplimentaryResponses.related_events.hits.hits}}
                         <li>
-                            <a href="/events/{{replace _source.slug "_" "/"}}">{{{_source.title}}}</a><br />
-                            <span aria-hidden="true" class="fa fa-calendar"></span> {{moment _source.date_start "Do MMM YYYY"}}
+                            {{{_source.rendered.mini}}}
                         </li>
                         {{/each}}
                     </ul>

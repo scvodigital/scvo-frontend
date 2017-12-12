@@ -4,7 +4,7 @@
             <div class="mdc-card">
                 <section class="mdc-card__primary">
                     <h2 class="mdc-card__title mdc-card__title--large">Search SCVO</h2>
-                    <form [searchroute]="'main_search'">
+                    <form [searchroute]="'main_search'" data-auto-search="true">
                         <div class="mdc-textfield">
                             <input type="text" class="mdc-textfield__input searchRoute" placeholder="Search" value="{{params.query.q}}" name="q" id="main-q">
                             <div class="mdc-textfield__bottom-line"></div>
@@ -12,21 +12,17 @@
                         <div class="mdc-form-field">
                             <label class="mdc-select__label" for="main-type">Show me</label>
                             <select class="mdc-select" role="listbox" id="main-type" name="type">
-                                <option value="" {{#if ../params.query.type}}{{else}}selected{{/if}}>Everything</option>
-                                <option value="scvo-cms-post" {{#compare ../params.query.type "===" "scvo-cms-post"}}selected{{/compare}}>Posts</option>
-                                <option value="scvo-cms-page" {{#compare ../params.query.type "===" "scvo-cms-page"}}selected{{/compare}}>Pages</option>
-                                <option value="scvo-event" {{#compare ../params.query.type "===" "scvo-event"}}selected{{/compare}}>Events</option>
+                                <option value="" {{#unless params.query.type}}selected{{/unless}}>Everything</option>
+                                <option value="scvo-cms-post" {{#compare params.query.type "===" "scvo-cms-post"}}selected{{/compare}}>Posts</option>
+                                <option value="scvo-cms-page" {{#compare params.query.type "===" "scvo-cms-page"}}selected{{/compare}}>Pages</option>
+                                <option value="scvo-event" {{#compare params.query.type "===" "scvo-event"}}selected{{/compare}}>Events</option>
                             </select>
                         </div>
-                        <button type="submit" class="mdc-button mdc-button--raised" aria-label="Search" alt="Search">
-                            <span class="fa fa-search" aria-hidden="true"></span>
-                            Search
-                        </button>
                     </form>
                 </section>
             </div>
         </div>
-
+        
         {{#each primaryResponse.hits.hits}}
         <div class="v-margin">
             {{#if _source.rendered.search_result_scvo}}

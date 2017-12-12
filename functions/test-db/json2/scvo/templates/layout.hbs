@@ -2,7 +2,6 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>{{{route.title}}}</title>
     <base href="/">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
@@ -27,14 +26,11 @@
     <style type="text/css">
     {{{this.css}}}
     </style>
-    <script type="application/ld+json">
-    {{{route.jsonLd}}}
-    </script>
 </head>
-<body class="{{replace route.params.path '_' ' '}}">
+<body class="mdc-theme--site-bg {{replace route.params.path '_' ' '}}">
     <scvo-site>
-        <div class="mdc-typography">
-            <header class="mdc-toolbar mdc-toolbar--fixed">
+        <div class="mdc-typography mdc-theme--site-bg">
+            <header class="mdc-toolbar mdc-toolbar--fixed mdc-theme--primary-light-bg">
                 <div class="mdc-toolbar__row">
                     <div class="container-fluid">
                         <section class="mdc-toolbar__section mdc-toolbar__section--align-start">
@@ -47,7 +43,7 @@
                         <section class="mdc-toolbar__section mdc-toolbar__section--align-end toolbar-search">
                             <nav id="upper-tab-bar" class="mdc-tab-bar">
                                 {{#each menus.upper}}
-                                <a class="mdc-tab" href="{{path}}">{{{label}}}</a>
+                                <a class="mdc-tab" href="{{path}}"{{#if match}} class="active"{{/if}}>{{{label}}}</a>
                                 {{/each}}
                             </nav>
                             <form [searchroute]="'main_search'" class="mdc-form-field mdc-form-field--align-end search_form">
@@ -64,12 +60,12 @@
                         </section>
                     </div>
                 </div>
-                <div class="mdc-toolbar__row toolbar-nav">
+                <div class="mdc-toolbar__row toolbar-nav mdc-theme--primary-dark-bg">
                     <div class="container-fluid">
                         <section class="mdc-toolbar__section mdc-toolbar__section--align-start toolbar-menu">
                             <nav id="main-tab-bar" class="mdc-tab-bar">
                                 {{#each menus.main}}
-                                <a class="mdc-tab" href="{{path}}">{{{label}}}</a>
+                                <a class="mdc-tab" href="{{path}}"{{#if match}} class="active"{{/if}}>{{{label}}}</a>
                                 {{/each}}
                             </nav>
                         </section>
@@ -102,7 +98,7 @@
                 </nav>
             </aside>
 
-            <main class="mdc-toolbar-fixed-adjust">
+            <main class="mdc-toolbar-fixed-adjust mdc-theme--background">
                 <div class="container-content">
                     <router-outlet>{{{route.rendered}}}</router-outlet>
                 </div>
@@ -162,7 +158,7 @@
                         <div class="row">
                             <div class="col-sm-12">
                                 <p>
-                                    &copy; 2017. The Scottish Council for Voluntary Organisations (SCVO) is a Scottish Charitable Incorporated Organisation. Charity registered in Scotland <a href="http://www.oscr.org.uk/charities/search-scottish-charity-register/charity-details?number=SC003558">SC003558</a>. Registered office Mansfield Traquair Centre, 15 Mansfield Place, Edinburgh EH3 6BB.
+                                    &copy; {{momentFormat (moment) "YYYY"}}. The Scottish Council for Voluntary Organisations (SCVO) is a Scottish Charitable Incorporated Organisation. Charity registered in Scotland <a href="http://www.oscr.org.uk/charities/search-scottish-charity-register/charity-details?number=SC003558">SC003558</a>. Registered office Mansfield Traquair Centre, 15 Mansfield Place, Edinburgh EH3 6BB.
                                 </p>
                             </div>
                         </div>

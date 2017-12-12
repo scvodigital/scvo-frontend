@@ -1,0 +1,51 @@
+<div class="page">
+    <div class="splash-image splash-image-{{primaryResponse.hits.hits.[0]._type}}" style="{{> header_splash_image}}">
+        <div class="splash-overlay{{#if primaryResponse.hits.hits.[0]._source.hide_overlay}} splash-overlay-hidden{{/if}}">
+            <div class="container-fluid">
+                <div class="mdc-layout-grid">
+                    {{#if primaryResponse.hits.hits.[0]._source.header_text}}
+                    <img src="{{primaryResponse.hits.hits.[0]._source.header_text}}" alt="{{primaryResponse.hits.hits.[0]._source.title}}" class="header-text" />
+                    {{else}}
+                    <h1 class="header-text">
+                        <span class="header-text-banner">
+                            {{#if primaryResponse.hits.hits.[0]}}
+                            {{{primaryResponse.hits.hits.[0]._source.title}}}
+                            {{else}}
+                            404: Not found
+                            {{/if}}
+                        </span>
+                    </h1>
+                    {{/if}}
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <ul class="breadcrumbs">
+            <li><a href="/">Home</a></li>
+            <li><a href="/about">About SCVO</a></li>
+            <li><a href="/about/members">Members</a></li>
+            {{#if primaryResponse.hits.hits.[0]}}
+            <li>{{primaryResponse.hits.hits.[0]._source.title}}</li>
+            {{else}}
+            <li>Member not found</li>
+            {{/if}}
+        </ul>
+        <div class="mdc-layout-grid">
+            <div class="mdc-layout-grid__inner">
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-9 content page-content">
+                    {{#if primaryResponse.hits.hits.[0]}}
+                    {{#with primaryResponse.hits.hits.[0]._source}}
+                    {{{rendered.full}}}
+                    {{/with}}
+                    {{else}}
+                    <h2>Page not found</h2>
+                    {{/if}}
+                </div>
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3 sidebar page-sidebar">
+                    {{> menu_about}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,15 +1,52 @@
-{
-	"size": 5,
-    "from": {{multiply (subtract (default query.page 1) 1) 5}},
-    "_source": [
-        "rendered.search_result",
-        "rendered.list"
-    ],
-    "query": {
-        "function_score": {
-            "query": {},
-            "random_score": {},
-            "score_mode": "sum"
+{{#ifAny query.q query.type}}
+    {
+        "size": 10,
+        "from": {{multiply (subtract (default query.page 1) 1) 10}},
+        "_source": [
+            "rendered.search_result",
+            "rendered.list"
+        ],
+        "query": {
+            "bool": {
+                "must": [
+                    {{#if query.q}}
+                        {
+                            "query_string": {
+                                "query": "{{query.q}}",
+                                "default_field": "text_bag",
+                                "default_operator": "AND",
+                                "analyzer": "snowball"
+                            }
+                        }
+                        {{#if query.type}},{{/if}}
+                    {{/if}}
+                    {{#if query.type}}
+                        {
+                            "term": {
+                                "membership_type_slug": {
+                                    "value": "{{query.type}}"
+                                }
+                            }
+                        }
+                    {{/if}}
+                ]
+            }
         }
     }
-}
+{{else}}
+    {
+        "size": 5,
+        "from": 0,
+        "_source": [
+            "rendered.search_result",
+            "rendered.list"
+        ],
+        "query": {
+            "function_score": {
+                "query": {},
+                "random_score": {},
+                "score_mode": "sum"
+            }
+        }
+    }
+{{/ifAny}}

@@ -1,7 +1,6 @@
-<form [searchroute]="'evidence-library'">
-    <div class="mdc-textfield mdc-textfield--upgraded" data-mdc-auto-init="MDCTextfield">
-        <input type="text" class="mdc-textfield__input" name="q" id="evidence-library-keywords" value="{{params.query.q}}">
-        <label class="mdc-textfield__label" for="evidence-library-keywords">Keywords</label>
+<form [searchroute]="'evidence-library'" data-auto-search="true">
+    <div class="mdc-textfield mdc-textfield--upgraded">
+        <input type="text" class="mdc-textfield__input" name="q" id="evidence-library-keywords" value="{{params.query.q}}" placeholder="Search query">
         <div class="mdc-textfield__bottom-line"></div>
     </div>
     <div class="mdc-form-field">
@@ -12,7 +11,4 @@
             {{/each}}
         </select>
     </div>
-    <button class="mdc-button mdc-button--raised" type="submit">
-        Search
-    </button>
 </form>

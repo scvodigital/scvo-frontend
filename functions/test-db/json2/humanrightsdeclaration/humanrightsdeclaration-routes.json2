@@ -1,11 +1,13 @@
 {
     "home": {
         "pattern": "/",
-        "linkTags": [],
-        "metaTags": [],
-        "template": `{:templates/home.hbs}`,
-        "titleTemplate": `{:templates/home-title.hbs}`,
-        "jsonLdTemplate": `{:templates/home-json-ld.hbs}`,
+        "templates": {
+            "default": `{:templates/home.hbs}`
+        },
+        "metaData": {
+            "title": "Home"
+        },
+        "headTagsTemplate": `{:templates/head-tags.hbs}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
             "type": "scvo-cms-page",
@@ -20,11 +22,13 @@
     },
     "declaration": {
         "pattern": "/the-declaration",
-        "linkTags": [],
-        "metaTags": [],
-        "template": `{:templates/declaration.hbs}`,
-        "titleTemplate": `{:templates/home-title.hbs}`,
-        "jsonLdTemplate": `{:templates/home-json-ld.hbs}`,
+        "templates": {
+            "default": `{:templates/declaration.hbs}`
+        },
+        "metaData": {
+            "title": "The Declaration"
+        },
+        "headTagsTemplate": `{:templates/head-tags.hbs}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
             "type": "scvo-cms-page",
@@ -39,11 +43,13 @@
     },
     "why_sign": {
         "pattern": "/why-sign",
-        "linkTags": [],
-        "metaTags": [],
-        "template": `{:templates/why-sign.hbs}`,
-        "titleTemplate": `{:templates/home-title.hbs}`,
-        "jsonLdTemplate": `{:templates/home-json-ld.hbs}`,
+        "templates": {
+            "default": `{:templates/why-sign.hbs}`
+        },
+        "metaData": {
+            "title": "Why Sign?"
+        },
+        "headTagsTemplate": `{:templates/head-tags.hbs}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
             "type": "scvo-cms-page",
@@ -58,11 +64,55 @@
     },
     "sign_up": {
         "pattern": "/sign-up",
-        "linkTags": [],
-        "metaTags": [],
-        "template": `{:templates/sign-up.hbs}`,
-        "titleTemplate": `{:templates/home-title.hbs}`,
-        "jsonLdTemplate": `{:templates/home-json-ld.hbs}`,
+        "templates": {
+            "default": `{:templates/sign-up.hbs}`
+        },
+        "metaData": {
+            "title": "Sign Up"
+        },
+        "headTagsTemplate": `{:templates/head-tags.hbs}`,
+        "primarySearchTemplate": {
+            "index": "web-content-production",
+            "type": "scvo-cms-page",
+            "template": `{:queries/none.json}`
+        },
+        "supplimentarySearchTemplates": {},
+        "elasticsearchConfig": {
+            "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
+            "apiVersion": "5.6",
+            "log": "debug"
+        }
+    },
+    "sign_up_thank_you": {
+        "pattern": "/sign-up-thank-you",
+        "templates": {
+            "default": `{:templates/sign-up-thank-you.hbs}`
+        },
+        "metaData": {
+            "title": "Thank You"
+        },
+        "headTagsTemplate": `{:templates/head-tags.hbs}`,
+        "primarySearchTemplate": {
+            "index": "web-content-production",
+            "type": "scvo-cms-page",
+            "template": `{:queries/none.json}`
+        },
+        "supplimentarySearchTemplates": {},
+        "elasticsearchConfig": {
+            "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
+            "apiVersion": "5.6",
+            "log": "debug"
+        }
+    },
+    "faq": {
+        "pattern": "/faq",
+        "templates": {
+            "default": `{:templates/faq.hbs}`
+        },
+        "metaData": {
+            "title": "FAQ"
+        },
+        "headTagsTemplate": `{:templates/head-tags.hbs}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
             "type": "scvo-cms-page",
@@ -77,11 +127,13 @@
     },
     "signatory_search": {
         "pattern": "/signatories",
-        "linkTags": [],
-        "metaTags": [],
-        "template": `{:templates/signatory-search.hbs}`,
-        "titleTemplate": `{:templates/home-title.hbs}`,
-        "jsonLdTemplate": `{:templates/home-json-ld.hbs}`,
+        "templates": {
+            "default": `{:templates/signatory-search.hbs}`
+        },
+        "metaData": {
+            "title": "Signatories"
+        },
+        "headTagsTemplate": `{:templates/head-tags.hbs}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
             "type": "digital-charter-signatory",
@@ -102,11 +154,13 @@
     },
     "signatory": {
         "pattern": "/signatories/:slug",
-        "linkTags": [],
-        "metaTags": [],
-        "template": `{:templates/signatory.hbs}`,
-        "titleTemplate": `{:templates/home-title.hbs}`,
-        "jsonLdTemplate": `{:templates/home-json-ld.hbs}`,
+        "templates": {
+            "default": `{:templates/signatory.hbs}`
+        },
+        "metaData": {
+            "title": "Signatory"
+        },
+        "headTagsTemplate": `{:templates/head-tags.hbs}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
             "type": "digital-charter-signatory",
@@ -127,10 +181,13 @@
     },
     "_default": {
         "pattern": "/*path",
-        "linkTags": [],
-        "metaTags": [],
-        "template": `{:templates/404.hbs}`,
-        "titleTemplate": `{:templates/home-title.hbs}`,
+        "templates": {
+            "default": `{:templates/404.hbs}`
+        },
+        "metaData": {
+            "title": "Page Not Found"
+        },
+        "headTagsTemplate": `{:templates/head-tags.hbs}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
             "type": "scvo-cms-page",

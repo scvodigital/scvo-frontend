@@ -44,3 +44,27 @@ window.share = function(where) {
 
     var shareWindow = window.open(shareUrl, 'share-window', 'height=' + shareHeight + ',width=' + shareWidth + ',location=0,menubar=0,status=0,resizable=0,toolbar=0');
 }
+
+var autoSearchForms = document.querySelectorAll('form[data-auto-search="true"]');
+for (var x = 0; x < autoSearchForms.length; x++) {
+    var searchForm = autoSearchForms[x];
+
+    var dropDowns = searchForm.querySelectorAll('select');
+    var checkboxes = searchForm.querySelectorAll('input[type="checkbox"]');
+
+    for (var y = 0; y < dropDowns.length; y++) {
+        var dropDown = dropDowns[y];
+
+        dropDown.addEventListener('change', function() {
+            searchForm.submit();
+        });
+    }
+    
+    for (var y = 0; y < checkboxes.length; y++) {
+        var checkboxes = checkboxes[y];
+
+        checkboxes.addEventListener('change', function() {
+            checkboxes.submit();
+        });
+    }
+}
