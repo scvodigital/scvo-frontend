@@ -30,8 +30,8 @@
                             <div class="mdc-layout-grid__cell">
                                 <div class="mdc-textfield mdc-textfield--upgraded" data-mdc-auto-init="MDCTextField">
                                     <input type="text" class="mdc-textfield__input" name="q" id="events-keywords" value="{{params.query.q}}">
-                                    <label class="mdc-textfield__label" for="events-keywords">Keywords</label>
-                                    <div class="mdc-textfield__bottom-line"></div>
+                                    <!-- <label class="mdc-textfield__label" for="events-keywords">Keywords</label> -->
+                                    <!-- <div class="mdc-textfield__bottom-line"></div> -->
                                 </div>
                             </div>
                             <div class="mdc-layout-grid__cell">
@@ -70,9 +70,15 @@
             </section>
         </div>
 
-        {{#each primaryResponse.hits.hits}}
-        {{{_source.rendered.list}}}
-        {{/each}}
+        <div class="mdc-layout-grid equal-height">
+            <div class="mdc-layout-grid__inner">
+                {{#each primaryResponse.hits.hits}}
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell">
+                    {{{_source.rendered.list}}}
+                </div>
+                {{/each}}
+            </div>
+        </div>
 
         {{> pagination paging=paging params=params}}
     </div>

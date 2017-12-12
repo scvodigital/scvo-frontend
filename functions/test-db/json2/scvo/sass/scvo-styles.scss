@@ -239,11 +239,13 @@ site-background: #251032
     blockquote {
         border-left-color: map-get($theme, 'primary') !important;
     }
-    .mdc-button {
+    .mdc-button,
+    .mdc-button--raised:not(:disabled) {
         color: map-get($theme, 'primary');
         border-color: map-get($theme, 'primary');
     }
-    .mdc-button:hover {
+    .mdc-button:hover,
+    .mdc-button--raised:not(:disabled):hover {
         color: white;
         border-color: map-get($theme, 'primary-dark');
         background-color: map-get($theme, 'primary');
@@ -467,6 +469,7 @@ site-background: #251032
     @include theme-colours('projects');
 }
 .search-result.scvo-cms-post,
+.related-posts,
 .post,
 .blogs,
 .press-media,
@@ -501,9 +504,8 @@ site-background: #251032
 .search-result.scvo-cms-page,
 .breadcrumbs,
 .page-content,
-.page-sidebar,
+.posts-page .page-sidebar,
 .post-content,
-.post-sidebar,
 .library-content,
 .library-sidebar,
 .home .cta-content,
@@ -1487,7 +1489,7 @@ h1.mdc-typography--title {
     }
 }
 .mdc-card__actions {
-    padding: $spacing-unit/2 $spacing-unit $spacing-unit/2;
+    padding: $spacing-unit/2 $spacing-unit $spacing-unit;
     .mdc-card__action {
         font-weight: 800;
     }
@@ -1711,7 +1713,7 @@ ul.breadcrumbs {
         padding: 0;
         margin: 0 $spacing-unit/2;
         display: inline-block;
-        color: rgba(0,0,0,.6);
+        color: rgba(0,0,0,.6) !important;
     }
     li.pull-right:before,
     li:first-child:before {
@@ -1945,6 +1947,8 @@ p:last-child {
     a[href^="http://fundingscotland"]::after,
     a[href^="https://fundingscotland"]::after {
         content: " ";
+        margin: 0;
+        top: 0;
     }
 }
 
