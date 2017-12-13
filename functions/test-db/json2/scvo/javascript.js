@@ -59,7 +59,7 @@ for (var x = 0; x < autoSearchForms.length; x++) {
             searchForm.submit();
         });
     }
-    
+
     for (var y = 0; y < checkboxes.length; y++) {
         var checkboxes = checkboxes[y];
 
