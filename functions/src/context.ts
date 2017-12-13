@@ -7,7 +7,7 @@ import * as handlebars from 'handlebars';
 const hbs = require('clayhandlebars')();
 import * as sass from 'node-sass';
 import * as uglify from 'uglify-js';
-import { IContext, ILinkTag, IMetaTag, IScriptTag, IMenus, IRoutes, Router, IRouteMatch, MenuProcessor, IPartials, Helpers } from 'scvo-router';
+import { IContext, ILinkTag, IMetaTag, IScriptTag, IMenus, IRoutes, Router, IRouteMatch, IPartials, Helpers } from 'scvo-router';
 
 Helpers.register(hbs);
 
@@ -20,7 +20,6 @@ export class Context implements IContext {
     routes: IRoutes = {};
     sass: string = '';
     template: string = '';
-    menuProcessor: MenuProcessor = null;
     templatePartials: IPartials = {};
     uaId: string = '';
     javascript: string = '';
@@ -61,7 +60,6 @@ export class Context implements IContext {
 
         // Setup our router
         this.router = new Router(this.toJSON, this.uaId, userId, true);
-        this.menuProcessor = new MenuProcessor(this.menus);
 
         // Compile our templates and CSS
         this.compiledTemplate = hbs.compile(this.template);
@@ -74,8 +72,6 @@ export class Context implements IContext {
 
     renderPage(uriString: string): Promise<string>{
         return new Promise<string>((resolve, reject) => {
-            var menus = this.menuProcessor.getMenus(uriString, 0, 5);
-
             this.router.execute(uriString).then((routeMatch: IRouteMatch) => {
                 if(routeMatch.templateName !== 'default'){
                     return resolve(routeMatch.rendered);
@@ -85,7 +81,7 @@ export class Context implements IContext {
                     metaData: this.metaData,
                     scriptTags: this.scriptTags,
                     domains: this.domains,
-                    menus: menus,
+                    menus: this.menus,
                     css: this.compiledCss,
                     routes: this.routes,
                     route: routeMatch,

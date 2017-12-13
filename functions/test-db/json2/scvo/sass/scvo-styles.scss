@@ -293,7 +293,7 @@ site-background: #251032
     .post-info .post-info-categories .inline-list li a,
     .pagination li.current-page,
     .mdc-theme--primary-bg {
-        background-color: map-get($theme, 'primary');
+        background-color: map-get($theme, 'primary') !important;
     }
     body,
     .mdc-theme--site-bg {
@@ -502,6 +502,7 @@ site-background: #251032
 }
 .services,
 .search-result.scvo-cms-page,
+.search-result.scvo-event,
 .breadcrumbs,
 .page-content,
 .posts-page .page-sidebar,
@@ -971,6 +972,7 @@ a:hover {
                     padding: 0 $spacing-unit/2;
                     line-height: $spacing-unit*2;
                     background: transparent;
+                    border-radius: 0 !important;
                 }
                 ::-webkit-input-placeholder {
                     color: rgba(255, 255, 255, 0.6);
@@ -1021,11 +1023,20 @@ a:hover {
                     display: none;
                 }
             }
+            #main-tab-bar {
+                .mdc-tab.mdc-tab--active {
+                    // border-bottom: 1px solid rgba(255,255,255,0.5);
+                    // background: rgba(0,0,0,0.2);
+                }
+            }
             #upper-tab-bar {
                 margin-right: $spacing-unit;
                 .mdc-tab {
                     min-width: auto;
                     font-weight: 600;
+                }
+                .mdc-tab.mdc-tab--active {
+                    // border-bottom: 1px solid rgba(255,255,255,0.5);
                 }
             }
         }
@@ -1310,7 +1321,7 @@ a:hover {
     .splash-image.hello .splash-overlay,
     .splash-image.hello {
         height: 40vh;
-        min-height: 300px;
+        min-height: 350px;
     }
     .splash-image.hello {
         .container-fluid {
@@ -1319,7 +1330,7 @@ a:hover {
                 margin-left: 5%;
                 width: 39%;
                 h1.header-text {
-                    font-size: 5rem;
+                    font-size: 4.8rem;
                     line-height: 4rem;
                 }
             }
@@ -2066,7 +2077,35 @@ footer {
     }
 }
 
+@media screen and (max-width: 1340px) {
+    .home {
+        .splash-image.hello .container-fluid .mdc-layout-grid h1.header-text {
+            font-size: 4rem;
+            line-height: 3.5rem;
+        }
+        .splash-image p.header-extra {
+            font-size: 1.4rem;
+            padding-bottom: $spacing-unit/2;
+        }
+    }
+}
+
 @media screen and (max-width: 1140px) {
+    .home {
+        .splash-image.hello .container-fluid {
+            .mdc-layout-grid {
+                width: 60%;
+                h1.header-text {
+                    font-size: 3.8rem;
+                    line-height: 3.4rem;
+                }
+                p.header-extra {
+                    font-size: 1.3rem;
+                    padding: $spacing-unit/2 0;
+                }
+            }
+        }
+    }
     .mdc-toolbar.mdc-toolbar--fixed {
         padding-top: 0;
     }
@@ -2147,6 +2186,9 @@ footer {
         font-size: 0.92rem;
         line-height: 1.25;
     }
+    .home .splash-image.hello .container-fluid .mdc-layout-grid p.header-extra {
+        font-size: 1.2rem;
+    }
     .breadcrumbs {
         font-size: 85%;
     }
@@ -2165,11 +2207,18 @@ footer {
     }
 }
 
+@media screen and (max-width: 479px) {
+    .home .featured-content .featured-background-image img.header-text {
+        margin-right: 0
+    }
+}
+
 @media screen and (max-width: 450px) {
     .pagination-distance-4 {
         display: none !important;
     }
     .splash-overlay {
+        min-height: 290px;
         h1.header-text {
             font-size: 2rem;
             line-height: 2.2rem;
@@ -2177,6 +2226,10 @@ footer {
     }
     .home .splash-image.hello {
         padding: 0;
+        min-height: 290px;
+        .splash-overlay {
+            min-height: 290px;
+        }
         .container-fluid .mdc-layout-grid {
             width: 100%;
             margin: 0;
@@ -2186,6 +2239,7 @@ footer {
             }
             p.header-extra {
                 font-size: 1.1rem;
+                margin-bottom: 0;
             }
         }
     }

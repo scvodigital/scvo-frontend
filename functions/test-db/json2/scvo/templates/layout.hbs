@@ -22,7 +22,7 @@
     <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
     <meta name="theme-color" content="#00838f">
     <link rel="search" type="application/opensearchdescription+xml" title="SCVO" href="/assets/opensearch.xml" />
-    <link type="text/css" rel="stylesheet" href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css">
+    <link type="text/css" rel="stylesheet" href="/assets/css/material-components-web.min.css">
     <style type="text/css">
     {{{this.css}}}
     </style>
@@ -36,14 +36,14 @@
                         <section class="mdc-toolbar__section mdc-toolbar__section--align-start">
                             <span class="mdc-toolbar__title catalog-title">
                                 <a href="/" class="brand-logo" title="Scottish Council for Voluntary Organisations">
-                                    <img src="assets/images/scvo-logo.png" />
+                                    <img src="/assets/images/scvo-logo.png" />
                                 </a>
                             </span>
                         </section>
                         <section class="mdc-toolbar__section mdc-toolbar__section--align-end toolbar-search">
                             <nav id="upper-tab-bar" class="mdc-tab-bar">
                                 {{#each menus.upper}}
-                                <a class="mdc-tab" href="{{path}}"{{#if match}} class="active"{{/if}}>{{{label}}}</a>
+                                <a class="mdc-tab{{#if match}} mdc-tab--active{{/if}}" href="{{path}}">{{{label}}}</a>
                                 {{/each}}
                             </nav>
                             <form [searchroute]="'main_search'" class="mdc-form-field mdc-form-field--align-end search_form">
@@ -65,7 +65,7 @@
                         <section class="mdc-toolbar__section mdc-toolbar__section--align-start toolbar-menu">
                             <nav id="main-tab-bar" class="mdc-tab-bar">
                                 {{#each menus.main}}
-                                <a class="mdc-tab" href="{{path}}"{{#if match}} class="active"{{/if}}>{{{label}}}</a>
+                                <a class="mdc-tab{{#if match}} mdc-tab--active{{/if}}" href="{{path}}">{{{label}}}</a>
                                 {{/each}}
                             </nav>
                         </section>
@@ -76,8 +76,8 @@
             <aside class="mdc-temporary-drawer" id="menu_drawer" dir="rtl">
                 <nav class="mdc-temporary-drawer__drawer">
                     <header class="mdc-temporary-drawer__header">
-                        <div class="mdc-temporary-drawer__header-content mdc-theme--primary-bg mdc-theme--text-primary-on-primary">
-                            <img src="assets/images/scvo-logo.png" />
+                        <div class="mdc-temporary-drawer__header-content mdc-theme--primary-bg">
+                            <img src="/assets/images/scvo-logo.png" />
                         </div>
                     </header>
                     <nav class="mdc-temporary-drawer__content mdc-list-group">
@@ -111,7 +111,7 @@
                             <div class="mdc-layout-grid__inner">
                                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-7-desktop mdc-layout-grid__cell--span-5-tablet">
                                     <a href="/" class="brand-logo" title="Scottish Council for Voluntary Organisations">
-                                        <img src="assets/images/scvo-logo.png" />
+                                        <img src="/assets/images/scvo-logo.png" />
                                     </a>
                                     <p>The <strong>Scottish Council for Voluntary Organisations</strong> is the membership organisation for Scotland's charities, voluntary organisations and social enterprises.</p>
                                 </div>
@@ -167,7 +167,12 @@
             </footer>
         </div>
     </scvo-site>
-    <script type="text/javascript" src="//unpkg.com/material-components-web@latest/dist/material-components-web.js"></script>
+
+    <!-- <div id="spinner" style="position:fixed; top:0; left:0; right:0; bottom:0; background-color:#fff; z-index:9999; display:flex; align-items:center; justify-content:center;">
+        <span class="fa fa-fw fa-circle-o-notch fa-spin" style="color:#C2185B;"></span>
+    </div> -->
+
+    <script type="text/javascript" src="/assets/js/material-components-web.js"></script>
     <script type="text/javascript" src="//npmcdn.com/headroom.js/dist/headroom.min.js"></script>
     <script type="text/javascript">
     // Cookie Consent
