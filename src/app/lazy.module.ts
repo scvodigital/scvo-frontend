@@ -15,6 +15,7 @@ import { RouterService } from './services/router.service';
 
 // Components
 import { RouterFormDirective } from './directives/router-form.directive';
+import { MenuDirective } from './directives/menu.directive';
 import { MenuComponent } from './components/menu/menu.component';
 
 // Directives
@@ -22,6 +23,7 @@ import { MenuComponent } from './components/menu/menu.component';
 @NgModule({
     declarations: [
         RouterFormDirective,
+        MenuDirective,
         MenuComponent,
     ],
     imports: [
@@ -30,6 +32,7 @@ import { MenuComponent } from './components/menu/menu.component';
     ],
     exports: [
         RouterFormDirective,
+        MenuDirective,
         MenuComponent,
     ]
 })

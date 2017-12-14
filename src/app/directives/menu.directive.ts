@@ -1,27 +1,20 @@
-import { Component, OnInit, ElementRef, Input, Renderer2, ViewChild } from '@angular/core';
+import { Directive, OnInit, ElementRef, Input, Renderer2 } from '@angular/core';
 
-import { RouterModule, Router } from '@angular/router';
+import { Router } from '@angular/router';
 
 import { Router as ScvoRouter, IRoutes, IContext, RouteMatch, IMenus, IMenuItem } from 'scvo-router';
 import { Subscription } from 'rxjs/Rx';
 
-import { LazyModule } from '../../lazy.module';
-import { RouterService } from '../../services/router.service';
+import { RouterService } from '../services/router.service';
 
-@Component({
-    selector: '[menu]',
-    templateUrl: './menu.component.html',
-    styleUrls: ['./menu.component.scss']
+@Directive({
+    selector: '[menus]',
 })
-export class MenuComponent implements OnInit {
+export class MenuDirective implements OnInit {
     @Input('menu') menuName: string = '';
     templateNode: HTMLElement = null;
-    modules = [RouterModule, LazyModule];
-    html: string = '';
-    path: string = '';
-    
-    @ViewChild('menuContainer') public viewChild: ElementRef;
-    
+    menuHtml: string = '';
+
     get menuItems(): IMenuItem[] {
         if (this.routerService.currentRoute && this.routerService.currentRoute.context.menus.hasOwnProperty(this.menuName)) {
             return this.routerService.currentRoute.context.menus[this.menuName];
@@ -34,9 +27,8 @@ export class MenuComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.html = this.viewChild.nativeElement.innerHTML;
-        this.templateNode = this.viewChild.nativeElement.children[0].cloneNode();
-        this.viewChild.nativeElement.innerHTML = '';
+        this.menuHtml = this.el.nativeElement.innerHTML;
+        this.templateNode = this.el.nativeElement.children[0].cloneNode();
         this.routerService.routeChanged.subscribe((routeMatch: RouteMatch) => {
             this.renderMenu();
         });
@@ -50,18 +42,8 @@ export class MenuComponent implements OnInit {
             var element = this.templateNode.cloneNode();
             if (element.nodeName === 'A') {
                 (<any>element).setAttribute('href', menuItem.path);
-                if (menuItem.match) {
-                    (<any>element).classList.add('active');
-                } else {
-                    (<any>element).classList.remove('active');
-                }
             } else {
                 (<any>element).querySelector('a').setAttribute('href', menuItem.path);
-                if (menuItem.match) {
-                    (<any>element).querySelector('a').classList.add('active');
-                } else {
-                    (<any>element).querySelector('a').classList.remove('active');
-                }
             }
             if ((<any>element).children.length === 0) {
                 (<any>element).innerHTML = menuItem.label;
@@ -71,6 +53,6 @@ export class MenuComponent implements OnInit {
         console.log('elements:', elementsHtml);
         var ngElements = this.routerService.cleanHtml(elementsHtml);
         console.log('ngElements:', ngElements);
-        this.html = ngElements;
+        this.el.nativeElement.innerHTML = ngElements;
     }
 }
