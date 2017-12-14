@@ -63,7 +63,7 @@
                 <div class="mdc-toolbar__row toolbar-nav mdc-theme--primary-dark-bg">
                     <div class="container-fluid">
                         <section class="mdc-toolbar__section mdc-toolbar__section--align-start toolbar-menu">
-                            <nav id="main-tab-bar" class="mdc-tab-bar">
+                            <nav id="main-tab-bar" class="mdc-tab-bar" [menu]="'main'" [menulinkselector]="''" [menulabelselector]="'span.mdc-tab--label'" [menuactiveclass]="'mdc-tab--active'">
                                 {{#each menus.main}}
                                 <a class="mdc-tab{{#if match}} mdc-tab--active{{/if}}" href="{{path}}"><span class="mdc-tab--label">{{{label}}}</span></a>
                                 {{/each}}
