@@ -48,7 +48,6 @@ export class MenuComponent implements OnInit {
     }
 
     renderMenu() {
-        console.log(this.menuItems);
         var elementsHtml = '';
         this.menuItems.forEach((menuItem: IMenuItem) => {
             var element = this.templateNode.cloneNode(true);
