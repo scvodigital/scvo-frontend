@@ -245,6 +245,7 @@ site-background: #251032
         border-color: map-get($theme, 'primary');
     }
     .mdc-button:hover,
+    .mdc-button--raised.mdc-button--active:not(:disabled),
     .mdc-button--raised:not(:disabled):hover {
         color: white;
         border-color: map-get($theme, 'primary-dark');
@@ -386,7 +387,7 @@ site-background: #251032
             66deg,
             map-get($theme, 'primary-fade'),
             map-get($theme, 'primary-fade')
-            ) !important;
+            );
         }
     }
     .home .cta-content.callout-image {
@@ -395,7 +396,7 @@ site-background: #251032
         map-get($themeServices, 'primary-fade')
         ),
         url('https://storage.googleapis.com/scvo-cms/wp-content/uploads/2017/10/Drake-Music-03.jpg');
-        .mdc-layout-grid__cell--span-4 h3 a:hover .fa {
+        .mdc-layout-grid__cell h3 a:hover .fa {
             background-color: map-get($themeServices, 'primary') !important;
         }
     }
@@ -501,7 +502,9 @@ site-background: #251032
     @include theme-colours('digital');
 }
 .services,
+.events,
 .search-result.scvo-cms-page,
+.search-result.scvo-event,
 .breadcrumbs,
 .page-content,
 .posts-page .page-sidebar,
@@ -509,145 +512,13 @@ site-background: #251032
 .library-content,
 .library-sidebar,
 .home .cta-content,
+.home .featured-text,
 .home .latest-content,
 .home .gist.scvo-cms-post,
 .home .gist.goodmoves-job,
 .home .gist.tfn-post {
     @include theme-colours('services');
 }
-
-
-
-//
-// :root{
-//     --mdc-theme-primary: #AD1457; // Pink 800
-//     --mdc-theme-primary-fade: rgba(173, 20, 87, 0.89);
-//     --mdc-theme-primary-light: #C2185B; // Pink 700
-//     --mdc-theme-primary-dark: #880E4F; // Pink 900
-//     --mdc-theme-secondary: #FF8F00; // Amber 800
-//     --mdc-theme-secondary-light: #FFA000; // Amber 700
-//     --mdc-theme-secondary-dark: #FF6F00; // Amber 900
-//     --mdc-theme-background: #ECEFF1; // Blue Grey 50
-//     --mdc-footer-primary: #371448;
-//     --mdc-footer-primary-highlight: #B3185B;
-//     --mdc-footer-primary-light: #592864;
-//     --mdc-footer-primary-dark: #251032;
-//     --mdc-site-background: #290b4d; // was #263238 Blue Grey 900
-//     --mdc-layout-grid-margin-desktop: 0;
-//     --mdc-layout-grid-margin-tablet: 0;
-// }
-// .running-a-charity,
-// .setting-up-a-charity,
-// .running-your-organisation {
-//     --mdc-theme-primary: #4527A0; // Deep Purple 800
-//     --mdc-theme-primary-fade: rgba(69, 39, 160, 0.89);
-//     --mdc-theme-primary-light: #512DA8; // Deep Purple 700
-//     --mdc-theme-primary-dark: #311B92; // Deep Purple 900
-// }
-// .search-result.cjs-job,
-// .employability,
-// .employment,
-// .jobs {
-//     --mdc-theme-primary: #2E7D32; // Green 800
-//     --mdc-theme-primary-fade: rgba(46, 125, 50, 0.89);
-//     --mdc-theme-primary-light: #388E3C; // Green 700
-//     --mdc-theme-primary-dark: #1B5E20; // Green 900
-// }
-// .goodmoves,
-// .search-result.goodmoves-job,
-// .services.goodmoves {
-//     --mdc-theme-primary: #58a934;
-//     --mdc-theme-primary-fade: #58a934;
-//     --mdc-theme-primary-light: #58a934;
-//     --mdc-theme-primary-dark: #58a934;
-// }
-// .funding {
-//     --mdc-theme-primary: #00838F; // Cyan 800
-//     --mdc-theme-primary-fade: rgba(0, 131, 143, 0.89);
-//     --mdc-theme-primary-light: #008D9B; // Cyan 750
-//     --mdc-theme-primary-dark: #006064; // Cyan 900
-// }
-// .project,
-// .campaign,
-// .open-government,
-// .projects-campaigns {
-//     --mdc-theme-primary: #AD1457; // Pink 800
-//     --mdc-theme-primary-fade: rgba(173, 20, 87, 0.89);
-//     --mdc-theme-primary-light: #C2185B; // Pink 700
-//     --mdc-theme-primary-dark: #880E4F; // Pink 900
-// }
-// .digital .callout-image,
-// .post,
-// .blogs,
-// .press-media,
-// .policy-research {
-//     --mdc-theme-primary: #D84315; // Deep Orange 800
-//     --mdc-theme-primary-fade: rgba(216, 67, 21, 0.89);
-//     --mdc-theme-primary-light: #E64A19; // Deep Orange 700
-//     --mdc-theme-primary-dark: #BF360C; // Deep Orange 900
-// }
-// .goodhq,
-// .search-result.goodhq-organisation {
-//     --mdc-theme-primary: #4033E9;
-//     --mdc-theme-primary-fade: #4033E9;
-//     --mdc-theme-primary-light: #4033E9;
-//     --mdc-theme-primary-dark: #160AAD;
-// }
-// .search-result.digital-charter-signatory {
-//     --mdc-theme-primary: #022347;
-//     --mdc-theme-primary-fade: #022347;
-//     --mdc-theme-primary-light: #022347;
-//     --mdc-theme-primary-dark: #022347;
-// }
-// .tfn,
-// .post-related-tfn,
-// .gist.tfn-post,
-// .search-result.tfn-post {
-//     --mdc-theme-primary: #3b9db1;
-//     --mdc-theme-primary-fade: #3b9db1;
-//     --mdc-theme-primary-light: #3b9db1;
-//     --mdc-theme-primary-dark: #3b9db1;
-// }
-// .funding-scotland,
-// .search-result.funding-scotland-fund,
-// .services.funding-scotland {
-//     --mdc-theme-primary: #6FB744;
-//     --mdc-theme-primary-fade: #6FB744;
-//     --mdc-theme-primary-light: #6FB744;
-//     --mdc-theme-primary-dark: #6FB744;
-// }
-// .credit-union {
-//     --mdc-theme-primary: #1976D2;
-//     --mdc-theme-primary-fade: rgba(21, 101, 192, 0.89);
-//     --mdc-theme-primary-light: #1976D2;
-//     --mdc-theme-primary-dark: #145ea8;
-// }
-// .digital {
-//     --mdc-theme-primary: #1976d2;
-//     --mdc-theme-primary-fade: rgba(13, 71, 161, 0.89);
-//     --mdc-theme-primary-light: #1976D2;
-//     --mdc-theme-primary-dark: #0D47A1;
-// }
-// .services,
-// .breadcrumbs,
-// .page-content,
-// .page-sidebar,
-// .post-content,
-// .post-sidebar,
-// .library-content,
-// .library-sidebar,
-// .home .cta-content,
-// .home .latest-content,
-// .home .gist.scvo-cms-post,
-// .home .gist.goodmoves-job,
-// .home .gist.tfn-post {
-//     --mdc-theme-primary: #1565C0; // Blue 800
-//     --mdc-theme-primary-fade: rgba(21, 101, 192, 0.89);
-//     --mdc-theme-primary-light: #1976D2; // Blue 700
-//     --mdc-theme-primary-dark: #0D47A1; // Blue 900
-// }
-
-
 
 html {
     overflow-y: scroll;
@@ -722,6 +593,27 @@ a:hover {
 
 .home {
     .featured-content {
+        .search_form {
+            margin-left: 5%;
+            margin-right: 5%;
+            .mdc-text-field {
+                border: 2px solid #333;
+                border-radius: 0;
+                width: 100%;
+                height: 1.5rem;
+                line-height: 2rem;
+                margin: 1.5rem 0 1rem;
+                padding: 1rem;
+                font-size: 1.5rem;
+            }
+        }
+        .search-button-large {
+            padding: 1.8rem 0 0;
+            float: right;
+            .fa-search {
+                color: #333;
+            }
+        }
         .featured {
             h1,
             p {
@@ -778,8 +670,11 @@ a:hover {
         h2 {
             font-size: 1.8rem;
         }
-        .mdc-layout-grid__cell--span-4 {
+        .mdc-layout-grid__cell {
             text-align: center;
+            h2 {
+                text-align: left;
+            }
             h3 {
                 margin: 0;
                 .fa {
@@ -971,6 +866,7 @@ a:hover {
                     padding: 0 $spacing-unit/2;
                     line-height: $spacing-unit*2;
                     background: transparent;
+                    border-radius: 0 !important;
                 }
                 ::-webkit-input-placeholder {
                     color: rgba(255, 255, 255, 0.6);
@@ -1021,11 +917,20 @@ a:hover {
                     display: none;
                 }
             }
+            #main-tab-bar {
+                .mdc-tab.mdc-tab--active {
+                    // border-bottom: 1px solid rgba(255,255,255,0.5);
+                    // background: rgba(0,0,0,0.2);
+                }
+            }
             #upper-tab-bar {
                 margin-right: $spacing-unit;
                 .mdc-tab {
                     min-width: auto;
                     font-weight: 600;
+                }
+                .mdc-tab.mdc-tab--active {
+                    // border-bottom: 1px solid rgba(255,255,255,0.5);
                 }
             }
         }
@@ -1327,7 +1232,7 @@ a:hover {
     }
 }
 .credit-union .splash-image {
-    min-height: $spacing-unit*11;
+    min-height: $spacing-unit*9;
     img.header-text {
         max-height: $spacing-unit*6;
     }
@@ -1530,7 +1435,7 @@ h1.mdc-typography--title {
     // }
 }
 .mdc-card__primary:last-child {
-    padding-bottom: 0;
+    padding-bottom: 1rem;
 }
 .mdc-card-search {
     margin: 0 0 $spacing-unit;
@@ -2206,18 +2111,15 @@ footer {
     .pagination-distance-4 {
         display: none !important;
     }
-    .splash-overlay {
-        min-height: 290px;
-        h1.header-text {
-            font-size: 2rem;
-            line-height: 2.2rem;
-        }
-    }
     .home .splash-image.hello {
         padding: 0;
         min-height: 290px;
         .splash-overlay {
             min-height: 290px;
+            h1.header-text {
+                font-size: 2rem;
+                line-height: 2.2rem;
+            }
         }
         .container-fluid .mdc-layout-grid {
             width: 100%;
@@ -2231,6 +2133,9 @@ footer {
                 margin-bottom: 0;
             }
         }
+    }
+    .home .featured-content .search_form {
+        margin: 0;
     }
 }
 

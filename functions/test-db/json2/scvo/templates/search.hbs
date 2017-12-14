@@ -1,39 +1,40 @@
 <div class="search">
     <div class="container-fluid">
         <div class="v-margin">
-            <div class="mdc-card">
-                <section class="mdc-card__primary">
-                    <h2 class="mdc-card__title mdc-card__title--large">Search SCVO</h2>
-                    <form [searchroute]="'main_search'" data-auto-search="true">
-                        <div class="mdc-textfield">
-                            <input type="text" class="mdc-textfield__input searchRoute" placeholder="Search" value="{{params.query.q}}" name="q" id="main-q">
-                            <div class="mdc-textfield__bottom-line"></div>
-                        </div>
-                        <div class="mdc-form-field">
-                            <!-- <label class="mdc-select__label" for="main-type">Show me</label> -->
-                            <select class="mdc-select" role="listbox" id="main-type" name="type">
-                                <option value="" {{#unless params.query.type}}selected{{/unless}}>Everything</option>
-                                <option value="scvo-cms-post" {{#compare params.query.type "===" "scvo-cms-post"}}selected{{/compare}}>Posts</option>
-                                <option value="scvo-cms-page" {{#compare params.query.type "===" "scvo-cms-page"}}selected{{/compare}}>Pages</option>
-                                <option value="scvo-event" {{#compare params.query.type "===" "scvo-event"}}selected{{/compare}}>Events</option>
-                            </select>
-                        </div>
-                    </form>
-                </section>
-            </div>
+            <h1>Search SCVO</h1>
+            <form [searchroute]="'main_search'" data-auto-search="true">
+                <!-- <div class="mdc-textfield">
+                    <input type="text" class="mdc-textfield__input searchRoute" placeholder="Search" value="{{params.query.q}}" name="q" id="main-q">
+                    <div class="mdc-textfield__bottom-line"></div>
+                </div> -->
+                <div class="mdc-form-field">
+                    <!-- <label class="mdc-select__label" for="main-type">Filter by</label> -->
+                    <select class="mdc-select" role="listbox" id="main-type" name="type">
+                        <option value="" {{#unless params.query.type}}selected{{/unless}}>All content</option>
+                        <option value="scvo-cms-post" {{#compare params.query.type "===" "scvo-cms-post"}}selected{{/compare}}>Blog posts</option>
+                        <option value="scvo-cms-page" {{#compare params.query.type "===" "scvo-cms-page"}}selected{{/compare}}>Pages</option>
+                        <option value="scvo-event" {{#compare params.query.type "===" "scvo-event"}}selected{{/compare}}>Training &amp; events</option>
+                        <option value="goodmoves-legacy" {{#compare params.query.type "===" "goodmoves-legacy"}}selected{{/compare}}>Goodmoves jobs</option>
+                    </select>
+                </div>
+            </form>
         </div>
 
-        {{#each primaryResponse.hits.hits}}
-        <div class="v-margin">
-            {{#if _source.rendered.search_result_scvo}}
-            {{{_source.rendered.search_result_scvo}}}
-            {{else}}
-            {{#if _source.rendered.search_result}}
-            {{{_source.rendered.search_result}}}
-            {{/if}}
-            {{/if}}
+        <div class="mdc-layout-grid equal-height">
+            <div class="mdc-layout-grid__inner">
+                {{#each primaryResponse.hits.hits}}
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
+                    {{#if _source.rendered.search_result_scvo}}
+                    {{{_source.rendered.search_result_scvo}}}
+                    {{else}}
+                    {{#if _source.rendered.search_result}}
+                    {{{_source.rendered.search_result}}}
+                    {{/if}}
+                    {{/if}}
+                </div>
+                {{/each}}
+            </div>
         </div>
-        {{/each}}
         {{> pagination}}
     </div>
 </div>

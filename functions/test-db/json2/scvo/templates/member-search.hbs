@@ -29,7 +29,7 @@
                         <div class="v-margin">
                             <div class="mdc-card">
                                 <section class="mdc-card__primary">
-                                    <h2 class="mdc-card__title mdc-card__title--large">Search SCVO</h2>
+                                    <h2 class="mdc-card__title mdc-card__title--large">Search SCVO member organisations</h2>
                                     <form [searchroute]="'members'" data-auto-search="true">
                                         <div class="mdc-textfield">
                                             <input type="text" class="mdc-textfield__input searchRoute" placeholder="Search" value="{{params.query.q}}" name="q">
@@ -49,13 +49,13 @@
                                 </section>
                             </div>
                         </div>
-                        
+
                         {{#each primaryResponse.hits.hits}}
                         {{{this._source.rendered.list}}}
                         {{/each}}
 
                         {{#ifAny params.query.q params.query.type}}
-                            {{> pagination paging=paging params=params}}
+                            {{> pagination}}
                         {{/ifAny}}
                     </div>
                     <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3 sidebar page-sidebar">
