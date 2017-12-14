@@ -15,6 +15,10 @@ import { RouterService } from '../../services/router.service';
 })
 export class MenuComponent implements OnInit {
     @Input('menu') menuName: string = '';
+    @Input('menulinkselector') menuLinkSelector: string = '';
+    @Input('menulabelselector') menuLabelSelector: string = '';
+    @Input('menuactiveclass') menuActiveClass: string = '';
+    
     templateNode: HTMLElement = null;
     modules = [RouterModule, LazyModule];
     html: string = '';
@@ -35,7 +39,7 @@ export class MenuComponent implements OnInit {
 
     ngOnInit() {
         this.html = this.viewChild.nativeElement.innerHTML;
-        this.templateNode = this.viewChild.nativeElement.children[0].cloneNode();
+        this.templateNode = this.viewChild.nativeElement.children[0].cloneNode(true);
         this.viewChild.nativeElement.innerHTML = '';
         this.routerService.routeChanged.subscribe((routeMatch: RouteMatch) => {
             this.renderMenu();
@@ -47,24 +51,26 @@ export class MenuComponent implements OnInit {
         console.log(this.menuItems);
         var elementsHtml = '';
         this.menuItems.forEach((menuItem: IMenuItem) => {
-            var element = this.templateNode.cloneNode();
-            if (element.nodeName === 'A') {
+            var element = this.templateNode.cloneNode(true);
+            if (!this.menuLinkSelector) {
                 (<any>element).setAttribute('href', menuItem.path);
                 if (menuItem.match) {
-                    (<any>element).classList.add('active');
+                    (<any>element).classList.add(this.menuActiveClass);
                 } else {
-                    (<any>element).classList.remove('active');
+                    (<any>element).classList.remove(this.menuActiveClass);
                 }
             } else {
-                (<any>element).querySelector('a').setAttribute('href', menuItem.path);
+                (<any>element).querySelector(this.menuLinkSelector).setAttribute('href', menuItem.path);
                 if (menuItem.match) {
                     (<any>element).querySelector('a').classList.add('active');
                 } else {
                     (<any>element).querySelector('a').classList.remove('active');
                 }
             }
-            if ((<any>element).children.length === 0) {
+            if (!this.menuLabelSelector) {
                 (<any>element).innerHTML = menuItem.label;
+            } else {
+                (<any>element).querySelector(this.menuLabelSelector).innerHTML = menuItem.label;
             }
             elementsHtml += (<any>element).outerHTML;
         });
