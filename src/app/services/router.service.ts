@@ -68,6 +68,8 @@ export class RouterService {
     cleanHtml(html: string, paramsQuery: any = {}, multipleResults: boolean = false): string {
         html = html
             .replace(this.domainStripper, '')
+            .replace(/<script/ig, '<script-hack')
+            .replace(/<\/script/ig, '</script-hack')
             .replace(/(href=\"|\')(\/.*?)(\"|\')/gi, (m, p1, p2, p3) => {
                 var parts = p2.split('?');
                 var url = parts[0];

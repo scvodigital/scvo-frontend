@@ -48,7 +48,6 @@ export class MenuComponent implements OnInit {
     }
 
     renderMenu() {
-        console.log(this.menuItems);
         var elementsHtml = '';
         this.menuItems.forEach((menuItem: IMenuItem) => {
             var element = this.templateNode.cloneNode(true);
@@ -74,9 +73,7 @@ export class MenuComponent implements OnInit {
             }
             elementsHtml += (<any>element).outerHTML;
         });
-        console.log('elements:', elementsHtml);
         var ngElements = this.routerService.cleanHtml(elementsHtml);
-        console.log('ngElements:', ngElements);
         this.html = ngElements;
     }
 }
