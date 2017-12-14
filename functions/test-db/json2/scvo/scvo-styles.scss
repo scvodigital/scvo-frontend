@@ -2,7 +2,7 @@
 @import url('//fonts.googleapis.com/css?family=Open+Sans:400,600,700');
 
 $spacing-unit: 1rem;
-$nav-height: 2.5rem;
+$nav-height: 38px;
 
 $colours: (
 default: (
@@ -460,6 +460,7 @@ site-background: #251032
 .services.goodmoves {
     @include theme-colours('goodmoves');
 }
+.about,
 .funding {
     @include theme-colours('funding');
 }
@@ -820,7 +821,7 @@ a:hover {
 }
 
 .mdc-toolbar.mdc-toolbar--fixed {
-    padding-top: $spacing-unit;
+    padding-top: 15px;
 }
 .mdc-toolbar {
     #upper-tab-bar,
@@ -854,7 +855,7 @@ a:hover {
             }
             .mdc-textfield {
                 margin: 0;
-                max-height: $spacing-unit*2.2;
+                max-height: $nav-height;
                 height: auto;
                 .mdc-textfield__input,
                 .mdc-textfield__input:focus,
@@ -864,7 +865,8 @@ a:hover {
                     border-style: solid;
                     border-color: rgba(255,255,255,.75);
                     padding: 0 $spacing-unit/2;
-                    line-height: $spacing-unit*2;
+                    margin: 0;
+                    line-height: $nav-height - 3px;
                     background: transparent;
                     border-radius: 0 !important;
                 }
@@ -907,8 +909,15 @@ a:hover {
                 .mdc-tab {
                     color: rgba(255, 255, 255, 0.95);
                     font-size: 1rem;
+                    height: $nav-height;
                     font-weight: 600;
-                    padding: 0 $spacing-unit;
+                    padding: 0 $spacing-unit*(3/4);
+                    .mdc-tab--label {
+                        line-height: $nav-height - 4px;
+                        display: block;
+                        border-top: 2px solid transparent;
+                        border-bottom: 2px solid transparent;
+                    }
                 }
                 .mdc-tab:first-child {
                     padding-left: 0;
@@ -918,8 +927,8 @@ a:hover {
                 }
             }
             #main-tab-bar {
-                .mdc-tab.mdc-tab--active {
-                    // border-bottom: 1px solid rgba(255,255,255,0.5);
+                .mdc-tab.mdc-tab--active .mdc-tab--label {
+                    border-bottom-color: rgba(255,255,255,0.9);
                     // background: rgba(0,0,0,0.2);
                 }
             }
@@ -929,8 +938,8 @@ a:hover {
                     min-width: auto;
                     font-weight: 600;
                 }
-                .mdc-tab.mdc-tab--active {
-                    // border-bottom: 1px solid rgba(255,255,255,0.5);
+                .mdc-tab.mdc-tab--active .mdc-tab--label {
+                    border-bottom-color: rgba(255,255,255,0.9);
                 }
             }
         }
@@ -972,7 +981,7 @@ a:hover {
     }
 }
 .mdc-toolbar-fixed-adjust {
-    padding: $spacing-unit*9.5 0 $spacing-unit*2;
+    padding: 145px 0 $spacing-unit*2;
     margin: 0;
 }
 .setting-up-a-charity .mdc-toolbar-fixed-adjust,
@@ -2004,7 +2013,7 @@ footer {
         padding-top: 0;
     }
     .mdc-toolbar-fixed-adjust {
-        padding-top: $spacing-unit*8.5;
+        padding-top: 130px;
     }
     .mdc-toolbar .mdc-toolbar__row .container-fluid #upper-tab-bar {
         margin-right: 0;
@@ -2048,14 +2057,14 @@ footer {
         padding-top: 0;
     }
     .mdc-toolbar .mdc-toolbar__row .container-fluid .mdc-toolbar__icon {
-        height: $spacing-unit*4;
+        height: 58px;
     }
     .mdc-toolbar #upper-tab-bar,
     .mdc-toolbar .mdc-toolbar__icon,
     .mdc-toolbar .mdc-toolbar__row,
     .mdc-toolbar .mdc-form-field,
     .mdc-toolbar .mdc-toolbar__section {
-        max-height: $spacing-unit*4;
+        max-height: 58px;
     }
     .mdc-temporary-drawer__header-content,
     .brand-logo {
@@ -2065,7 +2074,7 @@ footer {
         }
     }
     .mdc-toolbar-fixed-adjust {
-        padding-top: $spacing-unit*4;
+        padding-top: 58px;
     }
     .pagination-distance-9,
     .pagination-distance-8,
