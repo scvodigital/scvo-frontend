@@ -15,19 +15,22 @@ import { RouterService } from './services/router.service';
 
 // Components
 import { RouterFormDirective } from './directives/router-form.directive';
+import { MenuComponent } from './components/menu/menu.component';
 
 // Directives
 
 @NgModule({
     declarations: [
         RouterFormDirective,
+        MenuComponent,
     ],
     imports: [
         RouterModule.forChild(rootRouterConfig),
-        DynamicComponentModule
+        DynamicComponentModule,
     ],
     exports: [
         RouterFormDirective,
+        MenuComponent,
     ]
 })
 export class LazyModule { }

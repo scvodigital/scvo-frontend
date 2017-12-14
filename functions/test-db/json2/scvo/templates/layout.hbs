@@ -41,9 +41,9 @@
                             </span>
                         </section>
                         <section class="mdc-toolbar__section mdc-toolbar__section--align-end toolbar-search">
-                            <nav id="upper-tab-bar" class="mdc-tab-bar">
+                            <nav id="upper-tab-bar" class="mdc-tab-bar" [menu]="'upper'" [menutemplate]="'%3Ca%20class%3D%22mdc-tab%20%7B%7Bactive%7D%7D%22%20href%3D%22%7B%7Burl%7D%7D%22%3E%7B%7Blabel%7D%7D%3C%2Fa%3E'">
                                 {{#each menus.upper}}
-                                <a class="mdc-tab" href="{{path}}"{{#if match}} class="active"{{/if}}>{{{label}}}</a>
+                                <a class="mdc-tab{{#if match}} active{{/if}}" href="{{path}}">{{{label}}}</a>
                                 {{/each}}
                             </nav>
                             <form [searchroute]="'main_search'" class="mdc-form-field mdc-form-field--align-end search_form">
