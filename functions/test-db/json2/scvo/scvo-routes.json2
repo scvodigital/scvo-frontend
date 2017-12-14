@@ -634,16 +634,16 @@
             "apiVersion": "5.6"
         }
     },
-    "members": {
+    "member_search": {
         "pattern": "/about/members",
         "templates": {
-            "default": `{:templates/members.hbs}`
+            "default": `{:templates/member-search.hbs}`
         },
         "headTagsTemplate": `{:templates/page-head-tags.hbs}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
             "type": "scvo-member",
-            "template": `{:queries/members.json}`
+            "template": `{:queries/member-search.json}`
         },
         "supplimentarySearchTemplates": {
             "splash": {
@@ -654,7 +654,7 @@
             "types": {
                 "index": "web-content-production",
                 "type": "scvo-member",
-                "template": `{:queries/members-aggs.json}`
+                "template": `{:queries/member-aggs.json}`
             }
         },
         "elasticsearchConfig": {
@@ -665,13 +665,13 @@
     "member-page": {
         "pattern": "/about/member/:slug",
         "templates": {
-            "default": `{:templates/page-member.hbs}`
+            "default": `{:templates/member.hbs}`
         },
         "headTagsTemplate": `{:templates/page-head-tags.hbs}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
             "type": "scvo-member",
-            "template": `{:queries/member-page.json}`
+            "template": `{:queries/member.json}`
         },
         "supplimentarySearchTemplates": {
             "splash": {
