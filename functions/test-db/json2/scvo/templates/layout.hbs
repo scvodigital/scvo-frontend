@@ -41,9 +41,9 @@
                             </span>
                         </section>
                         <section class="mdc-toolbar__section mdc-toolbar__section--align-end toolbar-search">
-                            <nav id="upper-tab-bar" class="mdc-tab-bar">
+                            <nav id="upper-tab-bar" class="mdc-tab-bar" [menu]="'upper'" [menulinkselector]="''" [menulabelselector]="'span.mdc-tab--label'" [menuactiveclass]="'mdc-tab--active'">
                                 {{#each menus.upper}}
-                                <a class="mdc-tab{{#if match}} mdc-tab--active{{/if}}" href="{{path}}">{{{label}}}</a>
+                                <a class="mdc-tab{{#if match}} mdc-tab--active{{/if}}" href="{{path}}"><span class="mdc-tab--label">{{{label}}}</span></a>
                                 {{/each}}
                             </nav>
                             <form [searchroute]="'main_search'" class="mdc-form-field mdc-form-field--align-end search_form">
@@ -63,9 +63,9 @@
                 <div class="mdc-toolbar__row toolbar-nav mdc-theme--primary-dark-bg">
                     <div class="container-fluid">
                         <section class="mdc-toolbar__section mdc-toolbar__section--align-start toolbar-menu">
-                            <nav id="main-tab-bar" class="mdc-tab-bar">
+                            <nav id="main-tab-bar" class="mdc-tab-bar" [menu]="'main'" [menulinkselector]="''" [menulabelselector]="'span.mdc-tab--label'" [menuactiveclass]="'mdc-tab--active'">
                                 {{#each menus.main}}
-                                <a class="mdc-tab{{#if match}} mdc-tab--active{{/if}}" href="{{path}}">{{{label}}}</a>
+                                <a class="mdc-tab{{#if match}} mdc-tab--active{{/if}}" href="{{path}}"><span class="mdc-tab--label">{{{label}}}</span></a>
                                 {{/each}}
                             </nav>
                         </section>
@@ -109,23 +109,23 @@
                     <div class="container-fluid">
                         <div class="mdc-layout-grid">
                             <div class="mdc-layout-grid__inner">
-                                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-7-desktop mdc-layout-grid__cell--span-5-tablet">
+                                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-phone mdc-layout-grid__cell--span-5-tablet mdc-layout-grid__cell--span-7-desktop ">
                                     <a href="/" class="brand-logo" title="Scottish Council for Voluntary Organisations">
                                         <img src="/assets/images/scvo-logo.png" />
                                     </a>
                                     <p>The <strong>Scottish Council for Voluntary Organisations</strong> is the membership organisation for Scotland's charities, voluntary organisations and social enterprises.</p>
                                 </div>
-                                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-1-desktop mdc-layout-grid__cell--span-1-tablet">
+                                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-phone mdc-layout-grid__cell--span-1-tablet mdc-layout-grid__cell--span-1-desktop">
                                     &nbsp;
                                 </div>
-                                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-2-desktop mdc-layout-grid__cell--span-3-tablet">
+                                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-phone mdc-layout-grid__cell--span-3-tablet mdc-layout-grid__cell--span-2-desktop">
                                     <ul class="mdc-list">
                                         {{#each menus.footer}}
                                         <li class="mdc-list-item"><a href="{{path}}">{{{label}}}</a></li>
                                         {{/each}}
                                     </ul>
                                 </div>
-                                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-2-desktop mdc-layout-grid__cell--span-3-tablet">
+                                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-phone mdc-layout-grid__cell--span-3-tablet mdc-layout-grid__cell--span-2-desktop">
                                     <ul class="mdc-list">
                                         <li class="mdc-list-item">
                                             <a href="mailto:enquiries@scvo.org.uk">
@@ -168,9 +168,9 @@
         </div>
     </scvo-site>
 
-    <!-- <div id="spinner" style="position:fixed; top:0; left:0; right:0; bottom:0; background-color:#fff; z-index:9999; display:flex; align-items:center; justify-content:center;">
+    <div id="spinner" style="position:fixed; top:0; left:0; right:0; bottom:0; background-color:#fff; z-index:9999; display:flex; align-items:center; justify-content:center;">
         <span class="fa fa-fw fa-circle-o-notch fa-spin" style="color:#C2185B;"></span>
-    </div> -->
+    </div>
 
     <script type="text/javascript" src="/assets/js/material-components-web.js"></script>
     <script type="text/javascript" src="//npmcdn.com/headroom.js/dist/headroom.min.js"></script>
