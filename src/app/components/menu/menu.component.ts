@@ -74,9 +74,7 @@ export class MenuComponent implements OnInit {
             }
             elementsHtml += (<any>element).outerHTML;
         });
-        console.log('elements:', elementsHtml);
         var ngElements = this.routerService.cleanHtml(elementsHtml);
-        console.log('ngElements:', ngElements);
         this.html = ngElements;
     }
 }
