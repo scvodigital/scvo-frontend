@@ -43,7 +43,7 @@
                         <section class="mdc-toolbar__section mdc-toolbar__section--align-end toolbar-search">
                             <nav id="upper-tab-bar" class="mdc-tab-bar" [menu]="'upper'">
                                 {{#each menus.upper}}
-                                <a class="mdc-tab{{#if match}} mdc-tab--active{{/if}}" href="{{path}}">{{{label}}}</a>
+                                <a class="mdc-tab{{#if match}} mdc-tab--active{{/if}}" href="{{path}}"><span class="mdc-tab--label">{{{label}}}</span></a>
                                 {{/each}}
                             </nav>
                             <form [searchroute]="'main_search'" class="mdc-form-field mdc-form-field--align-end search_form">
@@ -65,7 +65,7 @@
                         <section class="mdc-toolbar__section mdc-toolbar__section--align-start toolbar-menu">
                             <nav id="main-tab-bar" class="mdc-tab-bar">
                                 {{#each menus.main}}
-                                <a class="mdc-tab{{#if match}} mdc-tab--active{{/if}}" href="{{path}}">{{{label}}}</a>
+                                <a class="mdc-tab{{#if match}} mdc-tab--active{{/if}}" href="{{path}}"><span class="mdc-tab--label">{{{label}}}</span></a>
                                 {{/each}}
                             </nav>
                         </section>
