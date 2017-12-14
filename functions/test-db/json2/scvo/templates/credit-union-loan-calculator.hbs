@@ -1,14 +1,24 @@
 <div class="page credit-union">
-    <div class="splash-image splash-image-{{primaryResponse.hits.hits.[0]._type}}"
-        style="{{> header_splash_image}}">
+    <div class="splash-image splash-image-{{primaryResponse.hits.hits.[0]._type}}" style="{{> header_splash_image}}">
         <div class="splash-overlay{{#if primaryResponse.hits.hits.[0]._source.hide_overlay}} splash-overlay-hidden{{/if}}">
             <div class="container-fluid">
                 <div class="mdc-layout-grid">
+                    {{#if primaryResponse.hits.hits.[0]._source.header_text}}
+                    <img src="{{primaryResponse.hits.hits.[0]._source.header_text}}" alt="{{primaryResponse.hits.hits.[0]._source.title}}" class="header-text" />
+                    {{else}}
                     <h1 class="header-text">
                         <span class="header-text-banner">
-                            Credit Union | Loan Calculator
+                            {{#if primaryResponse.hits.hits.[0]}}
+                            {{#if primaryResponse.hits.hits.[0]._source.hide_overlay}}
+                            {{else}}
+                            {{{primaryResponse.hits.hits.[0]._source.title}}}
+                            {{/if}}
+                            {{else}}
+                            404: Not found
+                            {{/if}}
                         </span>
                     </h1>
+                    {{/if}}
                 </div>
             </div>
         </div>
@@ -37,7 +47,7 @@
                         <div class="control-group">
                             <label class="control-label">Installments:</label>
                             <div class="controls">
-                                £ <input style="width: 75px;" type="text" name="meanRepayment" id="meanRepayment" onchange="window.calculateMaxLoan()"> 
+                                £ <input style="width: 75px;" type="text" name="meanRepayment" id="meanRepayment" onchange="window.calculateMaxLoan()">
                                 each <input style="width: 75px;" type="text" name="rPeriodDisp" id="rPeriodDisp">
                             </div>
                         </div>
