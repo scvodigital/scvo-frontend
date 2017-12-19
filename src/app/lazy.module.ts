@@ -15,16 +15,16 @@ import { RouterService } from './services/router.service';
 
 // Components
 import { RouterFormDirective } from './directives/router-form.directive';
-import { MenuDirective } from './directives/menu.directive';
 import { MenuComponent } from './components/menu/menu.component';
+import { ScriptHackComponent } from './components/script-hack/script-hack.component';
 
 // Directives
 
 @NgModule({
     declarations: [
         RouterFormDirective,
-        MenuDirective,
         MenuComponent,
+        ScriptHackComponent,        
     ],
     imports: [
         RouterModule.forChild(rootRouterConfig),
@@ -32,8 +32,8 @@ import { MenuComponent } from './components/menu/menu.component';
     ],
     exports: [
         RouterFormDirective,
-        MenuDirective,
         MenuComponent,
+        ScriptHackComponent,        
     ]
 })
 export class LazyModule { }

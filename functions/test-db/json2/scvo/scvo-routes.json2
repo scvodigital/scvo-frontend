@@ -50,7 +50,7 @@
         "headTagsTemplate": `{:templates/search-head-tags.hbs}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
-            "type": "scvo-cms-page,scvo-cms-post,scvo-member,digital-charter-signatory,goodmoves-legacy,funding-scotland-fund,goodhq-organisation,scvo-document-evidence,scvo-event,scvo-grant-charter,scvo-staff",
+            "type": "scvo-cms-page,scvo-cms-post,scvo-member,digital-charter-signatory,goodmoves-job,funding-scotland-fund,goodhq-organisation,scvo-document-evidence,scvo-event,scvo-grant-charter,oscr-charity",
             "template": `{:queries/search-all.json}`
         },
         "elasticsearchConfig": {
@@ -663,7 +663,7 @@
         }
     },
     "member-page": {
-        "pattern": "/about/member/:slug",
+        "pattern": "/about/members/:slug",
         "templates": {
             "default": `{:templates/member.hbs}`
         },
@@ -685,12 +685,12 @@
             "apiVersion": "5.6"
         }
     },
-    "staff_list": {
+    "staff_search": {
         "pattern": "/about/staff-team",
         "templates": {
-            "default": `{:templates/staff-list.hbs}`
+            "default": `{:templates/staff-search.hbs}`
         },
-        "headTagsTemplate": `{:templates/staff-list-head-tags.hbs}`,
+        "headTagsTemplate": `{:templates/staff-search-head-tags.hbs}`,
         "defaultParams": {
             "query": {
                 "grouping": "department-office"
@@ -699,13 +699,13 @@
         "primarySearchTemplate": {
             "index": "web-content-production",
             "type": "scvo-staff",
-            "template": `{:queries/staff-list.json}`
+            "template": `{:queries/staff-search.json}`
         },
         "supplimentarySearchTemplates": {
             "departments": {
                 "index": "web-content-production",
                 "type": "scvo-staff",
-                "template": `{:queries/staff-list-aggs.json}`
+                "template": `{:queries/staff-aggs.json}`
             },
             "splash": {
                 "index": "web-content-production",

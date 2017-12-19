@@ -25,7 +25,7 @@
         <div class="mdc-layout-grid">
             <div class="mdc-layout-grid__inner">
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-9 content page-content">
-                    <form [searchroute]="'staff_list'">
+                    <form [searchroute]="'staff_search'" data-auto-search="true">
                         <h2>Filter by</h2>
                         <div class="mdc-form-field">
                             <select class="mdc-select" role="listbox" id="department" name="department">
@@ -43,9 +43,9 @@
                                 {{/each}}
                             </select>
                         </div>
-                        <button class="mdc-button mdc-button--raised" type="submit">
+                        <!-- <button class="mdc-button mdc-button--raised" type="submit">
                             Search
-                        </button>
+                        </button> -->
                     </form>
 
                     {{#each primaryResponse.aggregations.query.buckets}}
