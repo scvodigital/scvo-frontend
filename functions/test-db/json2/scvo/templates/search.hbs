@@ -34,7 +34,11 @@
             <div class="mdc-layout-grid__inner">
                 {{#each primaryResponse.hits.hits}}
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
+                    {{#if _source.rendered.scvo_search_result}}
                     {{{_source.rendered.scvo_search_result}}}
+                    {{else}}
+                    [ Error - search result template missing ]
+                    {{/if}}
                 </div>
                 {{/each}}
             </div>
