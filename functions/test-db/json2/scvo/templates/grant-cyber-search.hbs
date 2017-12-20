@@ -4,13 +4,14 @@
             <div class="container-fluid">
                 <div class="mdc-layout-grid">
                     {{#if primaryResponse.hits.hits.[0]._source.header_text}}
-                    <img src="{{primaryResponse.hits.hits.[0]._source.header_text}}" alt="{{primaryResponse.hits.hits.[0]._source.title}}"
-                        class="header-text" /> {{else}}
+                    <img src="{{primaryResponse.hits.hits.[0]._source.header_text}}" alt="{{primaryResponse.hits.hits.[0]._source.title}}" class="header-text" />
+                    {{else}}
                     <h1 class="header-text">
                         <span class="header-text-banner">
                             {{{supplimentaryResponses.page.hits.hits.[0]._source.title}}}
                         </span>
-                    </h1> {{/if}}
+                    </h1>
+                    {{/if}}
                 </div>
             </div>
         </div>
@@ -72,7 +73,7 @@
                         </div>
                     </div>
 
-                    {{> pagination paging=paging params=params}}
+                    {{> pagination}}
                 </div>
             </div>
         </div>
