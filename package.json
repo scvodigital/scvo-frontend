@@ -14,7 +14,8 @@
     "serve-f": "cd ./functions && npm run build && cd ../ && devmode=true firebase serve -p 9000 --only functions",
     "deploy": "cd ./functions && npm run build && npm run deploy-db && cd ../ && npm run build && firebase deploy --only functions,hosting",
     "deploy-h": "npm run build && firebase deploy --only hosting",
-    "deploy-f": "cd ./functions && npm run build && cd ../ && firebase deploy --only functions"
+    "deploy-f": "cd ./functions && npm run build && cd ../ && firebase deploy --only functions",
+    "postmerge": "git diff-tree -r --name-only --no-commit-id ORIG_HEAD HEAD | grep --quiet 'yarn.lock' && eval 'yarn; cd functions; yarn; cd ..'"
   },
   "private": true,
   "dependencies": {
@@ -51,6 +52,7 @@
     "@types/jasminewd2": "~2.0.2",
     "@types/node": "~6.0.60",
     "codelyzer": "~3.2.0",
+    "husky": "^0.14.3",
     "jasmine-core": "~2.6.2",
     "jasmine-spec-reporter": "~4.1.0",
     "karma": "~1.7.0",
