@@ -188,12 +188,76 @@
             "apiVersion": "5.6"
         }
     },
+    "trustee_search": {
+        "pattern": "/projects-campaigns/terrific-trustees/search",
+        "templates": {
+            "default": `{:templates/trustee-search.hbs}`
+        },
+        "headTagsTemplate": `{:templates/page-head-tags.hbs}`,
+        "primarySearchTemplate": {
+            "index": "web-content-production",
+            "type": "goodmoves-job,milo-volunteering-opportunity",
+            "template": `{:queries/trustee-search.json}`
+        },
+        "supplimentarySearchTemplates": {
+            "page": {
+                "index": "web-content-production",
+                "type": "scvo-cms-page",
+                "template": `{:queries/page.json}`
+            },
+            "types": {
+                "index": "web-content-production",
+                "type": "goodmoves-job,milo-volunteering-opportunity",
+                "template": `{:queries/trustee-aggs.json}`
+            },
+            "splash": {
+                "index": "web-content-production",
+                "type": "scvo-cms-media",
+                "template": `{:queries/event-splash.json}`
+            }
+        },
+        "elasticsearchConfig": {
+            "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
+            "apiVersion": "5.6"
+        }
+    },
+    "trustee": {
+        "pattern": "/projects-campaigns/terrific-trustees/search/:project_slug",
+        "templates": {
+            "default": `{:templates/trustee.hbs}`
+        },
+        "headTagsTemplate": `{:templates/page-head-tags.hbs}`,
+        "primarySearchTemplate": {
+            "index": "web-content-production",
+            "type": "goodmoves-job,milo-volunteering-opportunity",
+            "template": `{:queries/trustee.json}`
+        },
+        "supplimentarySearchTemplates": {
+            "types": {
+                "index": "web-content-production",
+                "type": "goodmoves-job,milo-volunteering-opportunity",
+                "template": `{:queries/trustee-aggs.json}`
+            },
+            "splash": {
+                "index": "web-content-production",
+                "type": "scvo-cms-media",
+                "template": `{:queries/event-splash.json}`
+            }
+        },
+        "elasticsearchConfig": {
+            "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
+            "apiVersion": "5.6"
+        }
+    },
     "event_search": {
         "pattern": "/events",
         "templates": {
             "default": `{:templates/event-search.hbs}`
         },
         "headTagsTemplate": `{:templates/event-search-head-tags.hbs}`,
+        "defaultParams": {
+            "pageSize": 12
+        },
         "primarySearchTemplate": {
             "index": "web-content-production",
             "type": "scvo-event",

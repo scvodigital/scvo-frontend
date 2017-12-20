@@ -1,7 +1,7 @@
 {{#if primaryResponse.hits.hits.[0]}}
     {{#with primaryResponse.hits.hits.[0]._source}}
-        <title>SCVO – Posts by {{{primaryResponse.hits.hits.[0]._source.name_full}}}</title>
-        <meta property="og:title" content="SCVO – Posts by {{{primaryResponse.hits.hits.[0]._source.name_full}}}" data-dynamic="true">
+        <title>SCVO – Posts by {{{name_full}}}</title>
+        <meta property="og:title" content="SCVO – Posts by {{{name_full}}}" data-dynamic="true">
 
         {{#ifAny og_image ../og_image}}
             <meta property="og:image" content="{{default og_image ../og_image}}" data-dynamic="true">

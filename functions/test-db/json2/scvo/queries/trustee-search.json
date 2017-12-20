@@ -1,0 +1,34 @@
+{
+    "size": 10,
+    "from": {{multiply (subtract (default query.page 1) 1) 10}},
+    "_source": [
+        "rendered.trustee_search_result"
+    ],
+    "query": {
+        "bool": {
+            {{#if query.q}}
+            "must": [
+                {
+                    "query_string": {
+                        "query": "{{query.q}}",
+                        "default_operator": "AND",
+                        "analyzer": "snowball"
+                    }
+                }
+            ],
+            {{/if}}
+            "should": [
+                {
+                    "terms": {
+                        "work_type-slugs": ["trustee-and-committee-roles"]
+                    }
+                },
+                {
+                    "terms": {
+                        "roles_slugs": ["board-membershiptrustee"]
+                    }
+                }
+            ]
+        }
+    }
+}
