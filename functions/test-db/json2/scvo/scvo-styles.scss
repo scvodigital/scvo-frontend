@@ -147,6 +147,9 @@ primary-dark: #251032
 
     a,
     .post-info .post-info-categories .fa,
+    .post-info .post-info-categories .fas,
+    .post-info .post-info-categories .fab,
+    .post-info .post-info-categories .far,
     .post-info .post-info-categories .fal,
     #share-menu-button,
     .mdc-simple-menu .mdc-list-item,
@@ -523,6 +526,9 @@ a:hover {
 .mdc-button:not(.mdc-ripple-upgraded):hover:before {
     opacity: 0.1;
 }
+.pull-right {
+    float: right;
+}
 
 .home {
     .featured-content {
@@ -597,7 +603,7 @@ a:hover {
         background-position: center center;
         height: auto;
         padding: $spacing-unit 0 $spacing-unit*3.25;
-        h2, h3, a, .fa, .fal, .fab, .fas {
+        h2, h3, a, .fa, .fal, .fab, .fas, .far {
             color: white;
         }
         h2 {
@@ -1806,15 +1812,17 @@ p:last-child {
 .post-content {
     a[href^="http://"]::after,
     a[href^="https://"]::after {
-        font-family: 'FontAwesome';
+        font-family: 'Font Awesome\ 5 Pro';
         content: "\f08e";
-        top: 0.12rem;
-        margin-left: 0.3rem;
-        text-decoration: none;
-        display: inline-block;
-        position: relative;
-        vertical-align: bottom;
         font-weight: 400;
+        margin-left: 0.3rem;
+        -moz-osx-font-smoothing: grayscale;
+        -webkit-font-smoothing: antialiased;
+        display: inline-block;
+        font-style: normal;
+        font-variant: normal;
+        text-rendering: auto;
+        line-height: 1;
     }
     a[href^="http://goodhq.org"]::after,
     a[href^="https://goodhq.org"]::after,
@@ -1852,18 +1860,18 @@ p:last-child {
 //     line-height: 0.75rem;
 //     vertical-align: -15%;
 // }
-// .fa-2x {
-//     font-size: 2rem;
-// }
-// .fa-3x {
-//     font-size: 3rem;
-// }
-// .fa-4x {
-//     font-size: 4rem;
-// }
-// .fa-5x {
-//     font-size: 5rem;
-// }
+.fa-2x {
+    font-size: 2rem;
+}
+.fa-3x {
+    font-size: 3rem;
+}
+.fa-4x {
+    font-size: 4rem;
+}
+.fa-5x {
+    font-size: 5rem;
+}
 
 .inline-icon {
     vertical-align: middle;
@@ -1925,6 +1933,19 @@ footer {
         margin-bottom: 0;
         p {
             margin: 0 0 0.8rem;
+        }
+    }
+    .fa-ul,
+    .mdc-list {
+        font-size: 1.1rem;
+    }
+    .fa-ul {
+        margin: 0 0 0 1.5rem;
+        li a {
+            text-decoration: none;
+        }
+        li a:hover {
+            text-decoration: underline;
         }
     }
     .mdc-list {
