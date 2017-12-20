@@ -50,7 +50,7 @@
         "headTagsTemplate": `{:templates/search-head-tags.hbs}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
-            "type": "scvo-cms-page,scvo-cms-post,scvo-member,digital-charter-signatory,goodmoves-job,funding-scotland-fund,goodhq-organisation,scvo-document-evidence,scvo-event,scvo-grant-charter,oscr-charity,tfn-news-post,tfn-blog-post,tfn-poll,tfn-event",
+            "type": "scvo-cms-page,scvo-cms-post,scvo-member,digital-charter-signatory,goodmoves-legacy,funding-scotland-fund,goodhq-organisation,scvo-document-evidence,scvo-event,scvo-grant-charter,oscr-charity,tfn-news-post,tfn-blog-post,tfn-poll,tfn-event",
             "template": `{:queries/search-all.json}`
         },
         "elasticsearchConfig": {
@@ -196,7 +196,7 @@
         "headTagsTemplate": `{:templates/page-head-tags.hbs}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
-            "type": "goodmoves-job,milo-volunteering-opportunity",
+            "type": "goodmoves-legacy,milo-volunteering-opportunity",
             "template": `{:queries/trustee-search.json}`
         },
         "supplimentarySearchTemplates": {
@@ -207,7 +207,7 @@
             },
             "types": {
                 "index": "web-content-production",
-                "type": "goodmoves-job,milo-volunteering-opportunity",
+                "type": "goodmoves-legacy,milo-volunteering-opportunity",
                 "template": `{:queries/trustee-aggs.json}`
             },
             "splash": {
@@ -222,20 +222,20 @@
         }
     },
     "trustee": {
-        "pattern": "/projects-campaigns/terrific-trustees/search/:project_slug",
+        "pattern": "/projects-campaigns/terrific-trustees/search/:slug",
         "templates": {
             "default": `{:templates/trustee.hbs}`
         },
         "headTagsTemplate": `{:templates/page-head-tags.hbs}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
-            "type": "goodmoves-job,milo-volunteering-opportunity",
+            "type": "goodmoves-legacy,milo-volunteering-opportunity",
             "template": `{:queries/trustee.json}`
         },
         "supplimentarySearchTemplates": {
             "types": {
                 "index": "web-content-production",
-                "type": "goodmoves-job,milo-volunteering-opportunity",
+                "type": "goodmoves-legacy,milo-volunteering-opportunity",
                 "template": `{:queries/trustee-aggs.json}`
             },
             "splash": {
@@ -246,7 +246,8 @@
         },
         "elasticsearchConfig": {
             "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
-            "apiVersion": "5.6"
+            "apiVersion": "5.6",
+            "log": "debug"
         }
     },
     "event_search": {
@@ -509,7 +510,7 @@
         }
     },
     "post_briefings": {
-        "pattern": "/policy-research/briefings-consultation-responses",
+        "pattern": "/policy-research/briefings",
         "templates": {
             "default": `{:templates/post-category.hbs}`
         },
@@ -518,6 +519,29 @@
             "index": "web-content-production",
             "type": "scvo-cms-post",
             "template": `{:queries/post-briefings.json}`
+        },
+        "supplimentarySearchTemplates": {
+            "splash": {
+                "index": "web-content-production",
+                "type": "scvo-cms-media",
+                "template": `{:queries/post-splash.json}`
+            }
+        },
+        "elasticsearchConfig": {
+            "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
+            "apiVersion": "5.6"
+        }
+    },
+    "post_consultation_responses": {
+        "pattern": "/policy-research/consultation-responses",
+        "templates": {
+            "default": `{:templates/post-category.hbs}`
+        },
+        "headTagsTemplate": `{:templates/page-head-tags.hbs}`,
+        "primarySearchTemplate": {
+            "index": "web-content-production",
+            "type": "scvo-cms-post",
+            "template": `{:queries/post-consultation-responses.json}`
         },
         "supplimentarySearchTemplates": {
             "splash": {
@@ -891,10 +915,11 @@
     "page_full_width": {
         "pattern": {
             "setting_up_faq": "/setting-up-a-charity/frequently-asked-questions",
-            "digital_about": "/digital/about",
+            "bank_comparison": "/running-your-organisation/finance-business-management/bank-accounts/comparison",
             "services": "/services",
             "projects_campaigns": "/projects-campaigns",
-            "bank_comparison": "/running-your-organisation/finance-business-management/bank-accounts/comparison"
+            "policy_research": "/policy-research",
+            "digital_about": "/digital/about"
         },
         "templates": {
             "default": `{:templates/page-full-width.hbs}`

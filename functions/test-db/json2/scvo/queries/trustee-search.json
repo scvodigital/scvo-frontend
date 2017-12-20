@@ -17,18 +17,53 @@
                 }
             ],
             {{/if}}
+            "minimum_should_match": "1",
             "should": [
                 {
-                    "terms": {
-                        "work_type-slugs": ["trustee-and-committee-roles"]
+                    "bool": {
+                        "must": [
+                            {
+                                "term": {
+                                    "_type": {
+                                        "value" : "milo-volunteering-opportunity"
+                                    }
+                                }
+                            },
+                            {
+                                "terms": {
+                                    "work_type-slugs": ["trustee-and-committee-roles"]
+                                }
+                            }
+                        ]
                     }
                 },
                 {
-                    "terms": {
-                        "roles_slugs": ["board-membershiptrustee"]
+                    "bool": {
+                        "must": [
+                            {
+                                "term": {
+                                    "_type": {
+                                        "value" : "goodmoves-legacy"
+                                    }
+                                }
+                            },
+                            {
+                                "term": {
+                                    "vacancy_status": "vacancy-open"
+                                }
+                            },
+                            {
+                                "terms": {
+                                    "roles_slugs": ["board-membershiptrustee"]
+                                }
+                            }
+                        ]
                     }
                 }
             ]
         }
+    },
+    "sort": {
+        "available_from": "desc"
     }
 }
