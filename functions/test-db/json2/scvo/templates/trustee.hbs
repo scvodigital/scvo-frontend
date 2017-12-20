@@ -8,7 +8,7 @@
                     {{else}}
                     <h1 class="header-text">
                         <span class="header-text-banner">
-                            {{{primaryResponse.hits.hits.[0]._source.title}}}
+                            Trustee vacancy
                         </span>
                     </h1>
                     {{/if}}
@@ -22,13 +22,13 @@
             <li><a href="/projects-campaigns">Projects &amp; campaigns</a></li>
             <li><a href="/projects-campaigns/terrific-trustees">Terrific trustees</a></li>
             <li><a href="/projects-campaigns/terrific-trustees/search">Trustee vacancy search</a></li>
-            <li>{{{primaryResponse.hits.hits.[0]._source.title}}}</li>
+            <li>{{{primaryResponse.hits.hits.[0]._source.title}}} - {{{primaryResponse.hits.hits.[0]._source.organisation_name}}}</li>
         </ul>
         <div class="mdc-layout-grid">
             <div class="mdc-layout-grid__inner">
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 content trustee-content">
                     {{#with primaryResponse.hits.hits.[0]}}
-                    {{{_source.rendered.scvo_full}}}
+                    {{{_source.rendered.full}}}
                     {{/with}}
                 </div>
             </div>
