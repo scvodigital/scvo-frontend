@@ -26,7 +26,10 @@
         </ul>
         <div class="mdc-layout-grid">
             <div class="mdc-layout-grid__inner">
-                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 content trustee-content">
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3 sidebar trustee-sidebar">
+                    {{> trustee_search}}
+                </div>
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-9 content trustee-content">
                     {{#with primaryResponse.hits.hits.[0]}}
                     {{{_source.rendered.full}}}
                     {{/with}}
