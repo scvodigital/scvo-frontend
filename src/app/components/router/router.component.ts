@@ -70,6 +70,9 @@ export class RouterComponent implements OnInit {
 
         setTimeout(() => {
             mdc.autoInit();
+            if (typeof (<any>window).setupAutoSearchForms === 'function') {
+                (<any>window).setupAutoSearchForms();
+            }
         }, 500);
     }
 }

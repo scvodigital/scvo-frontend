@@ -16,7 +16,7 @@
     "deploy": "cd ./functions && npm run build && npm run deploy-db && cd ../ && npm run build && firebase deploy --only functions,hosting",
     "deploy-h": "npm run build && firebase deploy --only hosting",
     "deploy-f": "cd ./functions && npm run build && cd ../ && firebase deploy --only functions",
-    "postmerge": "npm -v; git diff-tree -r --name-only --no-commit-id ORIG_HEAD HEAD | grep --quiet 'yarn.lock' && eval 'npm run yarn'"
+    "postmerge": "git diff-tree -r --name-only --no-commit-id ORIG_HEAD HEAD | grep --quiet 'yarn.lock' && eval 'npm run yarn'"
   },
   "private": true,
   "dependencies": {
