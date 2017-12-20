@@ -20,7 +20,6 @@ export class RouterFormDirective {
     }
 
     submit(evt: Event): void {
-        console.log('FORM SUBMIT:', evt);
         var params = {};
         [].concat(...(<any>evt.srcElement).elements).forEach((child) => {
             var key = child.name || child.id;

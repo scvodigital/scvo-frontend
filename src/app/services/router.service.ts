@@ -30,7 +30,6 @@ export class RouterService {
         var routes = this.scvoContext.routes;
         var uid = this.cookieService.get('__session');
         if(uid){
-            console.log('GOT UID:', this.scvoContext.uaId, uid);
             this.scvoRouter = new ScvoRouter(this.scvoContext, this.scvoContext.uaId, uid, true);
         }else{
             this.scvoRouter = new ScvoRouter(this.scvoContext);
@@ -46,10 +45,8 @@ export class RouterService {
                 if(!this.loaded){
                     (<any>window).document.querySelector('router-outlet').innerHTML = '';
                     this.loaded = true;
-                    console.log('First load, router "loaded" set to true');
                     return;
                 }
-                console.log('Calling router.execute:', event.url);
                 this.scvoRouter.execute(event.url).then((routeMatch: RouteMatch) => {
                     // HACK: To allow Angular to take over the pre-rendered site
                     this.currentRoute = routeMatch;
@@ -76,11 +73,6 @@ export class RouterService {
                 var replaceString = `[routerLink]="'${url}'"`;
 
                 var query = parts.length > 1 ? querystring.parse(parts[1]) : {};
-//                if (multipleResults) {
-//                    var combined = {};
-//                    Object.assign(combined, paramsQuery, query);
-//                    query = combined;
-//                }
                 if (Object.keys(query).length > 0) {
                     var queryJson = JSON.stringify(query);
                     replaceString += ` [queryParams]='${queryJson}'`;
@@ -89,7 +81,6 @@ export class RouterService {
                 return replaceString;
             })
             .replace(/(\<\/?big\>)|(\<\/?small\>)/g, '');
-        //console.log('HTML:', html);
         return html;
     }
 }

@@ -52,23 +52,16 @@ window.share = function(where) {
 var autoSearchForms = document.querySelectorAll('form[data-auto-search="true"]');
 for (var x = 0; x < autoSearchForms.length; x++) {
     var searchForm = autoSearchForms[x];
+    var submitButton = document.createElement('button');
+    submitButton.setAttribute('type', 'submit');
+    submitButton.setAttribute('style', 'display:none');
+    searchForm.appendChild(submitButton);
 
-    var dropDowns = searchForm.querySelectorAll('select');
-    var checkboxes = searchForm.querySelectorAll('input[type="checkbox"]');
+    var changeTriggers = searchForm.querySelectorAll('select,input[type="checkbox"],input[type="radio"]');
 
-    for (var y = 0; y < dropDowns.length; y++) {
-        var dropDown = dropDowns[y];
-
-        dropDown.addEventListener('change', function() {
-            searchForm.submit();
-        });
-    }
-
-    for (var y = 0; y < checkboxes.length; y++) {
-        var checkboxes = checkboxes[y];
-
-        checkboxes.addEventListener('change', function() {
-            checkboxes.submit();
+    for (var y = 0; y < changeTriggers.length; y++) {
+        changeTriggers[y].addEventListener('change', function() {
+            submitButton.click();
         });
     }
 }
