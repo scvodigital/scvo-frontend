@@ -69,4 +69,4 @@ window.setupAutoSearchForms = function() {
         }
     }
 }
-window.setupAutoShareForms();
+window.setupAutoSearchForms();
