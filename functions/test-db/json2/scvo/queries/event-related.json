@@ -5,14 +5,21 @@
     ],
 	"query": {
         "bool": {
-            "must": {
-                "simple_query_string": {
-                    "query": "{{primaryResponse.hits.hits.[0]._source.title}} {{primaryResponse.hits.hits.[0]._source.type}} {{primaryResponse.hits.hits.[0]._source.trainer}}",
-                    "default_operator": "or",
-                    "fields": ["text_bag"],
-                    "analyzer": "snowball"
+            "must": [
+                {
+                    "simple_query_string": {
+                        "query": "{{primaryResponse.hits.hits.[0]._source.title}} {{primaryResponse.hits.hits.[0]._source.type}} {{primaryResponse.hits.hits.[0]._source.trainer}}",
+                        "default_operator": "or",
+                        "fields": ["text_bag"],
+                        "analyzer": "snowball"
+                    },
+                },
+                {
+                    "term": {
+                        "record_type": "Events Team"
+                    }
                 }
-            },
+            ],
             "should": [
                 {
                     "bool": {
