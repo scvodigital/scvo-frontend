@@ -1,0 +1,66 @@
+{
+    "size": 10,
+    "from": {{multiply (subtract (default query.page 1) 1) 10}},
+    "_source": [
+        "rendered.scvo_search_result"
+    ],
+    "query": {
+        "bool": {
+            "must": [
+                {{#if query.sector}}
+                {
+                    "term": {
+                        "sectors": "{{query.sector}}"
+                    }
+                },
+                {{/if}}
+                {{#if query.role}}
+                {
+                    "term": {
+                        "roles": "{{query.role}}"
+                    }
+                },
+                {{/if}}
+                {{#if query.status}}
+                {
+                    "term": {
+                        "status": "{{query.status}}"
+                    }
+                },
+                {{/if}}
+                {{#if query.q}}
+                {
+                    "query_string": {
+                        "query": "{{query.q}}",
+                        "default_operator": "AND",
+                        "analyzer": "snowball"
+                    }
+                },
+                {{/if}}
+                {
+                    "term": {
+                        "country_iso3": "GBR"
+                    }
+                },
+                {
+                    "term": {
+                        "vacancy_status": "vacancy-open"
+                    }
+                }
+            ],
+            "should": [
+                {
+                    "term": {
+                        "top_job": {
+                            "value": true,
+                            "boost": 100
+                        }
+                    }
+                }
+            ]
+        }
+    },
+    "sort": {
+        "_score": "desc"
+    }
+}
