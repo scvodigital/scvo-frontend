@@ -250,6 +250,43 @@
             "log": "debug"
         }
     },
+    "funding_updates_link_gen": {
+        "pattern": "/funding-updates-link-gen/",
+        "templates": {
+            "default": `{:templates/funding-updates-link-gen.hbs}`
+        },
+        "javascript": `{:javascript/funding-updates-link-gen.js}`,
+        "headTagsTemplate": `{:templates/funding-updates-head-tags.hbs}`,
+        "primarySearchTemplate": {
+            "index": "web-content-production",
+            "type": "funding-scotland-fund",
+            "template": `{:queries/none.json}`
+        },
+        "supplimentarySearchTemplates": { },
+        "elasticsearchConfig": {
+            "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
+            "apiVersion": "5.6",
+            "log": "trace"
+        }
+    },
+    "funding_updates": {
+        "pattern": "/funding-updates/:range",
+        "templates": {
+            "default": `{:templates/funding-updates.hbs}`
+        },
+        "headTagsTemplate": `{:templates/funding-updates-head-tags.hbs}`,
+        "primarySearchTemplate": {
+            "index": "web-content-production",
+            "type": "funding-scotland-fund",
+            "template": `{:queries/funding-updates.json}`
+        },
+        "supplimentarySearchTemplates": { },
+        "elasticsearchConfig": {
+            "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
+            "apiVersion": "5.6",
+            "log": "trace"
+        }
+    },
     "event_search": {
         "pattern": "/events",
         "templates": {
