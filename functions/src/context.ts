@@ -97,6 +97,7 @@ export class Context implements IContext {
                     var dataJson = JSON.stringify(templateData, null, 4);
                     dataJson = dataJson.replace(/\<\/script/ig, '</scr" + "ipt');
                     var tags = `
+                        ${routeMatch.headTags}
                         <script>
                             window.contextData = ${dataJson};
                         </script>
@@ -109,7 +110,6 @@ export class Context implements IContext {
                                 ${routeMatch.javascript}
                             });
                         </script>
-                        ${routeMatch.headTags}
                     `;
                     contextHtml = [contextHtml.slice(0, closingHeadTag), tags, contextHtml.slice(closingHeadTag)].join('');
                 }
