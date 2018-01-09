@@ -163,19 +163,34 @@ primary-dark: #251032
     }
     .mdc-button,
     .mdc-button--raised:not(:disabled) {
-        color: map-get($themeSelected, 'primary');
-        border-color: rgba(0, 0, 0, 0.1);
-        background-color: rgba(0, 0, 0, 0.1);
+        color: white;
+        border-color: map-get($themeSelected, 'primary');
+        background-color: map-get($themeSelected, 'primary');
     }
     .mdc-button:hover,
     .mdc-button--raised.mdc-button--active:not(:disabled),
     .mdc-button--raised:not(:disabled):hover {
         color: white;
         border-color: map-get($themeSelected, 'primary-dark');
-        background-color: map-get($themeSelected, 'primary');
+        background-color: map-get($themeSelected, 'primary-dark');
     }
     .mdc-button:hover {
         background-color: map-get($themeSelected, 'primary-dark') !important;
+    }
+    .menu-sidebar {
+        .mdc-button,
+        .mdc-button--raised:not(:disabled) {
+            color: map-get($themeSelected, 'primary');
+            border-color: rgba(0, 0, 0, 0.1);
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+        .mdc-button:hover,
+        .mdc-button--raised.mdc-button--active:not(:disabled),
+        .mdc-button--raised:not(:disabled):hover {
+            color: white;
+            border-color: map-get($themeSelected, 'primary-dark');
+            background-color: map-get($themeSelected, 'primary');
+        }
     }
     .splash-image {
         .mdc-button {
@@ -189,11 +204,11 @@ primary-dark: #251032
         }
     }
 
-    .mdc-button:after,
-    .mdc-button:before,
-    .mdc-theme--primary-alpha {
-        color: map-get($themeSelected, 'primary-alpha');
-    }
+    // .mdc-button:after,
+    // .mdc-button:before,
+    // .mdc-theme--primary-alpha {
+    //     color: map-get($themeSelected, 'primary-alpha');
+    // }
     .mdc-theme--primary-light {
         color: map-get($themeSelected, 'primary-light');
     }
@@ -212,6 +227,7 @@ primary-dark: #251032
         color: map-get($themeSelected, 'secondary-dark');
     }
     .support.support-organisation .mdc-card__media,
+    .support.support-organisation .mdc-card__primary,
     .section-projects .mdc-card__media,
     .section-campaigns .mdc-card__media,
     .post-info .post-info-categories .inline-list li a,
@@ -342,8 +358,10 @@ primary-dark: #251032
             color: map-get($themeDefault, 'primary') !important;
         }
     }
+    .running-your-organisation .footer-image,
     .setting-up-a-charity .footer-image {
         .mdc-button {
+            background-color: transparent !important;
             border-color: white !important;
             color: white !important;
         }
@@ -398,7 +416,6 @@ primary-dark: #251032
     @include theme-colours('projects');
 }
 .search-result.scvo-cms-post,
-.gist.scvo-cms-post,
 .related-posts,
 .post,
 .blogs,
@@ -434,6 +451,8 @@ primary-dark: #251032
 .events,
 .search-result.scvo-cms-page,
 .search-result.scvo-event,
+.gist.scvo-cms-post,
+.list.scvo-cms-post,
 .breadcrumbs,
 .page-content,
 .posts-page .page-sidebar,
@@ -622,6 +641,10 @@ a:hover {
                     border-radius: 50%;
                     padding: $spacing-unit*1.75;
                     box-shadow: 1px 2px 5rem rgba(255,255,255,0.15);
+                }
+                .fa-fw {
+                    height: 1.25em;
+                    line-height: 1.25em;
                 }
                 a:hover {
                     text-decoration: none;
@@ -852,7 +875,7 @@ a:hover {
                 height: $nav-height;
                 margin: 0;
                 .mdc-tab {
-                    color: rgba(255, 255, 255, 0.95);
+                    color: white !important;
                     font-size: 1rem;
                     min-height: $nav-height;
                     height: $nav-height;
@@ -932,6 +955,7 @@ a:hover {
     padding: 145px 0 $spacing-unit*2;
     margin: 0;
 }
+.running-your-organisation .mdc-toolbar-fixed-adjust,
 .setting-up-a-charity .mdc-toolbar-fixed-adjust,
 .home .mdc-toolbar-fixed-adjust {
     padding-bottom: 0;
@@ -1040,6 +1064,7 @@ a:hover {
     border-top: 1px solid rgba(0,0,0,.2);
 }
 
+.running-your-organisation,
 .setting-up-a-charity {
     .page-content .mdc-layout-grid {
         margin-top: $spacing-unit;
@@ -1061,6 +1086,15 @@ a:hover {
             font-weight: 800;
             padding-bottom: $spacing-unit;
         }
+    }
+}
+.running-your-organisation {
+    .footer-image {
+        background-image: linear-gradient(
+            rgba(173, 20, 87, 0.89),
+            rgba(173, 20, 87, 0.89)
+        ),
+        url('https://storage.googleapis.com/scvo-cms/21981/hayweight-new-940x470.jpg');
     }
 }
 .digital .callout-image {
@@ -1197,7 +1231,15 @@ a:hover {
 .digital.charter-fund.projects .page-info,
 .digital.cyber-resilience.projects .page-info,
 .projects-campaigns.terrific-trustees.search .page-info,
-.policy-research .scvo-cms-page-20027 .page-info,
+.scvo-cms-page-20027 .page-info,
+.scvo-cms-page-20043 .page-info,
+.scvo-cms-page-20042 .page-info,
+.scvo-cms-page-20114 .page-info,
+.scvo-cms-page-20003 .page-info,
+.scvo-cms-page-21421 .page-info,
+.scvo-cms-page-20090 .page-info,
+.scvo-cms-page-20035 .page-info,
+.scvo-cms-page-20034 .page-info,
 .blogs .page-sidebar .page-info,
 .policy-research.briefings-consultation-responses .mdc-card__actions,
 .policy-research.research .mdc-card__actions,
@@ -1273,7 +1315,17 @@ h1.mdc-typography--title {
 .support.support-sector {
     .mdc-card__media {
         h1 {
-            display: none;
+            display: block;
+            width: 100%;
+            height: 100%;
+            a {
+                display: block;
+                width: 100%;
+                height: 100%;
+                .hidden {
+                    display: none;
+                }
+            }
         }
     }
     .mdc-card__media {
@@ -1311,7 +1363,32 @@ h1.mdc-typography--title {
         padding-top: $spacing-unit;
     }
 }
+h1.support-organisation {
+    margin-top: $spacing-unit*3;
+}
 .support.support-organisation {
+    .mdc-card__primary {
+        margin-bottom: $spacing-unit;
+        .mdc-card__title {
+            padding-bottom: 0;
+            a {
+                display: block;
+                width: 100%;
+                height: 100%;
+                color: white;
+                .fa-fw {
+                    width: 1.55em;
+                    text-align: left;
+                    height: auto;
+                    line-height: 1em;
+                    vertical-align: middle;
+                }
+            }
+            a:hover {
+                text-decoration: none;
+            }
+        }
+    }
     .mdc-card__media {
         height: 128px;
         background-size: cover;
@@ -1504,12 +1581,12 @@ h1.mdc-typography--title {
     //     }
     // }
     .mdc-button {
-        background: white;
+        // background: white;
         border-width: $spacing-unit/8;
         border-style: solid;
         // margin-top: $spacing-unit;
         text-transform: none;
-        background: transparent;
+        // background: transparent;
     }
     .scvo-cms-page-20114 .mdc-button {
         margin-top: 0;
@@ -1755,7 +1832,7 @@ h1,
 h2,
 h3,
 h4 {
-    margin-bottom: $spacing-unit/4;
+    margin-bottom: $spacing-unit/2;
     font-family: "Montserrat", "Open Sans", Helvetica, Arial, sans-serif;
     font-weight: 700;
     strong {
@@ -1763,7 +1840,7 @@ h4 {
     }
 }
 p {
-    margin: 0 0 $spacing-unit/2;
+    margin: 0 0 $spacing-unit;
 }
 p:last-child {
     margin-bottom: 0;

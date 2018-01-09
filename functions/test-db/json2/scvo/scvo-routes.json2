@@ -700,7 +700,7 @@
     "page_digital": {
         "pattern": "/digital",
         "templates": {
-            "default": `{:templates/digital.hbs}`
+            "default": `{:templates/page-digital.hbs}`
         },
         "headTagsTemplate": `{:templates/page-head-tags.hbs}`,
         "primarySearchTemplate": {
@@ -733,7 +733,7 @@
     "page_policy": {
         "pattern": "/policy-research",
         "templates": {
-            "default": `{:templates/policy.hbs}`
+            "default": `{:templates/page-policy.hbs}`
         },
         "headTagsTemplate": `{:templates/page-head-tags.hbs}`,
         "primarySearchTemplate": {
@@ -809,7 +809,7 @@
             "work": "/about/work-with-us"
         },
         "templates": {
-            "default": `{:templates/about.hbs}`
+            "default": `{:templates/page-about.hbs}`
         },
         "headTagsTemplate": `{:templates/page-head-tags.hbs}`,
         "primarySearchTemplate": {
@@ -922,7 +922,7 @@
             "faqs": "/credit-union/faqs"
         },
         "templates": {
-            "default": `{:templates/credit-union.hbs}`
+            "default": `{:templates/page-credit-union.hbs}`
         },
         "headTagsTemplate": `{:templates/page-head-tags.hbs}`,
         "primarySearchTemplate": {
@@ -947,7 +947,7 @@
             "index": "/credit-union/loan-calculator"
         },
         "templates": {
-            "default": `{:templates/credit-union-loan-calculator.hbs}`
+            "default": `{:templates/page-credit-union-loan-calculator.hbs}`
         },
         "headTagsTemplate": `{:templates/page-head-tags.hbs}`,
         "javascript": `{:javascript/credit-union-loan-calculator.js}`,
@@ -974,32 +974,7 @@
             "section": "/services/membership/:path"
         },
         "templates": {
-            "default": `{:templates/membership.hbs}`
-        },
-        "headTagsTemplate": `{:templates/page-head-tags.hbs}`,
-        "primarySearchTemplate": {
-            "index": "web-content-production",
-            "type": "scvo-cms-page",
-            "template": `{:queries/page.json}`
-        },
-        "supplimentarySearchTemplates": {
-            "splash": {
-                "index": "web-content-production",
-                "type": "scvo-cms-media",
-                "template": `{:queries/page-splash.json}`
-            }
-        },
-        "elasticsearchConfig": {
-            "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
-            "apiVersion": "5.6"
-        }
-    },
-    "page_funding_guide": {
-        "pattern": {
-            "section": "/running-your-organisation/funding/step-by-step-guide/:path"
-        },
-        "templates": {
-            "default": `{:templates/funding-guide.hbs}`
+            "default": `{:templates/page-membership.hbs}`
         },
         "headTagsTemplate": `{:templates/page-head-tags.hbs}`,
         "primarySearchTemplate": {
@@ -1054,7 +1029,7 @@
             "section": "/setting-up-a-charity/*path"
         },
         "templates": {
-            "default": `{:templates/setting-up-a-charity.hbs}`
+            "default": `{:templates/page-setting-up.hbs}`
         },
         "headTagsTemplate": `{:templates/page-head-tags.hbs}`,
         "primarySearchTemplate": {
@@ -1063,6 +1038,161 @@
             "template": `{:queries/page.json}`
         },
         "supplimentarySearchTemplates": {
+            "splash": {
+                "index": "web-content-production",
+                "type": "scvo-cms-media",
+                "template": `{:queries/page-splash.json}`
+            }
+        },
+        "elasticsearchConfig": {
+            "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
+            "apiVersion": "5.6"
+        }
+    },
+    "page_running_funding_guide": {
+        "pattern": {
+            "index": "/running-your-organisation/funding/step-by-step-guide",
+            "section": "/running-your-organisation/funding/step-by-step-guide/:path"
+        },
+        "templates": {
+            "default": `{:templates/page-running-funding-guide.hbs}`
+        },
+        "headTagsTemplate": `{:templates/page-head-tags.hbs}`,
+        "primarySearchTemplate": {
+            "index": "web-content-production",
+            "type": "scvo-cms-page",
+            "template": `{:queries/page.json}`
+        },
+        "supplimentarySearchTemplates": {
+            "related_posts": {
+                "index": "web-content-production",
+                "type": "scvo-cms-post",
+                "template": `{:queries/page-posts.json}`
+            },
+            "splash": {
+                "index": "web-content-production",
+                "type": "scvo-cms-media",
+                "template": `{:queries/page-splash.json}`
+            }
+        },
+        "elasticsearchConfig": {
+            "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
+            "apiVersion": "5.6"
+        }
+    },
+    "page_running_funding": {
+        "pattern": {
+            "index": "/running-your-organisation/funding",
+            "section": "/running-your-organisation/funding/:path"
+        },
+        "templates": {
+            "default": `{:templates/page-running-funding.hbs}`
+        },
+        "headTagsTemplate": `{:templates/page-head-tags.hbs}`,
+        "primarySearchTemplate": {
+            "index": "web-content-production",
+            "type": "scvo-cms-page",
+            "template": `{:queries/page.json}`
+        },
+        "supplimentarySearchTemplates": {
+            "related_posts": {
+                "index": "web-content-production",
+                "type": "scvo-cms-post",
+                "template": `{:queries/page-posts.json}`
+            },
+            "splash": {
+                "index": "web-content-production",
+                "type": "scvo-cms-media",
+                "template": `{:queries/page-splash.json}`
+            }
+        },
+        "elasticsearchConfig": {
+            "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
+            "apiVersion": "5.6"
+        }
+    },
+    "page_running_business_planning": {
+        "pattern": {
+            "index": "/running-your-organisation/business-planning",
+            "section": "/running-your-organisation/business-planning/*path"
+        },
+        "templates": {
+            "default": `{:templates/page-running-business-planning.hbs}`
+        },
+        "headTagsTemplate": `{:templates/page-head-tags.hbs}`,
+        "primarySearchTemplate": {
+            "index": "web-content-production",
+            "type": "scvo-cms-page",
+            "template": `{:queries/page.json}`
+        },
+        "supplimentarySearchTemplates": {
+            "related_posts": {
+                "index": "web-content-production",
+                "type": "scvo-cms-post",
+                "template": `{:queries/page-posts.json}`
+            },
+            "splash": {
+                "index": "web-content-production",
+                "type": "scvo-cms-media",
+                "template": `{:queries/page-splash.json}`
+            }
+        },
+        "elasticsearchConfig": {
+            "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
+            "apiVersion": "5.6"
+        }
+    },
+    "page_running_financial_responsibilities": {
+        "pattern": {
+            "index": "/running-your-organisation/finance-business-management",
+            "section": "/running-your-organisation/finance-business-management/*path"
+        },
+        "templates": {
+            "default": `{:templates/page-running-financial-responsibilities.hbs}`
+        },
+        "headTagsTemplate": `{:templates/page-head-tags.hbs}`,
+        "primarySearchTemplate": {
+            "index": "web-content-production",
+            "type": "scvo-cms-page",
+            "template": `{:queries/page.json}`
+        },
+        "supplimentarySearchTemplates": {
+            "related_posts": {
+                "index": "web-content-production",
+                "type": "scvo-cms-post",
+                "template": `{:queries/page-posts.json}`
+            },
+            "splash": {
+                "index": "web-content-production",
+                "type": "scvo-cms-media",
+                "template": `{:queries/page-splash.json}`
+            }
+        },
+        "elasticsearchConfig": {
+            "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
+            "apiVersion": "5.6"
+        }
+    },
+    "page_running_your_organisation": {
+        "pattern": {
+            "index": "/running-your-organisation",
+            "section": "/running-your-organisation/*path"
+        },
+        "templates": {
+            "default": `{:templates/page-running.hbs}`
+        },
+        "headTagsTemplate": `{:templates/page-head-tags.hbs}`,
+        "primarySearchTemplate": {
+            "index": "web-content-production",
+            "type": "scvo-cms-page",
+            "template": `{:queries/page.json}`
+        },
+        "supplimentarySearchTemplates": {
+            "related_posts": {
+                "index": "web-content-production",
+                "type": "scvo-cms-post",
+                "template": `{:queries/page-posts.json}`
+            },
             "splash": {
                 "index": "web-content-production",
                 "type": "scvo-cms-media",
