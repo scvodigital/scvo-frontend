@@ -1,0 +1,8 @@
+<nav class="menu-sidebar" id="setting-up-menu">
+    {{#each context.menus.setting-up}}
+    <a class="mdc-button mdc-button--raised{{#if match}} mdc-button--active{{/if}}" href="{{path}}">{{{label}}}</a>
+    {{#each this.children}}
+    <a class="mdc-button mdc-button--raised{{#if match}} mdc-button--active{{/if}}" href="{{path}}">{{{label}}}</a>
+    {{/each}}
+    {{/each}}
+</nav>
