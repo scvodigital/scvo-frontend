@@ -49,19 +49,24 @@ window.share = function(where) {
     var shareWindow = window.open(shareUrl, 'share-window', 'height=' + shareHeight + ',width=' + shareWidth + ',location=0,menubar=0,status=0,resizable=0,toolbar=0');
 }
 
-var autoSearchForms = document.querySelectorAll('form[data-auto-search="true"]');
-for (var x = 0; x < autoSearchForms.length; x++) {
-    var searchForm = autoSearchForms[x];
-    var submitButton = document.createElement('button');
-    submitButton.setAttribute('type', 'submit');
-    submitButton.setAttribute('style', 'display:none');
-    searchForm.appendChild(submitButton);
+window.setupAutoSearchForms = function() {
+    var autoSearchForms = document.querySelectorAll('form[data-auto-search="true"]');
+    console.log('setupAutoSearchForms()', autoSearchForms);
+    
+    for (var x = 0; x < autoSearchForms.length; x++) {
+        var searchForm = autoSearchForms[x];
+        var submitButton = document.createElement('button');
+        submitButton.setAttribute('type', 'submit');
+        submitButton.setAttribute('style', 'display:none');
+        searchForm.appendChild(submitButton);
 
-    var changeTriggers = searchForm.querySelectorAll('select,input[type="checkbox"],input[type="radio"]');
+        var changeTriggers = searchForm.querySelectorAll('select,input[type="checkbox"],input[type="radio"]');
 
-    for (var y = 0; y < changeTriggers.length; y++) {
-        changeTriggers[y].addEventListener('change', function() {
-            submitButton.click();
-        });
+        for (var y = 0; y < changeTriggers.length; y++) {
+            changeTriggers[y].addEventListener('change', function() {
+                submitButton.click();
+            });
+        }
     }
 }
+window.setupAutoSearchForms();

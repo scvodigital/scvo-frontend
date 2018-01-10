@@ -3,19 +3,38 @@
     "_source": false,
     "query": {
         "bool": {
-            "must": {
-                "range" : {
-                    "date_start" : {
-                        "gte" : "now/d"
+            "must": [
+                {
+                    "range" : {
+                        "date_start" : {
+                            "gte" : "now/d"
+                        }
+                    }
+                },
+                {
+                    "term": {
+                        "record_type": "Events Team"
                     }
                 }
-            }
+            ]
         }
     },
     "aggs": {
         "types": {
             "terms": {
                 "field": "course_type",
+                "size": 10000
+            }
+        },
+        "months": {
+            "terms": {
+                "field": "month",
+                "size": 10000
+            }
+        },
+        "locations": {
+            "terms": {
+                "field": "city",
                 "size": 10000
             }
         }

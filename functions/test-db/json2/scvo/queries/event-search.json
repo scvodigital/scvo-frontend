@@ -28,6 +28,20 @@
                     }
                 },
                 {{/if}}
+                {{#if query.month}}
+                {
+                    "term": {
+                        "month": "{{query.month}}"
+                    }
+                },
+                {{/if}}
+                {{#if query.location}}
+                {
+                    "term": {
+                        "city": "{{query.location}}"
+                    }
+                },
+                {{/if}}
                 {{#if query.q}}
                 {
                     "query_string": {
@@ -42,6 +56,11 @@
                         "date_start" : {
                             "gte" : "now/d"
                         }
+                    }
+                },
+                {
+                    "term": {
+                        "record_type": "Events Team"
                     }
                 }
             ]

@@ -25,25 +25,16 @@
         </ul>
         <div class="mdc-layout-grid">
             <div class="mdc-layout-grid__inner">
-                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 content trustee-content">
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3 sidebar trustee-sidebar">
+                    {{> trustee_search}}
+
+                    <hr />
+
                     {{#with supplimentaryResponses.page.hits.hits.[0]._source}}
                     {{{rendered.full}}}
                     {{/with}}
-
-                    <hr />
-
-                    <form [searchroute]="'trustee_search'" data-auto-search="true">
-                        <div class="mdc-textfield mdc-textfield--upgraded">
-                            <input type="text" class="mdc-textfield__input" name="q" id="trustee-keywords" value="{{params.query.q}}" placeholder="Search query">
-                            <div class="mdc-textfield__bottom-line"></div>
-                        </div>
-                        <button class="mdc-button mdc-button--raised" type="submit">
-                            Search
-                        </button>
-                    </form>
-
-                    <hr />
-
+                </div>
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-9 content trustee-content">
                     {{#each primaryResponse.hits.hits}}
                     {{{_source.rendered.trustee_search_result}}}
                     {{/each}}

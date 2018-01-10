@@ -1,4 +1,4 @@
-window.drawerEl = document.querySelector('.mdc-temporary-drawer');
+window.drawerEl = document.querySelector('.mdc-drawer--temporary');
 window.drawer = mdc.drawer.MDCTemporaryDrawer.attachTo(drawerEl);
 document.querySelector('#menu_button').addEventListener('click', function() {
     window.drawer.open = true;

@@ -24,42 +24,30 @@
         {{> breadcrumbs}}
         <div class="mdc-layout-grid">
             <div class="mdc-layout-grid__inner">
-                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-8 content page-content">
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-9 content page-content">
                     {{#with primaryResponse.hits.hits.[0]._source}}
                     {{{rendered.full}}}
                     {{/with}}
                 </div>
-                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 sidebar page-sidebar">
-                    {{#compare supplimentaryResponses.related_posts.hits.total ">" 0}}
-                    <div class="related-posts">
-                        <h3 class="blogs">Related posts</h3>
-                        <ul class="v-margin supplimentary-list">
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3 sidebar page-sidebar">
+                    {{> menu_running}}
+                </div>
+                {{#compare supplimentaryResponses.related_posts.hits.total ">" 0}}
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 related page-related">
+                    <h3 class="blogs">Related posts</h3>
+                    <div class="mdc-layout-grid">
+                        <div class="mdc-layout-grid__inner">
                             {{#each supplimentaryResponses.related_posts.hits.hits}}
-                            {{{_source.rendered.sidebar_mini}}}
+                            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4">
+                                {{{_source.rendered.gist}}}
+                            </div>
                             {{/each}}
-                        </ul>
-                        <a class="v-margin mdc-button mdc-button--raised" href="/post/categories/{{primaryResponse.hits.hits.[0]._source.categories_slug.[0]}}">Read more</a>
+                        </div>
                     </div>
-                    {{/compare}}
                 </div>
+                {{/compare}}
             </div>
         </div>
     </div>
-    <div class="footer-image faqs">
-        <div class="container-fluid">
-            <div class="mdc-layout-grid">
-                <div class="mdc-layout-grid__inner">
-                    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
-                        <h2>Frequently asked questions</h2>
-                        <p>What is a SCIO?</p>
-                        <p>Do I need to be a charity to fundraise?</p>
-                        <p>Can we pay the trustees of our charity?</p>
-                        <p>What is an honorarium?</p>
-                        <p>How long does it take to set up a charity?</p>
-                        <a href="/setting-up-a-charity/frequently-asked-questions" class="mdc-button mdc-button--raised">See all FAQs</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    {{> footer_join_our_hub}}
 </div>

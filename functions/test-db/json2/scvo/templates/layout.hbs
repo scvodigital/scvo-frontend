@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en">
-<head>
+<head prefix="og: http://ogp.me/ns#">
     <meta charset="utf-8">
     <base href="/">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -23,6 +23,7 @@
     <meta name="theme-color" content="#00838f">
     <link rel="search" type="application/opensearchdescription+xml" title="SCVO" href="/assets/opensearch.xml" />
     <link type="text/css" rel="stylesheet" href="/assets/css/material-components-web.min.css">
+    <link type="text/css" rel="stylesheet" href="/assets/fonts/fontawesome/css/fontawesome-all.min.css">
     <style type="text/css">
     {{{this.css}}}
     </style>
@@ -41,8 +42,8 @@
                             </span>
                         </section>
                         <section class="mdc-toolbar__section mdc-toolbar__section--align-end toolbar-search">
-                            <nav id="upper-tab-bar" class="mdc-tab-bar" [menu]="'upper'" [menulinkselector]="''" [menulabelselector]="'span.mdc-tab--label'" [menuactiveclass]="'mdc-tab--active'">
-                                {{#each menus.upper}}
+                            <nav id="upper-tab-bar" class="mdc-tab-bar" [menu]="'main-upper'" [menulinkselector]="''" [menulabelselector]="'span.mdc-tab--label'" [menuactiveclass]="'mdc-tab--active'">
+                                {{#each menus.main-upper}}
                                 <a class="mdc-tab{{#if match}} mdc-tab--active{{/if}}" href="{{path}}"><span class="mdc-tab--label">{{{label}}}</span></a>
                                 {{/each}}
                             </nav>
@@ -109,45 +110,69 @@
                     <div class="container-fluid">
                         <div class="mdc-layout-grid">
                             <div class="mdc-layout-grid__inner">
-                                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-phone mdc-layout-grid__cell--span-5-tablet mdc-layout-grid__cell--span-7-desktop ">
-                                    <a href="/" class="brand-logo" title="Scottish Council for Voluntary Organisations">
-                                        <img src="/assets/images/scvo-logo.png" />
-                                    </a>
-                                    <p>The <strong>Scottish Council for Voluntary Organisations</strong> is the membership organisation for Scotland's charities, voluntary organisations and social enterprises.</p>
+                                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-phone mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-3-desktop">
+                                    <h3>Contact</h3>
+                                    <ul class="fa-ul">
+                                        <li>
+                                            <span class="fa-li"><span class="fas fa-envelope-square"></span></span>
+                                            <a href="mailto:enquiries@scvo.org.uk">enquiries@scvo.org.uk</a>
+                                        </li>
+                                        <li>
+                                            <span class="fa-li"><span class="fas fa-phone-square"></span></span>
+                                            <a href="tel:+441314748000">0131 474 8000</a>
+                                        </li>
+                                    </ul>
+                                    <p>
+                                        Information service helpline
+                                    </p>
+                                    <ul class="fa-ul">
+                                        <li>
+                                            <span class="fa-li"><span class="fas fa-phone-square"></span></span>
+                                            <a href="tel:+448001690022">0800 169 0022</a>
+                                        </li>
+                                    </ul>
+                                    <ul class="mdc-list">
+                                        <li class="mdc-list-item"><a href="/services/membership">Become a member</a></li>
+                                    </ul>
                                 </div>
-                                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-phone mdc-layout-grid__cell--span-1-tablet mdc-layout-grid__cell--span-1-desktop">
-                                    &nbsp;
+                                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-phone mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-3-desktop">
+                                    <h3>Social</h3>
+                                    <ul class="fa-ul">
+                                        <li>
+                                            <span class="fa-li"><span class="fab fa-twitter-square"></span></span>
+                                            <a href="https://twitter.com/scvotweet">Twitter</a>
+                                        </li>
+                                        <li>
+                                            <span class="fa-li"><span class="fab fa-facebook-square"></span></span>
+                                            <a href="https://www.facebook.com/SCVO1939">Facebook</a>
+                                        </li>
+                                        <li>
+                                            <span class="fa-li"><span class="fas fa-heart"></span></span>
+                                            <a href="https://goodhq.org/scvo">Good HQ</a>
+                                        </li>
+                                        <li>
+                                            <span class="fa-li"><span class="fab fa-youtube"></span></span>
+                                            <a href="https://www.youtube.com/user/SCVOtv">YouTube</a>
+                                        </li>
+                                        <li>
+                                            <span class="fa-li"><span class="fab fa-linkedin"></span></span>
+                                            <a href="https://www.linkedin.com/company/scvo">LinkedIn</a>
+                                        </li>
+                                    </ul>
                                 </div>
-                                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-phone mdc-layout-grid__cell--span-3-tablet mdc-layout-grid__cell--span-2-desktop">
+                                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-phone mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-3-desktop">
+                                    <h3>Help with our site</h3>
                                     <ul class="mdc-list">
                                         {{#each menus.footer}}
                                         <li class="mdc-list-item"><a href="{{path}}">{{{label}}}</a></li>
                                         {{/each}}
                                     </ul>
                                 </div>
-                                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-phone mdc-layout-grid__cell--span-3-tablet mdc-layout-grid__cell--span-2-desktop">
-                                    <ul class="mdc-list">
-                                        <li class="mdc-list-item">
-                                            <a href="mailto:enquiries@scvo.org.uk">
-                                                <span class="fa fa-envelope"></span> enquiries@scvo.org.uk
-                                            </a>
-                                        </li>
-                                        <li class="mdc-list-item">
-                                            <a href="tel:+441314748000">
-                                                <span class="fa fa-phone-square"></span> 0131 474 8000
-                                            </a>
-                                        </li>
-                                        <li class="mdc-list-item">
-                                            <a href="https://twitter.com/scvotweet">
-                                                <span class="fa fa-twitter-square"></span> Twitter
-                                            </a>
-                                        </li>
-                                        <li class="mdc-list-item">
-                                            <a href="https://www.facebook.com/SCVO1939">
-                                                <span class="fa fa-facebook-square"></span> Facebook
-                                            </a>
-                                        </li>
-                                    </ul>
+                                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-phone mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-3-desktop">
+                                    <a href="/" class="brand-logo" title="Scottish Council for Voluntary Organisations">
+                                        <img src="/assets/images/scvo-logo.png" />
+                                    </a>
+                                    <p>The <strong>Scottish Council for Voluntary Organisations</strong> is the membership organisation for Scotland's charities, voluntary organisations and social enterprises.</p>
                                 </div>
                             </div>
                         </div>

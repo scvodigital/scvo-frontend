@@ -1,0 +1,28 @@
+{ 
+	"size": 80, 
+    "_source": [
+        "rendered.search_result"
+    ],
+	"sort": { 
+		"lastImportantActivity": "desc" 
+	}, 
+	"query": {
+	    "bool": {
+	        "must": [
+	            {
+	                "range": {
+	                    "lastImportantActivity": {
+	                        "gte": "{{firstItem (split (atob range) '-')}}",
+	                        "lte": "{{lastItem (split (atob range) '-')}}"
+	                    }
+	                }
+	            },
+	            {
+	                "terms": {
+	                    "fundStatus": [ "Open" ]
+	                }
+	            }
+	        ]
+	    }
+	}
+}

@@ -35,10 +35,34 @@
                     </div>
                     <div class="mdc-layout-grid__cell">
                         <div class="mdc-form-field">
-                            <select class="mdc-select" role="listbox" id="events-type" name="course_type">
+                            <select class="mdc-select" role="listbox" id="events-course_type" name="course_type">
                                 <option value="" {{#if params.query.course_type}}{{else}}selected{{/if}}>Select event type</option>
                                 {{#each supplimentaryResponses.types.aggregations.types.buckets}}
-                                <option value="{{key}}" {{#compare ../params.query.course_type "===" key}}selected{{/compare}}>{{key}} ({{doc_count}})</option>
+                                <option value="{{key}}" {{#compare ../params.query.course_type "===" key}}selected{{/compare}}>{{key}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="mdc-layout-grid__cell">
+                        <div class="mdc-form-field">
+                            <select class="mdc-select" role="listbox" id="events-month" name="month">
+                                <option value="" {{#if params.query.month}}{{else}}selected{{/if}}>Any month</option>
+                                {{#each supplimentaryResponses.types.aggregations.months.buckets}}
+                                {{#if key}}
+                                <option value="{{key}}" {{#compare ../params.query.month "===" key}}selected{{/compare}}>{{key}}</option>
+                                {{/if}}
+                                {{/each}}
+                            </select>
+                        </div>
+                    </div>
+                    <div class="mdc-layout-grid__cell">
+                        <div class="mdc-form-field">
+                            <select class="mdc-select" role="listbox" id="events-locations" name="location">
+                                <option value="" {{#if params.query.location}}{{else}}selected{{/if}}>Any location</option>
+                                {{#each supplimentaryResponses.types.aggregations.locations.buckets}}
+                                {{#if key}}
+                                <option value="{{key}}" {{#compare ../params.query.location "===" key}}selected{{/compare}}>{{key}}</option>
+                                {{/if}}
                                 {{/each}}
                             </select>
                         </div>

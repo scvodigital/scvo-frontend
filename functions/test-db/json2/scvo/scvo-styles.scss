@@ -147,6 +147,10 @@ primary-dark: #251032
 
     a,
     .post-info .post-info-categories .fa,
+    .post-info .post-info-categories .fas,
+    .post-info .post-info-categories .fab,
+    .post-info .post-info-categories .far,
+    .post-info .post-info-categories .fal,
     #share-menu-button,
     .mdc-simple-menu .mdc-list-item,
     .container-content ul li::before,
@@ -159,19 +163,34 @@ primary-dark: #251032
     }
     .mdc-button,
     .mdc-button--raised:not(:disabled) {
-        color: map-get($themeSelected, 'primary');
-        border-color: rgba(0, 0, 0, 0.1);
-        background-color: rgba(0, 0, 0, 0.1);
+        color: white;
+        border-color: map-get($themeSelected, 'primary');
+        background-color: map-get($themeSelected, 'primary');
     }
     .mdc-button:hover,
     .mdc-button--raised.mdc-button--active:not(:disabled),
     .mdc-button--raised:not(:disabled):hover {
         color: white;
         border-color: map-get($themeSelected, 'primary-dark');
-        background-color: map-get($themeSelected, 'primary');
+        background-color: map-get($themeSelected, 'primary-dark');
     }
     .mdc-button:hover {
         background-color: map-get($themeSelected, 'primary-dark') !important;
+    }
+    .menu-sidebar {
+        .mdc-button,
+        .mdc-button--raised:not(:disabled) {
+            color: map-get($themeSelected, 'primary');
+            border-color: rgba(0, 0, 0, 0.1);
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+        .mdc-button:hover,
+        .mdc-button--raised.mdc-button--active:not(:disabled),
+        .mdc-button--raised:not(:disabled):hover {
+            color: white;
+            border-color: map-get($themeSelected, 'primary-dark');
+            background-color: map-get($themeSelected, 'primary');
+        }
     }
     .splash-image {
         .mdc-button {
@@ -184,12 +203,15 @@ primary-dark: #251032
             color: map-get($themeSelected, 'primary') !important;
         }
     }
-
-    .mdc-button:after,
-    .mdc-button:before,
-    .mdc-theme--primary-alpha {
-        color: map-get($themeSelected, 'primary-alpha');
+    footer h3 {
+        border-color: map-get($themeFooter, 'primary-light');
     }
+
+    // .mdc-button:after,
+    // .mdc-button:before,
+    // .mdc-theme--primary-alpha {
+    //     color: map-get($themeSelected, 'primary-alpha');
+    // }
     .mdc-theme--primary-light {
         color: map-get($themeSelected, 'primary-light');
     }
@@ -207,13 +229,17 @@ primary-dark: #251032
     .mdc-theme--secondary-dark {
         color: map-get($themeSelected, 'secondary-dark');
     }
-    .support.support-organisation .mdc-card__media,
+    .support.funding .mdc-card__primary,
+    .support.support-organisation .mdc-card__primary,
     .section-projects .mdc-card__media,
     .section-campaigns .mdc-card__media,
     .post-info .post-info-categories .inline-list li a,
     .pagination li.current-page,
     .mdc-theme--primary-bg {
         background-color: map-get($themeSelected, 'primary') !important;
+    }
+    .support.support-organisation .mdc-card__media {
+        background-color: map-get($themeSelected, 'primary');
     }
     body {
         background-color: map-get($themeFooter, 'primary-dark');
@@ -338,8 +364,9 @@ primary-dark: #251032
             color: map-get($themeDefault, 'primary') !important;
         }
     }
-    .setting-up-a-charity .footer-image {
+    .footer-image {
         .mdc-button {
+            background-color: transparent !important;
             border-color: white !important;
             color: white !important;
         }
@@ -429,6 +456,8 @@ primary-dark: #251032
 .events,
 .search-result.scvo-cms-page,
 .search-result.scvo-event,
+.gist.scvo-cms-post,
+.list.scvo-cms-post,
 .breadcrumbs,
 .page-content,
 .posts-page .page-sidebar,
@@ -522,6 +551,9 @@ a:hover {
 .mdc-button:not(.mdc-ripple-upgraded):hover:before {
     opacity: 0.1;
 }
+.pull-right {
+    float: right;
+}
 
 .home {
     .featured-content {
@@ -596,7 +628,7 @@ a:hover {
         background-position: center center;
         height: auto;
         padding: $spacing-unit 0 $spacing-unit*3.25;
-        h2, h3, a, .fa {
+        h2, h3, a, .fa, .fal, .fab, .fas, .far {
             color: white;
         }
         h2 {
@@ -609,11 +641,15 @@ a:hover {
             }
             h3 {
                 margin: 0;
-                .fa {
+                .fal {
                     border: $spacing-unit/8 solid white;
                     border-radius: 50%;
                     padding: $spacing-unit*1.75;
                     box-shadow: 1px 2px 5rem rgba(255,255,255,0.15);
+                }
+                .fa-fw {
+                    height: 1.25em;
+                    line-height: 1.25em;
                 }
                 a:hover {
                     text-decoration: none;
@@ -628,28 +664,48 @@ a:hover {
             }
         }
     }
+}
+.home,
+.policy-research {
     .latest-content {
-        padding: $spacing-unit/2 0 $spacing-unit*2;
+        padding: $spacing-unit*2 0;
+        .mdc-layout-grid__cell--span-10-desktop {
+            padding-left: $spacing-unit/2;
+        }
         h2 {
+            margin: 0;
             font-size: 1.8rem;
             a {
+                padding: $spacing-unit 0;
                 font-size: 1.1rem;
                 display: block;
             }
         }
-        .gist {
-            margin-top: $spacing-unit*1.5;
-            .mdc-card__subtitle {
-                margin-top: $spacing-unit/4;
-            }
-            img.photo-wee {
-                height: 64px;
-                width: 64px;
-            }
+    }
+}
+.home {
+    .latest-content {
+        h2 a,
+        .scvo-cms-post,
+        .tfn-news-post {
+            padding-right: $spacing-unit;
+            border-right: 1px solid rgba(0,0,0,.2);
+        }
+        .no-border h2 a,
+        .no-border .scvo-cms-post {
+            border: none;
         }
     }
 }
 .gist {
+    padding-top: $spacing-unit;
+    .mdc-card__subtitle {
+        margin-top: $spacing-unit/4;
+    }
+    img.photo-wee {
+        height: 64px;
+        width: 64px;
+    }
     h3.mdc-card__title {
         font-size: 1.1rem;
         line-height: 1.4;
@@ -673,9 +729,12 @@ a:hover {
         line-height: 1.8;
     }
 }
+.policy-research .latest-content .gist,
 .home .latest-content .gist,
+.page-related .gist,
 .post-related .gist {
     box-shadow: none;
+    -webkit-box-shadow: none;
     .post-info-closing-date,
     .post-info-published {
         font-weight: 400;
@@ -683,6 +742,10 @@ a:hover {
 }
 .post-related {
     border-top: 1px solid rgba(0,0,0,.2);
+}
+.page-related,
+.post-related {
+    margin-bottom: $spacing-unit*2;
     h3 {
         margin-bottom: $spacing-unit;
     }
@@ -746,7 +809,7 @@ a:hover {
     .name_full {
         font-weight: 600;
     }
-    .fa {
+    .fal {
         font-size: 1.4rem;
     }
 }
@@ -840,7 +903,7 @@ a:hover {
                 height: $nav-height;
                 margin: 0;
                 .mdc-tab {
-                    color: rgba(255, 255, 255, 0.95);
+                    color: white !important;
                     font-size: 1rem;
                     min-height: $nav-height;
                     height: $nav-height;
@@ -887,6 +950,7 @@ a:hover {
             color: white;
             border: none;
             box-shadow: none;
+            -webkit-box-shadow: none;
             cursor: pointer;
             visibility: hidden;
             width: 0;
@@ -917,12 +981,8 @@ a:hover {
     }
 }
 .mdc-toolbar-fixed-adjust {
-    padding: 145px 0 $spacing-unit*2;
+    padding: 145px 0 0;
     margin: 0;
-}
-.setting-up-a-charity .mdc-toolbar-fixed-adjust,
-.home .mdc-toolbar-fixed-adjust {
-    padding-bottom: 0;
 }
 .mdc-temporary-drawer {
     .mdc-temporary-drawer__header-content {
@@ -1028,27 +1088,37 @@ a:hover {
     border-top: 1px solid rgba(0,0,0,.2);
 }
 
+.running-your-organisation,
 .setting-up-a-charity {
     .page-content .mdc-layout-grid {
         margin-top: $spacing-unit;
     }
+}
+.footer-image {
+    position: relative;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-image: linear-gradient(
+        rgba(173, 20, 87, 0.89),
+        rgba(173, 20, 87, 0.89)
+    ),
+    url('https://storage.googleapis.com/scvo-cms/wp-content/uploads/2017/10/Drake-Music-06.jpg');
+    text-align: center;
+    color: white;
+    padding: $spacing-unit 0 $spacing-unit*2.5;
+    h2 {
+        font-weight: 800;
+        padding-bottom: $spacing-unit;
+    }
+}
+.running-your-organisation {
     .footer-image {
-        position: relative;
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-position: center center;
         background-image: linear-gradient(
             rgba(173, 20, 87, 0.89),
             rgba(173, 20, 87, 0.89)
         ),
-        url('https://storage.googleapis.com/scvo-cms/wp-content/uploads/2017/10/Drake-Music-06.jpg');
-        text-align: center;
-        color: white;
-        padding: $spacing-unit 0 $spacing-unit*2.5;
-        h2 {
-            font-weight: 800;
-            padding-bottom: $spacing-unit;
-        }
+        url('https://storage.googleapis.com/scvo-cms/21981/hayweight-new-940x470.jpg');
     }
 }
 .digital .callout-image {
@@ -1185,6 +1255,16 @@ a:hover {
 .digital.charter-fund.projects .page-info,
 .digital.cyber-resilience.projects .page-info,
 .projects-campaigns.terrific-trustees.search .page-info,
+.scvo-cms-page-20027 .page-info,
+.scvo-cms-page-20043 .page-info,
+.scvo-cms-page-20042 .page-info,
+.scvo-cms-page-20114 .page-info,
+.scvo-cms-page-20003 .page-info,
+.scvo-cms-page-21421 .page-info,
+.scvo-cms-page-20090 .page-info,
+.scvo-cms-page-20035 .page-info,
+.scvo-cms-page-20034 .page-info,
+.scvo-cms-page-20005 .page-info,
 .blogs .page-sidebar .page-info,
 .policy-research.briefings-consultation-responses .mdc-card__actions,
 .policy-research.research .mdc-card__actions,
@@ -1195,6 +1275,12 @@ a:hover {
     display: none;
 }
 
+.digital {
+    .heading h1.mdc-card__title--large {
+        font-size: 2.2rem;
+        line-height: 2.7rem;
+    }
+}
 .digital.about {
     .page-info {
         display: none;
@@ -1241,7 +1327,7 @@ a:hover {
     letter-spacing: normal;
     line-height: 1.7rem;
     margin: 0;
-    padding: 0;
+    padding: 0 0 $spacing-unit/2;
     font-weight: 600 !important;
 }
 h1.mdc-typography--title {
@@ -1251,25 +1337,67 @@ h1.mdc-typography--title {
 .mdc-card__primary .mdc-card__title--large {
     padding-top: 0;
 }
-.support.support-sector {
-    .mdc-card__media {
-        h1 {
-            display: none;
-        }
-    }
+.support.funding .mdc-card {
+    margin: $spacing-unit 0;
+}
+.support {
     .mdc-card__media {
         height: 80px;
         padding: $spacing-unit*(3/4) $spacing-unit;
         background-size: contain;
         background-repeat: no-repeat;
         background-origin: content-box;
+        h1 {
+            display: block;
+            width: 100%;
+            height: 100%;
+            a {
+                display: block;
+                width: 100%;
+                height: 100%;
+                .hidden {
+                    display: none;
+                }
+            }
+        }
+    }
+    .mdc-card__primary {
+        // margin-bottom: $spacing-unit;
+        .mdc-card__title {
+            padding-bottom: 0;
+            color: white;
+            a {
+                display: block;
+                width: 100%;
+                height: 100%;
+                color: white;
+                .fa-fw {
+                    width: 1.55em;
+                    text-align: left;
+                    height: auto;
+                    line-height: 1em;
+                    vertical-align: middle;
+                }
+            }
+            a:hover {
+                text-decoration: none;
+            }
+        }
+    }
+    .mdc-card__supporting-text {
+        padding-top: 0;
     }
     .goodmoves .mdc-card__media {
-        background-color: #58a934;
+        background-color: #58a934 !important;
         background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/goodmoves.png');
     }
+    .cjs .mdc-card__media {
+        height: 105px;
+        background-color: #fff !important;
+        background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/cjs.png');
+    }
     .funding-scotland .mdc-card__media {
-        background-color: #8AC645;
+        background-color: #8AC645 !important;
         background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/funding-scotland.png');
     }
     .goodhq .mdc-card__media {
@@ -1292,16 +1420,8 @@ h1.mdc-typography--title {
         padding-top: $spacing-unit;
     }
 }
-.support.support-organisation {
-    .mdc-card__media {
-        height: 128px;
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-position: center center;
-    }
-    .mdc-card__supporting-text {
-        padding-top: 0;
-    }
+h1.support-sector {
+    margin-top: $spacing-unit*3;
 }
 .section-projects {
     .mdc-card__media {
@@ -1466,7 +1586,7 @@ h1.mdc-typography--title {
             padding-left: $spacing-unit*1.4;
         }
         li::before {
-            content: "\25A0";
+            content: "\25CF";
             font-size: 1rem;
             margin-left: -$spacing-unit*1.4;
             padding-right: 0.95rem;
@@ -1474,23 +1594,23 @@ h1.mdc-typography--title {
             top: 0em;
         }
     }
-    ul.fa-ul {
-        li {
-            padding-left: 0;
-        }
-        li::before {
-            content: " ";
-            padding: 0;
-            margin: 0;
-        }
-    }
+    // ul.fa-ul {
+    //     li {
+    //         padding-left: 0;
+    //     }
+    //     li::before {
+    //         content: " ";
+    //         padding: 0;
+    //         margin: 0;
+    //     }
+    // }
     .mdc-button {
-        background: white;
+        // background: white;
         border-width: $spacing-unit/8;
         border-style: solid;
         // margin-top: $spacing-unit;
         text-transform: none;
-        background: transparent;
+        // background: transparent;
     }
     .scvo-cms-page-20114 .mdc-button {
         margin-top: 0;
@@ -1529,11 +1649,24 @@ h1.mdc-typography--title {
     box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
     -webkit-box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
     .mdc-button {
+        padding: 0 $spacing-unit;
+    }
+    .menu-level-2 {
+        padding-left: $spacing-unit*1.5;
+    }
+    .menu-level-3 {
+        padding-left: $spacing-unit*2;
+    }
+    .menu-level-4 {
+        padding-left: $spacing-unit*2.5;
+    }
+    .mdc-button {
         border: none;
         text-align: left;
         margin-bottom: 0;
         border-radius: 0;
         box-shadow: none;
+        -webkit-box-shadow: none;
     }
     .mdc-button:first-child {
         border-radius: 2px 2px 0 0;
@@ -1646,7 +1779,8 @@ ul.breadcrumbs {
             text-decoration: underline;
         }
         img {
-            width: 1.6rem;
+            width: 1.6rem !important;
+            height: 1.6rem !important;
             border-radius: 50%;
             margin-right: $spacing-unit/2;
             vertical-align: text-bottom;
@@ -1736,7 +1870,7 @@ h1,
 h2,
 h3,
 h4 {
-    margin-bottom: $spacing-unit/4;
+    margin-bottom: $spacing-unit/2;
     font-family: "Montserrat", "Open Sans", Helvetica, Arial, sans-serif;
     font-weight: 700;
     strong {
@@ -1744,7 +1878,7 @@ h4 {
     }
 }
 p {
-    margin: 0 0 $spacing-unit/2;
+    margin: 0 0 $spacing-unit;
 }
 p:last-child {
     margin-bottom: 0;
@@ -1805,15 +1939,17 @@ p:last-child {
 .post-content {
     a[href^="http://"]::after,
     a[href^="https://"]::after {
-        font-family: 'FontAwesome';
+        font-family: 'Font Awesome\ 5 Pro';
         content: "\f08e";
-        top: 0.12rem;
-        margin-left: 0.3rem;
-        text-decoration: none;
-        display: inline-block;
-        position: relative;
-        vertical-align: bottom;
         font-weight: 400;
+        margin-left: 0.3rem;
+        -moz-osx-font-smoothing: grayscale;
+        -webkit-font-smoothing: antialiased;
+        display: inline-block;
+        font-style: normal;
+        font-variant: normal;
+        text-rendering: auto;
+        line-height: 1;
     }
     a[href^="http://goodhq.org"]::after,
     a[href^="https://goodhq.org"]::after,
@@ -1837,20 +1973,20 @@ p:last-child {
     }
 }
 
-.fa {
-    display: inline-block;
-    font: normal normal normal 14px/1 FontAwesome;
-    font-size: inherit;
-    text-rendering: auto;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-}
+// .fa {
+//     display: inline-block;
+//     font: normal normal normal 14px/1 FontAwesome;
+//     font-size: inherit;
+//     text-rendering: auto;
+//     -webkit-font-smoothing: antialiased;
+//     -moz-osx-font-smoothing: grayscale;
+// }
 /* makes the font 33% larger relative to the icon container */
-.fa-lg {
-    font-size: 1.33333333rem;
-    line-height: 0.75rem;
-    vertical-align: -15%;
-}
+// .fa-lg {
+//     font-size: 1.33333333rem;
+//     line-height: 0.75rem;
+//     vertical-align: -15%;
+// }
 .fa-2x {
     font-size: 2rem;
 }
@@ -1904,6 +2040,11 @@ footer {
     .footer-main {
         padding: $spacing-unit*2.5 0 $spacing-unit*2;
     }
+    h3 {
+        padding-bottom: $spacing-unit/2;
+        border-bottom-style: solid;
+        border-bottom-width: $spacing-unit/5;
+    }
     a {
         color: white;
         text-decoration: underline;
@@ -1925,6 +2066,25 @@ footer {
         p {
             margin: 0 0 0.8rem;
         }
+    }
+    .fa-ul,
+    .mdc-list {
+        font-size: 1.1rem;
+    }
+    .fa-ul {
+        margin: 0 0 0 1.5rem;
+        li a {
+            text-decoration: none;
+        }
+        li a:hover {
+            text-decoration: underline;
+        }
+    }
+    ul {
+        margin-bottom: $spacing-unit !important;
+    }
+    .mdc-layout-grid p {
+        margin-bottom: 0;
     }
     .mdc-list {
         padding: 0;
