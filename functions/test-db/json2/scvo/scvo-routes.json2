@@ -1023,6 +1023,39 @@
             "apiVersion": "5.6"
         }
     },
+    "page_landing": {
+        "pattern": {
+            "running_a_charity": "/running-a-charity",
+            "jobs": "/jobs",
+            "jobs_cjs": "/jobs/community-jobs-scotland",
+            "funding": "/funding"
+        },
+        "templates": {
+            "default": `{:templates/page-landing.hbs}`
+        },
+        "headTagsTemplate": `{:templates/page-head-tags.hbs}`,
+        "primarySearchTemplate": {
+            "index": "web-content-production",
+            "type": "scvo-cms-page",
+            "template": `{:queries/page.json}`
+        },
+        "supplimentarySearchTemplates": {
+            "related_posts": {
+                "index": "web-content-production",
+                "type": "scvo-cms-post",
+                "template": `{:queries/page-posts-random.json}`
+            },
+            "splash": {
+                "index": "web-content-production",
+                "type": "scvo-cms-media",
+                "template": `{:queries/page-splash.json}`
+            }
+        },
+        "elasticsearchConfig": {
+            "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
+            "apiVersion": "5.6"
+        }
+    },
     "page_setting_up_a_charity": {
         "pattern": {
             "index": "/setting-up-a-charity",
@@ -1067,7 +1100,7 @@
             "related_posts": {
                 "index": "web-content-production",
                 "type": "scvo-cms-post",
-                "template": `{:queries/page-posts.json}`
+                "template": `{:queries/page-posts-random.json}`
             },
             "splash": {
                 "index": "web-content-production",
@@ -1098,7 +1131,7 @@
             "related_posts": {
                 "index": "web-content-production",
                 "type": "scvo-cms-post",
-                "template": `{:queries/page-posts.json}`
+                "template": `{:queries/page-posts-random.json}`
             },
             "splash": {
                 "index": "web-content-production",
@@ -1129,7 +1162,7 @@
             "related_posts": {
                 "index": "web-content-production",
                 "type": "scvo-cms-post",
-                "template": `{:queries/page-posts.json}`
+                "template": `{:queries/page-posts-random.json}`
             },
             "splash": {
                 "index": "web-content-production",
@@ -1160,7 +1193,7 @@
             "related_posts": {
                 "index": "web-content-production",
                 "type": "scvo-cms-post",
-                "template": `{:queries/page-posts.json}`
+                "template": `{:queries/page-posts-random.json}`
             },
             "splash": {
                 "index": "web-content-production",
@@ -1191,7 +1224,7 @@
             "related_posts": {
                 "index": "web-content-production",
                 "type": "scvo-cms-post",
-                "template": `{:queries/page-posts.json}`
+                "template": `{:queries/page-posts-random.json}`
             },
             "splash": {
                 "index": "web-content-production",
