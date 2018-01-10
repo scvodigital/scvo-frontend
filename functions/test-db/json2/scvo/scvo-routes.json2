@@ -1144,13 +1144,13 @@
             "apiVersion": "5.6"
         }
     },
-    "page_running_business_planning": {
+    "page_running_business": {
         "pattern": {
             "index": "/running-your-organisation/business-planning",
             "section": "/running-your-organisation/business-planning/*path"
         },
         "templates": {
-            "default": `{:templates/page-running-business-planning.hbs}`
+            "default": `{:templates/page-running-business.hbs}`
         },
         "headTagsTemplate": `{:templates/page-head-tags.hbs}`,
         "primarySearchTemplate": {
@@ -1175,13 +1175,13 @@
             "apiVersion": "5.6"
         }
     },
-    "page_running_financial_responsibilities": {
+    "page_running_financial": {
         "pattern": {
             "index": "/running-your-organisation/finance-business-management",
             "section": "/running-your-organisation/finance-business-management/*path"
         },
         "templates": {
-            "default": `{:templates/page-running-financial-responsibilities.hbs}`
+            "default": `{:templates/page-running-financial.hbs}`
         },
         "headTagsTemplate": `{:templates/page-head-tags.hbs}`,
         "primarySearchTemplate": {
@@ -1206,7 +1206,100 @@
             "apiVersion": "5.6"
         }
     },
-    "page_running_your_organisation": {
+    "page_running_legislation": {
+        "pattern": {
+            "index": "/running-your-organisation/legislation",
+            "section": "/running-your-organisation/legislation/*path"
+        },
+        "templates": {
+            "default": `{:templates/page-running-legislation.hbs}`
+        },
+        "headTagsTemplate": `{:templates/page-head-tags.hbs}`,
+        "primarySearchTemplate": {
+            "index": "web-content-production",
+            "type": "scvo-cms-page",
+            "template": `{:queries/page.json}`
+        },
+        "supplimentarySearchTemplates": {
+            "related_posts": {
+                "index": "web-content-production",
+                "type": "scvo-cms-post",
+                "template": `{:queries/page-posts-random.json}`
+            },
+            "splash": {
+                "index": "web-content-production",
+                "type": "scvo-cms-media",
+                "template": `{:queries/page-splash.json}`
+            }
+        },
+        "elasticsearchConfig": {
+            "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
+            "apiVersion": "5.6"
+        }
+    },
+    "page_running_governance": {
+        "pattern": {
+            "index": "/running-your-organisation/governance",
+            "section": "/running-your-organisation/governance/*path"
+        },
+        "templates": {
+            "default": `{:templates/page-running-governance.hbs}`
+        },
+        "headTagsTemplate": `{:templates/page-head-tags.hbs}`,
+        "primarySearchTemplate": {
+            "index": "web-content-production",
+            "type": "scvo-cms-page",
+            "template": `{:queries/page.json}`
+        },
+        "supplimentarySearchTemplates": {
+            "related_posts": {
+                "index": "web-content-production",
+                "type": "scvo-cms-post",
+                "template": `{:queries/page-posts-random.json}`
+            },
+            "splash": {
+                "index": "web-content-production",
+                "type": "scvo-cms-media",
+                "template": `{:queries/page-splash.json}`
+            }
+        },
+        "elasticsearchConfig": {
+            "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
+            "apiVersion": "5.6"
+        }
+    },
+    "page_running_staff": {
+        "pattern": {
+            "index": "/running-your-organisation/staff-volunteers",
+            "section": "/running-your-organisation/staff-volunteers/*path"
+        },
+        "templates": {
+            "default": `{:templates/page-running-staff.hbs}`
+        },
+        "headTagsTemplate": `{:templates/page-head-tags.hbs}`,
+        "primarySearchTemplate": {
+            "index": "web-content-production",
+            "type": "scvo-cms-page",
+            "template": `{:queries/page.json}`
+        },
+        "supplimentarySearchTemplates": {
+            "related_posts": {
+                "index": "web-content-production",
+                "type": "scvo-cms-post",
+                "template": `{:queries/page-posts-random.json}`
+            },
+            "splash": {
+                "index": "web-content-production",
+                "type": "scvo-cms-media",
+                "template": `{:queries/page-splash.json}`
+            }
+        },
+        "elasticsearchConfig": {
+            "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
+            "apiVersion": "5.6"
+        }
+    },
+    "page_running": {
         "pattern": {
             "index": "/running-your-organisation",
             "section": "/running-your-organisation/*path"
