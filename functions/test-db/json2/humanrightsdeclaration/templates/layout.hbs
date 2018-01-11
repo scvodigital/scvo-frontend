@@ -22,7 +22,7 @@
     <meta name="msapplication-TileColor" content="#00838f">
     <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
     <meta name="theme-color" content="#00838f">
-    <link type="text/css" rel="stylesheet" href="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.css">
+    <link type="text/css" rel="stylesheet" href="/assets/css/material-components-web.min.css">
     <link type="text/css" rel="stylesheet" href="/assets/fonts/fontawesome/css/fontawesome-all.min.css">
     <style type="text/css">
     {{{this.css}}}
@@ -52,29 +52,29 @@
                                 <!-- <a class="mdc-tab" href="/signatories">Signatories</a> -->
                             </nav>
                             <button class="menu mdc-toolbar__icon mdc-toolbar__icon--menu" id="menu_button" aria-label="Menu" alt="Menu">
-                                <span class="fal fa-2x fa-bars" aria-hidden="true"></span>
+                                <span class="far fa-2x fa-bars" aria-hidden="true"></span>
                             </button>
                         </section>
                     </div>
                 </div>
             </header>
 
-            <aside class="mdc-drawer mdc-drawer--temporary" id="menu_drawer" dir="rtl">
-              <nav class="mdc-drawer__drawer">
-                <header class="mdc-drawer__header">
-                  <div class="mdc-drawer__header-content">
-                      <img src="https://storage.googleapis.com/human-rights-declaration/sdhr-logo.png" class="brand-logo-mobile" />
-                  </div>
-                </header>
-                <nav id="icon-with-text-demo" class="mdc-drawer__content mdc-list">
-                    <a class="mdc-list-item" href="/" data-mdc-tabindex-handled="true" tabindex="-1" onclick="window.drawer.open = false">Home</a>
-                    <a class="mdc-list-item" href="/the-declaration" data-mdc-tabindex-handled="true" tabindex="-1" onclick="window.drawer.open = false">The Declaration</a>
-                    <a class="mdc-list-item" href="/why-sign" data-mdc-tabindex-handled="true" tabindex="-1" onclick="window.drawer.open = false">Why sign?</a>
-                    <a class="mdc-list-item" href="/sign-up" data-mdc-tabindex-handled="true" tabindex="-1" onclick="window.drawer.open = false">Sign up</a>
-                    <a class="mdc-list-item" href="/faq" data-mdc-tabindex-handled="true" tabindex="-1" onclick="window.drawer.open = false">FAQ</a>
-                    <!-- <a class="mdc-list-item" href="/signatories" data-mdc-tabindex-handled="true" tabindex="-1" onclick="menu_draw.MDCTemporaryDrawer.open = false">Signatories</a> -->
+            <aside class="mdc-temporary-drawer" id="menu_draw" dir="rtl">
+                <nav class="mdc-temporary-drawer__drawer">
+                    <header class="mdc-temporary-drawer__header">
+                        <div class="mdc-temporary-drawer__header-content mdc-theme--text-primary-on-primary">
+                            <img src="https://storage.googleapis.com/human-rights-declaration/sdhr-logo.png" class="brand-logo-mobile" />
+                        </div>
+                    </header>
+                    <nav class="mdc-temporary-drawer__content mdc-list-group">
+                        <a class="mdc-list-item" href="/" data-mdc-tabindex-handled="true" tabindex="-1" onclick="window.drawer.open = false">Home</a>
+                        <a class="mdc-list-item" href="/the-declaration" data-mdc-tabindex-handled="true" tabindex="-1" onclick="window.drawer.open = false">The Declaration</a>
+                        <a class="mdc-list-item" href="/why-sign" data-mdc-tabindex-handled="true" tabindex="-1" onclick="window.drawer.open = false">Why sign?</a>
+                        <a class="mdc-list-item" href="/sign-up" data-mdc-tabindex-handled="true" tabindex="-1" onclick="window.drawer.open = false">Sign up</a>
+                        <a class="mdc-list-item" href="/faq" data-mdc-tabindex-handled="true" tabindex="-1" onclick="window.drawer.open = false">FAQ</a>
+                        <!-- <a class="mdc-list-item" href="/signatories" data-mdc-tabindex-handled="true" tabindex="-1" onclick="menu_draw.MDCTemporaryDrawer.open = false">Signatories</a> -->
+                    </nav>
                 </nav>
-              </nav>
             </aside>
 
             <main>
@@ -121,7 +121,7 @@
             </footer>
         </div>
     </scvo-site>
-    <script type="text/javascript" src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
+    <script type="text/javascript" src="/assets/js/material-components-web.js"></script>
     <script type="text/javascript">
     // Material Design Components
     mdc.autoInit();
@@ -129,9 +129,9 @@
     // Browser Update
     var $buoop = {notify:{i:-4,f:-4,o:-4,s:-2,c:-4},unsecure:true,api:5};
     function $buo_f(){
-     var e = document.createElement("script");
-     e.src = "//browser-update.org/update.min.js";
-     document.body.appendChild(e);
+        var e = document.createElement("script");
+        e.src = "//browser-update.org/update.min.js";
+        document.body.appendChild(e);
     };
     try {document.addEventListener("DOMContentLoaded", $buo_f,false)}
     catch(e){window.attachEvent("onload", $buo_f)}
