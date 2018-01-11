@@ -1,6 +1,6 @@
 {
-    "size": 10,
-    "from": {{multiply (subtract (default query.page 1) 1) 10}},
+    "size": 40,
+    "from": {{multiply (subtract (default query.page 1) 1) 40}},
     "_source": [
         "title",
         "rendered.scvo_search_result"
@@ -66,21 +66,20 @@
 	        		]
                     {{/unless}}
 	        	}
-        	}
-            {{#ifAny (compare query.type "scvo-cms-post") (compare query.type null) (compare query.type "")}},
+        	},
+            "boost_mode": "multiply",
             "functions": [
         		{ 
         			"filter": { "term": { "_type": "scvo-cms-post" } },
-        			"weight": "10",
+        			"weight": "5",
         			"gauss": {
 		                "publish_on": {
-		                    "scale": "7d",
-		                    "decay": "0.9"
+		                    "scale": "84d",
+		                    "decay": "0.1"
 		                }
 		            }
         		}
             ]
-            {{/ifAny}}
         }
     }
 }
