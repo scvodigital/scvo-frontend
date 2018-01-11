@@ -24,10 +24,25 @@
         {{> breadcrumbs}}
         <div class="mdc-layout-grid">
             <div class="mdc-layout-grid__inner">
-                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 content page-content">
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-9 content page-content">
                     {{#with primaryResponse.hits.hits.[0]._source}}
                     {{{rendered.full}}}
                     {{/with}}
+                </div>
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3 sidebar page-sidebar">
+                    <h3>About Community Jobs Scotland</h3>
+                    <p>
+                        Creating jobs in Scotland's third sector for unemployed vulnerable young people.
+                    </p>
+                    <h3>
+                        Contact
+                    </h3>
+                    <p>
+                        <i class="fas fa-envelope-square"></i> <a href="mailto:communityjobsscotland@scvo.org.uk">communityjobsscotland@scvo.org.uk</a><br />
+                        <i class="fas fa-phone-square"></i> <a href="tel:+441415595026">0141 559 5026</a><br />
+                        <i class="fab fa-twitter-square"></i> <a href="https://twitter.com/_cjs_">Twitter</a><br />
+                        <i class="fab fa-facebook-square"></i> <a href="https://www.facebook.com/CommunityJobsScotland/">Facebook</a>
+                    </p>
                 </div>
                 {{#compare supplimentaryResponses.related_posts.hits.total ">" 0}}
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 related page-related">
@@ -47,5 +62,3 @@
         </div>
     </div>
 </div>
-
-{{> footer_services}}
