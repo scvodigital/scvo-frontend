@@ -1,23 +1,275 @@
 {
-  "database": {
-    "rules": "firebase-configuration/database.rules.json"
-  },
-  "hosting": {
-    "public": "dist",
-    "trailingSlash": false,
-    "rewrites": [
-      {
-        "source": "**",
-        "function": "index"
-      }
-    ],
-    "ignore": [
-      "firebase.json",
-      "**/.*",
-      "**/node_modules/**"
-    ]
-  },
-  "storage": {
-    "rules": "firebase-configuration/storage.rules"
-  }
+    "database": {
+        "rules": "firebase-configuration/database.rules.json"
+    },
+    "hosting": {
+        "public": "dist",
+        "trailingSlash": false,
+        "redirects": [
+            {
+                "source" : "/jobs-employability",
+                "destination" : "/jobs",
+                "type" : 301
+            },
+            {
+                "source" : "/jobs-employability/*",
+                "destination" : "/jobs",
+                "type" : 301
+            },
+            {
+                "source" : "/about-us",
+                "destination" : "/about",
+                "type" : 301
+            },
+            {
+                "source" : "/contact-us",
+                "destination" : "/about/staff-team",
+                "type" : 301
+            },
+            {
+                "source" : "/media-centre",
+                "destination" : "/press-media",
+                "type" : 301
+            },
+            {
+                "source" : "/news-campaigns-policy",
+                "destination" : "/policy-research",
+                "type" : 301
+            },
+            {
+                "source" : "/setting-up-a-charity/decide-on-a-structure/scottish-charitable-incorporated-organisation/",
+                "destination" : "/setting-up-a-charity/decide-on-structure/scio",
+                "type" : 301
+            },
+            {
+                "source" : "/posts/accessibility-information",
+                "destination" : "/accessibility",
+                "type" : 301
+            },
+            {
+                "source" : "/news-campaigns-policy/europe-and-the-third-sector",
+                "destination" : "/projects-campaigns/europe-and-the-third-sector",
+                "type" : 301
+            },
+            {
+                "source" : "/news-campaigns-policy/campaigns/welfare-reform",
+                "destination" : "/projects-campaigns/welfare-reform",
+                "type" : 301
+            },
+            {
+                "source" : "/creditunion",
+                "destination" : "/credit-union",
+                "type" : 301
+            },
+            {
+                "source" : "/communityjobsscotland",
+                "destination" : "/jobs/community-jobs-scotland",
+                "type" : 301
+            },
+            {
+                "source" : "/SCIO",
+                "destination" : "/setting-up-a-charity/decide-on-structure/scio",
+                "type" : 301
+            },
+            {
+                "source" : "/annualreport",
+                "destination" : "/about/annual-reports-reviews",
+                "type" : 301
+            },
+            {
+                "source" : "/cjsemployerinformation",
+                "destination" : "/jobs/community-jobs-scotland/information-for-employers",
+                "type" : 301
+            },
+            {
+                "source" : "/keystone",
+                "destination" : "/services/keystone",
+                "type" : 301
+            },
+            {
+                "source" : "/governance",
+                "destination" : "/running-your-organisation/governance",
+                "type" : 301
+            },
+            {
+                "source" : "/cjs",
+                "destination" : "/jobs/community-jobs-scotland",
+                "type" : 301
+            },
+            {
+                "source" : "/rural",
+                "destination" : "/services/professional-networks",
+                "type" : 301
+            },
+            {
+                "source" : "/villagehalls",
+                "destination" : "/services/professional-networks",
+                "type" : 301
+            },
+            {
+                "source" : "/evidencelibrary",
+                "destination" : "/policy-research/evidence-library",
+                "type" : 301
+            },
+            {
+                "source" : "/hief",
+                "destination" : "/services/professional-networks",
+                "type" : 301
+            },
+            {
+                "source" : "/msc",
+                "destination" : "/services/professional-networks",
+                "type" : 301
+            },
+            {
+                "source" : "/payroll",
+                "destination" : "/services/payroll",
+                "type" : 301
+            },
+            {
+                "source" : "/join",
+                "destination" : "/services/membership",
+                "type" : 301
+            },
+            {
+                "source" : "/join-us",
+                "destination" : "/services/membership",
+                "type" : 301
+            },
+            {
+                "source" : "/about/scvo-rural-communities/keystone",
+                "destination" : "/services/keystone",
+                "type" : 301
+            },
+            {
+                "source" : "/information",
+                "destination" : "/running-your-organisation",
+                "type" : 301
+            },
+            {
+                "source" : "/training-employability/scvo-training",
+                "destination" : "/events",
+                "type" : 301
+            },
+            {
+                "source" : "/membership/exclusive-benefits/scvo-credit-union",
+                "destination" : "/credit-union",
+                "type" : 301
+            },
+            {
+                "source" : "/stateofthesector",
+                "destination" : "/policy-research",
+                "type" : 301
+            },
+            {
+                "source" : "/europe",
+                "destination" : "/services/professional-networks",
+                "type" : 301
+            },
+            {
+                "source" : "/awards",
+                "destination" : "https://goodhq.org/scottish_charity_awards_2017/",
+                "type" : 301
+            },
+            {
+                "source" : "/charityawards",
+                "destination" : "https://goodhq.org/scottish_charity_awards_2017/",
+                "type" : 301
+            },
+            {
+                "source" : "/scottish-charity-awards",
+                "destination" : "https://goodhq.org/scottish_charity_awards_2017/",
+                "type" : 301
+            },
+            {
+                "source" : "/charity-awards",
+                "destination" : "https://goodhq.org/scottish_charity_awards_2017/",
+                "type" : 301
+            },
+            {
+                "source" : "/charity-awards/*",
+                "destination" : "https://goodhq.org/scottish_charity_awards_2017/",
+                "type" : 301
+            },
+            {
+                "source" : "/scvo/Home/Home.aspx",
+                "destination" : "/",
+                "type" : 301
+            },
+            {
+                "source" : "/rightsandequality",
+                "destination" : "/services/professional-networks",
+                "type" : 301
+            },
+            {
+                "source" : "/stats",
+                "destination" : "/policy-research",
+                "type" : 301
+            },
+            {
+                "source" : "/vote",
+                "destination" : "https://goodhq.org/scottish_charity_awards_2017/",
+                "type" : 301
+            },
+            {
+                "source" : "/membership-application",
+                "destination" : "/services/membership",
+                "type" : 301
+            },
+            {
+                "source" : "/bhhc",
+                "destination" : "/projects-campaigns/building-healthier-happier-communities",
+                "type" : 301
+            },
+            {
+                "source" : "/candrfund",
+                "destination" : "/running-your-organisation/funding/community-capacity-resilience-fund",
+                "type" : 301
+            },
+            {
+                "source" : "/amazing",
+                "destination" : "/services/membership",
+                "type" : 301
+            },
+            {
+                "source" : "/charitytown",
+                "destination" : "/projects-campaigns",
+                "type" : 301
+            },
+            {
+                "source" : "/joinourhub",
+                "destination" : "/services/office-space",
+                "type" : 301
+            },
+            {
+                "source" : "/MembershipForm.html",
+                "destination" : "/services/membership",
+                "type" : 301
+            },
+            {
+                "source" : "/digitalcalltoaction",
+                "destination" : "/post/2016/11/08/digital-call-to-action-third-sector-scotland",
+                "type" : 301
+            },
+            {
+                "source" : "/tfn",
+                "destination" : "http://thirdforcenews.org.uk",
+                "type" : 302
+            }
+        ],
+        "rewrites": [
+            {
+                "source": "**",
+                "function": "index"
+            }
+        ],
+        "ignore": [
+            "firebase.json",
+            "**/.*",
+            "**/node_modules/**"
+        ]
+    },
+    "storage": {
+        "rules": "firebase-configuration/storage.rules"
+    }
 }
