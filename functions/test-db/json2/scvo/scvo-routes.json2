@@ -53,13 +53,12 @@
         "headTagsTemplate": `{:templates/search-head-tags.hbs}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
-            "type": "scvo-cms-page,scvo-cms-post,scvo-member,digital-charter-signatory,goodmoves-legacy,funding-scotland-fund,goodhq-organisation,scvo-document-evidence,scvo-event,scvo-grant-charter,oscr-charity,tfn-news-post,tfn-blog-post,tfn-poll,tfn-event",
-            "template": `{:queries/search-all.json}`
+            "type": "scvo-cms-page,scvo-cms-post,scvo-member,digital-charter-signatory,goodmoves-legacy,funding-scotland-fund,goodhq-organisation,scvo-document-evidence,scvo-event,scvo-grant-charter,oscr-charity,tfn-news-post,tfn-blog-post,tfn-poll,tfn-event,tfn-list,tfn-feature",
+            "template": `{:queries/search.json}`
         },
         "elasticsearchConfig": {
             "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
-            "apiVersion": "5.6",
-            "log": "debug"
+            "apiVersion": "5.6"
         },
         "multipleResults": true
     },
@@ -265,11 +264,9 @@
             "type": "funding-scotland-fund",
             "template": `{:queries/none.json}`
         },
-        "supplimentarySearchTemplates": { },
         "elasticsearchConfig": {
             "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
-            "apiVersion": "5.6",
-            "log": "trace"
+            "apiVersion": "5.6"
         }
     },
     "funding_updates": {
@@ -283,7 +280,6 @@
             "type": "funding-scotland-fund",
             "template": `{:queries/funding-updates.json}`
         },
-        "supplimentarySearchTemplates": { },
         "elasticsearchConfig": {
             "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
             "apiVersion": "5.6",
@@ -318,8 +314,7 @@
         },
         "elasticsearchConfig": {
             "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
-            "apiVersion": "5.6",
-            "log": "debug"
+            "apiVersion": "5.6"
         }
     },
     "event_search": {
@@ -350,8 +345,7 @@
         },
         "elasticsearchConfig": {
             "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
-            "apiVersion": "5.6",
-            "log": "debug"
+            "apiVersion": "5.6"
         }
     },
     "event_booking": {
@@ -440,8 +434,7 @@
         },
         "elasticsearchConfig": {
             "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
-            "apiVersion": "5.6",
-            "log": "debug"
+            "apiVersion": "5.6"
         }
     },
     "evidence_library_document": {
@@ -469,8 +462,7 @@
         },
         "elasticsearchConfig": {
             "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
-            "apiVersion": "5.6",
-            "log": "debug"
+            "apiVersion": "5.6"
         }
     },
     "general_document": {
@@ -913,8 +905,7 @@
         },
         "elasticsearchConfig": {
             "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
-            "apiVersion": "5.6",
-            "log": "debug"
+            "apiVersion": "5.6"
         }
     },
     "page_credit_union": {
@@ -1086,7 +1077,7 @@
             "apiVersion": "5.6"
         }
     },
-    "page_setting_up_a_charity": {
+    "page_cjs": {
         "pattern": {
             "employers_index": "/jobs/community-jobs-scotland/information-for-employers",
             "employers_section": "/jobs/community-jobs-scotland/information-for-employers/*path",
