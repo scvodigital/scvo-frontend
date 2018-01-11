@@ -114,19 +114,19 @@ secondary-light: #FFA000,
 secondary-dark: #FF6F00
 ),
 digital: (
-primary: #1976d2,
+primary: #1976D2,
 primary-alpha: rgba(13,71,161,0.89),
 primary-light: #1976D2,
-primary-dark: #0D47A1,
-secondary: #FF8F00,
-secondary-light: #FFA000,
-secondary-dark: #FF6F00
+primary-dark: #145EA8,
+secondary: #022347,
+secondary-light: #6dede5,
+secondary-dark: #A7C9F2
 ),
 services: (
 primary: #1565C0,
 primary-alpha: rgba(21,101,192,0.89),
-primary-light: #1976D2,
-primary-dark: #0D47A1,
+primary-light: #1565C0,
+primary-dark: #0E4686,
 secondary: #FF8F00,
 secondary-light: #FFA000,
 secondary-dark: #FF6F00
@@ -145,6 +145,7 @@ primary-dark: #251032
     $themePosts: map-get($colours, 'posts');
     $themeServices: map-get($colours, 'services');
     $themeCharity: map-get($colours, 'charity');
+    $themeDigital: map-get($colours, 'digital');
 
     a,
     .post-info .post-info-categories .fa,
@@ -211,6 +212,36 @@ primary-dark: #251032
         }
         .mdc-button:hover {
             background-color: map-get($themeCharity, 'primary') !important;
+        }
+    }
+    .digital-participation {
+        background: linear-gradient(180deg, map-get($themeDigital, 'secondary-light') 5%, map-get($themeDigital, 'secondary-dark') 95%);
+        p,
+        h2,
+        h3,
+        .mdc-card__supporting-text {
+            color: map-get($themeDigital, 'secondary');
+        }
+        .mdc-button {
+            color: map-get($themeDigital, 'secondary') !important;
+            border-color: map-get($themeDigital, 'secondary') !important;
+            background-color: transparent !important;
+        }
+        .mdc-button:hover {
+            color: white !important;
+            background-color: map-get($themeDigital, 'secondary') !important;
+        }
+    }
+    .digital-evolution {
+        background-color: map-get($themeDigital, 'primary') !important;
+        p,
+        h2,
+        h3,
+        .mdc-card__supporting-text {
+            color: white;
+        }
+        .mdc-button {
+            border-color: white !important;
         }
     }
     footer h3 {
@@ -389,7 +420,8 @@ primary-dark: #251032
 
     footer {
         color: white;
-        background-color: map-get($themeFooter, 'primary');
+        background-image: linear-gradient(115deg, map-get($themeFooter, 'primary'), map-get($themeFooter, 'primary') 60%, map-get($themeFooter, 'primary-dark') 80%, map-get($themeFooter, 'primary-dark'));
+        // background-color: map-get($themeFooter, 'primary');
         border-top: 0.6rem solid map-get($themeFooter, 'primary-light');
         .footer-copyright {
             background-color: map-get($themeFooter, 'primary-dark');
@@ -714,6 +746,7 @@ iframe {
     }
 }
 .gist {
+    box-shadow: none;
     padding-top: $spacing-unit;
     .mdc-card__subtitle {
         margin-top: $spacing-unit/4;
@@ -1297,9 +1330,45 @@ iframe {
 }
 
 .digital {
+    .callout {
+        padding-bottom: $spacing-unit;
+        h2 {
+            margin: $spacing-unit*2 0;
+        }
+        .mdc-card {
+            box-shadow: none;
+            h3 {
+                margin: 0;
+            }
+        }
+    }
     .heading h1.mdc-card__title--large {
         font-size: 2.2rem;
         line-height: 2.7rem;
+    }
+    .latest_content {
+        .mdc-layout-grid__inner {
+            grid-gap: 0;
+        }
+        .mdc-layout-grid__cell--span-2-desktop {
+            grid-column-end: span 3;
+        }
+        .mdc-layout-grid__cell--span-10-desktop {
+            grid-column-end: span 9;
+        }
+    }
+    .logos {
+        margin-bottom: $spacing-unit*2;
+        h3 {
+            font-weight: 100;
+            font-family: "Open Sans";
+            margin-bottom: $spacing-unit*2;
+            text-align: center;
+        }
+        img {
+            margin: 0 $spacing-unit*3;
+            max-width: 50%;
+        }
     }
 }
 .digital.about {
@@ -1313,6 +1382,10 @@ iframe {
 }
 
 .scvo-event {
+    margin-bottom: $spacing-unit;
+    h3 {
+        margin-top: 0;
+    }
     .mdc-layout-grid__inner {
         margin-bottom: $spacing-unit/2;
     }
@@ -1337,7 +1410,7 @@ iframe {
     outline: none;
 }
 .mdc-button.mdc-button--raised.pull-right {
-    margin-top: $spacing-unit;
+    margin-top: $spacing-unit/2;
 }
 
 .mdc-card__subtitle .post-info-item {
@@ -1904,6 +1977,12 @@ p {
 p:last-child {
     margin-bottom: 0;
 }
+.digital,
+.full {
+    img {
+        max-width: 100%;
+    }
+}
 .full {
     margin: $spacing-unit 0;
     h1:first-child,
@@ -1911,9 +1990,6 @@ p:last-child {
     h3:first-child,
     h4:first-child {
         margin-top: 0 !important;
-    }
-    img {
-        max-width: 100%;
     }
     .post-info {
         margin: $spacing-unit/2 0 $spacing-unit*1.5;
@@ -2064,7 +2140,7 @@ p.results-highlights em {
 
 footer {
     .footer-main {
-        padding: $spacing-unit*2.5 0 $spacing-unit*2;
+        padding: $spacing-unit*1.5 0 0;
     }
     h3 {
         padding-bottom: $spacing-unit/2;
