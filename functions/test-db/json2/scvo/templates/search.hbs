@@ -29,11 +29,11 @@
                 </div>
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-9 content">
                     {{#each primaryResponse.hits.hits}}
-                    {{#if _source.rendered.scvo_search_result}}
-                    {{{_source.rendered.scvo_search_result}}}
-                    {{else}}
-                    [ Error - search result template missing ]
-                    {{/if}}
+                        {{#if _source.rendered.scvo_search_result}}
+                            {{{replace _source.rendered.scvo_search_result "%highlights%" (removeEntities (concat "<p class=\"results-highlights\">..." (join highlight.text_bag " ... ... ") " ...</p>"))}}}
+                        {{else}}
+                        [ Error - search result template missing ]
+                        {{/if}}
                     {{/each}}
                 </div>
             </div>
