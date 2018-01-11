@@ -17,6 +17,9 @@
         	"query": {
 	        	"bool": {
 	        		"must": [
+                        {
+                            "exists": { "field": "rendered.scvo_search_result" }
+                        },
                         {{#if query.type}}
                         {
                             "bool": {
