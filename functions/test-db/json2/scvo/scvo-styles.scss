@@ -192,6 +192,7 @@ primary-dark: #251032
             background-color: map-get($themeSelected, 'primary');
         }
     }
+    .featured-background-image,
     .splash-image {
         .mdc-button {
             border-color: white !important;
@@ -608,12 +609,15 @@ a:hover {
             background-size: cover;
             background-repeat: no-repeat;
             background-position: center center;
-            p {
+            p,
+            .mdc-card__supporting-text {
                 font-size: 1.4rem;
+                letter-spacing: -0.05rem;
             }
             h1,
             p,
-            a {
+            a,
+            .mdc-card__supporting-text {
                 color: white;
             }
             img.header-text {
@@ -908,7 +912,7 @@ a:hover {
                     min-height: $nav-height;
                     height: $nav-height;
                     font-weight: 600;
-                    padding: 0 $spacing-unit;
+                    padding: 0 $spacing-unit*(3/4);
                     .mdc-tab--label {
                         line-height: $nav-height - 4px;
                         height: $nav-height - 4px;
