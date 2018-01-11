@@ -6,7 +6,7 @@
                     <h2>Search SCVO, Goodmoves, TFN, and more</h2>
                     <form [searchroute]="'main_search'" data-auto-search="true">
                         <input type="text" class="mdc-textfield__input searchRoute" placeholder="Search keywords" value="{{params.query.q}}" name="q" id="main-q">
-                        <h3>Filter</h3>
+                        <h3>SCVO</h3>
                         <div class="mdc-form-field">
                             <div class="mdc-checkbox">
                                 <input type="checkbox" name="type" id="type-scvo-cms-post" value="scvo-cms-post" class="mdc-checkbox__native-control"
@@ -24,37 +24,7 @@
                         </div>
                         <div class="mdc-form-field">
                             <div class="mdc-checkbox">
-                                <input type="checkbox" name="type" id="type-scvo-grant-charter" value="scvo-grant-charter" class="mdc-checkbox__native-control" 
-                                    {{#if (contains params.query.type "scvo-grant-charter")}}checked{{/if}}>
-                                <div class="mdc-checkbox__background">
-                                    <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
-                                        <path class="mdc-checkbox__checkmark__path" fill="none" stroke="white" d="M1.73,12.91 8.1,19.28 22.79,4.59"></path>
-                                    </svg>
-                                    <div class="mdc-checkbox__mixedmark"></div>
-                                </div>
-                            </div>
-                            <label for="type-scvo-grant-charter">
-                                Digital funded projects
-                            </label>
-                        </div>
-                        <div class="mdc-form-field">
-                            <div class="mdc-checkbox">
-                                <input type="checkbox" name="type" id="type-digital-charter-signatory" value="digital-charter-signatory" class="mdc-checkbox__native-control" 
-                                    {{#if (contains params.query.type "digital-charter-signatory")}}checked{{/if}}>
-                                <div class="mdc-checkbox__background">
-                                    <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
-                                        <path class="mdc-checkbox__checkmark__path" fill="none" stroke="white" d="M1.73,12.91 8.1,19.28 22.79,4.59"></path>
-                                    </svg>
-                                    <div class="mdc-checkbox__mixedmark"></div>
-                                </div>
-                            </div>
-                            <label for="type-digital-charter-signatory">
-                                Digital Participation Charter signatories
-                            </label>
-                        </div>
-                        <div class="mdc-form-field">
-                            <div class="mdc-checkbox">
-                                <input type="checkbox" name="type" id="type-scvo-document-evidence" value="scvo-document-evidence" class="mdc-checkbox__native-control" 
+                                <input type="checkbox" name="type" id="type-scvo-document-evidence" value="scvo-document-evidence" class="mdc-checkbox__native-control"
                                     {{#if (contains params.query.type "scvo-document-evidence")}}checked{{/if}}>
                                 <div class="mdc-checkbox__background">
                                     <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
@@ -66,70 +36,25 @@
                             <label for="type-scvo-document-evidence">
                                 Evidence Library documents
                             </label>
-                        </div>
-                        <div class="mdc-form-field">
-                            <div class="mdc-checkbox">
-                                <input type="checkbox" name="type" id="type-funding-scotland-fund" value="funding-scotland-fund" class="mdc-checkbox__native-control" 
-                                    {{#if (contains params.query.type "funding-scotland-fund")}}checked{{/if}}>
-                                <div class="mdc-checkbox__background">
-                                    <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
-                                        <path class="mdc-checkbox__checkmark__path" fill="none" stroke="white" d="M1.73,12.91 8.1,19.28 22.79,4.59"></path>
-                                    </svg>
-                                    <div class="mdc-checkbox__mixedmark"></div>
+                            <div class="mdc-form-field">
+                                <div class="mdc-checkbox">
+                                    <input type="checkbox" name="type" id="type-scvo-cms-page" value="scvo-cms-page" class="mdc-checkbox__native-control"
+                                        {{#if (contains params.query.type "scvo-cms-page")}}checked{{/if}}>
+                                    <div class="mdc-checkbox__background">
+                                        <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
+                                            <path class="mdc-checkbox__checkmark__path" fill="none" stroke="white" d="M1.73,12.91 8.1,19.28 22.79,4.59"></path>
+                                        </svg>
+                                        <div class="mdc-checkbox__mixedmark"></div>
+                                    </div>
                                 </div>
+                                <label for="type-scvo-cms-page">
+                                    Pages
+                                </label>
                             </div>
-                            <label for="type-funding-scotland-fund">
-                                Funding Scotland funds
-                            </label>
                         </div>
                         <div class="mdc-form-field">
                             <div class="mdc-checkbox">
-                                <input type="checkbox" name="type" id="type-goodhq-organisation" value="goodhq-organisation" class="mdc-checkbox__native-control" 
-                                    {{#if (contains params.query.type "goodhq-organisation")}}checked{{/if}}>
-                                <div class="mdc-checkbox__background">
-                                    <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
-                                        <path class="mdc-checkbox__checkmark__path" fill="none" stroke="white" d="M1.73,12.91 8.1,19.28 22.79,4.59"></path>
-                                    </svg>
-                                    <div class="mdc-checkbox__mixedmark"></div>
-                                </div>
-                            </div>
-                            <label for="type-goodhq-organisation">
-                                Good HQ organisation profiles
-                            </label>
-                        </div>
-                        <div class="mdc-form-field">
-                            <div class="mdc-checkbox">
-                                <input type="checkbox" name="type" id="type-goodmoves-legacy" value="goodmoves-legacy" class="mdc-checkbox__native-control" 
-                                    {{#if (contains params.query.type "goodmoves-legacy")}}checked{{/if}}>
-                                <div class="mdc-checkbox__background">
-                                    <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
-                                        <path class="mdc-checkbox__checkmark__path" fill="none" stroke="white" d="M1.73,12.91 8.1,19.28 22.79,4.59"></path>
-                                    </svg>
-                                    <div class="mdc-checkbox__mixedmark"></div>
-                                </div>
-                            </div>
-                            <label for="type-goodmoves-legacy">
-                                Goodmoves jobs
-                            </label>
-                        </div>
-                        <div class="mdc-form-field">
-                            <div class="mdc-checkbox">
-                                <input type="checkbox" name="type" id="type-scvo-cms-page" value="scvo-cms-page" class="mdc-checkbox__native-control"
-                                    {{#if (contains params.query.type "scvo-cms-page")}}checked{{/if}}>
-                                <div class="mdc-checkbox__background">
-                                    <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
-                                        <path class="mdc-checkbox__checkmark__path" fill="none" stroke="white" d="M1.73,12.91 8.1,19.28 22.79,4.59"></path>
-                                    </svg>
-                                    <div class="mdc-checkbox__mixedmark"></div>
-                                </div>
-                            </div>
-                            <label for="type-scvo-cms-page">
-                                Pages
-                            </label>
-                        </div>
-                        <div class="mdc-form-field">
-                            <div class="mdc-checkbox">
-                                <input type="checkbox" name="type" id="type-scvo-member" value="scvo-member" class="mdc-checkbox__native-control" 
+                                <input type="checkbox" name="type" id="type-scvo-member" value="scvo-member" class="mdc-checkbox__native-control"
                                     {{#if (contains params.query.type "scvo-member")}}checked{{/if}}>
                                 <div class="mdc-checkbox__background">
                                     <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
@@ -144,7 +69,7 @@
                         </div>
                         <div class="mdc-form-field">
                             <div class="mdc-checkbox">
-                                <input type="checkbox" name="type" id="type-scvo-event" value="scvo-event" class="mdc-checkbox__native-control" 
+                                <input type="checkbox" name="type" id="type-scvo-event" value="scvo-event" class="mdc-checkbox__native-control"
                                     {{#if (contains params.query.type "scvo-event")}}checked{{/if}}>
                                 <div class="mdc-checkbox__background">
                                     <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
@@ -157,9 +82,176 @@
                                 Training &amp; events
                             </label>
                         </div>
-                        <!-- <button class="mdc-button mdc-button--raised" type="submit">
-                            Search
-                        </button> -->
+                        <h3>Digital Participation</h3>
+                        <div class="mdc-form-field">
+                            <div class="mdc-checkbox">
+                                <input type="checkbox" name="type" id="type-scvo-grant-charter" value="scvo-grant-charter" class="mdc-checkbox__native-control"
+                                    {{#if (contains params.query.type "scvo-grant-charter")}}checked{{/if}}>
+                                <div class="mdc-checkbox__background">
+                                    <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
+                                        <path class="mdc-checkbox__checkmark__path" fill="none" stroke="white" d="M1.73,12.91 8.1,19.28 22.79,4.59"></path>
+                                    </svg>
+                                    <div class="mdc-checkbox__mixedmark"></div>
+                                </div>
+                            </div>
+                            <label for="type-scvo-grant-charter">
+                                Digital funded projects
+                            </label>
+                        </div>
+                        <div class="mdc-form-field">
+                            <div class="mdc-checkbox">
+                                <input type="checkbox" name="type" id="type-digital-charter-signatory" value="digital-charter-signatory" class="mdc-checkbox__native-control"
+                                    {{#if (contains params.query.type "digital-charter-signatory")}}checked{{/if}}>
+                                <div class="mdc-checkbox__background">
+                                    <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
+                                        <path class="mdc-checkbox__checkmark__path" fill="none" stroke="white" d="M1.73,12.91 8.1,19.28 22.79,4.59"></path>
+                                    </svg>
+                                    <div class="mdc-checkbox__mixedmark"></div>
+                                </div>
+                            </div>
+                            <label for="type-digital-charter-signatory">
+                                Digital Participation Charter signatories
+                            </label>
+                        </div>
+                        <h3>Funding Scotland</h3>
+                        <div class="mdc-form-field">
+                            <div class="mdc-checkbox">
+                                <input type="checkbox" name="type" id="type-funding-scotland-fund" value="funding-scotland-fund" class="mdc-checkbox__native-control"
+                                    {{#if (contains params.query.type "funding-scotland-fund")}}checked{{/if}}>
+                                <div class="mdc-checkbox__background">
+                                    <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
+                                        <path class="mdc-checkbox__checkmark__path" fill="none" stroke="white" d="M1.73,12.91 8.1,19.28 22.79,4.59"></path>
+                                    </svg>
+                                    <div class="mdc-checkbox__mixedmark"></div>
+                                </div>
+                            </div>
+                            <label for="type-funding-scotland-fund">
+                                Funding Scotland funds
+                            </label>
+                        </div>
+                        <h3>Good HQ</h3>
+                        <div class="mdc-form-field">
+                            <div class="mdc-checkbox">
+                                <input type="checkbox" name="type" id="type-goodhq-organisation" value="goodhq-organisation" class="mdc-checkbox__native-control"
+                                    {{#if (contains params.query.type "goodhq-organisation")}}checked{{/if}}>
+                                <div class="mdc-checkbox__background">
+                                    <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
+                                        <path class="mdc-checkbox__checkmark__path" fill="none" stroke="white" d="M1.73,12.91 8.1,19.28 22.79,4.59"></path>
+                                    </svg>
+                                    <div class="mdc-checkbox__mixedmark"></div>
+                                </div>
+                            </div>
+                            <label for="type-goodhq-organisation">
+                                Good HQ organisation profiles
+                            </label>
+                        </div>
+                        <h3>Goodmoves</h3>
+                        <div class="mdc-form-field">
+                            <div class="mdc-checkbox">
+                                <input type="checkbox" name="type" id="type-goodmoves-legacy" value="goodmoves-legacy" class="mdc-checkbox__native-control"
+                                    {{#if (contains params.query.type "goodmoves-legacy")}}checked{{/if}}>
+                                <div class="mdc-checkbox__background">
+                                    <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
+                                        <path class="mdc-checkbox__checkmark__path" fill="none" stroke="white" d="M1.73,12.91 8.1,19.28 22.79,4.59"></path>
+                                    </svg>
+                                    <div class="mdc-checkbox__mixedmark"></div>
+                                </div>
+                            </div>
+                            <label for="type-goodmoves-legacy">
+                                Goodmoves jobs
+                            </label>
+                        </div>
+                        <h3>TFN</h3>
+                        <div class="mdc-form-field">
+                            <div class="mdc-checkbox">
+                                <input type="checkbox" name="type" id="type-tfn-blog-post" value="tfn-blog-post" class="mdc-checkbox__native-control"
+                                    {{#if (contains params.query.type "tfn-blog-post")}}checked{{/if}}>
+                                <div class="mdc-checkbox__background">
+                                    <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
+                                        <path class="mdc-checkbox__checkmark__path" fill="none" stroke="white" d="M1.73,12.91 8.1,19.28 22.79,4.59"></path>
+                                    </svg>
+                                    <div class="mdc-checkbox__mixedmark"></div>
+                                </div>
+                            </div>
+                            <label for="type-tfn-blog-post">
+                                TFN blog posts
+                            </label>
+                        </div>
+                        <div class="mdc-form-field">
+                            <div class="mdc-checkbox">
+                                <input type="checkbox" name="type" id="type-tfn-event" value="tfn-event" class="mdc-checkbox__native-control"
+                                    {{#if (contains params.query.type "tfn-event")}}checked{{/if}}>
+                                <div class="mdc-checkbox__background">
+                                    <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
+                                        <path class="mdc-checkbox__checkmark__path" fill="none" stroke="white" d="M1.73,12.91 8.1,19.28 22.79,4.59"></path>
+                                    </svg>
+                                    <div class="mdc-checkbox__mixedmark"></div>
+                                </div>
+                            </div>
+                            <label for="type-tfn-event">
+                                TFN events
+                            </label>
+                        </div>
+                        <div class="mdc-form-field">
+                            <div class="mdc-checkbox">
+                                <input type="checkbox" name="type" id="type-tfn-feature" value="tfn-feature" class="mdc-checkbox__native-control"
+                                    {{#if (contains params.query.type "tfn-feature")}}checked{{/if}}>
+                                <div class="mdc-checkbox__background">
+                                    <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
+                                        <path class="mdc-checkbox__checkmark__path" fill="none" stroke="white" d="M1.73,12.91 8.1,19.28 22.79,4.59"></path>
+                                    </svg>
+                                    <div class="mdc-checkbox__mixedmark"></div>
+                                </div>
+                            </div>
+                            <label for="type-tfn-feature">
+                                TFN features
+                            </label>
+                        </div>
+                        <div class="mdc-form-field">
+                            <div class="mdc-checkbox">
+                                <input type="checkbox" name="type" id="type-tfn-list" value="tfn-list" class="mdc-checkbox__native-control"
+                                    {{#if (contains params.query.type "tfn-list")}}checked{{/if}}>
+                                <div class="mdc-checkbox__background">
+                                    <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
+                                        <path class="mdc-checkbox__checkmark__path" fill="none" stroke="white" d="M1.73,12.91 8.1,19.28 22.79,4.59"></path>
+                                    </svg>
+                                    <div class="mdc-checkbox__mixedmark"></div>
+                                </div>
+                            </div>
+                            <label for="type-tfn-list">
+                                TFN lists
+                            </label>
+                        </div>
+                        <div class="mdc-form-field">
+                            <div class="mdc-checkbox">
+                                <input type="checkbox" name="type" id="type-tfn-news-post" value="tfn-news-post" class="mdc-checkbox__native-control"
+                                    {{#if (contains params.query.type "tfn-news-post")}}checked{{/if}}>
+                                <div class="mdc-checkbox__background">
+                                    <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
+                                        <path class="mdc-checkbox__checkmark__path" fill="none" stroke="white" d="M1.73,12.91 8.1,19.28 22.79,4.59"></path>
+                                    </svg>
+                                    <div class="mdc-checkbox__mixedmark"></div>
+                                </div>
+                            </div>
+                            <label for="type-tfn-news-post">
+                                TFN news posts
+                            </label>
+                        </div>
+                        <div class="mdc-form-field">
+                            <div class="mdc-checkbox">
+                                <input type="checkbox" name="type" id="type-tfn-poll" value="tfn-poll" class="mdc-checkbox__native-control"
+                                    {{#if (contains params.query.type "tfn-poll")}}checked{{/if}}>
+                                <div class="mdc-checkbox__background">
+                                    <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
+                                        <path class="mdc-checkbox__checkmark__path" fill="none" stroke="white" d="M1.73,12.91 8.1,19.28 22.79,4.59"></path>
+                                    </svg>
+                                    <div class="mdc-checkbox__mixedmark"></div>
+                                </div>
+                            </div>
+                            <label for="type-tfn-poll">
+                                TFN polls
+                            </label>
+                        </div>
                     </form>
                 </div>
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-9 content">
@@ -171,7 +263,11 @@
                                 {{{_source.rendered.scvo_search_result}}}
                             {{/if}}
                         {{else}}
-                        [ Error - search result template missing ]
+                            {{#if _source.rendered.search_result_scvo}}
+                                {{{replace _source.rendered.search_result_scvo "%highlights%" (removeEntities (concat "<p class=\"results-highlights\">..." (join highlight.text_bag " ... ... ") " ...</p>"))}}}
+                            {{else}}
+                                [ Error - search result template missing ]
+                            {{/if}}
                         {{/if}}
                     {{/each}}
                 </div>

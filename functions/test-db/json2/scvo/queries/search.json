@@ -3,7 +3,8 @@
     "from": {{multiply (subtract (default query.page 1) 1) 10}},
     "_source": [
         "title",
-        "rendered.scvo_search_result"
+        "rendered.scvo_search_result",
+        "rendered.search_result_scvo"
     ],
 	"highlight" : {
         "fields" : {
@@ -52,7 +53,7 @@
 					                        "analyzer": "snowball",
 					                        "boost": 10
 					                    }
-					                }	
+					                }
 		        				]
 		        			}
 	        			}
@@ -69,7 +70,7 @@
         	},
             "boost_mode": "multiply",
             "functions": [
-        		{ 
+        		{
         			"filter": { "term": { "_type": "scvo-cms-post" } },
         			"weight": "5",
         			"gauss": {
