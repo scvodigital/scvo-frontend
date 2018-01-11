@@ -22,18 +22,15 @@
             <li>Events</li>
         </ul>
 
-        <h2 class="mdc-card__title mdc-card__title--large">Find Events</h2>
+        <h2>Find Events</h2>
         <form [searchroute]="'event_search'" data-auto-search="true">
             <div class="mdc-layout-grid">
                 <div class="mdc-layout-grid__inner">
-                    <div class="mdc-layout-grid__cell">
+                    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3 sidebar events-sidebar">
                         <div class="mdc-textfield mdc-textfield--upgraded">
                             <input type="text" class="mdc-textfield__input" name="q" id="events-keywords" placeholder="Keywords" value="{{params.query.q}}">
-                            <!-- <label class="mdc-textfield__label" for="events-keywords">Keywords</label> -->
-                            <!-- <div class="mdc-textfield__bottom-line"></div> -->
                         </div>
-                    </div>
-                    <div class="mdc-layout-grid__cell">
+                        <h3>Filter</h3>
                         <div class="mdc-form-field">
                             <select class="mdc-select" role="listbox" id="events-course_type" name="course_type">
                                 <option value="" {{#if params.query.course_type}}{{else}}selected{{/if}}>Select event type</option>
@@ -42,8 +39,6 @@
                                 {{/each}}
                             </select>
                         </div>
-                    </div>
-                    <div class="mdc-layout-grid__cell">
                         <div class="mdc-form-field">
                             <select class="mdc-select" role="listbox" id="events-month" name="month">
                                 <option value="" {{#if params.query.month}}{{else}}selected{{/if}}>Any month</option>
@@ -54,8 +49,6 @@
                                 {{/each}}
                             </select>
                         </div>
-                    </div>
-                    <div class="mdc-layout-grid__cell">
                         <div class="mdc-form-field">
                             <select class="mdc-select" role="listbox" id="events-locations" name="location">
                                 <option value="" {{#if params.query.location}}{{else}}selected{{/if}}>Any location</option>
@@ -66,8 +59,6 @@
                                 {{/each}}
                             </select>
                         </div>
-                    </div>
-                    <div class="mdc-layout-grid__cell">
                         <div class="mdc-form-field">
                             <div class="mdc-checkbox">
                                 <input type="checkbox" class="mdc-checkbox__native-control" id="events-free" name="free" {{#if params.query.free}}checked{{/if}} />
@@ -80,23 +71,22 @@
                             </div>
                             <label for="events-free">Only free events</label>
                         </div>
+                        <button class="mdc-button mdc-button--raised" type="submit">
+                            Search
+                        </button>
+                    </div>
+                    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6 content events-content">
+                        {{#each primaryResponse.hits.hits}}
+                        {{{_source.rendered.list}}}
+                        {{/each}}
+                    </div>
+                    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3 sidebar events-sidebar">
+                        {{> sidebar_events}}
                     </div>
                 </div>
             </div>
-            <button class="mdc-button mdc-button--raised" type="submit">
-                Search
-            </button>
         </form>
 
-        <div class="mdc-layout-grid equal-height">
-            <div class="mdc-layout-grid__inner">
-                {{#each primaryResponse.hits.hits}}
-                <div class="mdc-layout-grid__cell mdc-layout-grid__cell">
-                    {{{_source.rendered.list}}}
-                </div>
-                {{/each}}
-            </div>
-        </div>
         {{> pagination}}
     </div>
 </div>

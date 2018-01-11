@@ -47,6 +47,9 @@
         "templates": {
             "default": `{:templates/search.hbs}`
         },
+        "defaultParams": {
+            "type": ["scvo-cms-post", "scvo-grant-charter", "digital-charter-signatory", "scvo-document-evidence", "funding-scotland-fund", "goodhq-organisation", "goodmoves-legacy", "scvo-cms-page", "scvo-member", "scvo-event"]
+        },
         "headTagsTemplate": `{:templates/search-head-tags.hbs}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
@@ -56,7 +59,7 @@
         "elasticsearchConfig": {
             "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
             "apiVersion": "5.6",
-            "log": "trace"
+            "log": "debug"
         },
         "multipleResults": true
     },
@@ -1000,7 +1003,8 @@
             "bank_comparison": "/running-your-organisation/finance-business-management/bank-accounts/comparison",
             "services": "/services",
             "projects_campaigns": "/projects-campaigns",
-            "digital_about": "/digital/about"
+            "digital_about": "/digital/about",
+            "office_space": "/services/office-space"
         },
         "templates": {
             "default": `{:templates/page-full-width.hbs}`
@@ -1063,6 +1067,34 @@
         },
         "templates": {
             "default": `{:templates/page-setting-up.hbs}`
+        },
+        "headTagsTemplate": `{:templates/page-head-tags.hbs}`,
+        "primarySearchTemplate": {
+            "index": "web-content-production",
+            "type": "scvo-cms-page",
+            "template": `{:queries/page.json}`
+        },
+        "supplimentarySearchTemplates": {
+            "splash": {
+                "index": "web-content-production",
+                "type": "scvo-cms-media",
+                "template": `{:queries/page-splash.json}`
+            }
+        },
+        "elasticsearchConfig": {
+            "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
+            "apiVersion": "5.6"
+        }
+    },
+    "page_setting_up_a_charity": {
+        "pattern": {
+            "employers_index": "/jobs/community-jobs-scotland/information-for-employers",
+            "employers_section": "/jobs/community-jobs-scotland/information-for-employers/*path",
+            "employees_index": "/jobs/community-jobs-scotland/information-for-employees",
+            "employees_section": "/jobs/community-jobs-scotland/information-for-employees/*path"
+        },
+        "templates": {
+            "default": `{:templates/page-cjs.hbs}`
         },
         "headTagsTemplate": `{:templates/page-head-tags.hbs}`,
         "primarySearchTemplate": {

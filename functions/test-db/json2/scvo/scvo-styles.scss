@@ -144,6 +144,7 @@ primary-dark: #251032
     $themeDefault: map-get($colours, 'default');
     $themePosts: map-get($colours, 'posts');
     $themeServices: map-get($colours, 'services');
+    $themeCharity: map-get($colours, 'charity');
 
     a,
     .post-info .post-info-categories .fa,
@@ -201,6 +202,15 @@ primary-dark: #251032
             background-color: white !important;
             border-color: map-get($themeSelected, 'primary-dark') !important;
             color: map-get($themeSelected, 'primary') !important;
+        }
+    }
+    .featured-background-image {
+        .mdc-button {
+            border-color: map-get($themeCharity, 'primary') !important;
+            color: white !important;
+        }
+        .mdc-button:hover {
+            background-color: map-get($themeCharity, 'primary') !important;
         }
     }
     footer h3 {
@@ -540,6 +550,9 @@ a {
 a:hover {
     text-decoration: underline;
 }
+iframe {
+    border: none;
+}
 .mdc-card__actions a:hover,
 .mdc-button a:hover,
 .mdc-button:hover,
@@ -608,12 +621,15 @@ a:hover {
             background-size: cover;
             background-repeat: no-repeat;
             background-position: center center;
-            p {
+            p,
+            .mdc-card__supporting-text {
                 font-size: 1.4rem;
+                letter-spacing: -0.05rem;
             }
             h1,
             p,
-            a {
+            a,
+            .mdc-card__supporting-text {
                 color: white;
             }
             img.header-text {
@@ -1159,25 +1175,31 @@ a:hover {
 .splash-image {
     overflow: hidden;
     position: relative;
-    height: 25vh;
-    min-height: $spacing-unit*9;
+    min-height: 25vh;
+    // min-height: $spacing-unit*9;
 }
 .splash-overlay.splash-overlay-hidden {
     background-image: none;
+}
+.splash-overlay {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
 }
 .splash-image {
     background-size: cover;
     background-position: center center;
     // padding-bottom: $spacing-unit;
     .container-fluid {
-        position: relative;
+        // position: relative;
         height: 100%;
         padding: 0;
         .mdc-layout-grid {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
             width: 44%;
+            margin: $spacing-unit*(2/3) 0 $spacing-unit;
+            // position: absolute;
+            // top: 50%;
+            // transform: translateY(-50%);
         }
     }
     img.header-text {
@@ -1229,8 +1251,7 @@ a:hover {
 .home {
     .splash-image.hello .splash-overlay,
     .splash-image.hello {
-        height: 40vh;
-        min-height: 350px;
+        min-height: 40vh;
     }
     .splash-image.hello {
         .container-fluid {
@@ -2019,6 +2040,11 @@ p:last-child {
 .l-margin { margin-left: $spacing-unit/2; }
 .r-margin { margin-right: $spacing-unit/2; }
 
+p.results-highlights em {
+    font-weight: bolder;
+    font-style: normal;
+}
+
 .horizontal-list-details {
     display: flex;
     padding: 0 0 0;
@@ -2232,7 +2258,7 @@ footer {
     .splash-image {
         .container-fluid {
             .mdc-layout-grid {
-                width: 100%;
+                width: 66%;
                 img.header-text {
                     max-height: auto;
                 }
@@ -2250,6 +2276,13 @@ footer {
 @media screen and (max-width: 450px) {
     .pagination-distance-4 {
         display: none !important;
+    }
+    .splash-image {
+        .container-fluid {
+            .mdc-layout-grid {
+                width: 100%;
+            }
+        }
     }
     .home .splash-image.hello {
         padding: 0;

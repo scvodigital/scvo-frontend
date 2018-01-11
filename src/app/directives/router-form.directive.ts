@@ -43,8 +43,12 @@ export class RouterFormDirective {
             }
         });
 
+        console.log('GENERATE URL FROM | searchRoute:', this.searchRoute, '| params:', { queryParams: params });
+
         var url = this.routerService.scvoRouter.generateUrl(this.searchRoute, { queryParams: params });
-        console.log('URL:', url);
+        console.log('URL BEFORE:', url);
+        url = url.replace(/(%5B%5D=)|(\[\]=)/gi, '=');
+        console.log('URL AFTER:', url);
         this.router.navigateByUrl(url);
     }
 }
