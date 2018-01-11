@@ -2,7 +2,17 @@
 @import url('//fonts.googleapis.com/css?family=Rubik:400,500i,700');
 
 $spacing-unit: 1rem;
+$brand-border-width: 2px;
 $brand-colour: #2C2C2B;
+
+:root {
+    --mdc-layout-grid-margin-desktop: 0;
+    --mdc-layout-grid-gutter-desktop: 0;
+    --mdc-layout-grid-margin-tablet: 0;
+    --mdc-layout-grid-gutter-tablet: 0;
+    --mdc-layout-grid-margin-phone: 0;
+    --mdc-layout-grid-gutter-phone: 0;
+}
 
 html {
     --mdc-theme-primary: $brand-colour;
@@ -113,7 +123,7 @@ a {
 
 .mdc-button {
     background-color: white !important;
-    border: 2px solid $brand-colour;
+    border: $brand-border-width solid $brand-colour;
     color: $brand-colour !important;
     text-transform: none;
     line-height: 1.75rem;
@@ -159,10 +169,100 @@ p.quote {
     float: right;
 }
 
-.signatories {
-    .mdc-layout-grid__cell {
+.signatories main {
+    padding-bottom: 4rem;
+    h1 {
+        font-size: 4rem;
+        line-height: 4.5rem;
+    }
+    h3 {
+        font-size: 2.5rem;
+    }
+    h4 {
+        font-size: 2rem;
+        margin: 1rem 0 0;
+    }
+    img {
+        max-width: 100%;
+    }
+    label {
+        font-size: inherit;
+        color: inherit;
+    }
+    ul li {
+        list-style-type: disc;
+    }
+    ol {
+        padding-left: 1rem;
+        li {
+            list-style-type: decimal;
+        }
+    }
+
+    form {
+        margin-bottom: $spacing-unit*2;
+    }
+    h1 {
+        font-size: 5.3rem;
+        line-height: 5.5rem;
+        letter-spacing: -.1rem;
+        margin: 2rem 0 2rem;
+        padding-right: 2rem;
+        .small {
+            font-size: 3.8rem;
+            letter-spacing: -.15rem;
+        }
+    }
+    h4 {
+        margin: 0.5rem 0 0.25rem;
+        font-size: 1.8rem;
+    }
+    h4.sort {
+        text-align: right;
+        margin-right: $spacing-unit/2;
+    }
+    .mdc-textfield__input {
+        min-width: 60%;
+        margin-bottom: 1rem;
+    }
+    .mdc-textfield__input,
+    .mdc-select {
+        font-size: 1.1rem;
+        font-weight: bold;
+        color: $brand-colour;
+        line-height: 2rem;
+        height: 3rem;
+        background-color: white;
+        padding: 0 $spacing-unit/2;
+        border: $brand-border-width solid $brand-colour;
+        border-radius: 0.15rem;
+        max-width: 100%;
+        letter-spacing: 0;
+    }
+    .humanrightsdeclaration-signatory {
+        h3 {
+            margin: $spacing-unit 0;
+        }
+    }
+    .signatory-logo-background {
+        p {
+            padding: 1rem 1rem 0.25rem;
+            background: white;
+            text-align: center;
+            border: 0px solid $brand-colour;
+        }
+        img {
+            margin: 0;
+        }
+    }
+    .signatory-detail {
+        p {
+            margin: 0 0 1rem;
+        }
+    }
+    .signatory {
         background: white;
-        margin: 0 -0.75rem;
+        // margin: 0 -0.75rem;
         padding: $spacing-unit;
         vertical-align: middle;
         a {
@@ -199,27 +299,27 @@ p.quote {
         }
     }
 
-    .mdc-layout-grid__cell--span-3 {
-        border: 2px solid $brand-colour;
+    .signatory {
+        border: 0px solid $brand-colour;
         border-right: none;
         border-bottom: none;
     }
-    .mdc-layout-grid__cell--span-3:nth-child(4n + 1) {
+    .signatory:nth-child(4n + 1) {
         border-left: none;
         .inner {
             padding-left: 0;
         }
     }
-    .mdc-layout-grid__cell--span-3:nth-child(4n + 4) {
+    .signatory:nth-child(4n + 4) {
         border-right: none;
         padding-right: 0;
         .inner {
             margin-right: 0;
         }
     }
-    .mdc-layout-grid__cell--span-3:nth-child(4n+1):nth-last-child(-n+4),
-    .mdc-layout-grid__cell--span-3:nth-child(4n+1):nth-last-child(-n+4) ~ .mdc-layout-grid__cell--span-3 {
-        border-bottom: 2px solid $brand-colour;
+    .signatory:nth-child(4n+1):nth-last-child(-n+4),
+    .signatory:nth-child(4n+1):nth-last-child(-n+4) ~ .mdc-layout-grid__cell--span-3 {
+        border-bottom: 0px solid $brand-colour;
     }
 }
 
@@ -229,7 +329,24 @@ p.quote {
     text-align: center;
     display: block !important;
     padding-top: $spacing-unit !important;
+    margin-top: 3rem;
+    list-style-type: none;
+    li a,
+    li.active a {
+        cursor: pointer;
+        color: $brand-colour;
+        font-weight: 400;
+        text-decoration: none;
+    }
+    li.active {
+        background-color: $brand-colour;
+    }
+    li.disabled a {
+        color: inherit;
+        opacity: 0.5;
+    }
     li {
+        display: inline-block;
         padding: 0 !important;
         height: $spacing-unit*2;
         width: $spacing-unit*2;
@@ -237,7 +354,7 @@ p.quote {
         margin: 0 $spacing-unit/5;
         vertical-align: bottom;
         a {
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             line-height: $spacing-unit*2;
             height: $spacing-unit*2;
             width: $spacing-unit*2;
@@ -269,7 +386,7 @@ p.quote {
             color: white;
         }
     }
-    li:hover,
+    li:hover:not(.disabled),
     li.current-page:hover {
         background-color: $brand-colour;
         a {

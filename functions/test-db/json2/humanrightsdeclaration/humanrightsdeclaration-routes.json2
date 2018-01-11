@@ -136,14 +136,14 @@
         "headTagsTemplate": `{:templates/head-tags.hbs}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
-            "type": "digital-charter-signatory",
+            "type": "humanrightsdeclaration-signatory",
             "template": `{:queries/signatory-search.json}`
         },
         "supplimentarySearchTemplates": {
-            "types": {
+            "total": {
                 "index": "web-content-production",
-                "type": "digital-charter-signatory",
-                "template": `{:queries/signatory-aggs.json}`
+                "type": "humanrightsdeclaration-signatory",
+                "template": `{:queries/signatory-total.json}`
             }
         },
         "elasticsearchConfig": {
@@ -163,15 +163,8 @@
         "headTagsTemplate": `{:templates/head-tags.hbs}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
-            "type": "digital-charter-signatory",
+            "type": "humanrightsdeclaration-signatory",
             "template": `{:queries/signatory.json}`
-        },
-        "supplimentarySearchTemplates": {
-            "types": {
-                "index": "web-content-production",
-                "type": "digital-charter-signatory",
-                "template": `{:queries/signatory-aggs.json}`
-            }
         },
         "elasticsearchConfig": {
             "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",

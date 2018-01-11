@@ -4,18 +4,11 @@
     "_source": [
         "slug",
         "title",
-        "rendered.search_result_logo"
+        "rendered.humanrightsdeclaration_search_result"
     ],
     "query": {
         "bool": {
             "must": [
-            {{#if query.course_type}}
-                {
-                    "term": {
-                        "type": "{{query.type}}"
-                    }
-                }{{#if query.q}},{{/if}}
-            {{/if}}
             {{#if query.q}}
                 {
                     "query_string": {
@@ -27,5 +20,8 @@
             {{/if}}
             ]
         }
+    },
+    "sort": {
+        {{#if query.sort}}"slug": "asc"{{else}}"date_signed": "desc"{{/if}}
     }
 }
