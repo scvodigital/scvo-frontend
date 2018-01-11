@@ -144,6 +144,7 @@ primary-dark: #251032
     $themeDefault: map-get($colours, 'default');
     $themePosts: map-get($colours, 'posts');
     $themeServices: map-get($colours, 'services');
+    $themeCharity: map-get($colours, 'charity');
 
     a,
     .post-info .post-info-categories .fa,
@@ -192,7 +193,6 @@ primary-dark: #251032
             background-color: map-get($themeSelected, 'primary');
         }
     }
-    .featured-background-image,
     .splash-image {
         .mdc-button {
             border-color: white !important;
@@ -202,6 +202,15 @@ primary-dark: #251032
             background-color: white !important;
             border-color: map-get($themeSelected, 'primary-dark') !important;
             color: map-get($themeSelected, 'primary') !important;
+        }
+    }
+    .featured-background-image {
+        .mdc-button {
+            border-color: map-get($themeCharity, 'primary') !important;
+            color: white !important;
+        }
+        .mdc-button:hover {
+            background-color: map-get($themeCharity, 'primary') !important;
         }
     }
     footer h3 {
@@ -1187,7 +1196,7 @@ iframe {
         padding: 0;
         .mdc-layout-grid {
             width: 44%;
-            margin: $spacing-unit 0;
+            margin: $spacing-unit*(2/3) 0 $spacing-unit;
             // position: absolute;
             // top: 50%;
             // transform: translateY(-50%);

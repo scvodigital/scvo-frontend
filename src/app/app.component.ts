@@ -25,17 +25,17 @@ export class AppComponent implements OnInit {
                 console.log('Post Message Event', event.data);
                 switch (event.data.event) {
                     case ('resize'):
-                        (<HTMLIFrameElement>document.querySelector('iframe[src*="' + event.origin + '"]')).style.height = event.data.height + 'px';
+                        (<HTMLIFrameElement>document.querySelector('iframe[src*="' + event.origin + '"]')).style.height = (30+event.data.height) + 'px';
                         break;
                     case ('redirect'):
                         var url = event.data.url;
-                        ngRouter.navigateByUrl(url); 
+                        ngRouter.navigateByUrl(url);
                         break;
                 }
             }
         }, false);
 
-        var html = (<any>window).startingPoint; 
+        var html = (<any>window).startingPoint;
         this.html = this.router.cleanHtml(html, this.router.currentRoute.params, this.router.currentRoute.multipleResults);
 
         setTimeout(() => {
