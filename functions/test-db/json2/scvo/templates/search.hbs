@@ -261,7 +261,6 @@
                                     
                                     {{{regexReplace _source.rendered.scvo_search_result "(%highlights%)(.|[\r\n])*?(%/highlights%)" "img" (removeEntities (concat "<p class=\"results-highlights\">..." (join highlight.text_bag " ... ... ") " ...</p>"))}}}
                                 {{else}}
-                                    TEST
                                     {{{regexReplace _source.rendered.scvo_search_result "(%/?highlights%)" "igm" ""}}}
                                 {{/ifAll}}
                         {{else}}
