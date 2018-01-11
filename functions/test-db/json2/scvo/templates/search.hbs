@@ -165,7 +165,11 @@
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-9 content">
                     {{#each primaryResponse.hits.hits}}
                         {{#if _source.rendered.scvo_search_result}}
-                            {{{replace _source.rendered.scvo_search_result "%highlights%" (removeEntities (concat "<p class=\"results-highlights\">..." (join highlight.text_bag " ... ... ") " ...</p>"))}}}
+                            {{#if highlight }}
+                                {{{replace _source.rendered.scvo_search_result "%highlights%" (removeEntities (concat "<p class=\"results-highlights\">..." (join highlight.text_bag " ... ... ") " ...</p>"))}}}
+                            {{else}}
+                                {{{_source.rendered.scvo_search_result}}}
+                            {{/if}}
                         {{else}}
                         [ Error - search result template missing ]
                         {{/if}}
