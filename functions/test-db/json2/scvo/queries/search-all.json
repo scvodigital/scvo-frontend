@@ -15,14 +15,24 @@
         "function_score": {
         	"query": {
 	        	"bool": {
-                    {{#if query.type}}
-                    "filter": {
-                        "term": {
-                            "_type": "{{query.type}}"
-                        }
-                    },
-                    {{/if}}
 	        		"must": [
+                        {{#if query.type}}
+                        {
+                            "bool": {
+                                "should": [
+                                    {{#compare (getType query.type) "string"}}
+                                        { "term": { "_type": "{{query.type}}" } },
+                                    {{/compare}}
+                                    {{#compare (getType query.type) "array"}}
+                                        {{#each query.type}}
+                                        { "term": { "_type": "{{this}}" } },
+                                        {{/each}}
+                                    {{/compare}}
+                                    { "match_none": {} }
+                                ]
+                            }
+                        },
+                        {{/if}}
 	        			{
 		        			"bool": {
 		        				"should": [
