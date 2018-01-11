@@ -1159,25 +1159,31 @@ a:hover {
 .splash-image {
     overflow: hidden;
     position: relative;
-    height: 25vh;
-    min-height: $spacing-unit*9;
+    min-height: 25vh;
+    // min-height: $spacing-unit*9;
 }
 .splash-overlay.splash-overlay-hidden {
     background-image: none;
+}
+.splash-overlay {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
 }
 .splash-image {
     background-size: cover;
     background-position: center center;
     // padding-bottom: $spacing-unit;
     .container-fluid {
-        position: relative;
+        // position: relative;
         height: 100%;
         padding: 0;
         .mdc-layout-grid {
-            position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
             width: 44%;
+            margin: $spacing-unit 0;
+            // position: absolute;
+            // top: 50%;
+            // transform: translateY(-50%);
         }
     }
     img.header-text {
@@ -1229,8 +1235,7 @@ a:hover {
 .home {
     .splash-image.hello .splash-overlay,
     .splash-image.hello {
-        height: 40vh;
-        min-height: 350px;
+        min-height: 40vh;
     }
     .splash-image.hello {
         .container-fluid {
@@ -2232,7 +2237,7 @@ footer {
     .splash-image {
         .container-fluid {
             .mdc-layout-grid {
-                width: 100%;
+                width: 66%;
                 img.header-text {
                     max-height: auto;
                 }
@@ -2250,6 +2255,13 @@ footer {
 @media screen and (max-width: 450px) {
     .pagination-distance-4 {
         display: none !important;
+    }
+    .splash-image {
+        .container-fluid {
+            .mdc-layout-grid {
+                width: 100%;
+            }
+        }
     }
     .home .splash-image.hello {
         padding: 0;
