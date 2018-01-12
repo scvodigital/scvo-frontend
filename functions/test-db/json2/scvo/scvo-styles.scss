@@ -507,6 +507,7 @@ primary-dark: #251032
 .library-content,
 .library-sidebar,
 .home .cta-content,
+.home .search,
 .home .featured-text,
 .home .latest-content,
 .home .gist.scvo-cms-post,
@@ -535,6 +536,10 @@ body {
 :focus {
     outline: none;
 }
+input:focus::-webkit-input-placeholder { color:transparent; }
+input:focus:-moz-placeholder { color:transparent; } /* FF 4-18 */
+input:focus::-moz-placeholder { color:transparent; } /* FF 19+ */
+input:focus:-ms-input-placeholder { color:transparent; } /* IE 10+ */
 .brand-logo {
     margin-left: -$spacing-unit/2;
     img {
@@ -601,28 +606,39 @@ iframe {
 }
 
 .home {
-    .featured-content {
-        .search_form {
-            margin-left: 5%;
-            margin-right: 5%;
+    .search {
+        margin-bottom: $spacing-unit*2;
+        h3 {
+            margin: $spacing-unit*2 0;
+        }
+        .home_search_form {
+            position: relative;
+            margin-right: $spacing-unit*2;
             .mdc-text-field {
+                -moz-box-sizing: border-box;
+                -webkit-box-sizing: border-box;
+                box-sizing: border-box;
                 border: 2px solid #333;
                 border-radius: 0;
                 width: 100%;
-                height: 1.5rem;
-                line-height: 2rem;
-                margin: 1.5rem 0 1rem;
-                padding: 1rem;
+                height: $spacing-unit*3;
+                line-height: $spacing-unit*3;
+                margin: 0;
+                padding: $spacing-unit;
                 font-size: 1.5rem;
             }
-        }
-        .search-button-large {
-            padding: 1.8rem 0 0;
-            float: right;
-            .fa-search {
-                color: #333;
+            .search-button-large {
+                padding: 1px 0 0;
+                position: absolute;
+                top: $spacing-unit/2;
+                right: $spacing-unit/2;
+                .fa-search {
+                    color: #333;
+                }
             }
         }
+    }
+    .featured-content {
         .featured {
             h1,
             p {
@@ -2054,14 +2070,17 @@ p:last-child {
         font-family: 'Font Awesome\ 5 Pro';
         content: "\f08e";
         font-weight: 400;
-        margin-left: 0.3rem;
+        margin-left: 0.25rem;
         -moz-osx-font-smoothing: grayscale;
         -webkit-font-smoothing: antialiased;
         display: inline-block;
         font-style: normal;
         font-variant: normal;
         text-rendering: auto;
-        line-height: 1;
+        line-height: 1.2rem;
+        font-size: 0.8rem;
+        top: -0.1rem;
+        position: relative;
     }
     a[href^="https://storage.googleapis.com"]::after,
     a[href^="https://maps.google.co.uk"]::after,
@@ -2424,17 +2443,17 @@ footer {
             }
         }
     }
-    .home .featured-content .search_form {
-        margin: 0;
-        .mdc-text-field {
-            width: 100%;
-            height: 1.5rem;
-            line-height: 2rem;
-            margin: 1rem 0 0.5rem;
-            padding: 0.5rem 0;
-            font-size: 1.1rem;
-        }
-    }
+    // .home .featured-content .search_form {
+    //     margin: 0;
+    //     .mdc-text-field {
+    //         width: 100%;
+    //         height: 1.5rem;
+    //         line-height: 2rem;
+    //         margin: 1rem 0 0.5rem;
+    //         padding: 0.5rem 0;
+    //         font-size: 1.1rem;
+    //     }
+    // }
 }
 
 @media screen and (max-width: 395px) {
