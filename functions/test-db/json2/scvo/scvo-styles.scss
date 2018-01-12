@@ -156,7 +156,6 @@ primary-dark: #251032
     #share-menu-button,
     .mdc-simple-menu .mdc-list-item,
     .container-content ul li::before,
-    blockquote p strong,
     .mdc-theme--primary {
         color: map-get($themeSelected, 'primary');
     }
@@ -502,6 +501,7 @@ primary-dark: #251032
 .list.scvo-cms-post,
 .breadcrumbs,
 .page-content,
+.page-sidebar .static-sidebar,
 .posts-page .page-sidebar,
 .post-content,
 .library-content,
@@ -746,7 +746,6 @@ iframe {
     }
 }
 .gist {
-    box-shadow: none;
     padding-top: $spacing-unit;
     .mdc-card__subtitle {
         margin-top: $spacing-unit/4;
@@ -780,6 +779,7 @@ iframe {
 }
 .policy-research .latest-content .gist,
 .home .latest-content .gist,
+.digital .gist,
 .page-related .gist,
 .post-related .gist {
     box-shadow: none;
@@ -1331,12 +1331,13 @@ iframe {
 
 .digital {
     .callout {
-        padding-bottom: $spacing-unit;
+        padding: $spacing-unit 0 $spacing-unit;
         h2 {
-            margin: $spacing-unit*1.7 0;
+            margin: $spacing-unit*1.2 0;
         }
         .mdc-card {
             box-shadow: none;
+            -webkit-box-shadow: none;
             h3 {
                 margin: 0;
             }
@@ -1362,6 +1363,12 @@ iframe {
     }
     .logos {
         margin-bottom: $spacing-unit*2;
+        .mdc-layout-grid__cell {
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
         h3 {
             font-weight: 100;
             font-family: "Open Sans";
@@ -2052,6 +2059,7 @@ p:last-child {
         text-rendering: auto;
         line-height: 1;
     }
+    a[href^="https://storage.googleapis.com"]::after,
     a[href^="http://goodhq.org"]::after,
     a[href^="https://goodhq.org"]::after,
     a[href^="http://digitalparticipation.scot"]::after,
