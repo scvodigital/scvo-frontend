@@ -17,9 +17,11 @@
         </div>
     </div>
     <div class="container-fluid">
+        {{#> handle_404}}
         {{> breadcrumbs}}
         <div class="content page-content">
             {{{primaryResponse.hits.hits.[0]._source.rendered.full}}}
         </div>
+        {{/handle_404}}
     </div>
 </div>
