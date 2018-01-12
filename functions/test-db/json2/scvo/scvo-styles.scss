@@ -214,7 +214,7 @@ primary-dark: #251032
         }
     }
     .digital-participation {
-        background: linear-gradient(180deg, map-get($themeDigital, 'secondary-light') 5%, map-get($themeDigital, 'secondary-dark') 95%);
+        background-image: linear-gradient(180deg, map-get($themeDigital, 'secondary-light') 5%, map-get($themeDigital, 'secondary-dark') 95%);
         p,
         h2,
         h3,
@@ -243,6 +243,21 @@ primary-dark: #251032
             border-color: white !important;
         }
     }
+    .support.funding .mdc-card__primary,
+    .support.support-organisation .mdc-card__primary,
+    .post-info .post-info-categories .inline-list li a,
+    .pagination li.current-page,
+    .mdc-theme--primary-bg {
+        background-color: map-get($themeSelected, 'primary') !important;
+    }
+    .section-campaigns .mdc-card__media,
+    .section-projects .mdc-card__media,
+    .support.support-organisation .mdc-card__media {
+        background-color: map-get($themeSelected, 'primary');
+    }
+    body {
+        background-color: map-get($themeFooter, 'primary-dark');
+    }
     footer h3 {
         border-color: map-get($themeFooter, 'primary-light');
     }
@@ -268,21 +283,6 @@ primary-dark: #251032
     }
     .mdc-theme--secondary-dark {
         color: map-get($themeSelected, 'secondary-dark');
-    }
-    .support.funding .mdc-card__primary,
-    .support.support-organisation .mdc-card__primary,
-    .section-projects .mdc-card__media,
-    .section-campaigns .mdc-card__media,
-    .post-info .post-info-categories .inline-list li a,
-    .pagination li.current-page,
-    .mdc-theme--primary-bg {
-        background-color: map-get($themeSelected, 'primary') !important;
-    }
-    .support.support-organisation .mdc-card__media {
-        background-color: map-get($themeSelected, 'primary');
-    }
-    body {
-        background-color: map-get($themeFooter, 'primary-dark');
     }
     .mdc-theme--background,
     .mdc-theme--site-bg {
@@ -1869,7 +1869,7 @@ ul.breadcrumbs {
     margin-bottom: $spacing-unit/2;
 }
 .post-info .post-info-author img,
-.scvo-staff-photo-wee {
+.about.staff-team .scvo-staff-photo-wee {
     width: 1.6rem !important;
     height: 1.6rem !important;
     border-radius: 50%;
@@ -2064,6 +2064,7 @@ p:last-child {
         line-height: 1;
     }
     a[href^="https://storage.googleapis.com"]::after,
+    a[href^="https://maps.google.co.uk"]::after,
     a[href^="http://goodhq.org"]::after,
     a[href^="https://goodhq.org"]::after,
     a[href^="http://digitalparticipation.scot"]::after,
