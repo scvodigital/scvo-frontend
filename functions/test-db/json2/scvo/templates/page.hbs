@@ -4,52 +4,61 @@
             <div class="container-fluid">
                 <div class="mdc-layout-grid">
                     {{#if primaryResponse.hits.hits.[0]._source.header_text}}
-                    <img src="{{primaryResponse.hits.hits.[0]._source.header_text}}" alt="{{primaryResponse.hits.hits.[0]._source.title}}" class="header-text" />
+                        <img src="{{primaryResponse.hits.hits.[0]._source.header_text}}" alt="{{primaryResponse.hits.hits.[0]._source.title}}" class="header-text" />
                     {{else}}
-                    <h1 class="header-text">
-                        <span class="header-text-banner">
-                            {{#if primaryResponse.hits.hits.[0]}}
-                            {{#if primaryResponse.hits.hits.[0]._source.hide_overlay}}
-                            {{else}}
-                            {{{primaryResponse.hits.hits.[0]._source.title}}}
-                            {{/if}}
-                            {{else}}
-                            404: Not found
-                            {{/if}}
-                        </span>
-                    </h1>
+                            <h1 class="header-text">
+                                <span class="header-text-banner">
+                                {{#if primaryResponse.hits.hits.[0]}}
+                                    {{#unless primaryResponse.hits.hits.[0]._source.hide_overlay}}
+                                        {{{primaryResponse.hits.hits.[0]._source.title}}}
+                                    {{/unless}}
+                                {{else}}
+                                    404: Not found
+                                {{/if}}
+                            </span>
+                        </h1>
                     {{/if}}
                 </div>
             </div>
         </div>
     </div>
     <div class="container-fluid">
-        {{> breadcrumbs}}
-        <div class="mdc-layout-grid">
-            <div class="mdc-layout-grid__inner">
-                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-8-desktop mdc-layout-grid__cell--span-12-tablet content page-content">
-                    {{#if primaryResponse.hits.hits.[0]}}
-                    {{#with primaryResponse.hits.hits.[0]._source}}
-                    {{{rendered.full}}}
-                    {{/with}}
-                    {{else}}
-                    <h2>Page not found</h2>
-                    {{/if}}
-                </div>
-                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-12-tablet sidebar page-sidebar">
-                    {{#compare supplimentaryResponses.related_posts.hits.total ">" 0}}
-                    <div class="related-posts">
-                        <h3 class="blogs">Related posts</h3>
-                        <ul class="v-margin supplimentary-list">
-                            {{#each supplimentaryResponses.related_posts.hits.hits}}
-                            {{{_source.rendered.sidebar_mini}}}
-                            {{/each}}
-                        </ul>
-                        <a class="v-margin mdc-button mdc-button--raised" href="/post/categories/{{primaryResponse.hits.hits.[0]._source.categories_slug.[0]}}">Read more</a>
+        {{#if primaryResponse.hits.hits.[0]}}
+            {{> breadcrumbs}}
+            <div class="mdc-layout-grid">
+                <div class="mdc-layout-grid__inner">
+                    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-8-desktop mdc-layout-grid__cell--span-12-tablet content page-content">
+                        {{#with primaryResponse.hits.hits.[0]._source}}
+                            {{{rendered.full}}}
+                        {{/with}}
                     </div>
-                    {{/compare}}
+                    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-12-tablet sidebar page-sidebar">
+                        {{#compare supplimentaryResponses.related_posts.hits.total ">" 0}}
+                            <div class="related-posts">
+                                <h3 class="blogs">Related posts</h3>
+                                <ul class="v-margin supplimentary-list">
+                                    {{#each supplimentaryResponses.related_posts.hits.hits}}
+                                        {{{_source.rendered.sidebar_mini}}}
+                                    {{/each}}
+                                </ul>
+                                <a class="v-margin mdc-button mdc-button--raised" href="/post/categories/{{primaryResponse.hits.hits.[0]._source.categories_slug.[0]}}">Read more</a>
+                            </div>
+                        {{/compare}}
+                    </div>
                 </div>
             </div>
-        </div>
+        {{else}}
+            <h2>Page not found</h2>
+            <p>Some witty text about how we must have misplaced it or the user was just way off in what they typed</p>
+            {{#compare supplimentaryResponses.not_found.hits.total ">" 0}}
+                <h3>Did you mean</h3>
+                {{#each supplimentaryResponses.not_found.hits.hits}}
+                    <!-- TITLE: {{{title}}} - SCORE: {{_score}}</h4> -->
+                    {{>highlight-result}}
+                {{/each}}
+            {{else}}
+                <p>We couldn't even find anything in our index that looks relevant</p> 
+            {{/compare}}
+        {{/if}}
     </div>
 </div>
