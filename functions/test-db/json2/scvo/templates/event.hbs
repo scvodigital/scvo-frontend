@@ -23,8 +23,17 @@
             <li><a href="/events">Events</a></li>
             <li>{{{primaryResponse.hits.hits.[0]._source.title}}}</li>
         </ul>
+
+        {{{primaryResponse.hits.hits.[0]._source.rendered.full}}}
+
+        <p>
+            <strong>NB: Please read our Policies, procedures and terms & conditions document below before making your booking.</strong>
+        </p>
+        <p>
+            <a href="https://cms.scvo.org/wp-content/uploads/2018/01/Policies-procedures-and-TCs.docx">Policies, procedures and T&amp;Cs</a>
+        </p>
+
         <div class="mdc-layout-grid">
-            {{{primaryResponse.hits.hits.[0]._source.rendered.full}}}
             <div class="mdc-layout-grid__inner">
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
                     {{#compare supplimentaryResponses.related_events.hits.total ">" 0}}
