@@ -123,7 +123,7 @@ secondary-light: #6dede5,
 secondary-dark: #A7C9F2
 ),
 services: (
-primary: #1565C0,
+primary: #125AAC,
 primary-alpha: rgba(21,101,192,0.89),
 primary-light: #1565C0,
 primary-dark: #0E4686,
@@ -295,6 +295,9 @@ primary-dark: #251032
     }
     .mdc-theme--primary-light-bg {
         background-color: map-get($themeSelected, 'primary-light') !important;
+    }
+    .mdc-theme--primary-dark-bg.toolbar-nav {
+        background-image: linear-gradient(90deg, map-get($themeSelected, 'primary-dark'), map-get($themeSelected, 'primary-dark') 60%, map-get($themeSelected, 'primary') 150%, map-get($themeSelected, 'primary'));
     }
     .pagination li:hover,
     .pagination li.current-page:hover,
@@ -2016,6 +2019,7 @@ p:last-child {
 .full {
     img {
         max-width: 100%;
+        height: auto;
     }
 }
 .full {
