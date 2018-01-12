@@ -31,17 +31,21 @@ export class RouterFormDirective {
                 val = val === 'on' ? true : val === 'off' ? false : val;
             }
 
-            if(val && val !== ''){
-                if(params.hasOwnProperty(key)){
-                    if(!Array.isArray(params[key])){
+            if (val && val !== '') {
+                if (params.hasOwnProperty(key)) {
+                    if (!Array.isArray(params[key])) {
                         params[key] = [params[key]];
                     }
                     params[key].push(val);
-                }else{
+                } else {
                     params[key] = val;
                 }
             }
         });
+
+        if (Object.keys(params).length == 0) {
+            return;
+        }
 
         console.log('GENERATE URL FROM | searchRoute:', this.searchRoute, '| params:', { queryParams: params });
 
