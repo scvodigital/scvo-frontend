@@ -1,4 +1,4 @@
-<div class="page posts-page">
+<div class="staff">
     <div class="splash-image splash-image-{{primaryResponse.hits.hits.[0]._type}}" style="{{> header_splash_image}}">
         <div class="splash-overlay{{#if primaryResponse.hits.hits.[0]._source.hide_overlay}} splash-overlay-hidden{{/if}}">
             <div class="container-fluid">
@@ -8,7 +8,7 @@
                     {{else}}
                     <h1 class="header-text">
                         <span class="header-text-banner">
-                            {{{primaryResponse.hits.hits.[0]._source.title}}}
+                            {{{primaryResponse.hits.hits.[0]._source.name_full}}}
                         </span>
                     </h1>
                     {{/if}}
@@ -17,25 +17,18 @@
         </div>
     </div>
     <div class="container-fluid">
-        {{#> handle_404}}
-        {{> breadcrumbs_posts}}
+        <ul class="breadcrumbs">
+            <li><a href="/">Home</a></li>
+            <li><a href="/about">About SCVO</a></li>
+            <li><a href="/about/staff-team">Staff team</a></li>
+            <li>{{{primaryResponse.hits.hits.[0]._source.name_full}}}</li>
+        </ul>
         <div class="mdc-layout-grid">
             <div class="mdc-layout-grid__inner">
-                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-8 content page-content">
-                    <ul class="supplimentary-list">
-                        {{#each supplimentaryResponses.related_posts.hits.hits}}
-                        {{{_source.rendered.list}}}
-                        {{/each}}
-                    </ul>
-                    {{> pagination}}
-                </div>
-                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 sidebar page-sidebar">
-                    {{#with primaryResponse.hits.hits.[0]._source}}
-                    {{{rendered.full}}}
-                    {{/with}}
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 content page-content">
+                    {{{primaryResponse.hits.hits.[0]._source.rendered.scvo_full}}}
                 </div>
             </div>
         </div>
-        {{/handle_404}}
     </div>
 </div>

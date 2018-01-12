@@ -20,7 +20,6 @@ import { RouterService } from './services/router.service';
 // Components
 import { AppComponent } from './app.component';
 import { RouterComponent } from './components/router/router.component';
-import { NotFoundComponent } from './components/not-found/not-found.component';
 
 // Directives
 
@@ -28,7 +27,6 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
     declarations: [
         AppComponent,
         RouterComponent,
-        NotFoundComponent
     ],
     imports: [
         BrowserModule,

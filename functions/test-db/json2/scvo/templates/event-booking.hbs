@@ -16,21 +16,23 @@
             </div>
         </div>
     </div>
-    {{#with primaryResponse.hits.hits.[0]._source}}
     <div class="container-fluid">
-        <ul class="breadcrumbs">
-            <li><a href="/">Home</a></li>
-            <li><a href="/events">Events</a></li>
-            <li><a href="/events/{{slug}}">{{{title}}}</a></li>
-            <li>Booking</li>
-        </ul>
-        <div class="mdc-layout-grid">
-            <div class="mdc-layout-grid__inner">
-                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 content event-content">
-                    <iframe src="https://www.surveygizmo.eu/s3/90055302/Events-Booking-Training-Events?sfid={{Id}}&title={{title}}" frameborder="0" width="100%" height="400" style="overflow:hidden"></iframe>
+        {{#> handle_404}}
+            {{#with primaryResponse.hits.hits.[0]._source}}
+                <ul class="breadcrumbs">
+                    <li><a href="/">Home</a></li>
+                    <li><a href="/events">Events</a></li>
+                    <li><a href="/events/{{slug}}">{{{title}}}</a></li>
+                    <li>Booking</li>
+                </ul>
+                <div class="mdc-layout-grid">
+                    <div class="mdc-layout-grid__inner">
+                        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 content event-content">
+                            <iframe src="https://www.surveygizmo.eu/s3/90055302/Events-Booking-Training-Events?sfid={{Id}}&title={{title}}" frameborder="0" width="100%" height="400" style="overflow:hidden"></iframe>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
+            {{/with}}
+        {{/handle_404}}
     </div>
-    {{/with}}
 </div>
