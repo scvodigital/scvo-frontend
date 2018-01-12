@@ -23,7 +23,7 @@
         </div>
     </div>
     <div class="container-fluid">
-        {{#if primaryResponse.hits.hits.[0]}}
+        {{#> handle_404}}
             {{> breadcrumbs}}
             <div class="mdc-layout-grid">
                 <div class="mdc-layout-grid__inner">
@@ -47,18 +47,6 @@
                     </div>
                 </div>
             </div>
-        {{else}}
-            <h2>Page not found</h2>
-            <p>Some witty text about how we must have misplaced it or the user was just way off in what they typed</p>
-            {{#compare supplimentaryResponses.not_found.hits.total ">" 0}}
-                <h3>Did you mean</h3>
-                {{#each supplimentaryResponses.not_found.hits.hits}}
-                    <!-- TITLE: {{{title}}} - SCORE: {{_score}}</h4> -->
-                    {{>highlight-result}}
-                {{/each}}
-            {{else}}
-                <p>We couldn't even find anything in our index that looks relevant</p> 
-            {{/compare}}
-        {{/if}}
+        {{/handle_404}}
     </div>
 </div>
