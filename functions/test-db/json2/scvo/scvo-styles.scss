@@ -504,6 +504,7 @@ primary-dark: #251032
 .list.scvo-cms-post,
 .breadcrumbs,
 .page-content,
+.page-related,
 .page-sidebar .static-sidebar,
 .posts-page .page-sidebar,
 .post-content,
@@ -1329,6 +1330,7 @@ iframe {
         max-height: $spacing-unit*6;
     }
 }
+.about.staff-team .post-info-author,
 .digital.charter-fund.projects .page-info,
 .digital.cyber-resilience.projects .page-info,
 .projects-campaigns.terrific-trustees.search .page-info,
@@ -1892,7 +1894,7 @@ ul.breadcrumbs {
     margin-bottom: $spacing-unit/2;
 }
 .post-info .post-info-author img,
-.about.staff-team .scvo-staff-photo-wee {
+.about.staff-team .staff-list .scvo-staff-photo-wee {
     width: 1.6rem !important;
     height: 1.6rem !important;
     border-radius: 50%;
@@ -1900,6 +1902,19 @@ ul.breadcrumbs {
     vertical-align: text-bottom;
     float: left;
     margin-top: -0.15rem;
+}
+.about.staff-team {
+    .scvo-staff-photo-full {
+        margin: 0;
+    }
+    .inline-dl {
+        dt {
+            width: 20px;
+        }
+        dd {
+            width: calc(100% - 20px);
+        }
+    }
 }
 .post-info {
     font-size: 0.9rem;

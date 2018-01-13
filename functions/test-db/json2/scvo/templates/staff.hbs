@@ -28,6 +28,25 @@
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 content page-content">
                     {{{primaryResponse.hits.hits.[0]._source.rendered.scvo_full}}}
                 </div>
+                {{#compare supplimentaryResponses.author_posts.hits.total ">" 0}}
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 related page-related">
+                    <h3 class="blogs">Posts by {{{primaryResponse.hits.hits.[0]._source.name_full}}}</h3>
+                    <div class="mdc-layout-grid">
+                        <div class="mdc-layout-grid__inner">
+                            {{#each supplimentaryResponses.author_posts.hits.hits}}
+                            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4">
+                                {{{_source.rendered.list}}}
+                            </div>
+                            {{/each}}
+                        </div>
+                    </div>
+                    {{#compare supplimentaryResponses.author_posts.hits.total ">" 6}}
+                    <p class="v-margin read-more">
+                        <a href="/post/author/{{{supplimentaryResponses.author_posts.hits.hits.[0]._source.author_slug}}}" class="mdc-button mdc-button__raised">Read more</a>
+                    </p>
+                    {{/compare}}
+                </div>
+                {{/compare}}
             </div>
         </div>
     </div>

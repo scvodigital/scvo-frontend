@@ -4,7 +4,7 @@
         <div class="mdc-layout-grid">
             <div class="mdc-layout-grid__inner">
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3 sidebar">
-                    <form [searchroute]="'main_search'" data-auto-search="true">
+                    <form [searchroute]="'main_search'" data-auto-search="true" autocomplete="off">
                         <input type="text" class="mdc-textfield__input searchRoute" placeholder="Search keywords" value="{{params.query.q}}" name="q" id="main-q">
                         {{#*inline "filter_checkbox"}}
                             <div class="mdc-form-field">
@@ -31,20 +31,20 @@
                         {{>filter_checkbox label="Pages" value="scvo-cms-page"}}
                         {{>filter_checkbox label="Staff" value="scvo-staff"}}
                         {{>filter_checkbox label="Training & events" value="scvo-event"}}
-                        
+
                         <h3>Digital Participation</h3>
                         {{>filter_checkbox label="Digital funded projects" value="scvo-grant-charter"}}
                         {{>filter_checkbox label="Digital Participation Charter signatories" value="digital-charter-signatory"}}
-                        
+
                         <h3>Funding Scotland</h3>
                         {{>filter_checkbox label="Funding Scotland funds" value="funding-scotland-fund"}}
-                        
+
                         <h3>Good HQ</h3>
                         {{>filter_checkbox label="Good HQ organisation profiles" value="goodhq-organisation"}}
-                        
+
                         <h3>Goodmoves</h3>
                         {{>filter_checkbox label="Goodmoves jobs" value="goodmoves-legacy"}}
-                        
+
                         <h3>TFN</h3>
                         {{>filter_checkbox label="TFN blog posts" value="tfn-blog-post"}}
                         {{>filter_checkbox label="TFN events" value="tfn-event"}}
