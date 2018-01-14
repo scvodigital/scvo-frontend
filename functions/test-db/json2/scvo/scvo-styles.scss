@@ -422,7 +422,7 @@ primary-dark: #251032
 
     footer {
         color: white;
-        background-image: linear-gradient(115deg, map-get($themeFooter, 'primary'), map-get($themeFooter, 'primary') 60%, map-get($themeFooter, 'primary-dark') 80%, map-get($themeFooter, 'primary-dark'));
+        background-image: linear-gradient(160deg, map-get($themeFooter, 'primary'), map-get($themeFooter, 'primary') 60%, map-get($themeFooter, 'primary-dark') 80%, map-get($themeFooter, 'primary-dark'));
         // background-color: map-get($themeFooter, 'primary');
         border-top: 0.6rem solid map-get($themeFooter, 'primary-light');
         .footer-copyright {
@@ -851,6 +851,9 @@ iframe {
 .mdc-form-field {
     font-size: 1rem;
 }
+.mdc-select {
+    background-image: none;
+}
 .mdc-select,
 .mdc-textfield {
     width: 100%;
@@ -934,12 +937,13 @@ iframe {
                     border-width: $spacing-unit/8;
                     border-style: solid;
                     border-color: rgba(255,255,255,.75);
-                    padding: 0 $spacing-unit/2;
+                    padding: 0  $spacing-unit*2 0 $spacing-unit/2;
                     margin: 0;
                     line-height: $nav-height - 3px;
                     height: $nav-height - 3px;
                     background: transparent;
                     border-radius: 0 !important;
+                    box-sizing: border-box;
                 }
                 ::-webkit-input-placeholder {
                     color: rgba(255, 255, 255, 0.6);
