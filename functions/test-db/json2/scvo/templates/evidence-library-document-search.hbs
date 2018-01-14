@@ -25,7 +25,7 @@
         </ul>
         <div class="mdc-layout-grid">
             <div class="mdc-layout-grid__inner">
-                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3 sidebar library-sidebar">
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-3-tablet mdc-layout-grid__cell--span-4-phone sidebar library-sidebar">
                     {{> sidebar_library_search}}
 
                     <hr />
@@ -34,9 +34,9 @@
                         The Evidence Library is a resource for anyone interested in learning about the third sector in Scotland. The database is regularly being added to and visitors are encouraged to submit their research for possible inclusion on the site. For further information, please email: <a href="mailto:research@scvo.org.uk">research@scvo.org.uk</a>
                     </p>
                 </div>
-                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-9 content library-content">
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-9-desktop mdc-layout-grid__cell--span-5-tablet mdc-layout-grid__cell--span-4-phone content library-content">
                     {{#each primaryResponse.hits.hits}}
-                    {{{_source.rendered.list}}}
+                    {{{_source.rendered.scvo_list}}}
                     {{/each}}
 
                     {{> pagination}}

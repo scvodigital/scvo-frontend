@@ -25,7 +25,7 @@
         </ul>
         <div class="mdc-layout-grid">
             <div class="mdc-layout-grid__inner">
-                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3 sidebar trustee-sidebar">
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-3-tablet mdc-layout-grid__cell--span-4-phone sidebar trustee-sidebar">
                     {{> trustee_search}}
 
                     <hr />
@@ -34,7 +34,7 @@
                     {{{rendered.full}}}
                     {{/with}}
                 </div>
-                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-9 content trustee-content">
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-9-desktop mdc-layout-grid__cell--span-5-tablet mdc-layout-grid__cell--span-4-phone content trustee-content">
                     {{#each primaryResponse.hits.hits}}
                     {{{_source.rendered.trustee_search_result}}}
                     {{/each}}

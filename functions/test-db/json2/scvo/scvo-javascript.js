@@ -52,7 +52,7 @@ window.share = function(where) {
 window.setupAutoSearchForms = function() {
     var autoSearchForms = document.querySelectorAll('form[data-auto-search="true"]');
     console.log('setupAutoSearchForms()', autoSearchForms);
-    
+
     for (var x = 0; x < autoSearchForms.length; x++) {
         var searchForm = autoSearchForms[x];
         var submitButton = document.createElement('button');

@@ -1,28 +1,32 @@
 {
-    "size": 3,
+    "size": 5,
     "_source": [
         "slug",
         "title",
-        "rendered.gist"
+        "rendered.sidebar_mini"
     ],
     "query": {
         "function_score": {
 			"query": {
-                "bool": {
-                    "must": {
-                        "match_all": {}
-                    },
-                    "should": [
-                        {
-                            "terms": {
-                                "categories_id": [
-                                    {{join primaryResponse.hits.hits.[0]._source.categories_id}}
-                                ]
+                {{#if primaryResponse.hits.hits.[0]}}
+                    "bool": {
+                        "must": {
+                            "match_all": {}
+                        },
+                        "should": [
+                            {
+                                "terms": {
+                                    "categories_id": [
+                                        {{join primaryResponse.hits.hits.[0]._source.categories_id}}
+                                    ]
+                                }
                             }
-                        }
-                    ],
-                    "minimum_should_match": 1
-                }
+                        ],
+                        "minimum_should_match": 1
+                    }
+                {{else}}
+                    "match_none": {}
+                {{/if}}
 			},
 			"random_score": {},
 			"score_mode": "sum"
