@@ -21,7 +21,7 @@
         {{> breadcrumbs_posts}}
         <div class="mdc-layout-grid">
             <div class="mdc-layout-grid__inner">
-                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-8 content page-content">
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-8-desktop mdc-layout-grid__cell--span-5-tablet mdc-layout-grid__cell--span-4-phone content page-content">
                     <ul class="supplimentary-list">
                         {{#each supplimentaryResponses.related_posts.hits.hits}}
                         {{{_source.rendered.list}}}
@@ -29,7 +29,7 @@
                     </ul>
                     {{> pagination}}
                 </div>
-                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 sidebar page-sidebar">
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-3-tablet mdc-layout-grid__cell--span-4-phone sidebar page-sidebar">
                     {{#with primaryResponse.hits.hits.[0]._source}}
                     {{{rendered.full}}}
                     {{/with}}

@@ -34,19 +34,21 @@
             <header class="mdc-toolbar mdc-toolbar--fixed mdc-theme--primary-light-bg">
                 <div class="mdc-toolbar__row">
                     <div class="container-fluid">
-                        <section class="mdc-toolbar__section mdc-toolbar__section--align-start">
+                        <section class="mdc-toolbar__section mdc-toolbar__section--shrink-to-fit mdc-toolbar__section--align-start">
                             <span class="mdc-toolbar__title catalog-title">
                                 <a href="/" class="brand-logo" title="Scottish Council for Voluntary Organisations">
                                     <img src="/assets/images/scvo-logo.png" />
                                 </a>
                             </span>
                         </section>
-                        <section class="mdc-toolbar__section mdc-toolbar__section--align-end toolbar-search">
+                        <section class="mdc-toolbar__section mdc-toolbar__section--align-end">
                             <nav id="upper-tab-bar" class="mdc-tab-bar" [menu]="'main-upper'" [menulinkselector]="''" [menulabelselector]="'span.mdc-tab--label'" [menuactiveclass]="'mdc-tab--active'">
                                 {{#each menus.main-upper}}
                                 <a class="mdc-tab{{#if match}} mdc-tab--active{{/if}}" href="{{path}}"><span class="mdc-tab--label">{{{label}}}</span></a>
                                 {{/each}}
                             </nav>
+                        </section>
+                        <section class="mdc-toolbar__section mdc-toolbar__section--align-end mdc-toolbar__section--shrink-to-fit toolbar-search">
                             <form [searchroute]="'main_search'" class="mdc-form-field mdc-form-field--align-end search_form" autocomplete="off">
                                 <div class="mdc-textfield">
                                     <input type="text" class="mdc-textfield__input white-text mdc-text-field searchRoute" placeholder="Search" id="q" name="q" aria-label="Search keywords" value="{{params.query.q}}">
@@ -89,7 +91,7 @@
                                 {{{label}}}
                             </a>
                             {{/each}}
-                            {{#each menus.upper}}
+                            {{#each menus.main-upper}}
                             <a class="mdc-list-item" href="{{path}}" data-mdc-tabindex-handled="true" tabindex="-1" onclick="window.drawer.open = false">
                                 {{{label}}}
                             </a>
@@ -182,12 +184,12 @@
                     <div class="container-fluid">
                         <div class="mdc-layout-grid">
                             <div class="mdc-layout-grid__inner">
-                                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-phone mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-9-desktop">
+                                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-phone mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-9-desktop">
                                     <p>
                                         &copy; {{momentFormat (moment) "YYYY"}}. The Scottish Council for Voluntary Organisations (SCVO) is a Scottish Charitable Incorporated Organisation. Charity registered in Scotland <a href="http://www.oscr.org.uk/charities/search-scottish-charity-register/charity-details?number=SC003558">SC003558</a>. Registered office Mansfield Traquair Centre, 15 Mansfield Place, Edinburgh EH3 6BB.
                                     </p>
                                 </div>
-                                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-phone mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-3-desktop">
+                                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-phone mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-3-desktop">
                                     <a href="/" class="brand-logo" title="Scottish Council for Voluntary Organisations">
                                         <img src="/assets/images/scvo-logo.png" />
                                     </a>
