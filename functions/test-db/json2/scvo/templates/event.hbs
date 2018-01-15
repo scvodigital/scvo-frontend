@@ -18,20 +18,21 @@
     </div>
     <div class="container-fluid page-content">
         {{#> handle_404}}
+        {{#with primaryResponse.hits.hits.[0]._source}}
         <ul class="breadcrumbs">
             <li><a href="/">Home</a></li>
             <li><a href="/events">Events</a></li>
-            <li>{{{primaryResponse.hits.hits.[0]._source.title}}}</li>
+            <li>{{{title}}}</li>
         </ul>
 
-        {{{primaryResponse.hits.hits.[0]._source.rendered.full}}}
+        {{{rendered.full}}}
 
+        {{#compare course_type "===" "Training Course"}}
         <p>
-            <strong>NB: Please read our Policies, procedures and terms & conditions document below before making your booking.</strong>
+            <strong>NB: Please read our <a href="https://cms.scvo.org/wp-content/uploads/2018/01/Policies-procedures-and-TCs.docx">policies, procedures and terms &amp; conditions</a> document below before making your booking.</strong>
         </p>
-        <p>
-            <a href="https://cms.scvo.org/wp-content/uploads/2018/01/Policies-procedures-and-TCs.docx">Policies, procedures and T&amp;Cs</a>
-        </p>
+        {{/compare}}
+        {{/with}}
 
         <div class="mdc-layout-grid">
             <div class="mdc-layout-grid__inner">
