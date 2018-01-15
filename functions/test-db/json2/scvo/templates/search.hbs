@@ -55,12 +55,15 @@
                     </form>
                 </div>
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-9 content">
+                    {{> search_info}}
+
                     {{#each primaryResponse.hits.hits}}
                         {{>highlight_result}}
                     {{/each}}
+
+                    {{> pagination}}
                 </div>
             </div>
         </div>
-        {{> pagination}}
     </div>
 </div>
