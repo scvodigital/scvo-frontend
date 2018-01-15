@@ -17,21 +17,33 @@
 	        	"bool": {
 	        		"must": [
                         {
-                            "exists": { "field": "rendered.scvo_search_result" }
+                            "exists": {
+                                "field": "rendered.scvo_search_result"
+                            }
                         },
                         {{#if query.type}}
                         {
                             "bool": {
                                 "should": [
                                     {{#compare (getType query.type) "string"}}
-                                        { "term": { "_type": "{{query.type}}" } },
+                                        {
+                                            "term": {
+                                                "_type": "{{query.type}}"
+                                            }
+                                        },
                                     {{/compare}}
                                     {{#compare (getType query.type) "array"}}
                                         {{#each query.type}}
-                                        { "term": { "_type": "{{this}}" } },
+                                        {
+                                            "term": {
+                                                "_type": "{{this}}"
+                                            }
+                                        },
                                         {{/each}}
                                     {{/compare}}
-                                    { "match_none": {} }
+                                    {
+                                        "match_none": {}
+                                    }
                                 ]
                             }
                         },
@@ -62,17 +74,39 @@
 	        		]
                     {{#unless query.type}},
                     "should": [
-	                    { "term" : { "_type" : { "value" : "scvo-cms-post",         "boost" : 5.0 } } },
-	                    { "term" : { "_type" : { "value" : "scvo-event",            "boost" : 4.0 } } },
-	                    { "term" : { "_type" : { "value" : "scvo-cms-page",         "boost" : 8.0 } } }
+	                    {
+                            "term" : {
+                                "_type" : {
+                                    "value" : "scvo-cms-post", "boost" : 5.0
+                                }
+                            }
+                        },
+                        {
+                            "term" : {
+                                "_type" : {
+                                    "value" : "scvo-event", "boost" : 4.0
+                                }
+                            }
+                        },
+	                    {
+                            "term" : {
+                                "_type" : {
+                                    "value" : "scvo-cms-page", "boost" : 8.0
+                                }
+                            }
+                        }
 	        		]
                     {{/unless}}
 	        	}
         	},
             "boost_mode": "multiply",
             "functions": [
-        		{
-        			"filter": { "term": { "_type": "scvo-cms-post" } },
+                {
+        			"filter": {
+                        "term": {
+                            "_type": "scvo-cms-post"
+                        }
+                    },
         			"weight": "5",
         			"gauss": {
 		                "publish_on": {

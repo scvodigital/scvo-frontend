@@ -213,8 +213,12 @@ primary-dark: #251032
             background-color: map-get($themeCharity, 'primary') !important;
         }
     }
-    .digital-participation {
-        background-image: linear-gradient(180deg, map-get($themeDigital, 'secondary-light') 5%, map-get($themeDigital, 'secondary-dark') 95%);
+    .digital-participation.callout {
+        background-image: linear-gradient(
+            180deg,
+            map-get($themeDigital, 'secondary-light') 5%,
+            map-get($themeDigital, 'secondary-dark') 95%
+        );
         p,
         h2,
         h3,
@@ -231,7 +235,7 @@ primary-dark: #251032
             background-color: map-get($themeDigital, 'secondary') !important;
         }
     }
-    .digital-evolution {
+    .digital-evolution.callout {
         background-color: map-get($themeDigital, 'primary') !important;
         p,
         h2,
@@ -297,7 +301,13 @@ primary-dark: #251032
         background-color: map-get($themeSelected, 'primary-light') !important;
     }
     .mdc-theme--primary-dark-bg.toolbar-nav {
-        background-image: linear-gradient(90deg, map-get($themeSelected, 'primary-dark'), map-get($themeSelected, 'primary-dark') 60%, map-get($themeSelected, 'primary') 150%, map-get($themeSelected, 'primary'));
+        background-image: linear-gradient(
+            90deg,
+            map-get($themeSelected, 'primary-dark'),
+            map-get($themeSelected, 'primary-dark') 60%,
+            map-get($themeSelected, 'primary') 120%,
+            map-get($themeSelected, 'primary')
+        );
     }
     .pagination li:hover,
     .pagination li.current-page:hover,
@@ -332,69 +342,73 @@ primary-dark: #251032
 
     .splash-overlay {
         background-image: linear-gradient(
-        66deg,
-        map-get($themeSelected, 'primary-alpha'),
-        map-get($themeSelected, 'primary-alpha') 47%,
-        transparent 47.08%,
-        transparent
+            66deg,
+            map-get($themeSelected, 'primary-alpha'),
+            map-get($themeSelected, 'primary-alpha') 47%,
+            transparent 47.08%,
+            transparent
         );
     }
     @media screen and (max-width: 1140px) {
         .splash-overlay {
             background-image: linear-gradient(
-            66deg,
-            map-get($themeSelected, 'primary-alpha'),
-            map-get($themeSelected, 'primary-alpha') 52%,
-            transparent 52.08%,
-            transparent
+                66deg,
+                map-get($themeSelected, 'primary-alpha'),
+                map-get($themeSelected, 'primary-alpha') 52%,
+                transparent 52.08%,
+                transparent
             );
         }
     }
     @media screen and (max-width: 991px) {
         .splash-overlay {
             background-image: linear-gradient(
-            66deg,
-            map-get($themeSelected, 'primary-alpha'),
-            map-get($themeSelected, 'primary-alpha') 57%,
-            transparent 57.08%,
-            transparent
+                66deg,
+                map-get($themeSelected, 'primary-alpha'),
+                map-get($themeSelected, 'primary-alpha') 57%,
+                transparent 57.08%,
+                transparent
             );
         }
     }
     @media screen and (max-width: 839px) {
         .splash-overlay {
             background-image: linear-gradient(
-            66deg,
-            map-get($themeSelected, 'primary-alpha'),
-            map-get($themeSelected, 'primary-alpha') 67%,
-            transparent 67.08%,
-            transparent
+                66deg,
+                map-get($themeSelected, 'primary-alpha'),
+                map-get($themeSelected, 'primary-alpha') 67%,
+                transparent 67.08%,
+                transparent
             );
         }
     }
     @media screen and (max-width: 450px) {
         .splash-overlay {
             background-image: linear-gradient(
-            66deg,
-            map-get($themeSelected, 'primary-alpha'),
-            map-get($themeSelected, 'primary-alpha')
+                66deg,
+                map-get($themeSelected, 'primary-alpha'),
+                map-get($themeSelected, 'primary-alpha')
             );
         }
     }
     .home .cta-content.callout-image {
         background-image: linear-gradient(
-        map-get($themeServices, 'primary-alpha'),
-        map-get($themeServices, 'primary-alpha')
+            map-get($themeServices, 'primary-alpha'),
+            map-get($themeServices, 'primary-alpha')
         ),
         url('https://storage.googleapis.com/scvo-cms/wp-content/uploads/2017/10/Drake-Music-03.jpg');
         // .mdc-layout-grid__cell h3 a:hover .fa {
         //     background-color: map-get($themeServices, 'primary') !important;
         // }
+        a:hover .fa-fw {
+            background-color: white !important;
+            color: map-get($themeServices, 'primary') !important;
+        }
     }
     .digital .callout-image {
         background-image: linear-gradient(
-        map-get($themeDefault, 'primary-alpha'),
-        map-get($themeDefault, 'primary-alpha')
+            map-get($themeDefault, 'primary-alpha'),
+            map-get($themeDefault, 'primary-alpha')
         ),
         url('https://storage.googleapis.com/scvo-cms/wp-content/uploads/2017/11/Dunaverty-Hall.jpg');
         .mdc-button {
@@ -422,7 +436,13 @@ primary-dark: #251032
 
     footer {
         color: white;
-        background-image: linear-gradient(160deg, map-get($themeFooter, 'primary'), map-get($themeFooter, 'primary') 60%, map-get($themeFooter, 'primary-dark') 80%, map-get($themeFooter, 'primary-dark'));
+        background-image: linear-gradient(
+            160deg,
+            map-get($themeFooter, 'primary'),
+            map-get($themeFooter, 'primary') 60%,
+            map-get($themeFooter, 'primary-dark') 80%,
+            map-get($themeFooter, 'primary-dark')
+        );
         // background-color: map-get($themeFooter, 'primary');
         border-top: 0.6rem solid map-get($themeFooter, 'primary-light');
         .footer-copyright {
@@ -439,6 +459,7 @@ primary-dark: #251032
 
 #spinner,
 .about,
+.funding-updates,
 .funding {
     @include theme-colours('funding');
 }
@@ -805,6 +826,7 @@ iframe {
     h3.mdc-card__title {
         font-size: 1.1rem;
         line-height: 1.4;
+        margin-bottom: 0;
     }
     a.thumbnail:after {
         content: "" !important;
@@ -1142,6 +1164,7 @@ iframe {
     text-align: center;
     display: block !important;
     padding-top: $spacing-unit !important;
+    padding-bottom: $spacing-unit*2 !important;
     li {
         padding: 0 !important;
         height: $spacing-unit*2;
@@ -1227,6 +1250,13 @@ iframe {
         ),
         url('https://storage.googleapis.com/scvo-cms/21981/hayweight-new-940x470.jpg');
     }
+}
+.footer-image.join-our-hub {
+    background-image: linear-gradient(
+        rgba(173, 20, 87, 0.89),
+        rgba(173, 20, 87, 0.89)
+    ),
+    url('https://storage.googleapis.com/scvo-cms/wp-content/uploads/2018/01/edward-new-940x470.jpg');
 }
 .digital .callout-image {
     position: relative;
@@ -1460,6 +1490,14 @@ iframe {
     .mdc-layout-grid__inner {
         margin-bottom: $spacing-unit/2;
     }
+    // .book-now {
+    //     .mdc-button {
+    //         min-width: 60%;
+    //         max-width: 100%;
+    //         margin: 1rem auto 0;
+    //         display: block;
+    //     }
+    // }
 }
 .policy-research.briefings-consultation-responses .mdc-card__supporting-text,
 .policy-research.research .mdc-card__supporting-text,
@@ -1501,6 +1539,16 @@ h1.mdc-typography--title {
 }
 .mdc-card__primary .mdc-card__title--large {
     padding-top: 0;
+}
+.funding-updates {
+    h3 {
+        margin-top: 0;
+    }
+    .page-content {
+        .mdc-layout-grid {
+            margin: $spacing-unit 0;
+        }
+    }
 }
 .support.funding .mdc-card {
     margin: $spacing-unit 0;
@@ -1654,6 +1702,9 @@ h1.support-sector {
         }
     }
 }
+.supplimentary-list .list .mdc-card__actions {
+    padding-bottom: $spacing-unit/2 !important;
+}
 .post-info-categories {
     ul {
         padding: 0;
@@ -1690,11 +1741,39 @@ h1.support-sector {
         margin-top: 0;
     }
 }
+.mdc-card__supporting-text:last-child {
+    padding-bottom: $spacing-unit;
+}
 .scvo-cms-post .mdc-card__actions {
     // padding: $spacing-unit/2 $spacing-unit;
     .post-info {
         padding: 0;
     }
+}
+
+.search-page {
+    margin: $spacing-unit auto;
+    h3 {
+        margin-top: 0;
+    }
+    form h3 {
+        margin-top: $spacing-unit;
+    }
+}
+
+.search-info {
+    margin-bottom: 1rem;
+    border: 0.125rem solid #eee;
+    background: #f8f8f8;
+    color: #555;
+    padding: 0 0.5rem;
+    height: 35px;
+    line-height: 35px;
+    box-sizing: border-box;
+}
+
+.search-result {
+    margin-bottom: $spacing-unit;
 }
 
 .mdc-layout-grid {
@@ -1953,6 +2032,12 @@ ul.breadcrumbs {
         }
     }
 }
+.board-of-trustees .full .mdc-layout-grid img {
+    max-width: 64px;
+    height: auto;
+    border-radius: 50%;
+}
+
 .post-info {
     font-size: 0.9rem;
     color: #333;
@@ -1960,6 +2045,9 @@ ul.breadcrumbs {
         display: inline-block;
         margin-right: $spacing-unit/2;
         margin-bottom: $spacing-unit/2;
+    }
+    .post-info-item.post-info-categories {
+        margin-bottom: 0;
     }
     .post-info-item:last-child {
         margin-right: 0;
@@ -2000,6 +2088,9 @@ ul.breadcrumbs {
             }
         }
     }
+}
+.scvo-cms-post .mdc-card__primary {
+    padding-bottom: $spacing-unit/2;
 }
 
 blockquote {
@@ -2048,6 +2139,7 @@ ul.supplimentary-list {
 .sidebar .author_about,
 .content .supplimentary-list {
     margin-top: $spacing-unit/2;
+    margin-bottom: $spacing-unit;
 }
 
 h1,
