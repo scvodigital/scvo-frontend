@@ -171,17 +171,17 @@ p.quote {
 
 .signatories main {
     padding-bottom: 4rem;
-    h1 {
-        font-size: 4rem;
-        line-height: 4.5rem;
-    }
-    h3 {
-        font-size: 2.5rem;
-    }
-    h4 {
-        font-size: 2rem;
-        margin: 1rem 0 0;
-    }
+    // h1 {
+    //     font-size: 4rem;
+    //     line-height: 4.5rem;
+    // }
+    // h3 {
+    //     font-size: 2.5rem;
+    // }
+    // h4 {
+    //     font-size: 2rem;
+    //     margin: 1rem 0 0;
+    // }
     img {
         max-width: 100%;
     }
@@ -202,28 +202,33 @@ p.quote {
     form {
         margin-bottom: $spacing-unit*2;
     }
-    h1 {
-        font-size: 5.3rem;
-        line-height: 5.5rem;
-        letter-spacing: -.1rem;
-        margin: 2rem 0 2rem;
-        padding-right: 2rem;
-        .small {
-            font-size: 3.8rem;
-            letter-spacing: -.15rem;
-        }
-    }
-    h4 {
-        margin: 0.5rem 0 0.25rem;
-        font-size: 1.8rem;
-    }
+    // h1 {
+    //     font-size: 5.3rem;
+    //     line-height: 5.5rem;
+    //     letter-spacing: -.1rem;
+    //     margin: 2rem 0 2rem;
+    //     padding-right: 2rem;
+    //     .small {
+    //         font-size: 3.8rem;
+    //         letter-spacing: -.15rem;
+    //     }
+    // }
+    // h4 {
+    //     margin: 0.5rem 0 0.25rem;
+    //     font-size: 1.8rem;
+    // }
     h4.sort {
         text-align: right;
         margin-right: $spacing-unit/2;
     }
     .mdc-textfield__input {
-        min-width: 60%;
         margin-bottom: 1rem;
+    }
+    .mdc-form-field {
+        width: 100%;
+        .mdc-select {
+            background-image: none;
+        }
     }
     .mdc-textfield__input,
     .mdc-select {
@@ -236,8 +241,9 @@ p.quote {
         padding: 0 $spacing-unit/2;
         border: $brand-border-width solid $brand-colour;
         border-radius: 0.15rem;
-        max-width: 100%;
+        width: 100%;
         letter-spacing: 0;
+        box-sizing: border-box;
     }
     .humanrightsdeclaration-signatory {
         h3 {
@@ -446,5 +452,22 @@ footer {
     }
     .mdc-button {
         width: 100%;
+    }
+    .pagination {
+        padding: 0 !important;
+        margin: 1rem 0 0;
+    }
+    .pagination-distance-9,
+    .pagination-distance-8,
+    .pagination-distance-7,
+    .pagination-distance-6,
+    .pagination-distance-5 {
+        display: none !important;
+    }
+}
+@media screen and (max-width: 450px) {
+    .pagination-distance-3,
+    .pagination-distance-4 {
+        display: none !important;
     }
 }
