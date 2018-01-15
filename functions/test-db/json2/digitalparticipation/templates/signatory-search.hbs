@@ -14,7 +14,7 @@
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3">
                     <h4>Sector</h4>
                     <div class="mdc-form-field sector">
-                        <select class="mdc-select" role="listbox" id="charter-sector" name="sector">
+                        <select class="mdc-select" role="listbox" id="charter-sector" name="sector" data-clear-input="#charter-category">
                             <option value="" {{#if params.query.sector}}{{else}}selected{{/if}}>All sectors</option>
                             {{#each supplimentaryResponses.types.aggregations.sectors.buckets}}
                             <option value="{{key}}" {{#compare ../params.query.sector "===" key}}selected{{/compare}}>{{key}} ({{doc_count}})</option>
@@ -27,7 +27,7 @@
                     <div class="mdc-form-field category">
                         <select class="mdc-select" role="listbox" id="charter-category" name="category">
                             <option value="" {{#if params.query.category}}{{else}}selected{{/if}}>All categories</option>
-                            {{#each supplimentaryResponses.types.aggregations.categories.buckets}}
+                            {{#each supplimentaryResponses.categories.aggregations.categories.buckets}}
                             <option value="{{key}}" {{#compare ../params.query.category "===" key}}selected{{/compare}}>{{key}} ({{doc_count}})</option>
                             {{/each}}
                         </select>
