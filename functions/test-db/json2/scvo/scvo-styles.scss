@@ -213,7 +213,7 @@ primary-dark: #251032
             background-color: map-get($themeCharity, 'primary') !important;
         }
     }
-    .digital-participation {
+    .digital-participation.callout {
         background-image: linear-gradient(
             180deg,
             map-get($themeDigital, 'secondary-light') 5%,
@@ -235,7 +235,7 @@ primary-dark: #251032
             background-color: map-get($themeDigital, 'secondary') !important;
         }
     }
-    .digital-evolution {
+    .digital-evolution.callout {
         background-color: map-get($themeDigital, 'primary') !important;
         p,
         h2,
@@ -305,7 +305,7 @@ primary-dark: #251032
             90deg,
             map-get($themeSelected, 'primary-dark'),
             map-get($themeSelected, 'primary-dark') 60%,
-            map-get($themeSelected, 'primary') 150%,
+            map-get($themeSelected, 'primary') 120%,
             map-get($themeSelected, 'primary')
         );
     }
@@ -1683,7 +1683,7 @@ h1.support-sector {
     }
 }
 .supplimentary-list .list .mdc-card__actions {
-    padding-bottom: 0 !important;
+    padding-bottom: $spacing-unit/2 !important;
 }
 .post-info-categories {
     ul {
@@ -1728,6 +1728,16 @@ h1.support-sector {
     // padding: $spacing-unit/2 $spacing-unit;
     .post-info {
         padding: 0;
+    }
+}
+
+.search-page {
+    margin: $spacing-unit auto;
+    h3 {
+        margin-top: 0;
+    }
+    form h3 {
+        margin-top: $spacing-unit;
     }
 }
 
@@ -2109,6 +2119,7 @@ ul.supplimentary-list {
 .sidebar .author_about,
 .content .supplimentary-list {
     margin-top: $spacing-unit/2;
+    margin-bottom: $spacing-unit;
 }
 
 h1,

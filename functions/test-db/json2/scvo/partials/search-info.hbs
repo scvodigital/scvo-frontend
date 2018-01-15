@@ -1,4 +1,35 @@
+{{#if paging.totalResults}}
 <div class="search-info">
     <strong>Total results:</strong> {{paging.totalResults}} |
     <strong>Current page:</strong> {{paging.currentPage}} of {{paging.totalPages}}
 </div>
+{{else}}
+{{#if params.query.q}}
+<div class="search-info">
+    No results, please try a different search query
+</div>
+{{/if}}
+<h3>Trending topics</h3>
+<div class="mdc-layout-grid">
+    <div class="mdc-layout-grid__inner">
+        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4">
+            <a href="https://thegathering.scot/">The Gathering</a>
+        </div>
+        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4">
+            <a ng-reflect-router-link="/jobs/community-jobs-scotland/" href="/jobs/community-jobs-scotland/information-for-employers/become-an-employer">Become a CJS employer</a>
+        </div>
+        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4">
+            <a ng-reflect-router-link="/running-your-organisation/bus" href="/running-your-organisation/business-planning/writing-business-plan">Writing a business plan</a>
+        </div>
+        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4">
+            <a ng-reflect-router-link="/running-your-organisation/gov" href="/running-your-organisation/governance/roles-responsibilities">Governance roles &amp; responsibilites</a>
+        </div>
+        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4">
+            <a ng-reflect-router-link="/setting-up-a-charity/write-yo" href="/setting-up-a-charity/write-your-constitution">Write your constitution</a>
+        </div>
+        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4">
+            <a ng-reflect-router-link="/setting-up-a-charity/frequent" href="/setting-up-a-charity/frequently-asked-questions">Setting up a charity FAQs</a>
+        </div>
+    </div>
+</div>
+{{/if}}
