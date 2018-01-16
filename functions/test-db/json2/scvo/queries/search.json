@@ -74,19 +74,19 @@
 	        		]
                     {{#unless query.type}},
                     "should": [
-	                    {
-                            "term" : {
-                                "_type" : {
-                                    "value" : "scvo-cms-post",
-                                    "boost" : 5.0
-                                }
-                            }
-                        },
                         {
                             "term" : {
                                 "_type" : {
                                     "value" : "scvo-event",
-                                    "boost" : 4.0
+                                    "boost" : 2.0
+                                }
+                            }
+                        },
+	                    {
+                            "term" : {
+                                "_type" : {
+                                    "value" : "scvo-cms-page",
+                                    "boost" : 1.0
                                 }
                             }
                         },
@@ -95,6 +95,14 @@
                                 "_type" : {
                                     "value" : "scvo-cms-page",
                                     "boost" : 8.0
+                                }
+                            }
+                        },
+	                    {
+                            "term" : {
+                                "_type" : {
+                                    "value" : "oscr-charity",
+                                    "boost" : -5.0
                                 }
                             }
                         }
@@ -110,7 +118,7 @@
                             "_type": "scvo-cms-post"
                         }
                     },
-        			"weight": "8",
+        			"weight": "3",
         			"gauss": {
 		                "publish_on": {
 		                    "scale": "120d",
