@@ -9,6 +9,7 @@
 			"query": {
 				"bool": {
 					"should": [
+                        {{#if primaryResponse.hits.hits.[0]._source.categories_id}}
                         {
     						"terms": {
     							"categories_id": [
@@ -21,6 +22,13 @@
     							"categories_id": 1
     						}
     					}
+                        {{else}}
+                        {
+    						"term": {
+    							"categories_id": 1
+    						}
+    					}
+                        {{/if}}
                     ],
                     "minimum_should_match": 1
 				}
