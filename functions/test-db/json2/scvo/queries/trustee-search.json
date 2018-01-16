@@ -25,24 +25,6 @@
                             {
                                 "term": {
                                     "_type": {
-                                        "value" : "milo-volunteering-opportunity"
-                                    }
-                                }
-                            },
-                            {
-                                "terms": {
-                                    "work_type-slugs": ["committee-work"]
-                                }
-                            }
-                        ]
-                    }
-                },
-                {
-                    "bool": {
-                        "must": [
-                            {
-                                "term": {
-                                    "_type": {
                                         "value" : "goodmoves-legacy"
                                     }
                                 }
@@ -55,6 +37,24 @@
                             {
                                 "terms": {
                                     "roles_slugs": ["board-membershiptrustee"]
+                                }
+                            }
+                        ]
+                    }
+                },
+                {
+                    "bool": {
+                        "must": [
+                            {
+                                "term": {
+                                    "_type": {
+                                        "value" : "milo-volunteering-opportunity"
+                                    }
+                                }
+                            },
+                            {
+                                "terms": {
+                                    "work_type-slugs": ["committee-work"]
                                 }
                             }
                         ]
