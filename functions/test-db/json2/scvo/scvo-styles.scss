@@ -155,7 +155,6 @@ primary-dark: #251032
     .post-info .post-info-categories .fal,
     #share-menu-button,
     .mdc-simple-menu .mdc-list-item,
-    .container-content ul li::before,
     .mdc-theme--primary {
         color: map-get($themeSelected, 'primary');
     }
@@ -504,7 +503,8 @@ primary-dark: #251032
     @include theme-colours('posts');
 }
 .goodhq,
-.search-result.goodhq-organisation {
+.search-result.goodhq-organisation,
+.search-result.goodhq-post {
     @include theme-colours('goodhq');
 }
 .search-result.digital-charter-signatory {
@@ -513,7 +513,11 @@ primary-dark: #251032
 .tfn,
 .post-related-tfn,
 .gist.tfn-post,
-.search-result.tfn-post {
+.search-result.tfn-post,
+.search-result.tfn-event,
+.search-result.tfn-poll,
+.search-result.tfn-feature,
+.search-result.tfn-list {
     @include theme-colours('tfn');
 }
 .funding-scotland,
@@ -536,7 +540,7 @@ primary-dark: #251032
 .breadcrumbs,
 .page-content,
 .page-related,
-.page-sidebar .static-sidebar,
+.page-sidebar,
 .posts-page .page-sidebar,
 .post-content,
 .library-content,
@@ -656,7 +660,6 @@ figure {
     border-radius: 0 !important;
     box-sizing: border-box;
 }
-.mdc-card__actions a:hover,
 .mdc-button a:hover,
 .mdc-button:hover,
 .mdc-toolbar a:hover {
@@ -1327,7 +1330,6 @@ figure {
         padding: 0;
         margin: 0 auto;
         .mdc-layout-grid {
-            float: left;
             width: 44%;
             margin: $spacing-unit*(2/3) 0 $spacing-unit;
             // position: absolute;
@@ -1341,7 +1343,7 @@ figure {
         max-height: 18vh;
     }
     h1.header-text {
-        margin: 0;
+        margin: 0 !important;
         color: #fff;
         font-weight: 800;
         font-size: 3rem;
@@ -1861,7 +1863,8 @@ h1.support-sector {
             list-style: none;
             padding-left: $spacing-unit*1.4;
         }
-        li::before {
+        li:before {
+            color: black;
             content: "\25CF";
             font-size: 1rem;
             margin-left: -$spacing-unit*1.4;
