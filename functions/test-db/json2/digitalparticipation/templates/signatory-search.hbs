@@ -1,13 +1,13 @@
 <div class="signatories">
     <h1>Signatories <span class="small">({{supplimentaryResponses.total.hits.total}})</span></h1>
 
-    <form [searchroute]="'signatory_search'" data-auto-search="true">
+    <form [searchroute]="'signatory_search'" data-auto-search="true" id="signatory-search">
         <div class="mdc-layout-grid">
             <div class="mdc-layout-grid__inner">
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6">
                     <h4>Search</h4>
                     <div class="mdc-textfield mdc-textfield--upgraded keywords">
-                        <input type="text" class="mdc-textfield__input" name="q" id="charter-keywords" value="{{params.query.q}}" placeholder="Search for a charter signatory">
+                        <input type="text" class="mdc-textfield__input" name="q" id="charter-keywords" value="{{params.query.q}}" placeholder="Search for a charter signatory" autofocus>
                         <div class="mdc-textfield__bottom-line"></div>
                     </div>
                 </div>
@@ -17,7 +17,7 @@
                         <select class="mdc-select" role="listbox" id="charter-sector" name="sector" data-clear-input="#charter-category">
                             <option value="" {{#if params.query.sector}}{{else}}selected{{/if}}>All sectors</option>
                             {{#each supplimentaryResponses.types.aggregations.sectors.buckets}}
-                            <option value="{{key}}" {{#compare ../params.query.sector "===" key}}selected{{/compare}}>{{key}} ({{doc_count}})</option>
+                            <option value="{{key}}" {{#compare ../params.query.sector "===" key}}selected{{/compare}}>{{key}}</option>
                             {{/each}}
                         </select>
                     </div>
@@ -28,7 +28,7 @@
                         <select class="mdc-select" role="listbox" id="charter-category" name="category">
                             <option value="" {{#if params.query.category}}{{else}}selected{{/if}}>All categories</option>
                             {{#each supplimentaryResponses.categories.aggregations.categories.buckets}}
-                            <option value="{{key}}" {{#compare ../params.query.category "===" key}}selected{{/compare}}>{{key}} ({{doc_count}})</option>
+                            <option value="{{key}}" {{#compare ../params.query.category "===" key}}selected{{/compare}}>{{key}}</option>
                             {{/each}}
                         </select>
                     </div>

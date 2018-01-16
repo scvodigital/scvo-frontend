@@ -8,20 +8,11 @@
     ],
     "query": {
         "bool": {
-            "must": [
+            "filter": [
                 {{#if query.sector}}
                     {
                         "term": {
                             "sector": "{{query.sector}}"
-                        }
-                    }{{#if query.q}},{{/if}}
-                {{/if}}
-                {{#if query.q}}
-                    {
-                        "query_string": {
-                            "query": "{{query.q}}",
-                            "default_operator": "AND",
-                            "analyzer": "snowball"
                         }
                     }
                 {{/if}}

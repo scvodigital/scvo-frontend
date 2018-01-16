@@ -8,7 +8,7 @@
     ],
     "query": {
         "bool": {
-            "must": [
+            "filter": [
                 {{#if query.sector}}
                     {
                         "term": {
@@ -21,8 +21,10 @@
                         "term": {
                             "category": "{{query.category}}"
                         }
-                    }{{#if query.q}},{{/if}}
+                    }
                 {{/if}}
+            ],
+            "must": [
                 {{#if query.q}}
                     {
                         "query_string": {

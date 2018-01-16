@@ -14,15 +14,17 @@ export class RouterFormDirective {
 
     constructor(private rd2: Renderer2, private el: ElementRef, private routerService: RouterService, private router: Router) {
         rd2.listen(el.nativeElement, 'submit', (evt: Event) => {
+            console.log('FORM SUBMIT EVENT:', evt);
             this.submit(evt);
+            evt.preventDefault();
             return false;
         });
     }
 
-    submit(evt: Event): void {
+    submit(evt): void {
         var params = {};
-        console.log(evt);
-        [].concat(...(<any>evt.target).elements).forEach((child) => {
+        
+        [].concat(...(<any>this.el.nativeElement).elements).forEach((child) => {
             var key = child.name || child.id;
             var val = child.value;
 
@@ -43,12 +45,8 @@ export class RouterFormDirective {
             }
         });
 
-        console.log('GENERATE URL FROM | searchRoute:', this.searchRoute, '| params:', { queryParams: params });
-
         var url = this.routerService.scvoRouter.generateUrl(this.searchRoute, { queryParams: params });
-        console.log('URL BEFORE:', url);
         url = url.replace(/(%5B%5D=)|(\[\]=)/gi, '=');
-        console.log('URL AFTER:', url);
         this.router.navigateByUrl(url);
     }
 }
