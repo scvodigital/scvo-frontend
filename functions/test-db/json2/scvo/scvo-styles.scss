@@ -1295,8 +1295,7 @@ figure {
         color: white;
     }
 }
-.splash-overlay,
-.splash-image {
+.splash-image .splash-overlay .container-fluid {
     overflow: hidden;
     position: relative;
     min-height: 25vh;
@@ -1305,21 +1304,20 @@ figure {
 .splash-overlay.splash-overlay-hidden {
     background-image: none;
 }
-.splash-overlay {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-}
 .splash-image {
     background-size: cover;
     background-position: center center;
     // padding-bottom: $spacing-unit;
     .container-fluid {
-        // position: relative;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        position: relative;
         height: 100%;
         padding: 0;
-        margin: $spacing-unit/2 auto;
+        margin: 0 auto;
         .mdc-layout-grid {
+            float: left;
             width: 44%;
             margin: $spacing-unit*(2/3) 0 $spacing-unit;
             // position: absolute;
@@ -1364,6 +1362,19 @@ figure {
         text-transform: none;
         border-width: $spacing-unit/8;
         border-style: solid;
+    }
+    .header-caption {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        max-width: 50%;
+        font-size: 0.9rem;
+        color: white;
+        background: rgba(0,0,0,0.5);
+        padding: $spacing-unit/4 $spacing-unit*(0.4);
+        p {
+            margin: 0;
+        }
     }
 }
 .splash-image-scvo-event h1.header-text,
@@ -1657,7 +1668,7 @@ h1.support-sector {
         background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/open-government.png');
     }
     .project-cjs .mdc-card__media {
-        background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/cjs.png');
+        background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/header-cjs.jpg');
     }
 }
 .section-campaigns {
@@ -1674,19 +1685,22 @@ h1.support-sector {
         background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/eu-are-valued.png');
     }
     .building-healthier-happier-communities .mdc-card__media {
-        background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/building-healthier-happier-communities.png');
+        background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/header-bhhc.jpg');
     }
     .datawareness .mdc-card__media {
-        background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/datawareness.png');
+        background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/header-datawareness.png');
     }
     .right-approach .mdc-card__media {
         background-image: url('https://storage.googleapis.com/scvo-cms/wp-content/uploads/2017/06/right-approach-strapline-hires-1024x337.jpg');
     }
     .scottish-charity-awards .mdc-card__media {
-        background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/scottish-charity-awards.png');
+        background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/header-charity-awards.png');
     }
     .welfare-reform .mdc-card__media {
         background-image: url('https://storage.googleapis.com/scvo-cms/wp-content/uploads/2017/10/welfare-reform-bg-1400x400.jpg');
+    }
+    .terrific-trustees .mdc-card__media {
+        background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/header-trustees.png');
     }
 }
 .mdc-card__actions {
@@ -2603,6 +2617,9 @@ footer {
         .container-fluid {
             .mdc-layout-grid {
                 width: 100%;
+            }
+            .header-caption {
+                display: none;
             }
         }
     }
