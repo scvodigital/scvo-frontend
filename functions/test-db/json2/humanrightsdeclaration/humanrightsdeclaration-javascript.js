@@ -1,4 +1,4 @@
-window.drawerEl = document.querySelector('.mdc-drawer--temporary');
+window.drawerEl = document.querySelector('.mdc-temporary-drawer');
 window.drawer = mdc.drawer.MDCTemporaryDrawer.attachTo(drawerEl);
 document.querySelector('#menu_button').addEventListener('click', function() {
     window.drawer.open = true;
@@ -24,7 +24,11 @@ window.setupAutoSearchForms = function() {
         var changeTriggers = searchForm.querySelectorAll('select,input[type="checkbox"],input[type="radio"]');
 
         for (var y = 0; y < changeTriggers.length; y++) {
-            changeTriggers[y].addEventListener('change', function() {
+            changeTriggers[y].addEventListener('change', function(evt) {
+                var clearInput = evt.srcElement.getAttribute('data-clear-input');
+                if (clearInput) {
+                    document.querySelector(clearInput).value = null;
+                }
                 submitButton.click();
             });
         }
