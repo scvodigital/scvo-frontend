@@ -1,21 +1,5 @@
 <div class="page about">
-    <div class="splash-image splash-image-{{primaryResponse.hits.hits.[0]._type}}" style="{{> header_splash_image}}">
-        <div class="splash-overlay{{#if primaryResponse.hits.hits.[0]._source.hide_overlay}} splash-overlay-hidden{{/if}}">
-            <div class="container-fluid">
-                <div class="mdc-layout-grid">
-                    {{#if primaryResponse.hits.hits.[0]._source.header_text}}
-                    <img src="{{primaryResponse.hits.hits.[0]._source.header_text}}" alt="{{primaryResponse.hits.hits.[0]._source.title}}" class="header-text" />
-                    {{else}}
-                    <h1 class="header-text">
-                        <span class="header-text-banner">
-                            {{{primaryResponse.hits.hits.[0]._source.title}}}
-                        </span>
-                    </h1>
-                    {{/if}}
-                </div>
-            </div>
-        </div>
-    </div>
+    {{> header_splash}}
     <div class="container-fluid">
         {{#> handle_404}}
         {{> breadcrumbs}}

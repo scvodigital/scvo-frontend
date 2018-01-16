@@ -13,6 +13,7 @@
                     </h1>
                     {{/if}}
                 </div>
+                {{> header_caption}}
             </div>
         </div>
     </div>
@@ -73,6 +74,8 @@
                 Search
             </button>
         </form>
+
+        {{> search_info}}
 
         {{#each primaryResponse.hits.hits}}
         {{{_source.rendered.scvo_search_result}}}

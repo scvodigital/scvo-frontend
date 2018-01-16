@@ -44,16 +44,12 @@
                                 </span>
                             </section>
                             <section class="mdc-toolbar__section mdc-toolbar__section--align-end">
-                                <nav id="main-tab-bar" class="mdc-tab-bar">
-                                    <a class="mdc-tab" href="/">Home</a>
-                                    <a class="mdc-tab" href="/sign-up">Sign Up</a>
-                                    <a class="mdc-tab" href="/skill-up">Skill Up</a>
-                                    <a class="mdc-tab" href="/the-charter">The Charter</a>
-                                    <a class="mdc-tab" href="/stories">Stories</a>
-                                    <a class="mdc-tab" href="/signatories">Signatories</a>
-                                    <a class="mdc-tab" href="/resources">Resources</a>
+                                <nav id="main-tab-bar" class="mdc-tab-bar" [menu]="'main'" [menulinkselector]="''" [menulabelselector]="'span.mdc-tab--label'" [menuactiveclass]="'active'">
+                                    {{#each menus.main}}
+                                    <a class="mdc-tab{{#if match}} mdc-tab--active{{/if}}" href="{{path}}"><span class="mdc-tab--label">{{{label}}}</span></a>
+                                    {{/each}}
                                 </nav>
-                                <button id="menu_button" class="menu mdc-toolbar__icon mdc-toolbar__icon--menu" onclick="menu_draw.MDCTemporaryDrawer.open = true">
+                                <button id="menu_button" class="menu mdc-toolbar__icon mdc-toolbar__icon--menu" onclick="window.drawer.open = true">
                                     <span class="far fa-2x fa-bars" aria-hidden="true"></span>
                                 </button>
                             </section>
@@ -69,14 +65,13 @@
                             </div>
                         </header>
                         <nav class="mdc-temporary-drawer__content mdc-list-group">
-                            <div id="icon-with-text-demo" class="mdc-list">
-                                <a class="mdc-list-item" href="/" data-mdc-tabindex-handled="true" tabindex="-1" onclick="menu_draw.MDCTemporaryDrawer.open = false">Home</a>
-                                <a class="mdc-list-item" href="/sign-up" data-mdc-tabindex-handled="true" tabindex="-1" onclick="menu_draw.MDCTemporaryDrawer.open = false">Sign up</a>
-                                <a class="mdc-list-item" href="/skill-up" data-mdc-tabindex-handled="true" tabindex="-1" onclick="menu_draw.MDCTemporaryDrawer.open = false">Skill Up</a>
-                                <a class="mdc-list-item" href="/the-charter" data-mdc-tabindex-handled="true" tabindex="-1" onclick="menu_draw.MDCTemporaryDrawer.open = false">The Charter</a>
-                                <a class="mdc-list-item" href="/stories" data-mdc-tabindex-handled="true" tabindex="-1" onclick="menu_draw.MDCTemporaryDrawer.open = false">Stories</a>
-                                <a class="mdc-list-item" href="/signatories" data-mdc-tabindex-handled="true" tabindex="-1" onclick="menu_draw.MDCTemporaryDrawer.open = false">Signatories</a>
-                                <a class="mdc-list-item" href="/resources" data-mdc-tabindex-handled="true" tabindex="-1" onclick="menu_draw.MDCTemporaryDrawer.open = false">Resources</a>
+                            <div id="icon-with-text-demo" class="mdc-list" [menu]="'main'" [menulinkselector]="''" [menulabelselector]="'span.menu-label'" [menuactiveclass]="'active'">
+                                {{#each menus.main}}
+                                <a class="mdc-list-item{{#if match}} mdc-tab--active{{/if}}" href="{{path}}" 
+                                    data-mdc-tabindex-handled="true" tabindex="-" onclick="window.drawer.open = false">
+                                    <span class="menu-label">{{{label}}}</span>
+                                </a>
+                                {{/each}}
                             </div>
                         </nav>
                     </nav>

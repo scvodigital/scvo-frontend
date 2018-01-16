@@ -1,8 +1,7 @@
-var drawerEl = document.querySelector('.mdc-temporary-drawer');
-var drawer = mdc.drawer.MDCTemporaryDrawer.attachTo(drawerEl);
-console.log('DRAWER:', drawer);
+window.drawerEl = document.querySelector('.mdc-temporary-drawer');
+window.drawer = mdc.drawer.MDCTemporaryDrawer.attachTo(drawerEl);
 document.querySelector('#menu_button').addEventListener('click', function() {
-    drawer.open = true;
+    window.drawer.open = true;
 });
 drawerEl.addEventListener('MDCTemporaryDrawer:open', function() {
     console.log('Received MDCTemporaryDrawer:open');
@@ -25,7 +24,11 @@ window.setupAutoSearchForms = function() {
         var changeTriggers = searchForm.querySelectorAll('select,input[type="checkbox"],input[type="radio"]');
 
         for (var y = 0; y < changeTriggers.length; y++) {
-            changeTriggers[y].addEventListener('change', function() {
+            changeTriggers[y].addEventListener('change', function(evt) {
+                var clearInput = evt.srcElement.getAttribute('data-clear-input');
+                if (clearInput) {
+                    document.querySelector(clearInput).value = null;    
+                }
                 submitButton.click();
             });
         }

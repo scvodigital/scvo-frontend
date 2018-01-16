@@ -294,6 +294,7 @@ primary-dark: #251032
     }
     .mdc-simple-menu .mdc-list-item:after,
     .mdc-simple-menu .mdc-list-item:before,
+    .splash-image .header-caption,
     .mdc-theme--primary-alpha-bg {
         background-color: map-get($themeSelected, 'primary-alpha');
     }
@@ -626,6 +627,9 @@ a:hover {
 }
 iframe {
     border: none;
+}
+figure {
+    margin: $spacing-unit 0;
 }
 .mdc-textfield__input,
 .mdc-textfield__input:focus,
@@ -1292,8 +1296,7 @@ iframe {
         color: white;
     }
 }
-.splash-overlay,
-.splash-image {
+.splash-image .splash-overlay .container-fluid {
     overflow: hidden;
     position: relative;
     min-height: 25vh;
@@ -1302,21 +1305,20 @@ iframe {
 .splash-overlay.splash-overlay-hidden {
     background-image: none;
 }
-.splash-overlay {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-}
 .splash-image {
     background-size: cover;
     background-position: center center;
     // padding-bottom: $spacing-unit;
     .container-fluid {
-        // position: relative;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        position: relative;
         height: 100%;
         padding: 0;
-        margin: $spacing-unit/2 auto;
+        margin: 0 auto;
         .mdc-layout-grid {
+            float: left;
             width: 44%;
             margin: $spacing-unit*(2/3) 0 $spacing-unit;
             // position: absolute;
@@ -1362,6 +1364,20 @@ iframe {
         border-width: $spacing-unit/8;
         border-style: solid;
     }
+    .header-caption {
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        max-width: 50%;
+        font-size: 0.9rem;
+        color: rgba(255, 255, 255, 0.8);
+        background: rgba(0, 0, 0, 0.65);
+        border-radius: $spacing-unit/4 $spacing-unit/4 0 0;
+        padding: $spacing-unit/4 $spacing-unit*(0.4);
+        p {
+            margin: 0;
+        }
+    }
 }
 .splash-image-scvo-event h1.header-text,
 .splash-image-scvo-cms-post h1.header-text,
@@ -1371,8 +1387,7 @@ iframe {
     line-height: 2.2rem;
 }
 .home {
-    .splash-image.hello .splash-overlay,
-    .splash-image.hello {
+    .splash-image.hello .splash-overlay .container-fluid {
         min-height: 40vh;
     }
     .splash-image.hello {
@@ -1389,7 +1404,7 @@ iframe {
         }
     }
 }
-.credit-union .splash-image {
+.credit-union .splash-image .splash-overlay .container-fluid {
     min-height: $spacing-unit*9;
     img.header-text {
         max-height: $spacing-unit*6;
@@ -1553,10 +1568,13 @@ h1.mdc-typography--title {
 .support.funding .mdc-card {
     margin: $spacing-unit 0;
 }
+.services .support .mdc-card__primary {
+    height: $spacing-unit*2;
+}
 .support {
     .mdc-card__media {
-        height: 80px;
-        padding: $spacing-unit*(3/4) $spacing-unit;
+        height: $spacing-unit*4;
+        padding: $spacing-unit/2 $spacing-unit;
         background-size: contain;
         background-repeat: no-repeat;
         background-origin: content-box;
@@ -1575,6 +1593,7 @@ h1.mdc-typography--title {
         }
     }
     .mdc-card__primary {
+        padding: $spacing-unit;
         // margin-bottom: $spacing-unit;
         .mdc-card__title {
             padding-bottom: 0;
@@ -1614,19 +1633,19 @@ h1.mdc-typography--title {
         background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/funding-scotland.png');
     }
     .goodhq .mdc-card__media {
-        background-color: #4033E9;
+        background-color: #4033E9 !important;
         background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/goodhq.png');
     }
     .tfn .mdc-card__media {
-        background-color: #3b9db1;
+        background-color: #3b9db1 !important;
         background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/tfn.png');
     }
     .credit-union .mdc-card__media {
-        background-color: #1976D2;
+        background-color: #1976D2 !important;
         background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/credit-union.png');
     }
     .milo .mdc-card__media {
-        background-color: #4475A0;
+        background-color: #4475A0 !important;
         background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/milo.png');
     }
     .mdc-card__supporting-text {
@@ -1650,7 +1669,7 @@ h1.support-sector {
         background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/open-government.png');
     }
     .project-cjs .mdc-card__media {
-        background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/cjs.png');
+        background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/header-cjs.jpg');
     }
 }
 .section-campaigns {
@@ -1667,19 +1686,22 @@ h1.support-sector {
         background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/eu-are-valued.png');
     }
     .building-healthier-happier-communities .mdc-card__media {
-        background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/building-healthier-happier-communities.png');
+        background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/header-bhhc.jpg');
     }
     .datawareness .mdc-card__media {
-        background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/datawareness.png');
+        background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/header-datawareness.png');
     }
     .right-approach .mdc-card__media {
         background-image: url('https://storage.googleapis.com/scvo-cms/wp-content/uploads/2017/06/right-approach-strapline-hires-1024x337.jpg');
     }
     .scottish-charity-awards .mdc-card__media {
-        background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/scottish-charity-awards.png');
+        background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/header-charity-awards.png');
     }
     .welfare-reform .mdc-card__media {
         background-image: url('https://storage.googleapis.com/scvo-cms/wp-content/uploads/2017/10/welfare-reform-bg-1400x400.jpg');
+    }
+    .terrific-trustees .mdc-card__media {
+        background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/header-trustees.png');
     }
 }
 .mdc-card__actions {
@@ -2597,19 +2619,18 @@ footer {
             .mdc-layout-grid {
                 width: 100%;
             }
-        }
-    }
-    .home .splash-image.hello {
-        padding: 0;
-        min-height: 30vh;
-        .splash-overlay {
-            min-height: 30vh;
-            h1.header-text {
-                font-size: 2rem;
-                line-height: 2.2rem;
+            .header-caption {
+                display: none;
             }
         }
-        .container-fluid .mdc-layout-grid {
+    }
+    .home .splash-image.hello .splash-overlay .container-fluid {
+        min-height: 30vh;
+        h1.header-text {
+            font-size: 2rem;
+            line-height: 2.2rem;
+        }
+        .mdc-layout-grid {
             width: 100%;
             margin: 0;
             h1.header-text {

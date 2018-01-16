@@ -6,30 +6,45 @@
         "rendered.json_ld"
     ],
     "query": {
-        "bool": {
-            {{#if query.classification}}
-                "filter": [
-                    "term": { "library_classification_slug": "{{query.classification}}" }
-                ]{{#if query.q}},{{/if}}
-            {{/if}}
-            {{#if query.q}}
-                "must": [
-                    {
-                        "query_string": {
-                            "query": "{{query.q}}",
-                            "default_operator": "AND",
-                            "analyzer": "snowball"
+        "function_score": {
+        	"query": {
+	        	"bool": {
+                    "must": [
+                        {{#if query.classification}}
+                        {
+                            "term": {
+                                "library_classification_slug": "{{query.classification}}"
+                            }
+                        },
+                        {{/if}}
+                        {{#if query.q}}
+                        {
+                            "query_string": {
+                                "query": "{{query.q}}",
+                                "default_operator": "AND",
+                                "analyzer": "snowball"
+                            }
+                        }
+                        {{else}}
+                		{
+                			"match_all": {}
+                		}
+                        {{/if}}
+                    ]
+                }
+            },
+            "boost_mode": "multiply",
+            "functions": [
+                {
+                    "weight": "8",
+                    "gauss": {
+                        "date_posted": {
+                            "scale": "84d",
+                            "decay": "0.1"
                         }
                     }
-                ]
-            {{/if}}
+                }
+            ]
         }
     }
-    {{#if query.q}}
-    {{else}}
-        ,
-        "sort": {
-            "date_posted": "desc"
-        }
-    {{/if}}
 }
