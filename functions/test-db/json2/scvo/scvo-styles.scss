@@ -96,10 +96,10 @@ secondary-light: #FFA000,
 secondary-dark: #FF6F00
 ),
 funding-scotland: (
-primary: #6FB744,
-primary-alpha: #6FB744,
-primary-light: #6FB744,
-primary-dark: #6FB744,
+primary: #71B745,
+primary-alpha: rgba(113, 183, 69, 0.89),
+primary-light: #71B745,
+primary-dark: #689F38,
 secondary: #FF8F00,
 secondary-light: #FFA000,
 secondary-dark: #FF6F00
@@ -155,7 +155,6 @@ primary-dark: #251032
     .post-info .post-info-categories .fal,
     #share-menu-button,
     .mdc-simple-menu .mdc-list-item,
-    .container-content ul li::before,
     .mdc-theme--primary {
         color: map-get($themeSelected, 'primary');
     }
@@ -360,6 +359,9 @@ primary-dark: #251032
                 transparent
             );
         }
+        .splash-image .header-caption {
+            max-width: 42%;
+        }
     }
     @media screen and (max-width: 991px) {
         .splash-overlay {
@@ -371,6 +373,9 @@ primary-dark: #251032
                 transparent
             );
         }
+        .splash-image .header-caption {
+            max-width: 36%;
+        }
     }
     @media screen and (max-width: 839px) {
         .splash-overlay {
@@ -381,6 +386,9 @@ primary-dark: #251032
                 transparent 67.08%,
                 transparent
             );
+        }
+        .splash-image .header-caption {
+            display: none;
         }
     }
     @media screen and (max-width: 450px) {
@@ -486,16 +494,9 @@ primary-dark: #251032
 .projects-campaigns {
     @include theme-colours('projects');
 }
-.search-result.scvo-cms-post,
-.related-posts,
-.post,
-.blogs,
-.press-media,
-.policy-research {
-    @include theme-colours('posts');
-}
 .goodhq,
-.search-result.goodhq-organisation {
+.search-result.goodhq-organisation,
+.search-result.goodhq-post {
     @include theme-colours('goodhq');
 }
 .search-result.digital-charter-signatory {
@@ -504,10 +505,13 @@ primary-dark: #251032
 .tfn,
 .post-related-tfn,
 .gist.tfn-post,
-.search-result.tfn-post {
+.search-result.tfn-post,
+.search-result.tfn-event,
+.search-result.tfn-poll,
+.search-result.tfn-feature,
+.search-result.tfn-list {
     @include theme-colours('tfn');
 }
-.funding-scotland,
 .search-result.funding-scotland-fund,
 .services.funding-scotland {
     @include theme-colours('funding-scotland');
@@ -518,6 +522,14 @@ primary-dark: #251032
 .digital {
     @include theme-colours('digital');
 }
+.search-result.scvo-cms-post,
+.related-posts,
+.post,
+.blogs,
+.press-media,
+.policy-research {
+    @include theme-colours('posts');
+}
 .services,
 .events,
 .search-result.scvo-cms-page,
@@ -527,7 +539,7 @@ primary-dark: #251032
 .breadcrumbs,
 .page-content,
 .page-related,
-.page-sidebar .static-sidebar,
+.page-sidebar,
 .posts-page .page-sidebar,
 .post-content,
 .library-content,
@@ -647,7 +659,6 @@ figure {
     border-radius: 0 !important;
     box-sizing: border-box;
 }
-.mdc-card__actions a:hover,
 .mdc-button a:hover,
 .mdc-button:hover,
 .mdc-toolbar a:hover {
@@ -1318,7 +1329,6 @@ figure {
         padding: 0;
         margin: 0 auto;
         .mdc-layout-grid {
-            float: left;
             width: 44%;
             margin: $spacing-unit*(2/3) 0 $spacing-unit;
             // position: absolute;
@@ -1332,7 +1342,7 @@ figure {
         max-height: 18vh;
     }
     h1.header-text {
-        margin: 0;
+        margin: 0 !important;
         color: #fff;
         font-weight: 800;
         font-size: 3rem;
@@ -1852,7 +1862,8 @@ h1.support-sector {
             list-style: none;
             padding-left: $spacing-unit*1.4;
         }
-        li::before {
+        li:before {
+            color: black;
             content: "\25CF";
             font-size: 1rem;
             margin-left: -$spacing-unit*1.4;
@@ -2181,7 +2192,7 @@ p {
 p:last-child {
     margin-bottom: 0;
 }
-.digital,
+.page.digital,
 .full {
     img {
         max-width: 100%;
@@ -2356,7 +2367,7 @@ p.results-highlights em {
 
 footer {
     .footer-main {
-        padding: $spacing-unit*1.5 0 0;
+        padding: 0;
     }
     h3 {
         padding-bottom: $spacing-unit/2;
@@ -2618,9 +2629,6 @@ footer {
         .container-fluid {
             .mdc-layout-grid {
                 width: 100%;
-            }
-            .header-caption {
-                display: none;
             }
         }
     }
