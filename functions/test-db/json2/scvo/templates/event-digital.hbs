@@ -1,0 +1,32 @@
+<div class="event">
+    {{> header_splash}}
+    <div class="container-fluid page-content">
+        {{#> handle_404}}
+        {{#with primaryResponse.hits.hits.[0]._source}}
+        <ul class="breadcrumbs">
+            <li><a href="/">Home</a></li>
+            <li><a href="/digital">Digital</a></li>
+            <li><a href="/digital/events">Events</a></li>
+            <li>{{{title}}}</li>
+        </ul>
+
+        {{{rendered.scvo_full}}}
+        {{/with}}
+
+        <div class="mdc-layout-grid">
+            <div class="mdc-layout-grid__inner">
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
+                    {{#compare supplimentaryResponses.related_events.hits.total ">" 0}}
+                    <h2 class="author">Similar events</h2>
+                    <ul class="supplimentary-list">
+                        {{#each supplimentaryResponses.related_events.hits.hits}}
+                        {{{_source.rendered.scvo_list}}}
+                        {{/each}}
+                    </ul>
+                    {{/compare}}
+                </div>
+            </div>
+        </div>
+        {{/handle_404}}
+    </div>
+</div>
