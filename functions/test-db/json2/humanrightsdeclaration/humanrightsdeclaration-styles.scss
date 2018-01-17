@@ -1,5 +1,5 @@
 @import url("//cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css");
-@import url('//fonts.googleapis.com/css?family=Rubik:400,500i,700');
+@import url('//fonts.googleapis.com/css?family=Rubik:400,500,700');
 
 $spacing-unit: 1rem;
 $brand-border-width: 2px;
@@ -25,7 +25,7 @@ html {
     line-height: 1.45;
 }
 body {
-    background: $brand-colour;
+    background: #1A1A19;
     min-height: 100%;
     padding: 0;
     margin: 0;
@@ -202,6 +202,25 @@ p.quote {
 
     form {
         margin-bottom: $spacing-unit*2;
+        .mdc-textfield {
+            position: relative;
+            margin-right: $spacing-unit/2;
+            .mdc-textfield__input {
+                margin-right: 1rem;
+                box-sizing: border-box;
+                padding: 0 $spacing-unit*2.5 0 $spacing-unit/2;
+                width: 100%;
+            }
+            .search-button-large {
+                padding: 1px 0 0;
+                position: absolute;
+                top: $spacing-unit/2;
+                right: $spacing-unit/2;
+                .fa-search {
+                    color: #333;
+                }
+            }
+        }
     }
     // h1 {
     //     font-size: 5.3rem;
@@ -406,23 +425,121 @@ p.quote {
 }
 
 footer {
-    padding: $spacing-unit*2 0 $spacing-unit;
+    --mdc-layout-grid-margin-desktop: 1rem;
+    --mdc-layout-grid-gutter-desktop: 1rem;
+    --mdc-layout-grid-margin-tablet: 1rem;
+    --mdc-layout-grid-gutter-tablet: 1rem;
+    --mdc-layout-grid-margin-phone: 1rem;
+    --mdc-layout-grid-gutter-phone: 1rem;
+    color: white;
+    // background-color: $brand-colour;
     .brand-logo {
         margin-right: $spacing-unit;
         img {
             max-width: 180px;
         }
     }
+    strong {
+        font-weight: 500;
+    }
     p {
         color: white;
         a {
+            font-weight: 500;
             color: white;
             text-decoration: underline;
         }
+        a:hover {
+            color: white;
+        }
     }
-    .footer-copyright p {
-        font-size: 0.85rem;
+    .footer-copyright {
+        background-color: #1A1A19;
+        p {
+            font-size: 0.85rem;
+            margin-bottom: 0;
+        }
+    }
+    .container-fluid {
+        position: relative;
+    }
+    .footer-main {
+        border-top: $spacing-unit/2 solid #5C96DD;
+        // padding: $spacing-unit 0 $spacing-unit*2;
+        background-image: linear-gradient(160deg, $brand-colour, $brand-colour 50%, #1A1A19 95%, #1A1A19);
+    }
+    h3 {
+        font-weight: 500;
+        margin-top: 0.5rem;
+        padding-bottom: $spacing-unit/2;
+        border-bottom: $spacing-unit/5 solid #5C96DD;
+        color: white;
+    }
+    .mdc-list .mdc-list-item a {
+        color: white;
+        font-weight: 500;
+    }
+    .mdc-list .mdc-list-item a:hover {
+        text-decoration: underline !important;
+    }
+    .brand-logo {
+        margin-top: 1.5rem;
+        display: inline-block;
+        // text-align: right;
+        img {
+            margin-bottom: 0;
+        }
+    }
+    .mdc-layout-grid {
+        padding: 0;
         margin-bottom: 0;
+        p {
+            margin: 0 0 0.8rem;
+        }
+    }
+    p,
+    .fa-ul li,
+    .mdc-list-item {
+        color: white;
+        font-size: 1rem;
+    }
+    .fa-ul {
+        margin: 0 0 0 $spacing-unit*2;
+        li a {
+            text-decoration: none;
+        }
+        li a:hover {
+            text-decoration: underline;
+        }
+    }
+    ul {
+        margin-bottom: $spacing-unit !important;
+    }
+    .mdc-layout-grid p {
+        margin-bottom: 0;
+    }
+    .mdc-list {
+        padding: 0;
+        .mdc-list-item {
+            height: $spacing-unit*1.5;
+            a {
+                text-decoration: none;
+            }
+        }
+    }
+    .logo.scvo {
+        position: absolute;
+        bottom: 1.2rem;
+        right: 0.75rem;
+    }
+    .logo.digital-scotland {
+        height: 50px;
+        position: absolute;
+        bottom: 0.7rem;
+        right: 160px;
+    }
+    .menu ul {
+        margin-top: 0;
     }
 }
 
@@ -468,6 +585,15 @@ footer {
         display: none !important;
     }
 }
+
+@media screen and (max-width: 479px) {
+    footer .logo.scvo {
+        position: relative;
+        bottom: 0;
+        right: 0;
+    }
+}
+
 @media screen and (max-width: 450px) {
     .pagination-distance-3,
     .pagination-distance-4 {

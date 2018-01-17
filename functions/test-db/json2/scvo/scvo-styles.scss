@@ -42,10 +42,10 @@ secondary-light: #FFA000,
 secondary-dark: #FF6F00
 ),
 funding: (
-primary: #00838F,
-primary-alpha: rgba(0,131,143,0.89),
-primary-light: #008D9B,
-primary-dark: #006064,
+primary: #00796A,
+primary-alpha: rgba(0,121,106,0.89),
+primary-light: #198678,
+primary-dark: #006054,
 secondary: #FF8F00,
 secondary-light: #FFA000,
 secondary-dark: #FF6F00
@@ -534,12 +534,13 @@ primary-dark: #251032
 .events,
 .search-result.scvo-cms-page,
 .search-result.scvo-event,
+.gist.scvo-event,
 .gist.scvo-cms-post,
 .list.scvo-cms-post,
 .breadcrumbs,
 .page-content,
 .page-related,
-.page-sidebar,
+.page-sidebar .static-sidebar,
 .posts-page .page-sidebar,
 .post-content,
 .library-content,
@@ -1379,11 +1380,14 @@ figure {
         bottom: 0;
         right: 0;
         max-width: 50%;
-        font-size: 0.9rem;
         color: rgba(255, 255, 255, 0.8);
         background: rgba(0, 0, 0, 0.65);
         border-radius: $spacing-unit/4 $spacing-unit/4 0 0;
-        padding: $spacing-unit/4 $spacing-unit*(0.4);
+        padding: $spacing-unit/10 $spacing-unit/3 $spacing-unit/4;
+        font-size: 1rem;
+        font-weight: 600;
+        font-variant-caps: all-small-caps;
+        line-height: 1;
         p {
             margin: 0;
         }
@@ -1477,6 +1481,9 @@ figure {
             grid-column-end: span 9;
         }
     }
+    .scvo-event {
+        margin-bottom: 0;
+    }
     .logos {
         margin-bottom: $spacing-unit*2;
         .mdc-layout-grid__cell {
@@ -1492,8 +1499,8 @@ figure {
             text-align: center;
         }
         img {
-            margin: 0 $spacing-unit*3;
-            max-width: 50%;
+            margin: 0;
+            width: 50%;
         }
     }
 }
