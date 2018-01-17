@@ -860,6 +860,39 @@
             "apiVersion": "5.6"
         }
     },
+    "event_booking": {
+        "pattern": "/digital/events/:event_slug/book",
+        "templates": {
+            "default": `{:templates/event-digital-booking.hbs}`
+        },
+        "headTagsTemplate": `{:templates/page-head-tags.hbs}`,
+        "primarySearchTemplate": {
+            "index": "web-content-production",
+            "type": "scvo-event-digital",
+            "template": `{:queries/event.json}`
+        },
+        "supplimentarySearchTemplates": {
+            "not_found": {
+                "index": "web-content-production",
+                "type": "scvo-cms-page,scvo-cms-post",
+                "template": `{:queries/not-found.json}`
+            },
+            "types": {
+                "index": "web-content-production",
+                "type": "scvo-event-digital",
+                "template": `{:queries/event-aggs.json}`
+            },
+            "splash": {
+                "index": "web-content-production",
+                "type": "scvo-cms-media",
+                "template": `{:queries/event-splash.json}`
+            }
+        },
+        "elasticsearchConfig": {
+            "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
+            "apiVersion": "5.6"
+        }
+    },
     "event_search_digital": {
         "pattern": "/digital/events",
         "templates": {
