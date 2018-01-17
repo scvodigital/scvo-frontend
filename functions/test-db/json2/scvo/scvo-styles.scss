@@ -502,16 +502,6 @@ primary-dark: #251032
 .search-result.digital-charter-signatory {
     @include theme-colours('digital-charter');
 }
-.tfn,
-.post-related-tfn,
-.gist.tfn-post,
-.search-result.tfn-post,
-.search-result.tfn-event,
-.search-result.tfn-poll,
-.search-result.tfn-feature,
-.search-result.tfn-list {
-    @include theme-colours('tfn');
-}
 .search-result.funding-scotland-fund,
 .services.funding-scotland {
     @include theme-colours('funding-scotland');
@@ -529,6 +519,17 @@ primary-dark: #251032
 .press-media,
 .policy-research {
     @include theme-colours('posts');
+}
+.tfn,
+.post-related-tfn,
+.post-related-tfn h3 a,
+.gist.tfn-post,
+.search-result.tfn-post,
+.search-result.tfn-event,
+.search-result.tfn-poll,
+.search-result.tfn-feature,
+.search-result.tfn-list {
+    @include theme-colours('tfn');
 }
 .services,
 .events,
@@ -1068,7 +1069,8 @@ figure {
                 }
             }
             #main-tab-bar {
-                .mdc-tab.mdc-tab--active .mdc-tab--label {
+                .mdc-tab.mdc-tab--active .mdc-tab--label,
+                .mdc-tab:hover .mdc-tab--label {
                     border-bottom-color: rgba(255,255,255,0.9);
                     // background: rgba(0,0,0,0.2);
                 }
@@ -1080,7 +1082,8 @@ figure {
                     min-width: auto;
                     font-weight: 600;
                 }
-                .mdc-tab.mdc-tab--active .mdc-tab--label {
+                .mdc-tab.mdc-tab--active .mdc-tab--label,
+                .mdc-tab:hover .mdc-tab--label {
                     border-bottom-color: rgba(255,255,255,0.9);
                 }
             }
