@@ -718,15 +718,16 @@ figure {
                 height: $spacing-unit*3;
                 line-height: $spacing-unit*3;
                 margin: 0;
-                padding: $spacing-unit $spacing-unit*3 $spacing-unit $spacing-unit;
-                font-size: 1.5rem;
+                padding: 0 $spacing-unit*2.75 0 $spacing-unit*0.75;
+                font-size: 1.1rem;
             }
             .search-button-large {
                 padding: 1px 0 0;
                 position: absolute;
-                top: $spacing-unit/2;
-                right: $spacing-unit/2;
+                top: $spacing-unit*0.7;
+                right: $spacing-unit*0.75;
                 .fa-search {
+                    font-size: $spacing-unit*1.5;
                     color: #333;
                 }
             }
@@ -746,7 +747,9 @@ figure {
             }
             .photo-wee {
                 max-width: 96px;
-                margin-right: 1.5rem;
+                margin-right: $spacing-unit;
+                margin-bottom: $spacing-unit;
+                float: left;
             }
             .post-info .photo-wee {
                 display: none;
@@ -2452,6 +2455,7 @@ p.results-highlights em {
 footer {
     .footer-main {
         padding: 0;
+        margin-bottom: $spacing-unit;
     }
     h3 {
         padding-bottom: $spacing-unit/2;
@@ -2495,7 +2499,7 @@ footer {
             text-decoration: underline;
         }
     }
-    ul {
+    .contact .fa-ul {
         margin-bottom: $spacing-unit !important;
     }
     .mdc-layout-grid p {
@@ -2655,6 +2659,7 @@ footer {
     }
     .home .splash-image.hello .container-fluid .mdc-layout-grid p.header-extra {
         font-size: 1.2rem;
+        margin-bottom: $spacing-unit/2;
     }
     .breadcrumbs {
         font-size: 85%;
@@ -2716,6 +2721,19 @@ footer {
             }
         }
     }
+    .home .latest-content .gist img.photo-wee,
+    .gist .thumbnail img {
+        height: 64px;
+        width: 64px;
+    }
+    footer {
+        .footer-main {
+            margin: $spacing-unit 0;
+            h3 {
+                margin-top: 0;
+            }
+        }
+    }
 }
 
 @media screen and (max-width: 450px) {
@@ -2743,8 +2761,8 @@ footer {
                 line-height: 3.3rem;
             }
             p.header-extra {
-                font-size: 0.9rem;
-                margin-bottom: 0;
+                font-size: 0.97rem;
+                // margin-bottom: 0;
             }
         }
     }
