@@ -635,6 +635,16 @@ img.responsive {
 .mdc-temporary-drawer .mdc-list-item {
     font-weight: 600;
 }
+.mdc-temporary-drawer__drawer {
+  display: -webkit-box;
+  -webkit-transition: all .195s ease;
+  -webkit-transform: translateX(-400px);
+}
+.mdc-temporary-drawer--open  {
+  .mdc-temporary-drawer__drawer {
+    -webkit-transform: none;
+  }
+}
 .mdc-card__title,
 .mdc-typography--headline,
 .supplimentary-list-title,
@@ -2568,6 +2578,9 @@ footer {
             }
         }
     }
+    .home .splash-image.hello .container-fluid .mdc-layout-grid {
+        margin-left: 0;
+    }
     .latest-content {
         .mdc-layout-grid {
             width: 100%;
@@ -2703,7 +2716,7 @@ footer {
         }
         .mdc-layout-grid {
             width: 100%;
-            margin: 0;
+            margin: $spacing-unit*(2/3) 0;
             h1.header-text {
                 font-size: 3rem;
                 line-height: 3.3rem;
