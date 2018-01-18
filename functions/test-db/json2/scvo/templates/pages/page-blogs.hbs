@@ -1,0 +1,27 @@
+<div class="page posts blogs">
+    {{> header_splash}}
+    <div class="container-fluid">
+        {{#> handle_404}}
+        {{> breadcrumbs_posts}}
+        <div class="mdc-layout-grid">
+            <div class="mdc-layout-grid__inner">
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-8-desktop mdc-layout-grid__cell--span-5-tablet mdc-layout-grid__cell--span-4-phone content post-content">
+                    <ul class="supplimentary-list">
+                        {{#each supplimentaryResponses.related_posts.hits.hits}}
+                        {{{_source.rendered.list}}}
+                        {{/each}}
+                    </ul>
+                    {{> pagination}}
+                </div>
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-3-tablet mdc-layout-grid__cell--span-4-phone sidebar post-sidebar">
+                    {{> wee_search title="Search posts" searchRoute="main_search" extraParams='{ "type": "scvo-cms-post" }'}}
+
+                    {{#with primaryResponse.hits.hits.[0]._source}}
+                    {{{rendered.full}}}
+                    {{/with}}
+                </div>
+            </div>
+        </div>
+        {{/handle_404}}
+    </div>
+</div>

@@ -558,7 +558,8 @@ primary-dark: #251032
 .page-sidebar.static-sidebar,
 .policy-research.events .event-content,
 .policy-research.events .event-sidebar,
-.posts-page .page-sidebar,
+.posts.blogs .post-sidebar,
+.posts.press .post-sidebar,
 .post-content,
 .library-content,
 .library-sidebar,
@@ -1490,7 +1491,6 @@ figure {
 .policy-research.briefings-consultation-responses .mdc-card__actions,
 .policy-research.research .mdc-card__actions,
 .post.author .post-info-author,
-.blogs .mdc-card__actions,
 .press-media .mdc-card__actions,
 .press-media .sidebar h3.blogs {
     display: none;
@@ -1795,10 +1795,13 @@ h1.support-sector {
         }
     }
 }
-.supplimentary-list .list .mdc-card__actions {
-    padding-bottom: $spacing-unit/2 !important;
+.supplimentary-list .list {
+    .mdc-card__actions {
+        padding-bottom: $spacing-unit/2 !important;
+    }
 }
 .post-info-categories {
+    margin-left: 1px;
     ul {
         padding: 0;
     }
@@ -1825,6 +1828,7 @@ h1.support-sector {
 .mdc-card-search {
     margin: 0 0 $spacing-unit;
     .mdc-card__primary {
+        padding-top: $spacing-unit/2;
         padding-bottom: $spacing-unit;
     }
 }
@@ -2306,6 +2310,9 @@ p:last-child {
 .post-content .full {
     margin-top: $spacing-unit/2;
 }
+.page.press .post-sidebar .full {
+    margin-top: 0;
+}
 .sidebar {
     .blogs {
         margin-top: $spacing-unit;
@@ -2326,6 +2333,9 @@ p:last-child {
 .page-sidebar h3:first-child ,
 .post-sidebar h3:first-child {
     margin: $spacing-unit 0 $spacing-unit/4 !important;
+}
+.post-sidebar {
+    margin-top: $spacing-unit/2;
 }
 
 .page-content,
@@ -2579,8 +2589,18 @@ footer {
             }
         }
     }
-    .home .splash-image.hello .container-fluid .mdc-layout-grid {
-        margin-left: 0;
+    .home {
+        .splash-image.hello .container-fluid .mdc-layout-grid {
+            margin-left: 0;
+        }
+        .latest-content {
+            h2 a,
+            .scvo-cms-post,
+            .tfn-news-post {
+                border-right: none;
+                padding-right: 0;
+            }
+        }
     }
     .latest-content {
         .mdc-layout-grid {
