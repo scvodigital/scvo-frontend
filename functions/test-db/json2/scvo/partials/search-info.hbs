@@ -1,7 +1,7 @@
 {{#if paging.totalResults}}
 <div class="search-info">
-    <strong>Total results:</strong> {{paging.totalResults}} |
-    <strong>Current page:</strong> {{paging.currentPage}} of {{paging.totalPages}}
+    <strong>Total results:</strong> {{addCommas paging.totalResults}} |
+    <strong>Current page:</strong> {{addCommas paging.currentPage}} of {{addCommas paging.totalPages}}
 </div>
 {{else}}
 {{#if params.query.q}}
