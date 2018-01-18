@@ -20,7 +20,7 @@
                             "exists": {
                                 "field": "rendered.scvo_search_result"
                             }
-                        },
+                        }{{#ifAny query.q query.type}},{{/ifAny}}
                         {{#if query.type}}
                         {
                             "bool": {
@@ -42,12 +42,13 @@
                                         {{/each}}
                                     {{/compare}}
                                     {
-                                        "match_none": {}
+                                        "match_all": {}
                                     }
                                 ]
                             }
-                        },
+                        }{{#if query.q}},{{/if}}
                         {{/if}}
+                        {{#if query.q}}
 	        			{
 		        			"bool": {
 		        				"should": [
@@ -67,10 +68,14 @@
 					                        "analyzer": "snowball",
 					                        "boost": 10
 					                    }
-					                }
+					                },
+                                    {
+                                        "match_none": {}
+                                    }
 		        				]
 		        			}
 	        			}
+                        {{/if}}
 	        		]
                     {{#unless query.type}},
                     "should": [
