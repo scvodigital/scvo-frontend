@@ -55,7 +55,7 @@
         "headTagsTemplate": `{:templates/search-head-tags.hbs}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
-            "type": "scvo-cms-page,scvo-cms-post,scvo-staff,scvo-member,digital-charter-signatory,goodmoves-legacy,funding-scotland-fund,goodhq-organisation,goodhq-post,scvo-document-evidence,scvo-event,scvo-event-training,scvo-event-digital,scvo-event-cjs,scvo-event-policy,scvo-grant-charter,oscr-charity,tfn-news-post,tfn-blog-post,tfn-poll,tfn-event,tfn-list,tfn-feature",
+            "type": "scvo-cms-page,scvo-cms-post,scvo-staff,scvo-member,digital-charter-signatory,goodmoves-legacy,funding-scotland-fund,goodhq-organisation,goodhq-post,scvo-document-evidence,scvo-event,scvo-event-training,scvo-event-digital,scvo-event-policy,scvo-grant-charter,oscr-charity,tfn-news-post,tfn-blog-post,tfn-poll,tfn-event,tfn-list,tfn-feature",
             "template": `{:queries/search.json}`
         },
         "supplimentarySearchTemplates": {
@@ -67,8 +67,7 @@
         },
         "elasticsearchConfig": {
             "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
-            "apiVersion": "5.6",
-            "log": "debug"
+            "apiVersion": "5.6"
         },
         "multipleResults": true
     },
@@ -283,8 +282,7 @@
         },
         "elasticsearchConfig": {
             "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
-            "apiVersion": "5.6",
-            "log": "debug"
+            "apiVersion": "5.6"
         }
     },
     "funding_updates_link_gen": {
@@ -341,8 +339,7 @@
         },
         "elasticsearchConfig": {
             "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
-            "apiVersion": "5.6",
-            "log": "trace"
+            "apiVersion": "5.6"
         }
     },
     "job_search": {
@@ -518,8 +515,7 @@
         },
         "elasticsearchConfig": {
             "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
-            "apiVersion": "5.6",
-            "log": "debug"
+            "apiVersion": "5.6"
         }
     },
     "evidence_library_document": {
@@ -822,6 +818,39 @@
             "apiVersion": "5.6"
         }
     },
+    "event_digital_booking": {
+        "pattern": "/digital/events/:event_slug/book",
+        "templates": {
+            "default": `{:templates/event-digital-booking.hbs}`
+        },
+        "headTagsTemplate": `{:templates/page-head-tags.hbs}`,
+        "primarySearchTemplate": {
+            "index": "web-content-production",
+            "type": "scvo-event-digital",
+            "template": `{:queries/event.json}`
+        },
+        "supplimentarySearchTemplates": {
+            "not_found": {
+                "index": "web-content-production",
+                "type": "scvo-cms-page,scvo-cms-post",
+                "template": `{:queries/not-found.json}`
+            },
+            "types": {
+                "index": "web-content-production",
+                "type": "scvo-event-digital",
+                "template": `{:queries/event-aggs.json}`
+            },
+            "splash": {
+                "index": "web-content-production",
+                "type": "scvo-cms-media",
+                "template": `{:queries/event-splash.json}`
+            }
+        },
+        "elasticsearchConfig": {
+            "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
+            "apiVersion": "5.6"
+        }
+    },
     "event_digital": {
         "pattern": "/digital/events/:event_slug",
         "templates": {
@@ -860,45 +889,12 @@
             "apiVersion": "5.6"
         }
     },
-    "event_booking": {
-        "pattern": "/digital/events/:event_slug/book",
-        "templates": {
-            "default": `{:templates/event-digital-booking.hbs}`
-        },
-        "headTagsTemplate": `{:templates/page-head-tags.hbs}`,
-        "primarySearchTemplate": {
-            "index": "web-content-production",
-            "type": "scvo-event-digital",
-            "template": `{:queries/event.json}`
-        },
-        "supplimentarySearchTemplates": {
-            "not_found": {
-                "index": "web-content-production",
-                "type": "scvo-cms-page,scvo-cms-post",
-                "template": `{:queries/not-found.json}`
-            },
-            "types": {
-                "index": "web-content-production",
-                "type": "scvo-event-digital",
-                "template": `{:queries/event-aggs.json}`
-            },
-            "splash": {
-                "index": "web-content-production",
-                "type": "scvo-cms-media",
-                "template": `{:queries/event-splash.json}`
-            }
-        },
-        "elasticsearchConfig": {
-            "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
-            "apiVersion": "5.6"
-        }
-    },
-    "event_search_digital": {
+    "event_digital_search": {
         "pattern": "/digital/events",
         "templates": {
-            "default": `{:templates/event-search-digital.hbs}`
+            "default": `{:templates/event-digital-search.hbs}`
         },
-        "headTagsTemplate": `{:templates/event-search-digital-head-tags.hbs}`,
+        "headTagsTemplate": `{:templates/event-digital-search-head-tags.hbs}`,
         "defaultParams": {
             "pageSize": 12
         },
@@ -964,8 +960,114 @@
         },
         "elasticsearchConfig": {
             "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
-            "apiVersion": "5.6",
-            "log": "debug"
+            "apiVersion": "5.6"
+        }
+    },
+    "event_policy_booking": {
+        "pattern": "/policy-research/events/:event_slug/book",
+        "templates": {
+            "default": `{:templates/event-policy-booking.hbs}`
+        },
+        "headTagsTemplate": `{:templates/page-head-tags.hbs}`,
+        "primarySearchTemplate": {
+            "index": "web-content-production",
+            "type": "scvo-event-policy",
+            "template": `{:queries/event.json}`
+        },
+        "supplimentarySearchTemplates": {
+            "not_found": {
+                "index": "web-content-production",
+                "type": "scvo-cms-page,scvo-cms-post",
+                "template": `{:queries/not-found.json}`
+            },
+            "types": {
+                "index": "web-content-production",
+                "type": "scvo-event-policy",
+                "template": `{:queries/event-aggs.json}`
+            },
+            "splash": {
+                "index": "web-content-production",
+                "type": "scvo-cms-media",
+                "template": `{:queries/event-splash.json}`
+            }
+        },
+        "elasticsearchConfig": {
+            "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
+            "apiVersion": "5.6"
+        }
+    },
+    "event_policy": {
+        "pattern": "/policy-research/events/:event_slug",
+        "templates": {
+            "default": `{:templates/event-policy.hbs}`
+        },
+        "headTagsTemplate": `{:templates/page-head-tags.hbs}`,
+        "primarySearchTemplate": {
+            "index": "web-content-production",
+            "type": "scvo-event-policy",
+            "template": `{:queries/event.json}`
+        },
+        "supplimentarySearchTemplates": {
+            "not_found": {
+                "index": "web-content-production",
+                "type": "scvo-cms-page,scvo-cms-post",
+                "template": `{:queries/not-found.json}`
+            },
+            "related_events": {
+                "index": "web-content-production",
+                "type": "scvo-event-policy",
+                "template": `{:queries/event-related.json}`
+            },
+            "types": {
+                "index": "web-content-production",
+                "type": "scvo-event-policy",
+                "template": `{:queries/event-aggs.json}`
+            },
+            "splash": {
+                "index": "web-content-production",
+                "type": "scvo-cms-media",
+                "template": `{:queries/event-splash.json}`
+            }
+        },
+        "elasticsearchConfig": {
+            "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
+            "apiVersion": "5.6"
+        }
+    },
+    "event_policy_search": {
+        "pattern": "/policy-research/events",
+        "templates": {
+            "default": `{:templates/event-policy-search.hbs}`
+        },
+        "headTagsTemplate": `{:templates/event-policy-search-head-tags.hbs}`,
+        "defaultParams": {
+            "pageSize": 12
+        },
+        "primarySearchTemplate": {
+            "index": "web-content-production",
+            "type": "scvo-event-policy",
+            "template": `{:queries/event-search.json}`
+        },
+        "supplimentarySearchTemplates": {
+            "not_found": {
+                "index": "web-content-production",
+                "type": "scvo-cms-page,scvo-cms-post",
+                "template": `{:queries/not-found.json}`
+            },
+            "types": {
+                "index": "web-content-production",
+                "type": "scvo-event-policy",
+                "template": `{:queries/event-aggs.json}`
+            },
+            "splash": {
+                "index": "web-content-production",
+                "type": "scvo-cms-media",
+                "template": `{:queries/event-splash.json}`
+            }
+        },
+        "elasticsearchConfig": {
+            "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
+            "apiVersion": "5.6"
         }
     },
     "page_policy": {
@@ -1399,6 +1501,113 @@
                 "index": "web-content-production",
                 "type": "scvo-cms-media",
                 "template": `{:queries/splash.json}`
+            }
+        },
+        "elasticsearchConfig": {
+            "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
+            "apiVersion": "5.6"
+        }
+    },
+    "event_cjs_booking": {
+        "pattern": "/jobs/community-jobs-scotland/training-opportunities/:event_slug/book",
+        "templates": {
+            "default": `{:templates/event-cjs-booking.hbs}`
+        },
+        "headTagsTemplate": `{:templates/page-head-tags.hbs}`,
+        "primarySearchTemplate": {
+            "index": "web-content-production",
+            "type": "scvo-event-cjs",
+            "template": `{:queries/event.json}`
+        },
+        "supplimentarySearchTemplates": {
+            "not_found": {
+                "index": "web-content-production",
+                "type": "scvo-cms-page,scvo-cms-post",
+                "template": `{:queries/not-found.json}`
+            },
+            "types": {
+                "index": "web-content-production",
+                "type": "scvo-event-cjs",
+                "template": `{:queries/event-aggs.json}`
+            },
+            "splash": {
+                "index": "web-content-production",
+                "type": "scvo-cms-media",
+                "template": `{:queries/event-splash.json}`
+            }
+        },
+        "elasticsearchConfig": {
+            "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
+            "apiVersion": "5.6"
+        }
+    },
+    "event_cjs": {
+        "pattern": "/jobs/community-jobs-scotland/training-opportunities/:event_slug",
+        "templates": {
+            "default": `{:templates/event-cjs.hbs}`
+        },
+        "headTagsTemplate": `{:templates/page-head-tags.hbs}`,
+        "primarySearchTemplate": {
+            "index": "web-content-production",
+            "type": "scvo-event-cjs",
+            "template": `{:queries/event.json}`
+        },
+        "supplimentarySearchTemplates": {
+            "not_found": {
+                "index": "web-content-production",
+                "type": "scvo-cms-page,scvo-cms-post",
+                "template": `{:queries/not-found.json}`
+            },
+            "related_events": {
+                "index": "web-content-production",
+                "type": "scvo-event-cjs",
+                "template": `{:queries/event-related.json}`
+            },
+            "types": {
+                "index": "web-content-production",
+                "type": "scvo-event-cjs",
+                "template": `{:queries/event-aggs.json}`
+            },
+            "splash": {
+                "index": "web-content-production",
+                "type": "scvo-cms-media",
+                "template": `{:queries/event-splash.json}`
+            }
+        },
+        "elasticsearchConfig": {
+            "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
+            "apiVersion": "5.6"
+        }
+    },
+    "event_cjs_search": {
+        "pattern": "/jobs/community-jobs-scotland/training-opportunities",
+        "templates": {
+            "default": `{:templates/event-cjs-search.hbs}`
+        },
+        "headTagsTemplate": `{:templates/event-cjs-search-head-tags.hbs}`,
+        "defaultParams": {
+            "pageSize": 12
+        },
+        "primarySearchTemplate": {
+            "index": "web-content-production",
+            "type": "scvo-event-cjs",
+            "template": `{:queries/event-search.json}`
+        },
+        "supplimentarySearchTemplates": {
+            "not_found": {
+                "index": "web-content-production",
+                "type": "scvo-cms-page,scvo-cms-post",
+                "template": `{:queries/not-found.json}`
+            },
+            "types": {
+                "index": "web-content-production",
+                "type": "scvo-event-cjs",
+                "template": `{:queries/event-aggs.json}`
+            },
+            "splash": {
+                "index": "web-content-production",
+                "type": "scvo-cms-media",
+                "template": `{:queries/event-splash.json}`
             }
         },
         "elasticsearchConfig": {
