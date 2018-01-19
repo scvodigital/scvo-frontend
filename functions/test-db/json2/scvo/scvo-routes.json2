@@ -593,8 +593,8 @@
         "headTagsTemplate": `{:templates/posts/post-author-head-tags.hbs}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
-            "type": "scvo-cms-author",
-            "template": `{:queries/posts/post-author-profile.json}`
+            "type": "scvo-cms-post",
+            "template": `{:queries/posts/post-author.json}`
         },
         "supplimentarySearchTemplates": {
             "not_found": {
@@ -602,10 +602,10 @@
                 "type": "scvo-cms-page,scvo-cms-post",
                 "template": `{:queries/pages/not-found.json}`
             },
-            "author_posts": {
+            "author_profile": {
                 "index": "web-content-production",
-                "type": "scvo-cms-post",
-                "template": `{:queries/posts/post-author.json}`
+                "type": "scvo-cms-author",
+                "template": `{:queries/posts/post-author-profile.json}`
             },
             "staff_profile": {
                 "index": "web-content-production",
