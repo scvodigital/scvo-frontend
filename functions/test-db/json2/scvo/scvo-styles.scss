@@ -558,7 +558,8 @@ primary-dark: #251032
 .page-sidebar.static-sidebar,
 .policy-research.events .event-content,
 .policy-research.events .event-sidebar,
-.posts-page .page-sidebar,
+.posts.blogs .post-sidebar,
+.posts.press .post-sidebar,
 .post-content,
 .library-content,
 .library-sidebar,
@@ -717,15 +718,25 @@ figure {
                 height: $spacing-unit*3;
                 line-height: $spacing-unit*3;
                 margin: 0;
+<<<<<<< HEAD
                 padding: $spacing-unit $spacing-unit*3 $spacing-unit $spacing-unit;
+=======
+                padding: 0 $spacing-unit*2.75 0 $spacing-unit*0.75;
+>>>>>>> b341350b6152d42c68dd0e5f22b235b0f01065ef
                 font-size: 1.1rem;
             }
             .search-button-large {
                 padding: 1px 0 0;
                 position: absolute;
+<<<<<<< HEAD
                 top: $spacing-unit*(3/4);
                 right: $spacing-unit*(3/4);
+=======
+                top: $spacing-unit*0.7;
+                right: $spacing-unit*0.75;
+>>>>>>> b341350b6152d42c68dd0e5f22b235b0f01065ef
                 .fa-search {
+                    font-size: $spacing-unit*1.5;
                     color: #333;
                     font-size: 1.5rem;
                 }
@@ -746,7 +757,9 @@ figure {
             }
             .photo-wee {
                 max-width: 96px;
-                margin-right: 1.5rem;
+                margin-right: $spacing-unit;
+                margin-bottom: $spacing-unit;
+                float: left;
             }
             .post-info .photo-wee {
                 display: none;
@@ -1474,6 +1487,7 @@ figure {
 }
 // .mdc-temporary-drawer,
 .about.staff-team .post-info-author,
+.about.work-with-us .page-info,
 .digital.charter-fund.projects .page-info,
 .digital.cyber-resilience.projects .page-info,
 .projects-campaigns.terrific-trustees.search .page-info,
@@ -1491,7 +1505,6 @@ figure {
 .policy-research.briefings-consultation-responses .mdc-card__actions,
 .policy-research.research .mdc-card__actions,
 .post.author .post-info-author,
-.blogs .mdc-card__actions,
 .press-media .mdc-card__actions,
 .press-media .sidebar h3.blogs {
     display: none;
@@ -1796,10 +1809,13 @@ h1.support-sector {
         }
     }
 }
-.supplimentary-list .list .mdc-card__actions {
-    padding-bottom: $spacing-unit/2 !important;
+.supplimentary-list .list {
+    .mdc-card__actions {
+        padding-bottom: $spacing-unit/2 !important;
+    }
 }
 .post-info-categories {
+    margin-left: 1px;
     ul {
         padding: 0;
     }
@@ -1826,6 +1842,7 @@ h1.support-sector {
 .mdc-card-search {
     margin: 0 0 $spacing-unit;
     .mdc-card__primary {
+        padding-top: $spacing-unit/2;
         padding-bottom: $spacing-unit;
     }
 }
@@ -2307,6 +2324,9 @@ p:last-child {
 .post-content .full {
     margin-top: $spacing-unit/2;
 }
+.page.press .post-sidebar .full {
+    margin-top: 0;
+}
 .sidebar {
     .blogs {
         margin-top: $spacing-unit;
@@ -2327,6 +2347,13 @@ p:last-child {
 .page-sidebar h3:first-child ,
 .post-sidebar h3:first-child {
     margin: $spacing-unit 0 $spacing-unit/4 !important;
+}
+.post-sidebar {
+    margin-top: $spacing-unit/2;
+}
+
+.page-content {
+    padding-bottom: $spacing-unit*1.5;
 }
 
 .page-content,
@@ -2443,6 +2470,7 @@ p.results-highlights em {
 footer {
     .footer-main {
         padding: 0;
+        margin-bottom: $spacing-unit;
     }
     h3 {
         padding-bottom: $spacing-unit/2;
@@ -2486,7 +2514,7 @@ footer {
             text-decoration: underline;
         }
     }
-    ul {
+    .contact .fa-ul {
         margin-bottom: $spacing-unit !important;
     }
     .mdc-layout-grid p {
@@ -2580,8 +2608,18 @@ footer {
             }
         }
     }
-    .home .splash-image.hello .container-fluid .mdc-layout-grid {
-        margin-left: 0;
+    .home {
+        .splash-image.hello .container-fluid .mdc-layout-grid {
+            margin-left: 0;
+        }
+        .latest-content {
+            h2 a,
+            .scvo-cms-post,
+            .tfn-news-post {
+                border-right: none;
+                padding-right: 0;
+            }
+        }
     }
     .latest-content {
         .mdc-layout-grid {
@@ -2636,6 +2674,7 @@ footer {
     }
     .home .splash-image.hello .container-fluid .mdc-layout-grid p.header-extra {
         font-size: 1.2rem;
+        margin-bottom: $spacing-unit/2;
     }
     .breadcrumbs {
         font-size: 85%;
@@ -2697,6 +2736,19 @@ footer {
             }
         }
     }
+    .home .latest-content .gist img.photo-wee,
+    .gist .thumbnail img {
+        height: 64px;
+        width: 64px;
+    }
+    footer {
+        .footer-main {
+            margin: $spacing-unit 0;
+            h3 {
+                margin-top: 0;
+            }
+        }
+    }
 }
 
 @media screen and (max-width: 450px) {
@@ -2724,8 +2776,8 @@ footer {
                 line-height: 3.3rem;
             }
             p.header-extra {
-                font-size: 0.9rem;
-                margin-bottom: 0;
+                font-size: 0.97rem;
+                // margin-bottom: 0;
             }
         }
     }
