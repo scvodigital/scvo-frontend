@@ -1114,13 +1114,10 @@
             "apiVersion": "5.6"
         }
     },
-    "posts_page": {
-        "pattern": {
-            "press_media": "/press-media",
-            "blogs": "/blogs"
-        },
+    "page_blogs": {
+        "pattern": "/blogs",
         "templates": {
-            "default": `{:templates/posts/posts-page.hbs}`
+            "default": `{:templates/pages/page-blogs.hbs}`
         },
         "headTagsTemplate": `{:templates/pages/page-head-tags.hbs}`,
         "primarySearchTemplate": {
@@ -1150,14 +1147,79 @@
             "apiVersion": "5.6"
         }
     },
+    "page_press": {
+        "pattern": "/press-media",
+        "templates": {
+            "default": `{:templates/pages/page-press.hbs}`
+        },
+        "headTagsTemplate": `{:templates/pages/page-head-tags.hbs}`,
+        "primarySearchTemplate": {
+            "index": "web-content-production",
+            "type": "scvo-cms-page",
+            "template": `{:queries/pages/page.json}`
+        },
+        "supplimentarySearchTemplates": {
+            "not_found": {
+                "index": "web-content-production",
+                "type": "scvo-cms-page,scvo-cms-post",
+                "template": `{:queries/pages/not-found.json}`
+            },
+            "related_posts": {
+                "index": "web-content-production",
+                "type": "scvo-cms-post",
+                "template": `{:queries/posts/posts-page.json}`
+            },
+            "splash": {
+                "index": "web-content-production",
+                "type": "scvo-cms-media",
+                "template": `{:queries/pages/splash.json}`
+            }
+        },
+        "elasticsearchConfig": {
+            "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
+            "apiVersion": "5.6"
+        }
+    },
+    "page_about_jobs": {
+        "pattern": "/about/work-with-us",
+        "templates": {
+            "default": `{:templates/jobs/scvo-jobs.hbs}`
+        },
+        "headTagsTemplate": `{:templates/pages/page-head-tags.hbs}`,
+        "primarySearchTemplate": {
+            "index": "web-content-production",
+            "type": "scvo-cms-page",
+            "template": `{:queries/pages/page.json}`
+        },
+        "supplimentarySearchTemplates": {
+            "scvo_jobs": {
+                "index": "web-content-production",
+                "type": "goodmoves-legacy",
+                "template": `{:queries/jobs/scvo-jobs.json}`
+            },
+            "not_found": {
+                "index": "web-content-production",
+                "type": "scvo-cms-page,scvo-cms-post",
+                "template": `{:queries/pages/not-found.json}`
+            },
+            "splash": {
+                "index": "web-content-production",
+                "type": "scvo-cms-media",
+                "template": `{:queries/pages/gathering-splash.json}`
+            }
+        },
+        "elasticsearchConfig": {
+            "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
+            "apiVersion": "5.6"
+        }
+    },
     "page_about": {
         "pattern": {
             "index": "/about",
             "trustees": "/about/board-of-trustees",
             "annual_reports": "/about/annual-review",
             "accounts": "/about/accounts",
-            "strategy": "/about/strategy",
-            "work": "/about/work-with-us"
+            "strategy": "/about/strategy"
         },
         "templates": {
             "default": `{:templates/pages/page-about.hbs}`
@@ -1409,10 +1471,10 @@
             "setting_up_faq": "/setting-up-a-charity/frequently-asked-questions",
             "bank_comparison": "/running-your-organisation/finance-business-management/bank-accounts/comparison",
             "services": "/services",
+            "office_space": "/services/office-space",
             "offices": "/services/office-space/*",
             "projects_campaigns": "/projects-campaigns",
-            "digital_about": "/digital/about",
-            "office_space": "/services/office-space"
+            "digital_about": "/digital/about"
         },
         "templates": {
             "default": `{:templates/pages/page-full-width.hbs}`

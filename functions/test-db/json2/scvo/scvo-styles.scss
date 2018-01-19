@@ -480,6 +480,7 @@ primary-dark: #251032
 
 #spinner,
 .about,
+.events,
 .funding-updates,
 .funding {
     @include theme-colours('funding');
@@ -545,7 +546,6 @@ primary-dark: #251032
     @include theme-colours('tfn');
 }
 .services,
-.events,
 .search-result.scvo-cms-page,
 .search-result.scvo-event,
 .gist.scvo-event,
@@ -558,7 +558,8 @@ primary-dark: #251032
 .page-sidebar.static-sidebar,
 .policy-research.events .event-content,
 .policy-research.events .event-sidebar,
-.posts-page .page-sidebar,
+.posts.blogs .post-sidebar,
+.posts.press .post-sidebar,
 .post-content,
 .library-content,
 .library-sidebar,
@@ -717,16 +718,18 @@ figure {
                 height: $spacing-unit*3;
                 line-height: $spacing-unit*3;
                 margin: 0;
-                padding: $spacing-unit $spacing-unit*3 $spacing-unit $spacing-unit;
-                font-size: 1.5rem;
+                padding: 0 $spacing-unit*2.75 0 $spacing-unit*0.75;
+                font-size: 1.1rem;
             }
             .search-button-large {
                 padding: 1px 0 0;
                 position: absolute;
-                top: $spacing-unit/2;
-                right: $spacing-unit/2;
+                top: $spacing-unit*0.7;
+                right: $spacing-unit*0.75;
                 .fa-search {
+                    font-size: $spacing-unit*1.5;
                     color: #333;
+                    font-size: 1.5rem;
                 }
             }
         }
@@ -745,7 +748,9 @@ figure {
             }
             .photo-wee {
                 max-width: 96px;
-                margin-right: 1.5rem;
+                margin-right: $spacing-unit;
+                margin-bottom: $spacing-unit;
+                float: left;
             }
             .post-info .photo-wee {
                 display: none;
@@ -841,9 +846,13 @@ figure {
         padding: $spacing-unit 0;
     }
     .policy-stats {
-        padding: $spacing-unit 0;
+        padding: $spacing-unit*1.5 0;
         h2 {
             margin-top: 0;
+        }
+        .mdc-layout-grid__cell {
+            padding: $spacing-unit*1.5 0 $spacing-unit/2;
+            text-align: center;
         }
     }
 }
@@ -1166,6 +1175,7 @@ figure {
     margin: 0;
 }
 .mdc-temporary-drawer {
+    display: none;
     .mdc-temporary-drawer__header-content {
         direction: ltr;
         padding: $spacing-unit;
@@ -1473,6 +1483,7 @@ figure {
 }
 // .mdc-temporary-drawer,
 .about.staff-team .post-info-author,
+.about.work-with-us .page-info,
 .digital.charter-fund.projects .page-info,
 .digital.cyber-resilience.projects .page-info,
 .projects-campaigns.terrific-trustees.search .page-info,
@@ -1490,7 +1501,6 @@ figure {
 .policy-research.briefings-consultation-responses .mdc-card__actions,
 .policy-research.research .mdc-card__actions,
 .post.author .post-info-author,
-.blogs .mdc-card__actions,
 .press-media .mdc-card__actions,
 .press-media .sidebar h3.blogs {
     display: none;
@@ -1726,6 +1736,19 @@ h1.mdc-typography--title {
 h1.support-sector {
     margin-top: $spacing-unit*3;
 }
+table.membership-fees {
+    border-collapse: collapse;
+    margin-bottom: $spacing-unit;
+    min-width: 40%;
+    tr {
+        th,
+        td {
+            border: 1px solid #ccc;
+            padding: $spacing-unit/4 $spacing-unit/2;
+        }
+    }
+}
+
 .section-projects {
     .mdc-card__media {
         height: 128px;
@@ -1795,10 +1818,14 @@ h1.support-sector {
         }
     }
 }
-.supplimentary-list .list .mdc-card__actions {
-    padding-bottom: $spacing-unit/2 !important;
+.supplimentary-list .list,
+.supplimentary-list .gist {
+    .mdc-card__actions {
+        padding-bottom: $spacing-unit/2 !important;
+    }
 }
 .post-info-categories {
+    margin-left: 1px;
     ul {
         padding: 0;
     }
@@ -1825,6 +1852,7 @@ h1.support-sector {
 .mdc-card-search {
     margin: 0 0 $spacing-unit;
     .mdc-card__primary {
+        padding-top: $spacing-unit/2;
         padding-bottom: $spacing-unit;
     }
 }
@@ -1927,6 +1955,10 @@ h1.support-sector {
     width: 70%;
     display: block;
     margin-left: 30%;
+}
+.booking {
+    font-size: 2rem;
+    font-weight: 600;
 }
 
 .container-content {
@@ -2248,6 +2280,9 @@ ul.supplimentary-list {
     margin-top: $spacing-unit/2;
     margin-bottom: $spacing-unit;
 }
+.digital.events .full .event-sidebar {
+    text-align: right;
+}
 
 h1,
 h2,
@@ -2306,6 +2341,9 @@ p:last-child {
 .post-content .full {
     margin-top: $spacing-unit/2;
 }
+.page.press .post-sidebar .full {
+    margin-top: 0;
+}
 .sidebar {
     .blogs {
         margin-top: $spacing-unit;
@@ -2326,6 +2364,13 @@ p:last-child {
 .page-sidebar h3:first-child ,
 .post-sidebar h3:first-child {
     margin: $spacing-unit 0 $spacing-unit/4 !important;
+}
+.post-sidebar {
+    margin-top: $spacing-unit/2;
+}
+
+.page-content {
+    padding-bottom: $spacing-unit*1.5;
 }
 
 .page-content,
@@ -2442,16 +2487,19 @@ p.results-highlights em {
 footer {
     .footer-main {
         padding: 0;
+        margin-bottom: $spacing-unit;
     }
     h3 {
         padding-bottom: $spacing-unit/2;
         border-bottom-style: solid;
         border-bottom-width: $spacing-unit/5;
     }
+    .about a,
     a {
         color: white;
         text-decoration: underline;
     }
+    .about a:hover,
     a:hover {
         color: white;
     }
@@ -2485,7 +2533,7 @@ footer {
             text-decoration: underline;
         }
     }
-    ul {
+    .contact .fa-ul {
         margin-bottom: $spacing-unit !important;
     }
     .mdc-layout-grid p {
@@ -2557,9 +2605,9 @@ footer {
 }
 
 @media screen and (max-width: 991px) {
-    // .mdc-temporary-drawer {
-    //     display: block;
-    // }
+    .mdc-temporary-drawer {
+        display: block;
+    }
     .mdc-toolbar {
         #upper-tab-bar,
         .mdc-toolbar__row.toolbar-nav {
@@ -2579,8 +2627,18 @@ footer {
             }
         }
     }
-    .home .splash-image.hello .container-fluid .mdc-layout-grid {
-        margin-left: 0;
+    .home {
+        .splash-image.hello .container-fluid .mdc-layout-grid {
+            margin-left: 0;
+        }
+        .latest-content {
+            h2 a,
+            .scvo-cms-post,
+            .tfn-news-post {
+                border-right: none;
+                padding-right: 0;
+            }
+        }
     }
     .latest-content {
         .mdc-layout-grid {
@@ -2635,6 +2693,7 @@ footer {
     }
     .home .splash-image.hello .container-fluid .mdc-layout-grid p.header-extra {
         font-size: 1.2rem;
+        margin-bottom: $spacing-unit/2;
     }
     .breadcrumbs {
         font-size: 85%;
@@ -2696,6 +2755,19 @@ footer {
             }
         }
     }
+    .home .latest-content .gist img.photo-wee,
+    .gist .thumbnail img {
+        height: 64px;
+        width: 64px;
+    }
+    footer {
+        .footer-main {
+            margin: $spacing-unit 0;
+            h3 {
+                margin-top: 0;
+            }
+        }
+    }
 }
 
 @media screen and (max-width: 450px) {
@@ -2723,8 +2795,8 @@ footer {
                 line-height: 3.3rem;
             }
             p.header-extra {
-                font-size: 0.9rem;
-                margin-bottom: 0;
+                font-size: 0.97rem;
+                // margin-bottom: 0;
             }
         }
     }
