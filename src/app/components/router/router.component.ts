@@ -36,10 +36,10 @@ export class RouterComponent implements OnInit {
     }
 
     handleRoute(match: RouteMatch) {
-        console.log('Handle Route:', match.name);
+        // console.log('Handle Route:', match.name);
         window.scrollTo(0, 0);
 
-        console.log(match);
+        // console.log(match);
 
         var headTags = Array.prototype.slice.call(document.querySelectorAll('[data-dynamic="true"],title'));
         headTags.forEach((el) => {
