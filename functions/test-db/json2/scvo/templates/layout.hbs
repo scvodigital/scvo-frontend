@@ -27,6 +27,15 @@
     <style type="text/css">
     {{{this.css}}}
     </style>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-3467930-27"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-3467930-27');
+    </script>
 </head>
 <body class="mdc-theme--site-bg {{replace route.params.path '_' ' '}}">
     <scvo-site>
@@ -210,12 +219,23 @@
 
     <script type="text/javascript" src="/assets/js/material-components-web.js"></script>
     <script type="text/javascript" src="/assets/js/headroom.min.js"></script>
+    <script type="text/javascript" id="cookieinfo"
+    	src="//cookieinfoscript.com/js/cookieinfo.min.js"
+    	data-bg="#251032"
+    	data-fg="#FFFFFF"
+    	data-link="#FFFFFF"
+        data-divlink="#FFFFFF"
+        data-divlinkbg="#B3185B"
+        data-moreinfo="/privacy-cookies-policy"
+    	data-cookie="CookieInfoScript"
+    	data-text-align="left">
+    </script>
     <script type="text/javascript">
     // Cookie Consent
-    window.cookieconsent_options = {
-        learnMore: 'More info',
-        link: '/privacy-cookies-policy'
-    };
+    // window.cookieconsent_options = {
+    //     learnMore: 'More info',
+    //     link: '/privacy-cookies-policy'
+    // };
     // Material Design Components
     mdc.autoInit();
 
@@ -232,7 +252,7 @@
     <script type="text/javascript">
     {{{ javascript }}}
     </script>
-    <script src="/assets/js/cookieconsent.min.js"></script>
+    <!-- <script src="/assets/js/cookieconsent.min.js"></script> -->
     <script type="text/javascript" src="inline.bundle.js"></script>
     <script type="text/javascript" src="polyfills.bundle.js"></script>
     <script type="text/javascript" src="styles.bundle.js"></script>
