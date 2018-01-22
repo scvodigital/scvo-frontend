@@ -20,16 +20,18 @@
                     </ul>
                     {{else}}
                     {{#if primaryResponse.hits.hits.[0]._source.categories}}
-                    <div class="author_about">
+                    <!-- <div class="author-about">
                         {{#if supplimentaryResponses.staff_profile.hits.hits.[0]}}
                         {{{supplimentaryResponses.staff_profile.hits.hits.[0]._source.rendered.scvo_profile}}}
                         {{else}}
                         {{{supplimentaryResponses.author_profile.hits.hits.[0]._source.rendered.scvo_profile}}}
                         {{/if}}
-                    </div>
+                    </div> -->
                     {{#compare supplimentaryResponses.authors_posts.hits.total ">" 0}}
                     {{#compare supplimentaryResponses.staff_profile.hits.total ">" 0}}
-                    <h3 class="author">More posts by {{primaryResponse.hits.hits.[0]._source.author_name_full}}</h3>
+                    <h3 class="author static-sidebar">
+                        More posts by <a href="/post/author/{{primaryResponse.hits.hits.[0]._source.author_slug}}">{{primaryResponse.hits.hits.[0]._source.author_name_full}}</a>
+                    </h3>
                     {{/compare}}
                     <ul class="supplimentary-list">
                         {{#each supplimentaryResponses.authors_posts.hits.hits}}
