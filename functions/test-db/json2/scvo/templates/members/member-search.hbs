@@ -30,7 +30,9 @@
                         <div class="v-margin">
                             <div class="mdc-card">
                                 <section class="mdc-card__primary">
-                                    <h2 class="mdc-card__title mdc-card__title--large">Search SCVO member organisations</h2>
+                                    <h2 class="mdc-card__title mdc-card__title--large">
+                                        Search SCVO's {{addCommas supplimentaryResponses.total.hits.total}} member organisations
+                                    </h2>
                                     <form [searchroute]="'members'" data-auto-search="true">
                                         <div class="mdc-textfield">
                                             <input type="text" class="mdc-textfield__input searchRoute" placeholder="Search" value="{{params.query.q}}" name="q">
@@ -51,7 +53,11 @@
                             </div>
                         </div>
 
+                        {{#if params.query.q}}
                         {{> search_info}}
+                        {{else}}
+                        <h3>Our members include&hellip;</h3>
+                        {{/if}}
 
                         {{#each primaryResponse.hits.hits}}
                         {{{this._source.rendered.list}}}
