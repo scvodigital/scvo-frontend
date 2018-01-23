@@ -1,6 +1,6 @@
 {{#if primaryResponse.hits.hits.[0]}}
-    <title>SCVO – Posts in {{#each primaryResponse.hits.hits.[0]._source.categories_slug}}{{#compare this "===" (lastItem (split ../params.path '_'))}}{{{lookup ../primaryResponse.hits.hits.[0]._source.categories @index}}}{{/compare}}{{/each}}</title>
-    <meta property="og:title" content="SCVO – Posts in {{#each primaryResponse.hits.hits.[0]._source.categories_slug}}{{#compare this "===" (lastItem (split ../params.path '_'))}}{{{lookup ../primaryResponse.hits.hits.[0]._source.categories @index}}}{{/compare}}{{/each}}" data-dynamic="true">
+    <title>SCVO – Posts about {{#each primaryResponse.hits.hits.[0]._source.categories_slug}}{{#compare this "===" (lastItem (split ../params.path '_'))}}{{{lookup ../primaryResponse.hits.hits.[0]._source.categories @index}}}{{/compare}}{{/each}}</title>
+    <meta property="og:title" content="SCVO – Posts about {{#each primaryResponse.hits.hits.[0]._source.categories_slug}}{{#compare this "===" (lastItem (split ../params.path '_'))}}{{{lookup ../primaryResponse.hits.hits.[0]._source.categories @index}}}{{/compare}}{{/each}}" data-dynamic="true">
 
     {{#with primaryResponse.hits.hits.[0]._source}}
         {{#ifAny og_image ../og_image}}
