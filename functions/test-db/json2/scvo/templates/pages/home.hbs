@@ -92,13 +92,55 @@
         </div>
     </div>
 
-    {{#each supplimentaryResponses.featured.hits.hits}}
+    <div class="container-fluid">
+        <h2>Latest blog post</h2>
+    </div>
+    {{#with supplimentaryResponses.blogs_latest.hits.hits.[0]}}
     <div {{#if _source.header_background}}class="featured-background-image" style="background-image: url('{{_source.header_background}}');"{{else}}class="featured-text"{{/if}}>
         <div class="container-fluid">
             {{{_source.rendered.featured}}}
         </div>
     </div>
-    {{/each}}
+    {{/with}}
+
+    <div class="featured-background-image" style="background-image: url('https://storage.googleapis.com/scvo-cms/wp-content/uploads/2017/10/eu-are-valued-bg-1400x400.jpg');">
+        <div class="container-fluid">
+            <div class="featured scvo-cms scvo-cms-page scvo-cms-page-20536 mdc-layout-grid">
+                <div class="mdc-layout-grid__inner">
+                    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 mdc-layout-grid__cell--span-3-tablet mdc-layout-grid__cell--span-4-phone">
+                        <a ng-reflect-router-link="/projects-campaigns/europe-and" href="/projects-campaigns/europe-and-the-third-sector/eu-are-valued">
+                            <img alt="#EUareValued" class="header-text" src="https://storage.googleapis.com/scvo-cms/wp-content/uploads/2017/10/eu-are-valued-text.png">
+                        </a>
+                    </div>
+                    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-8 mdc-layout-grid__cell--span-5-tablet mdc-layout-grid__cell--span-4-phone">
+                        <p>
+                            Here at SCVO, we love charities. We believe every person who works to make a difference to Scottish communities should be valued, and that includes our colleagues who have come from other EU countries to live and work here. Scotland’s third sector is strengthened thanks to their contribution…
+                            <a ng-reflect-router-link="/projects-campaigns/europe-and" href="/projects-campaigns/europe-and-the-third-sector/eu-are-valued">Read more</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid">
+        <h2>Latest press release</h2>
+    </div>
+    {{#with supplimentaryResponses.press_latest.hits.hits.[0]}}
+    <div {{#if _source.header_background}}class="featured-background-image" style="background-image: url('{{_source.header_background}}');"{{else}}class="featured-text"{{/if}}>
+        <div class="container-fluid">
+            {{{_source.rendered.featured}}}
+        </div>
+    </div>
+    {{/with}}
+
+    <!-- {{#each supplimentaryResponses.featured.hits.hits}}
+    <div {{#if _source.header_background}}class="featured-background-image" style="background-image: url('{{_source.header_background}}');"{{else}}class="featured-text"{{/if}}>
+        <div class="container-fluid">
+            {{{_source.rendered.featured}}}
+        </div>
+    </div>
+    {{/each}} -->
 </section>
 
 <section class="callout-image cta-content">

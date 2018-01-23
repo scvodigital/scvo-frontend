@@ -1,6 +1,11 @@
-window.onload = function () {
-    document.getElementById("spinner").style.display = "none";
-}
+document.onreadystatechange = function(e) {
+    if (document.readyState === 'complete') {
+        document.getElementById("spinner").style.display = "none";
+    }
+};
+// window.onload = function () {
+//     document.getElementById("spinner").style.display = "none";
+// }
 
 window.drawerEl = document.querySelector('.mdc-temporary-drawer');
 window.drawer = mdc.drawer.MDCTemporaryDrawer.attachTo(drawerEl);
