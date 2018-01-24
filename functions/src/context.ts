@@ -89,13 +89,23 @@ export class Context implements IContext {
                     templatePartials: this.templatePartials,
                 };
 
+                var strippedData = {
+                    metaData: this.metaData,
+                    domains: this.domains,
+                    menus: this.menus,
+                    routes: this.routes,
+                    route: routeMatch,
+                    uaId: this.uaId
+                };
+
                 //console.log('TEMPLATE DATA:', JSON.stringify(templateData, null, 4));
                 var contextHtml = this.compiledTemplate(templateData);
 
                 var closingHeadTag = contextHtml.indexOf('</head>');
                 if(closingHeadTag > -1){
-                    var dataJson = JSON.stringify(templateData, null, 4);
-                    dataJson = dataJson.replace(/\<\/script/ig, '</scr" + "ipt');
+                    var dataJson = JSON.stringify(strippedData, null, 4);
+                    dataJson = ''; //dataJson.replace(/\<\/script/ig, '</scr" + "ipt');
+
                     var tags = `
                         ${routeMatch.headTags}
                         <script>

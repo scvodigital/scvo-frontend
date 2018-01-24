@@ -58,7 +58,7 @@
                             </nav>
                         </section>
                         <section class="mdc-toolbar__section mdc-toolbar__section--align-end mdc-toolbar__section--shrink-to-fit toolbar-search">
-                            <form [searchroute]="'main_search'" class="mdc-form-field mdc-form-field--align-end search_form" autocomplete="off">
+                            <form [searchroute]="'main_search'" class="mdc-form-field mdc-form-field--align-end search_form" autocomplete="off" action="search">
                                 <div class="mdc-textfield">
                                     <input type="text" class="mdc-textfield__input white-text mdc-text-field searchRoute" placeholder="Search" id="q" name="q" aria-label="Search keywords" value="{{params.query.q}}">
                                 </div>
@@ -213,7 +213,7 @@
         </div>
     </scvo-site>
 
-    <div id="spinner" style="position:fixed; top:0; left:0; right:0; bottom:0; background-color:#fff; z-index:9999; display:flex; align-items:center; justify-content:center;">
+    <div id="spinner" style="position:fixed; top:0; left:0; right:0; bottom:0; background-color:#fff; z-index:9999; display:flex; align-items:center; justify-content:center; display:none;">
         <span class="fal fa-spinner-third fa-spin" style="color:#C2185B; font-size:2rem;"></span>
     </div>
 
@@ -247,9 +247,9 @@
     <script type="text/javascript">
     {{{ javascript }}}
     </script>
-    <script type="text/javascript" src="inline.bundle.js"></script>
+<!--    <script type="text/javascript" src="inline.bundle.js"></script>
     <script type="text/javascript" src="polyfills.bundle.js"></script>
     <script type="text/javascript" src="vendor.bundle.js"></script>
-    <script type="text/javascript" src="main.bundle.js"></script>
+    <script type="text/javascript" src="main.bundle.js"></script> -->
 </body>
 </html>
