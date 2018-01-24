@@ -37,7 +37,7 @@
       gtag('config', 'UA-3467930-27');
     </script>
 </head>
-<body class="mdc-theme--site-bg {{replace route.params.path '_' ' '}}">
+<body class="mdc-theme--site-bg {{#if route.params.path}}{{replace route.params.path '_' ' '}}{{else}}home{{/if}}">
     <scvo-site>
         <div class="mdc-typography mdc-theme--site-bg">
             <header class="mdc-toolbar mdc-toolbar--fixed mdc-theme--primary-light-bg">
