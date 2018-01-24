@@ -27,7 +27,7 @@ window.setupAutoSearchForms = function() {
             changeTriggers[y].addEventListener('change', function(evt) {
                 var clearInput = evt.srcElement.getAttribute('data-clear-input');
                 if (clearInput) {
-                    document.querySelector(clearInput).value = null;    
+                    document.querySelector(clearInput).value = null;
                 }
                 submitButton.click();
             });
