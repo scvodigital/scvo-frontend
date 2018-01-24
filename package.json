@@ -5,7 +5,7 @@
   "scripts": {
     "ng": "ng",
     "start": "npm run serve",
-    "build": "ng build --prod --aot",
+    "build": "ng build --prod && cd dist && mv inline.*.bundle.js inline.bundle.js && mv main.*.bundle.js main.bundle.js && mv polyfills.*.bundle.js polyfills.bundle.js && mv vendor.*.bundle.js vendor.bundle.js && mv styles.*.bundle.css styles.bundle.css && cd ..",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
