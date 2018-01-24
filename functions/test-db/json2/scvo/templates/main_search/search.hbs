@@ -21,7 +21,7 @@
         <div class="mdc-layout-grid">
             <div class="mdc-layout-grid__inner">
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3 sidebar">
-                    <form action="/search" method="POST" [searchroute]="'main_search'" autocomplete="off">
+                    <form action="/search" method="GET" [searchroute]="'main_search'" data-auto-search="true" autocomplete="off">
                         <input type="text" class="mdc-textfield__input searchRoute" placeholder="Search keywords" value="{{params.query.q}}" name="q" id="main-q">
                         {{#*inline "filter_checkbox"}}
                             <div class="mdc-form-field">
