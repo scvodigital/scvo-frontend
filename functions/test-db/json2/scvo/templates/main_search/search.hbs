@@ -21,13 +21,14 @@
         <div class="mdc-layout-grid">
             <div class="mdc-layout-grid__inner">
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3 sidebar">
-                    <form action="/search" method="POST" [searchroute]="'main_search'" data-auto-search="true" autocomplete="off">
+                    <form action="/search" method="POST" [searchroute]="'main_search'" autocomplete="off">
                         <input type="text" class="mdc-textfield__input searchRoute" placeholder="Search keywords" value="{{params.query.q}}" name="q" id="main-q">
                         {{#*inline "filter_checkbox"}}
                             <div class="mdc-form-field">
                                 <div class="mdc-checkbox">
-                                    <input type="checkbox" name="type" id="type-{{value}}" value="{{value}}" class="mdc-checkbox__native-control"
-                                    {{#if (contains params.query.type value)}}checked{{/if}}>
+                                    <input type="checkbox" name="type" id="type-{{value}}" 
+                                        value="{{value}}" class="mdc-checkbox__native-control"
+                                        {{#if (contains params.query.type value)}}checked{{/if}}>
                                     <div class="mdc-checkbox__background">
                                         <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
                                             <path class="mdc-checkbox__checkmark__path" fill="none" stroke="white" d="M1.73,12.91 8.1,19.28 22.79,4.59"></path>
