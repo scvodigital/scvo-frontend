@@ -31,6 +31,8 @@ const dot = new Dot('/');
 const cp = cookieParser();
 
 exports.index = functions.https.onRequest((req: functions.Request, res: functions.Response) => {
+    var startTime = +new Date();
+    console.log('#### Starting router at:', startTime);
     return new Promise((resolve, reject) => {
         userId(req, res, () => {
             var domain = req.hostname.replace(/www\./, '');
@@ -60,6 +62,9 @@ exports.index = functions.https.onRequest((req: functions.Request, res: function
 
                         res.send(html);
                         res.end();
+                        var endTime = +new Date();
+                        console.log('#### Ending router at:', endTime);
+                        console.log('#### Time to complete:', (endTime - startTime));
                         resolve();
                     //});
                 }).catch((err) => {
