@@ -1,11 +1,12 @@
 {
   "name": "scvo",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "license": "MIT",
   "scripts": {
     "ng": "ng",
     "start": "npm run serve",
-    "build": "ng build --prod --aot",
+    "build": "ng build",
+    "build-prod": "ng build --prod --aot=false && cd dist && mv inline.*.bundle.js inline.bundle.js && mv main.*.bundle.js main.bundle.js && mv polyfills.*.bundle.js polyfills.bundle.js && mv vendor.*.bundle.js vendor.bundle.js && rm styles.*.bundle.css && cd ..",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
@@ -14,6 +15,7 @@
     "serve": "cd ./functions && npm run build && cd ../ && npm run build && devmode=true firebase serve -p 9000 --only functions,hosting",
     "serve-f": "cd ./functions && npm run build && cd ../ && devmode=true firebase serve -p 9000 --only functions",
     "deploy": "cd ./functions && npm run build && npm run deploy-db && cd ../ && npm run build && firebase deploy --only functions,hosting",
+    "deploy-prod": "npm run build-prod && firebase deploy --only hosting",
     "deploy-h": "npm run build && firebase deploy --only hosting",
     "deploy-f": "cd ./functions && npm run build && cd ../ && firebase deploy --only functions",
     "postmerge": "git diff-tree -r --name-only --no-commit-id ORIG_HEAD HEAD | grep --quiet 'yarn.lock' && eval 'npm run yarn'"
