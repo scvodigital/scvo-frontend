@@ -160,6 +160,7 @@ primary-dark: #251032
     $themeServices: map-get($colours, 'services');
     $themeCharity: map-get($colours, 'charity');
     $themeDigital: map-get($colours, 'digital');
+    $themeJobs: map-get($colours, 'jobs');
 
     a,
     #share-menu-button,
@@ -415,8 +416,8 @@ primary-dark: #251032
     }
     .home .cta-content.callout-image {
         background-image: linear-gradient(
-        map-get($themeServices, 'primary-overlay-start'),
-        map-get($themeServices, 'primary-overlay-start')
+        map-get($themeJobs, 'primary-overlay-start'),
+        map-get($themeJobs, 'primary-overlay-start')
         ),
         url('https://storage.googleapis.com/scvo-cms/23595/THEGATHERING-22.02.17_0475.jpg');
         a:hover .fa-fw {
@@ -468,6 +469,20 @@ primary-dark: #251032
             border-color: map-get($themeDefault, 'primary-dark') !important;
             color: map-get($themeDefault, 'primary') !important;
         }
+    }
+    .running-your-organisation .footer-image {
+        background-image: linear-gradient(
+             map-get($themeDefault, 'primary-overlay-start'),
+             map-get($themeDefault, 'primary-overlay-start')
+        ),
+        url('https://storage.googleapis.com/scvo-cms/23601/THEGATHERING-23.02.17_0302.jpg');
+    }
+    .footer-image.join-our-hub {
+        background-image: linear-gradient(
+            map-get($themeServices, 'primary-overlay-start'),
+            map-get($themeServices, 'primary-overlay-start')
+        ),
+        url('https://storage.googleapis.com/scvo-cms/wp-content/uploads/2018/01/edward-new-940x470.jpg');
     }
 
     footer {
@@ -1347,22 +1362,6 @@ figure {
         font-weight: 800;
         padding-bottom: $spacing-unit;
     }
-}
-.running-your-organisation {
-    .footer-image {
-        background-image: linear-gradient(
-        rgba(173, 20, 87, 0.89),
-        rgba(173, 20, 87, 0.89)
-        ),
-        url('https://storage.googleapis.com/scvo-cms/23601/THEGATHERING-23.02.17_0302.jpg');
-    }
-}
-.footer-image.join-our-hub {
-    background-image: linear-gradient(
-    rgba(173, 20, 87, 0.89),
-    rgba(173, 20, 87, 0.89)
-    ),
-    url('https://storage.googleapis.com/scvo-cms/wp-content/uploads/2018/01/edward-new-940x470.jpg');
 }
 .digital .callout-image {
     position: relative;
