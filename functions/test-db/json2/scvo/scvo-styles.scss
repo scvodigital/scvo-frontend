@@ -7,7 +7,8 @@ $nav-height: 38px;
 $colours: (
 default: (
 primary: #AD1457,
-primary-alpha: rgba(173,20,87,0.89),
+primary-overlay-start: rgba(173,20,87,0.89),
+primary-overlay-end: rgba(173,20,87,0.91),
 primary-light: #C2185B,
 primary-dark: #880E4F,
 secondary: #FF8F00,
@@ -16,7 +17,8 @@ secondary-dark: #FF6F00
 ),
 charity: (
 primary: #4527A0,
-primary-alpha: rgba(69,39,160,0.89),
+primary-overlay-start: rgba(69,39,160,0.89),
+primary-overlay-end: rgba(69,39,160,0.91),
 primary-light: #512DA8,
 primary-dark: #311B92,
 secondary: #FF8F00,
@@ -25,7 +27,8 @@ secondary-dark: #FF6F00
 ),
 jobs: (
 primary: #2e7d32,
-primary-alpha: rgba(46,125,50,0.89),
+primary-overlay-start: rgba(46,125,50,0.89),
+primary-overlay-end: rgba(46,125,50,0.91),
 primary-light: #388E3C,
 primary-dark: #1b5e20,
 secondary: #ff8f00,
@@ -34,7 +37,8 @@ secondary-dark: #FF6F00
 ),
 goodmoves: (
 primary: #58a934,
-primary-alpha: #58a934,
+primary-overlay-start: rgba(88,169,52,0.89),
+primary-overlay-end: rgba(88,169,52,0.91),
 primary-light: #58a934,
 primary-dark: #58a934,
 secondary: #FF8F00,
@@ -43,7 +47,8 @@ secondary-dark: #FF6F00
 ),
 funding: (
 primary: #00796A,
-primary-alpha: rgba(0,121,106,0.89),
+primary-overlay-start: rgba(0,121,106,0.89),
+primary-overlay-end: rgba(0,121,106,0.91),
 primary-light: #198678,
 primary-dark: #006054,
 secondary: #FF8F00,
@@ -52,7 +57,8 @@ secondary-dark: #FF6F00
 ),
 projects: (
 primary: #AD1457,
-primary-alpha: rgba(173,20,87,0.89),
+primary-overlay-start: rgba(173,20,87,0.89),
+primary-overlay-end: rgba(173,20,87,0.91),
 primary-light: #C2185B,
 primary-dark: #880E4F,
 secondary: #FF8F00,
@@ -61,7 +67,8 @@ secondary-dark: #FF6F00
 ),
 posts: (
 primary: #D84315,
-primary-alpha: rgba(216,67,21,0.89),
+primary-overlay-start: rgba(216,67,21,0.89),
+primary-overlay-end: rgba(216,67,21,0.91),
 primary-light: #E64A19,
 primary-dark: #BF360C,
 secondary: #FF8F00,
@@ -70,7 +77,8 @@ secondary-dark: #FF6F00
 ),
 goodhq: (
 primary: #4033E9,
-primary-alpha: #4033E9,
+primary-overlay-start: rgba(64,51,233,0.89),
+primary-overlay-end: rgba(64,51,233,0.91),
 primary-light: #4033E9,
 primary-dark: #160AAD,
 secondary: #FF8F00,
@@ -79,7 +87,8 @@ secondary-dark: #FF6F00
 ),
 digital-charter: (
 primary: #022347,
-primary-alpha: #022347,
+primary-overlay-start: rgba(2,35,71,0.89),
+primary-overlay-end: rgba(2,35,71,0.91),
 primary-light: #022347,
 primary-dark: #022347,
 secondary: #FF8F00,
@@ -88,7 +97,8 @@ secondary-dark: #FF6F00
 ),
 tfn: (
 primary: #3b9db1,
-primary-alpha: #3b9db1,
+primary-overlay-start: rgba(59,157,177,0.89),
+primary-overlay-end: rgba(59,157,177,0.91),
 primary-light: #3b9db1,
 primary-dark: #3b9db1,
 secondary: #FF8F00,
@@ -97,7 +107,8 @@ secondary-dark: #FF6F00
 ),
 funding-scotland: (
 primary: #71B745,
-primary-alpha: rgba(113, 183, 69, 0.89),
+primary-overlay-start: rgba(113, 183, 69, 0.89),
+primary-overlay-end: rgba(113, 183, 69, 0.91),
 primary-light: #71B745,
 primary-dark: #689F38,
 secondary: #FF8F00,
@@ -106,7 +117,8 @@ secondary-dark: #FF6F00
 ),
 credit-union: (
 primary: #1976D2,
-primary-alpha: rgba(21,101,192,0.89),
+primary-overlay-start: rgba(21,101,192,0.89),
+primary-overlay-end: rgba(21,101,192,0.91),
 primary-light: #1976D2,
 primary-dark: #145ea8,
 secondary: #FF8F00,
@@ -115,7 +127,8 @@ secondary-dark: #FF6F00
 ),
 digital: (
 primary: #1976D2,
-primary-alpha: rgba(13,71,161,0.89),
+primary-overlay-start: rgba(25,118,210,0.89),
+primary-overlay-end: rgba(25,118,210,0.91),
 primary-light: #1976D2,
 primary-dark: #145EA8,
 secondary: #022347,
@@ -124,7 +137,8 @@ secondary-dark: #A7C9F2
 ),
 services: (
 primary: #125AAC,
-primary-alpha: rgba(21,101,192,0.89),
+primary-overlay-start: rgba(21,101,192,0.89),
+primary-overlay-end: rgba(21,101,192,0.91),
 primary-light: #1565C0,
 primary-dark: #0E4686,
 secondary: #FF8F00,
@@ -150,6 +164,7 @@ primary-dark: #251032
     a,
     #share-menu-button,
     .mdc-simple-menu .mdc-list-item,
+    .social .fa-fw,
     .mdc-theme--primary {
         color: map-get($themeSelected, 'primary');
     }
@@ -265,8 +280,8 @@ primary-dark: #251032
 
     // .mdc-button:after,
     // .mdc-button:before,
-    // .mdc-theme--primary-alpha {
-    //     color: map-get($themeSelected, 'primary-alpha');
+    // .mdc-theme--primary-overlay-start {
+    //     color: map-get($themeSelected, 'primary-overlay-start');
     // }
     .mdc-theme--primary-light {
         color: map-get($themeSelected, 'primary-light');
@@ -292,8 +307,8 @@ primary-dark: #251032
     .mdc-simple-menu .mdc-list-item:after,
     .mdc-simple-menu .mdc-list-item:before,
     .splash-image .header-caption,
-    .mdc-theme--primary-alpha-bg {
-        background-color: map-get($themeSelected, 'primary-alpha');
+    .mdc-theme--primary-overlay-start-bg {
+        background-color: map-get($themeSelected, 'primary-overlay-start');
     }
     .mdc-theme--primary-light-bg {
         background-color: map-get($themeSelected, 'primary-light') !important;
@@ -341,8 +356,8 @@ primary-dark: #251032
     .splash-overlay {
         background-image: linear-gradient(
         66deg,
-        map-get($themeSelected, 'primary-alpha'),
-        map-get($themeSelected, 'primary-alpha') 47%,
+        map-get($themeSelected, 'primary-overlay-start'),
+        map-get($themeSelected, 'primary-overlay-end') 47%,
         transparent 47.08%,
         transparent
         );
@@ -351,8 +366,8 @@ primary-dark: #251032
         .splash-overlay {
             background-image: linear-gradient(
             66deg,
-            map-get($themeSelected, 'primary-alpha'),
-            map-get($themeSelected, 'primary-alpha') 52%,
+            map-get($themeSelected, 'primary-overlay-start'),
+            map-get($themeSelected, 'primary-overlay-end') 52%,
             transparent 52.08%,
             transparent
             );
@@ -365,8 +380,8 @@ primary-dark: #251032
         .splash-overlay {
             background-image: linear-gradient(
             66deg,
-            map-get($themeSelected, 'primary-alpha'),
-            map-get($themeSelected, 'primary-alpha') 57%,
+            map-get($themeSelected, 'primary-overlay-start'),
+            map-get($themeSelected, 'primary-overlay-end') 57%,
             transparent 57.08%,
             transparent
             );
@@ -379,8 +394,8 @@ primary-dark: #251032
         .splash-overlay {
             background-image: linear-gradient(
             66deg,
-            map-get($themeSelected, 'primary-alpha'),
-            map-get($themeSelected, 'primary-alpha') 67%,
+            map-get($themeSelected, 'primary-overlay-start'),
+            map-get($themeSelected, 'primary-overlay-end') 67%,
             transparent 67.08%,
             transparent
             );
@@ -393,15 +408,15 @@ primary-dark: #251032
         .splash-overlay {
             background-image: linear-gradient(
             66deg,
-            map-get($themeSelected, 'primary-alpha'),
-            map-get($themeSelected, 'primary-alpha')
+            map-get($themeSelected, 'primary-overlay-start'),
+            map-get($themeSelected, 'primary-overlay-end')
             );
         }
     }
     .home .cta-content.callout-image {
         background-image: linear-gradient(
-        map-get($themeServices, 'primary-alpha'),
-        map-get($themeServices, 'primary-alpha')
+        map-get($themeServices, 'primary-overlay-start'),
+        map-get($themeServices, 'primary-overlay-start')
         ),
         url('https://storage.googleapis.com/scvo-cms/23595/THEGATHERING-22.02.17_0475.jpg');
         a:hover .fa-fw {
@@ -411,8 +426,8 @@ primary-dark: #251032
     }
     .digital .callout-image {
         background-image: linear-gradient(
-        map-get($themeDefault, 'primary-alpha'),
-        map-get($themeDefault, 'primary-alpha')
+        map-get($themeDefault, 'primary-overlay-start'),
+        map-get($themeDefault, 'primary-overlay-start')
         ),
         url('https://storage.googleapis.com/scvo-cms/23602/THEGATHERING-23.02.17_0303.jpg');
         .mdc-button {
@@ -427,8 +442,8 @@ primary-dark: #251032
     }
     .policy-research .callout-image {
         background-image: linear-gradient(
-        map-get($themeDefault, 'primary-alpha'),
-        map-get($themeDefault, 'primary-alpha')
+        map-get($themeDefault, 'primary-overlay-start'),
+        map-get($themeDefault, 'primary-overlay-start')
         ),
         url('https://storage.googleapis.com/scvo-cms/23594/THEGATHERING-22.02.17_0028.jpg');
         color: white;
@@ -460,8 +475,8 @@ primary-dark: #251032
         background-image: linear-gradient(
         160deg,
         map-get($themeFooter, 'primary'),
-        map-get($themeFooter, 'primary') 60%,
-        map-get($themeFooter, 'primary-dark') 80%,
+        map-get($themeFooter, 'primary') 55%,
+        map-get($themeFooter, 'primary-dark') 95%,
         map-get($themeFooter, 'primary-dark')
         );
         // background-color: map-get($themeFooter, 'primary');
@@ -480,6 +495,7 @@ primary-dark: #251032
 
 #spinner,
 .about,
+.search-result.scvo-staff,
 .events,
 .funding-updates,
 .funding {
@@ -556,6 +572,8 @@ primary-dark: #251032
 .page-related,
 .page-sidebar .static-sidebar,
 .page-sidebar.static-sidebar,
+.post-sidebar .static-sidebar,
+.post-sidebar.static-sidebar,
 .policy-research.events .event-content,
 .policy-research.events .event-sidebar,
 .posts.blogs .post-sidebar,
@@ -668,7 +686,7 @@ figure {
     color: #333;
     border-width: $spacing-unit/8;
     border-style: solid;
-    border-color: #eee;
+    border-color: #333;
     padding: 0  $spacing-unit/2;
     margin: 0;
     width: 100%;
@@ -759,11 +777,11 @@ figure {
                 padding-bottom: $spacing-unit/2;
             }
         }
-        .featured-text,
-        .featured-background-image {
-            padding: $spacing-unit*2 0;
+        .featured-text {
+            padding: 0 0 $spacing-unit*2;
         }
         .featured-background-image {
+            padding: $spacing-unit*2 0;
             background-size: cover;
             background-repeat: no-repeat;
             background-position: center center;
@@ -929,6 +947,21 @@ figure {
     margin-top: 0;
 }
 
+.c-align {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    -ms-flex-flow: row nowrap;
+    flex-flow: row nowrap;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+}
 .hero {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -1403,9 +1436,9 @@ figure {
         margin: 0 !important;
         color: #fff;
         font-weight: 800;
-        font-size: 3rem;
-        line-height: $spacing-unit*3.5;
-        letter-spacing: -0.08rem;
+        font-size: 2.9rem;
+        line-height: 3rem;
+        letter-spacing: -0.06rem;
         margin-bottom: $spacing-unit/2;
         .photo-wee {
             height: 64px;
@@ -1486,7 +1519,10 @@ figure {
 .about.work-with-us .page-info,
 .digital.charter-fund.projects .page-info,
 .digital.cyber-resilience.projects .page-info,
+.community-jobs-scotland .footer-image.join-our-hub,
 .projects-campaigns.terrific-trustees.search .page-info,
+.post-sidebar .page-info,
+.page-sidebar .page-info,
 .scvo-cms-page-20027 .page-info,
 .scvo-cms-page-20043 .page-info,
 .scvo-cms-page-20042 .page-info,
@@ -1599,6 +1635,12 @@ figure {
 .policy-research.research .mdc-card__supporting-text,
 .press-media .mdc-card__supporting-text {
     padding-bottom: $spacing-unit;
+}
+.press-media,
+.blogs {
+    .search-info {
+        margin-top: $spacing-unit/2;
+    }
 }
 
 .mdc-form-field,
@@ -1748,6 +1790,13 @@ table.membership-fees {
         }
     }
 }
+.community-jobs-scotland {
+    .grid-info {
+        .social {
+            text-align: center;
+        }
+    }
+}
 
 .section-projects {
     .mdc-card__media {
@@ -1884,12 +1933,12 @@ table.membership-fees {
 
 .search-info {
     margin-bottom: 1rem;
-    border: 0.125rem solid #eee;
+    border: 0.125rem solid #ddd;
     background: #f8f8f8;
     color: #555;
     padding: 0 0.5rem;
-    height: 35px;
-    line-height: 35px;
+    height: 2.5rem;
+    line-height: 2.33rem;
     box-sizing: border-box;
 }
 
@@ -1934,13 +1983,37 @@ table.membership-fees {
         float: left;
     }
     dt {
-        font-weight: 600;
-        font-size: 1.15rem;
         clear: both;
         width: 30%;
     }
     dd {
         width: 70%;
+    }
+}
+.staff-team .inline-dl {
+    margin: 0;
+    dt, dd {
+        float: left;
+        margin: 0;
+    }
+    dt {
+        clear: both;
+        width: 20%;
+    }
+    dd {
+        width: 80%;
+        margin: 0 0 $spacing-unit/2;
+        ul {
+            margin: 0 0 0 1.4rem;
+        }
+    }
+}
+.events .inline-dl {
+    dt {
+        font-weight: 600;
+        font-size: 1.15rem;
+    }
+    dd {
         margin: 0 0 $spacing-unit;
         .mdc-layout-grid__cell strong {
             font-size: 1.15rem;
@@ -1978,16 +2051,16 @@ table.membership-fees {
             top: 0em;
         }
     }
-    // ul.fa-ul {
-    //     li {
-    //         padding-left: 0;
-    //     }
-    //     li::before {
-    //         content: " ";
-    //         padding: 0;
-    //         margin: 0;
-    //     }
-    // }
+    ul.fa-ul {
+        li {
+            padding-left: 0;
+        }
+        li::before {
+            content: " ";
+            padding: 0;
+            margin: 0;
+        }
+    }
     .mdc-button {
         // background: white;
         border-width: $spacing-unit/8;
@@ -1999,17 +2072,6 @@ table.membership-fees {
     .scvo-cms-page-20114 .mdc-button {
         margin-top: 0;
     }
-    // .menu-sidebar,
-    // .mdc-card {
-    //     .mdc-button {
-    //         margin-top: 0;
-    //         border: none;
-    //         box-shadow: none;
-    //         text-align: left;
-    //         background-color: rgba(0,0,0,0.05);
-    //         padding-top: 2px;
-    //     }
-    // }
     .mdc-card__actions ul,
     ul.supplimentary-list,
     ul.inline-list {
@@ -2159,16 +2221,11 @@ ul.breadcrumbs {
     margin-top: -0.15rem;
 }
 .about.staff-team {
+    .read-more {
+        margin-top: $spacing-unit;
+    }
     .scvo-staff-photo-full {
         margin: 0;
-    }
-    .inline-dl {
-        dt {
-            width: 20px;
-        }
-        dd {
-            width: calc(100% - 20px);
-        }
     }
 }
 .board-of-trustees .full .mdc-layout-grid img {
@@ -2275,13 +2332,18 @@ ul.supplimentary-list {
         display: none;
     }
 }
-.sidebar .author_about,
+.sidebar .author-about,
 .content .supplimentary-list {
     margin-top: $spacing-unit/2;
     margin-bottom: $spacing-unit;
 }
-.digital.events .full .event-sidebar {
-    text-align: right;
+.digital.events .full {
+    .scvo-event-digital-brand-charter {
+
+    }
+    .event-sidebar {
+        text-align: right;
+    }
 }
 
 h1,
@@ -2340,6 +2402,7 @@ p:last-child {
 }
 .post-content .full {
     margin-top: $spacing-unit/2;
+    word-wrap: break-word;
 }
 .page.press .post-sidebar .full {
     margin-top: 0;
@@ -2392,6 +2455,7 @@ p:last-child {
         top: -0.1rem;
         position: relative;
     }
+    a.noext::after,
     a[href^="https://storage.googleapis.com"]::after,
     a[href^="https://maps.google.co.uk"]::after,
     a[href^="http://goodhq.org"]::after,
@@ -2610,6 +2674,7 @@ footer {
     }
     .mdc-toolbar {
         #upper-tab-bar,
+        .upper-menu,
         .mdc-toolbar__row.toolbar-nav {
             display: none;
         }
@@ -2778,6 +2843,10 @@ footer {
         .container-fluid {
             .mdc-layout-grid {
                 width: 100%;
+                h1.header-text {
+                    font-size: 2rem;
+                    line-height: 2.5rem;
+                }
             }
         }
     }

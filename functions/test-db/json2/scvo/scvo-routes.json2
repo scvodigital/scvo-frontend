@@ -18,13 +18,18 @@
             },
             "goodmoves_latest": {
                 "index": "web-content-production",
-                "type": "goodmoves-legacy",
+                "type": "goodmoves-job",
                 "template": `{:queries/pages/home-goodmoves-job-list.json}`
             },
             "blogs_latest": {
                 "index": "web-content-production",
                 "type": "scvo-cms-post",
                 "template": `{:queries/pages/home-blog-post-list.json}`
+            },
+            "press_latest": {
+                "index": "web-content-production",
+                "type": "scvo-cms-post",
+                "template": `{:queries/pages/home-press-list.json}`
             },
             "tfn_latest": {
                 "index": "web-content-production",
@@ -55,7 +60,7 @@
         "headTagsTemplate": `{:templates/main_search/search-head-tags.hbs}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
-            "type": "scvo-cms-page,scvo-cms-post,scvo-staff,scvo-member,digital-charter-signatory,goodmoves-legacy,funding-scotland-fund,goodhq-organisation,goodhq-post,scvo-document-evidence,scvo-event,scvo-event-training,scvo-event-digital,scvo-event-policy,scvo-grant-charter,oscr-charity,tfn-news-post,tfn-blog-post,tfn-poll,tfn-event,tfn-list,tfn-feature",
+            "type": "scvo-cms-page,scvo-cms-post,scvo-staff,scvo-member,digital-charter-signatory,goodmoves-job,funding-scotland-fund,goodhq-organisation,goodhq-post,scvo-document-evidence,scvo-event,scvo-event-training,scvo-event-digital,scvo-event-policy,scvo-grant-charter,oscr-charity,tfn-news-post,tfn-blog-post,tfn-poll,tfn-event,tfn-list,tfn-feature",
             "template": `{:queries/main_search/search.json}`
         },
         "supplimentarySearchTemplates": {
@@ -223,7 +228,7 @@
         "headTagsTemplate": `{:templates/pages/page-head-tags.hbs}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
-            "type": "goodmoves-legacy,milo-volunteering-opportunity",
+            "type": "goodmoves-job,milo-volunteering-opportunity",
             "template": `{:queries/trustees/trustee-search.json}`
         },
         "supplimentarySearchTemplates": {
@@ -239,7 +244,7 @@
             },
             "types": {
                 "index": "web-content-production",
-                "type": "goodmoves-legacy,milo-volunteering-opportunity",
+                "type": "goodmoves-job,milo-volunteering-opportunity",
                 "template": `{:queries/trustees/trustee-aggs.json}`
             },
             "splash": {
@@ -254,14 +259,14 @@
         }
     },
     "trustee": {
-        "pattern": "/projects-campaigns/terrific-trustees/main_search/:slug",
+        "pattern": "/projects-campaigns/terrific-trustees/search/:slug",
         "templates": {
             "default": `{:templates/trustees/trustee.hbs}`
         },
         "headTagsTemplate": `{:templates/pages/page-head-tags.hbs}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
-            "type": "goodmoves-legacy,milo-volunteering-opportunity",
+            "type": "goodmoves-job,milo-volunteering-opportunity",
             "template": `{:queries/trustees/trustee.json}`
         },
         "supplimentarySearchTemplates": {
@@ -272,7 +277,7 @@
             },
             "types": {
                 "index": "web-content-production",
-                "type": "goodmoves-legacy,milo-volunteering-opportunity",
+                "type": "goodmoves-job,milo-volunteering-opportunity",
                 "template": `{:queries/trustees/trustee-aggs.json}`
             },
             "splash": {
@@ -354,7 +359,7 @@
         "headTagsTemplate": `{:templates/jobs/goodmoves-job-search-head-tags.hbs}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
-            "type": "goodmoves-legacy",
+            "type": "goodmoves-job",
             "template": `{:queries/jobs/goodmoves-job-search.json}`
         },
         "supplimentarySearchTemplates": {
@@ -365,7 +370,7 @@
             },
             "types": {
                 "index": "web-content-production",
-                "type": "goodmoves-legacy",
+                "type": "goodmoves-job",
                 "template": `{:queries/jobs/goodmoves-job-aggs.json}`
             },
             "splash": {
@@ -593,8 +598,8 @@
         "headTagsTemplate": `{:templates/posts/post-author-head-tags.hbs}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
-            "type": "scvo-cms-author",
-            "template": `{:queries/posts/post-author-profile.json}`
+            "type": "scvo-cms-post",
+            "template": `{:queries/posts/post-author.json}`
         },
         "supplimentarySearchTemplates": {
             "not_found": {
@@ -602,10 +607,10 @@
                 "type": "scvo-cms-page,scvo-cms-post",
                 "template": `{:queries/pages/not-found.json}`
             },
-            "author_posts": {
+            "author_profile": {
                 "index": "web-content-production",
-                "type": "scvo-cms-post",
-                "template": `{:queries/posts/post-author.json}`
+                "type": "scvo-cms-author",
+                "template": `{:queries/posts/post-author-profile.json}`
             },
             "staff_profile": {
                 "index": "web-content-production",
@@ -788,6 +793,11 @@
                 "type": "scvo-cms-author",
                 "template": `{:queries/posts/post-author-profile.json}`
             },
+            "staff_profile": {
+                "index": "web-content-production",
+                "type": "scvo-staff",
+                "template": `{:queries/posts/post-staff-profile.json}`
+            },
             "authors_posts": {
                 "index": "web-content-production",
                 "type": "scvo-cms-post",
@@ -807,11 +817,6 @@
                 "index": "web-content-production",
                 "type": "scvo-cms-media",
                 "template": `{:queries/pages/splash.json}`
-            },
-            "staff_profile": {
-                "index": "web-content-production",
-                "type": "scvo-staff",
-                "template": `{:queries/posts/post-staff-profile.json}`
             }
         },
         "elasticsearchConfig": {
@@ -1122,19 +1127,14 @@
         "headTagsTemplate": `{:templates/pages/page-head-tags.hbs}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
-            "type": "scvo-cms-page",
-            "template": `{:queries/pages/page.json}`
+            "type": "scvo-cms-post",
+            "template": `{:queries/pages/page-blogs.json}`
         },
         "supplimentarySearchTemplates": {
-            "not_found": {
+            "page": {
                 "index": "web-content-production",
-                "type": "scvo-cms-page,scvo-cms-post",
-                "template": `{:queries/pages/not-found.json}`
-            },
-            "related_posts": {
-                "index": "web-content-production",
-                "type": "scvo-cms-post",
-                "template": `{:queries/posts/posts-page.json}`
+                "type": "scvo-cms-page",
+                "template": `{:queries/pages/page.json}`
             },
             "splash": {
                 "index": "web-content-production",
@@ -1155,19 +1155,14 @@
         "headTagsTemplate": `{:templates/pages/page-head-tags.hbs}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
-            "type": "scvo-cms-page",
-            "template": `{:queries/pages/page.json}`
+            "type": "scvo-cms-post",
+            "template": `{:queries/pages/page-press.json}`
         },
         "supplimentarySearchTemplates": {
-            "not_found": {
+            "page": {
                 "index": "web-content-production",
-                "type": "scvo-cms-page,scvo-cms-post",
-                "template": `{:queries/pages/not-found.json}`
-            },
-            "related_posts": {
-                "index": "web-content-production",
-                "type": "scvo-cms-post",
-                "template": `{:queries/posts/posts-page.json}`
+                "type": "scvo-cms-page",
+                "template": `{:queries/pages/page.json}`
             },
             "splash": {
                 "index": "web-content-production",
@@ -1194,7 +1189,7 @@
         "supplimentarySearchTemplates": {
             "scvo_jobs": {
                 "index": "web-content-production",
-                "type": "goodmoves-legacy",
+                "type": "goodmoves-job",
                 "template": `{:queries/jobs/scvo-jobs.json}`
             },
             "not_found": {
@@ -1263,6 +1258,11 @@
                 "index": "web-content-production",
                 "type": "scvo-cms-page,scvo-cms-post",
                 "template": `{:queries/pages/not-found.json}`
+            },
+            "total": {
+                "index": "web-content-production",
+                "type": "scvo-member",
+                "template": `{:queries/members/member-search-total.json}`
             },
             "splash": {
                 "index": "web-content-production",
@@ -1438,7 +1438,8 @@
     "page_membership": {
         "pattern": {
             "index": "/services/membership",
-            "section": "/services/membership/:path"
+            "section": "/services/membership/:path",
+            "subsection": "/services/membership/:path/:path"
         },
         "templates": {
             "default": `{:templates/pages/page-membership.hbs}`
@@ -1463,7 +1464,8 @@
         },
         "elasticsearchConfig": {
             "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
-            "apiVersion": "5.6"
+            "apiVersion": "5.6",
+            "log": "debug"
         }
     },
     "page_full_width": {
@@ -1474,6 +1476,7 @@
             "office_space": "/services/office-space",
             "offices": "/services/office-space/*",
             "projects_campaigns": "/projects-campaigns",
+            "projects_campaigns_terrific_trustees": "/projects-campaigns/terrific-trustees",
             "digital_about": "/digital/about"
         },
         "templates": {
@@ -1699,6 +1702,11 @@
                 "index": "web-content-production",
                 "type": "scvo-cms-page,scvo-cms-post",
                 "template": `{:queries/pages/not-found.json}`
+            },
+            "related_posts": {
+                "index": "web-content-production",
+                "type": "scvo-cms-post",
+                "template": `{:queries/pages/page-posts-related-random.json}`
             },
             "splash": {
                 "index": "web-content-production",

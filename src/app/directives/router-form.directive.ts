@@ -14,7 +14,6 @@ export class RouterFormDirective {
 
     constructor(private rd2: Renderer2, private el: ElementRef, private routerService: RouterService, private router: Router) {
         rd2.listen(el.nativeElement, 'submit', (evt: Event) => {
-            console.log('FORM SUBMIT EVENT:', evt);
             this.submit(evt);
             evt.preventDefault();
             return false;

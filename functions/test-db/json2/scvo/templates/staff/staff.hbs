@@ -8,7 +8,7 @@
                     {{else}}
                     <h1 class="header-text">
                         <span class="header-text-banner">
-                            {{{primaryResponse.hits.hits.[0]._source.name_full}}}
+                            {{{primaryResponse.hits.hits.[0]._source.rendered.scvo_header}}}
                         </span>
                     </h1>
                     {{/if}}
@@ -34,7 +34,10 @@
                 </div>
                 {{#compare supplimentaryResponses.author_posts.hits.total ">" 0}}
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 related page-related">
-                    <h3 class="blogs">Posts by {{{primaryResponse.hits.hits.[0]._source.name_full}}}</h3>
+                    <h3 class="blogs">
+                        Latest post{{#compare supplimentaryResponses.author_posts.hits.total ">" 1}}s{{/compare}}
+                        by {{{primaryResponse.hits.hits.[0]._source.name_full}}}
+                    </h3>
                     <div class="mdc-layout-grid">
                         <div class="mdc-layout-grid__inner">
                             {{#each supplimentaryResponses.author_posts.hits.hits}}
@@ -44,9 +47,9 @@
                             {{/each}}
                         </div>
                     </div>
-                    {{#compare supplimentaryResponses.author_posts.hits.total ">" 6}}
+                    {{#compare supplimentaryResponses.author_posts.hits.total ">" 3}}
                     <p class="v-margin read-more">
-                        <a href="/post/author/{{{supplimentaryResponses.author_posts.hits.hits.[0]._source.author_slug}}}" class="mdc-button mdc-button--raised">Read more</a>
+                        <a href="/post/author/{{{supplimentaryResponses.author_posts.hits.hits.[0]._source.author_slug}}}" class="mdc-button mdc-button--raised">More posts</a>
                     </p>
                     {{/compare}}
                 </div>
