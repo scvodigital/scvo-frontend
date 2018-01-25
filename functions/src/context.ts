@@ -5,8 +5,6 @@ import * as util from 'util';
 import * as admin from 'firebase-admin';
 import * as handlebars from 'handlebars';
 const hbs = require('clayhandlebars')();
-import * as sass from 'node-sass';
-import * as uglify from 'uglify-js';
 import { IContext, ILinkTag, IMetaTag, IScriptTag, IMenus, IRoutes, Router, IRouteMatch, IPartials, Helpers } from 'scvo-router';
 
 Helpers.register(hbs);
@@ -52,7 +50,6 @@ export class Context implements IContext {
 
     // Instance specific properties
     private compiledTemplate: (obj: any, hbs?: any) => string = null;
-    private compiledCss: string = null;
     private router: Router = null;
 
     constructor(context: IContext, public userId: any){
@@ -66,8 +63,6 @@ export class Context implements IContext {
         Object.keys(context.templatePartials).forEach((name: string) => {
             hbs.registerPartial(name, context.templatePartials[name]);
         });
-
-        this.compiledCss = sass.renderSync({ data: this.sass, sourceMap: false, outputStyle: 'compact' }).css.toString('utf8');
     }
 
     renderPage(uriString: string): Promise<string>{
@@ -82,7 +77,6 @@ export class Context implements IContext {
                     scriptTags: this.scriptTags,
                     domains: this.domains,
                     menus: this.menus,
-                    css: this.compiledCss,
                     routes: this.routes,
                     route: routeMatch,
                     uaId: this.uaId,
