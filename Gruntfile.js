@@ -4,7 +4,7 @@ module.exports = function(grunt) {
         clean: {
             main: {
                 src: ['./dist']
-            }   
+            }
         },
         copy: {
             main: {
@@ -33,8 +33,7 @@ module.exports = function(grunt) {
         },
         bgShell: {
             serve: {
-                bg: true,
-                cmd: 'devmode=true firebase serve -p 9000 --only functions,hosting'  
+                cmd: 'devmode=true firebase serve -p 9000 --only functions,hosting'
             },
             deploy: {
                 cmd: 'firebase deploy --only functions,hosting'
