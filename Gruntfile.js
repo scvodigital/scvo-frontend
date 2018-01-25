@@ -33,6 +33,7 @@ module.exports = function(grunt) {
         },
         bgShell: {
             serve: {
+                bg: true,
                 cmd: 'devmode=true firebase serve -p 9000 --only functions,hosting'  
             },
             deploy: {
