@@ -96,6 +96,10 @@ function transformWpMenu(wpMenuItem: IWPMenuItem, domainRegex: RegExp): IMenuIte
         path = path.replace(domainRegex, '');
     }
 
+    if (path.endsWith('/')) {
+        path = path.substr(0, path.length - 1);
+    }
+
     var menuItem: IMenuItem = {
         label: wpMenuItem.title,
         path: path,
