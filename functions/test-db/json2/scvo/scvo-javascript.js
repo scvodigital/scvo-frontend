@@ -13,10 +13,10 @@ document.querySelector('#menu_button').addEventListener('click', function() {
     window.drawer.open = true;
 });
 drawerEl.addEventListener('MDCTemporaryDrawer:open', function() {
-    // console.log('Received MDCTemporaryDrawer:open');
+    console.log('Received MDCTemporaryDrawer:open');
 });
 drawerEl.addEventListener('MDCTemporaryDrawer:close', function() {
-    // console.log('Received MDCTemporaryDrawer:close');
+    console.log('Received MDCTemporaryDrawer:close');
 });
 
 var header = document.querySelector("header.mdc-toolbar");
