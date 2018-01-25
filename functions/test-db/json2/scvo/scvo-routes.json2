@@ -1505,6 +1505,35 @@
             "apiVersion": "5.6"
         }
     },
+    "page_gathering": {
+        "pattern": "/the-gathering",
+        "templates": {
+            "default": `{:templates/pages/page-gathering.hbs}`
+        },
+        "headTagsTemplate": `{:templates/pages/page-head-tags.hbs}`,
+        "javascript": `{:javascript/gathering-landing.js}`,
+        "primarySearchTemplate": {
+            "index": "web-content-production",
+            "type": "scvo-cms-page",
+            "template": `{:queries/pages/page.json}`
+        },
+        "supplimentarySearchTemplates": {
+            "not_found": {
+                "index": "web-content-production",
+                "type": "scvo-cms-page,scvo-cms-post",
+                "template": `{:queries/pages/not-found.json}`
+            },
+            "splash": {
+                "index": "web-content-production",
+                "type": "scvo-cms-media",
+                "template": `{:queries/pages/splash.json}`
+            }
+        },
+        "elasticsearchConfig": {
+            "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
+            "apiVersion": "5.6"
+        }
+    },
     "page_cjs_landing": {
         "pattern": "/jobs/community-jobs-scotland",
         "templates": {

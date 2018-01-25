@@ -134,6 +134,16 @@ secondary: #022347,
 secondary-light: #6dede5,
 secondary-dark: #A7C9F2
 ),
+gathering: (
+primary: #673ab7,
+primary-overlay-start: rgba(92,52,164,0.89),
+primary-overlay-end: rgba(92,52,164,0.91),
+primary-light: #5731C9,
+primary-dark: #4527a0,
+secondary: #022347,
+secondary-light: #6dede5,
+secondary-dark: #A7C9F2
+),
 services: (
 primary: #125AAC,
 primary-overlay-start: rgba(21,101,192,0.89),
@@ -160,6 +170,7 @@ primary-dark: #251032
     $themeCharity: map-get($colours, 'charity');
     $themeDigital: map-get($colours, 'digital');
     $themeJobs: map-get($colours, 'jobs');
+    $themeGathering: map-get($colours, 'gathering');
 
     a,
     #share-menu-button,
@@ -440,7 +451,7 @@ primary-dark: #251032
             color: map-get($themeDefault, 'primary') !important;
         }
     }
-    .community-jobs-scotland .callout-image .text {
+    .community-jobs-scotland .callout-image .caption {
         background-color: map-get($themeJobs, 'primary-overlay-start');
     }
     .swiper-container .swiper-pagination-bullet {
@@ -448,6 +459,38 @@ primary-dark: #251032
     }
     .swiper-container .swiper-pagination-bullet.swiper-pagination-bullet-active {
         background-color: map-get($themeServices, 'primary') !important;
+    }
+    .the-gathering .full {
+        .mdc-button {
+            color: white;
+            border-color: map-get($themeGathering, 'primary') !important;
+            background-color: map-get($themeGathering, 'primary') !important;
+        }
+        .mdc-button:hover {
+            color: white !important;
+            background-color: map-get($themeGathering, 'primary-dark') !important;
+        }
+    }
+    .the-gathering .callout-image.gathering-1 {
+        background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/headers/THEGATHERING-22.02.17_0775.jpg');
+    }
+    .the-gathering .callout-image.gathering-2 {
+        background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/headers/THEGATHERING-22.02.17_0010.jpg');
+    }
+    .the-gathering .callout-image.gathering-3 {
+        background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/headers/THEGATHERING-22.02.17_0390.jpg');
+    }
+    .the-gathering .callout-image.gathering-4 {
+        background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/headers/THEGATHERING-22.02.17_0348.jpg');
+    }
+    .the-gathering .callout-image.gathering-5 {
+        background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/headers/THEGATHERING-23.02.17_0028.jpg');
+    }
+    .the-gathering .callout-image.gathering-6 {
+        background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/headers/THEGATHERING-23.02.17_0207.jpg');
+    }
+    .the-gathering .callout-image.gathering-7 {
+        background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/headers/THEGATHERING-23.02.17_0253.jpg');
     }
     .community-jobs-scotland .callout-image.saltire {
         background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/headers/saltire.jpg');
@@ -531,8 +574,8 @@ primary-dark: #251032
 @include theme-colours('default');
 
 .about,
-.search-result.scvo-staff,
 .events,
+.search-result.scvo-staff,
 .funding-updates,
 .funding {
     @include theme-colours('funding');
@@ -576,6 +619,9 @@ primary-dark: #251032
 }
 .digital {
     @include theme-colours('digital');
+}
+.the-gathering {
+    @include theme-colours('gathering');
 }
 .search-result.scvo-cms-post,
 .related-posts,
@@ -766,7 +812,7 @@ figure {
             display: flex;
             align-items: baseline;
             justify-content: center;
-            .text {
+            .caption {
                 text-align: center;
                 color: #fff;
                 font-weight: 600;
@@ -778,17 +824,17 @@ figure {
             }
         }
     }
-}
-
-.community-jobs-scotland .swiper-container {
-    width: 100%;
-    height: 100%;
-    margin-left: auto;
-    margin-right: auto;
-    .swiper-pagination-bullet {
-        opacity: 0.9;
+    .swiper-container {
+        width: 100%;
+        height: 100%;
+        margin-left: auto;
+        margin-right: auto;
+        .swiper-pagination-bullet {
+            opacity: 0.9;
+        }
     }
 }
+
 
 .home {
     .search {
@@ -1470,7 +1516,7 @@ figure {
     min-height: 25vh;
 }
 .splash-overlay.splash-overlay-hidden {
-    background-image: none;
+    background-image: none !important;
 }
 .splash-image {
     background-size: cover;
@@ -1505,7 +1551,7 @@ figure {
             height: 64px;
             width: 64px;
             vertical-align: bottom;
-            margin: -$spacing-unit/5 $spacing-unit $spacing-unit*2 0;
+            margin: -$spacing-unit/5 $spacing-unit 0 0;
             float: left;
         }
         .mdc-typography--caption {
@@ -1575,6 +1621,40 @@ figure {
         max-height: $spacing-unit*6;
     }
 }
+body.the-gathering {
+    .container-fluid,
+    .page-content {
+        padding-bottom: 0;
+    }
+    .full {
+        margin-left: auto;
+        margin-right: auto;
+        width: 60%;
+        .mdc-button {
+            width: 100%;
+        }
+    }
+    .splash-image .splash-overlay .container-fluid {
+        min-height: 30vh;
+        .mdc-layout-grid {
+            margin: 0;
+            width: 100%;
+            text-align: center;
+            img.header-text {
+                max-height: 30vh;
+            }
+        }
+    }
+    .callout-image {
+        min-height: 40vh;
+        .container-fluid {
+            min-height: 40vh;
+        }
+    }
+    .swiper-container {
+        margin-top: $spacing-unit;
+    }
+}
 // .mdc-temporary-drawer,
 .about.staff-team .post-info-author,
 .about.work-with-us .page-info,
@@ -1584,6 +1664,7 @@ figure {
 .projects-campaigns.terrific-trustees.search .page-info,
 .post-sidebar .page-info,
 .page-sidebar .page-info,
+body.the-gathering .page-info,
 .scvo-cms-page-20027 .page-info,
 .scvo-cms-page-20043 .page-info,
 .scvo-cms-page-20042 .page-info,
