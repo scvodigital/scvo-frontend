@@ -1,4 +1,17 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // Material Design Components
+    mdc.autoInit();
+
+    // Browser Update
+    var $buoop = {notify:{i:-4,f:-4,o:-4,s:-2,c:-4},unsecure:true,api:5};
+    function $buo_f(){
+        var e = document.createElement("script");
+        e.src = "/assets/js/browser-update.min.js";
+        document.body.appendChild(e);
+    };
+    try {document.addEventListener("DOMContentLoaded", $buo_f,false)}
+    catch(e){window.attachEvent("onload", $buo_f)}
+
     window.drawerEl = document.querySelector('.mdc-temporary-drawer');
     window.drawer = mdc.drawer.MDCTemporaryDrawer.attachTo(drawerEl);
     document.querySelector('#menu_button').addEventListener('click', function() {
