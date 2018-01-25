@@ -90,24 +90,6 @@ export class Context implements IContext {
                 };
 
                 var contextHtml = this.compiledTemplate(templateData);
-
-                var closingHeadTag = contextHtml.indexOf('</head>');
-                if(closingHeadTag > -1){
-                    var tags = `
-                        ${routeMatch.headTags}
-                        <script>
-                            document.addEventListener("DOMContentLoaded", function(event) {
-                                //Context Javascript
-                                ${this.javascript}
-
-                                //Route Javascript
-                                ${routeMatch.javascript}
-                            });
-                        </script>
-                    `;
-                    contextHtml = [contextHtml.slice(0, closingHeadTag), tags, contextHtml.slice(closingHeadTag)].join('');
-                }
-
                 contextHtml = contextHtml.replace(this.domainStripper, '');
 
                 resolve(contextHtml);
