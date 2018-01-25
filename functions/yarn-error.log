@@ -2,7 +2,7 @@ Arguments:
   /home/calum/.nvm/versions/node/v6.11.4/bin/node /home/calum/.yarn/bin/yarn.js
 
 PATH: 
-  /home/calum/.yarn/bin:/home/calum/.nvm/versions/node/v6.11.4/bin:/home/calum/.platformsh/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin
+  /home/calum/.yarn/bin:/home/calum/.nvm/versions/node/v6.11.4/bin:/home/calum/.platformsh/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/snap/bin:/opt/mssql-tools/bin
 
 Yarn version: 
   1.3.2
@@ -18,11 +18,15 @@ npm manifest:
     "name": "functions",
     "description": "Cloud Functions for Firebase",
     "scripts": {
-      "cleanup": "rm -rf ./dist",
       "start": "npm run build;firebase serve --only functions",
+  <<<<<<< HEAD
       "build": "npm run cleanup; npm run json2;tsc",
-      "json2": "node json2 ./test-db/json2/**/*.json2 ./test-db/json; node json2 ./test-db/db.json2 ./test-db",
-      "deploy-db": "npm run json2; firebase database:set -y / ./test-db/db.json"
+      "json2": "node json2 ./test-db/json2/**/*.json2 ./test-db/json; node json2 ./test-db/db.json2 ./test-db; npm run scss",
+      "deploy-db": "npm run json2; firebase database:set -y / ./test-db/db.json",
+      "scss": "node-sass --output-style compressed test-db/json2/scvo/scvo-styles.scss > ../src/assets/css/scvo-styles-2.css;node-sass --output-style compressed test-db/json2/scvo/scvo-styles.scss > ../dist/assets/css/scvo-styles-2.css"
+  =======
+      "build": "npm run cleanup; npm run json2;tsc"
+  >>>>>>> 8c9937471349bad5e396d68e2c2de2f2cb278767
     },
     "dependencies": {
       "@types/jsdom": "^11.0.2",
@@ -31,6 +35,7 @@ npm manifest:
       "@types/request": "^2.0.6",
       "@types/uuid": "^3.4.3",
       "clayhandlebars": "^3.2.2",
+      "compression": "^1.7.1",
       "cookie-parser": "^1.4.3",
       "dot-object": "^1.7.0",
       "firebase-admin": "5.4.0",
@@ -42,7 +47,7 @@ npm manifest:
       "pdfmake": "^0.1.33",
       "q": "^1.5.0",
       "request": "^2.83.0",
-      "scvo-router": "1.0.45",
+      "scvo-router": "1.0.52",
       "string": "^3.3.3",
       "uuid": "^3.1.0"
     },
@@ -737,6 +742,24 @@ Lockfile:
   commander@^2.10.0:
     version "2.11.0"
     resolved "https://registry.yarnpkg.com/commander/-/commander-2.11.0.tgz#157152fd1e7a6c8d98a5b715cf376df928004563"
+  
+  compressible@~2.0.11:
+    version "2.0.12"
+    resolved "https://registry.yarnpkg.com/compressible/-/compressible-2.0.12.tgz#c59a5c99db76767e9876500e271ef63b3493bd66"
+    dependencies:
+      mime-db ">= 1.30.0 < 2"
+  
+  compression@^1.7.1:
+    version "1.7.1"
+    resolved "https://registry.yarnpkg.com/compression/-/compression-1.7.1.tgz#eff2603efc2e22cf86f35d2eb93589f9875373db"
+    dependencies:
+      accepts "~1.3.4"
+      bytes "3.0.0"
+      compressible "~2.0.11"
+      debug "2.6.9"
+      on-headers "~1.0.1"
+      safe-buffer "5.1.1"
+      vary "~1.1.2"
   
   concat-map@0.0.1:
     version "0.0.1"
@@ -1934,6 +1957,10 @@ Lockfile:
     version "1.1.2"
     resolved "https://registry.yarnpkg.com/methods/-/methods-1.1.2.tgz#5529a4d67654134edcc5266656835b0f851afcee"
   
+  "mime-db@>= 1.30.0 < 2":
+    version "1.32.0"
+    resolved "https://registry.yarnpkg.com/mime-db/-/mime-db-1.32.0.tgz#485b3848b01a3cda5f968b4882c0771e58e09414"
+  
   mime-db@~1.30.0:
     version "1.30.0"
     resolved "https://registry.yarnpkg.com/mime-db/-/mime-db-1.30.0.tgz#74c643da2dd9d6a45399963465b26d5ca7d71f01"
@@ -2146,6 +2173,10 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/on-finished/-/on-finished-2.3.0.tgz#20f1336481b083cd75337992a16971aa2d906947"
     dependencies:
       ee-first "1.1.1"
+  
+  on-headers@~1.0.1:
+    version "1.0.1"
+    resolved "https://registry.yarnpkg.com/on-headers/-/on-headers-1.0.1.tgz#928f5d0f470d49342651ea6794b0857c100693f7"
   
   once@^1.3.0, once@^1.3.1, once@^1.3.3, once@^1.4.0:
     version "1.4.0"
@@ -2636,9 +2667,9 @@ Lockfile:
       js-base64 "^2.1.8"
       source-map "^0.4.2"
   
-  scvo-router@1.0.45:
-    version "1.0.45"
-    resolved "https://registry.yarnpkg.com/scvo-router/-/scvo-router-1.0.45.tgz#248d4aa8463c32a9a106bcc43e56f0ff4113f6a2"
+  scvo-router@1.0.52:
+    version "1.0.52"
+    resolved "https://registry.yarnpkg.com/scvo-router/-/scvo-router-1.0.52.tgz#94d70be84a43a843f710296dd73a9da95826d01e"
     dependencies:
       deep-extend "^0.5.0"
       dot-object "^1.7.0"
@@ -3269,5 +3300,9 @@ Lockfile:
       window-size "0.1.0"
 
 Trace: 
-  Error: https://registry.yarnpkg.com/scvo-router/-/scvo-router-1.0.45.tgz: ENOENT: no such file or directory, chmod '/home/calum/.cache/yarn/v1/npm-scvo-router-1.0.45-248d4aa8463c32a9a106bcc43e56f0ff4113f6a2/yarn.lock'
-      at Error (native)
+  SyntaxError: /home/calum/Development/scvo-frontend/functions/package.json: Unexpected token < in JSON at position 151
+      at Object.parse (native)
+      at /home/calum/.yarn/lib/cli.js:770:59
+      at next (native)
+      at step (/home/calum/.yarn/lib/cli.js:92:30)
+      at /home/calum/.yarn/lib/cli.js:103:13
