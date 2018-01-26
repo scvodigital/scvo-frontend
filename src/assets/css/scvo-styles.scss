@@ -1,7 +1,7 @@
 @import url('//cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css');
 @import url('//fonts.googleapis.com/css?family=Montserrat:700|Open+Sans:400,600');
 
-$spacing-unit: 1rem;
+$unit: 1rem;
 $nav-height: 38px;
 $colours: (
 default: (
@@ -692,7 +692,7 @@ body {
     max-width: 1280px;
     width: 95%;
     margin: 0 auto;
-    padding: $spacing-unit/2;
+    padding: $unit/2;
 }
 :focus {
     outline: none;
@@ -710,9 +710,9 @@ input:focus:-ms-input-placeholder {
     color:transparent;
 }
 .brand-logo {
-    margin-left: -$spacing-unit/2;
+    margin-left: -$unit/2;
     img {
-        max-height: $spacing-unit*3.5;
+        max-height: $unit*3.5;
     }
 }
 
@@ -764,16 +764,16 @@ iframe {
     border: none;
 }
 figure {
-    margin: $spacing-unit 0;
+    margin: $unit 0;
 }
 .mdc-textfield__input,
 .mdc-textfield__input:focus,
 .mdc-textfield__input:hover {
     color: #333;
-    border-width: $spacing-unit/8;
+    border-width: $unit/8;
     border-style: solid;
     border-color: #333;
-    padding: 0  $spacing-unit/2;
+    padding: 0  $unit/2;
     margin: 0;
     width: 100%;
     line-height: $nav-height - 3px;
@@ -839,40 +839,58 @@ figure {
     }
 }
 
+.search-page {
+    .page-content {
+        h2 {
+            margin-top: 0;
+        }
+    }
+}
+.search {
+    margin-bottom: $unit*2;
+    h3 {
+        margin: $unit*2 0 0;
+    }
+    .main_search {
+        position: relative;
+    }
+    .search_form {
+        position: relative;
+        margin-bottom: $unit;
+        .mdc-text-field {
+            -moz-box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+            border: 2px solid #333;
+            border-radius: 0;
+            width: 100%;
+            height: $unit*3;
+            line-height: $unit*3;
+            margin: 0;
+            padding: 0 $unit*2.75 0 $unit*0.75;
+            font-size: 1.1rem;
+        }
+        .search-button-large {
+            padding: 1px 0 0;
+            position: absolute;
+            top: $unit*0.7;
+            right: $unit*0.75;
+            .fa-search {
+                font-size: $unit*1.5;
+                color: #333;
+                font-size: 1.5rem;
+            }
+        }
+    }
+}
 
 .home {
     .search {
-        margin-bottom: $spacing-unit*2;
         h3 {
-            margin: $spacing-unit*2 0;
+            margin: $unit*2 0;
         }
-        .home_search_form {
-            position: relative;
-            margin-right: $spacing-unit*2;
-            .mdc-text-field {
-                -moz-box-sizing: border-box;
-                -webkit-box-sizing: border-box;
-                box-sizing: border-box;
-                border: 2px solid #333;
-                border-radius: 0;
-                width: 100%;
-                height: $spacing-unit*3;
-                line-height: $spacing-unit*3;
-                margin: 0;
-                padding: 0 $spacing-unit*2.75 0 $spacing-unit*0.75;
-                font-size: 1.1rem;
-            }
-            .search-button-large {
-                padding: 1px 0 0;
-                position: absolute;
-                top: $spacing-unit*0.7;
-                right: $spacing-unit*0.75;
-                .fa-search {
-                    font-size: $spacing-unit*1.5;
-                    color: #333;
-                    font-size: 1.5rem;
-                }
-            }
+        .search_form {
+            margin-right: $unit*2;
         }
     }
     .featured-content {
@@ -895,22 +913,22 @@ figure {
             }
             .photo-wee {
                 max-width: 96px;
-                margin-right: $spacing-unit;
-                margin-bottom: $spacing-unit;
+                margin-right: $unit;
+                margin-bottom: $unit;
                 float: left;
             }
             .post-info .photo-wee {
                 display: none;
             }
             .post-info {
-                padding-bottom: $spacing-unit/2;
+                padding-bottom: $unit/2;
             }
         }
         .featured-text {
-            padding: 0 0 $spacing-unit*2;
+            padding: 0 0 $unit*2;
         }
         .featured-background-image {
-            padding: $spacing-unit*2 0;
+            padding: $unit*2 0;
             background-size: cover;
             background-repeat: no-repeat;
             background-position: center center;
@@ -932,7 +950,7 @@ figure {
         }
     }
     .cta-content.callout-image {
-        padding: $spacing-unit 0 $spacing-unit*3.25;
+        padding: $unit 0 $unit*3.25;
         h2, h3, a, .fa, .fal, .fab, .fas, .far {
             color: white;
         }
@@ -947,9 +965,9 @@ figure {
             h3 {
                 margin: 0;
                 .fal {
-                    border: $spacing-unit/8 solid white;
+                    border: $unit/8 solid white;
                     border-radius: 50%;
-                    padding: $spacing-unit*1.75;
+                    padding: $unit*1.75;
                     box-shadow: 1px 2px 5rem rgba(255,255,255,0.15);
                 }
                 .fa-fw {
@@ -964,7 +982,7 @@ figure {
                 }
                 a .underline {
                     display: block;
-                    padding-top: $spacing-unit;
+                    padding-top: $unit;
                 }
             }
         }
@@ -973,15 +991,15 @@ figure {
 .home,
 .policy-research {
     .latest-content {
-        padding: $spacing-unit*2 0;
+        padding: $unit*2 0;
         .mdc-layout-grid__cell--span-10-desktop {
-            padding-left: $spacing-unit/2;
+            padding-left: $unit/2;
         }
         h2 {
             margin: 0;
             font-size: 1.8rem;
             a {
-                padding: $spacing-unit 0;
+                padding: $unit 0;
                 font-size: 1.1rem;
                 display: block;
             }
@@ -990,15 +1008,15 @@ figure {
 }
 .policy-research {
     .latest-content {
-        padding: $spacing-unit 0;
+        padding: $unit 0;
     }
     .policy-stats {
-        padding: $spacing-unit*1.5 0;
+        padding: $unit*1.5 0;
         h2 {
             margin-top: 0;
         }
         .mdc-layout-grid__cell {
-            padding: $spacing-unit*1.5 0 $spacing-unit/2;
+            padding: $unit*1.5 0 $unit/2;
             text-align: center;
         }
     }
@@ -1008,7 +1026,7 @@ figure {
         h2 a,
         .scvo-cms-post,
         .tfn-news-post {
-            padding-right: $spacing-unit;
+            padding-right: $unit;
             border-right: 1px solid rgba(0,0,0,.2);
         }
         .no-border h2 a,
@@ -1018,9 +1036,9 @@ figure {
     }
 }
 .gist {
-    padding-top: $spacing-unit;
+    padding-top: $unit;
     .mdc-card__subtitle {
-        margin-top: $spacing-unit/4;
+        margin-top: $unit/4;
     }
     img.photo-wee {
         height: 64px;
@@ -1037,7 +1055,7 @@ figure {
         margin: 0;
     }
     .thumbnail {
-        margin-top: $spacing-unit/2;
+        margin-top: $unit/2;
         display: block;
         img {
             border-radius: 50%;
@@ -1067,9 +1085,9 @@ figure {
 }
 .page-related,
 .post-related {
-    margin: $spacing-unit*2 0;
+    margin: $unit*2 0;
     h3 {
-        margin-bottom: $spacing-unit;
+        margin-bottom: $unit;
     }
 }
 .page-related {
@@ -1124,7 +1142,7 @@ figure {
 .mdc-select,
 .mdc-textfield {
     width: 100%;
-    margin: 0 0 $spacing-unit/2;
+    margin: 0 0 $unit/2;
 }
 
 .sidebar {
@@ -1136,7 +1154,7 @@ figure {
 }
 .related-posts {
     .mdc-button {
-        margin: $spacing-unit 0;
+        margin: $unit 0;
     }
 }
 .v-align-img {
@@ -1169,7 +1187,7 @@ figure {
     .mdc-toolbar__row,
     .mdc-form-field,
     .mdc-toolbar__section {
-        height: $spacing-unit*6;
+        height: $unit*6;
         padding: 0;
     }
     .mdc-toolbar__section.toolbar-menu,
@@ -1190,7 +1208,7 @@ figure {
             box-sizing: border-box;
             padding: 0;
             .mdc-toolbar__title {
-                padding: $spacing-unit/4 0 0;
+                padding: $unit/4 0 0;
                 margin-left: 0;
             }
             .mdc-textfield {
@@ -1201,10 +1219,10 @@ figure {
                 .mdc-textfield__input:focus,
                 .mdc-textfield__input:hover {
                     color: rgba(255,255,255,.87);
-                    border-width: $spacing-unit/8;
+                    border-width: $unit/8;
                     border-style: solid;
                     border-color: rgba(255,255,255,.75);
-                    padding: 0  $spacing-unit*2 0 $spacing-unit/2;
+                    padding: 0  $unit*2 0 $unit/2;
                     margin: 0;
                     line-height: $nav-height - 3px;
                     height: $nav-height - 3px;
@@ -1226,7 +1244,7 @@ figure {
                 }
             }
             .mdc-toolbar__icon {
-                height: $spacing-unit*2;
+                height: $unit*2;
                 z-index: 100;
             }
             .mdc-toolbar__icon:focus {
@@ -1240,8 +1258,8 @@ figure {
                 .mdc-toolbar__search {
                     background-color: transparent;
                     position: absolute;
-                    right: $spacing-unit/2;
-                    bottom: $spacing-unit*2;
+                    right: $unit/2;
+                    bottom: $unit*2;
                 }
             }
             .mdc-tab-bar {
@@ -1255,7 +1273,7 @@ figure {
                     min-height: $nav-height;
                     height: $nav-height;
                     font-weight: 600;
-                    padding: 0 $spacing-unit*(3/4);
+                    padding: 0 $unit*(3/4);
                     .mdc-tab--label {
                         line-height: $nav-height - 4px;
                         height: $nav-height - 4px;
@@ -1280,8 +1298,8 @@ figure {
                 }
             }
             #upper-tab-bar {
-                // margin-top: $spacing-unit*1.75;
-                margin-right: $spacing-unit;
+                // margin-top: $unit*1.75;
+                margin-right: $unit;
                 .mdc-tab {
                     min-width: auto;
                     font-weight: 600;
@@ -1343,7 +1361,7 @@ figure {
     display: none;
     .mdc-temporary-drawer__header-content {
         direction: ltr;
-        padding: $spacing-unit;
+        padding: $unit;
     }
     .mdc-temporary-drawer__header:before {
         padding-top: 24%;
@@ -1353,7 +1371,7 @@ figure {
         .mdc-list {
             .mdc-list-item {
                 direction: ltr;
-                padding: 0 $spacing-unit;
+                padding: 0 $unit;
             }
             .mdc-list-item__start-detail {
                 display: none;
@@ -1401,20 +1419,20 @@ figure {
 .pagination {
     text-align: center;
     display: block !important;
-    padding-top: $spacing-unit !important;
-    padding-bottom: $spacing-unit*2 !important;
+    padding-top: $unit !important;
+    padding-bottom: $unit*2 !important;
     li {
         padding: 0 !important;
-        height: $spacing-unit*2;
-        width: $spacing-unit*2;
+        height: $unit*2;
+        width: $unit*2;
         border-radius: 50%;
-        margin: 0 $spacing-unit/5;
+        margin: 0 $unit/5;
         vertical-align: bottom;
         a {
             font-size: 1.2rem;
-            line-height: $spacing-unit*2;
-            height: $spacing-unit*2;
-            width: $spacing-unit*2;
+            line-height: $unit*2;
+            height: $unit*2;
+            width: $unit*2;
             color: #000;
             padding: 0;
             margin: 0;
@@ -1459,7 +1477,7 @@ figure {
 .running-your-organisation,
 .setting-up-a-charity {
     .page-content .mdc-layout-grid {
-        margin-top: $spacing-unit;
+        margin-top: $unit;
     }
 }
 .footer-image {
@@ -1474,10 +1492,10 @@ figure {
     url('https://storage.googleapis.com/scvo-cms/wp-content/uploads/2017/10/Drake-Music-06.jpg');
     text-align: center;
     color: white;
-    padding: $spacing-unit 0 $spacing-unit*2.5;
+    padding: $unit 0 $unit*2.5;
     h2 {
         font-weight: 800;
-        padding-bottom: $spacing-unit;
+        padding-bottom: $unit;
     }
 }
 .digital .callout-image {
@@ -1486,16 +1504,16 @@ figure {
     background-repeat: no-repeat;
     background-position: center center;
     color: white;
-    padding: $spacing-unit 0 $spacing-unit*1.5;
-    margin: $spacing-unit 0;
+    padding: $unit 0 $unit*1.5;
+    margin: $unit 0;
     li {
-        margin-top: $spacing-unit/2;
+        margin-top: $unit/2;
     }
     .mdc-card__actions {
         display: none;
     }
     .mdc-card__supporting-text {
-        padding-bottom: $spacing-unit;
+        padding-bottom: $unit;
     }
     a,
     a:hover,
@@ -1508,7 +1526,7 @@ figure {
         color: white;
     }
     .mdc-button {
-        border-width: $spacing-unit/8;
+        border-width: $unit/8;
         border-style: solid;
         background: transparent;
         color: white;
@@ -1535,7 +1553,7 @@ figure {
         margin: 0 auto;
         .mdc-layout-grid {
             width: 44%;
-            margin: $spacing-unit*(2/3) 0 $spacing-unit;
+            margin: $unit*(2/3) 0 $unit;
         }
     }
     img.header-text {
@@ -1550,18 +1568,18 @@ figure {
         font-size: 2.9rem;
         line-height: 3rem;
         letter-spacing: -0.06rem;
-        margin-bottom: $spacing-unit/2;
+        margin-bottom: $unit/2;
         .photo-wee {
             height: 64px;
             width: 64px;
             vertical-align: bottom;
-            margin: -$spacing-unit/5 $spacing-unit 0 0;
+            margin: -$unit/5 $unit 0 0;
             float: left;
         }
         .mdc-typography--caption {
             font-size: 1.2rem;
             letter-spacing: 0.02rem;
-            margin: $spacing-unit/3 0 0;
+            margin: $unit/3 0 0;
             display: block;
         }
     }
@@ -1569,11 +1587,11 @@ figure {
         font-weight: 600;
         color: white;
         font-size: 1.5rem;
-        padding: $spacing-unit 0;
+        padding: $unit 0;
     }
     .mdc-button {
         text-transform: none;
-        border-width: $spacing-unit/8;
+        border-width: $unit/8;
         border-style: solid;
     }
     .header-caption {
@@ -1583,8 +1601,8 @@ figure {
         max-width: 50%;
         color: rgba(255, 255, 255, 0.8);
         background: rgba(0, 0, 0, 0.65);
-        border-radius: $spacing-unit/4 $spacing-unit/4 0 0;
-        padding: $spacing-unit/10 $spacing-unit/3 $spacing-unit/4;
+        border-radius: $unit/4 $unit/4 0 0;
+        padding: $unit/10 $unit/3 $unit/4;
         font-size: 1rem;
         font-weight: 600;
         font-variant-caps: all-small-caps;
@@ -1620,9 +1638,9 @@ figure {
     }
 }
 .credit-union .splash-image .splash-overlay .container-fluid {
-    min-height: $spacing-unit*9;
+    min-height: $unit*9;
     img.header-text {
-        max-height: $spacing-unit*6;
+        max-height: $unit*6;
     }
 }
 body.scottish-charity-awards,
@@ -1656,7 +1674,7 @@ body.the-gathering {
         }
     }
     .swiper-container {
-        margin-top: $spacing-unit;
+        margin-top: $unit;
     }
 }
 body.the-gathering {
@@ -1695,9 +1713,9 @@ body.the-gathering .page-info,
 
 .digital {
     .callout {
-        padding: $spacing-unit 0 $spacing-unit;
+        padding: $unit 0 $unit;
         h2 {
-            margin: $spacing-unit*1.2 0;
+            margin: $unit*1.2 0;
         }
         .mdc-card {
             box-shadow: none;
@@ -1708,7 +1726,7 @@ body.the-gathering .page-info,
         }
     }
     .page-cta {
-        margin-bottom: $spacing-unit/2;
+        margin-bottom: $unit/2;
     }
     .heading h1.mdc-card__title--large {
         font-size: 2.2rem;
@@ -1726,17 +1744,17 @@ body.the-gathering .page-info,
         }
         .gist,
         .digital-blogs {
-            padding-right: $spacing-unit/2;
+            padding-right: $unit/2;
         }
         .digital-events {
-            padding-left: $spacing-unit/2;
+            padding-left: $unit/2;
         }
     }
     .gist.scvo-event {
         margin-bottom: 0;
     }
     .logos {
-        padding-bottom: $spacing-unit*2;
+        padding-bottom: $unit*2;
         .mdc-layout-grid__cell {
             text-align: center;
             display: flex;
@@ -1746,7 +1764,7 @@ body.the-gathering .page-info,
         h3 {
             font-weight: 100;
             font-family: "Open Sans";
-            margin-bottom: $spacing-unit*2;
+            margin-bottom: $unit*2;
             text-align: center;
         }
         img {
@@ -1766,12 +1784,12 @@ body.the-gathering .page-info,
 }
 
 .scvo-event {
-    margin-bottom: $spacing-unit;
+    margin-bottom: $unit;
     h3 {
         margin-top: 0;
     }
     .mdc-layout-grid__inner {
-        margin-bottom: $spacing-unit/2;
+        margin-bottom: $unit/2;
     }
     // .book-now {
     //     .mdc-button {
@@ -1785,12 +1803,12 @@ body.the-gathering .page-info,
 .policy-research.briefings-consultation-responses .mdc-card__supporting-text,
 .policy-research.research .mdc-card__supporting-text,
 .press-media .mdc-card__supporting-text {
-    padding-bottom: $spacing-unit;
+    padding-bottom: $unit;
 }
 .press-media,
 .blogs {
     .search-info {
-        margin-top: $spacing-unit/2;
+        margin-top: $unit/2;
     }
 }
 
@@ -1808,7 +1826,7 @@ body.the-gathering .page-info,
     outline: none;
 }
 .mdc-button.mdc-button--raised.pull-right {
-    margin-top: $spacing-unit/2;
+    margin-top: $unit/2;
 }
 
 .mdc-card__subtitle .post-info-item {
@@ -1819,12 +1837,12 @@ body.the-gathering .page-info,
     letter-spacing: normal;
     line-height: 1.7rem;
     margin: 0;
-    padding: 0 0 $spacing-unit/2;
+    padding: 0 0 $unit/2;
     font-weight: 600 !important;
 }
 h1.mdc-typography--title {
     font-size: 2rem;
-    margin-bottom: $spacing-unit*1.5;
+    margin-bottom: $unit*1.5;
 }
 .mdc-card__primary .mdc-card__title--large {
     padding-top: 0;
@@ -1835,28 +1853,28 @@ h1.mdc-typography--title {
     }
     .page-content {
         .mdc-layout-grid {
-            margin: $spacing-unit 0;
+            margin: $unit 0;
         }
     }
 }
 .support.funding .mdc-card {
-    margin: $spacing-unit 0;
+    margin: $unit 0;
 }
 .services .support .mdc-card__primary {
-    height: $spacing-unit*2;
+    height: $unit*2;
 }
 h1.support-sector {
-    margin-top: $spacing-unit*3;
+    margin-top: $unit*3;
 }
 table.membership-fees {
     border-collapse: collapse;
-    margin-bottom: $spacing-unit;
+    margin-bottom: $unit;
     min-width: 40%;
     tr {
         th,
         td {
             border: 1px solid #ccc;
-            padding: $spacing-unit/4 $spacing-unit/2;
+            padding: $unit/4 $unit/2;
         }
     }
 }
@@ -1888,7 +1906,7 @@ table.membership-fees {
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center center;
-        margin-bottom: $spacing-unit;
+        margin-bottom: $unit;
     }
     .cjs-employers .mdc-card__media {
         background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/.jpg');
@@ -1954,16 +1972,16 @@ table.membership-fees {
     }
 }
 .grid-info.cjs-footer {
-    margin: $spacing-unit*2 0 0;
+    margin: $unit*2 0 0;
 }
 .support {
     .mdc-card__media {
-        height: $spacing-unit*4;
-        padding: $spacing-unit/2 $spacing-unit;
+        height: $unit*4;
+        padding: $unit/2 $unit;
         background-size: contain;
         background-repeat: no-repeat;
         background-origin: content-box;
-        margin-bottom: $spacing-unit;
+        margin-bottom: $unit;
         .hidden {
             display: none;
         }
@@ -1978,8 +1996,8 @@ table.membership-fees {
         background-color: #ccc !important;
     }
     .mdc-card__primary {
-        margin-bottom: $spacing-unit;
-        padding: $spacing-unit;
+        margin-bottom: $unit;
+        padding: $unit;
         .mdc-card__title {
             padding-bottom: 0;
             color: white;
@@ -2043,7 +2061,7 @@ table.membership-fees {
     }
 }
 .mdc-card__actions {
-    padding: $spacing-unit/2 $spacing-unit $spacing-unit;
+    padding: $unit/2 $unit $unit;
     .mdc-card__action {
         font-weight: 800;
     }
@@ -2051,10 +2069,10 @@ table.membership-fees {
         width: 100%;
         list-style-type: none;
         margin: 0;
-        padding: 0 $spacing-unit/2 $spacing-unit/2;
+        padding: 0 $unit/2 $unit/2;
         li .mdc-card__action {
             width: 100%;
-            margin-bottom: $spacing-unit/2;
+            margin-bottom: $unit/2;
             display: block;
         }
         li:last-child .mdc-card__action {
@@ -2065,7 +2083,7 @@ table.membership-fees {
 .supplimentary-list .list,
 .supplimentary-list .gist {
     .mdc-card__actions {
-        padding-bottom: $spacing-unit/2 !important;
+        padding-bottom: $unit/2 !important;
     }
 }
 .post-info-categories {
@@ -2081,11 +2099,11 @@ table.membership-fees {
 .photo-full {
     border-radius: 2px;
     box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
-    margin: 0 auto $spacing-unit;
+    margin: 0 auto $unit;
     display: block;
 }
 .mdc-card__primary {
-    padding: $spacing-unit;
+    padding: $unit;
     // .mdc-card__title {
     //     padding-bottom: 0;
     // }
@@ -2094,23 +2112,23 @@ table.membership-fees {
     padding-bottom: 1rem;
 }
 .mdc-card-search {
-    margin: 0 0 $spacing-unit;
+    margin: 0 0 $unit;
     .mdc-card__primary {
-        padding-top: $spacing-unit/2;
-        padding-bottom: $spacing-unit;
+        padding-top: $unit/2;
+        padding-bottom: $unit;
     }
 }
 .mdc-card__supporting-text {
-    padding: 0 $spacing-unit $spacing-unit/2;
+    padding: 0 $unit $unit/2;
     h4 {
         margin-top: 0;
     }
 }
 .mdc-card__supporting-text:last-child {
-    padding-bottom: $spacing-unit;
+    padding-bottom: $unit;
 }
 .scvo-cms-post .mdc-card__actions {
-    // padding: $spacing-unit/2 $spacing-unit;
+    // padding: $unit/2 $unit;
     .post-info {
         padding: 0;
     }
@@ -2119,29 +2137,27 @@ table.membership-fees {
 .search-page {
     margin: 0 auto;
     .mdc-layout-grid {
-        margin: $spacing-unit auto;
+        margin: $unit auto;
     }
     h3 {
         margin-top: 0;
     }
     form h3 {
-        margin-top: $spacing-unit;
+        margin-top: $unit;
     }
 }
 
 .search-info {
-    margin-bottom: 1rem;
+    margin-bottom: $unit;
     border: 0.125rem solid #ddd;
     background: #f8f8f8;
     color: #555;
-    padding: 0 0.5rem;
-    height: 2.5rem;
-    line-height: 2.33rem;
+    padding: $unit/3 $unit/2;
     box-sizing: border-box;
 }
 
 .search-result {
-    margin-bottom: $spacing-unit;
+    margin-bottom: $unit;
 }
 
 .mdc-layout-grid {
@@ -2200,7 +2216,7 @@ table.membership-fees {
     }
     dd {
         width: 80%;
-        margin: 0 0 $spacing-unit/2;
+        margin: 0 0 $unit/2;
         ul {
             margin: 0 0 0 1.4rem;
         }
@@ -2212,7 +2228,7 @@ table.membership-fees {
         font-size: 1.15rem;
     }
     dd {
-        margin: 0 0 $spacing-unit;
+        margin: 0 0 $unit;
         .mdc-layout-grid__cell strong {
             font-size: 1.15rem;
         }
@@ -2237,13 +2253,13 @@ table.membership-fees {
         padding-left: 0;
         li {
             list-style: none;
-            padding-left: $spacing-unit*1.4;
+            padding-left: $unit*1.4;
         }
         li:before {
             color: black;
             content: "\25CF";
             font-size: 1rem;
-            margin-left: -$spacing-unit*1.4;
+            margin-left: -$unit*1.4;
             padding-right: 0.95rem;
             position: relative;
             top: 0em;
@@ -2261,9 +2277,9 @@ table.membership-fees {
     }
     .mdc-button {
         // background: white;
-        border-width: $spacing-unit/8;
+        border-width: $unit/8;
         border-style: solid;
-        // margin-top: $spacing-unit;
+        // margin-top: $unit;
         text-transform: none;
         // background: transparent;
     }
@@ -2289,21 +2305,21 @@ table.membership-fees {
 }
 
 .menu-sidebar {
-    margin-top: $spacing-unit;
-    margin-bottom: $spacing-unit*2;
+    margin-top: $unit;
+    margin-bottom: $unit*2;
     box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
     -webkit-box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
     .mdc-button {
-        padding: 0 $spacing-unit;
+        padding: 0 $unit;
     }
     .menu-level-2 {
-        padding-left: $spacing-unit*1.5;
+        padding-left: $unit*1.5;
     }
     .menu-level-3 {
-        padding-left: $spacing-unit*2;
+        padding-left: $unit*2;
     }
     .menu-level-4 {
-        padding-left: $spacing-unit*2.5;
+        padding-left: $unit*2.5;
     }
     .mdc-button {
         border: none;
@@ -2328,7 +2344,7 @@ table.membership-fees {
 
 .mdc-simple-menu {
     .fa-fw {
-        margin-right: $spacing-unit/2;
+        margin-right: $unit/2;
     }
     .mdc-list-item {
         font-weight: 600;
@@ -2345,7 +2361,7 @@ table.membership-fees {
 }
 
 hr {
-    margin: $spacing-unit 0;
+    margin: $unit 0;
     height: 1px;
     background-color: white;
     border: none;
@@ -2353,8 +2369,8 @@ hr {
 }
 
 ul.breadcrumbs {
-    margin: 0 0 $spacing-unit/2;
-    padding: $spacing-unit/2 0 $spacing-unit;
+    margin: 0 0 $unit/2;
+    padding: $unit/2 0 $unit;
     // height: $nav-height;
     // line-height: $nav-height;
     list-style: none;
@@ -2373,7 +2389,7 @@ ul.breadcrumbs {
         font-weight: 800;
         width: auto;
         padding: 0;
-        margin: 0 $spacing-unit/2;
+        margin: 0 $unit/2;
         display: inline-block;
         color: rgba(0,0,0,.6) !important;
     }
@@ -2389,11 +2405,11 @@ ul.breadcrumbs {
         margin: 0;
     }
     // li:not(:last-child) {
-    //     margin-right: $spacing-unit/4;
+    //     margin-right: $unit/4;
     // }
 }
 .spacer {
-    margin: 0 0 $spacing-unit*1.5;
+    margin: 0 0 $unit*1.5;
 }
 .bank-accounts.comparison {
     .mdc-layout-grid__cell--span-3-desktop {
@@ -2406,21 +2422,21 @@ ul.breadcrumbs {
 }
 
 .scvo-staff.list {
-    margin-bottom: $spacing-unit/2;
+    margin-bottom: $unit/2;
 }
 .post-info .post-info-author img,
 .about.staff-team .staff-list .scvo-staff-photo-wee {
     width: 1.6rem !important;
     height: 1.6rem !important;
     border-radius: 50%;
-    margin-right: $spacing-unit/2;
+    margin-right: $unit/2;
     vertical-align: text-bottom;
     float: left;
     margin-top: -0.15rem;
 }
 .about.staff-team {
     .read-more {
-        margin-top: $spacing-unit;
+        margin-top: $unit;
     }
     .scvo-staff-photo-full {
         margin: 0;
@@ -2437,8 +2453,8 @@ ul.breadcrumbs {
     color: #333;
     .post-info-item {
         display: inline-block;
-        margin-right: $spacing-unit/2;
-        margin-bottom: $spacing-unit/2;
+        margin-right: $unit/2;
+        margin-bottom: $unit/2;
     }
     .post-info-item.post-info-categories {
         margin-bottom: 0;
@@ -2473,7 +2489,7 @@ ul.breadcrumbs {
                 padding: 0 !important;
                 a {
                     padding: 0.05rem 0.4rem 0.1rem;
-                    border-radius: $spacing-unit;
+                    border-radius: $unit;
                     color: #fff;
                 }
                 a:hover {
@@ -2484,7 +2500,7 @@ ul.breadcrumbs {
     }
 }
 .scvo-cms-post .mdc-card__primary {
-    padding-bottom: $spacing-unit/2;
+    padding-bottom: $unit/2;
 }
 
 blockquote {
@@ -2515,11 +2531,11 @@ ul.supplimentary-list {
         }
         .post-info {
             display: block;
-            // margin-bottom: $spacing-unit/2;
+            // margin-bottom: $unit/2;
         }
     }
     li.supplimentary-list-item:not(:last-child){
-        margin-bottom: $spacing-unit;
+        margin-bottom: $unit;
     }
 }
 .mdc-card__primary+.mdc-card__supporting-text {
@@ -2532,8 +2548,8 @@ ul.supplimentary-list {
 }
 .sidebar .author-about,
 .content .supplimentary-list {
-    margin-top: $spacing-unit/2;
-    margin-bottom: $spacing-unit;
+    margin-top: $unit/2;
+    margin-bottom: $unit;
 }
 .digital.events .full {
     .scvo-event-digital-brand-charter {
@@ -2548,7 +2564,7 @@ h1,
 h2,
 h3,
 h4 {
-    margin-bottom: $spacing-unit/2;
+    margin-bottom: $unit/2;
     font-family: "Montserrat", "Open Sans", Helvetica, Arial, sans-serif;
     font-weight: 700;
     strong {
@@ -2556,7 +2572,7 @@ h4 {
     }
 }
 p {
-    margin: 0 0 $spacing-unit;
+    margin: 0 0 $unit;
 }
 p:last-child {
     margin-bottom: 0;
@@ -2569,7 +2585,7 @@ p:last-child {
     }
 }
 .full {
-    margin: $spacing-unit 0;
+    margin: $unit 0;
     h1:first-child,
     h2:first-child,
     h3:first-child,
@@ -2577,30 +2593,30 @@ p:last-child {
         margin-top: 0 !important;
     }
     .post-info {
-        margin: $spacing-unit/2 0 $spacing-unit*1.5;
+        margin: $unit/2 0 $unit*1.5;
         border-bottom: 1px solid rgba(0,0,0,.2);
-        padding: 0 $spacing-unit*5 $spacing-unit/2 0;
+        padding: 0 $unit*5 $unit/2 0;
         // .post-info-categories {
         //     margin-right: 0 !important;
         // }
         .post-info-share {
-            margin-right: -$spacing-unit*5;
+            margin-right: -$unit*5;
         }
     }
     .page-info {
         font-size: 0.9rem;
         color: #777;
         .page-info-updated {
-            margin: $spacing-unit*1.5 0 $spacing-unit/2;
+            margin: $unit*1.5 0 $unit/2;
             border-top: 1px solid rgba(0,0,0,.2);
-            padding: $spacing-unit 0 0;
+            padding: $unit 0 0;
             font-size: 95%;
         }
     }
 }
 .static-sidebar,
 .post-content .full {
-    margin-top: $spacing-unit/2;
+    margin-top: $unit/2;
     word-wrap: break-word;
 }
 .page.press .post-sidebar .full {
@@ -2608,7 +2624,7 @@ p:last-child {
 }
 .sidebar {
     .blogs {
-        margin-top: $spacing-unit;
+        margin-top: $unit;
     }
     h1:first-child,
     h2:first-child,
@@ -2620,19 +2636,19 @@ p:last-child {
 
 .post {
     h1.post-title {
-        margin: $spacing-unit/2 0 $spacing-unit;
+        margin: $unit/2 0 $unit;
     }
 }
 .page-sidebar h3:first-child ,
 .post-sidebar h3:first-child {
-    margin: $spacing-unit 0 $spacing-unit/4 !important;
+    margin: $unit 0 $unit/4 !important;
 }
 .post-sidebar {
-    margin-top: $spacing-unit/2;
+    margin-top: $unit/2;
 }
 
 .page-content {
-    padding-bottom: $spacing-unit*1.5;
+    padding-bottom: $unit*1.5;
 }
 
 .page-content,
@@ -2711,19 +2727,19 @@ p:last-child {
 }
 
 .v-margin {
-    margin-top: $spacing-unit/2;
-    margin-bottom: $spacing-unit/2;
+    margin-top: $unit/2;
+    margin-bottom: $unit/2;
 }
 
 .h-margin {
-    margin-left: $spacing-unit/2;
-    margin-bottom: $spacing-unit/2;
+    margin-left: $unit/2;
+    margin-bottom: $unit/2;
 }
 
-.t-margin { margin-top: $spacing-unit/2; }
-.b-margin { margin-bottom: $spacing-unit/2; }
-.l-margin { margin-left: $spacing-unit/2; }
-.r-margin { margin-right: $spacing-unit/2; }
+.t-margin { margin-top: $unit/2; }
+.b-margin { margin-bottom: $unit/2; }
+.l-margin { margin-left: $unit/2; }
+.r-margin { margin-right: $unit/2; }
 
 p.results-highlights em {
     font-weight: bolder;
@@ -2734,7 +2750,7 @@ p.results-highlights em {
     display: flex;
     padding: 0 0 0;
     margin-top: 8px;
-    margin-bottom: $spacing-unit/2;
+    margin-bottom: $unit/2;
 
     li {
         min-width: 15%;
@@ -2750,12 +2766,12 @@ p.results-highlights em {
 footer {
     .footer-main {
         padding: 0;
-        margin-bottom: $spacing-unit;
+        margin-bottom: $unit;
     }
     h3 {
-        padding-bottom: $spacing-unit/2;
+        padding-bottom: $unit/2;
         border-bottom-style: solid;
-        border-bottom-width: $spacing-unit/5;
+        border-bottom-width: $unit/5;
     }
     .about a,
     a {
@@ -2797,7 +2813,7 @@ footer {
         }
     }
     .contact .fa-ul {
-        margin-bottom: $spacing-unit !important;
+        margin-bottom: $unit !important;
     }
     .mdc-layout-grid p {
         margin-bottom: 0;
@@ -2827,7 +2843,7 @@ footer {
         }
         .splash-image p.header-extra {
             font-size: 1.4rem;
-            padding-bottom: $spacing-unit/2;
+            padding-bottom: $unit/2;
         }
     }
 }
@@ -2843,7 +2859,7 @@ footer {
                 }
                 p.header-extra {
                     font-size: 1.3rem;
-                    padding: $spacing-unit/2 0;
+                    padding: $unit/2 0;
                 }
             }
         }
@@ -2855,7 +2871,7 @@ footer {
         padding-top: 130px;
     }
     .mdc-toolbar .mdc-toolbar__row .container-fluid .mdc-tab-bar .mdc-tab {
-        padding: 0 $spacing-unit/2;
+        padding: 0 $unit/2;
     }
     .home .latest-content .gist img.photo-wee,
     .gist .thumbnail img {
@@ -2881,7 +2897,7 @@ footer {
                 display: block;
             }
             .search_form {
-                margin-right: $spacing-unit;
+                margin-right: $unit;
                 .mdc-toolbar__search {
                     bottom: 0;
                 }
@@ -2938,7 +2954,7 @@ footer {
     .brand-logo {
         margin-left: 0;
         img {
-            max-height: $spacing-unit*2.5;
+            max-height: $unit*2.5;
         }
     }
     .mdc-toolbar-fixed-adjust {
@@ -2959,7 +2975,7 @@ footer {
     }
     .home .splash-image.hello .container-fluid .mdc-layout-grid p.header-extra {
         font-size: 1.2rem;
-        margin-bottom: $spacing-unit/2;
+        margin-bottom: $unit/2;
     }
     .breadcrumbs {
         font-size: 85%;
@@ -2979,7 +2995,7 @@ footer {
     }
     .home .search {
         h3 {
-            margin: $spacing-unit 0;
+            margin: $unit 0;
         }
         .home_search_form {
             margin-right: 0;
@@ -3028,7 +3044,7 @@ footer {
     }
     footer {
         .footer-main {
-            margin: $spacing-unit 0;
+            margin: $unit 0;
             h3 {
                 margin-top: 0;
             }
@@ -3059,7 +3075,7 @@ footer {
         }
         .mdc-layout-grid {
             width: 100%;
-            margin: $spacing-unit*(2/3) 0;
+            margin: $unit*(2/3) 0;
             h1.header-text {
                 font-size: 3rem;
                 line-height: 3.3rem;
