@@ -61,6 +61,9 @@ module.exports = function(grunt) {
                   cwd: './functions'
                 },
                 cmd: 'node json2 ./test-db/json2/**/*.json2 ./test-db/json; node json2 ./test-db/db.json2 ./test-db'
+            },
+            upgradeRouter: {
+                cmd: 'yarn add scvo-router; cd functions; yarn add scvo-router; cd ..'
             }
         }
     });
@@ -76,4 +79,5 @@ module.exports = function(grunt) {
     grunt.registerTask('deploy-db', ['default', 'bgShell:deployDb']);
     grunt.registerTask('deploy-hosting', ['default', 'bgShell:deployHostring']);
     grunt.registerTask('deploy-functions', ['default', 'bgShell:deployFunctions']);
+    grunt.registerTask('upgrade-router', ['bgShell:upgradeRouter']);
 };
