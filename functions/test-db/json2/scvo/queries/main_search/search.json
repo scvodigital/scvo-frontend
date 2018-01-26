@@ -22,31 +22,32 @@
                             }
                         },
                         {{#if query.type}}
-                        {
-                            "bool": {
-                                "should": [
-                                    {{#compare (getType query.type) "string"}}
+                            {
+                                "bool": {
+                                    "should": [
+                                        {{#compare (getType query.type) "string"}}
+                                            {
+                                                "term": {
+                                                    "_type": "{{query.type}}"
+                                                }
+                                            },
+                                        {{/compare}}
+                                        {{#compare (getType query.type) "array"}}
+                                            {{#each query.type}}
+                                            {
+                                                "term": {
+                                                    "_type": "{{this}}"
+                                                }
+                                            },
+                                            {{/each}}
+                                        {{/compare}}
                                         {
-                                            "term": {
-                                                "_type": "{{query.type}}"
-                                            }
-                                        },
-                                    {{/compare}}
-                                    {{#compare (getType query.type) "array"}}
-                                        {{#each query.type}}
-                                        {
-                                            "term": {
-                                                "_type": "{{this}}"
-                                            }
-                                        },
-                                        {{/each}}
-                                    {{/compare}}
-                                    {
-                                        "match_none": {}
-                                    }
-                                ]
+                                            "match_none": {}
+                                        }
+                                    ]
+                                }
                             }
-                        }{{#if query.q}},{{/if}}
+                            {{#if query.q}},{{/if}}
                         {{/if}}
 	        			{
 		        			"bool": {

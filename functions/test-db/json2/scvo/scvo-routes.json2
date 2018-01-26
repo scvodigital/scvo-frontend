@@ -683,6 +683,41 @@
     "post_category": {
         "pattern": "/post/categories/:category_slug",
         "layouts": {
+            "rss": {
+                "head": "",
+                "body": `{:templates/posts/post-category-rss.hbs}`
+            },
+            "default": {
+                "head": `{:templates/posts/post-category-head-tags.hbs}`,
+                "body": `{:templates/posts/post-category.hbs}`,
+                "foot": ""
+            }
+        },
+        "primarySearchTemplate": {
+            "index": "web-content-production",
+            "type": "scvo-cms-post",
+            "template": `{:queries/posts/post-category.json}`
+        },
+        "supplimentarySearchTemplates": {
+            "not_found": {
+                "index": "web-content-production",
+                "type": "scvo-cms-page,scvo-cms-post",
+                "template": `{:queries/pages/not-found.json}`
+            },
+            "splash": {
+                "index": "web-content-production",
+                "type": "scvo-cms-media",
+                "template": `{:queries/pages/splash.json}`
+            }
+        },
+        "elasticsearchConfig": {
+            "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
+            "apiVersion": "5.6"
+        }
+    },
+    "post_digital": {
+        "pattern": "/digital/blogs",
+        "layouts": {
             "default": {
                 "head": `{:templates/pages/page-head-tags.hbs}`,
                 "body": `{:templates/posts/post-category.hbs}`,
@@ -803,10 +838,70 @@
             "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
             "apiVersion": "5.6"
         }
-    },
+    },  
     "post": {
         "pattern": "/post/*path",
         "layouts": {
+            "amp": {
+                "head": `{:templates/pages/page-head-tags.hbs}`,
+                "body": `{:templates/posts/post-amp.hbs}`
+            },
+            "default": {
+                "head": `{:templates/posts/post-head-tags.hbs}`,
+                "body": `{:templates/posts/post.hbs}`,
+                "foot": ""
+            }
+        },
+        "primarySearchTemplate": {
+            "index": "web-content-production",
+            "type": "scvo-cms-post",
+            "template": `{:queries/posts/post.json}`
+        },
+        "supplimentarySearchTemplates": {
+            "not_found": {
+                "index": "web-content-production",
+                "type": "scvo-cms-page,scvo-cms-post",
+                "template": `{:queries/pages/not-found.json}`
+            },
+            "author_profile": {
+                "index": "web-content-production",
+                "type": "scvo-cms-author",
+                "template": `{:queries/posts/post-author-profile.json}`
+            },
+            "staff_profile": {
+                "index": "web-content-production",
+                "type": "scvo-staff",
+                "template": `{:queries/posts/post-staff-profile.json}`
+            },
+            "authors_posts": {
+                "index": "web-content-production",
+                "type": "scvo-cms-post",
+                "template": `{:queries/posts/post-author-posts.json}`
+            },
+            "category_posts": {
+                "index": "web-content-production",
+                "type": "scvo-cms-post",
+                "template": `{:queries/posts/post-category-posts.json}`
+            },
+            "tfn_related_posts": {
+                "index": "web-content-production",
+                "type": "tfn-news-post,tfn-blog-post,tfn-feature",
+                "template": `{:queries/posts/tfn-related.json}`
+            },
+            "splash": {
+                "index": "web-content-production",
+                "type": "scvo-cms-media",
+                "template": `{:queries/pages/splash.json}`
+            }
+        },
+        "elasticsearchConfig": {
+            "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
+            "apiVersion": "5.6"
+        }
+    },
+    "event_digital_booking": {
+        "pattern": "/digital/events/:event_slug/book",
+         "layouts": {
             "default": {
                 "head": `{:templates/pages/page-head-tags.hbs}`,
                 "body": `{:templates/events/event-digital-booking.hbs}`,
