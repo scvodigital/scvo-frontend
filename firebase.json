@@ -187,11 +187,6 @@
                 "type" : 301
             },
             {
-                "source" : "/scottish-charity-awards",
-                "destination" : "https://goodhq.org/scottish_charity_awards_2017/",
-                "type" : 301
-            },
-            {
                 "source" : "/charity-awards",
                 "destination" : "https://goodhq.org/scottish_charity_awards_2017/",
                 "type" : 301
@@ -282,6 +277,26 @@
             "firebase.json",
             "**/.*",
             "**/node_modules/**"
+        ],
+        "headers": [
+            {
+                "source" : "**/*.@(eot|otf|ttf|ttc|woff|font.css)",
+                "headers" : [
+                    {
+                        "key" : "Access-Control-Allow-Origin",
+                        "value" : "*"
+                    }
+                ]
+            },
+            {
+                "source" : "**",
+                "headers" : [
+                    {
+                        "key" : "Cache-Control",
+                        "value" : "max-age=86400"
+                    }
+                ]
+            }
         ]
     },
     "storage": {

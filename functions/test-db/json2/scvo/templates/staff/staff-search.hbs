@@ -26,10 +26,10 @@
         <div class="mdc-layout-grid">
             <div class="mdc-layout-grid__inner">
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-9-desktop mdc-layout-grid__cell--span-5-tablet mdc-layout-grid__cell--span-4-phone content page-content">
-                    <form [searchroute]="'staff_search'" data-auto-search="true">
+                    <form action="/about/staff-team" method="GET" [searchroute]="'staff_search'" data-auto-search="true">
                         <h3>Filter</h3>
                         <div class="mdc-form-field">
-                            <select class="mdc-select" role="listbox" id="department" name="department">
+                            <select class="mdc-select" role="listbox" id="department" name="department" onchange="this.form.submit();">
                                 <option value="" {{#if params.query.department}}{{else}}selected{{/if}}>All departments</option>
                                 {{#each supplimentaryResponses.departments.aggregations.departments.buckets}}
                                 <option value="{{slugify key}}" {{#compare ../params.query.department "===" (slugify key)}}selected{{/compare}}>{{key}} ({{doc_count}})</option>
@@ -37,7 +37,7 @@
                             </select>
                         </div>
                         <div class="mdc-form-field">
-                            <select class="mdc-select" role="listbox" id="city" name="city">
+                            <select class="mdc-select" role="listbox" id="city" name="city" onchange="this.form.submit();">
                                 <option value="" {{#if params.query.city}}{{else}}selected{{/if}}>All cities</option>
                                 {{#each supplimentaryResponses.departments.aggregations.cities.buckets}}
                                 <option value="{{slugify key}}" {{#compare ../params.query.city "===" (slugify key)}}selected{{/compare}}>{{key}} ({{doc_count}})</option>

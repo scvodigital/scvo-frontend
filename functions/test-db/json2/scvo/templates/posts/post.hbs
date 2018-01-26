@@ -11,7 +11,7 @@
                     {{/with}}
                 </div>
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-3-tablet mdc-layout-grid__cell--span-4-phone sidebar post-sidebar">
-                    {{> wee_search title="Search posts" searchRoute="main_search" extraParams='{ "type": "scvo-cms-post" }'}}
+                    {{> wee_search title="Search posts" searchPath="/search" searchRoute="main_search" extraParams='{ "type": "scvo-cms-post" }'}}
                     {{#if primaryResponse.hits.hits.[0]._source.is_press_release}}
                     <ul class="supplimentary-list">
                         {{#each supplimentaryResponses.category_posts.hits.hits}}
@@ -69,3 +69,4 @@
         {{/handle_404}}
     </div>
 </div>
+<script src="/assets/js/scvo/post.js"></script>

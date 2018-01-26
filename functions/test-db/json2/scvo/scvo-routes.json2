@@ -1,10 +1,13 @@
 {
     "index": {
         "pattern": "/",
-        "templates": {
-            "default": `{:templates/pages/home.hbs}`
+        "layouts": {
+            "default": {
+                "head": `{:templates/pages/page-head-tags.hbs}`,
+                "body": `{:templates/pages/home.hbs}`,
+                "foot": ""
+            }
         },
-        "headTagsTemplate": `{:templates/pages/page-head-tags.hbs}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
             "type": "scvo-cms-page",
@@ -49,15 +52,18 @@
     },
     "main_search": {
         "pattern": "/search",
-        "templates": {
-            "default": `{:templates/main_search/search.hbs}`
+        "layouts": {
+            "default": {
+                "head": `{:templates/main_search/search-head-tags.hbs}`,
+                "body": `{:templates/main_search/search.hbs}`,
+                "foot": ""
+            }
         },
         "defaultParams": {
             "q": "",
             "type": ["scvo-cms-post", "scvo-cms-page"],
             "pageSize": 40
         },
-        "headTagsTemplate": `{:templates/main_search/search-head-tags.hbs}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
             "type": "scvo-cms-page,scvo-cms-post,scvo-staff,scvo-member,digital-charter-signatory,goodmoves-job,funding-scotland-fund,goodhq-organisation,goodhq-post,scvo-document-evidence,scvo-event,scvo-event-training,scvo-event-digital,scvo-event-policy,scvo-grant-charter,oscr-charity,tfn-news-post,tfn-blog-post,tfn-poll,tfn-event,tfn-list,tfn-feature",
@@ -74,15 +80,17 @@
             "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
             "apiVersion": "5.6",
             "log": "debug"
-        },
-        "multipleResults": true
+        }
     },
     "grant_charter_search": {
         "pattern": "/digital/participation/charter-fund/projects",
-        "templates": {
-            "default": `{:templates/grants/grant-charter-search.hbs}`
+        "layouts": {
+            "default": {
+                "head": `{:templates/grants/grant-charter-search-head-tags.hbs}`,
+                "body": `{:templates/grants/grant-charter-search.hbs}`,
+                "foot": ""
+            }
         },
-        "headTagsTemplate": `{:templates/grants/grant-charter-search-head-tags.hbs}`,
         "defaultParams": {
             "pageSize": 12
         },
@@ -115,10 +123,13 @@
     },
     "grant_charter": {
         "pattern": "/digital/participation/charter-fund/projects/:project_slug",
-        "templates": {
-            "default": `{:templates/grants/grant-charter.hbs}`
+        "layouts": {
+            "default": {
+                "head": `{:templates/pages/page-head-tags.hbs}`,
+                "body": `{:templates/grants/grant-charter.hbs}`,
+                "foot": ""
+            }
         },
-        "headTagsTemplate": `{:templates/pages/page-head-tags.hbs}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
             "type": "scvo-grant-charter",
@@ -148,10 +159,13 @@
     },
     "grant_cyber_search": {
         "pattern": "/digital/evolution/cyber-resilience/projects",
-        "templates": {
-            "default": `{:templates/grants/grant-cyber-search.hbs}`
+        "layouts": {
+            "default": {
+                "head": `{:templates/pages/page-head-tags.hbs}`,
+                "body": `{:templates/grants/grant-cyber-search.hbs}`,
+                "foot": ""
+            }
         },
-        "headTagsTemplate": `{:templates/pages/page-head-tags.hbs}`,
         "defaultParams": {
             "pageSize": 12
         },
@@ -189,10 +203,13 @@
     },
     "grant_cyber": {
         "pattern": "/digital/evolution/cyber-resilience/projects/:project_slug",
-        "templates": {
-            "default": `{:templates/grants/grant-cyber.hbs}`
+        "layouts": {
+            "default": {
+                "head": `{:templates/pages/page-head-tags.hbs}`,
+                "body": `{:templates/grants/grant-cyber.hbs}`,
+                "foot": ""
+            }
         },
-        "headTagsTemplate": `{:templates/pages/page-head-tags.hbs}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
             "type": "scvo-grant-cyber",
@@ -222,10 +239,13 @@
     },
     "trustee_search": {
         "pattern": "/projects-campaigns/terrific-trustees/search",
-        "templates": {
-            "default": `{:templates/trustees/trustee-search.hbs}`
+        "layouts": {
+            "default": {
+                "head": `{:templates/pages/page-head-tags.hbs}`,
+                "body": `{:templates/trustees/trustee-search.hbs}`,
+                "foot": ""
+            }
         },
-        "headTagsTemplate": `{:templates/pages/page-head-tags.hbs}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
             "type": "goodmoves-job,milo-volunteering-opportunity",
@@ -260,10 +280,13 @@
     },
     "trustee": {
         "pattern": "/projects-campaigns/terrific-trustees/search/:slug",
-        "templates": {
-            "default": `{:templates/trustees/trustee.hbs}`
+        "layouts": {
+            "default": {
+                "head": `{:templates/pages/page-head-tags.hbs}`,
+                "body": `{:templates/trustees/trustee.hbs}`,
+                "foot": ""
+            }
         },
-        "headTagsTemplate": `{:templates/pages/page-head-tags.hbs}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
             "type": "goodmoves-job,milo-volunteering-opportunity",
@@ -293,11 +316,13 @@
     },
     "funding_updates_link_gen": {
         "pattern": "/funding-updates-link-gen/",
-        "templates": {
-            "default": `{:templates/funding/funding-updates-link-gen.hbs}`
+        "layouts": {
+            "default": {
+                "head": `{:templates/funding/funding-updates-head-tags.hbs}`,
+                "body": `{:templates/funding/funding-updates-link-gen.hbs}`,
+                "foot": ""
+            }
         },
-        "javascript": `{:javascript/funding-updates-link-gen.js}`,
-        "headTagsTemplate": `{:templates/funding/funding-updates-head-tags.hbs}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
             "type": "funding-scotland-fund",
@@ -322,10 +347,13 @@
     },
     "funding_updates": {
         "pattern": "/funding-updates/:range",
-        "templates": {
-            "default": `{:templates/funding/funding-updates.hbs}`
+        "layouts": {
+            "default": {
+                "head": `{:templates/funding/funding-updates-head-tags.hbs}`,
+                "body": `{:templates/funding/funding-updates.hbs}`,
+                "foot": ""
+            }
         },
-        "headTagsTemplate": `{:templates/funding/funding-updates-head-tags.hbs}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
             "type": "funding-scotland-fund",
@@ -350,13 +378,16 @@
     },
     "job_search": {
         "pattern": "/jobs/search",
-        "templates": {
-            "default": `{:templates/jobs/goodmoves-job-search.hbs}`
+        "layouts": {
+            "default": {
+                "head": `{:templates/jobs/goodmoves-job-search-head-tags.hbs}`,
+                "body": `{:templates/jobs/goodmoves-job-search.hbs}`,
+                "foot": ""
+            }
         },
         "defaultParams": {
             "pageSize": 10
         },
-        "headTagsTemplate": `{:templates/jobs/goodmoves-job-search-head-tags.hbs}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
             "type": "goodmoves-job",
@@ -386,10 +417,13 @@
     },
     "event_search": {
         "pattern": "/events",
-        "templates": {
-            "default": `{:templates/events/event-search.hbs}`
+        "layouts": {
+            "default": {
+                "head": `{:templates/events/event-search-head-tags.hbs}`,
+                "body": `{:templates/events/event-search.hbs}`,
+                "foot": ""
+            }
         },
-        "headTagsTemplate": `{:templates/events/event-search-head-tags.hbs}`,
         "defaultParams": {
             "pageSize": 12
         },
@@ -422,10 +456,13 @@
     },
     "event_booking": {
         "pattern": "/events/:event_slug/book",
-        "templates": {
-            "default": `{:templates/events/event-booking.hbs}`
+        "layouts": {
+            "default": {
+                "head": `{:templates/pages/page-head-tags.hbs}`,
+                "body": `{:templates/events/event-booking.hbs}`,
+                "foot": ""
+            }
         },
-        "headTagsTemplate": `{:templates/pages/page-head-tags.hbs}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
             "type": "scvo-event,scvo-event-training,scvo-event-digital,scvo-event-policy",
@@ -455,10 +492,13 @@
     },
     "event": {
         "pattern": "/events/:event_slug",
-        "templates": {
-            "default": `{:templates/events/event.hbs}`
+        "layouts": {
+            "default": {
+                "head": `{:templates/pages/page-head-tags.hbs}`,
+                "body": `{:templates/events/event.hbs}`,
+                "foot": ""
+            }
         },
-        "headTagsTemplate": `{:templates/pages/page-head-tags.hbs}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
             "type": "scvo-event,scvo-event-training",
@@ -493,10 +533,13 @@
     },
     "evidence_library_document_search": {
         "pattern": "/policy-research/evidence-library",
-        "templates": {
-            "default": `{:templates/documents/evidence-library-document-search.hbs}`
+        "layouts": {
+            "default": {
+                "head": `{:templates/pages/page-head-tags.hbs}`,
+                "body": `{:templates/documents/evidence-library-document-search.hbs}`,
+                "foot": ""
+            }
         },
-        "headTagsTemplate": `{:templates/pages/page-head-tags.hbs}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
             "type": "scvo-document-evidence",
@@ -526,10 +569,13 @@
     },
     "evidence_library_document": {
         "pattern": "/policy-research/evidence-library/:library_slug",
-        "templates": {
-            "default": `{:templates/documents/evidence-library-document.hbs}`
+        "layouts": {
+            "default": {
+                "head": `{:templates/pages/page-head-tags.hbs}`,
+                "body": `{:templates/documents/evidence-library-document.hbs}`,
+                "foot": ""
+            }
         },
-        "headTagsTemplate": `{:templates/pages/page-head-tags.hbs}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
             "type": "scvo-document-evidence",
@@ -559,10 +605,13 @@
     },
     "general_document": {
         "pattern": "/documents/:library_slug",
-        "templates": {
-            "default": `{:templates/documents/evidence-library-document.hbs}`
+        "layouts": {
+            "default": {
+                "head": `{:templates/pages/page-head-tags.hbs}`,
+                "body": `{:templates/documents/evidence-library-document.hbs}`,
+                "foot": ""
+            }
         },
-        "headTagsTemplate": `{:templates/pages/page-head-tags.hbs}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
             "type": "scvo-document-general",
@@ -592,10 +641,13 @@
     },
     "post_author": {
         "pattern": "/post/author/:author_slug",
-        "templates": {
-            "default": `{:templates/posts/post-author.hbs}`
+        "layouts": {
+            "default": {
+                "head": `{:templates/posts/post-author-head-tags.hbs}`,
+                "body": `{:templates/posts/post-author.hbs}`,
+                "foot": ""
+            }
         },
-        "headTagsTemplate": `{:templates/posts/post-author-head-tags.hbs}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
             "type": "scvo-cms-post",
@@ -630,11 +682,17 @@
     },
     "post_category": {
         "pattern": "/post/categories/:category_slug",
-        "templates": {
-            "default": `{:templates/posts/post-category.hbs}`,
-            "rss": `{:templates/posts/post-category-rss.hbs}`
+        "layouts": {
+            "rss": {
+                "head": `{:templates/posts/post-category-rss-head-tags.hbs}`,
+                "body": `{:templates/posts/post-category-rss.hbs}`
+            },
+            "default": {
+                "head": `{:templates/posts/post-category-head-tags.hbs}`,
+                "body": `{:templates/posts/post-category.hbs}`,
+                "foot": ""
+            }
         },
-        "headTagsTemplate": `{:templates/posts/post-category-head-tags.hbs}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
             "type": "scvo-cms-post",
@@ -659,10 +717,17 @@
     },
     "post_digital": {
         "pattern": "/digital/blogs",
-        "templates": {
-            "default": `{:templates/posts/post-category.hbs}`
+        "layouts": {
+            "rss": {
+                "head": `{:templates/posts/post-category-rss-head-tags.hbs}`,
+                "body": `{:templates/posts/post-category-rss.hbs}`
+            },
+            "default": {
+                "head": `{:templates/pages/page-head-tags.hbs}`,
+                "body": `{:templates/posts/post-category.hbs}`,
+                "foot": ""
+            }
         },
-        "headTagsTemplate": `{:templates/pages/page-head-tags.hbs}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
             "type": "scvo-cms-post",
@@ -687,10 +752,13 @@
     },
     "post_briefings": {
         "pattern": "/policy-research/briefings",
-        "templates": {
-            "default": `{:templates/posts/post-category.hbs}`
+        "layouts": {
+            "default": {
+                "head": `{:templates/pages/page-head-tags.hbs}`,
+                "body": `{:templates/posts/post-category.hbs}`,
+                "foot": ""
+            }
         },
-        "headTagsTemplate": `{:templates/pages/page-head-tags.hbs}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
             "type": "scvo-cms-post",
@@ -715,10 +783,13 @@
     },
     "post_consultation_responses": {
         "pattern": "/policy-research/consultation-responses",
-        "templates": {
-            "default": `{:templates/posts/post-category.hbs}`
+        "layouts": {
+            "default": {
+                "head": `{:templates/pages/page-head-tags.hbs}`,
+                "body": `{:templates/posts/post-category.hbs}`,
+                "foot": ""
+            }
         },
-        "headTagsTemplate": `{:templates/pages/page-head-tags.hbs}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
             "type": "scvo-cms-post",
@@ -743,10 +814,13 @@
     },
     "post_reports": {
         "pattern": "/policy-research/research",
-        "templates": {
-            "default": `{:templates/posts/post-category.hbs}`
+        "layouts": {
+            "default": {
+                "head": `{:templates/pages/page-head-tags.hbs}`,
+                "body": `{:templates/posts/post-category.hbs}`,
+                "foot": ""
+            }
         },
-        "headTagsTemplate": `{:templates/pages/page-head-tags.hbs}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
             "type": "scvo-cms-post",
@@ -771,12 +845,17 @@
     },
     "post": {
         "pattern": "/post/*path",
-        "templates": {
-            "default": `{:templates/posts/post.hbs}`,
-            "amp": `{:templates/posts/post-amp.hbs}`
+        "layouts": {
+            "amp": {
+                "head": `{:templates/pages/page-head-tags.hbs}`,
+                "body": `{:templates/posts/post-amp.hbs}`
+            },
+            "default": {
+                "head": `{:templates/posts/post-head-tags.hbs}`,
+                "body": `{:templates/posts/post.hbs}`,
+                "foot": ""
+            }
         },
-        "headTagsTemplate": `{:templates/posts/post-head-tags.hbs}`,
-        "javascript": `{:javascript/post.js}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
             "type": "scvo-cms-post",
@@ -826,10 +905,13 @@
     },
     "event_digital_booking": {
         "pattern": "/digital/events/:event_slug/book",
-        "templates": {
-            "default": `{:templates/events/event-digital-booking.hbs}`
+         "layouts": {
+            "default": {
+                "head": `{:templates/pages/page-head-tags.hbs}`,
+                "body": `{:templates/events/event-digital-booking.hbs}`,
+                "foot": ""
+            }
         },
-        "headTagsTemplate": `{:templates/pages/page-head-tags.hbs}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
             "type": "scvo-event-digital",
@@ -859,10 +941,13 @@
     },
     "event_digital": {
         "pattern": "/digital/events/:event_slug",
-        "templates": {
-            "default": `{:templates/events/event-digital.hbs}`
+        "layouts": {
+            "default": {
+                "head": `{:templates/pages/page-head-tags.hbs}`,
+                "body": `{:templates/events/event-digital.hbs}`,
+                "foot": ""
+            }
         },
-        "headTagsTemplate": `{:templates/pages/page-head-tags.hbs}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
             "type": "scvo-event-digital",
@@ -897,10 +982,13 @@
     },
     "event_digital_search": {
         "pattern": "/digital/events",
-        "templates": {
-            "default": `{:templates/events/event-digital-search.hbs}`
+        "layouts": {
+            "default": {
+                "head": `{:templates/events/event-digital-search-head-tags.hbs}`,
+                "body": `{:templates/events/event-digital-search.hbs}`,
+                "foot": ""
+            }
         },
-        "headTagsTemplate": `{:templates/events/event-digital-search-head-tags.hbs}`,
         "defaultParams": {
             "pageSize": 12
         },
@@ -933,10 +1021,13 @@
     },
     "page_digital": {
         "pattern": "/digital",
-        "templates": {
-            "default": `{:templates/pages/page-digital.hbs}`
+        "layouts": {
+            "default": {
+                "head": `{:templates/pages/page-head-tags.hbs}`,
+                "body": `{:templates/pages/page-digital.hbs}`,
+                "foot": ""
+            }
         },
-        "headTagsTemplate": `{:templates/pages/page-head-tags.hbs}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
             "type": "scvo-cms-page",
@@ -971,10 +1062,13 @@
     },
     "event_policy_booking": {
         "pattern": "/policy-research/events/:event_slug/book",
-        "templates": {
-            "default": `{:templates/events/event-policy-booking.hbs}`
+        "layouts": {
+            "default": {
+                "head": `{:templates/pages/page-head-tags.hbs}`,
+                "body": `{:templates/events/event-policy-booking.hbs}`,
+                "foot": ""
+            }
         },
-        "headTagsTemplate": `{:templates/pages/page-head-tags.hbs}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
             "type": "scvo-event-policy",
@@ -1004,10 +1098,13 @@
     },
     "event_policy": {
         "pattern": "/policy-research/events/:event_slug",
-        "templates": {
-            "default": `{:templates/events/event-policy.hbs}`
+        "layouts": {
+            "default": {
+                "head": `{:templates/pages/page-head-tags.hbs}`,
+                "body": `{:templates/events/event-policy.hbs}`,
+                "foot": ""
+            }
         },
-        "headTagsTemplate": `{:templates/pages/page-head-tags.hbs}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
             "type": "scvo-event-policy",
@@ -1042,10 +1139,13 @@
     },
     "event_policy_search": {
         "pattern": "/policy-research/events",
-        "templates": {
-            "default": `{:templates/events/event-policy-search.hbs}`
+        "layouts": {
+            "default": {
+                "head": `{:templates/events/event-policy-search-head-tags.hbs}`,
+                "body": `{:templates/events/event-policy-search.hbs}`,
+                "foot": ""
+            }
         },
-        "headTagsTemplate": `{:templates/events/event-policy-search-head-tags.hbs}`,
         "defaultParams": {
             "pageSize": 12
         },
@@ -1078,10 +1178,13 @@
     },
     "page_policy": {
         "pattern": "/policy-research",
-        "templates": {
-            "default": `{:templates/pages/page-policy.hbs}`
+        "layouts": {
+            "default": {
+                "head": `{:templates/pages/page-head-tags.hbs}`,
+                "body": `{:templates/pages/page-policy.hbs}`,
+                "foot": ""
+            }
         },
-        "headTagsTemplate": `{:templates/pages/page-head-tags.hbs}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
             "type": "scvo-cms-page",
@@ -1121,10 +1224,17 @@
     },
     "page_blogs": {
         "pattern": "/blogs",
-        "templates": {
-            "default": `{:templates/pages/page-blogs.hbs}`
+        "layouts": {
+            "rss": {
+                "head": `{:templates/posts/post-category-rss-head-tags.hbs}`,
+                "body": `{:templates/posts/post-category-rss.hbs}`
+            },
+            "default": {
+                "head": `{:templates/pages/page-head-tags.hbs}`,
+                "body": `{:templates/pages/page-blogs.hbs}`,
+                "foot": ""
+            }
         },
-        "headTagsTemplate": `{:templates/pages/page-head-tags.hbs}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
             "type": "scvo-cms-post",
@@ -1149,10 +1259,13 @@
     },
     "page_press": {
         "pattern": "/press-media",
-        "templates": {
-            "default": `{:templates/pages/page-press.hbs}`
+        "layouts": {
+            "default": {
+                "head": `{:templates/pages/page-head-tags.hbs}`,
+                "body": `{:templates/pages/page-press.hbs}`,
+                "foot": ""
+            }
         },
-        "headTagsTemplate": `{:templates/pages/page-head-tags.hbs}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
             "type": "scvo-cms-post",
@@ -1177,10 +1290,13 @@
     },
     "page_about_jobs": {
         "pattern": "/about/work-with-us",
-        "templates": {
-            "default": `{:templates/jobs/scvo-jobs.hbs}`
+        "layouts": {
+            "default": {
+                "head": `{:templates/pages/page-head-tags.hbs}`,
+                "body": `{:templates/jobs/scvo-jobs.hbs}`,
+                "foot": ""
+            }
         },
-        "headTagsTemplate": `{:templates/pages/page-head-tags.hbs}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
             "type": "scvo-cms-page",
@@ -1216,10 +1332,13 @@
             "accounts": "/about/accounts",
             "strategy": "/about/strategy"
         },
-        "templates": {
-            "default": `{:templates/pages/page-about.hbs}`
+        "layouts": {
+            "default": {
+                "head": `{:templates/pages/page-head-tags.hbs}`,
+                "body": `{:templates/pages/page-about.hbs}`,
+                "foot": ""
+            }
         },
-        "headTagsTemplate": `{:templates/pages/page-head-tags.hbs}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
             "type": "scvo-cms-page",
@@ -1244,10 +1363,13 @@
     },
     "member_search": {
         "pattern": "/about/members",
-        "templates": {
-            "default": `{:templates/members/member-search.hbs}`
+        "layouts": {
+            "default": {
+                "head": `{:templates/pages/page-head-tags.hbs}`,
+                "body": `{:templates/members/member-search.hbs}`,
+                "foot": ""
+            }
         },
-        "headTagsTemplate": `{:templates/pages/page-head-tags.hbs}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
             "type": "scvo-member",
@@ -1282,10 +1404,13 @@
     },
     "member-page": {
         "pattern": "/about/members/:slug",
-        "templates": {
-            "default": `{:templates/members/member.hbs}`
+        "layouts": {
+            "default": {
+                "head": `{:templates/pages/page-head-tags.hbs}`,
+                "body": `{:templates/members/member.hbs}`,
+                "foot": ""
+            }
         },
-        "headTagsTemplate": `{:templates/pages/page-head-tags.hbs}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
             "type": "scvo-member",
@@ -1310,10 +1435,13 @@
     },
     "staff": {
         "pattern": "/about/staff-team/:slug",
-        "templates": {
-            "default": `{:templates/staff/staff.hbs}`
+        "layouts": {
+            "default": {
+                "head": `{:templates/pages/page-head-tags.hbs}`,
+                "body": `{:templates/staff/staff.hbs}`,
+                "foot": ""
+            }
         },
-        "headTagsTemplate": `{:templates/pages/page-head-tags.hbs}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
             "type": "scvo-staff",
@@ -1338,10 +1466,13 @@
     },
     "staff_search": {
         "pattern": "/about/staff-team",
-        "templates": {
-            "default": `{:templates/staff/staff-search.hbs}`
+        "layouts": {
+            "default": {
+                "head": `{:templates/staff/staff-search-head-tags.hbs}`,
+                "body": `{:templates/staff/staff-search.hbs}`,
+                "foot": ""
+            }
         },
-        "headTagsTemplate": `{:templates/staff/staff-search-head-tags.hbs}`,
         "defaultParams": {
         },
         "primarySearchTemplate": {
@@ -1378,10 +1509,13 @@
             "members": "/credit-union/members-guide",
             "faqs": "/credit-union/faqs"
         },
-        "templates": {
-            "default": `{:templates/pages/page-credit-union.hbs}`
+        "layouts": {
+            "default": {
+                "head": `{:templates/pages/page-head-tags.hbs}`,
+                "body": `{:templates/pages/page-credit-union.hbs}`,
+                "foot": ""
+            }
         },
-        "headTagsTemplate": `{:templates/pages/page-head-tags.hbs}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
             "type": "scvo-cms-page",
@@ -1408,11 +1542,13 @@
         "pattern": {
             "index": "/credit-union/loan-calculator"
         },
-        "templates": {
-            "default": `{:templates/pages/page-credit-union-loan-calculator.hbs}`
+        "layouts": {
+            "default": {
+                "head": `{:templates/pages/page-head-tags.hbs}`,
+                "body": `{:templates/pages/page-credit-union-loan-calculator.hbs}`,
+                "foot": ""
+            }
         },
-        "headTagsTemplate": `{:templates/pages/page-head-tags.hbs}`,
-        "javascript": `{:javascript/credit-union-loan-calculator.js}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
             "type": "scvo-cms-page",
@@ -1441,10 +1577,13 @@
             "section": "/services/membership/:path",
             "subsection": "/services/membership/:path/:path"
         },
-        "templates": {
-            "default": `{:templates/pages/page-membership.hbs}`
+        "layouts": {
+            "default": {
+                "head": `{:templates/pages/page-head-tags.hbs}`,
+                "body": `{:templates/pages/page-membership.hbs}`,
+                "foot": ""
+            }
         },
-        "headTagsTemplate": `{:templates/pages/page-head-tags.hbs}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
             "type": "scvo-cms-page",
@@ -1479,10 +1618,13 @@
             "projects_campaigns_terrific_trustees": "/projects-campaigns/terrific-trustees",
             "digital_about": "/digital/about"
         },
-        "templates": {
-            "default": `{:templates/pages/page-full-width.hbs}`
+        "layouts": {
+            "default": {
+                "head": `{:templates/pages/page-head-tags.hbs}`,
+                "body": `{:templates/pages/page-full-width.hbs}`,
+                "foot": ""
+            }
         },
-        "headTagsTemplate": `{:templates/pages/page-head-tags.hbs}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
             "type": "scvo-cms-page",
@@ -1505,17 +1647,117 @@
             "apiVersion": "5.6"
         }
     },
+    "page_gathering": {
+        "pattern": "/the-gathering",
+        "layouts": {
+            "default": {
+                "head": `{:templates/pages/page-head-tags.hbs}`,
+                "body": `{:templates/pages/page-gathering.hbs}`,
+                "foot": ""
+            }
+        },
+        "primarySearchTemplate": {
+            "index": "web-content-production",
+            "type": "scvo-cms-page",
+            "template": `{:queries/pages/page.json}`
+        },
+        "supplimentarySearchTemplates": {
+            "not_found": {
+                "index": "web-content-production",
+                "type": "scvo-cms-page,scvo-cms-post",
+                "template": `{:queries/pages/not-found.json}`
+            },
+            "splash": {
+                "index": "web-content-production",
+                "type": "scvo-cms-media",
+                "template": `{:queries/pages/splash.json}`
+            }
+        },
+        "elasticsearchConfig": {
+            "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
+            "apiVersion": "5.6"
+        }
+    },
+    "page_charity_awards": {
+        "pattern": "/scottish-charity-awards",
+        "layouts": {
+            "default": {
+                "head": `{:templates/pages/page-head-tags.hbs}`,
+                "body": `{:templates/pages/page-charity-awards.hbs}`,
+                "foot": ""
+            }
+        },
+        "primarySearchTemplate": {
+            "index": "web-content-production",
+            "type": "scvo-cms-page",
+            "template": `{:queries/pages/page.json}`
+        },
+        "supplimentarySearchTemplates": {
+            "not_found": {
+                "index": "web-content-production",
+                "type": "scvo-cms-page,scvo-cms-post",
+                "template": `{:queries/pages/not-found.json}`
+            },
+            "splash": {
+                "index": "web-content-production",
+                "type": "scvo-cms-media",
+                "template": `{:queries/pages/splash.json}`
+            }
+        },
+        "elasticsearchConfig": {
+            "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
+            "apiVersion": "5.6"
+        }
+    },
+    "page_cjs_landing": {
+        "pattern": "/jobs/community-jobs-scotland",
+        "layouts": {
+            "default": {
+                "head": `{:templates/pages/page-head-tags.hbs}`,
+                "body": `{:templates/pages/page-cjs-landing.hbs}`,
+                "foot": ""
+            }
+        },
+        "primarySearchTemplate": {
+            "index": "web-content-production",
+            "type": "scvo-cms-page",
+            "template": `{:queries/pages/page.json}`
+        },
+        "supplimentarySearchTemplates": {
+            "not_found": {
+                "index": "web-content-production",
+                "type": "scvo-cms-page,scvo-cms-post",
+                "template": `{:queries/pages/not-found.json}`
+            },
+            "related_posts": {
+                "index": "web-content-production",
+                "type": "scvo-cms-post",
+                "template": `{:queries/pages/page-posts-related-random.json}`
+            },
+            "splash": {
+                "index": "web-content-production",
+                "type": "scvo-cms-media",
+                "template": `{:queries/pages/splash.json}`
+            }
+        },
+        "elasticsearchConfig": {
+            "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
+            "apiVersion": "5.6"
+        }
+    },
     "page_landing": {
         "pattern": {
             "running_a_charity": "/running-a-charity",
             "jobs": "/jobs",
-            "jobs_cjs": "/jobs/community-jobs-scotland",
             "funding": "/funding"
         },
-        "templates": {
-            "default": `{:templates/pages/page-landing.hbs}`
+        "layouts": {
+            "default": {
+                "head": `{:templates/pages/page-head-tags.hbs}`,
+                "body": `{:templates/pages/page-landing.hbs}`,
+                "foot": ""
+            }
         },
-        "headTagsTemplate": `{:templates/pages/page-head-tags.hbs}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
             "type": "scvo-cms-page",
@@ -1548,10 +1790,13 @@
             "index": "/setting-up-a-charity",
             "section": "/setting-up-a-charity/*path"
         },
-        "templates": {
-            "default": `{:templates/pages/page-setting-up.hbs}`
+        "layouts": {
+            "default": {
+                "head": `{:templates/pages/page-head-tags.hbs}`,
+                "body": `{:templates/pages/page-setting-up.hbs}`,
+                "foot": ""
+            }
         },
-        "headTagsTemplate": `{:templates/pages/page-head-tags.hbs}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
             "type": "scvo-cms-page",
@@ -1576,10 +1821,13 @@
     },
     "event_cjs_booking": {
         "pattern": "/jobs/community-jobs-scotland/training-opportunities/:event_slug/book",
-        "templates": {
-            "default": `{:templates/events/event-cjs-booking.hbs}`
+        "layouts": {
+            "default": {
+                "head": `{:templates/pages/page-head-tags.hbs}`,
+                "body": `{:templates/events/event-cjs-booking.hbs}`,
+                "foot": ""
+            }
         },
-        "headTagsTemplate": `{:templates/pages/page-head-tags.hbs}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
             "type": "scvo-event-cjs",
@@ -1609,10 +1857,13 @@
     },
     "event_cjs": {
         "pattern": "/jobs/community-jobs-scotland/training-opportunities/:event_slug",
-        "templates": {
-            "default": `{:templates/events/event-cjs.hbs}`
+        "layouts": {
+            "default": {
+                "head": `{:templates/pages/page-head-tags.hbs}`,
+                "body": `{:templates/events/event-cjs.hbs}`,
+                "foot": ""
+            }
         },
-        "headTagsTemplate": `{:templates/pages/page-head-tags.hbs}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
             "type": "scvo-event-cjs",
@@ -1647,10 +1898,13 @@
     },
     "event_cjs_search": {
         "pattern": "/jobs/community-jobs-scotland/training-opportunities",
-        "templates": {
-            "default": `{:templates/events/event-cjs-search.hbs}`
+        "layouts": {
+            "default": {
+                "head": `{:templates/events/event-cjs-search-head-tags.hbs}`,
+                "body": `{:templates/events/event-cjs-search.hbs}`,
+                "foot": ""
+            }
         },
-        "headTagsTemplate": `{:templates/events/event-cjs-search-head-tags.hbs}`,
         "defaultParams": {
             "pageSize": 12
         },
@@ -1681,17 +1935,57 @@
             "apiVersion": "5.6"
         }
     },
-    "page_cjs": {
+    "page_cjs_employees": {
         "pattern": {
-            "employers_index": "/jobs/community-jobs-scotland/information-for-employers",
-            "employers_section": "/jobs/community-jobs-scotland/information-for-employers/*path",
             "employees_index": "/jobs/community-jobs-scotland/information-for-employees",
             "employees_section": "/jobs/community-jobs-scotland/information-for-employees/*path"
         },
-        "templates": {
-            "default": `{:templates/pages/page-cjs.hbs}`
+        "layouts": {
+            "default": {
+                "head": `{:templates/pages/page-head-tags.hbs}`,
+                "body": `{:templates/pages/page-cjs-employees.hbs}`,
+                "foot": ""
+            }
         },
-        "headTagsTemplate": `{:templates/pages/page-head-tags.hbs}`,
+        "primarySearchTemplate": {
+            "index": "web-content-production",
+            "type": "scvo-cms-page",
+            "template": `{:queries/pages/page.json}`
+        },
+        "supplimentarySearchTemplates": {
+            "not_found": {
+                "index": "web-content-production",
+                "type": "scvo-cms-page,scvo-cms-post",
+                "template": `{:queries/pages/not-found.json}`
+            },
+            "related_posts": {
+                "index": "web-content-production",
+                "type": "scvo-cms-post",
+                "template": `{:queries/pages/page-posts-related-random.json}`
+            },
+            "splash": {
+                "index": "web-content-production",
+                "type": "scvo-cms-media",
+                "template": `{:queries/pages/splash.json}`
+            }
+        },
+        "elasticsearchConfig": {
+            "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
+            "apiVersion": "5.6"
+        }
+    },
+    "page_cjs_employers": {
+        "pattern": {
+            "index": "/jobs/community-jobs-scotland/information-for-employers",
+            "section": "/jobs/community-jobs-scotland/information-for-employers/*path"
+        },
+        "layouts": {
+            "default": {
+                "head": `{:templates/pages/page-head-tags.hbs}`,
+                "body": `{:templates/pages/page-cjs-employers.hbs}`,
+                "foot": ""
+            }
+        },
         "primarySearchTemplate": {
             "index": "web-content-production",
             "type": "scvo-cms-page",
@@ -1724,10 +2018,13 @@
             "index": "/running-your-organisation/funding/step-by-step-guide",
             "section": "/running-your-organisation/funding/step-by-step-guide/:path"
         },
-        "templates": {
-            "default": `{:templates/pages/page-running-funding-guide.hbs}`
+        "layouts": {
+            "default": {
+                "head": `{:templates/pages/page-head-tags.hbs}`,
+                "body": `{:templates/pages/page-running-funding-guide.hbs}`,
+                "foot": ""
+            }
         },
-        "headTagsTemplate": `{:templates/pages/page-head-tags.hbs}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
             "type": "scvo-cms-page",
@@ -1760,10 +2057,13 @@
             "index": "/running-your-organisation/funding",
             "section": "/running-your-organisation/funding/:path"
         },
-        "templates": {
-            "default": `{:templates/pages/page-running-funding.hbs}`
+        "layouts": {
+            "default": {
+                "head": `{:templates/pages/page-head-tags.hbs}`,
+                "body": `{:templates/pages/page-running-funding.hbs}`,
+                "foot": ""
+            }
         },
-        "headTagsTemplate": `{:templates/pages/page-head-tags.hbs}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
             "type": "scvo-cms-page",
@@ -1796,10 +2096,13 @@
             "index": "/running-your-organisation/business-planning",
             "section": "/running-your-organisation/business-planning/*path"
         },
-        "templates": {
-            "default": `{:templates/pages/page-running-business.hbs}`
+        "layouts": {
+            "default": {
+                "head": `{:templates/pages/page-head-tags.hbs}`,
+                "body": `{:templates/pages/page-running-business.hbs}`,
+                "foot": ""
+            }
         },
-        "headTagsTemplate": `{:templates/pages/page-head-tags.hbs}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
             "type": "scvo-cms-page",
@@ -1832,10 +2135,13 @@
             "index": "/running-your-organisation/finance-business-management",
             "section": "/running-your-organisation/finance-business-management/*path"
         },
-        "templates": {
-            "default": `{:templates/pages/page-running-financial.hbs}`
+        "layouts": {
+            "default": {
+                "head": `{:templates/pages/page-head-tags.hbs}`,
+                "body": `{:templates/pages/page-running-financial.hbs}`,
+                "foot": ""
+            }
         },
-        "headTagsTemplate": `{:templates/pages/page-head-tags.hbs}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
             "type": "scvo-cms-page",
@@ -1868,10 +2174,13 @@
             "index": "/running-your-organisation/legislation",
             "section": "/running-your-organisation/legislation/*path"
         },
-        "templates": {
-            "default": `{:templates/pages/page-running-legislation.hbs}`
+        "layouts": {
+            "default": {
+                "head": `{:templates/pages/page-head-tags.hbs}`,
+                "body": `{:templates/pages/page-running-legislation.hbs}`,
+                "foot": ""
+            }
         },
-        "headTagsTemplate": `{:templates/pages/page-head-tags.hbs}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
             "type": "scvo-cms-page",
@@ -1904,10 +2213,13 @@
             "index": "/running-your-organisation/governance",
             "section": "/running-your-organisation/governance/*path"
         },
-        "templates": {
-            "default": `{:templates/pages/page-running-governance.hbs}`
+        "layouts": {
+            "default": {
+                "head": `{:templates/pages/page-head-tags.hbs}`,
+                "body": `{:templates/pages/page-running-governance.hbs}`,
+                "foot": ""
+            }
         },
-        "headTagsTemplate": `{:templates/pages/page-head-tags.hbs}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
             "type": "scvo-cms-page",
@@ -1940,10 +2252,13 @@
             "index": "/running-your-organisation/staff-volunteers",
             "section": "/running-your-organisation/staff-volunteers/*path"
         },
-        "templates": {
-            "default": `{:templates/pages/page-running-staff.hbs}`
+        "layouts": {
+            "default": {
+                "head": `{:templates/pages/page-head-tags.hbs}`,
+                "body": `{:templates/pages/page-running-staff.hbs}`,
+                "foot": ""
+            }
         },
-        "headTagsTemplate": `{:templates/pages/page-head-tags.hbs}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
             "type": "scvo-cms-page",
@@ -1976,10 +2291,13 @@
             "index": "/running-your-organisation",
             "section": "/running-your-organisation/*path"
         },
-        "templates": {
-            "default": `{:templates/pages/page-running.hbs}`
+        "layouts": {
+            "default": {
+                "head": `{:templates/pages/page-head-tags.hbs}`,
+                "body": `{:templates/pages/page-running.hbs}`,
+                "foot": ""
+            }
         },
-        "headTagsTemplate": `{:templates/pages/page-head-tags.hbs}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
             "type": "scvo-cms-page",
@@ -2009,10 +2327,13 @@
     },
     "_default": {
         "pattern": "/*path",
-        "templates": {
-            "default": `{:templates/pages/page.hbs}`
+        "layouts": {
+            "default": {
+                "head": `{:templates/pages/page-head-tags.hbs}`,
+                "body": `{:templates/pages/page.hbs}`,
+                "foot": ""
+            }
         },
-        "headTagsTemplate": `{:templates/pages/page-head-tags.hbs}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
             "type": "scvo-cms-page",

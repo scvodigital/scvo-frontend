@@ -20,11 +20,12 @@
     <div class="container-fluid page-content">
         <ul class="breadcrumbs">
             <li><a href="/">Home</a></li>
-            <li>Jobs</li>
+            <li><a href="/jobs">Jobs</a></li>
+            <li>Search</li>
         </ul>
 
         <h2 class="mdc-card__title mdc-card__title--large">Find Jobs</h2>
-        <form [searchroute]="'job_search'" data-auto-search="true">
+        <form action="/jobs/search" method="GET" [searchroute]="'job_search'" data-auto-search="true">
             <div class="mdc-layout-grid">
                 <div class="mdc-layout-grid__inner">
                     <div class="mdc-layout-grid__cell">
@@ -34,6 +35,8 @@
                             <!-- <div class="mdc-textfield__bottom-line"></div> -->
                         </div>
                     </div>
+                </div>
+                <div class="mdc-layout-grid__inner">
                     <div class="mdc-layout-grid__cell">
                         <div class="mdc-form-field">
                             <select class="mdc-select" role="listbox" id="events-role" name="role">

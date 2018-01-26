@@ -18,31 +18,29 @@
         </div>
     </div>
     <div class="container-fluid">
-        {{#with primaryResponse.hits.hits.[0]._source}}
-            <ul class="breadcrumbs">
-                <li><a href="/">Home</a></li>
-                <li><a href="/digital">Digital</a></li>
-                <li><a href="/digital/events">Events</a></li>
-                <li><a href="/digital/events/{{slug}}">{{{title}}}</a></li>
-                <li>Booking</li>
-            </ul>
-            <div class="mdc-layout-grid">
-                <div class="mdc-layout-grid__inner">
-                    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-9-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone content event-content">
-                        <iframe src="https://www.surveygizmo.eu/s3/90064254/Event-Booking-Digital-Events" frameborder="0" width="100%" height="400" style="overflow:hidden"></iframe>
+        <ul class="breadcrumbs">
+            <li><a href="/">Home</a></li>
+            <li><a href="/digital">Digital</a></li>
+            <li><a href="/digital/events">Events</a></li>
+            <li><a href="/digital/events/{{primaryResponse.hits.hits.[0]._source.slug}}">{{{primaryResponse.hits.hits.[0]._source.title}}}</a></li>
+            <li>Booking</li>
+        </ul>
+        <div class="mdc-layout-grid">
+            <div class="mdc-layout-grid__inner">
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-9-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone content event-content">
+                    <iframe src="https://www.surveygizmo.eu/s3/90064254/Event-Booking-Digital-Events?sfid={{primaryResponse.hits.hits.[0]._source.Id}}" frameborder="0" width="100%" height="400" style="overflow:hidden"></iframe>
 
-                        {{#compare course_type "===" "Training Course"}}
-                        <p>
-                            <strong><a href="https://storage.googleapis.com/scvo-cms/wp-content/uploads/2018/01/Policies-procedures-and-TCs.docx" download>Policies, procedures and terms &amp; conditions</a></strong>
-                        </p>
-                        {{else}}
-                        <p>
-                            <strong><a href="https://storage.googleapis.com/scvo-cms/wp-content/uploads/2018/01/Policies-procedures-and-TCs.docx" download>Policies, procedures and terms &amp; conditions</a></strong>
-                        </p>
-                        {{/compare}}
-                    </div>
+                    {{#compare primaryResponse.hits.hits.[0]._source.course_type "===" "Training Course"}}
+                    <p>
+                        <strong><a href="https://storage.googleapis.com/scvo-cms/wp-content/uploads/2018/01/Policies-procedures-and-TCs.docx" download>Policies, procedures and terms &amp; conditions</a></strong>
+                    </p>
+                    {{else}}
+                    <p>
+                        <strong><a href="https://storage.googleapis.com/scvo-cms/wp-content/uploads/2018/01/Policies-procedures-and-TCs.docx" download>Policies, procedures and terms &amp; conditions</a></strong>
+                    </p>
+                    {{/compare}}
                 </div>
             </div>
-        {{/with}}
+        </div>
     </div>
 </div>

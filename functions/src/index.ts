@@ -12,6 +12,7 @@ import { Router, RouteMatch, IMenus } from 'scvo-router';
 import * as Dot from 'dot-object';
 import * as uuid from 'uuid';
 import * as cookieParser from 'cookie-parser';
+import * as compression from 'compression';
 
 // Internal imports
 import { fsPdf } from './fs-pdf';
@@ -30,8 +31,9 @@ const dot = new Dot('/');
 const cp = cookieParser();
 
 exports.index = functions.https.onRequest((req: functions.Request, res: functions.Response) => {
+    var startTime = +new Date();
     return new Promise((resolve, reject) => {
-        userId(req, res, () => {
+        userId(req, res, () => { 
             var domain = req.hostname.replace(/www\./, '');
             if (domain === 'localhost') {
                 domain = req.get('x-forwarded-host').split(":")[0];
@@ -42,23 +44,30 @@ exports.index = functions.https.onRequest((req: functions.Request, res: function
             getJson<Context>(path).then((contextJson: Context) => {
                 var context = new Context(contextJson, req.cookies.__session);
                 var url = req.query.url || req.url;
-                context.renderPage(url).then((html: string) => {
-                    //HACK for setting content type
-                    if (html.indexOf('<?xml') === 0) {
-                        if (html.indexOf('<rss') > -1) {
-                            res.contentType('application/rss+xml');
-                        } else {
-                            res.contentType('application/xml');
-                        }
-                    } else if (html.indexOf('{') === 0 || html.indexOf('[') === 0) {
-                        res.contentType('application/json');
-                    } else {
-                        //res.contentType('text/html');
-                    }
+                
+                url = 'https://' + domain + url;
 
-                    res.send(html);
-                    res.end();
-                    resolve();
+                context.renderPage(url).then((html: string) => {
+                    //compression(req, res, () => {
+                        //HACK for setting content type
+                        if (html.indexOf('<?xml') === 0) {
+                            if (html.indexOf('<rss') > -1) {
+                                res.contentType('application/rss+xml');
+                            } else {
+                                res.contentType('application/xml');
+                            }
+                        } else if (html.indexOf('{') === 0 || html.indexOf('[') === 0) {
+                            res.contentType('application/json');
+                        } else {
+                            //res.contentType('text/html');
+                        }
+
+                        res.send(html);
+                        res.end();
+                        var endTime = +new Date();
+                        console.log('#### Took', (endTime - startTime), 'ms to complete route', url);
+                        resolve();
+                    //});
                 }).catch((err) => {
                     console.error('Failed to execute router', err);
                     res.json(err);

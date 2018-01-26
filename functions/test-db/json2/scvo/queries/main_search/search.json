@@ -20,34 +20,36 @@
                             "exists": {
                                 "field": "rendered.scvo_search_result"
                             }
-                        },
+                        }{{#ifAny query.type query.q}},{{/ifAny}}
                         {{#if query.type}}
-                        {
-                            "bool": {
-                                "should": [
-                                    {{#compare (getType query.type) "string"}}
+                            {
+                                "bool": {
+                                    "should": [
+                                        {{#compare (getType query.type) "string"}}
+                                            {
+                                                "term": {
+                                                    "_type": "{{query.type}}"
+                                                }
+                                            },
+                                        {{/compare}}
+                                        {{#compare (getType query.type) "array"}}
+                                            {{#each query.type}}
+                                            {
+                                                "term": {
+                                                    "_type": "{{this}}"
+                                                }
+                                            },
+                                            {{/each}}
+                                        {{/compare}}
                                         {
-                                            "term": {
-                                                "_type": "{{query.type}}"
-                                            }
-                                        },
-                                    {{/compare}}
-                                    {{#compare (getType query.type) "array"}}
-                                        {{#each query.type}}
-                                        {
-                                            "term": {
-                                                "_type": "{{this}}"
-                                            }
-                                        },
-                                        {{/each}}
-                                    {{/compare}}
-                                    {
-                                        "match_none": {}
-                                    }
-                                ]
+                                            "match_none": {}
+                                        }
+                                    ]
+                                }
                             }
-                        }{{#if query.q}},{{/if}}
+                            {{#if query.q}},{{/if}}
                         {{/if}}
+                        {{#if query.q}}
 	        			{
 		        			"bool": {
 		        				"should": [
@@ -71,6 +73,21 @@
 		        				]
 		        			}
 	        			}
+                        {{else}}
+                        {{#if query.type}}
+                        {{else}}
+                        ,
+                        {
+                            "bool": {
+                                "should": [
+                                    {
+                                        "match_none": {}
+                                    }
+                                ]
+                            }
+                        }
+                        {{/if}}
+                        {{/if}}
 	        		]
                     {{#unless query.type}},
                     "should": [
@@ -112,6 +129,14 @@
         	},
             "boost_mode": "multiply",
             "functions": [
+                {
+        			"filter": {
+                        "term": {
+                            "vacancy_status": "vacancy-closed"
+                        }
+                    },
+        			"weight": "-1000"
+        		},
                 {
         			"filter": {
                         "term": {

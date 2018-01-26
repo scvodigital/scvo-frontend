@@ -1,7 +1,7 @@
 <div class="mdc-card mdc-card-search">
     <section class="mdc-card__primary">
         <h2 class="mdc-card__title mdc-card__title--large">{{title}}</h2>
-        <form [searchroute]="'{{searchRoute}}'" autocomplete="off">
+        <form action="{{searchPath}}" method="GET" [searchroute]="'{{searchRoute}}'" autocomplete="off">
             <div class="mdc-textfield mdc-textfield--upgraded">
                 <input type="text" class="mdc-textfield__input" name="q" id="wee-query" value="{{params.query.q}}">
                 <div class="mdc-textfield__bottom-line"></div>
