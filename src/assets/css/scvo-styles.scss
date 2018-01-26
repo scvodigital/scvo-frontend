@@ -274,9 +274,14 @@ primary-dark: #251032
     .mdc-theme--primary-bg {
         background-color: map-get($themeSelected, 'primary') !important;
     }
+    .support .funding-scotland-platforms .mdc-card__primary {
+        background-color: #006054 !important;
+    }
     .support.support-policy .mdc-card__primary {
         background-color: map-get($themePosts, 'primary') !important;
     }
+    .section-events .mdc-card__primary,
+    .section-events .mdc-card__primary,
     .section-campaigns .mdc-card__primary,
     .section-projects .mdc-card__primary,
     .section-campaigns .mdc-card__media,
@@ -1617,6 +1622,7 @@ figure {
         max-height: $spacing-unit*6;
     }
 }
+body.scottish-charity-awards,
 body.the-gathering {
     .container-fluid,
     .page-content {
@@ -1625,7 +1631,6 @@ body.the-gathering {
     .full {
         margin-left: auto;
         margin-right: auto;
-        width: 60%;
         .mdc-button {
             width: 100%;
         }
@@ -1649,6 +1654,11 @@ body.the-gathering {
     }
     .swiper-container {
         margin-top: $spacing-unit;
+    }
+}
+body.the-gathering {
+    .full {
+        width: 60%;
     }
 }
 // .mdc-temporary-drawer,
@@ -1887,6 +1897,7 @@ table.membership-fees {
         background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/hiring.jpg');
     }
 }
+.section-events,
 .section-projects,
 .section-campaigns {
     .mdc-card__primary {
@@ -1920,14 +1931,19 @@ table.membership-fees {
     .right-approach .mdc-card__media {
         background-image: url('https://storage.googleapis.com/scvo-cms/wp-content/uploads/2017/06/right-approach-strapline-hires-1024x337.jpg');
     }
-    .scottish-charity-awards .mdc-card__media {
-        background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/header-charity-awards.png');
-    }
     .welfare-reform .mdc-card__media {
         background-image: url('https://storage.googleapis.com/scvo-cms/wp-content/uploads/2017/10/welfare-reform-bg-1400x400.jpg');
     }
     .terrific-trustees .mdc-card__media {
         background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/header-trustees.png');
+    }
+}
+.section-events {
+    .scottish-charity-awards .mdc-card__media {
+        background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/header-charity-awards.png');
+    }
+    .the-gathering .mdc-card__media {
+        background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/header-gathering.png');
     }
 }
 .grid-info.cjs-footer {
@@ -2877,6 +2893,11 @@ footer {
     }
     .latest-content {
         .mdc-layout-grid {
+            width: 100%;
+        }
+    }
+    body.the-gathering {
+        .full {
             width: 100%;
         }
     }
