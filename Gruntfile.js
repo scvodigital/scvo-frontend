@@ -64,6 +64,9 @@ module.exports = function(grunt) {
             },
             upgradeRouter: {
                 cmd: 'yarn add scvo-router; cd functions; yarn add scvo-router; cd ..'
+            },
+            testRouter: {
+                cmd: 'cd ../scvo-router; npm run build; npm link; cd ../scvo-frontend; npm link scvo-router; cd functions; npm link scvo-router; cd ..'
             }
         }
     });
@@ -75,6 +78,7 @@ module.exports = function(grunt) {
 
     grunt.registerTask('default', ['clean:main', 'copy:main', 'sass', 'bgShell:json2', 'bgShell:buildFunctions']);
     grunt.registerTask('serve', ['default', 'bgShell:serve']);
+    grunt.registerTask('serve-router', ['default', 'bgShell:testRouter', 'serve']);
     grunt.registerTask('deploy-all', ['default', 'bgShell:deployDb', 'bgShell:deploy']);
     grunt.registerTask('deploy-db', ['default', 'bgShell:deployDb']);
     grunt.registerTask('deploy-hosting', ['default', 'bgShell:deployHostring']);
