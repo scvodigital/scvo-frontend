@@ -20,7 +20,7 @@
                             "exists": {
                                 "field": "rendered.scvo_search_result"
                             }
-                        },
+                        }{{#ifAny query.type query.q}},{{/ifAny}}
                         {{#if query.type}}
                             {
                                 "bool": {
