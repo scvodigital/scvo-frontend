@@ -1851,12 +1851,11 @@ table.membership-fees {
 
 .grid-info {
     .mdc-card__primary {
-        .mdc-card__title {
+        h1 {
             display: block;
             width: 100%;
             height: 100%;
             padding: 0;
-            color: white;
             a {
                 display: block;
                 color: white;
@@ -1864,13 +1863,6 @@ table.membership-fees {
                 height: 100%;
                 .hidden {
                     display: none;
-                }
-                .fa-fw {
-                    width: 1.55em;
-                    text-align: left;
-                    height: auto;
-                    line-height: 1em;
-                    vertical-align: middle;
                 }
             }
             a:hover {
@@ -1884,6 +1876,15 @@ table.membership-fees {
         background-repeat: no-repeat;
         background-position: center center;
         margin-bottom: $spacing-unit;
+    }
+    .cjs-employers .mdc-card__media {
+        background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/.jpg');
+    }
+    .cjs-employees .mdc-card__media {
+        background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/.jpg');
+    }
+    .cjs-vacancies .mdc-card__media {
+        background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/hiring.jpg');
     }
 }
 .section-projects,
@@ -1929,6 +1930,9 @@ table.membership-fees {
         background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/header-trustees.png');
     }
 }
+.grid-info.cjs-footer {
+    margin: $spacing-unit*2 0 0;
+}
 .support {
     .mdc-card__media {
         height: $spacing-unit*4;
@@ -1936,9 +1940,51 @@ table.membership-fees {
         background-size: contain;
         background-repeat: no-repeat;
         background-origin: content-box;
+        margin-bottom: $spacing-unit;
+        .hidden {
+            display: none;
+        }
+    }
+    .cjs .mdc-card__media {
+        height: 128px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
+        padding: 0;
+        margin-bottom: 1rem;
+        background-color: #ccc !important;
     }
     .mdc-card__primary {
+        margin-bottom: $spacing-unit;
         padding: $spacing-unit;
+        .mdc-card__title {
+            padding-bottom: 0;
+            color: white;
+            a {
+                display: block;
+                width: 100%;
+                height: 100%;
+                color: white;
+                .hidden {
+                    display: none;
+                }
+                .fa-fw {
+                    width: 1.55em;
+                    text-align: left;
+                    height: auto;
+                    line-height: 1em;
+                    vertical-align: middle;
+                }
+            }
+            a:hover {
+                text-decoration: none;
+            }
+        }
+    }
+    .cjs {
+        .mdc-card__primary {
+            margin-bottom: 0;
+        }
     }
     .mdc-card__supporting-text {
         padding-top: 0;
@@ -1947,7 +1993,7 @@ table.membership-fees {
         background-color: #58a934 !important;
         background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/goodmoves.png');
     }
-    .cjs .mdc-card__media {
+    .cjs-brand .mdc-card__media {
         height: 105px;
         background-color: #fff !important;
         background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/cjs.png');
