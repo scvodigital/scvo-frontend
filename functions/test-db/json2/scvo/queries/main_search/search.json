@@ -73,6 +73,20 @@
 		        				]
 		        			}
 	        			}
+                        {{else}}
+                        {{#if query.type}}
+                        {{else}}
+                        ,
+                        {
+                            "bool": {
+                                "should": [
+                                    {
+                                        "match_none": {}
+                                    }
+                                ]
+                            }
+                        }
+                        {{/if}}
                         {{/if}}
 	        		]
                     {{#unless query.type}},
