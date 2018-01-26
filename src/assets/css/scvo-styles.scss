@@ -277,6 +277,8 @@ primary-dark: #251032
     .support.support-policy .mdc-card__primary {
         background-color: map-get($themePosts, 'primary') !important;
     }
+    .section-campaigns .mdc-card__primary,
+    .section-projects .mdc-card__primary,
     .section-campaigns .mdc-card__media,
     .section-projects .mdc-card__media,
     .support.support-organisation .mdc-card__media {
@@ -1830,19 +1832,33 @@ h1.mdc-typography--title {
 .services .support .mdc-card__primary {
     height: $spacing-unit*2;
 }
-.support {
-    .mdc-card__media {
-        height: $spacing-unit*4;
-        padding: $spacing-unit/2 $spacing-unit;
-        background-size: contain;
-        background-repeat: no-repeat;
-        background-origin: content-box;
+h1.support-sector {
+    margin-top: $spacing-unit*3;
+}
+table.membership-fees {
+    border-collapse: collapse;
+    margin-bottom: $spacing-unit;
+    min-width: 40%;
+    tr {
+        th,
+        td {
+            border: 1px solid #ccc;
+            padding: $spacing-unit/4 $spacing-unit/2;
+        }
+    }
+}
+
+
+.grid-info {
+    .mdc-card__primary {
         h1 {
             display: block;
             width: 100%;
             height: 100%;
+            padding: 0;
             a {
                 display: block;
+                color: white;
                 width: 100%;
                 height: 100%;
                 .hidden {
@@ -1851,9 +1867,67 @@ h1.mdc-typography--title {
             }
         }
     }
+    .mdc-card__media {
+        height: 128px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
+        margin-bottom: $spacing-unit;
+    }
+}
+.section-projects,
+.section-campaigns {
+    .mdc-card__primary {
+        background-color: #AD1457 !important;
+    }
+}
+.section-projects {
+    .project-digital .mdc-card__media {
+        background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/digital.png');
+    }
+    .project-open-government .mdc-card__media {
+        background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/open-government.png');
+    }
+    .project-cjs .mdc-card__media {
+        background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/header-cjs.jpg');
+    }
+}
+.section-campaigns {
+    .europe-and-the-third-sector .mdc-card__media {
+        background-image: url('https://storage.googleapis.com/scvo-cms/wp-content/uploads/2017/10/europe-and-the-third-sector-bg-1400x400.jpg');
+    }
+    .eu-are-valued .mdc-card__media {
+        background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/eu-are-valued.png');
+    }
+    .building-healthier-happier-communities .mdc-card__media {
+        background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/header-bhhc.jpg');
+    }
+    .datawareness .mdc-card__media {
+        background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/header-datawareness.png');
+    }
+    .right-approach .mdc-card__media {
+        background-image: url('https://storage.googleapis.com/scvo-cms/wp-content/uploads/2017/06/right-approach-strapline-hires-1024x337.jpg');
+    }
+    .scottish-charity-awards .mdc-card__media {
+        background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/header-charity-awards.png');
+    }
+    .welfare-reform .mdc-card__media {
+        background-image: url('https://storage.googleapis.com/scvo-cms/wp-content/uploads/2017/10/welfare-reform-bg-1400x400.jpg');
+    }
+    .terrific-trustees .mdc-card__media {
+        background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/header-trustees.png');
+    }
+}
+.support {
+    .mdc-card__media {
+        height: $spacing-unit*4;
+        padding: $spacing-unit/2 $spacing-unit;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-origin: content-box;
+    }
     .mdc-card__primary {
         padding: $spacing-unit;
-        // margin-bottom: $spacing-unit;
         .mdc-card__title {
             padding-bottom: 0;
             color: white;
@@ -1906,74 +1980,6 @@ h1.mdc-typography--title {
     .milo .mdc-card__media {
         background-color: #4475A0 !important;
         background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/milo.png');
-    }
-    .mdc-card__supporting-text {
-        padding-top: $spacing-unit;
-    }
-}
-h1.support-sector {
-    margin-top: $spacing-unit*3;
-}
-table.membership-fees {
-    border-collapse: collapse;
-    margin-bottom: $spacing-unit;
-    min-width: 40%;
-    tr {
-        th,
-        td {
-            border: 1px solid #ccc;
-            padding: $spacing-unit/4 $spacing-unit/2;
-        }
-    }
-}
-
-.section-projects {
-    .mdc-card__media {
-        height: 128px;
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-position: center center;
-    }
-    .project-digital .mdc-card__media {
-        background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/digital.png');
-    }
-    .project-open-government .mdc-card__media {
-        background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/open-government.png');
-    }
-    .project-cjs .mdc-card__media {
-        background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/header-cjs.jpg');
-    }
-}
-.section-campaigns {
-    .mdc-card__media {
-        height: 128px;
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-position: center center;
-    }
-    .europe-and-the-third-sector .mdc-card__media {
-        background-image: url('https://storage.googleapis.com/scvo-cms/wp-content/uploads/2017/10/europe-and-the-third-sector-bg-1400x400.jpg');
-    }
-    .eu-are-valued .mdc-card__media {
-        background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/eu-are-valued.png');
-    }
-    .building-healthier-happier-communities .mdc-card__media {
-        background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/header-bhhc.jpg');
-    }
-    .datawareness .mdc-card__media {
-        background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/header-datawareness.png');
-    }
-    .right-approach .mdc-card__media {
-        background-image: url('https://storage.googleapis.com/scvo-cms/wp-content/uploads/2017/06/right-approach-strapline-hires-1024x337.jpg');
-    }
-    .scottish-charity-awards .mdc-card__media {
-        background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/header-charity-awards.png');
-    }
-    .welfare-reform .mdc-card__media {
-        background-image: url('https://storage.googleapis.com/scvo-cms/wp-content/uploads/2017/10/welfare-reform-bg-1400x400.jpg');
-    }
-    .terrific-trustees .mdc-card__media {
-        background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/header-trustees.png');
     }
 }
 .mdc-card__actions {
@@ -3001,17 +3007,6 @@ footer {
             font-size: 1rem;
         }
     }
-    // .home .featured-content .search_form {
-    //     margin: 0;
-    //     .mdc-text-field {
-    //         width: 100%;
-    //         height: 1.5rem;
-    //         line-height: 2rem;
-    //         margin: 1rem 0 0.5rem;
-    //         padding: 0.5rem 0;
-    //         font-size: 1.1rem;
-    //     }
-    // }
 }
 
 @media screen and (max-width: 395px) {
