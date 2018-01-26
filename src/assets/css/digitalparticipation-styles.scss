@@ -283,6 +283,7 @@ a {
         hr {
             border-bottom-color: white;
         }
+        #menu_button,
         h1, h2, h3, h4, p {
             color: white;
         }
@@ -1130,7 +1131,7 @@ footer {
         height: 50px;
         position: absolute;
         bottom: 0.7rem;
-        right: 160px;
+        right: 180px;
     }
     .menu ul {
         margin-top: 0;
@@ -1357,12 +1358,6 @@ footer {
     .mdc-button {
         width: 100%;
     }
-    .hide-on-med-and-up {
-        display: block;
-    }
-    .hide-on-small-only {
-        display: none;
-    }
     .pagination {
         padding: 0;
     }
@@ -1439,6 +1434,11 @@ footer {
                 font-size: 1.3rem;
                 width: 90%;
             }
+            .mdc-button.mdc-button--raised {
+                min-width: 0;
+                max-width: 86%;
+                font-size: 1.2rem;
+            }
         }
         .expand {
             h1 {
@@ -1447,6 +1447,7 @@ footer {
             }
             h3 {
                 padding: 1.5rem 0 0;
+                font-size: 1.5rem;
                 .number {
                     height: 2.9rem;
                     width: 2.9rem;
@@ -1580,13 +1581,16 @@ footer {
             bottom: auto;
             right: auto;
         }
-        .logo.digital-scotland {
-            margin-right: 1rem;
-        }
     }
 }
 
 @media screen and (max-width: 479px) {
+    .hide-on-med-and-up {
+        display: block;
+    }
+    .hide-on-small-only {
+        display: none;
+    }
     .pagination-distance-3,
     .pagination-distance-4 {
         display: none !important;
