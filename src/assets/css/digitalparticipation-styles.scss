@@ -124,7 +124,7 @@ hr {
 }
 
 html {
-    --mdc-theme-primary: $brand-typography;
+    --mdc-theme-primary: #{$brand-typography};
     overflow-y: scroll;
     height: 100%;
     font-size: $base-font-size;
@@ -254,7 +254,7 @@ a {
             border: $brand-border-width solid transparent;
             background: transparent;
         }
-        .mdc-tab.active,
+        .mdc-tab--active,
         .mdc-tab:hover {
             border: $brand-border-width solid $brand-typography;
             background: white;
@@ -306,7 +306,7 @@ a {
                     color: white;
                 }
                 .mdc-tab:hover,
-                .mdc-tab.active {
+                .mdc-tab--active {
                     background-color: $brand-typography;
                     border-color: white;
                 }
@@ -421,9 +421,12 @@ main {
     .sort {
         margin-top: 1.5rem;
     }
-    .mdc-select {
-        background-image: none;
+    .mdc-form-field.sort {
+        margin-top: 1.35rem;
     }
+    // .mdc-select {
+    //     background-image: none;
+    // }
     .mdc-select,
     .mdc-form-field {
         width: 100%;
@@ -1177,7 +1180,7 @@ footer {
     .mdc-tab-bar .mdc-tab {
         font-size: 1.35rem;
     }
-    .mdc-tab-bar .mdc-tab.active, .mdc-tab-bar .mdc-tab:hover {
+    .mdc-tab-bar .mdc-tab--active, .mdc-tab-bar .mdc-tab:hover {
         padding: 0.15rem 0.55rem;
     }
 }
@@ -1306,49 +1309,15 @@ footer {
             font-size: 1.5rem;
         }
     }
-    main .signatories {
-        .col.s6, .col.m4, .col.l3 {
-            border: $brand-border-width solid $brand-typography;
-            border-right: none;
-            border-bottom: none;
+    footer {
+        .footer-copyright a {
+            display: inline-block;
         }
-        .col:nth-child(4n + 1) {
-            border-left: $brand-border-width solid $brand-typography;
-            .inner {
-                padding-left: inherit;
-            }
-        }
-        .col:nth-child(4n + 4) {
-            border-right: none;
-            padding-right: inherit;
-            .inner {
-                margin-right: inherit;
-            }
-        }
-
-        .col:nth-child(3n + 1) {
-            border-left: none;
-            border-bottom: none;
-            .inner {
-                padding-left: 0;
-            }
-        }
-        .col:nth-child(3n + 3) {
-            border-right: none;
-            padding-right: 0;
-            .inner {
-                margin-right: 0;
-            }
-        }
-
-        .col:nth-child(4n+1):nth-last-child(-n+4),
-        .col:nth-child(4n+1):nth-last-child(-n+4) ~ .col {
-            border-bottom: none;
-        }
-
-        .col:nth-child(3n+1):nth-last-child(-n+3),
-        .col:nth-child(3n+1):nth-last-child(-n+3) ~ .col {
-            border-bottom: $brand-border-width solid $brand-typography;
+        .logo.scvo,
+        .logo.digital-scotland {
+            position: relative !important;
+            bottom: 0;
+            right: 0;
         }
     }
 }
@@ -1394,9 +1363,12 @@ footer {
     .hide-on-small-only {
         display: none;
     }
+    .pagination {
+        padding: 0;
+    }
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 839px) {
     .margin-top {
         margin-top: 1.5rem;
     }
@@ -1414,6 +1386,27 @@ footer {
     }
     .primary-gradient main .title h1 {
         margin-top: 1rem;
+    }
+    .signatories main {
+        h1 {
+            font-size: 2.2rem;
+            line-height: 2.2rem;
+            margin: 0;
+            padding: 0;
+            .small {
+                font-size: 1.8rem;
+            }
+        }
+        h4 {
+            font-size: 1.2rem;
+            margin-top: 1rem;
+        }
+        .mdc-form-field.sort {
+            margin: 0;
+            .mdc-select {
+                margin-top: 0.5rem;
+            }
+        }
     }
     main {
         .title {
@@ -1518,7 +1511,7 @@ footer {
           height: 7rem;
           line-height: 7rem;
         }
-        .col:nth-child(3n + 1) {
+        .signatory:nth-child(3n + 1) {
             padding-left: 0;
             padding-right: 0;
             .inner {
@@ -1526,7 +1519,7 @@ footer {
                 margin-right: 0;
             }
         }
-        .col:nth-child(3n + 3) {
+        .signatory:nth-child(3n + 3) {
             // border-left: none;
             padding-left: 0;
             padding-right: 0;
@@ -1536,7 +1529,7 @@ footer {
             }
         }
 
-        .col:nth-child(2n + 1) {
+        .signatory:nth-child(2n + 1) {
             border-left: none;
             // margin-right: -0.75rem;
             padding-left: 0;
@@ -1546,7 +1539,7 @@ footer {
                 margin-right: 0;
             }
         }
-        .col:nth-child(2n + 2) {
+        .signatory:nth-child(2n + 2) {
             border-left: $brand-border-width solid $brand-typography;
             padding-left: 0;
             padding-right: 0;
@@ -1555,14 +1548,29 @@ footer {
                 margin-right: 0;
             }
         }
-        .col:nth-child(3n+1):nth-last-child(-n+3),
-        .col:nth-child(3n+1):nth-last-child(-n+3) ~ .col {
+        .signatory:nth-child(4n+1):nth-last-child(-n+4),
+        .signatory:nth-child(4n+1):nth-last-child(-n+4) ~ .mdc-layout-grid__cell--span-3-desktop {
             border-bottom: none;
         }
-        .col:nth-child(2n+1):nth-last-child(-n+2),
-        .col:nth-child(2n+1):nth-last-child(-n+2) ~ .col {
+        .signatory:nth-child(3n+1):nth-last-child(-n+3),
+        .signatory:nth-child(3n+1):nth-last-child(-n+3) ~ .mdc-layout-grid__cell--span-3-desktop {
+            border-bottom: none;
+        }
+        .signatory:nth-child(2n+1):nth-last-child(-n+2),
+        .signatory:nth-child(2n+1):nth-last-child(-n+2) ~ .mdc-layout-grid__cell--span-3-desktop {
             border-bottom: $brand-border-width solid $brand-typography !important;
         }
+    }
+    .pagination {
+        padding: 0 !important;
+        margin: 1rem 0 0;
+    }
+    .pagination-distance-9,
+    .pagination-distance-8,
+    .pagination-distance-7,
+    .pagination-distance-6,
+    .pagination-distance-5 {
+        display: none !important;
     }
     .footer .container-fluid {
         .logo.scvo,
@@ -1574,6 +1582,21 @@ footer {
         }
         .logo.digital-scotland {
             margin-right: 1rem;
+        }
+    }
+}
+
+@media screen and (max-width: 479px) {
+    .pagination-distance-3,
+    .pagination-distance-4 {
+        display: none !important;
+    }
+    main .signatories {
+        .signatory:nth-child(2n+1):nth-last-child(-n+2) {
+            border-bottom: none !important;
+        }
+        .signatory:nth-child(2n + 2) {
+            border-left: none;
         }
     }
 }
