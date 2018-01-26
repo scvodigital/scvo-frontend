@@ -3,15 +3,8 @@
     "version": "1.0.0",
     "license": "MIT",
     "scripts": {
-        "build": "rm -rf ./dist; mkdir ./dist;",
-        "start": "npm run serve",
+        "start": "grunt serve",
         "yarn": "echo '#### yarn.lock has changed!'; $NVM_BIN/yarn; cd functions; $NVM_BIN/yarn; cd ..",
-        "serve-r": "cd ../scvo-router; npm run build; npm link; cd ../scvo-frontend; npm link scvo-router; cd functions; npm link scvo-router; cd ..; npm run serve",
-        "serve": "cd ./functions && npm run build && cd ../ && npm run build-dev && devmode=true firebase serve -p 9000 --only functions,hosting",
-        "serve-f": "cd ./functions && npm run build && cd ../ && devmode=true firebase serve -p 9000 --only functions",
-        "deploy": "cd ./functions && npm run build && npm run deploy-db && cd ../ && npm run build-prod && firebase deploy --only functions,hosting",
-        "deploy-h": "npm run build && firebase deploy --only hosting",
-        "deploy-f": "cd ./functions && npm run build && cd ../ && firebase deploy --only functions",
         "postmerge": "git diff-tree -r --name-only --no-commit-id ORIG_HEAD HEAD | grep --quiet 'yarn.lock' && eval 'npm run yarn'"
     },
     "private": true,
@@ -22,6 +15,7 @@
         "grunt-contrib-clean": "^1.1.0",
         "grunt-contrib-copy": "^1.0.0",
         "grunt-contrib-sass": "^1.0.0",
-        "typescript": "~2.3.3"
+        "husky": "^0.14.3",
+        "typescript": "~2.6.2"
     }
 }
