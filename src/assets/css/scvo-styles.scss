@@ -325,13 +325,7 @@ primary-dark: #251032
         background-color: map-get($themeSelected, 'primary-light') !important;
     }
     .mdc-theme--primary-dark-bg.toolbar-nav {
-        background-image: linear-gradient(
-        90deg,
-        map-get($themeSelected, 'primary-dark'),
-        map-get($themeSelected, 'primary-dark') 60%,
-        map-get($themeSelected, 'primary') 120%,
-        map-get($themeSelected, 'primary')
-        );
+        background-image: linear-gradient(90deg, rgba(0,0,0,0.15), rgba(0,0,0,0.15) 60%, rgba(0,0,0,0.1) 120%, rgba(0,0,0,0.1));
     }
     .pagination li:hover,
     .pagination li.current-page:hover,
@@ -872,6 +866,12 @@ figure {
         }
     }
     .featured-content {
+        .mdc-typography--caption {
+            font-weight: 600;
+            font-size: 1rem;
+            margin-left: 0.25rem;
+            letter-spacing: -0.02rem;
+        }
         .featured {
             h1,
             p {
@@ -895,12 +895,6 @@ figure {
             .post-info {
                 padding-bottom: $spacing-unit/2;
             }
-        }
-        .mdc-typography--caption {
-            font-weight: 600;
-            font-size: 1rem;
-            margin-left: 0.25rem;
-            letter-spacing: -0.02rem;
         }
         .featured-text {
             padding: 0 0 $spacing-unit*2;
@@ -1114,9 +1108,9 @@ figure {
 .mdc-form-field {
     font-size: 1rem;
 }
-.mdc-select {
-    background-image: none;
-}
+// .mdc-select {
+//     background-image: none;
+// }
 .mdc-select,
 .mdc-textfield {
     width: 100%;
