@@ -1577,10 +1577,13 @@
     },
     "page_charity_awards": {
         "pattern": "/scottish-charity-awards",
-        "templates": {
-            "default": `{:templates/pages/page-charity-awards.hbs}`
+        "layouts": {
+            "default": {
+                "head": `{:templates/pages/page-head-tags.hbs}`,
+                "body": `{:templates/pages/page-charity-awards.hbs}`,
+                "foot": ""
+            }
         },
-        "headTagsTemplate": `{:templates/pages/page-head-tags.hbs}`,
         "primarySearchTemplate": {
             "index": "web-content-production",
             "type": "scvo-cms-page",
