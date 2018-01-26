@@ -55,6 +55,7 @@ export class Context implements IContext {
     renderPage(uriString: string): Promise<string>{
         return new Promise<string>((resolve, reject) => {
             this.router.execute(uriString).then((routeMatch: string) => {
+                routeMatch = routeMatch.replace(this.domainStripper, '');
                 resolve(routeMatch);
             }).catch((err) => {
                 console.error('Failed to render route', err);
