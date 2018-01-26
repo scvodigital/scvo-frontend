@@ -1,4 +1,4 @@
-# SCVO's web frontend stack
+# SCVO web frontend stack
 
 This project uses [SCVO router](https://github.com/scvodigital/scvo-router) to serve numerous sites.
 
