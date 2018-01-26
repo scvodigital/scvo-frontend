@@ -49,6 +49,7 @@
                             }
                             {{#if query.q}},{{/if}}
                         {{/if}}
+                        {{#if query.q}}
 	        			{
 		        			"bool": {
 		        				"should": [
@@ -72,6 +73,7 @@
 		        				]
 		        			}
 	        			}
+                        {{/if}}
 	        		]
                     {{#unless query.type}},
                     "should": [
