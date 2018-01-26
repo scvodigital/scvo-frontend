@@ -33,7 +33,7 @@ const cp = cookieParser();
 exports.index = functions.https.onRequest((req: functions.Request, res: functions.Response) => {
     var startTime = +new Date();
     return new Promise((resolve, reject) => {
-        userId(req, res, () => {
+        userId(req, res, () => { 
             var domain = req.hostname.replace(/www\./, '');
             if (domain === 'localhost') {
                 domain = req.get('x-forwarded-host').split(":")[0];
@@ -44,6 +44,9 @@ exports.index = functions.https.onRequest((req: functions.Request, res: function
             getJson<Context>(path).then((contextJson: Context) => {
                 var context = new Context(contextJson, req.cookies.__session);
                 var url = req.query.url || req.url;
+                
+                url = 'https://' + domain + url;
+
                 context.renderPage(url).then((html: string) => {
                     //compression(req, res, () => {
                         //HACK for setting content type

@@ -684,7 +684,7 @@
         "pattern": "/post/categories/:category_slug",
         "layouts": {
             "rss": {
-                "head": "",
+                "head": `{:templates/posts/post-category-rss-head-tags.hbs}`,
                 "body": `{:templates/posts/post-category-rss.hbs}`
             },
             "default": {
@@ -718,6 +718,10 @@
     "post_digital": {
         "pattern": "/digital/blogs",
         "layouts": {
+            "rss": {
+                "head": `{:templates/posts/post-category-rss-head-tags.hbs}`,
+                "body": `{:templates/posts/post-category-rss.hbs}`
+            },
             "default": {
                 "head": `{:templates/pages/page-head-tags.hbs}`,
                 "body": `{:templates/posts/post-category.hbs}`,
@@ -1221,6 +1225,10 @@
     "page_blogs": {
         "pattern": "/blogs",
         "layouts": {
+            "rss": {
+                "head": `{:templates/posts/post-category-rss-head-tags.hbs}`,
+                "body": `{:templates/posts/post-category-rss.hbs}`
+            },
             "default": {
                 "head": `{:templates/pages/page-head-tags.hbs}`,
                 "body": `{:templates/pages/page-blogs.hbs}`,
