@@ -3854,3 +3854,33 @@ button.swiper-pagination-bullet {
   /* Windows 8 IE 10 fix */
   -ms-perspective: 1200px;
 }
+
+@media print {
+    .mdc-toolbar-fixed-adjust {
+        padding: 0;
+    }
+    .sidebar,
+    .related,
+    .breadcrumbs,
+    .header-caption,
+    .mdc-toolbar.mdc-toolbar--fixed,
+    #share-menu-button,
+    header,
+    footer {
+        display: none;
+    }
+    .content {
+        grid-column-end: span 12;
+    }
+    .splash-image .container-fluid .mdc-layout-grid {
+        width: 100%;
+        margin: 0;
+    }
+    .splash-image h1.header-text {
+        color: black;
+        font-size: 2rem;
+    }
+    .splash-image .splash-overlay .container-fluid {
+        min-height: auto;
+    }
+}
