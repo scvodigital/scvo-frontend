@@ -22,40 +22,29 @@
             <li><a href="/">Home</a></li>
             <li><a href="/jobs">Jobs</a></li>
             <li><a href="/jobs/community-jobs-scotland">Community Jobs Scotland</a></li>
-            <li>Vacancies</li>
+            <li><a href="/jobs/community-jobs-scotland/vacancies">Vacancies</a></li>
+            <li>Search</li>
         </ul>
-        <p class="v-margin-full">
-            Please view the opportunities available but if you cannot see a CJS job that would suit your customer then please contact the CJS team at <a href="mailto:communityjobsscotland@scvo.org.uk">communityjobsscotland@scvo.org.uk</a> with details and we can try and arrange an another opportunity.
-        </p>
         <div class="mdc-layout-grid">
             <div class="mdc-layout-grid__inner">
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone content page-content">
+                    <p class="v-margin-full">
+                        Please view the opportunities available but if you cannot see a CJS job that would suit your customer then please contact the CJS team at <a href="mailto:communityjobsscotland@scvo.org.uk">communityjobsscotland@scvo.org.uk</a> with details and we can try and arrange an another opportunity.
+                    </p>
+                </div>
+
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-3-tablet mdc-layout-grid__cell--span-4-phone sidebar page-sidebar">
                     {{> sidebar_cjs_search}}
                 </div>
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-9-desktop mdc-layout-grid__cell--span-5-tablet mdc-layout-grid__cell--span-4-phone content page-content v-margin">
-                    {{#ifAny params.query.region params.query.sector params.query.location params.query.job_number params.query.q}}
-
-                    <p>
-                        <a href="/jobs/community-jobs-scotland/vacancies">Back to list of sectors and regions</a>
-                    </p>
-
-                    {{> search_info}}
-
-                    {{#each primaryResponse.hits.hits}}
-                    {{{_source.rendered.scvo_list}}}
-                    {{/each}}
-
-                    {{> pagination}}
-
-                    {{else}}
-                    <div class="mdc-layout-grid cjs-search-list">
+                    <div class="mdc-layout-grid cjs-search-list v-margin-full">
                         <div class="mdc-layout-grid__inner">
                             <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
                                 <h2>Jobs by sector</h2>
                                 <div class="list">
                                     {{#each supplimentaryResponses.types.aggregations.sectors.buckets}}
                                     {{#if key}}
-                                    <a href="/jobs/community-jobs-scotland/vacancies?sector={{key}}">{{key}}</a><br />
+                                    <a href="/jobs/community-jobs-scotland/vacancies/{{../params.phase}}?sector={{key}}">{{key}}</a><br />
                                     {{/if}}
                                     {{/each}}
                                 </div>
@@ -65,14 +54,21 @@
                                 <div class="list">
                                     {{#each supplimentaryResponses.types.aggregations.regions.buckets}}
                                     {{#if key}}
-                                    <a href="/jobs/community-jobs-scotland/vacancies?region={{key}}">{{key}}</a><br />
+                                    <a href="/jobs/community-jobs-scotland/vacancies/{{../params.phase}}?region={{key}}">{{key}}</a><br />
                                     {{/if}}
                                     {{/each}}
                                 </div>
                             </div>
                         </div>
                     </div>
-                    {{/ifAny}}
+
+                    {{> search_info}}
+
+                    {{#each primaryResponse.hits.hits}}
+                    {{{_source.rendered.scvo_list}}}
+                    {{/each}}
+
+                    {{> pagination}}
                 </div>
             </div>
         </div>
