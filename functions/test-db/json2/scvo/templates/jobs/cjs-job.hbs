@@ -1,4 +1,4 @@
-<div class="goodmoves-job-search">
+<div class="cjs-job">
     <div class="splash-image splash-image-{{primaryResponse.hits.hits.[0]._type}}" style="{{> header_splash_image}}">
         <div class="splash-overlay{{#if primaryResponse.hits.hits.[0]._source.hide_overlay}} splash-overlay-hidden{{/if}}">
             <div class="container-fluid">
@@ -8,7 +8,7 @@
                     {{else}}
                     <h1 class="header-text">
                         <span class="header-text-banner">
-                            Job search
+                            pagetitle
                         </span>
                     </h1>
                     {{/if}}
@@ -21,14 +21,16 @@
         <ul class="breadcrumbs">
             <li><a href="/">Home</a></li>
             <li><a href="/jobs">Jobs</a></li>
-            <li>Search</li>
+            <li><a href="/jobs/community-jobs-scotland">Community Jobs Scotland</a></li>
+            <li><a href="/jobs/community-jobs-scotland/vacancies">Vacancies</a></li>
+            <li>pagetitle</li>
         </ul>
 
         <div class="mdc-layout-grid">
             <div class="mdc-layout-grid__inner">
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-3-tablet mdc-layout-grid__cell--span-4-phone sidebar page-sidebar">
-                    <h2 class="mdc-card__title mdc-card__title--large">Search jobs</h2>
-                    <form action="/jobs/search" method="GET" [searchroute]="'goodmoves_job_search'" data-auto-search="true">
+                    <h2 class="mdc-card__title mdc-card__title--large">Search vacancies</h2>
+                    <form action="/jobs/community-jobs-scotland/vacancies" method="GET" [searchroute]="'cjs_job_search'" data-auto-search="true">
                         <div class="mdc-layout-grid">
                             <div class="mdc-layout-grid__inner">
                                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone">
@@ -72,25 +74,6 @@
                                             {{/if}}
                                             {{/each}}
                                         </select>
-                                    </div>
-                                </div>
-                                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone">
-                                    <div class="mdc-form-field">
-                                        <label class="mdc-textfield__label" for="status">Status</label>
-                                        <select class="mdc-select" role="listbox" id="jobs-status" name="status">
-                                            <option value="" {{#if params.query.status}}{{else}}selected{{/if}}>Any status</option>
-                                            {{#each supplimentaryResponses.types.aggregations.statuses.buckets}}
-                                            {{#if key}}
-                                            <option value="{{key}}" {{#compare ../params.query.status "===" key}}selected{{/compare}}>{{key}}</option>
-                                            {{/if}}
-                                            {{/each}}
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone">
-                                    <div class="mdc-textfield mdc-textfield--upgraded">
-                                        <label class="mdc-textfield__label" for="minimum_salary">Minimum salary</label>
-                                        <input type="text" class="mdc-textfield__input" name="minimum_salary" id="jobs-minimum_salary" placeholder="e.g. 32000" value="{{params.query.q}}">
                                     </div>
                                 </div>
                             </div>
