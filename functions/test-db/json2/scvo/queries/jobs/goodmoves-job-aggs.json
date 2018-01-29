@@ -18,21 +18,39 @@
         }
     },
     "aggs": {
-        "roles": {
-            "terms": {
-                "field": "roles",
-                "size": 10000
-            }
-        },
         "sectors": {
             "terms": {
                 "field": "sectors",
+                "order": {
+                    "_term": "asc"
+                },
+                "size": 10000
+            }
+        },
+        "roles": {
+            "terms": {
+                "field": "roles",
+                "order": {
+                    "_term": "asc"
+                },
+                "size": 10000
+            }
+        },
+        "regions": {
+            "terms": {
+                "field": "regions",
+                "order": {
+                    "_term": "asc"
+                },
                 "size": 10000
             }
         },
         "statuses": {
             "terms": {
                 "field": "status",
+                "order": {
+                    "_term": "asc"
+                },
                 "size": 10000
             }
         }

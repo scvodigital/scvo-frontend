@@ -7,6 +7,15 @@
     "query": {
         "bool": {
             "must": [
+                {{#if query.q}}
+                {
+                    "query_string": {
+                        "query": "{{query.q}}",
+                        "default_operator": "AND",
+                        "analyzer": "snowball"
+                    }
+                },
+                {{/if}}
                 {{#if query.sector}}
                 {
                     "term": {
@@ -21,6 +30,13 @@
                     }
                 },
                 {{/if}}
+                {{#if query.region}}
+                {
+                    "term": {
+                        "regions": "{{query.region}}"
+                    }
+                },
+                {{/if}}
                 {{#if query.status}}
                 {
                     "term": {
@@ -28,14 +44,7 @@
                     }
                 },
                 {{/if}}
-                {{#if query.q}}
-                {
-                    "query_string": {
-                        "query": "{{query.q}}",
-                        "default_operator": "AND",
-                        "analyzer": "snowball"
-                    }
-                },
+                {{#if query.minimum_salary}}
                 {{/if}}
                 {
                     "term": {

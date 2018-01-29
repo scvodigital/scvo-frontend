@@ -722,6 +722,7 @@ img.responsive {
 
 .mdc-tab,
 .mdc-button,
+.mdc-form-field,
 .mdc-typography,
 .mdc-card__subtitle,
 .mdc-textfield__input,
@@ -741,9 +742,10 @@ img.responsive {
     font-weight: 600;
 }
 .mdc-card__title,
+.mdc-textfield__label,
+.mdc-typography--title,
 .mdc-typography--headline,
-.supplimentary-list-title,
-.mdc-typography--title {
+.supplimentary-list-title {
     font-family: "Montserrat", "Open Sans", Helvetica, Arial, sans-serif;
     font-weight: 700;
 }
@@ -850,9 +852,9 @@ section.search {
     margin-bottom: $unit*2;
 }
 .search {
-    h3 {
-        margin: $unit*2 0 0;
-    }
+    // h3 {
+    //     margin: $unit*2 0 0;
+    // }
     .main_search {
         position: relative;
     }
@@ -884,6 +886,11 @@ section.search {
             }
         }
     }
+}
+.mdc-card.search .search_form .search-button-large,
+.mdc-card-search .search_form .search-button-large {
+    top: 0.35rem;
+    right: 0.4rem;
 }
 
 .home {
@@ -1148,10 +1155,34 @@ section.search {
 // .mdc-select {
 //     background-image: none;
 // }
+.mdc-select {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
+}
 .mdc-select,
 .mdc-textfield {
     width: 100%;
     margin: 0 0 $unit/2;
+}
+.mdc-form-field>label {
+    padding: 0;
+}
+.sidebar .mdc-form-field {
+    display: block;
+}
+.mdc-textfield__label {
+    display: block;
+    margin-bottom: $unit/2;
+}
+.filter {
+    margin-top: $unit !important;
+    h3 {
+        margin: 0;
+    }
+    .mdc-form-field {
+        width: 100%;
+    }
 }
 
 .sidebar {
@@ -2462,6 +2493,9 @@ ul.breadcrumbs {
 
 .scvo-staff.list {
     margin-bottom: $unit/2;
+    .contact {
+        text-align: right;
+    }
 }
 .post-info .post-info-author img,
 .about.staff-team .staff-list .scvo-staff-photo-wee {
@@ -2781,6 +2815,10 @@ p:last-child {
     margin-top: $unit/2;
     margin-bottom: $unit/2;
 }
+.v-margin-full {
+    margin-top: $unit;
+    margin-bottom: $unit;
+}
 
 .h-margin {
     margin-left: $unit/2;
@@ -2863,8 +2901,10 @@ footer {
             text-decoration: underline;
         }
     }
-    .contact .fa-ul {
-        margin-bottom: $unit !important;
+    .contact {
+        .fa-ul {
+            margin-bottom: $unit !important;
+        }
     }
     .mdc-layout-grid p {
         margin-bottom: 0;
