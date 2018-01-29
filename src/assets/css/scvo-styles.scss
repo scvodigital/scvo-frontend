@@ -3,6 +3,13 @@
 
 $unit: 1rem;
 $nav-height: 38px;
+
+// :root {
+//     --mdc-layout-grid-gutter-desktop: $unit;
+//     --mdc-layout-grid-gutter-tablet: $unit;
+//     --mdc-layout-grid-gutter-phone: $unit;
+// }
+
 $colours: (
 default: (
 primary: #AD1457,
@@ -768,6 +775,7 @@ iframe {
 figure {
     margin: $unit 0;
 }
+.mdc-select,
 .mdc-textfield__input,
 .mdc-textfield__input:focus,
 .mdc-textfield__input:hover {
@@ -775,14 +783,18 @@ figure {
     border-width: $unit/8;
     border-style: solid;
     border-color: #333;
-    padding: 0  $unit/2;
+    padding: 0 $unit/2;
     margin: 0;
     width: 100%;
     line-height: $nav-height - 3px;
     height: $nav-height - 3px;
-    background: transparent;
     border-radius: 0 !important;
     box-sizing: border-box;
+}
+.mdc-textfield__input,
+.mdc-textfield__input:focus,
+.mdc-textfield__input:hover {
+    background: transparent;
 }
 .mdc-button a:hover,
 .mdc-button:hover,
@@ -997,6 +1009,13 @@ section.search {
         }
     }
 }
+
+.cjs-search-list {
+    .mdc-layout-grid__cell .list {
+        column-count: 2;
+    }
+}
+
 .home,
 .policy-research {
     .latest-content {
@@ -1160,6 +1179,9 @@ section.search {
     width: 100%;
     max-width: 100%;
 }
+.mdc-select:focus {
+    border-bottom-color: inherit;
+}
 .mdc-select,
 .mdc-textfield {
     width: 100%;
@@ -1168,8 +1190,10 @@ section.search {
 .mdc-form-field>label {
     padding: 0;
 }
-.sidebar .mdc-form-field {
-    display: block;
+.sidebar {
+    .mdc-form-field {
+        display: block;
+    }
 }
 .mdc-textfield__label {
     display: block;
@@ -2250,7 +2274,6 @@ body.post.author {
     }
 }
 
-dl.inline,
 .inline-dl {
     margin: 0;
     dt, dd {
@@ -2264,6 +2287,7 @@ dl.inline,
         width: 70%;
     }
 }
+.cjs-job-search .inline-dl,
 .staff-team .inline-dl {
     margin: 0;
     dt, dd {
