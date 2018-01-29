@@ -415,17 +415,53 @@
             "apiVersion": "5.6"
         }
     },
+    "cjs_job": {
+        "pattern": "/jobs/community-jobs-scotland/vacancies/:phase/:slug",
+        "layouts": {
+            "default": {
+                "head": `{:templates/pages/page-head-tags.hbs}`,
+                "body": `{:templates/jobs/cjs-job.hbs}`,
+                "foot": ""
+            }
+        },
+        "defaultParams": {
+            "pageSize": 10
+        },
+        "primarySearchTemplate": {
+            "index": "web-content-production",
+            "type": "cjs-job",
+            "template": `{:queries/jobs/cjs-job.json}`
+        },
+        "supplimentarySearchTemplates": {
+            "not_found": {
+                "index": "web-content-production",
+                "type": "scvo-cms-page,scvo-cms-post",
+                "template": `{:queries/pages/not-found.json}`
+            },
+            "types": {
+                "index": "web-content-production",
+                "type": "cjs-job",
+                "template": `{:queries/jobs/cjs-job-aggs.json}`
+            },
+            "splash": {
+                "index": "web-content-production",
+                "type": "scvo-cms-media",
+                "template": `{:queries/pages/splash.json}`
+            }
+        },
+        "elasticsearchConfig": {
+            "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
+            "apiVersion": "5.6"
+        }
+    },
     "cjs_job_search": {
-        "pattern": "/jobs/community-jobs-scotland/vacancies",
+        "pattern": "/jobs/community-jobs-scotland/vacancies/:phase",
         "layouts": {
             "default": {
                 "head": `{:templates/jobs/cjs-job-search-head-tags.hbs}`,
                 "body": `{:templates/jobs/cjs-job-search.hbs}`,
                 "foot": ""
             }
-        },
-        "defaultParams": {
-            "pageSize": 10
         },
         "primarySearchTemplate": {
             "index": "web-content-production",
@@ -454,33 +490,25 @@
             "apiVersion": "5.6"
         }
     },
-    "cjs_job": {
-        "pattern": "/jobs/community-jobs-scotland/vacancies/:slug",
+    "cjs_job_phase": {
+        "pattern": "/jobs/community-jobs-scotland/vacancies",
         "layouts": {
             "default": {
-                "head": `{:templates/pages/page-head-tags.hbs}`,
-                "body": `{:templates/jobs/cjs-job.hbs}`,
+                "head": `{:templates/jobs/cjs-job-search-head-tags.hbs}`,
+                "body": `{:templates/jobs/cjs-job-phase.hbs}`,
                 "foot": ""
             }
         },
-        "defaultParams": {
-            "pageSize": 10
-        },
         "primarySearchTemplate": {
             "index": "web-content-production",
-            "type": "cjs-job",
-            "template": `{:queries/jobs/cjs-job.json}`
+            "type": "scvo-cms-page,scvo-cms-post",
+            "template": `{:queries/pages/not-found.json}`
         },
         "supplimentarySearchTemplates": {
             "not_found": {
                 "index": "web-content-production",
                 "type": "scvo-cms-page,scvo-cms-post",
                 "template": `{:queries/pages/not-found.json}`
-            },
-            "types": {
-                "index": "web-content-production",
-                "type": "cjs-job",
-                "template": `{:queries/jobs/cjs-job-aggs.json}`
             },
             "splash": {
                 "index": "web-content-production",

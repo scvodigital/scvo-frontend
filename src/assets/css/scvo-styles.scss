@@ -831,7 +831,7 @@ figure {
             align-items: baseline;
             justify-content: flex-end;
             .caption {
-                text-align: center;
+                text-align: right;
                 color: #fff;
                 font-weight: 600;
                 font-size: 2.1rem;
@@ -1011,6 +1011,9 @@ section.search {
 }
 
 .cjs-search-list {
+    h2 {
+        margin-top: $unit/4;
+    }
     .mdc-layout-grid__cell .list {
         column-count: 2;
     }
@@ -2311,7 +2314,6 @@ body.post.author {
 }
 .inline-dl.span-2 {
     clear: both;
-    column-count: 2;
     dt {
         width: 40%;
     }
@@ -3851,4 +3853,35 @@ button.swiper-pagination-bullet {
 .swiper-container-coverflow .swiper-wrapper {
   /* Windows 8 IE 10 fix */
   -ms-perspective: 1200px;
+}
+
+@media print {
+    .mdc-toolbar-fixed-adjust {
+        padding: 0;
+    }
+    .sidebar,
+    .related,
+    .footer-image,
+    .breadcrumbs,
+    .header-caption,
+    .mdc-toolbar.mdc-toolbar--fixed,
+    #share-menu-button,
+    header,
+    footer {
+        display: none;
+    }
+    .content {
+        grid-column-end: span 12;
+    }
+    .splash-image .container-fluid .mdc-layout-grid {
+        width: 100%;
+        margin: 0;
+    }
+    .splash-image h1.header-text {
+        color: black;
+        font-size: 2rem;
+    }
+    .splash-image .splash-overlay .container-fluid {
+        min-height: auto;
+    }
 }
