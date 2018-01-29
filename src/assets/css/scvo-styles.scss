@@ -831,7 +831,7 @@ figure {
             align-items: baseline;
             justify-content: flex-end;
             .caption {
-                text-align: center;
+                text-align: right;
                 color: #fff;
                 font-weight: 600;
                 font-size: 2.1rem;
@@ -899,6 +899,7 @@ section.search {
         }
     }
 }
+.jobs-landing .search_form .search-button-large,
 .mdc-card.search .search_form .search-button-large,
 .mdc-card-search .search_form .search-button-large {
     top: 0.35rem;
@@ -1109,6 +1110,7 @@ section.search {
 .policy-research .latest-content .gist,
 .home .latest-content .gist,
 .digital .latest_content .gist,
+.jobs-landing .gist,
 .page-related .gist,
 .post-related .gist {
     box-shadow: none;
@@ -1132,6 +1134,21 @@ section.search {
     margin-top: 0;
     h3 {
         margin-top: 0;
+    }
+}
+.jobs-landing {
+    .page-content {
+        .mdc-layout-grid__inner {
+            margin: $unit/2 0;
+        }
+        .search {
+            ul {
+                list-style-type: none;
+                li {
+                    margin: $unit/2 0;
+                }
+            }
+        }
     }
 }
 
@@ -3853,4 +3870,35 @@ button.swiper-pagination-bullet {
 .swiper-container-coverflow .swiper-wrapper {
   /* Windows 8 IE 10 fix */
   -ms-perspective: 1200px;
+}
+
+@media print {
+    .mdc-toolbar-fixed-adjust {
+        padding: 0;
+    }
+    .sidebar,
+    .related,
+    .footer-image,
+    .breadcrumbs,
+    .header-caption,
+    .mdc-toolbar.mdc-toolbar--fixed,
+    #share-menu-button,
+    header,
+    footer {
+        display: none;
+    }
+    .content {
+        grid-column-end: span 12;
+    }
+    .splash-image .container-fluid .mdc-layout-grid {
+        width: 100%;
+        margin: 0;
+    }
+    .splash-image h1.header-text {
+        color: black;
+        font-size: 2rem;
+    }
+    .splash-image .splash-overlay .container-fluid {
+        min-height: auto;
+    }
 }
