@@ -2,7 +2,7 @@
     "size": 10,
     "from": {{multiply (subtract (default query.page 1) 1) 10}},
     "_source": [
-        "rendered.scvo_search_result"
+        "rendered.scvo_list"
     ],
     "query": {
         "bool": {
@@ -16,54 +16,42 @@
                     }
                 },
                 {{/if}}
-                {{#if query.sector}}
+                {{#if query.job_number}}
                 {
                     "term": {
-                        "sectors": "{{query.sector}}"
+                        "job_number": "{{query.job_number}}"
                     }
                 },
                 {{/if}}
-                {{#if query.role}}
+                {{#if query.location}}
                 {
                     "term": {
-                        "roles": "{{query.role}}"
+                        "organisation.area_town": "{{query.location}}"
+                    }
+                },
+                {{/if}}
+                {{#if query.sector}}
+                {
+                    "term": {
+                        "occupational_sector": "{{query.sector}}"
                     }
                 },
                 {{/if}}
                 {{#if query.region}}
                 {
                     "term": {
-                        "regions": "{{query.region}}"
+                        "local_authority": "{{query.region}}"
                     }
                 },
                 {{/if}}
-                {{#if query.status}}
                 {
                     "term": {
-                        "status": "{{query.status}}"
-                    }
-                },
-                {{/if}}
-                {{#if query.minimum_salary}}
-                {{/if}}
-                {
-                    "term": {
-                        "country_iso3": "GBR"
+                        "status": "Subbed"
                     }
                 },
                 {
-                    "term": {
-                        "vacancy_status": "vacancy-open"
-                    }
-                }
-            ],
-            "should": [
-                {
-                    "term": {
-                        "top_job": {
-                            "value": true,
-                            "boost": 100
-                        }
+                    "wildcard" : {
+                        "cjs_lookup": "{{#compare phase "aag"}}AA PH7{{else}}{{#compare phase "p52"}}N/A{{else}}CJS PH7*{{/compare}}{{/compare}}"
                     }
                 }
             ]

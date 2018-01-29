@@ -5,34 +5,26 @@
         "bool": {
             "must": [
                 {
-                    "range" : {
-                        "date_start" : {
-                            "gte" : "now/d"
-                        }
+                    "term": {
+                        "status": "Subbed"
                     }
                 }
             ]
         }
     },
     "aggs": {
-        "types": {
+        "sectors": {
             "terms": {
-                "field": "course_type",
+                "field": "occupational_sector",
                 "order": {
                     "_term": "asc"
                 },
                 "size": 10000
             }
         },
-        "months": {
+        "regions": {
             "terms": {
-                "field": "month",
-                "size": 10000
-            }
-        },
-        "locations": {
-            "terms": {
-                "field": "city",
+                "field": "local_authority",
                 "order": {
                     "_term": "asc"
                 },

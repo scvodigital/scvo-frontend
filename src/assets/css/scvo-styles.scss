@@ -3,6 +3,13 @@
 
 $unit: 1rem;
 $nav-height: 38px;
+
+// :root {
+//     --mdc-layout-grid-gutter-desktop: $unit;
+//     --mdc-layout-grid-gutter-tablet: $unit;
+//     --mdc-layout-grid-gutter-phone: $unit;
+// }
+
 $colours: (
 default: (
 primary: #AD1457,
@@ -722,6 +729,7 @@ img.responsive {
 
 .mdc-tab,
 .mdc-button,
+.mdc-form-field,
 .mdc-typography,
 .mdc-card__subtitle,
 .mdc-textfield__input,
@@ -741,9 +749,10 @@ img.responsive {
     font-weight: 600;
 }
 .mdc-card__title,
+.mdc-textfield__label,
+.mdc-typography--title,
 .mdc-typography--headline,
-.supplimentary-list-title,
-.mdc-typography--title {
+.supplimentary-list-title {
     font-family: "Montserrat", "Open Sans", Helvetica, Arial, sans-serif;
     font-weight: 700;
 }
@@ -766,6 +775,7 @@ iframe {
 figure {
     margin: $unit 0;
 }
+.mdc-select,
 .mdc-textfield__input,
 .mdc-textfield__input:focus,
 .mdc-textfield__input:hover {
@@ -773,14 +783,18 @@ figure {
     border-width: $unit/8;
     border-style: solid;
     border-color: #333;
-    padding: 0  $unit/2;
+    padding: 0 $unit/2;
     margin: 0;
     width: 100%;
     line-height: $nav-height - 3px;
     height: $nav-height - 3px;
-    background: transparent;
     border-radius: 0 !important;
     box-sizing: border-box;
+}
+.mdc-textfield__input,
+.mdc-textfield__input:focus,
+.mdc-textfield__input:hover {
+    background: transparent;
 }
 .mdc-button a:hover,
 .mdc-button:hover,
@@ -815,15 +829,15 @@ figure {
             padding: 0;
             display: flex;
             align-items: baseline;
-            justify-content: center;
+            justify-content: flex-end;
             .caption {
                 text-align: center;
                 color: #fff;
                 font-weight: 600;
-                font-size: 1.25rem;
-                padding: 0.5rem 1rem;
+                font-size: 2.1rem;
+                padding: 1.5rem 3rem;
                 align-self: flex-end;
-                margin: 2.75rem 0;
+                margin: 0;
                 max-width: 65%;
             }
         }
@@ -850,9 +864,9 @@ section.search {
     margin-bottom: $unit*2;
 }
 .search {
-    h3 {
-        margin: $unit*2 0 0;
-    }
+    // h3 {
+    //     margin: $unit*2 0 0;
+    // }
     .main_search {
         position: relative;
     }
@@ -884,6 +898,11 @@ section.search {
             }
         }
     }
+}
+.mdc-card.search .search_form .search-button-large,
+.mdc-card-search .search_form .search-button-large {
+    top: 0.35rem;
+    right: 0.4rem;
 }
 
 .home {
@@ -990,6 +1009,16 @@ section.search {
         }
     }
 }
+
+.cjs-search-list {
+    h2 {
+        margin-top: $unit/4;
+    }
+    .mdc-layout-grid__cell .list {
+        column-count: 2;
+    }
+}
+
 .home,
 .policy-research {
     .latest-content {
@@ -1016,6 +1045,13 @@ section.search {
         padding: $unit*1.5 0;
         h2 {
             margin-top: 0;
+        }
+        p {
+            margin: $unit 0 0;
+        }
+        a {
+            color: white;
+            text-decoration: underline;
         }
         .mdc-layout-grid__cell {
             padding: $unit*1.5 0 $unit/2;
@@ -1141,10 +1177,39 @@ section.search {
 // .mdc-select {
 //     background-image: none;
 // }
+.mdc-select {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
+}
+.mdc-select:focus {
+    border-bottom-color: inherit;
+}
 .mdc-select,
 .mdc-textfield {
     width: 100%;
     margin: 0 0 $unit/2;
+}
+.mdc-form-field>label {
+    padding: 0;
+}
+.sidebar {
+    .mdc-form-field {
+        display: block;
+    }
+}
+.mdc-textfield__label {
+    display: block;
+    margin-bottom: $unit/2;
+}
+.filter {
+    margin-top: $unit !important;
+    h3 {
+        margin: 0;
+    }
+    .mdc-form-field {
+        width: 100%;
+    }
 }
 
 .sidebar {
@@ -1220,6 +1285,7 @@ section.search {
                 .mdc-textfield__input,
                 .mdc-textfield__input:focus,
                 .mdc-textfield__input:hover {
+                    font-size: 16px;
                     color: rgba(255,255,255,.87);
                     border-width: $unit/8;
                     border-style: solid;
@@ -1291,6 +1357,9 @@ section.search {
                     display: none;
                 }
             }
+            .mdc-tab.mdc-tab--active {
+                opacity: 1;
+            }
             #main-tab-bar {
                 .mdc-tab:hover .mdc-tab--label {
                     border-bottom-color: rgba(255,255,255,0.6);
@@ -1361,13 +1430,19 @@ section.search {
 }
 .mdc-temporary-drawer {
     display: none;
+    .mdc-temporary-drawer__header,
+    .mdc-temporary-drawer__header-content {
+        height: 58px;
+    }
     .mdc-temporary-drawer__header-content {
         direction: ltr;
-        padding: $unit;
+        padding: 0 $unit*0.7;
+        -webkit-box-align: center;
+        align-items: center;
     }
-    .mdc-temporary-drawer__header:before {
-        padding-top: 24%;
-    }
+    // .mdc-temporary-drawer__header:before {
+    //     padding-top: 24%;
+    // }
     .mdc-list-group {
         direction: ltr;
         .mdc-list {
@@ -1661,6 +1736,7 @@ body.the-gathering {
     .splash-image .splash-overlay .container-fluid {
         min-height: 30vh;
         .mdc-layout-grid {
+            line-height: 0;
             margin: 0;
             width: 100%;
             text-align: center;
@@ -1911,10 +1987,10 @@ table.membership-fees {
         margin-bottom: $unit;
     }
     .cjs-employers .mdc-card__media {
-        background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/.jpg');
+        background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/cafe.jpg');
     }
     .cjs-employees .mdc-card__media {
-        background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/.jpg');
+        background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/woodwork.jpg');
     }
     .cjs-vacancies .mdc-card__media {
         background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/hiring.jpg');
@@ -2120,6 +2196,9 @@ table.membership-fees {
         padding-bottom: $unit;
     }
 }
+.scvo-event .mdc-card__primary {
+    padding-bottom: $unit/2;
+}
 .mdc-card__supporting-text {
     padding: 0 $unit $unit/2;
     h4 {
@@ -2144,18 +2223,23 @@ table.membership-fees {
     h3 {
         margin-top: 0;
     }
-    form h3 {
+    form .sidebar h3 {
         margin-top: $unit;
     }
 }
 
 .search-info {
+    // border: 0.125rem solid #ddd;
     margin-bottom: $unit;
-    border: 0.125rem solid #ddd;
-    background: #f8f8f8;
+    background: #fafafa;
     color: #555;
     padding: $unit/3 $unit/2;
     box-sizing: border-box;
+}
+body.post.author {
+    .search-info {
+        margin-top: $unit;
+    }
 }
 
 .search-result {
@@ -2206,7 +2290,10 @@ table.membership-fees {
         width: 70%;
     }
 }
+.cjs-job-search .inline-dl,
+.cjs-job .inline-dl,
 .staff-team .inline-dl {
+    clear: both;
     margin: 0;
     dt, dd {
         float: left;
@@ -2214,6 +2301,7 @@ table.membership-fees {
     }
     dt {
         clear: both;
+        font-weight: 600;
         width: 20%;
     }
     dd {
@@ -2222,6 +2310,22 @@ table.membership-fees {
         ul {
             margin: 0 0 0 1.4rem;
         }
+    }
+}
+.inline-dl.span-2 {
+    clear: both;
+    dt {
+        width: 40%;
+    }
+    dd {
+        width: 60%;
+    }
+}
+.full.cjs-job {
+    hr,
+    h2,
+    h3 {
+        clear: both;
     }
 }
 .events .inline-dl {
@@ -2344,6 +2448,16 @@ table.membership-fees {
     }
 }
 
+// Hide CU members site
+#credit-union-menu {
+    a:nth-child(2),
+    a:nth-child(6),
+    a:nth-child(7),
+    a:nth-child(8) {
+        display: none;
+    }
+}
+
 .mdc-simple-menu {
     .fa-fw {
         margin-right: $unit/2;
@@ -2425,6 +2539,9 @@ ul.breadcrumbs {
 
 .scvo-staff.list {
     margin-bottom: $unit/2;
+    .contact {
+        text-align: right;
+    }
 }
 .post-info .post-info-author img,
 .about.staff-team .staff-list .scvo-staff-photo-wee {
@@ -2615,6 +2732,18 @@ p:last-child {
             font-size: 95%;
         }
     }
+    .alignleft {
+        float: left;
+        margin-right: $unit;
+    }
+    .alignright {
+        float: right;
+        margin-left: $unit;
+    }
+    .aligncenter {
+        display: block;
+        margin: 0 auto;
+    }
 }
 .static-sidebar,
 .post-content .full {
@@ -2732,6 +2861,10 @@ p:last-child {
     margin-top: $unit/2;
     margin-bottom: $unit/2;
 }
+.v-margin-full {
+    margin-top: $unit;
+    margin-bottom: $unit;
+}
 
 .h-margin {
     margin-left: $unit/2;
@@ -2814,8 +2947,10 @@ footer {
             text-decoration: underline;
         }
     }
-    .contact .fa-ul {
-        margin-bottom: $unit !important;
+    .contact {
+        .fa-ul {
+            margin-bottom: $unit !important;
+        }
     }
     .mdc-layout-grid p {
         margin-bottom: 0;
@@ -2909,6 +3044,9 @@ footer {
     .home {
         .splash-image.hello .container-fluid .mdc-layout-grid {
             margin-left: 0;
+        }
+        .search .search_form {
+            margin: 0;
         }
         .latest-content {
             h2 a,
