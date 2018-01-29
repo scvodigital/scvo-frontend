@@ -199,6 +199,8 @@ const domainMap = {
     "scvo.local": "scvo",
     "127.0.0.1": "scvo",
     "scvo.net": "scvo",
+    "amp.scvo.local": "scvo",
+    "amp.scvo.org": "scvo",
     "scvo.org": "scvo",
     "scvo.org.uk": "scvo",
     "test.scvo.org": "scvo",

@@ -19,16 +19,6 @@ export class Context implements IContext {
     uaId: string = '';
     layouts: ILayouts;
 
-    _domainStripper: RegExp = null;
-    get domainStripper(): RegExp {
-        if(!this._domainStripper){
-            var stripDomains = this.domains.map((domain: string) => { return domain.replace(/\./g, '\\.'); });
-            var domainRegexString = '((https?)?:\\/\\/)((' + stripDomains.join(')|(') + '))';
-            this._domainStripper = new RegExp(domainRegexString, 'ig');
-        }
-        return this._domainStripper;
-    }
-
     get toJSON(): IContext {
         return {
             name: this.name,
@@ -55,7 +45,6 @@ export class Context implements IContext {
     renderPage(uriString: string): Promise<string>{
         return new Promise<string>((resolve, reject) => {
             this.router.execute(uriString).then((routeMatch: string) => {
-                routeMatch = routeMatch.replace(this.domainStripper, '');
                 resolve(routeMatch);
             }).catch((err) => {
                 console.error('Failed to render route', err);

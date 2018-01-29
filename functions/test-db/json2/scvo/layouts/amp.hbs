@@ -1,11 +1,10 @@
 <!doctype html>
 <html amp lang="en">
-
 <head>
     <meta charset="utf-8">
     <script async src="https://cdn.ampproject.org/v0.js"></script>
-    <title>Hello, AMPs</title>
-    <link rel="canonical" href="{{routeMatch.params.uri.path}}">
+    <link rel="canonical" href="{{regexReplace route.params.uri.href "(//amp.)" "gi" "//"}}">
+    <!--{section:head}-->
     <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
     <script type="application/ld+json">
         {{{rendered.json_ld}}}
@@ -66,7 +65,7 @@
 </head>
 
 <body>
-    {{> @partial-block }}
+    <!--{section:body}-->
 </body>
 
 </html>
