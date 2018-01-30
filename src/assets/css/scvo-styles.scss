@@ -463,8 +463,11 @@ primary-dark: #251032
             color: map-get($themeDefault, 'primary') !important;
         }
     }
-    .community-jobs-scotland .callout-image .caption .caption-inner {
-        background-color: map-get($themeJobs, 'primary-overlay-start');
+    .community-jobs-scotland .callout-image .caption {
+        background-color: rgba(255,255,255,0.5);
+        .caption-inner {
+            background-color: map-get($themeJobs, 'primary-overlay-start');
+        }
     }
     .swiper-container .swiper-pagination-bullet {
         background-color: white;
@@ -835,18 +838,17 @@ figure {
                 text-align: right;
                 color: #fff;
                 font-weight: 600;
-                font-size: 1.7rem;
+                font-size: 1.75rem;
                 align-self: flex-end;
                 margin: 0;
                 max-width: 65%;
                 img {
                     width: 200px;
                     height: auto;
-                    padding-top: $unit;
-                    padding-bottom: $unit/2;
+                    padding: $unit $unit/2 $unit/2;
                 }
                 .caption-inner {
-                    padding: 1.5rem 3rem;
+                    padding: $unit $unit*2;
                 }
             }
         }
@@ -2445,6 +2447,11 @@ body.post.author {
         clear: both;
     }
 }
+.list.cjs-job {
+    .mdc-card__title {
+        padding: 0;
+    }
+}
 .events .inline-dl {
     dt {
         font-weight: 600;
@@ -3272,6 +3279,9 @@ footer {
                 grid-column-end: span 7;
             }
         }
+    }
+    .community-jobs-scotland .callout-image .container-fluid .caption {
+        max-width: 100%;
     }
     .splash-image {
         .container-fluid {
