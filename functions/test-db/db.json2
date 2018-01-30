@@ -67,17 +67,26 @@
                 "amp": {
                     "template": `{:json2/scvo/layouts/amp.hbs}`,
                     "sections": ["head", "body", "foot"],
-                    "pattern": "https?:\\/\\/amp\\..*"
+                    "pattern": "https?:\\/\\/amp\\..*",
+                    "contentType": "text/html"
                 },
                 "rss": {
                     "template": `{:json2/scvo/layouts/rss.hbs}`,
                     "sections": ["head", "body"],
-                    "pattern": "(&|\\?)rss\\b"
+                    "pattern": "(&|\\?)rss\\b",
+                    "contentType": "application/rss+xml"
+                },
+                "txt": {
+                    "template": `{:json2/scvo/layouts/empty.hbs}`,
+                    "sections": ["content"],
+                    "pattern": "[^]",
+                    "contentType": "text/plain"
                 },
                 "default": {
                     "template": `{:json2/scvo/layouts/default.hbs}`,
                     "sections": ["head", "body", "foot"],
-                    "pattern": ".*"
+                    "pattern": ".*",
+                    "contentType": "text/html"
                 }
             }
         },

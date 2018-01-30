@@ -8,7 +8,7 @@ import * as url from 'url';
 // Module imports
 import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
-import { Router, RouteMatch, IMenus } from 'scvo-router';
+import { Router, RouteMatch, IMenus, IRouterResponse } from 'scvo-router';
 import * as Dot from 'dot-object';
 import * as uuid from 'uuid';
 import * as cookieParser from 'cookie-parser';
@@ -47,27 +47,14 @@ exports.index = functions.https.onRequest((req: functions.Request, res: function
                 
                 url = 'https://' + domain + url;
 
-                context.renderPage(url).then((html: string) => {
-                    //compression(req, res, () => {
-                        //HACK for setting content type
-                        if (html.indexOf('<?xml') === 0) {
-                            if (html.indexOf('<rss') > -1) {
-                                res.contentType('application/rss+xml');
-                            } else {
-                                res.contentType('application/xml');
-                            }
-                        } else if (html.indexOf('{') === 0 || html.indexOf('[') === 0) {
-                            res.contentType('application/json');
-                        } else {
-                            //res.contentType('text/html');
-                        }
-
-                        res.send(html);
-                        res.end();
-                        var endTime = +new Date();
-                        console.log('#### Took', (endTime - startTime), 'ms to complete route', url);
-                        resolve();
-                    //});
+                context.renderPage(url).then((response: IRouterResponse) => {
+                    res.contentType(response.contentType);
+                    res.status(response.statusCode);
+                    res.send(response.contentBody);
+                    res.end();
+                    var endTime = +new Date();
+                    console.log('#### Took', (endTime - startTime), 'ms to complete route', url);
+                    resolve();
                 }).catch((err) => {
                     console.error('Failed to execute router', err);
                     res.json(err);
