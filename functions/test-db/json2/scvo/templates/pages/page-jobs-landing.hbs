@@ -37,7 +37,10 @@
                             </p>
                         </section>
                         <section class="mdc-card__actions">
-                            <a href="/jobs/community-jobs-scotland" class="mdc-action">Find out more</a>
+                            <ul>
+                                <li><a href="/jobs/community-jobs-scotland" class="mdc-action">Find out more</a></li>
+                                <li><a href="http://jobs.scvo.org.uk" class="mdc-action">JCP & SDS vacancy access</a></li>
+                            </ul>
                         </section>
                     </div>
                 </div>
@@ -60,21 +63,21 @@
                         <a href="/jobs/search" class="mdc-button mdc-button--raised">Find more jobs</a>
                     </p>
                 </div>
-                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone content page-content">
+                <!-- <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone content page-content">
                     <h2>Current CJS vacancies</h2>
                     <div class="mdc-layout-grid">
                         <div class="mdc-layout-grid__inner">
-                            {{#each supplimentaryResponses.cjs_latest.hits.hits}}
+                            { {#each supplimentaryResponses.cjs_latest.hits.hits}}
                             <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet  mdc-layout-grid__cell--span-4-phone">
-                                {{{_source.rendered.scvo_gist}}}
+                                { { {_source.rendered.scvo_gist}}}
                             </div>
-                            {{/each}}
+                            { {/each}}
                         </div>
                     </div>
                     <p>
                         <a href="/jobs/community-jobs-scotland" class="mdc-button mdc-button--raised">Browse all vacancies</a>
                     </p>
-                </div>
+                </div> -->
                 {{#compare supplimentaryResponses.related_training.hits.total ">" 0}}
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone related page-related">
                     <h2>Our training courses</h2>
