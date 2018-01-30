@@ -25,7 +25,47 @@
         </div>
     </div>
 
-    <div class="cta-content callout-image policy-stats">
+    <div class="container-fluid content page-content">
+        <div class="mdc-layout-grid latest-content">
+            <div class="mdc-layout-grid__inner">
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
+                    <h3>Briefings</h3>
+
+                    {{#if supplimentaryResponses.latest_briefings.hits.hits}}
+                    {{{supplimentaryResponses.latest_briefings.hits.hits.[0]._source.rendered.gist}}}
+                    {{{supplimentaryResponses.latest_briefings.hits.hits.[1]._source.rendered.gist}}}
+                    {{{supplimentaryResponses.latest_briefings.hits.hits.[2]._source.rendered.gist}}}
+                    {{/if}}
+
+                    <a href="/policy-research/briefings" class="v-margin">More briefings</a>
+                </div>
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
+                    <h3>Consultation responses</h3>
+
+                    {{#if supplimentaryResponses.latest_consultation_responses.hits.hits}}
+                    {{{supplimentaryResponses.latest_consultation_responses.hits.hits.[0]._source.rendered.gist}}}
+                    {{{supplimentaryResponses.latest_consultation_responses.hits.hits.[1]._source.rendered.gist}}}
+                    {{{supplimentaryResponses.latest_consultation_responses.hits.hits.[2]._source.rendered.gist}}}
+                    {{/if}}
+
+                    <a href="/policy-research/consultation-responses" class="v-margin">More consultation responses</a>
+                </div>
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone no-border">
+                    <h3>Research</h3>
+
+                    {{#if supplimentaryResponses.latest_research.hits.hits}}
+                    {{{supplimentaryResponses.latest_research.hits.hits.[0]._source.rendered.gist}}}
+                    {{{supplimentaryResponses.latest_research.hits.hits.[1]._source.rendered.gist}}}
+                    {{{supplimentaryResponses.latest_research.hits.hits.[2]._source.rendered.gist}}}
+                    {{/if}}
+
+                    <a href="/policy-research/research" class="v-margin">More research</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="cta-content callout-image policy-stats v-margin-full">
         <div class="container-fluid">
             <h2>The Scottish third sector</h2>
             <div class="mdc-layout-grid">
@@ -87,43 +127,6 @@
     </div>
 
     <div class="container-fluid content page-content">
-        <div class="mdc-layout-grid latest-content">
-            <div class="mdc-layout-grid__inner">
-                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
-                    <h3>Briefings</h3>
-
-                    {{#if supplimentaryResponses.latest_briefings.hits.hits}}
-                    {{{supplimentaryResponses.latest_briefings.hits.hits.[0]._source.rendered.gist}}}
-                    {{{supplimentaryResponses.latest_briefings.hits.hits.[1]._source.rendered.gist}}}
-                    {{{supplimentaryResponses.latest_briefings.hits.hits.[2]._source.rendered.gist}}}
-                    {{/if}}
-
-                    <a href="/policy-research/briefings" class="v-margin">More briefings</a>
-                </div>
-                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
-                    <h3>Consultation responses</h3>
-
-                    {{#if supplimentaryResponses.latest_consultation_responses.hits.hits}}
-                    {{{supplimentaryResponses.latest_consultation_responses.hits.hits.[0]._source.rendered.gist}}}
-                    {{{supplimentaryResponses.latest_consultation_responses.hits.hits.[1]._source.rendered.gist}}}
-                    {{{supplimentaryResponses.latest_consultation_responses.hits.hits.[2]._source.rendered.gist}}}
-                    {{/if}}
-
-                    <a href="/policy-research/consultation-responses" class="v-margin">More consultation responses</a>
-                </div>
-                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone no-border">
-                    <h3>Research</h3>
-
-                    {{#if supplimentaryResponses.latest_research.hits.hits}}
-                    {{{supplimentaryResponses.latest_research.hits.hits.[0]._source.rendered.gist}}}
-                    {{{supplimentaryResponses.latest_research.hits.hits.[1]._source.rendered.gist}}}
-                    {{{supplimentaryResponses.latest_research.hits.hits.[2]._source.rendered.gist}}}
-                    {{/if}}
-
-                    <a href="/policy-research/research" class="v-margin">More research</a>
-                </div>
-            </div>
-        </div>
         <div class="mdc-layout-grid equal-height support support-policy">
             <div class="mdc-layout-grid__inner">
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
