@@ -463,7 +463,7 @@ primary-dark: #251032
             color: map-get($themeDefault, 'primary') !important;
         }
     }
-    .community-jobs-scotland .callout-image .caption {
+    .community-jobs-scotland .callout-image .caption .caption-inner {
         background-color: map-get($themeJobs, 'primary-overlay-start');
     }
     .swiper-container .swiper-pagination-bullet {
@@ -511,7 +511,7 @@ primary-dark: #251032
         background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/headers/cjs-jobs.png');
     }
     .community-jobs-scotland .callout-image.benefit {
-        background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/headers/benefit.jpg');
+        background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/headers/newcjsbanner.jpg');
     }
     .policy-research .callout-image {
         background-image: linear-gradient(
@@ -835,11 +835,19 @@ figure {
                 text-align: right;
                 color: #fff;
                 font-weight: 600;
-                font-size: 2.1rem;
-                padding: 1.5rem 3rem;
+                font-size: 1.7rem;
                 align-self: flex-end;
                 margin: 0;
                 max-width: 65%;
+                img {
+                    width: 200px;
+                    height: auto;
+                    padding-top: $unit;
+                    padding-bottom: $unit/2;
+                }
+                .caption-inner {
+                    padding: 1.5rem 3rem;
+                }
             }
         }
     }
@@ -905,6 +913,29 @@ section.search {
 .mdc-card-search .search_form .search-button-large {
     top: 0.35rem;
     right: 0.4rem;
+}
+.jobs-landing {
+    .page-content {
+        padding: 0;
+    }
+    .mdc-card.goodmoves-brand,
+    .mdc-card.cjs-brand {
+        .mdc-card__media {
+            padding: $unit;
+            a {
+                height: 100%;
+                width: 100%;
+                display: block;
+                position: relative;
+            }
+            a:hover {
+                text-decoration: none;
+            }
+        }
+        h3 {
+            margin: 0 0 $unit;
+        }
+    }
 }
 
 .home {
@@ -1074,7 +1105,9 @@ section.search {
     .latest-content {
         h2 a,
         .scvo-cms-post,
-        .tfn-news-post {
+        .tfn-feature,
+        .tfn-news-post,
+        .tfn-blog-post {
             padding-right: $unit;
             border-right: 1px solid rgba(0,0,0,.2);
         }
@@ -1790,6 +1823,41 @@ body.the-gathering {
         width: 60%;
     }
 }
+body.scottish-charity-awards {
+    .mdc-card {
+        .mdc-card__primary .mdc-card__title {
+            color: white;
+            padding: 0;
+        }
+        .mdc-card__supporting-text {
+            margin-top: $unit;
+        }
+    }
+    .mdc-card.celebrating-communities .mdc-card__primary {
+        background-color: #729957;
+    }
+    .mdc-card.charity-champion .mdc-card__primary {
+        background-color: #a9889f;
+    }
+    .mdc-card.charity-of-the-year .mdc-card__primary {
+        background-color: #008eca;
+    }
+    .mdc-card.cracking-campaign .mdc-card__primary {
+        background-color: #f18816;
+    }
+    .mdc-card.demonstrating-digital .mdc-card__primary {
+        background-color: #e30613;
+    }
+    .mdc-card.leading-light .mdc-card__primary {
+        background-color: #d7bb00;
+    }
+    .mdc-card.pioneering-project .mdc-card__primary {
+        background-color: #578da3;
+    }
+    .mdc-card.terrific-trustee .mdc-card__primary {
+        background-color: #b0be48;
+    }
+}
 // .mdc-temporary-drawer,
 .about.staff-team .post-info-author,
 .about.work-with-us .page-info,
@@ -2014,10 +2082,10 @@ table.membership-fees {
         margin-bottom: $unit;
     }
     .cjs-employers .mdc-card__media {
-        background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/cafe.jpg');
+        background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/cjs-employers.jpg');
     }
     .cjs-employees .mdc-card__media {
-        background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/woodwork.jpg');
+        background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/cjs-employees.jpg');
     }
     .cjs-vacancies .mdc-card__media {
         background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/hiring.jpg');
@@ -2083,7 +2151,7 @@ table.membership-fees {
     .mdc-card__media {
         height: $unit*4;
         padding: $unit/2 $unit;
-        background-size: contain;
+        background-size: cover;
         background-repeat: no-repeat;
         background-origin: content-box;
         margin-bottom: $unit;
@@ -2091,11 +2159,12 @@ table.membership-fees {
             display: none;
         }
     }
-    .cjs .mdc-card__media {
+    .goodmoves-brand .mdc-card__media,
+    .cjs-brand .mdc-card__media {
         height: 128px;
-        background-size: cover;
+        background-size: unset;
         background-repeat: no-repeat;
-        background-position: center center;
+        background-position: left center;
         padding: 0;
         margin-bottom: 1rem;
         background-color: #ccc !important;
@@ -2128,6 +2197,10 @@ table.membership-fees {
         }
     }
     .cjs {
+        .mdc-card__media {
+            padding: 0;
+            height: 8rem;
+        }
         .mdc-card__primary {
             margin-bottom: 0;
         }
@@ -2135,33 +2208,43 @@ table.membership-fees {
     .mdc-card__supporting-text {
         padding-top: 0;
     }
-    .goodmoves .mdc-card__media {
+    .goodmoves .mdc-card__media,
+    .goodmoves-brand .mdc-card__media {
         background-color: #58a934 !important;
+        background-size: contain;
         background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/goodmoves.png');
     }
+    .goodmoves-brand .mdc-card__media {
+        background-size: unset;
+    }
     .cjs-brand .mdc-card__media {
-        height: 105px;
-        background-color: #fff !important;
-        background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/cjs.png');
+        background-color: #f1f1f1 !important;
+        background-size: contain;
+        background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/cjs-logo.png');
     }
     .funding-scotland .mdc-card__media {
         background-color: #8AC645 !important;
+        background-size: contain;
         background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/funding-scotland.png');
     }
     .goodhq .mdc-card__media {
         background-color: #4033E9 !important;
+        background-size: contain;
         background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/goodhq.png');
     }
     .tfn .mdc-card__media {
         background-color: #3b9db1 !important;
+        background-size: contain;
         background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/tfn.png');
     }
     .credit-union .mdc-card__media {
         background-color: #1976D2 !important;
+        background-size: contain;
         background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/credit-union.png');
     }
     .milo .mdc-card__media {
         background-color: #4475A0 !important;
+        background-size: contain;
         background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/milo.png');
     }
 }
