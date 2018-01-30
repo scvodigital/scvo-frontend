@@ -412,6 +412,42 @@
             "apiVersion": "5.6"
         }
     },
+    "page_funding_landing": {
+        "pattern": "/funding",
+        "layouts": {
+            "default": {
+                "head": `{:templates/pages/page-head-tags.hbs}`,
+                "body": `{:templates/pages/page-funding-landing.hbs}`,
+                "foot": ""
+            }
+        },
+        "primarySearchTemplate": {
+            "index": "web-content-production",
+            "type": "scvo-cms-page",
+            "template": `{:queries/pages/page.json}`
+        },
+        "supplimentarySearchTemplates": {
+            "not_found": {
+                "index": "web-content-production",
+                "type": "scvo-cms-page,scvo-cms-post",
+                "template": `{:queries/pages/not-found.json}`
+            },
+            "recently_updated_funds": {
+                "index": "web-content-production",
+                "type": "funding-scotland-funds",
+                "template": `{:queries/pages/none.json}`
+            },
+            "splash": {
+                "index": "web-content-production",
+                "type": "scvo-cms-media",
+                "template": `{:queries/pages/splash.json}`
+            }
+        },
+        "elasticsearchConfig": {
+            "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
+            "apiVersion": "5.6"
+        }
+    },
     "goodmoves_job_search": {
         "pattern": "/jobs/search",
         "layouts": {
@@ -1933,15 +1969,12 @@
             "apiVersion": "5.6"
         }
     },
-    "page_landing": {
-        "pattern": {
-            "running_a_charity": "/running-a-charity",
-            "funding": "/funding"
-        },
+    "page_running_landing": {
+        "pattern": "/running-a-charity",
         "layouts": {
             "default": {
                 "head": `{:templates/pages/page-head-tags.hbs}`,
-                "body": `{:templates/pages/page-landing.hbs}`,
+                "body": `{:templates/pages/page-running-landing.hbs}`,
                 "foot": ""
             }
         },
