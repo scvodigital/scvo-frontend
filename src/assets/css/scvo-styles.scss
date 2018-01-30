@@ -463,8 +463,11 @@ primary-dark: #251032
             color: map-get($themeDefault, 'primary') !important;
         }
     }
-    .community-jobs-scotland .callout-image .caption .caption-inner {
-        background-color: map-get($themeJobs, 'primary-overlay-start');
+    .community-jobs-scotland .callout-image .caption {
+        background-color: rgba(255,255,255,0.5);
+        .caption-inner {
+            background-color: map-get($themeJobs, 'primary-overlay-start');
+        }
     }
     .swiper-container .swiper-pagination-bullet {
         background-color: white;
@@ -789,7 +792,7 @@ figure {
     width: 100%;
     line-height: $nav-height - 3px;
     height: $nav-height - 3px;
-    border-radius: 0 !important;
+    border-radius: 2px !important;
     box-sizing: border-box;
 }
 .mdc-textfield__input,
@@ -835,18 +838,17 @@ figure {
                 text-align: right;
                 color: #fff;
                 font-weight: 600;
-                font-size: 1.7rem;
+                font-size: 1.75rem;
                 align-self: flex-end;
                 margin: 0;
                 max-width: 65%;
                 img {
                     width: 200px;
                     height: auto;
-                    padding-top: $unit;
-                    padding-bottom: $unit/2;
+                    padding: $unit $unit/2 $unit/2;
                 }
                 .caption-inner {
-                    padding: 1.5rem 3rem;
+                    padding: $unit $unit*2;
                 }
             }
         }
@@ -887,7 +889,7 @@ section.search {
             -webkit-box-sizing: border-box;
             box-sizing: border-box;
             border: 2px solid #333;
-            border-radius: 0;
+            border-radius: 3px;
             width: 100%;
             height: $unit*3;
             line-height: $unit*3;
@@ -1087,6 +1089,12 @@ section.search {
         padding: $unit*1.5 0;
         h2 {
             margin-top: 0;
+            .mdc-typography--caption {
+                font-weight: 600;
+                font-size: 1rem;
+                margin-left: 0.25rem;
+                letter-spacing: -0.02rem;
+            }
         }
         p {
             margin: $unit 0 0;
@@ -1244,6 +1252,7 @@ section.search {
     box-sizing: border-box;
     width: 100%;
     max-width: 100%;
+    background-position-x: 97%;
 }
 .mdc-select:focus {
     border-bottom-color: inherit;
@@ -1358,7 +1367,7 @@ section.search {
                     line-height: $nav-height - 3px;
                     height: $nav-height - 3px;
                     background: transparent;
-                    border-radius: 0 !important;
+                    border-radius: 2px !important;
                     box-sizing: border-box;
                 }
                 ::-webkit-input-placeholder {
@@ -2364,11 +2373,22 @@ body.post.author {
     }
 }
 
-.scvo-document.full {
+.full.scvo-document {
+    margin: 0 0 $unit;
+    .post-info {
+        border: none;
+        padding: 0;
+        margin: 0 0 $unit;
+    }
     ul {
         margin: 0;
         list-style-type: none;
         padding: 0;
+    }
+}
+.list.scvo-document {
+    .post-info-item {
+        margin-bottom: 0;
     }
 }
 
@@ -2437,6 +2457,11 @@ body.post.author {
     h2,
     h3 {
         clear: both;
+    }
+}
+.list.cjs-job {
+    .mdc-card__title {
+        padding: 0;
     }
 }
 .events .inline-dl {
@@ -3266,6 +3291,9 @@ footer {
                 grid-column-end: span 7;
             }
         }
+    }
+    .community-jobs-scotland .callout-image .container-fluid .caption {
+        max-width: 100%;
     }
     .splash-image {
         .container-fluid {
