@@ -1,4 +1,4 @@
-<div class="event event-search">
+<div class="funding-updates">
     <div class="splash-image splash-image-{{primaryResponse.hits.hits.[0]._type}}" style="{{> header_splash_image}}">
         <div class="splash-overlay{{#if primaryResponse.hits.hits.[0]._source.hide_overlay}} splash-overlay-hidden{{/if}}">
             <div class="container-fluid">
@@ -20,31 +20,37 @@
     <div class="container-fluid page-content">
         <ul class="breadcrumbs">
             <li><a href="/">Home</a></li>
-            <li>Funding updates</li>
+            <li><a href="/funding">Funding</a></li>
+            <li>Updates</li>
         </ul>
 
-        <h2 class="mdc-card__title mdc-card__title--large">
-            Link generator
-        </h2>
-
-        <div class="">
-            <label>
-                <strong>Date from: </strong>
-                <input type="date" id="link-gen-from">
-            </label>
+        <div class="v-margin-full">
+            <h3>Welcome to our new SCVO Members Bulletin funding search, courtesy of <a href="http://fundingscotland.com">Funding Scotland</a>.</h3>
+            <p>
+                Simply enter your date range below and click 'Generate URL' to find the latest funding opportunities available.
+            </p>
         </div>
 
-        <div class="">
-            <label>
-                <strong>Date to: </strong>
-                <input type="date" id="link-gen-to">
-            </label>
+        <div class="mdc-layout-grid v-margin">
+            <div class="mdc-layout-grid__inner">
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4">
+                    <label>
+                        <strong>Date from: </strong>
+                        <input type="date" id="link-gen-from">
+                    </label>
+                </div>
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4">
+                    <label>
+                        <strong>Date to: </strong>
+                        <input type="date" id="link-gen-to">
+                    </label>
+                </div>
+            </div>
         </div>
-
-        <div class="">
-            <strong>Generated link: </strong>
+        <p id="link-gen-text">
+            <strong>Unique link for this date range:</strong>
             <span id="link-gen-link"></span>
-        </div>
+        </p>
     </div>
 </div>
 <script src="/assets/js/scvo/funding-updates-link-gen.js"></script>

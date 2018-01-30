@@ -5,7 +5,7 @@ import * as util from 'util';
 import * as admin from 'firebase-admin';
 import { 
     IContext, IMenus, IRoutes, Router, IRouteMatch, 
-    IPartials, Helpers, ILayouts, ILayout
+    IPartials, Helpers, ILayouts, ILayout, IRouteResponse
 } from 'scvo-router';
 
 
@@ -42,10 +42,10 @@ export class Context implements IContext {
         this.router = new Router(this.toJSON, this.uaId, userId, true);
     }
 
-    renderPage(uriString: string): Promise<string>{
-        return new Promise<string>((resolve, reject) => {
-            this.router.execute(uriString).then((routeMatch: string) => {
-                resolve(routeMatch);
+    renderPage(uriString: string): Promise<IRouteResponse>{
+        return new Promise<{ html: string, contentType: string }>((resolve, reject) => {
+            this.router.execute(uriString).then((routeResponse: IRouteResponse) => {
+                resolve(routeResponse);
             }).catch((err) => {
                 console.error('Failed to render route', err);
                 reject(err);

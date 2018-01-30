@@ -5,14 +5,10 @@
         {{> breadcrumbs}}
         <div class="mdc-layout-grid">
             <div class="mdc-layout-grid__inner">
-                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-9-desktop mdc-layout-grid__cell--span-5-tablet mdc-layout-grid__cell--span-4-phone content page-content">
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 content page-content">
                     {{#with primaryResponse.hits.hits.[0]._source}}
                     {{{rendered.scvo_full}}}
                     {{/with}}
-                </div>
-                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-3-tablet mdc-layout-grid__cell--span-4-phone sidebar page-sidebar">
-                    {{> menu_cjs_employees}}
-                    {{> sidebar_cjs}}
                 </div>
                 {{#compare supplimentaryResponses.related_posts.hits.total ">" 0}}
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 related page-related">
@@ -20,7 +16,7 @@
                     <div class="mdc-layout-grid">
                         <div class="mdc-layout-grid__inner">
                             {{#each supplimentaryResponses.related_posts.hits.hits}}
-                            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4">
+                            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet  mdc-layout-grid__cell--span-4-phone">
                                 {{{_source.rendered.scvo_gist}}}
                             </div>
                             {{/each}}
@@ -33,3 +29,5 @@
         {{/handle_404}}
     </div>
 </div>
+
+{{> footer_services}}

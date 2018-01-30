@@ -178,6 +178,7 @@ primary-dark: #251032
     $themeDigital: map-get($colours, 'digital');
     $themeJobs: map-get($colours, 'jobs');
     $themeGathering: map-get($colours, 'gathering');
+    $themeFunding: map-get($colours, 'funding');
 
     a,
     #share-menu-button,
@@ -281,8 +282,8 @@ primary-dark: #251032
     .mdc-theme--primary-bg {
         background-color: map-get($themeSelected, 'primary') !important;
     }
-    .support .funding-scotland-platforms .mdc-card__primary {
-        background-color: #006054 !important;
+    .support.funding .mdc-card__primary {
+        background-color: map-get($themeFunding, 'primary') !important;
     }
     .support.support-policy .mdc-card__primary {
         background-color: map-get($themePosts, 'primary') !important;
@@ -957,7 +958,7 @@ section.search {
             p,
             .mdc-card__supporting-text {
                 font-size: 1.4rem;
-                letter-spacing: -0.05rem;
+                letter-spacing: -0.03rem;
             }
             h1,
             p,
@@ -969,6 +970,15 @@ section.search {
                 margin-right: 3rem;
                 max-width: 100%;
             }
+        }
+    }
+    .featured {
+        .mdc-card__supporting-text {
+            padding-top: $unit;
+            line-height: 1.55rem;
+            font-size: 1.25rem;
+            letter-spacing: -0.03rem;
+            color: #fff !important;
         }
     }
     .cta-content.callout-image {
@@ -1040,7 +1050,7 @@ section.search {
 }
 .policy-research {
     .latest-content {
-        padding: $unit 0;
+        padding: 0;
     }
     .policy-stats {
         padding: $unit*1.5 0;
@@ -1140,6 +1150,9 @@ section.search {
     .page-content {
         .mdc-layout-grid__inner {
             margin: $unit/2 0;
+        }
+        .gist .mdc-layout-grid__inner {
+            margin: 0;
         }
         .search {
             ul {
@@ -1952,9 +1965,6 @@ h1.mdc-typography--title {
         }
     }
 }
-.support.funding .mdc-card {
-    margin: $unit 0;
-}
 .services .support .mdc-card__primary {
     height: $unit*2;
 }
@@ -2304,6 +2314,7 @@ body.post.author {
         width: 30%;
     }
     dd {
+        margin: 0;
         width: 70%;
     }
 }
@@ -2934,8 +2945,13 @@ footer {
     a:hover {
         color: white;
     }
-    .mdc-list .mdc-list-item a:hover {
-        text-decoration: underline !important;
+    .mdc-list .mdc-list-item {
+        a {
+            font-size: 1rem;
+        }
+        a:hover {
+            text-decoration: underline !important;
+        }
     }
     .brand-logo {
         display: block;
@@ -3247,6 +3263,9 @@ footer {
         .mdc-card__title--large {
             font-size: 1rem;
         }
+    }
+    footer .brand-logo {
+        text-align: center;
     }
 }
 
@@ -3878,6 +3897,7 @@ button.swiper-pagination-bullet {
     }
     .sidebar,
     .related,
+    .pagination,
     .footer-image,
     .breadcrumbs,
     .header-caption,

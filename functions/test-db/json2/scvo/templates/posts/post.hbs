@@ -7,7 +7,7 @@
             <div class="mdc-layout-grid__inner">
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-8-desktop mdc-layout-grid__cell--span-5-tablet mdc-layout-grid__cell--span-4-phone content post-content">
                     {{#with primaryResponse.hits.hits.[0]._source}}
-                    {{{rendered.full}}}
+                    {{{rendered.scvo_full}}}
                     {{/with}}
                 </div>
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-3-tablet mdc-layout-grid__cell--span-4-phone sidebar post-sidebar">
@@ -15,7 +15,7 @@
                     {{#if primaryResponse.hits.hits.[0]._source.is_press_release}}
                     <ul class="supplimentary-list">
                         {{#each supplimentaryResponses.category_posts.hits.hits}}
-                        {{{_source.rendered.sidebar}}}
+                        {{{_source.rendered.scvo_sidebar}}}
                         {{/each}}
                     </ul>
                     {{else}}
@@ -35,13 +35,13 @@
                     {{/compare}}
                     <ul class="supplimentary-list">
                         {{#each supplimentaryResponses.authors_posts.hits.hits}}
-                        {{{_source.rendered.sidebar}}}
+                        {{{_source.rendered.scvo_sidebar}}}
                         {{/each}}
                     </ul>
                     {{else}}
                     <ul class="supplimentary-list">
                         {{#each supplimentaryResponses.category_posts.hits.hits}}
-                        {{{_source.rendered.sidebar}}}
+                        {{{_source.rendered.scvo_sidebar}}}
                         {{/each}}
                     </ul>
                     {{/compare}}

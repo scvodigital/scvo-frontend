@@ -50,6 +50,42 @@
             "apiVersion": "5.6"
         }
     },
+    "robots": {
+        "pattern": "/robots.txt",
+        "layouts": {
+            "txt": {
+                "content": `{:templates/robots.txt}`
+            }
+        },
+        "primarySearchTemplate": {
+            "index": "web-content-production",
+            "type": "scvo-cms-page",
+            "template": `{:queries/pages/none.json}`
+        },
+        "supplimentarySearchTemplates": { },
+        "elasticsearchConfig": {
+            "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
+            "apiVersion": "5.6"
+        }
+    },
+    "humans": {
+        "pattern": "/humans.txt",
+        "layouts": {
+            "txt": {
+                "content": `{:templates/humans.txt}`
+            }
+        },
+        "primarySearchTemplate": {
+            "index": "web-content-production",
+            "type": "scvo-cms-page",
+            "template": `{:queries/pages/none.json}`
+        },
+        "supplimentarySearchTemplates": { },
+        "elasticsearchConfig": {
+            "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
+            "apiVersion": "5.6"
+        }
+    },
     "main_search": {
         "pattern": "/search",
         "layouts": {
@@ -66,7 +102,7 @@
         },
         "primarySearchTemplate": {
             "index": "web-content-production",
-            "type": "scvo-cms-page,scvo-cms-post,scvo-staff,scvo-member,digital-charter-signatory,goodmoves-job,funding-scotland-fund,goodhq-organisation,goodhq-post,scvo-document-evidence,scvo-event,scvo-event-training,scvo-event-digital,scvo-event-policy,scvo-grant-charter,oscr-charity,tfn-news-post,tfn-blog-post,tfn-poll,tfn-event,tfn-list,tfn-feature",
+            "type": "scvo-cms-page,scvo-cms-post,scvo-staff,scvo-member,cjs-job,digital-charter-signatory,goodmoves-job,funding-scotland-fund,goodhq-organisation,goodhq-post,scvo-document-evidence,scvo-event,scvo-event-training,scvo-event-digital,scvo-event-policy,scvo-grant-charter,oscr-charity,tfn-news-post,tfn-blog-post,tfn-poll,tfn-event,tfn-list,tfn-feature",
             "template": `{:queries/main_search/search.json}`
         },
         "supplimentarySearchTemplates": {
@@ -315,7 +351,7 @@
         }
     },
     "funding_updates_link_gen": {
-        "pattern": "/funding-updates-link-gen/",
+        "pattern": "/funding/updates/link-generator/",
         "layouts": {
             "default": {
                 "head": `{:templates/funding/funding-updates-head-tags.hbs}`,
@@ -346,7 +382,7 @@
         }
     },
     "funding_updates": {
-        "pattern": "/funding-updates/:range",
+        "pattern": "/funding/updates/:range",
         "layouts": {
             "default": {
                 "head": `{:templates/funding/funding-updates-head-tags.hbs}`,
@@ -364,6 +400,42 @@
                 "index": "web-content-production",
                 "type": "scvo-cms-page,scvo-cms-post",
                 "template": `{:queries/pages/not-found.json}`
+            },
+            "splash": {
+                "index": "web-content-production",
+                "type": "scvo-cms-media",
+                "template": `{:queries/pages/splash.json}`
+            }
+        },
+        "elasticsearchConfig": {
+            "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
+            "apiVersion": "5.6"
+        }
+    },
+    "page_funding_landing": {
+        "pattern": "/funding",
+        "layouts": {
+            "default": {
+                "head": `{:templates/pages/page-head-tags.hbs}`,
+                "body": `{:templates/pages/page-funding-landing.hbs}`,
+                "foot": ""
+            }
+        },
+        "primarySearchTemplate": {
+            "index": "web-content-production",
+            "type": "scvo-cms-page",
+            "template": `{:queries/pages/page.json}`
+        },
+        "supplimentarySearchTemplates": {
+            "not_found": {
+                "index": "web-content-production",
+                "type": "scvo-cms-page,scvo-cms-post",
+                "template": `{:queries/pages/not-found.json}`
+            },
+            "recently_updated_funds": {
+                "index": "web-content-production",
+                "type": "funding-scotland-funds",
+                "template": `{:queries/pages/none.json}`
             },
             "splash": {
                 "index": "web-content-production",
@@ -1884,7 +1956,7 @@
             "related_training": {
                 "index": "web-content-production",
                 "type": "scvo-event-training",
-                "template": `{:queries/events/event-search.json}`
+                "template": `{:queries/events/event-soon.json}`
             },
             "splash": {
                 "index": "web-content-production",
@@ -1897,15 +1969,12 @@
             "apiVersion": "5.6"
         }
     },
-    "page_landing": {
-        "pattern": {
-            "running_a_charity": "/running-a-charity",
-            "funding": "/funding"
-        },
+    "page_running_landing": {
+        "pattern": "/running-a-charity",
         "layouts": {
             "default": {
                 "head": `{:templates/pages/page-head-tags.hbs}`,
-                "body": `{:templates/pages/page-landing.hbs}`,
+                "body": `{:templates/pages/page-running-landing.hbs}`,
                 "foot": ""
             }
         },

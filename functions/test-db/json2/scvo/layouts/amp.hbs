@@ -1,13 +1,20 @@
 <!doctype html>
 <html amp lang="en">
+
 <head>
     <meta charset="utf-8">
     <script async src="https://cdn.ampproject.org/v0.js"></script>
-    <link rel="canonical" href="{{regexReplace route.params.uri.href "(//amp.)" "gi" "//"}}">
+    <link rel="canonical" href="{{regexReplace route.params.uri.href " (//amp.) " "gi" "// "}}">
     <!--{section:head}-->
     <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
     <script type="application/ld+json">
-        {{{rendered.json_ld}}}
+        {
+            {
+                {
+                    rendered.json_ld
+                }
+            }
+        }
     </script>
     <style amp-boilerplate>
         body {
@@ -61,11 +68,123 @@
                 visibility: visible
             }
         }
-    </style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+    </style>
+    <noscript>
+        <style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style>
+    </noscript>
+    <style amp-custom>
+        header {
+            background-color: #000000;
+            color: #ffffff;
+            padding: 10px;
+        }
+        
+        .menu-button {
+            display: inline-block;
+            width: 50px;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            background-color: transparent;
+            border: none;
+        }
+        
+        .menu-button svg {
+            vertical-align: middle;
+        }
+        
+        article {
+            font-size: 1.2rem;
+            margin: 10px;
+        }
+        
+        article p {
+            line-height: 1.75rem;
+        }
+        
+        .scvo-cms-post> p::first-letter {
+            font-size: 4rem;
+            font-family: serif;
+            font-weight: 500;
+        }
+        
+        .scvo-cms-post> p~ p::first-letter {
+            font-size: 1.2rem;
+            font-family: sans-serif;
+            font-weight: normal;
+        }
+        
+        .inline-list {
+            display: inline-block;
+            padding: 0;
+        }
+        
+        .inline-list li {
+            display: inline-block;
+            padding-left: 15px;
+        }
+        
+        .inline-list li:first-child {
+            padding-left: 0;
+        }
+        /* Hide Regular Stuff */
+        
+        #share-menu-button,
+        .mdc-simple-menu {
+            display: none;
+        }
+    </style>
 </head>
 
 <body>
-    <!--{section:body}-->
+    <amp-sidebar id="sidebar" layout="nodisplay" side="right">
+        <amp-img class="amp-close-image" src="/img/ic_close_black_18dp_2x.png" width="20"
+            height="20" alt="close sidebar" on="tap:sidebar.close" role="button" tabindex="0"></amp-img>
+        <ul>
+            <li>
+                <a href="/">Home</a>
+            </li>
+            <li> Nav item 1</li>
+            <li>
+                <amp-fit-text width="220" height="20" layout="responsive" max-font-size="24">
+                    Nav item 2 - &lt;amp-fit-text&gt;
+                </amp-fit-text>
+            </li>
+            <li>
+                <amp-fit-text width="220" height="20" layout="responsive" max-font-size="24">
+                    Nav item 3 - &lt;amp-fit-text&gt; longer text
+                </amp-fit-text>
+            </li>
+            <li> Nav item 4 - Image
+                <amp-img class="amp-sidebar-image" src="/img/favicon.png" width="20" height="20"
+                    alt="an image"></amp-img>
+            </li>
+            <li> Nav item 5</li>
+            <li> Nav item 6</li>
+        </ul>
+    </amp-sidebar>
+    <header>
+        <div class="fixed-panel">
+            <div>
+                <a href="/" class="brand-logo" title="Scottish Council for Voluntary Organisations">
+                    <img src="/assets/images/scvo-logo.png" height="50px">
+                </a>
+            </div>
+            <div>
+                <button on="tap:sidebar.toggle" class="menu-button" title="Open menu">
+                    <svg width="30" height="30" fill="#ffffff" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve"><g><path d="M92.028,25h-84c-1.657,0-3-1.343-3-3V8c0-1.657,1.343-3,3-3h84c1.657,0,3,1.343,3,3v14C95.028,23.657,93.685,25,92.028,25z   "/></g><g><path d="M92.028,59.938h-84c-1.657,0-3-1.343-3-3v-14c0-1.657,1.343-3,3-3h84c1.657,0,3,1.343,3,3v14   C95.028,58.594,93.685,59.938,92.028,59.938z"/></g><g><path d="M92.028,94.875h-84c-1.657,0-3-1.343-3-3v-14c0-1.657,1.343-3,3-3h84c1.657,0,3,1.343,3,3v14   C95.028,93.532,93.685,94.875,92.028,94.875z"/></g></svg>
+                </button>
+            </div>
+        </div>
+    </header>
+    <article>
+        <!--{section:body}-->
+    </article>
+    <footer>
+
+    </footer>
+    <script async custom-element="amp-sidebar" src="https://cdn.ampproject.org/v0/amp-sidebar-0.1.js"></script>
+    <script async custom-element="amp-fit-text" src="https://cdn.ampproject.org/v0/amp-fit-text-0.1.js"></script>
 </body>
 
 </html>

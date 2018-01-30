@@ -4,14 +4,25 @@
         "rendered.scvo_gist"
     ],
     "query": {
-        "bool": {
-            "must": [
-                {
-                    "term": {
-                        "status": "Subbed"
-                    }
+        "function_score": {
+            "query": {
+                "bool": {
+                    "must": [
+                        {
+                            "term": {
+                                "status": "Subbed"
+                            }
+                        },
+                        {
+                            "wildcard" : {
+                                "cjs_lookup": "CJS PH7*"
+                            }
+                        }
+                    ]
                 }
-            ]
+            },
+            "random_score": {},
+            "score_mode": "sum"
         }
     },
     "sort": {

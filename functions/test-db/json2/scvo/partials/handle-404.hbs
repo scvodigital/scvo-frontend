@@ -5,7 +5,6 @@
         <div class="mdc-layout-grid__inner">
             <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-8-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone content page-content">
                 <h2>The page you requested could not be found</h2>
-                <!-- <p>Some witty text about how we must have misplaced it or the user was just way off in what they typed</p> -->
                 <p>
                     We recently relaunched our website and some page addresses may have changed.
                 </p>
@@ -21,7 +20,6 @@
     {{#ifAll supplimentaryResponses.not_found (compare supplimentaryResponses.not_found.hits.total ">" 0)}}
         <h3>Relevant content</h3>
         {{#each supplimentaryResponses.not_found.hits.hits}}
-            <!-- TITLE: {{{title}}} - SCORE: {{_score}}</h4> -->
             {{>highlight_result}}
         {{/each}}
     {{else}}
