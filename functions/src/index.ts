@@ -48,12 +48,23 @@ exports.index = functions.https.onRequest((req: functions.Request, res: function
                 url = 'https://' + domain + url;
 
                 context.renderPage(url).then((response: IRouterResponse) => {
-                    res.contentType(response.contentType);
-                    res.status(response.statusCode);
-                    res.send(response.contentBody);
-                    res.end();
-                    var endTime = +new Date();
-                    console.log('#### Took', (endTime - startTime), 'ms to complete route', url);
+                    try {
+                        console.log('#### FINISHED RENDERING:', response);
+                        res.contentType(response.contentType);
+                        res.status(response.statusCode);
+                        res.send(response.contentBody);
+                        res.end();
+                        var endTime = +new Date();
+                        console.log('#### Took', (endTime - startTime), 'ms to complete route', url);
+                    } catch(err) {
+                        res.status(500);
+                        res.json({
+                            message: "Something isn't right, please wait while we get this sorted",
+                            error: err,
+                            response: response
+                        });
+                        res.end();
+                    }
                     resolve();
                 }).catch((err) => {
                     console.error('Failed to execute router', err);

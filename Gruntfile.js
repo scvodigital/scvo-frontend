@@ -81,7 +81,7 @@ module.exports = function(grunt) {
     grunt.registerTask('serve-router', ['default', 'bgShell:testRouter', 'serve']);
     grunt.registerTask('deploy-all', ['default', 'bgShell:deploy', 'bgShell:deployDb']);
     grunt.registerTask('deploy-db', ['default', 'bgShell:deployDb']);
-    grunt.registerTask('deploy-hosting', ['default', 'bgShell:deployHostring']);
+    grunt.registerTask('deploy-hosting', ['default', 'bgShell:deployHosting']);
     grunt.registerTask('deploy-functions', ['default', 'bgShell:deployFunctions']);
     grunt.registerTask('upgrade-router', ['bgShell:upgradeRouter']);
 };
