@@ -37,9 +37,9 @@ export class Context implements IContext {
 
     constructor(context: IContext, public userId: any){
         Object.assign(this, context);
-
+        console.log('#### USERID:', userId);
         // Setup our router
-        this.router = new Router(this.toJSON, this.uaId, userId, true);
+        this.router = new Router(this.toJSON, this.uaId, userId, false);
     }
 
     renderPage(uriString: string): Promise<IRouteResponse>{

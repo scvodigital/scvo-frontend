@@ -33,7 +33,7 @@ const cp = cookieParser();
 exports.index = functions.https.onRequest((req: functions.Request, res: functions.Response) => {
     var startTime = +new Date();
     return new Promise((resolve, reject) => {
-        userId(req, res, () => { 
+        userId(req, res, (req, res) => { 
             var domain = req.hostname.replace(/www\./, '');
             if (domain === 'localhost') {
                 domain = req.get('x-forwarded-host').split(":")[0];
@@ -49,7 +49,6 @@ exports.index = functions.https.onRequest((req: functions.Request, res: function
 
                 context.renderPage(url).then((response: IRouterResponse) => {
                     try {
-                        console.log('#### FINISHED RENDERING:', response);
                         res.contentType(response.contentType);
                         res.status(response.statusCode);
                         res.send(response.contentBody);
