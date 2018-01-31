@@ -25,11 +25,12 @@
     {{else}}
         <h3>Try searching for a topic</h3>
     {{/ifAll}}
+    
+    <script>
+        gtag('event', '404', {
+            event_category: '{{name}}', 
+            event_label: '{{params.uri.pathname}}'
+        });
+    </script>
 {{/if}}
 
-<script>
-    gtag('event', '404', {
-        event_category: '{{name}}', 
-        event_label: '{{params.uri.pathname}}'
-    });
-</script>
