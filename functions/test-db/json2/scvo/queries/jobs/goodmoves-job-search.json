@@ -45,6 +45,13 @@
                 },
                 {{/if}}
                 {{#if query.minimum_salary}}
+                {
+                    "range": {
+                        "salary_min": {
+                            "gte": "{{query.minimum_salary}}"
+                        }
+                    }
+                },
                 {{/if}}
                 {
                     "term": {
