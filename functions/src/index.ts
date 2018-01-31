@@ -33,50 +33,48 @@ const cp = cookieParser();
 exports.index = functions.https.onRequest((req: functions.Request, res: functions.Response) => {
     var startTime = +new Date();
     return new Promise((resolve, reject) => {
-        userId(req, res, (req, res) => { 
-            var domain = req.hostname.replace(/www\./, '');
-            if (domain === 'localhost') {
-                domain = req.get('x-forwarded-host').split(":")[0];
-            }
-            var siteKey = domainMap[domain] ? domainMap[domain] : 'scvo';
-            var path = '/sites/' + siteKey;
+        var domain = req.hostname.replace(/www\./, '');
+        if (domain === 'localhost') {
+            domain = req.get('x-forwarded-host').split(":")[0];
+        }
+        var siteKey = domainMap[domain] ? domainMap[domain] : 'scvo';
+        var path = '/sites/' + siteKey;
 
-            getJson<Context>(path).then((contextJson: Context) => {
-                var context = new Context(contextJson, req.cookies.__session);
-                var url = req.query.url || req.url;
-                
-                url = 'https://' + domain + url;
+        getJson<Context>(path).then((contextJson: Context) => {
+            var context = new Context(contextJson, '123456');
+            var url = req.query.url || req.url;
+            
+            url = 'https://' + domain + url;
 
-                context.renderPage(url).then((response: IRouterResponse) => {
-                    try {
-                        res.contentType(response.contentType);
-                        res.status(response.statusCode);
-                        res.send(response.contentBody);
-                        res.end();
-                        var endTime = +new Date();
-                        console.log('#### Took', (endTime - startTime), 'ms to complete route', url);
-                    } catch(err) {
-                        res.status(500);
-                        res.json({
-                            message: "Something isn't right, please wait while we get this sorted",
-                            error: err,
-                            response: response
-                        });
-                        res.end();
-                    }
-                    resolve();
-                }).catch((err) => {
-                    console.error('Failed to execute router', err);
-                    res.json(err);
+            context.renderPage(url).then((response: IRouterResponse) => {
+                try {
+                    res.contentType(response.contentType);
+                    res.status(response.statusCode);
+                    res.send(response.contentBody);
                     res.end();
-                    reject(err);
-                });
+                    var endTime = +new Date();
+                    console.log('#### Took', (endTime - startTime), 'ms to complete route', url);
+                } catch(err) {
+                    res.status(500);
+                    res.json({
+                        message: "Something isn't right, please wait while we get this sorted",
+                        error: err,
+                        response: response
+                    });
+                    res.end();
+                }
+                resolve();
             }).catch((err) => {
-                console.error('Failed to get context', err);
+                console.error('Failed to execute router', err);
                 res.json(err);
                 res.end();
                 reject(err);
             });
+        }).catch((err) => {
+            console.error('Failed to get context', err);
+            res.json(err);
+            res.end();
+            reject(err);
         });
     });
 });
