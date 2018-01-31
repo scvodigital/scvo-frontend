@@ -63,7 +63,7 @@ module.exports = function(grunt) {
                 cmd: 'node json2 ./test-db/json2/**/*.json2 ./test-db/json; node json2 ./test-db/db.json2 ./test-db'
             },
             upgradeRouter: {
-                cmd: 'yarn add scvo-router; cd functions; yarn add scvo-router; cd ..'
+                cmd: 'yarn add -E scvo-router; cd functions; yarn add -E scvo-router; cd ..'
             },
             testRouter: {
                 cmd: 'cd ../scvo-router; npm run build; npm link; cd ../scvo-frontend; npm link scvo-router; cd functions; npm link scvo-router; cd ..'

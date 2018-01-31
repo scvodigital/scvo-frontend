@@ -8,6 +8,11 @@
                     "term": {
                         "status": "Subbed"
                     }
+                },
+                {
+                    "term" : {
+                        "cjs_lookup": "{{#compare phase "aag"}}AA PH7{{else}}{{#compare phase "p52"}}CJS PH7 PT 78wks{{else}}CJS PH7{{/compare}}{{/compare}}"
+                    }
                 }
             ]
         }
@@ -15,7 +20,16 @@
     "aggs": {
         "sectors": {
             "terms": {
-                "field": "occupational_sector",
+                "field": "sector",
+                "order": {
+                    "_term": "asc"
+                },
+                "size": 10000
+            }
+        },
+        "sectors_slugs": {
+            "terms": {
+                "field": "sector_slug",
                 "order": {
                     "_term": "asc"
                 },
@@ -24,7 +38,16 @@
         },
         "regions": {
             "terms": {
-                "field": "local_authority",
+                "field": "region",
+                "order": {
+                    "_term": "asc"
+                },
+                "size": 10000
+            }
+        },
+        "regions_slugs": {
+            "terms": {
+                "field": "region_slug",
                 "order": {
                     "_term": "asc"
                 },
