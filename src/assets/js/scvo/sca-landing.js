@@ -1,9 +1,8 @@
 document.addEventListener('DOMContentLoaded', function() {
     var swiper = new Swiper(
-        '#gallery-1',
+        '.swiper-container',
         {
             effect: 'coverflow',
-            slideClass: 'gallery-item',
             grabCursor: true,
             autoplay: {
                 delay: 2500,
