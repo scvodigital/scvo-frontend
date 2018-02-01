@@ -157,6 +157,33 @@
             "apiVersion": "5.6"
         }
     },
+    "grant_charter_data": {
+        "pattern": "/digital/participation/charter-fund/projects/data",
+        "layouts": {
+            "data": {
+                "content": `{:templates/grants/grant-charter-data.hbs}`
+            }
+        },
+        "defaultParams": {
+            "pageSize": 500
+        },
+        "primarySearchTemplate": {
+            "index": "web-content-production",
+            "type": "scvo-grant-charter",
+            "template": `{:queries/grants/grant-charter-data.json}`
+        },
+        "supplimentarySearchTemplates": {
+            "types": {
+                "index": "web-content-production",
+                "type": "scvo-grant-charter",
+                "template": `{:queries/grants/grant-charter-aggs.json}`
+            }
+        },
+        "elasticsearchConfig": {
+            "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
+            "apiVersion": "5.6"
+        }
+    },
     "grant_charter": {
         "pattern": "/digital/participation/charter-fund/projects/:project_slug",
         "layouts": {

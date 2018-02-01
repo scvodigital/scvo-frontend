@@ -43,7 +43,7 @@ exports.index = functions.https.onRequest((req: functions.Request, res: function
         getJson<Context>(path).then((contextJson: Context) => {
             var context = new Context(contextJson, '123456');
             var url = req.query.url || req.url;
-            
+
             url = 'https://' + domain + url;
 
             context.renderPage(url).then((response: IRouterResponse) => {
@@ -222,6 +222,7 @@ const domainMap = {
     "fundingscotland.com": "fundingscotland",
     "test.fundingscotland.com": "fundingscotland",
     "fundingscotland.local": "fundingscotland",
+    "scvo-sites.firebaseapp.com": "scvo",
     "scvo-net.firebaseapp.com": "scvo"
 };
 
