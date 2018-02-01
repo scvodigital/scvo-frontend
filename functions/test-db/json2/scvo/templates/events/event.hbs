@@ -1,8 +1,8 @@
 <div class="event">
-    {{> header_splash}}
+    {{> header_splash_event}}
     <div class="container-fluid page-content">
         {{#> handle_404}}
-        {{#with primaryResponse.hits.hits.[0]._source}}
+        {{#with primaryResponse.hits.hits.[0]._source ~}}
         <ul class="breadcrumbs">
             <li><a href="/">Home</a></li>
             <li><a href="/events">Events</a></li>
@@ -12,26 +12,26 @@
         {{{rendered.scvo_full}}}
 
         <div class="event-content">
-            {{#compare course_type "===" "Training Course"}}
+            {{#compare course_type "===" "Training Course" ~}}
             <p>
                 <strong>Please read our <a href="https://storage.googleapis.com/scvo-cms/wp-content/uploads/2018/01/Policies-procedures-and-TCs.docx">policies, procedures and terms &amp; conditions document</a> before making your booking.</strong>
             </p>
             {{else}}
-            {{/compare}}
+            {{/compare ~}}
         </div>
-        {{/with}}
+        {{/with ~}}
 
         <div class="mdc-layout-grid related">
             <div class="mdc-layout-grid__inner">
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
-                    {{#compare supplimentaryResponses.related_events.hits.total ">" 0}}
+                    {{#compare supplimentaryResponses.related_events.hits.total ">" 0 ~}}
                     <h2 class="author">Similar events</h2>
                     <ul class="supplimentary-list">
-                        {{#each supplimentaryResponses.related_events.hits.hits}}
+                        {{#each supplimentaryResponses.related_events.hits.hits ~}}
                         {{{_source.rendered.scvo_list}}}
-                        {{/each}}
+                        {{/each ~}}
                     </ul>
-                    {{/compare}}
+                    {{/compare ~}}
                 </div>
             </div>
         </div>
