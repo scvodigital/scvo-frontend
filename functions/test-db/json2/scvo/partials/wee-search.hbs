@@ -8,12 +8,9 @@
                     <span class="far fa-2x fa-search" aria-hidden="true"></span>
                 </button>
             </div>
-            {{#each (keyValue (parse extraParams))}}
+            {{#each (keyValue (parse extraParams)) ~}}
             <input type="hidden" name="{{key}}" value="{{value}}">
-            {{/each}}
-            <!-- <button class="mdc-button mdc-button--raised" type="submit">
-                Search
-            </button> -->
+            {{/each ~}}
         </form>
     </section>
 </div>

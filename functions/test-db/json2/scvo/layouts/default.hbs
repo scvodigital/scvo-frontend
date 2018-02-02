@@ -5,24 +5,24 @@
     <base href="/">
     <!--{section:head}-->
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/apple-icon-57x57.png">
-    <link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/apple-icon-60x60.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/apple-icon-72x72.png">
-    <link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/apple-icon-76x76.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/apple-icon-114x114.png">
-    <link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/apple-icon-120x120.png">
-    <link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/apple-icon-144x144.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/apple-icon-152x152.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/apple-icon-180x180.png">
-    <link rel="icon" type="image/png" sizes="192x192"  href="/assets/icons/android-icon-192x192.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/favicon-96x96.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/favicon-16x16.png">
-    <link rel="manifest" href="/assets/icons/manifest.json">
+    <link rel="apple-touch-icon" sizes="57x57" href="https://storage.googleapis.com/scvo-assets/assets/icons/apple-icon-57x57.png">
+    <link rel="apple-touch-icon" sizes="60x60" href="https://storage.googleapis.com/scvo-assets/assets/icons/apple-icon-60x60.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="https://storage.googleapis.com/scvo-assets/assets/icons/apple-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="https://storage.googleapis.com/scvo-assets/assets/icons/apple-icon-76x76.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="https://storage.googleapis.com/scvo-assets/assets/icons/apple-icon-114x114.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="https://storage.googleapis.com/scvo-assets/assets/icons/apple-icon-120x120.png">
+    <link rel="apple-touch-icon" sizes="144x144" href="https://storage.googleapis.com/scvo-assets/assets/icons/apple-icon-144x144.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="https://storage.googleapis.com/scvo-assets/assets/icons/apple-icon-152x152.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="https://storage.googleapis.com/scvo-assets/assets/icons/apple-icon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192"  href="https://storage.googleapis.com/scvo-assets/assets/icons/android-icon-192x192.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="https://storage.googleapis.com/scvo-assets/assets/icons/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="https://storage.googleapis.com/scvo-assets/assets/icons/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="https://storage.googleapis.com/scvo-assets/assets/icons/favicon-16x16.png">
+    <link rel="manifest" href="https://storage.googleapis.com/scvo-assets/assets/icons/manifest.json">
     <meta name="msapplication-TileColor" content="#00838f">
-    <meta name="msapplication-TileImage" content="/assets/icons/ms-icon-144x144.png">
+    <meta name="msapplication-TileImage" content="https://storage.googleapis.com/scvo-assets/assets/icons/ms-icon-144x144.png">
     <meta name="theme-color" content="#00838f">
-    <link rel="search" type="application/opensearchdescription+xml" title="SCVO" href="/assets/opensearch.xml" />
+    <link rel="search" type="application/opensearchdescription+xml" title="SCVO" href="https://storage.googleapis.com/scvo-assets/assets/opensearch.xml" />
     <!-- Global site tag (gtag.js) - Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=UA-3467930-27"></script>
     <script>
@@ -33,12 +33,17 @@
         gtag('config', 'UA-3467930-2', { 'send_page_view': true });
         {{#each route.primaryResponse.hits.hits}}
         gtag('event', 'document_hit', {
-            event_category: '{{_type}}', 
+            event_category: '{{_type}}',
             event_label: '{{_id}}'
         });
-        {{/each}}
+    {{/each}}
+
+    {{#if route.params.query.debug}}
+        console.log('#### DEBUG MODE ON ####');
+        console.log('Route:', {{{regexReplace (regexReplace (stringify route) "(<\/script)" "gi" '</scr\" + \"ipt') "(\r|\n)" "gi" ""}}});
+    {{/if}}
     </script>
-    <link type="text/css" rel="stylesheet" href="/assets/css/material-components-web.min.css">
+    <link type="text/css" rel="stylesheet" href="https://storage.googleapis.com/scvo-assets/assets/css/material-components-web.min.css">
     <link type="text/css" rel="stylesheet" href="/assets/fonts/fontawesome/css/fontawesome-all.min.css">
     <link type="text/css" rel="stylesheet" href="/assets/css/scvo-styles.css">
 </head>
@@ -51,7 +56,7 @@
                         <section class="mdc-toolbar__section mdc-toolbar__section--align-start">
                             <span class="mdc-toolbar__title catalog-title">
                                 <a href="/" class="brand-logo" title="Scottish Council for Voluntary Organisations">
-                                    <img src="/assets/images/scvo-logo.png" />
+                                    <img src="https://storage.googleapis.com/scvo-assets/assets/images/scvo-logo.png" />
                                 </a>
                             </span>
                         </section>
@@ -96,7 +101,7 @@
                 <nav class="mdc-temporary-drawer__drawer">
                     <header class="mdc-temporary-drawer__header">
                         <div class="mdc-temporary-drawer__header-content mdc-theme--primary-bg">
-                            <img src="/assets/images/scvo-logo.png" />
+                            <img src="https://storage.googleapis.com/scvo-assets/assets/images/scvo-logo.png" />
                         </div>
                     </header>
                     <nav class="mdc-temporary-drawer__content mdc-list-group">
@@ -207,7 +212,7 @@
                                 </div>
                                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
                                     <a href="/" class="brand-logo" title="Scottish Council for Voluntary Organisations">
-                                        <img src="/assets/images/scvo-logo.png" alt="Scottish Council for Voluntary Organisations" />
+                                        <img src="https://storage.googleapis.com/scvo-assets/assets/images/scvo-logo.png" alt="Scottish Council for Voluntary Organisations" />
                                     </a>
                                 </div>
                             </div>
@@ -218,11 +223,11 @@
         </div>
     </scvo-site>
 
-    <script type="text/javascript" src="/assets/js/material-components-web.js"></script>
-    <script type="text/javascript" src="/assets/js/headroom.min.js"></script>
-    <script type="text/javascript" src="/assets/js/swiper.min.js"></script>
+    <script type="text/javascript" src="https://storage.googleapis.com/scvo-assets/assets/js/material-components-web.js"></script>
+    <script type="text/javascript" src="https://storage.googleapis.com/scvo-assets/assets/js/headroom.min.js"></script>
+    <script type="text/javascript" src="https://storage.googleapis.com/scvo-assets/assets/js/swiper.min.js"></script>
     <script type="text/javascript" id="cookieinfo"
-    	src="/assets/js/cookieinfo.min.js"
+    	src="https://storage.googleapis.com/scvo-assets/assets/js/cookieinfo.min.js"
     	data-bg="#251032"
     	data-fg="#FFFFFF"
     	data-link="#FFFFFF"

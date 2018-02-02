@@ -335,9 +335,11 @@ primary-dark: #251032
     }
     .mdc-simple-menu .mdc-list-item:after,
     .mdc-simple-menu .mdc-list-item:before,
-    .splash-image .header-caption,
     .mdc-theme--primary-overlay-start-bg {
         background-color: map-get($themeSelected, 'primary-overlay-start');
+    }
+    .splash-image .header-caption {
+        background-color: rgba(0,0,0,0.7);
     }
     .mdc-theme--primary-light-bg {
         background-color: map-get($themeSelected, 'primary-light') !important;
@@ -1289,6 +1291,9 @@ section.search {
 .mdc-form-field {
     font-size: 1rem;
 }
+.mdc-form-field > label {
+    line-height: 38px;
+}
 // .mdc-select {
 //     background-image: none;
 // }
@@ -1452,6 +1457,7 @@ section.search {
                 height: $nav-height;
                 margin: 0;
                 .mdc-tab {
+                    background-color: transparent;
                     color: white !important;
                     font-size: 1rem;
                     min-height: $nav-height;
@@ -1725,6 +1731,13 @@ section.search {
         color: white;
     }
 }
+.digital .basic-digital-skills.callout {
+    background-color: #fae8d6;
+    h2,
+    h3 {
+        margin: 0;
+    }
+}
 .splash-image .splash-overlay .container-fluid {
     overflow: hidden;
     position: relative;
@@ -1781,6 +1794,7 @@ section.search {
         color: white;
         font-size: 1.5rem;
         padding: $unit 0;
+        margin: 0;
     }
     .mdc-button {
         text-transform: none;
@@ -1820,7 +1834,7 @@ section.search {
         .container-fluid {
             overflow: visible;
             .mdc-layout-grid {
-                margin-left: 5%;
+                margin: $unit*1.5 0 $unit*1.5 4%;
                 width: 39%;
                 h1.header-text {
                     font-size: 4.8rem;
@@ -3327,6 +3341,15 @@ footer {
             padding: 0 !important;
             margin: 0 !important;
         }
+    }
+    .scvo-staff.list {
+        word-wrap: break-word;
+        // margin-bottom: $unit/2;
+        border-bottom: 1px solid rgba(0,0,0,0.2);
+        padding-bottom: $unit/2;
+    }
+    .scvo-staff.list:last-child {
+        border-bottom: none;
     }
     .breadcrumbs {
         font-size: 85%;

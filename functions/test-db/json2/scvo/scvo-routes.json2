@@ -42,7 +42,7 @@
             "splash": {
                 "index": "web-content-production",
                 "type": "scvo-cms-media",
-                "template": `{:queries/pages/gathering-splash.json}`
+                "template": `{:queries/pages/splash.json}`
             }
         },
         "elasticsearchConfig": {
@@ -150,6 +150,33 @@
                 "index": "web-content-production",
                 "type": "scvo-cms-media",
                 "template": `{:queries/events/event-splash.json}`
+            }
+        },
+        "elasticsearchConfig": {
+            "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
+            "apiVersion": "5.6"
+        }
+    },
+    "grant_charter_data": {
+        "pattern": "/digital/participation/charter-fund/projects/data",
+        "layouts": {
+            "data": {
+                "content": `{:templates/grants/grant-charter-data.hbs}`
+            }
+        },
+        "defaultParams": {
+            "pageSize": 500
+        },
+        "primarySearchTemplate": {
+            "index": "web-content-production",
+            "type": "scvo-grant-charter",
+            "template": `{:queries/grants/grant-charter-data.json}`
+        },
+        "supplimentarySearchTemplates": {
+            "types": {
+                "index": "web-content-production",
+                "type": "scvo-grant-charter",
+                "template": `{:queries/grants/grant-charter-aggs.json}`
             }
         },
         "elasticsearchConfig": {
@@ -690,7 +717,7 @@
         "supplimentarySearchTemplates": {
             "not_found": {
                 "index": "web-content-production",
-                "type": "scvo-cms-page,scvo-cms-post",
+                "type": "scvo-cms-page,scvo-cms-post,scvo-event,scvo-event-training,scvo-event-digital",
                 "template": `{:queries/pages/not-found.json}`
             },
             "related_events": {
@@ -2570,7 +2597,7 @@
         "supplimentarySearchTemplates": {
             "not_found": {
                 "index": "web-content-production",
-                "type": "scvo-cms-page,scvo-cms-post",
+                "type": "scvo-cms-page,scvo-cms-post,scvo-staff,scvo-event,scvo-event-training,scvo-event-digital",
                 "template": `{:queries/pages/not-found.json}`
             },
             "related_posts": {

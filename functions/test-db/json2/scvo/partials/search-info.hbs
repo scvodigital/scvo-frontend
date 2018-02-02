@@ -1,15 +1,15 @@
-{{#if paging.totalResults}}
+{{#if paging.totalResults ~}}
 <div class="search-info mdc-elevation--z3">
     <strong>Total results:</strong> {{addCommas paging.totalResults}} |
     <strong>Current page:</strong> {{addCommas paging.currentPage}} of {{addCommas paging.totalPages}}
 </div>
 {{else}}
-{{#ifAny phase params.query.region params.query.sector params.query.location params.query.job_number params.query.q}}
+{{#ifAny phase params.query.region params.query.sector params.query.location params.query.job_number params.query.q ~}}
 <div class="search-info mdc-elevation--z1">
     No results, please try a different search query
 </div>
-{{/ifAny}}
-{{#compare params.path "===" "search"}}
+{{/ifAny ~}}
+{{#compare params.path "===" "search" ~}}
 <h3>Trending topics</h3>
 <div class="mdc-layout-grid">
     <div class="mdc-layout-grid__inner">
@@ -33,5 +33,5 @@
         </div>
     </div>
 </div>
-{{/compare}}
-{{/if}}
+{{/compare ~}}
+{{/if ~}}

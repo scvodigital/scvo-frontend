@@ -30,6 +30,7 @@
                 "header_caption": `{:json2/scvo/partials/header-caption.hbs}`,
                 "header_splash_image": `{:json2/scvo/partials/header-splash-image.hbs}`,
                 "header_splash": `{:json2/scvo/partials/header-splash.hbs}`,
+                "header_splash_event": `{:json2/scvo/partials/header-splash-event.hbs}`,
                 "handle_404": `{:json2/scvo/partials/handle-404.hbs}`,
                 "highlight_result": `{:json2/scvo/partials/highlight-result.hbs}`,
                 "footer_services": `{:json2/scvo/partials/footer-services.hbs}`,
@@ -82,6 +83,13 @@
                     "sections": ["content"],
                     "pattern": "[^]",
                     "contentType": "text/plain"
+                },
+                "data": {
+                    "template": `{:json2/scvo/layouts/data.hbs}`,
+                    "sections": ["content"],
+                    "pattern": ".*",
+                    "contentType": "application/json",
+                    "doNotStripDomains": true
                 },
                 "default": {
                     "template": `{:json2/scvo/layouts/default.hbs}`,
