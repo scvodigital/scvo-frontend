@@ -2295,6 +2295,23 @@
             "apiVersion": "5.6"
         }
     },
+    "grant_data": {
+        "pattern": "/transparency-open-data/data.json",
+        "layouts": {
+            "data": {
+                "content": `{:templates/grants/data.json}`
+            }
+        },
+        "primarySearchTemplate": {
+            "index": "web-content-production",
+            "type": "scvo-grant-cyber",
+            "template": `{:queries/grants/grant-data.json}`
+        },
+        "elasticsearchConfig": {
+            "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
+            "apiVersion": "5.6"
+        }
+    },
     "grant_ccrf_data": {
         "pattern": "/running-your-organisation/funding/community-capacity-resilience-fund/projects/data.json",
         "layouts": {
