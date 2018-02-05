@@ -14,7 +14,17 @@
                                         {{#ifAny date_start city ~}}
                                         <span class="mdc-typography--caption">
                                             {{#if date_start ~}}
+                                            {{#compare (momentFormat (moment date_start "x") "DDMMYYYY") "===" (momentFormat (moment date_end "x") "DDMMYYYY") ~}}
                                             {{{momentFormat (moment date_start "x") "Do MMMM YYYY"}}},
+                                            {{else}}
+                                            {{#if date_end ~}}
+                                            {{{momentFormat (moment date_start "x") "Do"}}} –
+                                            {{{momentFormat (moment date_end "x") "Do"}}}
+                                            {{{momentFormat (moment date_start "x") "MMMM YYYY"}}},
+                                            {{else}}
+                                            {{{momentFormat (moment date_start "x") "Do MMMM YYYY"}}},
+                                            {{/if}}
+                                            {{/compare ~}}
                                             {{/if ~}}
                                             {{#if city ~}}
                                             {{{city}}}

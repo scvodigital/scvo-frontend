@@ -664,6 +664,7 @@ primary-dark: #251032
 .digital {
     @include theme-colours('digital');
 }
+.events.a1vb0000007fc04aaa-the-gathering,
 .the-gathering {
     @include theme-colours('gathering');
 }
@@ -1007,6 +1008,11 @@ section.search {
             }
             .post-info {
                 padding-bottom: $unit/2;
+            }
+        }
+        .featured.scvo-cms-post {
+            .post-info-categories {
+                display: none;
             }
         }
         .featured-text {
@@ -1779,7 +1785,7 @@ section.search {
             height: 64px;
             width: 64px;
             vertical-align: bottom;
-            margin: -$unit/5 $unit 0 0;
+            margin: -$unit/5 0 0 0;
             float: left;
         }
         .mdc-typography--caption {
@@ -1818,6 +1824,9 @@ section.search {
             margin: 0;
         }
     }
+}
+.about.staff-team .splash-image .header-text .mdc-typography--caption .organisation {
+    display: none;
 }
 .splash-image-scvo-event h1.header-text,
 .splash-image-scvo-cms-post h1.header-text,
@@ -3013,6 +3022,8 @@ p:last-child {
     }
     a.noext::after,
     a[href^="https://storage.googleapis.com"]::after,
+    a[href^="https://www.facebook.com/SCVO1939"]::after,
+    a[href^="https://twitter.com/scvotweet"]::after,
     a[href^="https://maps.google.co.uk"]::after,
     a[href^="http://goodhq.org"]::after,
     a[href^="https://goodhq.org"]::after,
@@ -3230,6 +3241,21 @@ footer {
         height: 50px;
         width: 50px;
     }
+    .scottish-charity-awards {
+        .sidebar {
+            margin-bottom: $unit;
+            p {
+                margin: $unit 0;
+            }
+            .mdc-layout-grid__cell--span-6-desktop {
+                grid-column-end: span 12;
+                .sponsor {
+                    width: 60%;
+                    margin: 0 auto;
+                }
+            }
+        }
+    }
 }
 
 @media screen and (max-width: 991px) {
@@ -3419,6 +3445,16 @@ footer {
         height: 64px;
         width: 64px;
     }
+    .scottish-charity-awards {
+        .sidebar {
+            .mdc-layout-grid__cell--span-6-desktop {
+                .sponsor {
+                    width: 50%;
+                }
+            }
+        }
+    }
+
     footer {
         .footer-main {
             margin: $unit 0;
