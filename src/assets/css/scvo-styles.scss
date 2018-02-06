@@ -510,31 +510,31 @@ primary-dark: #251032
         background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/headers/THEGATHERING-23.02.17_0253.jpg');
     }
     .scottish-charity-awards .callout-image.charity-awards-1 {
-        background-image: url('https://storage.googleapis.com/scvo-cms/wp-content/uploads/2018/01/ENABLE-Scotland-Cracking-Campaign-2.jpg');
+        background-image: url('https://storage.googleapis.com/scvo-cms/24169/ENABLE-Scotland-Cracking-Campaign-2_crop.jpg');
     }
     .scottish-charity-awards .callout-image.charity-awards-2 {
-        background-image: url('https://storage.googleapis.com/scvo-cms/wp-content/uploads/2018/01/Street-Soccer-Scotland-Charity-of-the-Year.jpg');
+        background-image: url('https://storage.googleapis.com/scvo-cms/24173/Street-Soccer-Scotland-Charity-of-the-Year_crop.jpg');
     }
     .scottish-charity-awards .callout-image.charity-awards-3 {
-        background-image: url('https://storage.googleapis.com/scvo-cms/wp-content/uploads/2018/01/Drake-Music-Scotland-Demonstrating-Digital-Winners.jpg');
+        background-image: url('https://storage.googleapis.com/scvo-cms/24167/Drake-Music-Scotland-Demonstrating-Digital-Winners_crop.jpg');
     }
     .scottish-charity-awards .callout-image.charity-awards-4 {
-        background-image: url('https://storage.googleapis.com/scvo-cms/wp-content/uploads/2018/01/Celine-Sinclair-The-Yard-Leading-Light.jpg');
+        background-image: url('https://storage.googleapis.com/scvo-cms/24165/Celine-Sinclair-The-Yard-Leading-Light_crop.jpg');
     }
     .scottish-charity-awards .callout-image.charity-awards-5 {
-        background-image: url('https://storage.googleapis.com/scvo-cms/wp-content/uploads/2018/01/dates-n-mates-C-change-Scotland-Pioneering-Project.jpg');
+        background-image: url('https://storage.googleapis.com/scvo-cms/24166/dates-n-mates-C-change-Scotland-Pioneering-Project_crop.jpg');
     }
     .scottish-charity-awards .callout-image.charity-awards-6 {
-        background-image: url('https://storage.googleapis.com/scvo-cms/wp-content/uploads/2018/01/Dunaverty-Hall-Committee-Celebrating-Communities.jpg');
+        background-image: url('https://storage.googleapis.com/scvo-cms/24168/Dunaverty-Hall-Committee-Celebrating-Communities_crop.jpg');
     }
     .scottish-charity-awards .callout-image.charity-awards-7 {
-        background-image: url('https://storage.googleapis.com/scvo-cms/wp-content/uploads/2018/01/Gordons-Fightback-MND-Scotland-Peoples-Choice-Award.jpg');
+        background-image: url('https://storage.googleapis.com/scvo-cms/24170/Gordons-Fightback-MND-Scotland-Peoples-Choice-Award_crop.jpg');
     }
     .scottish-charity-awards .callout-image.charity-awards-8 {
-        background-image: url('https://storage.googleapis.com/scvo-cms/wp-content/uploads/2018/01/James-Campbell-Bobath-Scotland-Terrific-Trustee-1.jpg');
+        background-image: url('https://storage.googleapis.com/scvo-cms/24171/James-Campbell-Bobath-Scotland-Terrific-Trustee-1_crop.jpg');
     }
     .scottish-charity-awards .callout-image.charity-awards-9 {
-        background-image: url('https://storage.googleapis.com/scvo-cms/wp-content/uploads/2018/01/Laura-Young-Teapot-Trust-Charity-Champion.jpg');
+        background-image: url('https://storage.googleapis.com/scvo-cms/24172/Laura-Young-Teapot-Trust-Charity-Champion_crop.jpg');
     }
     .community-jobs-scotland .callout-image.saltire {
         background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/headers/saltire.jpg');
@@ -664,6 +664,7 @@ primary-dark: #251032
 .digital {
     @include theme-colours('digital');
 }
+.events.a1vb0000007fc04aaa-the-gathering,
 .the-gathering {
     @include theme-colours('gathering');
 }
@@ -695,6 +696,7 @@ primary-dark: #251032
 .list.scvo-cms-post,
 .breadcrumbs,
 .page-content,
+.grant-content,
 .page-related,
 .page-sidebar .static-sidebar,
 .page-sidebar.static-sidebar,
@@ -939,11 +941,15 @@ section.search {
         }
     }
 }
+.projects .search_form .search-button-large,
 .jobs-landing .search_form .search-button-large,
 .mdc-card.search .search_form .search-button-large,
 .mdc-card-search .search_form .search-button-large {
     top: 0.35rem;
     right: 0.4rem;
+}
+.grant-search .mdc-textfield {
+    position: relative;
 }
 .jobs-landing {
     .page-content {
@@ -1007,6 +1013,11 @@ section.search {
             }
             .post-info {
                 padding-bottom: $unit/2;
+            }
+        }
+        .featured.scvo-cms-post {
+            .post-info-categories {
+                display: none;
             }
         }
         .featured-text {
@@ -1779,7 +1790,7 @@ section.search {
             height: 64px;
             width: 64px;
             vertical-align: bottom;
-            margin: -$unit/5 $unit 0 0;
+            margin: -$unit/5 0 0 0;
             float: left;
         }
         .mdc-typography--caption {
@@ -1819,6 +1830,9 @@ section.search {
         }
     }
 }
+.splash-image-scvo-grant-charter h1.header-text,
+.splash-image-scvo-grant-ccrf h1.header-text,
+.splash-image-scvo-grant-cyber h1.header-text,
 .splash-image-scvo-event h1.header-text,
 .splash-image-scvo-cms-post h1.header-text,
 .splash-image-scvo-document-general h1.header-text,
@@ -1944,6 +1958,7 @@ body.scottish-charity-awards {
 .post-sidebar .page-info,
 .page-sidebar .page-info,
 body.the-gathering .page-info,
+.grant-content .page-info,
 .scvo-cms-page-20040 .page-info,
 .scvo-cms-page-20027 .page-info,
 .scvo-cms-page-20043 .page-info,
@@ -1959,6 +1974,9 @@ body.the-gathering .page-info,
 .policy-research.briefings-consultation-responses .mdc-card__actions,
 .policy-research.research .mdc-card__actions,
 .post.author .post-info-author,
+.digital.about .page-info,
+.sidebar .list .post-info-author,
+.about.staff-team .splash-image .header-text .mdc-typography--caption .organisation,
 .press-media .mdc-card__actions,
 .press-media .sidebar h3.blogs {
     display: none;
@@ -2027,9 +2045,6 @@ body.the-gathering .page-info,
     }
 }
 .digital.about {
-    .page-info {
-        display: none;
-    }
     .scvo-staff-photo-wee {
         height: 64px;
         width: 64px;
@@ -2870,11 +2885,6 @@ ul.supplimentary-list {
 .mdc-card__primary+.mdc-card__supporting-text {
     margin-top: 0;
 }
-.sidebar .list {
-    .post-info-author {
-        display: none;
-    }
-}
 .sidebar .author-about,
 .content .supplimentary-list {
     margin-top: $unit/2;
@@ -3013,6 +3023,8 @@ p:last-child {
     }
     a.noext::after,
     a[href^="https://storage.googleapis.com"]::after,
+    a[href^="https://www.facebook.com/SCVO1939"]::after,
+    a[href^="https://twitter.com/scvotweet"]::after,
     a[href^="https://maps.google.co.uk"]::after,
     a[href^="http://goodhq.org"]::after,
     a[href^="https://goodhq.org"]::after,
@@ -3230,6 +3242,21 @@ footer {
         height: 50px;
         width: 50px;
     }
+    .scottish-charity-awards {
+        .sidebar {
+            margin-bottom: $unit;
+            p {
+                margin: $unit 0;
+            }
+            .mdc-layout-grid__cell--span-6-desktop {
+                grid-column-end: span 12;
+                .sponsor {
+                    width: 60%;
+                    margin: 0 auto;
+                }
+            }
+        }
+    }
 }
 
 @media screen and (max-width: 991px) {
@@ -3342,6 +3369,9 @@ footer {
             margin: 0 !important;
         }
     }
+    .cjs-search-list .mdc-layout-grid__cell .list {
+        column-count: 1;
+    }
     .scvo-staff.list {
         word-wrap: break-word;
         // margin-bottom: $unit/2;
@@ -3419,6 +3449,16 @@ footer {
         height: 64px;
         width: 64px;
     }
+    .scottish-charity-awards {
+        .sidebar {
+            .mdc-layout-grid__cell--span-6-desktop {
+                .sponsor {
+                    width: 50%;
+                }
+            }
+        }
+    }
+
     footer {
         .footer-main {
             margin: $unit 0;
