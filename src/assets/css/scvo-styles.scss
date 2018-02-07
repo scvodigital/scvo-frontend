@@ -722,7 +722,7 @@ primary-dark: #251032
 html {
     overflow-y: scroll;
     height: 100%;
-    font-size: 0.96rem;
+    font-size: 1.02rem;
     line-height: 1.45;
 }
 body {
@@ -750,6 +750,17 @@ input:focus::-moz-placeholder {
 }
 input:focus:-ms-input-placeholder {
     color:transparent;
+}
+.brand-logo,
+.mdc-tab,
+#menu_button {
+    -webkit-tap-highlight-color: rgba(255, 255, 255, 0);
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 .brand-logo {
     margin-left: -$unit/2;
@@ -929,10 +940,10 @@ section.search {
             font-size: 1.1rem;
         }
         .search-button-large {
-            padding: 1px 0 0;
+            padding: 0.75rem;
             position: absolute;
-            top: $unit*0.7;
-            right: $unit*0.75;
+            top: 0;
+            right: 0;
             .fa-search {
                 font-size: $unit*1.5;
                 color: #333;
@@ -945,8 +956,10 @@ section.search {
 .jobs-landing .search_form .search-button-large,
 .mdc-card.search .search_form .search-button-large,
 .mdc-card-search .search_form .search-button-large {
-    top: 0.35rem;
-    right: 0.4rem;
+    padding: 0.3rem;
+}
+.post-sidebar .search_form {
+    margin-bottom: 0;
 }
 .grant-search .mdc-textfield {
     position: relative;
@@ -1001,6 +1014,9 @@ section.search {
                 font-size: 1.3rem;
                 line-height: 1.5rem;
                 margin: 0;
+            }
+            .post-info {
+                font-size: 1rem;
             }
             .photo-wee {
                 max-width: 96px;
@@ -1458,7 +1474,8 @@ section.search {
                 .mdc-toolbar__search {
                     background-color: transparent;
                     position: absolute;
-                    right: $unit/2;
+                    padding: 0.4rem;
+                    right: 0;
                     bottom: $unit*2;
                 }
             }
@@ -1821,12 +1838,13 @@ section.search {
         background: rgba(0, 0, 0, 0.65);
         border-radius: $unit/4 $unit/4 0 0;
         padding: $unit/10 $unit/3 $unit/4;
-        font-size: 1rem;
+        font-size: 1.1rem;
         font-weight: 600;
         font-variant-caps: all-small-caps;
         line-height: 1;
         p {
             margin: 0;
+            line-height: 1;
         }
     }
 }
@@ -1848,8 +1866,8 @@ section.search {
         .container-fluid {
             overflow: visible;
             .mdc-layout-grid {
-                margin: $unit*1.5 0 $unit*1.5 4%;
-                width: 39%;
+                margin: $unit*1.5 0 $unit*1.5 3%;
+                width: 45%;
                 h1.header-text {
                     font-size: 4.8rem;
                     line-height: 4rem;
@@ -2086,11 +2104,15 @@ body.the-gathering .page-info,
 .mdc-card__subtitle {
     font-size: 1rem;
 }
+.mdc-card__supporting-text {
+    letter-spacing: 0;
+}
 .mdc-button,
 .mdc-card__subtitle {
     font-weight: 600;
 }
 .mdc-button {
+    line-height: 1.96rem;
     outline: none;
 }
 .mdc-button.mdc-button--raised.pull-right {
@@ -2357,6 +2379,7 @@ table.membership-fees {
         margin: 0;
         padding: 0 $unit/2 $unit/2;
         li .mdc-card__action {
+            line-height: 1.96rem;
             width: 100%;
             margin-bottom: $unit/2;
             display: block;
@@ -2545,7 +2568,7 @@ body.post.author {
     hr,
     h2,
     h3 {
-        clear: both;
+        clear: left;
     }
 }
 .list.cjs-job {
@@ -2642,6 +2665,7 @@ body.post.author {
     -webkit-box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12);
     .mdc-button {
         padding: 0 $unit;
+        line-height: 2.23rem;
     }
     .menu-level-2 {
         padding-left: $unit*1.5;
@@ -2829,7 +2853,7 @@ ul.breadcrumbs {
             li {
                 display: inline-block;
                 font-size: 90%;
-                margin: 0 0 0.5rem 0.1rem;
+                margin: 0 0 0.3rem 0.1rem;
                 padding: 0 !important;
                 a {
                     padding: 0.05rem 0.4rem 0.1rem;
@@ -2871,6 +2895,7 @@ ul.supplimentary-list {
             display: block;
         }
         .supplimentary-list-text {
+            line-height: 1.4;
             letter-spacing: normal;
         }
         .post-info {
@@ -2909,6 +2934,11 @@ h4 {
     strong {
         font-weight: 700;
     }
+}
+p,
+.mdc-card__supporting-text,
+li {
+    line-height: 1.5;
 }
 p {
     margin: 0 0 $unit;
@@ -3502,6 +3532,10 @@ footer {
                 // margin-bottom: 0;
             }
         }
+    }
+    .jobs-landing .mdc-card.goodmoves-brand .mdc-card__media,
+    .jobs-landing .mdc-card.cjs-brand .mdc-card__media {
+        padding: $unit/4;
     }
     .mdc-card {
         .mdc-card__title--large {
@@ -4139,6 +4173,7 @@ button.swiper-pagination-bullet {
     .mdc-toolbar-fixed-adjust {
         padding: 0;
     }
+    .print-button,
     .sidebar,
     .related,
     .pagination,
