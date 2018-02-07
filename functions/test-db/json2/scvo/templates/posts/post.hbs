@@ -14,19 +14,24 @@
                     {{> wee_search title="Search posts" searchPath="/search" searchRoute="main_search" extraParams='{ "type": "scvo-cms-post" }'}}
                     {{#if primaryResponse.hits.hits.[0]._source.is_press_release}}
                     <ul class="supplimentary-list">
-                        {{#each supplimentaryResponses.category_posts.hits.hits}}
-                        {{{_source.rendered.scvo_sidebar}}}
-                        {{/each}}
+                        {{#compare (wordCount primaryResponse.hits.hits.[0]._source.rendered.scvo_full) ">" 50}}
+                        {{{supplimentaryResponses.category_posts.hits.hits.[0]._source.rendered.scvo_sidebar}}}
+                        {{/compare}}
+                        {{#compare (wordCount primaryResponse.hits.hits.[0]._source.rendered.scvo_full) ">" 170}}
+                        {{{supplimentaryResponses.category_posts.hits.hits.[1]._source.rendered.scvo_sidebar}}}
+                        {{/compare}}
+                        {{#compare (wordCount primaryResponse.hits.hits.[0]._source.rendered.scvo_full) ">" 300}}
+                        {{{supplimentaryResponses.category_posts.hits.hits.[2]._source.rendered.scvo_sidebar}}}
+                        {{/compare}}
+                        {{#compare (wordCount primaryResponse.hits.hits.[0]._source.rendered.scvo_full) ">" 430}}
+                        {{{supplimentaryResponses.category_posts.hits.hits.[3]._source.rendered.scvo_sidebar}}}
+                        {{/compare}}
+                        {{#compare (wordCount primaryResponse.hits.hits.[0]._source.rendered.scvo_full) ">" 600}}
+                        {{{supplimentaryResponses.category_posts.hits.hits.[4]._source.rendered.scvo_sidebar}}}
+                        {{/compare}}
                     </ul>
                     {{else}}
                     {{#if primaryResponse.hits.hits.[0]._source.categories}}
-                    <!-- <div class="author-about">
-                        {{#if supplimentaryResponses.staff_profile.hits.hits.[0]}}
-                        {{{supplimentaryResponses.staff_profile.hits.hits.[0]._source.rendered.scvo_profile}}}
-                        {{else}}
-                        {{{supplimentaryResponses.author_profile.hits.hits.[0]._source.rendered.scvo_profile}}}
-                        {{/if}}
-                    </div> -->
                     {{#compare supplimentaryResponses.authors_posts.hits.total ">" 0}}
                     {{#compare supplimentaryResponses.staff_profile.hits.total ">" 0}}
                     <h3 class="author static-sidebar">
@@ -34,15 +39,39 @@
                     </h3>
                     {{/compare}}
                     <ul class="supplimentary-list">
-                        {{#each supplimentaryResponses.authors_posts.hits.hits}}
-                        {{{_source.rendered.scvo_sidebar}}}
-                        {{/each}}
+                        {{#compare (wordCount primaryResponse.hits.hits.[0]._source.rendered.scvo_full) ">" 50}}
+                        {{{supplimentaryResponses.authors_posts.hits.hits.[0]._source.rendered.scvo_sidebar}}}
+                        {{/compare}}
+                        {{#compare (wordCount primaryResponse.hits.hits.[0]._source.rendered.scvo_full) ">" 170}}
+                        {{{supplimentaryResponses.authors_posts.hits.hits.[1]._source.rendered.scvo_sidebar}}}
+                        {{/compare}}
+                        {{#compare (wordCount primaryResponse.hits.hits.[0]._source.rendered.scvo_full) ">" 300}}
+                        {{{supplimentaryResponses.authors_posts.hits.hits.[2]._source.rendered.scvo_sidebar}}}
+                        {{/compare}}
+                        {{#compare (wordCount primaryResponse.hits.hits.[0]._source.rendered.scvo_full) ">" 430}}
+                        {{{supplimentaryResponses.authors_posts.hits.hits.[3]._source.rendered.scvo_sidebar}}}
+                        {{/compare}}
+                        {{#compare (wordCount primaryResponse.hits.hits.[0]._source.rendered.scvo_full) ">" 600}}
+                        {{{supplimentaryResponses.authors_posts.hits.hits.[4]._source.rendered.scvo_sidebar}}}
+                        {{/compare}}
                     </ul>
                     {{else}}
                     <ul class="supplimentary-list">
-                        {{#each supplimentaryResponses.category_posts.hits.hits}}
-                        {{{_source.rendered.scvo_sidebar}}}
-                        {{/each}}
+                        {{#compare (wordCount primaryResponse.hits.hits.[0]._source.rendered.scvo_full) ">" 50}}
+                        {{{supplimentaryResponses.category_posts.hits.hits.[0]._source.rendered.scvo_sidebar}}}
+                        {{/compare}}
+                        {{#compare (wordCount primaryResponse.hits.hits.[0]._source.rendered.scvo_full) ">" 170}}
+                        {{{supplimentaryResponses.category_posts.hits.hits.[1]._source.rendered.scvo_sidebar}}}
+                        {{/compare}}
+                        {{#compare (wordCount primaryResponse.hits.hits.[0]._source.rendered.scvo_full) ">" 300}}
+                        {{{supplimentaryResponses.category_posts.hits.hits.[2]._source.rendered.scvo_sidebar}}}
+                        {{/compare}}
+                        {{#compare (wordCount primaryResponse.hits.hits.[0]._source.rendered.scvo_full) ">" 430}}
+                        {{{supplimentaryResponses.category_posts.hits.hits.[3]._source.rendered.scvo_sidebar}}}
+                        {{/compare}}
+                        {{#compare (wordCount primaryResponse.hits.hits.[0]._source.rendered.scvo_full) ">" 600}}
+                        {{{supplimentaryResponses.category_posts.hits.hits.[4]._source.rendered.scvo_sidebar}}}
+                        {{/compare}}
                     </ul>
                     {{/compare}}
                     {{/if}}
