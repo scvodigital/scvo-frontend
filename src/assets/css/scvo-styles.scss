@@ -1206,6 +1206,12 @@ section.search {
 }
 .gist {
     padding-top: $unit;
+    .mdc-layout-grid__cell--span-3-desktop {
+        grid-column-end: span 2;
+    }
+    .mdc-layout-grid__cell--span-9-desktop {
+        grid-column-end: span 10;
+    }
     .mdc-card__subtitle {
         margin-top: $unit/4;
     }
@@ -3236,6 +3242,14 @@ footer {
 }
 
 @media screen and (max-width: 1340px) {
+    .gist {
+        .mdc-layout-grid__cell--span-3-desktop {
+            grid-column-end: span 3;
+        }
+        .mdc-layout-grid__cell--span-9-desktop {
+            grid-column-end: span 9;
+        }
+    }
     .home {
         .splash-image.hello .container-fluid .mdc-layout-grid h1.header-text {
             font-size: 4rem;
