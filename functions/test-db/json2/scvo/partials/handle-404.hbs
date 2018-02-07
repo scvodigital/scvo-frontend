@@ -1,4 +1,4 @@
-{{#if primaryResponse.hits.hits.[0]}}
+{{#if primaryResponse.hits.hits.[0] ~}}
     {{> @partial-block }}
 {{else}}
     <div class="mdc-layout-grid">
@@ -8,33 +8,33 @@
                 <p>
                     We recently relaunched our website and some page addresses may have changed.
                 </p>
-                {{#ifAll supplimentaryResponses.not_found (compare supplimentaryResponses.not_found.hits.total ">" 0)}}
+                {{#ifAll supplimentaryResponses.not_found (compare supplimentaryResponses.not_found.hits.total ">" 0) ~}}
                 <h3>Did you mean?</h3>
-                {{#each supplimentaryResponses.not_found.hits.hits}}
-                    {{#compare @index "===" 0}}
+                {{#each supplimentaryResponses.not_found.hits.hits ~}}
+                    {{#compare @index "===" 0 ~}}
                     {{>highlight_result}}
                     {{else}}
-                    {{/compare}}
-                {{/each}}
-                {{/ifAll}}
+                    {{/compare ~}}
+                {{/each ~}}
+                {{/ifAll ~}}
             </div>
             <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
                 <img src="https://storage.googleapis.com/scvo-assets/assets/images/404.png" class="responsive">
             </div>
         </div>
     </div>
-    {{#ifAll supplimentaryResponses.not_found (compare supplimentaryResponses.not_found.hits.total ">" 1)}}
+    {{#ifAll supplimentaryResponses.not_found (compare supplimentaryResponses.not_found.hits.total ">" 1) ~}}
         <hr />
         <h3>Other relevant content</h3>
-        {{#each supplimentaryResponses.not_found.hits.hits}}
-            {{#compare @index "===" 0}}
+        {{#each supplimentaryResponses.not_found.hits.hits ~}}
+            {{#compare @index "===" 0 ~}}
             {{else}}
             {{>highlight_result}}
-            {{/compare}}
-        {{/each}}
+            {{/compare ~}}
+        {{/each ~}}
     {{else}}
         <h3>Try searching for a topic</h3>
-    {{/ifAll}}
+    {{/ifAll ~}}
 
     <script>
         gtag('event', '404', {
@@ -42,4 +42,4 @@
             event_label: '{{params.uri.pathname}}'
         });
     </script>
-{{/if}}
+{{/if ~}}
