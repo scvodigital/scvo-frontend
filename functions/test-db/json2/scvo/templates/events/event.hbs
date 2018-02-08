@@ -1,7 +1,7 @@
 <div class="event">
     {{> header_splash_event}}
     <div class="container-fluid page-content">
-        {{#> handle_404}}
+        {{#> handle_404 ~}}
         {{#with primaryResponse.hits.hits.[0]._source ~}}
         <ul class="breadcrumbs">
             <li><a href="/">Home</a></li>
@@ -21,20 +21,20 @@
         </div>
         {{/with ~}}
 
+        {{#compare supplimentaryResponses.related_events.hits.total ">" 0 ~}}
+        <h2 class="author">Similar events</h2>
         <div class="mdc-layout-grid related">
             <div class="mdc-layout-grid__inner">
-                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
-                    {{#compare supplimentaryResponses.related_events.hits.total ">" 0 ~}}
-                    <h2 class="author">Similar events</h2>
+                {{#each supplimentaryResponses.related_events.hits.hits ~}}
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
                     <ul class="supplimentary-list">
-                        {{#each supplimentaryResponses.related_events.hits.hits ~}}
                         {{{_source.rendered.scvo_list}}}
-                        {{/each ~}}
                     </ul>
-                    {{/compare ~}}
                 </div>
+                {{/each ~}}
             </div>
         </div>
-        {{/handle_404}}
+        {{/compare ~}}
+        {{/handle_404 ~}}
     </div>
 </div>

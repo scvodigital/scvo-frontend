@@ -1206,12 +1206,12 @@ section.search {
 }
 .gist {
     padding-top: $unit;
-    .mdc-layout-grid__cell--span-3-desktop {
-        grid-column-end: span 2;
-    }
-    .mdc-layout-grid__cell--span-9-desktop {
-        grid-column-end: span 10;
-    }
+    // .mdc-layout-grid__cell--span-3-desktop {
+    //     grid-column-end: span 2;
+    // }
+    // .mdc-layout-grid__cell--span-9-desktop {
+    //     grid-column-end: span 10;
+    // }
     .mdc-card__subtitle {
         margin-top: $unit/4;
     }
@@ -1256,6 +1256,14 @@ section.search {
         font-weight: 400;
     }
 }
+// .digital .gist {
+//     .mdc-layout-grid__cell--span-3-desktop {
+//         grid-column-end: span 3;
+//     }
+//     .mdc-layout-grid__cell--span-9-desktop {
+//         grid-column-end: span 9;
+//     }
+// }
 .post-related {
     border-top: 1px solid rgba(0,0,0,.2);
 }
@@ -2037,12 +2045,12 @@ body.the-gathering .page-info,
         .mdc-layout-grid__inner {
             grid-gap: 0;
         }
-        .mdc-layout-grid__cell--span-2-desktop {
-            grid-column-end: span 3;
-        }
-        .mdc-layout-grid__cell--span-10-desktop {
-            grid-column-end: span 9;
-        }
+        // .mdc-layout-grid__cell--span-2-desktop {
+        //     grid-column-end: span 3;
+        // }
+        // .mdc-layout-grid__cell--span-10-desktop {
+        //     grid-column-end: span 9;
+        // }
         .gist,
         .digital-blogs {
             padding-right: $unit/2;
@@ -2591,23 +2599,28 @@ body.post.author {
 .events .inline-dl {
     dt {
         font-weight: 600;
-        font-size: 1.15rem;
+        // font-size: 1.15rem;
     }
     dd {
         margin: 0 0 $unit;
         .mdc-layout-grid__cell strong {
-            font-size: 1.15rem;
+            // font-size: 1.15rem;
         }
         .mdc-layout-grid__inner:last-child {
             margin-bottom: 0;
         }
     }
 }
+// .events .full {
+//     h2 {
+//         margin-top: $unit*2;
+//     }
+// }
 .book-now .mdc-button {
     margin: 0 auto;
-    width: 70%;
-    display: block;
     margin-left: 30%;
+    // width: 70%;
+    // display: block;
 }
 .booking {
     font-size: 2rem;
@@ -2712,9 +2725,9 @@ body.post.author {
 // Hide CU members site
 #credit-union-menu {
     a:nth-child(2),
-    a:nth-child(3),
-    a:nth-child(9),
-    a:nth-child(10) {
+    a:nth-child(4),
+    a:nth-child(10),
+    a:nth-child(11) {
         display: none;
     }
 }
@@ -2928,12 +2941,12 @@ ul.supplimentary-list {
     margin-bottom: $unit;
 }
 .digital.events .full {
-    .scvo-event-digital-brand-charter {
-
-    }
-    .event-sidebar {
-        text-align: right;
-    }
+    // .scvo-event-digital-brand-charter {
+    //
+    // }
+    // .event-sidebar {
+    //     text-align: right;
+    // }
 }
 
 h1,
@@ -3204,8 +3217,10 @@ footer {
         }
     }
     .fa-ul,
-    .mdc-list {
-        font-size: 1.1rem;
+    .mdc-list,
+    .mdc-list-item {
+        font-size: inherit;
+        letter-spacing: 0;
     }
     .fa-ul {
         margin: 0 0 0 1.5rem;
@@ -3242,14 +3257,14 @@ footer {
 }
 
 @media screen and (max-width: 1340px) {
-    .gist {
-        .mdc-layout-grid__cell--span-3-desktop {
-            grid-column-end: span 3;
-        }
-        .mdc-layout-grid__cell--span-9-desktop {
-            grid-column-end: span 9;
-        }
-    }
+    // .gist {
+    //     .mdc-layout-grid__cell--span-3-desktop {
+    //         grid-column-end: span 3;
+    //     }
+    //     .mdc-layout-grid__cell--span-9-desktop {
+    //         grid-column-end: span 9;
+    //     }
+    // }
     .home {
         .splash-image.hello .container-fluid .mdc-layout-grid h1.header-text {
             font-size: 4rem;
@@ -3480,6 +3495,12 @@ footer {
     }
 }
 
+@media screen and (max-width: 570px) {
+    .events .related .photo-wee {
+        max-width: 110px;
+    }
+}
+
 @media screen and (max-width: 479px) {
     .home .featured-content {
         .featured-background-image img.header-text {
@@ -3488,6 +3509,9 @@ footer {
         .featured-info-summary {
             margin-top: 0;
         }
+    }
+    .events .related .photo-wee {
+        max-width: 64px;
     }
     .digital {
         .latest_content {

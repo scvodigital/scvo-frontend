@@ -31,17 +31,17 @@
         gtag('js', new Date());
 
         gtag('config', 'UA-3467930-2', { 'send_page_view': true });
-        {{#each route.primaryResponse.hits.hits}}
+        {{#each route.primaryResponse.hits.hits ~}}
         gtag('event', 'document_hit', {
             event_category: '{{_type}}',
             event_label: '{{_id}}'
         });
-    {{/each}}
+        {{/each ~}}
 
-    {{#if route.params.query.debug}}
+        {{#if route.params.query.debug ~}}
         console.log('#### DEBUG MODE ON ####');
         console.log('Route:', {{{regexReplace (regexReplace (stringify route) "(<\/script)" "gi" '</scr\" + \"ipt') "(\r|\n)" "gi" ""}}});
-    {{/if}}
+        {{/if ~}}
     </script>
     <link type="text/css" rel="stylesheet" href="https://storage.googleapis.com/scvo-assets/assets/css/material-components-web.min.css">
     <link type="text/css" rel="stylesheet" href="/assets/fonts/fontawesome/css/fontawesome-all.min.css">
@@ -62,9 +62,9 @@
                         </section>
                         <section class="mdc-toolbar__section upper-menu mdc-toolbar__section--align-end">
                             <nav id="upper-tab-bar" class="mdc-tab-bar" [menu]="'main-upper'" [menulinkselector]="''" [menulabelselector]="'span.mdc-tab--label'" [menuactiveclass]="'mdc-tab--active'">
-                                {{#each menus.main-upper}}
+                                {{#each menus.main-upper ~}}
                                 <a class="mdc-tab{{#if match}} mdc-tab--active{{/if}}" href="{{stripTrailingSlash path}}"><span class="mdc-tab--label">{{{label}}}</span></a>
-                                {{/each}}
+                                {{/each ~}}
                             </nav>
                         </section>
                         <section class="mdc-toolbar__section mdc-toolbar__section--align-end mdc-toolbar__section--shrink-to-fit toolbar-search">
@@ -88,9 +88,9 @@
                     <div class="container-fluid">
                         <section class="mdc-toolbar__section mdc-toolbar__section--align-start toolbar-menu">
                             <nav id="main-tab-bar" class="mdc-tab-bar" [menu]="'main'" [menulinkselector]="''" [menulabelselector]="'span.mdc-tab--label'" [menuactiveclass]="'mdc-tab--active'">
-                                {{#each menus.main}}
+                                {{#each menus.main ~}}
                                 <a class="mdc-tab{{#if match}} mdc-tab--active{{/if}}" href="{{stripTrailingSlash path}}"><span class="mdc-tab--label">{{{label}}}</span></a>
-                                {{/each}}
+                                {{/each ~}}
                             </nav>
                         </section>
                     </div>
@@ -107,16 +107,16 @@
                     <nav class="mdc-temporary-drawer__content mdc-list-group">
                         <div id="icon-with-text-demo" class="mdc-list">
                             <a class="mdc-list-item" href="/" onclick="window.drawer.open = false">Home</a>
-                            {{#each menus.main}}
+                            {{#each menus.main ~}}
                             <a class="mdc-list-item" href="{{path}}" data-mdc-tabindex-handled="true" tabindex="-1" onclick="window.drawer.open = false">
                                 {{{label}}}
                             </a>
-                            {{/each}}
-                            {{#each menus.main-upper}}
+                            {{/each ~}}
+                            {{#each menus.main-upper ~}}
                             <a class="mdc-list-item" href="{{path}}" data-mdc-tabindex-handled="true" tabindex="-1" onclick="window.drawer.open = false">
                                 {{{label}}}
                             </a>
-                            {{/each}}
+                            {{/each ~}}
                         </div>
                     </nav>
                 </nav>
@@ -186,9 +186,9 @@
                                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone help">
                                     <h3>Help</h3>
                                     <ul class="mdc-list">
-                                        {{#each menus.footer}}
+                                        {{#each menus.footer ~}}
                                         <li class="mdc-list-item"><a href="{{path}}">{{{label}}}</a></li>
-                                        {{/each}}
+                                        {{/each ~}}
                                     </ul>
                                 </div>
                                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone about">

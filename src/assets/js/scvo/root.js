@@ -37,7 +37,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Headroom
     var header = document.querySelector("header.mdc-toolbar");
     var headroom  = new Headroom(header, {
-        "offset": 205,
+        "offset": 150,
         "tolerance": 5
     });
     headroom.init();

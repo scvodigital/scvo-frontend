@@ -205,19 +205,19 @@
                 </label>
             </form>
             <ul>
-                {{#each menus.main}}
+                {{#each menus.main ~}}
                     <li>
                         <a class="{{#if match}}active{{/if}}" href="{{stripTrailingSlash path}}">{{{label}}}</a>
                     </li>
-                {{/each}}
+                {{/each ~}}
             </ul>
             <hr>
             <ul>
-                {{#each menus.main-upper}}
+                {{#each menus.main-upper ~}}
                     <li>
                         <a class="{{#if match}}active{{/if}}" href="{{stripTrailingSlash path}}">{{{label}}}</a>
                     </li>
-                {{/each}}
+                {{/each ~}}
             </ul>
         </nav>
     </amp-sidebar>
@@ -287,9 +287,9 @@
                 <section>
                     <h1>Help</h1>
                     <ul class="mdc-list">
-                        {{#each menus.footer}}
+                        {{#each menus.footer ~}}
                         <li class="mdc-list-item"><a href="{{path}}">{{{label}}}</a></li>
-                        {{/each}}
+                        {{/each ~}}
                     </ul>
                 </section>
                 <section>

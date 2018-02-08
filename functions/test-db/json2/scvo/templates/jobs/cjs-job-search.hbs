@@ -3,7 +3,7 @@
         <div class="splash-overlay{{#if primaryResponse.hits.hits.[0]._source.hide_overlay}} splash-overlay-hidden{{/if}}">
             <div class="container-fluid">
                 <div class="mdc-layout-grid">
-                    {{#if primaryResponse.hits.hits.[0]._source.header_text}}
+                    {{#if primaryResponse.hits.hits.[0]._source.header_text ~}}
                     <img src="{{primaryResponse.hits.hits.[0]._source.header_text}}" alt="{{primaryResponse.hits.hits.[0]._source.title}}" class="header-text" />
                     {{else}}
                     <h1 class="header-text">
@@ -11,7 +11,7 @@
                             CJS vacancies
                         </span>
                     </h1>
-                    {{/if}}
+                    {{/if ~}}
                 </div>
                 {{> header_caption}}
             </div>
@@ -37,32 +37,32 @@
                     {{> sidebar_cjs_search}}
                 </div>
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-9-desktop mdc-layout-grid__cell--span-5-tablet mdc-layout-grid__cell--span-4-phone content page-content v-margin">
-                    {{#ifAny params.query.q params.query.job_number params.query.location params.query.sector params.query.region}}
-                    {{#if primaryResponse.hits.total}}
+                    {{#ifAny params.query.q params.query.job_number params.query.location params.query.sector params.query.region ~}}
+                    {{#if primaryResponse.hits.total ~}}
                     {{> search_info}}
 
-                    {{#each primaryResponse.hits.hits}}
+                    {{#each primaryResponse.hits.hits ~}}
                     {{{_source.rendered.scvo_list}}}
-                    {{/each}}
+                    {{/each ~}}
 
                     {{> pagination}}
                     {{else}}
                     <div class="search-info mdc-elevation--z3">
                         No vacancies in the selected category. Please check back soon.
                     </div>
-                    {{/if}}
+                    {{/if ~}}
                     {{else}}
                     <div class="mdc-layout-grid cjs-search-list v-margin-full">
                         <div class="mdc-layout-grid__inner">
                             <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
                                 <h2>Jobs by sector</h2>
-                                {{#*inline "sector_result_count"}}
-                                {{#each supplimentaryResponses.types.aggregations.sectors_slugs.buckets}}
-                                {{#compare key "===" ../input}}
+                                {{#*inline "sector_result_count" ~}}
+                                {{#each supplimentaryResponses.types.aggregations.sectors_slugs.buckets ~}}
+                                {{#compare key "===" ../input ~}}
                                 ({{doc_count}})
-                                {{/compare}}
-                                {{/each}}
-                                {{/inline}}
+                                {{/compare ~}}
+                                {{/each ~}}
+                                {{/inline ~}}
                                 <div class="list">
                                     <a href="/jobs/community-jobs-scotland/vacancies/{{params.phase}}?sector=administration-reception">Administration/Reception</a>
                                     {{> sector_result_count input="administration-reception"}}<br />
@@ -140,11 +140,11 @@
                                     {{> sector_result_count input="research"}}<br />
                                     <a href="/jobs/community-jobs-scotland/vacancies/{{params.phase}}?sector=resource-development">Resource Development</a>
                                     {{> sector_result_count input="resource-development"}}
-                                    <!-- {{#each supplimentaryResponses.types.aggregations.sectors.buckets}}
-                                    {{#if key}}
+                                    <!-- {{#each supplimentaryResponses.types.aggregations.sectors.buckets ~}}
+                                    {{#if key ~}}
                                     <a href="/jobs/community-jobs-scotland/vacancies/{{../params.phase}}?sector={{key}}">{{key}}</a><br />
-                                    {{/if}}
-                                    {{/each}} -->
+                                    {{/if ~}}
+                                    {{/each ~}} -->
                                 </div>
                             </div>
                             <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
@@ -221,16 +221,16 @@
                                     {{> region_result_count input="west-lothian"}}<br />
                                     <a href="/jobs/community-jobs-scotland/vacancies/{{params.phase}}?region=western-isles">Western Isles</a>
                                     {{> region_result_count input="western-isles"}}
-                                    <!-- {{#each supplimentaryResponses.types.aggregations.regions.buckets}}
-                                    {{#if key}}
+                                    <!-- {{#each supplimentaryResponses.types.aggregations.regions.buckets ~}}
+                                    {{#if key ~}}
                                     <a href="/jobs/community-jobs-scotland/vacancies/{{../params.phase}}?region={{key}}">{{key}}</a><br />
-                                    {{/if}}
-                                    {{/each}} -->
+                                    {{/if ~}}
+                                    {{/each ~}} -->
                                 </div>
                             </div>
                         </div>
                     </div>
-                    {{/ifAny}}
+                    {{/ifAny ~}}
                 </div>
             </div>
         </div>

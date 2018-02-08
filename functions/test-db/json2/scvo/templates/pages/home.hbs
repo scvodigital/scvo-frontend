@@ -100,13 +100,13 @@
             <a href="/blogs" class="mdc-typography--caption">See all</a>
         </h2>
     </div>
-    {{#with supplimentaryResponses.blogs_latest.hits.hits.[0]}}
+    {{#with supplimentaryResponses.blogs_latest.hits.hits.[0] ~}}
     <div {{#if _source.header_background}}class="featured-background-image" style="background-image: url('{{_source.header_background}}');"{{else}}class="featured-text"{{/if}}>
         <div class="container-fluid">
             {{{_source.rendered.scvo_featured}}}
         </div>
     </div>
-    {{/with}}
+    {{/with ~}}
 
     <div class="featured-background-image charity-awards" style="background-image: url('https://storage.googleapis.com/scvo-cms/wp-content/uploads/2018/01/SCA-2018-SCVOWEB-MAIN-1400x400.jpg');">
         <div class="container-fluid">
@@ -160,13 +160,13 @@
             <a href="/press-media" class="mdc-typography--caption">See all</a>
         </h2>
     </div>
-    {{#with supplimentaryResponses.press_latest.hits.hits.[0]}}
+    {{#with supplimentaryResponses.press_latest.hits.hits.[0] ~}}
     <div {{#if _source.header_background}}class="featured-background-image" style="background-image: url('{{_source.header_background}}');"{{else}}class="featured-text"{{/if}}>
         <div class="container-fluid">
             {{{_source.rendered.scvo_featured}}}
         </div>
     </div>
-    {{/with}}
+    {{/with ~}}
 
     <!-- {{#each supplimentaryResponses.featured.hits.hits}}
     <div {{#if _source.header_background}}class="featured-background-image" style="background-image: url('{{_source.header_background}}');"{{else}}class="featured-text"{{/if}}>
@@ -183,7 +183,7 @@
             <div class="mdc-layout-grid__inner">
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
                     <h2>
-                        Find information on...
+                        Find information on&hellip;
                     </h2>
                 </div>
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3 mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
@@ -242,9 +242,9 @@
                     <h2>
                         Latest TFN news
                     </h2>
-                    {{#each supplimentaryResponses.tfn_latest.hits.hits}}
+                    {{#each supplimentaryResponses.tfn_latest.hits.hits ~}}
                     {{{_source.rendered.scvo_gist}}}
-                    {{/each}}
+                    {{/each ~}}
                     <h2>
                         <a href="http://thirdforcenews.org.uk">Read more on TFN</a>
                     </h2>
@@ -253,9 +253,9 @@
                     <h2>
                         Top third sector jobs
                     </h2>
-                    {{#each supplimentaryResponses.goodmoves_latest.hits.hits}}
+                    {{#each supplimentaryResponses.goodmoves_latest.hits.hits ~}}
                     {{{_source.rendered.scvo_gist}}}
-                    {{/each}}
+                    {{/each ~}}
                     <h2>
                         <a href="https://goodmoves.com">See more on <strong>good</strong>moves</a>
                     </h2>
