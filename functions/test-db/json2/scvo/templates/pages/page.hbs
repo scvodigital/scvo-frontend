@@ -1,30 +1,28 @@
 <div class="page">
     {{> header_splash}}
     <div class="container-fluid">
-        {{#> handle_404}}
+        {{#> handle_404 ~}}
         {{> breadcrumbs}}
         <div class="mdc-layout-grid">
             <div class="mdc-layout-grid__inner">
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-8-desktop mdc-layout-grid__cell--span-5-tablet mdc-layout-grid__cell--span-4-phone content page-content">
-                    {{#with primaryResponse.hits.hits.[0]._source}}
-                        {{{rendered.scvo_full}}}
-                    {{/with}}
+                    {{{primaryResponse.hits.hits.[0]._source.rendered.scvo_full}}}
                 </div>
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-12-tablet sidebar page-sidebar">
-                    {{#compare supplimentaryResponses.related_posts.hits.total ">" 0}}
+                    {{#compare supplimentaryResponses.related_posts.hits.total ">" 0 ~}}
                         <div class="related-posts">
                             <h3 class="blogs">Related posts</h3>
                             <ul class="v-margin supplimentary-list">
-                                {{#each supplimentaryResponses.related_posts.hits.hits}}
+                                {{#each supplimentaryResponses.related_posts.hits.hits ~}}
                                     {{{_source.rendered.scvo_sidebar_mini}}}
-                                {{/each}}
+                                {{/each ~}}
                             </ul>
                             <a class="v-margin mdc-button mdc-button--raised" href="/post/categories/{{primaryResponse.hits.hits.[0]._source.categories_slug.[0]}}">Read more</a>
                         </div>
-                    {{/compare}}
+                    {{/compare ~}}
                 </div>
             </div>
         </div>
-        {{/handle_404}}
+        {{/handle_404 ~}}
     </div>
 </div>

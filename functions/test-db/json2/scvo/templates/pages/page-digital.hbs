@@ -1,7 +1,7 @@
 <div class="page digital">
     {{> header_splash}}
     <div class="container-fluid heading">
-        {{#> handle_404}}
+        {{#> handle_404 ~}}
         {{> breadcrumbs}}
         <div class="mdc-layout-grid">
             <div class="mdc-layout-grid__inner">
@@ -217,11 +217,11 @@
                     <h2>Latest digital blogs</h2>
                     <div class="mdc-layout-grid">
                         <div class="mdc-layout-grid__inner">
-                            {{#each supplimentaryResponses.related_posts.hits.hits}}
+                            {{#each supplimentaryResponses.related_posts.hits.hits ~}}
                             <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone">
                                 {{{_source.rendered.scvo_gist}}}
                             </div>
-                            {{/each}}
+                            {{/each ~}}
                         </div>
                     </div>
                     <p>
@@ -229,21 +229,21 @@
                     </p>
                 </div>
                 <div class="digital-events mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone">
-                    {{#compare supplimentaryResponses.related_events.hits.total ">" 0}}
+                    {{#compare supplimentaryResponses.related_events.hits.total ">" 0 ~}}
                     <h2>Upcoming digital events</h2>
                     <div class="mdc-layout-grid">
                         <div class="mdc-layout-grid__inner">
-                            {{#each supplimentaryResponses.related_events.hits.hits}}
+                            {{#each supplimentaryResponses.related_events.hits.hits ~}}
                             <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone">
                                 {{{_source.rendered.scvo_gist}}}
                             </div>
-                            {{/each}}
+                            {{/each ~}}
                         </div>
                     </div>
                     <p>
                         <a class="mdc-button mdc-button--raised v-margin" href="/digital/events">See all</a>
                     </p>
-                    {{/compare}}
+                    {{/compare ~}}
                 </div>
             </div>
         </div>
@@ -278,6 +278,6 @@
                 </div>
             </div>
         </div>
-        {{/handle_404}}
+        {{/handle_404 ~}}
     </div>
 </div>

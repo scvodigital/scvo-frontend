@@ -3,7 +3,7 @@
         <div class="splash-overlay{{#if primaryResponse.hits.hits.[0]._source.hide_overlay}} splash-overlay-hidden{{/if}}">
             <div class="container-fluid">
                 <div class="mdc-layout-grid">
-                    {{#if primaryResponse.hits.hits.[0]._source.header_text}}
+                    {{#if primaryResponse.hits.hits.[0]._source.header_text ~}}
                     <img src="{{primaryResponse.hits.hits.[0]._source.header_text}}" alt="{{primaryResponse.hits.hits.[0]._source.title}}" class="header-text" />
                     {{else}}
                     <h1 class="header-text">
@@ -11,7 +11,7 @@
                             {{{supplimentaryResponses.page.hits.hits.[0]._source.title}}}
                         </span>
                     </h1>
-                    {{/if}}
+                    {{/if ~}}
                 </div>
                 {{> header_caption}}
             </div>
@@ -28,9 +28,7 @@
         <div class="mdc-layout-grid">
             <div class="mdc-layout-grid__inner">
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 content grant-content">
-                    {{#with supplimentaryResponses.page.hits.hits.[0]._source}}
-                    {{{rendered.scvo_full}}}
-                    {{/with}}
+                    {{{supplimentaryResponses.page.hits.hits.[0]._source.rendered.scvo_full}}}
 
                     <hr />
 
@@ -48,17 +46,17 @@
                                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-3-tablet mdc-layout-grid__cell--span-4-phone">
                                     <select class="mdc-select" role="listbox" id="grant-ccrf-call" name="call">
                                         <option value="" {{#if params.query.call}}{{else}}selected{{/if}}>All funding rounds</option>
-                                        {{#each supplimentaryResponses.types.aggregations.calls.buckets}}
+                                        {{#each supplimentaryResponses.types.aggregations.calls.buckets ~}}
                                         <option value="{{slugify key}}" {{#compare ../params.query.call "===" (slugify key)}}selected{{/compare}}>{{key}} ({{doc_count}})</option>
-                                        {{/each}}
+                                        {{/each ~}}
                                     </select>
                                 </div>
                                 <!-- <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
                                     <select class="mdc-select" role="listbox" id="grant-ccrf-tag" name="tag">
                                         <option value="" {{#if params.query.tag}}{{else}}selected{{/if}}>All tags</option>
-                                        {{#each supplimentaryResponses.types.aggregations.tags.buckets}}
+                                        {{#each supplimentaryResponses.types.aggregations.tags.buckets ~}}
                                         <option value="{{slugify key}}" {{#compare ../params.query.tag "===" (slugify key)}}selected{{/compare}}>{{key}} ({{doc_count}})</option>
-                                        {{/each}}
+                                        {{/each ~}}
                                     </select>
                                 </div> -->
                             </div>
@@ -69,11 +67,11 @@
 
                     <div class="mdc-layout-grid equal-height">
                         <div class="mdc-layout-grid__inner">
-                            {{#each primaryResponse.hits.hits}}
+                            {{#each primaryResponse.hits.hits ~}}
                             <div class="mdc-layout-grid__cell mdc-layout-grid__cell">
                                 {{{_source.rendered.scvo_card}}}
                             </div>
-                            {{/each}}
+                            {{/each ~}}
                         </div>
                     </div>
 

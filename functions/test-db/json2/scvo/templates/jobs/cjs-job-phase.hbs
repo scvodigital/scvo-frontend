@@ -3,7 +3,7 @@
         <div class="splash-overlay{{#if primaryResponse.hits.hits.[0]._source.hide_overlay}} splash-overlay-hidden{{/if}}">
             <div class="container-fluid">
                 <div class="mdc-layout-grid">
-                    {{#if primaryResponse.hits.hits.[0]._source.header_text}}
+                    {{#if primaryResponse.hits.hits.[0]._source.header_text ~}}
                     <img src="{{primaryResponse.hits.hits.[0]._source.header_text}}" alt="{{primaryResponse.hits.hits.[0]._source.title}}" class="header-text" />
                     {{else}}
                     <h1 class="header-text">
@@ -11,7 +11,7 @@
                             CJS vacancies
                         </span>
                     </h1>
-                    {{/if}}
+                    {{/if ~}}
                 </div>
                 {{> header_caption}}
             </div>
