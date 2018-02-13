@@ -146,6 +146,27 @@
                 "pagination": `{:json2/goodmoves/partials/pagination.hbs}`
             }
         },
+        "auth": {
+            "domains": [
+                "auth.local"
+            ],
+            "menus": {},
+            "metaData": {
+                "title": "Auth test"
+            },
+            "title": "Auth tests",
+            "routes": {:json/auth-routes.json},
+            "templatePartials": {
+                "login": `{:json2/auth/partials/login.hbs}`
+            },
+            "layouts": {
+                "default": {
+                    "template": `{:json2/auth/layouts/default.hbs}`,
+                    "sections": ["head", "body", "foot"],
+                    "pattern": ".*"
+                }
+            }
+        },
         "digitalparticipation": {
             "uaId": "UA-3467930-19",
             "domains": [

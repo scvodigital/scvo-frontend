@@ -223,7 +223,8 @@ const domainMap = {
     "test.fundingscotland.com": "fundingscotland",
     "fundingscotland.local": "fundingscotland",
     "scvo-sites.firebaseapp.com": "scvo",
-    "scvo-net.firebaseapp.com": "scvo"
+    "scvo-net.firebaseapp.com": "scvo",
+    "auth.local": "auth",
 };
 
 // This is only temporarily here while we work out how PDF generation is handled in the future

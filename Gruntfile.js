@@ -1,4 +1,11 @@
 module.exports = function(grunt) {
+    var functions = grunt.option('functions');
+    if (functions) {
+        functions = functions.split(',').map(func => 'functions:' + func).join(',');
+    } else {
+        functions = 'functions';
+    }
+
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
         clean: {
@@ -33,16 +40,16 @@ module.exports = function(grunt) {
         },
         bgShell: {
             serve: {
-                cmd: 'devmode=true firebase serve -p 9000 --only functions,hosting'
+                cmd: 'devmode=true firebase serve -p 9000 --only hosting,functions'
             },
             deploy: {
-                cmd: 'firebase deploy --only functions,hosting'
+                cmd: 'firebase deploy --only hosting,' + functions 
             },
             deployHosting: {
                 cmd: 'firebase deploy --only hosting'
             },
             deployFunctions: {
-                cmd: 'firebase deploy --only functions'
+                cmd: 'firebase deploy --only ' + functions
             },
             deployDb: {
                 execOpts: {
@@ -67,7 +74,7 @@ module.exports = function(grunt) {
             },
             testRouter: {
                 cmd: 'cd ../scvo-router; npm run build; npm link; cd ../scvo-frontend; npm link scvo-router; cd functions; npm link scvo-router; cd ..'
-            }
+            },
         }
     });
 
