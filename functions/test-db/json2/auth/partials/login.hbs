@@ -1,17 +1,79 @@
-<form>
+<form id="login-form">
     <h2>Login</h2>
-    <div class="row">
-        <div class="six columns">
-            <label for="login-email">Email address</label>
-            <input type="email" id="login-email" placeholder="me@there.co.uk" class="u-full-width">
-        </div>
-        <div class="six columns">
-            <label for="login-password">Password</label>
-            <input type="password" id="login-password" placeholder="Super$ecr3tP455worD" class="u-full-width">
+    <div class="section">
+        <h3>Sign-in method</h3>
+        <div class="row">
+            <div class="three columns">
+                <label class="button u-full-width" id="login-provider-email">
+                    <input type="radio" name="login-provider" value="email" checked>
+                    <span class="label-body">Email</span>
+                </label>
+            </div>
+            <div class="three columns">
+                <label class="button u-full-width" id="login-provider-google">
+                    <input type="radio" name="login-provider" value="google">
+                    <span class="label-body">Google</span>
+                </label>
+            </div>
+            <div class="three columns">
+                <label class="button u-full-width" id="login-provider-facebook">
+                    <input type="radio" name="login-provider" value="facebook">
+                    <span class="label-body">Facebook</span>
+                </label>
+            </div>
+            <div class="three columns">
+                <label class="button u-full-width" id="login-provider-twitter">
+                    <input type="radio" name="login-provider" value="twitter">
+                    <span class="label-body">twitter</span>
+                </label>
+            </div>
         </div>
     </div>
-    <button class="button-primary" type="button">Login</button>
+    <div class="section" id="form-section-email">
+        <div class="row">
+            <div class="six columns">
+                <label for="login-email">Email address</label>
+                <input type="email" id="login-email" placeholder="me@there.co.uk" class="u-full-width">
+            </div>
+            <div class="six columns">
+                <label for="login-password">Password</label>
+                <input type="password" id="login-password" placeholder="Super$ecr3tP455worD" class="u-full-width">
+            </div>
+        </div>
+    </div>
+    <div class="section">
+        <div class="row">
+            <div class="eight columns">
+                <label for="login-account">Account</label>
+                <select id="login-account" name="login-account" class="u-full-width">
+                    {{#each context.metaData.firebaseApps}}
+                        <option value="{{name}}">{{label}}</option>
+                    {{/each}}
+                </select>
+            </div>
+            <div class="four columns">
+                <label>&nbsp;</label>
+                <button class="button-primary u-full-width" type="button" id="login-submit">Login</button>
+            </div>
+        </div>
+    </div>
 </form>
 <script>
+    var firebaseConfigs = {
+        {{#each context.metaData.firebaseApps ~}}
+        {{name}}: {{{stringify config}}},
+        {{/each}}
+    }
 
+    var loginProviders = document.querySelectorAll('[name="login-provider"]');
+    for (var i = 0; i < loginProviders.length; i++) {
+        loginProviders[i].addEventListener('change', function(evt) {
+            if (evt.srcElement.value === 'email') {
+                document.querySelector('#form-section-email').style.display = 'block';
+                document.querySelector('#login-email').select();
+            } else {
+                document.querySelector('#form-section-email').style.display = 'none';
+            }
+        });
+    }
 </script>

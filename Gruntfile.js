@@ -75,6 +75,12 @@ module.exports = function(grunt) {
             testRouter: {
                 cmd: 'cd ../scvo-router; npm run build; npm link; cd ../scvo-frontend; npm link scvo-router; cd functions; npm link scvo-router; cd ..'
             },
+            gzip: {
+                execOpts: {
+                    cwd: './dist'
+                },
+                cmd: 'find . -type f | while read -r x; do gzip -c "$x" > "$x.gz"; done'
+            }
         }
     });
 
@@ -83,7 +89,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-bg-shell');
 
-    grunt.registerTask('default', ['clean:main', 'copy:main', 'sass', 'bgShell:json2', 'bgShell:buildFunctions']);
+    grunt.registerTask('default', ['clean:main', 'copy:main', 'sass', 'bgShell:json2', 'bgShell:gzip', 'bgShell:buildFunctions']);
     grunt.registerTask('serve', ['default', 'bgShell:serve']);
     grunt.registerTask('serve-router', ['default', 'bgShell:testRouter', 'serve']);
     grunt.registerTask('deploy-all', ['default', 'bgShell:deploy', 'bgShell:deployDb']);
