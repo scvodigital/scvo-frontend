@@ -464,6 +464,10 @@ primary-dark: #251032
             border-color: map-get($themeDefault, 'primary-dark') !important;
             color: map-get($themeDefault, 'primary') !important;
         }
+        a:hover .fa-fw {
+            background-color: white !important;
+            color: map-get($themeJobs, 'primary') !important;
+        }
     }
     .community-jobs-scotland .callout-image .caption {
         background-color: rgba(255,255,255,0.5);
@@ -1780,7 +1784,8 @@ section.search {
     }
 }
 .digital .basic-digital-skills.callout {
-    background-color: #fae8d6;
+    background-color: #1976D2;
+    color:#fff;
     h2,
     h3 {
         margin: 0;
@@ -2079,6 +2084,45 @@ body.the-gathering .page-info,
         img {
             margin: 0;
             width: 50%;
+        }
+    }
+    
+    .cta-content.callout {
+        padding: $unit 0 $unit*3.25;
+        h2, h3, a, .fa, .fal, .fab, .fas, .far {
+            color: white;
+        }
+        h2 {
+            font-size: 1.8rem;
+        }
+        .mdc-layout-grid__cell {
+            text-align: center;
+            h2 {
+                text-align: left;
+            }
+            h3 {
+                margin: 0;
+                .fal {
+                    border: $unit/8 solid white;
+                    border-radius: 50%;
+                    padding: $unit*1.75;
+                    box-shadow: 1px 2px 5rem rgba(255,255,255,0.15);
+                }
+                .fa-fw {
+                    height: 1.25em;
+                    line-height: 1.25em;
+                }
+                a:hover {
+                    text-decoration: none;
+                    .underline {
+                        text-decoration: underline;
+                    }
+                }
+                a .underline {
+                    display: block;
+                    padding-top: $unit;
+                }
+            }
         }
     }
 }
@@ -4250,3 +4294,8 @@ button.swiper-pagination-bullet {
         min-height: auto;
     }
 }
+
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+.text-centre { text-align: center; }
+.text-justify { text-align: justify; }
