@@ -151,6 +151,16 @@ secondary: #022347,
 secondary-light: #6dede5,
 secondary-dark: #A7C9F2
 ),
+i-love-charity: (
+primary: #d50f3c,
+primary-overlay-start: rgba(213,15,60,0.89),
+primary-overlay-end: rgba(213,15,60,0.91),
+primary-light: #DA2D54,
+primary-dark: #9F0B2D,
+secondary: #022347,
+secondary-light: #6dede5,
+secondary-dark: #A7C9F2
+),
 services: (
 primary: #125AAC,
 primary-overlay-start: rgba(21,101,192,0.89),
@@ -175,6 +185,7 @@ primary-dark: #251032
     $themePosts: map-get($colours, 'posts');
     $themeServices: map-get($colours, 'services');
     $themeCharity: map-get($colours, 'charity');
+    $themeLoveCharity: map-get($colours, 'i-love-charity');
     $themeDigital: map-get($colours, 'digital');
     $themeJobs: map-get($colours, 'jobs');
     $themeGathering: map-get($colours, 'gathering');
@@ -239,6 +250,17 @@ primary-dark: #251032
         }
         .mdc-button:hover {
             background-color: map-get($themeCharity, 'primary') !important;
+        }
+    }
+    .i-love-charity.featured-background-image {
+        .mdc-button {
+            border-color: map-get($themeLoveCharity, 'primary') !important;
+            background-color: map-get($themeLoveCharity, 'primary') !important;
+            color: white !important;
+        }
+        .mdc-button:hover {
+            border-color: map-get($themeLoveCharity, 'primary-dark') !important;
+            background-color: map-get($themeLoveCharity, 'primary-dark') !important;
         }
     }
     .digital-participation.callout {
@@ -672,6 +694,10 @@ primary-dark: #251032
 .the-gathering {
     @include theme-colours('gathering');
 }
+.i-love-charity.featured-background-image,
+.i-love-charity {
+    @include theme-colours('i-love-charity');
+}
 .search-result.scvo-cms-post,
 .related-posts,
 .post,
@@ -920,6 +946,12 @@ figure {
 }
 section.search {
     margin-bottom: $unit*2;
+}
+.home section.search {
+    margin-bottom: $unit;
+    h3 {
+        margin-top: $unit;
+    }
 }
 .search {
     // h3 {
@@ -1951,6 +1983,12 @@ body.the-gathering .full {
     width: 60%;
 }
 body.i-love-charity {
+    .splash-image .splash-overlay .container-fluid {
+        min-height: 125px;
+        img.header-text {
+            max-height: 100%;
+        }
+    }
     .splash-image .container-fluid .mdc-layout-grid {
         margin: 0;
         width: 100% !important;
@@ -2039,6 +2077,7 @@ body.scottish-charity-awards {
 .post-sidebar .page-info,
 .page-sidebar .page-info,
 body.the-gathering .page-info,
+body.i-love-charity .page-info,
 .grant-content .page-info,
 .scvo-cms-page-20040 .page-info,
 .scvo-cms-page-20027 .page-info,
