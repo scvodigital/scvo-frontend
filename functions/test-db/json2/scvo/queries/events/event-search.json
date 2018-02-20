@@ -59,7 +59,25 @@
                         }
                     }
                 }
-            ]
+            ],
+            "should": [
+                {
+                    "term": {
+                        "team": "events"
+                    }
+                },
+                {
+                    "term": {
+                        "team": "digital"
+                    }
+                },
+                {
+                    "term": {
+                        "team": "policy"
+                    }
+                }
+            ],
+            "minimum_should_match": 1
         }
     },
     "sort": {

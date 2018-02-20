@@ -13,6 +13,7 @@ import * as Dot from 'dot-object';
 import * as uuid from 'uuid';
 import * as cookieParser from 'cookie-parser';
 import * as compression from 'compression';
+import * as Cors from 'cors';
 
 // Internal imports
 import { fsPdf } from './fs-pdf';
@@ -21,14 +22,15 @@ import { Secrets } from './secrets';
 import { getMenus } from './menus';
 
 const config = {
-    credential: admin.credential.cert(<admin.ServiceAccount>Secrets),
-    databaseURL: "https://scvo-net.firebaseio.com"
+    credential: admin.credential.cert(<admin.ServiceAccount>Secrets.configs.default.credential),
+    databaseURL: Secrets.configs.default.databaseURL
 };
 
 const app = admin.initializeApp(<admin.AppOptions>config);
 const dot = new Dot('/');
 
 const cp = cookieParser();
+const cors = Cors({ origin: true });
 
 exports.index = functions.https.onRequest((req: functions.Request, res: functions.Response) => {
     var startTime = +new Date();
@@ -223,7 +225,8 @@ const domainMap = {
     "test.fundingscotland.com": "fundingscotland",
     "fundingscotland.local": "fundingscotland",
     "scvo-sites.firebaseapp.com": "scvo",
-    "scvo-net.firebaseapp.com": "scvo"
+    "scvo-net.firebaseapp.com": "scvo",
+    "auth.local": "auth",
 };
 
 // This is only temporarily here while we work out how PDF generation is handled in the future
@@ -250,3 +253,97 @@ exports.getFsPdf = functions.https.onRequest((req: functions.Request, res: funct
         });
     });
 });
+
+exports.centralAuthLogin = functions.https.onRequest((req: functions.Request, res: functions.Response) => {
+    cors(req, res, () => {
+        return new Promise((resolve, reject) => {
+            var loginApp;
+            var loginDomainName = req.body.loginDomain;
+            var idToken = req.body.idToken;
+            
+            try {
+                admin.apps.forEach((app: admin.app.App) => {
+                    if (app.name === loginDomainName) {
+                        loginApp = app;
+                    }
+                });
+
+                if (!loginApp) {
+                    if (!Secrets.configs.hasOwnProperty(loginDomainName)) {
+                        sendError("Could not find login domain", 500, new Error("Login domain '" + loginDomainName + "' does not exist"));
+                        return;
+                    }
+
+                    var config = {
+                        credential: admin.credential.cert({
+                            projectId: Secrets.configs[loginDomainName].credential.project_id,
+                            clientEmail: Secrets.configs[loginDomainName].credential.client_email,
+                            privateKey: Secrets.configs[loginDomainName].credential.private_key     
+                        }),
+                        databaseURL: Secrets.configs[loginDomainName].databaseURL
+                    };
+
+                    loginApp = admin.initializeApp(<admin.AppOptions> config, loginDomainName);
+                }
+            } catch(err) {
+                sendError("Error loading login app", 500, err);
+                return;
+            }
+
+            loginApp.auth().verifyIdToken(idToken).then((decodedToken: admin.auth.DecodedIdToken) => {
+                loginApp.auth().getUser(decodedToken.uid).then((loginUser: admin.auth.UserRecord) => {
+                    var email = loginUser.email;
+                    app.auth().getUserByEmail(email).then((centralUser: admin.auth.UserRecord) => {
+                        var centralUid = centralUser.uid;
+                        app.auth().createCustomToken(centralUid).then((customToken: string) => {
+                            res.json({
+                                customToken: customToken,
+                                user: centralUser
+                            });
+                            res.end();
+                            resolve();
+                        }).catch((err) => {
+                            sendError("Could not login to central account '" + email + "' (" + centralUid + ")", 403, err); 
+                        });
+                    }).catch((err) => {
+                        sendError("Could not find user '" + email + "' in central domain", 403, err);  
+                    });
+                }).catch((err) => {
+                    sendError("Could not find user in '" + loginDomainName + "'", 500, err);       
+                });;        
+            }).catch((err) => {
+                sendError("Failed to verify token", 403, err);
+            });
+
+            function sendError(message: string, code: number, error: any) {
+                console.error(message, '->', error);
+                res.status(code);
+                res.json({
+                    message: message,
+                    error: error
+                });
+                res.end();
+                resolve();
+            }
+        });
+    }); 
+});
+
+const loginDomainConfigurations = {
+    fundingscotland: {
+        "apiKey": "AIzaSyAdecxsam31jfcXk5riBTKFjjZN6H68FMI",
+        "authDomain": "scvo-auth-fs.firebaseapp.com",
+        "databaseURL": "https://scvo-auth-fs.firebaseio.com",
+        "projectId": "scvo-auth-fs",
+        "storageBucket": "scvo-auth-fs.appspot.com",
+        "messagingSenderId": "35877130739"
+    },
+    goodmoves: {
+        "apiKey": "AIzaSyAuGAacoIdUgbtfI42UXTHDosMS4pP5Teg",
+        "authDomain": "goodmoves-frontend.firebaseapp.com",
+        "databaseURL": "https://goodmoves-frontend.firebaseio.com",
+        "projectId": "goodmoves-frontend",
+        "storageBucket": "goodmoves-frontend.appspot.com",
+        "messagingSenderId": "639831727728"
+    }
+}
