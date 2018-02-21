@@ -252,6 +252,12 @@ primary-dark: #251032
             background-color: map-get($themeCharity, 'primary') !important;
         }
     }
+    .cta-content.case-studies {
+        background-color: map-get($themeLoveCharity, 'primary') !important;
+        .mdc-card {
+            background-color: white;
+        }
+    }
     .i-love-charity.featured-background-image {
         .mdc-button {
             border-color: map-get($themeLoveCharity, 'primary') !important;
@@ -1943,7 +1949,7 @@ section.search {
         max-height: $unit*6;
     }
 }
-body.scottish-charity-awards,
+body.scottish-charity-awards:not(body.post.scottish-charity-awards),
 body.the-gathering {
     .container-fluid,
     .page-content {
@@ -2006,6 +2012,15 @@ body.building-healthier-happier-communities {
     }
 }
 body.i-love-charity {
+    .full {
+        margin-bottom: 0;
+    }
+    .page-content {
+        padding-bottom: 0;
+    }
+    .cta-content.case-studies {
+        margin-top: $unit;
+    }
     .splash-image .splash-overlay .container-fluid {
         min-height: 125px;
         padding-top: 0;
@@ -3452,7 +3467,7 @@ footer {
         height: 50px;
         width: 50px;
     }
-    .scottish-charity-awards {
+    body.scottish-charity-awards:not(body.post.scottish-charity-awards) {
         .sidebar {
             margin-bottom: $unit;
             p {
