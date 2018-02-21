@@ -151,6 +151,16 @@ secondary: #022347,
 secondary-light: #6dede5,
 secondary-dark: #A7C9F2
 ),
+i-love-charity: (
+primary: #d50f3c,
+primary-overlay-start: rgba(213,15,60,0.89),
+primary-overlay-end: rgba(213,15,60,0.91),
+primary-light: #DA2D54,
+primary-dark: #9F0B2D,
+secondary: #022347,
+secondary-light: #6dede5,
+secondary-dark: #A7C9F2
+),
 services: (
 primary: #125AAC,
 primary-overlay-start: rgba(21,101,192,0.89),
@@ -175,6 +185,7 @@ primary-dark: #251032
     $themePosts: map-get($colours, 'posts');
     $themeServices: map-get($colours, 'services');
     $themeCharity: map-get($colours, 'charity');
+    $themeLoveCharity: map-get($colours, 'i-love-charity');
     $themeDigital: map-get($colours, 'digital');
     $themeJobs: map-get($colours, 'jobs');
     $themeGathering: map-get($colours, 'gathering');
@@ -239,6 +250,23 @@ primary-dark: #251032
         }
         .mdc-button:hover {
             background-color: map-get($themeCharity, 'primary') !important;
+        }
+    }
+    .cta-content.case-studies {
+        background-color: map-get($themeLoveCharity, 'primary') !important;
+        .mdc-card {
+            background-color: white;
+        }
+    }
+    .i-love-charity.featured-background-image {
+        .mdc-button {
+            border-color: map-get($themeLoveCharity, 'primary') !important;
+            background-color: map-get($themeLoveCharity, 'primary') !important;
+            color: white !important;
+        }
+        .mdc-button:hover {
+            border-color: map-get($themeLoveCharity, 'primary-dark') !important;
+            background-color: map-get($themeLoveCharity, 'primary-dark') !important;
         }
     }
     .digital-participation.callout {
@@ -672,6 +700,10 @@ primary-dark: #251032
 .the-gathering {
     @include theme-colours('gathering');
 }
+.i-love-charity.featured-background-image,
+.i-love-charity {
+    @include theme-colours('i-love-charity');
+}
 .search-result.scvo-cms-post,
 .related-posts,
 .post,
@@ -699,6 +731,7 @@ primary-dark: #251032
 .gist.scvo-cms-post,
 .list.scvo-cms-post,
 .breadcrumbs,
+.page-content .breadcrumbs,
 .page-content,
 .grant-content,
 .page-related,
@@ -919,6 +952,12 @@ figure {
 }
 section.search {
     margin-bottom: $unit*2;
+}
+.home section.search {
+    margin-bottom: $unit;
+    h3 {
+        margin-top: $unit;
+    }
 }
 .search {
     // h3 {
@@ -1903,11 +1942,14 @@ section.search {
 }
 .credit-union .splash-image .splash-overlay .container-fluid {
     min-height: $unit*9;
+    .mdc-layout-grid {
+        margin: $unit*2 0;
+    }
     img.header-text {
         max-height: $unit*6;
     }
 }
-body.scottish-charity-awards,
+body.scottish-charity-awards:not(body.post.scottish-charity-awards),
 body.the-gathering {
     .container-fluid,
     .page-content {
@@ -1948,6 +1990,68 @@ body.the-gathering {
 }
 body.the-gathering .full {
     width: 60%;
+}
+body.datawareness,
+body.i-love-charity,
+body.right-approach,
+body.building-healthier-happier-communities {
+    .splash-image .splash-overlay .container-fluid {
+        min-height: 125px;
+        padding-top: $unit*2;
+        img.header-text {
+            max-height: 100%;
+        }
+    }
+    .splash-image .container-fluid .mdc-layout-grid {
+        margin: 0;
+        width: 100% !important;
+        img {
+            margin: 0 auto;
+            display: block;
+        }
+    }
+}
+body.i-love-charity {
+    .full {
+        margin-bottom: 0;
+    }
+    .page-content {
+        padding-bottom: 0;
+    }
+    .cta-content.case-studies {
+        margin-top: $unit;
+    }
+    .splash-image .splash-overlay .container-fluid {
+        min-height: 125px;
+        padding-top: 0;
+    }
+    h3 {
+        margin: 0 0 $unit;
+    }
+    .mdc-card__primary {
+        h2 {
+            margin: 0;
+        }
+    }
+    .mdc-card__media {
+        height: 250px;
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
+        margin-bottom: $unit;
+    }
+    .mdc-card.contact-teas .mdc-card__media {
+        background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/contact-teas.jpg');
+    }
+    .mdc-card.the-yard .mdc-card__media {
+        background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/celine-sinclair-the-yard.jpg');
+    }
+    .mdc-card.starter-packs-glasgow .mdc-card__media {
+        background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/starter-packs.jpg');
+    }
+    .mdc-card.friends-of-oban-community-playpark .mdc-card__media {
+        background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/oban.jpg');
+    }
 }
 body.scottish-charity-awards {
     .mdc-card {
@@ -2001,6 +2105,7 @@ body.scottish-charity-awards {
 .post-sidebar .page-info,
 .page-sidebar .page-info,
 body.the-gathering .page-info,
+body.i-love-charity .page-info,
 .grant-content .page-info,
 .scvo-cms-page-20040 .page-info,
 .scvo-cms-page-20027 .page-info,
@@ -2086,7 +2191,7 @@ body.the-gathering .page-info,
             width: 50%;
         }
     }
-    
+
     .cta-content.callout {
         padding: $unit 0 $unit*3.25;
         h2, h3, a, .fa, .fal, .fab, .fas, .far {
@@ -2294,6 +2399,11 @@ table.membership-fees {
     }
 }
 .section-campaigns {
+    .i-love-charity .mdc-card__media {
+        background-image: url('https://storage.googleapis.com/scvo-cms/wp-content/uploads/2018/02/i-love-charity-lp-banner.png');
+        background-size: 90%;
+        background-color: white;
+    }
     .europe-and-the-third-sector .mdc-card__media {
         background-image: url('https://storage.googleapis.com/scvo-cms/wp-content/uploads/2017/10/europe-and-the-third-sector-bg-1400x400.jpg');
     }
@@ -2302,12 +2412,18 @@ table.membership-fees {
     }
     .building-healthier-happier-communities .mdc-card__media {
         background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/header-bhhc.jpg');
+        background-size: 90%;
+        background-color: white;
     }
     .datawareness .mdc-card__media {
         background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/header-datawareness.png');
+        background-size: 90%;
+        background-color: white;
     }
     .right-approach .mdc-card__media {
         background-image: url('https://storage.googleapis.com/scvo-cms/wp-content/uploads/2017/06/right-approach-strapline-hires-1024x337.jpg');
+        background-size: 90%;
+        background-color: white;
     }
     .welfare-reform .mdc-card__media {
         background-image: url('https://storage.googleapis.com/scvo-cms/wp-content/uploads/2017/10/welfare-reform-bg-1400x400.jpg');
@@ -2770,8 +2886,8 @@ body.post.author {
 #credit-union-menu {
     a:nth-child(2),
     a:nth-child(4),
-    a:nth-child(10),
-    a:nth-child(11) {
+    a:nth-child(11),
+    a:nth-child(12) {
         display: none;
     }
 }
@@ -3351,7 +3467,7 @@ footer {
         height: 50px;
         width: 50px;
     }
-    .scottish-charity-awards {
+    body.scottish-charity-awards:not(body.post.scottish-charity-awards) {
         .sidebar {
             margin-bottom: $unit;
             p {

@@ -1232,7 +1232,7 @@
         "primarySearchTemplate": {
             "index": "web-content-production",
             "type": "scvo-event",
-            "template": `{:queries/events/event-search.json}`
+            "template": `{:queries/events/event-digital-search.json}`
         },
         "supplimentarySearchTemplates": {
             "not_found": {
@@ -1389,7 +1389,7 @@
         "primarySearchTemplate": {
             "index": "web-content-production",
             "type": "scvo-event",
-            "template": `{:queries/events/event-search.json}`
+            "template": `{:queries/events/event-policy-search.json}`
         },
         "supplimentarySearchTemplates": {
             "not_found": {
@@ -1923,6 +1923,37 @@
             "default": {
                 "head": `{:templates/pages/page-head-tags.hbs}`,
                 "body": `{:templates/pages/page-gathering.hbs}`,
+                "foot": ""
+            }
+        },
+        "primarySearchTemplate": {
+            "index": "web-content-production",
+            "type": "scvo-cms-page",
+            "template": `{:queries/pages/page.json}`
+        },
+        "supplimentarySearchTemplates": {
+            "not_found": {
+                "index": "web-content-production",
+                "type": "scvo-cms-page,scvo-cms-post",
+                "template": `{:queries/pages/not-found.json}`
+            },
+            "splash": {
+                "index": "web-content-production",
+                "type": "scvo-cms-media",
+                "template": `{:queries/pages/splash.json}`
+            }
+        },
+        "elasticsearchConfig": {
+            "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
+            "apiVersion": "5.6"
+        }
+    },
+    "page_i_love_charity": {
+        "pattern": "/projects-campaigns/i-love-charity",
+        "layouts": {
+            "default": {
+                "head": `{:templates/pages/page-head-tags.hbs}`,
+                "body": `{:templates/pages/page-no-margin.hbs}`,
                 "foot": ""
             }
         },
