@@ -7,14 +7,20 @@
                         <span class="header-text-banner">{{{headerTextOverride}}}</span>
                     </h1>
                 {{else}}
-                    {{#if primaryResponse.hits.hits.[0]._source.header_text ~}}
-                        <img src="{{primaryResponse.hits.hits.[0]._source.header_text}}" alt="{{primaryResponse.hits.hits.[0]._source.title}}" class="header-text" />
+                {{#with primaryResponse.hits.hits.[0]._source ~}}
+                    {{#if header_text ~}}
+                        <img src="{{header_text}}" alt="{{title}}" class="header-text" />
                     {{else}}
                         <h1 class="header-text">
                             <span class="header-text-banner">
-                                {{#if primaryResponse.hits.hits.[0] ~}}
-                                    {{#unless primaryResponse.hits.hits.[0]._source.hide_overlay ~}}
-                                        {{{primaryResponse.hits.hits.[0]._source.title}}}
+                                {{#if title ~}}
+                                    {{#unless hide_overlay ~}}
+                                        {{{title}}}
+                                        {{#if sub_title ~}}
+                                            <span class="mdc-typography--caption">
+                                                {{{sub_title}}}
+                                            </span>
+                                        {{/if}}
                                     {{/unless ~}}
                                 {{else}}
                                     404: Not found
@@ -22,6 +28,7 @@
                             </span>
                         </h1>
                     {{/if ~}}
+                    {{/with ~}}
                 {{/if}}
             </div>
             {{> header_caption}}
