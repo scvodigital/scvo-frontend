@@ -1,0 +1,121 @@
+{
+    "home": {
+        "pattern": "/",
+        "layouts": {
+            "default": {
+                "head": `{:templates/head-tags.hbs}`,
+                "body": `{:templates/home.hbs}`,
+                "foot": ""
+            }
+        },
+        "metaData": {
+            "title": "Home"
+        },
+        "tasks": [
+            {
+                "name": "primaryResponse",
+                "taskType": "elasticsearch",
+                "config": {
+                    "connectionStringTemplate": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
+                    "elasticsearchConfig": {
+                        "apiVersion": "5.4",
+                        "log": "trace"
+                    },
+                    "queryTemplates": [
+                        {
+                            "name": "first_query",
+                            "index": "web-content-production",
+                            "type": "goodmoves-job",
+                            "template": `{:queries/pages/none.json}`
+                        },
+                        {
+                            "name": "second_query",
+                            "index": "web-content-production",
+                            "type": "goodmoves-job",
+                            "template": `{:queries/pages/none.json}`
+                        }
+                    ]
+                }
+            }
+        ],
+        "primarySearchTemplate": {
+            "index": "web-content-production",
+            "type": "scvo-cms-page",
+            "template": `{:queries/none.json}`
+        },
+        "supplimentarySearchTemplates": {},
+        "elasticsearchConfig": {
+            "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
+            "apiVersion": "5.6"
+        }
+    },
+    "sign-up": {
+        "pattern": "/sign-up",
+        "layouts": {
+            "default": {
+                "head": `{:templates/head-tags.hbs}`,
+                "body": `{:templates/sign-up.hbs}`,
+                "foot": ""
+            }
+        },
+        "metaData": {
+            "title": "Sign-up"
+        },
+        "primarySearchTemplate": {
+            "index": "web-content-production",
+            "type": "scvo-cms-page",
+            "template": `{:queries/none.json}`
+        },
+        "supplimentarySearchTemplates": {},
+        "elasticsearchConfig": {
+            "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
+            "apiVersion": "5.6"
+        }
+    },
+    "profile": {
+        "pattern": "/profile",
+        "layouts": {
+            "default": {
+                "head": `{:templates/head-tags.hbs}`,
+                "body": `{:templates/profile.hbs}`,
+                "foot": ""
+            }
+        },
+        "metaData": {
+            "title": "Profile"
+        },
+        "primarySearchTemplate": {
+            "index": "web-content-production",
+            "type": "scvo-cms-page",
+            "template": `{:queries/none.json}`
+        },
+        "supplimentarySearchTemplates": {},
+        "elasticsearchConfig": {
+            "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
+            "apiVersion": "5.6"
+        }
+    },
+    "_default": {
+        "pattern": "/*path",
+        "layouts": {
+            "default": {
+                "head": `{:templates/head-tags.hbs}`,
+                "body": `{:templates/404.hbs}`,
+                "foot": ""
+            }
+        },
+        "metaData": {
+            "title": "Page Not Found"
+        },
+        "primarySearchTemplate": {
+            "index": "web-content-production",
+            "type": "scvo-cms-page",
+            "template": `{:queries/none.json}`
+        },
+        "supplimentarySearchTemplates": {},
+        "elasticsearchConfig": {
+            "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
+            "apiVersion": "5.6"
+        }
+    }
+}

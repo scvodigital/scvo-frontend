@@ -8,6 +8,7 @@ import {
     IPartials, Helpers, ILayouts, ILayout, IRouteResponse
 } from 'scvo-router';
 
+import { RouterTask as ElasticsearchRouterTask } from 'router-task-elasticsearch';
 
 export class Context implements IContext {
     name: string = '';
