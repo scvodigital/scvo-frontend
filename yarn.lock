@@ -154,6 +154,24 @@ ci-info@^1.0.0:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/ci-info/-/ci-info-1.1.2.tgz#03561259db48d0474c8bdc90f5b47b068b6bbfb4"
 
+clayhandlebars@^4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/clayhandlebars/-/clayhandlebars-4.0.0.tgz#988c3b0de26b474b3173d9ab2bfc37620b735de0"
+  dependencies:
+    comma-it "0.0.7"
+    date-fns "^1.28.2"
+    glob "^7.1.1"
+    handlebars "^4.0.6"
+    he "^1.1.0"
+    helper-yaml "^0.1.0"
+    json-stringify-safe "^5.0.1"
+    lodash "^4.17.4"
+    outdent "^0.3.0"
+    randomstring "^1.1.5"
+    sinon "^2.1.0"
+    speakingurl "^11.0.0"
+    striptags "^2.1.1"
+
 cliui@^2.1.0:
   version "2.1.0"
   resolved "https://registry.yarnpkg.com/cliui/-/cliui-2.1.0.tgz#4b475760ff80264c762c3a1719032e91c7fea0d1"
@@ -269,6 +287,17 @@ ecc-jsbn@~0.1.1:
 elasticsearch@^13.3.1:
   version "13.3.1"
   resolved "https://registry.yarnpkg.com/elasticsearch/-/elasticsearch-13.3.1.tgz#c530aea9afb17ea91c3d0a56f1f111ba49bc9239"
+  dependencies:
+    agentkeepalive "^2.2.0"
+    chalk "^1.0.0"
+    lodash "2.4.2"
+    lodash.get "^4.4.2"
+    lodash.isempty "^4.4.0"
+    lodash.trimend "^4.5.1"
+
+elasticsearch@^14.1.0:
+  version "14.1.0"
+  resolved "https://registry.yarnpkg.com/elasticsearch/-/elasticsearch-14.1.0.tgz#9a5e461fa3bacc1bd91411534650c63408121f81"
   dependencies:
     agentkeepalive "^2.2.0"
     chalk "^1.0.0"
@@ -780,7 +809,7 @@ minimist@~0.0.1:
   version "0.0.10"
   resolved "https://registry.yarnpkg.com/minimist/-/minimist-0.0.10.tgz#de3f98543dbf96082be48ad1a0c7cda836301dcf"
 
-moment@^2.19.3:
+moment@^2.19.3, moment@^2.20.1:
   version "2.20.1"
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.20.1.tgz#d6eb1a46cbcc14a2b2f9434112c1ff8907f313fd"
 
@@ -1007,7 +1036,18 @@ samsam@1.x, samsam@^1.1.3:
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/samsam/-/samsam-1.3.0.tgz#8d1d9350e25622da30de3e44ba692b5221ab7c50"
 
-scvo-router@1.0.69:
+"scvo-router-task-elasticsearch@git+https://github.com/scvodigital/router-task-elasticsearch.git":
+  version "0.0.1"
+  resolved "git+https://github.com/scvodigital/router-task-elasticsearch.git#2304274664f9d0801c228d8ad609af9e55bb5140"
+  dependencies:
+    clayhandlebars "^4.0.0"
+    dot-object "^1.7.0"
+    elasticsearch "^14.1.0"
+    moment "^2.20.1"
+    scvo-router "^1.0.69"
+    string "^3.3.3"
+
+scvo-router@^1.0.69:
   version "1.0.69"
   resolved "https://registry.yarnpkg.com/scvo-router/-/scvo-router-1.0.69.tgz#85bf97a7e2e055b62e0d5668fa7e9c4eb7aa5a1b"
   dependencies:

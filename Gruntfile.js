@@ -73,7 +73,7 @@ module.exports = function(grunt) {
                 cmd: 'yarn add -E scvo-router; cd functions; yarn add -E scvo-router; cd ..'
             },
             testRouter: {
-                cmd: 'cd ../scvo-router; npm run build; npm link; cd ../scvo-frontend; npm link scvo-router; cd functions; npm link scvo-router; cd ..'
+                cmd: 'cd ../router; npm run local; npm link; cd ../frontend; npm link scvo-router; cd functions; npm link scvo-router; cd ..'
             },
             gzip: {
                 execOpts: {
