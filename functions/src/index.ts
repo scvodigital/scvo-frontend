@@ -49,8 +49,6 @@ async function indexHandler(req: functions.Request, res: functions.Response): Pr
         new ElasticsearchRouterTask({}),
     ];
 
-    console.log('#### INDEX -> Router Tasks:', util.inspect(routerTasks, false, null, true));
-
     var router = new Router(contextJson, routerTasks);
     var url = req.query.url || req.url;
 
@@ -58,17 +56,10 @@ async function indexHandler(req: functions.Request, res: functions.Response): Pr
     
     var response: IRouterResponse = await router.execute(url);
 
-    console.log('#### INDEXHANDLER -> Finished getting route response');
-    console.log('#### INDEXHANDLER -> Setting content type:', response.contentType);
     res.contentType(response.contentType);
-    console.log('#### INDEXHANDLER -> Setting status code:', response.statusCode);
     res.status(response.statusCode);
-    console.log('#### INDEXHANDLER -> Setting content body:');
     res.send(response.contentBody);
-    console.log('#### INDEXHANDLER -> Setting ENDING');
     res.end();
-
-    console.log('#### INDEXHANDLER -> Finished response');
 
     var endTime = +new Date();
     console.log('#### Took', (endTime - startTime), 'ms to complete route', url);
