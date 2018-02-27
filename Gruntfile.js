@@ -70,10 +70,10 @@ module.exports = function(grunt) {
                 cmd: 'node json2 ./test-db/json2/**/*.json2 ./test-db/json; node json2 ./test-db/db.json2 ./test-db'
             },
             upgradeRouter: {
-                cmd: 'yarn add -E scvo-router; cd functions; yarn add -E scvo-router; cd ..'
+                cmd: 'yarn add -E @scvo/router @scvo/router-task-elasticsearch; cd functions; yarn add -E @scvo/router @scvo/router-task-elasticsearch; cd ..'
             },
             testRouter: {
-                cmd: 'cd ../router; npm run local; npm link; cd ../frontend; npm link scvo-router; cd functions; npm link scvo-router; cd ..'
+                cmd: 'cd ../router; npm run local; npm link; cd ../frontend; npm link @scvo/router; npm link @scvo/router-task-elasticsearch; cd functions; npm link @scvo/router; npm link @scvo/router-task-elasticsearch; cd ..'
             },
             gzip: {
                 execOpts: {

@@ -8,8 +8,8 @@ import * as url from 'url';
 // Module imports
 import * as functions from 'firebase-functions';
 import * as admin from 'firebase-admin';
-import { Router, RouteMatch, IMenus, IRouterResponse, IContext } from 'scvo-router';
-import { RouterTask as ElasticsearchRouterTask } from 'router-task-elasticsearch';
+import { Router, RouteMatch, IMenus, IRouterResponse, IContext } from '@scvo/router';
+import { RouterTask as ElasticsearchRouterTask } from '@scvo/router-task-elasticsearch';
 import * as Dot from 'dot-object';
 import * as uuid from 'uuid';
 import * as cookieParser from 'cookie-parser';
@@ -18,7 +18,6 @@ import * as Cors from 'cors';
 
 // Internal imports
 import { fsPdf } from './fs-pdf';
-import { Context } from './context';
 import { Secrets } from './secrets';
 import { getMenus } from './menus';
 
@@ -44,7 +43,7 @@ async function indexHandler(req: functions.Request, res: functions.Response): Pr
     var siteKey = domainMap[domain] ? domainMap[domain] : 'scvo';
     var path = '/sites/' + siteKey;
 
-    var contextJson = await getJson<Context>(path);
+    var contextJson = await getJson<IContext>(path);
     var routerTasks = [
         new ElasticsearchRouterTask({}),
     ];
@@ -74,7 +73,7 @@ async function menuUpdateHandler(req: functions.Request, res: functions.Response
         console.log('UPDATING SITE MENUS:', siteKey);
         var path = '/sites/' + siteKey;
 
-        var contextJson: IContext = await getJson<Context>(path);
+        var contextJson: IContext = await getJson<IContext>(path);
         var domain = siteCmsMap[siteKey] || 'cms.scvo.net';
         var menus: IMenus = await getMenus(domain, contextJson.domains);
         await putJson('/sites/' + siteKey + '/menus', menus);
