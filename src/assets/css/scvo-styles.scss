@@ -2036,8 +2036,11 @@ body.i-love-charity {
             margin: 0;
         }
     }
-    .mdc-card__media {
+    .mdc-card__media,
+    .mdc-card__media a {
         height: 250px;
+    }
+    .mdc-card__media {
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center center;
@@ -2293,7 +2296,9 @@ body.i-love-charity .page-info,
 .mdc-button.mdc-button--raised.pull-right {
     margin-top: $unit/2;
 }
-
+.mdc-card__media a:hover {
+    text-decoration: none;
+}
 .mdc-card__subtitle .post-info-item {
     font-weight: 500;
 }
@@ -2309,11 +2314,27 @@ h1.mdc-typography--title {
     font-size: 2rem;
     margin-bottom: $unit*1.5;
 }
-.mdc-card__primary .mdc-card__title--large {
-    padding-top: 0;
+.linked-cards {
+    .mdc-card__primary {
+        padding: 0;
+        a {
+            padding: $unit;
+        }
+    }
+    .mdc-card__media {
+        padding: 0;
+        a {
+            display: block;
+        }
+    }
 }
-.mdc-card__primary .mdc-card__title {
-    padding-bottom: 0;
+.mdc-card__primary {
+    .mdc-card__title {
+        padding-bottom: 0;
+    }
+    .mdc-card__title--large {
+        padding-top: 0;
+    }
 }
 .search-result.scvo-cms-post .mdc-card__title {
     padding-bottom: $unit/2;
@@ -2329,7 +2350,7 @@ h1.mdc-typography--title {
     }
 }
 .services .support .mdc-card__primary {
-    height: $unit*2;
+    height: $unit*4;
 }
 h1.support-sector {
     margin-top: $unit*3;
@@ -2369,8 +2390,11 @@ table.membership-fees {
             }
         }
     }
-    .mdc-card__media {
+    .mdc-card__media,
+    .mdc-card__media a {
         height: 128px;
+    }
+    .mdc-card__media {
         background-size: cover;
         background-repeat: no-repeat;
         background-position: center center;
@@ -2439,7 +2463,8 @@ table.membership-fees {
     }
 }
 .section-events {
-    .mdc-card__media {
+    .mdc-card__media,
+    .mdc-card__media a {
         height: 230px;
     }
     .scottish-charity-awards .mdc-card__media {
@@ -2454,20 +2479,31 @@ table.membership-fees {
     margin: $unit*2 0 0;
 }
 .support {
-    .mdc-card__media {
+    .mdc-card__media,
+    .mdc-card__media a {
         height: $unit*4;
-        padding: $unit/2 $unit;
+    }
+    .mdc-card__media {
+        padding: 0;
         background-size: cover;
         background-repeat: no-repeat;
         background-origin: content-box;
         margin-bottom: $unit;
+        .mdc-card__title--large {
+            padding: 0;
+        }
         .hidden {
             display: none;
         }
     }
     .goodmoves-brand .mdc-card__media,
-    .cjs-brand .mdc-card__media {
+    .cjs-brand .mdc-card__media,
+    .goodmoves-brand .mdc-card__media a,
+    .cjs-brand .mdc-card__media a {
         height: 128px;
+    }
+    .goodmoves-brand .mdc-card__media,
+    .cjs-brand .mdc-card__media {
         background-size: unset;
         background-repeat: no-repeat;
         background-position: left center;
@@ -2477,7 +2513,7 @@ table.membership-fees {
     }
     .mdc-card__primary {
         margin-bottom: $unit;
-        padding: $unit;
+        // padding: $unit;
         .mdc-card__title {
             padding-bottom: 0;
             color: white;
@@ -2489,21 +2525,22 @@ table.membership-fees {
                 .hidden {
                     display: none;
                 }
-                .fa-fw {
-                    width: 1.55em;
-                    text-align: left;
-                    height: auto;
-                    line-height: 1em;
-                    vertical-align: middle;
-                }
             }
             a:hover {
                 text-decoration: none;
             }
+            .fa-fw {
+                width: 1.55em;
+                text-align: left;
+                height: auto;
+                line-height: 1em;
+                vertical-align: middle;
+            }
         }
     }
     .cjs {
-        .mdc-card__media {
+        .mdc-card__media,
+        .mdc-card__media a {
             padding: 0;
             height: 8rem;
         }
