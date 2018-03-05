@@ -1,36 +1,31 @@
 // Module imports
 import * as request from 'request';
-import * as Q from 'q';
-import { IMenus, IMenuItem } from 'scvo-router';
+import { IMenus, IMenuItem } from '@scvo/router';
 
-export function getMenus(domain: string, stripDomains: string[]): Promise<IMenus> {
-    return new Promise((resolve, reject) => {
-        var domainRegex: RegExp = null;
-        if(stripDomains && stripDomains.length > 0){
-            stripDomains = stripDomains.map((domain: string) => { return domain.replace(/\./g, '\\.'); });
-            var domainRegexString = '((https?)?:\\/\\/)((' + stripDomains.join(')|(') + '))';
-            domainRegex = new RegExp(domainRegexString, 'ig');
+export async function getMenus(domain: string, stripDomains: string[]): Promise<IMenus> {
+    var domainRegex: RegExp = null;
+    if(stripDomains && stripDomains.length > 0){
+        stripDomains = stripDomains.map((domain: string) => { return domain.replace(/\./g, '\\.'); });
+        var domainRegexString = '((https?)?:\\/\\/)((' + stripDomains.join(')|(') + '))';
+        domainRegex = new RegExp(domainRegexString, 'ig');
+    }
+
+    var menuIds: number[] = await getMenuIds(domain);
+    var menusArray: any[] = [];
+    for (var i = 0; i < menuIds.length; i++){
+        var menuId = menuIds[i];
+        var menu = await getMenu(domain, menuId);
+        menusArray.push(menu);
+    }
+
+    var menus = {};
+    menusArray.forEach((menu: any) => {
+        if(menu.slug){
+            menus[menu.slug] = menu.items.map((item) => { return transformWpMenu(item, domainRegex); });
         }
-
-        getMenuIds(domain).then((menuIds: number[]) => {
-            var promises = menuIds.map((menuId: number) => {
-                return getMenu(domain, menuId);
-            });
-
-            var obs = Q.all(promises).then((menusArray: any[]) => {
-                var menus = {};
-                menusArray.forEach((menu: any) => {
-                    if(menu.slug){
-                        menus[menu.slug] = menu.items.map((item) => { return transformWpMenu(item, domainRegex); });
-                    }
-                });
-
-                resolve(menus);
-            }).catch((err) => {
-                console.log('ERROR:', err);  
-            });
-        });
     });
+
+    return menus;
 }
 
 function getMenuIds(domain: string): Promise<number[]> {

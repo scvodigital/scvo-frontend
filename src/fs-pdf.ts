@@ -1,6 +1,5 @@
 import * as util from 'util';
 import * as pdfPrinter from 'pdfmake';
-import * as functions from 'firebase-functions';
 import * as request from 'request';
 import * as stream from 'stream';
 import * as moment from 'moment';
@@ -22,8 +21,8 @@ const fonts = {
 
 const printer = new pdfPrinter(fonts);
 
-export function fsPdf(ids: string[], subdomain: string, title: string = 'Funding Scotland', subtitle: string = null) {
-    return new Promise((resolve, reject) => {
+export function fsPdf(ids: string[], subdomain: string, title: string = 'Funding Scotland', subtitle: string = null): Promise<stream.PassThrough> {
+    return new Promise<stream.PassThrough>((resolve, reject) => {
         getImage(subdomain).then((image) => {
             getFunds(ids).then((fund) => {
                 generatePdf(image, fund, title, subtitle).then((s: stream.PassThrough) => {

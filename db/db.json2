@@ -153,6 +153,17 @@
             ],
             "menus": {},
             "metaData": {
+                "handlebarsPartials": {
+                    "login": `{:json2/test/partials/login.hbs}`
+                },
+                "handlebarsLayouts": {
+                    "default": {
+                        "template": `{:json2/test/layouts/default.hbs}`,
+                        "sections": ["head", "body", "foot"],
+                        "pattern": ".*",
+                        "contentType": "text/html"
+                    }
+                },
                 "title": "Test test",
                 "firebaseDefaultDomain": {
                     "name": "scvo",
@@ -197,17 +208,7 @@
                 ]
             },
             "title": "Testing the new Context Schema",
-            "routes": {:json/test-routes.json},
-            "templatePartials": {
-                "login": `{:json2/test/partials/login.hbs}`
-            },
-            "layouts": {
-                "default": {
-                    "template": `{:json2/test/layouts/default.hbs}`,
-                    "sections": ["head", "body", "foot"],
-                    "pattern": ".*"
-                }
-            }
+            "routes": {:json/test-routes.json}
         },
         "auth": {
             "domains": [
