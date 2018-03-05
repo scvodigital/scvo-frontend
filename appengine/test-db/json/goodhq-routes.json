@@ -1,0 +1,215 @@
+{
+    "index": {
+        "pattern": "/",
+        "linkTags": [],
+        "metaTags": [],
+        "templates": {
+            "default": "<div class=\"home-splash home-splash-1\" style=\"background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.7)), url({{primaryResponse.hits.hits.[0]._source.original_image}}) no-repeat center center; background-size: cover;\">\n    <div class=\"container-fluid splash-nav\">\n        <div class=\"row\">\n            <div class=\"col-md-offset-3 col-sm-offset-2 col-md-6 col-sm-8\">\n                <div class=\"home-spacer\"></div>\n                <div class=\"home-brand\" title=\"Good HQ\"></div>\n                <div class=\"home-intro\">\n                    <h2>Find the causes you care about</h2>\n                    <h3>Share your experiences and get involved</h3>\n                </div>\n                <div class=\"home-search row\">\n                    <form>\n                        <div class=\"col-xs-9 tight\">\n                            <div class=\"searchbar ng-pristine ng-valid ng-valid-pattern\" name=\"searchForm\" role=\"form\" novalidate=\"\">\n                                <input aria-label=\"Search Bar\" title=\"Search Bar\" id=\"searchbar\" name=\"search\" type=\"text\" ng-pattern=\"/^[a-zA-ZÀ-ÿ0-9&amp;+@#'!\\?_\\-() ]+$/\" class=\"\" ng-model=\"homequery\" placeholder=\"Search\">\n                            </div>\n                        </div>\n                        <div class=\"col-xs-3 tight\">\n                            <button class=\"btn btn-icon\" type=\"submit\" href=\"/search\">\n                                <span class=\"glyphicon glyphicon-search\" aria-hidden=\"true\"></span>\n                            </button>\n                        </div>\n                    </form>\n                </div>\n                <div class=\"row\">\n                    <p>or explore other ways to get involved</p>\n                </div>\n                <div class=\"home-buttons row\">\n                    <div class=\"col-xs-12 col-sm-4 tight\">\n                        <button class=\"btn btn-icon btn-inverse\" href=\"/search?type=goodhq-organisation\">\n                            <span class=\"glyphicon glyphicon-edit left\" aria-hidden=\"true\"></span>\n                            Review\n                        </button>\n                    </div>\n                    <div class=\"col-xs-12 col-sm-4 tight\">\n                        <button class=\"btn btn-icon btn-inverse\" href=\"/search?type=milo-volunteering-opportunity\">\n                            <span class=\"glyphicon glyphicon-thumbs-up left\" aria-hidden=\"true\"></span>\n                            Volunteer\n                        </button>\n                    </div>\n                    <div class=\"col-xs-12 col-sm-4 tight\">\n                        <button class=\"btn btn-icon btn-inverse\" href=\"/search?type=goodmoves-job\">\n                            <span class=\"glyphicon glyphicon-briefcase left\" aria-hidden=\"true\"></span>\n                            Work\n                        </button>\n                    </div>\n                </div>\n            </div>\n        </div>\n    </div>\n</div>\n\n<div class=\"container-fluid container-home\">\n    <div class=\"row\">\n        <div class=\"col-xs-12\">\n            <h1>Featured reviews</h1>\n            <h2>Find out what people are saying about their favourite good causes and charities - <a href=\"/reviews\">more reviews</a></h2>\n        </div>\n    </div>\n    <div class=\"row\">\n        <ul class=\"media-list\">\n            <li class=\"media\">\n                {{#each supplimentaryResponses.latest_reviews.hits.hits}}\n                <div class=\"col-md-4 col-sm-12\">\n                    {{{this._source.rendered.ghq_list}}}\n                </div>\n                {{/each}}\n            </li>\n        </ul>\n    </div>\n\n    <div class=\"row\">\n        <div class=\"col-xs-12\">\n            <h1>Featured posts</h1>\n            <h2>Find out what good causes and charities are talking about - <a href=\"/posts\">more posts</a></h2>\n        </div>\n    </div>\n    <div class=\"row\">\n        <ul class=\"media-list\">\n            <li class=\"media\">\n                {{#each supplimentaryResponses.latest_posts.hits.hits}}\n                <div class=\"col-md-4 col-sm-12\">\n                    {{{this._source.rendered.ghq_list}}}\n                </div>\n                {{/each}}\n            </li>\n        </ul>\n    </div>\n</div>\n"
+        },
+        "titleTemplate": "Good HQ\n",
+        "primarySearchTemplate": {
+            "index": "web-content-production",
+            "type": "scvo-cms-media",
+            "template": "{\n\t\"size\": 1,\n    \"_source\": [\n        \"original_image\"\n    ],\n\t\"query\": {\n\t\t\"function_score\": {\n\t\t\t\"query\": {\n\t\t\t\t\"bool\": {\n\t\t\t\t\t\"must\": [\n                            {\n    \t\t\t\t\t\t\"term\": {\n    \t\t\t\t\t\t\t\"categories_id\": 509\n    \t\t\t\t\t\t}\n    \t\t\t\t\t}\n                    ]\n\t\t\t\t}\n\t\t\t},\n\t\t\t\"random_score\": {},\n\t\t\t\"score_mode\": \"sum\"\n\t\t}\n\t}\n}\n"
+        },
+        "supplimentarySearchTemplates": {
+            "latest_reviews": {
+                "index": "web-content-production",
+                "type": "goodhq-review",
+                "template": "{\n    \"size\": 3,\n    \"_source\": [\n        \"rendered.ghq_list\"\n    ],\n    \"sort\": {\n        \"date_posted\": \"desc\"\n    }\n}\n"
+            },
+            "latest_posts": {
+                "index": "web-content-production",
+                "type": "goodhq-post",
+                "template": "{\n    \"size\": 3,\n    \"_source\": [\n        \"rendered.ghq_list\"\n    ],\n    \"sort\": {\n        \"date_posted\": \"desc\"\n    }\n}\n"
+            }
+        },
+        "elasticsearchConfig": {
+            "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
+            "apiVersion": "5.6",
+            "log": "debug"
+        }
+    },
+    "search": {
+        "pattern": "/search",
+        "linkTags": [],
+        "metaTags": [],
+        "templates": {
+            "default": "<div class=\"container-fluid\">\n    <div class=\"v-margin\">\n        <div class=\"mdc-card\">\n            <section class=\"mdc-card__primary\">\n                <h2 class=\"mdc-card__title mdc-card__title--large\">Search Good HQ</h2>\n                <form [searchroute]=\"'search'\">\n                    <div class=\"mdc-textfield\">\n                        <input type=\"text\" class=\"mdc-textfield__input searchRoute\" placeholder=\"Search\" value=\"{{params.query.q}}\" name=\"q\" id=\"q\">\n                        <div class=\"mdc-textfield__bottom-line\"></div>\n                    </div>\n                    <div class=\"mdc-form-field\">\n                        <label class=\"mdc-select__label\" for=\"type\">Show me</label>\n                        <select class=\"mdc-select\" role=\"listbox\" id=\"type\" name=\"type\">\n                            <option value=\"\" {{#if ../params.query.type}}{{else}}selected{{/if}}>Everything</option>\n                            <option value=\"goodhq-organisation\" {{#compare ../params.query.type \"===\" \"goodhq-organisation\"}}selected{{/compare}}>Causes</option>\n                            <option value=\"goodhq-post\" {{#compare ../params.query.type \"===\" \"goodhq-post\"}}selected{{/compare}}>Posts</option>\n                            <option value=\"milo-volunteering-opportunity\" {{#compare ../params.query.type \"===\" \"milo-volunteering-opportunity\"}}selected{{/compare}}>Volunteering opportunities</option>\n                            <option value=\"goodmoves-job\" {{#compare ../params.query.type \"===\" \"goodmoves-job\"}}selected{{/compare}}>Jobs</option>\n                        </select>\n                    </div>\n                    <button type=\"submit\" class=\"mdc-button mdc-button--raised\" aria-label=\"Search\" alt=\"Search\">\n                        <span class=\"fa fa-search\" aria-hidden=\"true\"></span>\n                        Search\n                    </button>\n                </form>\n            </section>\n        </div>\n    </div>\n\n    <div class=\"mdc-layout-grid\">\n    <div class=\"mdc-layout-grid__inner\">\n    {{#each primaryResponse.hits.hits}}\n    <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell\">\n    {{{_source.rendered.ghq_search_result}}}\n    </div>\n    {{/each}}\n    </div>\n    </div>\n\n    {{> pagination paging=paging params=params}}\n</div>\n"
+        },
+        "titleTemplate": "Good HQ – Search\n",
+        "jsonLdTemplate": "",
+        "defaultParams": {
+            "query": {
+                "type": ""
+            }
+        },
+        "primarySearchTemplate": {
+            "index": "web-content-production",
+            "type": "goodhq-organisation,goodhq-post,goodmoves-job,milo-volunteering-opportunity",
+            "template": "{\n    \"size\": 10,\n    \"from\": {{multiply (subtract (default query.page 1) 1) 10}},\n    \"_source\": [\n        \"title\",\n        \"rendered.ghq_search_result\"\n    ],\n    \"query\": {\n        \"bool\": {\n            {{#if query.type}}\n            \"must\": [\n                {\n                    \"term\": {\n                        \"_type\": {\n                            \"value\" : \"{{query.type}}\"\n                        }\n                    }\n                }\n            ],\n            {{/if}}\n            \"should\": [\n                {\n                    \"query_string\": {\n                        \"query\": \"{{query.q}}\",\n                        \"default_operator\": \"AND\",\n                        \"analyzer\": \"snowball\"\n                    }\n                },\n                {\n                    \"term\" : {\n                        \"_type\" : {\n                            \"value\" : \"goodhq-organisation\",\n                            \"boost\" : 2\n                        }\n                    }\n                }\n            ]\n        }\n    }\n}\n"
+        },
+        "elasticsearchConfig": {
+            "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
+            "apiVersion": "5.6",
+            "log": "trace"
+        },
+        "multipleResults": true
+    },
+    "page": {
+        "pattern": {
+            "about": "/about",
+            "signin": "/signin",
+            "signup": "/signup",
+            "help": "/help",
+            "terms": "/terms",
+            "privacy": "/privacy",
+            "contact": "/contact"
+        },
+        "linkTags": [],
+        "metaTags": [],
+        "templates": {
+            "default": "<div class=\"container-fluid\">\n    Static page content\n</div>\n"
+        },
+        "titleTemplate": "Good HQ – Static page content\n",
+        "jsonLdTemplate": "{{#if multipleResults}}\n    { \"error\": \"404\" }\n{{else}}\n    {{{primaryResponse.hits.hits.[0]._source.rendered.json_ld}}}\n{{/if}}\n",
+        "primarySearchTemplate": {
+            "index": "web-content-production",
+            "type": "scvo-cms-page",
+            "template": ""
+        },
+        "elasticsearchConfig": {
+            "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
+            "apiVersion": "5.6",
+            "log": "debug"
+        }
+    },
+    "profile_posts": {
+        "pattern": "/:xid/posts",
+        "linkTags": [],
+        "metaTags": [],
+        "templates": {
+            "default": "{{#with primaryResponse.hits.hits.[0]._source}}\n{{{rendered.ghq_profile_header}}}\n{{/with}}\n\n<div class=\"container-fluid\">\n    <div class=\"mdc-layout-grid\">\n        <div class=\"mdc-layout-grid__inner\">\n            <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-12\">\n                <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-4\">\n                    <a href=\"/{{primaryResponse.hits.hits.[0]._source.xid}}\">About</a>\n                </div>\n                <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-4\">\n                    <a href=\"/{{primaryResponse.hits.hits.[0]._source.xid}}/volopps\">Get involved</a>\n                </div>\n                <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-4\">\n                    <a href=\"/{{primaryResponse.hits.hits.[0]._source.xid}}/reviews\">Reviews</a>\n                </div>\n            </div>\n        </div>\n        <div class=\"mdc-layout-grid__inner\">\n            <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-12\">\n                <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-4\">\n                    <a href=\"/{{primaryResponse.hits.hits.[0]._source.xid}}/volopps\">Volunteer</a>\n                </div>\n                <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-4\">\n                    <a href=\"/{{primaryResponse.hits.hits.[0]._source.xid}}/jobs\">Work</a>\n                </div>\n                <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-4\">\n                    &nbsp;\n                </div>\n            </div>\n        </div>\n        <div class=\"mdc-layout-grid__inner\">\n            <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-4 sidebar profile-sidebar\">\n                {{#with primaryResponse.hits.hits.[0]._source}}\n                {{{rendered.ghq_profile_info}}}\n                {{/with}}\n            </div>\n            <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-8 content profile-content\">\n                {{#each supplimentaryResponses.posts.hits.hits}}\n                {{{this._source.rendered.ghq_list}}}\n                {{/each}}\n            </div>\n        </div>\n    </div>\n</div>\n"
+        },
+        "titleTemplate": "",
+        "jsonLdTemplate": "{{#if multipleResults}}\n    { \"error\": \"404\" }\n{{else}}\n    {{{primaryResponse.hits.hits.[0]._source.rendered.json_ld}}}\n{{/if}}\n",
+        "primarySearchTemplate": {
+            "index": "web-content-production",
+            "type": "goodhq-organisation",
+            "template": "{\n    \"size\": 1,\n    \"_source\": [\n        \"xid\",\n        \"charity_number\",\n        \"rendered.ghq_profile_header\",\n        \"rendered.ghq_profile_info\"\n    ],\n    \"query\": {\n        \"term\": {\n            \"xid\": \"{{xid}}\"\n        }\n    }\n}\n"
+        },
+        "supplimentarySearchTemplates": {
+            "posts": {
+                "index": "web-content-production",
+                "type": "goodhq-post",
+                "template": "{\n    \"size\": 10,\n    \"from\": {{multiply (subtract (default query.page 1) 1) 10}},\n    \"_source\": [\n        \"rendered.ghq_list\"\n    ],\n    \"query\": {\n        \"bool\": {\n\t        \"should\": [\n                {\n                    \"term\": {\n                        \"author_xid\": \"{{primaryResponse.hits.hits.[0]._source.xid}}\"\n                    }\n                }\n            ],\n            \"minimum_should_match\": 1\n\t    }\n    },\n    \"sort\": {\n        \"date_posted\": \"desc\"\n    }\n}\n"
+            }
+        },
+        "elasticsearchConfig": {
+            "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
+            "apiVersion": "5.6",
+            "log": "debug"
+        }
+    },
+    "profile_volopps": {
+        "pattern": "/:xid/volopps",
+        "linkTags": [],
+        "metaTags": [],
+        "templates": {
+            "default": "{{#with primaryResponse.hits.hits.[0]._source}}\n{{{rendered.ghq_profile_header}}}\n{{/with}}\n\n<div class=\"container-fluid\">\n    <div class=\"mdc-layout-grid\">\n        <div class=\"mdc-layout-grid__inner\">\n            <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-12\">\n                <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-4\">\n                    <a href=\"/{{primaryResponse.hits.hits.[0]._source.xid}}\">About</a>\n                </div>\n                <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-4\">\n                    <a href=\"/{{primaryResponse.hits.hits.[0]._source.xid}}/volopps\">Get involved</a>\n                </div>\n                <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-4\">\n                    <a href=\"/{{primaryResponse.hits.hits.[0]._source.xid}}/reviews\">Reviews</a>\n                </div>\n            </div>\n        </div>\n        <div class=\"mdc-layout-grid__inner\">\n            <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-12\">\n                <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-4\">\n                    <a href=\"/{{primaryResponse.hits.hits.[0]._source.xid}}/volopps\">Volunteer</a>\n                </div>\n                <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-4\">\n                    <a href=\"/{{primaryResponse.hits.hits.[0]._source.xid}}/jobs\">Work</a>\n                </div>\n                <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-4\">\n                    &nbsp;\n                </div>\n            </div>\n        </div>\n        <div class=\"mdc-layout-grid__inner\">\n            <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-4 sidebar profile-sidebar\">\n                {{#with primaryResponse.hits.hits.[0]._source}}\n                {{{rendered.ghq_profile_info}}}\n                {{/with}}\n            </div>\n            <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-8 content profile-content\">\n                {{#each supplimentaryResponses.volopps.hits.hits}}\n                {{{this._source.rendered.ghq_list}}}\n                {{/each}}\n            </div>\n        </div>\n    </div>\n</div>\n"
+        },
+        "titleTemplate": "",
+        "jsonLdTemplate": "{{#if multipleResults}}\n    { \"error\": \"404\" }\n{{else}}\n    {{{primaryResponse.hits.hits.[0]._source.rendered.json_ld}}}\n{{/if}}\n",
+        "primarySearchTemplate": {
+            "index": "web-content-production",
+            "type": "goodhq-organisation",
+            "template": "{\n    \"size\": 1,\n    \"_source\": [\n        \"xid\",\n        \"charity_number\",\n        \"rendered.ghq_profile_header\",\n        \"rendered.ghq_profile_info\"\n    ],\n    \"query\": {\n        \"term\": {\n            \"xid\": \"{{xid}}\"\n        }\n    }\n}\n"
+        },
+        "supplimentarySearchTemplates": {
+            "posts": {
+                "index": "web-content-production",
+                "type": "milo-volunteering-opportunity",
+                "template": "{\n    \"size\": 10,\n    \"from\": {{multiply (subtract (default query.page 1) 1) 10}},\n    \"_source\": [\n        \"rendered.ghq_list\"\n    ],\n    \"query\": {\n\t    \"bool\": {\n\t        \"should\": [\n\t        \t{\n\t            \t\"term\": {\n\t                \t\"organisation_good_hq_xid\": \"{{primaryResponse.hits.hits.[0]._source.xid}}\"\n                \t}\n            \t},\n            \t{\n            \t\t\"term\": {\n\t\t                \"organisation_charity_number\": \"{{primaryResponse.hits.hits.[0]._source.charity_number}}\"\n\t                }\n\t            }\n            ],\n            \"minimum_should_match\": 1\n\t    }\n    },\n    \"sort\": {\n        \"start_date\": \"desc\"\n    }\n}\n"
+            }
+        },
+        "elasticsearchConfig": {
+            "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
+            "apiVersion": "5.6",
+            "log": "debug"
+        }
+    },
+    "profile_jobs": {
+        "pattern": "/:xid/jobs",
+        "linkTags": [],
+        "metaTags": [],
+        "templates": {
+            "default": "{{#with primaryResponse.hits.hits.[0]._source}}\n{{{rendered.ghq_profile_header}}}\n{{/with}}\n\n<div class=\"container-fluid\">\n    <div class=\"mdc-layout-grid\">\n        <div class=\"mdc-layout-grid__inner\">\n            <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-12\">\n                <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-4\">\n                    <a href=\"/{{primaryResponse.hits.hits.[0]._source.xid}}\">About</a>\n                </div>\n                <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-4\">\n                    <a href=\"/{{primaryResponse.hits.hits.[0]._source.xid}}/volopps\">Get involved</a>\n                </div>\n                <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-4\">\n                    <a href=\"/{{primaryResponse.hits.hits.[0]._source.xid}}/reviews\">Reviews</a>\n                </div>\n            </div>\n        </div>\n        <div class=\"mdc-layout-grid__inner\">\n            <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-12\">\n                <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-4\">\n                    <a href=\"/{{primaryResponse.hits.hits.[0]._source.xid}}/volopps\">Volunteer</a>\n                </div>\n                <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-4\">\n                    <a href=\"/{{primaryResponse.hits.hits.[0]._source.xid}}/jobs\">Work</a>\n                </div>\n                <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-4\">\n                    &nbsp;\n                </div>\n            </div>\n        </div>\n        <div class=\"mdc-layout-grid__inner\">\n            <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-4 sidebar profile-sidebar\">\n                {{#with primaryResponse.hits.hits.[0]._source}}\n                {{{rendered.ghq_profile_info}}}\n                {{/with}}\n            </div>\n            <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-8 content profile-content\">\n                {{#each supplimentaryResponses.jobs.hits.hits}}\n                {{{this._source.rendered.ghq_list}}}\n                {{/each}}\n            </div>\n        </div>\n    </div>\n</div>\n"
+        },
+        "titleTemplate": "",
+        "jsonLdTemplate": "{{#if multipleResults}}\n    { \"error\": \"404\" }\n{{else}}\n    {{{primaryResponse.hits.hits.[0]._source.rendered.json_ld}}}\n{{/if}}\n",
+        "primarySearchTemplate": {
+            "index": "web-content-production",
+            "type": "goodhq-organisation",
+            "template": "{\n    \"size\": 1,\n    \"_source\": [\n        \"xid\",\n        \"charity_number\",\n        \"rendered.ghq_profile_header\",\n        \"rendered.ghq_profile_info\"\n    ],\n    \"query\": {\n        \"term\": {\n            \"xid\": \"{{xid}}\"\n        }\n    }\n}\n"
+        },
+        "supplimentarySearchTemplates": {
+            "posts": {
+                "index": "web-content-production",
+                "type": "goodmoves-job",
+                "template": "{\n    \"size\": 10,\n    \"from\": {{multiply (subtract (default query.page 1) 1) 10}},\n    \"_source\": [\n        \"rendered.ghq_list\"\n    ],\n    \"query\": {\n        \"bool\": {\n\t        \"should\": [\n                {\n                    \"term\": {\n                        \"organisation.charity_number\": \"{{primaryResponse.hits.hits.[0]._source.charity_number}}\"\n                    }\n                }\n            ],\n            \"minimum_should_match\": 1\n\t    }\n    },\n    \"sort\": {\n        \"closing_date\": \"desc\"\n    }\n}\n"
+            }
+        },
+        "elasticsearchConfig": {
+            "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
+            "apiVersion": "5.6",
+            "log": "debug"
+        }
+    },
+    "profile_reviews": {
+        "pattern": "/:xid/reviews",
+        "linkTags": [],
+        "metaTags": [],
+        "templates": {
+            "default": "{{#with primaryResponse.hits.hits.[0]._source}}\n{{{rendered.ghq_profile_header}}}\n{{/with}}\n\n<div class=\"container-fluid\">\n    <div class=\"mdc-layout-grid\">\n        <div class=\"mdc-layout-grid__inner\">\n            <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-12\">\n                <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-4\">\n                    <a href=\"/{{primaryResponse.hits.hits.[0]._source.xid}}\">About</a>\n                </div>\n                <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-4\">\n                    <a href=\"/{{primaryResponse.hits.hits.[0]._source.xid}}/volopps\">Get involved</a>\n                </div>\n                <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-4\">\n                    <a href=\"/{{primaryResponse.hits.hits.[0]._source.xid}}/reviews\">Reviews</a>\n                </div>\n            </div>\n        </div>\n        <div class=\"mdc-layout-grid__inner\">\n            <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-12\">\n                <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-4\">\n                    <a href=\"/{{primaryResponse.hits.hits.[0]._source.xid}}/volopps\">Volunteer</a>\n                </div>\n                <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-4\">\n                    <a href=\"/{{primaryResponse.hits.hits.[0]._source.xid}}/jobs\">Work</a>\n                </div>\n                <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-4\">\n                    &nbsp;\n                </div>\n            </div>\n        </div>\n        <div class=\"mdc-layout-grid__inner\">\n            <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-4 sidebar profile-sidebar\">\n                {{#with primaryResponse.hits.hits.[0]._source}}\n                {{{rendered.ghq_profile_info}}}\n                {{/with}}\n            </div>\n            <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-8 content profile-content\">\n                {{#each supplimentaryResponses.reviews.hits.hits}}\n                {{{this._source.rendered.ghq_list}}}\n                {{/each}}\n            </div>\n        </div>\n    </div>\n</div>\n"
+        },
+        "titleTemplate": "",
+        "jsonLdTemplate": "{{#if multipleResults}}\n    { \"error\": \"404\" }\n{{else}}\n    {{{primaryResponse.hits.hits.[0]._source.rendered.json_ld}}}\n{{/if}}\n",
+        "primarySearchTemplate": {
+            "index": "web-content-production",
+            "type": "goodhq-organisation",
+            "template": "{\n    \"size\": 1,\n    \"_source\": [\n        \"xid\",\n        \"charity_number\",\n        \"rendered.ghq_profile_header\",\n        \"rendered.ghq_profile_info\"\n    ],\n    \"query\": {\n        \"term\": {\n            \"xid\": \"{{xid}}\"\n        }\n    }\n}\n"
+        },
+        "supplimentarySearchTemplates": {
+            "reviews": {
+                "index": "web-content-production",
+                "type": "goodhq-review",
+                "template": "{\n    \"size\": 10,\n    \"from\": {{multiply (subtract (default query.page 1) 1) 10}},\n    \"_source\": [\n        \"rendered.ghq_list\"\n    ],\n    \"query\": {\n        \"bool\": {\n\t        \"should\": [\n                {\n                    \"term\": {\n                        \"target_xid\": \"{{primaryResponse.hits.hits.[0]._source.xid}}\"\n                    }\n                }\n            ],\n            \"minimum_should_match\": 1\n\t    }\n    },\n    \"sort\": {\n        \"date_posted\": \"desc\"\n    }\n}\n"
+            }
+        },
+        "elasticsearchConfig": {
+            "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
+            "apiVersion": "5.6",
+            "log": "debug"
+        }
+    },
+    "_default": {
+        "pattern": "/*path",
+        "linkTags": [],
+        "metaTags": [],
+        "templates": {
+            "default": "{{#with primaryResponse.hits.hits.[0]._source}}\n{{{rendered.ghq_profile_header}}}\n{{/with}}\n\n<div class=\"container-fluid\">\n    <div class=\"mdc-layout-grid\">\n        <div class=\"mdc-layout-grid__inner\">\n            <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-12\">\n                <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-4\">\n                    <a href=\"/{{primaryResponse.hits.hits.[0]._source.xid}}\">About</a>\n                </div>\n                <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-4\">\n                    <a href=\"/{{primaryResponse.hits.hits.[0]._source.xid}}/volopps\">Get involved</a>\n                </div>\n                <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-4\">\n                    <a href=\"/{{primaryResponse.hits.hits.[0]._source.xid}}/reviews\">Reviews</a>\n                </div>\n            </div>\n        </div>\n        <div class=\"mdc-layout-grid__inner\">\n            <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-12\">\n                <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-4\">\n                    <a href=\"/{{primaryResponse.hits.hits.[0]._source.xid}}/volopps\">Volunteer</a>\n                </div>\n                <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-4\">\n                    <a href=\"/{{primaryResponse.hits.hits.[0]._source.xid}}/jobs\">Work</a>\n                </div>\n                <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-4\">\n                    &nbsp;\n                </div>\n            </div>\n        </div>\n        <div class=\"mdc-layout-grid__inner\">\n            <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-4 sidebar profile-sidebar\">\n                {{#with primaryResponse.hits.hits.[0]._source}}\n                {{{rendered.ghq_profile_info}}}\n                {{/with}}\n            </div>\n            <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-8 content profile-content\">\n                About {{xid}}\n            </div>\n        </div>\n    </div>\n</div>\n"
+        },
+        "titleTemplate": "",
+        "jsonLdTemplate": "{{#if multipleResults}}\n    { \"error\": \"404\" }\n{{else}}\n    {{{primaryResponse.hits.hits.[0]._source.rendered.json_ld}}}\n{{/if}}\n",
+        "primarySearchTemplate": {
+            "index": "web-content-production",
+            "type": "goodhq-organisation,goodhq-user",
+            "template": "{\n    \"size\": 1,\n    \"_source\": [\n        \"xid\",\n        \"charity_number\",\n        \"rendered.ghq_profile_header\",\n        \"rendered.ghq_profile_info\"\n    ],\n    \"query\": {\n        \"term\": {\n            \"xid\": \"{{path}}\"\n        }\n    }\n}\n"
+        },
+        "elasticsearchConfig": {
+            "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
+            "apiVersion": "5.6",
+            "log": "debug"
+        }
+    }
+}

@@ -11,6 +11,9 @@ module.exports = function(grunt) {
         clean: {
             main: {
                 src: ['./dist']
+            },
+            appengine: {
+                src: ['./appengine/dist']
             }
         },
         copy: {
@@ -21,6 +24,17 @@ module.exports = function(grunt) {
                         cwd: 'src/',
                         src: ['**/*'],
                         dest: 'dist/'
+                    }
+                ]
+            },
+            appengine: {
+                files: [
+                    {
+                        nonull: true,
+                        expand: true,
+                        cwd: './dist/assets/',
+                        src: ['**/*'],
+                        dest: './appengine/dist/assets/'
                     }
                 ]
             }
@@ -39,8 +53,14 @@ module.exports = function(grunt) {
             }
         },
         bgShell: {
-            serve: {
+            serve_old: {
                 cmd: 'devmode=true firebase serve -p 9000 --only hosting,functions'
+            },
+            serve: {
+                execOpts: {
+                    cwd: './appengine'
+                },
+                cmd: 'devmode=true npm start'
             },
             deploy: {
                 cmd: 'firebase deploy --only hosting,' + functions 
@@ -89,7 +109,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-bg-shell');
 
-    grunt.registerTask('default', ['clean:main', 'copy:main', 'sass', 'bgShell:json2', 'bgShell:gzip', 'bgShell:buildFunctions']);
+    grunt.registerTask('default', ['clean:main', 'clean:appengine', 'copy:main', 'sass', 'copy:appengine', 'bgShell:json2', 'bgShell:gzip', 'bgShell:buildFunctions']);
     grunt.registerTask('serve', ['default', 'bgShell:serve']);
     grunt.registerTask('serve-router', ['default', 'bgShell:testRouter', 'serve']);
     grunt.registerTask('deploy-all', ['default', 'bgShell:deploy', 'bgShell:deployDb']);
