@@ -1,54 +1,54 @@
 {
     "size": 10,
-    "from": {{multiply (subtract (default query.page 1) 1) 10}},
+    "from": {{multiply (subtract (default request.params.query.page 1) 1) 10}},
     "_source": [
         "rendered.scvo_search_result"
     ],
     "query": {
         "bool": {
             "must": [
-                {{#if query.q}}
+                {{#if request.params.query.q}}
                 {
                     "query_string": {
-                        "query": "{{query.q}}",
+                        "query": "{{request.params.query.q}}",
                         "default_operator": "AND",
                         "analyzer": "snowball"
                     }
                 },
                 {{/if}}
-                {{#if query.sector}}
+                {{#if request.params.query.sector}}
                 {
                     "term": {
-                        "sectors": "{{query.sector}}"
+                        "sectors": "{{request.params.query.sector}}"
                     }
                 },
                 {{/if}}
-                {{#if query.role}}
+                {{#if request.params.query.role}}
                 {
                     "term": {
-                        "roles": "{{query.role}}"
+                        "roles": "{{request.params.query.role}}"
                     }
                 },
                 {{/if}}
-                {{#if query.region}}
+                {{#if request.params.query.region}}
                 {
                     "term": {
-                        "region": "{{query.region}}"
+                        "region": "{{request.params.query.region}}"
                     }
                 },
                 {{/if}}
-                {{#if query.status}}
+                {{#if request.params.query.status}}
                 {
                     "term": {
-                        "status": "{{query.status}}"
+                        "status": "{{request.params.query.status}}"
                     }
                 },
                 {{/if}}
-                {{#if query.minimum_salary}}
+                {{#if request.params.query.minimum_salary}}
                 {
                     "range": {
                         "salary_min": {
-                            "gte": "{{query.minimum_salary}}"
+                            "gte": "{{request.params.query.minimum_salary}}"
                         }
                     }
                 },

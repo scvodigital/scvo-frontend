@@ -1,10 +1,10 @@
 <div class="goodmoves-job-search">
-    <div class="splash-image splash-image-{{primaryResponse.hits.hits.[0]._type}}" style="{{> header_splash_image}}">
-        <div class="splash-overlay{{#if primaryResponse.hits.hits.[0]._source.hide_overlay}} splash-overlay-hidden{{/if}}">
+    <div class="splash-image splash-image-{{data.primaryResponse.hits.hits.[0]._type}}" style="{{> header_splash_image}}">
+        <div class="splash-overlay{{#if data.primaryResponse.hits.hits.[0]._source.hide_overlay}} splash-overlay-hidden{{/if}}">
             <div class="container-fluid">
                 <div class="mdc-layout-grid">
-                    {{#if primaryResponse.hits.hits.[0]._source.header_text ~}}
-                    <img src="{{primaryResponse.hits.hits.[0]._source.header_text}}" alt="{{primaryResponse.hits.hits.[0]._source.title}}" class="header-text" />
+                    {{#if data.primaryResponse.hits.hits.[0]._source.header_text ~}}
+                    <img src="{{data.primaryResponse.hits.hits.[0]._source.header_text}}" alt="{{data.primaryResponse.hits.hits.[0]._source.title}}" class="header-text" />
                     {{else}}
                     <h1 class="header-text">
                         <span class="header-text-banner">
@@ -40,7 +40,7 @@
                                         <label class="mdc-textfield__label" for="role">Role</label>
                                         <select class="mdc-select" role="listbox" id="jobs-role" name="role">
                                             <option value="" {{#if params.query.role}}{{else}}selected{{/if}}>Any role</option>
-                                            {{#each supplimentaryResponses.types.aggregations.roles.buckets ~}}
+                                            {{#each data.supplimentaryResponses.types.aggregations.roles.buckets ~}}
                                             <option value="{{key}}" {{#compare ../params.query.role "===" key}}selected{{/compare}}>{{key}}</option>
                                             {{/each ~}}
                                         </select>
@@ -49,7 +49,7 @@
                                         <label class="mdc-textfield__label" for="sector">Sector</label>
                                         <select class="mdc-select" role="listbox" id="jobs-sector" name="sector">
                                             <option value="" {{#if params.query.sector}}{{else}}selected{{/if}}>Any sector</option>
-                                            {{#each supplimentaryResponses.types.aggregations.sectors.buckets ~}}
+                                            {{#each data.supplimentaryResponses.types.aggregations.sectors.buckets ~}}
                                             {{#if key ~}}
                                             <option value="{{key}}" {{#compare ../params.query.sector "===" key}}selected{{/compare}}>{{key}}</option>
                                             {{/if ~}}
@@ -60,7 +60,7 @@
                                         <label class="mdc-textfield__label" for="jobs-region">Region</label>
                                         <select class="mdc-select" role="listbox" id="region" name="region">
                                             <option value="" {{#if params.query.region}}{{else}}selected{{/if}}>Any region</option>
-                                            {{#each supplimentaryResponses.types.aggregations.regions.buckets ~}}
+                                            {{#each data.supplimentaryResponses.types.aggregations.regions.buckets ~}}
                                             {{#if key ~}}
                                             <option value="{{key}}" {{#compare ../params.query.region "===" key}}selected{{/compare}}>{{key}}</option>
                                             {{/if ~}}
@@ -71,7 +71,7 @@
                                         <label class="mdc-textfield__label" for="status">Status</label>
                                         <select class="mdc-select" role="listbox" id="jobs-status" name="status">
                                             <option value="" {{#if params.query.status}}{{else}}selected{{/if}}>Any status</option>
-                                            {{#each supplimentaryResponses.types.aggregations.statuses.buckets ~}}
+                                            {{#each data.supplimentaryResponses.types.aggregations.statuses.buckets ~}}
                                             {{#if key ~}}
                                             <option value="{{key}}" {{#compare ../params.query.status "===" key}}selected{{/compare}}>{{key}}</option>
                                             {{/if ~}}
@@ -93,7 +93,7 @@
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-9-desktop mdc-layout-grid__cell--span-5-tablet mdc-layout-grid__cell--span-4-phone content page-content v-margin">
                     {{> search_info}}
 
-                    {{#each primaryResponse.hits.hits ~}}
+                    {{#each data.primaryResponse.hits.hits ~}}
                     {{{_source.rendered.scvo_search_result}}}
                     {{/each ~}}
 

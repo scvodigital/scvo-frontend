@@ -11,19 +11,19 @@
                         "is_active": true
                     }
 				}
-                {{#ifAny query.city query.department}},{{/ifAny}}
-                {{#if query.city}}
+                {{#ifAny request.params.query.city request.params.query.department}},{{/ifAny}}
+                {{#if request.params.query.city}}
                     {
                         "term": {
-                            "city_slug": "{{query.city}}"
+                            "city_slug": "{{request.params.query.city}}"
                         }
                     }
-                    {{#ifAny query.department}},{{/ifAny}}
+                    {{#ifAny request.params.query.department}},{{/ifAny}}
                 {{/if}}
-                {{#if query.department}}
+                {{#if request.params.query.department}}
                     {
                         "term": {
-                            "department_slug": "{{query.department}}"
+                            "department_slug": "{{request.params.query.department}}"
                         }
                     }
                 {{/if}}

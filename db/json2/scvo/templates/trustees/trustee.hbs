@@ -1,10 +1,10 @@
 <div class="trustee">
-    <div class="splash-image splash-image-{{primaryResponse.hits.hits.[0]._type}}" style="{{> header_splash_image}}">
-        <div class="splash-overlay{{#if primaryResponse.hits.hits.[0]._source.hide_overlay}} splash-overlay-hidden{{/if}}">
+    <div class="splash-image splash-image-{{data.primaryResponse.hits.hits.[0]._type}}" style="{{> header_splash_image}}">
+        <div class="splash-overlay{{#if data.primaryResponse.hits.hits.[0]._source.hide_overlay}} splash-overlay-hidden{{/if}}">
             <div class="container-fluid">
                 <div class="mdc-layout-grid">
-                    {{#if primaryResponse.hits.hits.[0]._source.header_text ~}}
-                    <img src="{{primaryResponse.hits.hits.[0]._source.header_text}}" alt="{{primaryResponse.hits.hits.[0]._source.title}}" class="header-text" />
+                    {{#if data.primaryResponse.hits.hits.[0]._source.header_text ~}}
+                    <img src="{{data.primaryResponse.hits.hits.[0]._source.header_text}}" alt="{{data.primaryResponse.hits.hits.[0]._source.title}}" class="header-text" />
                     {{else}}
                     <h1 class="header-text">
                         <span class="header-text-banner">
@@ -23,7 +23,7 @@
             <li><a href="/projects-campaigns">Projects &amp; campaigns</a></li>
             <li><a href="/projects-campaigns/terrific-trustees">Terrific trustees</a></li>
             <li><a href="/projects-campaigns/terrific-trustees/search">Trustee vacancy search</a></li>
-            <li>{{{primaryResponse.hits.hits.[0]._source.title}}} - {{{primaryResponse.hits.hits.[0]._source.organisation_name}}}</li>
+            <li>{{{data.primaryResponse.hits.hits.[0]._source.title}}} - {{{data.primaryResponse.hits.hits.[0]._source.organisation_name}}}</li>
         </ul>
         <div class="mdc-layout-grid">
             <div class="mdc-layout-grid__inner">
@@ -31,7 +31,7 @@
                     {{> trustee_search}}
                 </div>
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-9-desktop mdc-layout-grid__cell--span-5-tablet mdc-layout-grid__cell--span-4-phone content trustee-content">
-                    {{{primaryResponse.hits.hits.[0]._source.rendered.scvo_full}}}
+                    {{{data.primaryResponse.hits.hits.[0]._source.rendered.scvo_full}}}
                 </div>
             </div>
         </div>

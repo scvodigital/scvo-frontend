@@ -6,9 +6,9 @@
         <div class="mdc-layout-grid">
             <div class="mdc-layout-grid__inner">
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-9-desktop mdc-layout-grid__cell--span-5-tablet mdc-layout-grid__cell--span-4-phone content page-content">
-                    {{#compare primaryResponse.hits.total ">" 0 ~}}
+                    {{#compare data.primaryResponse.hits.total ">" 0 ~}}
                     <ul class="supplimentary-list">
-                        {{#each primaryResponse.hits.hits ~}}
+                        {{#each data.primaryResponse.hits.hits ~}}
                         {{{_source.rendered.scvo_list}}}
                         {{/each ~}}
                     </ul>

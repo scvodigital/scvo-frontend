@@ -1,10 +1,10 @@
 <div class="members">
-    <div class="splash-image splash-image-{{primaryResponse.hits.hits.[0]._type}}" style="{{> header_splash_image}}">
-        <div class="splash-overlay{{#if primaryResponse.hits.hits.[0]._source.hide_overlay}} splash-overlay-hidden{{/if}}">
+    <div class="splash-image splash-image-{{data.primaryResponse.hits.hits.[0]._type}}" style="{{> header_splash_image}}">
+        <div class="splash-overlay{{#if data.primaryResponse.hits.hits.[0]._source.hide_overlay}} splash-overlay-hidden{{/if}}">
             <div class="container-fluid">
                 <div class="mdc-layout-grid">
-                    {{#if primaryResponse.hits.hits.[0]._source.header_text ~}}
-                    <img src="{{primaryResponse.hits.hits.[0]._source.header_text}}" alt="{{primaryResponse.hits.hits.[0]._source.title}}" class="header-text" />
+                    {{#if data.primaryResponse.hits.hits.[0]._source.header_text ~}}
+                    <img src="{{data.primaryResponse.hits.hits.[0]._source.header_text}}" alt="{{data.primaryResponse.hits.hits.[0]._source.title}}" class="header-text" />
                     {{else}}
                     <h1 class="header-text">
                         <span class="header-text-banner">
@@ -31,7 +31,7 @@
                             <div class="mdc-card search">
                                 <section class="mdc-card__primary">
                                     <h2 class="mdc-card__title mdc-card__title--large">
-                                        Search SCVO's {{addCommas supplimentaryResponses.total.hits.total}} member organisations
+                                        Search SCVO's {{addCommas data.supplimentaryResponses.total.hits.total}} member organisations
                                     </h2>
                                     <form action="/about/members" method="GET" [searchroute]="'member_search'" class="search_form" data-auto-search="true">
                                         <div class="mdc-textfield">
@@ -43,7 +43,7 @@
                                         <!-- <div class="mdc-form-field">
                                             <select class="mdc-select" role="listbox" name="type">
                                                 <option value="" {{#unless params.query.type}}selected{{/unless}}>All membership types</option>
-                                                {{#each supplimentaryResponses.types.aggregations.types.buckets}}
+                                                {{#each data.supplimentaryResponses.types.aggregations.types.buckets}}
                                                 <option value="{{slugify key}}" {{#compare ../params.query.type "===" (slugify key)}}selected{{/compare}}>{{key}} ({{doc_count}})</option>
                                                 {{/each}}
                                             </select>
@@ -59,7 +59,7 @@
                         <h3>Our members include&hellip;</h3>
                         {{/if ~}}
 
-                        {{#each primaryResponse.hits.hits ~}}
+                        {{#each data.primaryResponse.hits.hits ~}}
                         {{{this._source.rendered.scvo_list}}}
                         {{/each ~}}
 

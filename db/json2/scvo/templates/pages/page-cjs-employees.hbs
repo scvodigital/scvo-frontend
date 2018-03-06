@@ -6,18 +6,18 @@
         <div class="mdc-layout-grid">
             <div class="mdc-layout-grid__inner">
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-9-desktop mdc-layout-grid__cell--span-5-tablet mdc-layout-grid__cell--span-4-phone content page-content">
-                    {{{primaryResponse.hits.hits.[0]._source.rendered.scvo_full}}}
+                    {{{data.primaryResponse.hits.hits.[0]._source.rendered.scvo_full}}}
                 </div>
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-3-tablet mdc-layout-grid__cell--span-4-phone sidebar page-sidebar">
                     {{> menu_cjs_employees}}
                     {{> sidebar_cjs}}
                 </div>
-                {{#compare supplimentaryResponses.related_posts.hits.total ">" 0 ~}}
+                {{#compare data.supplimentaryResponses.related_posts.hits.total ">" 0 ~}}
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 related page-related">
                     <h3 class="blogs">Related posts</h3>
                     <div class="mdc-layout-grid">
                         <div class="mdc-layout-grid__inner">
-                            {{#each supplimentaryResponses.related_posts.hits.hits ~}}
+                            {{#each data.supplimentaryResponses.related_posts.hits.hits ~}}
                             <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4">
                                 {{{_source.rendered.scvo_gist}}}
                             </div>

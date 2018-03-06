@@ -166,6 +166,16 @@
             ],
             "menus": {},
             "metaData": {
+                "handlebarsPartials": {
+                    "login": "{$./json2/auth/partials/login.hbs}"
+                },
+                "handlebarsLayouts": {
+                    "default": {
+                        "template": "{$./json2/auth/layouts/default.hbs}",
+                        "sections": ["head", "body", "foot"],
+                        "pattern": ".*"
+                    }
+                },
                 "title": "Auth test",
                 "firebaseDefaultDomain": {
                     "name": "scvo",
@@ -207,17 +217,7 @@
                 }]
             },
             "title": "Auth tests",
-            "routes": "{:./json/auth-routes.json}",
-            "templatePartials": {
-                "login": "{$./json2/auth/partials/login.hbs}"
-            },
-            "layouts": {
-                "default": {
-                    "template": "{$./json2/auth/layouts/default.hbs}",
-                    "sections": ["head", "body", "foot"],
-                    "pattern": ".*"
-                }
-            }
+            "routes": "{:./json/auth-routes.json}"
         },
         "digitalparticipation": {
             "uaId": "UA-3467930-19",
@@ -231,20 +231,20 @@
             ],
             "menus": "{:./json2/digitalparticipation/digitalparticipation-menus.json}",
             "metaData": {
+                "handlebarsPartials": {
+                    "pagination": "{$./json2/digitalparticipation/partials/pagination.hbs}"
+                },
+                "handlebarsLayouts": {
+                    "default": {
+                        "template": "{$./json2/digitalparticipation/layouts/default.hbs}",
+                        "sections": ["head", "body", "foot"],
+                        "pattern": ".*"
+                    }
+                },
                 "title": "Scotland's Digital Participation Charter"
             },
             "title": "Scotland's Digital Participation Charter",
-            "routes": "{:./json/digitalparticipation-routes.json}",
-            "templatePartials": {
-                "pagination": "{$./json2/digitalparticipation/partials/pagination.hbs}"
-            },
-            "layouts": {
-                "default": {
-                    "template": "{$./json2/digitalparticipation/layouts/default.hbs}",
-                    "sections": ["head", "body", "foot"],
-                    "pattern": ".*"
-                }
-            }
+            "routes": "{:./json/digitalparticipation-routes.json}"
         },
         "humanrightsdeclaration": {
             "uaId": "UA-3467930-28",
@@ -258,20 +258,20 @@
             ],
             "menus": "{:./json2/humanrightsdeclaration/humanrightsdeclaration-menus.json}",
             "metaData": {
-                "title": "Scotland Declaration on Human Rights"
+                "title": "Scotland Declaration on Human Rights",
+                "templatePartials": {
+                    "pagination": "{$./json2/humanrightsdeclaration/partials/pagination.hbs}"
+                },
+                "layouts": {
+                    "default": {
+                        "template": "{$./json2/humanrightsdeclaration/layouts/default.hbs}",
+                        "sections": ["head", "body", "foot"],
+                        "pattern": ".*"
+                    }
+                }
             },
             "title": "Good HQ",
-            "routes": "{:./json/humanrightsdeclaration-routes.json}",
-            "templatePartials": {
-                "pagination": "{$./json2/humanrightsdeclaration/partials/pagination.hbs}"
-            },
-            "layouts": {
-                "default": {
-                    "template": "{$./json2/humanrightsdeclaration/layouts/default.hbs}",
-                    "sections": ["head", "body", "foot"],
-                    "pattern": ".*"
-                }
-            }
+            "routes": "{:./json/humanrightsdeclaration-routes.json}"
         }
     }
 }

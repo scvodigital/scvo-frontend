@@ -1,10 +1,10 @@
 <div class="cjs-job-search">
-    <div class="splash-image splash-image-{{primaryResponse.hits.hits.[0]._type}}" style="{{> header_splash_image}}">
-        <div class="splash-overlay{{#if primaryResponse.hits.hits.[0]._source.hide_overlay}} splash-overlay-hidden{{/if}}">
+    <div class="splash-image splash-image-{{data.primaryResponse.hits.hits.[0]._type}}" style="{{> header_splash_image}}">
+        <div class="splash-overlay{{#if data.primaryResponse.hits.hits.[0]._source.hide_overlay}} splash-overlay-hidden{{/if}}">
             <div class="container-fluid">
                 <div class="mdc-layout-grid">
-                    {{#if primaryResponse.hits.hits.[0]._source.header_text ~}}
-                    <img src="{{primaryResponse.hits.hits.[0]._source.header_text}}" alt="{{primaryResponse.hits.hits.[0]._source.title}}" class="header-text" />
+                    {{#if data.primaryResponse.hits.hits.[0]._source.header_text ~}}
+                    <img src="{{data.primaryResponse.hits.hits.[0]._source.header_text}}" alt="{{data.primaryResponse.hits.hits.[0]._source.title}}" class="header-text" />
                     {{else}}
                     <h1 class="header-text">
                         <span class="header-text-banner">
@@ -38,10 +38,10 @@
                 </div>
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-9-desktop mdc-layout-grid__cell--span-5-tablet mdc-layout-grid__cell--span-4-phone content page-content v-margin">
                     {{#ifAny params.query.q params.query.job_number params.query.location params.query.sector params.query.region ~}}
-                    {{#if primaryResponse.hits.total ~}}
+                    {{#if data.primaryResponse.hits.total ~}}
                     {{> search_info}}
 
-                    {{#each primaryResponse.hits.hits ~}}
+                    {{#each data.primaryResponse.hits.hits ~}}
                     {{{_source.rendered.scvo_list}}}
                     {{/each ~}}
 
@@ -57,7 +57,7 @@
                             <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
                                 <h2>Jobs by sector</h2>
                                 {{#*inline "sector_result_count" ~}}
-                                {{#each supplimentaryResponses.types.aggregations.sectors_slugs.buckets ~}}
+                                {{#each data.supplimentaryResponses.types.aggregations.sectors_slugs.buckets ~}}
                                 {{#compare key "===" ../input ~}}
                                 ({{doc_count}})
                                 {{/compare ~}}
@@ -140,7 +140,7 @@
                                     {{> sector_result_count input="research"}}<br />
                                     <a href="/jobs/community-jobs-scotland/vacancies/{{params.phase}}?sector=resource-development">Resource Development</a>
                                     {{> sector_result_count input="resource-development"}}
-                                    <!-- {{#each supplimentaryResponses.types.aggregations.sectors.buckets ~}}
+                                    <!-- {{#each data.supplimentaryResponses.types.aggregations.sectors.buckets ~}}
                                     {{#if key ~}}
                                     <a href="/jobs/community-jobs-scotland/vacancies/{{../params.phase}}?sector={{key}}">{{key}}</a><br />
                                     {{/if ~}}
@@ -150,7 +150,7 @@
                             <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
                                 <h2>Jobs by region</h2>
                                 {{#*inline "region_result_count"}}
-                                {{#each supplimentaryResponses.types.aggregations.regions_slugs.buckets}}
+                                {{#each data.supplimentaryResponses.types.aggregations.regions_slugs.buckets}}
                                 {{#compare key "===" ../input}}
                                 ({{doc_count}})
                                 {{/compare}}
@@ -221,7 +221,7 @@
                                     {{> region_result_count input="west-lothian"}}<br />
                                     <a href="/jobs/community-jobs-scotland/vacancies/{{params.phase}}?region=western-isles">Western Isles</a>
                                     {{> region_result_count input="western-isles"}}
-                                    <!-- {{#each supplimentaryResponses.types.aggregations.regions.buckets ~}}
+                                    <!-- {{#each data.supplimentaryResponses.types.aggregations.regions.buckets ~}}
                                     {{#if key ~}}
                                     <a href="/jobs/community-jobs-scotland/vacancies/{{../params.phase}}?region={{key}}">{{key}}</a><br />
                                     {{/if ~}}

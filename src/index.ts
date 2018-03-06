@@ -71,6 +71,7 @@ async function index(req: express.Request, res: express.Response, next: express.
         var host = req.hostname;
         var sitename = DomainMap[host] || 'scvo';
         var fullUrl = req.protocol + '://' + hostname + req.originalUrl; 
+        fullUrl = fullUrl.replace(/(\/)($|\?)/gi, '$2');
 
         var site = routers[sitename];
 

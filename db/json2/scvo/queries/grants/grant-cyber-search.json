@@ -1,6 +1,6 @@
 {
     "size": 24,
-    "from": {{multiply (subtract (default query.page 1) 1) 24}},
+    "from": {{multiply (subtract (default request.params.query.page 1) 1) 24}},
     "_source": [
         "rendered.scvo_card",
         "rendered.json_ld"
@@ -8,27 +8,27 @@
     "query": {
         "bool": {
             "must": [
-                {{#ifAny query.call query.tag query.q}}
-                {{#if query.call}}
+                {{#ifAny request.params.query.call request.params.query.tag request.params.query.q}}
+                {{#if request.params.query.call}}
                     {
                         "term": {
-                            "call-slug": "{{query.call}}"
+                            "call-slug": "{{request.params.query.call}}"
                         }
                     }
-                    {{#if query.tag}},{{/if}}
+                    {{#if request.params.query.tag}},{{/if}}
                 {{/if}}
-                {{#if query.tag}}
+                {{#if request.params.query.tag}}
                     {
                         "term": {
-                            "individuals_supported-slugs": "{{query.tag}}"
+                            "individuals_supported-slugs": "{{request.params.query.tag}}"
                         }
                     }
-                    {{#if query.q}},{{/if}}
+                    {{#if request.params.query.q}},{{/if}}
                 {{/if}}
-                {{#if query.q}}
+                {{#if request.params.query.q}}
                     {
                         "query_string": {
-                            "query": "{{query.q}}",
+                            "query": "{{request.params.query.q}}",
                             "default_operator": "AND",
                             "analyzer": "snowball"
                         }

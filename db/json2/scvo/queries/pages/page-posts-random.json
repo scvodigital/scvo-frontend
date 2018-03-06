@@ -8,7 +8,7 @@
     "query": {
         "function_score": {
 			"query": {
-                {{#if primaryResponse.hits.hits.[0]}}
+                {{#if data.primaryResponse.hits.hits.[0]}}
                     "bool": {
                         "must": {
                             "match_all": {}
@@ -17,7 +17,7 @@
                             {
                                 "terms": {
                                     "categories_id": [
-                                        {{join primaryResponse.hits.hits.[0]._source.categories_id}}
+                                        {{join data.primaryResponse.hits.hits.[0]._source.categories_id}}
                                     ]
                                 }
                             }

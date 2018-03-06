@@ -147,7 +147,7 @@
             <a href="/blogs" class="mdc-typography--caption">See all</a>
         </h2>
     </div>
-    {{#with supplimentaryResponses.blogs_latest.hits.hits.[0] ~}}
+    {{#with data.supplimentaryResponses.blogs_latest.hits.hits.[0] ~}}
     <div {{#if _source.header_background}}class="featured-background-image" style="background-image: url('{{_source.header_background}}');"{{else}}class="featured-text"{{/if}}>
         <div class="container-fluid">
             {{{_source.rendered.scvo_featured}}}
@@ -187,7 +187,7 @@
             <a href="/press-media" class="mdc-typography--caption">See all</a>
         </h2>
     </div>
-    {{#with supplimentaryResponses.press_latest.hits.hits.[0] ~}}
+    {{#with data.supplimentaryResponses.press_latest.hits.hits.[0] ~}}
     <div {{#if _source.header_background}}class="featured-background-image" style="background-image: url('{{_source.header_background}}');"{{else}}class="featured-text"{{/if}}>
         <div class="container-fluid">
             {{{_source.rendered.scvo_featured}}}
@@ -258,9 +258,9 @@
                     <h2>
                         Recent SCVO blog posts
                     </h2>
-                    {{{supplimentaryResponses.blogs_latest.hits.hits.[1]._source.rendered.scvo_gist}}}
-                    {{{supplimentaryResponses.blogs_latest.hits.hits.[2]._source.rendered.scvo_gist}}}
-                    {{{supplimentaryResponses.blogs_latest.hits.hits.[3]._source.rendered.scvo_gist}}}
+                    {{{data.supplimentaryResponses.blogs_latest.hits.hits.[1]._source.rendered.scvo_gist}}}
+                    {{{data.supplimentaryResponses.blogs_latest.hits.hits.[2]._source.rendered.scvo_gist}}}
+                    {{{data.supplimentaryResponses.blogs_latest.hits.hits.[3]._source.rendered.scvo_gist}}}
                     <h2>
                         <a href="/blogs">Read more SCVO blogs</a>
                     </h2>
@@ -269,7 +269,7 @@
                     <h2>
                         Latest TFN news
                     </h2>
-                    {{#each supplimentaryResponses.tfn_latest.hits.hits ~}}
+                    {{#each data.supplimentaryResponses.tfn_latest.hits.hits ~}}
                     {{{_source.rendered.scvo_gist}}}
                     {{/each ~}}
                     <h2>
@@ -280,7 +280,7 @@
                     <h2>
                         Top third sector jobs
                     </h2>
-                    {{#each supplimentaryResponses.goodmoves_latest.hits.hits ~}}
+                    {{#each data.supplimentaryResponses.goodmoves_latest.hits.hits ~}}
                     {{{_source.rendered.scvo_gist}}}
                     {{/each ~}}
                     <h2>

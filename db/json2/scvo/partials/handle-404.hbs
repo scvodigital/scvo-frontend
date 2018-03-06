@@ -1,4 +1,4 @@
-{{#if primaryResponse.hits.hits.[0] ~}}
+{{#if data.primaryResponse.hits.hits.[0] ~}}
     {{> @partial-block }}
 {{else}}
     <div class="mdc-layout-grid">
@@ -8,9 +8,9 @@
                 <p>
                     We recently relaunched our website and some page addresses may have changed.
                 </p>
-                {{#ifAll supplimentaryResponses.not_found (compare supplimentaryResponses.not_found.hits.total ">" 0) ~}}
+                {{#ifAll data.supplimentaryResponses.not_found (compare data.supplimentaryResponses.not_found.hits.total ">" 0) ~}}
                 <h3>Did you mean?</h3>
-                {{#each supplimentaryResponses.not_found.hits.hits ~}}
+                {{#each data.supplimentaryResponses.not_found.hits.hits ~}}
                     {{#compare @index "===" 0 ~}}
                     {{>highlight_result}}
                     {{else}}
@@ -23,10 +23,10 @@
             </div>
         </div>
     </div>
-    {{#ifAll supplimentaryResponses.not_found (compare supplimentaryResponses.not_found.hits.total ">" 1) ~}}
+    {{#ifAll data.supplimentaryResponses.not_found (compare data.supplimentaryResponses.not_found.hits.total ">" 1) ~}}
         <hr />
         <h3>Other relevant content</h3>
-        {{#each supplimentaryResponses.not_found.hits.hits ~}}
+        {{#each data.supplimentaryResponses.not_found.hits.hits ~}}
             {{#compare @index "===" 0 ~}}
             {{else}}
             {{>highlight_result}}

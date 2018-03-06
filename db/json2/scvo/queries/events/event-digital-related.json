@@ -8,7 +8,7 @@
             "must": [
                 {
                     "simple_query_string": {
-                        "query": "{{primaryResponse.hits.hits.[0]._source.title}} {{primaryResponse.hits.hits.[0]._source.type}} {{primaryResponse.hits.hits.[0]._source.trainer}}",
+                        "query": "{{data.primaryResponse.hits.hits.[0]._source.title}} {{data.primaryResponse.hits.hits.[0]._source.type}} {{data.primaryResponse.hits.hits.[0]._source.trainer}}",
                         "default_operator": "or",
                         "fields": ["text_bag"],
                         "analyzer": "snowball"
@@ -32,7 +32,7 @@
                     "bool": {
                         "must_not": {
                             "match": {
-                                "Id": "{{primaryResponse.hits.hits.[0]._source.Id}}"
+                                "Id": "{{data.primaryResponse.hits.hits.[0]._source.Id}}"
                             }
                         }
                     }

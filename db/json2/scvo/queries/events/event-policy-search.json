@@ -1,6 +1,6 @@
 {
     "size": 10,
-    "from": {{multiply (subtract (default query.page 1) 1) 10}},
+    "from": {{multiply (subtract (default request.params.query.page 1) 1) 10}},
     "_source": [
         "slug",
         "title",
@@ -12,7 +12,7 @@
     ],
     "query": {
         "bool": {
-            {{#if query.free}}
+            {{#if request.params.query.free}}
             "must_not": [
                 {
                     "exists": {
@@ -22,31 +22,31 @@
             ],
             {{/if}}
             "must": [
-                {{#if query.course_type}}
+                {{#if request.params.query.course_type}}
                 {
                     "term": {
-                        "course_type": "{{query.course_type}}"
+                        "course_type": "{{request.params.query.course_type}}"
                     }
                 },
                 {{/if}}
-                {{#if query.month}}
+                {{#if request.params.query.month}}
                 {
                     "term": {
-                        "month": "{{query.month}}"
+                        "month": "{{request.params.query.month}}"
                     }
                 },
                 {{/if}}
-                {{#if query.location}}
+                {{#if request.params.query.location}}
                 {
                     "term": {
-                        "city": "{{query.location}}"
+                        "city": "{{request.params.query.location}}"
                     }
                 },
                 {{/if}}
-                {{#if query.q}}
+                {{#if request.params.query.q}}
                 {
                     "query_string": {
-                        "query": "{{query.q}}",
+                        "query": "{{request.params.query.q}}",
                         "default_operator": "AND",
                         "analyzer": "snowball"
                     }

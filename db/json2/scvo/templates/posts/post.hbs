@@ -6,69 +6,69 @@
         <div class="mdc-layout-grid">
             <div class="mdc-layout-grid__inner">
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-8-desktop mdc-layout-grid__cell--span-5-tablet mdc-layout-grid__cell--span-4-phone content post-content">
-                    {{{primaryResponse.hits.hits.[0]._source.rendered.scvo_full}}}
+                    {{{data.primaryResponse.hits.hits.[0]._source.rendered.scvo_full}}}
                 </div>
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-3-tablet mdc-layout-grid__cell--span-4-phone sidebar post-sidebar">
                     {{> wee_search title="Search posts" searchPath="/search" searchRoute="main_search" extraParams='{ "type": "scvo-cms-post" }'}}
-                    {{#if primaryResponse.hits.hits.[0]._source.is_press_release ~}}
+                    {{#if data.primaryResponse.hits.hits.[0]._source.is_press_release ~}}
                     <ul class="supplimentary-list">
-                        {{#compare (wordCount primaryResponse.hits.hits.[0]._source.rendered.scvo_full) ">" 50 ~}}
-                        {{{supplimentaryResponses.category_posts.hits.hits.[0]._source.rendered.scvo_sidebar}}}
+                        {{#compare (wordCount data.primaryResponse.hits.hits.[0]._source.rendered.scvo_full) ">" 50 ~}}
+                        {{{data.supplimentaryResponses.category_posts.hits.hits.[0]._source.rendered.scvo_sidebar}}}
                         {{/compare ~}}
-                        {{#compare (wordCount primaryResponse.hits.hits.[0]._source.rendered.scvo_full) ">" 170 ~}}
-                        {{{supplimentaryResponses.category_posts.hits.hits.[1]._source.rendered.scvo_sidebar}}}
+                        {{#compare (wordCount data.primaryResponse.hits.hits.[0]._source.rendered.scvo_full) ">" 170 ~}}
+                        {{{data.supplimentaryResponses.category_posts.hits.hits.[1]._source.rendered.scvo_sidebar}}}
                         {{/compare ~}}
-                        {{#compare (wordCount primaryResponse.hits.hits.[0]._source.rendered.scvo_full) ">" 300 ~}}
-                        {{{supplimentaryResponses.category_posts.hits.hits.[2]._source.rendered.scvo_sidebar}}}
+                        {{#compare (wordCount data.primaryResponse.hits.hits.[0]._source.rendered.scvo_full) ">" 300 ~}}
+                        {{{data.supplimentaryResponses.category_posts.hits.hits.[2]._source.rendered.scvo_sidebar}}}
                         {{/compare ~}}
-                        {{#compare (wordCount primaryResponse.hits.hits.[0]._source.rendered.scvo_full) ">" 430 ~}}
-                        {{{supplimentaryResponses.category_posts.hits.hits.[3]._source.rendered.scvo_sidebar}}}
+                        {{#compare (wordCount data.primaryResponse.hits.hits.[0]._source.rendered.scvo_full) ">" 430 ~}}
+                        {{{data.supplimentaryResponses.category_posts.hits.hits.[3]._source.rendered.scvo_sidebar}}}
                         {{/compare ~}}
-                        {{#compare (wordCount primaryResponse.hits.hits.[0]._source.rendered.scvo_full) ">" 600 ~}}
-                        {{{supplimentaryResponses.category_posts.hits.hits.[4]._source.rendered.scvo_sidebar}}}
+                        {{#compare (wordCount data.primaryResponse.hits.hits.[0]._source.rendered.scvo_full) ">" 600 ~}}
+                        {{{data.supplimentaryResponses.category_posts.hits.hits.[4]._source.rendered.scvo_sidebar}}}
                         {{/compare ~}}
                     </ul>
                     {{else}}
-                    {{#if primaryResponse.hits.hits.[0]._source.categories ~}}
-                    {{#compare supplimentaryResponses.authors_posts.hits.total ">" 0 ~}}
-                    {{#compare supplimentaryResponses.staff_profile.hits.total ">" 0 ~}}
+                    {{#if data.primaryResponse.hits.hits.[0]._source.categories ~}}
+                    {{#compare data.supplimentaryResponses.authors_posts.hits.total ">" 0 ~}}
+                    {{#compare data.supplimentaryResponses.staff_profile.hits.total ">" 0 ~}}
                     <h3 class="author static-sidebar">
-                        More posts by <a href="/post/author/{{primaryResponse.hits.hits.[0]._source.author_slug}}">{{primaryResponse.hits.hits.[0]._source.author_name_full}}</a>
+                        More posts by <a href="/post/author/{{data.primaryResponse.hits.hits.[0]._source.author_slug}}">{{data.primaryResponse.hits.hits.[0]._source.author_name_full}}</a>
                     </h3>
                     {{/compare ~}}
                     <ul class="supplimentary-list">
-                        {{#compare (wordCount primaryResponse.hits.hits.[0]._source.rendered.scvo_full) ">" 50 ~}}
-                        {{{supplimentaryResponses.authors_posts.hits.hits.[0]._source.rendered.scvo_sidebar}}}
+                        {{#compare (wordCount data.primaryResponse.hits.hits.[0]._source.rendered.scvo_full) ">" 50 ~}}
+                        {{{data.supplimentaryResponses.authors_posts.hits.hits.[0]._source.rendered.scvo_sidebar}}}
                         {{/compare ~}}
-                        {{#compare (wordCount primaryResponse.hits.hits.[0]._source.rendered.scvo_full) ">" 170 ~}}
-                        {{{supplimentaryResponses.authors_posts.hits.hits.[1]._source.rendered.scvo_sidebar}}}
+                        {{#compare (wordCount data.primaryResponse.hits.hits.[0]._source.rendered.scvo_full) ">" 170 ~}}
+                        {{{data.supplimentaryResponses.authors_posts.hits.hits.[1]._source.rendered.scvo_sidebar}}}
                         {{/compare ~}}
-                        {{#compare (wordCount primaryResponse.hits.hits.[0]._source.rendered.scvo_full) ">" 300 ~}}
-                        {{{supplimentaryResponses.authors_posts.hits.hits.[2]._source.rendered.scvo_sidebar}}}
+                        {{#compare (wordCount data.primaryResponse.hits.hits.[0]._source.rendered.scvo_full) ">" 300 ~}}
+                        {{{data.supplimentaryResponses.authors_posts.hits.hits.[2]._source.rendered.scvo_sidebar}}}
                         {{/compare ~}}
-                        {{#compare (wordCount primaryResponse.hits.hits.[0]._source.rendered.scvo_full) ">" 430 ~}}
-                        {{{supplimentaryResponses.authors_posts.hits.hits.[3]._source.rendered.scvo_sidebar}}}
+                        {{#compare (wordCount data.primaryResponse.hits.hits.[0]._source.rendered.scvo_full) ">" 430 ~}}
+                        {{{data.supplimentaryResponses.authors_posts.hits.hits.[3]._source.rendered.scvo_sidebar}}}
                         {{/compare ~}}
-                        {{#compare (wordCount primaryResponse.hits.hits.[0]._source.rendered.scvo_full) ">" 600 ~}}
-                        {{{supplimentaryResponses.authors_posts.hits.hits.[4]._source.rendered.scvo_sidebar}}}
+                        {{#compare (wordCount data.primaryResponse.hits.hits.[0]._source.rendered.scvo_full) ">" 600 ~}}
+                        {{{data.supplimentaryResponses.authors_posts.hits.hits.[4]._source.rendered.scvo_sidebar}}}
                         {{/compare ~}}
                     </ul>
                     {{else}}
                     <ul class="supplimentary-list">
-                        {{#compare (wordCount primaryResponse.hits.hits.[0]._source.rendered.scvo_full) ">" 50 ~}}
-                        {{{supplimentaryResponses.category_posts.hits.hits.[0]._source.rendered.scvo_sidebar}}}
+                        {{#compare (wordCount data.primaryResponse.hits.hits.[0]._source.rendered.scvo_full) ">" 50 ~}}
+                        {{{data.supplimentaryResponses.category_posts.hits.hits.[0]._source.rendered.scvo_sidebar}}}
                         {{/compare ~}}
-                        {{#compare (wordCount primaryResponse.hits.hits.[0]._source.rendered.scvo_full) ">" 170 ~}}
-                        {{{supplimentaryResponses.category_posts.hits.hits.[1]._source.rendered.scvo_sidebar}}}
+                        {{#compare (wordCount data.primaryResponse.hits.hits.[0]._source.rendered.scvo_full) ">" 170 ~}}
+                        {{{data.supplimentaryResponses.category_posts.hits.hits.[1]._source.rendered.scvo_sidebar}}}
                         {{/compare ~}}
-                        {{#compare (wordCount primaryResponse.hits.hits.[0]._source.rendered.scvo_full) ">" 300 ~}}
-                        {{{supplimentaryResponses.category_posts.hits.hits.[2]._source.rendered.scvo_sidebar}}}
+                        {{#compare (wordCount data.primaryResponse.hits.hits.[0]._source.rendered.scvo_full) ">" 300 ~}}
+                        {{{data.supplimentaryResponses.category_posts.hits.hits.[2]._source.rendered.scvo_sidebar}}}
                         {{/compare ~}}
-                        {{#compare (wordCount primaryResponse.hits.hits.[0]._source.rendered.scvo_full) ">" 430 ~}}
-                        {{{supplimentaryResponses.category_posts.hits.hits.[3]._source.rendered.scvo_sidebar}}}
+                        {{#compare (wordCount data.primaryResponse.hits.hits.[0]._source.rendered.scvo_full) ">" 430 ~}}
+                        {{{data.supplimentaryResponses.category_posts.hits.hits.[3]._source.rendered.scvo_sidebar}}}
                         {{/compare ~}}
-                        {{#compare (wordCount primaryResponse.hits.hits.[0]._source.rendered.scvo_full) ">" 600 ~}}
-                        {{{supplimentaryResponses.category_posts.hits.hits.[4]._source.rendered.scvo_sidebar}}}
+                        {{#compare (wordCount data.primaryResponse.hits.hits.[0]._source.rendered.scvo_full) ">" 600 ~}}
+                        {{{data.supplimentaryResponses.category_posts.hits.hits.[4]._source.rendered.scvo_sidebar}}}
                         {{/compare ~}}
                     </ul>
                     {{/compare ~}}
@@ -76,13 +76,13 @@
                     {{/if ~}}
                 </div>
             </div>
-            {{#compare supplimentaryResponses.tfn_related_posts.hits.total ">" 0 ~}}
+            {{#compare data.supplimentaryResponses.tfn_related_posts.hits.total ">" 0 ~}}
             <div class="mdc-layout-grid__inner">
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 related post-related post-related-tfn">
                     <h3>Related articles on <a href="http://thirdforcenews.org.uk">Third Force News</a></h3>
                     <div class="mdc-layout-grid">
                         <div class="mdc-layout-grid__inner">
-                            {{#each supplimentaryResponses.tfn_related_posts.hits.hits ~}}
+                            {{#each data.supplimentaryResponses.tfn_related_posts.hits.hits ~}}
                             <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4">
                                 {{{_source.rendered.scvo_gist}}}
                             </div>

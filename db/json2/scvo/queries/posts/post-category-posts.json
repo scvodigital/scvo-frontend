@@ -8,12 +8,12 @@
             "must": [
                 {
                     "term": {
-                        "categories_id":  {{primaryResponse.hits.hits.[0]._source.categories_id.[0]}}
+                        "categories_id":  {{data.primaryResponse.hits.hits.[0]._source.categories_id.[0]}}
                     }
                 },
                 {
                     "term": {
-                        "is_press_release": {{primaryResponse.hits.hits.[0]._source.is_press_release}}
+                        "is_press_release": {{data.primaryResponse.hits.hits.[0]._source.is_press_release}}
                     }
                 }
             ],
@@ -21,7 +21,7 @@
                 "bool": {
                     "must_not": {
                         "match": {
-                            "wpid": {{primaryResponse.hits.hits.[0]._source.wpid}}
+                            "wpid": {{data.primaryResponse.hits.hits.[0]._source.wpid}}
                         }
                     }
                 }

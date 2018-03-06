@@ -38,16 +38,18 @@
         });
         {{/each ~}}
 
-        {{#if route.params.query.debug ~}}
+        {{#if request.params.query.debug ~}}
         console.log('#### DEBUG MODE ON ####');
+        console.log('Request:', {{{regexReplace (regexReplace (stringify request) "(<\/script)" "gi" '</scr\" + \"ipt') "(\r|\n)" "gi" ""}}});
         console.log('Route:', {{{regexReplace (regexReplace (stringify route) "(<\/script)" "gi" '</scr\" + \"ipt') "(\r|\n)" "gi" ""}}});
+        console.log('Data:', {{{regexReplace (regexReplace (stringify data) "(<\/script)" "gi" '</scr\" + \"ipt') "(\r|\n)" "gi" ""}}});
         {{/if ~}}
     </script>
     <link type="text/css" rel="stylesheet" href="/assets/css/material-components-web.min.css">
     <link type="text/css" rel="stylesheet" href="/assets/fonts/fontawesome/css/fontawesome-all.min.css">
     <link type="text/css" rel="stylesheet" href="/assets/css/scvo-styles.css">
 </head>
-<body class="mdc-theme--site-bg {{#if route.params.path}}{{replace route.params.path '_' ' '}}{{else}}home{{/if}}">
+<body class="mdc-theme--site-bg {{#if route.url.path}}{{replace request.params.path '_' ' '}}{{else}}home{{/if}}">
     <scvo-site>
         <div class="mdc-typography mdc-theme--site-bg">
             <header class="mdc-toolbar mdc-toolbar--fixed mdc-theme--primary-light-bg">

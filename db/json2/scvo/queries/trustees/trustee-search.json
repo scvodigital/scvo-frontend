@@ -1,16 +1,16 @@
 {
     "size": 10,
-    "from": {{multiply (subtract (default query.page 1) 1) 10}},
+    "from": {{multiply (subtract (default request.params.query.page 1) 1) 10}},
     "_source": [
         "rendered.trustee_search_result"
     ],
     "query": {
         "bool": {
-            {{#if query.q}}
+            {{#if request.params.query.q}}
             "must": [
                 {
                     "query_string": {
-                        "query": "{{query.q}}",
+                        "query": "{{request.params.query.q}}",
                         "default_operator": "AND",
                         "analyzer": "snowball"
                     }

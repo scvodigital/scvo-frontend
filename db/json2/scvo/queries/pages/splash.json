@@ -9,11 +9,11 @@
 			"query": {
 				"bool": {
 					"should": [
-                        {{#if primaryResponse.hits.hits.[0]._source.categories_id}}
+                        {{#if data.primaryResponse.hits.hits.[0]._source.categories_id}}
                         {
     						"terms": {
     							"categories_id": [
-                                    {{join primaryResponse.hits.hits.[0]._source.categories_id}}
+                                    {{join data.primaryResponse.hits.hits.[0]._source.categories_id}}
                                 ]
     						}
     					},

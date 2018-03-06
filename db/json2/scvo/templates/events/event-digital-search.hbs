@@ -1,10 +1,10 @@
 <div class="event event-search">
-    <div class="splash-image splash-image-{{primaryResponse.hits.hits.[0]._type}}" style="{{> header_splash_image}}">
-        <div class="splash-overlay{{#if primaryResponse.hits.hits.[0]._source.hide_overlay}} splash-overlay-hidden{{/if}}">
+    <div class="splash-image splash-image-{{data.primaryResponse.hits.hits.[0]._type}}" style="{{> header_splash_image}}">
+        <div class="splash-overlay{{#if data.primaryResponse.hits.hits.[0]._source.hide_overlay}} splash-overlay-hidden{{/if}}">
             <div class="container-fluid">
                 <div class="mdc-layout-grid">
-                    {{#if primaryResponse.hits.hits.[0]._source.header_text ~}}
-                    <img src="{{primaryResponse.hits.hits.[0]._source.header_text}}" alt="{{primaryResponse.hits.hits.[0]._source.title}}" class="header-text" />
+                    {{#if data.primaryResponse.hits.hits.[0]._source.header_text ~}}
+                    <img src="{{data.primaryResponse.hits.hits.[0]._source.header_text}}" alt="{{data.primaryResponse.hits.hits.[0]._source.title}}" class="header-text" />
                     {{else}}
                     <h1 class="header-text">
                         <span class="header-text-banner">
@@ -24,7 +24,7 @@
             <li>Events</li>
         </ul>
 
-        {{#compare primaryResponse.hits.total ">" 0}}
+        {{#compare data.primaryResponse.hits.total ">" 0}}
         <h2>Find digital events</h2>
         <div class="mdc-layout-grid">
             <div class="mdc-layout-grid__inner">
@@ -37,7 +37,7 @@
                         <div class="mdc-form-field">
                             <select class="mdc-select" role="listbox" id="events-course_type" name="course_type">
                                 <option value="" {{#if params.query.course_type}}{{else}}selected{{/if}}>Select event type</option>
-                                {{#each supplimentaryResponses.types.aggregations.types.buckets ~}}
+                                {{#each data.supplimentaryResponses.types.aggregations.types.buckets ~}}
                                 <option value="{{key}}" {{#compare ../params.query.course_type "===" key}}selected{{/compare}}>{{key}}</option>
                                 {{/each ~}}
                             </select>
@@ -45,7 +45,7 @@
                         <div class="mdc-form-field">
                             <select class="mdc-select" role="listbox" id="events-month" name="month">
                                 <option value="" {{#if params.query.month}}{{else}}selected{{/if}}>Any month</option>
-                                {{#each supplimentaryResponses.types.aggregations.months.buckets ~}}
+                                {{#each data.supplimentaryResponses.types.aggregations.months.buckets ~}}
                                 {{#if key ~}}
                                 <option value="{{key}}" {{#compare ../params.query.month "===" key}}selected{{/compare}}>{{key}}</option>
                                 {{/if ~}}
@@ -55,7 +55,7 @@
                         <div class="mdc-form-field">
                             <select class="mdc-select" role="listbox" id="events-locations" name="location">
                                 <option value="" {{#if params.query.location}}{{else}}selected{{/if}}>Any location</option>
-                                {{#each supplimentaryResponses.types.aggregations.locations.buckets ~}}
+                                {{#each data.supplimentaryResponses.types.aggregations.locations.buckets ~}}
                                 {{#if key ~}}
                                 <option value="{{key}}" {{#compare ../params.query.location "===" key}}selected{{/compare}}>{{key}}</option>
                                 {{/if ~}}
@@ -70,7 +70,7 @@
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-9-desktop mdc-layout-grid__cell--span-5-tablet mdc-layout-grid__cell--span-4-phone content event-content">
                     {{> search_info}}
 
-                    {{#each primaryResponse.hits.hits ~}}
+                    {{#each data.primaryResponse.hits.hits ~}}
                     {{{_source.rendered.scvo_list}}}
                     {{/each ~}}
 

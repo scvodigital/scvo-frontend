@@ -1,6 +1,6 @@
 {
     "size": 10,
-    "from": {{multiply (subtract (default query.page 1) 1) 10}},
+    "from": {{multiply (subtract (default request.params.query.page 1) 1) 10}},
     "_source": [
         "rendered.scvo_list",
         "rendered.json_ld"
@@ -10,17 +10,17 @@
         	"query": {
 	        	"bool": {
                     "must": [
-                        {{#if query.classification}}
+                        {{#if request.params.query.classification}}
                         {
                             "term": {
-                                "library_classification_slug": "{{query.classification}}"
+                                "library_classification_slug": "{{request.params.query.classification}}"
                             }
                         },
                         {{/if}}
-                        {{#if query.q}}
+                        {{#if request.params.query.q}}
                         {
                             "query_string": {
-                                "query": "{{query.q}}",
+                                "query": "{{request.params.query.q}}",
                                 "default_operator": "AND",
                                 "analyzer": "snowball"
                             }

@@ -1,6 +1,6 @@
 {
     "size": 10,
-    "from": {{multiply (subtract (default query.page 1) 1) 10}},
+    "from": {{multiply (subtract (default request.params.query.page 1) 1) 10}},
     "_source": [
         "title",
         "rendered.scvo_search_result"
@@ -20,20 +20,20 @@
                             "exists": {
                                 "field": "rendered.scvo_search_result"
                             }
-                        }{{#ifAny query.type query.q}},{{/ifAny}}
-                        {{#if query.type}}
+                        }{{#ifAny request.params.query.type request.params.query.q}},{{/ifAny}}
+                        {{#if request.params.query.type}}
                             {
                                 "bool": {
                                     "should": [
-                                        {{#compare (getType query.type) "string"}}
+                                        {{#compare (getType request.params.query.type) "string"}}
                                             {
                                                 "term": {
-                                                    "_type": "{{query.type}}"
+                                                    "_type": "{{request.params.query.type}}"
                                                 }
                                             },
                                         {{/compare}}
-                                        {{#compare (getType query.type) "array"}}
-                                            {{#each query.type}}
+                                        {{#compare (getType request.params.query.type) "array"}}
+                                            {{#each request.params.query.type}}
                                             {
                                                 "term": {
                                                     "_type": "{{this}}"
@@ -47,15 +47,15 @@
                                     ]
                                 }
                             }
-                            {{#if query.q}},{{/if}}
+                            {{#if request.params.query.q}},{{/if}}
                         {{/if}}
-                        {{#if query.q}}
+                        {{#if request.params.query.q}}
 	        			{
 		        			"bool": {
 		        				"should": [
 		        					{
 					                    "query_string": {
-					                        "query": {{{stringify (default query.q "")}}},
+					                        "query": {{{stringify (default request.params.query.q "")}}},
 					                        "default_field": "text_bag",
 					                        "default_operator": "AND",
 					                        "analyzer": "snowball"
@@ -63,7 +63,7 @@
 					                },
 					                {
 					                    "query_string": {
-					                        "query": {{{stringify (default query.q "")}}},
+					                        "query": {{{stringify (default request.params.query.q "")}}},
 					                        "default_field": "text_bag_boost",
 					                        "default_operator": "AND",
 					                        "analyzer": "snowball",
@@ -74,7 +74,7 @@
 		        			}
 	        			}
                         {{else}}
-                        {{#if query.type}}
+                        {{#if request.params.query.type}}
                         {{else}}
                         ,
                         {
@@ -89,7 +89,7 @@
                         {{/if}}
                         {{/if}}
 	        		]
-                    {{#unless query.type}},
+                    {{#unless request.params.query.type}},
                     "should": [
                         {
                             "term" : {

@@ -1,14 +1,14 @@
 <div class="search grant-search grant-ccrf-search">
-    <div class="splash-image splash-image-{{primaryResponse.hits.hits.[0]._type}}" style="{{> header_splash_image}}">
-        <div class="splash-overlay{{#if primaryResponse.hits.hits.[0]._source.hide_overlay}} splash-overlay-hidden{{/if}}">
+    <div class="splash-image splash-image-{{data.primaryResponse.hits.hits.[0]._type}}" style="{{> header_splash_image}}">
+        <div class="splash-overlay{{#if data.primaryResponse.hits.hits.[0]._source.hide_overlay}} splash-overlay-hidden{{/if}}">
             <div class="container-fluid">
                 <div class="mdc-layout-grid">
-                    {{#if primaryResponse.hits.hits.[0]._source.header_text ~}}
-                    <img src="{{primaryResponse.hits.hits.[0]._source.header_text}}" alt="{{primaryResponse.hits.hits.[0]._source.title}}" class="header-text" />
+                    {{#if data.primaryResponse.hits.hits.[0]._source.header_text ~}}
+                    <img src="{{data.primaryResponse.hits.hits.[0]._source.header_text}}" alt="{{data.primaryResponse.hits.hits.[0]._source.title}}" class="header-text" />
                     {{else}}
                     <h1 class="header-text">
                         <span class="header-text-banner">
-                            {{{supplimentaryResponses.page.hits.hits.[0]._source.title}}}
+                            {{{data.supplimentaryResponses.page.hits.hits.[0]._source.title}}}
                         </span>
                     </h1>
                     {{/if ~}}
@@ -23,12 +23,12 @@
             <li><a href="/running-your-organisation/">Running your organisation</a></li>
             <li><a href="/running-your-organisation/funding/">Funding</a></li>
             <li><a href="/running-your-organisation/funding/community-capacity-resilience-fund">Community capacity &amp; resilience fund</a></li>
-            <li>{{{supplimentaryResponses.page.hits.hits.[0]._source.title}}}</li>
+            <li>{{{data.supplimentaryResponses.page.hits.hits.[0]._source.title}}}</li>
         </ul>
         <div class="mdc-layout-grid">
             <div class="mdc-layout-grid__inner">
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 content grant-content">
-                    {{{supplimentaryResponses.page.hits.hits.[0]._source.rendered.scvo_full}}}
+                    {{{data.supplimentaryResponses.page.hits.hits.[0]._source.rendered.scvo_full}}}
 
                     <hr />
 
@@ -46,7 +46,7 @@
                                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-3-tablet mdc-layout-grid__cell--span-4-phone">
                                     <select class="mdc-select" role="listbox" id="grant-ccrf-call" name="call">
                                         <option value="" {{#if params.query.call}}{{else}}selected{{/if}}>All funding rounds</option>
-                                        {{#each supplimentaryResponses.types.aggregations.calls.buckets ~}}
+                                        {{#each data.supplimentaryResponses.types.aggregations.calls.buckets ~}}
                                         <option value="{{slugify key}}" {{#compare ../params.query.call "===" (slugify key)}}selected{{/compare}}>{{key}} ({{doc_count}})</option>
                                         {{/each ~}}
                                     </select>
@@ -54,7 +54,7 @@
                                 <!-- <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
                                     <select class="mdc-select" role="listbox" id="grant-ccrf-tag" name="tag">
                                         <option value="" {{#if params.query.tag}}{{else}}selected{{/if}}>All tags</option>
-                                        {{#each supplimentaryResponses.types.aggregations.tags.buckets ~}}
+                                        {{#each data.supplimentaryResponses.types.aggregations.tags.buckets ~}}
                                         <option value="{{slugify key}}" {{#compare ../params.query.tag "===" (slugify key)}}selected{{/compare}}>{{key}} ({{doc_count}})</option>
                                         {{/each ~}}
                                     </select>
@@ -67,7 +67,7 @@
 
                     <div class="mdc-layout-grid equal-height">
                         <div class="mdc-layout-grid__inner">
-                            {{#each primaryResponse.hits.hits ~}}
+                            {{#each data.primaryResponse.hits.hits ~}}
                             <div class="mdc-layout-grid__cell mdc-layout-grid__cell">
                                 {{{_source.rendered.scvo_card}}}
                             </div>
