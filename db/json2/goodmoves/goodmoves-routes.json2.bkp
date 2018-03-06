@@ -1,0 +1,105 @@
+{
+    "vacancies": {
+        "linkTags": [{
+            "href": "{{organisation.logo_url}}",
+            "name": "{{organisation.name}} logo",
+            "rel": "icon",
+            "sizes": "192x192",
+            "type": "image/png"
+        }],
+        "metaTags": [{
+            "content": "{{og_summary}}",
+            "name": "description"
+        }],
+        "pattern": "/vacancy/:slug",
+        "templates": {
+            "default": "{$./templates/vacancy.hbs}"
+        },
+        "primarySearchTemplate": {
+            "type": "goodmoves-job",
+            "template": "{$./queries/vacancy.json}"
+        }
+    },
+    "index": {
+        "linkTags": [],
+        "metaTags": [],
+        "pattern": "/test/test/test",
+        "templates": {
+            "default": "{$./templates/index.hbs}"
+        },
+        "primarySearchTemplate": {
+            "type": "goodmoves-job",
+            "template": "{$./queries/index.json}"
+        }
+    },
+    "all-organisations": {
+        "linkTags": [],
+        "metaTags": [],
+        "pattern": "/organisations",
+        "templates": {
+            "default": "{$./templates/organisations.hbs}"
+        },
+        "primarySearchTemplate": {
+            "type": "goodmoves-job",
+            "template": "{$./queries/organisations.json}"
+        }
+    },
+    "organisations": {
+        "linkTags": [{
+            "href": "{{organisation.logo_url}}",
+            "name": "{{organisation.name}} logo",
+            "rel": "icon",
+            "sizes": "192x192",
+            "type": "image/png"
+        }],
+        "metaTags": [{
+            "content": "{{og_summary}}",
+            "name": "description"
+        }],
+        "pattern": "/organisation/:slug",
+        "templates": {
+            "default": "{$./templates/organisation.hbs}"
+        },
+        "primarySearchTemplate": {
+            "type": "goodmoves-job",
+            "template": "{$./queries/organisation.json}"
+        }
+    },
+    "search": {
+        "linkTags": [{
+            "href": "{{organisation.logo_url}}",
+            "name": "{{organisation.name}} logo",
+            "rel": "icon",
+            "sizes": "192x192",
+            "type": "image/png"
+        }],
+        "metaTags": [{
+            "content": "{{og_summary}}",
+            "name": "description"
+        }],
+        "pattern": "/search",
+        "templates": {
+            "default": "{$./templates/search.hbs}"
+        },
+        "primarySearchTemplate": {
+            "type": "goodmoves-job",
+            "template": "{$./queries/search.hbs}"
+        }
+    },
+    "_default": {
+        "linkTags": [],
+        "metaTags": [],
+        "pattern": "/",
+        "templates": {
+            "default": "{$./templates/index.hbs}"
+        },
+        "primarySearchTemplate": {
+            "type": "goodmoves-job",
+            "template": "{$./queries/index.json}"
+        },
+        "elasticsearchConfig": {
+            "host": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
+            "apiVersion": "5.5"
+        }
+    }
+}
