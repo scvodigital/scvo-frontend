@@ -1,7 +1,7 @@
 @import url("//cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css");
 @import url('//fonts.googleapis.com/css?family=Rubik:400,500,700');
 
-$spacing-unit: 1rem;
+$unit: 1rem;
 $brand-border-width: 2px;
 $brand-colour: #2C2C2B;
 
@@ -51,7 +51,7 @@ main {
     display: none;
     .mdc-temporary-drawer__header-content {
         direction: ltr;
-        padding: $spacing-unit;
+        padding: $unit;
     }
     .mdc-temporary-drawer__header:before {
         padding-top: 24%;
@@ -61,7 +61,7 @@ main {
         .mdc-list {
             .mdc-list-item {
                 direction: ltr;
-                padding: 0 $spacing-unit;
+                padding: 0 $unit;
             }
             .mdc-list-item__start-detail {
                 display: none;
@@ -87,7 +87,7 @@ main {
 }
 
 main {
-    padding-bottom: $spacing-unit;
+    padding-bottom: $unit;
 }
 footer {
     background: $brand-colour;
@@ -110,17 +110,17 @@ a {
     margin: 0 auto;
     overflow: auto;
     overflow: -webkit-paged-x;
-    padding: $spacing-unit 0;
+    padding: $unit 0;
 }
 .mdc-toolbar {
     box-shadow: none;
     .container-fluid {
-        padding-bottom: $spacing-unit;
+        padding-bottom: $unit;
         border-bottom: 3px solid $brand-colour;
     }
     .mdc-toolbar__title {
         margin: 0;
-        padding: $spacing-unit 0;
+        padding: $unit 0;
         .brand-logo {
             img {
                 // min-height: 100px;
@@ -148,7 +148,7 @@ a {
         .mdc-tab {
             min-width: 0;
             font-size: 1rem;
-            padding: $spacing-unit;
+            padding: $unit;
             text-transform: none;
         }
         .mdc-tab--active,
@@ -242,21 +242,21 @@ p.quote {
     }
 
     form {
-        margin-bottom: $spacing-unit*2;
+        margin-bottom: $unit*2;
         .mdc-textfield {
             position: relative;
-            margin-right: $spacing-unit/2;
+            margin-right: $unit/2;
             .mdc-textfield__input {
                 margin-right: 1rem;
                 box-sizing: border-box;
-                padding: 0 $spacing-unit*2.5 0 $spacing-unit/2;
+                padding: 0 $unit*2.5 0 $unit/2;
                 width: 100%;
             }
             .search-button-large {
                 padding: 1px 0 0;
                 position: absolute;
-                top: $spacing-unit/2;
-                right: $spacing-unit/2;
+                top: $unit/2;
+                right: $unit/2;
                 .fa-search {
                     color: $brand-colour;
                 }
@@ -280,7 +280,7 @@ p.quote {
     // }
     h4.sort {
         text-align: right;
-        margin-right: $spacing-unit/2;
+        margin-right: $unit/2;
     }
     .mdc-textfield__input {
         margin-bottom: 1rem;
@@ -302,16 +302,30 @@ p.quote {
         line-height: 2rem;
         height: 3rem;
         background-color: white;
-        padding: 0 $spacing-unit/2;
+        padding: 0 $unit/2;
         border: $brand-border-width solid $brand-colour;
         border-radius: 0.15rem;
         width: 100%;
         letter-spacing: 0;
         box-sizing: border-box;
     }
+    .mdc-select {
+        box-sizing: border-box;
+        width: 100%;
+        max-width: 100%;
+        background-position-x: 97%;
+    }
+    .mdc-select:focus {
+        border-bottom-color: inherit;
+    }
+    .mdc-select,
+    .mdc-textfield {
+        width: 100%;
+        margin: 0 0 $unit/2;
+    }
     .humanrightsdeclaration-signatory {
         h3 {
-            margin: $spacing-unit 0;
+            margin: $unit 0;
         }
     }
     .signatory-logo-background {
@@ -333,7 +347,7 @@ p.quote {
     .signatory {
         background: white;
         // margin: 0 -0.75rem;
-        padding: $spacing-unit;
+        padding: $unit;
         vertical-align: middle;
         a {
             display: inline-block;
@@ -401,7 +415,7 @@ p.quote {
 .pagination {
     text-align: center;
     display: block !important;
-    padding-top: $spacing-unit !important;
+    padding-top: $unit !important;
     margin-top: 3rem;
     list-style-type: none;
     li a,
@@ -421,16 +435,16 @@ p.quote {
     li {
         display: inline-block;
         padding: 0 !important;
-        height: $spacing-unit*2;
-        width: $spacing-unit*2;
+        height: $unit*2;
+        width: $unit*2;
         border-radius: 50%;
-        margin: 0 $spacing-unit/5;
+        margin: 0 $unit/5;
         vertical-align: bottom;
         a {
             font-size: 1.3rem;
-            line-height: $spacing-unit*2;
-            height: $spacing-unit*2;
-            width: $spacing-unit*2;
+            line-height: $unit*2;
+            height: $unit*2;
+            width: $unit*2;
             color: $brand-colour;
             padding: 0;
             margin: 0;
@@ -479,7 +493,7 @@ footer {
     color: white;
     // background-color: $brand-colour;
     .brand-logo {
-        margin-right: $spacing-unit;
+        margin-right: $unit;
         img {
             max-width: 180px;
         }
@@ -509,15 +523,15 @@ footer {
         position: relative;
     }
     .footer-main {
-        border-top: $spacing-unit/2 solid #5C96DD;
-        // padding: $spacing-unit 0 $spacing-unit*2;
+        border-top: $unit/2 solid #5C96DD;
+        // padding: $unit 0 $unit*2;
         background-image: linear-gradient(160deg, $brand-colour, $brand-colour 50%, #1A1A19 95%, #1A1A19);
     }
     h3 {
         font-weight: 500;
         margin-top: 0.5rem;
-        padding-bottom: $spacing-unit/2;
-        border-bottom: $spacing-unit/5 solid #5C96DD;
+        padding-bottom: $unit/2;
+        border-bottom: $unit/5 solid #5C96DD;
         color: white;
     }
     .mdc-list .mdc-list-item a {
@@ -549,7 +563,7 @@ footer {
         font-size: 1rem;
     }
     .fa-ul {
-        margin: 0 0 0 $spacing-unit*2;
+        margin: 0 0 0 $unit*2;
         li a {
             text-decoration: none;
         }
@@ -558,7 +572,7 @@ footer {
         }
     }
     ul {
-        margin-bottom: $spacing-unit !important;
+        margin-bottom: $unit !important;
     }
     .mdc-layout-grid p {
         margin-bottom: 0;
@@ -566,7 +580,7 @@ footer {
     .mdc-list {
         padding: 0;
         .mdc-list-item {
-            height: $spacing-unit*1.5;
+            height: $unit*1.5;
             a {
                 text-decoration: none;
             }
