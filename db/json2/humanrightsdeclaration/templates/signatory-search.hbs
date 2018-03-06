@@ -1,5 +1,5 @@
 <div class="signatories">
-    <h1>Signatories <span class="small">({{supplimentaryResponses.total.hits.total}})</span></h1>
+    <h1>Signatories <span class="small">({{data.supplimentaryResponses.total.hits.total}})</span></h1>
 
     <form action="/signatories" [searchroute]="'signatory_search'" data-auto-search="true">
         <div class="mdc-layout-grid">
@@ -16,7 +16,7 @@
             </div>
             <div class="mdc-layout-grid__inner">
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-8">
-                    <h4>Total signatories found: {{primaryResponse.hits.total}}</h4>
+                    <h4>Total signatories found: {{data.primaryResponse.hits.total}}</h4>
                 </div>
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-1">
                     <h4 class="sort">Sort</h4>
@@ -35,7 +35,7 @@
 
     <div class="mdc-layout-grid signatories-search">
         <div class="mdc-layout-grid__inner">
-            {{#each primaryResponse.hits.hits}}
+            {{#each data.primaryResponse.hits.hits}}
             <div class="mdc-layout-grid__cell signatory inner mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
                 {{{_source.rendered.humanrightsdeclaration_search_result}}}
             </div>

@@ -1,6 +1,6 @@
 {
     "size": 12,
-    "from": {{multiply (subtract (default query.page 1) 1) 12}},
+    "from": {{multiply (subtract (default request.params.query.page 1) 1) 12}},
     "_source": [
         "slug",
         "title",
@@ -9,10 +9,10 @@
     "query": {
         "bool": {
             "filter": [
-                {{#if query.sector}}
+                {{#if request.params.query.sector}}
                     {
                         "term": {
-                            "sector": "{{query.sector}}"
+                            "sector": "{{request.params.query.sector}}"
                         }
                     }
                 {{/if}}
@@ -31,6 +31,6 @@
         }
     },
     "sort": {
-        {{#if query.sort}}"slug": "asc"{{else}}"date_signed": "desc"{{/if}}
+        {{#if request.params.query.sort}}"slug": "asc"{{else}}"date_signed": "desc"{{/if}}
     }
 }

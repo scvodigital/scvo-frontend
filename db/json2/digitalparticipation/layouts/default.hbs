@@ -35,7 +35,7 @@
       gtag('config', 'UA-3467930-19', { 'send_page_view': true });
     </script>
 </head>
-<body class="{{replace request.params.path '_' ' '}}">
+<body class="{{#if request.params.path}}{{replace request.params.path '_' ' '}}{{else}}home{{/if}}">
     <scvo-site>
         <div class="mdc-typography">
             <main>
@@ -53,7 +53,7 @@
                             </section>
                             <section class="mdc-toolbar__section mdc-toolbar__section--align-end">
                                 <nav id="main-tab-bar" class="mdc-tab-bar" [menu]="'main'" [menulinkselector]="''" [menulabelselector]="'span.mdc-tab--label'" [menuactiveclass]="'active'">
-                                    {{#each menus.main}}
+                                    {{#each context.menus.main}}
                                     <a class="mdc-tab{{#if match}} mdc-tab--active{{/if}}" href="{{path}}"><span class="mdc-tab--label">{{{label}}}</span></a>
                                     {{/each}}
                                 </nav>
@@ -74,7 +74,7 @@
                         </header>
                         <nav class="mdc-temporary-drawer__content mdc-list-group">
                             <div id="icon-with-text-demo" class="mdc-list" [menu]="'main'" [menulinkselector]="''" [menulabelselector]="'span.menu-label'" [menuactiveclass]="'active'">
-                                {{#each menus.main}}
+                                {{#each context.menus.main}}
                                 <a class="mdc-list-item{{#if match}} mdc-tab--active{{/if}}" href="{{path}}"
                                     data-mdc-tabindex-handled="true" tabindex="-" onclick="window.drawer.open = false">
                                     <span class="menu-label">{{{label}}}</span>
