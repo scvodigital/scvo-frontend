@@ -11,6 +11,9 @@ module.exports = function(grunt) {
         clean: {
             main: {
                 src: ['./dist']
+            },
+            appengine: {
+                src: ['./appengine/dist']
             }
         },
         copy: {
@@ -21,6 +24,17 @@ module.exports = function(grunt) {
                         cwd: 'src/',
                         src: ['**/*'],
                         dest: 'dist/'
+                    }
+                ]
+            },
+            appengine: {
+                files: [
+                    {
+                        nonull: true,
+                        expand: true,
+                        cwd: './dist/assets/',
+                        src: ['**/*'],
+                        dest: './appengine/dist/assets/'
                     }
                 ]
             }
@@ -39,11 +53,17 @@ module.exports = function(grunt) {
             }
         },
         bgShell: {
-            serve: {
+            serveOld: {
                 cmd: 'devmode=true firebase serve -p 9000 --only hosting,functions'
             },
+            serve: {
+                execOpts: {
+                    cwd: './appengine'
+                },
+                cmd: 'devmode=true npm start'
+            },
             deploy: {
-                cmd: 'firebase deploy --only hosting,' + functions 
+                cmd: 'firebase deploy --only hosting,' + functions
             },
             deployHosting: {
                 cmd: 'firebase deploy --only hosting'
@@ -55,7 +75,7 @@ module.exports = function(grunt) {
                 execOpts: {
                     cwd: './functions'
                 },
-                cmd: 'firebase database:set -y / ./test-db/db.json'
+                cmd: 'firebase database:set -y / ./appengine/test-db/db.json'
             },
             buildFunctions: {
                 execOpts: {
@@ -65,7 +85,7 @@ module.exports = function(grunt) {
             },
             json2: {
                 execOpts: {
-                  cwd: './functions'
+                  cwd: './appengine'
                 },
                 cmd: 'node json2 ./test-db/json2/**/*.json2 ./test-db/json; node json2 ./test-db/db.json2 ./test-db'
             },
@@ -89,8 +109,9 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-bg-shell');
 
-    grunt.registerTask('default', ['clean:main', 'copy:main', 'sass', 'bgShell:json2', 'bgShell:gzip', 'bgShell:buildFunctions']);
+    grunt.registerTask('default', ['clean:main', 'clean:appengine', 'copy:main', 'sass', 'copy:appengine', 'bgShell:json2', 'bgShell:gzip', 'bgShell:buildFunctions']);
     grunt.registerTask('serve', ['default', 'bgShell:serve']);
+    grunt.registerTask('serve-old', ['default', 'bgShell:serveOld']);
     grunt.registerTask('serve-router', ['default', 'bgShell:testRouter', 'serve']);
     grunt.registerTask('deploy-all', ['default', 'bgShell:deploy', 'bgShell:deployDb']);
     grunt.registerTask('deploy-db', ['default', 'bgShell:deployDb']);

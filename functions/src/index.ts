@@ -138,7 +138,7 @@ function putJson(jsonPath: string, json: any): Promise<void> {
         if(process.env.devmode){
             try{
                 jsonPath = jsonPath.indexOf('/') === 0 ? jsonPath.substr(1) : jsonPath;
-                var filePath = path.join(__dirname, '../test-db/db.json');
+                var filePath = path.join(__dirname, '../../appengine/test-db/db.json');
                 var jsonString = fs.readFileSync(filePath).toString();
                 var db = JSON.parse(jsonString);
                 dot.set(jsonPath, json, db, false);
@@ -162,7 +162,7 @@ function getJson<T>(jsonPath: string): Promise<T> {
         if(process.env.devmode){
             try{
                 jsonPath = jsonPath.indexOf('/') === 0 ? jsonPath.substr(1) : jsonPath;
-                var filePath = path.join(__dirname, '../test-db/db.json');
+                var filePath = path.join(__dirname, '../../appengine/test-db/db.json');
                 var jsonString = fs.readFileSync(filePath).toString();
                 var db = JSON.parse(jsonString);
                 var json = dot.pick(jsonPath, db);
@@ -260,7 +260,7 @@ exports.centralAuthLogin = functions.https.onRequest((req: functions.Request, re
             var loginApp;
             var loginDomainName = req.body.loginDomain;
             var idToken = req.body.idToken;
-            
+
             try {
                 admin.apps.forEach((app: admin.app.App) => {
                     if (app.name === loginDomainName) {
@@ -278,7 +278,7 @@ exports.centralAuthLogin = functions.https.onRequest((req: functions.Request, re
                         credential: admin.credential.cert({
                             projectId: Secrets.configs[loginDomainName].credential.project_id,
                             clientEmail: Secrets.configs[loginDomainName].credential.client_email,
-                            privateKey: Secrets.configs[loginDomainName].credential.private_key     
+                            privateKey: Secrets.configs[loginDomainName].credential.private_key
                         }),
                         databaseURL: Secrets.configs[loginDomainName].databaseURL
                     };
@@ -303,14 +303,14 @@ exports.centralAuthLogin = functions.https.onRequest((req: functions.Request, re
                             res.end();
                             resolve();
                         }).catch((err) => {
-                            sendError("Could not login to central account '" + email + "' (" + centralUid + ")", 403, err); 
+                            sendError("Could not login to central account '" + email + "' (" + centralUid + ")", 403, err);
                         });
                     }).catch((err) => {
-                        sendError("Could not find user '" + email + "' in central domain", 403, err);  
+                        sendError("Could not find user '" + email + "' in central domain", 403, err);
                     });
                 }).catch((err) => {
-                    sendError("Could not find user in '" + loginDomainName + "'", 500, err);       
-                });;        
+                    sendError("Could not find user in '" + loginDomainName + "'", 500, err);
+                });;
             }).catch((err) => {
                 sendError("Failed to verify token", 403, err);
             });
@@ -326,7 +326,7 @@ exports.centralAuthLogin = functions.https.onRequest((req: functions.Request, re
                 resolve();
             }
         });
-    }); 
+    });
 });
 
 const loginDomainConfigurations = {
