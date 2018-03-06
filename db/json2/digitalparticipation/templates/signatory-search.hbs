@@ -1,5 +1,5 @@
 <div class="signatories">
-    <h1>Signatories <span class="small">({{supplimentaryResponses.total.hits.total}})</span></h1>
+    <h1>Signatories <span class="small">({{data.supplimentaryResponses.total.hits.total}})</span></h1>
 
     <form action="/signatories" [searchroute]="'signatory_search'" data-auto-search="true" id="signatory-search">
         <div class="mdc-layout-grid">
@@ -18,7 +18,7 @@
                     <div class="mdc-form-field sector">
                         <select class="mdc-select" role="listbox" id="charter-sector" name="sector" data-clear-input="#charter-category">
                             <option value="" {{#if params.query.sector}}{{else}}selected{{/if}}>All sectors</option>
-                            {{#each supplimentaryResponses.types.aggregations.sectors.buckets}}
+                            {{#each data.supplimentaryResponses.types.aggregations.sectors.buckets}}
                             <option value="{{key}}" {{#compare ../params.query.sector "===" key}}selected{{/compare}}>{{key}}</option>
                             {{/each}}
                         </select>
@@ -29,7 +29,7 @@
                     <div class="mdc-form-field category">
                         <select class="mdc-select" role="listbox" id="charter-category" name="category">
                             <option value="" {{#if params.query.category}}{{else}}selected{{/if}}>All categories</option>
-                            {{#each supplimentaryResponses.categories.aggregations.categories.buckets}}
+                            {{#each data.supplimentaryResponses.categories.aggregations.categories.buckets}}
                             <option value="{{key}}" {{#compare ../params.query.category "===" key}}selected{{/compare}}>{{key}}</option>
                             {{/each}}
                         </select>
@@ -38,7 +38,7 @@
             </div>
             <div class="mdc-layout-grid__inner">
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-8-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone">
-                    <h4>Total signatories found: {{primaryResponse.hits.total}}</h4>
+                    <h4>Total signatories found: {{data.primaryResponse.hits.total}}</h4>
                 </div>
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-1 mdc-layout-grid__cell--span-3-tablet mdc-layout-grid__cell--span-1-phone">
                     <h4 class="sort">Sort</h4>
@@ -57,7 +57,7 @@
 
     <div class="mdc-layout-grid signatories-search">
         <div class="mdc-layout-grid__inner">
-            {{#each primaryResponse.hits.hits}}
+            {{#each data.primaryResponse.hits.hits}}
             <div class="mdc-layout-grid__cell signatory inner mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
                 {{{_source.rendered.charter_search_result}}}
             </div>

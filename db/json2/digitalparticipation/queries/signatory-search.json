@@ -1,6 +1,6 @@
 {
     "size": 12,
-    "from": {{multiply (subtract (default query.page 1) 1) 12}},
+    "from": {{multiply (subtract (default request.params.query.page 1) 1) 12}},
     "_source": [
         "slug",
         "title",
@@ -9,26 +9,26 @@
     "query": {
         "bool": {
             "filter": [
-                {{#if query.sector}}
+                {{#if request.params.query.sector}}
                     {
                         "term": {
-                            "sector": "{{query.sector}}"
+                            "sector": "{{request.params.query.sector}}"
                         }
-                    }{{#if query.category}},{{/if}}
+                    }{{#if request.params.query.category}},{{/if}}
                 {{/if}}
-                {{#if query.category}}
+                {{#if request.params.query.category}}
                     {
                         "term": {
-                            "category": "{{query.category}}"
+                            "category": "{{request.params.query.category}}"
                         }
                     }
                 {{/if}}
             ],
             "must": [
-                {{#if query.q}}
+                {{#if request.params.query.q}}
                     {
                         "query_string": {
-                            "query": "{{query.q}}",
+                            "query": "{{request.params.query.q}}",
                             "default_operator": "AND",
                             "analyzer": "snowball"
                         }
@@ -38,6 +38,6 @@
         }
     },
     "sort": {
-        {{#if query.sort}}"slug": "asc"{{else}}"date_signed": "desc"{{/if}}
+        {{#if request.params.query.sort}}"slug": "asc"{{else}}"date_signed": "desc"{{/if}}
     }
 }
