@@ -13,6 +13,7 @@
     "copy": "cp ./db/db.json ./dist/db.json; cp -r ./assets ./dist/assets",
     "sass": "node-sass ./dist/assets/css -o dist/assets/css",
     "router": "cd ../router; npm run local; cd ../frontend; npm link @scvo/router; npm link @scvo/router-task-elasticsearch; npm link @scvo/router-destination-handlebars",
+    "upgrade-router": "yarn add -E @scvo/router @scvo/router-task-elasticsearch @scvo/router-destination-handlebars",
     "build": "npm run cleanup; tsc; npm run json2; npm run copy; npm run sass",
     "start": "node dist/index.js",
     "dev": "npm run build; devmode=true node dist/index.js",
