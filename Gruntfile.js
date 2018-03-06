@@ -53,7 +53,7 @@ module.exports = function(grunt) {
             }
         },
         bgShell: {
-            serve_old: {
+            serveOld: {
                 cmd: 'devmode=true firebase serve -p 9000 --only hosting,functions'
             },
             serve: {
@@ -63,7 +63,7 @@ module.exports = function(grunt) {
                 cmd: 'devmode=true npm start'
             },
             deploy: {
-                cmd: 'firebase deploy --only hosting,' + functions 
+                cmd: 'firebase deploy --only hosting,' + functions
             },
             deployHosting: {
                 cmd: 'firebase deploy --only hosting'
@@ -75,7 +75,7 @@ module.exports = function(grunt) {
                 execOpts: {
                     cwd: './functions'
                 },
-                cmd: 'firebase database:set -y / ./test-db/db.json'
+                cmd: 'firebase database:set -y / ./appengine/test-db/db.json'
             },
             buildFunctions: {
                 execOpts: {
@@ -85,7 +85,7 @@ module.exports = function(grunt) {
             },
             json2: {
                 execOpts: {
-                  cwd: './functions'
+                  cwd: './appengine'
                 },
                 cmd: 'node json2 ./test-db/json2/**/*.json2 ./test-db/json; node json2 ./test-db/db.json2 ./test-db'
             },
@@ -111,6 +111,7 @@ module.exports = function(grunt) {
 
     grunt.registerTask('default', ['clean:main', 'clean:appengine', 'copy:main', 'sass', 'copy:appengine', 'bgShell:json2', 'bgShell:gzip', 'bgShell:buildFunctions']);
     grunt.registerTask('serve', ['default', 'bgShell:serve']);
+    grunt.registerTask('serve-old', ['default', 'bgShell:serveOld']);
     grunt.registerTask('serve-router', ['default', 'bgShell:testRouter', 'serve']);
     grunt.registerTask('deploy-all', ['default', 'bgShell:deploy', 'bgShell:deployDb']);
     grunt.registerTask('deploy-db', ['default', 'bgShell:deployDb']);
