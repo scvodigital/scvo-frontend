@@ -1,19 +1,28 @@
-{{#if metaData.title}}
-    <title>Scotland's Digital Participation Charter - {{{metaData.title}}}</title>
-    <meta property="og:title" content="Scotland's Digital Participation Charter - {{{title}}}" data-dynamic="true">
-{{/if}}
-
-{{#if metaData.og_image}}
-    <meta property="og:image" content="{{metaData.og_image}}" data-dynamic="true">
-{{/if}}
-
-{{#ifAny metaData.og_summary metaData.description}}
-    <meta property="og:summary" content="{{{default metaData.og_summary metaData.description}}}" data-dynamic="true">
-    <meta name="description" content="{{{default metaData.description metaData.og_summary}}}" data-dynamic="true">
-{{/ifAny}}
-
-{{#if rendered.json_ld}}
-    <script type="application/ld+json" data-dynamic="true">
-        {{{json_ld}}}
-    </script>
-{{/if}}
+{{#if data.primaryResponse.hits.hits.[0] ~}}
+{{#with data.primaryResponse.hits.hits.[0]._source ~}}
+{{#if title ~}}
+<title>Scotland's Digital Participation Charter signatory: {{{title}}}</title>
+<meta property="og:title" content="Scotland's Digital Participation Charter signatory: {{{title}}}" data-dynamic="true">
+{{else}}
+<title>Scotland's Digital Participation Charter</title>
+<meta property="og:title" content="Scotland's Digital Participation Charter" data-dynamic="true">
+{{/if ~}}
+{{#if files.0.uploadUrl ~}}
+<meta property="og:image" content="{{files.0.uploadUrl}}" data-dynamic="true">
+<meta property="og:image:width" content="128" data-dynamic="true">
+<meta property="og:image:height" content="128" data-dynamic="true">
+{{/if ~}}
+{{#if description ~}}
+<meta property="og:summary" content="{{description}}" data-dynamic="true">
+<meta name="description" content="{{description}}" data-dynamic="true">
+{{/if ~}}
+{{#if rendered.json_ld ~}}
+<script type="application/ld+json" data-dynamic="true">
+{{{rendered.json_ld}}}
+</script>
+{{/if ~}}
+{{/with ~}}
+{{else}}
+<title>Scotland's Digital Participation Charter</title>
+<meta property="og:title" content="Scotland's Digital Participation Charter" data-dynamic="true">
+{{/if ~}}
