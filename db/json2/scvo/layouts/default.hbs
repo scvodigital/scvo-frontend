@@ -64,7 +64,7 @@
                         </section>
                         <section class="mdc-toolbar__section upper-menu mdc-toolbar__section--align-end">
                             <nav id="upper-tab-bar" class="mdc-tab-bar" [menu]="'main-upper'" [menulinkselector]="''" [menulabelselector]="'span.mdc-tab--label'" [menuactiveclass]="'mdc-tab--active'">
-                                {{#each menus.main-upper ~}}
+                                {{#each context.menus.main-upper ~}}
                                 <a class="mdc-tab{{#if match}} mdc-tab--active{{/if}}" href="{{stripTrailingSlash path}}"><span class="mdc-tab--label">{{{label}}}</span></a>
                                 {{/each ~}}
                             </nav>
@@ -90,7 +90,7 @@
                     <div class="container-fluid">
                         <section class="mdc-toolbar__section mdc-toolbar__section--align-start toolbar-menu">
                             <nav id="main-tab-bar" class="mdc-tab-bar" [menu]="'main'" [menulinkselector]="''" [menulabelselector]="'span.mdc-tab--label'" [menuactiveclass]="'mdc-tab--active'">
-                                {{#each menus.main ~}}
+                                {{#each context.menus.main ~}}
                                 <a class="mdc-tab{{#if match}} mdc-tab--active{{/if}}" href="{{stripTrailingSlash path}}"><span class="mdc-tab--label">{{{label}}}</span></a>
                                 {{/each ~}}
                             </nav>
@@ -109,12 +109,12 @@
                     <nav class="mdc-temporary-drawer__content mdc-list-group">
                         <div id="icon-with-text-demo" class="mdc-list">
                             <a class="mdc-list-item" href="/" onclick="window.drawer.open = false">Home</a>
-                            {{#each menus.main ~}}
+                            {{#each context.menus.main ~}}
                             <a class="mdc-list-item" href="{{path}}" data-mdc-tabindex-handled="true" tabindex="-1" onclick="window.drawer.open = false">
                                 {{{label}}}
                             </a>
                             {{/each ~}}
-                            {{#each menus.main-upper ~}}
+                            {{#each context.menus.main-upper ~}}
                             <a class="mdc-list-item" href="{{path}}" data-mdc-tabindex-handled="true" tabindex="-1" onclick="window.drawer.open = false">
                                 {{{label}}}
                             </a>
