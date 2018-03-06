@@ -88,7 +88,7 @@ async function index(req: express.Request, res: express.Response, next: express.
 
         res.status(response.statusCode || 500);
         res.contentType(response.contentType || 'text/html');
-        res.send(response.contentBody || 'Something went bad');
+        res.send(response.body || 'Something went bad');
         res.end();
         
         return next();
