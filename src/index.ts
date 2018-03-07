@@ -248,7 +248,7 @@ app.listen(port, function () {
 // Utility functions!
 async function loadRouters(): Promise<any> {
     try {
-        if (routers) return;
+        if (routers && !process.env.devmode) return;
 
         var sites = await getJson< { [site: string]: IContext }>('/sites/');
         
