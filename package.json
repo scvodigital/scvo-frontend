@@ -9,7 +9,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "cleanup": "rm -rf ./dist",
-    "json2": "node json2 ./db/json2/**/*.json2 ./db/json; node json2 ./db/db.json2 ./db",
+    "json2": "json-inc ./db/json2/**/*.json2 ./db/json; json-inc ./db/db.json2 ./db",
     "copy": "cp ./db/db.json ./dist/db.json; cp -r ./assets ./dist/assets",
     "sass": "node-sass ./dist/assets/css -o dist/assets/css",
     "router": "cd ../router; npm run local; cd ../frontend; npm link @scvo/router; npm link @scvo/router-task-elasticsearch; npm link @scvo/router-destination-handlebars",
