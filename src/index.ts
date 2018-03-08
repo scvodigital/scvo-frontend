@@ -11,13 +11,14 @@ import * as admin from 'firebase-admin';
 import * as cors from 'cors';
 import * as compression from 'compression';
 import * as bodyParser from 'body-parser';
-import * as Dot from 'dot-object';
+const Dot = require('dot-object');
 import * as S from 'string';
 
 // Router modules
 import { Router, RouteMatch, IMenus, IRouterRequest, IRouterResponse, IContext } from '@scvo/router';
 import { ElasticsearchRouterTask } from '@scvo/router-task-elasticsearch';
 import { HandlebarsRouterDestination } from '@scvo/router-destination-handlebars';
+import { RedirectRouterDestination } from '@scvo/router-destination-redirect';
 
 // Import internal modules
 import { Secrets } from './secrets';
@@ -89,6 +90,11 @@ async function index(req: express.Request, res: express.Response, next: express.
 
         res.status(response.statusCode || 500);
         res.contentType(response.contentType || 'text/html');
+
+        Object.keys(response.headers).forEach((header) => {
+            res.setHeader(header, response.headers[header]);
+        });
+
         res.send(response.body || 'Something went bad');
         res.end();
         
@@ -257,7 +263,8 @@ async function loadRouters(): Promise<any> {
         ];
 
         var routerDestinations = [
-            new HandlebarsRouterDestination({})
+            new HandlebarsRouterDestination({}),
+            new RedirectRouterDestination()
         ]
 
         routers = {};

@@ -14,7 +14,7 @@ var output = input.pop();
     
 const re = {
     stringImport: /(?:"\{\$)(.*?)(?:\}")/ig,
-    jsonImport: /(?:"\{\:)(.*?)(@.+?)?(?:\}")/ig,
+    jsonImport: /(?:"\{\:)(.*?)(@.+?)?(?:\}")(: ?"")?/ig,
 };
 const importCache = {};
 
@@ -69,7 +69,7 @@ function processFile(path){
     
     var jsonImports = after.match(re.jsonImport) || [];
     console.log(chalk.blueBright(chalk.bold('\tJSON Imports:'), jsonImports.length));
-    var after = after.replace(re.jsonImport, (all, match, match2) => {
+    var after = after.replace(re.jsonImport, (all, match, match2, match3) => {
         var fullImportPath = pa.join(basedir, match);
         //check to see if we have already read this file
         if(!importCache.hasOwnProperty(fullImportPath)){
@@ -84,7 +84,16 @@ function processFile(path){
             obj = dot.pick(match2, obj);
         }
 
-        return JSON.stringify(obj);
+        var json = JSON.stringify(obj, null, 4);
+
+        if (match3) {
+            var lines = json.split(/\n/ig);
+            lines.shift();
+            lines.pop();
+            json = lines.join('\n');
+        }
+
+        return json;
     });
     
     var fileName = pa.parse(path).base;
