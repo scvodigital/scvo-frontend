@@ -4,12 +4,12 @@
     <strong>Current page:</strong> {{addCommas paging.currentPage}} of {{addCommas paging.totalPages}}
 </div>
 {{else}}
-{{#ifAny phase params.query.region params.query.sector params.query.location params.query.job_number params.query.q ~}}
+{{#ifAny phase request.params.query.region request.params.query.sector request.params.query.location request.params.query.job_number request.params.query.q ~}}
 <div class="search-info mdc-elevation--z1">
     No results, please try a different search query
 </div>
 {{/ifAny ~}}
-{{#compare params.path "===" "search" ~}}
+{{#compare request.params.path "===" "search" ~}}
 <h3>Trending topics</h3>
 <div class="mdc-layout-grid">
     <div class="mdc-layout-grid__inner">

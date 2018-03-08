@@ -7,7 +7,7 @@
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
                     <h4>Search</h4>
                     <div class="mdc-textfield mdc-textfield--upgraded keywords">
-                        <input type="text" class="mdc-textfield__input" name="q" id="keywords" value="{{params.query.q}}" placeholder="Search for a declaration signatory">
+                        <input type="text" class="mdc-textfield__input" name="q" id="keywords" value="{{request.params.query.q}}" placeholder="Search for a declaration signatory">
                         <button type="submit" class="mdc-toolbar__icon mdc-toolbar__search search-button-large" aria-label="Search" alt="Search">
                             <span class="far fa-2x fa-search" aria-hidden="true"></span>
                         </button>
@@ -24,8 +24,8 @@
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3">
                     <div class="mdc-form-field sort">
                         <select class="mdc-select" role="listbox" id="sort" name="sort">
-                            <option value="" {{#if params.query.sort}}{{else}}selected{{/if}}>Date signed</option>
-                            <option value="AZ" {{#if params.query.sort}}selected{{else}}{{/if}}>Alphabetical</option>
+                            <option value="" {{#if request.params.query.sort}}{{else}}selected{{/if}}>Date signed</option>
+                            <option value="AZ" {{#if request.params.query.sort}}selected{{else}}{{/if}}>Alphabetical</option>
                         </select>
                     </div>
                 </div>

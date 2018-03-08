@@ -34,24 +34,24 @@
                                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone">
                                     <div class="mdc-textfield mdc-textfield--upgraded">
                                         <label class="mdc-textfield__label" for="q">Keywords</label>
-                                        <input type="text" class="mdc-textfield__input" name="q" id="jobs-keywords" placeholder="Keywords" value="{{params.query.q}}">
+                                        <input type="text" class="mdc-textfield__input" name="q" id="jobs-keywords" placeholder="Keywords" value="{{request.params.query.q}}">
                                     </div>
                                     <div class="mdc-form-field">
                                         <label class="mdc-textfield__label" for="role">Role</label>
                                         <select class="mdc-select" role="listbox" id="jobs-role" name="role">
-                                            <option value="" {{#if params.query.role}}{{else}}selected{{/if}}>Any role</option>
+                                            <option value="" {{#if request.params.query.role}}{{else}}selected{{/if}}>Any role</option>
                                             {{#each data.supplimentaryResponses.types.aggregations.roles.buckets ~}}
-                                            <option value="{{key}}" {{#compare ../params.query.role "===" key}}selected{{/compare}}>{{key}}</option>
+                                            <option value="{{key}}" {{#compare ../request.params.query.role "===" key}}selected{{/compare}}>{{key}}</option>
                                             {{/each ~}}
                                         </select>
                                     </div>
                                     <div class="mdc-form-field">
                                         <label class="mdc-textfield__label" for="sector">Sector</label>
                                         <select class="mdc-select" role="listbox" id="jobs-sector" name="sector">
-                                            <option value="" {{#if params.query.sector}}{{else}}selected{{/if}}>Any sector</option>
+                                            <option value="" {{#if request.params.query.sector}}{{else}}selected{{/if}}>Any sector</option>
                                             {{#each data.supplimentaryResponses.types.aggregations.sectors.buckets ~}}
                                             {{#if key ~}}
-                                            <option value="{{key}}" {{#compare ../params.query.sector "===" key}}selected{{/compare}}>{{key}}</option>
+                                            <option value="{{key}}" {{#compare ../request.params.query.sector "===" key}}selected{{/compare}}>{{key}}</option>
                                             {{/if ~}}
                                             {{/each ~}}
                                         </select>
@@ -59,10 +59,10 @@
                                     <div class="mdc-form-field">
                                         <label class="mdc-textfield__label" for="jobs-region">Region</label>
                                         <select class="mdc-select" role="listbox" id="region" name="region">
-                                            <option value="" {{#if params.query.region}}{{else}}selected{{/if}}>Any region</option>
+                                            <option value="" {{#if request.params.query.region}}{{else}}selected{{/if}}>Any region</option>
                                             {{#each data.supplimentaryResponses.types.aggregations.regions.buckets ~}}
                                             {{#if key ~}}
-                                            <option value="{{key}}" {{#compare ../params.query.region "===" key}}selected{{/compare}}>{{key}}</option>
+                                            <option value="{{key}}" {{#compare ../request.params.query.region "===" key}}selected{{/compare}}>{{key}}</option>
                                             {{/if ~}}
                                             {{/each ~}}
                                         </select>
@@ -70,17 +70,17 @@
                                     <div class="mdc-form-field">
                                         <label class="mdc-textfield__label" for="status">Status</label>
                                         <select class="mdc-select" role="listbox" id="jobs-status" name="status">
-                                            <option value="" {{#if params.query.status}}{{else}}selected{{/if}}>Any status</option>
+                                            <option value="" {{#if request.params.query.status}}{{else}}selected{{/if}}>Any status</option>
                                             {{#each data.supplimentaryResponses.types.aggregations.statuses.buckets ~}}
                                             {{#if key ~}}
-                                            <option value="{{key}}" {{#compare ../params.query.status "===" key}}selected{{/compare}}>{{key}}</option>
+                                            <option value="{{key}}" {{#compare ../request.params.query.status "===" key}}selected{{/compare}}>{{key}}</option>
                                             {{/if ~}}
                                             {{/each ~}}
                                         </select>
                                     </div>
                                     <div class="mdc-textfield mdc-textfield--upgraded">
                                         <label class="mdc-textfield__label" for="minimum_salary">Minimum salary</label>
-                                        <input type="text" class="mdc-textfield__input" name="minimum_salary" id="jobs-minimum_salary" placeholder="e.g. 32000" value="{{params.query.minimum_salary}}">
+                                        <input type="text" class="mdc-textfield__input" name="minimum_salary" id="jobs-minimum_salary" placeholder="e.g. 32000" value="{{request.params.query.minimum_salary}}">
                                     </div>
                                 </div>
                             </div>

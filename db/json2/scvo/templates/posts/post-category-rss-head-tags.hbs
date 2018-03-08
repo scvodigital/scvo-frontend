@@ -1,9 +1,9 @@
 {{#if data.primaryResponse.hits.hits.[0] ~}}
 {{#with data.primaryResponse.hits.hits.[0]._source ~}}
-<title>SCVO Posts - {{corresponding categories_slug categories ../params.category_slug}}</title>
+<title>SCVO Posts - {{corresponding categories_slug categories ../request.params.category_slug}}</title>
 {{/with ~}}
 {{else}}
 <title>SCVO Posts</title>
 {{/if ~}}
 <description>{{{description}}}</description>
-<link>https://scvo.org{{{replace (replace params.uri.path "&_view=rss" "") "?_view=rss" ""}}}</link>
+<link>https://scvo.org{{{replace (replace request.params.uri.path "&_view=rss" "") "?_view=rss" ""}}}</link>

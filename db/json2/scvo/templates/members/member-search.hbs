@@ -35,16 +35,16 @@
                                     </h2>
                                     <form action="/about/members" method="GET" [searchroute]="'member_search'" class="search_form" data-auto-search="true">
                                         <div class="mdc-textfield">
-                                            <input type="text" class="mdc-textfield__input searchRoute" placeholder="Search" value="{{params.query.q}}" name="q">
+                                            <input type="text" class="mdc-textfield__input searchRoute" placeholder="Search" value="{{request.params.query.q}}" name="q">
                                             <button type="submit" class="mdc-toolbar__icon mdc-toolbar__search search-button-large" aria-label="Search" alt="Search">
                                                 <span class="far fa-2x fa-search" aria-hidden="true"></span>
                                             </button>
                                         </div>
                                         <!-- <div class="mdc-form-field">
                                             <select class="mdc-select" role="listbox" name="type">
-                                                <option value="" {{#unless params.query.type}}selected{{/unless}}>All membership types</option>
+                                                <option value="" {{#unless request.params.query.type}}selected{{/unless}}>All membership types</option>
                                                 {{#each data.supplimentaryResponses.types.aggregations.types.buckets}}
-                                                <option value="{{slugify key}}" {{#compare ../params.query.type "===" (slugify key)}}selected{{/compare}}>{{key}} ({{doc_count}})</option>
+                                                <option value="{{slugify key}}" {{#compare ../request.params.query.type "===" (slugify key)}}selected{{/compare}}>{{key}} ({{doc_count}})</option>
                                                 {{/each}}
                                             </select>
                                         </div> -->
@@ -53,7 +53,7 @@
                             </div>
                         </div>
 
-                        {{#if params.query.q ~}}
+                        {{#if request.params.query.q ~}}
                         {{> search_info}}
                         {{else}}
                         <h3>Our members include&hellip;</h3>
@@ -63,7 +63,7 @@
                         {{{this._source.rendered.scvo_list}}}
                         {{/each ~}}
 
-                        {{#ifAny params.query.q params.query.type ~}}
+                        {{#ifAny request.params.query.q request.params.query.type ~}}
                         {{> pagination paging=data.primaryResponse.pagination}}
                         {{/ifAny ~}}
                     </div>

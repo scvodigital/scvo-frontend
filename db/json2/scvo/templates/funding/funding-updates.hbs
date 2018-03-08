@@ -8,7 +8,7 @@
                     {{else}}
                     <h1 class="header-text">
                         <span class="header-text-banner">
-                            Funding update – {{momentFormat (moment (lastItem (split (atob params.range) "-")) "x") "Do MMMM YYYY"}}
+                            Funding update – {{momentFormat (moment (lastItem (split (atob request.params.range) "-")) "x") "Do MMMM YYYY"}}
                         </span>
                     </h1>
                     {{/if ~}}
@@ -21,7 +21,7 @@
         <ul class="breadcrumbs">
             <li><a href="/">Home</a></li>
             <li><a href="/funding">Funding</a></li>
-            <li>Funding update – {{momentFormat (moment (lastItem (split (atob params.range) "-")) "x") "Do MMMM YYYY"}}</li>
+            <li>Funding update – {{momentFormat (moment (lastItem (split (atob request.params.range) "-")) "x") "Do MMMM YYYY"}}</li>
         </ul>
 
         <div class="v-margin-full">

@@ -1,13 +1,13 @@
 <form action="/policy-research/evidence-library" method="GET" [searchroute]="'evidence_library_document_search'" data-auto-search="true" autocomplete="off">
     <div class="mdc-textfield mdc-textfield--upgraded">
-        <input type="text" class="mdc-textfield__input" name="q" id="evidence-library-keywords" value="{{params.query.q}}" placeholder="Keywords">
+        <input type="text" class="mdc-textfield__input" name="q" id="evidence-library-keywords" value="{{request.params.query.q}}" placeholder="Keywords">
         <div class="mdc-textfield__bottom-line"></div>
     </div>
     <div class="mdc-form-field">
         <select class="mdc-select" role="listbox" id="evidence-library-classification" name="classification">
-            <option value="" {{#if params.query.classification}}{{else}}selected{{/if}}>All categories</option>
+            <option value="" {{#if request.params.query.classification}}{{else}}selected{{/if}}>All categories</option>
             {{#each data.supplimentaryResponses.types.aggregations.types.buckets ~}}
-            <option value="{{slugify key}}" {{#compare ../params.query.classification "===" (slugify key)}}selected{{/compare}}>{{key}} ({{doc_count}})</option>
+            <option value="{{slugify key}}" {{#compare ../request.params.query.classification "===" (slugify key)}}selected{{/compare}}>{{key}} ({{doc_count}})</option>
             {{/each ~}}
         </select>
     </div>
