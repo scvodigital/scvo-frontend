@@ -256,7 +256,7 @@ async function loadRouters(): Promise<any> {
     try {
         if (routers && !process.env.devmode) return;
 
-        var sites = await getJson< { [site: string]: IContext }>('/sites/');
+        var sites = await getJson< { [site: string]: IContext }>('/app-engine/');
         
         var routerTasks = [
             new ElasticsearchRouterTask({})
