@@ -75,7 +75,7 @@ module.exports = function(grunt) {
                 execOpts: {
                     cwd: './functions'
                 },
-                cmd: 'firebase database:set -y / ./appengine/test-db/db.json'
+                cmd: 'firebase database:set -y /sites/ ./appengine/test-db/db.json'
             },
             buildFunctions: {
                 execOpts: {
