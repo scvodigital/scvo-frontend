@@ -293,9 +293,20 @@ async function getJson<T>(jsonPath: string): Promise<T> {
     if(process.env.devmode){
         try{
             jsonPath = S(jsonPath).chompLeft('/').chompRight('/').s;
+
+            var parts = jsonPath.split('/');
+            parts.shift();
+            jsonPath = parts.join('/');
+
             var jsonString = fs.readFileSync(localDbPath).toString();
             var db = JSON.parse(jsonString);
-            var json = dot.pick(jsonPath, db);
+            var json;
+
+            if (jsonPath === '') {
+                json = db;
+            } else {
+                json = dot.pick(jsonPath, db);
+            }
             return json;
         }catch(err){
             throw err;
@@ -319,9 +330,19 @@ async function putJson(jsonPath: string, json: any): Promise<void> {
     if(process.env.devmode){
         try{
             jsonPath = S(jsonPath).chompLeft('/').chompRight('/').s;
+            
+            var parts = jsonPath.split('/');
+            parts.shift();
+            jsonPath = parts.join('/');
+            
             var jsonString = fs.readFileSync(localDbPath).toString();
             var db = JSON.parse(jsonString);
-            dot.set(jsonPath, json, db, false);
+
+            if (jsonPath === '') {
+                db = json;
+            } else {
+                dot.set(jsonPath, json, db, false);
+            }
             fs.writeFileSync(localDbPath, JSON.stringify(db, null, 4));
             return;
         }catch(err){
