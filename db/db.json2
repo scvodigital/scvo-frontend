@@ -20,7 +20,6 @@
             "menus": "{:./json2/scvo/scvo-menus.json}",
             "metaData": {
                 "handlebarsPartials": {
-                    "amp_layout": "{$./json2/scvo/partials/amp-layout.hbs}",
                     "header_caption": "{$./json2/scvo/partials/header-caption.hbs}",
                     "header_splash_image": "{$./json2/scvo/partials/header-splash-image.hbs}",
                     "header_splash": "{$./json2/scvo/partials/header-splash.hbs}",
@@ -158,6 +157,71 @@
             },
             "title": "Testing the new Context Schema",
             "routes": "{:./json/test-routes.json}"
+        },
+        "goodmoves": {
+            "domains": [
+                "goodmoves.com",
+                "test.goodmoves.com",
+                "beta.goodmoves.com",
+                "goodmoves.eu",
+                "goodmoves.be",
+                "goodmoves.scot",
+                "goodmovesjobs.de",
+                "goodmoves.local"
+            ],
+            "menus": {},
+            "metaData": {
+                "handlebarsPartials": {
+                    "handle_404": "{$./json2/goodmoves/partials/handle-404.hbs}",
+                    "search_info": "{$./json2/goodmoves/partials/search-info.hbs}",
+                    "pagination": "{$./json2/goodmoves/partials/pagination.hbs}"
+                },
+                "handlebarsLayouts": {
+                    "rss": {
+                        "template": "{$./json2/goodmoves/layouts/rss.hbs}",
+                        "sections": ["head", "body"],
+                        "pattern": "(&|\\?)rss\\b",
+                        "contentType": "application/rss+xml"
+                    },
+                    "default": {
+                        "template": "{$./json2/goodmoves/layouts/default.hbs}",
+                        "sections": ["head", "body", "foot"],
+                        "pattern": ".*",
+                        "contentType": "text/html"
+                    }
+                },
+                "title": "Goodmoves - charity and voluntary sector recruitment",
+                "firebaseDefaultDomain": {
+                    "name": "scvo",
+                    "label": "SCVO",
+                    "logoUrl": "",
+                    "config": {
+                        "apiKey": "AIzaSyDIUNnyGeZY3sO8gGIf-_2dgO49xKij5zI",
+                        "authDomain": "scvo-net.firebaseapp.com",
+                        "databaseURL": "https://scvo-net.firebaseio.com",
+                        "projectId": "scvo-net",
+                        "storageBucket": "scvo-net.appspot.com",
+                        "messagingSenderId": "782194712584"
+                    }
+                },
+                "firebaseDomains": [
+                    {
+                        "name": "goodmoves",
+                        "label": "Goodmoves",
+                        "logoUrl": "",
+                        "config": {
+                            "apiKey": "AIzaSyAuGAacoIdUgbtfI42UXTHDosMS4pP5Teg",
+                            "authDomain": "goodmoves-frontend.firebaseapp.com",
+                            "databaseURL": "https://goodmoves-frontend.firebaseio.com",
+                            "projectId": "goodmoves-frontend",
+                            "storageBucket": "goodmoves-frontend.appspot.com",
+                            "messagingSenderId": "639831727728"
+                        }
+                    }
+                ]
+            },
+            "title": "Goodmoves - charity and voluntary sector recruitment",
+            "routes": "{:./json/goodmoves-routes.json}"
         },
         "auth": {
             "domains": [
