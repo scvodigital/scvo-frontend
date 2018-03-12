@@ -1,9 +1,9 @@
 {{#if data.primaryResponse.hits.hits.[0] ~}}
 {{#with data.primaryResponse.hits.hits.[0]._source ~}}
-<title>Goodmoves - {{corresponding categories_slug categories ../request.params.category_slug}}</title>
+<title>Goodmoves – Search results</title>
 {{/with ~}}
 {{else}}
-<title>Goodmoves</title>
+<title>Goodmoves – Search results</title>
 {{/if ~}}
 <description>{{{description}}}</description>
-<link>https://goodmoves.com{{{replace (replace request.params.uri.path "&_view=rss" "") "?_view=rss" ""}}}</link>
+<link>https://test.goodmoves.com{{{replace (replace request.params.uri.path "&rss" "") "?rss" ""}}}</link>
