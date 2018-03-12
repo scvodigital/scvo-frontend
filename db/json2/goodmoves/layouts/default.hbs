@@ -61,7 +61,7 @@
     </script>
     <link type="text/css" rel="stylesheet" href="/assets/css/material-components-web.min.css">
     <link type="text/css" rel="stylesheet" href="/assets/fonts/fontawesome/css/fontawesome-all.min.css">
-    <link type="text/css" rel="stylesheet" href="/assets/css/scvo-styles.css">
+    <link type="text/css" rel="stylesheet" href="/assets/css/goodmoves-styles.css">
     <script>
     if(location.host === 'scvo.local'){
         document.write('<script src="http://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')
@@ -76,31 +76,17 @@
                     <div class="container-fluid">
                         <section class="mdc-toolbar__section mdc-toolbar__section--align-start">
                             <span class="mdc-toolbar__title catalog-title">
-                                <a href="/" class="brand-logo" title="Scottish Council for Voluntary Organisations">
-                                    <img src="/assets/images/scvo-logo.png" />
+                                <a href="/" class="brand-logo" title="Goodmoves">
+                                    <img src="/assets/images/goodmoves-logo.png" />
                                 </a>
                             </span>
                         </section>
                         <section class="mdc-toolbar__section upper-menu mdc-toolbar__section--align-end">
                             <nav id="upper-tab-bar" class="mdc-tab-bar" [menu]="'main-upper'" [menulinkselector]="''" [menulabelselector]="'span.mdc-tab--label'" [menuactiveclass]="'mdc-tab--active'">
                                 {{#each context.menus.main-upper ~}}
-                                    <!--
-                                        Path Name: {{../request.url.pathname}}
-                                        Route Pattern: {{route}}
-                                    -->
                                 <a class="mdc-tab{{#if (regexMatch ../request.url.pathname route "gi")}} mdc-tab--active{{/if}}" href="{{stripTrailingSlash path}}"><span class="mdc-tab--label">{{{label}}}</span></a>
                                 {{/each ~}}
                             </nav>
-                        </section>
-                        <section class="mdc-toolbar__section mdc-toolbar__section--align-end mdc-toolbar__section--shrink-to-fit toolbar-search">
-                            <form [searchroute]="'main_search'" class="mdc-form-field mdc-form-field--align-end search_form" autocomplete="off" action="/search" method="GET">
-                                <div class="mdc-textfield">
-                                    <input type="text" class="mdc-textfield__input white-text mdc-text-field searchRoute" placeholder="Search" id="q" name="q" aria-label="Search keywords" value="{{request.params.query.q}}">
-                                </div>
-                                <button type="submit" class="mdc-toolbar__icon mdc-toolbar__search" aria-label="Search" alt="Search">
-                                    <span class="far fa-search" aria-hidden="true"></span>
-                                </button>
-                            </form>
                         </section>
                         <section class="mdc-toolbar__section mdc-toolbar__section--align-end mdc-toolbar__section--shrink-to-fit">
                             <button id="menu_button" class="menu mdc-toolbar__icon mdc-toolbar__icon--menu" onclick="window.drawer.open = true">
@@ -114,10 +100,6 @@
                         <section class="mdc-toolbar__section mdc-toolbar__section--align-start toolbar-menu">
                             <nav id="main-tab-bar" class="mdc-tab-bar" [menu]="'main'" [menulinkselector]="''" [menulabelselector]="'span.mdc-tab--label'" [menuactiveclass]="'mdc-tab--active'">
                                 {{#each context.menus.main ~}}
-                                    <!--
-                                        Path Name: {{../request.url.pathname}}
-                                        Route Pattern: {{route}}
-                                    -->
                                 <a class="mdc-tab{{#if (regexMatch ../request.url.pathname route "gi")}} mdc-tab--active{{/if}}" href="{{stripTrailingSlash path}}"><span class="mdc-tab--label">{{{label}}}</span></a>
                                 {{/each ~}}
                             </nav>

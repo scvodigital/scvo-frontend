@@ -8,9 +8,9 @@ You'll need Typescript and Firebase Tools installed globally.
 
 Run `grunt upgrade-router` to make sure you have the latest router installed.
 
-Run `grunt serve` for a dev server. Navigate to `http://localhost:9000/`.
+Run `npm run dev` for a dev server. Navigate to `http://localhost:9000/`.
 
-Run `grunt` to rebuild local templates and SCSS.
+Run `npm run build` to rebuild local templates and SCSS.
 
 ## Deploy
 
