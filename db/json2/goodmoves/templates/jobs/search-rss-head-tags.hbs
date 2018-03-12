@@ -1,0 +1,9 @@
+{{#if data.primaryResponse.hits.hits.[0] ~}}
+{{#with data.primaryResponse.hits.hits.[0]._source ~}}
+<title>Goodmoves - {{corresponding categories_slug categories ../request.params.category_slug}}</title>
+{{/with ~}}
+{{else}}
+<title>Goodmoves</title>
+{{/if ~}}
+<description>{{{description}}}</description>
+<link>https://goodmoves.com{{{replace (replace request.params.uri.path "&_view=rss" "") "?_view=rss" ""}}}</link>

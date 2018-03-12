@@ -127,9 +127,63 @@
         "destination": {
             "destinationType": "handlebars",
             "config": {
+                "rss": {
+                    "head": "{$./templates/jobs/search-rss-head-tags.hbs}",
+                    "body": "{$./templates/jobs/search-rss.hbs}"
+                },
                 "default": {
                     "head": "{$./templates/jobs/search-head-tags.hbs}",
                     "body": "{$./templates/jobs/search.hbs}",
+                    "foot": ""
+                }
+            }
+        }
+    },
+    "{:./goodmoves-redirects.json}": "",
+    "_default": {
+        "pattern": "/*path",
+        "tasks": [
+            {
+                "name": "primaryResponse",
+                "taskType": "elasticsearch",
+                "config": {
+                    "connectionStringTemplate": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
+                    "elasticsearchConfig": {
+                        "apiVersion": "5.6"
+                    },
+                    "queryTemplates": {
+                        "index": "web-content-production",
+                        "type": "goodmoves-page",
+                        "template": "{$./queries/pages/page.json}",
+                        "noResultsRoute": "four_oh_four"
+                    }
+                }
+            },
+            {
+                "name": "supplimentaryResponses",
+                "taskType": "elasticsearch",
+                "config": {
+                    "connectionStringTemplate": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
+                    "elasticsearchConfig": {
+                        "apiVersion": "5.6"
+                    },
+                    "queryTemplates": [
+                        {
+                            "name": "not_found",
+                            "index": "web-content-production",
+                            "type": "goodmoves-page,goodmoves-job",
+                            "template": "{$./queries/pages/not-found.json}"
+                        }
+                    ]
+                }
+            }
+        ],
+        "destination": {
+            "destinationType": "handlebars",
+            "config": {
+                "default": {
+                    "head": "{$./templates/pages/page-head-tags.hbs}",
+                    "body": "{$./templates/pages/page.hbs}",
                     "foot": ""
                 }
             }
