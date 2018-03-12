@@ -84,6 +84,10 @@
                         <section class="mdc-toolbar__section upper-menu mdc-toolbar__section--align-end">
                             <nav id="upper-tab-bar" class="mdc-tab-bar" [menu]="'main-upper'" [menulinkselector]="''" [menulabelselector]="'span.mdc-tab--label'" [menuactiveclass]="'mdc-tab--active'">
                                 {{#each context.menus.main-upper ~}}
+                                    <!--
+                                        Path Name: {{../request.url.pathname}}
+                                        Route Pattern: {{route}}
+                                    -->
                                 <a class="mdc-tab{{#if (regexMatch ../request.url.pathname route "gi")}} mdc-tab--active{{/if}}" href="{{stripTrailingSlash path}}"><span class="mdc-tab--label">{{{label}}}</span></a>
                                 {{/each ~}}
                             </nav>
@@ -110,6 +114,10 @@
                         <section class="mdc-toolbar__section mdc-toolbar__section--align-start toolbar-menu">
                             <nav id="main-tab-bar" class="mdc-tab-bar" [menu]="'main'" [menulinkselector]="''" [menulabelselector]="'span.mdc-tab--label'" [menuactiveclass]="'mdc-tab--active'">
                                 {{#each context.menus.main ~}}
+                                    <!--
+                                        Path Name: {{../request.url.pathname}}
+                                        Route Pattern: {{route}}
+                                    -->
                                 <a class="mdc-tab{{#if (regexMatch ../request.url.pathname route "gi")}} mdc-tab--active{{/if}}" href="{{stripTrailingSlash path}}"><span class="mdc-tab--label">{{{label}}}</span></a>
                                 {{/each ~}}
                             </nav>

@@ -17,7 +17,9 @@
     "build": "npm run cleanup; tsc; npm run json2; npm run copy; npm run sass",
     "start": "node dist/index.js",
     "dev": "npm run build; devmode=true node dist/index.js",
-    "dev-router": "npm run router; npm run dev"
+    "dev-router": "npm run router; npm run dev",
+    "deploy-db": "npm run build; firebase database:set -y /app-engine ./db/db.json",
+    "deploy-app": "npm run build; gcloud beta app deploy"
   },
   "author": "Matthew Wilkes (https://scvo.org.uk)",
   "license": "GPL-3.0",
