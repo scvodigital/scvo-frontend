@@ -25,7 +25,7 @@
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-8-desktop mdc-layout-grid__cell--span-5-tablet mdc-layout-grid__cell--span-4-phone content post-content">
                     {{#compare data.primaryResponse.hits.total ">" 0 ~}}
                     {{#compare data.primaryResponse.hits.total ">" 10 ~}}
-                    {{> search_info}}
+                    {{> search_info paging=data.primaryResponse.pagination}}
                     {{/compare ~}}
                     <ul class="supplimentary-list">
                         {{#each data.primaryResponse.hits.hits ~}}
