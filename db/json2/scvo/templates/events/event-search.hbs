@@ -23,7 +23,6 @@
             <li>Events</li>
         </ul>
 
-        {{#compare data.primaryResponse.hits.total ">" 0}}
         <h2>Find training courses &amp; events</h2>
         <div class="mdc-layout-grid">
             <div class="mdc-layout-grid__inner">
@@ -92,11 +91,5 @@
                 </div>
             </div>
         </div>
-        {{else}}
-        <h2>No results</h2>
-        <p>
-            There are no upcoming events{{#if request.params.query.q ~}} for your search query{{/if ~}}. Please check back soon.
-        </p>
-        {{/compare}}
     </div>
 </div>
