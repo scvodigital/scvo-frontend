@@ -1,0 +1,33 @@
+<div class="page">
+    {{> header_splash}}
+    <div class="container-fluid">
+        {{#> handle_404 ~}}
+        {{> breadcrumbs}}
+        <div class="mdc-layout-grid">
+            <div class="mdc-layout-grid__inner">
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-9-desktop mdc-layout-grid__cell--span-5-tablet mdc-layout-grid__cell--span-4-phone content page-content">
+                    {{{data.primaryResponse.hits.hits.[0]._source.rendered.scvo_full}}}
+                </div>
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-3-tablet mdc-layout-grid__cell--span-4-phone sidebar page-sidebar">
+                    {{> menu_cjs_employers}}
+                    {{> sidebar_cjs}}
+                </div>
+                {{#compare data.supplimentaryResponses.related_posts.hits.total ">" 0 ~}}
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 related page-related">
+                    <h3 class="blogs">Related posts</h3>
+                    <div class="mdc-layout-grid">
+                        <div class="mdc-layout-grid__inner">
+                            {{#each data.supplimentaryResponses.related_posts.hits.hits ~}}
+                            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4">
+                                {{{_source.rendered.scvo_gist}}}
+                            </div>
+                            {{/each ~}}
+                        </div>
+                    </div>
+                </div>
+                {{/compare ~}}
+            </div>
+        </div>
+        {{/handle_404 ~}}
+    </div>
+</div>

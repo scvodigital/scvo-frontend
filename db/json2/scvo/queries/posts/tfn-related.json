@@ -1,0 +1,24 @@
+{
+	"size": 6,
+    "_source": [
+        "rendered.scvo_gist"
+    ],
+	"query": {
+        "bool": {
+            "must": {
+                "match_all": {}
+            },
+            "should": [
+                {
+		            "simple_query_string": {
+		                "query": "{{data.primaryResponse.hits.hits.[0]._source.title}} {{join data.primaryResponse.hits.hits.[0]._source.categories}} {{join data.primaryResponse.hits.hits.[0]._source.post_tags}}",
+                        "default_operator": "or",
+                        "fields": ["text_bag"],
+                        "analyzer": "snowball"
+		            }
+	            }
+            ],
+            "minimum_should_match": 0
+        }
+	}
+}

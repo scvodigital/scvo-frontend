@@ -1,0 +1,32 @@
+{
+    "size": 5,
+    "_source": [
+        "slug",
+        "title",
+        "rendered.scvo_sidebar_mini"
+    ],
+    "query": {
+        {{#if data.primaryResponse.hits.hits.[0]}}
+            "bool": {
+                "must": {
+                    "match_all": {}
+                },
+                "should": [
+                    {
+                        "terms": {
+                            "categories_id": [
+                                {{join data.primaryResponse.hits.hits.[0]._source.categories_id}}
+                            ]
+                        }
+                    }
+                ],
+                "minimum_should_match": 1
+            }
+        {{else}}
+            "match_none": {}
+        {{/if}}
+    },
+    "sort": {
+        "publish_on": "desc"
+    }
+}

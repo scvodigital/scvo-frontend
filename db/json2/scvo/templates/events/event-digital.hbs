@@ -1,0 +1,47 @@
+<div class="event">
+    {{> header_splash_event}}
+    <div class="container-fluid page-content">
+        {{#> handle_404 ~}}
+        {{#with data.primaryResponse.hits.hits.[0]._source ~}}
+        <ul class="breadcrumbs">
+            <li><a href="/">Home</a></li>
+            <li><a href="/digital">Digital</a></li>
+            <li><a href="/digital/events">Events</a></li>
+            <li>{{{title}}}</li>
+        </ul>
+
+        {{{rendered.scvo_full}}}
+
+        <div class="event-content">
+            {{#compare course_type "===" "Training Course" ~}}
+            <p>
+                <strong>Please read our <a href="https://storage.googleapis.com/scvo-cms/wp-content/uploads/2018/01/Policies-procedures-and-TCs.docx">policies, procedures and terms &amp; conditions document</a> before making your booking.</strong>
+            </p>
+            {{else}}
+            <p>
+                <strong>Please read our <a href="https://storage.googleapis.com/scvo-cms/wp-content/uploads/2018/01/Policies-procedures-and-TCs.docx">policies, procedures and terms &amp; conditions document</a> before making your booking.</strong>
+            </p>
+            {{/compare ~}}
+        </div>
+
+        {{{rendered.scvo_speakers}}}
+
+        {{/with ~}}
+
+        {{#compare data.supplimentaryResponses.related_events.hits.total ">" 0 ~}}
+        <h2 class="author">Similar events</h2>
+        <div class="mdc-layout-grid related">
+            <div class="mdc-layout-grid__inner">
+                {{#each data.supplimentaryResponses.related_events.hits.hits ~}}
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
+                    <ul class="supplimentary-list">
+                        {{{_source.rendered.scvo_list}}}
+                    </ul>
+                </div>
+                {{/each ~}}
+            </div>
+        </div>
+        {{/compare ~}}
+        {{/handle_404 ~}}
+    </div>
+</div>

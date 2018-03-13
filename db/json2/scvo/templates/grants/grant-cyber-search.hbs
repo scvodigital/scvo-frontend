@@ -1,0 +1,52 @@
+<div class="search grant-search grant-cyber-search">
+    <div class="splash-image splash-image-{{data.primaryResponse.hits.hits.[0]._type}}" style="{{> header_splash_image}}">
+        <div class="splash-overlay{{#if data.primaryResponse.hits.hits.[0]._source.hide_overlay}} splash-overlay-hidden{{/if}}">
+            <div class="container-fluid">
+                <div class="mdc-layout-grid">
+                    {{#if data.primaryResponse.hits.hits.[0]._source.header_text ~}}
+                    <img src="{{data.primaryResponse.hits.hits.[0]._source.header_text}}" alt="{{data.primaryResponse.hits.hits.[0]._source.title}}" class="header-text" />
+                    {{else}}
+                    <h1 class="header-text">
+                        <span class="header-text-banner">
+                            {{{data.supplimentaryResponses.page.hits.hits.[0]._source.title}}}
+                        </span>
+                    </h1>
+                    {{/if ~}}
+                </div>
+                {{> header_caption}}
+            </div>
+        </div>
+    </div>
+    <div class="container-fluid">
+        <ul class="breadcrumbs">
+            <li><a href="/">Home</a></li>
+            <li><a href="/digital">Digital</a></li>
+            <li><a href="/digital/evolution">Evolution</a></li>
+            <li><a href="/digital/evolution/cyber-resilience">Cyber Resilience and Cyber Essentials Grants</a></li>
+            <li>{{{data.supplimentaryResponses.page.hits.hits.[0]._source.title}}}</li>
+        </ul>
+        <div class="mdc-layout-grid">
+            <div class="mdc-layout-grid__inner">
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 content grant-content">
+                    {{{data.supplimentaryResponses.page.hits.hits.[0]._source.rendered.scvo_full}}}
+
+                    <hr />
+
+                    <!-- {{> search_info paging=data.primaryResponse.pagination}} -->
+
+                    <div class="mdc-layout-grid equal-height v-margin">
+                        <div class="mdc-layout-grid__inner">
+                            {{#each data.primaryResponse.hits.hits ~}}
+                            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4">
+                                {{{_source.rendered.scvo_card}}}
+                            </div>
+                            {{/each ~}}
+                        </div>
+                    </div>
+
+                    {{> pagination paging=data.primaryResponse.pagination}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

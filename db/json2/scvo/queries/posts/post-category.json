@@ -1,0 +1,33 @@
+{
+	"size": 10,
+    "from": {{multiply (subtract (default request.params.query.page 1) 1) 10}},
+    "_source": [
+        "categories",
+        "categories_id",
+        "categories_slug",
+        "rendered.scvo_list",
+        "rendered.rss"
+    ],
+	"query": {
+        "bool": {
+            "must": [
+                {
+                    "term": {
+                        "is_press_release": false
+                    }
+                }
+            ],
+            "should": [{
+                "terms": {
+                    "categories_slug": [
+                        "{{request.params.category_slug}}"
+                    ]
+                }
+            }],
+            "minimum_should_match": 1
+        }
+	},
+	"sort": {
+		"publish_on": "desc"
+	}
+}

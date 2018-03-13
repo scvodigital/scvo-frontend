@@ -1,0 +1,78 @@
+<div class="page">
+    {{> header_splash}}
+    <div class="container-fluid">
+        {{#> handle_404 ~}}
+        {{> breadcrumbs}}
+    </div>
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <div class="cta-content callout-image benefit swiper-slide">
+                <div class="container-fluid">
+                    <div class="caption">
+                        <img src="https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/cjs-logo.png" alt="Community Jobs Scotland" />
+                        <div class="caption-inner">
+                            <p>
+                                Over 8,000 young people employed
+                            </p>
+                            <p>
+                                Over 600 partner organisations
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- <div class="cta-content callout-image jobs swiper-slide">
+                <div class="container-fluid">
+                    <div class="caption">
+                        <p>
+                            A diverse range of jobs offered
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="cta-content callout-image benefit swiper-slide">
+                <div class="container-fluid">
+                    <div class="caption">
+                        <p>
+                            All CJS jobs deliver community benefit
+                        </p>
+                        <p>
+                            £200 towards additional training is available for each CJS employee
+                        </p>
+                    </div>
+                </div>
+            </div> -->
+        </div>
+        <!-- <div class="swiper-pagination"></div>
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div> -->
+    </div>
+    <div class="container-fluid">
+        <div class="mdc-layout-grid">
+            <div class="mdc-layout-grid__inner">
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 content page-content">
+                    {{{data.primaryResponse.hits.hits.[0]._source.rendered.scvo_full}}}
+                </div>
+                {{#compare data.supplimentaryResponses.related_posts.hits.total ">" 0 ~}}
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 related page-related">
+                    <h3 class="blogs">Related posts</h3>
+                    <div class="mdc-layout-grid">
+                        <div class="mdc-layout-grid__inner">
+                            {{#each data.supplimentaryResponses.related_posts.hits.hits ~}}
+                            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet  mdc-layout-grid__cell--span-4-phone">
+                                {{{_source.rendered.scvo_gist}}}
+                            </div>
+                            {{/each ~}}
+                        </div>
+                    </div>
+                </div>
+                {{/compare ~}}
+            </div>
+        </div>
+        {{/handle_404 ~}}
+    </div>
+</div>
+
+{{> footer_services}}
+
+<!-- <script src="/assets/js/scvo/cjs-landing.js"></script> -->
