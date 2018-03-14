@@ -4,23 +4,17 @@
 $unit: 1rem;
 $nav-height: 38px;
 
-// :root {
-//     --mdc-layout-grid-gutter-desktop: $unit;
-//     --mdc-layout-grid-gutter-tablet: $unit;
-//     --mdc-layout-grid-gutter-phone: $unit;
-// }
-
 $colours: (
-default: (
-primary: #58a934,
-primary-overlay-start: rgba(88,169,52,0.89),
-primary-overlay-end: rgba(88,169,52,0.91),
-primary-light: #58a934,
-primary-dark: #58a934,
-secondary: #FF8F00,
-secondary-light: #FFA000,
-secondary-dark: #FF6F00
-)
+    default: (
+        primary: #58a934,
+        primary-overlay-start: rgba(88,169,52,0.89),
+        primary-overlay-end: rgba(88,169,52,0.91),
+        primary-light: #58a934,
+        primary-dark: #58a934,
+        secondary: #FF8F00,
+        secondary-light: #FFA000,
+        secondary-dark: #FF6F00
+    )
 );
 
 @mixin theme-colours($themeName: 'default') {
@@ -262,49 +256,6 @@ figure {
     background-position: center center;
     height: auto;
 }
-.community-jobs-scotland {
-    .grid-info {
-        .social {
-            text-align: center;
-        }
-    }
-    .callout-image {
-        min-height: 32vh;
-        .container-fluid {
-            min-height: 32vh;
-            padding: 0;
-            display: flex;
-            align-items: baseline;
-            justify-content: flex-end;
-            .caption {
-                text-align: right;
-                color: #fff;
-                font-weight: 600;
-                font-size: 1.75rem;
-                align-self: flex-end;
-                margin: 0;
-                max-width: 65%;
-                img {
-                    width: 200px;
-                    height: auto;
-                    padding: $unit $unit/2 $unit/2;
-                }
-                .caption-inner {
-                    padding: $unit $unit*2;
-                }
-            }
-        }
-    }
-    .swiper-container {
-        width: 100%;
-        height: 100%;
-        margin-left: auto;
-        margin-right: auto;
-        .swiper-pagination-bullet {
-            opacity: 0.9;
-        }
-    }
-}
 
 .search-page {
     .page-content {
@@ -358,8 +309,6 @@ section.search {
         }
     }
 }
-.projects .search_form .search-button-large,
-.jobs-landing .search_form .search-button-large,
 .mdc-card.search .search_form .search-button-large,
 .mdc-card-search .search_form .search-button-large {
     padding: 0.3rem;
@@ -369,29 +318,6 @@ section.search {
 }
 .grant-search .mdc-textfield {
     position: relative;
-}
-.jobs-landing {
-    .page-content {
-        padding: 0;
-    }
-    .mdc-card.goodmoves-brand,
-    .mdc-card.cjs-brand {
-        .mdc-card__media {
-            padding: $unit;
-            a {
-                height: 100%;
-                width: 100%;
-                display: block;
-                position: relative;
-            }
-            a:hover {
-                text-decoration: none;
-            }
-        }
-        h3 {
-            margin: 0 0 $unit;
-        }
-    }
 }
 
 .home {
@@ -542,17 +468,7 @@ section.search {
     }
 }
 
-.cjs-search-list {
-    h2 {
-        margin-top: $unit/4;
-    }
-    .mdc-layout-grid__cell .list {
-        column-count: 2;
-    }
-}
-
-.home,
-.policy-research {
+.home {
     .latest-content {
         padding: $unit*2 0;
         .mdc-layout-grid__cell--span-10-desktop {
@@ -568,36 +484,6 @@ section.search {
             }
         }
     }
-}
-.policy-research {
-    .latest-content {
-        padding: 0;
-    }
-    .policy-stats {
-        padding: $unit*1.5 0;
-        h2 {
-            margin-top: 0;
-            .mdc-typography--caption {
-                font-weight: 600;
-                font-size: 1rem;
-                margin-left: 0.25rem;
-                letter-spacing: -0.02rem;
-            }
-        }
-        p {
-            margin: $unit 0 0;
-        }
-        a {
-            color: white;
-            text-decoration: underline;
-        }
-        .mdc-layout-grid__cell {
-            padding: $unit*1.5 0 $unit/2;
-            text-align: center;
-        }
-    }
-}
-.home {
     .latest-content {
         h2 a,
         .scvo-cms-post,
@@ -613,14 +499,9 @@ section.search {
         }
     }
 }
+
 .gist {
     padding-top: $unit;
-    // .mdc-layout-grid__cell--span-3-desktop {
-    //     grid-column-end: span 2;
-    // }
-    // .mdc-layout-grid__cell--span-9-desktop {
-    //     grid-column-end: span 10;
-    // }
     .mdc-card__subtitle {
         margin-top: $unit/4;
     }
@@ -652,10 +533,8 @@ section.search {
         line-height: 1.8;
     }
 }
-.policy-research .latest-content .gist,
+
 .home .latest-content .gist,
-.digital .latest_content .gist,
-.jobs-landing .gist,
 .page-related .gist,
 .post-related .gist {
     box-shadow: none;
@@ -665,17 +544,11 @@ section.search {
         font-weight: 400;
     }
 }
-// .digital .gist {
-//     .mdc-layout-grid__cell--span-3-desktop {
-//         grid-column-end: span 3;
-//     }
-//     .mdc-layout-grid__cell--span-9-desktop {
-//         grid-column-end: span 9;
-//     }
-// }
+
 .post-related {
     border-top: 1px solid rgba(0,0,0,.2);
 }
+
 .page-related,
 .post-related {
     margin: $unit*2 0;
@@ -687,24 +560,6 @@ section.search {
     margin-top: 0;
     h3 {
         margin-top: 0;
-    }
-}
-.jobs-landing {
-    .page-content {
-        .mdc-layout-grid__inner {
-            margin: $unit/2 0;
-        }
-        .gist .mdc-layout-grid__inner {
-            margin: 0;
-        }
-        .search {
-            ul {
-                list-style-type: none;
-                li {
-                    margin: $unit/2 0;
-                }
-            }
-        }
     }
 }
 
@@ -750,9 +605,6 @@ section.search {
 .mdc-form-field > label {
     line-height: 38px;
 }
-// .mdc-select {
-//     background-image: none;
-// }
 .mdc-select {
     box-sizing: border-box;
     width: 100%;
@@ -1154,48 +1006,6 @@ section.search {
         padding-bottom: $unit;
     }
 }
-.digital .callout-image {
-    position: relative;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center center;
-    color: white;
-    padding: $unit 0 $unit*1.5;
-    margin: $unit 0;
-    li {
-        margin-top: $unit/2;
-    }
-    .mdc-card__actions {
-        display: none;
-    }
-    .mdc-card__supporting-text {
-        padding-bottom: $unit;
-    }
-    a,
-    a:hover,
-    li a,
-    .post-info,
-    .mdc-card__actions a,
-    .mdc-card__supporting-text,
-    .mdc-card__supporting-text a,
-    .mdc-card__title {
-        color: white;
-    }
-    .mdc-button {
-        border-width: $unit/8;
-        border-style: solid;
-        background: transparent;
-        color: white;
-    }
-}
-.digital .basic-digital-skills.callout {
-    background-color: #1976D2;
-    color:#fff;
-    h2,
-    h3 {
-        margin: 0;
-    }
-}
 .splash-image .splash-overlay .container-fluid {
     overflow: hidden;
     position: relative;
@@ -1278,16 +1088,6 @@ section.search {
         }
     }
 }
-.splash-image-scvo-grant-charter h1.header-text,
-.splash-image-scvo-grant-ccrf h1.header-text,
-.splash-image-scvo-grant-cyber h1.header-text,
-.splash-image-scvo-event h1.header-text,
-.splash-image-scvo-cms-post h1.header-text,
-.splash-image-scvo-document-general h1.header-text,
-.splash-image-scvo-document-evidence h1.header-text {
-    font-size: 2rem;
-    line-height: 2.2rem;
-}
 .home {
     .splash-image.hello .splash-overlay .container-fluid {
         min-height: 40vh;
@@ -1306,333 +1106,17 @@ section.search {
         }
     }
 }
-.credit-union .splash-image .splash-overlay .container-fluid {
-    min-height: $unit*9;
-    .mdc-layout-grid {
-        margin: $unit*2 0;
-    }
-    img.header-text {
-        max-height: $unit*6;
-    }
-}
-body.scottish-charity-awards,
-body.the-gathering {
-    .container-fluid,
-    .page-content {
-        padding-bottom: 0;
-    }
-    .full {
-        margin-left: auto;
-        margin-right: auto;
-        .mdc-button {
-            width: 100%;
-        }
-        .gallery-caption {
-            font-weight: 600;
-            margin-bottom: $unit;
-        }
-    }
-    .splash-image .splash-overlay .container-fluid {
-        min-height: 30vh;
-        .mdc-layout-grid {
-            line-height: 0;
-            margin: 0;
-            width: 100%;
-            text-align: center;
-            img.header-text {
-                max-height: 30vh;
-            }
-        }
-    }
-    .callout-image {
-        min-height: 40vh;
-        .container-fluid {
-            min-height: 40vh;
-        }
-    }
-    .swiper-container {
-        margin-top: $unit;
-    }
-}
-body.the-gathering .full {
-    width: 60%;
-}
-body.datawareness,
-body.i-love-charity,
-body.right-approach,
-body.building-healthier-happier-communities {
-    .splash-image .splash-overlay .container-fluid {
-        min-height: 125px;
-        padding-top: $unit*2;
-        img.header-text {
-            max-height: 100%;
-        }
-    }
-    .splash-image .container-fluid .mdc-layout-grid {
-        margin: 0;
-        width: 100% !important;
-        img {
-            margin: 0 auto;
-            display: block;
-        }
-    }
-}
-body.i-love-charity {
-    .full {
-        margin-bottom: 0;
-    }
-    .page-content {
-        padding-bottom: 0;
-    }
-    .cta-content.case-studies {
-        margin-top: $unit;
-    }
-    .splash-image .splash-overlay .container-fluid {
-        min-height: 125px;
-        padding-top: 0;
-    }
-    h3 {
-        margin: 0 0 $unit;
-    }
-    .mdc-card__primary {
-        h2 {
-            margin: 0;
-        }
-    }
-    .mdc-card__media,
-    .mdc-card__media a {
-        height: 250px;
-    }
-    .mdc-card__media {
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-position: center center;
-        margin-bottom: $unit;
-    }
-    .mdc-card.contact-teas .mdc-card__media {
-        background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/contact-teas.jpg');
-    }
-    .mdc-card.the-yard .mdc-card__media {
-        background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/celine-sinclair-the-yard.jpg');
-    }
-    .mdc-card.starter-packs-glasgow .mdc-card__media {
-        background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/starter-packs.jpg');
-    }
-    .mdc-card.friends-of-oban-community-playpark .mdc-card__media {
-        background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/oban.jpg');
-    }
-}
-body.scottish-charity-awards {
-    .mdc-card {
-        .mdc-card__primary .mdc-card__title {
-            color: white;
-            padding: 0;
-        }
-        .mdc-card__supporting-text {
-            margin-top: $unit;
-        }
-    }
-    .sponsor {
-        width: 100%;
-        height: 80px;
-        display: block;
-        background-size: cover;
-        background-position: center center;
-    }
-    .mdc-card.celebrating-communities .mdc-card__primary {
-        background-color: #729957;
-    }
-    .mdc-card.charity-champion .mdc-card__primary {
-        background-color: #a9889f;
-    }
-    .mdc-card.charity-of-the-year .mdc-card__primary {
-        background-color: #008eca;
-    }
-    .mdc-card.cracking-campaign .mdc-card__primary {
-        background-color: #f18816;
-    }
-    .mdc-card.demonstrating-digital .mdc-card__primary {
-        background-color: #e30613;
-    }
-    .mdc-card.leading-light .mdc-card__primary {
-        background-color: #d7bb00;
-    }
-    .mdc-card.pioneering-project .mdc-card__primary {
-        background-color: #578da3;
-    }
-    .mdc-card.terrific-trustee .mdc-card__primary {
-        background-color: #b0be48;
-    }
-}
 // .mdc-temporary-drawer,
 .hidden {
     display: none !important;
 }
-.about.staff-team .post-info-author,
-.about.work-with-us .page-info,
-.digital.charter-fund.projects .page-info,
-.digital.cyber-resilience.projects .page-info,
-.community-jobs-scotland .footer-image.join-our-hub,
-.projects-campaigns.terrific-trustees.search .page-info,
 .post-sidebar .page-info,
 .page-sidebar .page-info,
-body.the-gathering .page-info,
-body.i-love-charity .page-info,
-.grant-content .page-info,
-.scvo-cms-page-20040 .page-info,
-.scvo-cms-page-20027 .page-info,
-.scvo-cms-page-20043 .page-info,
-.scvo-cms-page-20042 .page-info,
-.scvo-cms-page-20114 .page-info,
-.scvo-cms-page-20003 .page-info,
-.scvo-cms-page-21421 .page-info,
-.scvo-cms-page-20090 .page-info,
-.scvo-cms-page-20035 .page-info,
-.scvo-cms-page-20034 .page-info,
-.scvo-cms-page-20005 .page-info,
-.blogs .page-sidebar .page-info,
-.policy-research.briefings-consultation-responses .mdc-card__actions,
-.policy-research.research .mdc-card__actions,
 .post.author .post-info-author,
-.digital.about .page-info,
-.sidebar .list .post-info-author,
-.about.staff-team .splash-image .header-text .mdc-typography--caption .organisation,
-.press-media .mdc-card__actions,
-.press-media .sidebar h3.blogs {
+.sidebar .list .post-info-author {
     display: none;
 }
 
-.digital {
-    .callout {
-        padding: $unit 0 $unit;
-        h2 {
-            margin: $unit*1.2 0;
-        }
-        .mdc-card {
-            box-shadow: none;
-            -webkit-box-shadow: none;
-            h3 {
-                margin: 0;
-            }
-        }
-    }
-    .page-cta {
-        margin-bottom: $unit/2;
-    }
-    .heading h1.mdc-card__title--large {
-        font-size: 2.2rem;
-        line-height: 2.7rem;
-    }
-    .latest_content {
-        .mdc-layout-grid__inner {
-            grid-gap: 0;
-        }
-        // .mdc-layout-grid__cell--span-2-desktop {
-        //     grid-column-end: span 3;
-        // }
-        // .mdc-layout-grid__cell--span-10-desktop {
-        //     grid-column-end: span 9;
-        // }
-        .gist,
-        .digital-blogs {
-            padding-right: $unit/2;
-        }
-        .digital-events {
-            padding-left: $unit/2;
-        }
-    }
-    .gist.scvo-event {
-        margin-bottom: 0;
-    }
-    .logos {
-        padding-bottom: $unit*2;
-        .mdc-layout-grid__cell {
-            text-align: center;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        h3 {
-            font-weight: 100;
-            font-family: "Open Sans";
-            margin-bottom: $unit*2;
-            text-align: center;
-        }
-        img {
-            margin: 0;
-            width: 50%;
-        }
-    }
-
-    .cta-content.callout {
-        padding: $unit 0 $unit*3.25;
-        h2, h3, a, .fa, .fal, .fab, .fas, .far {
-            color: white;
-        }
-        h2 {
-            font-size: 1.8rem;
-        }
-        .mdc-layout-grid__cell {
-            text-align: center;
-            h2 {
-                text-align: left;
-            }
-            h3 {
-                margin: 0;
-                .fal {
-                    border: $unit/8 solid white;
-                    border-radius: 50%;
-                    padding: $unit*1.75;
-                    box-shadow: 1px 2px 5rem rgba(255,255,255,0.15);
-                }
-                .fa-fw {
-                    height: 1.25em;
-                    line-height: 1.25em;
-                }
-                a:hover {
-                    text-decoration: none;
-                    .underline {
-                        text-decoration: underline;
-                    }
-                }
-                a .underline {
-                    display: block;
-                    padding-top: $unit;
-                }
-            }
-        }
-    }
-}
-.digital.about {
-    .scvo-staff-photo-wee {
-        height: 64px;
-        width: 64px;
-    }
-}
-
-.scvo-event {
-    margin-bottom: $unit;
-    h3 {
-        margin-top: 0;
-    }
-    .mdc-layout-grid__inner {
-        margin-bottom: $unit/2;
-    }
-    // .book-now {
-    //     .mdc-button {
-    //         min-width: 60%;
-    //         max-width: 100%;
-    //         margin: 1rem auto 0;
-    //         display: block;
-    //     }
-    // }
-}
-.policy-research.briefings-consultation-responses .mdc-card__supporting-text,
-.policy-research.research .mdc-card__supporting-text,
-.press-media .mdc-card__supporting-text {
-    padding-bottom: $unit;
-}
-.press-media,
 .blogs {
     .search-info {
         margin-top: $unit/2;
@@ -1700,39 +1184,6 @@ h1.mdc-typography--title {
         padding-top: 0;
     }
 }
-.search-result.scvo-cms-post .mdc-card__title {
-    padding-bottom: $unit/2;
-}
-.funding-updates {
-    h3 {
-        margin-top: 0;
-    }
-    .page-content {
-        .mdc-layout-grid {
-            margin: $unit 0;
-        }
-    }
-}
-.services .support .mdc-card__primary {
-    height: $unit*4;
-}
-h1.support-sector {
-    margin-top: $unit*3;
-}
-table.membership-fees {
-    border-collapse: collapse;
-    margin-bottom: $unit;
-    min-width: 40%;
-    tr {
-        th,
-        td {
-            border: 1px solid #ccc;
-            padding: $unit/4 $unit/2;
-        }
-    }
-}
-
-
 .grid-info {
     .mdc-card__primary {
         h1 {
@@ -1764,198 +1215,6 @@ table.membership-fees {
         background-position: center center;
         margin-bottom: $unit;
     }
-    .cjs-employers .mdc-card__media {
-        background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/cjs-employers.jpg');
-    }
-    .cjs-employees .mdc-card__media {
-        background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/cjs-employees.jpg');
-    }
-    .cjs-vacancies .mdc-card__media {
-        background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/hiring.jpg');
-    }
-}
-.section-events,
-.section-projects,
-.section-campaigns {
-    .mdc-card__primary {
-        background-color: #AD1457 !important;
-    }
-}
-.section-projects {
-    .project-digital .mdc-card__media {
-        background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/digital.png');
-    }
-    .project-open-government .mdc-card__media {
-        background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/open-government.png');
-    }
-    .project-cjs .mdc-card__media {
-        background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/header-cjs.jpg');
-    }
-}
-.section-campaigns {
-    .i-love-charity .mdc-card__media {
-        background-image: url('https://storage.googleapis.com/scvo-cms/wp-content/uploads/2018/02/i-love-charity-lp-banner.png');
-        background-size: 90%;
-        background-color: white;
-    }
-    .europe-and-the-third-sector .mdc-card__media {
-        background-image: url('https://storage.googleapis.com/scvo-cms/wp-content/uploads/2017/10/europe-and-the-third-sector-bg-1400x400.jpg');
-    }
-    .eu-are-valued .mdc-card__media {
-        background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/eu-are-valued.png');
-    }
-    .building-healthier-happier-communities .mdc-card__media {
-        background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/header-bhhc.jpg');
-        background-size: 90%;
-        background-color: white;
-    }
-    .datawareness .mdc-card__media {
-        background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/header-datawareness.png');
-        background-size: 90%;
-        background-color: white;
-    }
-    .right-approach .mdc-card__media {
-        background-image: url('https://storage.googleapis.com/scvo-cms/wp-content/uploads/2017/06/right-approach-strapline-hires-1024x337.jpg');
-        background-size: 90%;
-        background-color: white;
-    }
-    .welfare-reform .mdc-card__media {
-        background-image: url('https://storage.googleapis.com/scvo-cms/wp-content/uploads/2017/10/welfare-reform-bg-1400x400.jpg');
-    }
-    .ccrf .mdc-card__media {
-        background-image: url("https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/ccrf-card-640x280.jpg");
-    }
-    .terrific-trustees .mdc-card__media {
-        background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/header-trustees.png');
-    }
-}
-.section-events {
-    .mdc-card__media,
-    .mdc-card__media a {
-        height: 230px;
-    }
-    .scottish-charity-awards .mdc-card__media {
-        background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/headers/SCA_Winners_2017.jpg');
-    }
-    .the-gathering .mdc-card__media {
-        background-image: url("https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/headers/Gathering_2018.JPG");
-    }
-}
-.grid-info.cjs-footer {
-    margin: $unit*2 0 0;
-}
-.support {
-    .mdc-card__media,
-    .mdc-card__media a {
-        height: $unit*4;
-    }
-    .mdc-card__media {
-        padding: 0;
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-origin: content-box;
-        margin-bottom: $unit;
-        .mdc-card__title--large {
-            padding: 0;
-        }
-        .hidden {
-            display: none;
-        }
-    }
-    .goodmoves-brand .mdc-card__media,
-    .cjs-brand .mdc-card__media,
-    .goodmoves-brand .mdc-card__media a,
-    .cjs-brand .mdc-card__media a {
-        height: 128px;
-    }
-    .goodmoves-brand .mdc-card__media,
-    .cjs-brand .mdc-card__media {
-        background-size: unset;
-        background-repeat: no-repeat;
-        background-position: left center;
-        padding: 0;
-        margin-bottom: 1rem;
-        background-color: #ccc !important;
-    }
-    .mdc-card__primary {
-        margin-bottom: $unit;
-        // padding: $unit;
-        .mdc-card__title {
-            padding-bottom: 0;
-            color: white;
-            a {
-                display: block;
-                width: 100%;
-                height: 100%;
-                color: white;
-                .hidden {
-                    display: none;
-                }
-            }
-            a:hover {
-                text-decoration: none;
-            }
-            .fa-fw {
-                width: 1.55em;
-                text-align: left;
-                height: auto;
-                line-height: 1em;
-                vertical-align: middle;
-            }
-        }
-    }
-    .cjs {
-        .mdc-card__media,
-        .mdc-card__media a {
-            padding: 0;
-            height: 8rem;
-        }
-        .mdc-card__primary {
-            margin-bottom: 0;
-        }
-    }
-    .mdc-card__supporting-text {
-        padding-top: 0;
-    }
-    .goodmoves .mdc-card__media,
-    .goodmoves-brand .mdc-card__media {
-        background-color: #58a934 !important;
-        background-size: contain;
-        background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/goodmoves.png');
-    }
-    .goodmoves-brand .mdc-card__media {
-        background-size: unset;
-    }
-    .cjs-brand .mdc-card__media {
-        background-color: #f1f1f1 !important;
-        background-size: contain;
-        background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/cjs-logo.png');
-    }
-    .funding-scotland .mdc-card__media {
-        background-color: #8AC645 !important;
-        background-size: contain;
-        background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/funding-scotland.png');
-    }
-    .goodhq .mdc-card__media {
-        background-color: #4033E9 !important;
-        background-size: contain;
-        background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/goodhq.png');
-    }
-    .tfn .mdc-card__media {
-        background-color: #3b9db1 !important;
-        background-size: contain;
-        background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/tfn.png');
-    }
-    .credit-union .mdc-card__media {
-        background-color: #1976D2 !important;
-        background-size: contain;
-        background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/credit-union.png');
-    }
-    .milo .mdc-card__media {
-        background-color: #4475A0 !important;
-        background-size: contain;
-        background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/milo.png');
-    }
 }
 .mdc-card__actions {
     padding: $unit/2 $unit $unit;
@@ -1982,12 +1241,6 @@ table.membership-fees {
 .supplimentary-list .gist {
     .mdc-card__actions {
         padding-bottom: $unit/2 !important;
-    }
-}
-.post-info-categories {
-    margin-left: 1px;
-    ul {
-        padding: 0;
     }
 }
 .photo-wee,
@@ -2027,12 +1280,6 @@ table.membership-fees {
 }
 .mdc-card__supporting-text:last-child {
     padding-bottom: $unit;
-}
-.scvo-cms-post .mdc-card__actions {
-    // padding: $unit/2 $unit;
-    .post-info {
-        padding: 0;
-    }
 }
 
 .search-page {
@@ -2074,25 +1321,6 @@ body.post.author {
     }
 }
 
-.full.scvo-document {
-    margin: 0 0 $unit;
-    .post-info {
-        border: none;
-        padding: 0;
-        margin: 0 0 $unit;
-    }
-    ul {
-        margin: 0;
-        list-style-type: none;
-        padding: 0;
-    }
-}
-.list.scvo-document {
-    .post-info-item {
-        margin-bottom: 0;
-    }
-}
-
 .inline-list {
     display: inline;
     margin: 0;
@@ -2122,28 +1350,6 @@ body.post.author {
         width: 70%;
     }
 }
-.cjs-job-search .inline-dl,
-.cjs-job .inline-dl,
-.staff-team .inline-dl {
-    clear: both;
-    margin: 0;
-    dt, dd {
-        float: left;
-        margin: 0;
-    }
-    dt {
-        clear: both;
-        font-weight: 600;
-        width: 20%;
-    }
-    dd {
-        width: 80%;
-        margin: 0 0 $unit/2;
-        ul {
-            margin: 0 0 0 1.4rem;
-        }
-    }
-}
 .inline-dl.span-2 {
     clear: both;
     dt {
@@ -2153,49 +1359,6 @@ body.post.author {
         width: 60%;
     }
 }
-.full.cjs-job {
-    hr,
-    h2,
-    h3 {
-        clear: left;
-    }
-}
-.list.cjs-job {
-    .mdc-card__title {
-        padding: 0;
-    }
-}
-.events .inline-dl {
-    dt {
-        font-weight: 600;
-        // font-size: 1.15rem;
-    }
-    dd {
-        margin: 0 0 $unit;
-        .mdc-layout-grid__cell strong {
-            // font-size: 1.15rem;
-        }
-        .mdc-layout-grid__inner:last-child {
-            margin-bottom: 0;
-        }
-    }
-}
-// .events .full {
-//     h2 {
-//         margin-top: $unit*2;
-//     }
-// }
-.book-now .mdc-button {
-    margin: 0 auto;
-    margin-left: 30%;
-    // width: 70%;
-    // display: block;
-}
-.booking {
-    font-size: 2rem;
-    font-weight: 600;
-}
-
 .container-content {
     ul {
         padding-left: 0;
@@ -2292,17 +1455,6 @@ body.post.author {
     }
 }
 
-// Hide CU members site
-#credit-union-menu {
-    a:nth-child(2),
-    a:nth-child(4),
-    a:nth-child(5),
-    a:nth-child(12),
-    a:nth-child(13) {
-        display: none;
-    }
-}
-
 .mdc-simple-menu {
     .fa-fw {
         margin-right: $unit/2;
@@ -2372,24 +1524,7 @@ ul.breadcrumbs {
 .spacer {
     margin: 0 0 $unit*1.5;
 }
-.bank-accounts.comparison {
-    .mdc-layout-grid__cell--span-3-desktop {
-        a:after {
-            content: "" !important;
-            margin: 0;
-            display: none;
-        }
-    }
-}
-
-.scvo-staff.list {
-    margin-bottom: $unit/2;
-    .contact {
-        text-align: right;
-    }
-}
-.post-info .post-info-author img,
-.about.staff-team .staff-list .scvo-staff-photo-wee {
+.post-info .post-info-author img {
     width: 1.6rem !important;
     height: 1.6rem !important;
     border-radius: 50%;
@@ -2398,25 +1533,6 @@ ul.breadcrumbs {
     float: left;
     margin-top: -0.15rem;
 }
-.about.staff-team {
-    .read-more {
-        margin-top: $unit;
-    }
-    .scvo-staff-photo-full {
-        margin: 0;
-    }
-}
-.board-of-trustees .full .mdc-layout-grid {
-    .mdc-layout-grid__inner {
-        margin-bottom: $unit/2;
-        img {
-            max-width: 64px;
-            height: auto;
-            border-radius: 50%;
-        }
-    }
-}
-
 .post-info {
     font-size: 0.9rem;
     color: #333;
@@ -2516,14 +1632,6 @@ ul.supplimentary-list {
     margin-top: $unit/2;
     margin-bottom: $unit;
 }
-.digital.events .full {
-    // .scvo-event-digital-brand-charter {
-    //
-    // }
-    // .event-sidebar {
-    //     text-align: right;
-    // }
-}
 
 h1,
 h2,
@@ -2547,7 +1655,6 @@ p {
 p:last-child {
     margin-bottom: 0;
 }
-.page.digital,
 .full {
     img {
         max-width: 100%;
@@ -2678,21 +1785,6 @@ p:last-child {
         top: 0;
     }
 }
-
-// .fa {
-//     display: inline-block;
-//     font: normal normal normal 14px/1 FontAwesome;
-//     font-size: inherit;
-//     text-rendering: auto;
-//     -webkit-font-smoothing: antialiased;
-//     -moz-osx-font-smoothing: grayscale;
-// }
-/* makes the font 33% larger relative to the icon container */
-// .fa-lg {
-//     font-size: 1.33333333rem;
-//     line-height: 0.75rem;
-//     vertical-align: -15%;
-// }
 .fa-2x {
     font-size: 2rem;
 }
@@ -2833,14 +1925,6 @@ footer {
 }
 
 @media screen and (max-width: 1340px) {
-    // .gist {
-    //     .mdc-layout-grid__cell--span-3-desktop {
-    //         grid-column-end: span 3;
-    //     }
-    //     .mdc-layout-grid__cell--span-9-desktop {
-    //         grid-column-end: span 9;
-    //     }
-    // }
     .home {
         .splash-image.hello .container-fluid .mdc-layout-grid h1.header-text {
             font-size: 4rem;
@@ -2948,16 +2032,6 @@ footer {
     body.the-gathering .full {
         width: 100%;
     }
-    .digital {
-        .latest_content {
-            .mdc-layout-grid__cell--span-2-desktop {
-                grid-column-end: span 4;
-            }
-            .mdc-layout-grid__cell--span-10-desktop {
-                grid-column-end: span 8;
-            }
-        }
-    }
     .mdc-toolbar.mdc-toolbar--fixed {
         padding-top: 0;
     }
@@ -3010,18 +2084,6 @@ footer {
             margin: 0 !important;
         }
     }
-    .cjs-search-list .mdc-layout-grid__cell .list {
-        column-count: 1;
-    }
-    .scvo-staff.list {
-        word-wrap: break-word;
-        // margin-bottom: $unit/2;
-        border-bottom: 1px solid rgba(0,0,0,0.2);
-        padding-bottom: $unit/2;
-    }
-    .scvo-staff.list:last-child {
-        border-bottom: none;
-    }
     .breadcrumbs {
         font-size: 85%;
     }
@@ -3045,19 +2107,6 @@ footer {
         .home_search_form {
             margin-right: 0;
         }
-    }
-    .digital {
-        .latest_content {
-            .mdc-layout-grid__cell--span-2-desktop {
-                grid-column-end: span 1;
-            }
-            .mdc-layout-grid__cell--span-10-desktop {
-                grid-column-end: span 7;
-            }
-        }
-    }
-    .community-jobs-scotland .callout-image .container-fluid .caption {
-        max-width: 100%;
     }
     .splash-image {
         .container-fluid {
@@ -3160,10 +2209,6 @@ footer {
                 // margin-bottom: 0;
             }
         }
-    }
-    .jobs-landing .mdc-card.goodmoves-brand .mdc-card__media,
-    .jobs-landing .mdc-card.cjs-brand .mdc-card__media {
-        padding: $unit/4;
     }
     .mdc-card {
         .mdc-card__title--large {
