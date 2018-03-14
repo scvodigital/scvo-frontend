@@ -11,15 +11,15 @@
             <div class="mdc-layout-grid">
                 <div class="mdc-layout-grid__inner">
                     <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-9-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone content event-content">
+                        {{#if booking_url}}
+                        <iframe src="{{booking_url}}?sfid={{Id}}" frameborder="0" width="100%" height="400" style="overflow:hidden"></iframe>
+                        {{else}}
                         {{#compare course_type "===" "Training Course" ~}}
                         <iframe src="https://www.surveygizmo.eu/s3/90055302/Events-Booking-Training-Events?sfid={{Id}}" frameborder="0" width="100%" height="400" style="overflow:hidden"></iframe>
                         {{else}}
-                        {{#compare Id "===" "a1v0N000004Wy00QAC" ~}}
-                        <iframe src="https://www.surveygizmo.eu/s3/90071732/Event-Booking-Conference-GDPR?sfid={{Id}}" frameborder="0" width="100%" height="400" style="overflow:hidden"></iframe>
-                        {{else}}
                         <iframe src="https://www.surveygizmo.eu/s3/90066146/Event-Booking-Events?sfid={{Id}}" frameborder="0" width="100%" height="400" style="overflow:hidden"></iframe>
                         {{/compare ~}}
-                        {{/compare ~}}
+                        {{/if}}
                     </div>
                 </div>
             </div>
