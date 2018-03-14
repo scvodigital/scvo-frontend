@@ -19,7 +19,7 @@
     "dev": "npm run build; devmode=true node dist/index.js",
     "dev-router": "npm run router; npm run dev",
     "deploy-dispatch": "gcloud app deploy dispatch.yaml --quiet",
-    "cleare-cache": "curl -s https://scvo.org.uk/reload-sites",
+    "clear-cache": "curl -s https://scvo.org.uk/reload-sites",
     "deploy-db": "npm run build; firebase database:set -y /app-engine ./db/db.json; npm run clear-cache",
     "deploy-app": "npm run build; npm run deploy-dispatch; gcloud beta app deploy --quiet; npm run deploy-db"
   },
