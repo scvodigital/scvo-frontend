@@ -57,6 +57,8 @@ app.get('/menuUpdate', menuUpdate);
 app.post('/centralAuthLogin', centralAuthLogin);
 app.get('/getFsPdf', getFsPdf);
 app.get('/reload-sites', clearSitesCache);
+app.get('/liveness_check', livenessCheck);
+app.get('/readiness_check', readinessCheck);
 app.get('*', index);
 
 // Express route handlers
@@ -131,6 +133,22 @@ async function menuUpdate(req: express.Request, res: express.Response, next: exp
 
 async function favicon(req: express.Request, res: express.Response, next: express.NextFunction): Promise<any> {
     res.send('Naw');
+    res.end();
+    return next();
+}
+
+async function readinessCheck(req: express.Request, res: express.Response, next: express.NextFunction): Promise<any> {
+    console.log('Readiness Check!');
+    res.send('OK');
+    res.status(200);
+    res.end();
+    return next();
+}
+
+async function livenessCheck(req: express.Request, res: express.Response, next: express.NextFunction): Promise<any> {
+    console.log('Liveness Check!');
+    res.send('OK');
+    res.status(200);
     res.end();
     return next();
 }
