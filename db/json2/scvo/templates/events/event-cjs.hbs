@@ -1,7 +1,6 @@
 <div class="event">
     {{> header_splash_event}}
     <div class="container-fluid page-content">
-        {{#> handle_404}}
         {{#with data.primaryResponse.hits.hits.[0]._source ~}}
         <ul class="breadcrumbs">
             <li><a href="/">Home</a></li>
@@ -10,13 +9,9 @@
             <li><a href="/jobs/community-jobs-scotland/training-opportunities">Training opportunities</a></li>
             <li>{{{title}}}</li>
         </ul>
-
         {{{rendered.scvo_full}}}
-
         {{{rendered.scvo_speakers}}}
-
         {{/with ~}}
-
         <div class="mdc-layout-grid related">
             <div class="mdc-layout-grid__inner">
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
@@ -31,6 +26,5 @@
                 </div>
             </div>
         </div>
-        {{/handle_404 ~}}
     </div>
 </div>

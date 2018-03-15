@@ -1,7 +1,6 @@
 <div class="event">
     {{> header_splash_event}}
     <div class="container-fluid page-content">
-        {{#> handle_404 ~}}
         {{#with data.primaryResponse.hits.hits.[0]._source ~}}
         <ul class="breadcrumbs">
             <li><a href="/">Home</a></li>
@@ -9,13 +8,9 @@
             <li><a href="/digital/events">Events</a></li>
             <li>{{{title}}}</li>
         </ul>
-
         {{{rendered.scvo_full}}}
-
         {{{rendered.scvo_speakers}}}
-
         {{/with ~}}
-
         {{#compare data.supplimentaryResponses.related_events.hits.total ">" 0 ~}}
         <h2 class="author">Similar events</h2>
         <div class="mdc-layout-grid related">
@@ -30,6 +25,5 @@
             </div>
         </div>
         {{/compare ~}}
-        {{/handle_404 ~}}
     </div>
 </div>
