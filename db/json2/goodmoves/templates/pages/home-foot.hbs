@@ -1,0 +1,118 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"></script>
+<script>
+    var terms = {
+        sectors: [
+            {{#each data.terms.types.aggregations.sectors.buckets}}
+                { field: 'sectors', term: {{{stringify key}}} },
+            {{/each}} 
+        ],
+        roles: [
+            {{#each data.terms.types.aggregations.roles.buckets}}
+                { field: 'roles', term: {{{stringify key}}} },
+            {{/each}} 
+        ],
+        statuses: [
+            {{#each data.terms.types.aggregations.statuses.buckets}}
+                { field: 'statuses', term: {{{stringify key}}} },
+            {{/each}} 
+        ]
+    };
+
+    var selectedTerms = {
+        sectors: [],
+        roles: [],
+        statuses: []
+    };
+
+    var sectorsEngine = new Bloodhound({
+        datumTokenizer: Bloodhound.tokenizers.obj.whitespace('term'),
+        queryTokenizer: Bloodhound.tokenizers.whitespace,
+        local: terms.sectors
+    });
+
+    var rolesEngine = new Bloodhound({
+        datumTokenizer: Bloodhound.tokenizers.obj.whitespace('term'),
+        queryTokenizer: Bloodhound.tokenizers.whitespace,
+        local: terms.roles
+    });
+    
+    var statusesEngine = new Bloodhound({
+        datumTokenizer: Bloodhound.tokenizers.obj.whitespace('term'),
+        queryTokenizer: Bloodhound.tokenizers.whitespace,
+        local: terms.statuses
+    });
+
+    $('#tt-what #what').typeahead({
+        minlength: 0,
+        highlight: true,
+    },
+    {
+        name: 'sectors',
+        source: sectorsEngine,
+        display: 'term',
+        templates: {
+            header: '<h3>Sectors</h3>'
+        }
+    },
+    {
+        name: 'roles',
+        source: rolesEngine,
+        display: 'term',
+        templates: {
+            header: '<h3>Roles</h3>'
+        }
+    },
+    {
+        name: 'statuses',
+        source: statusesEngine,
+        display: 'term',
+        templates: {
+            header: '<h3>Statuses</h3>'
+        }
+    }).on('typeahead:select', function(ev, suggestion) {
+        addChip(suggestion.field, suggestion.term);
+        setTimeout(function() {
+            $('#what').typeahead('close').val('');
+        }, 100);
+    });
+
+    function addChip(field, term) {
+        if (selectedTerms[field].indexOf(term) === -1) {
+            selectedTerms[field].push(term);
+        }
+        redrawTermChips();
+    }
+
+    function removeChip(field, term) {
+        if (selectedTerms[field].indexOf(term) > -1) {
+            selectedTerms[field].splice(selectedTerms[field].indexOf(term), 1);
+        }
+        redrawTermChips();
+    }
+
+    function redrawTermChips() {
+        $('#search-terms').empty();
+        Object.keys(selectedTerms).forEach(function(field) {
+            selectedTerms[field].forEach(function(term) {
+                var chip = $('<div />')
+                    .addClass('mdc-chip mdc-theme--primary-bg')
+                    .attr({ tabindex: 0 })
+                    .appendTo('#search-terms');
+                var chipText = $('<div />')
+                    .addClass('mdc-chip__text')
+                    .html('<strong>' + field + '</strong>: ' + term)
+                    .appendTo(chip);
+                var chipClose = $('<i />')
+                    .addClass('fa fa-times-circle mdc-chip__icon mdc-chip__icon--trailing')
+                    .attr({ tabindex: 0, role: 'button' })
+                    .on('click', function() {
+                        removeChip(field, term);
+                    })
+                    .appendTo(chip);
+            });  
+        });
+    }
+</script>
+<!--
+    {{{stringify data.terms}}}
+-->

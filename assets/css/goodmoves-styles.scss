@@ -5,112 +5,132 @@ $unit: 1rem;
 $nav-height: 38px;
 
 $colours: (
-    default: (
-        primary: #58a934,
-        primary-overlay-start: rgba(88,169,52,0.89),
-        primary-overlay-end: rgba(88,169,52,0.91),
-        primary-light: #58a934,
-        primary-dark: #58a934,
-        secondary: #FF8F00,
-        secondary-light: #FFA000,
-        secondary-dark: #FF6F00
-    )
+    primary: #58a934,
+    primary-overlay-start: rgba(88,169,52,0.89),
+    primary-overlay-end: rgba(88,169,52,0.91),
+    primary-light: #58a934,
+    primary-dark: #58a934,
+    secondary: #FF8F00,
+    secondary-light: #FFA000,
+    secondary-dark: #FF6F00
 );
 
-@mixin theme-colours($themeName: 'default') {
-    $themeSelected: map-get($colours, $themeName);
-
-    a,
-    #share-menu-button,
-    .mdc-simple-menu .mdc-list-item,
-    .social .fa-fw,
-    .mdc-theme--primary {
-        color: map-get($themeSelected, 'primary');
-    }
-    blockquote {
-        border-left-color: map-get($themeSelected, 'primary') !important;
-    }
-    .mdc-button,
-    .mdc-button--raised:not(:disabled) {
-        color: white;
-        border-color: map-get($themeSelected, 'primary');
-        background-color: map-get($themeSelected, 'primary');
-    }
-    .mdc-button:hover,
-    .mdc-button--raised.mdc-button--active:not(:disabled),
-    .mdc-button--raised:not(:disabled):hover {
-        color: white;
-        border-color: map-get($themeSelected, 'primary-dark');
-        background-color: map-get($themeSelected, 'primary-dark');
-    }
-    .mdc-button:hover {
-        background-color: map-get($themeSelected, 'primary-dark') !important;
-    }
-    .mdc-theme--primary-bg {
-        background-color: map-get($themeSelected, 'primary') !important;
-    }
-    body {
-        background-color: map-get($themeSelected, 'primary-dark');
-    }
-    footer h3 {
-        border-color: map-get($themeSelected, 'primary-light');
-    }
-    .mdc-theme--primary-light {
-        color: map-get($themeSelected, 'primary-light');
-    }
-    a:hover,
-    #share-menu-button:hover,
-    .mdc-theme--primary-dark {
-        color: map-get($themeSelected, 'primary-dark');
-    }
-    .mdc-theme--secondary {
-        color: map-get($themeSelected, 'secondary');
-    }
-    .mdc-theme--secondary-light {
-        color: map-get($themeSelected, 'secondary-light');
-    }
-    .mdc-theme--secondary-dark {
-        color: map-get($themeSelected, 'secondary-dark');
-    }
-    .mdc-theme--background,
-    .mdc-theme--site-bg {
-        background-color: map-get($themeSelected, 'primary-dark');
-    }
-    .container-content {
-        background-color: #fff;
-    }
-    .mdc-simple-menu .mdc-list-item:after,
-    .mdc-simple-menu .mdc-list-item:before,
-    .mdc-theme--primary-overlay-start-bg {
-        background-color: map-get($themeSelected, 'primary-overlay-start');
-    }
-    .splash-image .header-caption {
-        background-color: rgba(0,0,0,0.7);
-    }
-    .mdc-theme--primary-light-bg {
-        background-color: map-get($themeSelected, 'primary-light') !important;
-    }
-    .mdc-theme--primary-dark-bg.toolbar-nav {
-        background-image: linear-gradient(90deg, rgba(0,0,0,0.16), rgba(0,0,0,0.16) 60%, rgba(0,0,0,0.08) 120%, rgba(0,0,0,0.08));
-    }
-    .pagination li:hover,
-    .pagination li.current-page:hover,
-    .post-info .post-info-categories .inline-list li a:hover,
-    .mdc-theme--primary-dark-bg {
-        background-color: map-get($themeSelected, 'primary-dark') !important;
-    }
-    .mdc-theme--secondary-bg {
-        background-color: map-get($themeSelected, 'secondary');
-    }
-    .mdc-theme--secondary-light-bg {
-        background-color: map-get($themeSelected, 'secondary-light');
-    }
-    .mdc-theme--secondary-dark-bg {
-        background-color: map-get($themeSelected, 'secondary-dark');
-    }
+a,
+#share-menu-button,
+.mdc-simple-menu .mdc-list-item,
+.social .fa-fw,
+.mdc-theme--primary {
+    color: map-get($colours, 'primary');
+}
+blockquote {
+    border-left-color: map-get($colours, 'primary') !important;
+}
+.mdc-button,
+.mdc-button--raised:not(:disabled) {
+    color: white;
+    border-color: map-get($colours, 'primary');
+    background-color: map-get($colours, 'primary');
+}
+.mdc-button:hover,
+.mdc-button--raised.mdc-button--active:not(:disabled),
+.mdc-button--raised:not(:disabled):hover {
+    color: white;
+    border-color: map-get($colours, 'primary-dark');
+    background-color: map-get($colours, 'primary-dark');
+}
+.mdc-button:hover {
+    background-color: map-get($colours, 'primary-dark') !important;
+}
+.mdc-theme--primary-bg {
+    background-color: map-get($colours, 'primary') !important;
+}
+body {
+    background-color: map-get($colours, 'primary-dark');
+}
+footer h3 {
+    border-color: map-get($colours, 'primary-light');
+}
+.mdc-theme--primary-light {
+    color: map-get($colours, 'primary-light');
+}
+a:hover,
+#share-menu-button:hover,
+.mdc-theme--primary-dark {
+    color: map-get($colours, 'primary-dark');
+}
+.mdc-theme--secondary {
+    color: map-get($colours, 'secondary');
+}
+.mdc-theme--secondary-light {
+    color: map-get($colours, 'secondary-light');
+}
+.mdc-theme--secondary-dark {
+    color: map-get($colours, 'secondary-dark');
+}
+.mdc-theme--background,
+.mdc-theme--site-bg {
+    background-color: map-get($colours, 'primary-dark');
+}
+.container-content {
+    background-color: #fff;
+}
+.mdc-simple-menu .mdc-list-item:after,
+.mdc-simple-menu .mdc-list-item:before,
+.mdc-theme--primary-overlay-start-bg {
+    background-color: map-get($colours, 'primary-overlay-start');
+}
+.splash-image .header-caption {
+    background-color: rgba(0,0,0,0.7);
+}
+.mdc-theme--primary-light-bg {
+    background-color: map-get($colours, 'primary-light') !important;
+}
+.mdc-theme--primary-dark-bg.toolbar-nav {
+    background-image: linear-gradient(90deg, rgba(0,0,0,0.16), rgba(0,0,0,0.16) 60%, rgba(0,0,0,0.08) 120%, rgba(0,0,0,0.08));
+}
+.pagination li:hover,
+.pagination li.current-page:hover,
+.post-info .post-info-categories .inline-list li a:hover,
+.mdc-theme--primary-dark-bg {
+    background-color: map-get($colours, 'primary-dark') !important;
+}
+.mdc-theme--secondary-bg {
+    background-color: map-get($colours, 'secondary');
+}
+.mdc-theme--secondary-light-bg {
+    background-color: map-get($colours, 'secondary-light');
+}
+.mdc-theme--secondary-dark-bg {
+    background-color: map-get($colours, 'secondary-dark');
 }
 
-@include theme-colours('default');
+/* Typeahead */
+.twitter-typeahead {
+    width: 100%;
+}
+
+.tt-menu {
+    width: 100%;
+    box-sizing: border-box;
+    background-color: #ffffff;
+    border-width: $unit/8;
+    border-color: #000000;
+    border-style: solid;
+}
+
+.tt-menu h3 {
+    margin: 0 !important;
+    padding: 5px 15px;
+}
+
+.tt-menu .tt-suggestion {
+    padding: 5px 15px;
+}
+
+.tt-cursor {
+    background-color: map-get($colours, 'primary');
+    color: #ffffff;
+}
 
 html {
     overflow-y: scroll;
@@ -2879,3 +2899,4 @@ button.swiper-pagination-bullet {
 .text-right { text-align: right; }
 .text-centre { text-align: center; }
 .text-justify { text-align: justify; }
+
