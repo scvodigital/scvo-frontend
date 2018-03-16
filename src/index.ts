@@ -60,6 +60,7 @@ app.get('/reload-sites', clearSitesCache);
 app.get('/liveness_check', livenessCheck);
 app.get('/readiness_check', readinessCheck);
 app.get('*', index);
+app.post('*', index);
 
 // Express route handlers
 async function index(req: express.Request, res: express.Response, next: express.NextFunction): Promise<any> {

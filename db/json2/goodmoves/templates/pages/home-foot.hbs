@@ -1,3 +1,4 @@
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBJdxcQpVKQ6HdrjnPXycUoZqsmp-Ep3l0&callback=initMap" async defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"></script>
 <script>
     var terms = {
@@ -21,7 +22,8 @@
     var selectedTerms = {
         sectors: [],
         roles: [],
-        statuses: []
+        statuses: [],
+        keywords: []
     };
 
     var sectorsEngine = new Bloodhound({
@@ -69,25 +71,86 @@
         templates: {
             header: '<h3>Statuses</h3>'
         }
-    }).on('typeahead:select', function(ev, suggestion) {
-        addChip(suggestion.field, suggestion.term);
-        setTimeout(function() {
-            $('#what').typeahead('close').val('');
-        }, 100);
+    }).on('typeahead:select', typeaheadSelect)
+    .on('typeahead:autocomplete', typeaheadSelect)
+    .on('keydown', function(ev) {
+        switch (ev.keyCode) {
+            case (9): 
+                ev.preventDefault(); 
+                break;
+            case (13):
+                console.log('keydown', arguments, $('#what').typeahead('getActive'));
+                ev.preventDefault();
+                var val = $('#what').val();
+                if (val) {
+                    addChip('keywords', $('#what').val());
+                    $('#what').typeahead('val', '');
+                    refocusWhat();
+                }
+                break;
+        }
     });
+
+    function typeaheadSelect(ev, suggestion) {
+        addChip(suggestion.field, suggestion.term);
+        $('#what')
+            .typeahead('val', '')
+            .typeahead('close');
+        refocusWhat();
+    }
+
+    function refocusWhat() {
+        setTimeout(function() {
+            $('#what').focus();
+        }, 100);
+    }
 
     function addChip(field, term) {
         if (selectedTerms[field].indexOf(term) === -1) {
             selectedTerms[field].push(term);
         }
-        redrawTermChips();
+        updateTerms();
     }
 
     function removeChip(field, term) {
         if (selectedTerms[field].indexOf(term) > -1) {
             selectedTerms[field].splice(selectedTerms[field].indexOf(term), 1);
         }
+        updateTerms();
+    }
+
+    function updateTerms() {
         redrawTermChips();
+        doHomeSearch(); 
+    }
+
+    function doHomeSearch() {
+        var body = {}
+        Object.keys(selectedTerms).forEach(function(field) {
+            if (selectedTerms[field].length > 0) {
+                body[field] = selectedTerms[field]
+            }
+        });
+        var options = {
+            url: '/home-search',
+            type: 'POST',
+            data: JSON.stringify(body),
+            contentType: 'application/json; charset=utf-8'
+        };
+        $.ajax(options).done(function(results) {
+            $('#search-results').empty();
+            clearPins();
+            $('#search-results-total').text(results.hits.total);
+            if (results.hits.total > 0) {
+                var vacancies = results.hits.hits.map(hit => hit._source);
+                vacancies.forEach(function(vacancy) {
+                    $('#search-results').append(vacancy.rendered.scvo_gist);
+                });
+                refreshMap(vacancies);
+            } else {
+
+            }
+        });
     }
 
     function redrawTermChips() {
@@ -111,6 +174,41 @@
                     .appendTo(chip);
             });  
         });
+    }
+
+    var map;
+    var markers = [];
+    function initMap() {
+        map = new google.maps.Map($('#map-full')[0], {
+            center: { lat: 57.0268117, lng: -5.5787529 },
+            zoom: 8
+        });
+    }
+
+    function clearPins() {
+        markers.forEach(function(marker) {
+            marker.setMap(null);
+            delete marker;
+        });
+        markers = [];
+    }
+
+    function refreshMap(results) {
+        var bounds = new google.maps.LatLngBounds();
+
+        results.forEach(function(result) {
+            result.geo_vacancy_coords.forEach(function(coord) {
+                var marker = new google.maps.Marker({
+                    position: new google.maps.LatLng(coord.lat, coord.lon),
+                    title: 'JOB',
+                });
+                marker.setMap(map);
+                bounds.extend(marker.position);
+                markers.push(marker);
+            });
+        });
+
+        map.fitBounds(bounds);
     }
 </script>
 <!--

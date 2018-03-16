@@ -1,6 +1,5 @@
 <section class="search">
     <div class="container-fluid">
-        <form action="/search" method="GET" [searchroute]="'main_search'" class="search_form" autocomplete="off">
             <h3>Find you new job?</h3>
             <div class="mdc-layout-grid">
                 <div class="mdc-layout-grid__inner">
@@ -13,10 +12,16 @@
                 </div>
             </div>
             <div id="search-terms" class="mdc-chip-set"></div>
-            <button type="submit" class="mdc-toolbar__icon mdc-toolbar__search search-button-large" aria-label="Search" alt="Search">
-                <span class="far fa-2x fa-search" aria-hidden="true"></span>
-            </button>
-        </form>
     </div>
 </section>
+<section class="search-results">
+    <div id="map-full">
 
+    </div>
+    <div class="container-fluid">
+        <div id="search-results-info">
+            <strong>Total:</strong> <span id="search-results-total"></span>
+        </div>
+        <div id="search-results"></div>
+    </div>
+</section>
