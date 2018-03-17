@@ -1,14 +1,33 @@
 {
     "index": {
         "pattern": "/",
-        "tasks": [],
+        "tasks": [
+            {
+                "name": "terms",
+                "taskType": "elasticsearch",
+                "config": {
+                    "connectionStringTemplate": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
+                    "elasticsearchConfig": {
+                        "apiVersion": "5.6"
+                    },
+                    "queryTemplates": [
+                        {
+                            "name": "types",
+                            "index": "web-content-production",
+                            "type": "goodmoves-job",
+                            "template": "{$./queries/jobs/aggs.json}"
+                        }
+                    ]
+                }
+            }
+        ],
         "destination": {
             "destinationType": "handlebars",
             "config": {
                 "default": {
                     "head": "{$./templates/pages/page-head-tags.hbs}",
                     "body": "{$./templates/pages/home.hbs}",
-                    "foot": ""
+                    "foot": "{$./templates/pages/home-foot.hbs}"
                 }
             }
         }
@@ -77,6 +96,35 @@
             "config": {
                 "txt": {
                     "content": "{$./templates/humans.txt}"
+                }
+            }
+        }
+    },
+    "home_search": {
+        "pattern": "/home-search",
+        "tasks": [
+            {
+                "name": "map_data",
+                "taskType": "elasticsearch",
+                "config": {
+                    "connectionStringTemplate": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
+                    "elasticsearchConfig": {
+                        "apiVersion": "5.6",
+                        "log": "trace"
+                    },
+                    "queryTemplates": {
+                        "index": "web-content-production",
+                        "type": "goodmoves-job-test",
+                        "template": "{$./queries/jobs/home_search.json}"
+                    }
+                }
+            }
+        ],
+        "destination": {
+            "destinationType": "handlebars",
+            "config": {
+                "data": {
+                    "content": "{$./templates/pages/home_search.hbs}"
                 }
             }
         }

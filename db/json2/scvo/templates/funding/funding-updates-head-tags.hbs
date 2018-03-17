@@ -1,7 +1,7 @@
 {{#if data.primaryResponse.hits.hits.[0] ~}}
 {{#with data.primaryResponse.hits.hits.[0]._source ~}}
-<title>SCVO – Funding update – {{momentFormat (moment (lastItem (split (atob ../params.range) "-")) "x") "Do MMMM YYYY"}}</title>
-<meta property="og:title" content="SCVO – Funding update – {{momentFormat (moment (lastItem (split (atob ../params.range) "-")) "x") "Do MMMM YYYY"}}" data-dynamic="true">
+<title>SCVO – Funding update – {{momentFormat (moment (lastItem (split (atob ../request.params.range) "-")) "x") "Do MMMM YYYY"}}</title>
+<meta property="og:title" content="SCVO – Funding update – {{momentFormat (moment (lastItem (split (atob ../request.params.range) "-")) "x") "Do MMMM YYYY"}}" data-dynamic="true">
 {{#ifAny og_image ../og_image ~}}
 <meta property="og:image" content="{{default og_image ../og_image}}" data-dynamic="true">
 {{/ifAny ~}}

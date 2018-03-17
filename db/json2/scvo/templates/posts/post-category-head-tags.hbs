@@ -1,6 +1,6 @@
 {{#if data.primaryResponse.hits.hits.[0] ~}}
-<title>SCVO – Posts about {{#each data.primaryResponse.hits.hits.[0]._source.categories_slug}}{{#compare this "===" (lastItem (split ../params.path '_'))}}{{{lookup ../data.primaryResponse.hits.hits.[0]._source.categories @index}}}{{/compare}}{{/each}}</title>
-<meta property="og:title" content="SCVO – Posts about {{#each data.primaryResponse.hits.hits.[0]._source.categories_slug}}{{#compare this "===" (lastItem (split ../params.path '_'))}}{{{lookup ../data.primaryResponse.hits.hits.[0]._source.categories @index}}}{{/compare}}{{/each}}" data-dynamic="true">
+<title>SCVO – Posts about {{#each data.primaryResponse.hits.hits.[0]._source.categories_slug}}{{#compare this "===" (lastItem (split ../request.params.path '_'))}}{{{lookup ../data.primaryResponse.hits.hits.[0]._source.categories @index}}}{{/compare}}{{/each}}</title>
+<meta property="og:title" content="SCVO – Posts about {{#each data.primaryResponse.hits.hits.[0]._source.categories_slug}}{{#compare this "===" (lastItem (split ../request.params.path '_'))}}{{{lookup ../data.primaryResponse.hits.hits.[0]._source.categories @index}}}{{/compare}}{{/each}}" data-dynamic="true">
 {{#with data.primaryResponse.hits.hits.[0]._source ~}}
 <meta property="og:image" content="https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/logos/scvo-logo-square.png" data-dynamic="true">
 <meta property="og:image:width" content="96" data-dynamic="true">

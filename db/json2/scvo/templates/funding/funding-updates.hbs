@@ -8,7 +8,10 @@
                     {{else}}
                     <h1 class="header-text">
                         <span class="header-text-banner">
-                            Funding update – {{momentFormat (moment (lastItem (split (atob request.params.range) "-")) "x") "Do MMMM YYYY"}}
+                            Funding update
+                            <span class="mdc-typography--caption">
+                                {{momentFormat (moment (lastItem (split (atob request.params.range) "-")) "x") "Do MMMM YYYY"}}
+                            </span>
                         </span>
                     </h1>
                     {{/if ~}}

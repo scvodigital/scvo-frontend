@@ -1340,6 +1340,12 @@ section.search {
         margin-top: 0;
     }
 }
+.post-related-tfn {
+    .gist {
+        padding: 0;
+    }
+}
+
 .jobs-landing {
     .page-content {
         .mdc-layout-grid__inner {
@@ -1966,8 +1972,8 @@ section.search {
         max-height: $unit*6;
     }
 }
-body.scottish-charity-awards,
-body.the-gathering {
+body.scottish-charity-awards:not(.post),
+body.the-gathering:not(.post) {
     .container-fluid,
     .page-content {
         padding-bottom: 0;
@@ -2005,13 +2011,13 @@ body.the-gathering {
         margin-top: $unit;
     }
 }
-body.the-gathering .full {
+body.the-gathering:not(.post) .full {
     width: 60%;
 }
-body.datawareness,
-body.i-love-charity,
-body.right-approach,
-body.building-healthier-happier-communities {
+body.datawareness:not(.post),
+body.i-love-charity:not(.post),
+body.right-approach:not(.post),
+body.building-healthier-happier-communities:not(.post) {
     .splash-image .splash-overlay .container-fluid {
         min-height: 125px;
         padding-top: $unit*2;
@@ -2028,7 +2034,7 @@ body.building-healthier-happier-communities {
         }
     }
 }
-body.i-love-charity {
+body.i-love-charity:not(.post) {
     .full {
         margin-bottom: 0;
     }
@@ -2073,7 +2079,7 @@ body.i-love-charity {
         background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/oban.jpg');
     }
 }
-body.scottish-charity-awards {
+body.scottish-charity-awards:not(.post) {
     .mdc-card {
         .mdc-card__primary .mdc-card__title {
             color: white;
@@ -2082,6 +2088,9 @@ body.scottish-charity-awards {
         .mdc-card__supporting-text {
             margin-top: $unit;
         }
+    }
+    .mdc-card .mdc-card__supporting-text {
+        margin-top: 0;
     }
     .sponsor {
         width: 100%;
@@ -2944,17 +2953,6 @@ body.post.author {
     }
 }
 
-// Hide CU members site
-#credit-union-menu {
-    a:nth-child(2),
-    a:nth-child(4),
-    a:nth-child(5),
-    a:nth-child(12),
-    a:nth-child(13) {
-        display: none;
-    }
-}
-
 .mdc-simple-menu {
     .fa-fw {
         margin-right: $unit/2;
@@ -3535,7 +3533,7 @@ footer {
         height: 50px;
         width: 50px;
     }
-    body.scottish-charity-awards:not(body.post.scottish-charity-awards) {
+    body.scottish-charity-awards:not(.post) {
         .sidebar {
             margin-bottom: $unit;
             p {

@@ -1,5 +1,5 @@
 <div class="post-category">
-    <div class="splash-image splash-image-{{data.primaryResponse.hits.hits.[0]._type}}" style="{{> header_splash_image}}">
+    <div class="splash-image splash-image-{{data.primaryResponse.hits.hits.[0]._type}}-category" style="{{> header_splash_image}}">
         <div class="splash-overlay{{#if data.primaryResponse.hits.hits.[0]._source.hide_overlay}} splash-overlay-hidden{{/if}}">
             <div class="container-fluid">
                 <div class="mdc-layout-grid">
@@ -9,7 +9,7 @@
                     <h1 class="header-text">
                         <span class="header-text-banner">
                             {{#each data.primaryResponse.hits.hits.[0]._source.categories_slug ~}}
-                            {{#compare this "===" (lastItem (split ../params.path '_')) ~}}
+                            {{#compare this "===" (lastItem (split ../request.params.path '_')) ~}}
                             {{{lookup ../data.primaryResponse.hits.hits.[0]._source.categories @index}}}
                             {{/compare ~}}
                             {{/each ~}}

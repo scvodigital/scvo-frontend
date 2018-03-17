@@ -182,6 +182,13 @@
                         "pattern": "(&|\\?)rss",
                         "contentType": "application/rss+xml"
                     },
+                    "data": {
+                        "template": "{$./json2/goodmoves/layouts/data.hbs}",
+                        "sections": ["content"],
+                        "pattern": ".*",
+                        "contentType": "application/json",
+                        "doNotStripDomains": true
+                    },
                     "default": {
                         "template": "{$./json2/goodmoves/layouts/default.hbs}",
                         "sections": ["head", "body", "foot"],
