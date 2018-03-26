@@ -7,67 +7,61 @@
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-9-desktop mdc-layout-grid__cell--span-5-tablet mdc-layout-grid__cell--span-4-phone content page-content">
                     {{{data.primaryResponse.hits.hits.[0]._source.rendered.scvo_full}}}
 
-                    <h2>Quick guide</h2>
+                    <h3>Quick guide</h3>
                     <form name="settled_status" id="settled_status" action="">
-                        <h3>
+                        <p>
                             <strong>Q1.</strong> When did you arrive in the UK?
-                        </h3>
-                        <p>
-                            <div class="mdc-radio"><input id="answer-1" class="mdc-radio__native-control" name="a" value="1" type="radio" onchange="window.displayGuide()" />
-                                <div class="mdc-radio__background">
-                                    <div class="mdc-radio__outer-circle"></div>
-                                    <div class="mdc-radio__inner-circle"></div>
-                                </div>
-                            </div>
-                            <label id="answer-1-label" for="answer-1">On or before 29 March 2019</label>
-                            <div class="mdc-radio"><input id="answer-2" class="mdc-radio__native-control" name="a" value="2" type="radio" onchange="window.displayGuide()" />
-                                <div class="mdc-radio__background">
-                                    <div class="mdc-radio__outer-circle"></div>
-                                    <div class="mdc-radio__inner-circle"></div>
-                                </div>
-                            </div>
-                            <label id="answer-2-label" for="answer-2">After 29 March 2019</label>
                         </p>
-                        <h3>
+                        <div class="mdc-radio"><input id="answer-1" class="mdc-radio__native-control" name="a" value="1" type="radio" onchange="window.showGuide()" />
+                            <div class="mdc-radio__background">
+                                <div class="mdc-radio__outer-circle"></div>
+                                <div class="mdc-radio__inner-circle"></div>
+                            </div>
+                        </div>
+                        <label id="answer-1-label" for="answer-1">On or before 29 March 2019</label>
+                        <div class="mdc-radio"><input id="answer-2" class="mdc-radio__native-control" name="a" value="2" type="radio" onchange="window.showGuide()" />
+                            <div class="mdc-radio__background">
+                                <div class="mdc-radio__outer-circle"></div>
+                                <div class="mdc-radio__inner-circle"></div>
+                            </div>
+                        </div>
+                        <label id="answer-2-label" for="answer-2">After 29 March 2019</label>
+                        <p>
                             <strong>Q2.</strong> How long have you lived in the UK?
-                        </h3>
-                        <p>
-                            <div class="mdc-radio"><input id="answer-3" class="mdc-radio__native-control" name="b" value="3" type="radio" onchange="window.displayGuide()" />
-                                <div class="mdc-radio__background">
-                                    <div class="mdc-radio__outer-circle"></div>
-                                    <div class="mdc-radio__inner-circle"></div>
-                                </div>
-                            </div>
-                            <label id="answer-3-label" for="answer-3">Five years or more</label>
-                            <div class="mdc-radio"><input id="answer-4" class="mdc-radio__native-control" name="b" value="4" type="radio" onchange="window.displayGuide()" />
-                                <div class="mdc-radio__background">
-                                    <div class="mdc-radio__outer-circle"></div>
-                                    <div class="mdc-radio__inner-circle"></div>
-                                </div>
-                            </div>
-                            <label id="answer-4-label" for="answer-4">Less than five years</label>
                         </p>
-                        <h3>
+                        <div class="mdc-radio"><input id="answer-3" class="mdc-radio__native-control" name="b" value="3" type="radio" onchange="window.showGuide()" />
+                            <div class="mdc-radio__background">
+                                <div class="mdc-radio__outer-circle"></div>
+                                <div class="mdc-radio__inner-circle"></div>
+                            </div>
+                        </div>
+                        <label id="answer-3-label" for="answer-3">Five years or more</label>
+                        <div class="mdc-radio"><input id="answer-4" class="mdc-radio__native-control" name="b" value="4" type="radio" onchange="window.showGuide()" />
+                            <div class="mdc-radio__background">
+                                <div class="mdc-radio__outer-circle"></div>
+                                <div class="mdc-radio__inner-circle"></div>
+                            </div>
+                        </div>
+                        <label id="answer-4-label" for="answer-4">Less than five years</label>
+                        <p>
                             <strong>Q3.</strong> Do you have <a href="https://www.gov.uk/settle-in-the-uk">indefinite leave to remain</a> status?
-                        </h3>
-                        <p>
-                            <div class="mdc-radio"><input id="answer-5" class="mdc-radio__native-control" name="c" value="5" type="radio" onchange="window.displayGuide()" />
-                                <div class="mdc-radio__background">
-                                    <div class="mdc-radio__outer-circle"></div>
-                                    <div class="mdc-radio__inner-circle"></div>
-                                </div>
-                            </div>
-                            <label id="answer-5-label" for="answer-5">Yes</label>
-                            <div class="mdc-radio"><input id="answer-6" class="mdc-radio__native-control" name="c" value="6" type="radio" onchange="window.displayGuide()" />
-                                <div class="mdc-radio__background">
-                                    <div class="mdc-radio__outer-circle"></div>
-                                    <div class="mdc-radio__inner-circle"></div>
-                                </div>
-                            </div>
-                            <label id="answer-6-label" for="answer-6">No</label>
                         </p>
+                        <div class="mdc-radio"><input id="answer-5" class="mdc-radio__native-control" name="c" value="5" type="radio" onchange="window.showGuide()" />
+                            <div class="mdc-radio__background">
+                                <div class="mdc-radio__outer-circle"></div>
+                                <div class="mdc-radio__inner-circle"></div>
+                            </div>
+                        </div>
+                        <label id="answer-5-label" for="answer-5">Yes</label>
+                        <div class="mdc-radio"><input id="answer-6" class="mdc-radio__native-control" name="c" value="6" type="radio" onchange="window.showGuide()" />
+                            <div class="mdc-radio__background">
+                                <div class="mdc-radio__outer-circle"></div>
+                                <div class="mdc-radio__inner-circle"></div>
+                            </div>
+                        </div>
+                        <label id="answer-6-label" for="answer-6">No</label>
                     </form>
-                    <div id="settled_status_guide">
+                    <div id="settled_status_guide" class="mdc-elevation--z6">
                         <div class="guide_text" id="guide_135">
                             <p>
                                 Your <a href="https://www.gov.uk/settle-in-the-uk">'indefinite leave to remain'</a> status is not affected by the UK leaving the EU. However, should you wish to exchange your existing indefinite leave to remain document for the new 'settled status' document, you will be able to do so free of charge.
