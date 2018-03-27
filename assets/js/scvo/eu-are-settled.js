@@ -14,10 +14,6 @@ window.showGuide = function() {
     var b = getValueFromRadioButton('b');
     var c = getValueFromRadioButton('c');
 
-    console.log(a);
-    console.log(b);
-    console.log(c);
-
     if (a && b && c) {
         // If all answers are set
         document.getElementById('guide_'+a+b+c).style.display = 'block';
