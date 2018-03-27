@@ -5,23 +5,43 @@ window.showGuide = function() {
     for (var i = 0; i < size; i++) {
         elems[i].style.display = 'none';
     }
+    document.getElementById('settled_status_q_b').style.display = 'none';
+    document.getElementById('settled_status_q_c').style.display = 'none';
+    document.getElementById('settled_status_q_d').style.display = 'none';
 
     // Get guide text box
     var guide = document.getElementById('settled_status_guide');
 
     // Get question answers
     var a = getValueFromRadioButton('a');
-    var b = getValueFromRadioButton('b');
-    var c = getValueFromRadioButton('c');
+    a = (typeof a === 'undefined') ? 0 : a;
 
-    if (a && b && c) {
-        // If all answers are set
-        document.getElementById('guide_'+a+b+c).style.display = 'block';
-        guide.style.display = 'block';
-    } else {
-        // Hide guide box if some answers aren't set
-        guide.style.display = 'none';
+    var b = getValueFromRadioButton('b');
+    b = (typeof b === 'undefined') ? 0 : b;
+
+    var c = getValueFromRadioButton('c');
+    c = (typeof c === 'undefined') ? 0 : c;
+
+    var d = getValueFromRadioButton('d');
+    d = (typeof d === 'undefined') ? 0 : d;
+
+    if (a == 1) {
+        b = 0;
+        document.getElementById('settled_status_q_c').style.display = 'block';
+    } else if (a == 2) {
+        c = 0;
+        d = 0;
+        document.getElementById('settled_status_q_b').style.display = 'block';
     }
+    if (c == 1) {
+        d = 0;
+    } else if (c == 2) {
+        document.getElementById('settled_status_q_d').style.display = 'block';
+    }
+    console.log("show "+'guide_'+a+b+c+d);
+
+    var guide = document.getElementById('guide_'+a+b+c+d);
+    if (guide) guide.style.display = 'block';
 };
 
 function getValueFromRadioButton(name) {
@@ -36,5 +56,5 @@ function getValueFromRadioButton(name) {
       }
    }
    //No radio button is selected.
-   return null;
+   return 0;
 }
