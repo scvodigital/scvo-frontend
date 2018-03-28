@@ -2,15 +2,17 @@ document.addEventListener('DOMContentLoaded', function() {
     // Material Design Components
     mdc.autoInit();
 
-    // Browser Update
-    var $buoop = {notify:{i:-5,f:-4,o:-4,s:-2,c:-4},insecure:true,api:5};
-    function $buo_f(){
-        var e = document.createElement("script");
-        e.src = "/assets/js/browser-update.min.js";
-        document.body.appendChild(e);
-    };
-    try {document.addEventListener("DOMContentLoaded", $buo_f,false)}
-    catch(e){window.attachEvent("onload", $buo_f)}
+    // Resize iframes
+    window.addEventListener("message", (event) => {
+        if (event.data.hasOwnProperty('event')) {
+            console.log(event);
+            switch (event.data.event) {
+                case ('resize'):
+                    document.querySelector('iframe[src*="' + event.origin + '"]').style.height = (40+event.data.height) + 'px';
+                    break;
+            }
+        }
+    });
 
     // document.onreadystatechange = function(e) {
     //     if (document.readyState === 'complete') {
@@ -28,10 +30,10 @@ document.addEventListener('DOMContentLoaded', function() {
         window.drawer.open = true;
     });
     drawerEl.addEventListener('MDCTemporaryDrawer:open', function() {
-        console.log('Received MDCTemporaryDrawer:open');
+        // console.log('Received MDCTemporaryDrawer:open');
     });
     drawerEl.addEventListener('MDCTemporaryDrawer:close', function() {
-        console.log('Received MDCTemporaryDrawer:close');
+        // console.log('Received MDCTemporaryDrawer:close');
     });
 
     // Headroom
@@ -85,19 +87,13 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     window.setupAutoSearchForms();
 
-    // Resize iframes
-    window.addEventListener("message", (event) => {
-        if (event.data.hasOwnProperty('event')) {
-            console.log('Post Message Event', event.data);
-            switch (event.data.event) {
-                case ('resize'):
-                    document.querySelector('iframe[src*="' + event.origin + '"]').style.height = (30+event.data.height) + 'px';
-                    break;
-                case ('redirect'):
-                    var url = event.data.url;
-                    ngRouter.navigateByUrl(url);
-                    break;
-            }
-        }
-    });
+    // Browser Update
+    var $buoop = {notify:{i:-5,f:-4,o:-4,s:-2,c:-4},insecure:true,api:5};
+    function $buo_f(){
+        var e = document.createElement("script");
+        e.src = "/assets/js/browser-update.min.js";
+        document.body.appendChild(e);
+    };
+    try {document.addEventListener("DOMContentLoaded", $buo_f,false)}
+    catch(e){window.attachEvent("onload", $buo_f)}
 });

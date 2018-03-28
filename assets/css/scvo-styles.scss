@@ -300,7 +300,13 @@ primary-dark: #251032
             color: white;
         }
         .mdc-button {
+            color: white !important;
             border-color: white !important;
+            background-color: transparent !important;
+        }
+        .mdc-button:hover {
+            color: map-get($themeDigital, 'secondary') !important;
+            background-color: white !important;
         }
     }
     .support.funding .mdc-card__primary,
@@ -475,6 +481,14 @@ primary-dark: #251032
         a:hover .fa-fw {
             background-color: white !important;
             color: map-get($themeJobs, 'primary') !important;
+        }
+    }
+    .digital .basic-digital-skills.callout {
+        background-color: map-get($themeDigital, 'primary');
+        color: white;
+        a:hover .fa-fw {
+            background-color: white !important;
+            color: map-get($themeDigital, 'primary-dark') !important;
         }
     }
     .digital .callout-image {
@@ -1880,8 +1894,6 @@ form#settled_status {
     }
 }
 .digital .basic-digital-skills.callout {
-    background-color: #1976D2;
-    color:#fff;
     h2,
     h3 {
         margin: 0;
