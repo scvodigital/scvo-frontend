@@ -219,12 +219,12 @@
     <div class="container-fluid latest_content">
         <div class="mdc-layout-grid">
             <div class="mdc-layout-grid__inner">
-                <div class="digital-blogs mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone">
+                <div class="digital-blogs mdc-layout-grid__cell mdc-layout-grid__cell--span-{{#compare data.supplimentaryResponses.related_events.hits.total ">" 0}}6{{else}}12{{/compare}}-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone">
                     <h2>Latest digital blogs</h2>
                     <div class="mdc-layout-grid">
                         <div class="mdc-layout-grid__inner">
                             {{#each data.supplimentaryResponses.related_posts.hits.hits ~}}
-                            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone">
+                            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-{{#compare data.supplimentaryResponses.related_events.hits.total ">" 0}}6{{else}}3{{/compare}}-desktop mdc-layout-grid__cell--span-{{#compare data.supplimentaryResponses.related_events.hits.total ">" 0}}8{{else}}4{{/compare}}-tablet mdc-layout-grid__cell--span-4-phone">
                                 {{{_source.rendered.scvo_gist}}}
                             </div>
                             {{/each ~}}
@@ -234,8 +234,8 @@
                         <a class="mdc-button mdc-button--raised v-margin" href="/digital/blogs">Read more</a>
                     </p>
                 </div>
+                {{#compare data.supplimentaryResponses.related_events.hits.total ">" 0 ~}}
                 <div class="digital-events mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone">
-                    {{#compare data.supplimentaryResponses.related_events.hits.total ">" 0 ~}}
                     <h2>Upcoming digital events</h2>
                     <div class="mdc-layout-grid">
                         <div class="mdc-layout-grid__inner">
@@ -249,8 +249,8 @@
                     <p>
                         <a class="mdc-button mdc-button--raised v-margin" href="/digital/events">See all</a>
                     </p>
-                    {{/compare ~}}
                 </div>
+                {{/compare ~}}
             </div>
         </div>
     </div>
