@@ -1,8 +1,8 @@
 // Module imports
 import * as request from 'request';
-import { IMenus, IMenuItem } from '@scvo/router';
+import { MenuDictionary, MenuItem } from '@scvo/router';
 
-export async function getMenus(domain: string, stripDomains: string[]): Promise<IMenus> {
+export async function getMenus(domain: string, stripDomains: string[]): Promise<MenuDictionary> {
     var domainRegex: RegExp = null;
     if(stripDomains && stripDomains.length > 0){
         stripDomains = stripDomains.map((domain: string) => { return domain.replace(/\./g, '\\.'); });
@@ -68,7 +68,7 @@ function getMenu(domain: string, menuId: number): Promise<any> {
     });
 }
 
-function transformWpMenu(wpMenuItem: IWPMenuItem, domainRegex: RegExp): IMenuItem{
+function transformWpMenu(wpMenuItem: IWPMenuItem, domainRegex: RegExp): MenuItem{
     var children = !wpMenuItem.children ? [] : wpMenuItem.children.map((child) => { return transformWpMenu(child, domainRegex); });
     var metaData = {};
 
@@ -95,7 +95,7 @@ function transformWpMenu(wpMenuItem: IWPMenuItem, domainRegex: RegExp): IMenuIte
         path = path.substr(0, path.length - 1);
     }
 
-    var menuItem: IMenuItem = {
+    var menuItem: MenuItem = {
         label: wpMenuItem.title,
         path: path,
         route: route,

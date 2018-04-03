@@ -15,7 +15,7 @@ const Dot = require('dot-object');
 import * as S from 'string';
 
 // Router modules
-import { Router, RouteMatch, IMenus, IRouterRequest, IRouterResponse, IContext } from '@scvo/router';
+import { Router, RouteMatch, MenuDictionary, RouterRequest, RouterResponse, RouterConfiguration, HttpVerb } from '@scvo/router';
 import { ElasticsearchRouterTask } from '@scvo/router-task-elasticsearch';
 import { HandlebarsRouterDestination } from '@scvo/router-destination-handlebars';
 import { RedirectRouterDestination } from '@scvo/router-destination-redirect';
@@ -26,6 +26,7 @@ import { DomainMap } from './domain-map';
 import { CmsMap } from './cms-map';
 import { getMenus } from './menus';
 import { fsPdf } from './fs-pdf';
+
 
 // Setup firebase app
 const config = {
@@ -79,13 +80,23 @@ async function index(req: express.Request, res: express.Response, next: express.
 
         var site = routers[sitename];
 
-        var request: IRouterRequest = {
+        var headers: any = {};
+        for (var key in req.headers) {
+          headers[key] = req.headers[key];
+        }
+
+        var cookies: any = {};
+        for (var key in req.cookies) {
+          cookies[key] = req.cookies[key];
+        }        
+
+        var request: RouterRequest = {
             url: url.parse(fullUrl),
             fullUrl: fullUrl,
             params: req.query,
-            headers: req.headers,
-            cookies: req.cookies,
-            verb: req.method,
+            headers: headers,
+            cookies: cookies,
+            verb: (req.method as HttpVerb),
             body: req.body
         };
 
@@ -116,9 +127,9 @@ async function menuUpdate(req: express.Request, res: express.Response, next: exp
             console.log('UPDATING SITE MENUS:', siteKey);
             var path = '/sites/' + siteKey;
 
-            var contextJson: IContext = await getJson<IContext>(path); 
+            var contextJson: RouterConfiguration = await getJson<RouterConfiguration>(path); 
             var domain = CmsMap[siteKey] || 'cms.scvo.net';
-            var menus: IMenus = await getMenus(domain, contextJson.domains);
+            var menus: MenuDictionary = await getMenus(domain, contextJson.domains);
             await putJson('/sites/' + siteKey + '/menus', menus);
             res.end();
             return next();
@@ -275,7 +286,7 @@ async function loadRouters(): Promise<any> {
     try {
         if (routers && !process.env.devmode) return;
 
-        var sites = await getJson< { [site: string]: IContext }>('/app-engine/');
+        var sites = await getJson< { [site: string]: RouterConfiguration }>('/app-engine/');
         
         var routerTasks = [
             new ElasticsearchRouterTask({})
