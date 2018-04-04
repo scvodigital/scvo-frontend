@@ -1,215 +1,231 @@
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBJdxcQpVKQ6HdrjnPXycUoZqsmp-Ep3l0&callback=initMap" async defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"></script>
 <script>
-    var terms = {
-        sectors: [
-            {{#each data.terms.types.aggregations.sectors.buckets}}
-                { field: 'sectors', term: {{{stringify key}}} },
-            {{/each}} 
-        ],
-        roles: [
-            {{#each data.terms.types.aggregations.roles.buckets}}
-                { field: 'roles', term: {{{stringify key}}} },
-            {{/each}} 
-        ],
-        statuses: [
-            {{#each data.terms.types.aggregations.statuses.buckets}}
-                { field: 'statuses', term: {{{stringify key}}} },
-            {{/each}} 
-        ]
-    };
+  var terms = {
+    sectors: [
+      {{#each data.terms.types.aggregations.sectors.buckets}}
+        { field: 'sectors', term: {{{stringify key}}} },
+      {{/each}} 
+    ],
+    roles: [
+      {{#each data.terms.types.aggregations.roles.buckets}}
+        { field: 'roles', term: {{{stringify key}}} },
+      {{/each}} 
+    ],
+    statuses: [
+      {{#each data.terms.types.aggregations.statuses.buckets}}
+        { field: 'statuses', term: {{{stringify key}}} },
+      {{/each}} 
+    ]
+  };
 
-    var selectedTerms = {
-        sectors: [],
-        roles: [],
-        statuses: [],
-        keywords: []
-    };
+  var selectedTerms = {
+    sectors: [],
+    roles: [],
+    statuses: [],
+    keywords: []
+  };
 
-    var sectorsEngine = new Bloodhound({
-        datumTokenizer: Bloodhound.tokenizers.obj.whitespace('term'),
-        queryTokenizer: Bloodhound.tokenizers.whitespace,
-        local: terms.sectors
-    });
+  var sectorsEngine = new Bloodhound({
+    datumTokenizer: Bloodhound.tokenizers.obj.whitespace('term'),
+    queryTokenizer: Bloodhound.tokenizers.whitespace,
+    local: terms.sectors
+  });
 
-    var rolesEngine = new Bloodhound({
-        datumTokenizer: Bloodhound.tokenizers.obj.whitespace('term'),
-        queryTokenizer: Bloodhound.tokenizers.whitespace,
-        local: terms.roles
-    });
-    
-    var statusesEngine = new Bloodhound({
-        datumTokenizer: Bloodhound.tokenizers.obj.whitespace('term'),
-        queryTokenizer: Bloodhound.tokenizers.whitespace,
-        local: terms.statuses
-    });
+  var rolesEngine = new Bloodhound({
+    datumTokenizer: Bloodhound.tokenizers.obj.whitespace('term'),
+    queryTokenizer: Bloodhound.tokenizers.whitespace,
+    local: terms.roles
+  });
+  
+  var statusesEngine = new Bloodhound({
+    datumTokenizer: Bloodhound.tokenizers.obj.whitespace('term'),
+    queryTokenizer: Bloodhound.tokenizers.whitespace,
+    local: terms.statuses
+  });
 
-    $('#tt-what #what').typeahead({
-        minlength: 0,
-        highlight: true,
-    },
-    {
-        name: 'sectors',
-        source: sectorsEngine,
-        display: 'term',
-        templates: {
-            header: '<h3>Sectors</h3>'
-        }
-    },
-    {
-        name: 'roles',
-        source: rolesEngine,
-        display: 'term',
-        templates: {
-            header: '<h3>Roles</h3>'
-        }
-    },
-    {
-        name: 'statuses',
-        source: statusesEngine,
-        display: 'term',
-        templates: {
-            header: '<h3>Statuses</h3>'
-        }
-    }).on('typeahead:select', typeaheadSelect)
+  $('#tt-what #what').typeahead({
+    minlength: 0,
+    highlight: true,
+  },
+  {
+    name: 'sectors',
+    source: sectorsEngine,
+    display: 'term',
+    templates: {
+      header: '<h3>Sectors</h3>'
+    }
+  },
+  {
+    name: 'roles',
+    source: rolesEngine,
+    display: 'term',
+    templates: {
+      header: '<h3>Roles</h3>'
+    }
+  },
+  {
+    name: 'statuses',
+    source: statusesEngine,
+    display: 'term',
+    templates: {
+      header: '<h3>Statuses</h3>'
+    }
+  })
+    .on('typeahead:select', typeaheadSelect)
     .on('typeahead:autocomplete', typeaheadSelect)
     .on('keydown', function(ev) {
-        switch (ev.keyCode) {
-            case (9): 
-                ev.preventDefault(); 
-                break;
-            case (13):
-                console.log('keydown', arguments, $('#what').typeahead('getActive'));
-                ev.preventDefault();
-                var val = $('#what').val();
-                if (val) {
-                    addChip('keywords', $('#what').val());
-                    $('#what').typeahead('val', '');
-                    refocusWhat();
-                }
-                break;
-        }
+      switch (ev.keyCode) {
+        case (9): 
+          ev.preventDefault(); 
+          break;
+        case (13):
+          console.log('keydown', arguments, $('#what').typeahead('getActive'));
+          ev.preventDefault();
+          var val = $('#what').val();
+          if (val) {
+            addChip('keywords', $('#what').val());
+            $('#what').typeahead('val', '');
+            refocusWhat();
+          }
+          break;
+      }
     });
 
-    function typeaheadSelect(ev, suggestion) {
-        addChip(suggestion.field, suggestion.term);
-        $('#what')
-            .typeahead('val', '')
-            .typeahead('close');
-        refocusWhat();
-    }
+  function typeaheadSelect(ev, suggestion) {
+    addChip(suggestion.field, suggestion.term);
+    $('#what')
+      .typeahead('val', '')
+      .typeahead('close');
+    refocusWhat();
+  }
 
-    function refocusWhat() {
-        setTimeout(function() {
-            $('#what').focus();
-        }, 100);
-    }
+  function refocusWhat() {
+    setTimeout(function() {
+      $('#what').focus();
+    }, 100);
+  }
 
-    function addChip(field, term) {
-        if (selectedTerms[field].indexOf(term) === -1) {
-            selectedTerms[field].push(term);
-        }
-        updateTerms();
+  function addChip(field, term) {
+    if (selectedTerms[field].indexOf(term) === -1) {
+      selectedTerms[field].push(term);
     }
+    updateTerms();
+  }
 
-    function removeChip(field, term) {
-        if (selectedTerms[field].indexOf(term) > -1) {
-            selectedTerms[field].splice(selectedTerms[field].indexOf(term), 1);
-        }
-        updateTerms();
+  function removeChip(field, term) {
+    if (selectedTerms[field].indexOf(term) > -1) {
+      selectedTerms[field].splice(selectedTerms[field].indexOf(term), 1);
     }
+    updateTerms();
+  }
 
-    function updateTerms() {
-        redrawTermChips();
-        doHomeSearch(); 
-    }
+  function updateTerms() {
+    redrawTermChips();
+    doHomeSearch(); 
+  }
 
-    function doHomeSearch() {
-        var body = {}
-        Object.keys(selectedTerms).forEach(function(field) {
-            if (selectedTerms[field].length > 0) {
-                body[field] = selectedTerms[field]
-            }
+  function doHomeSearch() {
+    var body = {}
+    Object.keys(selectedTerms).forEach(function(field) {
+      if (selectedTerms[field].length > 0) {
+        body[field] = selectedTerms[field]
+      }
+    });
+    var options = {
+      url: '/home-search',
+      type: 'POST',
+      data: JSON.stringify(body),
+      contentType: 'application/json; charset=utf-8'
+    };
+    $.ajax(options).done(function(results) {
+      $('#search-results').empty();
+      clearPins();
+      $('#search-results-total').text(results.hits.total);
+      if (results.hits.total > 0) {
+        var vacancies = results.hits.hits.map(hit => hit._source);
+        vacancies.forEach(function(vacancy) {
+          $('#search-results').append(vacancy.rendered.scvo_gist);
         });
-        var options = {
-            url: '/home-search',
-            type: 'POST',
-            data: JSON.stringify(body),
-            contentType: 'application/json; charset=utf-8'
-        };
-        $.ajax(options).done(function(results) {
-            $('#search-results').empty();
-            clearPins();
-            $('#search-results-total').text(results.hits.total);
-            if (results.hits.total > 0) {
-                var vacancies = results.hits.hits.map(hit => hit._source);
-                vacancies.forEach(function(vacancy) {
-                    $('#search-results').append(vacancy.rendered.scvo_gist);
-                });
-                refreshMap(vacancies);
-            } else {
+        refreshMap(vacancies);
+      } else {
 
-            }
-        });
+      }
+    });
+  }
+
+  function redrawTermChips() {
+    $('#search-terms').empty();
+    Object.keys(selectedTerms).forEach(function(field) {
+      selectedTerms[field].forEach(function(term) {
+        var chip = $('<div />')
+          .addClass('mdc-chip mdc-theme--primary-bg')
+          .attr({ tabindex: 0 })
+          .appendTo('#search-terms');
+        var chipText = $('<div />')
+          .addClass('mdc-chip__text')
+          .html('<strong>' + field + '</strong>: ' + term)
+          .appendTo(chip);
+        var chipClose = $('<i />')
+          .addClass('fa fa-times-circle mdc-chip__icon mdc-chip__icon--trailing')
+          .attr({ tabindex: 0, role: 'button' })
+          .on('click', function() {
+            removeChip(field, term);
+          })
+          .appendTo(chip);
+      });  
+    });
+  }
+
+  var map;
+  var markers = [];
+  var homeCoords = { lat: 57.0268117, lng: -5.5787529 };
+  var defaultZoom = 8;
+  function initMap() {
+    if ('geolocation' in navigator) {
+      navigator.geolocation.getCurrentPosition(function(position) {
+        console.log('POSITION:', position);
+        homeCoords.lat = position.coords.latitude;
+        homeCoords.lng = position.coords.longitude;
+      });
+    } else {
+      console.log('Nae geolocation here');
+      createMap();
     }
+  }
 
-    function redrawTermChips() {
-        $('#search-terms').empty();
-        Object.keys(selectedTerms).forEach(function(field) {
-            selectedTerms[field].forEach(function(term) {
-                var chip = $('<div />')
-                    .addClass('mdc-chip mdc-theme--primary-bg')
-                    .attr({ tabindex: 0 })
-                    .appendTo('#search-terms');
-                var chipText = $('<div />')
-                    .addClass('mdc-chip__text')
-                    .html('<strong>' + field + '</strong>: ' + term)
-                    .appendTo(chip);
-                var chipClose = $('<i />')
-                    .addClass('fa fa-times-circle mdc-chip__icon mdc-chip__icon--trailing')
-                    .attr({ tabindex: 0, role: 'button' })
-                    .on('click', function() {
-                        removeChip(field, term);
-                    })
-                    .appendTo(chip);
-            });  
+  function createMap() {
+    map = new google.maps.Map($('#map-full')[0], {
+      center: homeCoords,
+      zoom: defaultzoom
+    });
+  }
+
+  function clearPins() {
+    markers.forEach(function(marker) {
+      marker.setMap(null);
+      delete marker;
+    });
+    markers = [];
+  }
+
+  function refreshMap(results) {
+    var bounds = new google.maps.LatLngBounds();
+
+    results.forEach(function(result) {
+      result.geo_vacancy_coords.forEach(function(coord) {
+        var marker = new google.maps.Marker({
+          position: new google.maps.LatLng(coord.lat, coord.lon),
+          title: 'JOB',
         });
-    }
+        marker.setMap(map);
+        bounds.extend(marker.position);
+        markers.push(marker);
+      });
+    });
 
-    var map;
-    var markers = [];
-    function initMap() {
-        map = new google.maps.Map($('#map-full')[0], {
-            center: { lat: 57.0268117, lng: -5.5787529 },
-            zoom: 8
-        });
-    }
-
-    function clearPins() {
-        markers.forEach(function(marker) {
-            marker.setMap(null);
-            delete marker;
-        });
-        markers = [];
-    }
-
-    function refreshMap(results) {
-        var bounds = new google.maps.LatLngBounds();
-
-        results.forEach(function(result) {
-            result.geo_vacancy_coords.forEach(function(coord) {
-                var marker = new google.maps.Marker({
-                    position: new google.maps.LatLng(coord.lat, coord.lon),
-                    title: 'JOB',
-                });
-                marker.setMap(map);
-                bounds.extend(marker.position);
-                markers.push(marker);
-            });
-        });
-
-        map.fitBounds(bounds);
-    }
+    map.fitBounds(bounds);
+  }
 </script>
 <!--
     {{{stringify data.terms}}}

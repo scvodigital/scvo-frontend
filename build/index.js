@@ -40,6 +40,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var bodyParser = require("body-parser");
 var compression = require("compression");
 var cors = require("cors");
+var https = require("https");
 // Import NPM modules
 var express = require("express");
 var admin = require("firebase-admin");
@@ -357,9 +358,25 @@ function sendError(message, code, error, res) {
         return;
     }
 }
-app.listen(port, function () {
-    console.log('Listening on port', port);
-});
+var server = null;
+if (process.env.devmode) {
+    var keyPath = path.join(__dirname, '../test-cert/server.key');
+    var crtPath = path.join(__dirname, '../test-cert/server.crt');
+    var options = {
+        key: fs.readFileSync(keyPath),
+        cert: fs.readFileSync(crtPath),
+        requestCert: false,
+        rejectUnauthorized: false
+    };
+    server = https.createServer(options, app).listen(port, function () {
+        console.log('Listening securely on port', port);
+    });
+}
+else {
+    app.listen(port, function () {
+        console.log('Listening on port', port);
+    });
+}
 // Utility functions!
 function loadRouters() {
     return __awaiter(this, void 0, void 0, function () {
