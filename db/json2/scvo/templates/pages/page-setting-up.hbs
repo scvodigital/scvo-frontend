@@ -1,33 +1,35 @@
 <div class="page">
-    {{> header_splash}}
+  {{> header_splash}}
+  <div class="container-fluid">
+    {{> breadcrumbs}}
+    <div class="mdc-layout-grid">
+      <div class="mdc-layout-grid__inner">
+        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-9-desktop mdc-layout-grid__cell--span-5-tablet mdc-layout-grid__cell--span-4-phone content page-content">
+          {{{data.primaryResponse.hits.hits.[0]._source.rendered.scvo_full}}}
+        </div>
+        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-3-tablet mdc-layout-grid__cell--span-4-phone sidebar page-sidebar">
+          {{> menu_setting_up}}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="footer-image faqs">
     <div class="container-fluid">
-        {{> breadcrumbs}}
-        <div class="mdc-layout-grid">
-            <div class="mdc-layout-grid__inner">
-                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-9-desktop mdc-layout-grid__cell--span-5-tablet mdc-layout-grid__cell--span-4-phone content page-content">
-                    {{{data.primaryResponse.hits.hits.[0]._source.rendered.scvo_full}}}
-                </div>
-                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-3-tablet mdc-layout-grid__cell--span-4-phone sidebar page-sidebar">
-                    {{> menu_setting_up}}
-                </div>
-            </div>
+      <div class="mdc-layout-grid">
+        <div class="mdc-layout-grid__inner">
+          <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
+            <h2>
+              <a href="/setting-up-a-charity/frequently-asked-questions">Frequently asked questions</a>
+            </h2>
+            <p>What is a SCIO?</p>
+            <p>Do I need to be a charity to fundraise?</p>
+            <p>Can we pay the trustees of our charity?</p>
+            <p>What is an honorarium?</p>
+            <p>How long does it take to set up a charity?</p>
+            <a href="/setting-up-a-charity/frequently-asked-questions" class="mdc-button mdc-button--raised">See all FAQs</a>
+          </div>
         </div>
+      </div>
     </div>
-    <div class="footer-image faqs">
-        <div class="container-fluid">
-            <div class="mdc-layout-grid">
-                <div class="mdc-layout-grid__inner">
-                    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
-                        <h2>Frequently asked questions</h2>
-                        <p>What is a SCIO?</p>
-                        <p>Do I need to be a charity to fundraise?</p>
-                        <p>Can we pay the trustees of our charity?</p>
-                        <p>What is an honorarium?</p>
-                        <p>How long does it take to set up a charity?</p>
-                        <a href="/setting-up-a-charity/frequently-asked-questions" class="mdc-button mdc-button--raised">See all FAQs</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+  </div>
 </div>
