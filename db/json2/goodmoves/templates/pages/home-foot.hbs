@@ -1,4 +1,4 @@
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBJdxcQpVKQ6HdrjnPXycUoZqsmp-Ep3l0&callback=initMap" async defer></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBJdxcQpVKQ6HdrjnPXycUoZqsmp-Ep3l0&libraries=places&callback=initMap" async defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"></script>
 <script>
   var terms = {
@@ -143,11 +143,11 @@
       clearPins();
       $('#search-results-total').text(results.hits.total);
       if (results.hits.total > 0) {
-        var vacancies = results.hits.hits.map(hit => hit._source);
+        vacancies = results.hits.hits.map(hit => hit._source);
         vacancies.forEach(function(vacancy) {
           $('#search-results').append(vacancy.rendered.scvo_gist);
         });
-        refreshMap(vacancies);
+        refreshMap();
       } else {
 
       }
@@ -177,27 +177,51 @@
     });
   }
 
-  var map;
+  var map, autocomplete, placeSearch, scotlandCoords, homeMarker, vacancies = [];
   var markers = [];
-  var homeCoords = { lat: 57.0268117, lng: -5.5787529 };
   var defaultZoom = 8;
   function initMap() {
-    if ('geolocation' in navigator) {
-      navigator.geolocation.getCurrentPosition(function(position) {
-        console.log('POSITION:', position);
-        homeCoords.lat = position.coords.latitude;
-        homeCoords.lng = position.coords.longitude;
-      });
-    } else {
-      console.log('Nae geolocation here');
-      createMap();
-    }
+    autocomplete = new google.maps.places.Autocomplete($('#where')[0], { types: ['geocode'] });
+    autocomplete.addListener('place_changed', autocompleteChange);
+    createMap();
+    geolocate();
   }
 
+  function autocompleteChange() {
+    var place = autocomplete.getPlace();
+    console.log('Autocomplete change', place);
+    console.log('Autocomplete coords', place.geometry.location.lat(), ',', place.geometry.location.lng());
+    var position = new google.maps.LatLng(place.geometry.location.lat(), place.geometry.location.lng());
+    changeHome(position, place.formattedAddress);
+  }
+
+  function changeHome(position, title) {
+    if (homeMarker) {
+      homeMarker.setPosition(position);
+      homeMarker.setTitle(title);
+    } else{ 
+      homeMarker = new google.maps.Marker({
+        position: position,
+        title: title,
+      });
+      homeMarker.setMap(map);
+    }
+    refreshMap();
+  }
+  
+  function geolocate() {
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function(position) {
+        var position = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+        changeHome(position, 'Home');
+      });
+    }
+  }
+  
   function createMap() {
     map = new google.maps.Map($('#map-full')[0], {
-      center: homeCoords,
-      zoom: defaultzoom
+      center: new google.maps.LatLng(57.0268117, -5.5676529),
+      zoom: defaultZoom
     });
   }
 
@@ -209,22 +233,34 @@
     markers = [];
   }
 
-  function refreshMap(results) {
+  function refreshMap() {
     var bounds = new google.maps.LatLngBounds();
 
-    results.forEach(function(result) {
-      result.geo_vacancy_coords.forEach(function(coord) {
-        var marker = new google.maps.Marker({
-          position: new google.maps.LatLng(coord.lat, coord.lon),
-          title: 'JOB',
+    vacancies.forEach(function(result) {
+      if (result.geo_vacancy_coords) {
+        result.geo_vacancy_coords.forEach(function(coord) {
+          var marker = new google.maps.Marker({
+            position: new google.maps.LatLng(coord.lat, coord.lon),
+            title: 'JOB',
+          });
+          marker.setMap(map);
+          bounds.extend(marker.position);
+          markers.push(marker);
         });
-        marker.setMap(map);
-        bounds.extend(marker.position);
-        markers.push(marker);
-      });
+      }
     });
+    if (homeMarker) {
+      bounds.extend(homeMarker.position);
+    }
 
     map.fitBounds(bounds);
+
+    var zoom = map.getZoom();
+    if (zoom > 12) {
+      map.setZoom(12);
+    } else if (zoom < 6) {
+      map.setZoom(6);
+    }
   }
 </script>
 <!--
