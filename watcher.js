@@ -6,7 +6,7 @@ const livereload = require('livereload');
 // Paths
 var json2Dir = path.join(__dirname, 'db/json2');
 var assetsSrcDir = path.join(__dirname, 'assets');
-var assetsDstDir = path.join(__dirname, 'dist/assets');
+var assetsDstDir = path.join(__dirname, 'build/assets');
 var dbPath = path.join(__dirname, 'db/db.json');
 
 var lsconfig = {

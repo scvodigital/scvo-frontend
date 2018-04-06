@@ -1,11 +1,14 @@
 {
 	"_source": [
 		"rendered.scvo_gist",
-		"geo_vacancy_coords"
+		"geo_vacancy_coords",
+    "Id",
+    "title"
 	],
+  "size": "1000",
 	"query": {
         "bool": {
-            {{#ifAny request.body.sectors request.body.roles request.body.statuses}}
+            {{#ifAny request.body.sectors request.body.roles request.body.statuses request.body.distance request.body.bounds}}
                 "filter": [
                     {{#if request.body.sectors}}
                         {
@@ -13,7 +16,7 @@
                                 "sectors": {{{stringify request.body.sectors}}}
                             }
                         }
-                        {{#ifAny request.body.roles request.body.statuses}},{{/ifAny}}
+                        {{#ifAny request.body.roles request.body.statuses request.body.distance request.body.bounds}},{{/ifAny}}
                     {{/if}}
                     {{#if request.body.roles}}
                         {
@@ -21,7 +24,7 @@
                                 "roles": {{{stringify request.body.roles}}}
                             }
                         }
-                        {{#if request.body.statuses}},{{/if}}
+                        {{#ifAny request.body.statuses request.body.distance request.body.bounds}},{{/ifAny}}
                     {{/if}}
                     {{#if request.body.statuses}}
                         {
@@ -29,6 +32,35 @@
                                 "status": {{{stringify request.body.statuses}}}
                             }
                         }
+                        {{#ifAny request.body.distance request.body.bounds}},{{/ifAny}}
+                    {{/if}}
+                    {{#if request.body.distance}}
+                      {
+                        "geo_distance": {
+                          "distance": "{{request.body.distance}}meters",
+                          "geo_vacancy_coords": {
+                            "lat": {{request.body.lat}},
+                            "lon": {{request.body.lng}}
+                          }
+                        }
+                      }
+                      {{#ifAny request.body.bounds}},{{/ifAny}}
+                    {{/if}}
+                    {{#if request.body.bounds}}
+                      {
+                        "geo_bounding_box": {
+                          "geo_vacancy_coords": {
+                            "top_left": {
+                              "lat": {{request.body.bounds.northEast.latitude}},
+                              "lon": {{request.body.bounds.southWest.longitude}}
+                            },
+                            "bottom_right": {
+                              "lat": {{request.body.bounds.southWest.latitude}},
+                              "lon": {{request.body.bounds.northEast.longitude}}
+                            }
+                          }
+                        }
+                      }
                     {{/if}}
                 ]
                 {{#if request.body.keywords}},{{/if}}
