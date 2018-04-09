@@ -352,10 +352,13 @@ async function loadRouters(): Promise<any> {
 }
 
 function registeredRoutes(): string[] {
-  return app._router.stack
-      .filter(
-          (r: any) => {return r.route && r.route.path && r.route.path !== '*'})
-      .map((r: any) => {r.route.path});
+  var routes: string[] = [];
+  app._router.stack.forEach((r: any) => {
+    if (r.route && r.route.path && r.route.path !== '*') {
+      routes.push(r.route.path);
+    }
+  });
+  return routes;
 }
 
 function isRegisteredRoute(path: string): boolean {
