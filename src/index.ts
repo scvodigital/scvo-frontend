@@ -3,6 +3,8 @@
 import * as bodyParser from 'body-parser';
 import * as compression from 'compression';
 import * as cors from 'cors';
+import * as https from 'https';
+
 // Import NPM modules
 import * as express from 'express';
 import * as admin from 'firebase-admin';
@@ -304,9 +306,26 @@ function sendError(
   }
 }
 
-app.listen(port, function() {
-  console.log('Listening on port', port);
-})
+var server: any = null;
+if (process.env.devmode) {
+  const keyPath = path.join(__dirname, '../test-cert/server.key');
+  const crtPath = path.join(__dirname, '../test-cert/server.crt');
+
+  const options = {
+    key: fs.readFileSync(keyPath),
+    cert: fs.readFileSync(crtPath),
+    requestCert: false,
+    rejectUnauthorized: false
+  };
+
+  server = https.createServer(options, app).listen(port, () => {
+    console.log('Listening securely on port', port);
+  });
+} else {
+  app.listen(port, function() {
+    console.log('Listening on port', port);
+  });
+}
 
 // Utility functions!
 async function loadRouters(): Promise<any> {

@@ -2,18 +2,18 @@
   "name": "@scvo/frontend",
   "version": "0.0.1",
   "description": "The App Engine service that runs the SCVO=>Router",
-  "main": "dist/index.js",
+  "main": "build/index.js",
   "engines": {
     "node": ">=6.11.3"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "cleanup": "rm -rf ./dist",
+    "cleanup": "rm -rf ./build/**",
     "json2": "json-inc ./db/json2/**/*.json2 ./db/json; json-inc ./db/db.json2 ./db",
     "copy": "cp ./db/db.json ./build/db.json; cp -r ./assets ./build/assets",
     "sass": "node-sass ./build/assets/css -o build/assets/css",
     "upgrade-router": "yarn add -E @scvo/router @scvo/router-task-elasticsearch @scvo/router-destination-handlebars",
-    "build": "npm run compile; npm run json2; npm run copy; npm run sass",
+    "build": "npm run cleanup; npm run compile; npm run json2; npm run copy; npm run sass",
     "start": "npm run compile; node build/index.js",
     "dev": "npm run build; devmode=true node build/index.js",
     "dev-router": "npm run router; npm run dev",
