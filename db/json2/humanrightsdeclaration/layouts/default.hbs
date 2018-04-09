@@ -32,6 +32,14 @@
       gtag('js', new Date());
 
       gtag('config', 'UA-3467930-28', { 'send_page_view': true });
+
+      {{#if request.params.query.debug ~}}
+      console.log('#### DEBUG MODE ON ####');
+      console.log('Request:', {{{regexReplace (regexReplace (stringify request) "(<\/script)" "gi" '</scr\" + \"ipt') "(\r|\n)" "gi" ""}}});
+      console.log('Route:', {{{regexReplace (regexReplace (stringify route) "(<\/script)" "gi" '</scr\" + \"ipt') "(\r|\n)" "gi" ""}}});
+      console.log('Data:', {{{regexReplace (regexReplace (stringify data) "(<\/script)" "gi" '</scr\" + \"ipt') "(\r|\n)" "gi" ""}}});
+      console.log('Menus:', {{{regexReplace (regexReplace (stringify context.menus) "(<\/script)" "gi" '</scr\" + \"ipt') "(\r|\n)" "gi" ""}}});
+      {{/if ~}}
     </script>
 </head>
 <body class="{{#if request.params.path}}{{replace request.params.path '_' ' '}}{{else}}home{{/if}}">
