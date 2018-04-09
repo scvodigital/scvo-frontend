@@ -1,8 +1,7 @@
 {
     "index": {
         "pattern": "/",
-        "tasks": [
-            {
+        "tasks": [{
                 "name": "terms",
                 "taskType": "elasticsearch",
                 "config": {
@@ -10,16 +9,31 @@
                     "elasticsearchConfig": {
                         "apiVersion": "5.6"
                     },
-                    "queryTemplates": [
-                        {
-                            "name": "types",
-                            "index": "web-content-production",
-                            "type": "goodmoves-job",
-                            "template": "{$./queries/jobs/aggs.json}"
-                        }
-                    ]
+                    "queryTemplates": [{
+                        "name": "types",
+                        "index": "web-content-production",
+                        "type": "goodmoves-job",
+                        "template": "{$./queries/jobs/aggs.json}"
+                    }]
+                }
+            },
+            {
+                "name": "currently_recruiting",
+                "taskType": "elasticsearch",
+                "config": {
+                    "connectionStringTemplate": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
+                    "elasticsearchConfig": {
+                        "apiVersion": "5.6"
+                    },
+                    "queryTemplates": [{
+                        "name": "organisations",
+                        "index": "web-content-production",
+                        "type": "goodmoves-job",
+                        "template": "{$./queries/organisations/currently-recruiting-random.json}"
+                    }]
                 }
             }
+
         ],
         "destination": {
             "destinationType": "handlebars",
@@ -34,23 +48,21 @@
     },
     "four_oh_four": {
         "pattern": "/404",
-        "tasks": [
-            {
-                "name": "not_found",
-                "taskType": "elasticsearch",
-                "config": {
-                    "connectionStringTemplate": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
-                    "elasticsearchConfig": {
-                        "apiVersion": "5.6"
-                    },
-                    "queryTemplates": {
-                        "index": "web-content-production",
-                        "type": "goodmoves-page",
-                        "template": "{$./queries/pages/not-found.json}"
-                    }
+        "tasks": [{
+            "name": "not_found",
+            "taskType": "elasticsearch",
+            "config": {
+                "connectionStringTemplate": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
+                "elasticsearchConfig": {
+                    "apiVersion": "5.6"
+                },
+                "queryTemplates": {
+                    "index": "web-content-production",
+                    "type": "goodmoves-page",
+                    "template": "{$./queries/pages/not-found.json}"
                 }
             }
-        ],
+        }],
         "destination": {
             "destinationType": "handlebars",
             "config": {
@@ -59,80 +71,66 @@
                     "body": "{$./templates/errors/404.hbs}",
                     "foot": ""
                 }
-            }
-        }
-    },
-    "five_hundred": {
-        "pattern": "/500",
-        "tasks": [],
-        "destination": {
-            "destinationType": "handlebars",
-            "config": {
-                "default": {
-                    "head": "{$./templates/pages/page-head-tags.hbs}",
-                    "body": "{$./templates/errors/500.hbs}",
-                    "foot": ""
-                }
-            }
-        }
-    },
-    "robots": {
-        "pattern": "/robots.txt",
-        "tasks": [],
-        "destination": {
-            "destinationType": "handlebars",
-            "config": {
-                "txt": {
-                    "content": "{$./templates/robots.txt}"
-                }
-            }
-        }
-    },
-    "humans": {
-        "pattern": "/humans.txt",
-        "tasks": [],
-        "destination": {
-            "destinationType": "handlebars",
-            "config": {
-                "txt": {
-                    "content": "{$./templates/humans.txt}"
+            },
+            "home_search": {
+                "pattern": "/home-search",
+                "tasks": [{
+                    "name": "map_data",
+                    "taskType": "elasticsearch",
+                    "config": {
+                        "connectionStringTemplate": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
+                        "elasticsearchConfig": {
+                            "apiVersion": "5.6",
+                            "log": "debug"
+                        },
+                        "queryTemplates": {
+                            "index": "web-content-production",
+                            "type": "goodmoves-job-test",
+                            "template": "{$./queries/jobs/home_search.json}"
+                        }
+                    }
+                }],
+                "destination": {
+                    "destinationType": "handlebars",
+                    "config": {
+                        "data": {
+                            "content": "{$./templates/pages/home_search.hbs}"
+                        }
+                    }
                 }
             }
         }
     },
     "home_search": {
         "pattern": "/home-search",
-        "tasks": [
-            {
-                "name": "map_data",
-                "taskType": "elasticsearch",
-                "config": {
-                    "connectionStringTemplate": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
-                    "elasticsearchConfig": {
-                        "apiVersion": "5.6",
-                        "log": "debug"
-                    },
-                    "queryTemplates": {
-                        "index": "web-content-production",
-                        "type": "goodmoves-job-test",
-                        "template": "{$./queries/jobs/home_search.json}"
-                    }
+        "tasks": [{
+            "name": "map_data",
+            "taskType": "elasticsearch",
+            "config": {
+                "connectionStringTemplate": "https://readonly:onlyread@50896fdf5c15388f8976945e5582a856.eu-west-1.aws.found.io",
+                "elasticsearchConfig": {
+                    "apiVersion": "5.6",
+                    "log": "trace"
+                },
+                "queryTemplates": {
+                    "index": "web-content-production",
+                    "type": "goodmoves-job-test",
+                    "template": "{$./queries/jobs/home-search.json}"
                 }
             }
-        ],
+        }],
         "destination": {
             "destinationType": "handlebars",
             "config": {
                 "data": {
-                    "content": "{$./templates/pages/home_search.hbs}"
+                    "content": "{$./templates/pages/home-search.hbs}"
                 }
             }
         }
     },
     "search": {
         "pattern": "/search",
-        "tasks": [
-            {
+        "tasks": [{
                 "name": "primaryResponse",
                 "taskType": "elasticsearch",
                 "config": {
@@ -155,8 +153,7 @@
                     "elasticsearchConfig": {
                         "apiVersion": "5.6"
                     },
-                    "queryTemplates": [
-                        {
+                    "queryTemplates": [{
                             "name": "not_found",
                             "index": "web-content-production",
                             "type": "goodmoves-job",
@@ -190,8 +187,7 @@
     "{:./goodmoves-redirects.json}": "",
     "_default": {
         "pattern": "/*path",
-        "tasks": [
-            {
+        "tasks": [{
                 "name": "primaryResponse",
                 "taskType": "elasticsearch",
                 "config": {
@@ -215,14 +211,12 @@
                     "elasticsearchConfig": {
                         "apiVersion": "5.6"
                     },
-                    "queryTemplates": [
-                        {
-                            "name": "not_found",
-                            "index": "web-content-production",
-                            "type": "goodmoves-page,goodmoves-job",
-                            "template": "{$./queries/pages/not-found.json}"
-                        }
-                    ]
+                    "queryTemplates": [{
+                        "name": "not_found",
+                        "index": "web-content-production",
+                        "type": "goodmoves-page,goodmoves-job",
+                        "template": "{$./queries/pages/not-found.json}"
+                    }]
                 }
             }
         ],
