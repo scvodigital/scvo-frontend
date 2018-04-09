@@ -65,6 +65,8 @@
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(function(position) {
         console.log('GEOLOCATION:', position);
+        $distance.val('8046.72');
+        searchTermsController.setDistance($distance.val());
         searchTermsController.setCenter(
           position.coords.latitude, 
           position.coords.longitude, 
@@ -72,6 +74,7 @@
         reverseLookup(position.coords.latitude, position.coords.longitude);
       });
     } else {
+      console.log('Getting All');
       vacanciesController.doSearch({});
     }
   }
@@ -170,15 +173,19 @@
                 lat: coords.lat,
                 lng: coords.lon
               },
+              icon: {
+                path: google.maps.SymbolPath.CIRCLE,
+                scale: 6,
+                fillColor: '#58a934',
+                fillOpacity: 0.6,
+                strokeColor: '#58a934',
+                strokeWeight: 1
+              },
               title: vacancy.title,
-              opacity: 1,
-              label: {
-                fontFamily: 'Fontawesome',
-                text: '\uf1ad'
-              }
+              opacity: 1
             };
             var infoWindowOptions = {
-              content: vacancy.rendered.scvo_gist
+              content: vacancy.rendered.goodmoves_map
             };
             var pinOptions = {
               markerOptions: markerOptions,
