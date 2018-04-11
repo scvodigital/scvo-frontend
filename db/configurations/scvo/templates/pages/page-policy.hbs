@@ -139,9 +139,17 @@
                 </h1>
               </section>
               <section class="mdc-card__supporting-text">
-                Search our events
+                {{#with data.supplimentaryResponses.events_total.hits ~}}
+                {{#compare total ">" 0 ~}}
+                We have {{total}} upcoming event{{#compare total ">" 1}}s{{/compare}}
+                {{else}}
+                We don't have any upcoming events, please check back soon!
+                {{/compare ~}}
               </section>
+              {{#compare total ">" 0 ~}}
               <section class="mdc-card__actions"><a class="mdc-card__action" href="/policy-research/events">Find out more</a></section>
+              {{/compare ~}}
+              {{/with ~}}
             </div>
           </div>
           <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
