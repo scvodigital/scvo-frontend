@@ -28,7 +28,8 @@
         {{#if request.params.query.q}}
         {
           "query_string": {
-            "query": "{{request.params.query.q}}",
+            "query": {{{stringify (default request.params.query.q "")}}},
+            "default_field": "text_bag",
             "default_operator": "AND",
             "analyzer": "snowball"
           }
