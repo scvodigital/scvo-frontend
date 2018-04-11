@@ -1,61 +1,61 @@
 {
-    "home": {
-        "pattern": "/",
-        "destination": {
-            "destinationType": "handlebars",
-            "config": {
-                "default": {
-                    "head": "{$./templates/head-tags.hbs}",
-                    "body": "{$./templates/home.hbs}",
-                    "foot": ""
-                }
-            }
-        },
-        "metaData": {
-            "title": "Home"
-        },
-        "tasks": [
-            {
-                "name": "primaryResponse",
-                "taskType": "elasticsearch",
-                "config": {
-                    "connectionStringTemplate": "{$../../elasticsearch-url}",
-                    "elasticsearchConfig": {
-                        "apiVersion": "5.4"
-                    },
-                    "queryTemplates": [
-                        {
-                            "name": "first_query",
-                            "index": "web-content-production",
-                            "type": "goodmoves-job",
-                            "template": "{$./queries/pages/none.json}"
-                        },
-                        {
-                            "name": "second_query",
-                            "index": "web-content-production",
-                            "type": "goodmoves-job",
-                            "template": "{$./queries/pages/none.json}"
-                        }
-                    ]
-                }
-            }
-        ]
-    },
-    "_default": {
-        "pattern": "/*path",
-        "destination": {
-            "destinationType": "handlebars",
-            "config": {
-                "default": {
-                    "head": "{$./templates/head-tags.hbs}",
-                    "body": "{$./templates/404.hbs}",
-                    "foot": ""
-                }
-            }
-        },
-        "tasks": [],
-        "metaData": {
-            "title": "Page Not Found"
+  "home": {
+    "pattern": "/",
+    "destination": {
+      "destinationType": "handlebars",
+      "config": {
+        "default": {
+          "head": "{$./templates/head-tags.hbs}",
+          "body": "{$./templates/home.hbs}",
+          "foot": ""
         }
+      }
+    },
+    "metaData": {
+      "title": "Home"
+    },
+    "tasks": [
+      {
+        "name": "primaryResponse",
+        "taskType": "elasticsearch",
+        "config": {
+          "connectionStringTemplate": "{$../elasticsearch-url.txt}",
+          "elasticsearchConfig": {
+            "apiVersion": "5.4"
+          },
+          "queryTemplates": [
+            {
+              "name": "first_query",
+              "index": "web-content-production",
+              "type": "goodmoves-job",
+              "template": "{$./queries/pages/none.json}"
+            },
+            {
+              "name": "second_query",
+              "index": "web-content-production",
+              "type": "goodmoves-job",
+              "template": "{$./queries/pages/none.json}"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  "_default": {
+    "pattern": "/*path",
+    "destination": {
+      "destinationType": "handlebars",
+      "config": {
+        "default": {
+          "head": "{$./templates/head-tags.hbs}",
+          "body": "{$./templates/404.hbs}",
+          "foot": ""
+        }
+      }
+    },
+    "tasks": [],
+    "metaData": {
+      "title": "Page Not Found"
     }
+  }
 }

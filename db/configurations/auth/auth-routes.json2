@@ -1,134 +1,134 @@
 {
-    "home": {
-        "pattern": "/",
-        "metaData": {
-            "title": "Home"
-        },
-        "tasks": [
-            {
-                "name": "primaryResponse",
-                "taskType": "elasticsearch",
-                "config": {
-                    "connectionStringTemplate": "{$../../elasticsearch-url}",
-                    "elasticsearchConfig": {
-                        "apiVersion": "5.6"
-                    },
-                    "queryTemplates": {
-                        "index": "web-content-production",
-                        "type": "scvo-cms-page",
-                        "template": "{$./queries/none.json}"
-                    }
-                }
-            }
-        ],
-        "destination": {
-            "destinationType": "handlebars",
-            "config": {
-                "default": {
-                    "head": "{$./templates/head-tags.hbs}",
-                    "body": "{$./templates/home.hbs}",
-                    "foot": ""
-                }
-            }
-        }
+  "home": {
+    "pattern": "/",
+    "metaData": {
+      "title": "Home"
     },
-    "sign-up": {
-        "pattern": "/sign-up",
-        "metaData": {
-            "title": "Sign-up"
-        },
-        "tasks": [
-            {
-                "name": "primaryResponse",
-                "taskType": "elasticsearch",
-                "config": {
-                    "connectionStringTemplate": "{$../../elasticsearch-url}",
-                    "elasticsearchConfig": {
-                        "apiVersion": "5.6"
-                    },
-                    "queryTemplates": {
-                        "index": "web-content-production",
-                        "type": "scvo-cms-page",
-                        "template": "{$./queries/none.json}"
-                    }
-                }
-            }
-        ],
-        "destination": {
-            "destinationType": "handlebars",
-            "config": {
-                "default": {
-                    "head": "{$./templates/head-tags.hbs}",
-                    "body": "{$./templates/sign-up.hbs}",
-                    "foot": ""
-                }
-            }
+    "tasks": [
+      {
+        "name": "primaryResponse",
+        "taskType": "elasticsearch",
+        "config": {
+          "connectionStringTemplate": "{$../elasticsearch-url.txt}",
+          "elasticsearchConfig": {
+            "apiVersion": "5.6"
+          },
+          "queryTemplates": {
+            "index": "web-content-production",
+            "type": "scvo-cms-page",
+            "template": "{$./queries/none.json}"
+          }
         }
-    },
-    "profile": {
-        "pattern": "/profile",
-        "metaData": {
-            "title": "Profile"
-        },
-        "tasks": [
-            {
-                "name": "primaryResponse",
-                "taskType": "elasticsearch",
-                "config": {
-                    "connectionStringTemplate": "{$../../elasticsearch-url}",
-                    "elasticsearchConfig": {
-                        "apiVersion": "5.6"
-                    },
-                    "queryTemplates": {
-                        "index": "web-content-production",
-                        "type": "scvo-cms-page",
-                        "template": "{$./queries/none.json}"
-                    }
-                }
-            }
-        ],
-        "destination": {
-            "destinationType": "handlebars",
-            "config": {
-                "default": {
-                    "head": "{$./templates/head-tags.hbs}",
-                    "body": "{$./templates/profile.hbs}",
-                    "foot": ""
-                }
-            }
+      }
+    ],
+    "destination": {
+      "destinationType": "handlebars",
+      "config": {
+        "default": {
+          "head": "{$./templates/head-tags.hbs}",
+          "body": "{$./templates/home.hbs}",
+          "foot": ""
         }
-    },
-    "_default": {
-        "pattern": "/*path",
-        "metaData": {
-            "title": "Page Not Found"
-        },
-        "tasks": [
-            {
-                "name": "primaryResponse",
-                "taskType": "elasticsearch",
-                "config": {
-                    "connectionStringTemplate": "{$../../elasticsearch-url}",
-                    "elasticsearchConfig": {
-                        "apiVersion": "5.6"
-                    },
-                    "queryTemplates": {
-                        "index": "web-content-production",
-                        "type": "scvo-cms-page",
-                        "template": "{$./queries/none.json}"
-                    }
-                }
-            }
-        ],
-        "destination": {
-            "destinationType": "handlebars",
-            "config": {
-                "default": {
-                    "head": "{$./templates/head-tags.hbs}",
-                    "body": "{$./templates/404.hbs}",
-                    "foot": ""
-                }
-            }
-        }
+      }
     }
+  },
+  "sign-up": {
+    "pattern": "/sign-up",
+    "metaData": {
+      "title": "Sign-up"
+    },
+    "tasks": [
+      {
+        "name": "primaryResponse",
+        "taskType": "elasticsearch",
+        "config": {
+          "connectionStringTemplate": "{$../elasticsearch-url.txt}",
+          "elasticsearchConfig": {
+            "apiVersion": "5.6"
+          },
+          "queryTemplates": {
+            "index": "web-content-production",
+            "type": "scvo-cms-page",
+            "template": "{$./queries/none.json}"
+          }
+        }
+      }
+    ],
+    "destination": {
+      "destinationType": "handlebars",
+      "config": {
+        "default": {
+          "head": "{$./templates/head-tags.hbs}",
+          "body": "{$./templates/sign-up.hbs}",
+          "foot": ""
+        }
+      }
+    }
+  },
+  "profile": {
+    "pattern": "/profile",
+    "metaData": {
+      "title": "Profile"
+    },
+    "tasks": [
+      {
+        "name": "primaryResponse",
+        "taskType": "elasticsearch",
+        "config": {
+          "connectionStringTemplate": "{$../elasticsearch-url.txt}",
+          "elasticsearchConfig": {
+            "apiVersion": "5.6"
+          },
+          "queryTemplates": {
+            "index": "web-content-production",
+            "type": "scvo-cms-page",
+            "template": "{$./queries/none.json}"
+          }
+        }
+      }
+    ],
+    "destination": {
+      "destinationType": "handlebars",
+      "config": {
+        "default": {
+          "head": "{$./templates/head-tags.hbs}",
+          "body": "{$./templates/profile.hbs}",
+          "foot": ""
+        }
+      }
+    }
+  },
+  "_default": {
+    "pattern": "/*path",
+    "metaData": {
+      "title": "Page Not Found"
+    },
+    "tasks": [
+      {
+        "name": "primaryResponse",
+        "taskType": "elasticsearch",
+        "config": {
+          "connectionStringTemplate": "{$../elasticsearch-url.txt}",
+          "elasticsearchConfig": {
+            "apiVersion": "5.6"
+          },
+          "queryTemplates": {
+            "index": "web-content-production",
+            "type": "scvo-cms-page",
+            "template": "{$./queries/none.json}"
+          }
+        }
+      }
+    ],
+    "destination": {
+      "destinationType": "handlebars",
+      "config": {
+        "default": {
+          "head": "{$./templates/head-tags.hbs}",
+          "body": "{$./templates/404.hbs}",
+          "foot": ""
+        }
+      }
+    }
+  }
 }
