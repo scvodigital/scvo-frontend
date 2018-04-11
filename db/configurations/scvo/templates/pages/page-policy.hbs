@@ -1,0 +1,186 @@
+<div class="page">
+  {{> header_splash}}
+  <div class="container-fluid content page-content">
+    {{> breadcrumbs}}
+    <div class="mdc-layout-grid support support-policy v-margin">
+      <div class="mdc-layout-grid__inner">
+        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-8-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
+          {{{data.primaryResponse.hits.hits.[0]._source.rendered.scvo_full}}}
+        </div>
+        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
+          <div class="mdc-card v-margin">
+            <section class="mdc-card__primary">
+              <h1 class="mdc-card__title mdc-card__title--large">
+                <a href="/projects-campaigns"><span class="fal fa-fw fa-flag fa-2x"> </span>Campaigns</a>
+              </h1>
+            </section>
+            <section class="mdc-card__supporting-text">
+              Learn more about our campaigns
+            </section>
+            <section class="mdc-card__actions"><a class="mdc-card__action" href="/projects-campaigns">Find out more</a></section>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container-fluid content page-content">
+    <div class="mdc-layout-grid latest-content">
+      <div class="mdc-layout-grid__inner">
+        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
+          <h3>Briefings</h3>
+
+          {{#if data.supplimentaryResponses.latest_briefings.hits.hits ~}}
+          {{{data.supplimentaryResponses.latest_briefings.hits.hits.[0]._source.rendered.scvo_gist}}}
+          {{{data.supplimentaryResponses.latest_briefings.hits.hits.[1]._source.rendered.scvo_gist}}}
+          {{{data.supplimentaryResponses.latest_briefings.hits.hits.[2]._source.rendered.scvo_gist}}}
+          {{/if ~}}
+
+          <a href="/policy-research/briefings" class="v-margin">More briefings</a>
+        </div>
+        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
+          <h3>Consultation responses</h3>
+
+          {{#if data.supplimentaryResponses.latest_consultation_responses.hits.hits ~}}
+          {{{data.supplimentaryResponses.latest_consultation_responses.hits.hits.[0]._source.rendered.scvo_gist}}}
+          {{{data.supplimentaryResponses.latest_consultation_responses.hits.hits.[1]._source.rendered.scvo_gist}}}
+          {{{data.supplimentaryResponses.latest_consultation_responses.hits.hits.[2]._source.rendered.scvo_gist}}}
+          {{/if ~}}
+
+          <a href="/policy-research/consultation-responses" class="v-margin">More consultation responses</a>
+        </div>
+        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone no-border">
+          <h3>Research</h3>
+
+          {{#if data.supplimentaryResponses.latest_research.hits.hits ~}}
+          {{{data.supplimentaryResponses.latest_research.hits.hits.[0]._source.rendered.scvo_gist}}}
+          {{{data.supplimentaryResponses.latest_research.hits.hits.[1]._source.rendered.scvo_gist}}}
+          {{{data.supplimentaryResponses.latest_research.hits.hits.[2]._source.rendered.scvo_gist}}}
+          {{/if ~}}
+
+          <a href="/policy-research/research" class="v-margin">More research</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cta-content callout-image policy-stats v-margin-full">
+    <div class="container-fluid">
+      <h2>
+        The Scottish third sector
+        <span class="mdc-typography--caption">(Detailed statistics will be published soon)</span>
+      </h2>
+      <div class="mdc-layout-grid">
+        <div class="mdc-layout-grid__inner v-margin">
+          <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
+            <span class="fal fa-fw fa-heart fa-5x"> </span>
+            <p>
+              <strong>1,200,000+ volunteers</strong>
+            </p>
+          </div>
+          <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
+            <span class="fal fa-fw fa-bullhorn fa-5x"> </span>
+            <p>
+              <strong>250,000+ trustees</strong>
+            </p>
+          </div>
+          <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
+            <span class="fal fa-fw fa-users fa-5x"> </span>
+            <p>
+              <strong>106,000+ paid staff</strong>
+            </p>
+          </div>
+          <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
+            <span class="fal fa-fw fa-building fa-5x"> </span>
+            <p>
+              <strong>40,000+ voluntary organisations</strong>
+            </p>
+          </div>
+        </div>
+        <div class="mdc-layout-grid__inner v-margin">
+          <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
+            <span class="fal fa-fw fa-handshake fa-5x"> </span>
+            <p>
+              <strong>1/4<br />
+                <a href="http://www.volunteerscotland.net/policy-and-research/">More than a quarter of Scottish adults volunteered in 2016</a></strong>
+              </p>
+            </div>
+            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
+              <span class="fal fa-fw fa-building fa-5x"> </span>
+              <p>
+                <strong>£11,713,200,000 in assets</strong>
+              </p>
+            </div>
+            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
+              <span class="fal fa-fw fa-chart-pie fa-5x"> </span>
+              <p>
+                <strong>74% of charities have no paid staff</strong>
+              </p>
+            </div>
+            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
+              <span class="fal fa-fw fa-chart-bar fa-5x"> </span>
+              <p>
+                <strong>854 new charities in 2016</strong>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="container-fluid content page-content">
+      <div class="mdc-layout-grid equal-height support support-policy">
+        <div class="mdc-layout-grid__inner">
+          <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
+            <div class="mdc-card">
+              <section class="mdc-card__primary">
+                <h1 class="mdc-card__title mdc-card__title--large">
+                  <a href="/policy-research/events"><span class="fal fa-fw fa-comments fa-2x"> </span>Events</a>
+                </h1>
+              </section>
+              <section class="mdc-card__supporting-text">
+                {{#with data.supplimentaryResponses.events_total.hits ~}}
+                {{#compare total ">" 0 ~}}
+                We have {{total}} upcoming event{{#compare total ">" 1}}s{{/compare}}
+                {{else}}
+                We don't have any upcoming events
+                {{/compare ~}}
+              </section>
+              {{#compare total ">" 0 ~}}
+              <section class="mdc-card__actions">
+                <a class="mdc-card__action" href="/policy-research/events">Find out more</a>
+              </section>
+              {{/compare ~}}
+              {{/with ~}}
+            </div>
+          </div>
+          <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
+            <div class="mdc-card">
+              <section class="mdc-card__primary">
+                <h1 class="mdc-card__title mdc-card__title--large">
+                  <a href="/policy-research/evidence-library"><span class="fal fa-fw fa-folder-open fa-2x"> </span>Evidence Library</a>
+                </h1>
+              </section>
+              <section class="mdc-card__supporting-text">
+                A resource for anyone interested in learning about the third sector in Scotland
+              </section>
+              <section class="mdc-card__actions"><a class="mdc-card__action" href="/policy-research/evidence-library">Find out more</a></section>
+            </div>
+          </div>
+          <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
+            <div class="mdc-card">
+              <section class="mdc-card__primary">
+                <h1 class="mdc-card__title mdc-card__title--large">
+                  <a href="/policy-research/policy-committee"><span class="fal fa-fw fa-users fa-2x"> </span>Policy Committee</a>
+                </h1>
+              </section>
+              <section class="mdc-card__supporting-text">
+                Advising us on policies which reflect the best interests of the third sector in Scotland
+              </section>
+              <section class="mdc-card__actions"><a class="mdc-card__action" href="/policy-research/policy-committee">Find out more</a></section>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

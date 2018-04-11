@@ -1,0 +1,64 @@
+{
+  "size": 10,
+  "from": {{multiply (subtract (default request.params.query.page 1) 1) 10}},
+  "_source": [
+    "rendered.scvo_list"
+  ],
+  "query": {
+    "bool": {
+      "must": [
+        {{#if request.params.query.q}}
+        {
+          "query_string": {
+            "query": {{{stringify (default request.params.query.q "")}}},
+            "default_field": "text_bag",
+            "default_operator": "AND",
+            "analyzer": "snowball"
+          }
+        },
+        {{/if}}
+        {{#if request.params.query.job_number}}
+        {
+          "term": {
+            "job_number": "{{request.params.query.job_number}}"
+          }
+        },
+        {{/if}}
+        {{#if request.params.query.location}}
+        {
+          "term": {
+            "organisation.area_town": "{{request.params.query.location}}"
+          }
+        },
+        {{/if}}
+        {{#if request.params.query.sector}}
+        {
+          "term": {
+            "sector_slug": "{{request.params.query.sector}}"
+          }
+        },
+        {{/if}}
+        {{#if request.params.query.region}}
+        {
+          "term": {
+            "region_slug": "{{request.params.query.region}}"
+          }
+        },
+        {{/if}}
+        {
+          "term": {
+            "status": "Subbed"
+          }
+        },
+        {
+          "term" : {
+            "cjs_lookup": "{{#compare request.params.phase "aag"}}AA PH7{{else}}{{#compare request.params.phase "p52"}}CJS PH7 PT 78wks{{else}}CJS PH7{{/compare}}{{/compare}}"
+          }
+        }
+      ]
+    }
+  },
+  "sort": {
+    "_score": "desc"
+  }
+}

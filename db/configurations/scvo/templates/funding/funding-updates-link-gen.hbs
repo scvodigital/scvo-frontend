@@ -1,0 +1,56 @@
+<div class="funding-updates">
+  <div class="splash-image splash-image-{{data.primaryResponse.hits.hits.[0]._type}}" style="{{> header_splash_image}}">
+    <div class="splash-overlay{{#if data.primaryResponse.hits.hits.[0]._source.hide_overlay}} splash-overlay-hidden{{/if}}">
+      <div class="container-fluid">
+        <div class="mdc-layout-grid">
+          {{#if data.primaryResponse.hits.hits.[0]._source.header_text ~}}
+          <img src="{{data.primaryResponse.hits.hits.[0]._source.header_text}}" alt="{{data.primaryResponse.hits.hits.[0]._source.title}}" class="header-text" />
+          {{else}}
+          <h1 class="header-text">
+            <span class="header-text-banner">
+              Funding updates
+            </span>
+          </h1>
+          {{/if ~}}
+        </div>
+        {{> header_caption}}
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid page-content">
+    <ul class="breadcrumbs">
+      <li><a href="/">Home</a></li>
+      <li><a href="/funding">Funding</a></li>
+      <li>Updates</li>
+    </ul>
+
+    <div class="v-margin-full">
+      <h3>Welcome to our new SCVO Members Bulletin funding search, courtesy of <a href="http://fundingscotland.com">Funding Scotland</a>.</h3>
+      <p>
+        Simply enter your date range below and click 'Generate URL' to find the latest funding opportunities available.
+      </p>
+    </div>
+
+    <div class="mdc-layout-grid v-margin">
+      <div class="mdc-layout-grid__inner">
+        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4">
+          <label>
+            <strong>Date from: </strong>
+            <input type="date" id="link-gen-from">
+          </label>
+        </div>
+        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4">
+          <label>
+            <strong>Date to: </strong>
+            <input type="date" id="link-gen-to">
+          </label>
+        </div>
+      </div>
+    </div>
+    <p id="link-gen-text">
+      <strong>Unique link for this date range:</strong>
+      <span id="link-gen-link"></span>
+    </p>
+  </div>
+</div>
+<script src="/assets/js/scvo/funding-updates-link-gen.js"></script>

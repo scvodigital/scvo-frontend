@@ -9,7 +9,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "cleanup": "rm -rf ./build/**",
-    "json2": "json-inc ./db/json2/**/*.json2 ./db/json; json-inc ./db/db.json2 ./db",
+    "json2": "json-inc ./db/configurations/**/*.json2 ./db/configurations-compiled; json-inc ./db/db.json2 ./db",
     "copy": "cp ./db/db.json ./build/db.json; cp -r ./assets ./build/assets",
     "sass": "node-sass ./build/assets/css -o build/assets/css",
     "upgrade-router": "yarn add -E @scvo/router @scvo/router-task-elasticsearch @scvo/router-destination-handlebars",
@@ -44,7 +44,7 @@
     "@scvo/router": "1.1.7",
     "@scvo/router-destination-handlebars": "0.0.11",
     "@scvo/router-destination-redirect": "0.0.7",
-    "@scvo/router-task-elasticsearch": "0.0.11",
+    "@scvo/router-task-elasticsearch": "0.0.13",
     "body-parser": "^1.18.2",
     "chalk": "^2.3.1",
     "compression": "^1.7.2",

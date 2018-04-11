@@ -1,0 +1,24 @@
+{
+  "size": 1,
+  "_source": [
+    "caption",
+    "original_image"
+  ],
+  "query": {
+    "function_score": {
+      "query": {
+        "bool": {
+          "must": [
+            {
+              "term": {
+                "categories_id": 529
+              }
+            }
+          ]
+        }
+      },
+      "random_score": {},
+      "score_mode": "sum"
+    }
+  }
+}

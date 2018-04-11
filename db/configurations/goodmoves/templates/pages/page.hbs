@@ -1,0 +1,15 @@
+<div class="page">
+  <div class="container-fluid">
+    {{#> handle_404 ~}}
+    <div class="mdc-layout-grid">
+      <div class="mdc-layout-grid__inner">
+        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-8-desktop mdc-layout-grid__cell--span-5-tablet mdc-layout-grid__cell--span-4-phone content page-content">
+          {{{data.primaryResponse.hits.hits.[0]._source.rendered.scvo_full}}}
+        </div>
+        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-12-tablet sidebar page-sidebar">
+        </div>
+      </div>
+    </div>
+    {{/handle_404 ~}}
+  </div>
+</div>

@@ -1,0 +1,17 @@
+{{#compare paging.totalPages ">" 1 ~}}
+<ul class="pagination inline-list">
+  <li class="{{#if paging.prevPage}}{{else}}disabled{{/if}}">
+    <a class="pagination-arrow" href="{{request.params.uri.pathname}}?{{{querystringify ../request.params.query page=paging.prevPage}}}"><i class="fa fa-fw fa-chevron-left"></i></a>
+  </li>
+  {{#each paging.pageRange ~}}
+  <li class="{{#compare ../paging.currentPage "===" this.pageNumber}}current-page {{/compare}}pagination-distance-{{this.distance}}">
+    <a class="pagination-page" href="{{../request.params.uri.pathname}}?{{{querystringify ../request.params.query page=this.pageNumber}}}">
+      {{this.pageNumber}}
+    </a>
+  </li>
+  {{/each ~}}
+  <li class="{{#if paging.nextPage}}{{else}}disabled{{/if}}">
+    <a class="pagination-arrow" href="{{request.params.uri.pathname}}?{{{querystringify ../request.params.query page=paging.nextPage}}}"><i class="fa fa-fw fa-chevron-right"></i></a>
+  </li>
+</ul>
+{{/compare ~}}

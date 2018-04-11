@@ -1,0 +1,31 @@
+{
+  "size": 20,
+  "from": {{multiply (subtract (default request.params.query.page 1) 1) 20}},
+  "_source": [
+    "rendered.scvo_search_result"
+  ],
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "term": {
+            "organisation.charity_number": "SC003558"
+          }
+        },
+        {
+          "term": {
+            "country_iso3": "GBR"
+          }
+        },
+        {
+          "term": {
+            "vacancy_status": "vacancy-open"
+          }
+        }
+      ]
+    }
+  },
+  "sort": {
+    "closing_date": "asc"
+  }
+}

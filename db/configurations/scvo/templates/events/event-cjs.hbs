@@ -1,0 +1,17 @@
+<div class="event">
+  {{> header_splash_event}}
+  <div class="container-fluid page-content">
+    {{#with data.primaryResponse.hits.hits.[0]._source ~}}
+    <ul class="breadcrumbs">
+      <li><a href="/">Home</a></li>
+      <li><a href="/jobs">Jobs</a></li>
+      <li><a href="/jobs/community-jobs-scotland">Community Jobs Scotland</a></li>
+      <li><a href="/jobs/community-jobs-scotland/training-opportunities">Training opportunities</a></li>
+      <li>{{{title}}}</li>
+    </ul>
+    {{{rendered.scvo_full}}}
+    {{{rendered.scvo_speakers}}}
+    {{/with ~}}
+    {{> related_events}}
+  </div>
+</div>

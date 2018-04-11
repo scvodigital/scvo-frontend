@@ -1,0 +1,46 @@
+<div class="splash-image splash-image-scvo-event splash-image-{{data.primaryResponse.hits.hits.[0]._type}}" style="{{> header_splash_image}}">
+  <div class="splash-overlay{{#if data.primaryResponse.hits.hits.[0]._source.hide_overlay}} splash-overlay-hidden{{/if}}">
+    <div class="container-fluid">
+      <div class="mdc-layout-grid">
+        {{#if data.primaryResponse.hits.hits.[0]._source.header_text ~}}
+        <img src="{{data.primaryResponse.hits.hits.[0]._source.header_text}}" alt="{{data.primaryResponse.hits.hits.[0]._source.title}}" class="header-text" />
+        {{else}}
+        <h1 class="header-text">
+          <span class="header-text-banner">
+            {{#if data.primaryResponse.hits.hits.[0] ~}}
+            {{#with data.primaryResponse.hits.hits.[0]._source ~}}
+            {{#unless hide_overlay ~}}
+            {{{title}}}
+            {{#ifAny date_start city ~}}
+            <span class="mdc-typography--caption">
+              {{#if date_start ~}}
+              {{#compare (momentFormat (moment date_start "x") "DDMMYYYY") "===" (momentFormat (moment date_end "x") "DDMMYYYY") ~}}
+              {{{momentFormat (moment date_start "x") "Do MMMM YYYY"}}},
+              {{else}}
+              {{#if date_end ~}}
+              {{{momentFormat (moment date_start "x") "Do"}}} –
+              {{{momentFormat (moment date_end "x") "Do"}}}
+              {{{momentFormat (moment date_start "x") "MMMM YYYY"}}},
+              {{else}}
+              {{{momentFormat (moment date_start "x") "Do MMMM YYYY"}}},
+              {{/if}}
+              {{/compare ~}}
+              {{/if ~}}
+              {{#if city ~}}
+              {{{city}}}
+              {{/if ~}}
+            </span>
+            {{/ifAny ~}}
+            {{/unless ~}}
+            {{/with}}
+            {{else}}
+            404: Not found
+            {{/if ~}}
+          </span>
+        </h1>
+        {{/if ~}}
+      </div>
+      {{> header_caption}}
+    </div>
+  </div>
+</div>
