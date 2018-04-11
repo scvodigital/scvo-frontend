@@ -1,0 +1,26 @@
+<div class="page">
+  {{> header_splash}}
+  <div class="container-fluid">
+    {{> breadcrumbs}}
+    <div class="mdc-layout-grid">
+      <div class="mdc-layout-grid__inner">
+        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-8-desktop mdc-layout-grid__cell--span-5-tablet mdc-layout-grid__cell--span-4-phone content page-content">
+          {{{data.primaryResponse.hits.hits.[0]._source.rendered.scvo_full}}}
+        </div>
+        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-12-tablet sidebar page-sidebar">
+          {{#compare data.supplimentaryResponses.related_posts.hits.total ">" 0 ~}}
+          <div class="related-posts">
+            <h3 class="blogs">Related posts</h3>
+            <ul class="v-margin supplimentary-list">
+              {{#each data.supplimentaryResponses.related_posts.hits.hits ~}}
+              {{{_source.rendered.scvo_sidebar_mini}}}
+              {{/each ~}}
+            </ul>
+            <a class="v-margin mdc-button mdc-button--raised" href="/post/categories/{{data.primaryResponse.hits.hits.[0]._source.categories_slug.[0]}}">Read more</a>
+          </div>
+          {{/compare ~}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

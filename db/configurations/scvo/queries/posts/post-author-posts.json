@@ -1,0 +1,35 @@
+{
+  "size": 5,
+  "_source": [
+    "rendered.scvo_sidebar"
+  ],
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "term": {
+            "author": {{data.primaryResponse.hits.hits.[0]._source.author}}
+          }
+        },
+        {
+          "term": {
+            "is_press_release": false
+          }
+        }
+      ],
+      "should": {
+        "bool": {
+          "must_not": {
+            "match": {
+              "wpid": {{data.primaryResponse.hits.hits.[0]._source.wpid}}
+            }
+          }
+        }
+      },
+      "minimum_should_match": 1
+    }
+  },
+  "sort": {
+    "publish_on": "desc"
+  }
+}

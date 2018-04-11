@@ -1,0 +1,24 @@
+{
+  "size": 3,
+  "_source": [
+    "header_background",
+    "header_text",
+    "title",
+    "hide_overlay",
+    "rendered.scvo_featured"
+  ],
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "term": {
+            "featured": true
+          }
+        }
+      ]
+    }
+  },
+  "sort": {
+    "publish_on": "desc"
+  }
+}

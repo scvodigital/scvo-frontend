@@ -1,0 +1,256 @@
+{
+  "home": {
+    "pattern": "/",
+    "metaData": {
+      "title": "Home"
+    },
+    "tasks": [],
+    "destination": {
+      "destinationType": "handlebars",
+      "config": {
+        "default": {
+          "head": "{$./templates/head-tags.hbs}",
+          "body": "{$./templates/home.hbs}",
+          "foot": ""
+        }
+      }
+    }
+  },
+  "declaration": {
+    "pattern": "/the-declaration",
+    "metaData": {
+      "title": "The Declaration"
+    },
+    "tasks": [],
+    "destination": {
+      "destinationType": "handlebars",
+      "config": {
+        "default": {
+          "head": "{$./templates/head-tags.hbs}",
+          "body": "{$./templates/declaration.hbs}",
+          "foot": ""
+        }
+      }
+    }
+  },
+  "why_sign": {
+    "pattern": "/why-sign",
+    "metaData": {
+      "title": "Why Sign?"
+    },
+    "tasks": [],
+    "destination": {
+      "destinationType": "handlebars",
+      "config": {
+        "default": {
+          "head": "{$./templates/head-tags.hbs}",
+          "body": "{$./templates/why-sign.hbs}",
+          "foot": ""
+        }
+      }
+    }
+  },
+  "sign_up": {
+    "pattern": "/sign-up",
+    "metaData": {
+      "title": "Sign Up"
+    },
+    "tasks": [],
+    "destination": {
+      "destinationType": "handlebars",
+      "config": {
+        "default": {
+          "head": "{$./templates/head-tags.hbs}",
+          "body": "{$./templates/sign-up.hbs}",
+          "foot": ""
+        }
+      }
+    }
+  },
+  "sign_up_thank_you": {
+    "pattern": "/sign-up-thank-you",
+    "metaData": {
+      "title": "Thank You"
+    },
+    "tasks": [],
+    "destination": {
+      "destinationType": "handlebars",
+      "config": {
+        "default": {
+          "head": "{$./templates/head-tags.hbs}",
+          "body": "{$./templates/sign-up-thank-you.hbs}",
+          "foot": ""
+        }
+      }
+    }
+  },
+  "faq": {
+    "pattern": "/faq",
+    "metaData": {
+      "title": "FAQ"
+    },
+    "tasks": [],
+    "destination": {
+      "destinationType": "handlebars",
+      "config": {
+        "default": {
+          "head": "{$./templates/head-tags.hbs}",
+          "body": "{$./templates/faq.hbs}",
+          "foot": ""
+        }
+      }
+    }
+  },
+  "signatory_search": {
+    "pattern": "/signatories",
+    "metaData": {
+      "title": "Signatories"
+    },
+    "tasks": [
+      {
+        "name": "primaryResponse",
+        "taskType": "elasticsearch",
+        "config": {
+          "connectionStringTemplate": "{$../../elasticsearch-url}",
+          "elasticsearchConfig": {
+            "apiVersion": "5.6"
+          },
+          "queryTemplates": {
+            "index": "web-content-production",
+            "type": "humanrightsdeclaration-signatory",
+            "template": "{$./queries/signatory-search.json}"
+          }
+        }
+      },
+      {
+        "name": "supplimentaryResponses",
+        "taskType": "elasticsearch",
+        "config": {
+          "connectionStringTemplate": "{$../../elasticsearch-url}",
+          "elasticsearchConfig": {
+            "apiVersion": "5.6"
+          },
+          "queryTemplates": [
+            {
+              "name": "total",
+              "index": "web-content-production",
+              "type": "humanrightsdeclaration-signatory",
+              "template": "{$./queries/signatory-total.json}"
+            }
+          ]
+        }
+      }
+    ],
+    "destination": {
+      "destinationType": "handlebars",
+      "config": {
+        "default": {
+          "head": "{$./templates/head-tags.hbs}",
+          "body": "{$./templates/signatory-search.hbs}",
+          "foot": ""
+        }
+      }
+    }
+  },
+  "signatory": {
+    "pattern": "/signatories/:slug",
+    "metaData": {
+      "title": "Signatory"
+    },
+    "tasks": [
+      {
+        "name": "primaryResponse",
+        "taskType": "elasticsearch",
+        "config": {
+          "connectionStringTemplate": "{$../../elasticsearch-url}",
+          "elasticsearchConfig": {
+            "apiVersion": "5.6"
+          },
+          "queryTemplates": {
+            "index": "web-content-production",
+            "type": "humanrightsdeclaration-signatory",
+            "template": "{$./queries/signatory.json}"
+          }
+        }
+      }
+    ],
+    "destination": {
+      "destinationType": "handlebars",
+      "config": {
+        "default": {
+          "head": "{$./templates/head-tags.hbs}",
+          "body": "{$./templates/signatory.hbs}",
+          "foot": ""
+        }
+      }
+    }
+  },
+  "privacy": {
+    "pattern": "/privacy-and-cookies",
+    "metaData": {
+      "title": "Privacy and Cookies"
+    },
+    "tasks": [],
+    "destination": {
+      "destinationType": "handlebars",
+      "config": {
+        "default": {
+          "head": "{$./templates/head-tags.hbs}",
+          "body": "{$./templates/privacy.hbs}",
+          "foot": ""
+        }
+      }
+    }
+  },
+  "accessibility": {
+    "pattern": "/accessibility",
+    "metaData": {
+      "title": "Accessibility"
+    },
+    "tasks": [],
+    "destination": {
+      "destinationType": "handlebars",
+      "config": {
+        "default": {
+          "head": "{$./templates/head-tags.hbs}",
+          "body": "{$./templates/accessibility.hbs}",
+          "foot": ""
+        }
+      }
+    }
+  },
+  "terms": {
+    "pattern": "/terms-and-conditions",
+    "metaData": {
+      "title": "Terms and Conditions"
+    },
+    "tasks": [],
+    "destination": {
+      "destinationType": "handlebars",
+      "config": {
+        "default": {
+          "head": "{$./templates/head-tags.hbs}",
+          "body": "{$./templates/terms.hbs}",
+          "foot": ""
+        }
+      }
+    }
+  },
+  "_default": {
+    "pattern": "/*path",
+    "metaData": {
+      "title": "Page Not Found"
+    },
+    "tasks": [],
+    "destination": {
+      "destinationType": "handlebars",
+      "config": {
+        "default": {
+          "head": "{$./templates/head-tags.hbs}",
+          "body": "{$./templates/404.hbs}",
+          "foot": ""
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,34 @@
+{
+  "size": 3,
+  "_source": [
+    "author",
+    "author_sfid",
+    "author_slug",
+    "slug",
+    "author_name_full",
+    "categories",
+    "categories_id",
+    "categories_slug",
+    "rendered.scvo_list"
+  ],
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "term": {
+            "author_sfid": "{{data.primaryResponse.hits.hits.[0]._source.Id}}"
+          }
+        },
+        {
+          "term": {
+            "is_press_release": false
+          }
+        }
+      ]
+    }
+
+  },
+  "sort": {
+    "publish_on": "desc"
+  }
+}

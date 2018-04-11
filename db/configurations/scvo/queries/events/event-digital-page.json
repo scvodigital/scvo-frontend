@@ -1,0 +1,28 @@
+{
+  "size": 4,
+  "_source": [
+    "rendered.scvo_gist",
+    "date_start"
+  ],
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "range" : {
+            "date_start" : {
+              "gte" : "now/d"
+            }
+          }
+        },
+        {
+          "term": {
+            "team": "digital"
+          }
+        }
+      ]
+    }
+  },
+  "sort": {
+    "date_start": "asc"
+  }
+}
