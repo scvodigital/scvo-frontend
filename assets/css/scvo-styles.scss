@@ -1130,7 +1130,15 @@ section.search {
     .featured-background-image.i-love-charity {
       padding: 0;
     }
+    .featured-background-image.eu-are-valued {
+      background-color: #1E1C34;
+    }
     .featured-background-image.charity-awards {
+      background-color: #150522;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      height: 200px;
       .mdc-card {
         background-color: rgba(0,0,0,0.5);
         .mdc-card-inner {
@@ -1324,7 +1332,11 @@ section.search {
     line-height: 1.8;
   }
 }
-.post-related .gist img.photo-wee {
+.gist.goodmoves-job .thumbnail img {
+  object-fit: contain;
+}
+.page-related .gist img.photo-wee,
+.post-related .gist .thumbnail img {
   height: 64px;
   width: 64px;
 }
@@ -3355,11 +3367,13 @@ p:last-child {
     font-variant: normal;
     text-rendering: auto;
     line-height: 1.2rem;
-    font-size: 0.8rem;
+    font-size: 70%;
     top: -0.1rem;
     position: relative;
   }
   a.noext::after,
+  a[href^="https://scvo.org"]::after,
+  a[href^="https://scvo.org.uk"]::after,
   a[href^="https://storage.googleapis.com"]::after,
   a[href^="https://www.facebook.com/SCVO1939"]::after,
   a[href^="https://twitter.com/scvotweet"]::after,
@@ -3660,6 +3674,9 @@ footer {
         border-right: none;
         padding-right: 0;
       }
+    }
+    .featured-background-image.charity-awards {
+      height: auto;
     }
   }
   .latest-content {
