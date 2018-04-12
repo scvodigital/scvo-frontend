@@ -191,44 +191,4 @@
 
     return pinsOptions;
   }
-
-  function addChip(field, term) {
-    if (selectedTerms[field].indexOf(term) === -1) {
-      selectedTerms[field].push(term);
-    }
-    updateTerms();
-  }
-
-  function removeChip(field, term) {
-    if (selectedTerms[field].indexOf(term) > -1) {
-      selectedTerms[field].splice(selectedTerms[field].indexOf(term), 1);
-    }
-    updateTerms();
-  }
-
-  function redrawTermChips() {
-    $searchTerms.empty();
-    Object.keys(selectedTerms).forEach(function(field) {
-      selectedTerms[field].forEach(function(term) {
-        var $chip = $('<div />')
-          .addClass('mdc-chip mdc-theme--primary-bg')
-          .attr({ tabindex: 0 })
-          .appendTo($searchTerms);
-        var chipText = $('<div />')
-          .addClass('mdc-chip__text')
-          .html('<strong>' + field + '</strong>: ' + term)
-          .appendTo($chip);
-        var chipClose = $('<i />')
-          .addClass('fa fa-times-circle mdc-chip__icon mdc-chip__icon--trailing')
-          .attr({ tabindex: 0, role: 'button' })
-          .on('click', function() {
-            removeChip(field, term);
-          })
-          .appendTo($chip);
-      });
-    });
-  }
 </script>
-<!--
-    {{{stringify data.terms}}}
--->
