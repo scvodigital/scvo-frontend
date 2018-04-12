@@ -34,11 +34,7 @@ function VacanciesController(getBody) {
     if (searchTerms.center) {
       body.lat = searchTerms.center.latitude;
       body.lng = searchTerms.center.longitude;
-      body.distance = searchTerms.distance || null;
-    }
-
-    if (searchTerms.bounds) {
-      body.bounds = searchTerms.bounds;
+      body.distance = searchTerms.center.distance || null;
     }
 
     console.log('Body:', body);

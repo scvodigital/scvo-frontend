@@ -10,9 +10,6 @@ function MapController($map, latitude, longitude, zoomLevel) {
   var pins = [];
   var shapes = [];
 
-  google.maps.event.addListener(map, 'dragend', mapBoundsUpdated.bind(this));
-  google.maps.event.addListener(map, 'zoom_change', mapBoundsUpdated.bind(this));
-
   this.refreshMap = function(shapesOptions, pinsOptions, snapTo = true) {
     clearMap();
     var bounds = new google.maps.LatLngBounds();
@@ -79,29 +76,5 @@ function MapController($map, latitude, longitude, zoomLevel) {
         pin.infoWindow.close();
       } 
     }
-  }
-
-  function mapBoundsUpdated() {
-    var bounds = map.getBounds();
-    updateTrigger(bounds);    
-  }
-
-  this.addListener = function(listener) {
-    if (listeners.indexOf(listener) === -1) {
-      listeners.push(listener);
-    }
-  }
-
-  this.removeListener = function(listener) {
-    var index = listeners.indexOf(listener);
-    if (index > -1) {
-      listeners.splice(index, 1);
-    }
-  }
-  
-  function updateTrigger(bounds) {
-    for (var i = 0; i < listeners.length; ++i) {
-      listeners[i](bounds);
-    } 
   }
 }

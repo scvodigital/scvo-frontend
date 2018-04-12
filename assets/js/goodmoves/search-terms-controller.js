@@ -1,8 +1,10 @@
 function SearchTermsController() {
   var terms = {};
-  var distance = null;
-  var center = null;
-  var bounds = null;
+  var center = {
+    latitude: null,
+    longitude: null,
+    distance: 16093.44
+  };
   var listeners = [];    
 
   this.addTerm = function(term, value) {
@@ -27,35 +29,12 @@ function SearchTermsController() {
     updateTrigger(this.currentState());
   }
 
-  this.setCenter = function(latitude, longitude, title) {
-    bounds = null;
+  this.setCenter = function(latitude, longitude, distance) {
     center = {
-      latitude: latitude,
-      longitude: longitude,
-      title: title
+      latitude: latitude || center.latitude,
+      longitude: longitude || center.longitude,
+      distance: distance || center.distance
     };
-    updateTrigger(this.currentState());
-  }
-
-  this.setDistance = function(newDistance) {
-    bounds = null;
-    distance = newDistance;
-    updateTrigger(this.currentState());
-  }
-
-  this.setBounds = function(southWest, northEast) {
-    center = null;
-    distance = null;
-    bounds = {
-      southWest: {
-        latitude: southWest.latitude,
-        longitude: southWest.longitude
-      },
-      northEast: {
-        latitude: northEast.latitude,
-        longitude: northEast.longitude
-      }
-    }
     updateTrigger(this.currentState());
   }
 
@@ -75,9 +54,7 @@ function SearchTermsController() {
   this.currentState = function() {
     return {
       terms: terms,
-      center: center,
-      bounds: bounds,
-      distance: distance
+      center: (center.latitude) ? center : null
     };
   }
 

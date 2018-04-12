@@ -47,30 +47,18 @@
     autocomplete = new google.maps.places.Autocomplete($where[0], { types: ['geocode'] });
     autocomplete.addListener('place_changed', autocompleteChange);
     mapController = new MapController($map, 57.0268117, -5.5676529, 5);
-    mapController.addListener(function(bounds) {
-      var southWest = {
-        latitude: bounds.getSouthWest().lat(),
-        longitude: bounds.getSouthWest().lng()
-      };
-      var northEast = {
-        latitude: bounds.getNorthEast().lat(),
-        longitude: bounds.getNorthEast().lng()
-      };
-      searchTermsController.setBounds(southWest, northEast);
-    });
     geolocate();
   }
 
   function geolocate() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(function(position) {
-        console.log('GEOLOCATION:', position);
-        $distance.val('8046.72');
-        searchTermsController.setDistance($distance.val());
+        console.log('GEOLOCATION:', position, $distance.val());
         searchTermsController.setCenter(
           position.coords.latitude,
           position.coords.longitude,
-          'Home');
+          $distance.val()
+        );
         reverseLookup(position.coords.latitude, position.coords.longitude);
       });
     } else {
@@ -98,7 +86,7 @@
     searchTermsController.setCenter(
       place.geometry.location.lat(),
       place.geometry.location.lng(),
-      place.formattedAddress);
+      $where.val());
   }
 
   function generateMapContent(vacancies, searchTerms) {
@@ -106,15 +94,10 @@
     var shapesOptions = [];
 
     var centerShapeOptions = getCenterShapeOptions(searchTerms);
-    var centerPinOptions = getCenterPinOptions(searchTerms);
     var vacancyPinsOptions = getVacancyPinsOptions(vacancies);
 
     if (centerShapeOptions) {
       shapesOptions.push(centerShapeOptions);
-    }
-
-    if (centerPinOptions) {
-      pinsOptions.push(centerPinOptions);
     }
 
     pinsOptions = pinsOptions.concat(vacancyPinsOptions);
@@ -123,7 +106,7 @@
   }
 
   function getCenterShapeOptions(searchTerms) {
-    if (!searchTerms.bounds && searchTerms.center && searchTerms.distance) {
+    if (searchTerms.center.distance) {
       var shapeOptions = {
         type: 'Circle',
         center: new google.maps.LatLng(searchTerms.center.latitude, searchTerms.center.longitude),
@@ -132,29 +115,9 @@
         strokeOpacity: 0.4,
         strokeColor: '#58a934',
         strokeWeight: 2,
-        radius: parseInt(searchTerms.distance, 10)
+        radius: parseInt(searchTerms.center.distance, 10)
       }
       return shapeOptions;
-    }
-    return null;
-  }
-
-  function getCenterPinOptions(searchTerms) {
-    if (!searchTerms.bounds && searchTerms.center) {
-      var markerOptions = {
-        position: new google.maps.LatLng(searchTerms.center.latitude, searchTerms.center.longitude),
-        title: searchTerms.center.title,
-        opacity: 0.6,
-        label: {
-          fontFamily: 'Fontawesome',
-          text: '\uf015'
-        }
-      };
-      var pinOptions = {
-        markerOptions: markerOptions,
-        infoWindowOptions: null
-      };
-      return pinOptions;
     }
     return null;
   }
