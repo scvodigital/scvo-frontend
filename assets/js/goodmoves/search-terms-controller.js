@@ -1,66 +1,69 @@
-function SearchTermsController() {
-  var terms = {};
-  var center = {
+var SearchTermsController = Class.extend({
+  terms: {},
+  center: {
     latitude: null,
     longitude: null,
     distance: 16093.44
-  };
-  var listeners = [];    
+  },
+  listeners: [],
 
-  this.addTerm = function(term, value) {
-    if (!terms.hasOwnProperty(term)) {
-      terms[term] = [];
+  addTerm: function(term, value) {
+    if (!this.terms.hasOwnProperty(term)) {
+      this.terms[term] = [];
     }
     
-    if (terms[term].indexOf(value) === -1) {
-      terms[term].push(value);
+    if (this.terms[term].indexOf(value) === -1) {
+      this.terms[term].push(value);
     }
 
-    updateTrigger(this.currentState());
-  }
+    this.updateTrigger();
+  },
 
-  this.removeTerm = function(term, value) {
-    if (terms.hasOwnProperty(term)) {
-      var index = terms[term].indexOf(value);
+  removeTerm: function(term, value) {
+    if (this.terms.hasOwnProperty(term)) {
+      var index = this.terms[term].indexOf(value);
       if (index > -1) {
-        terms[term].splice(index, 1);
+        this.terms[term].splice(index, 1);
+      }
+      if (this.terms[term].length === 0){
+        delete this.terms[term];
       }
     }
-    updateTrigger(this.currentState());
-  }
+    this.updateTrigger();
+  },
 
-  this.setCenter = function(latitude, longitude, distance) {
-    center = {
-      latitude: latitude || center.latitude,
-      longitude: longitude || center.longitude,
-      distance: distance || center.distance
+  setCenter: function(latitude, longitude, distance) {
+    this.center = {
+      latitude: latitude || this.center.latitude,
+      longitude: longitude || this.center.longitude,
+      distance: distance === 'any' ? null : distance || this.center.distance
     };
-    updateTrigger(this.currentState());
-  }
+    this.updateTrigger();
+  },
 
-  this.addListener = function(listener) {
-    if (listeners.indexOf(listener) === -1) {
-      listeners.push(listener);
+  addListener: function(listener) {
+    if (this.listeners.indexOf(listener) === -1) {
+      this.listeners.push(listener);
     }
-  }
+  },
 
-  this.removeListener = function(listener) {
-    var index = listeners.indexOf(listener);
+  removeListener: function(listener) {
+    var index = this.listeners.indexOf(listener);
     if (index > -1) {
-      listeners.splice(index, 1);
+      this.listeners.splice(index, 1);
     }
-  }
+  },
 
-  this.currentState = function() {
+  currentState: function() {
     return {
-      terms: terms,
-      center: (center.latitude) ? center : null
+      terms: this.terms,
+      center: (this.center.latitude) ? this.center : null
     };
-  }
+  },
 
-  function updateTrigger(state) {
-    for (var i = 0; i < listeners.length; ++i) {
-      listeners[i](state);
+  updateTrigger: function() {
+    for (var i = 0; i < this.listeners.length; ++i) {
+      this.listeners[i](this.currentState());
     } 
   }
-}
+});

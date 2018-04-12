@@ -1,15 +1,16 @@
-function VacanciesController(getBody) {
-  var listeners = [];
-
-  this.doSearch = function(searchTerms) {
+var VacanciesController = Class.extend({
+  listeners: [],
+  
+  doSearch: function(searchTerms) {
     var vacancies = [];
-    var body = getBody(searchTerms);
+    var body = this.getBody(searchTerms);
     var options = {
       url: '/home-search',
       type: 'POST',
       data: JSON.stringify(body),
       contentType: 'application/json; charset=utf-8'
     };
+    var _this = this;
     $.ajax(options).done(function(results) {
       if (results.hits.total === 0) {
         vacancies = [];
@@ -17,18 +18,20 @@ function VacanciesController(getBody) {
         var hits = results.hits.hits;
         vacancies = hits.map(hit => hit._source);
       }
-      updateTrigger(vacancies, searchTerms);
+      _this.updateTrigger(vacancies, searchTerms);
     });
-  }
+  },
 
-  function getBody(searchTerms) {
+  getBody: function(searchTerms) {
     var body = {}
 
-    var fields = Object.keys(searchTerms.terms);
-    for (var i = 0; i < fields.length; ++i){
-      var field = fields[i];
-      var terms = searchTerms.terms[field];
-      body[fields[i]] = terms;
+    if (searchTerms.terms) {
+      var fields = Object.keys(searchTerms.terms);
+      for (var i = 0; i < fields.length; ++i){
+        var field = fields[i];
+        var terms = searchTerms.terms[field];
+        body[fields[i]] = terms;
+      }
     }
 
     if (searchTerms.center) {
@@ -40,24 +43,24 @@ function VacanciesController(getBody) {
     console.log('Body:', body);
 
     return body;
-  }
+  },
 
-  this.addListener = function(listener) {
-    if (listeners.indexOf(listener) === -1) {
-      listeners.push(listener);
+  addListener: function(listener) {
+    if (this.listeners.indexOf(listener) === -1) {
+      this.listeners.push(listener);
     }
-  }
+  },
 
-  this.removeListener = function(listener) {
-    var index = listeners.indexOf(listener);
+  removeListener: function(listener) {
+    var index = this.listeners.indexOf(listener);
     if (index > -1) {
-      listeners.splice(index, 1);
+      this.listeners.splice(index, 1);
     }
-  }
+  },
   
-  function updateTrigger(vacancies, searchTerms) {
-    for (var i = 0; i < listeners.length; ++i) {
-      listeners[i](vacancies, searchTerms);
+  updateTrigger: function(vacancies, searchTerms) {
+    for (var i = 0; i < this.listeners.length; ++i) {
+      this.listeners[i](vacancies, searchTerms);
     } 
   }
-}
+});
