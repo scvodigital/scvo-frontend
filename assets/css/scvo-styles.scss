@@ -1135,6 +1135,10 @@ section.search {
     }
     .featured-background-image.charity-awards {
       background-color: #150522;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      height: 200px;
       .mdc-card {
         background-color: rgba(0,0,0,0.5);
         .mdc-card-inner {
@@ -3362,11 +3366,13 @@ p:last-child {
     font-variant: normal;
     text-rendering: auto;
     line-height: 1.2rem;
-    font-size: 0.8rem;
+    font-size: 70%;
     top: -0.1rem;
     position: relative;
   }
   a.noext::after,
+  a[href^="https://scvo.org"]::after,
+  a[href^="https://scvo.org.uk"]::after,
   a[href^="https://storage.googleapis.com"]::after,
   a[href^="https://www.facebook.com/SCVO1939"]::after,
   a[href^="https://twitter.com/scvotweet"]::after,
@@ -3667,6 +3673,9 @@ footer {
         border-right: none;
         padding-right: 0;
       }
+    }
+    .featured-background-image.charity-awards {
+      height: auto;
     }
   }
   .latest-content {
