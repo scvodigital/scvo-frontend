@@ -51,42 +51,34 @@
                     {{/each ~}}
                   </select>
                 </div>
-                <!-- <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
-                <select class="mdc-select" role="listbox" id="grant-ccrf-tag" name="tag">
-                <option value="" {{#if request.params.query.tag}}{{else}}selected{{/if}}>All tags</option>
-                {{#each data.supplimentaryResponses.types.aggregations.tags.buckets ~}}
-                <option value="{{slugify key}}" {{#compare ../request.params.query.tag "===" (slugify key)}}selected{{/compare}}>{{key}} ({{doc_count}})</option>
-                {{/each ~}}
-              </select>
-            </div> -->
-          </div>
-        </div>
-      </form>
+              </div>
+            </div>
+          </form>
 
-      <hr />
+          <hr />
 
-      <div class="mdc-layout-grid equal-height">
-        <div class="mdc-layout-grid__inner">
-          {{#compare data.primaryResponse.hits.total ">" 0 ~}}
-          {{#each data.primaryResponse.hits.hits ~}}
-          <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
-            {{{_source.rendered.scvo_card}}}
+          <div class="mdc-layout-grid equal-height">
+            <div class="mdc-layout-grid__inner">
+              {{#compare data.primaryResponse.hits.total ">" 0 ~}}
+              {{#each data.primaryResponse.hits.hits ~}}
+              <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
+                {{{_source.rendered.scvo_card}}}
+              </div>
+              {{/each ~}}
+              {{else}}
+              <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone">
+                <p>
+                  No projects could be found, please try a different search.
+                </p>
+                <p>&nbsp;</p>
+              </div>
+              {{/compare ~}}
+            </div>
           </div>
-          {{/each ~}}
-          {{else}}
-          <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone">
-            <p>
-              No projects could be found, please try a different search.
-            </p>
-            <p>&nbsp;</p>
-          </div>
-          {{/compare ~}}
+
+          {{> pagination paging=data.primaryResponse.pagination}}
         </div>
       </div>
-
-      {{> pagination paging=data.primaryResponse.pagination}}
     </div>
   </div>
-</div>
-</div>
 </div>
