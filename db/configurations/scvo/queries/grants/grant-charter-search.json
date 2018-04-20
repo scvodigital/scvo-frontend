@@ -8,14 +8,14 @@
   "query": {
     "bool": {
       "must": [
-        {{#ifAny request.params.query.q request.params.query.call request.params.query.tag ~}}
+        {{#ifAny request.params.query.call request.params.query.tag request.params.query.q ~}}
         {{#if request.params.query.call ~}}
         {
           "term": {
             "call-slug": "{{request.params.query.call}}"
           }
         }
-        {{#if request.params.query.tag ~}},{{else}}{{#if request.params.query.q}},{{/if}}{{/if ~}}
+        {{#if request.params.query.tag}},{{else}}{{#if request.params.query.q}},{{/if}}{{/if}}
         {{/if ~}}
         {{#if request.params.query.tag ~}}
         {
