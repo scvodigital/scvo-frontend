@@ -1,11 +1,12 @@
-<div class="page credit-union">
-  {{> header_splash}}
+<div class="page posts press">
+  {{> header_splash headerTextOverride="Press &amp; media"}}
   <div class="container-fluid">
-    {{> breadcrumbs}}
+    {{> breadcrumbs_posts}}
     <div class="mdc-layout-grid">
       <div class="mdc-layout-grid__inner">
-        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-9-desktop mdc-layout-grid__cell--span-5-tablet mdc-layout-grid__cell--span-4-phone content page-content">
+        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-8-desktop mdc-layout-grid__cell--span-5-tablet mdc-layout-grid__cell--span-4-phone content post-content">
           {{#compare data.supplimentaryResponses.posts.hits.total ">" 0 ~}}
+          {{> search_info paging=data.supplimentaryResponses.posts.pagination}}
           <ul class="supplimentary-list">
             {{#each data.supplimentaryResponses.posts.hits.hits ~}}
             {{{_source.rendered.scvo_list}}}
@@ -18,8 +19,8 @@
           </p>
           {{/compare ~}}
         </div>
-        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-3-tablet mdc-layout-grid__cell--span-4-phone content sidebar page-sidebar">
-          {{> menu_credit_union}}
+        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-3-tablet mdc-layout-grid__cell--span-4-phone sidebar post-sidebar">
+          {{{data.primaryResponse.hits.hits.[0]._source.rendered.scvo_full}}}
         </div>
       </div>
     </div>
