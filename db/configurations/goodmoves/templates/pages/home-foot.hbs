@@ -1,5 +1,6 @@
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBJdxcQpVKQ6HdrjnPXycUoZqsmp-Ep3l0&libraries=places&callback=initMap" async defer></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"></script>
+<script src="/assets/js/class-inheritance.js"></script>
 <script src="/assets/js/goodmoves/typeahead-controller.js"></script>
 <script src="/assets/js/goodmoves/search-terms-controller.js"></script>
 <script src="/assets/js/goodmoves/vacancies-controller.js"></script>
@@ -38,39 +39,28 @@
   var mapController = null;
 
   typeaheadController.addListener(searchTermsController.addTerm.bind(searchTermsController));
-  $distance.on('change', function(evt) { searchTermsController.setDistance($distance.val() || null); });
+  $distance.on('change', function(evt) { searchTermsController.setCenter.call(searchTermsController, null, null, $distance.val() || null); });
   searchTermsController.addListener(vacanciesController.doSearch.bind(vacanciesController));
   vacanciesController.addListener(generateMapContent);
+  vacanciesController.addListener(refreshChips);
 
   var autocomplete;
   function initMap() {
     autocomplete = new google.maps.places.Autocomplete($where[0], { types: ['geocode'] });
     autocomplete.addListener('place_changed', autocompleteChange);
-    mapController = new MapController($map, 57.0268117, -5.5676529, 5);
-    mapController.addListener(function(bounds) {
-      var southWest = {
-        latitude: bounds.getSouthWest().lat(),
-        longitude: bounds.getSouthWest().lng()
-      };
-      var northEast = {
-        latitude: bounds.getNorthEast().lat(),
-        longitude: bounds.getNorthEast().lng()
-      };
-      searchTermsController.setBounds(southWest, northEast);
-    });
+    mapController = new MapController($map, 57.0268117, -5.5676529, 6);
     geolocate();
   }
 
   function geolocate() {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(function(position) {
-        console.log('GEOLOCATION:', position);
-        $distance.val('8046.72');
-        searchTermsController.setDistance($distance.val());
+        console.log('GEOLOCATION:', position, $distance.val());
         searchTermsController.setCenter(
           position.coords.latitude,
           position.coords.longitude,
-          'Home');
+          $distance.val()
+        );
         reverseLookup(position.coords.latitude, position.coords.longitude);
       });
     } else {
@@ -98,7 +88,7 @@
     searchTermsController.setCenter(
       place.geometry.location.lat(),
       place.geometry.location.lng(),
-      place.formattedAddress);
+      $distance.val());
   }
 
   function generateMapContent(vacancies, searchTerms) {
@@ -106,15 +96,10 @@
     var shapesOptions = [];
 
     var centerShapeOptions = getCenterShapeOptions(searchTerms);
-    var centerPinOptions = getCenterPinOptions(searchTerms);
     var vacancyPinsOptions = getVacancyPinsOptions(vacancies);
 
     if (centerShapeOptions) {
       shapesOptions.push(centerShapeOptions);
-    }
-
-    if (centerPinOptions) {
-      pinsOptions.push(centerPinOptions);
     }
 
     pinsOptions = pinsOptions.concat(vacancyPinsOptions);
@@ -122,8 +107,35 @@
     mapController.refreshMap(shapesOptions, pinsOptions, !searchTerms.bounds);
   }
 
+  function refreshChips(vacancies, searchTerms) {
+    $searchTerms.empty();
+    var fields = Object.keys(searchTerms.terms);
+    for (var f = 0; f < fields.length; ++f) {
+      var field = fields[f];
+      var fieldTerms = searchTerms.terms[field];
+      for (var t = 0; t < fieldTerms.length; ++t) {
+        var term = fieldTerms[t];
+        var $chip = $('<div />')
+          .addClass('mdc-chip mdc-theme--primary-bg')
+          .attr({ tabindex: 0 })
+          .appendTo($searchTerms);
+        var chipText = $('<div />')
+          .addClass('mdc-chip__text')
+          .html('<strong>' + field + '</strong>: ' + term)
+          .appendTo($chip);
+        var chipClose = $('<i />')
+          .addClass('fa fa-times-circle mdc-chip__icon mdc-chip__icon--trailing')
+          .attr({ tabindex: 0, role: 'button' })
+          .on('click', function() {
+            searchTermsController.removeTerm(field, term);
+          })
+          .appendTo($chip);
+      }
+    }
+  }
+
   function getCenterShapeOptions(searchTerms) {
-    if (!searchTerms.bounds && searchTerms.center && searchTerms.distance) {
+    if (searchTerms.center.distance) {
       var shapeOptions = {
         type: 'Circle',
         center: new google.maps.LatLng(searchTerms.center.latitude, searchTerms.center.longitude),
@@ -132,29 +144,9 @@
         strokeOpacity: 0.4,
         strokeColor: '#58a934',
         strokeWeight: 2,
-        radius: parseInt(searchTerms.distance, 10)
-      }
+        radius: parseInt(searchTerms.center.distance, 10)
+      };
       return shapeOptions;
-    }
-    return null;
-  }
-
-  function getCenterPinOptions(searchTerms) {
-    if (!searchTerms.bounds && searchTerms.center) {
-      var markerOptions = {
-        position: new google.maps.LatLng(searchTerms.center.latitude, searchTerms.center.longitude),
-        title: searchTerms.center.title,
-        opacity: 0.6,
-        label: {
-          fontFamily: 'Fontawesome',
-          text: '\uf015'
-        }
-      };
-      var pinOptions = {
-        markerOptions: markerOptions,
-        infoWindowOptions: null
-      };
-      return pinOptions;
     }
     return null;
   }
@@ -199,44 +191,4 @@
 
     return pinsOptions;
   }
-
-  function addChip(field, term) {
-    if (selectedTerms[field].indexOf(term) === -1) {
-      selectedTerms[field].push(term);
-    }
-    updateTerms();
-  }
-
-  function removeChip(field, term) {
-    if (selectedTerms[field].indexOf(term) > -1) {
-      selectedTerms[field].splice(selectedTerms[field].indexOf(term), 1);
-    }
-    updateTerms();
-  }
-
-  function redrawTermChips() {
-    $searchTerms.empty();
-    Object.keys(selectedTerms).forEach(function(field) {
-      selectedTerms[field].forEach(function(term) {
-        var $chip = $('<div />')
-          .addClass('mdc-chip mdc-theme--primary-bg')
-          .attr({ tabindex: 0 })
-          .appendTo($searchTerms);
-        var chipText = $('<div />')
-          .addClass('mdc-chip__text')
-          .html('<strong>' + field + '</strong>: ' + term)
-          .appendTo($chip);
-        var chipClose = $('<i />')
-          .addClass('fa fa-times-circle mdc-chip__icon mdc-chip__icon--trailing')
-          .attr({ tabindex: 0, role: 'button' })
-          .on('click', function() {
-            removeChip(field, term);
-          })
-          .appendTo($chip);
-      });
-    });
-  }
 </script>
-<!--
-    {{{stringify data.terms}}}
--->

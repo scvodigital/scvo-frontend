@@ -868,6 +868,9 @@ a:hover {
 }
 iframe {
   border: none;
+  background-image: url('/assets/images/spinner2.gif');
+  background-repeat: no-repeat;
+  background-position: center center;
 }
 figure {
   margin: $unit 0;
@@ -1033,10 +1036,14 @@ section.search {
   .page-content {
     padding: 0;
   }
-  .mdc-card.goodmoves-brand,
   .mdc-card.cjs-brand {
     .mdc-card__media {
       padding: $unit;
+    }
+  }
+  .mdc-card.goodmoves-brand,
+  .mdc-card.cjs-brand {
+    .mdc-card__media {
       a {
         height: 100%;
         width: 100%;
@@ -1134,11 +1141,11 @@ section.search {
       background-color: #1E1C34;
     }
     .featured-background-image.charity-awards {
+      height: 200px;
       background-color: #150522;
       display: flex;
       align-items: center;
       overflow: hidden;
-      height: 200px;
       .mdc-card {
         background-color: rgba(0,0,0,0.5);
         .mdc-card-inner {
@@ -1192,6 +1199,7 @@ section.search {
           box-shadow: 1px 2px 5rem rgba(255,255,255,0.15);
         }
         .fa-fw {
+          display: inline-table;
           height: 1.25em;
           line-height: 1.25em;
         }
@@ -1730,7 +1738,7 @@ form#settled_status {
   }
 }
 .mdc-toolbar-fixed-adjust {
-  padding: 145px 0 0;
+  padding: 150px 0 0;
   margin: 0;
 }
 .mdc-temporary-drawer {
@@ -2039,6 +2047,29 @@ form#settled_status {
     max-height: $unit*6;
   }
 }
+.credit-union {
+  .cu-hero {
+    background-image: url('https://members.scvocreditunion.scot/images/scvo-hero.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;
+    display: flex;
+    align-items: center;
+    padding: $unit*1.5 0;
+    .mdc-layout-grid {
+      padding: 0 $unit*1.5;
+      width: 100%;
+      .mdc-button {
+        display: inline-grid;
+        height: auto;
+        width: 100%;
+      }
+    }
+    img {
+      display: none;
+    }
+  }
+}
 body.scottish-charity-awards:not(.post),
 body.the-gathering:not(.post) {
   .container-fluid,
@@ -2057,7 +2088,7 @@ body.the-gathering:not(.post) {
     }
   }
   .splash-image .splash-overlay .container-fluid {
-    min-height: 30vh;
+    min-height: 20vh;
     .mdc-layout-grid {
       line-height: 0;
       margin: 0;
@@ -2442,9 +2473,9 @@ h1.mdc-typography--title {
     }
   }
 }
-.services .support .mdc-card__primary {
-  height: $unit*4;
-}
+// .services .support .mdc-card__primary {
+//   height: $unit*4;
+// }
 h1.support-sector {
   margin-top: $unit*3;
 }
@@ -2649,41 +2680,53 @@ table.membership-fees {
   .goodmoves .mdc-card__media,
   .goodmoves-brand .mdc-card__media {
     background-color: #58a934 !important;
-    background-size: contain;
     background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/goodmoves.png');
+    background-size: 60%;
+    background-position: left center;
+    background-position-x: $unit;
   }
   .goodmoves-brand .mdc-card__media {
     background-size: unset;
   }
   .cjs-brand .mdc-card__media {
     background-color: #f1f1f1 !important;
-    background-size: contain;
     background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/cjs-logo.png');
+    background-size: contain;
   }
   .funding-scotland .mdc-card__media {
     background-color: #8AC645 !important;
-    background-size: contain;
     background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/funding-scotland.png');
+    background-size: 60%;
+    background-position: left center;
+    background-position-x: $unit;
   }
   .goodhq .mdc-card__media {
     background-color: #4033E9 !important;
-    background-size: contain;
     background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/goodhq.png');
+    background-size: 60%;
+    background-position: left center;
+    background-position-x: $unit;
   }
   .tfn .mdc-card__media {
     background-color: #3b9db1 !important;
-    background-size: contain;
     background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/tfn.png');
+    background-size: 60%;
+    background-position: left center;
+    background-position-x: $unit;
   }
   .credit-union .mdc-card__media {
     background-color: #1976D2 !important;
-    background-size: contain;
     background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/credit-union.png');
+    background-size: 60%;
+    background-position: left center;
+    background-position-x: $unit;
   }
   .milo .mdc-card__media {
     background-color: #4475A0 !important;
-    background-size: contain;
     background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/milo.png');
+    background-size: 30%;
+    background-position: left center;
+    background-position-x: $unit;
   }
 }
 .mdc-card__actions {
@@ -3269,7 +3312,7 @@ p:last-child {
 .full {
   img {
     max-width: 100%;
-    height: auto;
+    height: auto !important;
   }
 }
 .full {
@@ -3371,6 +3414,7 @@ p:last-child {
     top: -0.1rem;
     position: relative;
   }
+  .scvo-staff a::after,
   a.noext::after,
   a[href^="https://scvo.org"]::after,
   a[href^="https://scvo.org.uk"]::after,
@@ -3675,8 +3719,22 @@ footer {
         padding-right: 0;
       }
     }
-    .featured-background-image.charity-awards {
+    .featured-content .featured-background-image.charity-awards {
       height: auto;
+    }
+    .featured-content .featured-text,
+    .footer-image.join-our-hub,
+    .cta-content.callout-image {
+      padding: 0 0 $unit;
+    }
+    .scvo-cms-page-20536 .v-margin-full {
+      margin-top: 0;
+    }
+    .cta-grid {
+      .fa-fw {
+        font-size: 2.5rem;
+        padding: 1.2rem !important;
+      }
     }
   }
   .latest-content {
