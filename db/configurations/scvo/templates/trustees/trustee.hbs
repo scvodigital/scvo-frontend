@@ -1,22 +1,5 @@
 <div class="trustee">
-  <div class="splash-image splash-image-{{data.primaryResponse.hits.hits.[0]._type}}" style="{{> header_splash_image}}">
-    <div class="splash-overlay{{#if data.primaryResponse.hits.hits.[0]._source.hide_overlay}} splash-overlay-hidden{{/if}}">
-      <div class="container-fluid">
-        <div class="mdc-layout-grid">
-          {{#if data.primaryResponse.hits.hits.[0]._source.header_text ~}}
-          <img src="{{data.primaryResponse.hits.hits.[0]._source.header_text}}" alt="{{data.primaryResponse.hits.hits.[0]._source.title}}" class="header-text" />
-          {{else}}
-          <h1 class="header-text">
-            <span class="header-text-banner">
-              Trustee vacancy
-            </span>
-          </h1>
-          {{/if ~}}
-        </div>
-        {{> header_caption}}
-      </div>
-    </div>
-  </div>
+  {{> header_splash headerTextOverride="Trustee vacancy" typeOverride="page"}}
   <div class="container-fluid">
     <ul class="breadcrumbs">
       <li><a href="/">Home</a></li>

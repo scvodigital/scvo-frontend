@@ -705,12 +705,6 @@ primary-dark: #251032
 .services.funding-scotland {
   @include theme-colours('funding-scotland');
 }
-.credit-union {
-  @include theme-colours('credit-union');
-}
-.digital {
-  @include theme-colours('digital');
-}
 .events.a1vb0000007fc04aaa-the-gathering,
 .the-gathering {
   @include theme-colours('gathering');
@@ -726,6 +720,12 @@ primary-dark: #251032
 .press-media,
 .policy-research {
   @include theme-colours('posts');
+}
+.credit-union {
+  @include theme-colours('credit-union');
+}
+.digital {
+  @include theme-colours('digital');
 }
 .tfn,
 .post-related-tfn,
@@ -1966,8 +1966,8 @@ form#settled_status {
     letter-spacing: -0.06rem;
     margin-bottom: $unit/2;
     .photo-wee {
-      height: 64px;
-      width: 64px;
+      height: 84px;
+      width: 84px;
       vertical-align: bottom;
       margin: -$unit/5 0 0 0;
       float: left;
@@ -2846,7 +2846,13 @@ body.post.author {
   }
 }
 
-.full.scvo-document {
+.scvo-document.list {
+  margin-bottom: $unit;
+  .post-info-item {
+    margin-bottom: 0;
+  }
+}
+.scvo-document.full {
   margin: 0 0 $unit;
   .post-info {
     border: none;
@@ -2857,11 +2863,6 @@ body.post.author {
     margin: 0;
     list-style-type: none;
     padding: 0;
-  }
-}
-.list.scvo-document {
-  .post-info-item {
-    margin-bottom: 0;
   }
 }
 
@@ -2884,14 +2885,22 @@ body.post.author {
   margin: 0;
   dt, dd {
     float: left;
+    margin: 0 0 $unit;
   }
   dt {
+    font-weight: 600;
     clear: both;
     width: 30%;
   }
   dd {
-    margin: 0;
+    // margin: 0;
     width: 70%;
+    .fa-ul {
+      margin-left: $unit*1.5;
+      a {
+        word-wrap: break-word;
+      }
+    }
   }
 }
 .cjs-job-search .inline-dl,
@@ -3634,6 +3643,7 @@ footer {
       }
     }
   }
+  .splash-image h1.header-text .photo-wee,
   .gist .thumbnail img,
   .gist img.photo-wee {
     height: 64px;
