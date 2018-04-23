@@ -7,6 +7,10 @@ var SearchTermsController = Class.extend({
   },
   listeners: [],
 
+  init: function() {
+    console.log('Search Terms Controller Init');
+  },
+
   addTerm: function(term, value) {
     if (!this.terms.hasOwnProperty(term)) {
       this.terms[term] = [];

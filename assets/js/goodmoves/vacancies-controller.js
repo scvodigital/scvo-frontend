@@ -5,18 +5,16 @@ var VacanciesController = Class.extend({
     var vacancies = [];
     var body = this.getBody(searchTerms);
     var options = {
-      url: '/home-search',
-      type: 'POST',
-      data: JSON.stringify(body),
+      url: '/home-search?' + body,
+      type: 'GET',
       contentType: 'application/json; charset=utf-8'
     };
     var _this = this;
     $.ajax(options).done(function(results) {
-      if (results.hits.total === 0) {
+      if (results.total === 0) {
         vacancies = [];
       } else { 
-        var hits = results.hits.hits;
-        vacancies = hits.map(hit => hit._source);
+        vacancies = results.hits;
       }
       _this.updateTrigger(vacancies, searchTerms);
     });
@@ -42,7 +40,7 @@ var VacanciesController = Class.extend({
 
     console.log('Body:', body);
 
-    return body;
+    return $.param(body);
   },
 
   addListener: function(listener) {

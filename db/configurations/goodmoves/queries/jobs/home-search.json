@@ -1,58 +1,62 @@
 {
-  "_source": [
-    "rendered.goodmoves_map",
-    "geo_vacancy_coords",
-    "Id",
-    "title"
-  ],
-  "size": "1000",
+  {{#compare request.params.context "map"}}
+    "size": "1000",
+    "_source": ["Id", "title", "organisation.name", "geo_vacancy_coords", "closing_date", "remuneration_type", "salary_min", "salary_max", "status"],
+  {{else}}
+    "size": 10,
+    "from": {{multiply (subtract (default request.params.query.query.page 1) 1) 10}},
+    "_source": {
+      "includes": [ "*" ],
+      "excludes": [ "rendered.*", "text_bag", "text_bag_boost" ]
+    },
+  {{/compare}}
   "query": {
     "bool": {
-      {{#ifAny request.body.sectors request.body.roles request.body.statuses request.body.distance}}
+      {{#ifAny request.params.query.sectors request.params.query.roles request.params.query.statuses request.params.query.distance}}
       "filter": [
-        {{#if request.body.sectors}}
+        {{#if request.params.query.sectors}}
         {
           "terms": {
-            "sectors": {{{stringify request.body.sectors}}}
+            "sectors": {{{stringify (arrayify request.params.query.sectors)}}}
           }
         }
-        {{#ifAny request.body.roles request.body.statuses request.body.distance}},{{/ifAny}}
+        {{#ifAny request.params.query.roles request.params.query.statuses request.params.query.distance}},{{/ifAny}}
         {{/if}}
-        {{#if request.body.roles}}
+        {{#if request.params.query.roles}}
         {
           "terms": {
-            "roles": {{{stringify request.body.roles}}}
+            "roles": {{{stringify (arrayify request.params.query.roles)}}}
           }
         }
-        {{#ifAny request.body.statuses request.body.distance}},{{/ifAny}}
+        {{#ifAny request.params.query.statuses request.params.query.distance}},{{/ifAny}}
         {{/if}}
-        {{#if request.body.statuses}}
+        {{#if request.params.query.statuses}}
         {
           "terms": {
-            "status": {{{stringify request.body.statuses}}}
+            "status": {{{stringify (arrayify request.params.query.statuses)}}}
           }
         }
-        {{#ifAny request.body.distance}},{{/ifAny}}
+        {{#ifAny request.params.query.distance}},{{/ifAny}}
         {{/if}}
-        {{#if request.body.distance}}
+        {{#if request.params.query.distance}}
         {
           "geo_distance": {
-            "distance": "{{default request.body.distance "8046.72"}}meters",
+            "distance": "{{default request.params.query.distance "8046.72"}}meters",
             "geo_vacancy_coords": {
-              "lat": {{request.body.lat}},
-              "lon": {{request.body.lng}}
+              "lat": {{request.params.query.lat}},
+              "lon": {{request.params.query.lng}}
             }
           }
         }
         {{/if}}
       ]
-      {{#if request.body.keywords}},{{/if}}
+      {{#if request.params.query.keywords}},{{/if}}
       {{/ifAny}}
-      {{#if request.body.keywords}}
+      {{#if request.params.query.keywords}}
       "must": [
         {
           "query_string": {
-            "query": {{{stringify (join request.body.keywords " AND ")}}},
+            "query": {{{stringify (join request.params.query.keywords " AND ")}}},
             "default_field": "text_bag",
             "default_operator": "AND",
             "analyzer": "snowball"

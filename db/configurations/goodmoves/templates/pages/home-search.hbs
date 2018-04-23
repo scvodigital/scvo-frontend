@@ -1,1 +1,13 @@
-{{{stringify data.map_data}}}
+{
+  "total": {{data.map_data.hits.total}},
+  "hits":[
+    {{#each data.map_data.hits.hits}}
+      {
+        "Id": {{{stringify _id}}},
+        "geo_vacancy_coords": {{{stringify _source.geo_vacancy_coords}}},
+        "title": {{{stringify _source.title}}},
+        "info_window": {{{stringify (component "map_view" _source)}}}
+      }{{#unless @last}},{{/unless}}
+    {{/each}}
+  ]
+}

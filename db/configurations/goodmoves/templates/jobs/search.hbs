@@ -70,7 +70,7 @@
           {{> search_info paging=data.primaryResponse.pagination}}
 
           {{#each data.primaryResponse.hits.hits ~}}
-          {{{_source.rendered.search_result}}}
+            {{>results_view _source}}
           {{/each ~}}
 
           {{> pagination paging=data.primaryResponse.pagination}}

@@ -2,7 +2,12 @@
   "extends": "./node_modules/gts/tsconfig-google.json",
   "compilerOptions": {
     "rootDir": "src",
-    "outDir": "build"
+    "outDir": "build",
+    "types": [],
+    "baseUrl": ".",
+    "paths": {
+      "@scvo/router": [ "./node_modules/@scvo/router" ]
+    }
   },
   "include": [
     "src/*.ts",
@@ -11,6 +16,9 @@
     "test/**/*.ts"
   ],
   "exclude": [
-    "node_modules"
+    "node_modules",
+    "node_modules/@google-cloud/firestore/types/firestore.d.ts",
+    "node_modules/@firebase-admin/lib/index.d.ts",
+    "node_modules/**/*.ts"
   ]
 }

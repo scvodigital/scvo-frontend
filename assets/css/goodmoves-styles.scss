@@ -144,6 +144,24 @@ a:hover,
   width: 100%;
 }
 
+.search-overlay {
+  position: absolute;
+  margin-top: 25vh;
+  z-index: 1;
+  margin-left: 50px;
+  margin-right: 50px;
+  input, select {
+    font-size: 1.6rem;
+  }
+}
+
+.search-overlay-terms {
+  margin-top: 15px;
+  input, select { 
+    font-size: 1rem;
+  }
+}
+
 html {
   overflow-y: scroll;
   height: 100%;
@@ -198,6 +216,28 @@ img.responsive,
 img.responsive-img {
   max-width: 100%;
 }
+
+/* Search results card */
+.search-result-card__info-row {
+    display: flex;
+    border-top-left-radius: inherit;
+}
+
+.search-result-card__media--organisation {
+    width: 110px;
+    border-top-left-radius: inherit;
+}
+
+.search-result-card__info {
+    display: flex;
+    flex-direction: column;
+    padding: 8px 16px;
+}
+
+.search-result-article__snippet {
+  margin: 8px;
+}
+/* End Search results card */
 
 .mdc-tab,
 .mdc-button,
@@ -415,6 +455,7 @@ section.search {
 
 .mdc-form-field {
   font-size: 1rem;
+  width: 100%;
 }
 .mdc-form-field > label {
   line-height: 38px;
@@ -1485,7 +1526,7 @@ footer {
     padding-top: 0;
   }
   .mdc-toolbar-fixed-adjust {
-    padding-top: 130px;
+    padding-top: 145px;
   }
   .mdc-toolbar .mdc-toolbar__row .container-fluid .mdc-tab-bar .mdc-tab {
     padding: 0 $unit/2;

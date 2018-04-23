@@ -13,7 +13,8 @@ var MapController = Class.extend({
     this.initialZoom = zoomLevel;
     this.map = new google.maps.Map($map[0], {
       center: this.initialCoords,
-      zoom: this.initialZoom
+      zoom: this.initialZoom,
+      disableDefaultUI: true
     });
   },
 
