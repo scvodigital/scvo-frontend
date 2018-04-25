@@ -11,7 +11,7 @@
     "cleanup": "rm -rf ./build/**",
     "json2": "json-inc ./db/configurations/**/*.json2 ./db/configurations-compiled; json-inc ./db/db.json2 ./db",
     "copy": "cp ./db/db.json ./build/db.json; cp -r ./assets ./build/assets",
-    "sass": "node-sass ./build/assets/css -o build/assets/css",
+    "sass": "node-sass --include-path=./node_modules ./build/assets/css -o build/assets/css",
     "upgrade-router": "yarn add -E @scvo/router @scvo/router-task-firebase @scvo/router-task-elasticsearch @scvo/router-destination-handlebars @scvo/router-destination-redirect",
     "build": "npm run cleanup; npm run compile; npm run json2; npm run copy; npm run sass",
     "start": "npm run compile; node build/index.js",
@@ -71,6 +71,7 @@
     "@types/request": "^2.47.0",
     "@types/string": "^0.0.29",
     "gts": "^0.5.4",
+    "material-components-web": "^0.34.1",
     "node-sass": "^4.7.2",
     "typescript": "~2.6.1"
   }

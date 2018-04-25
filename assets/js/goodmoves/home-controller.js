@@ -32,7 +32,6 @@ function initMap() {
   autocomplete.addListener('place_changed', autocompleteChange);
   mapController = new MapController($map, 57.0268117, -5.5676529, 6);
   geolocate();
-  window.mdc.autoInit();
 }
 
 function geolocate() {
