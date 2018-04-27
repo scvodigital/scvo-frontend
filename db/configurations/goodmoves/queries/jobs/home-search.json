@@ -7,7 +7,7 @@
     "from": {{multiply (subtract (default request.params.query.query.page 1) 1) 10}},
     "_source": {
       "includes": [ "*" ],
-      "excludes": [ "rendered.*", "text_bag", "text_bag_boost" ]
+      "excludes": [ "text_bag", "text_bag_boost" ]
     },
   {{/compare}}
   "query": {
