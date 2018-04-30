@@ -54,7 +54,8 @@ header {
       }
     }
     .mdc-top-app-bar__action-item {
-      color: $mdc-theme-primary;
+      height: $toolbar-height;
+      color: $mdc-theme-secondary;
     }
     .mdc-top-app-bar__section--align-start {
       background-image: linear-gradient(66deg, $mdc-theme-primary, $mdc-theme-primary 265px, $mdc-theme-old 266px, $mdc-theme-old);
@@ -70,20 +71,19 @@ header {
       height: $toolbar-height;
       .mdc-tab {
         text-transform: none;
-        color: $mdc-theme-primary;
+        color: $mdc-theme-secondary;
         min-width: auto;
         font-size: 1rem;
+        padding: 0 $unit/2;
       }
-      .mdc-tab::before, .mdc-tab::after {
-        background-color: $mdc-theme-primary;
+      .mdc-tab::before,
+      .mdc-tab::after {
+        background-color: $mdc-theme-secondary;
       }
     }
-    // .mdc-tab::before, .mdc-tab::after {
-    //   background-color: $mdc-theme-primary-light;
-    // }
     .mdc-menu-anchor {
       .mdc-button {
-        color: $mdc-theme-primary;
+        color: $mdc-theme-secondary;
         height: $toolbar-height;
         padding-right: 0;
         text-transform: none;
@@ -93,6 +93,10 @@ header {
         .fa-fw:last-child {
           margin-right: 0;
         }
+      }
+      .mdc-button::before,
+      .mdc-button::after {
+        background-color: $mdc-theme-secondary;
       }
     }
   }
@@ -113,6 +117,7 @@ p,
 .mdc-text-field__input,
 .mdc-card__title--large,
 .mdc-typography--caption,
+.mdc-menu .mdc-list-item,
 .mdc-typography--headline,
 .supplimentary-list-title,
 .mdc-card__supporting-text,
@@ -133,7 +138,6 @@ p,
 
 a {
   color: $mdc-theme-primary;
-  font-weight: 600;
   text-decoration: none;
   text-decoration-skip: ink;
 }
@@ -145,16 +149,28 @@ a:hover {
   color: white
 }
 
+a,
+.mdc-menu .mdc-list-item {
+  font-weight: 600;
+}
+
 .mdc-button a:hover,
 .mdc-button:hover,
 .mdc-tab:hover,
 .mdc-toolbar a:hover {
   text-decoration: none;
 }
+.mdc-tab:active::before,
+.mdc-tab:focus::before,
+.mdc-tab:hover::before,
 .mdc-button:not(.mdc-ripple-upgraded):active:after,
 .mdc-button:not(.mdc-ripple-upgraded):focus:before,
 .mdc-button:not(.mdc-ripple-upgraded):hover:before {
   opacity: 0.1;
+}
+.mdc-tab-bar:not(.mdc-tab-bar-upgraded) .mdc-tab--active,
+.mdc-tab-bar:not(.mdc-tab-bar-upgraded) .mdc-tab:not(.mdc-tab--active):active .mdc-tab__indicator {
+  opacity: 1;
 }
 
 .mdc-form-field,
