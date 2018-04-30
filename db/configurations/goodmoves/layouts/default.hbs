@@ -306,7 +306,19 @@ if(location.host.indexOf('.local') > -1){
       </footer>
     </div>
   </goodmoves-site>
-
+  <script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
+  <script>
+    // Initialize Firebase
+    var config = {
+      apiKey: "AIzaSyDIUNnyGeZY3sO8gGIf-_2dgO49xKij5zI",
+      authDomain: "scvo-net.firebaseapp.com",
+      databaseURL: "https://scvo-net.firebaseio.com",
+      projectId: "scvo-net",
+      storageBucket: "scvo-net.appspot.com",
+      messagingSenderId: "782194712584"
+    };
+    var app = firebase.initializeApp(config);
+  </script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   {{#if (contains request.url.host '.local')}}
   <script type="text/javascript" src="https://unpkg.com/material-components-web@0.34.1/dist/material-components-web.js"></script>
@@ -324,27 +336,8 @@ if(location.host.indexOf('.local') > -1){
   data-cookie="CookieInfoScript"
   data-text-align="left">
   </script>
+  <script src="/assets/js/class-inheritance.js" async defer></script>
+  <script src="/assets/js/goodmoves/site-controller.js"></script>
   <!--{section:foot}-->
-  <script>
-  mdc.autoInit();
-
-  //Menu buttons
-  $('[data-menu-target]').each(function(i, o) {
-    let selector = $(o).attr('data-menu-target');
-    let menuEl = $(selector)[0];
-    $(o).on('click', function() {
-      menuEl.MDCMenu.open = !menuEl.MDCMenu.open;
-    });
-  });
-
-  //Temporary drawer buttons
-  $('[data-drawer-target]').each(function(i, o) {
-    let selector = $(o).attr('data-drawer-target');
-    let drawerEl = $(selector)[0];
-    $(o).on('click', function() {
-      drawerEl.MDCTemporaryDrawer.open = true;
-    });
-  });
-  </script>
 </body>
 </html>
