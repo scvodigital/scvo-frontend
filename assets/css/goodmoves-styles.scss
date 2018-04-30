@@ -12,6 +12,7 @@ $mdc-theme-background: white;
 
 $unit: 1rem;
 $toolbar-height: 64px;
+$toolbar-item-height: 48px;
 $nav-height: 38px;
 
 $mobile-breakpoint: 599px;
@@ -32,6 +33,13 @@ header {
   background-image: linear-gradient(66deg, $mdc-theme-primary, $mdc-theme-primary 50%, white 50.1%, white);
   .container-fluid {
     padding: 0;
+    .mdc-top-app-bar__section--align-start {
+      background-image: linear-gradient(66deg, $mdc-theme-primary, $mdc-theme-primary 265px, $mdc-theme-old 266px, $mdc-theme-old);
+      min-width: 266px;
+    }
+    .mdc-top-app-bar__section--align-end {
+      background-image: linear-gradient(66deg, $mdc-theme-old, $mdc-theme-old 63px, white 64px, white);
+    }
     .mdc-top-app-bar__title {
       padding: 0;
       a {
@@ -53,50 +61,46 @@ header {
         left: 0;
       }
     }
-    .mdc-top-app-bar__action-item {
-      height: $toolbar-height;
-      color: $mdc-theme-secondary;
-    }
-    .mdc-top-app-bar__section--align-start {
-      background-image: linear-gradient(66deg, $mdc-theme-primary, $mdc-theme-primary 265px, $mdc-theme-old 266px, $mdc-theme-old);
-      min-width: 266px;
-    }
-    .mdc-top-app-bar__section--align-end {
-      background-image: linear-gradient(66deg, $mdc-theme-old, $mdc-theme-old 63px, white 64px, white);
-    }
     .mdc-top-app-bar__section {
       padding: 0;
-    }
-    .mdc-tab-bar {
-      height: $toolbar-height;
-      .mdc-tab {
-        text-transform: none;
-        color: $mdc-theme-secondary;
-        min-width: auto;
-        font-size: 1rem;
-        padding: 0 $unit/2;
+      .mdc-tab-bar {
+        height: $toolbar-item-height;
+        .mdc-tab {
+          text-transform: none;
+          color: $mdc-theme-secondary;
+          min-width: auto;
+          height: $toolbar-item-height;
+          font-size: 1rem;
+          padding: 0 $unit/2;
+        }
       }
+      .mdc-top-app-bar__action-item {
+        height: $toolbar-item-height;
+        color: $mdc-theme-secondary !important;
+      }
+      .mdc-menu-anchor {
+        .mdc-button {
+          color: $mdc-theme-secondary;
+          height: $toolbar-item-height;
+          padding-right: $unit/4;
+          text-transform: none;
+          .fa-fw {
+            margin-right: $unit/2;
+          }
+          .fa-fw:last-child {
+            margin-right: 0;
+          }
+        }
+      }
+      .mdc-top-app-bar__action-item::before,
+      .mdc-top-app-bar__action-item::after,
+      .mdc-top-app-bar__navigation-icon::before,
+      .mdc-top-app-bar__navigation-icon::after,
+      .mdc-button::before,
+      .mdc-button::after,
       .mdc-tab::before,
       .mdc-tab::after {
-        background-color: $mdc-theme-secondary;
-      }
-    }
-    .mdc-menu-anchor {
-      .mdc-button {
-        color: $mdc-theme-secondary;
-        height: $toolbar-height;
-        padding-right: 0;
-        text-transform: none;
-        .fa-fw {
-          margin-right: $unit/2;
-        }
-        .fa-fw:last-child {
-          margin-right: 0;
-        }
-      }
-      .mdc-button::before,
-      .mdc-button::after {
-        background-color: $mdc-theme-secondary;
+        background-color: $mdc-theme-secondary !important;
       }
     }
   }
