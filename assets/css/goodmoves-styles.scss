@@ -2,12 +2,13 @@
 $mdc-theme-primary: #3c7524;
 $mdc-theme-primary-light: #d1edc4;
 $mdc-theme-primary-dark: #1e3b12;
+$mdc-theme-old: #58a934;
 
 $mdc-theme-secondary: #424242;
 $mdc-theme-secondary-light: lighten($mdc-theme-secondary, 10%);
 $mdc-theme-secondary-dark: darken($mdc-theme-secondary, 10%);
 
-$mdc-theme-background: #fff;
+$mdc-theme-background: white;
 
 $unit: 1rem;
 $toolbar-height: 64px;
@@ -28,6 +29,7 @@ body {
   padding-top: $toolbar-height;
 }
 header {
+  background-image: linear-gradient(66deg, $mdc-theme-primary, $mdc-theme-primary 50%, white 50.1%, white);
   .container-fluid {
     padding: 0;
     .mdc-top-app-bar__title {
@@ -51,6 +53,16 @@ header {
         left: 0;
       }
     }
+    .mdc-top-app-bar__action-item {
+      color: $mdc-theme-primary;
+    }
+    .mdc-top-app-bar__section--align-start {
+      background-image: linear-gradient(66deg, $mdc-theme-primary, $mdc-theme-primary 265px, $mdc-theme-old 266px, $mdc-theme-old);
+      min-width: 266px;
+    }
+    .mdc-top-app-bar__section--align-end {
+      background-image: linear-gradient(66deg, $mdc-theme-old, $mdc-theme-old 63px, white 64px, white);
+    }
     .mdc-top-app-bar__section {
       padding: 0;
     }
@@ -58,17 +70,21 @@ header {
       height: $toolbar-height;
       .mdc-tab {
         text-transform: none;
-        color: white;
+        color: $mdc-theme-primary;
         min-width: auto;
         font-size: 1rem;
       }
+      .mdc-tab::before, .mdc-tab::after {
+        background-color: $mdc-theme-primary;
+      }
     }
-    .mdc-tab::before, .mdc-tab::after {
-      background-color: white;
-    }
+    // .mdc-tab::before, .mdc-tab::after {
+    //   background-color: $mdc-theme-primary-light;
+    // }
     .mdc-menu-anchor {
       .mdc-button {
-        color: white;
+        color: $mdc-theme-primary;
+        height: $toolbar-height;
         padding-right: 0;
         text-transform: none;
         .fa-fw {
@@ -199,7 +215,7 @@ a:hover {
 .tt-menu {
   width: 100%;
   box-sizing: border-box;
-  background-color: #ffffff;
+  background-color: white;
   border-width: $unit/8;
   border-color: #000000;
   border-style: solid;
@@ -216,12 +232,13 @@ a:hover {
 
 .tt-cursor {
   background-color: $mdc-theme-primary;
-  color: #ffffff;
+  color: white;
 }
 
 /* Maps */
 #map-full {
-  height: 400px;
+  height: 800px;
+  min-height: 100px;
   max-height: 66.666vh;
   width: 100%;
 }
@@ -286,19 +303,19 @@ body {
 
 /* Search results card */
 .search-result-card__info-row {
-    display: flex;
-    border-top-left-radius: inherit;
+  display: flex;
+  border-top-left-radius: inherit;
 }
 
 .search-result-card__media--organisation {
-    width: 110px;
-    border-top-left-radius: inherit;
+  width: 110px;
+  border-top-left-radius: inherit;
 }
 
 .search-result-card__info {
-    display: flex;
-    flex-direction: column;
-    padding: 8px 16px;
+  display: flex;
+  flex-direction: column;
+  padding: 8px 16px;
 }
 
 .search-result-article__snippet {
