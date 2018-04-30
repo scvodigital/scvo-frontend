@@ -52,8 +52,8 @@
       ]
       {{#if request.params.query.keywords}},{{/if}}
       {{/ifAny}}
-      {{#if request.params.query.keywords}}
       "must": [
+        {{#if request.params.query.keywords}}
         {
           "query_string": {
             "query": {{{stringify (join request.params.query.keywords " AND ")}}},
@@ -61,9 +61,19 @@
             "default_operator": "AND",
             "analyzer": "snowball"
           }
+        },
+        {{/if}}
+        {
+          "term": {
+            "country_iso3": "GBR"
+          }
+        },
+        {
+          "term": {
+            "vacancy_status": "vacancy-open"
+          }
         }
       ]
-      {{/if}}
     }
   }
 }
