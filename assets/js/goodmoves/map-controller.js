@@ -14,6 +14,93 @@ var MapController = Class.extend({
     this.map = new google.maps.Map($map[0], {
       center: this.initialCoords,
       zoom: this.initialZoom,
+      styles: [
+        {
+          featureType: "administrative.country",
+          elementType: "labels",
+          stylers: [
+            { visibility: "off" }
+          ]
+        },
+        {elementType: 'geometry', stylers: [{color: '#d1edc4'}]},
+        {elementType: 'labels.text.stroke', stylers: [{color: '#ffffff'}]},
+        {elementType: 'labels.text.fill', stylers: [{color: '#424242'}]},
+        {
+          featureType: 'administrative.locality',
+          elementType: 'labels.text.fill',
+          stylers: [{color: '#424242'}]
+        },
+        {
+          featureType: 'poi',
+          elementType: 'labels.text.fill',
+          stylers: [{color: '#424242'}]
+        },
+        {
+          featureType: 'poi.park',
+          elementType: 'geometry',
+          stylers: [{color: '#d1edc4'}]
+        },
+        {
+          featureType: 'poi.park',
+          elementType: 'labels.text.fill',
+          stylers: [{color: '#424242'}]
+        },
+        {
+          featureType: 'road',
+          elementType: 'geometry',
+          stylers: [{color: '#424242'}]
+        },
+        {
+          featureType: 'road',
+          elementType: 'geometry.stroke',
+          stylers: [{color: '#424242'}]
+        },
+        {
+          featureType: 'road',
+          elementType: 'labels.text.fill',
+          stylers: [{color: '#424242'}]
+        },
+        {
+          featureType: 'road.highway',
+          elementType: 'geometry',
+          stylers: [{color: '#424242'}]
+        },
+        {
+          featureType: 'road.highway',
+          elementType: 'geometry.stroke',
+          stylers: [{color: '#424242'}]
+        },
+        {
+          featureType: 'road.highway',
+          elementType: 'labels.text.fill',
+          stylers: [{color: '#424242'}]
+        },
+        {
+          featureType: 'transit',
+          elementType: 'geometry',
+          stylers: [{color: '#424242'}]
+        },
+        {
+          featureType: 'transit.station',
+          elementType: 'labels.text.fill',
+          stylers: [{color: '#424242'}]
+        },
+        {
+          featureType: 'water',
+          elementType: 'geometry',
+          stylers: [{color: '#fafafa'}]
+        },
+        {
+          featureType: 'water',
+          elementType: 'labels.text.fill',
+          stylers: [{color: '#424242'}]
+        },
+        {
+          featureType: 'water',
+          elementType: 'labels.text.stroke',
+          stylers: [{color: '#424242'}]
+        }
+      ],
       disableDefaultUI: true
     });
   },
@@ -60,11 +147,11 @@ var MapController = Class.extend({
 
       pinBounds.extend(markerOptions.position);
     }
-    
+
     if (snapTo && pinsOptions.length > 0) {
-      this.map.fitBounds(pinBounds); 
+      this.map.fitBounds(pinBounds);
       var zoom = this.map.getZoom();
-      if (zoom > 12) { 
+      if (zoom > 12) {
         this.map.setZoom(12);
       } else if (zoom < 6) {
         this.map.setZoom(6);
@@ -92,15 +179,15 @@ var MapController = Class.extend({
       shape.setMap(null);
       delete shape;
     }
-    this.shapes = [];    
+    this.shapes = [];
   },
-  
+
   closeInfoWindows: function() {
     for (var i = 0; i < this.pins.length; ++i) {
       var pin = this.pins[i];
       if (pin.infoWindow) {
         pin.infoWindow.close();
-      } 
+      }
     }
   }
 });

@@ -42,21 +42,16 @@ function initMap() {
 }
 
 function geolocate() {
-  if ($distance.val < 500) {
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(function(position) {
-        console.log('GEOLOCATION:', position, $distance.val());
-        searchTermsController.setCenter(
-          position.coords.latitude,
-          position.coords.longitude,
-          $distance.val()
-        );
-        reverseLookup(position.coords.latitude, position.coords.longitude);
-      });
-    } else {
-      console.log('Getting All');
-      vacanciesController.doSearch({});
-    }
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+      console.log('GEOLOCATION:', position, $distance.val());
+      searchTermsController.setCenter(
+        position.coords.latitude,
+        position.coords.longitude,
+        $distance.val()
+      );
+      reverseLookup(position.coords.latitude, position.coords.longitude);
+    });
   } else {
     console.log('Getting All');
     vacanciesController.doSearch({});
@@ -146,10 +141,10 @@ function getCenterShapeOptions(searchTerms) {
     var shapeOptions = {
       type: 'Circle',
       center: new google.maps.LatLng(searchTerms.center.latitude, searchTerms.center.longitude),
-      fillOpacity: 0.2,
-      fillColor: '#58a934',
-      strokeOpacity: 0.4,
-      strokeColor: '#58a934',
+      fillOpacity: 0.6,
+      fillColor: '#ffffff',
+      strokeOpacity: 0.8,
+      strokeColor: '#ffffff',
       strokeWeight: 2,
       radius: parseInt(searchTerms.center.distance, 10)
     };
