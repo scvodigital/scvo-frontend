@@ -218,6 +218,63 @@
       }
     }
   },
+  "job": {
+    "pattern": "/vacancy/:slug",
+    "defaultParams": {
+      "context": "detail"
+    },
+    "tasks": [
+      {
+        "name": "primaryResponse",
+        "taskType": "elasticsearch",
+        "config": {
+          "connectionStringTemplate": "{$../elasticsearch-url.txt}",
+          "elasticsearchConfig": {
+            "apiVersion": "5.6"
+          },
+          "queryTemplates": {
+            "index": "web-content-production",
+            "type": "goodmoves-job",
+            "template": "{$./queries/jobs/job.json}"
+          }
+        }
+      },
+      {
+        "name": "supplimentaryResponses",
+        "taskType": "elasticsearch",
+        "config": {
+          "connectionStringTemplate": "{$../elasticsearch-url.txt}",
+          "elasticsearchConfig": {
+            "apiVersion": "5.6"
+          },
+          "queryTemplates": [
+            {
+              "name": "not_found",
+              "index": "web-content-production",
+              "type": "goodmoves-job",
+              "template": "{$./queries/pages/not-found.json}"
+            },
+            {
+              "name": "types",
+              "index": "web-content-production",
+              "type": "goodmoves-job",
+              "template": "{$./queries/jobs/aggs.json}"
+            }
+          ]
+        }
+      }
+    ],
+    "destination": {
+      "destinationType": "handlebars",
+      "config": {
+        "default": {
+          "head": "{$./templates/jobs/job-head-tags.hbs}",
+          "body": "{$./templates/jobs/job.hbs}",
+          "foot": ""
+        }
+      }
+    }
+  },
   "{:./goodmoves-redirects.json}": "",
   "_default": {
     "pattern": "/*path",
