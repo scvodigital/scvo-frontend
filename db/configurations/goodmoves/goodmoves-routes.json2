@@ -50,6 +50,38 @@
       }
     }
   },
+  "login": {
+    "pattern": "/login",
+    "tasks": [
+      {
+        "name": "currently_recruiting",
+        "taskType": "elasticsearch",
+        "config": {
+          "connectionStringTemplate": "{$../elasticsearch-url.txt}",
+          "elasticsearchConfig": {
+            "apiVersion": "5.6"
+          },
+          "queryTemplates": [
+            {
+              "name": "organisations",
+              "index": "web-content-production",
+              "type": "goodmoves-job",
+              "template": "{$./queries/organisations/currently-recruiting-random.json}"
+            }
+          ]
+        }
+      }
+    ],
+    "destination": {
+      "destinationType": "handlebars",
+      "config": {
+        "default": {
+          "head": "{$./templates/pages/page-head-tags.hbs}",
+          "body": "{$./templates/pages/login.hbs}"
+        }
+      }
+    }
+  },
   "test": {
     "pattern": "/test",
     "tasks": [
@@ -142,7 +174,7 @@
           },
           "queryTemplates": {
             "index": "web-content-production",
-            "type": "goodmoves-job-test",
+            "type": "goodmoves-job",
             "template": "{$./queries/jobs/home-search.json}"
           }
         }

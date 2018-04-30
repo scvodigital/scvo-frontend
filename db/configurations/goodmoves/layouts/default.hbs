@@ -139,7 +139,7 @@ if(location.host.indexOf('.local') > -1){
                 </button>
                 <div class="mdc-menu" tabindex="-1" data-mdc-auto-init="MDCMenu" id="upper-menu">
                   <div class="mdc-menu__items mdc-list" role="menu" aria-hidden="true">
-                    {{#each context.menus.main-upper ~}}
+                    {{#each context.menus.main-extra ~}}
                     <a class="mdc-list-item{{#if (regexMatch ../request.url.pathname route "gi")}} mdc-list-item--activated{{/if}}" href="{{stripTrailingSlash path}}">
                       {{{label}}}
                     </a>
@@ -150,42 +150,25 @@ if(location.host.indexOf('.local') > -1){
               <div class="mdc-menu-anchor">
                 <!-- Logged in: -->
                 <button class="mdc-button" data-menu-target="#user-menu">
-                  <span class="fal fa-fw fa-user-circle"></span>
+                  <span class="far fa-fw fa-user-circle"></span>
                   User McUserface
                   <span class="far fa-fw fa-angle-down"></span>
                 </button>
                 <div class="mdc-menu" tabindex="-1" data-mdc-auto-init="MDCMenu" id="user-menu">
                   <div class="mdc-menu__items mdc-list" role="menu" aria-hidden="true">
-                    <a href="/saved-searches" class="mdc-list-item" role="menuitem" tabindex="1">
-                      Saved searches
+                    {{#each context.menus.authenticated ~}}
+                    <a class="mdc-list-item {{#if (regexMatch ../request.url.pathname route "gi")}} mdc-list-item--activated{{/if}}" href="{{stripTrailingSlash path}}" role="menuitem">
+                      {{{label}}}
                     </a>
-                    <a href="/profile" class="mdc-list-item" role="menuitem" tabindex="0">
-                      Profile
-                    </a>
-                    <a href="/shortlist" class="mdc-list-item" role="menuitem" tabindex="1">
-                      Shortlist
-                    </a>
-                    <a href="/logout" class="mdc-list-item" role="menuitem" tabindex="1">
-                      Log out
-                    </a>
+                    {{/each ~}}
                   </div>
                 </div>
                 <!-- Not logged in: -->
-                <!-- <button class="mdc-button" data-menu-target="#user-menu">
-                  <span class="fas fa-fw fa-user-circle"></span>
-                  Your profile
-                  <span class="fal fa-fw fa-angle-down"></span>
-                </button> -->
-                <!-- <div class="mdc-menu" tabindex="-1" data-mdc-auto-init="MDCMenu" id="user-menu">
-                  <div class="mdc-menu__items mdc-list" role="menu" aria-hidden="true">
-                    <a href="/login" class="mdc-list-item" role="menuitem" tabindex="0">
-                      Login
-                    </a>
-                    <a href="/register" class="mdc-list-item" role="menuitem" tabindex="1">
-                      Create profile
-                    </a>
-                  </div>
-                </div> -->
+                <!-- {{#each context.menus.unauthenticated ~}}
+                <a class="mdc-button" href="{{stripTrailingSlash path}}">
+                  {{{label}}}
+                </a>
+                {{/each ~}} -->
               </div>
             </section>
           </div>
@@ -230,7 +213,13 @@ if(location.host.indexOf('.local') > -1){
             </a>
             {{/each ~}}
             <div role="separator" class="mdc-list-divider"></div>
-            {{#each (reverse context.menus.main-upper) ~}}
+            {{#each (reverse context.menus.main-extra) ~}}
+            <a class="mdc-list-item {{#if (regexMatch ../request.url.pathname route "gi")}} mdc-list-item--activated{{/if}}" href="{{stripTrailingSlash path}}">
+              {{{label}}}
+            </a>
+            {{/each ~}}
+            <div role="separator" class="mdc-list-divider"></div>
+            {{#each (reverse context.menus.unauthenticated) ~}}
             <a class="mdc-list-item {{#if (regexMatch ../request.url.pathname route "gi")}} mdc-list-item--activated{{/if}}" href="{{stripTrailingSlash path}}">
               {{{label}}}
             </a>
@@ -271,7 +260,9 @@ if(location.host.indexOf('.local') > -1){
                   <h3>Help</h3>
                   <ul class="mdc-list">
                     {{#each context.menus.footer ~}}
-                    <li class="mdc-list-item"><a href="{{path}}">{{{label}}}</a></li>
+                    <li class="mdc-list-item">
+                      <a href="{{path}}">{{{label}}}</a>
+                    </li>
                     {{/each ~}}
                   </ul>
                 </div>

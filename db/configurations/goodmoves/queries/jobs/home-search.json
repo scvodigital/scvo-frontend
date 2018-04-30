@@ -1,14 +1,14 @@
 {
   {{#compare request.params.context "map"}}
-    "size": "1000",
-    "_source": ["Id", "title", "organisation.name", "geo_vacancy_coords", "closing_date", "remuneration_type", "salary", "status"],
+  "size": 1000,
+  "_source": ["Id", "title", "organisation.name", "geo_vacancy_coords", "closing_date", "remuneration_type", "salary", "status"],
   {{else}}
-    "size": 10,
-    "from": {{multiply (subtract (default request.params.query.query.page 1) 1) 10}},
-    "_source": {
-      "includes": [ "*" ],
-      "excludes": [ "text_bag", "text_bag_boost" ]
-    },
+  "size": 10,
+  "from": {{multiply (subtract (default request.params.query.query.page 1) 1) 10}},
+  "_source": {
+    "includes": [ "*" ],
+    "excludes": [ "text_bag", "text_bag_boost" ]
+  },
   {{/compare}}
   "query": {
     "bool": {
@@ -49,8 +49,7 @@
           }
         }
         {{/if}}
-      ]
-      {{#if request.params.query.keywords}},{{/if}}
+      ],
       {{/ifAny}}
       "must": [
         {{#if request.params.query.keywords}}

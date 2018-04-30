@@ -74,11 +74,13 @@ function reverseLookup(latitude, longitude) {
 
 function autocompleteChange() {
   var place = autocomplete.getPlace();
-  searchTermsController.setCenter(
-    place.geometry.location.lat(),
-    place.geometry.location.lng(),
-    $distance.val()
-  );
+  if (place.geometry.location) {
+    searchTermsController.setCenter(
+      place.geometry.location.lat(),
+      place.geometry.location.lng(),
+      $distance.val()
+    );
+  }
 }
 
 function generateMapContent(vacancies, searchTerms) {
