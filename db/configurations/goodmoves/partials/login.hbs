@@ -35,45 +35,22 @@
     </div>
   </div>
 </form>
-<script src="https://www.gstatic.com/firebasejs/4.12.1/firebase.js"></script>
 <script>
-  // Initialize Firebase
-  var config = {
-    apiKey: "AIzaSyDIUNnyGeZY3sO8gGIf-_2dgO49xKij5zI",
-    authDomain: "scvo-net.firebaseapp.com",
-    databaseURL: "https://scvo-net.firebaseio.com",
-    projectId: "scvo-net",
-    storageBucket: "scvo-net.appspot.com",
-    messagingSenderId: "782194712584"
-  };
-  var app = firebase.initializeApp(config);
   document.addEventListener("DOMContentLoaded", function(event) {
     $('#login-form')[0].addEventListener('submit', login);
     function login(evt) {
-      console.log('LOGIN!');
       var email = $('#login-email').val();
       var password = $('#login-password').val();
       evt.preventDefault();
       app.auth().signInWithEmailAndPassword(email, password).then(function(user) {
-        console.log('Logged in:', user);
-        user.getIdToken().then(function(idToken) {
-          console.log('Id token', idToken);
-          setCookie('gm_token', idToken, 7);
-        }).catch(function(err) {
-          console.error('Failed to get id token for central user', err);
-        })
+        if (user) {
+          console.log('Login form, user logged in', user);
+        } else {
+          console.log('Something went wrong, logged in but no user?');
+        }
       }).catch(function(err) {
         console.error('Error logging in:', err);
       });
-    }
-    function setCookie(name, value, days) {
-      var expires = "";
-      if (days) {
-        var date = new Date();
-        date.setTime(date.getTime() + (days*24*60*60*1000));
-        expires = "; expires=" + date.toUTCString();
-      }
-      document.cookie = name + "=" + (value || "")  + expires + "; path=/; secure";
     }
   });
 </script>
