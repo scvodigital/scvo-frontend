@@ -41,78 +41,7 @@
   <hr class="mdc-list-divider" />
   <div class="mdc-card__actions">
     <div class="mdc-card__action-buttons demo-card__action-buttons--text-only mdc-card__actions--full-bleed">
-      <a href="/vacancy/{{slug}}" class="mdc-card__action">Find out more</a>
-      <a href="/vacancy/{{slug}}/apply" class="mdc-card__action">Apply</a>
+    <a href="/vacancy/{{slug}}/apply" class="mdc-card__action">Apply</a>
     </div>
   </div>
 </div>
-
-{{!--
-<div class="search-result goodmoves-job panel panel-default id-{{Id}}">
-  <div class="panel-heading">
-    <button type="button" #toggleSave class="btn-floating btn-star right waves-effect waves-light" (click)="emitEvent('toggleSave', 'arg1', 'arg2')">
-      <i class="fa" #shortlistStar></i>
-    </button>
-    <h3 class="panel-title">
-      <a href="/vacancy/{{slug}}">
-        {{#if top_job}}
-        <span class="badge green white-text left">Top Job!</span>
-        {{/if}}
-        <span class="hover-underline">{{trim title}}</span>
-      </a>
-    </h3>
-  </div>
-  {{> status}}
-  <div class="panel-body">
-    <div class="row nopadding no-margin-bottom">
-      <div class="col s12 m4 vacancy-info">
-        <dl class="dl-horizontal">
-          <dt>Organisation:</dt>
-          <dd>
-            <a href="/organisation/{{organisation.slug}}">
-              <strong>{{organisation.name}}</strong>
-            </a>
-          </dd>
-        </dl>
-        <dl class="dl-horizontal">
-          <dt>Salary:</dt>
-          <dd>
-          {{> salary}}
-          </dd>
-        </dl>
-        {{#if status}}
-        <dl class="dl-horizontal">
-          <dt class="hide-on-med-and-down">Status:</dt>
-          <dd>{{status}}</dd>
-        </dl>
-        {{/if}}
-        {{#if closing_date}}
-        <dl class="dl-horizontal">
-          <dt>Closing:</dt>
-          <dd>{{{momentFormat (moment closing_date "x") "Do MMMM YYYY"}}}</dd>
-        </dl>
-        {{/if}}
-        {{#if location}}
-        <dl class="dl-horizontal">
-          <dt>Location:</dt>
-          <dd>{{location}}</dd>
-        </dl>
-        {{/if}}
-      </div>
-      <div class="col hide-on-small-only {{#if organisation.has_logo}}m5{{else}}m8{{/if}} vacancy-description">
-        <div class="newspaper-preview">
-          <div class="details-markdown">
-            {{{description}}}
-          </div>
-          <div class="newspaper-preview-fade"></div>
-        </div>
-      </div>
-      {{#if organisation.has_logo}}
-      <div class="col hide-on-small-only m3 vacancy-logo">
-        <img src="{{organisation.logo_url}}" alt="{{organisation.name}}" class="thumbnail responsive-img" />
-      </div>
-      {{/if}}
-    </div>
-  </div>
-</div>
---}}
