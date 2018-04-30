@@ -5,15 +5,21 @@
     <strong>{{organisation.name}}</strong>
   </div>
   {{/if}}
-  <div>
+  <div class="post-info">
     {{#if closing_date}}
-    <span class="far fa-calendar-alt fw" title="Closing date"></span>
-    {{{momentFormat (moment closing_date "x") "Do MMMM YYYY"}}}
+    <div class="post-info-item post-info-closing">
+      <span class="fal fa-calendar fw" title="Closing date"></span>
+      {{{momentFormat (moment closing_date "x") "Do MMMM YYYY"}}}
+    </div>
     {{/if}}
-    <span class="far fa-money-bill-alt fa-fw" title="Salary"></span>
-    {{> salary}}
+    {{#if salary}}
+    <div class="post-info-item post-info-salary">
+      <span class="fal fa-money fa-fw" title="Salary"></span>
+      {{{salary}}}
+    </div>
+    {{/if}}
   </div>
-  <div class="text-right">
+  <div>
     <a href="/vacancy/{{slug}}" class="mdc-card__action">Find out more</a>
   </div>
 </div>

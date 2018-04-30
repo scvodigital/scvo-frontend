@@ -60,7 +60,7 @@ var MapController = Class.extend({
         {
           featureType: 'road.highway',
           elementType: 'geometry.stroke',
-          stylers: [{color: '#888888'}]
+          stylers: [{color: '#555555'}]
         },
         {
           featureType: 'road.highway',

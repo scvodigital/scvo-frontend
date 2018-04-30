@@ -1,7 +1,7 @@
 {
   {{#compare request.params.context "map"}}
     "size": "1000",
-    "_source": ["Id", "title", "organisation.name", "geo_vacancy_coords", "closing_date", "remuneration_type", "salary_min", "salary_max", "status"],
+    "_source": ["Id", "title", "organisation.name", "geo_vacancy_coords", "closing_date", "remuneration_type", "salary", "status"],
   {{else}}
     "size": 10,
     "from": {{multiply (subtract (default request.params.query.query.page 1) 1) 10}},

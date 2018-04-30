@@ -8,19 +8,19 @@
 <script>
 var terms = {
   sectors: [
-    {{#each data.terms.types.aggregations.sectors.buckets}}
+    {{#each data.terms.types.aggregations.sectors.buckets ~}}
     { field: 'sectors', term: {{{stringify key}}} },
-    {{/each}}
+    {{/each ~}}
   ],
   roles: [
-    {{#each data.terms.types.aggregations.roles.buckets}}
+    {{#each data.terms.types.aggregations.roles.buckets ~}}
     { field: 'roles', term: {{{stringify key}}} },
-    {{/each}}
+    {{/each ~}}
   ],
   statuses: [
-    {{#each data.terms.types.aggregations.statuses.buckets}}
+    {{#each data.terms.types.aggregations.statuses.buckets ~}}
     { field: 'statuses', term: {{{stringify key}}} },
-    {{/each}}
+    {{/each ~}}
   ]
 };
 </script>

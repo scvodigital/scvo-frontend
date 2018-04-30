@@ -1,0 +1,24 @@
+<div class="mdc-card gist" data-vacancy-id="{{Id}}">
+  <div class="search-result-card__info-row">
+    <div class="mdc-card__media mdc-card__media--square demo-card__media search-result-card__media--organisation" style="background-image:url({{organisation.logo_url}});"></div>
+    <div class="search-result-card__info">
+      <div class="search-result-card__info-title mdc-typography--headline">
+        {{title}}
+      </div>
+      <div class="search-result-card__info-organisation mdc-typography--body1">
+        <a href="/organisation/{{organisation.slug}}">{{organisation.name}}</a>
+      </div>
+      <div class="search-result-card__info-details mdc-typography--caption">
+        <span class="fal fa-calendar fw" title="Closing date"></span>
+        {{{momentFormat (moment closing_date "x") "Do MMMM YYYY"}}}
+      </div>
+    </div>
+  </div>
+  <hr class="mdc-list-divider">
+  <div class="mdc-card__actions">
+    <div class="mdc-card__action-buttons demo-card__action-buttons--text-only mdc-card__actions--full-bleed">
+      <a href="/vacancy/{{slug}}" class="mdc-card__action">Find out more</a>
+      <a href="/vacancy/{{slug}}/apply" class="mdc-card__action">Apply</a>
+    </div>
+  </div>
+</div>

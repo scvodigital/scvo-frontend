@@ -20,7 +20,7 @@ $mobile-landscape-breakpoint: 959px;
 
 @import "./node_modules/material-components-web/material-components-web.scss";
 @import url('//cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css');
-@import url('//fonts.googleapis.com/css?family=Montserrat:700|Open+Sans:400,600');
+@import url('//fonts.googleapis.com/css?family=Montserrat:700|Open+Sans:400,500,600');
 
 body {
   background-color: $mdc-theme-primary-dark;
@@ -100,7 +100,19 @@ header {
       .mdc-button::after,
       .mdc-tab::before,
       .mdc-tab::after {
-        background-color: $mdc-theme-secondary !important;
+        background-color: transparent;
+      }
+      .mdc-top-app-bar__action-item,
+      .mdc-top-app-bar__navigation-icon,
+      .mdc-button,
+      .mdc-tab {
+        font-weight: 500;
+      }
+      .mdc-top-app-bar__action-item:hover,
+      .mdc-top-app-bar__navigation-icon:hover,
+      .mdc-button:hover,
+      .mdc-tab:hover {
+        color: #000;
       }
     }
   }
@@ -153,8 +165,7 @@ a:hover {
   color: white
 }
 
-a,
-.mdc-menu .mdc-list-item {
+a {
   font-weight: 600;
 }
 
@@ -170,7 +181,8 @@ a,
 .mdc-button:not(.mdc-ripple-upgraded):active:after,
 .mdc-button:not(.mdc-ripple-upgraded):focus:before,
 .mdc-button:not(.mdc-ripple-upgraded):hover:before {
-  opacity: 0.1;
+  opacity: 0;
+  background-color: transparent;
 }
 .mdc-tab-bar:not(.mdc-tab-bar-upgraded) .mdc-tab--active,
 .mdc-tab-bar:not(.mdc-tab-bar-upgraded) .mdc-tab:not(.mdc-tab--active):active .mdc-tab__indicator {
@@ -190,6 +202,7 @@ a,
 .mdc-tab,
 .mdc-card__subtitle {
   font-weight: 600;
+  text-transform: none;
 }
 
 .search-info {
@@ -261,6 +274,11 @@ a,
   min-height: 100px;
   max-height: 66.666vh;
   width: 100%;
+}
+.map-content {
+  h3 {
+    margin: 0;
+  }
 }
 
 .search-overlay {

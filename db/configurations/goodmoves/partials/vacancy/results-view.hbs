@@ -1,4 +1,4 @@
-<div class="mdc-card" data-vacancy-id="{{Id}}">
+<div class="mdc-card search-result" data-vacancy-id="{{Id}}">
   <div class="search-result-card__info-row">
     <div class="mdc-card__media mdc-card__media--square demo-card__media search-result-card__media--organisation" style="background-image:url({{organisation.logo_url}});"></div>
     <div class="search-result-card__info">
@@ -9,15 +9,16 @@
         <a href="/organisation/{{organisation.slug}}">{{organisation.name}}</a>
       </div>
       <div class="search-result-card__info-details mdc-typography--caption">
+        <span class="fal fa-calendar fw" title="Closing date"></span>
         {{{momentFormat (moment closing_date "x") "Do MMMM YYYY"}}}
       </div>
     </div>
   </div>
-  <hr class="mdc-list-divider">
+  <hr class="mdc-list-divider" />
   <div class="search-result-article__snippet mdc-typography--body1">
     {{{description}}}
   </div>
-  <hr class="mdc-list-divider">
+  <hr class="mdc-list-divider" />
   <div class="mdc-card__actions">
     <div class="mdc-card__action-buttons demo-card__action-buttons--text-only mdc-card__actions--full-bleed">
       <a href="/vacancy/{{slug}}" class="mdc-card__action">Find out more</a>
@@ -25,7 +26,7 @@
     </div>
   </div>
 </div>
-<div style="padding:10px;"> </div>
+
 {{!--
 <div class="search-result goodmoves-job panel panel-default id-{{Id}}">
   <div class="panel-heading">
