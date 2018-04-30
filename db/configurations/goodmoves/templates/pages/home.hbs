@@ -1,51 +1,53 @@
 <section id="search-overlay" class="search-overlay">
-  <div class="mdc-layout-grid">
-    <div class="mdc-layout-grid__inner">
-      <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop">
-        <div class="mdc-text-field mdc-text-field--outlined" data-mdc-auto-init="MDCTextField">
-          <input type="text" class="mdc-text-field__input mdc-text-field--fullwidth" id="what">
-          <label class="mdc-floating-label mdc-floating-label--float-above" for="what">What</label>
-          <div class="mdc-notched-outline">
-            <svg>
-              <path class="mdc-notched-outline__path"/>
-            </svg>
-          </div>
-          <div class="mdc-notched-outline__idle"></div>
-        </div>
-      </div>
-      <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop">
-        <div class="mdc-form-field">
-          <div class="mdc-select" data-mdc-auto-init="MDCSelect">
-            <select class="mdc-select__native-control fullwidth" id="distance">
-              <option value="any">Any distance</option>
-              <option value="1609.344">1 miles</option>
-              <option value="3218.688">2 miles</option>
-              <option value="8046.72" selected>5 miles</option>
-              <option value="16093.44">10 miles</option>
-              <option value="24140.16">15 miles</option>
-              <option value="40233.6">25 miles</option>
-              <option value="80467.2">50 miles</option>
-            </select>
-            from
+  <div class="container-fluid">
+    <div class="mdc-layout-grid">
+      <div class="mdc-layout-grid__inner">
+        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop">
+          <div class="mdc-text-field mdc-text-field--outlined" data-mdc-auto-init="MDCTextField">
+            <input type="text" class="mdc-text-field__input mdc-text-field--fullwidth" id="what">
+            <label class="mdc-floating-label mdc-floating-label--float-above" for="what">What</label>
+            <div class="mdc-notched-outline">
+              <svg>
+                <path class="mdc-notched-outline__path"/>
+              </svg>
+            </div>
+            <div class="mdc-notched-outline__idle"></div>
           </div>
         </div>
-      </div>
-      <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop">
-        <div class="mdc-text-field mdc-text-field--outlined" data-mdc-auto-init="MDCTextField">
-          <input type="text" class="mdc-text-field__input mdc-text-field--fullwidth" id="where">
-          <label class="mdc-floating-label mdc-floating-label--float-above" for="where">Where</label>
-          <div class="mdc-notched-outline">
-            <svg>
-              <path class="mdc-notched-outline__path"/>
-            </svg>
+        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop">
+          <div class="mdc-form-field">
+            <div class="mdc-select" data-mdc-auto-init="MDCSelect">
+              <select class="mdc-select__native-control fullwidth" id="distance">
+                <option value="any">Any distance</option>
+                <option value="1609.344">1 miles</option>
+                <option value="3218.688">2 miles</option>
+                <option value="8046.72" selected>5 miles</option>
+                <option value="16093.44">10 miles</option>
+                <option value="24140.16">15 miles</option>
+                <option value="40233.6">25 miles</option>
+                <option value="80467.2">50 miles</option>
+              </select>
+              from
+            </div>
           </div>
-          <div class="mdc-notched-outline__idle"></div>
+        </div>
+        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop">
+          <div class="mdc-text-field mdc-text-field--outlined" data-mdc-auto-init="MDCTextField">
+            <input type="text" class="mdc-text-field__input mdc-text-field--fullwidth" id="where">
+            <label class="mdc-floating-label mdc-floating-label--float-above" for="where">Where</label>
+            <div class="mdc-notched-outline">
+              <svg>
+                <path class="mdc-notched-outline__path"/>
+              </svg>
+            </div>
+            <div class="mdc-notched-outline__idle"></div>
+          </div>
         </div>
       </div>
     </div>
+    <div id="search-terms" class="mdc-chip-set"></div>
+    <button type="button" id="detailed-results" class="mdc-button mdc-button--raised">Detailed results</button>
   </div>
-  <div id="search-terms" class="mdc-chip-set"></div>
-  <button type="button" id="detailed-results" class="mdc-button mdc-button--raised">Detailed results</button>
 </section>
 <section class="search-results">
   <div id="map-full"></div>

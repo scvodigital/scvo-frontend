@@ -4,15 +4,15 @@
   {{else}}
     {{#if salary_circa}} Circa {{/if}}
     {{#ifAll (compare salary_min ">" 0) (if salary_max false) ~}}
-      from &pound;{{addCommas salary_min}}
+      from {{> salary_currency}}{{addCommas salary_min}}
     {{else}}
       {{#ifAll (if salary_min false) (compare salary_max ">" 0) ~}}
-        up to &pound;{{addCommas salary_max}}
+        up to {{> salary_currency}}{{addCommas salary_max}}
       {{else}}
         {{#compare salary_max ">" salary_min ~}}
-          &pound;{{addCommas salary_min}} - &pound;{{addCommas salary_max}}
+          {{> salary_currency}}{{addCommas salary_min}} - {{> salary_currency}}{{addCommas salary_max}}
         {{else}}
-          &pound;{{addCommas salary_min}}
+          {{> salary_currency}}{{addCommas salary_min}}
         {{/compare ~}}
       {{/ifAll ~}}
     {{/ifAll ~}}

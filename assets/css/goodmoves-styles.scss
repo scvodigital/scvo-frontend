@@ -1,13 +1,16 @@
-$mdc-theme-primary: #58a934;
-$mdc-theme-secondary: #424242;
-$mdc-theme-background: #fff;
+// $mdc-theme-primary: #58a934;
+$mdc-theme-primary: #3c7524;
+$mdc-theme-primary-light: #d1edc4;
+$mdc-theme-primary-dark: #1e3b12;
 
-$mdc-theme-primary-light: lighten($mdc-theme-primary, 10%);
-$mdc-theme-primary-dark: darken($mdc-theme-primary, 10%);
+$mdc-theme-secondary: #424242;
 $mdc-theme-secondary-light: lighten($mdc-theme-secondary, 10%);
 $mdc-theme-secondary-dark: darken($mdc-theme-secondary, 10%);
 
+$mdc-theme-background: #fff;
+
 $unit: 1rem;
+$toolbar-height: 64px;
 $nav-height: 38px;
 
 $mobile-breakpoint: 599px;
@@ -17,11 +20,170 @@ $mobile-landscape-breakpoint: 959px;
 @import url('//cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css');
 @import url('//fonts.googleapis.com/css?family=Montserrat:700|Open+Sans:400,600');
 
+body {
+  background-color: $mdc-theme-primary-dark;
+}
+.mdc-toolbar-fixed-adjust {
+  margin: 0;
+  padding-top: $toolbar-height;
+}
 header {
   .container-fluid {
     padding: 0;
+    .mdc-top-app-bar__title {
+      padding: 0;
+      a {
+        display: block;
+      }
+      a:hover {
+        text-decoration: none;
+      }
+      svg {
+        position: absolute;
+        top: 4px;
+        left: 0;
+      }
+      .tagline {
+        color: white;
+        text-transform: lowercase;
+        position: absolute;
+        bottom: 1px;
+        left: 0;
+      }
+    }
+    .mdc-top-app-bar__section {
+      padding: 0;
+    }
+    .mdc-tab-bar {
+      height: $toolbar-height;
+      .mdc-tab {
+        text-transform: none;
+        color: white;
+        min-width: auto;
+        font-size: 1rem;
+      }
+    }
+    .mdc-tab::before, .mdc-tab::after {
+      background-color: white;
+    }
+    .mdc-menu-anchor {
+      .mdc-button {
+        color: white;
+        padding-right: 0;
+        text-transform: none;
+        .fa-fw {
+          margin-right: $unit/2;
+        }
+        .fa-fw:last-child {
+          margin-right: 0;
+        }
+      }
+    }
   }
 }
+
+li,
+p,
+.mdc-tab,
+.mdc-card,
+.mdc-button,
+.mdc-form-field,
+.mdc-typography,
+.mdc-card__subtitle,
+.mdc-textfield__input,
+.mdc-typography--body1,
+.mdc-typography--body2,
+.mdc-typography--title,
+.mdc-card__title--large,
+.mdc-typography--caption,
+.mdc-typography--headline,
+.supplimentary-list-title,
+.mdc-card__supporting-text,
+.mdc-typography--subheading2,
+.mdc-simple-menu .mdc-list-item,
+.mdc-temporary-drawer .mdc-list-item,
+.mdc-list {
+  font-family: "Open Sans", Helvetica, Arial, sans-serif;
+}
+.mdc-card__title,
+.mdc-textfield__label,
+.mdc-typography--title,
+.mdc-typography--headline,
+.supplimentary-list-title {
+  font-family: "Montserrat", "Open Sans", Helvetica, Arial, sans-serif;
+  font-weight: 700;
+}
+
+a {
+  color: $mdc-theme-primary;
+  font-weight: 600;
+  text-decoration: none;
+  text-decoration-skip: ink;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+.mdc-button a:hover,
+.mdc-button:hover,
+.mdc-tab:hover,
+.mdc-toolbar a:hover {
+  text-decoration: none;
+}
+.mdc-button:not(.mdc-ripple-upgraded):active:after,
+.mdc-button:not(.mdc-ripple-upgraded):focus:before,
+.mdc-button:not(.mdc-ripple-upgraded):hover:before {
+  opacity: 0.1;
+}
+
+.mdc-form-field,
+.mdc-button,
+.mdc-card__supporting-text,
+.mdc-card__subtitle {
+  font-size: 1rem;
+}
+.mdc-card__supporting-text {
+  letter-spacing: 0;
+}
+.mdc-button,
+.mdc-tab,
+.mdc-card__subtitle {
+  font-weight: 600;
+}
+
+.search-info {
+  margin-bottom: $unit;
+  background: #fafafa;
+  color: #555;
+  padding: $unit/3 $unit/2;
+  box-sizing: border-box;
+}
+
+.mdc-card {
+  p {
+    margin: 0 0 $unit/2;
+  }
+  p:last-child {
+    margin: 0;
+  }
+  .mdc-card__actions {
+    .mdc-card__action {
+      font-weight: 600;
+      margin-right: $unit;
+    }
+    .mdc-card__action:last-child {
+      margin-right: 0;
+    }
+  }
+}
+
+.mdc-text-field {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 100%;
+}
+
 
 /* Typeahead */
 .twitter-typeahead {
@@ -60,6 +222,7 @@ header {
 
 .search-overlay {
   position: absolute;
+  width: 100%;
   z-index: 1;
   input, select {
     border-bottom-style: none!important;
@@ -70,6 +233,9 @@ header {
   .mdc-floating-label {
     z-index: 1;
     color: #444444;
+  }
+  .mdc-layout-grid {
+    padding: 0;
   }
 }
 
@@ -280,7 +446,7 @@ footer {
     }
   }
   .footer-copyright {
-    background: mdc-theme-prop('primary', 'dark');
+    background-color: $mdc-theme-primary-dark;
     padding-top: 0;
     margin-bottom: 0;
     line-height: 1.2;

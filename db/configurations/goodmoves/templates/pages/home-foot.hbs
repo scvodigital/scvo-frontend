@@ -7,21 +7,21 @@
 <script src="/assets/js/goodmoves/home-controller.js" async defer></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBJdxcQpVKQ6HdrjnPXycUoZqsmp-Ep3l0&libraries=places&callback=initMap" async defer></script>
 <script>
-  var terms = {
-    sectors: [
-      {{#each data.terms.types.aggregations.sectors.buckets}}
-        { field: 'sectors', term: {{{stringify key}}} },
-      {{/each}}
-    ],
-    roles: [
-      {{#each data.terms.types.aggregations.roles.buckets}}
-        { field: 'roles', term: {{{stringify key}}} },
-      {{/each}}
-    ],
-    statuses: [
-      {{#each data.terms.types.aggregations.statuses.buckets}}
-        { field: 'statuses', term: {{{stringify key}}} },
-      {{/each}}
-    ]
-  };
+var terms = {
+  sectors: [
+    {{#each data.terms.types.aggregations.sectors.buckets}}
+    { field: 'sectors', term: {{{stringify key}}} },
+    {{/each}}
+  ],
+  roles: [
+    {{#each data.terms.types.aggregations.roles.buckets}}
+    { field: 'roles', term: {{{stringify key}}} },
+    {{/each}}
+  ],
+  statuses: [
+    {{#each data.terms.types.aggregations.statuses.buckets}}
+    { field: 'statuses', term: {{{stringify key}}} },
+    {{/each}}
+  ]
+};
 </script>
