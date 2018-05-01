@@ -7,8 +7,8 @@ var MapController = Class.extend({
 
   init: function($map, latitude, longitude, zoomLevel) {
     this.initialCoords = {
-      lat: latitude,
-      lng: longitude
+      'lat': latitude,
+      'lng': longitude
     };
     this.initialZoom = zoomLevel;
     this.map = new google.maps.Map($map[0], {
@@ -38,87 +38,87 @@ var MapController = Class.extend({
           'stylers': [{'color': '#424242'}]
         },
         {
-          featureType: 'road',
-          elementType: 'geometry',
-          stylers: [{color: '#888888'}]
+          'featureType': 'road',
+          'elementType': 'geometry',
+          'stylers': [{'color': '#888888'}]
         },
         {
-          featureType: 'road',
-          elementType: 'geometry.stroke',
-          stylers: [{color: '#888888'}]
+          'featureType': 'road',
+          'elementType': 'geometry.stroke',
+          'stylers': [{'color': '#888888'}]
         },
         {
-          featureType: 'road',
-          elementType: 'labels.text.fill',
-          stylers: [{color: '#424242'}]
+          'featureType': 'road',
+          'elementType': 'labels.text.fill',
+          'stylers': [{'color': '#424242'}]
         },
         {
-          featureType: 'road.highway',
-          elementType: 'geometry',
-          stylers: [{color: '#888888'}]
+          'featureType': 'road.highway',
+          'elementType': 'geometry',
+          'stylers': [{'color': '#888888'}]
         },
         {
-          featureType: 'road.highway',
-          elementType: 'geometry.stroke',
-          stylers: [{color: '#555555'}]
+          'featureType': 'road.highway',
+          'elementType': 'geometry.stroke',
+          'stylers': [{'color': '#555555'}]
         },
         {
-          featureType: 'road.highway',
-          elementType: 'labels.text.fill',
-          stylers: [{color: '#888888'}]
+          'featureType': 'road.highway',
+          'elementType': 'labels.text.fill',
+          'stylers': [{'color': '#888888'}]
         },
         {
-          featureType: 'transit',
-          elementType: 'geometry',
-          stylers: [{color: '#111111'}]
+          'featureType': 'transit',
+          'elementType': 'geometry',
+          'stylers': [{'color': '#111111'}]
         },
         {
-          featureType: 'transit.line',
-          elementType: 'geometry',
-          stylers: [{color: '#111111'}]
+          'featureType': 'transit.line',
+          'elementType': 'geometry',
+          'stylers': [{'color': '#111111'}]
         },
         {
-          featureType: 'transit.line',
-          elementType: 'geometry.stroke',
-          stylers: [{color: '#111111'}]
+          'featureType': 'transit.line',
+          'elementType': 'geometry.stroke',
+          'stylers': [{'color': '#111111'}]
         },
         {
-          featureType: 'transit.station',
-          elementType: 'labels.text.fill',
-          stylers: [{color: '#424242'}]
+          'featureType': 'transit.station',
+          'elementType': 'labels.text.fill',
+          'stylers': [{'color': '#424242'}]
         },
         {
-          featureType: 'transit.station.airport',
-          elementType: 'geometry',
-          stylers: [{color: '#888888'}]
+          'featureType': 'transit.station.airport',
+          'elementType': 'geometry',
+          'stylers': [{'color': '#888888'}]
         },
         {
-          featureType: 'transit.station.bus',
-          elementType: 'geometry',
-          stylers: [{color: '#333333'}]
+          'featureType': 'transit.station.bus',
+          'elementType': 'geometry',
+          'stylers': [{'color': '#333333'}]
         },
         {
-          featureType: 'transit.station.rail',
-          elementType: 'geometry',
-          stylers: [{color: '#333333'}]
+          'featureType': 'transit.station.rail',
+          'elementType': 'geometry',
+          'stylers': [{'color': '#333333'}]
         },
         {
-          featureType: 'water',
-          elementType: 'geometry',
-          stylers: [{color: '#fafafa'}]
+          'featureType': 'water',
+          'elementType': 'geometry',
+          'stylers': [{'color': '#fafafa'}]
         },
         {
-          featureType: 'water',
-          elementType: 'labels.text.fill',
-          stylers: [{color: '#424242'}]
+          'featureType': 'water',
+          'elementType': 'labels.text.fill',
+          'stylers': [{'color': '#424242'}]
         },
         {
-          featureType: 'water',
-          elementType: 'labels.text.stroke',
-          stylers: [{color: '#424242'}]
+          'featureType': 'water',
+          'elementType': 'labels.text.stroke',
+          'stylers': [{'color': '#424242'}]
         }
       ],
-      disableDefaultUI: true
+      'disableDefaultUI': true
     });
   },
 

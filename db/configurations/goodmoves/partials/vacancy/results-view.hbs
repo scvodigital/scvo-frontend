@@ -12,21 +12,21 @@
         <div class="mdc-layout-grid__inner">
           <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone">
             <div class="search-result-card__info-location mdc-typography--body1">
-              <span class="fal fa-map-marker-alt fa-fw" title="Location"></span>
+              <span class="far fa-map-marker-alt fa-fw" title="Location"></span>
               {{location}}
             </div>
             <div class="search-result-card__info-salary mdc-typography--body1">
-              <span class="fal fa-money-bill fa-fw" title="Salary"></span>
+              <span class="far fa-money-bill fa-fw" title="Salary"></span>
               {{{salary}}}
             </div>
           </div>
           <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone">
             <div class="search-result-card__info-status mdc-typography--body1">
-              <span class="fal fa-building fa-fw" title="Status"></span>
+              <span class="far fa-building fa-fw" title="Status"></span>
               {{status}}
             </div>
             <div class="search-result-card__info-closing mdc-typography--body1">
-              <span class="fal fa-calendar-alt fa-fw" title="Closing date"></span>
+              <span class="far fa-calendar-alt fa-fw" title="Closing date"></span>
               {{momentFormat (moment closing_date "x") "Do MMMM YYYY"}}
             </div>
           </div>
@@ -36,13 +36,21 @@
   </div>
   <hr class="mdc-list-divider" />
   <div class="search-result-article__snippet mdc-typography--body1">
-    {{{og_summary}}}
+    {{{description_short}}}
   </div>
   <hr class="mdc-list-divider" />
   <div class="mdc-card__actions">
     <div class="mdc-card__action-buttons demo-card__action-buttons--text-only mdc-card__actions--full-bleed">
       <a href="/vacancy/{{slug}}" class="mdc-card__action">Find out more</a>
       <a href="/vacancy/{{slug}}/apply" class="mdc-card__action">Apply</a>
+    </div>
+    <div class="mdc-card__action-icons pull-right">
+      <a href="#" class="mdc-card__action mdc-card__action--shortlist" title="Add to shortlist">
+        <span class="fa-stack fa-lg">
+          <span class="fas fa-circle fa-stack-2x" aria-hidden="true"></span>
+          <span class="far fa-star fa-stack-1x" aria-hidden="true"></span>
+        </span>
+      </a>
     </div>
   </div>
 </div>
