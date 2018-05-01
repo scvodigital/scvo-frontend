@@ -1,15 +1,27 @@
 <div class="mdc-card full" data-vacancy-id="{{Id}}">
   {{> vacancy_key_info}}
   <hr class="mdc-list-divider" />
-  <div class="mdc-card__actions">
-    <div class="mdc-card__action-buttons demo-card__action-buttons--text-only mdc-card__actions--full-bleed">
-      <a href="/vacancy/{{slug}}" class="mdc-card__action">Information</a>
-      <a href="/vacancy/{{slug}}/documents" class="mdc-card__action">Documents</a>
-      <a href="/vacancy/{{slug}}/apply" class="mdc-card__action">Apply</a>
-    </div>
+  <div id="vacancy-tab-bar" class="mdc-tab-bar" data-mdc-auto-init="MDCTabBar">
+    <a class="mdc-tab" href="/vacancy/{{slug}}">
+      <span class="far fa-list-ul fa-fw" title="Information"></span>
+      Information
+    </a>
+    <a class="mdc-tab" href="/vacancy/{{slug}}#location">
+      <span class="far fa-map-marker-alt fa-fw" title="Location"></span>
+      Location
+    </a>
+    <a class="mdc-tab" href="/vacancy/{{slug}}#documents">
+      <span class="far fa-file-alt fa-fw" title="Documents"></span>
+      Documents
+    </a>
+    <a class="mdc-tab" href="/vacancy/{{slug}}#apply">
+      <span class="far fa-handshake fa-fw" title="Apply"></span>
+      Apply
+    </a>
+    <span class="mdc-tab-bar__indicator"></span>
   </div>
   <hr class="mdc-list-divider" />
-  <div class="search-result-article__snippet mdc-typography--body1">
+  <div class="mdc-card--full-content mdc-typography--body1">
     {{{description}}}
   </div>
 </div>
