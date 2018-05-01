@@ -122,7 +122,8 @@ var MapController = Class.extend({
     });
   },
 
-  refreshMap: function(shapesOptions, pinsOptions, snapTo = true) {
+  refreshMap: function(shapesOptions, pinsOptions, snapTo) {
+    snapTo = typeof snapTo === 'undefined' ? true : snapTo;
     this.clearMap();
     var pinBounds = new google.maps.LatLngBounds();
     var shapeBounds = new google.maps.LatLngBounds();
@@ -139,31 +140,31 @@ var MapController = Class.extend({
       shapeBounds.extend(bounds.getSouthWest());
     }
 
-    for (var i = 0; i < pinsOptions.length; ++i) {
-      let pinOptions = pinsOptions[i];
-      let markerOptions = pinOptions.markerOptions;
-      let infoWindowOptions = pinOptions.infoWindowOptions || null;
+    var that = this;
+    pinsOptions.forEach(function(pinOptions) {
+      var markerOptions = pinOptions.markerOptions;
+      var infoWindowOptions = pinOptions.infoWindowOptions || null;
 
-      markerOptions.map = this.map;
-      let marker = new google.maps.Marker(markerOptions);
-      let infoWindow = null;
+      markerOptions.map = that.map;
+      var marker = new google.maps.Marker(markerOptions);
+      var infoWindow = null;
 
       if (infoWindowOptions) {
         infoWindow = new google.maps.InfoWindow(infoWindowOptions);
         marker.addListener('click', function() {
-          this.closeInfoWindows();
-          infoWindow.open(this.map, marker);
-        }.bind(this));
+          that.closeInfoWindows();
+          infoWindow.open(that.map, marker);
+        }.bind(that));
       }
 
-      let pin = {
+      var pin = {
         marker: marker,
         infoWindow: infoWindow
       }
-      this.pins.push(pin);
+      that.pins.push(pin);
 
       pinBounds.extend(markerOptions.position);
-    }
+    });
 
     if (snapTo && pinsOptions.length > 0) {
       this.map.fitBounds(pinBounds);

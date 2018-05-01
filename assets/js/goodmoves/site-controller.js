@@ -15,8 +15,8 @@ var GoodmovesController = Class.extend({
 
     // Menu buttons
     $('[data-menu-target]').each(function(i, o) {
-      let selector = $(o).attr('data-menu-target');
-      let menuEl = $(selector)[0];
+      var selector = $(o).attr('data-menu-target');
+      var menuEl = $(selector)[0];
       $(o).on('click', function() {
         menuEl.MDCMenu.open = !menuEl.MDCMenu.open;
       });
@@ -24,8 +24,8 @@ var GoodmovesController = Class.extend({
 
     // Temporary drawer buttons
     $('[data-drawer-target]').each(function(i, o) {
-      let selector = $(o).attr('data-drawer-target');
-      let drawerEl = $(selector)[0];
+      var selector = $(o).attr('data-drawer-target');
+      var drawerEl = $(selector)[0];
       $(o).on('click', function() {
         drawerEl.MDCTemporaryDrawer.open = true;
       });

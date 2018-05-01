@@ -13,7 +13,7 @@
     "copy": "cp ./db/db.json ./build/db.json; cp -r ./assets ./build/assets",
     "sass": "node-sass --include-path=./node_modules ./build/assets/css -o build/assets/css",
     "upgrade-router": "yarn add -E @scvo/router @scvo/router-task-firebase @scvo/router-task-elasticsearch @scvo/router-destination-handlebars @scvo/router-destination-redirect",
-    "build": "npm run cleanup; npm run compile; npm run json2; npm run copy; npm run sass",
+    "build": "npm run cleanup; npm run compile; npm run json2; npm run copy; npm run sass; npm run uglify",
     "start": "npm run compile; node build/index.js",
     "dev": "npm run build; devmode=true node build/index.js",
     "dev-router": "npm run router; npm run dev",
@@ -33,7 +33,10 @@
     "fix": "gts fix",
     "prepare": "npm run compile",
     "pretest": "npm run compile",
-    "posttest": "npm run check"
+    "posttest": "npm run check",
+    "uglify": "npm run uglify-main; npm run uglify-home",
+    "uglify-main": "uglifyjs --compress --output=./build/assets/js/goodmoves/main.js ./build/assets/js/cookieinfo.min.js ./build/assets/js/class-inheritance.js ./build/assets/js/goodmoves/site-controller.js",
+    "uglify-home": "uglifyjs --compress --output=./build/assets/js/goodmoves/home.js ./build/assets/js/goodmoves/typeahead-controller.js ./build/assets/js/goodmoves/search-terms-controller.js ./build/assets/js/goodmoves/vacancies-controller.js ./build/assets/js/goodmoves/map-controller.js ./build/assets/js/goodmoves/home-controller.js"
   },
   "author": "Matthew Wilkes (https://scvo.org.uk)",
   "license": "GPL-3.0",
