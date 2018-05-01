@@ -8,14 +8,14 @@ var SearchTermsController = Class.extend({
   listeners: [],
 
   init: function() {
-    console.log('Search Terms Controller Init');
+    // console.log('Search Terms Controller Init');
   },
 
   addTerm: function(term, value) {
     if (!this.terms.hasOwnProperty(term)) {
       this.terms[term] = [];
     }
-    
+
     if (this.terms[term].indexOf(value) === -1) {
       this.terms[term].push(value);
     }
@@ -68,6 +68,6 @@ var SearchTermsController = Class.extend({
   updateTrigger: function() {
     for (var i = 0; i < this.listeners.length; ++i) {
       this.listeners[i](this.currentState());
-    } 
+    }
   }
 });

@@ -1,9 +1,6 @@
 {
   "size": 10,
   "from": {{multiply (subtract (default request.params.query.page 1) 1) 10}},
-  "_source": {
-    "excludes": [ "text_bag", "text_bag_boost" ]
-  },
   "query": {
     "bool": {
       "must": [

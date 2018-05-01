@@ -318,6 +318,10 @@ a {
   }
 }
 
+.page-content {
+  padding-top: $unit*2;
+}
+
 .mdc-card {
   .mdc-card__actions {
     .mdc-card__action--shortlist {
@@ -481,7 +485,6 @@ body {
   padding: $unit/2;
 }
 
-/* Search results card */
 .mdc-card__info--vacancy-row {
   padding: $unit/2;
   display: flex;
@@ -491,7 +494,35 @@ body {
     width: 100%;
     flex-direction: column;
     padding: $unit/4 $unit/2 $unit/2;
-    // padding: $unit/2;
+    .mdc-card__info--vacancy-title a {
+      .top-job {
+        margin-left: 0;
+        margin-right: .2rem;
+        display: inline-block;
+        padding: .22222222rem .5rem;
+        font-weight: 700;
+        line-height: 1;
+        color: rgb(255, 255, 255);
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: baseline;
+        background-color: rgb(119, 119, 119)!important;
+        border-radius: 1rem;
+        position: relative;
+        top: -2px;
+        left: 0;
+        font-size: 1rem;
+        height: 1.6rem;
+        box-sizing: border-box;
+        color: white;
+      }
+    }
+    .mdc-card__info--vacancy-title a:hover {
+      text-decoration: none;
+      .hover-underline {
+        text-decoration: underline;
+      }
+    }
     .mdc-layout-grid {
       padding: 0;
       width: 100%;
@@ -659,6 +690,10 @@ body {
   padding: 0;
 }
 
+.mdc-list-item__graphic {
+  margin-right: $unit;
+}
+
 footer {
   border-top: .6rem solid $mdc-theme-primary-light;
   background-color: $mdc-theme-primary;
@@ -679,7 +714,6 @@ footer {
   .about a,
   a {
     color: white;
-    text-decoration: underline;
   }
   .about a:hover,
   a:hover {
@@ -724,8 +758,12 @@ footer {
   }
   .fa-ul {
     margin: 0 0 0 $unit*1.5;
-    li a {
-      text-decoration: none;
+    li {
+      margin-bottom: 0;
+      height: $unit*1.5;
+      a {
+        text-decoration: none;
+      }
     }
     li a:hover {
       text-decoration: underline;

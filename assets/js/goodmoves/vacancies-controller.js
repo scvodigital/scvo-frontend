@@ -1,6 +1,6 @@
 var VacanciesController = Class.extend({
   listeners: [],
-  
+
   doSearch: function(searchTerms) {
     var vacancies = [];
     var body = this.getBody(searchTerms);
@@ -13,7 +13,7 @@ var VacanciesController = Class.extend({
     $.ajax(options).done(function(results) {
       if (results.total === 0) {
         vacancies = [];
-      } else { 
+      } else {
         vacancies = results.hits;
       }
       _this.updateTrigger(vacancies, searchTerms);
@@ -38,7 +38,7 @@ var VacanciesController = Class.extend({
       body.distance = searchTerms.center.distance || null;
     }
 
-    console.log('Body:', body);
+    // console.log('Body:', body);
 
     return $.param(body);
   },
@@ -55,10 +55,10 @@ var VacanciesController = Class.extend({
       this.listeners.splice(index, 1);
     }
   },
-  
+
   updateTrigger: function(vacancies, searchTerms) {
     for (var i = 0; i < this.listeners.length; ++i) {
       this.listeners[i](vacancies, searchTerms);
-    } 
+    }
   }
 });

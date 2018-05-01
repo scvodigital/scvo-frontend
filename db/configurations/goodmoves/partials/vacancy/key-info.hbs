@@ -1,8 +1,11 @@
+{{> vacancy_status}}
 <div class="mdc-card__info--vacancy-row">
-  {{> vacancy_status}}
   <div class="mdc-card__info--vacancy">
     <div class="mdc-card__info--vacancy-title mdc-typography--headline">
-      <a href="/vacancy/{{slug}}">{{title}}</a>
+      <a href="/vacancy/{{slug}}">
+        {{#if top_job}}<span class="top-job">Top job!</span>{{/if}}
+        <span class="hover-underline">{{title}}</span>
+      </a>
     </div>
     <ul class="fa-ul">
       <li class="mdc-card__info--vacancy-organisation mdc-typography--body1">
@@ -47,9 +50,11 @@
       </div>
     </div>
   </div>
+  {{#if organisation.has_logo ~}}
   <div class="mdc-card__media mdc-card__media--square mdc-card__media--organisation">
     <a href="/organisation/{{organisation.slug}}">
       <img src="{{organisation.logo_url}}" alt="{{organisation.name}}" />
     </a>
   </div>
+  {{/if ~}}
 </div>
