@@ -163,15 +163,13 @@ function getVacancyPinsOptions(vacancies) {
     console.log('vacancy ',vacancy);
     if (vacancy.geo_vacancy_coords) {
       console.log('vacancy.geo_vacancy_coords ',vacancy.geo_vacancy_coords);
-      // for (var c = 0; c < vacancy.geo_vacancy_coords.length; ++c) {
-      //   var coords = vacancy.geo_vacancy_coords[c] || null;
-      //   console.log('coords ',coords);
-      //   if (coords) {
-      //     console.log('new pin at ',coords);
+      for (var c = 0; c < vacancy.geo_vacancy_coords.length; ++c) {
+        var coords = vacancy.geo_vacancy_coords[c] || null;
+        if (coords) {
           var markerOptions = {
             position: {
-              lat: vacancy.geo_vacancy_coords.lat,
-              lng: vacancy.geo_vacancy_coords.lon
+              lat: coords.lat,
+              lng: coords.lon
             },
             icon: {
               path: google.maps.SymbolPath.CIRCLE,
@@ -192,8 +190,8 @@ function getVacancyPinsOptions(vacancies) {
             infoWindowOptions: infoWindowOptions
           };
           pinsOptions.push(pinOptions);
-      //   }
-      // }
+        }
+      }
     }
   }
 

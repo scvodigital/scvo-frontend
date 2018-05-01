@@ -1,0 +1,36 @@
+<div class="mdc-card__info--vacancy-row">
+  {{> vacancy_status}}
+  <div class="mdc-card__media mdc-card__media--square demo-card__media search-result-card__media--organisation" style="background-image:url({{organisation.logo_url}});"></div>
+  <div class="mdc-card__info--vacancy">
+    <div class="mdc-card__info--vacancy-title mdc-typography--headline">
+      <a href="/vacancy/{{slug}}">{{title}}</a>
+    </div>
+    <div class="mdc-card__info--vacancy-organisation mdc-typography--body1">
+      <a href="/organisation/{{organisation.slug}}">{{organisation.name}}</a>
+    </div>
+    <div class="mdc-layout-grid">
+      <div class="mdc-layout-grid__inner">
+        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone">
+          <div class="mdc-card__info--vacancy-location mdc-typography--body1">
+            <span class="far fa-map-marker-alt fa-fw" title="Location"></span>
+            {{location}}
+          </div>
+          <div class="mdc-card__info--vacancy-salary mdc-typography--body1">
+            <span class="far fa-money-bill fa-fw" title="Salary"></span>
+            {{{salary}}}
+          </div>
+        </div>
+        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone">
+          <div class="mdc-card__info--vacancy-status mdc-typography--body1">
+            <span class="far fa-building fa-fw" title="Status"></span>
+            {{status}}
+          </div>
+          <div class="mdc-card__info--vacancy-closing mdc-typography--body1">
+            <span class="far fa-calendar-alt fa-fw" title="Closing date"></span>
+            {{momentFormat (moment closing_date "x") "Do MMMM YYYY"}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

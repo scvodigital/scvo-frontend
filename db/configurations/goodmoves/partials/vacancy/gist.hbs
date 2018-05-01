@@ -1,14 +1,14 @@
 <div class="mdc-card gist" data-vacancy-id="{{Id}}">
-  <div class="search-result-card__info-row">
+  <div class="mdc-card__info--vacancy-row">
     <div class="mdc-card__media mdc-card__media--square demo-card__media search-result-card__media--organisation" style="background-image:url({{organisation.logo_url}});"></div>
-    <div class="search-result-card__info">
-      <div class="search-result-card__info-title mdc-typography--headline">
+    <div class="mdc-card__info--vacancy">
+      <div class="mdc-card__info--vacancy-title mdc-typography--headline">
         {{title}}
       </div>
-      <div class="search-result-card__info-organisation mdc-typography--body1">
+      <div class="mdc-card__info--vacancy-organisation mdc-typography--body1">
         <a href="/organisation/{{organisation.slug}}">{{organisation.name}}</a>
       </div>
-      <div class="search-result-card__info-details mdc-typography--caption">
+      <div class="mdc-card__info--vacancy-details mdc-typography--caption">
         <span class="far fa-calendar-alt fa-fw" title="Closing date"></span>
         {{{momentFormat (moment closing_date "x") "Do MMMM YYYY"}}}
       </div>
