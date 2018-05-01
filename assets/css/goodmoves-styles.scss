@@ -287,6 +287,30 @@ a {
 .mdc-card.search-result:hover::after {
   opacity: 1;
 }
+.mdc-card.full {
+  box-shadow: none;
+  .mdc-card__info--vacancy-title a,
+  .mdc-card__info--vacancy-title a:hover {
+    color: inherit;
+    pointer-events: none;
+    cursor: default;
+    text-decoration: none;
+  }
+  #vacancy-tab-bar {
+    width: 100%;
+    background-color: $mdc-theme-primary;
+    .mdc-tab {
+      color: white;
+    }
+    .mdc-tab-bar__indicator {
+      background-color: white;
+    }
+  }
+  .mdc-card--full-content {
+    padding: $unit;
+    background-color: $mdc-theme-primary-light;
+  }
+}
 
 .mdc-card {
   .mdc-card__actions {
@@ -452,30 +476,38 @@ body {
   padding: $unit/2;
   display: flex;
   border-top-left-radius: inherit;
-}
-
-.search-result-card__media--organisation {
-  width: 110px;
-  border-top-left-radius: inherit;
-  background-size: contain;
-  margin: $unit/2;
-}
-
-.mdc-card__info--vacancy {
-  display: flex;
-  width: 100%;
-  flex-direction: column;
-  padding: $unit/2;
-  .mdc-layout-grid {
-    padding: 0;
+  .mdc-card__info--vacancy {
+    display: flex;
     width: 100%;
+    flex-direction: column;
+    padding: $unit/4 $unit/2;
+    // padding: $unit/2;
+    .mdc-layout-grid {
+      padding: 0;
+      width: 100%;
+    }
+    .fa-fw {
+      margin-right: $unit/4;
+    }
+    .mdc-card__info--vacancy-organisation {
+      padding: $unit/2 0;
+    }
   }
-  .fa-fw {
-    margin-right: $unit/4;
+  .mdc-card__media--organisation {
+    max-width: 120px;
+    height: auto;
+    display: flex;
+    align-items: center;
+    margin: $unit/2;
+    img {
+      width: 100%;
+      object-fit: contain;
+    }
   }
-  .mdc-card__info--vacancy-organisation {
-    padding: $unit/2 0;
-  }
+}
+
+.gm-style .gm-style-iw {
+  font-size: 0.9
 }
 
 /* End Search results card */
