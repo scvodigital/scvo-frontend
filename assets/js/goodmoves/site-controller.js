@@ -53,7 +53,7 @@ function getUserProfile(user) {
       console.log(window.userProfile);
       setUserProfileDefaults().then(function() {
       }).catch(function(err) {
-        
+
       });
     } else {
       console.error('User profile does not exist');
@@ -65,13 +65,13 @@ function getUserProfile(user) {
 
 function updateComponents() {
   var userProfile = window.userProfile;
-  $('[data-vacancy-id]').removeClass('vacancy-saved');
+  $('[data-vacancy-id]').removeClass('vacancy-shortlisted');
   if (userProfile.goodmoves && userProfile.goodmoves.saved_vacancies) {
     var savedVacancies = userProfile.goodmoves.saved_vacancies;
     var selectors = savedVacancies.map(function(vid) {
       return '[data-vacancy-id="' + vid + '"]';
     });
-    $(selectors.join(',')).addClass('vacancy-saved');
+    $(selectors.join(',')).addClass('vacancy-shortlisted');
   }
 }
 

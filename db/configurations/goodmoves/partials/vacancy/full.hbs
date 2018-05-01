@@ -1,27 +1,38 @@
 <div class="mdc-card full" data-vacancy-id="{{Id}}">
   {{> vacancy_key_info}}
   <hr class="mdc-list-divider" />
-  <div id="vacancy-tab-bar" class="mdc-tab-bar" data-mdc-auto-init="MDCTabBar">
-    <a class="mdc-tab" href="/vacancy/{{slug}}">
+  <div id="vacancy-tab-bar" class="mdc-tab-bar" data-mdc-auto-init="MDCTabBar" role="tablist">
+    <a class="mdc-tab mdc-tab--active" role="tab" aria-controls="information" href="/vacancy/{{slug}}#information">
       <span class="far fa-list-ul fa-fw" title="Information"></span>
       Information
     </a>
-    <a class="mdc-tab" href="/vacancy/{{slug}}#location">
+    <a class="mdc-tab" role="tab" aria-controls="location" href="/vacancy/{{slug}}#location">
       <span class="far fa-map-marker-alt fa-fw" title="Location"></span>
       Location
     </a>
-    <a class="mdc-tab" href="/vacancy/{{slug}}#documents">
+    <a class="mdc-tab" role="tab" aria-controls="documents" href="/vacancy/{{slug}}#documents">
       <span class="far fa-file-alt fa-fw" title="Documents"></span>
       Documents
     </a>
-    <a class="mdc-tab" href="/vacancy/{{slug}}#apply">
+    <a class="mdc-tab" role="tab" aria-controls="apply" href="/vacancy/{{slug}}#apply">
       <span class="far fa-handshake fa-fw" title="Apply"></span>
       Apply
     </a>
     <span class="mdc-tab-bar__indicator"></span>
   </div>
   <hr class="mdc-list-divider" />
-  <div class="mdc-card--full-content mdc-typography--body1">
-    {{{description}}}
+  <div class="panels">
+    <div class="panel active mdc-card--full-content mdc-typography--body1" id="information" role="tabpanel" aria-hidden="false">
+      {{{description}}}
+    </div>
+    <div class="panel mdc-card--full-content mdc-typography--body1" id="location" role="tabpanel" aria-hidden="true">
+      show map
+    </div>
+    <div class="panel mdc-card--full-content mdc-typography--body1" id="documents" role="tabpanel" aria-hidden="true">
+      downloads
+    </div>
+    <div class="panel mdc-card--full-content mdc-typography--body1" id="apply" role="tabpanel" aria-hidden="true">
+      apply now!
+    </div>
   </div>
 </div>
