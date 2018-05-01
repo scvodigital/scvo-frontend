@@ -315,6 +315,9 @@ a {
 .mdc-card {
   .mdc-card__actions {
     .mdc-card__action--shortlist {
+      background: transparent;
+      border: none;
+      padding: 0;
       .fa-stack {
         width: $nav-height;
         height: $nav-height;
@@ -625,6 +628,10 @@ body {
   }
 }
 
+.fa-ul {
+  margin: 0 0 0 $unit*2;
+}
+
 footer {
   border-top: .6rem solid $mdc-theme-primary-light;
   background-color: $mdc-theme-primary;
@@ -636,10 +643,10 @@ footer {
   h3 {
     color: white;
     font-size: 1.2rem;
-    border-bottom: .2rem solid $mdc-theme-primary-light;
+    border-bottom: $unit/5 solid $mdc-theme-primary-light;
     margin-top: 0;
-    margin-bottom: 1rem;
-    padding: .75rem 0 .5rem;
+    margin-bottom: $unit;
+    padding: $unit/(3/4) 0 $unit/2;
     font-weight: 600;
   }
   .about a,
@@ -689,7 +696,7 @@ footer {
     letter-spacing: 0;
   }
   .fa-ul {
-    margin: 0 0 0 1.5rem;
+    margin: 0 0 0 $unit*1.5;
     li a {
       text-decoration: none;
     }
@@ -713,7 +720,7 @@ footer {
   .mdc-list {
     padding: 0;
     .mdc-list-item {
-      height: 1.5rem;
+      height: $unit*1.5;
       a {
         text-decoration: none;
       }
