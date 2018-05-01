@@ -157,6 +157,12 @@ p,
   font-family: "Montserrat", "Open Sans", Helvetica, Arial, sans-serif;
   font-weight: 700;
 }
+.mdc-drawer--temporary .mdc-drawer__header::before {
+  padding-top: $toolbar-height;
+}
+.mdc-drawer--temporary .mdc-drawer__header-content {
+  align-items: center;
+}
 
 .mdc-textfield__label {
   display: block;
@@ -400,6 +406,7 @@ a {
 }
 
 .container-content {
+  background-color: #fdfdfd;
   .container-fluid {
     position: relative;
     padding: 0;
@@ -505,6 +512,17 @@ body {
     img {
       width: 100%;
       object-fit: contain;
+    }
+  }
+}
+.mdc-card.full {
+  .mdc-card__info--vacancy-row {
+    padding: $unit 0;
+    .mdc-card__info--vacancy {
+      padding: 0;
+    }
+    .mdc-card__media {
+      margin: 0;
     }
   }
 }
@@ -636,6 +654,9 @@ body {
   li:last-child {
     margin-bottom: 0;
   }
+}
+.mdc-layout-grid {
+  padding: 0;
 }
 
 footer {
