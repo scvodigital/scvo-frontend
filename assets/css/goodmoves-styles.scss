@@ -220,6 +220,9 @@ a {
   font-weight: 600;
   text-transform: none;
 }
+.mdc-button--raised .mdc-list-item__graphic {
+  color: white;
+}
 
 .search-info {
   margin-bottom: $unit;
@@ -319,7 +322,7 @@ a {
 }
 
 .page-content {
-  padding-top: $unit*2;
+  padding: $unit*2 0;
 }
 
 .mdc-card {
@@ -502,17 +505,16 @@ body {
         padding: .22222222rem .5rem;
         font-weight: 700;
         line-height: 1;
-        color: rgb(255, 255, 255);
         text-align: center;
         white-space: nowrap;
         vertical-align: baseline;
-        background-color: rgb(119, 119, 119)!important;
+        background-color: $mdc-theme-secondary !important;
         border-radius: 1rem;
         position: relative;
         top: -2px;
         left: 0;
         font-size: 1rem;
-        height: 1.6rem;
+        height: 1.5rem;
         box-sizing: border-box;
         color: white;
       }
@@ -548,7 +550,7 @@ body {
 }
 .mdc-card.full {
   .mdc-card__info--vacancy-row {
-    padding: $unit 0;
+    padding: 0 0 $unit;
     .mdc-card__info--vacancy {
       padding: 0;
     }
@@ -569,63 +571,7 @@ body {
 .pagination {
   text-align: center;
   display: block !important;
-  padding-top: $unit !important;
-  padding-bottom: $unit*2 !important;
-  li {
-    padding: 0 !important;
-    height: $unit*2;
-    width: $unit*2;
-    border-radius: 50%;
-    margin: 0 $unit/5;
-    vertical-align: bottom;
-    a {
-      font-size: 1.2rem;
-      line-height: $unit*2;
-      height: $unit*2;
-      width: $unit*2;
-      color: #000;
-      padding: 0;
-      margin: 0;
-      font-weight: 600;
-      display: block;
-    }
-    a.pagination-arrow {
-      color: #000;
-      vertical-align: middle;
-    }
-  }
-  li.disabled a.pagination-arrow {
-    cursor: default;
-    color: #999;
-  }
-  li:first-child a {
-    padding-left: 0;
-  }
-  li:last-child a {
-    padding-right: 0;
-  }
-  li.current-page {
-    border-radius: 50%;
-    a {
-      color: white;
-    }
-  }
-  li:hover,
-  li.current-page:hover {
-    a {
-      color: white;
-      text-decoration: none;
-    }
-  }
-}
-
-// Pagination ==================================================================
-
-.pagination {
-  text-align: center;
-  display: block !important;
-  padding-top: $unit !important;
-  padding-bottom: $unit*2 !important;
+  padding: $unit 0 $unit*2;
   li {
     display: inline-block;
     padding: 0 !important;
@@ -677,6 +623,22 @@ body {
   }
 }
 
+
+.head .pagination {
+  padding: 0;
+  margin-top: $unit/4;
+  .pagination-distance-4,
+  .pagination-distance-5,
+  .pagination-distance-6,
+  .pagination-distance-7,
+  .pagination-distance-8,
+  .pagination-distance-9 {
+    display: none;
+  }
+}
+
+// Lists =======================================================================
+
 .fa-ul {
   margin: 0 0 0 $unit*2;
   li {
@@ -694,10 +656,18 @@ body {
   margin-right: $unit;
 }
 
+// Footer ======================================================================
+
 footer {
   border-top: .6rem solid $mdc-theme-primary-light;
   background-color: $mdc-theme-primary;
-  background-image: linear-gradient(60deg, rgb(60, 117, 36), rgb(60, 117, 36) 96%, rgb(30, 59, 18) 96.08%, rgb(30, 59, 18));
+  background-image: linear-gradient(
+  60deg,
+  rgb(60, 117, 36),
+  rgb(60, 117, 36) 96%,
+  rgb(30, 59, 18) 96.08%,
+  rgb(30, 59, 18)
+  );
   .footer-main {
     padding: 0;
     margin-bottom: 0;
@@ -826,6 +796,7 @@ footer {
 .text-right { text-align: right; }
 .text-centre { text-align: center; }
 .text-justify { text-align: justify; }
+.pull-right { float: right; }
 
 .v-margin {
   margin-top: $unit/2;
