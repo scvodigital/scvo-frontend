@@ -26,7 +26,7 @@
 <div class="mdc-drawer__content">
   <h2 class="mdc-drawer__content-heading mdc-theme--primary-bg mdc-theme--on-primary hide-sm">Search jobs</h2> 
   <form action="/search" method="GET">
-    <div class="mdc-drawer__content-padded">
+    <div class="h-padding">
       <div class="mdc-text-field mdc-text-field--outlined" data-mdc-auto-init="MDCTextField">
         <input type="text" id="<!--{instance}-->-keywords" name="keywords" class="mdc-text-field__input mdc-text-field--fullwidth" value="{{request.params.query.q}}">
         <label class="mdc-floating-label mdc-floating-label--float-above" for="keywords">Keywords</label>
@@ -39,7 +39,7 @@
       </div>
     </div>
 
-    <div class="mdc-drawer__content-padded">
+    <div class="h-padding">
       <div class="mdc-text-field mdc-text-field--outlined" data-mdc-auto-init="MDCTextField">
         <input type="text" id="<!--{instance}-->-location" name="location" class="mdc-text-field__input mdc-text-field--fullwidth" value="{{request.params.query.q}}">
         <label class="mdc-floating-label mdc-floating-label--float-above" for="<!--{instance}-->-location">Location</label>
@@ -70,7 +70,7 @@
       {{> term_checkbox key=key field="statuses" selected=../request.params.query.roles}}
     {{/each ~}}
     
-    <button class="mdc-button mdc-button--raised" type="submit">
+    <button class="mdc-button mdc-button--raised mdc-button--fullwidth h-margin v-margin" type="submit">
       Search jobs
     </button>
   </form>
