@@ -14,7 +14,6 @@ $unit: 1rem;
 $toolbar-height: 64px;
 $toolbar-item-height: 48px;
 $nav-height: 38px;
-$sidebar-width: 301px;
 
 $mobile-breakpoint: 599px;
 $mobile-landscape-breakpoint: 959px;
@@ -123,6 +122,7 @@ header {
 
 li,
 p,
+footer h3,
 .mdc-tab,
 .mdc-card,
 .mdc-button,
@@ -167,12 +167,18 @@ p,
 }
 .mdc-drawer--permanent {
   align-items: flex-start;
-  width: $sidebar-width;
-  margin-right: $unit;
+  width: 100%;
   border-right: none;
 }
 .container-content {
   align-items: flex-end;
+}
+.container-content-home {
+  .container-fluid {
+    .mdc-layout-grid__cell {
+      position: relative;
+    }
+  }
 }
 
 .mdc-textfield__label {
@@ -251,7 +257,7 @@ a {
 }
 
 .search-info {
-  margin-bottom: $unit;
+  margin: $unit*1.5 0 $unit;
   background: #fafafa;
   color: #555;
   padding: $unit/3 $unit/2;
@@ -372,7 +378,10 @@ a {
 }
 
 .page-content {
-  padding: $unit*2 0;
+  padding: $unit 0 $unit*2;
+}
+.mdc-drawer__content {
+  padding-bottom: $unit*2;
 }
 
 .drawer-container {
@@ -492,40 +501,38 @@ a {
   background-color: #fdfdfd;
   .container-fluid {
     position: relative;
-    .search-overlay {
-      padding: 0;
-      z-index: 10;
-      position: absolute;
-      width: $sidebar-width;
-      .search-overlay-panel {
-        padding: $unit;
-        background-color: $mdc-theme-primary;
-        input, select {
-          border-bottom-style: none!important;
-        }
-        .mdc-notched-outline,
-        .mdc-notched-outline__idle {
-          background-color: rgba(255, 255, 255, 0.6);
-        }
-        .mdc-floating-label {
-          z-index: 1;
-          color: #444444;
-        }
-        .mdc-tab-bar {
-          width: 100%;
-          .mdc-tab {
-            color: white;
-          }
-          .mdc-tab-bar__indicator {
-            background-color: white;
-          }
-        }
+  }
+  .search-overlay {
+    padding: 0;
+    z-index: 10;
+    position: absolute;
+    background-color: $mdc-theme-primary;
+    .mdc-tab-bar {
+      width: 100%;
+      .mdc-tab {
+        color: white;
       }
-      .search-overlay-terms {
-        margin-top: 15px;
-        input, select {
-          font-size: 1rem;
-        }
+      .mdc-tab-bar__indicator {
+        background-color: white;
+      }
+    }
+    .search-overlay-panel {
+      padding: $unit;
+      input, select {
+        border-bottom-style: none!important;
+      }
+      .mdc-notched-outline,
+      .mdc-notched-outline__idle {
+        background-color: rgba(255, 255, 255, 0.6);
+      }
+      .mdc-floating-label {
+        z-index: 1;
+        color: #444444;
+      }
+    }
+    .search-overlay-terms {
+      input, select {
+        font-size: 1rem;
       }
     }
   }
@@ -557,16 +564,10 @@ body {
   margin: 0;
 }
 .container-fluid {
-  max-width: 1440px;
+  max-width: 1280px;
   width: 100%;
   margin: 0 auto;
   padding: 0;
-}
-header,
-main,
-footer {
-  padding-left: $unit/2;
-  padding-right: $unit/2;
 }
 
 .mdc-card__info--vacancy-row {
