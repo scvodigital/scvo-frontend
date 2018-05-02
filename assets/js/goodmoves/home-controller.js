@@ -30,7 +30,7 @@ var autocomplete;
 function initMap() {
   var autocompleteInput = $where[0];
   var autocompleteOptions = {
-    'types': ['(cities)'],
+    'types': ['(regions)'],
     'componentRestrictions': {
       'country': 'gb'
     }
