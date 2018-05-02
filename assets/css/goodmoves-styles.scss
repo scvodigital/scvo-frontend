@@ -14,6 +14,7 @@ $unit: 1rem;
 $toolbar-height: 64px;
 $toolbar-item-height: 48px;
 $nav-height: 38px;
+$sidebar-width: 301px;
 
 $mobile-breakpoint: 599px;
 $mobile-landscape-breakpoint: 959px;
@@ -163,6 +164,15 @@ p,
 }
 .mdc-drawer--temporary .mdc-drawer__header-content {
   align-items: center;
+}
+.mdc-drawer--permanent {
+  align-items: flex-start;
+  width: $sidebar-width;
+  margin-right: $unit;
+  border-right: none;
+}
+.container-content {
+  align-items: flex-end;
 }
 
 .mdc-textfield__label {
@@ -366,11 +376,14 @@ a {
 }
 
 .drawer-container {
-  display:flex; 
+  display:flex;
   flex-direction: row;
 
   aside {
     z-index: 1;
+  }
+  .container-fluid {
+    display: inline-flex;
   }
 }
 
@@ -479,12 +492,11 @@ a {
   background-color: #fdfdfd;
   .container-fluid {
     position: relative;
-    padding: 0;
     .search-overlay {
       padding: 0;
       z-index: 10;
       position: absolute;
-      width: 301px;
+      width: $sidebar-width;
       .search-overlay-panel {
         padding: $unit;
         background-color: $mdc-theme-primary;
@@ -545,10 +557,16 @@ body {
   margin: 0;
 }
 .container-fluid {
-  max-width: 1280px;
+  max-width: 1440px;
   width: 100%;
   margin: 0 auto;
-  padding: $unit/2;
+  padding: 0;
+}
+header,
+main,
+footer {
+  padding-left: $unit/2;
+  padding-right: $unit/2;
 }
 
 .mdc-card__info--vacancy-row {

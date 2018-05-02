@@ -76,11 +76,11 @@ if(location.host.indexOf('.local') > -1){
           <div class="mdc-top-app-bar__row">
             <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
               <button class="mdc-top-app-bar__navigation-icon hide-lg" data-drawer-target="#mobile-menu">
-                <i class="fa fa-fw fa-bars"></i>
+                <span class="far fa-fw fa-bars"></span>
               </button>
               {{#if route.metaData.sidebarIcon}}
               <button class="mdc-top-app-bar__navigation-icon hide-lg hide-md" data-drawer-target="#sidebar-temporary" title="{{route.metaData.sidebarTooltip}}">
-                <i class="fa fa-fw fa-{{route.metaData.sidebarIcon}}"></i>
+                <span class="far fa-fw fa-{{route.metaData.sidebarIcon}}"></span>
               </button>
               {{/if}}
               <span class="mdc-top-app-bar__title hide-md hide-lg">
@@ -245,7 +245,7 @@ if(location.host.indexOf('.local') > -1){
           </nav>
         </nav>
       </aside>
-      
+
       {{#if route.metaData.sidebarIcon}}
       <aside class="mdc-drawer mdc-drawer--temporary mdc-typography" id="sidebar-temporary" data-mdc-auto-init="MDCTemporaryDrawer">
         <div class="mdc-drawer__drawer">
@@ -255,15 +255,17 @@ if(location.host.indexOf('.local') > -1){
       {{/if}}
 
       <main class="mdc-theme--background mdc-toolbar-fixed-adjust {{#if route.metaData.sidebarIcon ~}}drawer-container{{/if}}">
-        {{#if route.metaData.sidebarIcon}}
-        <aside class="mdc-drawer mdc-drawer--permanent hide-sm" id="sidebar-permanent" data-mdc-aut-init="MDCPermanentDrawer">
-          <div class="mdc-drawer__drawer">
-            <!--{section:sidebar[perm]}-->
+        <div class="container-fluid">
+          {{#if route.metaData.sidebarIcon}}
+          <aside class="mdc-drawer mdc-drawer--permanent hide-sm" id="sidebar-permanent" data-mdc-aut-init="MDCPermanentDrawer">
+            <div class="mdc-drawer__drawer">
+              <!--{section:sidebar[perm]}-->
+            </div>
+          </aside>
+          {{/if}}
+          <div class="container-content">
+            <!--{section:body}-->
           </div>
-        </aside>
-        {{/if}}
-        <div class="container-content">
-          <!--{section:body}-->
         </div>
       </main>
 
