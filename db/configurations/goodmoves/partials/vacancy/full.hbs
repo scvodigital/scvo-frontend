@@ -1,38 +1,96 @@
 <div class="mdc-card full" data-vacancy-id="{{Id}}">
   {{> vacancy_key_info}}
   <hr class="mdc-list-divider" />
-  <div id="vacancy-tab-bar" class="mdc-tab-bar" data-mdc-auto-init="MDCTabBar" role="tablist">
-    <a class="mdc-tab mdc-tab--active" role="tab" aria-controls="information" href="/vacancy/{{slug}}#information">
-      <span class="far fa-list-ul fa-fw" aria-hidden="true"></span>
-      Information
-    </a>
-    <a class="mdc-tab" role="tab" aria-controls="location" href="/vacancy/{{slug}}#location">
-      <span class="far fa-map-marker-alt fa-fw" aria-hidden="true"></span>
-      Location
-    </a>
-    <a class="mdc-tab" role="tab" aria-controls="documents" href="/vacancy/{{slug}}#documents">
-      <span class="far fa-file-alt fa-fw" aria-hidden="true"></span>
-      Documents
-    </a>
-    <a class="mdc-tab" role="tab" aria-controls="apply" href="/vacancy/{{slug}}#apply">
-      <span class="far fa-handshake fa-fw" aria-hidden="true"></span>
-      Apply
-    </a>
-    <span class="mdc-tab-bar__indicator"></span>
-  </div>
-  <hr class="mdc-list-divider" />
-  <div class="panels">
-    <div class="panel active mdc-card--full-content mdc-typography--body1" id="information" role="tabpanel" aria-hidden="false">
-      {{{description}}}
+  <div class="vacancy-info-container">
+    <div id="vacancy-tab-bar" class="mdc-tab-bar" data-mdc-auto-init="MDCTabBar" role="tablist">
+      <a class="mdc-tab mdc-tab--active" role="tab" aria-controls="information" href="/vacancy/{{slug}}#information">
+        <span class="far fa-list-ul fa-fw" aria-hidden="true"></span>
+        Information
+      </a>
+      <a class="mdc-tab" role="tab" aria-controls="location" href="/vacancy/{{slug}}#location">
+        <span class="far fa-map-marker-alt fa-fw" aria-hidden="true"></span>
+        Location
+      </a>
+      <a class="mdc-tab" role="tab" aria-controls="apply" href="/vacancy/{{slug}}#apply">
+        <span class="far fa-handshake fa-fw" aria-hidden="true"></span>
+        Apply
+      </a>
+      <span class="mdc-tab-bar__indicator"></span>
     </div>
-    <div class="panel mdc-card--full-content mdc-typography--body1" id="location" role="tabpanel" aria-hidden="true">
-      show map
-    </div>
-    <div class="panel mdc-card--full-content mdc-typography--body1" id="documents" role="tabpanel" aria-hidden="true">
-      downloads
-    </div>
-    <div class="panel mdc-card--full-content mdc-typography--body1" id="apply" role="tabpanel" aria-hidden="true">
-      apply now!
+    <hr class="mdc-list-divider" />
+    <div class="panels">
+      <div class="panel active mdc-card--full-content" id="information" role="tabpanel" aria-hidden="false">
+        <div class="key-info-extra">
+          <ul class="fa-ul">
+            {{#if salary_info ~}}
+            <li class="mdc-card__info--vacancy-location mdc-typography--body1">
+              <span class="fa-li"><span class="far fa-info-circle fa-fw" title="Salary information"></span></span>
+              {{salary_info}}
+            </li>
+            {{/if ~}}
+            {{#if benefits ~}}
+            <li class="mdc-card__info--vacancy-salary mdc-typography--body1">
+              <span class="fa-li"><span class="far fa-smile fa-fw" title="Benefits"></span></span>
+              {{{benefits}}}
+            </li>
+            {{/if ~}}
+            {{#if reference_number ~}}
+            <li class="mdc-card__info--vacancy-reference mdc-typography--body1">
+              <span class="fa-li"><span class="far fa-hashtag fa-fw" title="Reference"></span></span>
+              {{reference_number}}
+            </li>
+            {{/if ~}}
+            {{#if organisation.website ~}}
+            <li class="mdc-card__info--vacancy-website mdc-typography--body1">
+              <span class="fa-li"><span class="far fa-link fa-fw" title="Website"></span></span>
+              <a href="{{organisation.website_url}}">
+                {{organisation.website}}
+              </a>
+            </li>
+            {{/if ~}}
+          </ul>
+        </div>
+        <div class="detailed-info">
+          {{#if description ~}}
+          <h4>Role</h4>
+          <div class="mdc-typography--body1">
+            {{{description}}}
+          </div>
+          {{/if ~}}
+          {{#if organisation.profile ~}}
+          <h4>Organisation profile</h4>
+          <div class="mdc-typography--body1">
+            {{{organisation.profile}}}
+          </div>
+          {{/if ~}}
+          {{{rendered.goodmoves_sponsor_logos}}}
+        </div>
+      </div>
+      <div class="panel mdc-card--full-content mdc-typography--body1" id="location" role="tabpanel" aria-hidden="true">
+        <div class="detailed-info mdc-typography--body1">
+          TODO: Map of vacancy location (or locations?)
+        </div>
+      </div>
+      <div class="panel mdc-card--full-content mdc-typography--body1" id="apply" role="tabpanel" aria-hidden="true">
+        <!-- <div class="key-info-extra">
+          <ul class="fa-ul">
+            {{#if closing_date ~}}
+            <li class="mdc-card__info--vacancy-closing mdc-typography--body1">
+              <span class="fa-li"><span class="far fa-calendar-alt fa-fw" title="Closing date"></span></span>
+              Closing on {{momentFormat (moment closing_date "x") "Do MMMM YYYY \a\t h:mm a"}}
+            </li>
+            {{/if ~}}
+          </ul>
+        </div> -->
+        <div class="detailed-info">
+          {{#if application_notes ~}}
+          <div class="mdc-typography--body1">
+            {{{application_notes}}}
+          </div>
+          {{/if ~}}
+          {{{rendered.goodmoves_downloads}}}
+        </div>
+      </div>
     </div>
   </div>
 </div>

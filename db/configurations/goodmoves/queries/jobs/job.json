@@ -1,9 +1,32 @@
 {
   "size": 1,
-  "_source": {
-    "includes": ["*"],
-    "excludes": ["rendered.*", "text_bag", "text_bag_boost"]
-  },
+  "_source": [
+    "Id",
+    "slug",
+    "vacancy_status",
+    "rendered.vacancy_status",
+    "top_job",
+    "description",
+    "title",
+    "geo_vacancy_coords",
+    "location",
+    "salary",
+    "role_status_list",
+    "closing_date",
+    "organisation.slug",
+    "organisation.name",
+    "organisation.has_logo",
+    "organisation.logo_url",
+    "rendered.rss",
+    "rendered.goodmoves_sponsor_logos",
+    "rendered.goodmoves_downloads",
+    "salary_info",
+    "benefits",
+    "reference_number",
+    "organisation.website",
+    "organisation.profile",
+    "application_notes"
+  ],
   "query": {
     "term": {
       "slug": "{{request.params.slug}}"

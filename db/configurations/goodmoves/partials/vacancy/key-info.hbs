@@ -1,4 +1,4 @@
-{{> vacancy_status}}
+{{{rendered.vacancy_status}}}
 <div class="mdc-card__info--vacancy-row">
   <div class="mdc-card__info--vacancy">
     <div class="mdc-card__info--vacancy-title mdc-typography--headline">
@@ -33,16 +33,16 @@
         </div>
         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone">
           <ul class="fa-ul">
-            {{#if status ~}}
+            {{#if role_status_list ~}}
             <li class="mdc-card__info--vacancy-status mdc-typography--body1">
               <span class="fa-li"><span class="far fa-clock fa-fw" title="Status"></span></span>
-              {{status}}
+              {{role_status_list}}
             </li>
             {{/if ~}}
             {{#if closing_date ~}}
             <li class="mdc-card__info--vacancy-closing mdc-typography--body1">
               <span class="fa-li"><span class="far fa-calendar-alt fa-fw" title="Closing date"></span></span>
-              {{momentFormat (moment closing_date "x") "Do MMMM YYYY"}}
+              Closing {{{momentFormat (moment closing_date "x") "Do MMMM YYYY"}}}
             </li>
             {{/if ~}}
           </ul>

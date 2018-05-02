@@ -323,13 +323,37 @@ a {
     .mdc-tab {
       color: white;
     }
+    .mdc-tab:hover {
+      background-color: $mdc-theme-primary-dark;
+    }
     .mdc-tab-bar__indicator {
-      background-color: white;
+      background-color: $mdc-theme-primary-light;
     }
   }
+  .vacancy-info-container {
+    box-shadow: 0px 6px 6px -3px rgba(0, 0, 0, 0.2), 0px 10px 14px 1px rgba(0, 0, 0, 0.14), 0px 4px 18px 3px rgba(0, 0, 0, 0.12);
+  }
   .mdc-card--full-content {
-    padding: $unit;
-    background-color: $mdc-theme-primary-light;
+    border-top: none;
+    .key-info-extra {
+      padding: $unit;
+      background-color: $mdc-theme-primary-light;
+    }
+    .detailed-info {
+      padding: $unit;
+      hr {
+        height: 0;
+        border: none;
+        background: transparent;
+      }
+      h4 {
+        margin: $unit 0 $unit/2;
+        font-size: 1.2rem;
+      }
+      h4:first-child {
+        margin-top: 0;
+      }
+    }
   }
 }
 
@@ -596,7 +620,7 @@ body {
 }
 
 .gm-style .gm-style-iw {
-  font-size: 0.9
+  font-size: 0.9rem;
 }
 
 /* End Search results card */
@@ -675,7 +699,7 @@ body {
 // Lists =======================================================================
 
 .fa-ul {
-  margin: 0 0 0 $unit*2;
+  margin: 0 0 0 $unit*1.55;
   li {
     margin-bottom: $unit/2;
   }
