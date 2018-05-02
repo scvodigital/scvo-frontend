@@ -75,9 +75,14 @@ if(location.host.indexOf('.local') > -1){
         <div class="container-fluid">
           <div class="mdc-top-app-bar__row">
             <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
-              <button href="#" class="mdc-top-app-bar__navigation-icon hide-lg" data-drawer-target="#mobile-menu">
+              <button class="mdc-top-app-bar__navigation-icon hide-lg" data-drawer-target="#mobile-menu">
                 <i class="fa fa-fw fa-bars"></i>
               </button>
+              {{#if route.metaData.sidebarIcon}}
+              <button class="mdc-top-app-bar__navigation-icon hide-lg hide-md" data-drawer-target="#sidebar-temporary" title="{{route.metaData.sidebarTooltip}}">
+                <i class="fa fa-fw fa-{{route.metaData.sidebarIcon}}"></i>
+              </button>
+              {{/if}}
               <span class="mdc-top-app-bar__title hide-md hide-lg">
                 <svg width="61" height="42" xmlns="http://www.w3.org/2000/svg">
                   <metadata id="metadata7">image/svg+xml</metadata>
@@ -94,7 +99,7 @@ if(location.host.indexOf('.local') > -1){
               </span>
               <span class="mdc-top-app-bar__title hide-sm">
                 <a href="/">
-                  <svg width="222" height="42" xmlns="http://www.w3.org/2000/svg">
+                  <svg width="222" height="60" xmlns="http://www.w3.org/2000/svg">
                     <metadata id="metadata7">image/svg+xml</metadata>
                     <g transform="scale(0.70)">
                       <title>Goodmoves</title>
@@ -116,12 +121,10 @@ if(location.host.indexOf('.local') > -1){
                         />
                         <path id="path4678" d="m316.56373,34.98q0,4.56 -3.3,7.32q-3.3,2.7 -8.46,2.7q-3.48,0 -7.26,-1.26q-3.72,-1.26 -6.6,-3.54l3.24,-5.22q5.58,4.2 10.8,4.2q2.28,0 3.6,-1.02q1.32,-1.08 1.32,-2.7q0,-2.4 -6.36,-4.32q-0.48,-0.18 -0.72,-0.24q-9.96,-2.7 -9.96,-9q0,-4.44 3.42,-7.08q3.48,-2.7 9,-2.7q5.52,0 10.44,3.24l-2.52,4.98q-3.9,-2.58 -8.46,-2.58q-2.4,0 -3.9,0.9q-1.5,0.84 -1.5,2.58q0,1.56 1.56,2.28q1.08,0.54 3,1.02q1.98,0.48 3.48,0.96c0.96,0.36 1.92,0.72 2.88,1.08q1.44,0.6 3.06,1.68q3.24,2.16 3.24,6.72z"
                         />
+                        <text font-size="17px" y="73" x="0" textLength="317" lengthAdjust="spacing">charity &amp; voluntary sector recruitment</text>
                       </g>
                     </g>
                   </svg>
-                  <div class="tagline mdc-typography--caption">
-                    Charity &amp; voluntary sector recruitment
-                  </div>
                 </a>
               </span>
             </section>
@@ -242,8 +245,23 @@ if(location.host.indexOf('.local') > -1){
           </nav>
         </nav>
       </aside>
+      
+      {{#if route.metaData.sidebarIcon}}
+      <aside class="mdc-drawer mdc-drawer--temporary mdc-typography" id="sidebar-temporary" data-mdc-auto-init="MDCTemporaryDrawer">
+        <div class="mdc-drawer__drawer">
+          <!--{section:sidebar[temp]}-->
+        </div>
+      </aside>
+      {{/if}}
 
-      <main class="mdc-theme--background mdc-toolbar-fixed-adjust">
+      <main class="mdc-theme--background mdc-toolbar-fixed-adjust {{#if route.metaData.sidebarIcon ~}}drawer-container{{/if}}">
+        {{#if route.metaData.sidebarIcon}}
+        <aside class="mdc-drawer mdc-drawer--permanent hide-sm" id="sidebar-permanent" data-mdc-aut-init="MDCPermanentDrawer">
+          <div class="mdc-drawer__drawer">
+            <!--{section:sidebar[perm]}-->
+          </div>
+        </aside>
+        {{/if}}
         <div class="container-content">
           <!--{section:body}-->
         </div>

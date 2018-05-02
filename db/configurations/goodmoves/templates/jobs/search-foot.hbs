@@ -1,0 +1,30 @@
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBJdxcQpVKQ6HdrjnPXycUoZqsmp-Ep3l0&libraries=places&region=uk&callback=initMap" async defer></script>
+<script>
+var autocompletePerm, autocompleteTemp;
+function initMap() {
+  var autocompletePermEl = $('#perm-location')[0];
+  var autocompleteTempEl = $('#temp-location')[0];
+
+  var autocompleteOptions = {
+    'types': ['(cities)'],
+    'componentRestrictions': {
+      'country': 'gb'
+    }
+  };
+  autocompletePerm = new google.maps.places.Autocomplete(autocompletePermEl, autocompleteOptions);
+  autocompleteTemp = new google.maps.places.Autocomplete(autocompleteTempEl, autocompleteOptions);
+
+  autocompletePerm.addListener('place_changed', autocompleteChange);
+  autocompleteTemp.addListener('place_changed', autocompleteChange);
+}
+
+function autocompleteChange(evt) {
+  var place = this.getPlace();
+  console.log(place.formatted_address);
+  if (place.geometry.location) {
+    $('[name="lat"]').val(place.geometry.location.lat());
+    $('[name="lng"]').val(place.geometry.location.lng());
+    $('[name="location"]').val(place.formatted_address);
+  }
+}
+</script>

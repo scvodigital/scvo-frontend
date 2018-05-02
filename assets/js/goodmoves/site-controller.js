@@ -3,13 +3,43 @@ var GoodmovesController = Class.extend({
   uid: null,
   app: null,
   config: null,
+  displayMode: null,
+  displayModes: [
+    { name: 'mobile', min: 0, max: 599 },
+    { name: 'tablet', min: 600, max: 959 },
+    { name: 'desktop', min: 960, max: 20000 }
+  ],
 
   init: function(firebaseConfig) {
     this.firebaseConfig = firebaseConfig;
     this.setupMaterialDesignComponents();
     this.setupFirebase();
+
+    var that = this;
+    $(window).on('resize', function() {
+      that.windowResized.call(that);
+    });
+    this.windowResized();
   },
-  
+ 
+  windowResized: function() {
+    var width = $(window).width();
+    var newDisplayMode = null;
+    this.displayModes.forEach(function(mode) {
+      if (width >= mode.min && width < mode.max) {
+        newDisplayMode = mode.name;
+      }
+    });
+    if (newDisplayMode !== this.displayMode) {
+      this.displayMode = newDisplayMode;
+      this.displayModeChanged();
+    }
+  },
+
+  displayModeChanged: function() {
+    console.log('Display Mode:', this.displayMode);
+  },
+
   setupMaterialDesignComponents: function() {
     mdc.autoInit();
 
@@ -26,9 +56,12 @@ var GoodmovesController = Class.extend({
     $('[data-drawer-target]').each(function(i, o) {
       var selector = $(o).attr('data-drawer-target');
       var drawerEl = $(selector)[0];
-      $(o).on('click', function() {
-        drawerEl.MDCTemporaryDrawer.open = true;
-      });
+      var drawerType = $(selector).attr('data-mdc-auto-init');
+      if (drawerType) {
+        $(o).on('click', function() {
+          drawerEl[drawerType].open = !drawerEl[drawerType].open;
+        });
+      }
     });
   },
 

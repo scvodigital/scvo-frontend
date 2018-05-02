@@ -49,9 +49,10 @@ header {
         text-decoration: none;
       }
       svg {
-        position: absolute;
-        top: 4px;
-        left: 0;
+        //position: absolute;
+        //top: 4px;
+        //left: 0;
+        margin-top: 14px;
       }
       .tagline {
         color: white;
@@ -334,6 +335,27 @@ a {
 
 .page-content {
   padding: $unit*2 0;
+}
+
+.drawer-container {
+  display:flex; 
+  flex-direction: row;
+
+  aside {
+    z-index: 1;
+  }
+}
+
+.mdc-drawer__content-padded {
+  padding: $unit;
+}
+
+.mdc-drawer__content-heading {
+  margin: 0;
+  padding: $unit;
+}
+
+@media (min-width: $mobile-breakpoint + 1) {
 }
 
 .mdc-card {
