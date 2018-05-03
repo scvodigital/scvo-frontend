@@ -37,18 +37,19 @@
 <meta name="theme-color" content="#00838f">
 <link rel="search" type="application/opensearchdescription+xml" title="Goodmoves" href="/assets/opensearch.xml" />
 <!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-3467930-2"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-3467930-6"></script>
 <script>
 window.dataLayer = window.dataLayer || [];
 function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 
 // NEEDS TO BE SET UP WITH THE CORRECT TRACKING ID
-// gtag('config', 'UA-3467930-2', { 'send_page_view': true });
+gtag('config', 'UA-3467930-6', { 'send_page_view': true, 'anonymize_ip': true });
+
 {{#each route.primaryResponse.hits.hits ~}}
 gtag('event', 'document_hit', {
-  event_category: '{{_type}}',
-  event_label: '{{_id}}'
+  'event_category': '{{_type}}',
+  'event_label': '{{_id}}'
 });
 {{/each ~}}
 
