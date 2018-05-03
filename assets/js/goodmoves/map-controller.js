@@ -105,7 +105,7 @@ var MapController = Class.extend({
         {
           'featureType': 'water',
           'elementType': 'geometry',
-          'stylers': [{'color': '#fafafa'}]
+          'stylers': [{'color': '#c4deed'}]
         },
         {
           'featureType': 'water',

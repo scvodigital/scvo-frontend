@@ -20,11 +20,33 @@
 
 <header class="mdc-drawer__header hide-md hide-lg">
   <div class="mdc-drawer__header-content mdc-theme--primary-bg">
-    <h2>Search jobs</h2>
+    <h2 class="mdc-drawer__content-heading mdc-theme--primary-bg mdc-theme--on-primary hide-sm">Search jobs</h2>
+    <div id="search-tab-bar" class="mdc-tab-bar" data-mdc-auto-init="MDCTabBar">
+      <a class="mdc-tab" href="/?{{request.url.query}}">
+        <span class="far fa-map-marker-alt fa-fw" title="Location"></span>
+        Map
+      </a>
+      <a class="mdc-tab mdc-tab--active" href="#" id="detailed-results">
+        <span class="far fa-list fa-fw" title="Location"></span>
+        List
+      </a>
+      <span class="mdc-tab-bar__indicator"></span>
+    </div>
   </div>
 </header>
 <div class="mdc-drawer__content">
-  <h2 class="mdc-drawer__content-heading mdc-theme--primary-bg mdc-theme--on-primary hide-sm">Search jobs</h2> 
+  <h2 class="mdc-drawer__content-heading mdc-theme--primary-bg mdc-theme--on-primary hide-sm">Search jobs</h2>
+  <div id="search-tab-bar" class="mdc-tab-bar" data-mdc-auto-init="MDCTabBar">
+    <a class="mdc-tab" href="/?{{request.url.query}}">
+      <span class="far fa-map-marker-alt fa-fw" title="Location"></span>
+      Map
+    </a>
+    <a class="mdc-tab mdc-tab--active" href="#" id="detailed-results">
+      <span class="far fa-list fa-fw" title="Location"></span>
+      List
+    </a>
+    <span class="mdc-tab-bar__indicator"></span>
+  </div>
   <form action="/search" method="GET">
     <div class="h-padding">
       <div class="mdc-text-field mdc-text-field--outlined" data-mdc-auto-init="MDCTextField">

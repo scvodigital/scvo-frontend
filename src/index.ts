@@ -87,9 +87,9 @@ async function index(
     fullUrl = fullUrl.replace(/(\/)($|\?)/gi, '$2');
 
     // Enforce SSL
-    if (req.protocol == 'http') {
-      res.redirect(`https://${hostname}${req.originalUrl}`);
-    }
+    //if (req.protocol == 'http') {
+    //  res.redirect(`https://${hostname}${req.originalUrl}`);
+    //}
 
     if (routers === null) {
       return next();

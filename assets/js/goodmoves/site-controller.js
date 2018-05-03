@@ -104,10 +104,7 @@ var GoodmovesController = Class.extend({
       if (response.exists()) {
         that.userProfile = response.val();
         console.log(that.userProfile);
-        that.setUserProfileDefaults().then(function() {
-        }).catch(function(err) {
-
-        });
+        that.setUserProfileDefaults().then(function() { }).catch(function(err) { });
       } else {
         console.error('User profile does not exist');
       }
@@ -135,7 +132,7 @@ var GoodmovesController = Class.extend({
       userProfile.goodmoves = userProfile.goodmoves || {};
       userProfile.goodmoves.saved_vacancies = userProfile.goodmoves.saved_vacancies || [];
       if (userProfile === that.userProfile) {
-        updateComponents();
+        that.updateComponents();
         resolve();
       } else {
         that.updateUserProfile(userProfile).then(function(userProfile) {
