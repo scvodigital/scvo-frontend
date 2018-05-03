@@ -502,20 +502,20 @@ a {
   .container-fluid {
     position: relative;
   }
+  .mdc-tab-bar {
+    width: 100%;
+    .mdc-tab {
+      color: white;
+    }
+    .mdc-tab-bar__indicator {
+      background-color: white;
+    }
+  }
   .search-overlay {
     padding: 0;
     z-index: 10;
     position: absolute;
     background-color: $mdc-theme-primary;
-    .mdc-tab-bar {
-      width: 100%;
-      .mdc-tab {
-        color: white;
-      }
-      .mdc-tab-bar__indicator {
-        background-color: white;
-      }
-    }
     .search-overlay-panel {
       padding: $unit;
       input, select {
@@ -752,7 +752,7 @@ footer {
   );
   .footer-main {
     padding: 0;
-    margin-bottom: 0;
+    margin-bottom: $unit/2;
   }
   h3 {
     color: white;
@@ -845,8 +845,8 @@ footer {
   }
   .footer-copyright {
     background-color: $mdc-theme-primary-dark;
-    padding-top: 0;
-    margin-bottom: 0;
+    padding: $unit 0 $unit*0.7;
+    margin: 0;
     line-height: 1.2;
     font-size: 0.9rem;
     p {
@@ -856,6 +856,7 @@ footer {
 }
 
 // Sidebar
+.mdc-drawer__content,
 #sidebar-permanent {
   .mdc-tab-bar {
     background-color: $mdc-theme-primary;

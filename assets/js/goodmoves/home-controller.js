@@ -173,11 +173,12 @@ function getVacancyPinsOptions(vacancies) {
             },
             icon: {
               path: google.maps.SymbolPath.CIRCLE,
-              scale: 6,
-              fillColor: '#58a934',
-              fillOpacity: 0.6,
-              strokeColor: '#58a934',
-              strokeWeight: 1
+              scale: 10,
+              fillColor: '#3c7524',
+              fillOpacity: 0.75,
+              strokeColor: '#1e3b12',
+              strokeOpacity: 0.75,
+              strokeWeight: 2
             },
             title: vacancy.title,
             opacity: 1
