@@ -330,6 +330,57 @@
       }
     }
   },
+  "organisation": {
+    "pattern": "/organisation/:slug",
+    "defaultParams": {
+      "context": "detail"
+    },
+    "tasks": [
+      {
+        "name": "primaryResponse",
+        "taskType": "elasticsearch",
+        "config": {
+          "connectionStringTemplate": "{$../elasticsearch-url.txt}",
+          "elasticsearchConfig": {
+            "apiVersion": "5.6"
+          },
+          "queryTemplates": {
+            "index": "web-content-production",
+            "type": "goodmoves-organisation-test",
+            "template": "{$./queries/organisations/organisation.json}"
+          }
+        }
+      },
+      {
+        "name": "supplimentaryResponses",
+        "taskType": "elasticsearch",
+        "config": {
+          "connectionStringTemplate": "{$../elasticsearch-url.txt}",
+          "elasticsearchConfig": {
+            "apiVersion": "5.6"
+          },
+          "queryTemplates": [
+            {
+              "name": "not_found",
+              "index": "web-content-production",
+              "type": "goodmoves-organisation-test",
+              "template": "{$./queries/pages/not-found.json}"
+            }
+          ]
+        }
+      }
+    ],
+    "destination": {
+      "destinationType": "handlebars",
+      "config": {
+        "default": {
+          "head": "{$./templates/organisations/organisation-head-tags.hbs}",
+          "body": "{$./templates/organisations/organisation.hbs}",
+          "foot": ""
+        }
+      }
+    }
+  },
   "{:./goodmoves-redirects.json}": "",
   "_default": {
     "pattern": "/*path",

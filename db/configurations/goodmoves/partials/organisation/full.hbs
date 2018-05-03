@@ -1,0 +1,24 @@
+<div class="mdc-card full" data-organisation-id="{{Id}}">
+  <div class="mdc-card__info--organisation-row">
+    <div class="mdc-card__info--organisation">
+      <div class="mdc-card__info--organisation-title mdc-typography--headline">
+        {{title}}
+      </div>
+    </div>
+    {{#if has_logo ~}}
+    <div class="mdc-card__media mdc-card__media--square mdc-card__media--organisation">
+      <a href="/organisation/{{slug}}">
+        <img src="{{logo_url}}" alt="{{name}}" />
+      </a>
+    </div>
+    {{/if ~}}
+  </div>
+  <div class="mdc-card__info--organisation-row">
+    <div class="detailed-info">
+      {{#if description ~}}
+      <div class="mdc-typography--body1">
+        {{{description}}}
+      </div>
+      {{/if ~}}
+  </div>
+</div>
