@@ -138,6 +138,13 @@ footer h3,
 .mdc-typography--caption,
 .mdc-menu .mdc-list-item,
 .mdc-typography--headline,
+.mdc-typography--headline1,
+.mdc-typography--headline2,
+.mdc-typography--headline3,
+.mdc-typography--headline4,
+.mdc-typography--headline5,
+.mdc-typography--headline6,
+.mdc-typography--headline7,
 .supplimentary-list-title,
 .mdc-card__supporting-text,
 .mdc-typography--subheading2,
@@ -148,9 +155,6 @@ footer h3,
 }
 .mdc-typography--body1 {
   font-size: 1rem;
-}
-.mdc-typography--headline {
-  font-size: 1.4rem;
 }
 .mdc-card__title,
 .mdc-textfield__label,
@@ -289,6 +293,8 @@ a {
   }
 }
 
+.mdc-card.list,
+.mdc-card.gist,
 .mdc-card.search-result {
   position: relative;
   z-index: 1;
@@ -306,14 +312,20 @@ a {
   }
 }
 .mdc-card.full,
+.mdc-card.list,
+.mdc-card.gist,
 .mdc-card.search-result {
   .mdc-list-divider {
     border: none;
   }
 }
+.mdc-card.list:last-child,
+.mdc-card.gist:last-child,
 .mdc-card.search-result:last-child {
   margin-bottom: 0;
 }
+.mdc-card.list::after,
+.mdc-card.gist::after,
 .mdc-card.search-result::after {
   content: "";
   position: absolute;
@@ -325,11 +337,23 @@ a {
   -webkit-transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
   transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
+.mdc-card.list:hover::after,
+.mdc-card.gist:hover::after,
 .mdc-card.search-result:hover::after {
   opacity: 1;
 }
 .mdc-card.full {
   box-shadow: none;
+  .mdc-card__info--organisation-title {
+    margin: 0;
+  }
+  .detailed-info,
+  .organisation-type {
+    margin: 0 0 $unit;
+    small {
+      font-size: 0.92rem;
+    }
+  }
   .mdc-card__info--vacancy-title a,
   .mdc-card__info--vacancy-title a:hover {
     color: inherit;
@@ -375,6 +399,18 @@ a {
       }
     }
   }
+}
+.mdc-card.list {
+  .mdc-card__info--vacancy-organisation {
+    display: none;
+  }
+}
+
+hr {
+  margin: $unit*1.5 0;
+  background-color: $mdc-theme-primary-light;
+  border: none;
+  height: 1px;
 }
 
 .page-content {
@@ -631,6 +667,7 @@ body {
   }
 }
 .mdc-card.full {
+  margin-top: $unit/2;
   .mdc-card__info--vacancy-row {
     padding: 0 0 $unit;
     .mdc-card__info--vacancy {
@@ -642,6 +679,10 @@ body {
   }
 }
 
+.mdc-typography--headline4,
+.mdc-typography--headline5 {
+  margin-bottom: $unit;
+}
 .gm-style .gm-style-iw {
   font-size: 0.9rem;
 }
