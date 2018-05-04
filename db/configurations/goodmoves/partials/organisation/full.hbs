@@ -7,9 +7,7 @@
     </div>
     {{#if has_logo ~}}
     <div class="mdc-card__media mdc-card__media--square mdc-card__media--organisation">
-      <a href="/organisation/{{slug}}">
-        <img src="{{logo_url}}" alt="{{name}}" />
-      </a>
+      <img src="{{logo_url}}" alt="{{name}}" />
     </div>
     {{/if ~}}
   </div>
@@ -20,5 +18,18 @@
         {{{description}}}
       </div>
       {{/if ~}}
+      <div class="key-info-extra">
+        <ul class="fa-ul">
+          {{#if website ~}}
+          <li class="mdc-card__info--vacancy-website mdc-typography--body1">
+            <span class="fa-li"><span class="far fa-link fa-fw" title="Website"></span></span>
+            <a href="{{website_url}}">
+              {{website}}
+            </a>
+          </li>
+          {{/if ~}}
+        </ul>
+      </div>
+    </div>
   </div>
 </div>
