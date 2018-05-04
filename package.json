@@ -34,15 +34,16 @@
     "prepare": "npm run compile",
     "pretest": "npm run compile",
     "posttest": "npm run check",
-    "uglify": "npm run uglify-main; npm run uglify-home",
+    "uglify": "npm run uglify-main; npm run uglify-search; npm run uglify-home",
     "uglify-main": "uglifyjs --compress --output=./build/assets/js/goodmoves/main.js ./build/assets/js/cookieinfo.min.js ./build/assets/js/class-inheritance.js ./build/assets/js/goodmoves/site-controller.js",
-    "uglify-home": "uglifyjs --compress --output=./build/assets/js/goodmoves/home.js ./build/assets/js/goodmoves/typeahead-controller.js ./build/assets/js/goodmoves/search-terms-controller.js ./build/assets/js/goodmoves/vacancies-controller.js ./build/assets/js/goodmoves/map-controller.js ./build/assets/js/goodmoves/home-controller.js"
+    "uglify-home": "uglifyjs --compress --output=./build/assets/js/goodmoves/home.js ./build/assets/js/goodmoves/typeahead-controller.js ./build/assets/js/goodmoves/search-terms-controller.js ./build/assets/js/goodmoves/home-controller.js",
+    "uglify-search": "uglifyjs --compress --output=./build/assets/js/goodmoves/search.js ./build/assets/js/goodmoves/typeahead-controller.js ./build/assets/js/goodmoves/search-terms-controller.js ./build/assets/js/goodmoves/vacancies-controller.js ./build/assets/js/goodmoves/map-controller.js ./build/assets/js/goodmoves/search-controller.js"
   },
   "author": "Matthew Wilkes (https://scvo.org.uk)",
   "license": "GPL-3.0",
   "dependencies": {
     "@scvo/router": "1.1.30",
-    "@scvo/router-destination-handlebars": "0.0.23",
+    "@scvo/router-destination-handlebars": "0.0.29",
     "@scvo/router-destination-redirect": "0.0.7",
     "@scvo/router-task-elasticsearch": "0.0.16",
     "@scvo/router-task-firebase": "0.0.2",

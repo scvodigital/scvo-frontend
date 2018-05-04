@@ -1,7 +1,7 @@
 {{#*inline "term_checkbox"}}
   <div class="mdc-form-field">
     <div class="mdc-checkbox">
-      <input type="checkbox" class="mdc-checkbox__native-control" id="<!--{instance}-->_{{field}}_{{key}}" 
+      <input type="checkbox" class="mdc-checkbox__native-control" id="{{instance_id}}_{{field}}_{{key}}" 
         name="{{field}}[]" value="{{key}}" {{#if (contains selected key)}}checked{{/if}} />
       <div class="mdc-checkbox__background">
         <svg class="mdc-checkbox__checkmark"
@@ -14,19 +14,19 @@
         <div class="mdc-checkbox__mixedmark"></div>
       </div>
     </div>
-    <label for="<!--{instance}-->_{{field}}_{{key}}">{{key}}</label>
+    <label for="{{instance_id}}_{{field}}_{{key}}">{{key}}</label>
   </div>
 {{/inline}}
 
 <header class="mdc-drawer__header hide-md hide-lg">
   <div class="mdc-drawer__header-content mdc-theme--primary-bg">
     <h2 class="mdc-drawer__content-heading mdc-theme--primary-bg mdc-theme--on-primary hide-sm">Search jobs</h2>
-    <div id="search-tab-bar" class="mdc-tab-bar" data-mdc-auto-init="MDCTabBar">
-      <a class="mdc-tab" href="/?{{request.url.query}}">
+    <div id="search-tab-bar" class="mdc-tab-bar fullwidth" data-mdc-auto-init="MDCTabBar">
+      <a class="mdc-tab" href="#map" onclick="mapView()">
         <span class="far fa-map-marker-alt fa-fw" title="Location"></span>
         Map
       </a>
-      <a class="mdc-tab mdc-tab--active" href="#" id="detailed-results">
+      <a class="mdc-tab mdc-tab--active" href="#details" id="detailed-results" onclick="detailsView()">
         <span class="far fa-list fa-fw" title="Location"></span>
         List
       </a>
@@ -36,12 +36,12 @@
 </header>
 <div class="mdc-drawer__content">
   <h2 class="mdc-drawer__content-heading mdc-theme--primary-bg mdc-theme--on-primary hide-sm">Search jobs</h2>
-  <div id="search-tab-bar" class="mdc-tab-bar" data-mdc-auto-init="MDCTabBar">
-    <a class="mdc-tab" href="/?{{request.url.query}}">
+  <div id="search-tab-bar" class="mdc-tab-bar fullwidth" data-mdc-auto-init="MDCTabBar">
+    <a class="mdc-tab" href="#map" onclick="mapView()">
       <span class="far fa-map-marker-alt fa-fw" title="Location"></span>
       Map
     </a>
-    <a class="mdc-tab mdc-tab--active" href="#" id="detailed-results">
+    <a class="mdc-tab mdc-tab--active" href="#details" id="detailed-results" onclick="detailsView()">
       <span class="far fa-list fa-fw" title="Location"></span>
       List
     </a>
@@ -50,7 +50,7 @@
   <form action="/search" method="GET">
     <div class="h-padding">
       <div class="mdc-text-field mdc-text-field--outlined" data-mdc-auto-init="MDCTextField">
-        <input type="text" id="<!--{instance}-->-keywords" name="keywords" class="mdc-text-field__input mdc-text-field--fullwidth" value="{{request.params.query.q}}">
+        <input type="text" id="{{instance_id}}-keywords" name="keywords" class="mdc-text-field__input mdc-text-field--fullwidth" value="{{request.params.query.q}}">
         <label class="mdc-floating-label mdc-floating-label--float-above" for="keywords">Keywords</label>
         <div class="mdc-notched-outline">
           <svg>
@@ -63,8 +63,8 @@
 
     <div class="h-padding">
       <div class="mdc-text-field mdc-text-field--outlined" data-mdc-auto-init="MDCTextField">
-        <input type="text" id="<!--{instance}-->-location" name="location" class="mdc-text-field__input mdc-text-field--fullwidth" value="{{request.params.query.q}}">
-        <label class="mdc-floating-label mdc-floating-label--float-above" for="<!--{instance}-->-location">Location</label>
+        <input type="text" id="{{instance_id}}-location" name="location" class="mdc-text-field__input mdc-text-field--fullwidth" value="{{request.params.query.q}}">
+        <label class="mdc-floating-label mdc-floating-label--float-above" for="{{instance_id}}-location">Location</label>
         <div class="mdc-notched-outline">
           <svg>
             <path class="mdc-notched-outline__path"/>
@@ -76,6 +76,32 @@
 
     <input type="hidden" name="lat" value="{{request.params.query.lat}}">
     <input type="hidden" name="lng" value="{{request.params.query.lng}}">
+
+    <div class="h-padding">
+      <div class="mdc-text-field mdc-text-field--outlined" data-mdc-auto-init="MDCTextField">
+        <input type="text" id="{{instance_id}}-salary_min" name="salary_min" class="mdc-text-field__input mdc-text-field--fullwidth" value="{{request.params.query.q}}">
+        <label class="mdc-floating-label mdc-floating-label--float-above" for="{{instance_id}}-salary_min">Minimum Salary</label>
+        <div class="mdc-notched-outline">
+          <svg>
+            <path class="mdc-notched-outline__path"/>
+          </svg>
+        </div>
+        <div class="mdc-notched-outline__idle"></div>
+      </div>
+    </div>
+
+    <div class="h-padding">
+      <div class="mdc-text-field mdc-text-field--outlined" data-mdc-auto-init="MDCTextField">
+        <input type="text" id="{{instance_id}}-salary_max" name="salary_max" class="mdc-text-field__input mdc-text-field--fullwidth" value="{{request.params.query.q}}">
+        <label class="mdc-floating-label mdc-floating-label--float-above" for="{{instance_id}}-salary_max">Maximum Salary</label>
+        <div class="mdc-notched-outline">
+          <svg>
+            <path class="mdc-notched-outline__path"/>
+          </svg>
+        </div>
+        <div class="mdc-notched-outline__idle"></div>
+      </div>
+    </div>
 
     <h3 class="mdc-drawer__content-heading mdc-theme--primary-bg mdc-theme--on-primary">Roles</h3>
     {{#each data.supplimentaryResponses.types.aggregations.roles.buckets ~}}
@@ -89,7 +115,7 @@
     
     <h3 class="mdc-drawer__content-heading mdc-theme--primary-bg mdc-theme--on-primary">Statuses</h3>
     {{#each data.supplimentaryResponses.types.aggregations.statuses.buckets ~}}
-      {{> term_checkbox key=key field="statuses" selected=../request.params.query.roles}}
+      {{> term_checkbox key=key field="role_status" selected=../request.params.query.role_status}}
     {{/each ~}}
     
     <button class="mdc-button mdc-button--raised mdc-button--fullwidth h-margin v-margin" type="submit">
