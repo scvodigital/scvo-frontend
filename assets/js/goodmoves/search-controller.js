@@ -39,10 +39,14 @@ $forms.on('submit', function(evt) {
 
 function mapView() {
   $detailedResults.hide();
+  $map.removeClass('hidden');
+  $map.addClass('shown');
 }
 
 function detailsView() {
   $detailedResults.show();
+  $map.removeClass('shown');
+  $map.addClass('hidden');
 }
 
 var autocompletePerm, autocompleteTemp, mapController;

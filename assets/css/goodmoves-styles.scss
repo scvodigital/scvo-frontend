@@ -280,6 +280,20 @@ a {
   width: 100%;
 }
 
+#map-full {
+  -webkit-transition: opacity .3s ease-in-out;
+  -moz-transition: opacity .3s ease-in-out;
+  -ms-transition: opacity .3s ease-in-out;
+  -o-transition: opacity .3s ease-in-out;
+  transition: opacity .3s ease-in-out;
+}
+#map-full.shown {
+  opacity: 1;
+}
+#map-full.hidden {
+  opacity: 0;
+}
+
 .search-info {
   margin: $unit*1.5 0 $unit;
   background: #fafafa;
@@ -437,7 +451,21 @@ hr {
   padding: $unit 0 $unit*2;
 }
 .mdc-drawer__content {
-  padding-bottom: $unit*2;
+  position: absolute;
+  z-index: 10;
+  padding: 0;
+  margin: 0 0 $unit*2;
+  background-color: white;
+  #search-tab-bar {
+    background-color: $mdc-theme-primary;
+  }
+}
+.mdc-drawer__content-padded {
+  padding: $unit;
+}
+.mdc-drawer__content-heading {
+  margin: 0;
+  padding: $unit;
 }
 
 .drawer-container {
@@ -450,15 +478,6 @@ hr {
   .container-fluid {
     display: inline-flex;
   }
-}
-
-.mdc-drawer__content-padded {
-  padding: $unit;
-}
-
-.mdc-drawer__content-heading {
-  margin: 0;
-  padding: $unit;
 }
 
 @media (min-width: $mobile-breakpoint + 1) {
@@ -551,8 +570,10 @@ hr {
 
 .goodmoves-job-search {
   position: relative;
+  z-index: 20;
   .search-bar-cell {
     background-color: #fff;
+    position: relative;
   }
 }
 
@@ -927,19 +948,19 @@ footer {
 }
 
 // Sidebar
-.mdc-drawer__content,
-#sidebar-permanent {
-  .mdc-tab-bar {
-    background-color: $mdc-theme-primary;
-    width: 100%;
-    .mdc-tab {
-      color: white;
-    }
-    .mdc-tab-bar__indicator {
-      background-color: white;
-    }
-  }
-}
+// .mdc-drawer__content,
+// #sidebar-permanent {
+//   .mdc-tab-bar {
+//     background-color: $mdc-theme-primary;
+//     width: 100%;
+//     .mdc-tab {
+//       color: white;
+//     }
+//     .mdc-tab-bar__indicator {
+//       background-color: white;
+//     }
+//   }
+// }
 
 /*=====Tab Bar=====*/
 
