@@ -1,40 +1,13 @@
-<div class="goodmoves-job-search">
-    {{> search_info paging=data.primaryResponse.pagination}}
+<div id="map-full"></div>
 
-    <div class="mdc-layout-grid head">
-      <div class="mdc-layout-grid__inner">
-        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone">
-          <a href="#" class="mdc-button mdc-button--raised">
-            <span class="far fa-cog fa-fw mdc-list-item__graphic" aria-hidden="true"></span>
-            Save search
-          </a>
-        </div>
-        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
-          {{> pagination paging=data.primaryResponse.pagination}}
-        </div>
-        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
-          <div class="mdc-select pull-right" data-mdc-auto-init="MDCSelect">
-            <select class="mdc-select__native-control">
-              <option value="undefined">Relevance</option>
-              <option value="distance-asc">Distance</option>
-              <option value="closing_date-asc">Closing soon</option>
-              <option value="start_at-desc">Newest</option>
-              <option value="start_at-asc">Oldest</option>
-              <option value="salary_min-desc">Salary - high to low</option>
-              <option value="salary_min-asc">Salary - low to high</option>
-            </select>
-            <label class="mdc-floating-label">Sort</label>
-            <div class="mdc-line-ripple"></div>
-          </div>
-        </div>
-      </div>
+<div class="goodmoves-job-search mdc-layout-grid">
+  <div class="mdc-layout-grid__inner">
+    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet hide-sm search-bar-cell">
+      {{> search_form this instance_id="perm"}}
     </div>
-
-    {{#each data.primaryResponse.hits.hits ~}}
-    {{> vacancy_search_result _source}}
-    {{/each ~}}
-
-    <div class="foot">
-      {{> pagination paging=data.primaryResponse.pagination}}
+    <div id="detailed-results-container" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-9-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-12-phone">
+      {{> search_results this}}
     </div>
+  </div>
 </div>
+

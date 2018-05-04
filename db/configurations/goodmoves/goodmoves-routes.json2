@@ -176,60 +176,42 @@
       }
     }
   },
-  "home_search": {
-    "pattern": "/home-search",
-    "defaultParams": {
-      "context": "map"
-    },
-    "tasks": [
-      {
-        "name": "map_data",
-        "taskType": "elasticsearch",
-        "config": {
-          "connectionStringTemplate": "{$../elasticsearch-url.txt}",
-          "elasticsearchConfig": {
-            "apiVersion": "5.6"
-          },
-          "queryTemplates": {
-            "index": "web-content-production",
-            "type": "goodmoves-job-test",
-            "template": "{$./queries/jobs/home-search.json}"
-          }
-        }
-      }
-    ],
-    "destination": {
-      "destinationType": "handlebars",
-      "config": {
-        "data": {
-          "content": "{$./templates/pages/home-search.hbs}"
-        }
-      }
-    }
-  },
   "search": {
     "pattern": "/search",
     "defaultParams": {
       "context": "results"
     },
     "metaData": {
-      "sidebarIcon": "search",
-      "sidebarTooltip": "Search"
+      "sidebarButton": {
+        "icon": "search",
+        "tooltip": "Search",
+        "classes": "hide-md hide-lg"
+      }
     },
     "tasks": [
       {
-        "name": "primaryResponse",
+        "name": "search_data",
         "taskType": "elasticsearch",
         "config": {
           "connectionStringTemplate": "{$../elasticsearch-url.txt}",
           "elasticsearchConfig": {
-            "apiVersion": "5.6"
+            "apiVersion": "5.6",
+            "log": "debug"
           },
-          "queryTemplates": {
-            "index": "web-content-production",
-            "type": "goodmoves-job-test",
-            "template": "{$./queries/jobs/home-search.json}"
-          }
+          "queryTemplates": [
+            {
+              "name": "detailed_results",
+              "index": "web-content-production",
+              "type": "goodmoves-job-test",
+              "template": "{$./queries/jobs/detailed-search.json}"
+            },
+            {
+              "name": "map_results",
+              "index": "web-content-production",
+              "type": "goodmoves-job-test",
+              "template": "{$./queries/jobs/map-search.json}"
+            }
+          ]
         }
       },
       {
@@ -269,6 +251,9 @@
           "body": "{$./templates/jobs/search.hbs}",
           "foot": "{$./templates/jobs/search-foot.hbs}",
           "sidebar": "{$./partials/search-form.hbs}"
+        },
+        "data": {
+          "content": "{$./templates/jobs/search-json.hbs}"
         }
       }
     }
