@@ -1,12 +1,12 @@
 {
-  "size": 1,
+  "size": 100,
   "_source": [
     "Id",
     "slug",
     "vacancy_status",
     "rendered.vacancy_status",
     "top_job",
-    "description",
+    "description_short",
     "title",
     "geo_vacancy_coords",
     "location",
@@ -29,8 +29,22 @@
     "rendered.rss"
   ],
   "query": {
-    "term": {
-      "slug": "{{request.params.slug}}"
+    "bool": {
+      "must": [
+        {
+          "term": {
+            "organisation.id": "{{data.primaryResponse.hits.hits.[0]._source.Id}}"
+          }
+        },
+        {
+          "term": {
+            "vacancy_status": "vacancy-open"
+          }
+        }
+      ]
     }
+  },
+  "sort": {
+    "start_at": "desc"
   }
 }

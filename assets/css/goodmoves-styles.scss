@@ -34,8 +34,8 @@ header {
   .container-fluid {
     padding: 0;
     .mdc-top-app-bar__section--align-start {
-      background-image: linear-gradient(60deg, $mdc-theme-primary, $mdc-theme-primary 261px, $mdc-theme-old 262px, $mdc-theme-old);
-      min-width: 262px;
+      background-image: linear-gradient(60deg, $mdc-theme-primary, $mdc-theme-primary 320px, $mdc-theme-old 321px, $mdc-theme-old);
+      min-width: 321px;
     }
     .mdc-top-app-bar__section--align-end {
       background-image: linear-gradient(60deg, $mdc-theme-old, $mdc-theme-old 63px, white 64px, white);
@@ -48,11 +48,18 @@ header {
       a:hover {
         text-decoration: none;
       }
+      img.brand-logo {
+        height: 60px;
+        position: absolute;
+        clip: rect(0px,60px,60px,0px);
+        top: 0px;
+      }
       svg {
         //position: absolute;
         //top: 4px;
         //left: 0;
-        margin-top: 14px;
+        margin-left: 70px;
+        margin-top: 0.75rem;
       }
       .tagline {
         color: white;
@@ -60,6 +67,7 @@ header {
         position: absolute;
         bottom: 1px;
         left: 0;
+        display: none;
       }
     }
     .mdc-top-app-bar__section {
@@ -138,6 +146,13 @@ footer h3,
 .mdc-typography--caption,
 .mdc-menu .mdc-list-item,
 .mdc-typography--headline,
+.mdc-typography--headline1,
+.mdc-typography--headline2,
+.mdc-typography--headline3,
+.mdc-typography--headline4,
+.mdc-typography--headline5,
+.mdc-typography--headline6,
+.mdc-typography--headline7,
 .supplimentary-list-title,
 .mdc-card__supporting-text,
 .mdc-typography--subheading2,
@@ -149,8 +164,17 @@ footer h3,
 .mdc-typography--body1 {
   font-size: 1rem;
 }
-.mdc-typography--headline {
-  font-size: 1.4rem;
+.mdc-typography--headline3 {
+  font-size: 2.4rem;
+  line-height: 2.65rem;
+}
+.mdc-typography--headline4 {
+  font-size: 1.9rem;
+  line-height: 2.1rem;
+}
+.mdc-typography--headline5 {
+  font-size: 1.75rem;
+  line-height: 1.9rem;
 }
 .mdc-card__title,
 .mdc-textfield__label,
@@ -289,6 +313,8 @@ a {
   }
 }
 
+.mdc-card.list,
+.mdc-card.gist,
 .mdc-card.search-result {
   position: relative;
   z-index: 1;
@@ -306,14 +332,20 @@ a {
   }
 }
 .mdc-card.full,
+.mdc-card.list,
+.mdc-card.gist,
 .mdc-card.search-result {
   .mdc-list-divider {
     border: none;
   }
 }
+.mdc-card.list:last-child,
+.mdc-card.gist:last-child,
 .mdc-card.search-result:last-child {
   margin-bottom: 0;
 }
+.mdc-card.list::after,
+.mdc-card.gist::after,
 .mdc-card.search-result::after {
   content: "";
   position: absolute;
@@ -325,11 +357,23 @@ a {
   -webkit-transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
   transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
+.mdc-card.list:hover::after,
+.mdc-card.gist:hover::after,
 .mdc-card.search-result:hover::after {
   opacity: 1;
 }
 .mdc-card.full {
   box-shadow: none;
+  .mdc-card__info--organisation-title {
+    margin: 0;
+  }
+  .detailed-info,
+  .organisation-type {
+    margin: 0 0 $unit;
+    small {
+      font-size: 0.92rem;
+    }
+  }
   .mdc-card__info--vacancy-title a,
   .mdc-card__info--vacancy-title a:hover {
     color: inherit;
@@ -375,6 +419,18 @@ a {
       }
     }
   }
+}
+.mdc-card.list {
+  .mdc-card__info--vacancy-organisation {
+    display: none;
+  }
+}
+
+hr {
+  margin: $unit*1.5 0;
+  background-color: $mdc-theme-primary-light;
+  border: none;
+  height: 1px;
 }
 
 .page-content {
@@ -511,20 +567,20 @@ a {
   .container-fluid {
     position: relative;
   }
+  .mdc-tab-bar {
+    width: 100%;
+    .mdc-tab {
+      color: white;
+    }
+    .mdc-tab-bar__indicator {
+      background-color: white;
+    }
+  }
   .search-overlay {
     padding: 0;
     z-index: 10;
     position: absolute;
     background-color: $mdc-theme-primary;
-    .mdc-tab-bar {
-      width: 100%;
-      .mdc-tab {
-        color: white;
-      }
-      .mdc-tab-bar__indicator {
-        background-color: white;
-      }
-    }
     .search-overlay-panel {
       padding: $unit;
       input, select {
@@ -640,6 +696,7 @@ body {
   }
 }
 .mdc-card.full {
+  margin-top: $unit/2;
   .mdc-card__info--vacancy-row {
     padding: 0 0 $unit;
     .mdc-card__info--vacancy {
@@ -651,6 +708,10 @@ body {
   }
 }
 
+.mdc-typography--headline4,
+.mdc-typography--headline5 {
+  margin-bottom: $unit;
+}
 .gm-style .gm-style-iw {
   font-size: 0.9rem;
 }
@@ -762,7 +823,7 @@ footer {
   );
   .footer-main {
     padding: 0;
-    margin-bottom: 0;
+    margin-bottom: $unit/2;
   }
   h3 {
     color: white;
@@ -855,8 +916,8 @@ footer {
   }
   .footer-copyright {
     background-color: $mdc-theme-primary-dark;
-    padding-top: 0;
-    margin-bottom: 0;
+    padding: $unit 0 $unit*0.7;
+    margin: 0;
     line-height: 1.2;
     font-size: 0.9rem;
     p {
@@ -866,6 +927,7 @@ footer {
 }
 
 // Sidebar
+.mdc-drawer__content,
 #sidebar-permanent {
   .mdc-tab-bar {
     background-color: $mdc-theme-primary;

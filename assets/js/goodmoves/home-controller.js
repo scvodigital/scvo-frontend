@@ -55,4 +55,3 @@ function reverseLookup(latitude, longitude) {
     }
   });
 }
-

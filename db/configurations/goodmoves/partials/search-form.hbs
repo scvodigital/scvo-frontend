@@ -107,17 +107,17 @@
     {{#each data.supplimentaryResponses.types.aggregations.roles.buckets ~}}
       {{> term_checkbox key=key field="roles" selected=../request.params.query.roles}}
     {{/each ~}}
-    
+
     <h3 class="mdc-drawer__content-heading mdc-theme--primary-bg mdc-theme--on-primary">Sectors</h3>
     {{#each data.supplimentaryResponses.types.aggregations.sectors.buckets ~}}
-      {{> term_checkbox key=key field="sectors" selected=../request.params.query.roles}}
+      {{> term_checkbox key=key field="sectors" selected=../request.params.query.sectors}}
     {{/each ~}}
-    
+
     <h3 class="mdc-drawer__content-heading mdc-theme--primary-bg mdc-theme--on-primary">Statuses</h3>
     {{#each data.supplimentaryResponses.types.aggregations.statuses.buckets ~}}
       {{> term_checkbox key=key field="role_status" selected=../request.params.query.role_status}}
     {{/each ~}}
-    
+
     <button class="mdc-button mdc-button--raised mdc-button--fullwidth h-margin v-margin" type="submit">
       Search jobs
     </button>

@@ -45,7 +45,7 @@ var MapController = Class.extend({
         {
           'featureType': 'road',
           'elementType': 'geometry.stroke',
-          'stylers': [{'color': '#888888'}]
+          'stylers': [{'color': '#d1edc4'}]
         },
         {
           'featureType': 'road',
@@ -60,12 +60,12 @@ var MapController = Class.extend({
         {
           'featureType': 'road.highway',
           'elementType': 'geometry.stroke',
-          'stylers': [{'color': '#555555'}]
+          'stylers': [{'color': '#d1edc4'}]
         },
         {
           'featureType': 'road.highway',
           'elementType': 'labels.text.fill',
-          'stylers': [{'color': '#888888'}]
+          'stylers': [{'color': '#424242'}]
         },
         {
           'featureType': 'transit',
