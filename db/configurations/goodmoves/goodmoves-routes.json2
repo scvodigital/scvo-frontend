@@ -361,10 +361,46 @@
           },
           "queryTemplates": [
             {
+              "name": "vacancies",
+              "index": "web-content-production",
+              "type": "goodmoves-job-test",
+              "template": "{$./queries/jobs/organisation-jobs.json}"
+            },
+            {
               "name": "not_found",
               "index": "web-content-production",
               "type": "goodmoves-organisation-test",
               "template": "{$./queries/pages/not-found.json}"
+            }
+          ]
+        }
+      },
+      {
+        "name": "goodhq",
+        "taskType": "elasticsearch",
+        "config": {
+          "connectionStringTemplate": "{$../elasticsearch-url.txt}",
+          "elasticsearchConfig": {
+            "apiVersion": "5.6"
+          },
+          "queryTemplates": [
+            {
+              "name": "posts",
+              "index": "web-content-production",
+              "type": "goodhq-post",
+              "template": "{$./queries/goodhq/posts.json}"
+            },
+            {
+              "name": "reviews",
+              "index": "web-content-production",
+              "type": "goodhq-review",
+              "template": "{$./queries/goodhq/reviews.json}"
+            },
+            {
+              "name": "volunteering",
+              "index": "web-content-production",
+              "type": "milo-volunteering-opportunity",
+              "template": "{$./queries/goodhq/volunteering.json}"
             }
           ]
         }
