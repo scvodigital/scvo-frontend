@@ -3,7 +3,7 @@
     "pattern": "/",
     "tasks": [
       {
-        "name": "terms",
+        "name": "jobs",
         "taskType": "elasticsearch",
         "config": {
           "connectionStringTemplate": "{$../elasticsearch-url.txt}",
@@ -11,6 +11,18 @@
             "apiVersion": "5.6"
           },
           "queryTemplates": [
+            {
+              "name": "latest",
+              "index": "web-content-production",
+              "type": "goodmoves-job-test",
+              "template": "{$./queries/jobs/latest.json}"
+            },
+            {
+              "name": "top",
+              "index": "web-content-production",
+              "type": "goodmoves-job-test",
+              "template": "{$./queries/jobs/top.json}"
+            },
             {
               "name": "types",
               "index": "web-content-production",

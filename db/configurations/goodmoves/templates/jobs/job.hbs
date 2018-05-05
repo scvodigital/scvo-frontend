@@ -1,16 +1,7 @@
-<div class="goodmoves-job">
-  <div class="container-fluid page-content">
-    <div class="mdc-layout-grid">
-      <div class="mdc-layout-grid__inner">
-        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-3-tablet mdc-layout-grid__cell--span-4-phone sidebar page-sidebar">
-          {{> search_form}}
-        </div>
-        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-9-desktop mdc-layout-grid__cell--span-5-tablet mdc-layout-grid__cell--span-4-phone content page-content">
-          {{#each data.primaryResponse.hits.hits ~}}
-          {{> vacancy_full _source}}
-          {{/each ~}}
-        </div>
-      </div>
-    </div>
-  </div>
+{{> search_form this instance_id="perm"}}
+
+<div class="container-content goodmoves-job">
+  {{#each data.primaryResponse.hits.hits ~}}
+  {{> vacancy_full _source}}
+  {{/each ~}}
 </div>

@@ -3,6 +3,10 @@ var $distance = $('#distance');
 var $where = $('#where');
 var $searchTerms = $('#search-terms');
 
+var $searchViewJobs = $('#search-view-jobs');
+var $searchViewOrganisations = $('#search-view-organisations');
+var $searchViewAdvice = $('#search-view-advice');
+
 var typeaheadController = new TypeaheadController($what, terms, { highlight: true, minlength: 0 });
 var searchTermsController = new SearchTermsController();
 
@@ -23,6 +27,22 @@ function initMap() {
   };
   autocomplete = new google.maps.places.Autocomplete(autocompleteInput, autocompleteOptions);
   //geolocate();
+}
+
+function searchViewJobs() {
+  $searchViewJobs.show();
+  $searchViewOrganisations.hide();
+  $searchViewAdvice.hide();
+}
+function searchViewOrganisations() {
+  $searchViewJobs.hide();
+  $searchViewOrganisations.show();
+  $searchViewAdvice.hide();
+}
+function searchViewAdvice() {
+  $searchViewJobs.hide();
+  $searchViewOrganisations.hide();
+  $searchViewAdvice.show();
 }
 
 function geolocate() {
