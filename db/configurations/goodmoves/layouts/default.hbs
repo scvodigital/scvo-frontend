@@ -186,7 +186,7 @@ if(location.host.indexOf('.local') > -1){
         </div>
       </header>
 
-      <aside class="mdc-drawer mdc-drawer--temporary mdc-typography" id="mobile-menu" data-mdc-auto-init="MDCTemporaryDrawer">
+      <aside class="mdc-drawer mdc-drawer--temporary" id="mobile-menu" data-mdc-auto-init="MDCTemporaryDrawer">
         <nav class="mdc-drawer__drawer">
           <header class="mdc-drawer__header">
             <div class="mdc-drawer__header-content mdc-theme--primary-bg">
@@ -249,16 +249,16 @@ if(location.host.indexOf('.local') > -1){
       </aside>
 
       <div class="container-content">
-        <div class="container-content-{{#if request.params.path}}{{replace request.params.path '_' '-'}} container-fluid{{else}}home{{/if}}">
+        <div class="container-content-{{#if request.params.path}}{{replace request.params.path '_' '-'}}{{else}}home{{/if}}">
           {{#if route.metaData.sidebarButton}}
-          <aside class="mdc-drawer mdc-drawer--temporary mdc-typography" id="sidebar-temporary" data-mdc-auto-init="MDCTemporaryDrawer">
+          <aside class="mdc-drawer mdc-drawer--temporary" id="sidebar-temporary" data-mdc-auto-init="MDCTemporaryDrawer">
             <div class="mdc-drawer__drawer">
               <!--{section:sidebar[temp]}-->
             </div>
           </aside>
           {{/if}}
 
-          <main class="mdc-theme--background mdc-toolbar-fixed-adjust {{#if route.metaData.sidebarIcon ~}}drawer-container{{/if}}">
+          <main class="mdc-theme--background mdc-toolbar-fixed-adjust {{#if route.metaData.sidebarIcon ~}}drawer-container-temporary{{else}}drawer-container-permanent{{/if}}">
             <!--{section:body}-->
           </main>
         </div>
