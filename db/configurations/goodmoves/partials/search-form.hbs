@@ -47,7 +47,7 @@
       <div class="h-padding">
         <div class="mdc-layout-grid">
           <div class="mdc-layout-grid__inner">
-            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-9-desktop mdc-layout-grid__cell--span-6-tablet mdc-layout-grid__cell--span-3-phone">
+            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-8-desktop mdc-layout-grid__cell--span-6-tablet mdc-layout-grid__cell--span-3-phone">
               <div class="mdc-text-field mdc-text-field--box mdc-text-field--with-leading-icon" data-mdc-auto-init="MDCTextField">
                 <span class="far fa-map-marker-alt mdc-text-field__icon" tabindex="0" role="button"></span>
                 <input type="text" id="{{instance_id}}-location" name="location" class="mdc-text-field__input mdc-text-field--fullwidth" value="{{request.params.query.q}}" placeholder="">
@@ -57,15 +57,15 @@
                 <div class="mdc-line-ripple"></div>
               </div>
             </div>
-            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-2-tablet mdc-layout-grid__cell--span-1-phone">
-              <div class="mdc-form-field">
+            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-2-tablet mdc-layout-grid__cell--span-1-phone">
+              <div class="mdc-select mdc-select--box">
                 <div class="mdc-select" data-mdc-auto-init="MDCSelect">
                   <select class="mdc-select__native-control" id="distance">
-                    <option value="8046.72" selected>within 5 miles</option>
-                    <option value="16093.44">within 10 miles</option>
-                    <option value="40233.6">within 25 miles</option>
-                    <option value="80467.2">within 50 miles</option>
-                    <option value="any">any distance</option>
+                    <option value="8046.72" selected>5 miles</option>
+                    <option value="16093.44">10 miles</option>
+                    <option value="40233.6">25 miles</option>
+                    <option value="80467.2">50 miles</option>
+                    <option value="any">no limit</option>
                   </select>
                   <label class="mdc-floating-label mdc-floating-label--float-above" for="distance">Distance</label>
                 </div>
@@ -80,7 +80,7 @@
 
       <div class="h-padding">
         <div class="mdc-text-field mdc-text-field--box mdc-text-field--with-leading-icon" data-mdc-auto-init="MDCTextField">
-          <span class="far fa-map-marker-alt mdc-text-field__icon" tabindex="0" role="button"></span>
+          <span class="far fa-arrow-alt-from-left mdc-text-field__icon" tabindex="0" role="button"></span>
           <input type="text" id="{{instance_id}}-salary_min" name="salary_min" class="mdc-text-field__input mdc-text-field--fullwidth" value="{{request.params.query.q}}">
           <label class="mdc-floating-label mdc-floating-label--float-above" for="{{instance_id}}-salary_min">
             Minimum salary
@@ -91,7 +91,7 @@
 
       <div class="h-padding">
         <div class="mdc-text-field mdc-text-field--box mdc-text-field--with-leading-icon" data-mdc-auto-init="MDCTextField">
-          <span class="far fa-map-marker-alt mdc-text-field__icon" tabindex="0" role="button"></span>
+          <span class="far fa-arrow-alt-to-right mdc-text-field__icon" tabindex="0" role="button"></span>
           <input type="text" id="{{instance_id}}-salary_max" name="salary_max" class="mdc-text-field__input mdc-text-field--fullwidth" value="{{request.params.query.q}}">
           <label class="mdc-floating-label mdc-floating-label--float-above" for="{{instance_id}}-salary_max">
             Maximum salary
