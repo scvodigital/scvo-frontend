@@ -23,18 +23,11 @@
         "job_count": {
           "terms": {
             "field": "organisation.id",
-            "size": 10000
+            "size": 12
           },
           "aggs": {
             "top_hits": {
               "top_hits": {
-                "sort": [
-                  {
-                    "closing_date": {
-                      "order": "desc"
-                    }
-                  }
-                ],
                 "_source": {
                   "includes": ["organisation.name", "organisation.slug", "organisation.logo_url", "organisation.has_logo"]
                 },

@@ -33,6 +33,24 @@
         }
       },
       {
+        "name": "organisations",
+        "taskType": "elasticsearch",
+        "config": {
+          "connectionStringTemplate": "{$../elasticsearch-url.txt}",
+          "elasticsearchConfig": {
+            "apiVersion": "5.6"
+          },
+          "queryTemplates": [
+            {
+              "name": "currently_recruiting",
+              "index": "web-content-production",
+              "type": "goodmoves-job-test",
+              "template": "{$./queries/organisations/currently-recruiting-random.json}"
+            }
+          ]
+        }
+      },
+      {
         "name": "posts",
         "taskType": "elasticsearch",
         "config": {
@@ -46,24 +64,6 @@
               "index": "web-content-production",
               "type": "tfn-news-post,tfn-feature",
               "template": "{$./queries/posts/home-tfn-post-list.json}"
-            }
-          ]
-        }
-      },
-      {
-        "name": "currently_recruiting",
-        "taskType": "elasticsearch",
-        "config": {
-          "connectionStringTemplate": "{$../elasticsearch-url.txt}",
-          "elasticsearchConfig": {
-            "apiVersion": "5.6"
-          },
-          "queryTemplates": [
-            {
-              "name": "organisations",
-              "index": "web-content-production",
-              "type": "goodmoves-job-test",
-              "template": "{$./queries/organisations/currently-recruiting-random.json}"
             }
           ]
         }
@@ -82,26 +82,6 @@
   },
   "login": {
     "pattern": "/login",
-    "tasks": [
-      {
-        "name": "currently_recruiting",
-        "taskType": "elasticsearch",
-        "config": {
-          "connectionStringTemplate": "{$../elasticsearch-url.txt}",
-          "elasticsearchConfig": {
-            "apiVersion": "5.6"
-          },
-          "queryTemplates": [
-            {
-              "name": "organisations",
-              "index": "web-content-production",
-              "type": "goodmoves-job-test",
-              "template": "{$./queries/organisations/currently-recruiting-random.json}"
-            }
-          ]
-        }
-      }
-    ],
     "destination": {
       "destinationType": "handlebars",
       "config": {
