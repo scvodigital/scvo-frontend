@@ -18,9 +18,18 @@ $forms.on('submit', function(evt) {
   evt.preventDefault();
   $form = $(evt.currentTarget);
   var qs = $form.serialize();
-  qs += qs ? '&json' : 'json';
-  console.log('Querystring:', qs);
-  $.getJSON('/search?' + qs, function(results) {
+  doSearch(qs);
+});
+
+function doSearch(qs) {
+  var query = queryStringToJSON(decodeURI(qs));
+  if (query.json) {
+    delete json;
+  }
+  var url = '/search?' + $.param(query);
+  query.json = true;
+  var urlWithJson = '/search?' + $.param(query);
+  $.getJSON(urlWithJson, function(results) {
     $detailedResults.html(results.detailed_results.string);
     var lat = $('[name="lat"]').val();
     var lng = $('[name="lng"]').val();
@@ -32,22 +41,57 @@ $forms.on('submit', function(evt) {
         distance: distance
       }
     };
-    var historyUrl = '/search?' + $form.serialize();
-    if ($map.is(":visible")) {
-      historyUrl += '&view=map';
-    }
-    history.pushState({}, 'Goodmoves Search', historyUrl);
+    history.pushState({}, 'Goodmoves Search', url);
     generateMapContent(results.map_results.hits, terms);
+    asyncSearchLinks();
+    goodmoves.updateComponents();
   });
-});
+}
+
+function queryStringToJSON(qs) {
+    qs = qs || location.search.slice(1);
+
+    var pairs = qs.split('&');
+    var result = {};
+    pairs.forEach(function(p) {
+        var pair = p.split('=');
+        var key = pair[0];
+        var value = decodeURIComponent(pair[1] || '');
+
+        if( result[key] ) {
+            if( Object.prototype.toString.call( result[key] ) === '[object Array]' ) {
+                result[key].push( value );
+            } else {
+                result[key] = [ result[key], value ];
+            }
+        } else {
+            result[key] = value;
+        }
+    });
+
+    return JSON.parse(JSON.stringify(result));
+};
+
+function asyncSearchLinks() {
+  $('a[href*="/search?"').attr('role', 'button').click(function(evt) {
+    var $o = $(evt.currentTarget);
+    var url = $o.attr('href');
+    var qs = url.split('?')[1] || '';
+    console.log(qs);
+    doSearch(qs);
+    evt.preventDefault();
+  });
+}
 
 function mapView() {
+  window.location.hash = 'map';
   $detailedResults.hide();
   $map.removeClass('hidden');
   $map.addClass('shown');
 }
 
 function detailsView() {
+  window.location.hash = 'details';
   $detailedResults.show();
   $map.removeClass('shown');
   $map.addClass('hidden');
@@ -71,14 +115,26 @@ function initMap() {
   autocompletePerm.addListener('place_changed', autocompleteChange);
   autocompleteTemp.addListener('place_changed', autocompleteChange);
   
+  var lat = $('[name="lat"]').val();
+  var lng = $('[name="lng"]').val();
+  var distance = $('[name="distance"]').val();
   var terms = {
     center: {
-      latitude: null,
-      longitude: null,
-      distance: null
+      latitude: lat,
+      longitude: lng,
+      distance: distance
     }
   };
+
   generateMapContent(mapResults, terms);
+  var view = window.location.hash || 'details';
+  view = view.replace(/#/ig, '');
+  if (view === 'map') {
+    $('.details-tab').removeClass('mdc-tab--active');
+    $('.map-tab').addClass('mdc-tab--active');
+    mapView();  
+  }
+  asyncSearchLinks();
 }
 
 function autocompleteChange(evt) {
