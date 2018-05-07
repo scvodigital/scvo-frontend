@@ -20,7 +20,7 @@
 
 <aside class="mdc-drawer mdc-drawer--permanent mdc-elevation--z8">
   <div class="mdc-drawer__content">
-    <h2 class="mdc-drawer__content-heading mdc-theme--secondary-bg mdc-theme--on-primary hide-sm">Search jobs</h2>
+    <h2 class="mdc-drawer__content-heading hide-sm">Search jobs</h2>
     <div id="search-tab-bar" class="mdc-tab-bar mdc-tab-bar--fullwidth" data-mdc-auto-init="MDCTabBar">
       <a class="mdc-tab mdc-tab--active" id="detailed-results" onclick="detailsView()">
         <span class="far fa-list fa-fw" title="Location"></span>
@@ -102,17 +102,26 @@
         </div>
       </div>
 
-      <h3 class="mdc-drawer__content-heading mdc-theme--secondary-bg mdc-theme--on-primary">Roles</h3>
+      <h3 class="mdc-drawer__content-heading">
+        Roles
+        <span class="far fa-chevron-up mdc-text-field__icon pull-right"></span>
+      </h3>
       {{#each data.supplimentaryResponses.types.aggregations.roles.buckets ~}}
       {{> term_checkbox key=key field="roles" selected=../request.params.query.roles}}
       {{/each ~}}
 
-      <h3 class="mdc-drawer__content-heading mdc-theme--secondary-bg mdc-theme--on-primary">Sectors</h3>
+      <h3 class="mdc-drawer__content-heading">
+        Sectors
+        <span class="far fa-chevron-up mdc-text-field__icon pull-right"></span>
+      </h3>
       {{#each data.supplimentaryResponses.types.aggregations.sectors.buckets ~}}
       {{> term_checkbox key=key field="sectors" selected=../request.params.query.sectors}}
       {{/each ~}}
 
-      <h3 class="mdc-drawer__content-heading mdc-theme--secondary-bg mdc-theme--on-primary">Statuses</h3>
+      <h3 class="mdc-drawer__content-heading">
+        Statuses
+        <span class="far fa-chevron-up mdc-text-field__icon pull-right"></span>
+      </h3>
       {{#each data.supplimentaryResponses.types.aggregations.statuses.buckets ~}}
       {{> term_checkbox key=key field="role_status" selected=../request.params.query.role_status}}
       {{/each ~}}

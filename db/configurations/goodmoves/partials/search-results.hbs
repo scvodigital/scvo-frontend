@@ -12,8 +12,8 @@
       {{> pagination paging=data.search_data.detailed_results.pagination}}
     </div>
     <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
-      <div class="mdc-select pull-right" data-mdc-auto-init="MDCSelect">
-        <select class="mdc-select__native-control">
+      <div class="mdc-select mdc-select--box pull-right" data-mdc-auto-init="MDCSelect">
+        <select class="mdc-select__native-control" id="sort" name="sort">
           <option value="undefined">Relevance</option>
           <option value="distance-asc">Distance</option>
           <option value="closing_date-asc">Closing soon</option>
@@ -22,8 +22,9 @@
           <option value="salary_min-desc">Salary - high to low</option>
           <option value="salary_min-asc">Salary - low to high</option>
         </select>
-        <label class="mdc-floating-label">Sort</label>
-        <div class="mdc-line-ripple"></div>
+        <label class="mdc-floating-label mdc-floating-label--float-above" for="sort">
+          Sort
+        </label>
       </div>
     </div>
   </div>
