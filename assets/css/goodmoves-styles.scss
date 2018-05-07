@@ -400,7 +400,7 @@ a {
   .mdc-card__info--organisation-title {
     margin: 0;
   }
-  .detailed-info,
+  .mdc-card__info--vacancy .detailed-info,
   .organisation-type {
     margin: 0 0 $unit;
     small {
@@ -666,17 +666,18 @@ body {
   padding: 0;
 }
 
-.mdc-card__info--organisation-row,
-.mdc-card__info--vacancy-row {
-  padding: $unit/2;
-  display: flex;
-  border-top-left-radius: inherit;
+.mdc-card {
+  padding: 0;
+  .mdc-card__info--organisation-row,
+  .mdc-card__info--vacancy-row {
+    display: flex;
+    padding: $unit/2;
+  }
   .mdc-card__info--organisation,
   .mdc-card__info--vacancy {
-    display: flex;
     width: 100%;
     flex-direction: column;
-    padding: $unit/4 $unit/2 $unit/2;
+    padding: 0 $unit/2;
     .mdc-card__info--vacancy-title {
       margin: $unit/2 0;
       a .top-job {
@@ -729,6 +730,7 @@ body {
     display: flex;
     align-items: center;
     margin: $unit/2;
+    padding: 0;
     img {
       width: 100%;
       object-fit: contain;
@@ -922,11 +924,16 @@ body {
     justify-content: center;
     align-items: center;
     img {
+      -webkit-transition: opacity .1s ease-in-out;
+      -moz-transition: opacity .1s ease-in-out;
+      -ms-transition: opacity .1s ease-in-out;
+      -o-transition: opacity .1s ease-in-out;
+      transition: opacity .1s ease-in-out;
       mix-blend-mode: multiply;
       filter: grayscale(100%);
       opacity: .8;
-      max-width: 90%;
-      max-height: 90%;
+      max-width: 100%;
+      max-height: 100%;
       position: absolute;
       top: 50%;
       left: 50%;
@@ -934,11 +941,11 @@ body {
     }
   }
   .organisation-logo:hover {
-    background-color: white;
+    // background-color: white;
     img {
       filter: none;
       opacity: 1;
-      mix-blend-mode: normal;
+      // mix-blend-mode: normal;
     }
   }
 }

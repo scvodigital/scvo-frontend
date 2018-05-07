@@ -17,11 +17,11 @@
           {{/if ~}}
         </div>
       </div>
-      {{#compare organisation.has_logo "===" "true" ~}}
+      {{#if organisation.has_logo ~}}
       <div class="mdc-card__media mdc-card__media--square mdc-card__media--organisation">
-        <img src="{{organisation.logo_url}}" alt="{{name}}" />
+        <img src="{{organisation.logo_url}}" alt="{{organisation.title}}" />
       </div>
-      {{/compare ~}}
+      {{/if ~}}
     </div>
     <div class="mdc-card__info--organisation-row">
       <div class="key-info-extra">
@@ -39,7 +39,7 @@
     </div>
   </div>
 
-  {{#if ../data.supplimentaryResponses.vacancies.hits.hits ~}}
+  {{#compare ../data.supplimentaryResponses.vacancies.hits.total ">" 0 ~}}
   <hr />
   <div class="mdc-typography--headline4">
     Current vacancies
@@ -47,7 +47,11 @@
   {{#each ../data.supplimentaryResponses.vacancies.hits.hits ~}}
   {{> vacancy_list _source}}
   {{/each ~}}
-  {{/if ~}}
+  {{else}}
+  <div class="mdc-typography--headline5">
+    No current vacancies
+  </div>
+  {{/compare ~}}
 
   <hr />
   <div class="mdc-typography--headline4">
