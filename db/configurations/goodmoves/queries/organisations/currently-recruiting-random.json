@@ -1,74 +1,21 @@
 {
-  "size": 0,
-  "_source": false,
-  "aggs": {
-    "active": {
-      "filter": {
+  "size": 24,
+  "_source": ["title", "slug", "logo_url", "has_logo"],
+  "query": {
+    "function_score": {
+      "query": {
         "bool": {
           "must": [
             {
               "term": {
-                "vacancy_status": "vacancy-open"
-              }
-            },
-            {
-              "term": {
-                "organisation.has_logo": true
+                "has_logo": true
               }
             }
           ]
         }
       },
-      "aggs": {
-        "job_count": {
-          "terms": {
-            "field": "organisation.id",
-            "size": 12
-          },
-          "aggs": {
-            "top_hits": {
-              "top_hits": {
-                "_source": {
-                  "includes": ["organisation.name", "organisation.slug", "organisation.logo_url", "organisation.has_logo"]
-                },
-                "size": 1
-              }
-            }
-          }
-        }
-      }
-    }
-  },
-  "query": {
-    "bool": {
-      "minimum_should_match": 1,
-      "should": [
-        {
-          "term": {
-            "country_iso3": "GBR"
-          }
-        },
-        {
-          "term": {
-            "country_iso3": "SCO"
-          }
-        },
-        {
-          "term": {
-            "country_iso3": "ENG"
-          }
-        },
-        {
-          "term": {
-            "country_iso3": "WAL"
-          }
-        },
-        {
-          "term": {
-            "country_iso3": "NIR"
-          }
-        }
-      ]
+      "random_score": {},
+      "score_mode": "sum"
     }
   }
 }

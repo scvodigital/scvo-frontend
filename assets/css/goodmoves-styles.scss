@@ -909,13 +909,24 @@ body {
   box-shadow: $toolbar-shadow-reverse;
   background-color: #ededed;
   .organisation-logo {
-    background-color: white;
+    background-color: transparent;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100%;
     img {
+      mix-blend-mode: multiply;
+      filter: grayscale(100%);
+      opacity: .8;
       max-width: 90%;
+    }
+  }
+  .organisation-logo:hover {
+    background-color: white;
+    img {
+      filter: none;
+      opacity: 1;
+      mix-blend-mode: normal;
     }
   }
 }
