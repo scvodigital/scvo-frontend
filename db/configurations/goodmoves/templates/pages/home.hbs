@@ -162,26 +162,9 @@
         {{/each ~}}
       </div>
     </div>
-    <div class="mdc-layout-grid__inner">
-      <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone v-margin-full tfn-latest">
-        <div class="mdc-typography--headline5 v-margin-full">
-          Latest TFN news
-        </div>
-        <div class="mdc-layout-grid">
-          <div class="mdc-layout-grid__inner">
-            {{#each data.posts.tfn_latest.hits.hits ~}}
-            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
-              {{{_source.rendered.scvo_gist}}}
-            </div>
-            {{/each ~}}
-          </div>
-        </div>
-        <p class="mdc-typography--body1">
-          <a href="http://thirdforcenews.org.uk">Read more on TFN</a>
-        </p>
-      </div>
-    </div>
   </div>
+
+  {{> tfn_latest}}
 
   {{> currently_recruiting}}
 </div>
