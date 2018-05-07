@@ -173,8 +173,12 @@ footer h3,
   line-height: 2.1rem;
 }
 .mdc-typography--headline5 {
-  font-size: 1.75rem;
-  line-height: 1.9rem;
+  font-size: 1.65rem;
+  line-height: 1.75rem;
+}
+.mdc-typography--headline6 {
+  font-size: 1.4rem;
+  line-height: 1.5rem;
 }
 .mdc-card__title,
 .mdc-textfield__label,
@@ -660,17 +664,20 @@ body {
   padding: 0;
 }
 
+.mdc-card__info--organisation-row,
 .mdc-card__info--vacancy-row {
   padding: $unit/2;
   display: flex;
   border-top-left-radius: inherit;
+  .mdc-card__info--organisation,
   .mdc-card__info--vacancy {
     display: flex;
     width: 100%;
     flex-direction: column;
     padding: $unit/4 $unit/2 $unit/2;
-    .mdc-card__info--vacancy-title a {
-      .top-job {
+    .mdc-card__info--vacancy-title {
+      margin: $unit/2 0;
+      a .top-job {
         margin-left: 0;
         margin-right: .2rem;
         display: inline-block;
@@ -689,6 +696,12 @@ body {
         height: 1.5rem;
         box-sizing: border-box;
         color: white;
+      }
+    }
+    .fa-ul {
+      li {
+        padding: 0;
+        margin-bottom: $unit/2;
       }
     }
     .mdc-card__info--vacancy-title a:hover {
@@ -718,6 +731,11 @@ body {
       width: 100%;
       object-fit: contain;
     }
+  }
+}
+.mdc-card.list {
+  .mdc-card__media--organisation {
+    display: none;
   }
 }
 .mdc-card.full {

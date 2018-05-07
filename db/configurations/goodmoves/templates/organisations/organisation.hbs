@@ -17,13 +17,11 @@
           {{/if ~}}
         </div>
       </div>
-      {{#with data.supplimentaryResponses.vacancies.hits.hits.[0]._source ~}}
-      {{#if has_logo ~}}
+      {{#compare organisation.has_logo "===" "true" ~}}
       <div class="mdc-card__media mdc-card__media--square mdc-card__media--organisation">
-        <img src="{{logo_url}}" alt="{{name}}" />
+        <img src="{{organisation.logo_url}}" alt="{{name}}" />
       </div>
-      {{/if ~}}
-      {{/with ~}}
+      {{/compare ~}}
     </div>
     <div class="mdc-card__info--organisation-row">
       <div class="key-info-extra">
