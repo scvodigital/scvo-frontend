@@ -204,7 +204,7 @@ footer h3,
   z-index: 20;
   width: 320px;
   margin-right: $unit*1.5;
-  margin-bottom: $unit*2;
+  margin-bottom: 0;
   border-right: none;
   background-color: $mdc-theme-secondary-light !important;
 }
@@ -273,8 +273,7 @@ a {
   letter-spacing: 0;
 }
 .mdc-button,
-.mdc-tab,
-.mdc-card__subtitle {
+.mdc-tab {
   font-weight: 600;
   text-transform: none;
 }
@@ -739,7 +738,7 @@ body {
   }
 }
 .mdc-card.full {
-  margin-top: $unit/2;
+  margin-top: $unit;
   .mdc-card__info--vacancy-row {
     padding: 0 0 $unit;
     .mdc-card__info--vacancy {
@@ -872,8 +871,35 @@ body {
 }
 
 .home-jobs {
+  background-color: #fdfdfd;
   padding: 0 $unit*1.5 $unit !important;
   box-shadow: 0px -3px 5px -1px rgba(0, 0, 0, 0.2), 0px -5px 8px 0px rgba(0, 0, 0, 0.14), 0px -1px 14px 0px rgba(0, 0, 0, 0.12);
+}
+.tfn-latest {
+  .mdc-card {
+    box-shadow: none;
+  }
+  .mdc-card:hover::after {
+    opacity: 0;
+  }
+  .gist {
+    .mdc-typography--headline {
+      font-weight: 400;
+      font-size: 1.1rem;
+      margin: 0;
+    }
+    .mdc-card__subtitle {
+      font-weight: 400;
+      margin: $unit/2 0;
+      color: $mdc-theme-secondary;
+    }
+    .thumbnail img {
+      border-radius: 50%;
+      width: 84px;
+      height: 84px;
+      object-fit: cover;
+    }
+  }
 }
 .currently-recruiting {
   padding: $unit $unit*1.5 $unit !important;
@@ -895,6 +921,7 @@ body {
 
 footer {
   position: relative;
+  z-index: 30;
   border-top: .6rem solid $mdc-theme-primary-light;
   background-color: $mdc-theme-primary;
   background-image: linear-gradient(
