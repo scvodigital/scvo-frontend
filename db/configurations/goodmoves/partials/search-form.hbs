@@ -2,7 +2,8 @@
 <div class="mdc-form-field">
   <div class="mdc-checkbox">
     <input type="checkbox" class="mdc-checkbox__native-control" id="{{instance_id}}_{{field}}_{{key}}"
-    name="{{field}}[]" value="{{key}}" {{#if (contains selected key)}}checked{{/if}} />
+      name="{{field}}[]" value="{{key}}" onchange="$('#{{instance_id}}-search-submit').click()" 
+      {{#if (contains selected key)}}checked{{/if}} />
     <div class="mdc-checkbox__background">
       <svg class="mdc-checkbox__checkmark"
       viewBox="0 0 24 24">
@@ -21,12 +22,12 @@
 <aside class="mdc-drawer mdc-drawer--permanent mdc-elevation--z8">
   <div class="mdc-drawer__content">
     <h2 class="mdc-drawer__content-heading mdc-theme--secondary-bg mdc-theme--on-primary hide-sm">Search jobs</h2>
-    <div id="search-tab-bar" class="mdc-tab-bar mdc-tab-bar--fullwidth" data-mdc-auto-init="MDCTabBar">
-      <a class="mdc-tab mdc-tab--active" id="detailed-results" onclick="detailsView()">
+    <div id="search-tab-bar" class="mdc-tab-bar mdc-tab-bar--fullwidth search-tab-bar" data-mdc-auto-init="MDCTabBar">
+      <a class="mdc-tab mdc-tab--active details-tab" id="detailed-results" onclick="detailsView()">
         <span class="far fa-list fa-fw" title="Location"></span>
         List
       </a>
-      <a class="mdc-tab" onclick="mapView()">
+      <a class="mdc-tab map-tab" onclick="mapView()">
         <span class="far fa-map-marker-alt fa-fw" title="Location"></span>
         Map
       </a>
@@ -104,21 +105,21 @@
 
       <h3 class="mdc-drawer__content-heading mdc-theme--secondary-bg mdc-theme--on-primary">Roles</h3>
       {{#each data.supplimentaryResponses.types.aggregations.roles.buckets ~}}
-      {{> term_checkbox key=key field="roles" selected=../request.params.query.roles}}
+      {{> term_checkbox key=key field="roles" selected=../request.params.query.roles instance_id=../instance_id}}
       {{/each ~}}
 
       <h3 class="mdc-drawer__content-heading mdc-theme--secondary-bg mdc-theme--on-primary">Sectors</h3>
       {{#each data.supplimentaryResponses.types.aggregations.sectors.buckets ~}}
-      {{> term_checkbox key=key field="sectors" selected=../request.params.query.sectors}}
+      {{> term_checkbox key=key field="sectors" selected=../request.params.query.sectors instance_id=../instance_id}}
       {{/each ~}}
 
       <h3 class="mdc-drawer__content-heading mdc-theme--secondary-bg mdc-theme--on-primary">Statuses</h3>
       {{#each data.supplimentaryResponses.types.aggregations.statuses.buckets ~}}
-      {{> term_checkbox key=key field="role_status" selected=../request.params.query.role_status}}
+      {{> term_checkbox key=key field="role_status" selected=../request.params.query.role_status instance_id=../instance_id}}
       {{/each ~}}
 
       <div class="h-margin v-margin">
-        <button class="mdc-button mdc-button--raised mdc-button--fullwidth" type="submit">
+        <button class="mdc-button mdc-button--raised mdc-button--fullwidth" type="submit" id="{{instance_id}}-search-submit">
           Search jobs
         </button>
       </div>

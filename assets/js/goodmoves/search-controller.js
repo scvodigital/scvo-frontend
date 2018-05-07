@@ -18,9 +18,16 @@ $forms.on('submit', function(evt) {
   evt.preventDefault();
   $form = $(evt.currentTarget);
   var qs = $form.serialize();
-  qs += qs ? '&json' : 'json';
-  console.log('Querystring:', qs);
-  $.getJSON('/search?' + qs, function(results) {
+  doSearch(qs);
+});
+
+function doSearch(qs) {
+  console.log('Query String Before:', qs);
+  var qsWithJson = qs ? qs + '&json' : 'json';
+  var url = '/search?' + qs;
+  var urlWithJson = '/search?' + qsWithJson;
+  console.log('Search Url:', urlWithJson);
+  $.getJSON(urlWithJson, function(results) {
     $detailedResults.html(results.detailed_results.string);
     var lat = $('[name="lat"]').val();
     var lng = $('[name="lng"]').val();
@@ -32,22 +39,33 @@ $forms.on('submit', function(evt) {
         distance: distance
       }
     };
-    var historyUrl = '/search?' + $form.serialize();
-    if ($map.is(":visible")) {
-      historyUrl += '&view=map';
-    }
-    history.pushState({}, 'Goodmoves Search', historyUrl);
+    history.pushState({}, 'Goodmoves Search', url);
     generateMapContent(results.map_results.hits, terms);
+    asyncSearchLinks();
+    goodmoves.updateComponents();
   });
-});
+}
+
+function asyncSearchLinks() {
+  $('a[href*="/search?"').attr('role', 'button').click(function(evt) {
+    var $o = $(evt.currentTarget);
+    var url = $o.attr('href');
+    var qs = url.split('?')[1] || '';
+    console.log(qs);
+    doSearch(qs);
+    evt.preventDefault();
+  });
+}
 
 function mapView() {
+  window.location.hash = 'map';
   $detailedResults.hide();
   $map.removeClass('hidden');
   $map.addClass('shown');
 }
 
 function detailsView() {
+  window.location.hash = 'details';
   $detailedResults.show();
   $map.removeClass('shown');
   $map.addClass('hidden');
@@ -71,14 +89,26 @@ function initMap() {
   autocompletePerm.addListener('place_changed', autocompleteChange);
   autocompleteTemp.addListener('place_changed', autocompleteChange);
   
+  var lat = $('[name="lat"]').val();
+  var lng = $('[name="lng"]').val();
+  var distance = $('[name="distance"]').val();
   var terms = {
     center: {
-      latitude: null,
-      longitude: null,
-      distance: null
+      latitude: lat,
+      longitude: lng,
+      distance: distance
     }
   };
+
   generateMapContent(mapResults, terms);
+  var view = window.location.hash || 'details';
+  view = view.replace(/#/ig, '');
+  if (view === 'map') {
+    $('.details-tab').removeClass('mdc-tab--active');
+    $('.map-tab').addClass('mdc-tab--active');
+    mapView();  
+  }
+  asyncSearchLinks();
 }
 
 function autocompleteChange(evt) {
