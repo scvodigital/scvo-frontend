@@ -22,11 +22,13 @@ $forms.on('submit', function(evt) {
 });
 
 function doSearch(qs) {
-  console.log('Query String Before:', qs);
-  var qsWithJson = qs ? qs + '&json' : 'json';
-  var url = '/search?' + qs;
-  var urlWithJson = '/search?' + qsWithJson;
-  console.log('Search Url:', urlWithJson);
+  var query = queryStringToJSON(decodeURI(qs));
+  if (query.json) {
+    delete json;
+  }
+  var url = '/search?' + $.param(query);
+  query.json = true;
+  var urlWithJson = '/search?' + $.param(query);
   $.getJSON(urlWithJson, function(results) {
     $detailedResults.html(results.detailed_results.string);
     var lat = $('[name="lat"]').val();
@@ -45,6 +47,30 @@ function doSearch(qs) {
     goodmoves.updateComponents();
   });
 }
+
+function queryStringToJSON(qs) {
+    qs = qs || location.search.slice(1);
+
+    var pairs = qs.split('&');
+    var result = {};
+    pairs.forEach(function(p) {
+        var pair = p.split('=');
+        var key = pair[0];
+        var value = decodeURIComponent(pair[1] || '');
+
+        if( result[key] ) {
+            if( Object.prototype.toString.call( result[key] ) === '[object Array]' ) {
+                result[key].push( value );
+            } else {
+                result[key] = [ result[key], value ];
+            }
+        } else {
+            result[key] = value;
+        }
+    });
+
+    return JSON.parse(JSON.stringify(result));
+};
 
 function asyncSearchLinks() {
   $('a[href*="/search?"').attr('role', 'button').click(function(evt) {
