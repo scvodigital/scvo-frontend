@@ -13,17 +13,19 @@ $mdc-theme-background: white;
 $unit: 1rem;
 $toolbar-height: 64px;
 $toolbar-item-height: 48px;
+$toolbar-shadow-reverse: 0px -3px 5px -1px rgba(0, 0, 0, 0.2), 0px -5px 8px 0px rgba(0, 0, 0, 0.14), 0px -1px 14px 0px rgba(0, 0, 0, 0.12);
 $nav-height: 38px;
 
 $mobile-breakpoint: 599px;
 $mobile-landscape-breakpoint: 959px;
+
 
 @import "./node_modules/material-components-web/material-components-web.scss";
 @import url('//cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css');
 @import url('//fonts.googleapis.com/css?family=Montserrat:700|Open+Sans:400,500,600');
 
 body {
-  background-color: $mdc-theme-primary-dark;
+  background-color: $mdc-theme-secondary-dark;
 }
 .mdc-toolbar-fixed-adjust {
   margin: 0;
@@ -205,6 +207,7 @@ footer h3,
   width: 320px;
   margin-right: $unit*1.5;
   margin-bottom: 0;
+  padding-bottom: $unit;
   border-right: none;
   background-color: $mdc-theme-secondary-light !important;
 }
@@ -873,7 +876,7 @@ body {
 .home-jobs {
   background-color: #fdfdfd;
   padding: 0 $unit*1.5 $unit !important;
-  box-shadow: 0px -3px 5px -1px rgba(0, 0, 0, 0.2), 0px -5px 8px 0px rgba(0, 0, 0, 0.14), 0px -1px 14px 0px rgba(0, 0, 0, 0.12);
+  box-shadow: $toolbar-shadow-reverse;
 }
 .tfn-latest {
   .mdc-card {
@@ -903,7 +906,7 @@ body {
 }
 .currently-recruiting {
   padding: $unit $unit*1.5 $unit !important;
-  box-shadow: 0px -3px 5px -1px rgba(0, 0, 0, 0.2), 0px -5px 8px 0px rgba(0, 0, 0, 0.14), 0px -1px 14px 0px rgba(0, 0, 0, 0.12);
+  box-shadow: $toolbar-shadow-reverse;
   background-color: #ededed;
   .organisation-logo {
     background-color: white;
@@ -920,16 +923,19 @@ body {
 // Footer ======================================================================
 
 footer {
+  box-shadow: $toolbar-shadow-reverse;
   position: relative;
   z-index: 30;
-  border-top: .6rem solid $mdc-theme-primary-light;
-  background-color: $mdc-theme-primary;
+  border-top: $unit solid $mdc-theme-old;
+  background-color: $mdc-theme-secondary;
   background-image: linear-gradient(
-  60deg,
-  rgb(60, 117, 36),
-  rgb(60, 117, 36) 96%,
-  rgb(30, 59, 18) 96.08%,
-  rgb(30, 59, 18)
+  -120deg,
+  $mdc-theme-secondary-dark,
+  $mdc-theme-secondary-dark $unit*4,
+  $mdc-theme-old $unit*4.05,
+  $mdc-theme-old $unit*5,
+  $mdc-theme-secondary $unit*5.05,
+  $mdc-theme-secondary
   );
   .footer-main,
   .footer-copyright {
@@ -941,7 +947,7 @@ footer {
   h3 {
     color: white;
     font-size: 1.2rem;
-    border-bottom: $unit/5 solid $mdc-theme-primary-light;
+    border-bottom: $unit/5 solid $mdc-theme-secondary-light;
     margin-top: 0;
     margin-bottom: $unit;
     padding: $unit/(3/4) 0 $unit/2;
@@ -1028,7 +1034,7 @@ footer {
     }
   }
   .footer-copyright {
-    background-color: $mdc-theme-primary-dark;
+    background-color: $mdc-theme-secondary-dark;
     padding: $unit $unit $unit*0.7;
     margin: 0;
     line-height: 1.2;
