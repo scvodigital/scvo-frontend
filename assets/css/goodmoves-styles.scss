@@ -908,17 +908,29 @@ body {
   padding: $unit $unit*1.5 $unit !important;
   box-shadow: $toolbar-shadow-reverse;
   background-color: #ededed;
+  .organisation-logo:before {
+    content: "";
+    display: block;
+    padding-top: 100%;
+  }
   .organisation-logo {
+    border-radius: 5px;
+    position: relative;
+  	width: 100%;
     background-color: transparent;
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100%;
     img {
       mix-blend-mode: multiply;
       filter: grayscale(100%);
       opacity: .8;
       max-width: 90%;
+      max-height: 90%;
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
     }
   }
   .organisation-logo:hover {
