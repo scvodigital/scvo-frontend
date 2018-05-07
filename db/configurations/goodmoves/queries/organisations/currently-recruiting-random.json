@@ -1,6 +1,6 @@
 {
   "size": 24,
-  "_source": ["title", "slug", "logo_url", "has_logo"],
+  "_source": ["organisation.name", "organisation.slug", "organisation.logo_url"],
   "query": {
     "function_score": {
       "query": {
@@ -8,7 +8,7 @@
           "must": [
             {
               "term": {
-                "has_logo": true
+                "organisation.has_logo": true
               }
             }
           ]
