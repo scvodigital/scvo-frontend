@@ -18,7 +18,7 @@ $forms.on('submit', function(evt) {
   evt.preventDefault();
   $form = $(evt.currentTarget);
   var qs = $form.serialize();
-  qs += qs ? '&json' : '?json';
+  qs += qs ? '&json' : 'json';
   console.log('Querystring:', qs);
   $.getJSON('/search?' + qs, function(results) {
     $detailedResults.html(results.detailed_results.string);
@@ -32,8 +32,12 @@ $forms.on('submit', function(evt) {
         distance: distance
       }
     };
+    var historyUrl = '/search?' + $form.serialize();
+    if ($map.is(":visible")) {
+      historyUrl += '&view=map';
+    }
+    history.pushState({}, 'Goodmoves Search', historyUrl);
     generateMapContent(results.map_results.hits, terms);
-
   });
 });
 
@@ -66,6 +70,15 @@ function initMap() {
 
   autocompletePerm.addListener('place_changed', autocompleteChange);
   autocompleteTemp.addListener('place_changed', autocompleteChange);
+  
+  var terms = {
+    center: {
+      latitude: null,
+      longitude: null,
+      distance: null
+    }
+  };
+  generateMapContent(mapResults, terms);
 }
 
 function autocompleteChange(evt) {
