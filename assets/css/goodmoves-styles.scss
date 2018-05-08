@@ -45,6 +45,7 @@ header {
       min-width: 321px;
     }
     .mdc-top-app-bar__section--align-end {
+      padding-right: $unit/2;
       background-image: linear-gradient(60deg, $mdc-theme-old, $mdc-theme-old 63px, white 64px, white);
     }
     .mdc-top-app-bar__title {
@@ -55,18 +56,16 @@ header {
       a:hover {
         text-decoration: none;
       }
-      img.brand-logo {
-        height: 60px;
-        position: absolute;
-        clip: rect(0px,60px,60px,0px);
-        top: 0px;
-      }
+      // img.brand-logo {
+      //   height: 60px;
+      //   position: absolute;
+      //   clip: rect(0px,60px,60px,0px);
+      //   top: 0px;
+      // }
       svg {
-        //position: absolute;
-        //top: 4px;
-        //left: 0;
-        margin-left: 70px;
-        margin-top: 0.75rem;
+        // margin-left: 70px;
+        margin-left: $unit;
+        margin-top: $unit*(3/4);
       }
       .tagline {
         color: white;
@@ -386,7 +385,7 @@ a {
   position: relative;
   z-index: 1;
   width: 100%;
-  margin-bottom: $unit;
+  margin-bottom: $unit*1.5;
   .search-result-article__snippet {
     padding: $unit;
     background-color: $mdc-theme-primary-light;
@@ -808,11 +807,10 @@ body {
     .mdc-card__media--organisation {
       align-items: flex-start;
       mix-blend-mode: multiply;
-    }
-  }
-  .mdc-card__info--organisation-row {
-    .mdc-card__media--organisation {
       max-width: 200px;
+    }
+    .mdc-card__media--square::before {
+      margin-top: 0;
     }
   }
 }
