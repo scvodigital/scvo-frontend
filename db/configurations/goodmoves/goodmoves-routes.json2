@@ -33,20 +33,38 @@
               "template": "{$./queries/jobs/top.json}"
             },
             {
+              "name": "currently_recruiting",
+              "index": "web-content-production",
+              "type": "goodmoves-organisation-test",
+              "template": "{$./queries/organisations/currently-recruiting.json}"
+            },
+            {
               "name": "types",
               "index": "web-content-production",
               "type": "goodmoves-job-test",
-              "template": "{$./queries/jobs/aggs.json}"
-            },
-            {
-              "name": "currently_recruiting",
-              "index": "web-content-production",
-              "type": "goodmoves-job-test",
-              "template": "{$./queries/organisations/currently-recruiting-random.json}"
+              "template": "{$./queries/jobs/types.json}"
             }
           ]
         }
       },
+      {
+        "name": "organisations_currently_recruiting",
+        "taskType": "elasticsearch",
+        "config": {
+          "connectionStringTemplate": "{$../elasticsearch-url.txt}",
+          "elasticsearchConfig": {
+            "apiVersion": "5.6"
+          },
+          "queryTemplates": [
+            {
+              "name": "vacancies",
+              "index": "web-content-production",
+              "type": "goodmoves-job-test",
+              "template": "{$./queries/jobs/currently-recruiting-jobs.json}"
+            }
+          ]
+        }
+      }
       {
         "name": "posts",
         "taskType": "elasticsearch",
@@ -216,7 +234,7 @@
               "name": "types",
               "index": "web-content-production",
               "type": "goodmoves-job-test",
-              "template": "{$./queries/jobs/aggs.json}"
+              "template": "{$./queries/jobs/types.json}"
             },
             {
               "name": "not_found",
@@ -281,7 +299,7 @@
               "name": "types",
               "index": "web-content-production",
               "type": "goodmoves-job-test",
-              "template": "{$./queries/jobs/aggs.json}"
+              "template": "{$./queries/jobs/types.json}"
             },
             {
               "name": "not_found",
@@ -344,7 +362,7 @@
               "name": "types",
               "index": "web-content-production",
               "type": "goodmoves-job-test",
-              "template": "{$./queries/jobs/aggs.json}"
+              "template": "{$./queries/jobs/types.json}"
             },
             {
               "name": "not_found",

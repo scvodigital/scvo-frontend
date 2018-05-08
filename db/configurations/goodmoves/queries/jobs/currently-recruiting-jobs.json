@@ -1,0 +1,17 @@
+{
+  "size": 0,
+  "_source": false,
+  "query": {
+    "bool" : {
+      "should" : [
+        {
+          "terms": {
+            "organisation.id": [
+              "{{{join (data.supplimentaryResponses.currently_recruiting.hits.hits records "_source.Id") '", "'}}}"
+            ]
+          }
+        }
+      ]
+    }
+  }
+}
