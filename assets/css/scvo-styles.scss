@@ -408,7 +408,7 @@ primary-dark: #251032
 
   .splash-overlay {
     background-image: linear-gradient(
-    66deg,
+    60deg,
     map-get($themeSelected, 'primary-overlay-start'),
     map-get($themeSelected, 'primary-overlay-end') 47%,
     transparent 47.08%,
@@ -418,7 +418,7 @@ primary-dark: #251032
   @media screen and (max-width: 1140px) {
     .splash-overlay {
       background-image: linear-gradient(
-      66deg,
+      60deg,
       map-get($themeSelected, 'primary-overlay-start'),
       map-get($themeSelected, 'primary-overlay-end') 52%,
       transparent 52.08%,
@@ -432,7 +432,7 @@ primary-dark: #251032
   @media screen and (max-width: 991px) {
     .splash-overlay {
       background-image: linear-gradient(
-      66deg,
+      60deg,
       map-get($themeSelected, 'primary-overlay-start'),
       map-get($themeSelected, 'primary-overlay-end') 57%,
       transparent 57.08%,
@@ -446,7 +446,7 @@ primary-dark: #251032
   @media screen and (max-width: 839px) {
     .splash-overlay {
       background-image: linear-gradient(
-      66deg,
+      60deg,
       map-get($themeSelected, 'primary-overlay-start'),
       map-get($themeSelected, 'primary-overlay-end') 67%,
       transparent 67.08%,
@@ -460,7 +460,7 @@ primary-dark: #251032
   @media screen and (max-width: 450px) {
     .splash-overlay {
       background-image: linear-gradient(
-      66deg,
+      60deg,
       map-get($themeSelected, 'primary-overlay-start'),
       map-get($themeSelected, 'primary-overlay-end')
       );
@@ -830,6 +830,8 @@ img.responsive {
 .mdc-typography,
 .mdc-card__subtitle,
 .mdc-textfield__input,
+.mdc-typography--body1,
+.mdc-typography--body2,
 .mdc-typography--title,
 .mdc-card__title--large,
 .mdc-typography--caption,
@@ -1948,7 +1950,7 @@ form#settled_status {
     padding: 0;
     margin: 0 auto;
     .mdc-layout-grid {
-      width: 44%;
+      width: 42%;
       margin: $unit*(2/3) 0 $unit;
     }
   }
@@ -2039,34 +2041,43 @@ form#settled_status {
   }
 }
 .credit-union .splash-image .splash-overlay .container-fluid {
-  min-height: $unit*9;
+  min-height: $unit*10;
   .mdc-layout-grid {
-    margin: $unit*2 0;
+    margin: $unit*3 0;
   }
   img.header-text {
     max-height: $unit*6;
   }
 }
 .credit-union {
-  .cu-hero {
-    background-image: url('https://members.scvocreditunion.scot/images/scvo-hero.png');
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center center;
-    display: flex;
-    align-items: center;
-    padding: $unit*1.5 0;
-    .mdc-layout-grid {
-      padding: 0 $unit*1.5;
+  // .cu-hero {
+  //   background-image: url('https://members.scvocreditunion.scot/images/scvo-hero.png');
+  //   background-repeat: no-repeat;
+  //   background-size: cover;
+  //   background-position: center center;
+  //   display: flex;
+  //   align-items: center;
+  //   padding: $unit*1.5 0;
+  //   .mdc-layout-grid {
+  //     padding: 0 $unit*1.5;
+  //     width: 100%;
+  //     .mdc-button {
+  //       display: inline-grid;
+  //       height: auto;
+  //       width: 100%;
+  //     }
+  //   }
+  //   img {
+  //     display: none;
+  //   }
+  // }
+  .mdc-layout-grid {
+    margin-bottom: $unit*1.25;
+    width: 100%;
+    .mdc-button {
+      display: inline-grid;
+      height: auto;
       width: 100%;
-      .mdc-button {
-        display: inline-grid;
-        height: auto;
-        width: 100%;
-      }
-    }
-    img {
-      display: none;
     }
   }
 }
@@ -2893,7 +2904,6 @@ body.post.author {
     width: 30%;
   }
   dd {
-    // margin: 0;
     width: 70%;
     .fa-ul {
       margin-left: $unit*1.5;
@@ -3876,7 +3886,7 @@ footer {
   .splash-image {
     .container-fluid {
       .mdc-layout-grid {
-        width: 66%;
+        width: 64%;
         img.header-text {
           max-height: auto;
         }

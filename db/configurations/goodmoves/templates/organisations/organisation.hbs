@@ -1,0 +1,121 @@
+{{> search_form}}
+
+<div class="container-content goodmoves-organisation">
+  {{#with data.primaryResponse.hits.hits.[0]._source as |organisation| ~}}
+  <div class="mdc-card full" data-organisation-id="{{Id}}">
+    <div class="mdc-card__info--organisation-row">
+      <div class="mdc-card__info--organisation">
+        <div class="mdc-card__info--organisation-title mdc-typography--headline3">
+          {{{organisation.title}}}
+        </div>
+        {{{organisation.rendered.goodmoves_charity_info}}}
+        <div class="detailed-info">
+          {{#if organisation.description ~}}
+          <div class="mdc-typography--body1">
+            {{{organisation.description}}}
+          </div>
+          {{/if ~}}
+        </div>
+      </div>
+      {{#if organisation.has_logo ~}}
+      <div class="mdc-card__media mdc-card__media--square mdc-card__media--organisation">
+        <img src="{{organisation.logo_url}}" alt="{{organisation.title}}" />
+      </div>
+      {{/if ~}}
+    </div>
+    <div class="mdc-card__info--organisation-row">
+      <div class="key-info-extra">
+        <ul class="fa-ul">
+          {{#if organisation.website ~}}
+          <li class="mdc-card__info--vacancy-website mdc-typography--body1">
+            <span class="fa-li"><span class="far fa-link fa-fw" title="Website"></span></span>
+            <a href="{{organisation.website_url}}">
+              {{organisation.website}}
+            </a>
+          </li>
+          {{/if ~}}
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  {{#compare ../data.supplimentaryResponses.vacancies.hits.total ">" 0 ~}}
+  <hr />
+  <div class="mdc-typography--headline4">
+    Current vacancies
+  </div>
+  {{#each ../data.supplimentaryResponses.vacancies.hits.hits ~}}
+  {{> vacancy_list _source}}
+  {{/each ~}}
+  {{else}}
+  <div class="mdc-typography--headline5">
+    No current vacancies
+  </div>
+  {{/compare ~}}
+
+  <hr />
+  <div class="mdc-typography--headline4">
+    Find out more about {{{organisation.title}}} on <a href="https://goodhq.org">Good HQ</a>
+  </div>
+  {{#compare ../data.goodhq.volunteering.hits.total ">" 0 ~}}
+  <div class="mdc-typography--headline5">
+    Volunteering opportunities
+  </div>
+  <div class="mdc-layout-grid equal-height">
+    <div class="mdc-layout-grid__inner">
+      {{#each ../data.goodhq.volunteering.hits.hits ~}}
+      <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone">
+        {{{_source.rendered.goodhq_list}}}
+      </div>
+      {{/each ~}}
+    </div>
+  </div>
+  {{#compare ../data.goodhq.volunteering.hits.total ">" 3 ~}}
+  <p class="mdc-typography--body1">
+    <a href="https://goodhq.org/{{organisation.goodhq_organisation.xid}}?mode=volopp">Find more on Good HQ</a>
+  </p>
+  {{/compare ~}}
+  {{/compare ~}}
+
+  {{#compare ../data.goodhq.posts.hits.total ">" 0 ~}}
+  <div class="mdc-typography--headline5">
+    Posts
+  </div>
+  <div class="mdc-layout-grid equal-height">
+    <div class="mdc-layout-grid__inner">
+      {{#each ../data.goodhq.posts.hits.hits ~}}
+      <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone">
+        {{{_source.rendered.goodhq_list}}}
+      </div>
+      {{/each ~}}
+    </div>
+  </div>
+  {{#compare ../data.goodhq.posts.hits.total ">" 3 ~}}
+  <p class="mdc-typography--body1">
+    <a href="https://goodhq.org/{{organisation.goodhq_organisation.xid}}?mode=post">Read more posts on Good HQ</a>
+  </p>
+  {{/compare ~}}
+  {{/compare ~}}
+
+  {{#compare ../data.goodhq.reviews.hits.total ">" 0 ~}}
+  <div class="mdc-typography--headline5">
+    Reviews
+  </div>
+  <div class="mdc-layout-grid equal-height">
+    <div class="mdc-layout-grid__inner">
+      {{#each ../data.goodhq.reviews.hits.hits ~}}
+      <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone">
+        {{{_source.rendered.goodhq_list}}}
+      </div>
+      {{/each ~}}
+    </div>
+  </div>
+  {{#compare ../data.goodhq.reviews.hits.total ">" 3 ~}}
+  <p class="mdc-typography--body1">
+    <a href="https://goodhq.org/{{organisation.goodhq_organisation.xid}}?mode=review">Read more reviews on Good HQ</a>
+  </p>
+  {{/compare ~}}
+  {{/compare ~}}
+
+  {{/with ~}}
+</div>

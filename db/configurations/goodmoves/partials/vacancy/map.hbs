@@ -1,0 +1,25 @@
+<div class="map-content">
+  <h3>{{title}}</h3>
+  {{#if organisation.name}}
+  <div>
+    <strong>{{organisation.name}}</strong>
+  </div>
+  {{/if}}
+  <div class="post-info">
+    {{#if closing_date}}
+    <div class="post-info-item post-info-closing">
+      <span class="far fa-calendar-alt fa-fw" title="Closing date"></span>
+      {{{momentFormat (moment closing_date "x") "Do MMMM YYYY"}}}
+    </div>
+    {{/if}}
+    {{#if salary}}
+    <div class="post-info-item post-info-salary">
+      <span class="far fa-calculator fa-fw" title="Salary"></span>
+      {{{salary}}}
+    </div>
+    {{/if}}
+  </div>
+  <div>
+    <a href="/vacancy/{{slug}}" class="mdc-card__action">Find out more</a>
+  </div>
+</div>

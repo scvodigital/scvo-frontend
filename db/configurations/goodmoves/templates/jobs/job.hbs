@@ -1,0 +1,7 @@
+{{> search_form this instance_id="perm"}}
+
+<div class="container-content goodmoves-job">
+  {{#each data.primaryResponse.hits.hits ~}}
+  {{> vacancy_full _source}}
+  {{/each ~}}
+</div>

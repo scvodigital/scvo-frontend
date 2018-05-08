@@ -1,0 +1,56 @@
+<form id="login-form" method="POST">
+  <h2>Login</h2>
+  <div class="login-form-section" id="form-section-message">
+    <div class="row">
+      <div class="twelve columns" id="form-message"></div>
+    </div>
+  </div>
+  <div class="login-form-section" id="form-section-email">
+    <div class="row">
+      <div class="six columns">
+        <div class="mdc-text-field mdc-text-field--outlined" data-mdc-auto-init="MDCTextField">
+          <input type="text" class="mdc-text-field__input mdc-text-field--fullwidth" id="login-email">
+          <label class="mdc-floating-label mdc-floating-label--float-above" for="login-email">Email</label>
+          <div class="mdc-notched-outline">
+            <svg>
+              <path class="mdc-notched-outline__path"/>
+            </svg>
+          </div>
+          <div class="mdc-notched-outline__idle"></div>
+        </div>
+      </div>
+      <div class="six columns">
+        <label for="login-password">Password</label>
+        <input type="password" id="login-password" placeholder="Super$ecr3tP455worD" class="u-full-width">
+      </div>
+    </div>
+  </div>
+  <div class="login-form-section" id="form-section-login-buttons">
+    <div class="row">
+      <div class="eight columns">
+      </div>
+      <div class="four columns">
+        <button class="button-primary u-full-width" type="submit" id="login-submit">Login</button>
+      </div>
+    </div>
+  </div>
+</form>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    $('#login-form')[0].addEventListener('submit', login);
+    function login(evt) {
+      var email = $('#login-email').val();
+      var password = $('#login-password').val();
+      evt.preventDefault();
+      goodmoves.app.auth().signInWithEmailAndPassword(email, password).then(function(user) {
+        if (user) {
+          console.log('Login form, user logged in', user);
+        } else {
+          console.log('Something went wrong, logged in but no user?');
+        }
+      }).catch(function(err) {
+        console.error('Error logging in:', err);
+      });
+    }
+  });
+</script>

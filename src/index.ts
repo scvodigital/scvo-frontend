@@ -2,13 +2,13 @@
 // Import node modules
 import * as bodyParser from 'body-parser';
 import * as compression from 'compression';
+import * as cookieParser from 'cookie-parser';
 import * as cors from 'cors';
-import * as https from 'https';
-
 // Import NPM modules
 import * as express from 'express';
 import * as admin from 'firebase-admin';
 import * as fs from 'fs';
+import * as https from 'https';
 import * as path from 'path';
 import * as stream from 'stream';
 import * as url from 'url';
@@ -20,6 +20,7 @@ import * as S from 'string';
 // Router modules
 import {Router, RouteMatch, MenuDictionary, RouterRequest, RouterResponse, RouterConfiguration, HttpVerb} from '@scvo/router';
 import {ElasticsearchRouterTask} from '@scvo/router-task-elasticsearch';
+import {FirebaseAuthRouterTask, FirebaseGetDataRouterTask, FirebaseSetDataRouterTask} from '@scvo/router-task-firebase';
 import {HandlebarsRouterDestination} from '@scvo/router-destination-handlebars';
 import {RedirectRouterDestination} from '@scvo/router-destination-redirect';
 
@@ -34,8 +35,8 @@ import {fsPdf} from './fs-pdf';
 // Setup firebase app
 const config = {
   credential: admin.credential.cert(
-      <admin.ServiceAccount>SECRETS.configs.default.credential),
-  databaseURL: SECRETS.configs.default.databaseURL
+      <admin.ServiceAccount>SECRETS.configs.scvo.credential),
+  databaseURL: SECRETS.configs.scvo.databaseURL
 };
 const fb = admin.initializeApp(<admin.AppOptions>config);
 
@@ -53,6 +54,7 @@ var routers: {[site: string]: Router}|null = null;
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(compression());
+app.use(cookieParser());
 app.options('*', cors());
 app.use('/assets', express.static(assetsPath));
 
@@ -84,6 +86,11 @@ async function index(
     var fullUrl = req.protocol + '://' + hostname + req.originalUrl;
     fullUrl = fullUrl.replace(/(\/)($|\?)/gi, '$2');
 
+    // Enforce SSL
+    //if (req.protocol == 'http') {
+    //  res.redirect(`https://${hostname}${req.originalUrl}`);
+    //}
+
     if (routers === null) {
       return next();
     }
@@ -99,7 +106,6 @@ async function index(
     for (var key in req.cookies) {
       cookies[key] = req.cookies[key];
     }
-
     var request: RouterRequest = {
       url: url.parse(fullUrl),
       fullUrl: fullUrl,
@@ -255,9 +261,12 @@ async function centralAuthLogin(
 
       var config = {
         credential: admin.credential.cert({
-          projectId: (SECRETS.configs as any)[loginDomainName].credential.project_id,
-          clientEmail: (SECRETS.configs as any)[loginDomainName].credential.client_email,
-          privateKey: (SECRETS.configs as any)[loginDomainName].credential.private_key
+          projectId:
+              (SECRETS.configs as any)[loginDomainName].credential.project_id,
+          clientEmail:
+              (SECRETS.configs as any)[loginDomainName].credential.client_email,
+          privateKey:
+              (SECRETS.configs as any)[loginDomainName].credential.private_key
         }),
         databaseURL: (SECRETS.configs as any)[loginDomainName].databaseURL
       };
@@ -335,7 +344,12 @@ async function loadRouters(): Promise<any> {
     var sites =
         await getJson<{[site: string]: RouterConfiguration}>('/app-engine/');
 
-    var routerTasks = [new ElasticsearchRouterTask({})];
+    var routerTasks = [
+      new ElasticsearchRouterTask({}),
+      new FirebaseAuthRouterTask(SECRETS.configs),
+      new FirebaseGetDataRouterTask(SECRETS.configs),
+      new FirebaseSetDataRouterTask(SECRETS.configs)
+    ];
 
     var routerDestinations =
         [new HandlebarsRouterDestination({}), new RedirectRouterDestination()]

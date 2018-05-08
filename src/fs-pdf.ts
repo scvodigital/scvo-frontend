@@ -24,7 +24,7 @@ const printer = new pdfPrinter(fonts);
 
 export function fsPdf(
     ids: string[], subdomain: string, title: string = 'Funding Scotland',
-    subtitle: string | null = null): Promise<stream.PassThrough> {
+    subtitle: string|null = null): Promise<stream.PassThrough> {
   return new Promise<stream.PassThrough>((resolve, reject) => {
     getImage(subdomain)
         .then((image) => {
@@ -49,7 +49,8 @@ export function fsPdf(
 }
 
 function generatePdf(
-    image: any, funds: any, title: string = 'Funding Scotland', subtitle: string | null = null) {
+    image: any, funds: any, title: string = 'Funding Scotland',
+    subtitle: string|null = null) {
   return new Promise((resolve, reject) => {
     try {
       subtitle = subtitle ?
@@ -435,7 +436,8 @@ function getFunds(ids: any) {
   return new Promise((resolve, reject) => {
     var esIndex = 'web-content-production';
     var esType = 'funding-scotland-fund';
-    var esHost = '2e6b5fd9344d4f8565e7d015d861b240.europe-west3.gcp.cloud.es.io';
+    var esHost =
+        '2e6b5fd9344d4f8565e7d015d861b240.europe-west3.gcp.cloud.es.io';
     var esUser = 'readonly';
     var esPass = 'onlyread';
     var esProt = 'https';
