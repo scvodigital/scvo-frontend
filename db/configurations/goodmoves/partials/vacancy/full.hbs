@@ -3,15 +3,15 @@
   <hr class="mdc-list-divider" />
   <div class="vacancy-info-container">
     <div id="vacancy-tab-bar" class="mdc-tab-bar" data-mdc-auto-init="MDCTabBar" role="tablist">
-      <a class="mdc-tab mdc-tab--active" role="tab" aria-controls="information" href="/vacancy/{{slug}}#information">
+      <a class="mdc-tab mdc-tab--active" role="tab" aria-controls="information" href="">
         <span class="far fa-list-ul fa-fw" aria-hidden="true"></span>
         Information
       </a>
-      <a class="mdc-tab" role="tab" aria-controls="location" href="/vacancy/{{slug}}#location">
+      <a class="mdc-tab" role="tab" aria-controls="location" href="">
         <span class="far fa-map-marker-alt fa-fw" aria-hidden="true"></span>
         Location
       </a>
-      <a class="mdc-tab" role="tab" aria-controls="apply" href="/vacancy/{{slug}}#apply">
+      <a class="mdc-tab" role="tab" aria-controls="apply" href="">
         <span class="far fa-handshake fa-fw" aria-hidden="true"></span>
         Apply
       </a>
@@ -68,7 +68,15 @@
       </div>
       <div class="panel mdc-card--full-content mdc-typography--body1" id="location" role="tabpanel" aria-hidden="true">
         <div class="detailed-info mdc-typography--body1">
-          TODO: Map of vacancy location (or locations?)
+          {{#if geo_vacancy_coords}}
+          {{#each geo_vacancy_coords}}
+          TODO: Map of vacancy location(s):
+          <p>lat:{{lat}} lon:{{lon}}</p>
+          {{/each}}
+          {{else}}
+          TODO: text explaining they have no location entered other than
+          "{{location}}"
+          {{/if}}
         </div>
       </div>
       <div class="panel mdc-card--full-content mdc-typography--body1" id="apply" role="tabpanel" aria-hidden="true">

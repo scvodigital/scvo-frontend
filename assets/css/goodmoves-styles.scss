@@ -8,6 +8,8 @@ $mdc-theme-secondary: #424242;
 $mdc-theme-secondary-light: #f5f5f5;
 $mdc-theme-secondary-dark: darken($mdc-theme-secondary, 10%);
 
+$mdc-theme-error: #a93f34;
+
 $mdc-theme-background: white;
 
 $unit: 1rem;
@@ -174,8 +176,8 @@ footer h3,
   line-height: 2.65rem;
 }
 .mdc-typography--headline4 {
-  font-size: 1.9rem;
-  line-height: 2.1rem;
+  font-size: 1.75rem;
+  line-height: 1.9rem;
 }
 .mdc-typography--headline5 {
   font-size: 1.65rem;
@@ -212,7 +214,7 @@ footer h3,
   margin-bottom: 0;
   padding-bottom: $unit;
   border-right: none;
-  background-color: #fff !important;
+  background-color: white !important;
 }
 .container-content {
   align-items: flex-end;
@@ -347,6 +349,9 @@ a {
 }
 
 .mdc-card {
+  .mdc-card__contents {
+    padding: 0 $unit $unit/2;
+  }
   p {
     margin: 0 0 $unit/2;
   }
@@ -422,6 +427,13 @@ a {
 }
 .mdc-card.full {
   box-shadow: none;
+  .panel-heading {
+    background: $mdc-theme-error;
+    margin: .5rem 0 1rem;
+    color: white;
+    padding: .5rem;
+    font-weight: 600;
+  }
   .mdc-card__info--organisation-title {
     margin: 0;
   }
