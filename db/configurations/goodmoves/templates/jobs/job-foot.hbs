@@ -1,0 +1,15 @@
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBJdxcQpVKQ6HdrjnPXycUoZqsmp-Ep3l0&libraries=places&region=uk&callback=initMap" async defer></script>
+<script>
+{{#with data.primaryResponse.hits.hits.[0]}}
+var mapResults = [
+    {{#each _source.geo_vacancy_coords as |coords|}}
+    {
+      "Id": {{{stringify _id}}},
+      "geo_vacancy_coords": {{{stringify coords}}},
+      "title": {{{stringify _source.title}}},
+      "info_window": {{{stringify (component "vacancy_map" _source)}}}
+    }{{#unless @last}},{{/unless}}
+    {{/each}}
+];
+{{/with}}
+</script>
