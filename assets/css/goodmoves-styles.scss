@@ -46,7 +46,7 @@ header {
       min-width: 320px;
     }
     .mdc-top-app-bar__section--align-end {
-      padding-right: $unit/2;
+      padding-right: $unit/2 !important;
       background-image: linear-gradient(60deg, $mdc-theme-old, $mdc-theme-old 63px, white 64px, white);
     }
     .mdc-top-app-bar__title {
@@ -215,9 +215,6 @@ footer h3,
   padding-bottom: $unit;
   border-right: none;
   background-color: white !important;
-}
-.container-content {
-  align-items: flex-end;
 }
 .goodmoves-job,
 .goodmoves-related-jobs {
@@ -660,8 +657,11 @@ hr {
 }
 
 .container-content {
+  width: 100%;
+  padding-right: $unit;
   position: relative;
   max-width: 1100px;
+  align-items: flex-end;
   .container-fluid {
     position: relative;
   }
@@ -938,8 +938,13 @@ body {
   padding: 0;
 }
 
-.mdc-list .mdc-list-item__graphic {
-  margin-right: $unit;
+.mdc-list {
+  .mdc-layout-grid {
+    width: 100%;
+  }
+  .mdc-list-item__graphic {
+    margin-right: $unit;
+  }
 }
 .mdc-tab-bar .mdc-list-item__graphic {
   margin: 0;

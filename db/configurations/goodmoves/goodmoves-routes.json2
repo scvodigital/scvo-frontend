@@ -265,6 +265,140 @@
       }
     }
   },
+  "saved_searches": {
+    "pattern": "/saved-searches",
+    "defaultParams": {
+      "context": "results"
+    },
+    "metaData": {
+      "sidebarButton": {
+        "icon": "search",
+        "tooltip": "Search",
+        "classes": "hide-md hide-lg"
+      }
+    },
+    "tasks": [
+      {
+        "name": "search_data",
+        "taskType": "elasticsearch",
+        "config": {
+          "connectionStringTemplate": "{$../elasticsearch-url.txt}",
+          "elasticsearchConfig": {
+            "apiVersion": "5.6",
+            "log": "debug"
+          },
+          "queryTemplates": [
+            {
+              "name": "detailed_results",
+              "index": "web-content-production",
+              "type": "goodmoves-job-test",
+              "template": "{$./queries/jobs/detailed-search.json}"
+            }
+          ]
+        }
+      },
+      {
+        "name": "supplimentaryResponses",
+        "taskType": "elasticsearch",
+        "config": {
+          "connectionStringTemplate": "{$../elasticsearch-url.txt}",
+          "elasticsearchConfig": {
+            "apiVersion": "5.6"
+          },
+          "queryTemplates": [
+            {
+              "name": "types",
+              "index": "web-content-production",
+              "type": "goodmoves-job-test",
+              "template": "{$./queries/jobs/types.json}"
+            },
+            {
+              "name": "not_found",
+              "index": "web-content-production",
+              "type": "goodmoves-job-test",
+              "template": "{$./queries/pages/not-found.json}"
+            }
+          ]
+        }
+      }
+    ],
+    "destination": {
+      "destinationType": "handlebars",
+      "config": {
+        "default": {
+          "head": "{$./templates/pages/page-head-tags.hbs}",
+          "body": "{$./templates/jobs/saved-searches.hbs}"
+        }
+      }
+    }
+  },
+  "shortlist": {
+    "pattern": "/shortlist",
+    "defaultParams": {
+      "context": "results"
+    },
+    "metaData": {
+      "sidebarButton": {
+        "icon": "search",
+        "tooltip": "Search",
+        "classes": "hide-md hide-lg"
+      }
+    },
+    "tasks": [
+      {
+        "name": "search_data",
+        "taskType": "elasticsearch",
+        "config": {
+          "connectionStringTemplate": "{$../elasticsearch-url.txt}",
+          "elasticsearchConfig": {
+            "apiVersion": "5.6",
+            "log": "debug"
+          },
+          "queryTemplates": [
+            {
+              "name": "detailed_results",
+              "index": "web-content-production",
+              "type": "goodmoves-job-test",
+              "template": "{$./queries/jobs/detailed-search.json}"
+            }
+          ]
+        }
+      },
+      {
+        "name": "supplimentaryResponses",
+        "taskType": "elasticsearch",
+        "config": {
+          "connectionStringTemplate": "{$../elasticsearch-url.txt}",
+          "elasticsearchConfig": {
+            "apiVersion": "5.6"
+          },
+          "queryTemplates": [
+            {
+              "name": "types",
+              "index": "web-content-production",
+              "type": "goodmoves-job-test",
+              "template": "{$./queries/jobs/types.json}"
+            },
+            {
+              "name": "not_found",
+              "index": "web-content-production",
+              "type": "goodmoves-job-test",
+              "template": "{$./queries/pages/not-found.json}"
+            }
+          ]
+        }
+      }
+    ],
+    "destination": {
+      "destinationType": "handlebars",
+      "config": {
+        "default": {
+          "head": "{$./templates/pages/page-head-tags.hbs}",
+          "body": "{$./templates/jobs/shortlist.hbs}"
+        }
+      }
+    }
+  },
   "job": {
     "pattern": "/vacancy/:slug",
     "defaultParams": {
