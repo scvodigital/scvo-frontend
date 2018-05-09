@@ -19,7 +19,7 @@
     </div>
     <hr class="mdc-list-divider" />
     <div class="panels" for="vacancy-tab-bar">
-      <div class="panel panel--active mdc-card--full-content" role="tabpanel" aria-hidden="false">
+      <div class="panel panel--active mdc-card--full-content" role="tabpanel" aria-hidden="false" id="panel-1">
         <div class="key-info-extra">
           <ul class="fa-ul">
             {{#if salary_info ~}}
@@ -66,20 +66,27 @@
           {{{rendered.goodmoves_sponsor_logos}}}
         </div>
       </div>
-      <div class="panel mdc-card--full-content mdc-typography--body1" role="tabpanel" aria-hidden="true">
+      <div class="panel mdc-card--full-content mdc-typography--body1" role="tabpanel" aria-hidden="true" id="panel-2">
         <div class="detailed-info mdc-typography--body1">
           {{#if geo_vacancy_coords}}
           {{#each geo_vacancy_coords}}
-          TODO: Map of vacancy location(s):
-          <p>lat:{{lat}} lon:{{lon}}</p>
+          <p>
+            <strong>TODO:</strong> Map of vacancy location(s)
+          </p>
+          <p>
+            Latitude:{{lat}}<br />
+            Longitude:{{lon}}
+          </p>
           {{/each}}
           {{else}}
-          TODO: text explaining they have no location entered other than
-          "{{location}}"
+          <p>
+            <strong>TODO:</strong> text explaining they have no location entered other than
+            "{{location}}"
+          </p>
           {{/if}}
         </div>
       </div>
-      <div class="panel mdc-card--full-content mdc-typography--body1" role="tabpanel" aria-hidden="true">
+      <div class="panel mdc-card--full-content mdc-typography--body1" role="tabpanel" aria-hidden="true" id="panel-3">
         <!-- <div class="key-info-extra">
           <ul class="fa-ul">
             {{#if closing_date ~}}
