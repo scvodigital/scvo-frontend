@@ -39,7 +39,6 @@ body {
   padding-top: $toolbar-height;
 }
 header {
-  background-image: linear-gradient(60deg, $mdc-theme-primary-dark, $mdc-theme-primary-dark 3%, $mdc-theme-primary 3.08%, $mdc-theme-primary 50%, white 50.08%, white);
   .container-fluid {
     padding: 0;
     .mdc-top-app-bar__section--align-start {
@@ -260,6 +259,9 @@ footer h3,
 .mdc-text-field--fullwidth:not(.mdc-text-field--textarea) {
   border-bottom: none !important;
 }
+.mdc-text-field--textarea .mdc-floating-label {
+  background-color: $mdc-theme-secondary-light;
+}
 
 a {
   color: $mdc-theme-primary;
@@ -395,6 +397,9 @@ a {
     padding: $unit;
     background-color: $mdc-theme-primary-light;
   }
+  .user-notes {
+    display: none;
+  }
   .mdc-card__actions {
     background-color: $mdc-theme-primary;
     .mdc-card__action {
@@ -462,8 +467,11 @@ a {
   #vacancy-tab-bar {
     width: 100%;
     background-color: $mdc-theme-primary;
+    display: flex;
     .mdc-tab {
       color: white;
+      flex: 1;
+      line-height: $toolbar-item-height;
     }
     .mdc-tab:hover {
       background-color: $mdc-theme-primary-dark;
