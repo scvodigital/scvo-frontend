@@ -27,12 +27,14 @@
       <div class="key-info-extra">
         <ul class="fa-ul">
           {{#if organisation.website ~}}
+          {{#compare organisation.website "===" null ~}}
           <li class="mdc-card__info--vacancy-website mdc-typography--body1">
             <span class="fa-li"><span class="far fa-link fa-fw" title="Website"></span></span>
             <a href="{{organisation.website_url}}">
               {{organisation.website}}
             </a>
           </li>
+          {{/compare ~}}
           {{/if ~}}
         </ul>
       </div>
@@ -56,7 +58,7 @@
   {{#if goodhq_organisation.xid}}
   <hr />
   <div class="mdc-typography--headline4">
-    Find out more about <a href="https://goodhq.org/{{xid}}">{{{organisation.title}}}</a> on <a href="https://goodhq.org">Good HQ</a>
+    Find out more about <a href="https://goodhq.org/{{goodhq_organisation.xid}}">{{{organisation.title}}}</a> on <a href="https://goodhq.org">Good HQ</a>
   </div>
   {{#compare ../data.goodhq.volunteering.hits.total ">" 0 ~}}
   <div class="mdc-typography--headline5">
