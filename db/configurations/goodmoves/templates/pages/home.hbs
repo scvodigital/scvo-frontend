@@ -94,7 +94,7 @@
                   {{#each data.supplimentaryResponses.types.aggregations.sectors.buckets ~}}
                   <li class="mdc-list-item">
                     <span class="mdc-list-item__text">
-                      <a href="/search?sector={{itemAt ../../../sectors_slugs.buckets @index}}">{{key}}</a>
+                      <a href="/search?sector={{urlencode key}}">{{key}}</a>
                     </span>
                     <span class="mdc-list-item__meta">
                       {{doc_count}}
@@ -111,7 +111,7 @@
                   {{#each data.supplimentaryResponses.types.aggregations.roles.buckets ~}}
                   <li class="mdc-list-item">
                     <span class="mdc-list-item__text">
-                      <a href="/search?role={{itemAt ../../../roles_slugs.buckets @index}}">{{key}}</a>
+                      <a href="/search?role={{urlencode key}}">{{key}}</a>
                     </span>
                     <span class="mdc-list-item__meta">
                       {{doc_count}}
@@ -128,7 +128,7 @@
                   {{#each data.supplimentaryResponses.types.aggregations.regions.buckets ~}}
                   <li class="mdc-list-item">
                     <span class="mdc-list-item__text">
-                      <a href="/search?region={{itemAt ../../../regions_slugs.buckets @index}}">{{key}}</a>
+                      <a href="/search?region={{urlencode key}}">{{key}}</a>
                     </span>
                     <span class="mdc-list-item__meta">
                       {{doc_count}}
@@ -145,7 +145,7 @@
                   {{#each data.supplimentaryResponses.types.aggregations.statuses.buckets ~}}
                   <li class="mdc-list-item">
                     <span class="mdc-list-item__text">
-                      <a href="/search?status={{itemAt ../../../statuses_slugs.buckets @index}}">{{key}}</a>
+                      <a href="/search?status={{urlencode key}}">{{key}}</a>
                     </span>
                     <span class="mdc-list-item__meta">
                       {{doc_count}}

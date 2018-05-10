@@ -27,7 +27,7 @@
             "has_logo": true
           }
         },
-        {{#if request.params.query.keywords}}
+        {{#if request.params.query.keywords ~}}
         {
           "query_string": {
             "query": {{{stringify request.params.query.keywords}}},
@@ -40,7 +40,7 @@
         {
           "match_all": {}
         }
-        {{/if}}
+        {{/if ~}}
       ]
     }
   }

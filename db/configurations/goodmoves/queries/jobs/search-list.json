@@ -22,25 +22,25 @@
   ],
   "query": {
     "bool": {
-      {{#ifAny request.params.query.sectors request.params.query.roles request.params.query.role_status request.params.query.distance}}
+      {{#ifAny request.params.query.sectors request.params.query.roles request.params.query.role_status request.params.query.distance ~}}
       "filter": [
-        {{#if request.params.query.sectors}}
+        {{#if request.params.query.sectors ~}}
         {
           "terms": {
             "sectors": {{{stringify (arrayify request.params.query.sectors)}}}
           }
         }
         {{#ifAny request.params.query.roles request.params.query.role_status request.params.query.distance}},{{/ifAny}}
-        {{/if}}
-        {{#if request.params.query.roles}}
+        {{/if ~}}
+        {{#if request.params.query.roles ~}}
         {
           "terms": {
             "roles": {{{stringify (arrayify request.params.query.roles)}}}
           }
         }
         {{#ifAny request.params.query.role_status request.params.query.distance}},{{/ifAny}}
-        {{/if}}
-        {{#if request.params.query.role_status}}
+        {{/if ~}}
+        {{#if request.params.query.role_status ~}}
         {
           "terms": {
             "status": {{{stringify (arrayify request.params.query.role_status)}}}
@@ -48,7 +48,7 @@
         }
         {{#ifAny request.params.query.distance}},{{/ifAny}}
         {{/if}}
-        {{#ifAll request.params.query.distance request.params.query.lat request.params.query.lon}}
+        {{#ifAll request.params.query.distance request.params.query.lat request.params.query.lon ~}}
         {
           "geo_distance": {
             "distance": "{{default request.params.query.distance "8046.72"}}meters",
@@ -58,11 +58,11 @@
             }
           }
         }
-        {{/ifAll}}
+        {{/ifAll ~}}
       ],
-      {{/ifAny}}
+      {{/ifAny ~}}
       "must": [
-        {{#if request.params.query.keywords}}
+        {{#if request.params.query.keywords ~}}
         {
           "query_string": {
             "query": {{{stringify request.params.query.keywords}}},
@@ -71,7 +71,7 @@
             "analyzer": "snowball"
           }
         },
-        {{/if}}
+        {{/if ~}}
         {
           "term": {
             "vacancy_status": "vacancy-open"
