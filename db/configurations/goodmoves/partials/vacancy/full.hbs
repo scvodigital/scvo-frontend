@@ -76,14 +76,15 @@
         </div>
       </div>
       <div class="panel mdc-card--full-content mdc-typography--body1" role="tabpanel" aria-hidden="true" id="panel-2">
-        <div class="detailed-info mdc-typography--body1">
+        <div class="key-info-extra">
           {{#if organisation.profile ~}}
           <h4>Organisation profile</h4>
           <div class="mdc-typography--body1">
             {{{organisation.profile}}}
           </div>
           {{/if ~}}
-          <hr />
+        </div>
+        <div class="detailed-info">
           {{#if geo_vacancy_coords}}
           {{#each geo_vacancy_coords}}
           <p>
@@ -103,8 +104,14 @@
         </div>
       </div>
       <div class="panel mdc-card--full-content mdc-typography--body1" role="tabpanel" aria-hidden="true" id="panel-3">
-        <!-- <div class="key-info-extra">
+        <div class="key-info-extra">
           <ul class="fa-ul">
+            {{#if start_at ~}}
+            <li class="mdc-card__info--vacancy-closing mdc-typography--body1">
+              <span class="fa-li"><span class="far fa-calendar-plus fa-fw" title="Start date"></span></span>
+              Advertised from {{momentFormat (moment start_at "x") "Do MMMM YYYY"}}
+            </li>
+            {{/if ~}}
             {{#if closing_date ~}}
             <li class="mdc-card__info--vacancy-closing mdc-typography--body1">
               <span class="fa-li"><span class="far fa-calendar-alt fa-fw" title="Closing date"></span></span>
@@ -112,7 +119,7 @@
             </li>
             {{/if ~}}
           </ul>
-        </div> -->
+        </div>
         <div class="detailed-info">
           {{#if application_notes ~}}
           <div class="mdc-typography--body1">
