@@ -72,16 +72,12 @@ function geolocate() {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function(position) {
       console.log('GEOLOCATION:', position, $distance.val());
-      searchTermsController.setCenter(
-        position.coords.latitude,
-        position.coords.longitude,
-        $distance.val()
-      );
+      $('[name="lat"]').val(position.coords.latitude);
+      $('[name="lng"]').val(position.coords.longitude);
       reverseLookup(position.coords.latitude, position.coords.longitude);
     });
   } else {
     console.log('Getting All');
-    vacanciesController.doSearch({});
   }
 }
 
