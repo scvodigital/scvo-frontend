@@ -105,19 +105,30 @@
 
       <h3 class="mdc-drawer__content-heading">
         Roles
-        <span class="far fa-chevron-up mdc-text-field__icon pull-right"></span>
+        <span class="mdc-icon-toggle pull-right" data-collapse-target="#{{instance_id}}-roles-collapse "
+              role="button" aria-pressed="true"
+              aria-label="Show roles" tabindex="0" data-mdc-auto-init="MDCIconToggle"
+              data-icon-inner-selector=".far"
+              data-toggle-on='{"cssClass": "fa-chevron-up", "label": "Show roles"}'
+              data-toggle-off='{"cssClass": "fa-chevron-down", "label": "Hide roles"}'>
+          <i class="far fa-chevron-up" aria-hidden="true"></i>
+        </span>
       </h3>
-      {{#each data.supplimentaryResponses.types.aggregations.roles.buckets ~}}
-      {{> term_checkbox key=key field="roles" selected=../request.params.query.roles instance_id=../instance_id}}
-      {{/each ~}}
+      <div id="{{instance_id}}-roles-collapse">
+        {{#each data.supplimentaryResponses.types.aggregations.roles.buckets ~}}
+        {{> term_checkbox key=key field="roles" selected=../request.params.query.roles instance_id=../instance_id}}
+        {{/each ~}}
+      </div>
 
       <h3 class="mdc-drawer__content-heading">
         Sectors
-        <span class="far fa-chevron-up mdc-text-field__icon pull-right"></span>
+        <span class="far fa-chevron-up mdc-text-field__icon pull-right" data-collapse-target="{{instance_id}}-sectors-collapse"></span>
       </h3>
-      {{#each data.supplimentaryResponses.types.aggregations.sectors.buckets ~}}
-      {{> term_checkbox key=key field="sectors" selected=../request.params.query.sectors instance_id=../instance_id}}
-      {{/each ~}}
+      <div id="{{instance_id}}-sectors-collapse">
+        {{#each data.supplimentaryResponses.types.aggregations.sectors.buckets ~}}
+        {{> term_checkbox key=key field="sectors" selected=../request.params.query.sectors instance_id=../instance_id}}
+        {{/each ~}}
+      </div>
 
       <h3 class="mdc-drawer__content-heading">
         Statuses
