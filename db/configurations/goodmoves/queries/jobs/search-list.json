@@ -22,7 +22,7 @@
   ],
   "query": {
     "bool": {
-      {{#ifAny request.params.query.sectors request.params.query.roles request.params.query.role_status request.params.query.distance ~}}
+      {{#ifAny request.params.query.sectors request.params.query.roles request.params.query.role_status request.params.query.lat}}
       "filter": [
         {{#if request.params.query.sectors ~}}
         {
@@ -30,7 +30,7 @@
             "sectors": {{{stringify (arrayify request.params.query.sectors)}}}
           }
         }
-        {{#ifAny request.params.query.roles request.params.query.role_status request.params.query.distance}},{{/ifAny}}
+        {{#ifAny request.params.query.roles request.params.query.role_status request.params.query.lat}},{{/ifAny}}
         {{/if ~}}
         {{#if request.params.query.roles ~}}
         {
@@ -38,7 +38,7 @@
             "roles": {{{stringify (arrayify request.params.query.roles)}}}
           }
         }
-        {{#ifAny request.params.query.role_status request.params.query.distance}},{{/ifAny}}
+        {{#ifAny request.params.query.role_status request.params.query.lat}},{{/ifAny}}
         {{/if ~}}
         {{#if request.params.query.role_status ~}}
         {
@@ -46,9 +46,9 @@
             "status": {{{stringify (arrayify request.params.query.role_status)}}}
           }
         }
-        {{#ifAny request.params.query.distance}},{{/ifAny}}
+        {{#ifAny request.params.query.lat}},{{/ifAny}}
         {{/if}}
-        {{#ifAll request.params.query.distance request.params.query.lat request.params.query.lon ~}}
+        {{#if request.params.query.lat ~}}
         {
           "geo_distance": {
             "distance": "{{default request.params.query.distance "8046.72"}}meters",
@@ -58,7 +58,7 @@
             }
           }
         }
-        {{/ifAll ~}}
+        {{/if ~}}
       ],
       {{/ifAny ~}}
       "must": [
