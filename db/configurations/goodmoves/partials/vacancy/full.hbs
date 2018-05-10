@@ -72,17 +72,18 @@
             {{{description}}}
           </div>
           {{/if ~}}
+          {{{rendered.goodmoves_sponsor_logos}}}
+        </div>
+      </div>
+      <div class="panel mdc-card--full-content mdc-typography--body1" role="tabpanel" aria-hidden="true" id="panel-2">
+        <div class="detailed-info mdc-typography--body1">
           {{#if organisation.profile ~}}
           <h4>Organisation profile</h4>
           <div class="mdc-typography--body1">
             {{{organisation.profile}}}
           </div>
           {{/if ~}}
-          {{{rendered.goodmoves_sponsor_logos}}}
-        </div>
-      </div>
-      <div class="panel mdc-card--full-content mdc-typography--body1" role="tabpanel" aria-hidden="true" id="panel-2">
-        <div class="detailed-info mdc-typography--body1">
+          <hr />
           {{#if geo_vacancy_coords}}
           {{#each geo_vacancy_coords}}
           <p>
@@ -120,6 +121,19 @@
           {{/if ~}}
           {{{rendered.goodmoves_downloads}}}
         </div>
+      </div>
+    </div>
+    <div class="mdc-card__actions">
+      <div class="mdc-card__action-buttons demo-card__action-buttons--text-only mdc-card__actions--full-bleed">
+        <a href="/organisation/{{organisation.slug}}" class="mdc-card__action">Find out more about {{organisation.name}}</a>
+      </div>
+      <div class="mdc-card__action-icons pull-right">
+        <button type="button" onclick="goodmoves.toggleShortlistItem('{{Id}}');" class="mdc-card__action mdc-card__action--shortlist" title="Add to shortlist">
+          <span class="fa-stack fa-lg">
+            <span class="fas fa-circle fa-stack-2x" aria-hidden="true"></span>
+            <span class="far fa-star fa-stack-1x" aria-hidden="true"></span>
+          </span>
+        </button>
       </div>
     </div>
   </div>
