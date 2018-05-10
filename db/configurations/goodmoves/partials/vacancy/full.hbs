@@ -78,14 +78,14 @@
         </div>
       </div>
       <div class="panel mdc-card--full-content mdc-typography--body1" role="tabpanel" aria-hidden="true" id="panel-2">
+        {{#if organisation.profile ~}}
         <div class="key-info-extra">
-          {{#if organisation.profile ~}}
           <h4>Organisation profile</h4>
           <div class="mdc-typography--body1">
             {{{organisation.profile}}}
           </div>
-          {{/if ~}}
         </div>
+        {{/if ~}}
         <div class="detailed-info">
           {{#if geo_vacancy_coords}}
           {{#each geo_vacancy_coords}}
