@@ -41,7 +41,7 @@ function doSearch(qs) {
         distance: distance
       }
     };
-    history.pushState({}, 'Goodmoves Search', url);
+    history.pushState({}, 'Goodmoves search', url);
     generateMapContent(results.map_results.hits, terms);
     asyncSearchLinks();
     goodmoves.updateComponents();
@@ -104,17 +104,20 @@ function initMap() {
   mapController = new MapController($map, 57.0268117, -5.5676529, 6);
 
   var autocompleteOptions = {
-    'types': ['(cities)'],
+    'types': ['(regions)'],
     'componentRestrictions': {
       'country': 'gb'
     }
   };
-  autocompletePerm = new google.maps.places.Autocomplete(autocompletePermEl, autocompleteOptions);
-  autocompleteTemp = new google.maps.places.Autocomplete(autocompleteTempEl, autocompleteOptions);
+  if (autocompletePermEl) {
+    autocompletePerm = new google.maps.places.Autocomplete(autocompletePermEl, autocompleteOptions);
+    autocompletePerm.addListener('place_changed', autocompleteChange);
+  }
+  if (autocompleteTempEl) {
+    autocompleteTemp = new google.maps.places.Autocomplete(autocompleteTempEl, autocompleteOptions);
+    autocompleteTemp.addListener('place_changed', autocompleteChange);
+  }
 
-  autocompletePerm.addListener('place_changed', autocompleteChange);
-  autocompleteTemp.addListener('place_changed', autocompleteChange);
-  
   var lat = $('[name="lat"]').val();
   var lng = $('[name="lng"]').val();
   var distance = $('[name="distance"]').val();
@@ -132,14 +135,14 @@ function initMap() {
   if (view === 'map') {
     $('.details-tab').removeClass('mdc-tab--active');
     $('.map-tab').addClass('mdc-tab--active');
-    mapView();  
+    mapView();
   }
   asyncSearchLinks();
 }
 
 function autocompleteChange(evt) {
   var place = this.getPlace();
-  console.log(place.formatted_address);
+  // console.log(place.formatted_address);
   if (place.geometry.location) {
     $('[name="lat"]').val(place.geometry.location.lat());
     $('[name="lng"]').val(place.geometry.location.lng());
@@ -268,11 +271,12 @@ function getVacancyPinsOptions(vacancies) {
             },
             icon: {
               path: google.maps.SymbolPath.CIRCLE,
-              scale: 6,
+              scale: 15,
               fillColor: '#58a934',
               fillOpacity: 0.6,
-              strokeColor: '#58a934',
-              strokeWeight: 1
+              strokeColor: '#3c7524',
+              strokeOpacity: 0.8,
+              strokeWeight: 2
             },
             title: vacancy.title,
             opacity: 1

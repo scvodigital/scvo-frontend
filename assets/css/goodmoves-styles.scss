@@ -879,9 +879,14 @@ body {
 .mdc-typography--headline5 {
   margin-bottom: $unit;
 }
-.search-form .mdc-typography--headline5 {
-  margin-top: $unit*1.5;
-  margin-left: $unit;
+.search-form {
+  .mdc-typography--headline5 {
+    margin-top: $unit*1.5;
+    margin-left: $unit;
+  }
+  .mdc-layout-grid__inner {
+    grid-gap: $unit/2;
+  }
 }
 .gm-style .gm-style-iw {
   font-size: 0.9rem;
@@ -1298,6 +1303,9 @@ footer {
   margin-top: 16px;
 }
 
+.mdc-select__native-control {
+  -webkit-appearance: none;
+}
 .mdc-select__native-control,
 .mdc-tab-bar--fullwidth {
   width: 100% !important;
