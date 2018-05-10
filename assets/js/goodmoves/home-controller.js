@@ -1,7 +1,9 @@
-var $what = $('#what');
+var $what = $('#what-jobs');
 var $distance = $('#distance');
-var $where = $('#where');
+var $where = $('#where-jobs');
 var $searchTerms = $('#search-terms');
+var $lat = $('[name="lat"]');
+var $lng = $('[name="lng"]');
 
 var $searchViewJobs = $('#search-view-jobs');
 var $searchViewCategories = $('#search-view-categories');
@@ -27,7 +29,18 @@ function initMap() {
     }
   };
   autocomplete = new google.maps.places.Autocomplete(autocompleteInput, autocompleteOptions);
+  autocomplete.addListener('place_changed', autocompleteChange);
   //geolocate();
+}
+
+function autocompleteChange(evt) {
+  var place = this.getPlace();
+  // console.log(place.formatted_address);
+  if (place.geometry.location) {
+    $('[name="lat"]').val(place.geometry.location.lat());
+    $('[name="lng"]').val(place.geometry.location.lng());
+    $('[name="location"]').val(place.formatted_address);
+  }
 }
 
 function searchViewJobs() {
