@@ -21,7 +21,7 @@ var GoodmovesController = Class.extend({
     });
     this.windowResized();
   },
- 
+
   windowResized: function() {
     var width = $(window).width();
     var newDisplayMode = null;
@@ -68,7 +68,7 @@ var GoodmovesController = Class.extend({
   setupFirebase: function() {
     // Initialize Firebase
     this.app = firebase.initializeApp(this.firebaseConfig);
-    var that = this; 
+    var that = this;
     // Firebase Auth Functions
     this.app.auth().onAuthStateChanged(function(user) {
       if (user) {
@@ -96,7 +96,6 @@ var GoodmovesController = Class.extend({
     }
     document.cookie = name + "=" + (value || "")  + expires + "; path=/; secure";
   },
-
 
   getUserProfile: function(user) {
     var that = this;

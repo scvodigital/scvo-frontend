@@ -4,6 +4,7 @@ var $where = $('#where');
 var $searchTerms = $('#search-terms');
 
 var $searchViewJobs = $('#search-view-jobs');
+var $searchViewCategories = $('#search-view-categories');
 var $searchViewOrganisations = $('#search-view-organisations');
 var $searchViewAdvice = $('#search-view-advice');
 
@@ -31,16 +32,25 @@ function initMap() {
 
 function searchViewJobs() {
   $searchViewJobs.show();
+  $searchViewCategories.hide();
+  $searchViewOrganisations.hide();
+  $searchViewAdvice.hide();
+}
+function searchViewCategories() {
+  $searchViewJobs.hide();
+  $searchViewCategories.show();
   $searchViewOrganisations.hide();
   $searchViewAdvice.hide();
 }
 function searchViewOrganisations() {
   $searchViewJobs.hide();
+  $searchViewCategories.hide();
   $searchViewOrganisations.show();
   $searchViewAdvice.hide();
 }
 function searchViewAdvice() {
   $searchViewJobs.hide();
+  $searchViewCategories.hide();
   $searchViewOrganisations.hide();
   $searchViewAdvice.show();
 }

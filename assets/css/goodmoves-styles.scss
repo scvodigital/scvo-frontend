@@ -10,6 +10,8 @@ $mdc-theme-secondary-dark: darken($mdc-theme-secondary, 10%);
 
 $mdc-theme-error: #a93f34;
 
+$mdc-theme-tfn: #3b9db1;
+
 $mdc-theme-background: white;
 
 $unit: 1rem;
@@ -37,15 +39,14 @@ body {
   padding-top: $toolbar-height;
 }
 header {
-  background-image: linear-gradient(60deg, $mdc-theme-primary-dark, $mdc-theme-primary-dark 3%, $mdc-theme-primary 3.08%, $mdc-theme-primary 50%, white 50.08%, white);
   .container-fluid {
     padding: 0;
     .mdc-top-app-bar__section--align-start {
-      background-image: linear-gradient(60deg, $mdc-theme-primary, $mdc-theme-primary 320px, $mdc-theme-old 321px, $mdc-theme-old);
-      min-width: 321px;
+      background-image: linear-gradient(60deg, $mdc-theme-primary, $mdc-theme-primary 300px, $mdc-theme-old 301px, $mdc-theme-old);
+      min-width: 320px;
     }
     .mdc-top-app-bar__section--align-end {
-      padding-right: $unit/2;
+      padding-right: $unit/2 !important;
       background-image: linear-gradient(60deg, $mdc-theme-old, $mdc-theme-old 63px, white 64px, white);
     }
     .mdc-top-app-bar__title {
@@ -215,8 +216,15 @@ footer h3,
   border-right: none;
   background-color: white !important;
 }
-.container-content {
-  align-items: flex-end;
+
+.goodmoves-page {
+  margin: $unit*1.5 0;
+  .mdc-card {
+    padding: $unit;
+    .x-items {
+      margin-top: 0;
+    }
+  }
 }
 .goodmoves-job,
 .goodmoves-related-jobs {
@@ -224,8 +232,28 @@ footer h3,
 }
 .goodmoves-job-search {
   .head {
+    margin-bottom: $unit/2;
     .mdc-select {
       margin-top: 0;
+    }
+    .mdc-button.save-search {
+      margin-top: $unit;
+    }
+    .pagination {
+      margin-top: $unit*1.25;
+    }
+  }
+}
+.goodmoves-saved-searches {
+  .mdc-list {
+    background-color: white;
+    .saved-search-email-switch {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      label {
+        margin-left: $unit;
+      }
     }
   }
 }
@@ -243,6 +271,9 @@ footer h3,
     width: 100%;
     justify-content: center;
   }
+  .x-item-side:hover {
+    text-decoration: none;
+  }
 }
 // .container-content-home {
 //   .container-fluid {
@@ -258,6 +289,9 @@ footer h3,
 .mdc-text-field--fullwidth:not(.mdc-text-field--textarea) {
   border-bottom: none !important;
 }
+.mdc-text-field--textarea .mdc-floating-label {
+  background-color: $mdc-theme-secondary-light;
+}
 
 a {
   color: $mdc-theme-primary;
@@ -266,6 +300,9 @@ a {
 }
 a:hover {
   text-decoration: underline;
+}
+.tfn a {
+  color: $mdc-theme-tfn;
 }
 
 .mdc-chip {
@@ -344,11 +381,14 @@ a {
 }
 
 .search-info {
-  margin: $unit*1.5 0 $unit;
+  margin: $unit*1.5 0 $unit*(3/4);
   background: white;
   color: $mdc-theme-secondary;
   padding: $unit/3 $unit/2;
   box-sizing: border-box;
+}
+.goodmoves-organisation-search .search-info {
+  margin-bottom: $unit*1.5;
 }
 
 .mdc-card {
@@ -362,10 +402,15 @@ a {
     margin: 0;
   }
   .mdc-card__actions {
+    background-color: $mdc-theme-primary;
     min-height: auto;
+    a {
+      color: white;
+    }
     .mdc-card__action {
       font-weight: 600;
       margin-right: $unit;
+      color: white;
     }
     .mdc-card__action:last-child {
       margin-right: 0;
@@ -386,9 +431,18 @@ a {
   z-index: 1;
   width: 100%;
   margin-bottom: $unit*1.5;
+  .mdc-card__info--organisation-title {
+    padding: $unit;
+  }
+  .mdc-card__media--organisation {
+    margin-right: $unit;
+  }
   .search-result-article__snippet {
     padding: $unit;
     background-color: $mdc-theme-primary-light;
+  }
+  .user-notes {
+    display: none;
   }
   .mdc-card__actions {
     background-color: $mdc-theme-primary;
@@ -442,7 +496,7 @@ a {
   }
   .mdc-card__info--vacancy .detailed-info,
   .organisation-type {
-    margin: 0 0 $unit;
+    margin: $unit/2 0 $unit;
     small {
       font-size: 0.92rem;
     }
@@ -454,18 +508,30 @@ a {
     cursor: default;
     text-decoration: none;
   }
+  .text-field-container.user-notes {
+    width: 95%;
+  }
   #vacancy-tab-bar {
     width: 100%;
     background-color: $mdc-theme-primary;
+    display: flex;
     .mdc-tab {
       color: white;
+      flex: 1;
+      line-height: $toolbar-item-height;
     }
     .mdc-tab:hover {
       background-color: $mdc-theme-primary-dark;
     }
     .mdc-tab-bar__indicator {
-      background-color: $mdc-theme-primary-light;
+      background-color: white;
     }
+  }
+  .panel {
+    display: none;
+  }
+  .panel.panel--active {
+    display: block;
   }
   .vacancy-info-container {
     background-color: white;
@@ -473,9 +539,27 @@ a {
   }
   .mdc-card--full-content {
     border-top: none;
+    h4 {
+      margin: 0 0 $unit;
+      font-size: 1.5rem;
+      font-weight: 400;
+    }
     .key-info-extra {
+      // margin-top: $unit*1.5;
       padding: $unit;
       background-color: $mdc-theme-primary-light;
+      .mdc-chip {
+        margin-bottom: $unit/4;
+        padding: $unit/5 $unit/2;
+        vertical-align: top;
+        font-weight: 600;
+        background-color: $mdc-theme-primary;
+      }
+      .mdc-chip:hover {
+        text-decoration: none;
+        color: white;
+        background-color: $mdc-theme-primary-dark;
+      }
     }
     .detailed-info {
       padding: $unit;
@@ -485,8 +569,7 @@ a {
         background: transparent;
       }
       h4 {
-        margin: $unit 0 $unit/2;
-        font-size: 1.2rem;
+        margin: $unit/2 0 $unit/2;
       }
       h4:first-child {
         margin-top: 0;
@@ -638,8 +721,11 @@ hr {
 }
 
 .container-content {
+  width: 100%;
+  padding-right: $unit;
   position: relative;
   max-width: 1100px;
+  align-items: flex-end;
   .container-fluid {
     position: relative;
   }
@@ -724,7 +810,7 @@ body {
     flex-direction: column;
     padding: 0 $unit/2;
     .mdc-card__info--vacancy-title {
-      margin: $unit/2 0;
+      margin: $unit/2 0 $unit*(3/4);
       a .top-job {
         margin-left: 0;
         margin-right: .2rem;
@@ -824,6 +910,15 @@ body {
 .mdc-typography--headline5 {
   margin-bottom: $unit;
 }
+.search-form {
+  .mdc-typography--headline5 {
+    margin-top: $unit*1.5;
+    margin-left: $unit;
+  }
+  .mdc-layout-grid__inner {
+    grid-gap: $unit/2;
+  }
+}
 .gm-style .gm-style-iw {
   font-size: 0.9rem;
 }
@@ -916,8 +1011,13 @@ body {
   padding: 0;
 }
 
-.mdc-list .mdc-list-item__graphic {
-  margin-right: $unit;
+.mdc-list {
+  .mdc-layout-grid {
+    width: 100%;
+  }
+  .mdc-list-item__graphic {
+    margin-right: $unit;
+  }
 }
 .mdc-tab-bar .mdc-list-item__graphic {
   margin: 0;
@@ -985,7 +1085,7 @@ body {
   .organisation-logo {
     border-radius: 5px;
     position: relative;
-  	width: 100%;
+    width: 100%;
     background-color: transparent;
     display: flex;
     justify-content: center;
@@ -1234,6 +1334,9 @@ footer {
   margin-top: 16px;
 }
 
+.mdc-select__native-control {
+  -webkit-appearance: none;
+}
 .mdc-select__native-control,
 .mdc-tab-bar--fullwidth {
   width: 100% !important;

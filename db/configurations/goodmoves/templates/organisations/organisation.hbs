@@ -1,4 +1,4 @@
-{{> search_form}}
+{{> vacancy_search_form}}
 
 <div class="container-content goodmoves-organisation">
   {{#with data.primaryResponse.hits.hits.[0]._source as |organisation| ~}}
@@ -53,9 +53,10 @@
   </div>
   {{/compare ~}}
 
+  {{#if goodhq_organisation.xid}}
   <hr />
   <div class="mdc-typography--headline4">
-    Find out more about {{{organisation.title}}} on <a href="https://goodhq.org">Good HQ</a>
+    Find out more about <a href="https://goodhq.org/{{xid}}">{{{organisation.title}}}</a> on <a href="https://goodhq.org">Good HQ</a>
   </div>
   {{#compare ../data.goodhq.volunteering.hits.total ">" 0 ~}}
   <div class="mdc-typography--headline5">
@@ -97,7 +98,7 @@
   {{/compare ~}}
   {{/compare ~}}
 
-  {{#compare ../data.goodhq.reviews.hits.total ">" 0 ~}}
+  <!-- {{#compare ../data.goodhq.reviews.hits.total ">" 0 ~}}
   <div class="mdc-typography--headline5">
     Reviews
   </div>
@@ -115,7 +116,9 @@
     <a href="https://goodhq.org/{{organisation.goodhq_organisation.xid}}?mode=review">Read more reviews on Good HQ</a>
   </p>
   {{/compare ~}}
-  {{/compare ~}}
+  {{/compare ~}} -->
+
+  {{/if}}
 
   {{/with ~}}
 </div>
