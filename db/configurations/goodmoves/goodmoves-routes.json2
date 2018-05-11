@@ -13,7 +13,7 @@
           "queryTemplates": {
             "index": "web-content-production",
             "type": "goodmoves-job-test",
-            "template": "{$./queries/jobs/latest.json}"
+            "template": "{$./queries/vacancies/latest.json}"
           }
         }
       },
@@ -30,7 +30,7 @@
               "name": "top",
               "index": "web-content-production",
               "type": "goodmoves-job-test",
-              "template": "{$./queries/jobs/top.json}"
+              "template": "{$./queries/vacancies/top.json}"
             },
             {
               "name": "currently_recruiting",
@@ -42,7 +42,7 @@
               "name": "types",
               "index": "web-content-production",
               "type": "goodmoves-job-test",
-              "template": "{$./queries/jobs/types.json}"
+              "template": "{$./queries/vacancies/types.json}"
             }
           ]
         }
@@ -60,7 +60,7 @@
               "name": "vacancies",
               "index": "web-content-production",
               "type": "goodmoves-job-test",
-              "template": "{$./queries/jobs/currently-recruiting.json}"
+              "template": "{$./queries/vacancies/currently-recruiting.json}"
             }
           ]
         }
@@ -210,13 +210,13 @@
               "name": "detailed_results",
               "index": "web-content-production",
               "type": "goodmoves-job-test",
-              "template": "{$./queries/jobs/search-list.json}"
+              "template": "{$./queries/vacancies/search-list.json}"
             },
             {
               "name": "map_results",
               "index": "web-content-production",
               "type": "goodmoves-job-test",
-              "template": "{$./queries/jobs/search-map.json}"
+              "template": "{$./queries/vacancies/search-map.json}"
             }
           ]
         }
@@ -234,7 +234,7 @@
               "name": "types",
               "index": "web-content-production",
               "type": "goodmoves-job-test",
-              "template": "{$./queries/jobs/types.json}"
+              "template": "{$./queries/vacancies/types.json}"
             },
             {
               "name": "not_found",
@@ -250,17 +250,17 @@
       "destinationType": "handlebars",
       "config": {
         "rss": {
-          "head": "{$./templates/jobs/search-rss-head-tags.hbs}",
-          "body": "{$./templates/jobs/search-rss.hbs}"
+          "head": "{$./templates/vacancies/search-rss-head-tags.hbs}",
+          "body": "{$./templates/vacancies/search-rss.hbs}"
         },
         "default": {
-          "head": "{$./templates/jobs/search-head-tags.hbs}",
-          "body": "{$./templates/jobs/search.hbs}",
-          "foot": "{$./templates/jobs/search-foot.hbs}",
+          "head": "{$./templates/vacancies/search-head-tags.hbs}",
+          "body": "{$./templates/vacancies/search.hbs}",
+          "foot": "{$./templates/vacancies/search-foot.hbs}",
           "sidebar": "{$./partials/vacancy-search-form.hbs}"
         },
         "data": {
-          "content": "{$./templates/jobs/search-json.hbs}"
+          "content": "{$./templates/vacancies/search-json.hbs}"
         }
       }
     }
@@ -292,7 +292,7 @@
               "name": "detailed_results",
               "index": "web-content-production",
               "type": "goodmoves-job-test",
-              "template": "{$./queries/jobs/search-list.json}"
+              "template": "{$./queries/vacancies/search-list.json}"
             }
           ]
         }
@@ -310,7 +310,7 @@
               "name": "types",
               "index": "web-content-production",
               "type": "goodmoves-job-test",
-              "template": "{$./queries/jobs/types.json}"
+              "template": "{$./queries/vacancies/types.json}"
             },
             {
               "name": "not_found",
@@ -327,7 +327,7 @@
       "config": {
         "default": {
           "head": "{$./templates/pages/page-head-tags.hbs}",
-          "body": "{$./templates/jobs/saved-searches.hbs}"
+          "body": "{$./templates/vacancies/saved-searches.hbs}"
         }
       }
     }
@@ -359,7 +359,7 @@
               "name": "detailed_results",
               "index": "web-content-production",
               "type": "goodmoves-job-test",
-              "template": "{$./queries/jobs/search-list.json}"
+              "template": "{$./queries/vacancies/search-list.json}"
             }
           ]
         }
@@ -377,7 +377,7 @@
               "name": "types",
               "index": "web-content-production",
               "type": "goodmoves-job-test",
-              "template": "{$./queries/jobs/types.json}"
+              "template": "{$./queries/vacancies/types.json}"
             },
             {
               "name": "not_found",
@@ -394,7 +394,7 @@
       "config": {
         "default": {
           "head": "{$./templates/pages/page-head-tags.hbs}",
-          "body": "{$./templates/jobs/shortlist.hbs}"
+          "body": "{$./templates/vacancies/shortlist.hbs}"
         }
       }
     }
@@ -416,7 +416,7 @@
           "queryTemplates": {
             "index": "web-content-production",
             "type": "goodmoves-job-test",
-            "template": "{$./queries/jobs/job.json}"
+            "template": "{$./queries/vacancies/vacancy.json}"
           }
         }
       },
@@ -433,13 +433,13 @@
               "name": "types",
               "index": "web-content-production",
               "type": "goodmoves-job-test",
-              "template": "{$./queries/jobs/types.json}"
+              "template": "{$./queries/vacancies/types.json}"
             },
             {
               "name": "related",
               "index": "web-content-production",
               "type": "goodmoves-job-test",
-              "template": "{$./queries/jobs/related.json}"
+              "template": "{$./queries/vacancies/related.json}"
             },
             {
               "name": "not_found",
@@ -455,9 +455,9 @@
       "destinationType": "handlebars",
       "config": {
         "default": {
-          "head": "{$./templates/jobs/job-head-tags.hbs}",
-          "body": "{$./templates/jobs/job.hbs}",
-          "foot": "{$./templates/jobs/job-foot.hbs}"
+          "head": "{$./templates/vacancies/vacancy-head-tags.hbs}",
+          "body": "{$./templates/vacancies/vacancy.hbs}",
+          "foot": "{$./templates/vacancies/vacancy-foot.hbs}"
         }
       }
     }
@@ -557,13 +557,13 @@
               "name": "vacancies",
               "index": "web-content-production",
               "type": "goodmoves-job-test",
-              "template": "{$./queries/jobs/organisation-jobs.json}"
+              "template": "{$./queries/vacancies/organisation-vacancies.json}"
             },
             {
               "name": "types",
               "index": "web-content-production",
               "type": "goodmoves-job-test",
-              "template": "{$./queries/jobs/types.json}"
+              "template": "{$./queries/vacancies/types.json}"
             },
             {
               "name": "not_found",
