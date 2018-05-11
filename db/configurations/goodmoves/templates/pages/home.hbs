@@ -27,13 +27,13 @@
           <span class="mdc-tab-bar__indicator"></span>
         </div>
         <div id="search-view-jobs" class="search-form">
-          <form action="/search" method="get">
+          <div action="/search" method="get">
             <input type="hidden" name="lat" value="">
             <input type="hidden" name="lng" value="">
             <div class="mdc-layout-grid">
               <div class="mdc-layout-grid__inner">
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-5-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
-                  <div class="mdc-text-field mdc-text-field--box mdc-text-field--with-leading-icon" data-mdc-auto-init="MDCTextField">
+                  <div class="mdc-text-field mdc-text-field--box mdc-text-field--with-leading-icon mdc-text-field-tt" data-mdc-auto-init="MDCTextField">
                     <span class="far fa-search mdc-text-field__icon" tabindex="0" role="button"></span>
                     <input type="text" id="what-jobs" name="keywords" class="mdc-text-field__input">
                     <label for="what-jobs" class="mdc-floating-label">
@@ -76,14 +76,14 @@
                   </div>
                 </div>
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-2-desktop mdc-layout-grid__cell--span-1-tablet mdc-layout-grid__cell--span-4-phone">
-                  <button class="mdc-button mdc-button--raised mdc-text-field--box mdc-button--search">
+                  <button id="search-jobs" class="mdc-button mdc-button--raised mdc-text-field--box mdc-button--search">
                     Search
                     <span class="far fa-search" aria-hidden="true"></span>
                   </button>
                 </div>
               </div>
             </div>
-          </form>
+          </div>
         </div>
         <div id="search-view-categories" class="search-form" style="display: none;">
           <div class="mdc-layout-grid">

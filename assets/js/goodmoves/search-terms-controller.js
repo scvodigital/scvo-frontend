@@ -1,10 +1,10 @@
 var SearchTermsController = Class.extend({
   terms: {},
-  center: {
-    latitude: null,
-    longitude: null,
-    distance: 16093.44
-  },
+  lat: null,
+  lng: null,
+  distance: 16093.44,
+  location: null,
+  keywords: null,
   listeners: [],
 
   init: function() {
@@ -37,11 +37,9 @@ var SearchTermsController = Class.extend({
   },
 
   setCenter: function(latitude, longitude, distance) {
-    this.center = {
-      latitude: latitude || this.center.latitude,
-      longitude: longitude || this.center.longitude,
-      distance: distance === 'any' ? null : distance || this.center.distance
-    };
+    this.lat = latitude || this.lat;
+    this.lng = longitude || this.lng;
+    this.distance = distance === 'any' ? null : distance || this.distance;
     this.updateTrigger();
   },
 
@@ -59,10 +57,35 @@ var SearchTermsController = Class.extend({
   },
 
   currentState: function() {
-    return {
+    var state = {
       terms: this.terms,
-      center: (this.center.latitude) ? this.center : null
+      keywords: this.keywords,
+      lat: this.lat,
+      lng: this.lng,
+      distance: this.distance,
+      location: this.location
     };
+
+    return state;
+  },
+
+  queryObject: function() {
+    var state = {
+      keywords: this.keywords,
+      lat: this.lat,
+      lng: this.lng,
+      distance: this.distance,
+      location: this.location
+    };
+    // HACK: Weird hack needed because for some reason this method loses scope
+    //       and this.terms starts referring to global terms. This doesn't happen
+    //       in currentState(); No idea why.
+    var currentState = this.currentState();
+    Object.keys(currentState.terms).forEach(function(field) {
+      state[field] = currentState.terms[field];
+    });
+
+    return state;
   },
 
   updateTrigger: function() {
