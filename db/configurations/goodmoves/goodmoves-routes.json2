@@ -78,7 +78,7 @@
               "name": "tfn_latest",
               "index": "web-content-production",
               "type": "tfn-news-post,tfn-feature",
-              "template": "{$./queries/posts/home-tfn-post-list.json}"
+              "template": "{$./queries/posts/tfn-latest.json}"
             }
           ]
         }
@@ -446,6 +446,24 @@
               "index": "web-content-production",
               "type": "goodmoves-vacancy",
               "template": "{$./queries/pages/not-found.json}"
+            }
+          ]
+        }
+      },
+      {
+        "name": "posts",
+        "taskType": "elasticsearch",
+        "config": {
+          "connectionStringTemplate": "{$../elasticsearch-url.txt}",
+          "elasticsearchConfig": {
+            "apiVersion": "5.6"
+          },
+          "queryTemplates": [
+            {
+              "name": "tfn_related",
+              "index": "web-content-production",
+              "type": "tfn-news-post,tfn-blog-post,tfn-feature",
+              "template": "{$./queries/posts/tfn-related.json}"
             }
           ]
         }
