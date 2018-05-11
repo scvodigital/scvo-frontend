@@ -26,6 +26,7 @@ $brand-other:                       #fee972; // Templates-Desktop PDF
 $brand-skills:                      #6beda0;
 
 $scvo-background:                   #02162E;
+$toolbar-shadow-reverse: 0px -3px 5px -1px rgba(0, 0, 0, 0.2), 0px -5px 8px 0px rgba(0, 0, 0, 0.14), 0px -1px 14px 0px rgba(0, 0, 0, 0.12);
 
 // Base variables
 
@@ -67,7 +68,7 @@ body {
     background-color: $scvo-background;
 }
 
-h1, h2, h3, h4, h5 {
+h1, h2, h3, h4, h5, strong {
     font-family: $heading-font-family;
     font-weight: $heading-font-weight;
 }
@@ -80,6 +81,7 @@ p a {
 h4 a {
     text-decoration: none;
 }
+
 :focus {
     outline: none;
 }
@@ -1056,9 +1058,31 @@ footer {
         position: relative;
     }
     .footer-main {
-        border-top: $unit*(0.6) solid white;
-        padding: $unit 0 $unit*2;
-        background-image: linear-gradient(160deg, $brand-typography, $brand-typography 60%, $scvo-background 110%, $scvo-background);
+      padding: $unit 0 $unit*2;
+      border-top: $unit solid white;
+      background-color: $brand-typography;
+      background-image: linear-gradient(
+      -120deg,
+      $scvo-background,
+      $scvo-background $unit*2,
+      $brand-skills $unit*2.05,
+      $brand-skills $unit*2.5,
+      $brand-other $unit*2.55,
+      $brand-other $unit*3,
+      $brand-signup $unit*3.05,
+      $brand-signup $unit*3.5,
+      $brand-charter $unit*3.55,
+      $brand-charter $unit*4,
+      $brand-signup $unit*4.05,
+      $brand-signup $unit*4.5,
+      white $unit*4.55,
+      white $unit*5,
+      $brand-typography $unit*5.05,
+      $brand-typography
+      );
+      box-shadow: $toolbar-shadow-reverse;
+        // border-top: $unit*(0.6) solid white;
+        // background-image: linear-gradient(160deg, $brand-typography, $brand-typography 60%, $scvo-background 110%, $scvo-background);
     }
     h3 {
         padding-bottom: $unit/2;
