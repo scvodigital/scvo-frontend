@@ -39,7 +39,11 @@
   ],
   "query": {
     "term": {
+      {{#if (includes request.params.slug "-") ~}}
       "slug": "{{request.params.slug}}"
+      {{else}}
+      "Id": "{{request.params.slug}}"
+      {{/if ~}}
     }
   }
 }
