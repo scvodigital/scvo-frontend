@@ -3,6 +3,7 @@
 
 $unit: 1rem;
 $nav-height: 38px;
+$toolbar-shadow-reverse: 0px -3px 5px -1px rgba(0, 0, 0, 0.2), 0px -5px 8px 0px rgba(0, 0, 0, 0.14), 0px -1px 14px 0px rgba(0, 0, 0, 0.12);
 
 $colours: (
 default: (
@@ -166,10 +167,15 @@ secondary-light: #FFA000,
 secondary-dark: #FF6F00
 ),
 footer: (
-primary: #371448,
-primary-light: #B3185B,
-primary-dark: #251032
+primary: #424242,
+primary-light: #565656,
+primary-dark: #292929
 )
+// footer: (
+// primary: #371448,
+// primary-light: #B3185B,
+// primary-dark: #251032
+// )
 );
 
 @mixin theme-colours($themeName: 'default') {
@@ -642,15 +648,33 @@ primary-dark: #251032
 
   footer {
     color: white;
+    border-top: $unit solid map-get($themeSelected, 'primary');
+    background-color: map-get($themeFooter, 'primary');
     background-image: linear-gradient(
-    160deg,
-    map-get($themeFooter, 'primary'),
-    map-get($themeFooter, 'primary') 55%,
-    map-get($themeFooter, 'primary-dark') 95%,
-    map-get($themeFooter, 'primary-dark')
+    -120deg,
+    map-get($themeFooter, 'primary-dark'),
+    map-get($themeFooter, 'primary-dark') $unit*2,
+    map-get($themeSelected, 'primary-dark') $unit*2.05,
+    map-get($themeSelected, 'primary-dark') $unit*2.5,
+    map-get($themeSelected, 'primary') $unit*2.55,
+    map-get($themeSelected, 'primary') $unit*3,
+    map-get($themeSelected, 'primary-light') $unit*3.05,
+    map-get($themeSelected, 'primary-light') $unit*3.5,
+    white $unit*3.55,
+    white $unit*4,
+    map-get($themeFooter, 'primary') $unit*4.05,
+    map-get($themeFooter, 'primary')
     );
+    box-shadow: $toolbar-shadow-reverse;
+    // border-top: 0.6rem solid map-get($themeFooter, 'primary-light');
+    // background-image: linear-gradient(
+    // 160deg,
+    // map-get($themeFooter, 'primary'),
+    // map-get($themeFooter, 'primary') 55%,
+    // map-get($themeFooter, 'primary-dark') 95%,
+    // map-get($themeFooter, 'primary-dark')
+    // );
     // background-color: map-get($themeFooter, 'primary');
-    border-top: 0.6rem solid map-get($themeFooter, 'primary-light');
     .footer-copyright {
       background-color: map-get($themeFooter, 'primary-dark');
     }
@@ -3536,6 +3560,7 @@ p.results-highlights em {
 }
 
 footer {
+  position: relative;
   .footer-main {
     padding: 0;
     margin-bottom: $unit;
