@@ -695,29 +695,40 @@ hr {
 /* Typeahead */
 .twitter-typeahead {
   width: 100%;
+  .tt-menu {
+    width: 100%;
+    box-sizing: border-box;
+    background-color: white;
+    border: 1px solid rgba(0, 0, 0, 0.87);
+    h3 {
+      margin: 0 !important;
+      padding: $unit/2 $unit;
+    }
+    .tt-suggestion {
+      padding: $unit/2 $unit;
+    }
+    .tt-suggestion:hover,
+    .tt-cursor {
+      background-color: $mdc-theme-primary-dark;
+      color: white;
+      cursor: pointer;
+    }
+  }
 }
 
-.tt-menu {
-  width: 100%;
-  box-sizing: border-box;
-  background-color: white;
-  border-width: $unit/8;
-  border-color: black;
-  border-style: solid;
-}
-
-.tt-menu h3 {
-  margin: 0 !important;
-  padding: 5px 15px;
-}
-
-.tt-menu .tt-suggestion {
-  padding: 5px 15px;
-}
-
-.tt-cursor {
-  background-color: $mdc-theme-primary;
-  color: white;
+#search-terms {
+  .mdc-chip,
+  .mdc-chip:hover {
+    .mdc-chip__icon,
+    .mdc-chip__text {
+      color: white;
+    }
+  }
+  .mdc-chip:hover {
+    .mdc-chip__icon {
+      font-weight: 700;
+    }
+  }
 }
 
 /* Maps */
@@ -932,6 +943,13 @@ body {
   }
   .mdc-layout-grid__inner {
     grid-gap: $unit/2;
+  }
+  .mdc-text-field {
+    z-index: 30;
+    overflow: visible;
+  }
+  .mdc-text-field--box::before, .mdc-text-field--box::after {
+    background-color: transparent;
   }
 }
 .gm-style .gm-style-iw {

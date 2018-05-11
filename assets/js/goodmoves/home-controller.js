@@ -115,7 +115,7 @@ function reverseLookup(latitude, longitude) {
 
 function refreshChips(searchTerms) {
   $searchTerms.empty();
-  var termCount = 0; 
+  var termCount = 0;
   var fields = Object.keys(searchTerms.terms);
   for (var f = 0; f < fields.length; ++f) {
     var field = fields[f];
@@ -128,10 +128,11 @@ function refreshChips(searchTerms) {
         .appendTo($searchTerms);
       var chipText = $('<div />')
         .addClass('mdc-chip__text')
-        .html('<strong>' + field + '</strong>: ' + term)
+        // .html('<strong>' + field + '</strong>: ' + term)
+        .html(term)
         .appendTo($chip);
       var chipClose = $('<i />')
-        .addClass('fa fa-times-circle mdc-chip__icon mdc-chip__icon--trailing')
+        .addClass('far fa-times-circle mdc-chip__icon mdc-chip__icon--trailing')
         .data({ field: field, term: term })
         .attr({ tabindex: 0, role: 'button' })
         .on('click', function(evt) {
