@@ -1,0 +1,27 @@
+{
+  "size": 16,
+  "from": {{multiply (subtract (default request.params.query.page 1) 1) 16}},
+  "_source": [
+    "slug",
+    "title",
+    "rendered.scotlandforeurope_search_result"
+  ],
+  "query": {
+    "bool": {
+      "must": [
+        {{#if request.params.query.q}}
+        {
+          "query_string": {
+            "query": "{{request.params.query.q}}",
+            "default_operator": "AND",
+            "analyzer": "snowball"
+          }
+        }
+        {{/if}}
+      ]
+    }
+  },
+  "sort": {
+    {{#if request.params.query.sort}}"slug": "asc"{{else}}"date_signed": "desc"{{/if}}
+  }
+}

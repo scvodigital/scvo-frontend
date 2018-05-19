@@ -16,7 +16,41 @@
       }
     }
   },
-  "sign-up": {
+  "declaration": {
+    "pattern": "/the-declaration",
+    "metaData": {
+      "title": "The Declaration"
+    },
+    "tasks": [],
+    "destination": {
+      "destinationType": "handlebars",
+      "config": {
+        "default": {
+          "head": "{$./templates/head-tags.hbs}",
+          "body": "{$./templates/declaration.hbs}",
+          "foot": ""
+        }
+      }
+    }
+  },
+  "why_sign": {
+    "pattern": "/why-sign",
+    "metaData": {
+      "title": "Why Sign?"
+    },
+    "tasks": [],
+    "destination": {
+      "destinationType": "handlebars",
+      "config": {
+        "default": {
+          "head": "{$./templates/head-tags.hbs}",
+          "body": "{$./templates/why-sign.hbs}",
+          "foot": ""
+        }
+      }
+    }
+  },
+  "sign_up": {
     "pattern": "/sign-up",
     "metaData": {
       "title": "Sign Up"
@@ -33,10 +67,10 @@
       }
     }
   },
-  "sign-up-form": {
-    "pattern": "/sign-up/form",
+  "sign_up_thank_you": {
+    "pattern": "/sign-up-thank-you",
     "metaData": {
-      "title": "Sign Up"
+      "title": "Thank You"
     },
     "tasks": [],
     "destination": {
@@ -44,16 +78,16 @@
       "config": {
         "default": {
           "head": "{$./templates/head-tags.hbs}",
-          "body": "{$./templates/sign-up-form.hbs}",
+          "body": "{$./templates/sign-up-thank-you.hbs}",
           "foot": ""
         }
       }
     }
   },
-  "sign-up-complete": {
-    "pattern": "/sign-up/complete",
+  "faq": {
+    "pattern": "/faq",
     "metaData": {
-      "title": "Sign Up Complete"
+      "title": "FAQ"
     },
     "tasks": [],
     "destination": {
@@ -61,92 +95,7 @@
       "config": {
         "default": {
           "head": "{$./templates/head-tags.hbs}",
-          "body": "{$./templates/sign-up-complete.hbs}",
-          "foot": ""
-        }
-      }
-    }
-  },
-  "skill-up": {
-    "pattern": "/skill-up",
-    "metaData": {
-      "title": "Skill Up"
-    },
-    "tasks": [],
-    "destination": {
-      "destinationType": "handlebars",
-      "config": {
-        "default": {
-          "head": "{$./templates/head-tags.hbs}",
-          "body": "{$./templates/skill-up.hbs}",
-          "foot": ""
-        }
-      }
-    }
-  },
-  "skill-up-detail": {
-    "pattern": "/skill-up/:slug",
-    "metaData": {
-      "title": "Skill Up"
-    },
-    "tasks": [],
-    "destination": {
-      "destinationType": "handlebars",
-      "config": {
-        "default": {
-          "head": "{$./templates/head-tags.hbs}",
-          "body": "{$./templates/skill-up-detail.hbs}",
-          "foot": ""
-        }
-      }
-    }
-  },
-  "the-charter": {
-    "pattern": "/the-charter",
-    "metaData": {
-      "title": "The Charter"
-    },
-    "tasks": [],
-    "destination": {
-      "destinationType": "handlebars",
-      "config": {
-        "default": {
-          "head": "{$./templates/head-tags.hbs}",
-          "body": "{$./templates/the-charter.hbs}",
-          "foot": ""
-        }
-      }
-    }
-  },
-  "stories": {
-    "pattern": "/stories",
-    "metaData": {
-      "title": "Stories"
-    },
-    "tasks": [],
-    "destination": {
-      "destinationType": "handlebars",
-      "config": {
-        "default": {
-          "head": "{$./templates/head-tags.hbs}",
-          "body": "{$./templates/stories.hbs}",
-          "foot": ""
-        }
-      }
-    }
-  },
-  "stories-detail": {
-    "pattern": "/stories/:slug",
-    "metaData": {
-      "title": "Story"
-    },
-    "tasks": [],
-    "destination": {
-      "destinationType": "handlebars",
-      "config": {
-        "default": {
-          "head": "{$./templates/head-tags.hbs}",
-          "body": "{$./templates/stories-detail.hbs}",
+          "body": "{$./templates/faq.hbs}",
           "foot": ""
         }
       }
@@ -168,7 +117,7 @@
           },
           "queryTemplates": {
             "index": "web-content-production",
-            "type": "charter-signatory-digitalparticipation",
+            "type": "charter-signatory-europe",
             "template": "{$./queries/signatory-search.json}"
           }
         }
@@ -185,20 +134,8 @@
             {
               "name": "total",
               "index": "web-content-production",
-              "type": "charter-signatory-digitalparticipation",
+              "type": "charter-signatory-europe",
               "template": "{$./queries/signatory-total.json}"
-            },
-            {
-              "name": "types",
-              "index": "web-content-production",
-              "type": "charter-signatory-digitalparticipation",
-              "template": "{$./queries/signatory-aggs.json}"
-            },
-            {
-              "name": "categories",
-              "index": "web-content-production",
-              "type": "charter-signatory-digitalparticipation",
-              "template": "{$./queries/signatory-category-aggs.json}"
             }
           ]
         }
@@ -231,27 +168,9 @@
           },
           "queryTemplates": {
             "index": "web-content-production",
-            "type": "charter-signatory-digitalparticipation",
+            "type": "charter-signatory-europe",
             "template": "{$./queries/signatory.json}"
           }
-        }
-      },
-      {
-        "name": "supplimentaryResponses",
-        "taskType": "elasticsearch",
-        "config": {
-          "connectionStringTemplate": "{$../elasticsearch-url.txt}",
-          "elasticsearchConfig": {
-            "apiVersion": "5.6"
-          },
-          "queryTemplates": [
-            {
-              "name": "types",
-              "index": "web-content-production",
-              "type": "charter-signatory-digitalparticipation",
-              "template": "{$./queries/signatory-aggs.json}"
-            }
-          ]
         }
       }
     ],
@@ -261,74 +180,6 @@
         "default": {
           "head": "{$./templates/head-tags.hbs}",
           "body": "{$./templates/signatory.hbs}",
-          "foot": ""
-        }
-      }
-    }
-  },
-  "resources": {
-    "pattern": "/resources",
-    "metaData": {
-      "title": "Resources"
-    },
-    "tasks": [],
-    "destination": {
-      "destinationType": "handlebars",
-      "config": {
-        "default": {
-          "head": "{$./templates/head-tags.hbs}",
-          "body": "{$./templates/resources.hbs}",
-          "foot": ""
-        }
-      }
-    }
-  },
-  "resources-detail": {
-    "pattern": "/resources/:slug",
-    "metaData": {
-      "title": "Resource"
-    },
-    "tasks": [],
-    "destination": {
-      "destinationType": "handlebars",
-      "config": {
-        "default": {
-          "head": "{$./templates/head-tags.hbs}",
-          "body": "{$./templates/resources-detail.hbs}",
-          "foot": ""
-        }
-      }
-    }
-  },
-  "accessibility": {
-    "pattern": "/accessibility",
-    "metaData": {
-      "title": "Accessibility"
-    },
-    "tasks": [],
-    "destination": {
-      "destinationType": "handlebars",
-      "config": {
-        "default": {
-          "head": "{$./templates/head-tags.hbs}",
-          "body": "{$./templates/accessibility.hbs}",
-          "foot": ""
-        }
-      }
-    }
-  },
-  "contact": {
-    "pattern": "/contact-us",
-    "metaData": {
-      "title": "Contact Us"
-    },
-    "tasks": [],
-    "destination": {
-      "destinationType": "handlebars",
-      "config": {
-        "default": {
-          "head": "{$./templates/head-tags.hbs}",
-          "body": "{$./templates/contact.hbs}",
           "foot": ""
         }
       }
@@ -346,6 +197,23 @@
         "default": {
           "head": "{$./templates/head-tags.hbs}",
           "body": "{$./templates/privacy.hbs}",
+          "foot": ""
+        }
+      }
+    }
+  },
+  "accessibility": {
+    "pattern": "/accessibility",
+    "metaData": {
+      "title": "Accessibility"
+    },
+    "tasks": [],
+    "destination": {
+      "destinationType": "handlebars",
+      "config": {
+        "default": {
+          "head": "{$./templates/head-tags.hbs}",
+          "body": "{$./templates/accessibility.hbs}",
           "foot": ""
         }
       }
