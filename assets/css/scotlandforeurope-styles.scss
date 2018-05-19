@@ -1,10 +1,26 @@
 @import url("//cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css");
-@import url('//fonts.googleapis.com/css?family=Rubik:400,500,700');
+@import url('//fonts.googleapis.com/css?family=Rubik:400,500,700|Open+Sans:400,600');
 
 $unit: 1rem;
 $brand-border-width: 2px;
-$brand-colour: #2C2C2B;
+
+$mdc-theme-primary: #5C96DD;
+$mdc-theme-secondary: #2C2C2B;
+
+$mdc-theme-footer: #424242;
+$mdc-theme-footer-light: #565656;
+$mdc-theme-footer-dark: #292929;
+
 $toolbar-shadow-reverse: 0px -3px 5px -1px rgba(0, 0, 0, 0.2), 0px -5px 8px 0px rgba(0, 0, 0, 0.14), 0px -1px 14px 0px rgba(0, 0, 0, 0.12);
+
+$base-font-family:                  "Rubik", Helvetica, Arial, sans-serif;
+$base-font-weight:                  400;
+
+$heading-font-family:               "Rubik", Helvetica, Arial, sans-serif;
+$heading-font-weight:               700;
+
+$footer-font-family:                "Open Sans", Helvetica, Arial, sans-serif;
+$footer-font-weight:                400;
 
 :root {
   --mdc-layout-grid-margin-desktop: 0;
@@ -16,7 +32,7 @@ $toolbar-shadow-reverse: 0px -3px 5px -1px rgba(0, 0, 0, 0.2), 0px -5px 8px 0px 
 }
 
 html {
-  --mdc-theme-primary: $brand-colour;
+  --mdc-theme-primary: $mdc-theme-secondary;
 }
 
 html {
@@ -26,16 +42,16 @@ html {
   line-height: 1.45;
 }
 body {
-  background: #1A1A19;
+  background: $mdc-theme-footer-dark;
   min-height: 100%;
   padding: 0;
   margin: 0;
-  font-family: "Rubik";
+  font-family: $base-font-family;
 }
 .mdc-drawer__header-content,
 header.mdc-toolbar,
 main {
-  color: $brand-colour;
+  color: $mdc-theme-secondary;
   background-color: white;
 }
 .mdc-drawer__header-content img.brand-logo-mobile {
@@ -90,19 +106,16 @@ main {
 main {
   padding-bottom: $unit;
 }
-footer {
-  background: $brand-colour;
-}
 a {
   text-decoration-skip: ink;
 }
 ::-moz-selection {
   color: white;
-  background: $brand-colour;
+  background: $mdc-theme-secondary;
 }
 ::selection {
   color: white;
-  background: $brand-colour;
+  background: $mdc-theme-secondary;
 }
 
 .container-fluid {
@@ -117,7 +130,7 @@ a {
   box-shadow: none;
   .container-fluid {
     padding-bottom: $unit;
-    border-bottom: 3px solid $brand-colour;
+    border-bottom: 3px solid $mdc-theme-secondary;
   }
   .mdc-toolbar__title {
     margin: 0;
@@ -159,15 +172,15 @@ a {
     }
     .mdc-tab,
     .mdc-tab:hover {
-      color: $brand-colour;
+      color: $mdc-theme-secondary;
     }
   }
 }
 
 .mdc-button {
   background-color: white !important;
-  border: $brand-border-width solid $brand-colour;
-  color: $brand-colour !important;
+  border: $brand-border-width solid $mdc-theme-secondary;
+  color: $mdc-theme-secondary !important;
   text-transform: none;
   line-height: 1.75rem;
   font-size: 1.25rem;
@@ -187,16 +200,16 @@ h3,
 h4,
 li,
 div {
-  font-family: "Rubik";
-  font-weight: 700;
-  color: $brand-colour;
+  font-family: $heading-font-family;
+  font-weight: $heading-font-weight;
+  color: $mdc-theme-secondary;
 }
 .mdc-toolbar__icon,
 a {
-  color: $brand-colour;
+  color: $mdc-theme-secondary;
 }
 em {
-  font-family: "Rubik";
+  font-family: $heading-font-family;
   font-style: italic;
   font-weight: 500;
 }
@@ -259,7 +272,7 @@ p.quote {
         top: $unit/2;
         right: $unit/2;
         .fa-search {
-          color: $brand-colour;
+          color: $mdc-theme-secondary;
         }
       }
     }
@@ -299,12 +312,12 @@ p.quote {
   .mdc-select {
     font-size: 1.1rem;
     font-weight: bold;
-    color: $brand-colour;
+    color: $mdc-theme-secondary;
     line-height: 2rem;
     height: 3rem;
     background-color: white;
     padding: 0 $unit/2;
-    border: $brand-border-width solid $brand-colour;
+    border: $brand-border-width solid $mdc-theme-secondary;
     border-radius: 0.15rem;
     width: 100%;
     letter-spacing: 0;
@@ -334,7 +347,7 @@ p.quote {
       padding: 1rem 1rem 0.25rem;
       background: white;
       text-align: center;
-      border: 0px solid $brand-colour;
+      border: 0px solid $mdc-theme-secondary;
     }
     img {
       margin: 0;
@@ -365,7 +378,7 @@ p.quote {
       overflow: hidden;
       font-size: 1rem;
       font-weight: bold;
-      color: $brand-colour;
+      color: $mdc-theme-secondary;
       margin: 0 auto;
       span {
         position: absolute;
@@ -377,7 +390,7 @@ p.quote {
         width: 100%;
         font-weight: bold;
         font-size: 1.1rem;
-        color: $brand-colour;
+        color: $mdc-theme-secondary;
       }
       img.resize-fit-center {
         max-width: 90%;
@@ -388,7 +401,7 @@ p.quote {
   }
 
   .signatory {
-    border: 0px solid $brand-colour;
+    border: 0px solid $mdc-theme-secondary;
     border-right: none;
     border-bottom: none;
   }
@@ -407,7 +420,7 @@ p.quote {
   }
   .signatory:nth-child(4n+1):nth-last-child(-n+4),
   .signatory:nth-child(4n+1):nth-last-child(-n+4) ~ .mdc-layout-grid__cell--span-3 {
-    border-bottom: 0px solid $brand-colour;
+    border-bottom: 0px solid $mdc-theme-secondary;
   }
 }
 
@@ -422,12 +435,12 @@ p.quote {
   li a,
   li.active a {
     cursor: pointer;
-    color: $brand-colour;
+    color: $mdc-theme-secondary;
     font-weight: 400;
     text-decoration: none;
   }
   li.active {
-    background-color: $brand-colour;
+    background-color: $mdc-theme-secondary;
   }
   li.disabled a {
     color: inherit;
@@ -446,20 +459,20 @@ p.quote {
       line-height: $unit*2;
       height: $unit*2;
       width: $unit*2;
-      color: $brand-colour;
+      color: $mdc-theme-secondary;
       padding: 0;
       margin: 0;
       font-weight: 600;
       display: block;
     }
     a.pagination-arrow {
-      color: $brand-colour;
+      color: $mdc-theme-secondary;
       vertical-align: middle;
     }
   }
   li.disabled a.pagination-arrow {
     cursor: default;
-    color: $brand-colour;
+    color: $mdc-theme-secondary;
   }
   li:first-child a {
     padding-left: 0;
@@ -468,7 +481,7 @@ p.quote {
     padding-right: 0;
   }
   li.current-page {
-    background-color: $brand-colour;
+    background-color: $mdc-theme-secondary;
     border-radius: 50%;
     a {
       color: white;
@@ -476,7 +489,7 @@ p.quote {
   }
   li:hover:not(.disabled),
   li.current-page:hover {
-    background-color: $brand-colour;
+    background-color: $mdc-theme-secondary;
     a {
       color: white;
       text-decoration: none;
@@ -492,7 +505,19 @@ footer {
   --mdc-layout-grid-margin-phone: 1rem;
   --mdc-layout-grid-gutter-phone: 1rem;
   color: white;
-  // background-color: $brand-colour;
+  background-color: $mdc-theme-footer;
+  p, li, div {
+    font-family: $footer-font-family;
+    font-weight: $footer-font-weight;
+    font-size: .9rem;
+  }
+  h3, a, strong {
+    font-family: $footer-font-family;
+    font-weight: 600;
+  }
+  h3 {
+    font-size: 1.2rem;
+  }
   .brand-logo {
     margin-right: $unit;
     img {
@@ -500,23 +525,24 @@ footer {
     }
   }
   strong {
-    font-weight: 500;
+    font-weight: 600;
   }
   p {
     color: white;
     a {
-      font-weight: 500;
+      text-decoration: none;
+      font-weight: 600;
       color: white;
-      text-decoration: underline;
     }
     a:hover {
+      text-decoration: underline;
       color: white;
     }
   }
   .footer-copyright {
-    background-color: #1A1A19;
+    background-color: $mdc-theme-footer-dark;
     p {
-      font-size: 0.85rem;
+      font-size: 0.8rem;
       margin-bottom: 0;
     }
   }
@@ -524,34 +550,34 @@ footer {
     position: relative;
   }
   .footer-main {
-    border-top: $unit solid #5C96DD;
-    background-color: $brand-colour;
-    background-image: linear-gradient(
-    -120deg,
-    #1A1A19,
-    #1A1A19 $unit*2,
-    #5C96DD $unit*2.05,
-    #5C96DD $unit*2.5,
-    white $unit*2.55,
-    white $unit*3,
-    $brand-colour $unit*3.05,
-    $brand-colour
-    );
+    border-top: $unit solid $mdc-theme-primary;
+    // background-color: $mdc-theme-secondary;
+    // background-image: linear-gradient(
+    // -120deg,
+    // #1A1A19,
+    // #1A1A19 $unit*2,
+    // #5C96DD $unit*2.05,
+    // #5C96DD $unit*2.5,
+    // white $unit*2.55,
+    // white $unit*3,
+    // $mdc-theme-secondary $unit*3.05,
+    // $mdc-theme-secondary
+    // );
     box-shadow: $toolbar-shadow-reverse;
     // border-top: $unit/2 solid #5C96DD;
-    // background-image: linear-gradient(120deg, $brand-colour, $brand-colour 50%, #1A1A19 95%, #1A1A19);
+    // background-image: linear-gradient(120deg, $mdc-theme-secondary, $mdc-theme-secondary 50%, #1A1A19 95%, #1A1A19);
     // padding: $unit 0 $unit*2;
   }
   h3 {
-    font-weight: 500;
-    margin-top: 0.5rem;
+    font-weight: 600;
+    margin: $unit/2 0 $unit;
     padding-bottom: $unit/2;
-    border-bottom: $unit/5 solid #5C96DD;
+    border-bottom: $unit/5 solid $mdc-theme-footer-light;
     color: white;
   }
   .mdc-list .mdc-list-item a {
     color: white;
-    font-weight: 500;
+    font-weight: 600;
   }
   .mdc-list .mdc-list-item a:hover {
     text-decoration: underline !important;
@@ -575,7 +601,7 @@ footer {
   .fa-ul li,
   .mdc-list-item {
     color: white;
-    font-size: 1rem;
+    // font-size: 1rem;
   }
   .fa-ul {
     margin: 0 0 0 $unit*2;

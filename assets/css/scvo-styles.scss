@@ -5,6 +5,16 @@ $unit: 1rem;
 $nav-height: 38px;
 $toolbar-shadow-reverse: 0px -3px 5px -1px rgba(0, 0, 0, 0.2), 0px -5px 8px 0px rgba(0, 0, 0, 0.14), 0px -1px 14px 0px rgba(0, 0, 0, 0.12);
 
+$base-font-family:                  "Open Sans", Helvetica, Arial, sans-serif;
+$base-font-weight:                  400;
+
+$heading-font-family:               "Montserrat", Helvetica, Arial, sans-serif;
+$heading-font-weight:               700;
+
+$footer-font-family:                "Open Sans", Helvetica, Arial, sans-serif;
+$footer-font-weight:                400;
+
+
 $colours: (
 default: (
 primary: #AD1457,
@@ -650,21 +660,21 @@ primary-dark: #292929
     color: white;
     border-top: $unit solid map-get($themeSelected, 'primary');
     background-color: map-get($themeFooter, 'primary');
-    background-image: linear-gradient(
-    -120deg,
-    map-get($themeFooter, 'primary-dark'),
-    map-get($themeFooter, 'primary-dark') $unit*2,
-    map-get($themeSelected, 'primary-dark') $unit*2.05,
-    map-get($themeSelected, 'primary-dark') $unit*2.5,
-    map-get($themeSelected, 'primary') $unit*2.55,
-    map-get($themeSelected, 'primary') $unit*3,
-    map-get($themeSelected, 'primary-light') $unit*3.05,
-    map-get($themeSelected, 'primary-light') $unit*3.5,
-    white $unit*3.55,
-    white $unit*4,
-    map-get($themeFooter, 'primary') $unit*4.05,
-    map-get($themeFooter, 'primary')
-    );
+    // background-image: linear-gradient(
+    // -120deg,
+    // map-get($themeFooter, 'primary-dark'),
+    // map-get($themeFooter, 'primary-dark') $unit*2,
+    // map-get($themeSelected, 'primary-dark') $unit*2.05,
+    // map-get($themeSelected, 'primary-dark') $unit*2.5,
+    // map-get($themeSelected, 'primary') $unit*2.55,
+    // map-get($themeSelected, 'primary') $unit*3,
+    // map-get($themeSelected, 'primary-light') $unit*3.05,
+    // map-get($themeSelected, 'primary-light') $unit*3.5,
+    // white $unit*3.55,
+    // white $unit*4,
+    // map-get($themeFooter, 'primary') $unit*4.05,
+    // map-get($themeFooter, 'primary')
+    // );
     box-shadow: $toolbar-shadow-reverse;
     // border-top: 0.6rem solid map-get($themeFooter, 'primary-light');
     // background-image: linear-gradient(
@@ -840,7 +850,7 @@ input:focus:-ms-input-placeholder {
 .brand-logo {
   margin-left: -$unit/2;
   img {
-    max-height: $unit*3.5;
+    max-height: $unit*3;
   }
 }
 
@@ -866,7 +876,8 @@ img.responsive {
 .mdc-simple-menu .mdc-list-item,
 .mdc-temporary-drawer .mdc-list-item,
 .mdc-list {
-  font-family: "Open Sans", Helvetica, Arial, sans-serif;
+  font-family: $base-font-family, Helvetica, Arial, sans-serif;
+  font-weight: $base-font-weight;
 }
 .mdc-temporary-drawer .mdc-list-item {
   font-weight: 600;
@@ -876,8 +887,8 @@ img.responsive {
 .mdc-typography--title,
 .mdc-typography--headline,
 .supplimentary-list-title {
-  font-family: "Montserrat", "Open Sans", Helvetica, Arial, sans-serif;
-  font-weight: 700;
+  font-family: $heading-font-family, $base-font-family, Helvetica, Arial, sans-serif;
+  font-weight: $heading-font-weight;
 }
 .mdc-typography {
   padding: 0;
@@ -2348,7 +2359,7 @@ body.i-love-charity .page-info,
     }
     h3 {
       font-weight: 100;
-      font-family: "Open Sans";
+      font-family: $base-font-family;
       margin-bottom: $unit*2;
       text-align: center;
     }
@@ -3334,8 +3345,8 @@ h2,
 h3,
 h4 {
   margin-bottom: $unit/2;
-  font-family: "Montserrat", "Open Sans", Helvetica, Arial, sans-serif;
-  font-weight: 700;
+  font-family: $heading-font-family, $base-font-family, Helvetica, Arial, sans-serif;
+  font-weight: $base-font-weight;
   strong {
     font-weight: 700;
   }
@@ -3566,6 +3577,10 @@ footer {
     margin-bottom: $unit;
   }
   h3 {
+    font-size: 1.2rem;
+    margin: $unit 0;
+    font-family: $footer-font-family;
+    font-weight: 600;
     padding-bottom: $unit/2;
     border-bottom-style: solid;
     border-bottom-width: $unit/5;
@@ -3573,7 +3588,7 @@ footer {
   .about a,
   a {
     color: white;
-    text-decoration: underline;
+    // text-decoration: underline;
   }
   .about a:hover,
   a:hover {
@@ -3582,6 +3597,7 @@ footer {
   .mdc-list .mdc-list-item {
     a {
       font-size: 1rem;
+      font-weight: 600;
     }
     a:hover {
       text-decoration: underline !important;
@@ -3634,8 +3650,8 @@ footer {
     }
   }
   .footer-copyright {
-    font-size: 0.85rem;
     p {
+      font-size: 0.9rem;
       margin: 0.7rem 0 0;
     }
   }

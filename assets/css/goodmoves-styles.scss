@@ -8,11 +8,24 @@ $mdc-theme-secondary: #424242;
 $mdc-theme-secondary-light: #f5f5f5;
 $mdc-theme-secondary-dark: darken($mdc-theme-secondary, 10%);
 
+$mdc-theme-footer: #424242;
+$mdc-theme-footer-light: #565656;
+$mdc-theme-footer-dark: #292929;
+
 $mdc-theme-error: #a93f34;
 
 $mdc-theme-tfn: #3b9db1;
 
 $mdc-theme-background: white;
+
+$base-font-family:                  "Open Sans", Helvetica, Arial, sans-serif;
+$base-font-weight:                  400;
+
+$heading-font-family:               "Montserrat", Helvetica, Arial, sans-serif;
+$heading-font-weight:               700;
+
+$footer-font-family:                "Open Sans", Helvetica, Arial, sans-serif;
+$footer-font-weight:                400;
 
 $unit: 1rem;
 $toolbar-height: 64px;
@@ -29,7 +42,7 @@ $mobile-landscape-breakpoint: 959px;
 @import url('//fonts.googleapis.com/css?family=Montserrat:700|Open+Sans:400,500,600');
 
 body {
-  background-color: $mdc-theme-secondary-dark;
+  background-color: $mdc-theme-footer-dark;
 }
 .mdc-theme--background {
   background-color: $mdc-theme-secondary-light !important;
@@ -170,7 +183,7 @@ footer h3,
 .mdc-simple-menu .mdc-list-item,
 .mdc-temporary-drawer .mdc-list-item,
 .mdc-list {
-  font-family: "Open Sans", Helvetica, Arial, sans-serif;
+  font-family: $base-font-family, Helvetica, Arial, sans-serif;
 }
 .mdc-typography--body1 {
   font-size: 1rem;
@@ -195,8 +208,8 @@ footer h3,
 .mdc-textfield__label,
 .mdc-typography--title,
 .supplimentary-list-title {
-  font-family: "Montserrat", "Open Sans", Helvetica, Arial, sans-serif;
-  font-weight: 700;
+  font-family: $heading-font-family, $base-font-family, Helvetica, Arial, sans-serif;
+  font-weight: $heading-font-weight;
 }
 .mdc-drawer--temporary {
   z-index: 100;
@@ -1173,28 +1186,37 @@ body {
 // Footer ======================================================================
 
 footer {
-  border-top: $unit solid $mdc-theme-old;
-  background-color: $mdc-theme-secondary;
-  background-image: linear-gradient(
-  -120deg,
-  $mdc-theme-secondary-dark,
-  $mdc-theme-secondary-dark $unit*2,
-  $mdc-theme-primary-dark $unit*2.05,
-  $mdc-theme-primary-dark $unit*2.5,
-  $mdc-theme-primary $unit*2.55,
-  $mdc-theme-primary $unit*3,
-  $mdc-theme-old $unit*3.05,
-  $mdc-theme-old $unit*3.5,
-  $mdc-theme-primary-light $unit*3.55,
-  $mdc-theme-primary-light $unit*4,
-  white $unit*4.05,
-  white $unit*4.5,
-  $mdc-theme-secondary $unit*4.55,
-  $mdc-theme-secondary
-  );
+  border-top: $unit solid $mdc-theme-primary;
+  background-color: $mdc-theme-footer;
+  // background-image: linear-gradient(
+  // -120deg,
+  // $mdc-theme-secondary-dark,
+  // $mdc-theme-secondary-dark $unit*2,
+  // $mdc-theme-primary-dark $unit*2.05,
+  // $mdc-theme-primary-dark $unit*2.5,
+  // $mdc-theme-primary $unit*2.55,
+  // $mdc-theme-primary $unit*3,
+  // $mdc-theme-old $unit*3.05,
+  // $mdc-theme-old $unit*3.5,
+  // $mdc-theme-primary-light $unit*3.55,
+  // $mdc-theme-primary-light $unit*4,
+  // white $unit*4.05,
+  // white $unit*4.5,
+  // $mdc-theme-secondary $unit*4.55,
+  // $mdc-theme-secondary
+  // );
   box-shadow: $toolbar-shadow-reverse;
   position: relative;
   z-index: 30;
+  p, li, div {
+    font-family: $footer-font-family;
+    font-weight: $footer-font-weight;
+    font-size: 1rem;
+  }
+  h3, a, strong {
+    font-family: $footer-font-family;
+    font-weight: 600;
+  }
   .footer-main,
   .footer-copyright {
     padding: 0 $unit;
@@ -1205,11 +1227,9 @@ footer {
   h3 {
     color: white;
     font-size: 1.2rem;
-    border-bottom: $unit/5 solid $mdc-theme-secondary-light;
-    margin-top: 0;
-    margin-bottom: $unit;
-    padding: $unit/(3/4) 0 $unit/2;
-    font-weight: 600;
+    border-bottom: $unit/5 solid $mdc-theme-footer-light;
+    margin: $unit 0;
+    padding: $unit/2 0 $unit/2;
   }
   .about a,
   a {
@@ -1223,6 +1243,7 @@ footer {
     .mdc-list-item {
       padding: 0;
       a {
+        font-weight: 600;
         font-size: 1rem;
       }
       a:hover {
@@ -1292,12 +1313,12 @@ footer {
     }
   }
   .footer-copyright {
-    background-color: $mdc-theme-secondary-dark;
+    background-color: $mdc-theme-footer-dark;
     padding: $unit $unit $unit*0.7;
     margin: 0;
     line-height: 1.2;
-    font-size: 0.9rem;
     p {
+      font-size: 0.9rem;
       margin: 0;
     }
   }
