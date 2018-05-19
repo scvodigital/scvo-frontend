@@ -276,7 +276,7 @@ a {
 .skill-up.handling-info,
 .skill-up.transacting,
 .skill-up.problem-solving,
-.skill-up.creating {
+.skill-up.safety {
   main {
     background: $brand-typography;
     hr {
@@ -313,6 +313,9 @@ a {
         }
       }
     }
+  }
+  footer .footer-main {
+    border-top-color: white !important;
   }
 }
 
@@ -535,7 +538,8 @@ main {
       height: auto;
       display: block;
       text-align: center;
-      font-weight: 600;
+      font-family: $heading-font-family;
+      font-weight: $heading-font-weight;
       font-size: 1.6rem;
       line-height: normal;
       border-radius: 0;
@@ -777,6 +781,7 @@ main {
     margin: 0;
   }
   .signatory-logo-background {
+    padding-left: $unit*2;
     p {
       padding: 1rem 1rem 0.25rem;
       background: white;
@@ -1627,12 +1632,17 @@ footer {
   .pagination-distance-4 {
     display: none !important;
   }
-  main .signatories {
-    .signatory:nth-child(2n+1):nth-last-child(-n+2) {
-      border-bottom: none !important;
+  main {
+    .signatory-logo-background {
+      padding-left: 0;
     }
-    .signatory:nth-child(2n + 2) {
-      border-left: none;
+    .signatories {
+      .signatory:nth-child(2n+1):nth-last-child(-n+2) {
+        border-bottom: none !important;
+      }
+      .signatory:nth-child(2n + 2) {
+        border-left: none;
+      }
     }
   }
 }
