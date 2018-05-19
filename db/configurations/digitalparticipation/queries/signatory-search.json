@@ -29,7 +29,7 @@
           {
             "query_string": {
               "query": {{{stringify (default request.params.query.q "")}}},
-              "default_field": "title",
+              "default_field": "text_bag_boost",
               "default_operator": "AND",
               "analyzer": "snowball"
             }
