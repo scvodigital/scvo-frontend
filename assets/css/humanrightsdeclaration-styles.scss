@@ -38,7 +38,7 @@ html {
 html {
   overflow-y: scroll;
   height: 100%;
-  font-size: 1.2rem;
+  font-size: 1.1rem;
   line-height: 1.45;
 }
 body {
@@ -161,14 +161,22 @@ a {
     }
     .mdc-tab {
       min-width: 0;
-      font-size: 1rem;
+      font-size: 1.2rem;
       padding: $unit;
       text-transform: none;
+      .mdc-tab--label {
+        padding-bottom: $unit/2;
+        display: block;
+        border-bottom: 3px solid white;
+      }
     }
     .mdc-tab--active,
     .mdc-tab:hover {
       opacity: 1;
-      text-decoration: underline;
+    }
+    .mdc-tab--active .mdc-tab--label,
+    .mdc-tab:hover .mdc-tab--label{
+      border-bottom-color: $mdc-theme-secondary;
     }
     .mdc-tab,
     .mdc-tab:hover {
@@ -234,10 +242,10 @@ p.quote {
   // h3 {
   //     font-size: 2.5rem;
   // }
-  // h4 {
-  //     font-size: 2rem;
-  //     margin: 1rem 0 0;
-  // }
+  h4 {
+      font-size: 1.3rem;
+      margin: 1rem 0 0;
+  }
   img {
     max-width: 100%;
   }
@@ -304,9 +312,9 @@ p.quote {
   // }
   .mdc-form-field {
     width: 100%;
-    .mdc-select {
-      background-image: none;
-    }
+    // .mdc-select {
+    //   background-image: none;
+    // }
   }
   .mdc-textfield__input,
   .mdc-select {
