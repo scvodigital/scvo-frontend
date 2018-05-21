@@ -105,10 +105,23 @@ main {
 
 main {
   padding-bottom: $unit;
+  background-color: #ECEFF1;
 }
 a {
   text-decoration-skip: ink;
+  text-decoration: none;
+  font-weight: 600;
 }
+a:hover {
+  text-decoration: underline;
+}
+// iframe {
+//   border: none;
+//   background-image: url('/assets/images/spinner2.gif');
+//   background-repeat: no-repeat;
+//   background-position: center center;
+// }
+
 ::-moz-selection {
   color: white;
   background: $mdc-theme-secondary;
@@ -127,10 +140,11 @@ a {
   padding: $unit 0;
 }
 .mdc-toolbar {
+  background: white;
   box-shadow: none;
   .container-fluid {
-    padding-bottom: $unit;
-    border-bottom: 3px solid $mdc-theme-secondary;
+    padding-bottom: 0;
+    // border-bottom: 3px solid $mdc-theme-secondary;
   }
   .mdc-toolbar__title {
     margin: 0;
@@ -156,14 +170,15 @@ a {
   }
   .mdc-tab-bar {
     margin: 0;
+    height: auto;
     padding-top: $unit;
     .mdc-tab:first-child {
       padding-left: 0;
     }
     .mdc-tab {
       min-width: 0;
-      font-size: 1.2rem;
-      padding: $unit;
+      font-size: 1.1rem;
+      padding: 0 $unit*.7;
       text-transform: none;
       .mdc-tab--label {
         text-transform: uppercase;
@@ -175,9 +190,10 @@ a {
     .mdc-tab--active,
     .mdc-tab:hover {
       opacity: 1;
+      text-decoration: none;
     }
     .mdc-tab--active .mdc-tab--label,
-    .mdc-tab:hover .mdc-tab--label{
+    .mdc-tab:hover .mdc-tab--label {
       border-bottom-color: $mdc-theme-secondary;
     }
     .mdc-tab,
@@ -200,6 +216,9 @@ a {
   margin: 0 auto;
   padding: 10px 15px;
   height: auto;
+}
+.mdc-button:hover {
+  text-decoration: none;
 }
 
 .mdc-tab,
@@ -245,8 +264,8 @@ p.quote {
   //     font-size: 2.5rem;
   // }
   h4 {
-      font-size: 1.3rem;
-      margin: 1rem 0 0;
+    font-size: 1.3rem;
+    margin: 1rem 0 0;
   }
   img {
     max-width: 100%;
@@ -370,7 +389,7 @@ p.quote {
     }
   }
   .signatory {
-    background: white;
+    background: transparent;
     // margin: 0 -0.75rem;
     padding: $unit;
     vertical-align: middle;
@@ -407,6 +426,7 @@ p.quote {
         max-width: 90%;
         max-height: 90%;
         vertical-align: middle;
+        mix-blend-mode: multiply;
       }
     }
   }
