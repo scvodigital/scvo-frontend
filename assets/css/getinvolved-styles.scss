@@ -4,7 +4,7 @@
 $unit: 1rem;
 $brand-border-width: 2px;
 
-$mdc-theme-primary: #167467;
+$mdc-theme-primary: #c2185b;
 $mdc-theme-secondary: #292929;
 
 $mdc-theme-footer: #37474F;
@@ -38,8 +38,8 @@ html {
 html {
   overflow-y: scroll;
   height: 100%;
-  font-size: 1.2rem;
-  line-height: 1.45;
+  font-size: 1.1rem;
+  line-height: 1.4;
 }
 body {
   background: $mdc-theme-footer-dark;
@@ -110,16 +110,22 @@ main {
   padding: $unit 0;
 }
 a {
-  color: #337ab7;
   text-decoration-skip: ink;
+  text-decoration: none;
+  font-weight: 600;
+  color: #337ab7;
+}
+a:hover {
+  color: #337ab7;
+  text-decoration: underline;
 }
 ::-moz-selection {
   color: white;
-  background: $mdc-theme-secondary;
+  background: $mdc-theme-primary;
 }
 ::selection {
   color: white;
-  background: $mdc-theme-secondary;
+  background: $mdc-theme-primary;
 }
 
 .container-fluid {
@@ -179,6 +185,7 @@ a {
       .mdc-tab--active,
       .mdc-tab:hover {
         opacity: 1;
+        text-decoration: none;
       }
     }
   }
@@ -370,7 +377,7 @@ footer {
   .logo.scvo {
     position: absolute;
     height: 45px;
-    bottom: 1.2rem;
+    bottom: .85rem;
     right: 0.75rem;
   }
   .logo.digital-scotland {
