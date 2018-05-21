@@ -69,12 +69,15 @@ header.mdc-toolbar {
 
 .mdc-temporary-drawer {
   display: none;
+  .mdc-temporary-drawer__header {
+    background-color: $mdc-theme-primary;
+  }
   .mdc-temporary-drawer__header-content {
     direction: ltr;
     padding: $unit;
   }
   .mdc-temporary-drawer__header:before {
-    padding-top: 24%;
+    padding-top: 93px;
   }
   .mdc-list-group {
     direction: ltr;
@@ -101,7 +104,6 @@ header.mdc-toolbar {
   }
 }
 
-.mdc-temporary-drawer__header,
 .hide-on-med-and-up {
   display: none;
 }
@@ -152,6 +154,7 @@ a:hover {
       img {
         // min-height: 100px;
         // max-width: 400px;
+        filter: grayscale(100%);
       }
       .brand-logo-mobile {
         display: none;
@@ -390,6 +393,9 @@ footer {
     display: block;
   }
   .mdc-toolbar {
+    .navbar {
+      display: none;
+    }
     .mdc-toolbar__title {
       .brand-logo {
         .brand-logo-mobile {
