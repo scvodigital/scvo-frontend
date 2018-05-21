@@ -4,7 +4,7 @@
 $unit: 1rem;
 $brand-border-width: 2px;
 
-$mdc-theme-primary: #138172;
+$mdc-theme-primary: #167467;
 $mdc-theme-secondary: #292929;
 
 $mdc-theme-footer: #37474F;
@@ -132,8 +132,8 @@ a {
 .mdc-toolbar {
   box-shadow: none;
   .container-fluid {
-    padding-bottom: $unit;
-    border-bottom: 3px solid $mdc-theme-secondary;
+    padding: 0;
+    // border-bottom: 3px solid $mdc-theme-secondary;
   }
   .mdc-toolbar__title {
     margin: 0;
@@ -147,7 +147,7 @@ a {
         display: none;
       }
       .brand-logo-desktop {
-        max-width: 70%;
+        // max-width: 70%;
       }
     }
   }
@@ -157,25 +157,20 @@ a {
   .mdc-toolbar__section--align-end {
     display: block;
   }
-  .mdc-tab-bar {
-    margin: 0;
-    .mdc-tab:first-child {
-      padding-left: 0;
-    }
-    .mdc-tab {
-      min-width: 0;
-      font-size: 1rem;
-      padding: $unit;
-      text-transform: none;
-    }
-    .mdc-tab--active,
-    .mdc-tab:hover {
-      opacity: 1;
-      text-decoration: underline;
-    }
-    .mdc-tab,
-    .mdc-tab:hover {
-      color: $mdc-theme-secondary;
+  .navbar {
+    background-image: linear-gradient(90deg, rgba(0, 0, 0, 0.16), rgba(0, 0, 0, 0.16) 60%, rgba(0, 0, 0, 0.08) 120%, rgba(0, 0, 0, 0.08));
+    .mdc-tab-bar {
+      margin: 0;
+      .mdc-tab {
+        min-width: 0;
+        font-size: 1rem;
+        padding: 0 $unit;
+        text-transform: none;
+      }
+      .mdc-tab--active,
+      .mdc-tab:hover {
+        opacity: 1;
+      }
     }
   }
 }
