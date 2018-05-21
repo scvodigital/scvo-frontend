@@ -49,7 +49,7 @@
       <header class="mdc-toolbar">
         <div class="mdc-toolbar__row">
           <div class="container-fluid">
-            <section class="mdc-toolbar__section mdc-toolbar__section--align-start">
+            <section class="mdc-toolbar__section">
               <span class="mdc-toolbar__title catalog-title">
                 <a href="/" class="brand-logo" title="Get Involved!">
                   <img src="/assets/images/get-involved-logo.png" class="brand-logo-mobile" />
@@ -61,7 +61,7 @@
         </div>
         <div class="mdc-toolbar__row navbar">
           <div class="container-fluid">
-            <section class="mdc-toolbar__section mdc-toolbar__section--align-end">
+            <section class="mdc-toolbar__section">
               <nav id="main-tab-bar" class="mdc-tab-bar" [menu]="'main'" [menulinkselector]="''" [menulabelselector]="'span.mdc-tab--label'" [menuactiveclass]="'active'">
                 {{#each context.menus.main}}
                 <a class="mdc-tab{{#if (regexMatch ../request.url.pathname route "gi")}} mdc-tab--active{{/if}}" href="{{path}}"><span class="mdc-tab--label">{{{label}}}</span></a>
@@ -109,21 +109,17 @@
                   <h3>About</h3>
                   <p>
                     <strong>Get Involved</strong> is run by the
-                    <a href="https://scvo.org">Scottish Council for Voluntary Organisations</a> and powered by a collaboration of infrastructure organisations across Scotland.
+                    <a href="https://scvo.org">Scottish Council for Voluntary Organisations</a> and powered by a collaboration of infrastructure organisations across Scotland. <a href="/about">Read more</a>
                   </p>
                 </div>
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-phone mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-3-desktop">
                   <h3>Help</h3>
                   <ul class="mdc-list">
+                    {{#each context.menus.footer}}
                     <li class="mdc-list-item">
-                      <a href="/accessibility">Accessibility</a>
+                      <a href="{{path}}">{{{label}}}</a>
                     </li>
-                    <li class="mdc-list-item">
-                      <a href="/privacy-and-cookies">Privacy &amp; cookies policy</a>
-                    </li>
-                    <li class="mdc-list-item">
-                      <a href="/terms-and-conditions">Terms &amp; conditions</a>
-                    </li>
+                    {{/each}}
                   </ul>
                 </div>
               </div>

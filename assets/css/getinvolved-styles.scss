@@ -107,9 +107,10 @@ header.mdc-toolbar {
 }
 
 main {
-  padding-bottom: $unit;
+  padding: $unit 0;
 }
 a {
+  color: #337ab7;
   text-decoration-skip: ink;
 }
 ::-moz-selection {
@@ -130,14 +131,17 @@ a {
   padding: $unit 0;
 }
 .mdc-toolbar {
-  box-shadow: none;
+  box-shadow: 0 2px 4px -1px rgba(0,0,0,.2), 0 4px 5px 0 rgba(0,0,0,.14), 0 1px 10px 0 rgba(0,0,0,.12);
+  .mdc-toolbar__row {
+    min-height: 48px;
+  }
   .container-fluid {
     padding: 0;
     // border-bottom: 3px solid $mdc-theme-secondary;
   }
   .mdc-toolbar__title {
     margin: 0;
-    padding: $unit 0;
+    padding: $unit 0 $unit*(3/4);
     .brand-logo {
       img {
         // min-height: 100px;
@@ -161,11 +165,16 @@ a {
     background-image: linear-gradient(90deg, rgba(0, 0, 0, 0.16), rgba(0, 0, 0, 0.16) 60%, rgba(0, 0, 0, 0.08) 120%, rgba(0, 0, 0, 0.08));
     .mdc-tab-bar {
       margin: 0;
+      .mdc-tab:first-child {
+        margin-left: 0 !important;
+      }
       .mdc-tab {
         min-width: 0;
         font-size: 1rem;
-        padding: 0 $unit;
+        padding: 0.5rem 0;
         text-transform: none;
+        margin: 0 .75rem;
+        display: inline-block;
       }
       .mdc-tab--active,
       .mdc-tab:hover {
@@ -175,16 +184,15 @@ a {
   }
 }
 
-.mdc-button {
-  background-color: white !important;
-  border: $brand-border-width solid $mdc-theme-secondary;
-  color: $mdc-theme-secondary !important;
+.mdc-button, .btn {
+  background-color: #337ab7 !important;
+  border-color: #337ab7;
+  color: white !important;
   text-transform: none;
   line-height: 1.75rem;
-  font-size: 1.25rem;
+  font-size: 0.9rem !important;
   text-align: center;
   display: block;
-  width: 50%;
   margin: 0 auto;
   padding: 10px 15px;
   height: auto;
@@ -202,14 +210,19 @@ div {
   font-weight: $heading-font-weight;
   color: $mdc-theme-secondary;
 }
-.mdc-toolbar__icon,
-a {
-  color: $mdc-theme-secondary;
+h1,
+h2 {
+  margin-top: 0;
 }
 em {
   font-family: $heading-font-family;
   font-style: italic;
   font-weight: 500;
+}
+hr {
+  background-color: $mdc-theme-primary;
+  height: $unit/5;
+  border: none;
 }
 p, li, div {
   font-weight: 400;
@@ -221,279 +234,6 @@ p.quote {
 
 .mdc-toolbar__icon {
   float: right;
-}
-
-.signatories main {
-  padding-bottom: 4rem;
-  // h1 {
-  //     font-size: 4rem;
-  //     line-height: 4.5rem;
-  // }
-  // h3 {
-  //     font-size: 2.5rem;
-  // }
-  // h4 {
-  //     font-size: 2rem;
-  //     margin: 1rem 0 0;
-  // }
-  img {
-    max-width: 100%;
-  }
-  label {
-    font-size: inherit;
-    color: inherit;
-  }
-  ul li {
-    list-style-type: disc;
-  }
-  ol {
-    padding-left: 1rem;
-    li {
-      list-style-type: decimal;
-    }
-  }
-
-  form {
-    margin-bottom: $unit*2;
-    .mdc-textfield {
-      position: relative;
-      margin-right: $unit/2;
-      .mdc-textfield__input {
-        margin-right: 1rem;
-        box-sizing: border-box;
-        padding: 0 $unit*2.5 0 $unit/2;
-        width: 100%;
-      }
-      .search-button-large {
-        padding: 1px 0 0;
-        position: absolute;
-        top: $unit/2;
-        right: $unit/2;
-        .fa-search {
-          color: $mdc-theme-secondary;
-        }
-      }
-    }
-  }
-  // h1 {
-  //     font-size: 5.3rem;
-  //     line-height: 5.5rem;
-  //     letter-spacing: -.1rem;
-  //     margin: 2rem 0 2rem;
-  //     padding-right: 2rem;
-  //     .small {
-  //         font-size: 3.8rem;
-  //         letter-spacing: -.15rem;
-  //     }
-  // }
-  // h4 {
-  //     margin: 0.5rem 0 0.25rem;
-  //     font-size: 1.8rem;
-  // }
-  h4.sort {
-    text-align: right;
-    margin-right: $unit/2;
-  }
-  .mdc-textfield__input {
-    margin-bottom: 1rem;
-  }
-  // .mdc-select {
-  //     background-image: none;
-  // }
-  .mdc-form-field {
-    width: 100%;
-    .mdc-select {
-      background-image: none;
-    }
-  }
-  .mdc-textfield__input,
-  .mdc-select {
-    font-size: 1.1rem;
-    font-weight: bold;
-    color: $mdc-theme-secondary;
-    line-height: 2rem;
-    height: 3rem;
-    background-color: white;
-    padding: 0 $unit/2;
-    border: $brand-border-width solid $mdc-theme-secondary;
-    border-radius: 0.15rem;
-    width: 100%;
-    letter-spacing: 0;
-    box-sizing: border-box;
-  }
-  .mdc-select {
-    box-sizing: border-box;
-    width: 100%;
-    max-width: 100%;
-    background-position-x: 97%;
-  }
-  .mdc-select:focus {
-    border-bottom-color: inherit;
-  }
-  .mdc-select,
-  .mdc-textfield {
-    width: 100%;
-    margin: 0 0 $unit/2;
-  }
-  .humanrightsdeclaration-signatory {
-    h3 {
-      margin: $unit 0;
-    }
-  }
-  .signatory-logo-background {
-    padding-left: $unit*2;
-    p {
-      padding: 1rem 1rem 0.25rem;
-      background: white;
-      text-align: center;
-      border: 0px solid $mdc-theme-secondary;
-    }
-    img {
-      margin: 0;
-    }
-  }
-  .signatory-detail {
-    p {
-      margin: 0 0 1rem;
-    }
-  }
-  .signatory {
-    background: white;
-    // margin: 0 -0.75rem;
-    padding: $unit;
-    vertical-align: middle;
-    a {
-      display: inline-block;
-      vertical-align: middle;
-      max-width: 100%;
-      width: 12rem;
-      height: 12rem;
-      line-height: 12rem;
-      display: block;
-      padding: 0;
-      vertical-align: middle;
-      position: relative;
-      text-align: center;
-      overflow: hidden;
-      font-size: 1rem;
-      font-weight: bold;
-      color: $mdc-theme-secondary;
-      margin: 0 auto;
-      span {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        margin-top: 3rem;
-        text-align: center;
-        display: block;
-        width: 100%;
-        font-weight: bold;
-        font-size: 1.1rem;
-        color: $mdc-theme-secondary;
-      }
-      img.resize-fit-center {
-        max-width: 90%;
-        max-height: 90%;
-        vertical-align: middle;
-      }
-    }
-  }
-
-  .signatory {
-    border: 0px solid $mdc-theme-secondary;
-    border-right: none;
-    border-bottom: none;
-  }
-  .signatory:nth-child(4n + 1) {
-    border-left: none;
-    .inner {
-      padding-left: 0;
-    }
-  }
-  .signatory:nth-child(4n + 4) {
-    border-right: none;
-    padding-right: 0;
-    .inner {
-      margin-right: 0;
-    }
-  }
-  .signatory:nth-child(4n+1):nth-last-child(-n+4),
-  .signatory:nth-child(4n+1):nth-last-child(-n+4) ~ .mdc-layout-grid__cell--span-3 {
-    border-bottom: 0px solid $mdc-theme-secondary;
-  }
-}
-
-// Pagination ==================================================================
-
-.pagination {
-  text-align: center;
-  display: block !important;
-  padding-top: $unit !important;
-  margin-top: 3rem;
-  list-style-type: none;
-  li a,
-  li.active a {
-    cursor: pointer;
-    color: $mdc-theme-secondary;
-    font-weight: 400;
-    text-decoration: none;
-  }
-  li.active {
-    background-color: $mdc-theme-secondary;
-  }
-  li.disabled a {
-    color: inherit;
-    opacity: 0.5;
-  }
-  li {
-    display: inline-block;
-    padding: 0 !important;
-    height: $unit*2.5;
-    width: $unit*2.5;
-    border-radius: 50%;
-    margin: 0 $unit/5;
-    vertical-align: bottom;
-    a {
-      font-size: 1.3rem;
-      line-height: $unit*2.5;
-      height: $unit*2.5;
-      width: $unit*2.5;
-      color: $mdc-theme-secondary;
-      padding: 0;
-      margin: 0;
-      font-weight: 600;
-      display: block;
-    }
-    a.pagination-arrow {
-      color: $mdc-theme-secondary;
-      vertical-align: middle;
-    }
-  }
-  li.disabled a.pagination-arrow {
-    cursor: default;
-    color: $mdc-theme-secondary;
-  }
-  li:first-child a {
-    padding-left: 0;
-  }
-  li:last-child a {
-    padding-right: 0;
-  }
-  li.current-page {
-    background-color: $mdc-theme-secondary;
-    border-radius: 50%;
-    a {
-      color: white;
-    }
-  }
-  li:hover:not(.disabled),
-  li.current-page:hover {
-    background-color: $mdc-theme-secondary;
-    a {
-      color: white;
-      text-decoration: none;
-    }
-  }
 }
 
 footer {
@@ -549,7 +289,7 @@ footer {
     position: relative;
   }
   .footer-main {
-    padding-bottom: $unit/2;
+    padding-bottom: 0;
     border-top: $unit solid $mdc-theme-primary;
     // background-color: $mdc-theme-secondary;
     // background-image: linear-gradient(
