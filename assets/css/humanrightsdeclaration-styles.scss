@@ -141,7 +141,7 @@ a:hover {
 }
 .mdc-toolbar {
   background: white;
-  box-shadow: none;
+  box-shadow: 0 2px 4px -1px rgba(0,0,0,.2), 0 4px 5px 0 rgba(0,0,0,.14), 0 1px 10px 0 rgba(0,0,0,.12);
   .container-fluid {
     padding-bottom: 0;
     // border-bottom: 3px solid $mdc-theme-secondary;
@@ -664,10 +664,20 @@ footer {
     position: absolute;
     height: 45px;
     bottom: 1.2rem;
-    right: 0.75rem;
+    right: 0;
   }
   .menu ul {
     margin-top: 0;
+  }
+}
+
+@media screen and (max-width: 840px) {
+  footer .logo.scvo {
+    margin: 0 auto;
+    display: block;
+    position: relative;
+    bottom: 0;
+    right: 0;
   }
 }
 
@@ -714,11 +724,6 @@ footer {
   .pagination-distance-6,
   .pagination-distance-5 {
     display: none !important;
-  }
-  footer .logo.scvo {
-    position: relative;
-    bottom: 0;
-    right: 0;
   }
 }
 
