@@ -26,6 +26,8 @@ export const DOMAIN_MAP: {[domain: string]: string} = {
   'getinvolved.local': 'getinvolved',
   'getinvolved.scot': 'getinvolved',
   'test.getinvolved.scot': 'getinvolved',
+  'getinvolved.org.uk': 'getinvolved',
+  'test.getinvolved.org.uk': 'getinvolved',
   'goodmoves.eu': 'goodmoves',
   'goodmoves.be': 'goodmoves',
   'goodmoves.com': 'goodmoves',
