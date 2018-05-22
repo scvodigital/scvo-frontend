@@ -1,8 +1,8 @@
 {{#if data.primaryResponse.hits.hits.[0] ~}}
 {{#with data.primaryResponse.hits.hits.[0]._source ~}}
 {{#if title ~}}
-<title>Scotland for Europe signatory: {{{title}}}</title>
-<meta property="og:title" content="Scotland for Europe signatory: {{{title}}}" data-dynamic="true">
+<title>{{{title}}} is a signatory of Scotland for Europe</title>
+<meta property="og:title" content="{{{title}}} is a signatory of Scotland for Europe" data-dynamic="true">
 {{else}}
 <title>{{route.metaData.title}}</title>
 <meta property="og:title" content="{{route.metaData.title}}" data-dynamic="true">
@@ -24,4 +24,5 @@
 {{/with ~}}
 {{else}}
 <title>{{route.metaData.title}}</title>
-<meta property="og:title" content="{{route.metaData.title}}" data-dynamic="true">{{/if ~}}
+<meta property="og:title" content="{{route.metaData.title}}" data-dynamic="true">
+{{/if ~}}

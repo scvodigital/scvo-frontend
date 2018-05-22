@@ -1,8 +1,8 @@
 {{#if data.primaryResponse.hits.hits.[0] ~}}
 {{#with data.primaryResponse.hits.hits.[0]._source ~}}
 {{#if title ~}}
-<title>The Scotland Declaration on Human Rights signatory: {{{title}}}</title>
-<meta property="og:title" content="The Scotland Declaration on Human Rights signatory: {{{title}}}" data-dynamic="true">
+<title>{{{title}}} is a signatory of the Scotland Declaration on Human Rights</title>
+<meta property="og:title" content="{{{title}}} is a signatory of the Scotland Declaration on Human Rights" data-dynamic="true">
 {{else}}
 <title>{{route.metaData.title}}</title>
 <meta property="og:title" content="{{route.metaData.title}}" data-dynamic="true">
@@ -24,4 +24,5 @@
 {{/with ~}}
 {{else}}
 <title>{{route.metaData.title}}</title>
-<meta property="og:title" content="{{route.metaData.title}}" data-dynamic="true">{{/if ~}}
+<meta property="og:title" content="{{route.metaData.title}}" data-dynamic="true">
+{{/if ~}}
