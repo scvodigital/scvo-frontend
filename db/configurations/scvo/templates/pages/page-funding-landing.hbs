@@ -27,11 +27,17 @@
           <h3 class="blogs">Related posts</h3>
           <div class="mdc-layout-grid">
             <div class="mdc-layout-grid__inner">
-              {{#each data.supplimentaryResponses.related_posts.hits.hits ~}}
+              {{#with data.supplimentaryResponses.related_posts.hits.hits ~}}
               <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet  mdc-layout-grid__cell--span-4-phone">
-                {{{_source.rendered.scvo_gist}}}
+                {{{[0]._source.rendered.scvo_gist}}}
               </div>
-              {{/each ~}}
+              <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet  mdc-layout-grid__cell--span-4-phone">
+                {{{[1]._source.rendered.scvo_gist}}}
+              </div>
+              <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet  mdc-layout-grid__cell--span-4-phone">
+                {{{[2]._source.rendered.scvo_gist}}}
+              </div>
+              {{/with ~}}
             </div>
           </div>
         </div>

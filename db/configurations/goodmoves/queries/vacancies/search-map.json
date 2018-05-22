@@ -1,0 +1,76 @@
+{
+  "size": 1000,
+  "_source": [
+    "Id",
+    "title",
+    "organisation.name",
+    "geo_vacancy_coords",
+    "closing_date",
+    "salary",
+    "role_status_list",
+    "slug"
+  ],
+  "query": {
+    "bool": {
+      {{#ifAny request.params.query.sectors request.params.query.roles request.params.query.role_status request.params.query.lat}}
+      "filter": [
+        {{#if request.params.query.sectors ~}}
+        {
+          "terms": {
+            "sectors": {{{stringify (arrayify request.params.query.sectors)}}}
+          }
+        }
+        {{#ifAny request.params.query.roles request.params.query.role_status request.params.query.lat}},{{/ifAny}}
+        {{/if ~}}
+        {{#if request.params.query.roles ~}}
+        {
+          "terms": {
+            "roles": {{{stringify (arrayify request.params.query.roles)}}}
+          }
+        }
+        {{#ifAny request.params.query.role_status request.params.query.lat}},{{/ifAny}}
+        {{/if ~}}
+        {{#if request.params.query.role_status ~}}
+        {
+          "terms": {
+            "status": {{{stringify (arrayify request.params.query.role_status)}}}
+          }
+        }
+        {{#ifAny request.params.query.lat}},{{/ifAny}}
+        {{/if}}
+        {{#if request.params.query.lat ~}}
+        {
+          "geo_distance": {
+            "distance": "{{default request.params.query.distance "8046.72"}}meters",
+            "geo_vacancy_coords": {
+              "lat": {{request.params.query.lat}},
+              "lon": {{request.params.query.lng}}
+            }
+          }
+        }
+        {{/if ~}}
+      ],
+      {{/ifAny ~}}
+      "must": [
+        {{#if request.params.query.keywords ~}}
+        {
+          "query_string": {
+            "query": {{{stringify request.params.query.keywords}}},
+            "default_field": "text_bag",
+            "default_operator": "AND",
+            "analyzer": "snowball"
+          }
+        },
+        {{/if ~}}
+        {
+          "term": {
+            "vacancy_status": "vacancy-open"
+          }
+        }
+      ]
+    }
+  },
+  "sort": {
+    "start_at": "desc"
+  }
+}

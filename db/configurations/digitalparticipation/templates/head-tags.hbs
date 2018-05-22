@@ -1,11 +1,15 @@
+{{#compare request.params.path "===" "signatories" ~}}
+<title>{{route.metaData.title}}</title>
+<meta property="og:title" content="{{route.metaData.title}}" data-dynamic="true">
+{{else}}
 {{#if data.primaryResponse.hits.hits.[0] ~}}
 {{#with data.primaryResponse.hits.hits.[0]._source ~}}
 {{#if title ~}}
-<title>Scotland's Digital Participation Charter signatory: {{{title}}}</title>
-<meta property="og:title" content="Scotland's Digital Participation Charter signatory: {{{title}}}" data-dynamic="true">
+<title>{{{title}}} is a signatory of Scotland's Digital Participation Charter</title>
+<meta property="og:title" content="{{{title}}} is a signatory of Scotland's Digital Participation Charter" data-dynamic="true">
 {{else}}
-<title>Scotland's Digital Participation Charter</title>
-<meta property="og:title" content="Scotland's Digital Participation Charter" data-dynamic="true">
+<title>{{route.metaData.title}}</title>
+<meta property="og:title" content="{{route.metaData.title}}" data-dynamic="true">
 {{/if ~}}
 {{#if files.0.uploadUrl ~}}
 <meta property="og:image" content="{{files.0.uploadUrl}}" data-dynamic="true">
@@ -23,6 +27,7 @@
 {{/if ~}}
 {{/with ~}}
 {{else}}
-<title>Scotland's Digital Participation Charter</title>
-<meta property="og:title" content="Scotland's Digital Participation Charter" data-dynamic="true">
+<title>{{route.metaData.title}}</title>
+<meta property="og:title" content="{{route.metaData.title}}" data-dynamic="true">
 {{/if ~}}
+{{/compare ~}}

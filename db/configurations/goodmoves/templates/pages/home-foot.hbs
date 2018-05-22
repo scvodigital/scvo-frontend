@@ -1,5 +1,4 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"></script>
-<script src="/assets/js/goodmoves/home.js" async defer></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBJdxcQpVKQ6HdrjnPXycUoZqsmp-Ep3l0&libraries=places&region=uk&callback=initMap" async defer></script>
 <script>
 var terms = {
@@ -13,6 +12,11 @@ var terms = {
     { field: 'roles', term: {{{stringify key}}} },
     {{/each ~}}
   ],
+  regions: [
+    {{#each data.supplimentaryResponses.types.aggregations.regions.buckets ~}}
+    { field: 'regions', term: {{{stringify key}}} },
+    {{/each ~}}
+  ],
   role_status: [
     {{#each data.supplimentaryResponses.types.aggregations.role_status.buckets ~}}
     { field: 'role_status', term: {{{stringify key}}} },
@@ -20,3 +24,4 @@ var terms = {
   ]
 };
 </script>
+<script src="/assets/js/goodmoves/home.js" async defer></script>

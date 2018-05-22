@@ -1,0 +1,26 @@
+{{> vacancy_search_form this instance_id="perm"}}
+
+<div class="container-content">
+  <div class="goodmoves-job">
+    {{#each data.primaryResponse.hits.hits ~}}
+    {{> vacancy_full _source}}
+    {{/each ~}}
+  </div>
+
+  <div class="goodmoves-related-jobs">
+    <div class="mdc-typography--headline5 v-margin-full">
+      Similar jobs
+    </div>
+    <div class="mdc-layout-grid">
+      <div class="mdc-layout-grid__inner">
+        {{#each data.supplimentaryResponses.related.hits.hits ~}}
+        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone">
+          {{> vacancy_list _source}}
+        </div>
+        {{/each ~}}
+      </div>
+    </div>
+  </div>
+
+  {{> tfn_related}}
+</div>

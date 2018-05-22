@@ -3,6 +3,17 @@
 
 $unit: 1rem;
 $nav-height: 38px;
+$toolbar-shadow-reverse: 0px -3px 5px -1px rgba(0, 0, 0, 0.2), 0px -5px 8px 0px rgba(0, 0, 0, 0.14), 0px -1px 14px 0px rgba(0, 0, 0, 0.12);
+
+$base-font-family:                  "Open Sans", Helvetica, Arial, sans-serif;
+$base-font-weight:                  400;
+
+$heading-font-family:               "Montserrat", Helvetica, Arial, sans-serif;
+$heading-font-weight:               700;
+
+$footer-font-family:                "Open Sans", Helvetica, Arial, sans-serif;
+$footer-font-weight:                400;
+
 
 $colours: (
 default: (
@@ -166,10 +177,15 @@ secondary-light: #FFA000,
 secondary-dark: #FF6F00
 ),
 footer: (
-primary: #371448,
-primary-light: #B3185B,
-primary-dark: #251032
+primary: #37474F,
+primary-light: #455A64,
+primary-dark: #263238
 )
+// footer: (
+// primary: #371448,
+// primary-light: #B3185B,
+// primary-dark: #251032
+// )
 );
 
 @mixin theme-colours($themeName: 'default') {
@@ -642,15 +658,33 @@ primary-dark: #251032
 
   footer {
     color: white;
-    background-image: linear-gradient(
-    160deg,
-    map-get($themeFooter, 'primary'),
-    map-get($themeFooter, 'primary') 55%,
-    map-get($themeFooter, 'primary-dark') 95%,
-    map-get($themeFooter, 'primary-dark')
-    );
+    border-top: $unit solid map-get($themeSelected, 'primary');
+    background-color: map-get($themeFooter, 'primary');
+    // background-image: linear-gradient(
+    // -120deg,
+    // map-get($themeFooter, 'primary-dark'),
+    // map-get($themeFooter, 'primary-dark') $unit*2,
+    // map-get($themeSelected, 'primary-dark') $unit*2.05,
+    // map-get($themeSelected, 'primary-dark') $unit*2.5,
+    // map-get($themeSelected, 'primary') $unit*2.55,
+    // map-get($themeSelected, 'primary') $unit*3,
+    // map-get($themeSelected, 'primary-light') $unit*3.05,
+    // map-get($themeSelected, 'primary-light') $unit*3.5,
+    // white $unit*3.55,
+    // white $unit*4,
+    // map-get($themeFooter, 'primary') $unit*4.05,
+    // map-get($themeFooter, 'primary')
+    // );
+    box-shadow: $toolbar-shadow-reverse;
+    // border-top: 0.6rem solid map-get($themeFooter, 'primary-light');
+    // background-image: linear-gradient(
+    // 160deg,
+    // map-get($themeFooter, 'primary'),
+    // map-get($themeFooter, 'primary') 55%,
+    // map-get($themeFooter, 'primary-dark') 95%,
+    // map-get($themeFooter, 'primary-dark')
+    // );
     // background-color: map-get($themeFooter, 'primary');
-    border-top: 0.6rem solid map-get($themeFooter, 'primary-light');
     .footer-copyright {
       background-color: map-get($themeFooter, 'primary-dark');
     }
@@ -816,7 +850,8 @@ input:focus:-ms-input-placeholder {
 .brand-logo {
   margin-left: -$unit/2;
   img {
-    max-height: $unit*3.5;
+    max-height: $unit*3;
+    margin-top: $unit/2;
   }
 }
 
@@ -842,7 +877,8 @@ img.responsive {
 .mdc-simple-menu .mdc-list-item,
 .mdc-temporary-drawer .mdc-list-item,
 .mdc-list {
-  font-family: "Open Sans", Helvetica, Arial, sans-serif;
+  font-family: $base-font-family, Helvetica, Arial, sans-serif;
+  font-weight: $base-font-weight;
 }
 .mdc-temporary-drawer .mdc-list-item {
   font-weight: 600;
@@ -852,8 +888,8 @@ img.responsive {
 .mdc-typography--title,
 .mdc-typography--headline,
 .supplimentary-list-title {
-  font-family: "Montserrat", "Open Sans", Helvetica, Arial, sans-serif;
-  font-weight: 700;
+  font-family: $heading-font-family, $base-font-family, Helvetica, Arial, sans-serif;
+  font-weight: $heading-font-weight;
 }
 .mdc-typography {
   padding: 0;
@@ -1815,16 +1851,16 @@ form#settled_status {
   padding-bottom: $unit*2 !important;
   li {
     padding: 0 !important;
-    height: $unit*2;
-    width: $unit*2;
+    height: $unit*2.5;
+    width: $unit*2.5;
     border-radius: 50%;
     margin: 0 $unit/5;
     vertical-align: bottom;
     a {
       font-size: 1.2rem;
-      line-height: $unit*2;
-      height: $unit*2;
-      width: $unit*2;
+      line-height: $unit*2.5;
+      height: $unit*2.5;
+      width: $unit*2.5;
       color: #000;
       padding: 0;
       margin: 0;
@@ -2324,7 +2360,7 @@ body.i-love-charity .page-info,
     }
     h3 {
       font-weight: 100;
-      font-family: "Open Sans";
+      font-family: $base-font-family;
       margin-bottom: $unit*2;
       text-align: center;
     }
@@ -3012,6 +3048,7 @@ body.post.author {
       content: " ";
       padding: 0;
       margin: 0;
+      display: none;
     }
   }
   .mdc-button {
@@ -3310,8 +3347,8 @@ h2,
 h3,
 h4 {
   margin-bottom: $unit/2;
-  font-family: "Montserrat", "Open Sans", Helvetica, Arial, sans-serif;
-  font-weight: 700;
+  font-family: $heading-font-family, $base-font-family, Helvetica, Arial, sans-serif;
+  font-weight: $base-font-weight;
   strong {
     font-weight: 700;
   }
@@ -3460,6 +3497,7 @@ p:last-child {
     content: " ";
     margin: 0;
     top: 0;
+    display: none;
   }
 }
 
@@ -3536,11 +3574,16 @@ p.results-highlights em {
 }
 
 footer {
+  position: relative;
   .footer-main {
     padding: 0;
     margin-bottom: $unit;
   }
   h3 {
+    font-size: 1.2rem;
+    margin: $unit 0;
+    font-family: $footer-font-family;
+    font-weight: 600;
     padding-bottom: $unit/2;
     border-bottom-style: solid;
     border-bottom-width: $unit/5;
@@ -3548,7 +3591,7 @@ footer {
   .about a,
   a {
     color: white;
-    text-decoration: underline;
+    // text-decoration: underline;
   }
   .about a:hover,
   a:hover {
@@ -3557,6 +3600,7 @@ footer {
   .mdc-list .mdc-list-item {
     a {
       font-size: 1rem;
+      font-weight: 600;
     }
     a:hover {
       text-decoration: underline !important;
@@ -3609,9 +3653,9 @@ footer {
     }
   }
   .footer-copyright {
-    font-size: 0.85rem;
     p {
-      margin: 0.7rem 0 0;
+      font-size: 0.9rem;
+      margin: $unit*.6 0 $unit/2;
     }
   }
 }

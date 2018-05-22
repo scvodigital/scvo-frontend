@@ -1,15 +1,70 @@
-<div class="page">
-  <div class="container-fluid">
-    {{#> handle_404 ~}}
-    <div class="mdc-layout-grid">
-      <div class="mdc-layout-grid__inner">
-        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-8-desktop mdc-layout-grid__cell--span-5-tablet mdc-layout-grid__cell--span-4-phone content page-content">
-          {{{data.primaryResponse.hits.hits.[0]._source.rendered.goodmoves_full}}}
-        </div>
-        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-12-tablet sidebar page-sidebar">
-        </div>
-      </div>
-    </div>
-    {{/handle_404 ~}}
+{{> vacancy_search_form this instance_id="perm"}}
+
+<div class="container-content goodmoves-page">
+  {{> banner_ads}}
+
+  <div class="mdc-card">
+
+    {{#compare request.params.path "===" "advertise-with-us" ~}}
+    <h1 class="mdc-typography--headline4">
+      Advertise with us
+    </h1>
+    <p>
+      If you are interested in booking a banner advert with us please call 0800 0192 149 to speak with a member of the goodmoves sales team.
+    </p>
+    {{/compare ~}}
+
+    {{#compare request.params.path "===" "contact-us" ~}}
+    <h1 class="mdc-typography--headline4">
+      Contact us
+    </h1>
+    <p>All general queries should be sent to <a href="mailto:enquiries@goodmoves.org.uk">enquiries@goodmoves.org.uk</a>. If you encounter any unexpected error messages or the site doesn't work as expected please also let us know your web browser version and send a screenshot if appropriate. We would love to hear your suggestions for improving goodmoves.</p>
+    <h2 class="mdc-typography--headline5">Recruiters</h2>
+    <p>If you cannot find the answer to your query in our marketing pack, please feel free to ring us on <a href="tel:08000192149">0800 0192 149</a> or email <a href="mailto:sales@goodmoves.org.uk">sales@goodmoves.org.uk</a></p>
+    <h2 class="mdc-typography--headline5">Jobseekers</h2>
+    <p>Please send any queries to <a href="mailto:enquiries@goodmoves.org.uk">enquiries@goodmoves.org.uk</a></p>
+    <p><a href="https://twitter.com/goodmovesjobs">Follow us on Twitter</a></p>
+    {{/compare ~}}
+
+    {{#compare request.params.path "===" "advice" ~}}
+    <h1 class="mdc-typography--headline4">
+      Advice
+    </h1>
+    <p>
+      Here are some helpful guides to help you get your idea third sector job:
+    </p>
+    <ul>
+      <li><a href="/">Completing a Winning Application</a></li>
+      <li><a href="/">CV Advice</a></li>
+      <li><a href="/">Routes into Employment in the Voluntary Sector</a></li>
+    </ul>
+    {{/compare ~}}
+
+    {{#compare request.params.path "===" "recruiting" ~}}
+    <h1 class="mdc-typography--headline4">The solution to all your recruitment needs</h1>
+    <p>goodmoves is a recruitment service and careers hub which meets the needs of charities, voluntary organisations and social enterprises. We provide low cost, professional and targeted advertising for all your recruitment needs.</p>
+    <h2 class="mdc-typography--headline5">Why choose us?</h2>
+    <ul>
+      <li>goodmoves charges a single fee with no hidden costs</li>
+      <li>goodmoves takes your copy, designs and distributes your ads to various media featured below</li>
+      <li>goodmoves includes your organisation profile with your vacancies on the website</li>
+      <li>goodmoves makes your application pack available for applicants to download direct from the website</li>
+      <li>goodmoves publishes your vacancies to the website immediately if your timescales are tight</li>
+    </ul>
+    <h2 class="mdc-typography--headline5">Where will my vacancies appear?</h2>
+    <h3 class="mdc-typography--headline6">TFN (Third Force News)</h3>
+    <p>A weekly newspaper with a readership of over 25,000, circulated across Scotland to charities, voluntary organisations and social enterprises plus local and national government.</p>
+    <h3 class="mdc-typography--headline6">thirdforcenews.org.uk</h3>
+    <p>The website of Third Force News.</p>
+    <h3 class="mdc-typography--headline6">goodmoves.com</h3>
+    <p>The heart of our service is more than just a jobs website. We offer information and advice about the charity and voluntary sector as an exciting career option.</p>
+    <h3 class="mdc-typography--headline6">scvo.org.uk</h3>
+    <p>The Scottish Council for Voluntary Organisations’ main website. Over 1000 jobseekers find goodmoves through the SCVO job site every week. Key goodmoves vacancies are also featured in SCVO’s core e-bulletins.</p>
+    <h2 class="mdc-typography--headline5">What should I do next?</h2>
+    <p>Get in touch to discuss your recruitment needs!</p>
+    <p>Take a look at our <a href="https://readymag.com/u24124000/650006/">rate card</a> and sample advert sizes, then call or email the team who can answer any queries and take details of your vacancy.</p>
+    <p>Ring us at: 0800 0192 149</p>
+    <p>E-mail us at: <a href="mailto:sales@goodmoves.org.uk">sales@goodmoves.org.uk</a></p>
+    {{/compare ~}}
   </div>
 </div>

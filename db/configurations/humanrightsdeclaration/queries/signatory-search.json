@@ -8,20 +8,43 @@
   ],
   "query": {
     "bool": {
-      "must": [
-        {{#if request.params.query.q}}
+      {{#if request.params.query.q ~}}
+      "should": [
         {
           "query_string": {
-            "query": "{{request.params.query.q}}",
+            "query": {{{stringify (default request.params.query.q "")}}},
+            "default_field": "text_bag",
             "default_operator": "AND",
             "analyzer": "snowball"
           }
+        },
+        {
+          "match_phrase": {
+            "title": {
+              "query": {{{stringify (default request.params.query.q "")}}},
+              "boost": 10
+            }
+          }
         }
-        {{/if}}
       ]
+      {{else}}
+      "must": [
+        {
+          "match_all": {}
+        }
+      ]
+      {{/if ~}}
     }
   },
   "sort": {
-    {{#if request.params.query.sort}}"slug": "asc"{{else}}"date_signed": "desc"{{/if}}
+    {{#if request.params.query.sort ~}}
+    "slug": "asc"
+    {{else}}
+    {{#if request.params.query.q ~}}
+    "_score": "desc"
+    {{else}}
+    "date_signed": "desc"
+    {{/if ~}}
+    {{/if ~}}
   }
 }

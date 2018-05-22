@@ -21,7 +21,7 @@ var GoodmovesController = Class.extend({
     });
     this.windowResized();
   },
- 
+
   windowResized: function() {
     var width = $(window).width();
     var newDisplayMode = null;
@@ -68,7 +68,7 @@ var GoodmovesController = Class.extend({
   setupFirebase: function() {
     // Initialize Firebase
     this.app = firebase.initializeApp(this.firebaseConfig);
-    var that = this; 
+    var that = this;
     // Firebase Auth Functions
     this.app.auth().onAuthStateChanged(function(user) {
       if (user) {
@@ -97,7 +97,6 @@ var GoodmovesController = Class.extend({
     document.cookie = name + "=" + (value || "")  + expires + "; path=/; secure";
   },
 
-
   getUserProfile: function(user) {
     var that = this;
     this.app.database().ref('/users/' + user.uid).once('value').then(function(response) {
@@ -123,6 +122,22 @@ var GoodmovesController = Class.extend({
       });
       $(selectors.join(',')).addClass('vacancy-shortlisted');
     }
+
+    console.log($('[data-collapse-target]'));
+    $('[data-collapse-target]').off('click').on('click', function(evt) {
+      console.log('Collapse click:', evt);
+      var $el = $(evt.currentTarget);
+      var selector = $el.attr('data-collapse-target');
+      var $target = $(selector);
+      var $icon = $el.find('.far');
+      if ($target.is(':visible')) {
+        $target.hide();
+        $icon.removeClass('fa-chevron-down').addClass('fa-chevron-up');
+      } else { 
+        $target.show();
+        $icon.removeClass('fa-chevron-up').addClass('fa-chevron-down');
+      }
+    });
   },
 
   setUserProfileDefaults: function() {

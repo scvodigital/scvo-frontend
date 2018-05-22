@@ -8,36 +8,61 @@
   ],
   "query": {
     "bool": {
+      {{#ifAny request.params.query.sector request.params.query.category ~}}
       "filter": [
-        {{#if request.params.query.sector}}
+        {{#if request.params.query.sector ~}}
         {
           "term": {
             "sector": "{{request.params.query.sector}}"
           }
-          }{{#if request.params.query.category}},{{/if}}
-          {{/if}}
-          {{#if request.params.query.category}}
-          {
-            "term": {
-              "category": "{{request.params.query.category}}"
+        }{{#if request.params.query.category}},{{/if}}
+        {{/if ~}}
+        {{#if request.params.query.category ~}}
+        {
+          "term": {
+            "category": "{{request.params.query.category}}"
+          }
+        }
+        {{/if ~}}
+      ],
+      {{/ifAny ~}}
+      {{#if request.params.query.q ~}}
+      "should": [
+        {
+          "query_string": {
+            "query": {{{stringify (default request.params.query.q "")}}},
+            "default_field": "text_bag_boost",
+            "default_operator": "AND",
+            "analyzer": "snowball"
+          }
+        },
+        {
+          "match_phrase": {
+            "title": {
+              "query": {{{stringify (default request.params.query.q "")}}},
+              "boost": 10
             }
           }
-          {{/if}}
-        ],
-        "must": [
-          {{#if request.params.query.q}}
-          {
-            "query_string": {
-              "query": "{{request.params.query.q}}",
-              "default_operator": "AND",
-              "analyzer": "snowball"
-            }
-          }
-          {{/if}}
-        ]
-      }
-    },
-    "sort": {
-      {{#if request.params.query.sort}}"slug": "asc"{{else}}"date_signed": "desc"{{/if}}
+        }
+      ]
+      {{else}}
+      "must": [
+        {
+          "match_all": {}
+        }
+      ]
+      {{/if ~}}
     }
+  },
+  "sort": {
+    {{#if request.params.query.sort ~}}
+    "slug": "asc"
+    {{else}}
+    {{#if request.params.query.q ~}}
+    "_score": "desc"
+    {{else}}
+    "date_signed": "desc"
+    {{/if ~}}
+    {{/if ~}}
   }
+}

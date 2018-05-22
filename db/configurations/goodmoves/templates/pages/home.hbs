@@ -12,6 +12,10 @@
             <span class="far fa-search mdc-list-item__graphic" title="Jobs"></span>
             Jobs
           </a>
+          <a class="mdc-tab" onclick="searchViewCategories()">
+            <span class="far fa-list-alt mdc-list-item__graphic" title="Categories"></span>
+            Categories
+          </a>
           <a class="mdc-tab" onclick="searchViewOrganisations()">
             <span class="far fa-building mdc-list-item__graphic" title="Organisations"></span>
             Organisations
@@ -23,84 +27,168 @@
           <span class="mdc-tab-bar__indicator"></span>
         </div>
         <div id="search-view-jobs" class="search-form">
-          <div class="mdc-layout-grid">
-            <div class="mdc-layout-grid__inner">
-              <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-5-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
-                <div class="mdc-text-field mdc-text-field--box mdc-text-field--with-leading-icon" data-mdc-auto-init="MDCTextField">
-                  <span class="far fa-search mdc-text-field__icon" tabindex="0" role="button"></span>
-                  <input type="text" id="what-jobs" class="mdc-text-field__input">
-                  <label for="what-jobs" class="mdc-floating-label">
-                    Keywords
-                  </label>
-                  <div class="mdc-line-ripple"></div>
-                </div>
-                <p id="what-jobs-helper-text" class="mdc-text-field-helper-text" aria-hidden="true">
-                  e.g. Fundraising, Carer, Manager
-                </p>
-                <div id="search-terms" class="mdc-chip-set"></div>
-              </div>
-              <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-2-tablet mdc-layout-grid__cell--span-3-phone">
-                <div class="mdc-text-field mdc-text-field--box mdc-text-field--with-leading-icon" data-mdc-auto-init="MDCTextField">
-                  <span class="far fa-map-marker-alt mdc-text-field__icon" tabindex="0" role="button"></span>
-                  <input type="text" id="where-jobs" class="mdc-text-field__input" placeholder=" ">
-                  <label for="where-jobs" class="mdc-floating-label">
-                    Location
-                  </label>
-                  <div class="mdc-line-ripple"></div>
-                </div>
-                <p id="where-jobs-helper-text" class="mdc-text-field-helper-text" aria-hidden="true">
-                  e.g. Glasgow, Edinburgh, Inverness
-                </p>
-              </div>
-              <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-2-desktop mdc-layout-grid__cell--span-1-tablet mdc-layout-grid__cell--span-1-phone">
-                <div class="mdc-form-field">
-                  <div class="mdc-select mdc-select--box" data-mdc-auto-init="MDCSelect">
-                    <select class="mdc-select__native-control" id="distance-jobs">
-                      <option value="8046.72" selected>within 5 miles</option>
-                      <option value="16093.44">within 10 miles</option>
-                      <option value="40233.6">within 25 miles</option>
-                      <option value="80467.2">within 50 miles</option>
-                      <option value="any">any distance</option>
-                    </select>
-                    <label class="mdc-floating-label mdc-floating-label--float-above" for="distance-jobs">
-                      Distance
+          <div action="/search" method="get">
+            <input type="hidden" name="lat" value="">
+            <input type="hidden" name="lng" value="">
+            <div class="mdc-layout-grid">
+              <div class="mdc-layout-grid__inner">
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-5-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
+                  <div class="mdc-text-field mdc-text-field--box mdc-text-field--with-leading-icon mdc-text-field-tt" data-mdc-auto-init="MDCTextField">
+                    <span class="far fa-search mdc-text-field__icon" tabindex="0" role="button"></span>
+                    <input type="text" id="what-jobs" name="keywords" class="mdc-text-field__input">
+                    <label for="what-jobs" class="mdc-floating-label">
+                      Keywords
                     </label>
+                    <div class="mdc-line-ripple"></div>
+                  </div>
+                  <p id="what-jobs-helper-text" class="mdc-text-field-helper-text" aria-hidden="true">
+                    e.g. Fundraising, Carer, Manager
+                  </p>
+                </div>
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-2-tablet mdc-layout-grid__cell--span-3-phone">
+                  <div class="mdc-text-field mdc-text-field--box mdc-text-field--with-leading-icon" data-mdc-auto-init="MDCTextField">
+                    <span class="far fa-map-marker-alt mdc-text-field__icon" tabindex="0" role="button" onclick="geolocate();"></span>
+                    <input type="text" id="where-jobs" name="location" class="mdc-text-field__input" placeholder=" ">
+                    <label for="where-jobs" class="mdc-floating-label">
+                      Location
+                    </label>
+                    <div class="mdc-line-ripple"></div>
+                  </div>
+                  <p id="where-jobs-helper-text" class="mdc-text-field-helper-text" aria-hidden="true">
+                    e.g. Glasgow, Edinburgh, Inverness
+                  </p>
+                </div>
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-2-desktop mdc-layout-grid__cell--span-1-tablet mdc-layout-grid__cell--span-1-phone">
+                  <div class="mdc-form-field">
+                    <div class="mdc-select mdc-select--box" data-mdc-auto-init="MDCSelect">
+                      <select class="mdc-select__native-control" name="distance" id="distance-jobs">
+                        <option value="8046.72" selected>within 5 miles</option>
+                        <option value="16093.44">within 10 miles</option>
+                        <option value="40233.6">within 25 miles</option>
+                        <option value="80467.2">within 50 miles</option>
+                        <option value="any">any distance</option>
+                      </select>
+                      <label class="mdc-floating-label mdc-floating-label--float-above" for="distance-jobs">
+                        Distance
+                      </label>
+                    </div>
                   </div>
                 </div>
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-2-desktop mdc-layout-grid__cell--span-1-tablet mdc-layout-grid__cell--span-4-phone">
+                  <button id="search-jobs" class="mdc-button mdc-button--raised mdc-text-field--box mdc-button--search">
+                    Search
+                    <span class="far fa-search" aria-hidden="true"></span>
+                  </button>
+                </div>
               </div>
-              <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-2-desktop mdc-layout-grid__cell--span-1-tablet mdc-layout-grid__cell--span-4-phone">
-                <button class="mdc-button mdc-button--raised mdc-text-field--box mdc-button--search" href="/search">
-                  Search
-                  <span class="far fa-search" aria-hidden="true"></span>
-                </button>
+              <div class="mdc-layout-grid__inner">
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone">
+                  <div id="search-terms" class="mdc-chip-set"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="search-view-categories" class="search-form" style="display: none;">
+          <div class="mdc-layout-grid">
+            <div class="mdc-layout-grid__inner">
+              <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
+                <div class="browse-title mdc-typography--headline5">
+                  Jobs by sector
+                </div>
+                <ul class="mdc-list">
+                  {{#each data.supplimentaryResponses.types.aggregations.sectors.buckets ~}}
+                  <li class="mdc-list-item">
+                    <span class="mdc-list-item__text">
+                      <a href="/search?sector={{urlencode key}}">{{key}}</a>
+                    </span>
+                    <span class="mdc-list-item__meta">
+                      {{doc_count}}
+                    </span>
+                  </li>
+                  {{/each ~}}
+                </ul>
+              </div>
+              <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
+                <div class="browse-title mdc-typography--headline5">
+                  Jobs by role
+                </div>
+                <ul class="mdc-list">
+                  {{#each data.supplimentaryResponses.types.aggregations.roles.buckets ~}}
+                  <li class="mdc-list-item">
+                    <span class="mdc-list-item__text">
+                      <a href="/search?role={{urlencode key}}">{{key}}</a>
+                    </span>
+                    <span class="mdc-list-item__meta">
+                      {{doc_count}}
+                    </span>
+                  </li>
+                  {{/each ~}}
+                </ul>
+              </div>
+              <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
+                <div class="browse-title mdc-typography--headline5">
+                  Jobs by region
+                </div>
+                <ul class="mdc-list">
+                  {{#each data.supplimentaryResponses.types.aggregations.regions.buckets ~}}
+                  <li class="mdc-list-item">
+                    <span class="mdc-list-item__text">
+                      <a href="/search?region={{urlencode key}}">{{key}}</a>
+                    </span>
+                    <span class="mdc-list-item__meta">
+                      {{doc_count}}
+                    </span>
+                  </li>
+                  {{/each ~}}
+                </ul>
+              </div>
+              <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
+                <div class="browse-title mdc-typography--headline5">
+                  Jobs by status
+                </div>
+                <ul class="mdc-list">
+                  {{#each data.supplimentaryResponses.types.aggregations.statuses.buckets ~}}
+                  <li class="mdc-list-item">
+                    <span class="mdc-list-item__text">
+                      <a href="/search?status={{urlencode key}}">{{key}}</a>
+                    </span>
+                    <span class="mdc-list-item__meta">
+                      {{doc_count}}
+                    </span>
+                  </li>
+                  {{/each ~}}
+                </ul>
               </div>
             </div>
           </div>
         </div>
         <div id="search-view-organisations" class="search-form" style="display: none;">
-          <div class="mdc-layout-grid">
-            <div class="mdc-layout-grid__inner">
-              <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-10-desktop mdc-layout-grid__cell--span-7-tablet mdc-layout-grid__cell--span-4-phone">
-                <div class="mdc-text-field mdc-text-field--box mdc-text-field--with-leading-icon" data-mdc-auto-init="MDCTextField">
-                  <span class="far fa-search mdc-text-field__icon" tabindex="0" role="button"></span>
-                  <input type="text" id="what-organisations" class="mdc-text-field__input">
-                  <label for="what-organisations" class="mdc-floating-label">
-                    Keywords
-                  </label>
-                  <div class="mdc-line-ripple"></div>
+          <form action="/organisations" method="get">
+            <div class="mdc-layout-grid">
+              <div class="mdc-layout-grid__inner">
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-10-desktop mdc-layout-grid__cell--span-7-tablet mdc-layout-grid__cell--span-4-phone">
+                  <div class="mdc-text-field mdc-text-field--box mdc-text-field--with-leading-icon" data-mdc-auto-init="MDCTextField">
+                    <span class="far fa-search mdc-text-field__icon" tabindex="0" role="button"></span>
+                    <input type="text" id="what-organisations" name="keywords" class="mdc-text-field__input">
+                    <label for="what-organisations" class="mdc-floating-label">
+                      Keywords
+                    </label>
+                    <div class="mdc-line-ripple"></div>
+                  </div>
+                  <p id="what-organisations-helper-text" class="mdc-text-field-helper-text" aria-hidden="true">
+                    e.g. Shelter, CrossReach, Big Lottery Fund
+                  </p>
                 </div>
-                <p id="what-organisations-helper-text" class="mdc-text-field-helper-text" aria-hidden="true">
-                  e.g. Shelter, CrossReach, Big Lottery Fund
-                </p>
-              </div>
-              <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-2-desktop mdc-layout-grid__cell--span-1-tablet mdc-layout-grid__cell--span-4-phone">
-                <button class="mdc-button mdc-button--raised mdc-text-field--box mdc-button--search" href="/search">
-                  Search
-                  <span class="far fa-search" aria-hidden="true"></span>
-                </button>
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-2-desktop mdc-layout-grid__cell--span-1-tablet mdc-layout-grid__cell--span-4-phone">
+                  <button class="mdc-button mdc-button--raised mdc-text-field--box mdc-button--search">
+                    Search
+                    <span class="far fa-search" aria-hidden="true"></span>
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
+          </form>
         </div>
         <div id="search-view-advice" class="search-form" style="display: none;">
           <div class="mdc-layout-grid">
@@ -108,7 +196,7 @@
               <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-10-desktop mdc-layout-grid__cell--span-7-tablet mdc-layout-grid__cell--span-4-phone">
                 <div class="mdc-text-field mdc-text-field--box mdc-text-field--with-leading-icon" data-mdc-auto-init="MDCTextField">
                   <span class="far fa-search mdc-text-field__icon" tabindex="0" role="button"></span>
-                  <input type="text" id="what-advice" class="mdc-text-field__input">
+                  <input type="text" id="what-advice" name="keywords" class="mdc-text-field__input">
                   <label for="what-advice" class="mdc-floating-label">
                     Keywords
                   </label>
@@ -119,7 +207,7 @@
                 </p>
               </div>
               <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-2-desktop mdc-layout-grid__cell--span-1-tablet mdc-layout-grid__cell--span-4-phone">
-                <button class="mdc-button mdc-button--raised mdc-text-field--box mdc-button--search" href="/search">
+                <button class="mdc-button mdc-button--raised mdc-text-field--box mdc-button--search">
                   Search
                   <span class="far fa-search" aria-hidden="true"></span>
                 </button>
@@ -129,42 +217,41 @@
         </div>
       </div>
     </div>
-  </div>
 
-  <div class="mdc-layout-grid home-jobs">
-    <!-- <div class="mdc-layout-grid__inner">
+    <div class="mdc-layout-grid home-jobs">
+      <!-- <div class="mdc-layout-grid__inner">
       <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone v-margin-full">
-        <div class="mdc-typography--headline5 v-margin-full">
-          Your saved searches (if authenticated)
-        </div>
-      </div>
-      <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone v-margin-full">
-        <div class="mdc-typography--headline5 v-margin-full">
-          Your shortlist (if authenticated)
-        </div>
-      </div>
-    </div> -->
-    <div class="mdc-layout-grid__inner">
-      <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone v-margin-full top-jobs">
-        <div class="mdc-typography--headline5 v-margin-full">
-          Top jobs
-        </div>
-        {{#each data.supplimentaryResponses.top.hits.hits ~}}
-        {{> vacancy_search_result _source}}
-        {{/each ~}}
-      </div>
-      <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone v-margin-full latest-jobs">
-        <div class="mdc-typography--headline5 v-margin-full">
-          Latest jobs
-        </div>
-        {{#each data.primaryResponse.hits.hits ~}}
-        {{> vacancy_search_result _source}}
-        {{/each ~}}
-      </div>
+      <div class="mdc-typography--headline5 v-margin-full">
+      Your saved searches (if authenticated)
     </div>
   </div>
+  <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone v-margin-full">
+  <div class="mdc-typography--headline5 v-margin-full">
+  Your shortlist (if authenticated)
+</div>
+</div>
+</div> -->
+<div class="mdc-layout-grid__inner">
+  <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone v-margin-full latest-jobs">
+    <div class="mdc-typography--headline5 v-margin-full">
+      Latest jobs
+    </div>
+    {{#each data.primaryResponse.hits.hits ~}}
+    {{> vacancy_search_result _source}}
+    {{/each ~}}
+  </div>
+  <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone v-margin-full top-jobs">
+    <div class="mdc-typography--headline5 v-margin-full">
+      Top jobs
+    </div>
+    {{#each data.supplimentaryResponses.top.hits.hits ~}}
+    {{> vacancy_search_result _source}}
+    {{/each ~}}
+  </div>
+</div>
+</div>
 
-  {{> tfn_latest}}
+{{> tfn_latest}}
 
-  {{> currently_recruiting}}
+{{> currently_recruiting}}
 </div>

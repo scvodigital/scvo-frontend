@@ -1,0 +1,161 @@
+{{#*inline "term_checkbox"}}
+<div class="mdc-form-field">
+  <div class="mdc-checkbox">
+    <input type="checkbox" class="mdc-checkbox__native-control" id="{{instance_id}}_{{field}}_{{key}}"
+    name="{{field}}[]" value="{{key}}" onchange="$('#{{instance_id}}-search-submit').click()"
+    {{#if (contains selected key)}}checked{{/if}} />
+    <div class="mdc-checkbox__background">
+      <svg class="mdc-checkbox__checkmark"
+      viewBox="0 0 24 24">
+      <path class="mdc-checkbox__checkmark-path"
+      fill="none"
+      stroke="white"
+      d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+    </svg>
+    <div class="mdc-checkbox__mixedmark"></div>
+  </div>
+</div>
+<label for="{{instance_id}}_{{field}}_{{key}}">{{key}}</label>
+</div>
+{{/inline}}
+
+<aside class="mdc-drawer mdc-drawer--permanent mdc-elevation--z8">
+  <div class="mdc-drawer__content">
+    <h2 class="mdc-drawer__content-heading hide-sm">Search jobs</h2>
+    <div id="search-tab-bar" class="mdc-tab-bar mdc-tab-bar--fullwidth search-tab-bar" data-mdc-auto-init="MDCTabBar">
+      <a class="mdc-tab mdc-tab--active details-tab" id="detailed-results" onclick="detailsView()">
+        <span class="far fa-list fa-fw" title="Location"></span>
+        List
+      </a>
+      <a class="mdc-tab map-tab" onclick="mapView()">
+        <span class="far fa-map-marker-alt fa-fw" title="Location"></span>
+        Map
+      </a>
+      <span class="mdc-tab-bar__indicator"></span>
+    </div>
+    <form action="/search" method="GET" class="search-form">
+      <div class="h-padding">
+        <div class="mdc-text-field mdc-text-field--box mdc-text-field--with-leading-icon" data-mdc-auto-init="MDCTextField">
+          <span class="far fa-search mdc-text-field__icon" tabindex="0" role="button"></span>
+          <input type="text" id="{{instance_id}}-keywords" name="keywords" class="mdc-text-field__input mdc-text-field--fullwidth" value="{{request.params.query.keywords}}" data-lpignore="true" autocomplete="off">
+          <label class="mdc-floating-label mdc-floating-label--float-above" for="keywords">
+            Keywords
+          </label>
+          <div class="mdc-line-ripple"></div>
+        </div>
+      </div>
+
+      <div class="h-padding">
+        <div class="mdc-layout-grid">
+          <div class="mdc-layout-grid__inner">
+            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-8-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone">
+              <div class="mdc-text-field mdc-text-field--box mdc-text-field--with-leading-icon" data-mdc-auto-init="MDCTextField">
+                <span class="far fa-map-marker-alt mdc-text-field__icon" tabindex="0" role="button"></span>
+                <input type="text" id="{{instance_id}}-location" name="location" class="mdc-text-field__input mdc-text-field--fullwidth" value="{{request.params.query.location}}" placeholder="" data-lpignore="true">
+                <label class="mdc-floating-label mdc-floating-label--float-above" for="{{instance_id}}-location">
+                  Location
+                </label>
+                <div class="mdc-line-ripple"></div>
+              </div>
+            </div>
+            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone">
+              <div class="mdc-select mdc-select--box" data-mdc-auto-init="MDCSelect">
+                <select class="mdc-select__native-control" id="{{instance_id}}-distance" name="distance">
+                  <option value="8046.72" {{#compare request.params.query.distance "8046.72"}}selected{{/compare}}>5 miles</option>
+                  <option value="16093.44" {{#compare request.params.query.distance "16093.44"}}selected{{/compare}}>10 miles</option>
+                  <option value="40233.6" {{#compare request.params.query.distance "40233.6"}}selected{{/compare}}>25 miles</option>
+                  <option value="80467.2" {{#compare request.params.query.distance "80467.2"}}selected{{/compare}}>50 miles</option>
+                  <option value="any" {{#compare request.params.query.distance "any"}}selected{{/compare}}>no limit</option>
+                </select>
+                <label class="mdc-floating-label mdc-floating-label--float-above" for="{{instance_id}}-distance">
+                  Within
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <input type="hidden" name="lat" value="{{request.params.query.lat}}">
+      <input type="hidden" name="lng" value="{{request.params.query.lng}}">
+
+      <div class="h-padding">
+        <div class="mdc-text-field mdc-text-field--box mdc-text-field--with-leading-icon" data-mdc-auto-init="MDCTextField">
+          <span class="far fa-arrow-alt-from-left mdc-text-field__icon" tabindex="0" role="button"></span>
+          <input type="text" id="{{instance_id}}-salary_min" name="salary_min" class="mdc-text-field__input mdc-text-field--fullwidth" value="{{request.params.query.q}}" data-lpignore="true">
+          <label class="mdc-floating-label mdc-floating-label--float-above" for="{{instance_id}}-salary_min">
+            Minimum salary
+          </label>
+          <div class="mdc-line-ripple"></div>
+        </div>
+      </div>
+
+      <div class="h-padding">
+        <div class="mdc-text-field mdc-text-field--box mdc-text-field--with-leading-icon" data-mdc-auto-init="MDCTextField">
+          <span class="far fa-arrow-alt-to-right mdc-text-field__icon" tabindex="0" role="button"></span>
+          <input type="text" id="{{instance_id}}-salary_max" name="salary_max" class="mdc-text-field__input mdc-text-field--fullwidth" value="{{request.params.query.q}}" data-lpignore="true">
+          <label class="mdc-floating-label mdc-floating-label--float-above" for="{{instance_id}}-salary_max">
+            Maximum salary
+          </label>
+          <div class="mdc-line-ripple"></div>
+        </div>
+      </div>
+
+      <h3 class="mdc-drawer__content-heading">
+        Roles
+        <span class="mdc-icon-toggle pull-right" data-collapse-target="#{{instance_id}}-roles-collapse "
+              role="button" aria-pressed="false"
+              aria-label="Show roles" tabindex="0" data-mdc-auto-init="MDCIconToggle"
+              data-icon-inner-selector=".far"
+              data-toggle-on='{"cssClass": "fa-chevron-down", "label": "Show roles"}'
+              data-toggle-off='{"cssClass": "fa-chevron-up", "label": "Hide roles"}'>
+          <i class="far fa-chevron-up" aria-hidden="true"></i>
+        </span>
+      </h3>
+      <div id="{{instance_id}}-roles-collapse">
+        {{#each data.supplimentaryResponses.types.aggregations.roles.buckets ~}}
+        {{> term_checkbox key=key field="roles" selected=../request.params.query.roles instance_id=../instance_id}}
+        {{/each ~}}
+      </div>
+
+      <h3 class="mdc-drawer__content-heading">
+        Sectors
+        <span class="mdc-icon-toggle pull-right" data-collapse-target="#{{instance_id}}-sectors-collapse "
+              role="button" aria-pressed="true"
+              aria-label="Show sectors" tabindex="0" data-mdc-auto-init="MDCIconToggle"
+              data-icon-inner-selector=".far"
+              data-toggle-on='{"cssClass": "fa-chevron-down", "label": "Show sectors"}'
+              data-toggle-off='{"cssClass": "fa-chevron-up", "label": "Hide sectors"}'>
+          <i class="far fa-chevron-up" aria-hidden="true"></i>
+        </span>
+      </h3>
+      <div id="{{instance_id}}-sectors-collapse">
+        {{#each data.supplimentaryResponses.types.aggregations.sectors.buckets ~}}
+        {{> term_checkbox key=key field="sectors" selected=../request.params.query.sectors instance_id=../instance_id}}
+        {{/each ~}}
+      </div>
+
+      <h3 class="mdc-drawer__content-heading">
+        Statuses
+        <span class="mdc-icon-toggle pull-right" data-collapse-target="#{{instance_id}}-statuses-collapse "
+              role="button" aria-pressed="true"
+              aria-label="Show statuses" tabindex="0" data-mdc-auto-init="MDCIconToggle"
+              data-icon-inner-selector=".far"
+              data-toggle-on='{"cssClass": "fa-chevron-down", "label": "Show statuses"}'
+              data-toggle-off='{"cssClass": "fa-chevron-up", "label": "Hide statuses"}'>
+          <i class="far fa-chevron-up" aria-hidden="true"></i>
+        </span>
+      </h3>
+      <div id="{{instance_id}}-statuses-collapse">
+      {{#each data.supplimentaryResponses.types.aggregations.statuses.buckets ~}}
+      {{> term_checkbox key=key field="role_status" selected=../request.params.query.role_status instance_id=../instance_id}}
+      {{/each ~}}
+      </div>
+      <div class="h-margin v-margin">
+        <button class="mdc-button mdc-button--raised mdc-button--fullwidth" type="submit" id="{{instance_id}}-search-submit">
+          Search jobs
+        </button>
+      </div>
+    </form>
+  </div>
+</aside>

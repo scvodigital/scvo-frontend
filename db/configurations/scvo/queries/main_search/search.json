@@ -69,6 +69,14 @@
                         "analyzer": "snowball",
                         "boost": 10
                       }
+                    },
+                    {
+                      "match_phrase": {
+                        "title": {
+                          "query": {{{stringify (default request.params.query.q "")}}},
+                          "boost": 20
+                        }
+                      }
                     }
                   ]
                 }
