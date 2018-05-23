@@ -43,7 +43,7 @@
   </script>
 </head>
 <body class="{{#if request.params.path}}{{replace request.params.path '_' ' '}}{{else}}home{{/if}}">
-  <scvo-site>
+  <charter-site>
     <div class="mdc-typography">
       <header class="mdc-toolbar">
         <div class="mdc-toolbar__row">
@@ -51,12 +51,16 @@
             <section class="mdc-toolbar__section mdc-toolbar__section--align-start">
               <span class="mdc-toolbar__title catalog-title">
                 <a href="/" class="brand-logo" title="Scotland for Europe">
-                  <img src="https://storage.googleapis.com/scotland-for-europe/sfe-logo.png" class="brand-logo-mobile" />
-                  <img src="https://storage.googleapis.com/scotland-for-europe/sfe-logo-desktop.png" class="brand-logo-desktop" />
+                  <img src="/assets/images/sfe-logo-mobile.png" class="brand-logo-mobile" />
+                  <img src="/assets/images/sfe-logo.png" class="brand-logo-desktop" />
                 </a>
               </span>
             </section>
-            <section class="mdc-toolbar__section mdc-toolbar__section--align-end">
+          </div>
+        </div>
+        <div class="mdc-toolbar__row navbar">
+          <div class="container-fluid">
+            <section class="mdc-toolbar__section mdc-toolbar__section--align-start">
               <nav id="main-tab-bar" class="mdc-tab-bar" [menu]="'main'" [menulinkselector]="''" [menulabelselector]="'span.mdc-tab--label'" [menuactiveclass]="'active'">
                 {{#each context.menus.main}}
                 <a class="mdc-tab{{#if (regexMatch ../request.url.pathname route "gi")}} mdc-tab--active{{/if}}" href="{{path}}"><span class="mdc-tab--label">{{{label}}}</span></a>
@@ -103,13 +107,8 @@
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-phone mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-9-desktop">
                   <h3>About</h3>
                   <p>
-                    <strong>Scotland for Europe</strong> is run by the
-                    <a href="https://scvo.org">Scottish Council for Voluntary Organisations</a>
-                    with support from &hellip;
+                    <strong>Scotland for Europe</strong> is a Scottish civil society campaign to stay in the EU, supported by <a href="https://scvo.org">Scottish Council for Voluntary Organisations</a>
                   </p>
-                  <a href="https://" class="brand-logo" title="">
-                    <img src="https://storage.googleapis.com/" />
-                  </a>
                 </div>
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-phone mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-3-desktop">
                   <h3>Help</h3>
@@ -149,7 +148,7 @@
         </div>
       </footer>
     </div>
-  </scvo-site>
+  </charter-site>
   <script type="text/javascript" src="/assets/js/material-components-web.js"></script>
   <script type="text/javascript" id="cookieinfo" src="/assets/js/cookieinfo.min.js" data-bg="#2C2C2B" data-fg="#FFFFFF" data-link="#FFFFFF" data-divlink="#FFFFFF" data-divlinkbg="#022347" data-moreinfo="/privacy-cookies-policy" data-cookie="CookieInfoScript" data-text-align="left"></script>
   <script type="text/javascript" src="/assets/js/scotlandforeurope/root.js"></script>
