@@ -55,6 +55,9 @@
                   <img src="/assets/images/sfe-logo.png" class="brand-logo-desktop" />
                 </a>
               </span>
+              <button id="menu_button" class="menu mdc-toolbar__icon mdc-toolbar__icon--menu" onclick="window.drawer.open = true">
+                <span class="far fa-2x fa-bars" aria-hidden="true"></span>
+              </button>
             </section>
           </div>
         </div>
@@ -66,9 +69,6 @@
                 <a class="mdc-tab{{#if (regexMatch ../request.url.pathname route "gi")}} mdc-tab--active{{/if}}" href="{{path}}"><span class="mdc-tab--label">{{{label}}}</span></a>
                 {{/each}}
               </nav>
-              <button id="menu_button" class="menu mdc-toolbar__icon mdc-toolbar__icon--menu" onclick="window.drawer.open = true">
-                <span class="far fa-2x fa-bars" aria-hidden="true"></span>
-              </button>
             </section>
           </div>
         </div>
