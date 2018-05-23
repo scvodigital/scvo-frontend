@@ -6,10 +6,8 @@ var $searchTerms = $('#search-terms');
 var $lat = $('[name="lat"]');
 var $lng = $('[name="lng"]');
 
-var $searchViewJobs = $('#search-view-jobs');
-var $searchViewCategories = $('#search-view-categories');
-var $searchViewOrganisations = $('#search-view-organisations');
-var $searchViewAdvice = $('#search-view-advice');
+var $searchView = $('#search-view');
+var $browseView = $('#browse-view');
 
 var typeaheadController = new TypeaheadController($what, terms, { highlight: true, minlength: 0 });
 var searchTermsController = new SearchTermsController();
@@ -60,29 +58,13 @@ function autocompleteChange(evt) {
   }
 }
 
-function searchViewJobs() {
-  $searchViewJobs.show();
-  $searchViewCategories.hide();
-  $searchViewOrganisations.hide();
-  $searchViewAdvice.hide();
+function searchView() {
+  $searchView.show();
+  $browseView.hide();
 }
-function searchViewCategories() {
-  $searchViewJobs.hide();
-  $searchViewCategories.show();
-  $searchViewOrganisations.hide();
-  $searchViewAdvice.hide();
-}
-function searchViewOrganisations() {
-  $searchViewJobs.hide();
-  $searchViewCategories.hide();
-  $searchViewOrganisations.show();
-  $searchViewAdvice.hide();
-}
-function searchViewAdvice() {
-  $searchViewJobs.hide();
-  $searchViewCategories.hide();
-  $searchViewOrganisations.hide();
-  $searchViewAdvice.show();
+function browseView() {
+  $searchView.hide();
+  $browseView.show();
 }
 
 function geolocate() {

@@ -130,7 +130,9 @@ if(location.host.indexOf('.local') > -1){
                 </a>
               </span>
             </section>
-            <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end">
+          </div>
+          <div class="mdc-top-app-bar__row">
+            <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
               <nav class="mdc-tab-bar mdc-tab-bar__right hide-sm hide-md">
                 {{#each context.menus.main ~}}
                 <a class="mdc-tab{{#if (regexMatch ../request.url.pathname route "gi")}} mdc-tab--active{{/if}}" href="{{stripTrailingSlash path}}">
@@ -155,6 +157,8 @@ if(location.host.indexOf('.local') > -1){
                   </div>
                 </div>
               </div>
+            </section>
+            <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end">
               <div class="mdc-menu-anchor">
                 <!-- Logged in: -->
                 <button class="mdc-button" data-menu-target="#user-menu">

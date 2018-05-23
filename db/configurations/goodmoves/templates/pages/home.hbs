@@ -1,32 +1,24 @@
-<div class="container-fluid">
+<div class="container-fluid home-banner" style="background-image: url('{{#if data.supplimentaryResponses.splash.hits.hits.[0]._source.original_image}}{{data.supplimentaryResponses.splash.hits.hits.[0]._source.original_image}}{{/if}}');">
   <div class="mdc-layout-grid banner-search">
     <div class="mdc-layout-grid__inner">
       <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-2-desktop mdc-layout-grid__cell--span-0-tablet mdc-layout-grid__cell--span-0-phone">
       </div>
-      <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-8-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone content page-content">
+      <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-8-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone content page-content mdc-elevation--z20">
         <div class="mdc-typography--headline3 v-margin-full">
           Charity and voluntary sector recruitment
         </div>
         <div id="home-tab-bar" class="mdc-tab-bar mdc-tab-bar--left" data-mdc-auto-init="MDCTabBar">
-          <a class="mdc-tab mdc-tab--active" onclick="searchViewJobs()">
-            <span class="far fa-search mdc-list-item__graphic" title="Jobs"></span>
-            Jobs
+          <a class="mdc-tab mdc-tab--active" onclick="searchView()">
+            <span class="far fa-search mdc-list-item__graphic" title="Search"></span>
+            Search
           </a>
-          <a class="mdc-tab" onclick="searchViewCategories()">
-            <span class="far fa-list-alt mdc-list-item__graphic" title="Categories"></span>
-            Categories
-          </a>
-          <a class="mdc-tab" onclick="searchViewOrganisations()">
-            <span class="far fa-building mdc-list-item__graphic" title="Organisations"></span>
-            Organisations
-          </a>
-          <a class="mdc-tab" onclick="searchViewAdvice()">
-            <span class="far fa-question-circle mdc-list-item__graphic" title="Advice"></span>
-            Advice
+          <a class="mdc-tab" onclick="browseView()">
+            <span class="far fa-list-alt mdc-list-item__graphic" title="Browse"></span>
+            Browse
           </a>
           <span class="mdc-tab-bar__indicator"></span>
         </div>
-        <div id="search-view-jobs" class="search-form">
+        <div id="search-view" class="search-form">
           <div action="/search" method="get">
             <input type="hidden" name="lat" value="">
             <input type="hidden" name="lng" value="">
@@ -89,7 +81,7 @@
             </div>
           </div>
         </div>
-        <div id="search-view-categories" class="search-form" style="display: none;">
+        <div id="browse-view" class="search-form" style="display: none;">
           <div class="mdc-layout-grid">
             <div class="mdc-layout-grid__inner">
               <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
@@ -237,7 +229,7 @@
       Latest jobs
     </div>
     {{#each data.primaryResponse.hits.hits ~}}
-    {{> vacancy_search_result _source}}
+    {{> vacancy_gist _source}}
     {{/each ~}}
   </div>
   <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone v-margin-full top-jobs">
@@ -245,7 +237,7 @@
       Top jobs
     </div>
     {{#each data.supplimentaryResponses.top.hits.hits ~}}
-    {{> vacancy_search_result _source}}
+    {{> vacancy_gist _source}}
     {{/each ~}}
   </div>
 </div>
