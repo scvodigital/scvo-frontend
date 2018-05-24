@@ -31,9 +31,9 @@ $footer-font-weight:                400;
 
 $unit: 1rem;
 $toolbar-height: 64px;
-$toolbar-item-height: 48px;
+$header-upper-height: 48px;
 $toolbar-shadow-reverse: 0px -3px 5px -1px rgba(0, 0, 0, 0.2), 0px -5px 8px 0px rgba(0, 0, 0, 0.14), 0px -1px 14px 0px rgba(0, 0, 0, 0.12);
-$nav-height: 38px;
+$header-lower-height: 38px;
 
 $mobile-breakpoint: 599px;
 $mobile-landscape-breakpoint: 959px;
@@ -51,7 +51,7 @@ body {
 }
 .mdc-toolbar-fixed-adjust {
   margin: 0;
-  padding-top: $toolbar-height;
+  padding-top: $toolbar-height+$header-lower-height;
 }
 header {
   .container-fluid {
@@ -92,16 +92,70 @@ header {
         display: none;
       }
     }
+    .mdc-top-app-bar__lower {
+      height: $header-lower-height;
+      background-image: linear-gradient(90deg, rgba(0, 0, 0, 0.16), rgba(0, 0, 0, 0.16) 60%, rgba(0, 0, 0, 0.08) 120%, rgba(0, 0, 0, 0.08));
+    }
+    .mdc-tab-bar {
+      overflow: hidden;
+      text-transform: none;
+      height: $header-lower-height;
+      margin: 0;
+      .mdc-tab {
+        background-color: transparent;
+        color: white !important;
+        font-size: 1rem;
+        min-height: $header-lower-height;
+        height: $header-lower-height;
+        font-weight: 600;
+        padding: 0 $unit*(3/4);
+        .mdc-tab--label {
+          line-height: $header-lower-height - 4px;
+          height: $header-lower-height - 4px;
+          display: block;
+          border-top: 2px solid transparent;
+          border-bottom: 2px solid transparent;
+        }
+      }
+      .mdc-tab:first-child {
+        padding-left: $unit;
+      }
+      .mdc-tab::after {
+        display: none;
+      }
+    }
+    #main-tab-bar {
+      .mdc-tab:hover .mdc-tab--label {
+        border-bottom-color: rgba(255,255,255,0.6);
+      }
+      .mdc-tab.mdc-tab--active .mdc-tab--label {
+        border-bottom-color: rgba(255,255,255,0.9);
+      }
+    }
+    #upper-tab-bar {
+      // margin-top: $unit*1.75;
+      // margin-right: $unit;
+      .mdc-tab {
+        min-width: auto;
+        font-weight: 600;
+      }
+      .mdc-tab:hover .mdc-tab--label {
+        border-bottom-color: rgba(255,255,255,0.6);
+      }
+      .mdc-tab.mdc-tab--active .mdc-tab--label {
+        border-bottom-color: rgba(255,255,255,0.9);
+      }
+    }
     .mdc-top-app-bar__section {
       padding: 0;
       .mdc-top-app-bar__action-item {
-        height: $toolbar-item-height;
+        height: $header-lower-height;
         color: $mdc-theme-secondary !important;
       }
       .mdc-menu-anchor {
         .mdc-button {
           color: $mdc-theme-secondary;
-          height: $toolbar-item-height;
+          height: $header-lower-height;
           padding-right: $unit/4;
           text-transform: none;
           .fa-fw {
@@ -110,6 +164,9 @@ header {
           .fa-fw:last-child {
             margin-right: 0;
           }
+        }
+        .mdc-button:hover {
+          background-color: $mdc-theme-primary-dark;
         }
       }
       .mdc-top-app-bar__action-item::before,
@@ -139,12 +196,12 @@ header {
 }
 
 .mdc-tab-bar {
-  height: $toolbar-item-height;
+  height: $header-lower-height;
   .mdc-tab {
     text-transform: none;
     color: $mdc-theme-secondary;
     min-width: auto;
-    height: $toolbar-item-height;
+    height: $header-lower-height;
     font-size: 1rem;
     padding: 0 $unit/2;
   }
@@ -541,7 +598,8 @@ a {
     .mdc-tab {
       color: white;
       flex: 1;
-      line-height: $toolbar-item-height;
+      line-height: $header-lower-height;
+      min-height: $header-lower-height;
     }
     .mdc-tab:hover {
       background-color: $mdc-theme-primary-dark;
@@ -675,15 +733,15 @@ hr {
       border: none;
       padding: 0;
       .fa-stack {
-        width: $nav-height;
-        height: $nav-height;
+        width: $header-lower-height;
+        height: $header-lower-height;
         .fa-circle {
-          font-size: $nav-height;
+          font-size: $header-lower-height;
           color: white;
         }
         .fa-star {
           font-size: 25px;
-          line-height: $nav-height;
+          line-height: $header-lower-height;
         }
       }
     }

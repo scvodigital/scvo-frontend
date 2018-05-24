@@ -8,7 +8,7 @@ var SearchTermsController = Class.extend({
   listeners: [],
 
   init: function() {
-    // console.log('Search Terms Controller Init');
+    console.log('Search Terms Controller Init');
   },
 
   addTerm: function(term, value) {

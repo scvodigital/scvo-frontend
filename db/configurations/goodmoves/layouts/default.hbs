@@ -75,7 +75,7 @@ if(location.host.indexOf('.local') > -1){
     <div class="mdc-typography">
       <header class="mdc-top-app-bar mdc-elevation--z5 top-bar-stuck" id="top-bar">
         <div class="container-fluid">
-          <div class="mdc-top-app-bar__row">
+          <div class="mdc-top-app-bar__row mdc-top-app-bar__upper">
             <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
               <button class="mdc-top-app-bar__navigation-icon hide-lg" data-drawer-target="#mobile-menu">
                 <span class="far fa-fw fa-bars"></span>
@@ -130,17 +130,26 @@ if(location.host.indexOf('.local') > -1){
                 </a>
               </span>
             </section>
+            <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end">
+              <nav class="mdc-tab-bar mdc-tab-bar__right hide-sm hide-md" id="upper-tab-bar">
+                {{#each context.menus.upper ~}}
+                <a class="mdc-tab{{#if (regexMatch ../request.url.pathname route "gi")}} mdc-tab--active{{/if}}" href="{{stripTrailingSlash path}}">
+                  <span class="mdc-tab--label">{{{label}}}</span>
+                </a>
+                {{/each ~}}
+              </nav>
+            </section>
           </div>
-          <div class="mdc-top-app-bar__row">
+          <div class="mdc-top-app-bar__row mdc-top-app-bar__lower">
             <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
-              <nav class="mdc-tab-bar mdc-tab-bar__right hide-sm hide-md">
+              <nav class="mdc-tab-bar mdc-tab-bar__left hide-sm hide-md" id="main-tab-bar">
                 {{#each context.menus.main ~}}
                 <a class="mdc-tab{{#if (regexMatch ../request.url.pathname route "gi")}} mdc-tab--active{{/if}}" href="{{stripTrailingSlash path}}">
                   <span class="mdc-tab--label">{{{label}}}</span>
                 </a>
                 {{/each ~}}
               </nav>
-              <div class="mdc-menu-anchor hide-md hide-sm">
+              <!-- <div class="mdc-menu-anchor hide-md hide-sm">
                 <button class="mdc-top-app-bar__action-item" data-menu-target="#upper-menu">
                   <i class="far fa-fw fa-ellipsis-h"></i>
                 </button>
@@ -156,7 +165,7 @@ if(location.host.indexOf('.local') > -1){
                     {{/each ~}}
                   </div>
                 </div>
-              </div>
+              </div> -->
             </section>
             <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end">
               <div class="mdc-menu-anchor">
