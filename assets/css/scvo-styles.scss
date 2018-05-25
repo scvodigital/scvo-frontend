@@ -850,13 +850,6 @@ input:focus:-ms-input-placeholder {
   -ms-user-select: none;
   user-select: none;
 }
-.brand-logo {
-  margin-left: -$unit/2;
-  img {
-    max-height: $unit*3;
-    margin-top: $unit/2;
-  }
-}
 
 img.responsive {
   max-width: 100%;
@@ -1595,7 +1588,7 @@ form#settled_status {
 }
 
 .mdc-toolbar.mdc-toolbar--fixed {
-  padding-top: 15px;
+  padding-top: 0;
 }
 .mdc-toolbar {
   .container-fluid {
@@ -1606,7 +1599,7 @@ form#settled_status {
   .mdc-toolbar__row,
   .mdc-form-field,
   .mdc-toolbar__section {
-    height: $unit*6;
+    height: 100px;
     padding: 0;
   }
   .mdc-toolbar__section.toolbar-menu,
@@ -1627,8 +1620,16 @@ form#settled_status {
       box-sizing: border-box;
       padding: 0;
       .mdc-toolbar__title {
-        padding: $unit/4 0 0;
+        padding: 0;
         margin-left: 0;
+        .brand-logo {
+          margin-left: -$unit/2;
+          img {
+            max-height: 80px;
+            margin: 0;
+            padding: 0;
+          }
+        }
       }
       .mdc-textfield {
         margin: 0;
@@ -1779,7 +1780,7 @@ form#settled_status {
   }
 }
 .mdc-toolbar-fixed-adjust {
-  padding: 150px 0 0;
+  padding: 100px+$nav-height 0 0;
   margin: 0;
 }
 .mdc-temporary-drawer {
@@ -3612,7 +3613,10 @@ footer {
   .brand-logo {
     display: block;
     text-align: right;
+    margin: 0;
     img {
+      max-height: $unit*3;
+      margin-top: $unit/2;
       margin-bottom: 0;
     }
   }
@@ -3758,6 +3762,9 @@ footer {
       display: none;
     }
     .mdc-toolbar__row .container-fluid {
+      .mdc-toolbar__title .brand-logo img {
+        max-height: 48px;
+      }
       .mdc-toolbar__icon--menu {
         visibility: visible;
         width: auto;
@@ -4005,6 +4012,10 @@ footer {
   .pagination-distance-4 {
     display: none !important;
   }
+  .mdc-toolbar__title {
+    width: 38px;
+    overflow: hidden;
+  }
   .splash-image {
     .container-fluid {
       .mdc-layout-grid {
@@ -4050,10 +4061,6 @@ footer {
 }
 
 @media screen and (max-width: 395px) {
-  .mdc-toolbar__title {
-    width: 38px;
-    overflow: hidden;
-  }
   .pagination-distance-3 {
     display: none !important;
   }

@@ -213,21 +213,29 @@
 
   <div class="mdc-layout-grid home-jobs">
     <div class="mdc-layout-grid__inner">
-      <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone v-margin-full latest-jobs">
+      <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone v-margin-full latest-jobs">
         <div class="mdc-typography--headline5 v-margin-full">
           Latest jobs
         </div>
         {{#each data.primaryResponse.hits.hits ~}}
-        {{> vacancy_gist _source}}
+        {{> vacancy_mini _source}}
         {{/each ~}}
       </div>
-      <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone v-margin-full top-jobs">
+      <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone v-margin-full top-jobs">
         <div class="mdc-typography--headline5 v-margin-full">
           Top jobs
         </div>
         {{#each data.supplimentaryResponses.top.hits.hits ~}}
-        {{> vacancy_gist _source}}
+        {{> vacancy_mini _source}}
         {{/each ~}}
+      </div>
+      <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone v-margin-full shortlist">
+        <div class="mdc-typography--headline5 v-margin-full">
+          Shortlist &amp; notes
+        </div>
+        <p>
+          There are currently no jobs in your shortlist, if you star or write notes on a job it will appear here for easy reference.
+        </p>
       </div>
     </div>
   </div>
