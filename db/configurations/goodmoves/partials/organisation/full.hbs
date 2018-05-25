@@ -16,6 +16,7 @@
         <ul class="fa-ul">
           {{#if website ~}}
           {{#compare website "!==" null ~}}
+          {{#compare website "!==" "http://" ~}}
           <li class="mdc-card__info--vacancy-website mdc-typography--body1">
             <span class="fa-li"><span class="far fa-link fa-fw" title="Website"></span></span>
             <a href="{{website_url}}">
@@ -23,9 +24,11 @@
             </a>
           </li>
           {{/compare ~}}
+          {{/compare ~}}
           {{/if ~}}
           {{#if twitter ~}}
           {{#compare twitter "!==" null ~}}
+          {{#compare twitter "!==" "http://" ~}}
           <li class="mdc-card__info--vacancy-twitter mdc-typography--body1">
             <span class="fa-li"><span class="fab fa-twitter fa-fw" title="Twitter"></span></span>
             <a href="{{twitter_url}}">
@@ -33,9 +36,11 @@
             </a>
           </li>
           {{/compare ~}}
+          {{/compare ~}}
           {{/if ~}}
           {{#if facebook ~}}
           {{#compare facebook "!==" null ~}}
+          {{#compare facebook "!==" "http://" ~}}
           <li class="mdc-card__info--vacancy-facebook mdc-typography--body1">
             <span class="fa-li"><span class="fab fa-facebook fa-fw" title="Facebook"></span></span>
             <a href="{{facebook_url}}">
@@ -43,15 +48,18 @@
             </a>
           </li>
           {{/compare ~}}
+          {{/compare ~}}
           {{/if ~}}
           {{#if linkedin ~}}
           {{#compare linkedin "!==" null ~}}
+          {{#compare linkedin "!==" "http://" ~}}
           <li class="mdc-card__info--vacancy-linkedin mdc-typography--body1">
             <span class="fa-li"><span class="fab fa-linkedin fa-fw" title="LinkedIn"></span></span>
             <a href="{{linkedin_url}}">
               {{linkedin}}
             </a>
           </li>
+          {{/compare ~}}
           {{/compare ~}}
           {{/if ~}}
         </ul>
