@@ -1,6 +1,7 @@
 {{> vacancy_search_form}}
 
 <div class="container-content goodmoves-organisation">
+  {{#compare data.primaryResponse.hits.total ">" 0}}
   {{#with data.primaryResponse.hits.hits.[0]._source as |organisation| ~}}
 
   {{> organisation_full organisation}}
@@ -87,4 +88,9 @@
   {{/if}}
 
   {{/with ~}}
+  {{else}}
+  <p>
+    <strong>Error:</strong> the requested organisation could not be found.
+  </p>
+  {{/compare}}
 </div>

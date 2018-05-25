@@ -1,6 +1,8 @@
 {{> vacancy_search_form this instance_id="perm"}}
 
 <div class="container-content">
+  {{#compare data.primaryResponse.hits.total ">" 0}}
+
   <div class="goodmoves-job">
     {{#each data.primaryResponse.hits.hits ~}}
     {{> vacancy_full _source}}
@@ -23,4 +25,10 @@
   </div>
 
   {{> tfn_related}}
+
+  {{else}}
+  <p>
+    <strong>Error:</strong> the requested job could not be found - it may have expired.
+  </p>
+  {{/compare}}
 </div>
