@@ -92,19 +92,57 @@
           <div class="mdc-typography--body1">
             {{{organisation.profile}}}
           </div>
+          <ul class="fa-ul">
+            {{#if organisation.website_url ~}}
+            {{#compare organisation.website "!==" null ~}}
+            {{#compare organisation.website "!==" "http://" ~}}
+            <li class="mdc-card__info--vacancy-website mdc-typography--body1">
+              <span class="fa-li"><span class="far fa-link fa-fw" title="Website"></span></span>
+              <a href="{{organisation.website_url}}">
+                {{organisation.website}}
+              </a>
+            </li>
+            {{/compare ~}}
+            {{/compare ~}}
+            {{/if ~}}
+            {{#if organisation.twitter_url ~}}
+            {{#compare organisation.twitter "!==" null ~}}
+            {{#compare organisation.twitter "!==" "http://" ~}}
+            <li class="mdc-card__info--vacancy-twitter mdc-typography--body1">
+              <span class="fa-li"><span class="fab fa-twitter fa-fw" title="Twitter"></span></span>
+              <a href="{{organisation.twitter_url}}">
+                {{organisation.twitter}}
+              </a>
+            </li>
+            {{/compare ~}}
+            {{/compare ~}}
+            {{/if ~}}
+            {{#if organisation.facebook_url ~}}
+            {{#compare organisation.acebook "!==" null ~}}
+            {{#compare organisation.facebook "!==" "http://" ~}}
+            <li class="mdc-card__info--vacancy-facebook mdc-typography--body1">
+              <span class="fa-li"><span class="fab fa-facebook fa-fw" title="Facebook"></span></span>
+              <a href="{{organisation.facebook_url}}">
+                {{organisation.facebook}}
+              </a>
+            </li>
+            {{/compare ~}}
+            {{/compare ~}}
+            {{/if ~}}
+            {{#if organisation.linkedin_url ~}}
+            {{#compare organisation.linkedin "!==" null ~}}
+            {{#compare organisation.linkedin "!==" "http://" ~}}
+            <li class="mdc-card__info--vacancy-linkedin mdc-typography--body1">
+              <span class="fa-li"><span class="fab fa-linkedin fa-fw" title="LinkedIn"></span></span>
+              <a href="{{organisation.linkedin_url}}">
+                {{organisation.inkedin}}
+              </a>
+            </li>
+            {{/compare ~}}
+            {{/compare ~}}
+            {{/if ~}}
+          </ul>
         </div>
-        {{/if ~}}
-        {{#if organisation.website ~}}
-        {{#compare organisation.website "!==" null ~}}
-        <ul class="fa-ul">
-          <li class="mdc-card__info--vacancy-website mdc-typography--body1">
-            <span class="fa-li"><span class="far fa-link fa-fw" title="Website"></span></span>
-            <a href="{{organisation_website_url}}">
-              {{organisation.website}}
-            </a>
-          </li>
-        </ul>
-        {{/compare}}
         {{/if ~}}
         <div class="detailed-info">
           {{#if geo_vacancy_coords}}
