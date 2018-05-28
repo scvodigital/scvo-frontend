@@ -86,56 +86,58 @@
         </div>
       </div>
       <div class="panel mdc-card--full-content mdc-typography--body1" role="tabpanel" aria-hidden="true" id="panel-2">
-        {{#if organisation.profile ~}}
+        {{#ifAny organisation.profile organisation_website organisation_twitter organisation_facebook organisation_linkedin ~}}
         <div class="key-info-extra">
+          {{#if organisation.profile ~}}
           <h4>Organisation profile</h4>
           <div class="mdc-typography--body1">
             {{{organisation.profile}}}
           </div>
+          {{/if ~}}
           <ul class="fa-ul">
-            {{#if organisation.website_url ~}}
-            {{#compare organisation.website "!==" null ~}}
-            {{#compare organisation.website "!==" "http://" ~}}
+            {{#if organisation_website ~}}
+            {{#compare organisation_website "!==" null ~}}
+            {{#compare organisation_website "!==" "http://" ~}}
             <li class="mdc-card__info--vacancy-website mdc-typography--body1">
               <span class="fa-li"><span class="far fa-link fa-fw" title="Website"></span></span>
-              <a href="{{organisation.website_url}}">
-                {{organisation.website}}
+              <a href="{{organisation_website_url}}">
+                {{organisation_website}}
               </a>
             </li>
             {{/compare ~}}
             {{/compare ~}}
             {{/if ~}}
-            {{#if organisation.twitter_url ~}}
-            {{#compare organisation.twitter "!==" null ~}}
-            {{#compare organisation.twitter "!==" "http://" ~}}
+            {{#if organisation_twitter ~}}
+            {{#compare organisation_twitter "!==" null ~}}
+            {{#compare organisation_twitter "!==" "http://" ~}}
             <li class="mdc-card__info--vacancy-twitter mdc-typography--body1">
               <span class="fa-li"><span class="fab fa-twitter fa-fw" title="Twitter"></span></span>
-              <a href="{{organisation.twitter_url}}">
-                {{organisation.twitter}}
+              <a href="{{organisation_twitter_url}}">
+                {{organisation_twitter}}
               </a>
             </li>
             {{/compare ~}}
             {{/compare ~}}
             {{/if ~}}
-            {{#if organisation.facebook_url ~}}
+            {{#if organisation_facebook ~}}
             {{#compare organisation.acebook "!==" null ~}}
-            {{#compare organisation.facebook "!==" "http://" ~}}
+            {{#compare organisation_facebook "!==" "http://" ~}}
             <li class="mdc-card__info--vacancy-facebook mdc-typography--body1">
               <span class="fa-li"><span class="fab fa-facebook fa-fw" title="Facebook"></span></span>
-              <a href="{{organisation.facebook_url}}">
-                {{organisation.facebook}}
+              <a href="{{organisation_facebook_url}}">
+                {{organisation_facebook}}
               </a>
             </li>
             {{/compare ~}}
             {{/compare ~}}
             {{/if ~}}
-            {{#if organisation.linkedin_url ~}}
-            {{#compare organisation.linkedin "!==" null ~}}
-            {{#compare organisation.linkedin "!==" "http://" ~}}
+            {{#if organisation_linkedin ~}}
+            {{#compare organisation_linkedin "!==" null ~}}
+            {{#compare organisation_linkedin "!==" "http://" ~}}
             <li class="mdc-card__info--vacancy-linkedin mdc-typography--body1">
               <span class="fa-li"><span class="fab fa-linkedin fa-fw" title="LinkedIn"></span></span>
-              <a href="{{organisation.linkedin_url}}">
-                {{organisation.inkedin}}
+              <a href="{{organisation_linkedin_url}}">
+                {{organisation_linkedin}}
               </a>
             </li>
             {{/compare ~}}
@@ -143,7 +145,7 @@
             {{/if ~}}
           </ul>
         </div>
-        {{/if ~}}
+        {{/ifAny ~}}
         <div class="detailed-info">
           {{#if geo_vacancy_coords}}
           {{#each geo_vacancy_coords}}
