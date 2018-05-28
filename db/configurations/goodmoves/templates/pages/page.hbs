@@ -4,7 +4,7 @@
   {{> banner_ads}}
 
   <div class="mdc-card full mdc-elevation--z3">
-    {{#if data.primaryResponse.hits.hits ~}}
+    {{#compare data.primaryResponse.hits.total ">" 0 ~}}
     <h1 class="mdc-typography--headline4">
       {{{data.primaryResponse.hits.hits.[0]._source.title}}}
     </h1>
@@ -13,6 +13,6 @@
     <h2 class="mdc-typography--headline5">
       Error 404: Page not found
     </h2>
-    {{/if ~}}
+    {{/compare ~}}
   </div>
 </div>
