@@ -22,6 +22,9 @@
   </div>
   <div class="mdc-layout-grid__inner expand detail">
     <div class="mdc-layout-grid__cell hide-on-small-only mdc-layout-grid__cell--span-4">
+      {{#compare request.params.slug "===" "foundations"}}
+      <!-- <img src="https://storage.googleapis.com/digitalparticipation/images/illustrations/WEB-Skill-Up-(Communicating).png" alt="Communicating illustration" class="responsive-img margin-top" /> -->
+      {{else}}
       {{#compare request.params.slug "===" "communicating"}}
       <img src="https://storage.googleapis.com/digitalparticipation/images/illustrations/WEB-Skill-Up-(Communicating).png" alt="Communicating illustration" class="responsive-img margin-top" />
       {{else}}
@@ -42,6 +45,7 @@
       {{/compare}}
       {{/compare}}
       {{/compare}}
+      {{/compare}}
     </div>
     <div class="mdc-layout-grid__cell hide-on-small-only mdc-layout-grid__cell--span-1">
       &nbsp;
@@ -54,6 +58,28 @@
           </a>
         </h3>
       </div>
+      {{#compare request.params.slug "===" "foundations"}}
+      <h3>Digital Foundation Skills</h3>
+      <p>
+        The framework includes a section on 'foundation' skills, which are typically required by those not currently using digital technology or using it in limited ways. These foundation skills are needed in all circumstances before moving on to develop skills for life and skills for work.
+      </p>
+      <ul class="mdc-layout-grid__cell collapsible">
+        <li>
+          <div class="mdc-layout-grid__cell collapsible-body">
+            <ul>
+              <li>I can turn on a device</li>
+              <li>I can use the available controls on my device</li>
+              <li>I can make use of accessibility tools on my device to make it easier to use</li>
+              <li>I can interact with the home screen on my device</li>
+              <li>I understand that the internet allows me to access information and content and that I can connect to it through Wi-Fi</li>
+              <li>I can connect my device to a safe and secure Wi-Fi network</li>
+              <li>I know that my passwords and personal information need to be kept safely as they have a value to others</li>
+              <li>I can update and change my password when prompted to do so.</li>
+            </ul>
+          </div>
+        </li>
+      </ul>
+      {{else}}
       {{#compare request.params.slug "===" "communicating"}}
       <h3><span class="number">1</span> Communicating</h3>
       <p>
@@ -224,6 +250,7 @@
       </ul>
       {{else}}
       <h3>Error 404: Page not found</h3>
+      {{/compare}}
       {{/compare}}
       {{/compare}}
       {{/compare}}
