@@ -107,12 +107,12 @@
               role="button" aria-pressed="false"
               aria-label="Show roles" tabindex="0" data-mdc-auto-init="MDCIconToggle"
               data-icon-inner-selector=".far"
-              data-toggle-on='{"cssClass": "fa-chevron-down", "label": "Show roles"}'
-              data-toggle-off='{"cssClass": "fa-chevron-up", "label": "Hide roles"}'>
-          <i class="far fa-chevron-up" aria-hidden="true"></i>
+              data-toggle-off='{"cssClass": "fa-chevron-down", "label": "Hide roles"}'
+              data-toggle-on='{"cssClass": "fa-chevron-up", "label": "Show roles"}'>
+          <i class="far fa-chevron-down" aria-hidden="true"></i>
         </span>
       </h3>
-      <div id="{{instance_id}}-roles-collapse">
+      <div id="{{instance_id}}-roles-collapse" style="display: none;">
         {{#each data.supplimentaryResponses.types.aggregations.roles.buckets ~}}
         {{> term_checkbox key=key field="roles" selected=../request.params.query.roles instance_id=../instance_id}}
         {{/each ~}}
@@ -121,15 +121,15 @@
       <h3 class="mdc-drawer__content-heading">
         Sectors
         <span class="mdc-icon-toggle pull-right" data-collapse-target="#{{instance_id}}-sectors-collapse "
-              role="button" aria-pressed="true"
+              role="button" aria-pressed="false"
               aria-label="Show sectors" tabindex="0" data-mdc-auto-init="MDCIconToggle"
               data-icon-inner-selector=".far"
-              data-toggle-on='{"cssClass": "fa-chevron-down", "label": "Show sectors"}'
-              data-toggle-off='{"cssClass": "fa-chevron-up", "label": "Hide sectors"}'>
-          <i class="far fa-chevron-up" aria-hidden="true"></i>
+              data-toggle-off='{"cssClass": "fa-chevron-down", "label": "Hide sectors"}'
+              data-toggle-on='{"cssClass": "fa-chevron-up", "label": "Show sectors"}'>
+          <i class="far fa-chevron-down" aria-hidden="true"></i>
         </span>
       </h3>
-      <div id="{{instance_id}}-sectors-collapse">
+      <div id="{{instance_id}}-sectors-collapse" style="display: none;">
         {{#each data.supplimentaryResponses.types.aggregations.sectors.buckets ~}}
         {{> term_checkbox key=key field="sectors" selected=../request.params.query.sectors instance_id=../instance_id}}
         {{/each ~}}
@@ -138,15 +138,15 @@
       <h3 class="mdc-drawer__content-heading">
         Statuses
         <span class="mdc-icon-toggle pull-right" data-collapse-target="#{{instance_id}}-statuses-collapse "
-              role="button" aria-pressed="true"
+              role="button" aria-pressed="false"
               aria-label="Show statuses" tabindex="0" data-mdc-auto-init="MDCIconToggle"
               data-icon-inner-selector=".far"
-              data-toggle-on='{"cssClass": "fa-chevron-down", "label": "Show statuses"}'
-              data-toggle-off='{"cssClass": "fa-chevron-up", "label": "Hide statuses"}'>
-          <i class="far fa-chevron-up" aria-hidden="true"></i>
+              data-toggle-off='{"cssClass": "fa-chevron-down", "label": "Hide statuses"}'
+              data-toggle-on='{"cssClass": "fa-chevron-up", "label": "Show statuses"}'>
+          <i class="far fa-chevron-down" aria-hidden="true"></i>
         </span>
       </h3>
-      <div id="{{instance_id}}-statuses-collapse">
+      <div id="{{instance_id}}-statuses-collapse" style="display: none;">
       {{#each data.supplimentaryResponses.types.aggregations.statuses.buckets ~}}
       {{> term_checkbox key=key field="role_status" selected=../request.params.query.role_status instance_id=../instance_id}}
       {{/each ~}}

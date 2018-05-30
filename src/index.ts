@@ -13,6 +13,7 @@ import * as path from 'path';
 import * as stream from 'stream';
 import * as url from 'url';
 import * as util from 'util';
+import { format } from 'date-fns';
 
 const Dot = require('dot-object');
 import * as S from 'string';
@@ -26,11 +27,12 @@ import {RedirectRouterDestination} from '@scvo/router-destination-redirect';
 
 // Import internal modules
 import {SECRETS} from './secrets';
+import {ANALYTICS_SECRETS} from './analytics-secrets';
 import {DOMAIN_MAP} from './domain-map';
 import {CMS_MAP} from './cms-map';
 import {getMenus} from './menus';
 import {fsPdf} from './fs-pdf';
-
+import {AnalyticsProcessor, ViewCount} from './analytics';
 
 // Setup firebase app
 const config = {
@@ -66,6 +68,11 @@ app.get('/getFsPdf', getFsPdf);
 app.get('/reload-sites', clearSitesCache);
 app.get('/liveness_check', livenessCheck);
 app.get('/readiness_check', readinessCheck);
+
+app.get('/analytics/goodmoves-vacancies', goodmovesVacanciesAnalytics);
+app.get('/analytics/goodmoves-vacancy-files', goodmovesVacancyFilesAnalytics);
+app.get('/analytics/generic', genericAnalytics);
+
 app.get('*', index);
 app.post('*', index);
 
@@ -87,7 +94,7 @@ async function index(
     fullUrl = fullUrl.replace(/(\/)($|\?)/gi, '$2');
 
     // Enforce SSL
-    //if (req.protocol == 'http') {
+    // if (req.protocol == 'http') {
     //  res.redirect(`https://${hostname}${req.originalUrl}`);
     //}
 
@@ -167,6 +174,89 @@ async function favicon(
     next: express.NextFunction): Promise<any> {
   res.send('Naw');
   res.end();
+  return next();
+}
+
+async function goodmovesVacanciesAnalytics(
+    req: express.Request, res: express.Response,
+    next: express.NextFunction): Promise<any> {
+  const analyticsProcessor = new AnalyticsProcessor(
+      ANALYTICS_SECRETS.googleCredentials.goodmoves,
+      ANALYTICS_SECRETS.salesforceCredentials.scvoProduction);
+  await analyticsProcessor.setup();
+  let response: any = null;
+  let gmHits: ViewCount[] = [];
+  let startDate = new Date();
+  try {
+    if (req.query.year && req.query.month) {
+      const year = Number(req.query.year);
+      const month = Number(req.query.month) - 1;
+      startDate = new Date(year, month, 1);  
+    }
+  } catch(err) {
+    console.error('Failed to parse date from querystring. Using beginning of this month.', err);
+    startDate = new Date();
+  }
+  try {
+    console.log('Starting Analytics import of Goodmoves Vacancies for', format(startDate, 'YYYY-MM-DD'));
+    gmHits = await analyticsProcessor.getGMHitEvents(startDate);
+    response = await analyticsProcessor.updateSalesforce(gmHits);
+  } catch (err) {
+    response = err;
+  }
+  res.send(
+      '<html><body>' +
+      '<h1>File Download Hits</h1>' +
+      '<pre>' + util.inspect(gmHits, false, null) + '</pre>' +
+      '<h1>Response</h1>' +
+      '<pre>' + util.inspect(response, false, null) + '</pre>' +
+      '</body></html>');
+  return next();
+}
+
+async function goodmovesVacancyFilesAnalytics(
+    req: express.Request, res: express.Response,
+    next: express.NextFunction): Promise<any> {
+  const analyticsProcessor = new AnalyticsProcessor(
+      ANALYTICS_SECRETS.googleCredentials.goodmoves,
+      ANALYTICS_SECRETS.salesforceCredentials.scvoProduction);
+  await analyticsProcessor.setup();
+  let response: any = null;
+  let gmHits: ViewCount[] = [];
+  let startDate = new Date();
+  try {
+
+    if (req.query.year && req.query.month) {
+      const year = Number(req.query.year);
+      const month = Number(req.query.month) - 1;
+      startDate = new Date(year, month, 1);  
+    }
+  } catch(err) {
+    console.error('Failed to parse date from querystring. Using beginning of this month.', err);
+    startDate = new Date();
+  }
+  try {
+    console.log('Starting Analytics import of Goodmoves Vacancy Files for', format(startDate, 'YYYY-MM-DD'));
+    gmHits = await analyticsProcessor.getGMDownloadEvents(startDate);
+    response = await analyticsProcessor.updateSalesforce(gmHits);
+  } catch (err) {
+    response = err;
+  }
+  res.send(
+      '<html><body>' +
+      '<h1>File Download Hits</h1>' +
+      '<pre>' + util.inspect(gmHits, false, null) + '</pre>' +
+      '<h1>Response</h1>' +
+      '<pre>' + util.inspect(response, false, null) + '</pre>' +
+      '</body></html>');
+  return next();
+}
+
+async function genericAnalytics(
+    req: express.Request, res: express.Response,
+    next: express.NextFunction): Promise<any> {
+  console.log('TEST CRON JOB');
+  res.send('Not yet implemented');
   return next();
 }
 

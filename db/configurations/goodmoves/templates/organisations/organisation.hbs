@@ -1,45 +1,10 @@
 {{> vacancy_search_form}}
 
 <div class="container-content goodmoves-organisation">
+  {{#compare data.primaryResponse.hits.total ">" 0}}
   {{#with data.primaryResponse.hits.hits.[0]._source as |organisation| ~}}
-  <div class="mdc-card full" data-organisation-id="{{Id}}">
-    <div class="mdc-card__info--organisation-row">
-      <div class="mdc-card__info--organisation">
-        <div class="mdc-card__info--organisation-title mdc-typography--headline3">
-          {{{organisation.title}}}
-        </div>
-        {{{organisation.rendered.goodmoves_charity_info}}}
-        <div class="detailed-info">
-          {{#if organisation.description ~}}
-          <div class="mdc-typography--body1">
-            {{{organisation.description}}}
-          </div>
-          {{/if ~}}
-        </div>
-      </div>
-      {{#if organisation.has_logo ~}}
-      <div class="mdc-card__media mdc-card__media--square mdc-card__media--organisation">
-        <img src="{{organisation.logo_url}}" alt="{{organisation.title}}" />
-      </div>
-      {{/if ~}}
-    </div>
-    <div class="mdc-card__info--organisation-row">
-      <div class="key-info-extra">
-        <ul class="fa-ul">
-          {{#if organisation.website ~}}
-          {{#compare organisation.website "===" null ~}}
-          <li class="mdc-card__info--vacancy-website mdc-typography--body1">
-            <span class="fa-li"><span class="far fa-link fa-fw" title="Website"></span></span>
-            <a href="{{organisation.website_url}}">
-              {{organisation.website}}
-            </a>
-          </li>
-          {{/compare ~}}
-          {{/if ~}}
-        </ul>
-      </div>
-    </div>
-  </div>
+
+  {{> organisation_full organisation}}
 
   {{#compare ../data.supplimentaryResponses.vacancies.hits.total ">" 0 ~}}
   <hr />
@@ -123,4 +88,9 @@
   {{/if}}
 
   {{/with ~}}
+  {{else}}
+  <p>
+    <strong>Error:</strong> the requested organisation could not be found.
+  </p>
+  {{/compare}}
 </div>

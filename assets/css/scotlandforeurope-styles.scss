@@ -1,11 +1,12 @@
 @import url("//cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css");
-@import url('//fonts.googleapis.com/css?family=Rubik:400,500,700|Open+Sans:400,600');
+@import url('//fonts.googleapis.com/css?family=Open+Sans:400,600');
 
 $unit: 1rem;
 $brand-border-width: 2px;
 
-$mdc-theme-primary: #5C96DD;
-$mdc-theme-secondary: #2C2C2B;
+$mdc-theme-primary: #0070bb;
+$mdc-theme-primary-dark: #003c6e;
+$mdc-theme-secondary: #212121;
 
 $mdc-theme-footer: #37474F;
 $mdc-theme-footer-light: #455A64;
@@ -13,11 +14,11 @@ $mdc-theme-footer-dark: #263238;
 
 $toolbar-shadow-reverse: 0px -3px 5px -1px rgba(0, 0, 0, 0.2), 0px -5px 8px 0px rgba(0, 0, 0, 0.14), 0px -1px 14px 0px rgba(0, 0, 0, 0.12);
 
-$base-font-family:                  "Rubik", Helvetica, Arial, sans-serif;
+$base-font-family:                  "Open Sans", Helvetica, Arial, sans-serif;
 $base-font-weight:                  400;
 
-$heading-font-family:               "Rubik", Helvetica, Arial, sans-serif;
-$heading-font-weight:               700;
+$heading-font-family:               "Open Sans", Helvetica, Arial, sans-serif;
+$heading-font-weight:               600;
 
 $footer-font-family:                "Open Sans", Helvetica, Arial, sans-serif;
 $footer-font-weight:                400;
@@ -49,7 +50,6 @@ body {
   font-family: $base-font-family;
 }
 .mdc-drawer__header-content,
-header.mdc-toolbar,
 main {
   color: $mdc-theme-secondary;
   background-color: white;
@@ -63,15 +63,70 @@ main {
 .mdc-list-item {
   direction: ltr;
 }
+.cookieinfo {
+  box-shadow: $toolbar-shadow-reverse;
+}
+
+.mdc-tab,
+.mdc-button,
+.mdc-form-field,
+.mdc-typography,
+.mdc-card__subtitle,
+.mdc-textfield__input,
+.mdc-typography--body1,
+.mdc-typography--body2,
+.mdc-typography--title,
+.mdc-card__title--large,
+.mdc-typography--caption,
+.mdc-typography--headline,
+.supplimentary-list-title,
+.mdc-card__supporting-text,
+.mdc-typography--subheading2,
+.mdc-simple-menu .mdc-list-item,
+.mdc-temporary-drawer .mdc-list-item,
+.mdc-list {
+  font-family: $base-font-family, Helvetica, Arial, sans-serif;
+  font-weight: $base-font-weight;
+}
+.mdc-temporary-drawer .mdc-list-item {
+  font-weight: 600;
+}
+.mdc-card__title,
+.mdc-textfield__label,
+.mdc-typography--title,
+.mdc-typography--headline,
+.supplimentary-list-title {
+  font-family: $heading-font-family, $base-font-family, Helvetica, Arial, sans-serif;
+  font-weight: $heading-font-weight;
+}
+.mdc-typography {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+a {
+  font-weight: 600;
+  text-decoration: none;
+  text-decoration-skip: ink;
+}
+a:hover {
+  text-decoration: underline;
+}
 
 .mdc-temporary-drawer {
   display: none;
+  .mdc-temporary-drawer__header {
+    background-color: $mdc-theme-primary;
+  }
   .mdc-temporary-drawer__header-content {
     direction: ltr;
-    padding: $unit;
+    padding: 0;
+    img.brand-logo-mobile {
+      max-width: 100%;
+    }
   }
   .mdc-temporary-drawer__header:before {
-    padding-top: 24%;
+    padding-top: 71%;
   }
   .mdc-list-group {
     direction: ltr;
@@ -98,13 +153,15 @@ main {
   }
 }
 
-.mdc-temporary-drawer__header,
 .hide-on-med-and-up {
   display: none;
 }
 
 main {
   padding-bottom: $unit;
+  .container-fluid {
+    padding: 0;
+  }
 }
 a {
   text-decoration-skip: ink;
@@ -114,6 +171,10 @@ a {
 a:hover {
   text-decoration: underline;
 }
+.mdc-button:hover {
+  text-decoration: none;
+}
+
 // iframe {
 //   border: none;
 //   background-image: url('/assets/images/spinner2.gif');
@@ -139,10 +200,14 @@ a:hover {
   padding: $unit 0;
 }
 .mdc-toolbar {
-  box-shadow: none;
+  box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2), 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12);
+  background-color: $mdc-theme-primary;
+  .mdc-toolbar__row {
+    min-height: auto;
+  }
   .container-fluid {
-    padding-bottom: $unit;
-    border-bottom: 3px solid $mdc-theme-secondary;
+    padding: 0;
+    // border-bottom: 3px solid $mdc-theme-secondary;
   }
   .mdc-toolbar__title {
     margin: 0;
@@ -166,40 +231,43 @@ a:hover {
   .mdc-toolbar__section--align-end {
     display: block;
   }
-  .mdc-tab-bar {
-    margin: 0;
-    .mdc-tab:first-child {
-      padding-left: 0;
-    }
-    .mdc-tab {
-      min-width: 0;
-      font-size: 1rem;
-      padding: $unit;
-      text-transform: none;
-    }
-    .mdc-tab--active,
-    .mdc-tab:hover {
-      opacity: 1;
-      text-decoration: underline;
-    }
-    .mdc-tab,
-    .mdc-tab:hover {
-      color: $mdc-theme-secondary;
+  .navbar {
+    background-image: linear-gradient(90deg, rgba(0, 0, 0, 0.16), rgba(0, 0, 0, 0.16) 60%, rgba(0, 0, 0, 0.08) 120%, rgba(0, 0, 0, 0.08));
+    .mdc-tab-bar {
+      margin: 0;
+      .mdc-tab:first-child {
+        margin-left: 0 !important;
+      }
+      .mdc-tab {
+        min-width: 0;
+        font-size: 1rem;
+        padding: $unit/2 0;
+        text-transform: none;
+        margin: 0 $unit*(3/4);
+        display: inline-block;
+      }
+      .mdc-tab--active,
+      .mdc-tab:hover {
+        opacity: 1;
+        text-decoration: none;
+      }
     }
   }
 }
 
 .mdc-button {
-  background-color: white !important;
-  border: $brand-border-width solid $mdc-theme-secondary;
-  color: $mdc-theme-secondary !important;
+  background-color: $mdc-theme-primary-dark !important;
+  border: $brand-border-width solid $mdc-theme-primary-dark;
+  color: white !important;
   text-transform: none;
   line-height: 1.75rem;
   font-size: 1.25rem;
+  font-weight: 600;
   text-align: center;
   display: block;
-  width: 50%;
-  margin: 0 auto;
+  width: 100%;
+  max-width: 310px;
+  margin: $unit/2 0 0;
   padding: 10px 15px;
   height: auto;
 }
@@ -216,9 +284,15 @@ div {
   font-weight: $heading-font-weight;
   color: $mdc-theme-secondary;
 }
+h1,
+h2,
+h3,
+h4 {
+  color: $mdc-theme-primary-dark;
+}
 .mdc-toolbar__icon,
 a {
-  color: $mdc-theme-secondary;
+  color: $mdc-theme-primary-dark;
 }
 em {
   font-family: $heading-font-family;
@@ -231,6 +305,10 @@ p, li, div {
 p.quote {
   text-align: center;
   font-size: 1.3rem;
+}
+blockquote {
+  font-size: 1.2rem;
+  margin: 0;
 }
 
 .mdc-toolbar__icon {
@@ -652,11 +730,24 @@ footer {
   }
 }
 
+@media screen and (max-width: 840px) {
+  footer .logo.scvo {
+    margin: 0 auto;
+    display: block;
+    position: relative;
+    bottom: 0;
+    right: 0;
+  }
+}
+
 @media screen and (max-width: 800px) {
   .mdc-temporary-drawer {
     display: block;
   }
   .mdc-toolbar {
+    .navbar {
+      display: none;
+    }
     .mdc-toolbar__title {
       .brand-logo {
         .brand-logo-mobile {
@@ -677,6 +768,7 @@ footer {
       top: 0;
       right: 0;
       z-index: 3;
+      color: white;
     }
     .mdc-toolbar__icon--menu:focus {
       outline: none;

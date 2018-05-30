@@ -18,23 +18,23 @@
 
 -->
 
-<link rel="shortcut icon" href="/assets/icons/goodmoves/favicon.ico">
-<link rel="apple-touch-icon" sizes="57x57" href="/assets/icons/goodmoves/apple-icon-57x57.png">
-<link rel="apple-touch-icon" sizes="60x60" href="/assets/icons/goodmoves/apple-icon-60x60.png">
-<link rel="apple-touch-icon" sizes="72x72" href="/assets/icons/goodmoves/apple-icon-72x72.png">
-<link rel="apple-touch-icon" sizes="76x76" href="/assets/icons/goodmoves/apple-icon-76x76.png">
-<link rel="apple-touch-icon" sizes="114x114" href="/assets/icons/goodmoves/apple-icon-114x114.png">
-<link rel="apple-touch-icon" sizes="120x120" href="/assets/icons/goodmoves/apple-icon-120x120.png">
-<link rel="apple-touch-icon" sizes="144x144" href="/assets/icons/goodmoves/apple-icon-144x144.png">
-<link rel="apple-touch-icon" sizes="152x152" href="/assets/icons/goodmoves/apple-icon-152x152.png">
-<link rel="apple-touch-icon" sizes="180x180" href="/assets/icons/goodmoves/apple-icon-180x180.png">
-<link rel="icon" type="image/png" sizes="192x192" href="/assets/icons/goodmoves/android-icon-192x192.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/assets/icons/goodmoves/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="96x96" href="/assets/icons/goodmoves/favicon-96x96.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/assets/icons/goodmoves/favicon-16x16.png">
-<link rel="manifest" href="/assets/icons/goodmoves/manifest.json">
+<link rel="shortcut icon" href="https://storage.googleapis.com/scvo-assets/scvo-frontend/assets/images/icons/goodmoves/favicon.ico">
+<link rel="apple-touch-icon" sizes="57x57" href="https://storage.googleapis.com/scvo-assets/scvo-frontend/assets/images/icons/goodmoves/apple-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="https://storage.googleapis.com/scvo-assets/scvo-frontend/assets/images/icons/goodmoves/apple-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="https://storage.googleapis.com/scvo-assets/scvo-frontend/assets/images/icons/goodmoves/apple-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="https://storage.googleapis.com/scvo-assets/scvo-frontend/assets/images/icons/goodmoves/apple-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="https://storage.googleapis.com/scvo-assets/scvo-frontend/assets/images/icons/goodmoves/apple-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="https://storage.googleapis.com/scvo-assets/scvo-frontend/assets/images/icons/goodmoves/apple-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="https://storage.googleapis.com/scvo-assets/scvo-frontend/assets/images/icons/goodmoves/apple-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="https://storage.googleapis.com/scvo-assets/scvo-frontend/assets/images/icons/goodmoves/apple-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="https://storage.googleapis.com/scvo-assets/scvo-frontend/assets/images/icons/goodmoves/apple-icon-180x180.png">
+<link rel="icon" type="image/png" sizes="192x192" href="https://storage.googleapis.com/scvo-assets/scvo-frontend/assets/images/icons/goodmoves/android-icon-192x192.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://storage.googleapis.com/scvo-assets/scvo-frontend/assets/images/icons/goodmoves/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="96x96" href="https://storage.googleapis.com/scvo-assets/scvo-frontend/assets/images/icons/goodmoves/favicon-96x96.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://storage.googleapis.com/scvo-assets/scvo-frontend/assets/images/icons/goodmoves/favicon-16x16.png">
+<link rel="manifest" href="https://storage.googleapis.com/scvo-assets/scvo-frontend/assets/images/icons/goodmoves/manifest.json">
 <meta name="msapplication-TileColor" content="#3c7524">
-<meta name="msapplication-TileImage" content="/assets/icons/goodmoves/ms-icon-144x144.png">
+<meta name="msapplication-TileImage" content="https://storage.googleapis.com/scvo-assets/scvo-frontend/assets/images/icons/goodmoves/ms-icon-144x144.png">
 <meta name="theme-color" content="#3c7524">
 <link rel="search" type="application/opensearchdescription+xml" title="Goodmoves" href="/assets/opensearch.xml" />
 <!-- Global site tag (gtag.js) - Google Analytics -->
@@ -75,7 +75,7 @@ if(location.host.indexOf('.local') > -1){
     <div class="mdc-typography">
       <header class="mdc-top-app-bar mdc-elevation--z5 top-bar-stuck" id="top-bar">
         <div class="container-fluid">
-          <div class="mdc-top-app-bar__row">
+          <div class="mdc-top-app-bar__row mdc-top-app-bar__upper">
             <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
               <button class="mdc-top-app-bar__navigation-icon hide-lg" data-drawer-target="#mobile-menu">
                 <span class="far fa-fw fa-bars"></span>
@@ -131,14 +131,25 @@ if(location.host.indexOf('.local') > -1){
               </span>
             </section>
             <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end">
-              <nav class="mdc-tab-bar mdc-tab-bar__right hide-sm hide-md">
+              <nav class="mdc-tab-bar mdc-tab-bar__right hide-sm hide-md" id="upper-tab-bar">
+                {{#each context.menus.upper ~}}
+                <a class="mdc-tab{{#if (regexMatch ../request.url.pathname route "gi")}} mdc-tab--active{{/if}}" href="{{stripTrailingSlash path}}">
+                  <span class="mdc-tab--label">{{{label}}}</span>
+                </a>
+                {{/each ~}}
+              </nav>
+            </section>
+          </div>
+          <div class="mdc-top-app-bar__row mdc-top-app-bar__lower">
+            <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
+              <nav class="mdc-tab-bar mdc-tab-bar__left hide-sm hide-md" id="main-tab-bar">
                 {{#each context.menus.main ~}}
                 <a class="mdc-tab{{#if (regexMatch ../request.url.pathname route "gi")}} mdc-tab--active{{/if}}" href="{{stripTrailingSlash path}}">
                   <span class="mdc-tab--label">{{{label}}}</span>
                 </a>
                 {{/each ~}}
               </nav>
-              <div class="mdc-menu-anchor hide-md hide-sm">
+              <!-- <div class="mdc-menu-anchor hide-md hide-sm">
                 <button class="mdc-top-app-bar__action-item" data-menu-target="#upper-menu">
                   <i class="far fa-fw fa-ellipsis-h"></i>
                 </button>
@@ -154,7 +165,9 @@ if(location.host.indexOf('.local') > -1){
                     {{/each ~}}
                   </div>
                 </div>
-              </div>
+              </div> -->
+            </section>
+            <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end">
               <div class="mdc-menu-anchor">
                 <!-- Logged in: -->
                 <button class="mdc-button" data-menu-target="#user-menu">
@@ -306,7 +319,7 @@ if(location.host.indexOf('.local') > -1){
                 </div>
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-2-desktop mdc-layout-grid__cell--span-2-tablet mdc-layout-grid__cell--span-4-phone">
                   <a href="https://scvo.org" class="brand-logo" title="Scottish Council for Voluntary Organisations">
-                    <img src="/assets/images/scvo-logo.png" alt="Scottish Council for Voluntary Organisations" />
+                    <img src="https://storage.googleapis.com/scvo-assets/scvo-frontend/assets/images/logos/scvo.png" alt="Scottish Council for Voluntary Organisations" />
                   </a>
                 </div>
               </div>
@@ -324,16 +337,8 @@ if(location.host.indexOf('.local') > -1){
   <script type="text/javascript" src="https://unpkg.com/material-components-web@0.34.1/dist/material-components-web.min.js"></script>
   {{/if}}
   <script src="https://cdn.jsdelivr.net/npm/promise-polyfill@7/dist/polyfill.min.js"></script>
-  <script type="text/javascript" id="cookieinfo" src="/assets/js/goodmoves/main.js"
-  data-bg="#251032"
-  data-fg="#FFFFFF"
-  data-link="#FFFFFF"
-  data-divlink="#FFFFFF"
-  data-divlinkbg="#B3185B"
-  data-moreinfo="/privacy-cookies-policy"
-  data-cookie="CookieInfoScript"
-  data-text-align="left">
-  </script>
+  <script type="text/javascript" id="cookieinfo" src="/assets/js/cookieinfo.min.js" data-message="We use cookies to track anonymous usage statistics and do not collect any personal information that can be used to identify you. By continuing to visit this site you agree to our use of cookies." data-moreinfo="/cookies" data-cookie="CookieInfoScript" data-text-align="left"></script>
+  <script type="text/javascript" src="/assets/js/goodmoves/main.js"></script>
   <!--{section:foot}-->
 </body>
 </html>

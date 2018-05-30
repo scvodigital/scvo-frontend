@@ -655,6 +655,20 @@ primary-dark: #263238
       color: map-get($themeServices, 'primary') !important;
     }
   }
+  .running-a-charity .footer-image.join-our-hub,
+  .setting-up-a-charity .footer-image.join-our-hub,
+  .running-your-organisation .footer-image.join-our-hub {
+    background-image: linear-gradient(
+    map-get($themePosts, 'primary-overlay-start'),
+    map-get($themePosts, 'primary-overlay-start')
+    ),
+    url('https://storage.googleapis.com/scvo-cms/wp-content/uploads/2018/01/edward-new-940x470.jpg') !important;
+    .mdc-button:hover {
+      background-color: white !important;
+      border-color: map-get($themePosts, 'primary-dark') !important;
+      color: map-get($themePosts, 'primary') !important;
+    }
+  }
 
   footer {
     color: white;
@@ -836,6 +850,9 @@ input:focus::-moz-placeholder {
 input:focus:-ms-input-placeholder {
   color:transparent;
 }
+.cookieinfo {
+  box-shadow: $toolbar-shadow-reverse;
+}
 .brand-logo,
 .mdc-tab,
 #menu_button {
@@ -846,13 +863,6 @@ input:focus:-ms-input-placeholder {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-}
-.brand-logo {
-  margin-left: -$unit/2;
-  img {
-    max-height: $unit*3;
-    margin-top: $unit/2;
-  }
 }
 
 img.responsive {
@@ -1592,7 +1602,7 @@ form#settled_status {
 }
 
 .mdc-toolbar.mdc-toolbar--fixed {
-  padding-top: 15px;
+  padding-top: 0;
 }
 .mdc-toolbar {
   .container-fluid {
@@ -1603,7 +1613,7 @@ form#settled_status {
   .mdc-toolbar__row,
   .mdc-form-field,
   .mdc-toolbar__section {
-    height: $unit*6;
+    height: 100px;
     padding: 0;
   }
   .mdc-toolbar__section.toolbar-menu,
@@ -1624,8 +1634,16 @@ form#settled_status {
       box-sizing: border-box;
       padding: 0;
       .mdc-toolbar__title {
-        padding: $unit/4 0 0;
+        padding: 0;
         margin-left: 0;
+        .brand-logo {
+          margin-left: -$unit/2;
+          img {
+            max-height: 80px;
+            margin: 0;
+            padding: 0;
+          }
+        }
       }
       .mdc-textfield {
         margin: 0;
@@ -1776,7 +1794,7 @@ form#settled_status {
   }
 }
 .mdc-toolbar-fixed-adjust {
-  padding: 150px 0 0;
+  padding: 100px+$nav-height 0 0;
   margin: 0;
 }
 .mdc-temporary-drawer {
@@ -3609,7 +3627,10 @@ footer {
   .brand-logo {
     display: block;
     text-align: right;
+    margin: 0;
     img {
+      max-height: $unit*3;
+      margin-top: $unit/2;
       margin-bottom: 0;
     }
   }
@@ -3755,6 +3776,9 @@ footer {
       display: none;
     }
     .mdc-toolbar__row .container-fluid {
+      .mdc-toolbar__title .brand-logo img {
+        max-height: 48px;
+      }
       .mdc-toolbar__icon--menu {
         visibility: visible;
         width: auto;
@@ -4002,6 +4026,10 @@ footer {
   .pagination-distance-4 {
     display: none !important;
   }
+  .mdc-toolbar__title {
+    width: 38px;
+    overflow: hidden;
+  }
   .splash-image {
     .container-fluid {
       .mdc-layout-grid {
@@ -4047,10 +4075,6 @@ footer {
 }
 
 @media screen and (max-width: 395px) {
-  .mdc-toolbar__title {
-    width: 38px;
-    overflow: hidden;
-  }
   .pagination-distance-3 {
     display: none !important;
   }

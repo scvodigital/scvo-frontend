@@ -101,8 +101,25 @@
       }
     }
   },
-  "signatory_search": {
+  "signatories": {
     "pattern": "/signatories",
+    "metaData": {
+      "title": "Signatories – Scotland for Europe"
+    },
+    "tasks": [],
+    "destination": {
+      "destinationType": "handlebars",
+      "config": {
+        "default": {
+          "head": "{$./templates/head-tags.hbs}",
+          "body": "{$./templates/signatories-static.hbs}",
+          "foot": ""
+        }
+      }
+    }
+  },
+  "signatory_search": {
+    "pattern": "/signatories_search",
     "metaData": {
       "title": "Signatories – Scotland for Europe"
     },
@@ -186,9 +203,9 @@
     }
   },
   "privacy": {
-    "pattern": "/privacy-and-cookies",
+    "pattern": "/privacy",
     "metaData": {
-      "title": "Privacy and cookies – Scotland for Europe"
+      "title": "Privacy policy – Scotland for Europe"
     },
     "tasks": [],
     "destination": {
@@ -197,6 +214,23 @@
         "default": {
           "head": "{$./templates/head-tags.hbs}",
           "body": "{$./templates/privacy.hbs}",
+          "foot": ""
+        }
+      }
+    }
+  },
+  "cookies": {
+    "pattern": "/cookies",
+    "metaData": {
+      "title": "Cookies policy – Scotland for Europe"
+    },
+    "tasks": [],
+    "destination": {
+      "destinationType": "handlebars",
+      "config": {
+        "default": {
+          "head": "{$./templates/head-tags.hbs}",
+          "body": "{$./templates/cookies.hbs}",
           "foot": ""
         }
       }
@@ -220,7 +254,7 @@
     }
   },
   "terms": {
-    "pattern": "/terms-and-conditions",
+    "pattern": "/terms",
     "metaData": {
       "title": "Terms and conditions – Scotland for Europe"
     },
