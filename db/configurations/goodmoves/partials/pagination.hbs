@@ -2,7 +2,7 @@
 <ul class="pagination inline-list">
   <li class="{{#if paging.prevPage}}{{else}}disabled{{/if}}">
     <a class="pagination-arrow" href="{{request.params.uri.pathname}}?{{{querystringify ../request.params.query page=paging.prevPage json=false}}}">
-      <i class="fa fa-fw fa-chevron-left"></i>
+      <i class="far fa-fw fa-chevron-left"></i>
     </a>
   </li>
   {{#each paging.pageRange ~}}
@@ -14,7 +14,7 @@
   {{/each ~}}
   <li class="{{#if paging.nextPage}}{{else}}disabled{{/if}}">
     <a class="pagination-arrow" href="{{request.params.uri.pathname}}?{{{querystringify ../request.params.query page=paging.nextPage json=false}}}">
-      <i class="fa fa-fw fa-chevron-right"></i>
+      <i class="far fa-fw fa-chevron-right"></i>
     </a>
   </li>
 </ul>
