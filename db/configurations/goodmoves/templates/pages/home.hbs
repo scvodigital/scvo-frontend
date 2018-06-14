@@ -4,7 +4,7 @@
       <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-2-desktop mdc-layout-grid__cell--span-0-tablet mdc-layout-grid__cell--span-0-phone">
       </div>
       <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-8-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone content page-content mdc-elevation--z20">
-        <div class="mdc-typography--headline3 v-margin-full">
+        <div class="mdc-typography--headline5 v-margin-full">
           Charity and voluntary sector recruitment
         </div>
         <!-- <div id="home-tab-bar" class="mdc-tab-bar mdc-tab-bar--left" data-mdc-auto-init="MDCTabBar">
@@ -33,9 +33,9 @@
                     </label>
                     <div class="mdc-line-ripple"></div>
                   </div>
-                  <p id="what-jobs-helper-text" class="mdc-text-field-helper-text" aria-hidden="true">
+                  <!-- <p id="what-jobs-helper-text" class="mdc-text-field-helper-text" aria-hidden="true">
                     e.g. Fundraising, Carer, Manager
-                  </p>
+                  </p> -->
                 </div>
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-2-tablet mdc-layout-grid__cell--span-3-phone">
                   <div class="mdc-text-field mdc-text-field--box mdc-text-field--with-leading-icon" data-mdc-auto-init="MDCTextField">
@@ -46,9 +46,9 @@
                     </label>
                     <div class="mdc-line-ripple"></div>
                   </div>
-                  <p id="where-jobs-helper-text" class="mdc-text-field-helper-text" aria-hidden="true">
+                  <!-- <p id="where-jobs-helper-text" class="mdc-text-field-helper-text" aria-hidden="true">
                     e.g. Glasgow, Edinburgh, Inverness
-                  </p>
+                  </p> -->
                 </div>
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-2-desktop mdc-layout-grid__cell--span-1-tablet mdc-layout-grid__cell--span-1-phone">
                   <div class="mdc-form-field">
@@ -76,6 +76,104 @@
               <div class="mdc-layout-grid__inner">
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone">
                   <div id="search-terms" class="mdc-chip-set"></div>
+                </div>
+              </div>
+              <div class="mdc-layout-grid__inner">
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
+                  <div class="mdc-menu-anchor">
+                    <button class="mdc-button mdc-button--raised" data-menu-target="#sectors-menu">
+                      Sectors
+                      <span class="far fa-fw fa-angle-down"></span>
+                    </button>
+                    <div class="mdc-menu" tabindex="-1" data-mdc-auto-init="MDCMenu" id="sectors-menu">
+                      <div class="mdc-menu__items mdc-list" role="menu" aria-hidden="true">
+                        {{#each data.supplimentaryResponses.types.aggregations.sectors_slugs.buckets ~}}
+                        <a class="mdc-list-item" href="/search?sector={{urlencode key}}" role="menuitem">
+                          <span class="mdc-list-item__text">
+                            {{#with (lookup ../data.supplimentaryResponses.types.aggregations.sectors.buckets @index) ~}}
+                              {{{key}}}
+                            {{/with ~}}
+                          </span>
+                          <span class="mdc-list-item__meta">
+                            {{doc_count}}
+                          </span>
+                        </a>
+                        {{/each ~}}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
+                  <div class="mdc-menu-anchor">
+                    <button class="mdc-button mdc-button--raised" data-menu-target="#roles-menu">
+                      Roles
+                      <span class="far fa-fw fa-angle-down"></span>
+                    </button>
+                    <div class="mdc-menu" tabindex="-1" data-mdc-auto-init="MDCMenu" id="roles-menu">
+                      <div class="mdc-menu__items mdc-list" role="menu" aria-hidden="true">
+                        {{#each data.supplimentaryResponses.types.aggregations.roles_slugs.buckets ~}}
+                        <a class="mdc-list-item" href="/search?role={{urlencode key}}" role="menuitem">
+                          <span class="mdc-list-item__text">
+                            {{#with (lookup ../data.supplimentaryResponses.types.aggregations.roles.buckets @index) ~}}
+                              {{{key}}}
+                            {{/with ~}}
+                          </span>
+                          <span class="mdc-list-item__meta">
+                            {{doc_count}}
+                          </span>
+                        </a>
+                        {{/each ~}}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
+                  <div class="mdc-menu-anchor">
+                    <button class="mdc-button mdc-button--raised" data-menu-target="#regions-menu">
+                      Regions
+                      <span class="far fa-fw fa-angle-down"></span>
+                    </button>
+                    <div class="mdc-menu" tabindex="-1" data-mdc-auto-init="MDCMenu" id="regions-menu">
+                      <div class="mdc-menu__items mdc-list" role="menu" aria-hidden="true">
+                        {{#each data.supplimentaryResponses.types.aggregations.regions_slugs.buckets ~}}
+                        <a class="mdc-list-item" href="/search?region={{urlencode key}}" role="menuitem">
+                          <span class="mdc-list-item__text">
+                            {{#with (lookup ../data.supplimentaryResponses.types.aggregations.regions.buckets @index) ~}}
+                              {{{key}}}
+                            {{/with ~}}
+                          </span>
+                          <span class="mdc-list-item__meta">
+                            {{doc_count}}
+                          </span>
+                        </a>
+                        {{/each ~}}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
+                  <div class="mdc-menu-anchor">
+                    <button class="mdc-button mdc-button--raised" data-menu-target="#statuses-menu">
+                      Statuses
+                      <span class="far fa-fw fa-angle-down"></span>
+                    </button>
+                    <div class="mdc-menu" tabindex="-1" data-mdc-auto-init="MDCMenu" id="statuses-menu">
+                      <div class="mdc-menu__items mdc-list" role="menu" aria-hidden="true">
+                        {{#each data.supplimentaryResponses.types.aggregations.statuses_slugs.buckets ~}}
+                        <a class="mdc-list-item" href="/search?status={{urlencode key}}" role="menuitem">
+                          <span class="mdc-list-item__text">
+                            {{#with (lookup ../data.supplimentaryResponses.types.aggregations.statuses.buckets @index) ~}}
+                              {{{key}}}
+                            {{/with ~}}
+                          </span>
+                          <span class="mdc-list-item__meta">
+                            {{doc_count}}
+                          </span>
+                        </a>
+                        {{/each ~}}
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
@@ -168,9 +266,9 @@
                     </label>
                     <div class="mdc-line-ripple"></div>
                   </div>
-                  <p id="what-organisations-helper-text" class="mdc-text-field-helper-text" aria-hidden="true">
+                  <!-- <p id="what-organisations-helper-text" class="mdc-text-field-helper-text" aria-hidden="true">
                     e.g. Shelter, CrossReach, Big Lottery Fund
-                  </p>
+                  </p> -->
                 </div>
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-2-desktop mdc-layout-grid__cell--span-1-tablet mdc-layout-grid__cell--span-4-phone">
                   <button class="mdc-button mdc-button--raised mdc-text-field--box mdc-button--search">
@@ -194,9 +292,9 @@
                   </label>
                   <div class="mdc-line-ripple"></div>
                 </div>
-                <p id="what-advice-helper-text" class="mdc-text-field-helper-text" aria-hidden="true">
+                <!-- <p id="what-advice-helper-text" class="mdc-text-field-helper-text" aria-hidden="true">
                   e.g. CV writing, interview preparation, third sector pay and conditions
-                </p>
+                </p> -->
               </div>
               <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-2-desktop mdc-layout-grid__cell--span-1-tablet mdc-layout-grid__cell--span-4-phone">
                 <button class="mdc-button mdc-button--raised mdc-text-field--box mdc-button--search">
@@ -210,6 +308,8 @@
       </div>
     </div>
   </div>
+
+  {{> currently_recruiting}}
 
   <div class="mdc-layout-grid home-jobs">
     <div class="mdc-layout-grid__inner">
@@ -239,8 +339,6 @@
       </div>
     </div>
   </div>
-
-  {{> currently_recruiting}}
 
   {{> tfn_latest}}
 </div>
