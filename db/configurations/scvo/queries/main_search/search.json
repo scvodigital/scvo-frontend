@@ -15,13 +15,6 @@
     "function_score": {
       "query": {
         "bool": {
-          "must_not": [
-            {
-              "term": {
-                "hide_in_results": true
-              }
-            }
-          ],
           "must": [
             {
               "exists": {
@@ -31,6 +24,13 @@
               {{#if request.params.query.type}}
               {
                 "bool": {
+                  "must_not": [
+                    {
+                      "term": {
+                        "hide_in_results": true
+                      }
+                    }
+                  ],
                   "should": [
                     {{#compare (getType request.params.query.type) "string"}}
                     {
@@ -59,6 +59,13 @@
               {{#if request.params.query.q}}
               {
                 "bool": {
+                  "must_not": [
+                    {
+                      "term": {
+                        "hide_in_results": true
+                      }
+                    }
+                  ],
                   "should": [
                     {
                       "query_string": {
@@ -105,6 +112,13 @@
               {{/if}}
             ]
             {{#unless request.params.query.type}},
+            "must_not": [
+              {
+                "term": {
+                  "hide_in_results": true
+                }
+              }
+            ],
             "should": [
               {
                 "term" : {
@@ -148,14 +162,6 @@
             "filter": {
               "term": {
                 "vacancy_status": "vacancy-closed"
-              }
-            },
-            "weight": -1000
-          },
-          {
-            "filter": {
-              "term": {
-                "hide_in_results": true
               }
             },
             "weight": -1000
