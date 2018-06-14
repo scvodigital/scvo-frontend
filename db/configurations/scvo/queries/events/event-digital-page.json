@@ -6,6 +6,13 @@
   ],
   "query": {
     "bool": {
+      "must_not": [
+        {
+          "term": {
+            "hide_in_results": true
+          }
+        }
+      ],
       "must": [
         {
           "range" : {

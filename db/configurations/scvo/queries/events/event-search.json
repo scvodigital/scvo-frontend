@@ -12,38 +12,43 @@
   ],
   "query": {
     "bool": {
-      {{#if request.params.query.free}}
       "must_not": [
+        {{#if request.params.query.free ~}}
         {
           "exists": {
             "field": "cost"
           }
+        },
+        {{/if ~}}
+        {
+          "term": {
+            "hide_in_results": true
+          }
         }
       ],
-      {{/if}}
       "must": [
-        {{#if request.params.query.course_type}}
+        {{#if request.params.query.course_type ~}}
         {
           "term": {
             "course_type": "{{request.params.query.course_type}}"
           }
         },
-        {{/if}}
-        {{#if request.params.query.month}}
+        {{/if ~}}
+        {{#if request.params.query.month ~}}
         {
           "term": {
             "month": "{{request.params.query.month}}"
           }
         },
-        {{/if}}
-        {{#if request.params.query.location}}
+        {{/if ~}}
+        {{#if request.params.query.location ~}}
         {
           "term": {
             "city": "{{request.params.query.location}}"
           }
         },
-        {{/if}}
-        {{#if request.params.query.q}}
+        {{/if ~}}
+        {{#if request.params.query.q ~}}
         {
           "query_string": {
             "query": {{{stringify (default request.params.query.q "")}}},
@@ -52,7 +57,7 @@
             "analyzer": "snowball"
           }
         },
-        {{/if}}
+        {{/if ~}}
         {
           "range" : {
             "date_start" : {
