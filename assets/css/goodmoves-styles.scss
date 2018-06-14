@@ -33,7 +33,7 @@ $header-lower-height: 38px;
 
 $mobile-breakpoint: 599px;
 $mobile-landscape-breakpoint: 959px;
-
+$desktop-landscape-breakpoint: 1010px;
 
 @import "./node_modules/material-components-web/material-components-web.scss";
 @import url('//cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css');
@@ -1237,6 +1237,9 @@ body {
 .home-jobs {
   background-color: #fdfdfd;
   padding: 0 $unit*1.5 $unit !important;
+}
+.currently-recruiting,
+.home-jobs {
   box-shadow: $toolbar-shadow-reverse;
 }
 .home .tfn-latest {
@@ -1551,13 +1554,13 @@ footer {
   margin: 0;
 }
 
-@media (max-width: $mobile-breakpoint) {
+@media screen and (max-width: $mobile-breakpoint) {
   .hide-sm {
     display: none;
   }
 }
 
-@media (min-width: $mobile-breakpoint + 1) and (max-width: $mobile-landscape-breakpoint) {
+@media screen and (min-width: $mobile-breakpoint + 1) and (max-width: $mobile-landscape-breakpoint) {
   .hide-md {
     display: none;
   }
@@ -1569,9 +1572,17 @@ footer {
   }
 }
 
-@media (min-width: $mobile-landscape-breakpoint + 1) {
+@media screen and (min-width: $mobile-landscape-breakpoint + 1) {
   .hide-lg {
     display: none;
+  }
+}
+
+@media screen and (min-width: $desktop-landscape-breakpoint + 1) {
+  .currently-recruiting {
+    .mdc-layout-grid__cell--span-2, .mdc-layout-grid__cell--span-2-desktop {
+      grid-column-end: span 1;
+    }
   }
 }
 
