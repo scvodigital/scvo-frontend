@@ -15,6 +15,13 @@
     "function_score": {
       "query": {
         "bool": {
+          "must_not": [
+            {
+              "term": {
+                "hide_in_results": true
+              }
+            }
+          ],
           "must": [
             {
               "exists": {
@@ -141,6 +148,14 @@
             "filter": {
               "term": {
                 "vacancy_status": "vacancy-closed"
+              }
+            },
+            "weight": -1000
+          },
+          {
+            "filter": {
+              "term": {
+                "hide_in_results": true
               }
             },
             "weight": -1000
