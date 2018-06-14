@@ -12,15 +12,20 @@
   ],
   "query": {
     "bool": {
-      {{#if request.params.query.free}}
       "must_not": [
+        {{#if request.params.query.free ~}}
         {
           "exists": {
             "field": "cost"
           }
+        },
+        {{/if ~}}
+        {
+          "term": {
+            "hide_in_results": true
+          }
         }
       ],
-      {{/if}}
       "must": [
         {{#if request.params.query.course_type}}
         {

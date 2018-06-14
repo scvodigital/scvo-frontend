@@ -242,6 +242,7 @@ a {
     //     padding-right: 0;
     // }
     .mdc-tab {
+      transition: 0.2s;
       margin: 0 0 0 .4rem;
       display: inline-block;
       height: auto;
@@ -731,11 +732,13 @@ main {
   .detail .collapsible {
     border: none;
     box-shadow: none;
+    width:100%;
     .collapsible-header {
       opacity: 0.5;
       background-color: inherit;
       border: none;
       padding: 1.5rem 0 0.5rem;
+      width:100%;
     }
     .collapsible-header.active {
       opacity: 1;
@@ -744,6 +747,7 @@ main {
       color: white;
       padding: 1rem 2rem;
       border: none;
+      width:100%;
       ul {
         padding: 0.5rem 0;
         border-top: $brand-border-width solid white;
@@ -914,37 +918,42 @@ hr {
   }
   .signatory {
     background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 12rem;
     // margin: 0 -0.75rem;
-    padding: $unit;
-    vertical-align: middle;
+    // padding: $unit;
+    // vertical-align: middle;
     a {
-      display: inline-block;
-      vertical-align: middle;
+      padding: $unit*(3/4);
       max-width: 100%;
       width: 12rem;
-      height: 12rem;
-      line-height: 12rem;
       display: block;
-      padding: 0;
       vertical-align: middle;
       position: relative;
       text-align: center;
       overflow: hidden;
       font-size: 1rem;
       font-weight: bold;
-      color: $brand-typography;
-      span {
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        margin-top: 3rem;
-        text-align: center;
+      text-decoration: none;
+      .title {
+        margin-top: $unit;
         display: block;
-        width: 100%;
-        font-weight: bold;
-        font-size: 1.1rem;
-        color: $brand-typography;
       }
+    //   color: $brand-typography;
+    //   span {
+    //     position: absolute;
+    //     bottom: 0;
+    //     left: 0;
+    //     margin-top: 3rem;
+    //     text-align: center;
+    //     display: block;
+    //     width: 100%;
+    //     font-weight: bold;
+    //     font-size: 1.1rem;
+    //     color: $brand-typography;
+    //   }
       img.resize-fit-center {
         max-width: 90%;
         max-height: 90%;
@@ -1180,7 +1189,7 @@ footer {
 }
 
 .mdc-temporary-drawer {
-  display: none;
+  display: block;
   .mdc-temporary-drawer__header-content {
     direction: ltr;
     padding: $unit;

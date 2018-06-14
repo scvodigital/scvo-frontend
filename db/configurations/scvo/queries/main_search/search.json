@@ -24,6 +24,13 @@
               {{#if request.params.query.type}}
               {
                 "bool": {
+                  "must_not": [
+                    {
+                      "term": {
+                        "hide_in_results": true
+                      }
+                    }
+                  ],
                   "should": [
                     {{#compare (getType request.params.query.type) "string"}}
                     {
@@ -52,6 +59,13 @@
               {{#if request.params.query.q}}
               {
                 "bool": {
+                  "must_not": [
+                    {
+                      "term": {
+                        "hide_in_results": true
+                      }
+                    }
+                  ],
                   "should": [
                     {
                       "query_string": {
@@ -98,6 +112,13 @@
               {{/if}}
             ]
             {{#unless request.params.query.type}},
+            "must_not": [
+              {
+                "term": {
+                  "hide_in_results": true
+                }
+              }
+            ],
             "should": [
               {
                 "term" : {
@@ -143,7 +164,7 @@
                 "vacancy_status": "vacancy-closed"
               }
             },
-            "weight": "-1000"
+            "weight": -1000
           },
           {
             "filter": {
@@ -151,11 +172,11 @@
                 "_type": "scvo-cms-post"
               }
             },
-            "weight": "3",
+            "weight": 3,
             "gauss": {
               "publish_on": {
                 "scale": "120d",
-                "decay": "0.1"
+                "decay": 0.1
               }
             }
           }
