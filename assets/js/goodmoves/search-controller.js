@@ -31,6 +31,7 @@ function doSearch(qs) {
   var urlWithJson = '/search?' + $.param(query);
   $.getJSON(urlWithJson, function(results) {
     $detailedResults.html(results.detailed_results.string);
+    searchQuery = results.query;
     var lat = $('[name="lat"]').val();
     var lng = $('[name="lng"]').val();
     var distance = $('[name="distance"]').val();
