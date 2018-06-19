@@ -1047,6 +1047,61 @@
       }
     }
   },
+  "cjs_job_apply": {
+    "pattern": "/jobs/community-jobs-scotland/vacancies/:phase/:slug/apply",
+    "tasks": [
+      {
+        "name": "primaryResponse",
+        "taskType": "elasticsearch",
+        "config": {
+          "connectionStringTemplate": "{$../elasticsearch-url.txt}",
+          "elasticsearchConfig": {
+            "apiVersion": "5.6"
+          },
+          "queryTemplates": {
+            "index": "web-content-production",
+            "type": "cjs-job",
+            "template": "{$./queries/jobs/cjs-job.json}",
+            "noResultsRoute": "four_oh_four"
+          }
+        }
+      },
+      {
+        "name": "supplimentaryResponses",
+        "taskType": "elasticsearch",
+        "config": {
+          "connectionStringTemplate": "{$../elasticsearch-url.txt}",
+          "elasticsearchConfig": {
+            "apiVersion": "5.6"
+          },
+          "queryTemplates": [
+            {
+              "name": "types",
+              "index": "web-content-production",
+              "type": "cjs-job",
+              "template": "{$./queries/jobs/cjs-job-aggs.json}"
+            },
+            {
+              "name": "splash",
+              "index": "web-content-production",
+              "type": "scvo-cms-media",
+              "template": "{$./queries/pages/splash.json}"
+            }
+          ]
+        }
+      }
+    ],
+    "destination": {
+      "destinationType": "handlebars",
+      "config": {
+        "default": {
+          "head": "{$./templates/pages/page-head-tags.hbs}",
+          "body": "{$./templates/jobs/cjs-job-apply.hbs}",
+          "foot": ""
+        }
+      }
+    }
+  },
   "cjs_job": {
     "pattern": "/jobs/community-jobs-scotland/vacancies/:phase/:slug",
     "tasks": [

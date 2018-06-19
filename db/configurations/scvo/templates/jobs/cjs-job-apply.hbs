@@ -1,5 +1,5 @@
 <div class="cjs-job">
-  {{> header_splash sub_title="cjs"}}
+  {{> header_splash}}
   <div class="container-fluid page-content">
     <ul class="breadcrumbs">
       <li><a href="/">Home</a></li>
@@ -7,7 +7,12 @@
       <li><a href="/jobs/community-jobs-scotland">Community Jobs Scotland</a></li>
       <li><a href="/jobs/community-jobs-scotland/vacancies">Vacancies</a></li>
       <li><a href="/jobs/community-jobs-scotland/vacancies/{{request.params.phase}}">Search</a></li>
-      <li>{{data.primaryResponse.hits.hits.[0]._source.title}}</li>
+      <li>
+        <a href="/jobs/community-jobs-scotland/vacancies/{{request.params.phase}}/{{request.params.slug}}">
+          {{data.primaryResponse.hits.hits.[0]._source.title}}
+        </a>
+      </li>
+      <li>Apply</li>
     </ul>
     <div class="mdc-layout-grid">
       <div class="mdc-layout-grid__inner">
@@ -15,7 +20,9 @@
           {{> sidebar_cjs_search}}
         </div>
         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-9-desktop mdc-layout-grid__cell--span-5-tablet mdc-layout-grid__cell--span-4-phone content page-content v-margin">
-          {{{data.primaryResponse.hits.hits.[0]._source.rendered.scvo_full}}}
+          {{#with data.primaryResponse.hits.hits.[0]._source ~}}
+          Apply for {{{title}}}
+          {{/with ~}}
         </div>
         {{> footer_cjs}}
       </div>
