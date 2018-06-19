@@ -14,6 +14,27 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
+    // Menu buttons
+    $('[data-menu-target]').each(function(i, o) {
+      var selector = $(o).attr('data-menu-target');
+      var menuEl = $(selector)[0];
+      $(o).on('click', function() {
+        menuEl.MDCMenu.open = !menuEl.MDCMenu.open;
+      });
+    });
+
+    // Temporary drawer buttons
+    $('[data-drawer-target]').each(function(i, o) {
+      var selector = $(o).attr('data-drawer-target');
+      var drawerEl = $(selector)[0];
+      var drawerType = $(selector).attr('data-mdc-auto-init');
+      if (drawerType) {
+        $(o).on('click', function() {
+          drawerEl[drawerType].open = !drawerEl[drawerType].open;
+        });
+      }
+    });
+
     // document.onreadystatechange = function(e) {
     //     if (document.readyState === 'complete') {
     //         document.getElementById("spinner").style.display = "none";
@@ -24,17 +45,17 @@ document.addEventListener('DOMContentLoaded', function() {
     // }
 
     // Mobile menu
-    window.drawerEl = document.querySelector('.mdc-temporary-drawer');
-    window.drawer = mdc.drawer.MDCTemporaryDrawer.attachTo(drawerEl);
-    document.querySelector('#menu_button').addEventListener('click', function() {
-        window.drawer.open = true;
-    });
-    drawerEl.addEventListener('MDCTemporaryDrawer:open', function() {
-        // console.log('Received MDCTemporaryDrawer:open');
-    });
-    drawerEl.addEventListener('MDCTemporaryDrawer:close', function() {
-        // console.log('Received MDCTemporaryDrawer:close');
-    });
+    // window.drawerEl = document.querySelector('.mdc-temporary-drawer');
+    // window.drawer = mdc.drawer.MDCTemporaryDrawer.attachTo(drawerEl);
+    // document.querySelector('#menu_button').addEventListener('click', function() {
+    //     window.drawer.open = true;
+    // });
+    // drawerEl.addEventListener('MDCTemporaryDrawer:open', function() {
+    //     // console.log('Received MDCTemporaryDrawer:open');
+    // });
+    // drawerEl.addEventListener('MDCTemporaryDrawer:close', function() {
+    //     // console.log('Received MDCTemporaryDrawer:close');
+    // });
 
     // Headroom
     var header = document.querySelector("header.mdc-toolbar");

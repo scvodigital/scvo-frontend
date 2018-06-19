@@ -63,11 +63,11 @@
   <link type="text/css" rel="stylesheet" href="/assets/css/material-components-web.min.css">
   <link type="text/css" rel="stylesheet" href="/assets/fonts/fontawesome/css/fontawesome-all.min.css">
   <link type="text/css" rel="stylesheet" href="/assets/css/scvo-styles.css">
-  <script>
+  <!-- <script>
   if(location.host.indexOf('.local') > -1){
     document.write('<script src="https://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')
   }
-  </script>
+  </script> -->
 </head>
 <body class="mdc-theme--site-bg {{#if request.params.path}}{{replace request.params.path '_' ' '}}{{else}}home{{/if}}">
   <scvo-site>
@@ -104,8 +104,8 @@
               </form>
             </section>
             <section class="mdc-toolbar__section mdc-toolbar__section--align-end mdc-toolbar__section--shrink-to-fit">
-              <button id="menu_button" class="menu mdc-toolbar__icon mdc-toolbar__icon--menu" onclick="window.drawer.open = true">
-                <span class="far fa-2x fa-bars" aria-hidden="true"></span>
+              <button class="mdc-top-app-bar__navigation-icon hide-lg" data-drawer-target="#mobile-menu">
+                <span class="far fa-fw fa-2x fa-bars"></span>
               </button>
             </section>
           </div>
@@ -127,27 +127,31 @@
         </div>
       </header>
 
-      <aside class="mdc-temporary-drawer" id="menu_draw" dir="rtl">
-        <nav class="mdc-temporary-drawer__drawer">
-          <header class="mdc-temporary-drawer__header">
-            <div class="mdc-temporary-drawer__header-content mdc-theme--primary-bg">
+      <aside class="mdc-drawer mdc-drawer--temporary" id="mobile-menu" data-mdc-auto-init="MDCTemporaryDrawer">
+        <nav class="mdc-drawer__drawer">
+          <header class="mdc-drawer__header">
+            <div class="mdc-drawer__header-content mdc-theme--primary-bg">
               <img src="https://storage.googleapis.com/scvo-assets/scvo-frontend/assets/images/logos/scvo.png" />
             </div>
           </header>
-          <nav class="mdc-temporary-drawer__content mdc-list-group">
-            <div id="icon-with-text-demo" class="mdc-list">
-              <a class="mdc-list-item" href="/" onclick="window.drawer.open = false">Home</a>
-              {{#each context.menus.main ~}}
-              <a class="mdc-list-item" href="{{path}}" data-mdc-tabindex-handled="true" tabindex="-1" onclick="window.drawer.open = false">
-                {{{label}}}
-              </a>
-              {{/each ~}}
-              {{#each context.menus.main-upper ~}}
-              <a class="mdc-list-item" href="{{path}}" data-mdc-tabindex-handled="true" tabindex="-1" onclick="window.drawer.open = false">
-                {{{label}}}
-              </a>
-              {{/each ~}}
-            </div>
+          <nav class="mdc-drawer__content mdc-list">
+            <a class="mdc-list-item" href="/">Home</a>
+            {{#each context.menus.main ~}}
+            <a class="mdc-list-item{{#if (regexMatch ../request.url.pathname route "gi")}} mdc-list-item--activated{{/if}}" href="{{stripTrailingSlash path}}">
+              {{#if icon ~}}
+              <span class="far fa-{{icon}} mdc-list-item__graphic" aria-hidden="true"></span>
+              {{/if ~}}
+              {{{label}}}
+            </a>
+            {{/each ~}}
+            {{#each context.menus.main-upper ~}}
+            <a class="mdc-list-item{{#if (regexMatch ../request.url.pathname route "gi")}} mdc-list-item--activated{{/if}}" href="{{stripTrailingSlash path}}">
+              {{#if icon ~}}
+              <span class="far fa-{{icon}} mdc-list-item__graphic" aria-hidden="true"></span>
+              {{/if ~}}
+              {{{label}}}
+            </a>
+            {{/each ~}}
           </nav>
         </nav>
       </aside>
@@ -253,19 +257,12 @@
     </div>
   </scvo-site>
 
-  <!--
-  {{#if (contains request.url.host '.local')}}
-    <script type="text/javascript" src="https://unpkg.com/material-components-web@0.32.0/dist/material-components-web.js"></script>
-  {{else}}
-    <script type="text/javascript" src="https://unpkg.com/material-components-web@0.32.0/dist/material-components-web.min.js"></script>
-  {{/if}}
-  -->
-  <!-- <script type="text/javascript" src="/assets/js/material-components-web.js"></script> -->
   {{#if (contains request.url.host '.local')}}
   <script type="text/javascript" src="https://unpkg.com/material-components-web@0.34.1/dist/material-components-web.js"></script>
   {{else}}
   <script type="text/javascript" src="https://unpkg.com/material-components-web@0.34.1/dist/material-components-web.min.js"></script>
   {{/if}}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script type="text/javascript" src="/assets/js/headroom.min.js"></script>
   <script type="text/javascript" src="/assets/js/swiper.min.js"></script>
   <script type="text/javascript" id="cookieinfo" src="/assets/js/cookieinfo.min.js" data-message="We use cookies to track anonymous usage statistics and do not collect any personal information that can be used to identify you. By continuing to visit this site you agree to our use of cookies." data-moreinfo="/cookies" data-cookie="CookieInfoScript" data-text-align="left"></script>
