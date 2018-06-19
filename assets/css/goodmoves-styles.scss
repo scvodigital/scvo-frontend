@@ -1227,6 +1227,21 @@ body {
 }
 
 .mdc-list {
+  .mdc-list-item:hover {
+    text-decoration: none;
+    .mdc-list-item__text {
+      text-decoration: underline;
+    }
+    .mdc-list-item__meta {
+      text-decoration: none;
+    }
+  }
+  .mdc-list-item:hover::before,
+  .mdc-list-item:hover::after,
+  .mdc-list-item:focus::before,
+  .mdc-list-item:focus::after {
+    opacity: 0 !important;
+  }
   .mdc-layout-grid {
     width: 100%;
   }
