@@ -2032,6 +2032,7 @@ form#settled_status {
     padding: 0;
     margin: 0 auto;
     .mdc-layout-grid {
+      word-break: break-word;
       width: 42%;
       margin: $unit*(2/3) 0 $unit;
     }
@@ -2939,6 +2940,9 @@ body.post.author {
   .mdc-card {
     width: 100%;
   }
+  .mdc-card.list {
+    margin-bottom: $unit;
+  }
 }
 
 .scvo-document.list {
@@ -2992,7 +2996,7 @@ body.post.author {
     .fa-ul {
       margin-left: $unit*1.5;
       a {
-        word-wrap: break-word;
+        word-wrap: break-all;
       }
     }
   }
@@ -3185,7 +3189,14 @@ body.post.author {
     opacity: 0.1;
   }
 }
-.community-jobs-scotland .page {
+.community-jobs-scotland .page-content {
+  .apply-button,
+  .print-button {
+    margin-bottom: $unit;
+  }
+  .apply-button {
+    margin-left: $unit;
+  }
   .mdc-list {
     .mdc-list-item {
       padding: 0;
@@ -4050,6 +4061,9 @@ footer {
         grid-column-end: span 3;
       }
     }
+  }
+  .support .goodmoves-brand .mdc-card__media {
+    background-size: 90%;
   }
   .home .latest-content .gist img.photo-wee,
   .gist .thumbnail img {
