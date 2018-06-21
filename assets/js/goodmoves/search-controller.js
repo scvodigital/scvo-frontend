@@ -13,7 +13,7 @@ var mapController = null;
 //searchTermsController.addListener(vacanciesController.doSearch.bind(vacanciesController));
 //vacanciesController.addListener(generateMapContent);
 //vacanciesController.addListener(refreshChips);
-
+/*
 $forms.on('submit', function(evt) {
   evt.preventDefault();
   $form = $(evt.currentTarget);
@@ -97,7 +97,7 @@ function detailsView() {
   $map.removeClass('shown');
   $map.addClass('hidden');
 }
-
+*/
 var autocompletePerm, autocompleteTemp, mapController;
 function initMap() {
   var autocompletePermEl = $('#perm-location')[0];

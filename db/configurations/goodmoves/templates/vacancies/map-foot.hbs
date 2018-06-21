@@ -1,0 +1,316 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBJdxcQpVKQ6HdrjnPXycUoZqsmp-Ep3l0&libraries=places&region=uk&callback=initMap" async defer></script>
+<script>
+var terms = {
+  sectors: [
+    {{#each data.supplimentaryResponses.types.aggregations.sectors.buckets ~}}
+    { field: 'sectors', term: {{{stringify key}}} },
+    {{/each ~}}
+  ],
+  roles: [
+    {{#each data.supplimentaryResponses.types.aggregations.roles.buckets ~}}
+    { field: 'roles', term: {{{stringify key}}} },
+    {{/each ~}}
+  ],
+  regions: [
+    {{#each data.supplimentaryResponses.types.aggregations.regions.buckets ~}}
+    { field: 'regions', term: {{{stringify key}}} },
+    {{/each ~}}
+  ],
+  role_status: [
+    {{#each data.supplimentaryResponses.types.aggregations.role_status.buckets ~}}
+    { field: 'role_status', term: {{{stringify key}}} },
+    {{/each ~}}
+  ]
+};
+
+var mapResults = [
+    {{#each data.search_data.map_results.hits.hits}}
+    {
+      "Id": {{{stringify _id}}},
+      "geo_vacancy_coords": {{{stringify _source.geo_vacancy_coords}}},
+      "title": {{{stringify _source.title}}},
+      "info_window": {{{stringify (component "vacancy_map" _source)}}}
+    }{{#unless @last}},{{/unless}}
+    {{/each}}
+];
+
+var map, autocompletePerm, autocompleteTemp, mapController, pins = [];
+function initMap() {
+  var autocompletePermEl = $('#perm-location')[0];
+  var autocompleteTempEl = $('#temp-location')[0];
+
+  var autocompleteOptions = {
+    'types': ['(regions)'],
+    'componentRestrictions': {
+      'country': 'gb'
+    }
+  };
+  if (autocompletePermEl) {
+    autocompletePerm = new google.maps.places.Autocomplete(autocompletePermEl, autocompleteOptions);
+    autocompletePerm.addListener('place_changed', autocompleteChange);
+  }
+  if (autocompleteTempEl) {
+    autocompleteTemp = new google.maps.places.Autocomplete(autocompleteTempEl, autocompleteOptions);
+    autocompleteTemp.addListener('place_changed', autocompleteChange);
+  }
+
+  map = new google.maps.Map(document.querySelector('#map-full'), {
+    center: { 
+      lat: 57.1795139,
+      lng: -5.5317967
+    },
+    zoom: 6,
+    styles: [
+      {
+        featureType: 'administrative.country',
+        elementType: 'labels',
+        stylers: [
+          { visibility: 'off' }
+        ]
+      },
+      {
+        featureType: 'poi',
+        elementType: 'labels',
+        stylers: [
+          { visibility: 'off' }
+        ]
+      },
+      {
+        elementType: 'geometry', 
+        stylers: [
+          { color: '#d1edc4' }
+        ]
+      },
+      {
+        elementType: 'labels.text.stroke', 
+        stylers: [
+          { color: '#ffffff' }
+        ]
+      },
+      {
+        elementType: 'labels.text.fill', 
+        stylers: [
+          { color: '#424242' }
+        ]
+      },
+      {
+        featureType: 'administrative.locality',
+        elementType: 'labels.text.fill',
+        stylers: [
+          { color: '#424242' }
+        ]
+      },
+      {
+        featureType: 'road',
+        elementType: 'geometry',
+        stylers: [
+          { color: '#888888' }
+        ]
+      },
+      {
+        featureType: 'road',
+        elementType: 'geometry.stroke',
+        stylers: [
+          { color: '#d1edc4' }
+        ]
+      },
+      {
+        featureType: 'road',
+        elementType: 'labels.text.fill',
+        stylers: [
+          { color: '#424242' }
+        ]
+      },
+      {
+        featureType: 'road.highway',
+        elementType: 'geometry',
+        stylers: [
+          { color: '#888888' }
+        ]
+      },
+      {
+        featureType: 'road.highway',
+        elementType: 'geometry.stroke',
+        stylers: [
+          { color: '#d1edc4' }
+        ]
+      },
+      {
+        featureType: 'road.highway',
+        elementType: 'labels.text.fill',
+        stylers: [
+          { color: '#424242' }
+        ]
+      },
+      {
+        featureType: 'transit',
+        elementType: 'geometry',
+        stylers: [
+          { color: '#111111' }
+        ]
+      },
+      {
+        featureType: 'transit.line',
+        elementType: 'geometry',
+        stylers: [
+          { color: '#111111' }
+        ]
+      },
+      {
+        featureType: 'transit.line',
+        elementType: 'geometry.stroke',
+        stylers: [
+          { color: '#111111' }
+        ]
+      },
+      {
+        featureType: 'transit.station',
+        elementType: 'labels.text.fill',
+        stylers: [
+          { color: '#424242' }
+        ]
+      },
+      {
+        featureType: 'transit.station.airport',
+        elementType: 'geometry',
+        stylers: [
+          { color: '#888888' }
+        ]
+      },
+      {
+        featureType: 'transit.station.bus',
+        elementType: 'geometry',
+        stylers: [
+          { color: '#333333' }
+        ]
+      },
+      {
+        featureType: 'transit.station.rail',
+        elementType: 'geometry',
+        stylers: [
+          { color: '#333333' }
+        ]
+      },
+      {
+        featureType: 'water',
+        elementType: 'geometry',
+        stylers: [
+          { color: '#c4deed' }
+        ]
+      },
+      {
+        featureType: 'water',
+        elementType: 'labels.text.fill',
+        stylers: [
+          { color: '#424242' }
+        ]
+      },
+      {
+        featureType: 'water',
+        elementType: 'labels.text.stroke',
+        stylers: [
+          { color: '#424242' }
+        ]
+      }
+    ],
+    disableDefaultUI: true
+  });
+  
+  var pinBounds = new google.maps.LatLngBounds();
+  var shapeBounds = new google.maps.LatLngBounds();
+
+  var searchDistance = $('[name="distance"]').val();
+  var searchLat = $('[name="lat"]').val();
+  var searchLng = $('[name="lng"]').val();
+
+  console.log('Distance:', searchDistance, '| Lat:', searchLat, '| Lng:', searchLng);
+  if (searchDistance && searchLat && searchLng) {
+    var shape = new google.maps.Circle({
+      type: 'Circle',
+      center: new google.maps.LatLng(searchLat, searchLng),
+      fillOpacity: 0.6,
+      fillColor: '#ffffff',
+      strokeOpacity: 0.8,
+      strokeColor: '#ffffff',
+      strokeWeight: 2,
+      radius: parseInt(searchDistance, 10),
+      map: map
+    });
+
+    var bounds = shape.getBounds();
+    shapeBounds.extend(bounds.getNorthEast());
+    shapeBounds.extend(bounds.getSouthWest());
+  }
+
+  mapResults.forEach(function(mapResult) {
+    if (mapResult.geo_vacancy_coords) {
+      for (var c = 0; c < mapResult.geo_vacancy_coords.length; ++c) {
+        var coords = mapResult.geo_vacancy_coords[c] || null;
+        if (coords) {
+          var markerOptions = {
+            map: map,
+            position: {
+              lat: coords.lat,
+              lng: coords.lon
+            },
+            icon: {
+              path: google.maps.SymbolPath.CIRCLE,
+              scale: 15,
+              fillColor: '#58a934',
+              fillOpacity: 0.6,
+              strokeColor: '#3c7524',
+              strokeOpacity: 0.8,
+              strokeWeight: 2
+            },
+            title: mapResult.title,
+            opacity: 1
+          };
+          var infoWindowOptions = {
+            content: mapResult.info_window.string,
+          };
+
+          var marker = new google.maps.Marker(markerOptions);
+          var infoWindow = new google.maps.InfoWindow(infoWindowOptions);
+          marker.addListener('click', function() {
+            closeAllWindows();
+            infoWindow.open(map, marker);
+          });
+
+          pins.push({
+            marker: marker,
+            infoWindow: infoWindow
+          });
+          pinBounds.extend(markerOptions.position);
+        }
+      }
+    }
+  });
+
+  map.fitBounds(pinBounds);
+  var zoom = map.getZoom();
+  if (zoom > 12) {
+    map.setZoom(12);
+  } else if (zoom < 6) {
+    map.setZoom(6);
+  }
+}
+
+function closeAllWindows() {
+  for (var i = 0; i < pins.length; i++) {
+    if (pins[i].infoWindow) {
+      pins[i].infoWindow.close();
+    } 
+  }
+}
+
+function autocompleteChange(evt) {
+  var place = this.getPlace();
+  // console.log(place.formatted_address);
+  if (place.geometry.location) {
+    $('[name="lat"]').val(place.geometry.location.lat());
+    $('[name="lng"]').val(place.geometry.location.lng());
+    $('[name="location"]').val(place.formatted_address);
+  }
+}
+</script>
