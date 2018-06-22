@@ -82,6 +82,7 @@ var GoodmovesController = Class.extend({
         console.log('User logged out');
         that.userProfile = null;
         that.uid = null;
+        that.updateComponents.call(that);
       }
     });
   },
@@ -132,14 +133,16 @@ var GoodmovesController = Class.extend({
   },
 
   updateComponents: function() {
-    var userProfile = this.userProfile;
-    $('[data-vacancy-id]').removeClass('vacancy-shortlisted');
-    if (userProfile.goodmoves && userProfile.goodmoves.saved_vacancies) {
-      var savedVacancies = userProfile.goodmoves.saved_vacancies;
-      var selectors = savedVacancies.map(function(vid) {
-        return '[data-vacancy-id="' + vid + '"]';
-      });
-      $(selectors.join(',')).addClass('vacancy-shortlisted');
+    if (this.userProfile) {
+      var userProfile = this.userProfile;
+      $('[data-vacancy-id]').removeClass('vacancy-shortlisted');
+      if (userProfile.goodmoves && userProfile.goodmoves.saved_vacancies) {
+        var savedVacancies = userProfile.goodmoves.saved_vacancies;
+        var selectors = savedVacancies.map(function(vid) {
+          return '[data-vacancy-id="' + vid + '"]';
+        });
+        $(selectors.join(',')).addClass('vacancy-shortlisted');
+      }
     }
 
     $('[data-collapse-target]').off('click').on('click', function(evt) {
