@@ -51,7 +51,13 @@
             <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-8-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone">
               <div class="mdc-text-field mdc-text-field--box mdc-text-field--with-leading-icon" data-mdc-auto-init="MDCTextField">
                 <span class="far fa-map-marker-alt mdc-text-field__icon" tabindex="0" role="button"></span>
-                <input type="text" id="{{instance_id}}-location" name="location" class="mdc-text-field__input mdc-text-field--fullwidth" value="{{request.params.query.location}}" placeholder="" data-lpignore="true">
+                <input type="text" id="{{instance_id}}-location" name="location" class="mdc-text-field__input mdc-text-field--fullwidth" value="{{request.params.query.location}}" placeholder="" data-lpignore="true" data-location-options='
+                  {
+                    "types": ["(regions)"],
+                    "componentRestrictions": {
+                      "country": "gb"
+                    }
+                  }' data-location-lat="[name='lat']" data-location-lng="[name='lng']">
                 <label class="mdc-floating-label mdc-floating-label--float-above" for="{{instance_id}}-location">
                   Location
                 </label>
@@ -76,8 +82,8 @@
         </div>
       </div>
 
-      <input type="hidden" name="lat" value="{{request.params.query.lat}}">
-      <input type="hidden" name="lng" value="{{request.params.query.lng}}">
+      <input type="hidden" name="lat" value="{{request.params.query.lat}}" id="{{instance_id}}-lat">
+      <input type="hidden" name="lng" value="{{request.params.query.lng}}" id="{{instance_id}}-lat">
 
       <div class="h-padding">
         <div class="mdc-text-field mdc-text-field--box mdc-text-field--with-leading-icon" data-mdc-auto-init="MDCTextField">

@@ -1,6 +1,4 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"></script>
-<script src="/assets/js/goodmoves/search.js" async defer></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBJdxcQpVKQ6HdrjnPXycUoZqsmp-Ep3l0&libraries=places&region=uk&callback=initMap" async defer></script>
 <script>
 var terms = {
   sectors: [
@@ -24,14 +22,4 @@ var terms = {
     {{/each ~}}
   ]
 };
-var mapResults = [
-    {{#each data.search_data.map_results.hits.hits}}
-    {
-      "Id": {{{stringify _id}}},
-      "geo_vacancy_coords": {{{stringify _source.geo_vacancy_coords}}},
-      "title": {{{stringify _source.title}}},
-      "info_window": {{{stringify (component "vacancy_map" _source)}}}
-    }{{#unless @last}},{{/unless}}
-    {{/each}}
-];
 </script>
