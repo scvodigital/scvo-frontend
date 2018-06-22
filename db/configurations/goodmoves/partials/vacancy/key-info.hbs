@@ -2,7 +2,7 @@
 <div class="mdc-card__info--vacancy-row">
   <div class="mdc-card__info--vacancy">
     <div class="mdc-card__info--vacancy-title mdc-typography--headline6">
-      <a href="/vacancy/{{slug}}">
+      <a href="/vacancy/{{slug}}{{@root.request.url.search}}">
         {{#if top_job}}<span class="top-job">Top job!</span>{{/if}}
         <span class="hover-underline">{{title}}</span>
       </a>
@@ -10,7 +10,7 @@
     <ul class="fa-ul organisation">
       <li class="mdc-card__info--vacancy-organisation mdc-typography--body1">
         <span class="fa-li"><span class="far fa-building fa-fw" title="Organisation"></span></span>
-        <a href="/organisation/{{organisation.slug}}">{{organisation.name}}</a>
+        <a href="/organisation/{{organisation.slug}}{{@root.request.url.search}}">{{organisation.name}}</a>
       </li>
     </ul>
     <div class="mdc-layout-grid">
