@@ -2,8 +2,7 @@
 <div class="mdc-form-field">
   <div class="mdc-checkbox">
     <input type="checkbox" class="mdc-checkbox__native-control" id="{{instance_id}}_{{field}}_{{key}}"
-    name="{{field}}[]" value="{{key}}" onchange="$('#{{instance_id}}-search-submit').click()"
-    {{#if (contains selected key)}}checked{{/if}} />
+    name="{{field}}[]" value="{{key}}" {{#if (contains selected key)}}checked{{/if}} />
     <div class="mdc-checkbox__background">
       <svg class="mdc-checkbox__checkmark"
       viewBox="0 0 24 24">
@@ -107,56 +106,22 @@
         </div>
       </div>
 
-      <h3 class="mdc-drawer__content-heading">
-        Roles
-        <span class="mdc-icon-toggle pull-right" data-collapse-target="#{{instance_id}}-roles-collapse "
-              role="button" aria-pressed="false"
-              aria-label="Show roles" tabindex="0" data-mdc-auto-init="MDCIconToggle"
-              data-icon-inner-selector=".far"
-              data-toggle-off='{"cssClass": "fa-chevron-down", "label": "Hide roles"}'
-              data-toggle-on='{"cssClass": "fa-chevron-up", "label": "Show roles"}'>
-          <i class="far fa-chevron-down" aria-hidden="true"></i>
-        </span>
-      </h3>
-      <div id="{{instance_id}}-roles-collapse" style="display: none;">
-        {{#each data.supplimentaryResponses.types.aggregations.roles.buckets ~}}
-        {{> term_checkbox key=key field="roles" selected=../request.params.query.roles instance_id=../instance_id}}
-        {{/each ~}}
-      </div>
+      {{#each (split "roles,sectors,statuses" ",")}}
+        <h3 class="mdc-drawer__content-heading">
+          {{capitalize this}}
+          <span class="mdc-icon-toggle pull-right" data-collapse-target="#{{../instance_id}}-{{this}}-collapse"
+                role="button" aria-pressed="false"
+                aria-label="Show roles" tabindex="0">
+            <i class="far {{#if (getProperty ../request.params.query this)}}fa-chevron-up{{else}}fa-chevron-down{{/if}}" aria-hidden="true"></i>
+          </span>
+        </h3>
+        <div id="{{../instance_id}}-{{this}}-collapse" {{#unless (getProperty ../request.params.query this)}}style="display: none;"{{/unless}}>
+          {{#each (getProperty ../data.supplimentaryResponses.types.aggregations (concat this ".buckets")) ~}}
+          {{> term_checkbox key=key field=../this selected=(getProperty ../../request.params.query ../this) instance_id=../../instance_id}}
+          {{/each ~}}
+        </div>
+      {{/each}}
 
-      <h3 class="mdc-drawer__content-heading">
-        Sectors
-        <span class="mdc-icon-toggle pull-right" data-collapse-target="#{{instance_id}}-sectors-collapse "
-              role="button" aria-pressed="false"
-              aria-label="Show sectors" tabindex="0" data-mdc-auto-init="MDCIconToggle"
-              data-icon-inner-selector=".far"
-              data-toggle-off='{"cssClass": "fa-chevron-down", "label": "Hide sectors"}'
-              data-toggle-on='{"cssClass": "fa-chevron-up", "label": "Show sectors"}'>
-          <i class="far fa-chevron-down" aria-hidden="true"></i>
-        </span>
-      </h3>
-      <div id="{{instance_id}}-sectors-collapse" style="display: none;">
-        {{#each data.supplimentaryResponses.types.aggregations.sectors.buckets ~}}
-        {{> term_checkbox key=key field="sectors" selected=../request.params.query.sectors instance_id=../instance_id}}
-        {{/each ~}}
-      </div>
-
-      <h3 class="mdc-drawer__content-heading">
-        Statuses
-        <span class="mdc-icon-toggle pull-right" data-collapse-target="#{{instance_id}}-statuses-collapse "
-              role="button" aria-pressed="false"
-              aria-label="Show statuses" tabindex="0" data-mdc-auto-init="MDCIconToggle"
-              data-icon-inner-selector=".far"
-              data-toggle-off='{"cssClass": "fa-chevron-down", "label": "Hide statuses"}'
-              data-toggle-on='{"cssClass": "fa-chevron-up", "label": "Show statuses"}'>
-          <i class="far fa-chevron-down" aria-hidden="true"></i>
-        </span>
-      </h3>
-      <div id="{{instance_id}}-statuses-collapse" style="display: none;">
-      {{#each data.supplimentaryResponses.types.aggregations.statuses.buckets ~}}
-      {{> term_checkbox key=key field="role_status" selected=../request.params.query.role_status instance_id=../instance_id}}
-      {{/each ~}}
-      </div>
       <div class="h-margin v-margin">
         <button class="mdc-button mdc-button--raised mdc-button--fullwidth" type="submit" id="{{instance_id}}-search-submit">
           Search jobs

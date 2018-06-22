@@ -142,7 +142,6 @@ var GoodmovesController = Class.extend({
       $(selectors.join(',')).addClass('vacancy-shortlisted');
     }
 
-    console.log($('[data-collapse-target]'));
     $('[data-collapse-target]').off('click').on('click', function(evt) {
       console.log('Collapse click:', evt);
       var $el = $(evt.currentTarget);
@@ -151,10 +150,10 @@ var GoodmovesController = Class.extend({
       var $icon = $el.find('.far');
       if ($target.is(':visible')) {
         $target.hide();
-        $icon.removeClass('fa-chevron-down').addClass('fa-chevron-up');
+        $icon.removeClass('fa-chevron-up').addClass('fa-chevron-down');
       } else { 
         $target.show();
-        $icon.removeClass('fa-chevron-up').addClass('fa-chevron-down');
+        $icon.removeClass('fa-chevron-down').addClass('fa-chevron-up');
       }
     });
   },
