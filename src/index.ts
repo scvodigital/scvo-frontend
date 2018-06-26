@@ -22,6 +22,8 @@ import * as S from 'string';
 import {Router, RouteMatch, MenuDictionary, RouterRequest, RouterResponse, RouterConfiguration, HttpVerb} from '@scvo/router';
 import {ElasticsearchRouterTask} from '@scvo/router-task-elasticsearch';
 import {FirebaseAuthRouterTask, FirebaseGetDataRouterTask, FirebaseSetDataRouterTask} from '@scvo/router-task-firebase';
+import {MySQLRouterTask} from '@scvo/router-task-mysql';
+import {TransformRouterTask} from '@scvo/router-task-transform';
 import {HandlebarsRouterDestination} from '@scvo/router-destination-handlebars';
 import {RedirectRouterDestination} from '@scvo/router-destination-redirect';
 
@@ -438,7 +440,9 @@ async function loadRouters(): Promise<any> {
       new ElasticsearchRouterTask({}),
       new FirebaseAuthRouterTask(SECRETS.configs),
       new FirebaseGetDataRouterTask(SECRETS.configs),
-      new FirebaseSetDataRouterTask(SECRETS.configs)
+      new FirebaseSetDataRouterTask(SECRETS.configs),
+      new MySQLRouterTask(SECRETS.mysql, {}),
+      new TransformRouterTask()
     ];
 
     var routerDestinations =

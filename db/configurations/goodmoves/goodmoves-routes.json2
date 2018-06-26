@@ -155,6 +155,72 @@
       }
     }
   },
+  "mysql": {
+    "pattern": "/mysql",
+    "tasks": [
+      {
+        "name": "auth",
+        "taskType": "firebase-auth",
+        "config": {
+          "cookie": "gm_token",
+          "appName": "scvo",
+          "noCookieRoute": "five_hundred",
+          "notAuthenticatedRoute": "five_hundred"
+        }
+      },
+      {
+        "name": "mysql_test",
+        "taskType": "mysql",
+        "config": {
+          "connectionName": "notifications",
+          "queryTemplates": {
+            "emails": "SELECT * FROM recipientEmails_1 WHERE email IN ('calum.macuisdean@gmail.com', '{{data.auth.email}}') AND id = 'goodmoves-weekly';"
+          }      
+        }
+      },
+      {
+        "name": "search_query",
+        "taskType": "transform",
+        "config": [
+          {
+            "list": "data.mysql_test.emails",
+            "item": {
+              "subscriptionName": "subscriptionName",
+              "searchQuery": "searchQuery"
+            },
+            "operate": [
+              {
+                "run": "JSON.parse",
+                "on": "searchQuery"
+              }
+            ]
+          },
+          {
+            "list": "",
+            "item": {
+              "subscriptionName": "subscriptionName",
+              "searchQuery": "searchQuery",
+              "roleSlugs": { 
+                "list": "searchQuery.bool.must",
+                "item": {
+                  "roleSlug": "terms.roles_slugs"
+                }
+              },
+              "alt": "searchQuery.bool.must.*.terms.roles_slugs"
+            }
+          }
+        ]
+      }
+    ],
+    "destination": {
+      "destinationType": "handlebars",
+      "config": {
+        "data": {
+          "content": "{{{stringify data.search_query}}}"
+        }
+      }
+    }
+  },
   "login": {
     "pattern": "/login",
     "destination": {
