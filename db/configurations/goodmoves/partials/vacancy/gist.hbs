@@ -6,7 +6,7 @@
         {{title}}
       </div>
       <div class="mdc-card__info--vacancy-organisation mdc-typography--body1">
-        <a href="/organisation/{{organisation.slug}}">{{organisation.name}}</a>
+        <a href="/organisation/{{organisation.slug}}{{@root.request.url.search}}">{{organisation.name}}</a>
       </div>
       <div class="mdc-card__info--vacancy-details mdc-typography--caption">
         <span class="far fa-calendar-alt fa-fw" title="Closing date"></span>
@@ -17,7 +17,7 @@
   <hr class="mdc-list-divider">
   <div class="mdc-card__actions">
     <div class="mdc-card__action-buttons demo-card__action-buttons--text-only mdc-card__actions--full-bleed">
-      <a href="/vacancy/{{slug}}" class="mdc-card__action">Find out more</a>
+      <a href="/vacancy/{{slug}}{{@root.request.url.search}}" class="mdc-card__action">Find out more</a>
     </div>
   </div>
 </div>

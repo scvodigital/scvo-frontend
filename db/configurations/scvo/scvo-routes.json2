@@ -1047,6 +1047,61 @@
       }
     }
   },
+  "cjs_job_apply": {
+    "pattern": "/jobs/community-jobs-scotland/vacancies/:phase/:slug/apply",
+    "tasks": [
+      {
+        "name": "primaryResponse",
+        "taskType": "elasticsearch",
+        "config": {
+          "connectionStringTemplate": "{$../elasticsearch-url.txt}",
+          "elasticsearchConfig": {
+            "apiVersion": "5.6"
+          },
+          "queryTemplates": {
+            "index": "web-content-production",
+            "type": "cjs-job",
+            "template": "{$./queries/jobs/cjs-job.json}",
+            "noResultsRoute": "four_oh_four"
+          }
+        }
+      },
+      {
+        "name": "supplimentaryResponses",
+        "taskType": "elasticsearch",
+        "config": {
+          "connectionStringTemplate": "{$../elasticsearch-url.txt}",
+          "elasticsearchConfig": {
+            "apiVersion": "5.6"
+          },
+          "queryTemplates": [
+            {
+              "name": "types",
+              "index": "web-content-production",
+              "type": "cjs-job",
+              "template": "{$./queries/jobs/cjs-job-aggs.json}"
+            },
+            {
+              "name": "splash",
+              "index": "web-content-production",
+              "type": "scvo-cms-media",
+              "template": "{$./queries/pages/splash.json}"
+            }
+          ]
+        }
+      }
+    ],
+    "destination": {
+      "destinationType": "handlebars",
+      "config": {
+        "default": {
+          "head": "{$./templates/pages/page-head-tags.hbs}",
+          "body": "{$./templates/jobs/cjs-job-apply.hbs}",
+          "foot": ""
+        }
+      }
+    }
+  },
   "cjs_job": {
     "pattern": "/jobs/community-jobs-scotland/vacancies/:phase/:slug",
     "tasks": [
@@ -4138,6 +4193,226 @@
         "default": {
           "head": "{$./templates/pages/page-head-tags.hbs}",
           "body": "{$./templates/pages/page-running-funding-guide.hbs}",
+          "foot": ""
+        }
+      }
+    }
+  },
+  "grant_cats_data": {
+    "pattern": "/running-your-organisation/funding/carers-act-transformation-support-fund/projects/data.json",
+    "tasks": [
+      {
+        "name": "primaryResponse",
+        "taskType": "elasticsearch",
+        "config": {
+          "connectionStringTemplate": "{$../elasticsearch-url.txt}",
+          "elasticsearchConfig": {
+            "apiVersion": "5.6"
+          },
+          "queryTemplates": {
+            "index": "web-content-production",
+            "type": "scvo-grant-cats",
+            "template": "{$./queries/grants/grant-data.json}",
+            "noResultsRoute": "four_oh_four"
+          }
+        }
+      },
+      {
+        "name": "supplimentaryResponses",
+        "taskType": "elasticsearch",
+        "config": {
+          "connectionStringTemplate": "{$../elasticsearch-url.txt}",
+          "elasticsearchConfig": {
+            "apiVersion": "5.6"
+          },
+          "queryTemplates": [
+            {
+              "name": "types",
+              "index": "web-content-production",
+              "type": "scvo-grant-cats",
+              "template": "{$./queries/grants/grant-cats-aggs.json}"
+            }
+          ]
+        }
+      }
+    ],
+    "destination": {
+      "destinationType": "handlebars",
+      "config": {
+        "data": {
+          "content": "{$./templates/grants/grant-data.hbs}"
+        }
+      }
+    }
+  },
+  "grant_cats_search": {
+    "pattern": "/running-your-organisation/funding/carers-act-transformation-support-fund/projects",
+    "tasks": [
+      {
+        "name": "primaryResponse",
+        "taskType": "elasticsearch",
+        "config": {
+          "connectionStringTemplate": "{$../elasticsearch-url.txt}",
+          "elasticsearchConfig": {
+            "apiVersion": "5.6"
+          },
+          "queryTemplates": {
+            "index": "web-content-production",
+            "type": "scvo-grant-cats",
+            "template": "{$./queries/grants/grant-cats-search.json}"
+          }
+        }
+      },
+      {
+        "name": "supplimentaryResponses",
+        "taskType": "elasticsearch",
+        "config": {
+          "connectionStringTemplate": "{$../elasticsearch-url.txt}",
+          "elasticsearchConfig": {
+            "apiVersion": "5.6"
+          },
+          "queryTemplates": [
+            {
+              "name": "page",
+              "index": "web-content-production",
+              "type": "scvo-cms-page",
+              "template": "{$./queries/pages/page.json}"
+            },
+            {
+              "name": "types",
+              "index": "web-content-production",
+              "type": "scvo-grant-cats",
+              "template": "{$./queries/grants/grant-cats-aggs.json}"
+            },
+            {
+              "name": "splash",
+              "index": "web-content-production",
+              "type": "scvo-cms-media",
+              "template": "{$./queries/events/event-splash.json}"
+            }
+          ]
+        }
+      }
+    ],
+    "destination": {
+      "destinationType": "handlebars",
+      "config": {
+        "default": {
+          "head": "{$./templates/pages/page-head-tags.hbs}",
+          "body": "{$./templates/grants/grant-cats-search.hbs}",
+          "foot": ""
+        }
+      }
+    }
+  },
+  "grant_cats": {
+    "pattern": "/running-your-organisation/funding/carers-act-transformation-support-fund/projects/:project_slug",
+    "tasks": [
+      {
+        "name": "primaryResponse",
+        "taskType": "elasticsearch",
+        "config": {
+          "connectionStringTemplate": "{$../elasticsearch-url.txt}",
+          "elasticsearchConfig": {
+            "apiVersion": "5.6"
+          },
+          "queryTemplates": {
+            "index": "web-content-production",
+            "type": "scvo-grant-cats",
+            "template": "{$./queries/grants/grant.json}",
+            "noResultsRoute": "four_oh_four"
+          }
+        }
+      },
+      {
+        "name": "supplimentaryResponses",
+        "taskType": "elasticsearch",
+        "config": {
+          "connectionStringTemplate": "{$../elasticsearch-url.txt}",
+          "elasticsearchConfig": {
+            "apiVersion": "5.6"
+          },
+          "queryTemplates": [
+            {
+              "name": "types",
+              "index": "web-content-production",
+              "type": "scvo-grant-cats",
+              "template": "{$./queries/grants/grant-cats-aggs.json}"
+            },
+            {
+              "name": "splash",
+              "index": "web-content-production",
+              "type": "scvo-cms-media",
+              "template": "{$./queries/events/event-splash.json}"
+            }
+          ]
+        }
+      }
+    ],
+    "destination": {
+      "destinationType": "handlebars",
+      "config": {
+        "default": {
+          "head": "{$./templates/pages/page-head-tags.hbs}",
+          "body": "{$./templates/grants/grant-cats.hbs}",
+          "foot": ""
+        }
+      }
+    }
+  },
+  "page_running_funding_cats": {
+    "pattern": {
+      "index": "/running-your-organisation/funding/carers-act-transformation-support-fund",
+      "section": "/running-your-organisation/funding/carers-act-transformation-support-fund/:path"
+    },
+    "tasks": [
+      {
+        "name": "primaryResponse",
+        "taskType": "elasticsearch",
+        "config": {
+          "connectionStringTemplate": "{$../elasticsearch-url.txt}",
+          "elasticsearchConfig": {
+            "apiVersion": "5.6"
+          },
+          "queryTemplates": {
+            "index": "web-content-production",
+            "type": "scvo-cms-page",
+            "template": "{$./queries/pages/page.json}",
+            "noResultsRoute": "four_oh_four"
+          }
+        }
+      },
+      {
+        "name": "supplimentaryResponses",
+        "taskType": "elasticsearch",
+        "config": {
+          "connectionStringTemplate": "{$../elasticsearch-url.txt}",
+          "elasticsearchConfig": {
+            "apiVersion": "5.6"
+          },
+          "queryTemplates": [
+            {
+              "name": "related_posts",
+              "index": "web-content-production",
+              "type": "scvo-cms-post",
+              "template": "{$./queries/pages/page-posts-related-random.json}"
+            },
+            {
+              "name": "splash",
+              "index": "web-content-production",
+              "type": "scvo-cms-media",
+              "template": "{$./queries/pages/splash.json}"
+            }
+          ]
+        }
+      }
+    ],
+    "destination": {
+      "destinationType": "handlebars",
+      "config": {
+        "default": {
+          "head": "{$./templates/pages/page-head-tags.hbs}",
+          "body": "{$./templates/pages/page-running-funding-cats.hbs}",
           "foot": ""
         }
       }

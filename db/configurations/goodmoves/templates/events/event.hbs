@@ -1,0 +1,15 @@
+{{> event_search_form}}
+
+<div class="container-content goodmoves-event">
+  {{#compare data.primaryResponse.hits.total ">" 0 ~}}
+  {{#with data.primaryResponse.hits.hits.[0]._source as |event| ~}}
+
+  {{> event_full event}}
+
+  {{/with ~}}
+  {{else}}
+  <p>
+    <strong>Error:</strong> the requested event could not be found.
+  </p>
+  {{/compare ~}}
+</div>

@@ -1,8 +1,10 @@
+@import "./node_modules/material-components-web/material-components-web.scss";
 @import url('//cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css');
 @import url('//fonts.googleapis.com/css?family=Montserrat:700|Open+Sans:400,600');
 
 $unit: 1rem;
 $nav-height: 38px;
+$mobile-nav-height: 58px;
 $toolbar-shadow-reverse: 0px -3px 5px -1px rgba(0, 0, 0, 0.2), 0px -5px 8px 0px rgba(0, 0, 0, 0.14), 0px -1px 14px 0px rgba(0, 0, 0, 0.12);
 
 $base-font-family:                  "Open Sans", Helvetica, Arial, sans-serif;
@@ -442,7 +444,7 @@ primary-dark: #263238
       );
     }
     .splash-image .header-caption {
-      max-width: 42%;
+      max-width: 40%;
     }
   }
   @media screen and (max-width: 991px) {
@@ -885,12 +887,13 @@ img.responsive {
 .mdc-card__supporting-text,
 .mdc-typography--subheading2,
 .mdc-simple-menu .mdc-list-item,
-.mdc-temporary-drawer .mdc-list-item,
+.mdc-drawer--temporary .mdc-list-item,
 .mdc-list {
   font-family: $base-font-family, Helvetica, Arial, sans-serif;
   font-weight: $base-font-weight;
+  letter-spacing: 0.01rem;
 }
-.mdc-temporary-drawer .mdc-list-item {
+.mdc-drawer--temporary .mdc-list-item {
   font-weight: 600;
 }
 .mdc-card__title,
@@ -1139,7 +1142,8 @@ section.search {
         font-size: 1rem;
       }
       .photo-wee {
-        max-width: 96px;
+        width: 96px;
+        height: 96px;
         margin-right: $unit;
         margin-bottom: $unit;
         float: left;
@@ -1681,6 +1685,7 @@ form#settled_status {
       }
       .mdc-toolbar__icon {
         height: $unit*2;
+        width: $unit*2;
         z-index: 100;
       }
       .mdc-toolbar__icon:focus {
@@ -1713,12 +1718,19 @@ form#settled_status {
           font-weight: 600;
           padding: 0 $unit*(3/4);
           .mdc-tab--label {
+            text-transform: none;
             line-height: $nav-height - 4px;
             height: $nav-height - 4px;
             display: block;
             border-top: 2px solid transparent;
             border-bottom: 2px solid transparent;
           }
+        }
+        .mdc-tab:hover::before,
+        .mdc-tab:hover::after,
+        .mdc-tab:focus::before,
+        .mdc-tab:focus::after {
+          opacity: 0 !important;
         }
         .mdc-tab:first-child {
           padding-left: 0;
@@ -1769,6 +1781,11 @@ form#settled_status {
         font-size: 1.7rem;
       }
     }
+    .mdc-top-app-bar__navigation-icon {
+      height: $mobile-nav-height;
+      width: auto;
+      padding: 0;
+    }
     .mdc-toolbar__icon--menu:focus {
       outline: none;
     }
@@ -1781,7 +1798,7 @@ form#settled_status {
     .mdc-toolbar__section.toolbar-search {
       vertical-align: middle;
       .mdc-textfield input {
-        max-width: 15rem;
+        max-width: 14rem;
       }
       .fa-search {
         font-size: 1.3rem;
@@ -1798,22 +1815,30 @@ form#settled_status {
   padding: 100px+$nav-height 0 0;
   margin: 0;
 }
-.mdc-temporary-drawer {
+.mdc-drawer--temporary {
   display: none;
-  .mdc-temporary-drawer__header,
-  .mdc-temporary-drawer__header-content {
-    height: 58px;
+  .mdc-drawer--temporary__header,
+  .mdc-drawer--temporary__header-content {
+    height: $mobile-nav-height;
   }
-  .mdc-temporary-drawer__header-content {
+  .mdc-drawer--temporary__header-content {
     direction: ltr;
     padding: 0 $unit*0.7;
     -webkit-box-align: center;
     align-items: center;
   }
-  // .mdc-temporary-drawer__header:before {
+  .mdc-drawer__header-content {
+    img {
+      max-width: 100%;
+    }
+  }
+  .mdc-drawer__header::before {
+    padding-top: 38%;
+  }
+  // .mdc-drawer--temporary__header:before {
   //     padding-top: 24%;
   // }
-  .mdc-list-group {
+  .mdc-drawer__content {
     direction: ltr;
     .mdc-list {
       .mdc-list-item {
@@ -1827,13 +1852,13 @@ form#settled_status {
   }
 }
 
-.mdc-temporary-drawer__drawer {
+.mdc-drawer--temporary__drawer {
   display: -webkit-box !important;
   -webkit-transition: all .195s ease !important;
   -webkit-transform: translateX(400px) !important;
 }
-.mdc-temporary-drawer--open {
-  .mdc-temporary-drawer__drawer {
+.mdc-drawer--temporary--open {
+  .mdc-drawer--temporary__drawer {
     -webkit-transform: none !important;
   }
 }
@@ -1893,6 +1918,7 @@ form#settled_status {
   }
   li.disabled a.pagination-arrow {
     cursor: default;
+    pointer-events: none;
     color: #999;
   }
   li:first-child a {
@@ -1913,6 +1939,9 @@ form#settled_status {
       color: white;
       text-decoration: none;
     }
+  }
+  li.disabled:hover {
+    background-color: inherit !important;
   }
 }
 
@@ -2005,6 +2034,7 @@ form#settled_status {
     padding: 0;
     margin: 0 auto;
     .mdc-layout-grid {
+      word-break: break-word;
       width: 42%;
       margin: $unit*(2/3) 0 $unit;
     }
@@ -2052,7 +2082,7 @@ form#settled_status {
     position: absolute;
     bottom: 0;
     right: 0;
-    max-width: 50%;
+    max-width: 46%;
     color: rgba(255, 255, 255, 0.8);
     background: rgba(0, 0, 0, 0.65);
     border-radius: $unit/4 $unit/4 0 0;
@@ -2288,10 +2318,11 @@ body.scottish-charity-awards:not(.post) {
     background-color: #b0be48;
   }
 }
-// .mdc-temporary-drawer,
+// .mdc-drawer--temporary,
 .hidden {
   display: none !important;
 }
+.hide-lg,
 .about.staff-team .post-info-author,
 .about.work-with-us .page-info,
 .digital.charter-fund.projects .page-info,
@@ -2911,6 +2942,9 @@ body.post.author {
   .mdc-card {
     width: 100%;
   }
+  .mdc-card.list {
+    margin-bottom: $unit;
+  }
 }
 
 .scvo-document.list {
@@ -2964,7 +2998,7 @@ body.post.author {
     .fa-ul {
       margin-left: $unit*1.5;
       a {
-        word-wrap: break-word;
+        word-wrap: break-all;
       }
     }
   }
@@ -3155,6 +3189,40 @@ body.post.author {
   .mdc-list-item:not(.mdc-ripple-upgraded):focus:before,
   .mdc-list-item:not(.mdc-ripple-upgraded):hover:before {
     opacity: 0.1;
+  }
+}
+.community-jobs-scotland .page-content {
+  .apply-button,
+  .print-button {
+    margin-bottom: $unit;
+  }
+  .apply-button {
+    margin-left: $unit;
+  }
+}
+
+.footer-main,
+.community-jobs-scotland .page-content {
+  .mdc-list {
+    .mdc-list-item {
+      padding: 0;
+      height: auto;
+    }
+    .mdc-list-item:hover {
+      text-decoration: none;
+      .mdc-list-item__text {
+        text-decoration: underline;
+      }
+      .mdc-list-item__meta {
+        text-decoration: none;
+      }
+    }
+    .mdc-list-item:hover::before,
+    .mdc-list-item:hover::after,
+    .mdc-list-item:focus::before,
+    .mdc-list-item:focus::after {
+      opacity: 0 !important;
+    }
   }
 }
 
@@ -3768,7 +3836,8 @@ footer {
 }
 
 @media screen and (max-width: 991px) {
-  .mdc-temporary-drawer {
+  .hide-lg,
+  .mdc-drawer--temporary {
     display: block;
   }
   .mdc-toolbar {
@@ -3808,6 +3877,10 @@ footer {
         border-right: none;
         padding-right: 0;
       }
+    }
+    .featured-content .featured .photo-wee {
+      height: 64px;
+      width: 64px;
     }
     .featured-content .featured-background-image.charity-awards {
       height: auto;
@@ -3849,16 +3922,16 @@ footer {
     padding-top: 0;
   }
   .mdc-toolbar .mdc-toolbar__row .container-fluid .mdc-toolbar__icon {
-    height: 58px;
+    height: $mobile-nav-height;
   }
   .mdc-toolbar #upper-tab-bar,
   .mdc-toolbar .mdc-toolbar__icon,
   .mdc-toolbar .mdc-toolbar__row,
   .mdc-toolbar .mdc-form-field,
   .mdc-toolbar .mdc-toolbar__section {
-    max-height: 58px;
+    max-height: $mobile-nav-height;
   }
-  .mdc-temporary-drawer__header-content,
+  .mdc-drawer--temporary__header-content,
   .brand-logo {
     margin-left: 0;
     img {
@@ -3866,7 +3939,7 @@ footer {
     }
   }
   .mdc-toolbar-fixed-adjust {
-    padding-top: 58px;
+    padding-top: $mobile-nav-height;
   }
   .pagination-distance-9,
   .pagination-distance-8,
@@ -3999,6 +4072,9 @@ footer {
       }
     }
   }
+  .support .goodmoves-brand .mdc-card__media {
+    background-size: 90%;
+  }
   .home .latest-content .gist img.photo-wee,
   .gist .thumbnail img {
     height: 64px;
@@ -4079,6 +4155,9 @@ footer {
 @media screen and (max-width: 395px) {
   .pagination-distance-3 {
     display: none !important;
+  }
+  .mdc-toolbar .mdc-toolbar__row .container-fluid .search_form {
+    margin-right: $unit/2;
   }
 }
 
@@ -4707,6 +4786,7 @@ button.swiper-pagination-bullet {
   .header-caption,
   .mdc-toolbar.mdc-toolbar--fixed,
   #share-menu-button,
+  .grid-info .social,
   header,
   footer {
     display: none;

@@ -1,81 +1,62 @@
 <div class="container-fluid">
-  <div class="mdc-layout-grid">
+  <div class="mdc-layout-grid home-jobs">
     <div class="mdc-layout-grid__inner">
-      <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-1-desktop mdc-layout-grid__cell--span-0-tablet mdc-layout-grid__cell--span-0-phone">
-      </div>
-      <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-10-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone content page-content">
-        <div class="mdc-layout-grid">
-          <div class="mdc-layout-grid__inner">
-            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
-              <div class="browse-title mdc-typography--headline5">
-                Jobs by sector
-              </div>
-              <ul class="mdc-list">
-                {{#each data.supplimentaryResponses.types.aggregations.sectors.buckets ~}}
-                <li class="mdc-list-item">
-                  <span class="mdc-list-item__text">
-                    <a href="/search?sector={{urlencode key}}">{{key}}</a>
-                  </span>
-                  <span class="mdc-list-item__meta">
-                    {{doc_count}}
-                  </span>
-                </li>
-                {{/each ~}}
-              </ul>
-            </div>
-            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
-              <div class="browse-title mdc-typography--headline5">
-                Jobs by role
-              </div>
-              <ul class="mdc-list">
-                {{#each data.supplimentaryResponses.types.aggregations.roles.buckets ~}}
-                <li class="mdc-list-item">
-                  <span class="mdc-list-item__text">
-                    <a href="/search?role={{urlencode key}}">{{key}}</a>
-                  </span>
-                  <span class="mdc-list-item__meta">
-                    {{doc_count}}
-                  </span>
-                </li>
-                {{/each ~}}
-              </ul>
-            </div>
-            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
-              <div class="browse-title mdc-typography--headline5">
-                Jobs by region
-              </div>
-              <ul class="mdc-list">
-                {{#each data.supplimentaryResponses.types.aggregations.regions.buckets ~}}
-                <li class="mdc-list-item">
-                  <span class="mdc-list-item__text">
-                    <a href="/search?region={{urlencode key}}">{{key}}</a>
-                  </span>
-                  <span class="mdc-list-item__meta">
-                    {{doc_count}}
-                  </span>
-                </li>
-                {{/each ~}}
-              </ul>
-            </div>
-            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
-              <div class="browse-title mdc-typography--headline5">
-                Jobs by status
-              </div>
-              <ul class="mdc-list">
-                {{#each data.supplimentaryResponses.types.aggregations.statuses.buckets ~}}
-                <li class="mdc-list-item">
-                  <span class="mdc-list-item__text">
-                    <a href="/search?status={{urlencode key}}">{{key}}</a>
-                  </span>
-                  <span class="mdc-list-item__meta">
-                    {{doc_count}}
-                  </span>
-                </li>
-                {{/each ~}}
-              </ul>
-            </div>
-          </div>
+      <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone content page-content">
+        <div class="browse-title mdc-typography--headline5">
+          Roles
         </div>
+        <ul class="mdc-list">
+          {{#each data.supplimentaryResponses.types.aggregations.roles_slugs.buckets ~}}
+          <a class="mdc-list-item" href="/search?role={{urlencode key}}" role="menuitem">
+            <span class="mdc-list-item__text">
+              {{#with (lookup ../data.supplimentaryResponses.types.aggregations.roles.buckets @index) ~}}
+              {{{key}}}
+              {{/with ~}}
+            </span>
+            <span class="mdc-list-item__meta">
+              {{doc_count}}
+            </span>
+          </a>
+          {{/each ~}}
+        </ul>
+      </div>
+      <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone content page-content">
+        <div class="browse-title mdc-typography--headline5">
+          Sectors
+        </div>
+        <ul class="mdc-list">
+          {{#each data.supplimentaryResponses.types.aggregations.sectors_slugs.buckets ~}}
+          <a class="mdc-list-item" href="/search?sector={{urlencode key}}" role="menuitem">
+            <span class="mdc-list-item__text">
+              {{#with (lookup ../data.supplimentaryResponses.types.aggregations.sectors.buckets @index) ~}}
+              {{{key}}}
+              {{/with ~}}
+            </span>
+            <span class="mdc-list-item__meta">
+              {{doc_count}}
+            </span>
+          </a>
+          {{/each ~}}
+        </ul>
+      </div>
+      <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone content page-content">
+        <div class="browse-title mdc-typography--headline5">
+          Statuses
+        </div>
+        <ul class="mdc-list">
+          {{#each data.supplimentaryResponses.types.aggregations.statuses_slugs.buckets ~}}
+          <a class="mdc-list-item" href="/search?status={{urlencode key}}" role="menuitem">
+            <span class="mdc-list-item__text">
+              {{#with (lookup ../data.supplimentaryResponses.types.aggregations.statuses.buckets @index) ~}}
+              {{{key}}}
+              {{/with ~}}
+            </span>
+            <span class="mdc-list-item__meta">
+              {{doc_count}}
+            </span>
+          </a>
+          {{/each ~}}
+        </ul>
       </div>
     </div>
   </div>

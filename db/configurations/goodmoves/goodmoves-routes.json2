@@ -271,7 +271,77 @@
               "index": "web-content-production",
               "type": "goodmoves-vacancy",
               "template": "{$./queries/vacancies/search-list.json}"
+            }
+          ]
+        }
+      },
+      {
+        "name": "supplimentaryResponses",
+        "taskType": "elasticsearch",
+        "config": {
+          "connectionStringTemplate": "{$../elasticsearch-url.txt}",
+          "elasticsearchConfig": {
+            "apiVersion": "5.6"
+          },
+          "queryTemplates": [
+            {
+              "name": "types",
+              "index": "web-content-production",
+              "type": "goodmoves-vacancy",
+              "template": "{$./queries/vacancies/types.json}"
             },
+            {
+              "name": "not_found",
+              "index": "web-content-production",
+              "type": "goodmoves-vacancy",
+              "template": "{$./queries/pages/not-found.json}"
+            }
+          ]
+        }
+      }
+    ],
+    "destination": {
+      "destinationType": "handlebars",
+      "config": {
+        "rss": {
+          "head": "{$./templates/vacancies/search-rss-head-tags.hbs}",
+          "body": "{$./templates/vacancies/search-rss.hbs}"
+        },
+        "default": {
+          "head": "{$./templates/vacancies/search-head-tags.hbs}",
+          "body": "{$./templates/vacancies/search.hbs}",
+          "foot": "{$./templates/vacancies/search-foot.hbs}",
+          "sidebar": "{$./partials/vacancy-search-form.hbs}"
+        },
+        "data": {
+          "content": "{$./templates/vacancies/search-json.hbs}"
+        }
+      }
+    }
+  },
+  "vacancy_map": {
+    "pattern": "/map",
+    "defaultParams": {
+      "context": "results"
+    },
+    "metaData": {
+      "sidebarButton": {
+        "icon": "search",
+        "tooltip": "Search",
+        "classes": "hide-md hide-lg"
+      }
+    },
+    "tasks": [
+      {
+        "name": "search_data",
+        "taskType": "elasticsearch",
+        "config": {
+          "connectionStringTemplate": "{$../elasticsearch-url.txt}",
+          "elasticsearchConfig": {
+            "apiVersion": "5.6",
+            "log": "debug"
+          },
+          "queryTemplates": [
             {
               "name": "map_results",
               "index": "web-content-production",
@@ -315,8 +385,8 @@
         },
         "default": {
           "head": "{$./templates/vacancies/search-head-tags.hbs}",
-          "body": "{$./templates/vacancies/search.hbs}",
-          "foot": "{$./templates/vacancies/search-foot.hbs}",
+          "body": "{$./templates/vacancies/map.hbs}",
+          "foot": "{$./templates/vacancies/map-foot.hbs}",
           "sidebar": "{$./partials/vacancy-search-form.hbs}"
         },
         "data": {
@@ -689,6 +759,118 @@
         "default": {
           "head": "{$./templates/organisations/organisation-head-tags.hbs}",
           "body": "{$./templates/organisations/organisation.hbs}",
+          "foot": ""
+        }
+      }
+    }
+  },
+  "event_search": {
+    "pattern": "/training",
+    "defaultParams": {
+      "context": "results"
+    },
+    "metaData": {
+      "sidebarButton": {
+        "icon": "search",
+        "tooltip": "Search",
+        "classes": "hide-md hide-lg"
+      }
+    },
+    "tasks": [
+      {
+        "name": "search_data",
+        "taskType": "elasticsearch",
+        "config": {
+          "connectionStringTemplate": "{$../elasticsearch-url.txt}",
+          "elasticsearchConfig": {
+            "apiVersion": "5.6",
+            "log": "debug"
+          },
+          "queryTemplates": [
+            {
+              "name": "detailed_results",
+              "index": "web-content-production",
+              "type": "scvo-event",
+              "template": "{$./queries/events/search-list.json}"
+            }
+          ]
+        }
+      },
+      {
+        "name": "supplimentaryResponses",
+        "taskType": "elasticsearch",
+        "config": {
+          "connectionStringTemplate": "{$../elasticsearch-url.txt}",
+          "elasticsearchConfig": {
+            "apiVersion": "5.6"
+          },
+          "queryTemplates": [
+            {
+              "name": "not_found",
+              "index": "web-content-production",
+              "type": "goodmoves-vacancy",
+              "template": "{$./queries/pages/not-found.json}"
+            }
+          ]
+        }
+      }
+    ],
+    "destination": {
+      "destinationType": "handlebars",
+      "config": {
+        "default": {
+          "head": "{$./templates/events/search-head-tags.hbs}",
+          "body": "{$./templates/events/search.hbs}"
+        }
+      }
+    }
+  },
+  "event": {
+    "pattern": "/training/:slug",
+    "defaultParams": {
+      "context": "detail"
+    },
+    "tasks": [
+      {
+        "name": "primaryResponse",
+        "taskType": "elasticsearch",
+        "config": {
+          "connectionStringTemplate": "{$../elasticsearch-url.txt}",
+          "elasticsearchConfig": {
+            "apiVersion": "5.6"
+          },
+          "queryTemplates": {
+            "index": "web-content-production",
+            "type": "scvo-event",
+            "template": "{$./queries/events/event.json}"
+          }
+        }
+      },
+      {
+        "name": "supplimentaryResponses",
+        "taskType": "elasticsearch",
+        "config": {
+          "connectionStringTemplate": "{$../elasticsearch-url.txt}",
+          "elasticsearchConfig": {
+            "apiVersion": "5.6"
+          },
+          "queryTemplates": [
+            {
+              "name": "not_found",
+              "index": "web-content-production",
+              "type": "scvo-events",
+              "template": "{$./queries/pages/not-found.json}"
+            }
+          ]
+        }
+      }
+    ],
+    "destination": {
+      "destinationType": "handlebars",
+      "config": {
+        "default": {
+          "head": "{$./templates/events/event-head-tags.hbs}",
+          "body": "{$./templates/events/event.hbs}",
           "foot": ""
         }
       }

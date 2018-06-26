@@ -10,53 +10,23 @@ var $searchView = $('#search-view');
 var $browseView = $('#browse-view');
 
 var typeaheadController = new TypeaheadController($what, terms, { highlight: true, minlength: 0 });
-var searchTermsController = new SearchTermsController();
 
 typeaheadController.addListener(function(field, term) {
   if (field !== "keywords") {
-    searchTermsController.addTerm(field, term);
+    addChip(field, term);
   } else {
-    searchTermsController.keywords = term;
     $search[0].click();
   }
-});
-searchTermsController.addListener(refreshChips);
-
-var autocomplete;
-function initMap() {
-  var autocompleteInput = $where[0];
-  var autocompleteOptions = {
-    'types': ['(regions)'],
-    'componentRestrictions': {
-      'country': 'gb'
-    }
-  };
-  autocomplete = new google.maps.places.Autocomplete(autocompleteInput, autocompleteOptions);
-  autocomplete.addListener('place_changed', autocompleteChange);
-  //geolocate();
-}
-
-$distance.on('change', function(evt) {
-  searchTermsController.distance = $distance.val();
+  refreshChips();
 });
 
-$search.on('click', function() {
-  var queryObject = searchTermsController.queryObject.call(searchTermsController);
-  console.log(JSON.stringify(queryObject, null, 4));
-  var queryString = $.param(queryObject);
-  window.location.href = '/search?' + queryString;
-});
-
-function autocompleteChange(evt) {
-  var place = this.getPlace();
-  // console.log(place.formatted_address);
-  if (place.geometry.location) {
-    searchTermsController.location = place.formatted_address;
-    searchTermsController.lat = place.geometry.location.lat();
-    searchTermsController.lng = place.geometry.location.lng();
-    $where.val(place.formatted_address);
+$where.on('keypress', function(evt) {
+  var keyCode = evt.keyCode || evt.which;
+  if (keyCode === 13) { 
+    evt.preventDefault();
+    return false;
   }
-}
+});
 
 function searchView() {
   $searchView.show();
@@ -95,37 +65,25 @@ function reverseLookup(latitude, longitude) {
   });
 }
 
-function refreshChips(searchTerms) {
-  $searchTerms.empty();
-  var termCount = 0;
-  var fields = Object.keys(searchTerms.terms);
-  for (var f = 0; f < fields.length; ++f) {
-    var field = fields[f];
-    var fieldTerms = searchTerms.terms[field];
-    for (var t = 0; t < fieldTerms.length; ++t) {
-      var term = fieldTerms[t];
-      var $chip = $('<div />')
-        .addClass('mdc-chip mdc-theme--primary-bg')
-        .attr({ tabindex: 0 })
-        .appendTo($searchTerms);
-      var chipText = $('<div />')
-        .addClass('mdc-chip__text')
-        // .html('<strong>' + field + '</strong>: ' + term)
-        .html(term)
-        .appendTo($chip);
-      var chipClose = $('<i />')
-        .addClass('far fa-times-circle mdc-chip__icon mdc-chip__icon--trailing')
-        .data({ field: field, term: term })
-        .attr({ tabindex: 0, role: 'button' })
-        .on('click', function(evt) {
-          console.log(evt);
-          var btn = $(evt.currentTarget);
-          var field = btn.data('field');
-          var term = btn.data('term');
-          searchTermsController.removeTerm(field, term);
-        })
-        .appendTo($chip);
-      termCount++;
-    }
-  }
+function addChip(field, term) {
+  var $chip = $('<div />')
+    .addClass('mdc-chip mdc-theme--primary-bg')
+    .attr({ tabindex: 0 })
+    .appendTo($searchTerms);
+  var $chipText = $('<div />')
+    .addClass('mdc-chip__text')
+    .html(term)
+    .appendTo($chip);
+  var $chipField = $('<input />')
+    .attr({ type: 'hidden', name: field + '[]', value: term })
+    .appendTo($chip);
+  var $chipClose = $('<i />')
+    .addClass('far fa-times-circle mdc-chip__icon mdc-chip__icon--trailing')
+    .data({ field: field, term: term })
+    .attr({ tabindex: 0, role: 'button' })
+    .on('click', function(evt) {
+      console.log(evt);
+      $chip.remove();
+    })
+    .appendTo($chip);
 }
