@@ -216,7 +216,7 @@
           <div class="mdc-layout-grid">
             <div class="mdc-layout-grid__inner">
               {{#each data.supplimentaryResponses.related_posts.hits.hits ~}}
-              <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-{{#compare data.supplimentaryResponses.related_events.hits.total ">" 0}}6{{else}}3{{/compare}}-desktop mdc-layout-grid__cell--span-{{#compare data.supplimentaryResponses.related_events.hits.total ">" 0}}8{{else}}4{{/compare}}-tablet mdc-layout-grid__cell--span-4-phone">
+              <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-{{#compare ../data.supplimentaryResponses.related_events.hits.total ">" 0}}6{{else}}3{{/compare}}-desktop mdc-layout-grid__cell--span-{{#compare ../data.supplimentaryResponses.related_events.hits.total ">" 0}}8{{else}}4{{/compare}}-tablet mdc-layout-grid__cell--span-4-phone">
                 {{{_source.rendered.scvo_gist}}}
               </div>
               {{/each ~}}
