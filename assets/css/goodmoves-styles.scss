@@ -98,7 +98,7 @@ header {
       height: $header-lower-height;
     }
     .mdc-top-app-bar__lower .mdc-top-app-bar__section--align-start {
-      background-image: linear-gradient(60deg, $mdc-theme-primary-dark, $mdc-theme-primary-dark 300px, $mdc-theme-primary 301px, $mdc-theme-primary);
+      background-image: linear-gradient(60deg, $mdc-theme-primary-dark, $mdc-theme-primary-dark 403px, $mdc-theme-primary 404px, $mdc-theme-primary);
     }
     .mdc-top-app-bar__lower .mdc-top-app-bar__section--align-end {
       background-color: $mdc-theme-primary;
@@ -131,15 +131,16 @@ header {
         display: none;
       }
     }
-    #main-tab-bar {
+    #main-tab-bar,
+    #main-extra-tab-bar {
       .mdc-tab {
         color: white;
       }
       .mdc-tab:hover .mdc-tab--label {
-        border-bottom-color: white;
+        border-bottom-color: rgba(255, 255, 255, 0.6);
       }
       .mdc-tab.mdc-tab--active .mdc-tab--label {
-        border-bottom-color: white;
+        border-bottom-color: rgba(255, 255, 255, 0.9);
       }
     }
     #upper-tab-bar {
@@ -159,15 +160,13 @@ header {
     .mdc-top-app-bar__navigation-icon {
       color: $mdc-theme-primary;
     }
-    .mdc-top-app-bar__section {
-      padding: 0;
-      .mdc-top-app-bar__action-item {
-        height: $header-lower-height;
-        color: $mdc-theme-secondary !important;
-      }
+    .mdc-top-app-bar__main,
+    .mdc-top-app-bar__user {
       .mdc-menu-anchor {
         .mdc-button {
           border-radius: 0;
+          border-top: 2px solid transparent;
+          border-bottom: 2px solid transparent;
           color: white;
           // color: $mdc-theme-secondary;
           height: $header-lower-height;
@@ -181,8 +180,16 @@ header {
           }
         }
         .mdc-button:hover {
-          background-color: $mdc-theme-primary-dark;
+          background-color: transparent;
+          border-bottom-color: rgba(255, 255, 255, 0.6);
         }
+      }
+    }
+    .mdc-top-app-bar__section {
+      padding: 0;
+      .mdc-top-app-bar__action-item {
+        height: $header-lower-height;
+        color: $mdc-theme-secondary !important;
       }
       #user-menu {
         top: $header-lower-height !important;
@@ -313,6 +320,12 @@ footer h3,
   padding-bottom: $unit;
   border-right: none;
   background-color: white !important;
+}
+
+.mdc-checkbox__native-control:enabled:checked ~ .mdc-checkbox__background,
+.mdc-checkbox__native-control:enabled:indeterminate ~ .mdc-checkbox__background {
+  border-color: $mdc-theme-primary;
+  background-color: $mdc-theme-primary;
 }
 
 .goodmoves-page {
@@ -740,9 +753,9 @@ a {
 .mdc-chip-set {
   float: left;
   padding: 0;
-  margin-bottom: $unit;
+  margin-bottom: 0;
   .mdc-chip {
-    margin: 0 $unit 0 0;
+    margin: 0 $unit/2 $unit/2 0;
   }
 }
 .top-jobs .top-job,
@@ -805,6 +818,7 @@ hr {
       .fa-stack {
         width: $header-lower-height;
         height: $header-lower-height;
+        line-height: $header-lower-height;
         .fa-circle {
           font-size: $header-lower-height;
           color: white;
@@ -1274,11 +1288,16 @@ footer,
 .home-banner {
   .banner-search {
     background-size: cover;
+    background-position: center center;
     background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 40vh;
     .content {
-      background-color: rgba(255, 255, 255, 0.65);
-      padding: $unit/2 $unit*1.25 $unit*1.25;
-      margin: $unit*6 0;
+      background-color: rgba(255, 255, 255, 0.6);
+      padding: $unit/2 $unit*1.25 $unit;
+      // margin: $unit*6 0;
       border-radius: 2px;
       .mdc-text-field--box::before, .mdc-text-field--box::after {
         width: 100%;
@@ -1348,6 +1367,7 @@ footer,
       width: 84px;
       height: 84px;
       object-fit: cover;
+      box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
     }
   }
 }
@@ -1651,6 +1671,9 @@ footer {
 }
 
 @media screen and (max-width: $mobile-breakpoint) {
+  .mdc-toolbar-fixed-adjust {
+    padding-top: $header-upper-height;
+  }
   .hide-sm {
     display: none;
   }
