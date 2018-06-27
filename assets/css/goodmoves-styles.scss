@@ -472,13 +472,11 @@ a {
 }
 
 .mdc-button--raised {
-  background-size: 100% 1800%;
-  background-position: 0 0;
-  background-image: linear-gradient(60deg, $mdc-theme-primary-dark 50%, $mdc-theme-primary 50.08%);
+  background-color: $mdc-theme-primary !important;
   transition: all 1s cubic-bezier(0, 1, 0.3, 1);
 }
 .mdc-button--raised:hover {
-  background-position: 0 100%;
+  background-color: $mdc-theme-primary-dark !important;
   transition: all .3s ease-out;
 }
 
@@ -1324,6 +1322,20 @@ footer,
       }
       .mdc-menu--open {
         z-index: 100;
+      }
+    }
+  }
+  .banner-search.overlay {
+    display: block;
+    .content {
+      background-image: linear-gradient(60deg, rgba(66, 132, 42, 0.89), rgba(66, 132, 42, 0.91) 47%, transparent 47.08%, transparent);
+      min-height: 40vh;
+      background-color: transparent;
+      display: flex;
+      justify-content: left;
+      align-items: center;
+      form {
+        min-width: 48%;
       }
     }
   }

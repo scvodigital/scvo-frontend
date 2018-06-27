@@ -107,6 +107,114 @@
       }
     }
   },
+  "index_alt": {
+    "pattern": "/home-alternative",
+    "tasks": [
+      {
+        "name": "primaryResponse",
+        "taskType": "elasticsearch",
+        "config": {
+          "connectionStringTemplate": "{$../elasticsearch-url.txt}",
+          "elasticsearchConfig": {
+            "apiVersion": "5.6"
+          },
+          "queryTemplates": {
+            "index": "web-content-production",
+            "type": "goodmoves-vacancy",
+            "template": "{$./queries/vacancies/latest.json}"
+          }
+        }
+      },
+      {
+        "name": "supplimentaryResponses",
+        "taskType": "elasticsearch",
+        "config": {
+          "connectionStringTemplate": "{$../elasticsearch-url.txt}",
+          "elasticsearchConfig": {
+            "apiVersion": "5.6"
+          },
+          "queryTemplates": [
+            {
+              "name": "top",
+              "index": "web-content-production",
+              "type": "goodmoves-vacancy",
+              "template": "{$./queries/vacancies/top.json}"
+            },
+            {
+              "name": "currently_recruiting",
+              "index": "web-content-production",
+              "type": "goodmoves-organisation",
+              "template": "{$./queries/organisations/currently-recruiting.json}"
+            },
+            {
+              "name": "home_based",
+              "index": "web-content-production",
+              "type": "goodmoves-vacancy",
+              "template": "{$./queries/vacancies/home-based.json}"
+            },
+            {
+              "name": "types",
+              "index": "web-content-production",
+              "type": "goodmoves-vacancy",
+              "template": "{$./queries/vacancies/types.json}"
+            },
+            {
+              "name": "splash",
+              "index": "web-content-production",
+              "type": "scvo-cms-media",
+              "template": "{$./queries/pages/splash.json}"
+            }
+          ]
+        }
+      },
+      {
+        "name": "organisations_currently_recruiting",
+        "taskType": "elasticsearch",
+        "config": {
+          "connectionStringTemplate": "{$../elasticsearch-url.txt}",
+          "elasticsearchConfig": {
+            "apiVersion": "5.6"
+          },
+          "queryTemplates": [
+            {
+              "name": "vacancies",
+              "index": "web-content-production",
+              "type": "goodmoves-vacancy",
+              "template": "{$./queries/vacancies/currently-recruiting.json}"
+            }
+          ]
+        }
+      },
+      {
+        "name": "posts",
+        "taskType": "elasticsearch",
+        "config": {
+          "connectionStringTemplate": "{$../elasticsearch-url.txt}",
+          "elasticsearchConfig": {
+            "apiVersion": "5.6"
+          },
+          "queryTemplates": [
+            {
+              "name": "tfn_latest",
+              "index": "web-content-production",
+              "type": "tfn-news-post,tfn-feature",
+              "template": "{$./queries/posts/tfn-latest.json}"
+            }
+          ]
+        }
+      }
+    ],
+    "destination": {
+      "destinationType": "handlebars",
+      "config": {
+        "default": {
+          "head": "{$./templates/pages/home-head-tags.hbs}",
+          "body": "{$./templates/pages/home-alt.hbs}",
+          "foot": "{$./templates/pages/home-foot.hbs}"
+        }
+      }
+    }
+  },
   "browse": {
     "pattern": "/browse",
     "tasks": [
