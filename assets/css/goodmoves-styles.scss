@@ -98,7 +98,7 @@ header {
       height: $header-lower-height;
     }
     .mdc-top-app-bar__lower .mdc-top-app-bar__section--align-start {
-      background-image: linear-gradient(60deg, $mdc-theme-primary-dark, $mdc-theme-primary-dark 403px, $mdc-theme-primary 404px, $mdc-theme-primary);
+      background-image: linear-gradient(60deg, $mdc-theme-primary-dark, $mdc-theme-primary-dark 413px, $mdc-theme-primary 414px, $mdc-theme-primary);
     }
     .mdc-top-app-bar__lower .mdc-top-app-bar__section--align-end {
       background-color: $mdc-theme-primary;
@@ -115,7 +115,7 @@ header {
         min-height: $header-lower-height;
         height: $header-lower-height;
         font-weight: 600;
-        padding: 0 $unit*(3/4);
+        padding: 0 $unit/2;
         .mdc-tab--label {
           line-height: $header-lower-height - 4px;
           height: $header-lower-height - 4px;
@@ -124,11 +124,13 @@ header {
           border-bottom: 2px solid transparent;
         }
       }
-      .mdc-tab:first-child {
-        padding-left: $unit;
-      }
       .mdc-tab::after {
         display: none;
+      }
+    }
+    #main-tab-bar {
+      .mdc-tab:first-child {
+        padding-left: $unit;
       }
     }
     #main-tab-bar,
@@ -163,6 +165,7 @@ header {
     .mdc-top-app-bar__main,
     .mdc-top-app-bar__user {
       .mdc-menu-anchor {
+        padding: 0 $unit/4 0 $unit/2;
         .mdc-button {
           border-radius: 0;
           border-top: 2px solid transparent;
@@ -170,12 +173,13 @@ header {
           color: white;
           // color: $mdc-theme-secondary;
           height: $header-lower-height;
-          padding-right: $unit/4;
+          padding: 0;
           text-transform: none;
           .fa-fw {
             margin-right: $unit/2;
           }
           .fa-fw:last-child {
+            padding-left: $unit/4;
             margin-right: 0;
           }
         }
@@ -299,8 +303,9 @@ footer h3,
 .mdc-drawer--temporary {
   z-index: 100;
 }
+.mdc-tab .mdc-tab--label,
 .mdc-button {
-  transition: 0.3s;
+  transition: 0.1s;
 }
 .mdc-drawer--temporary .mdc-drawer__header::before {
   padding-top: $header-upper-height;
