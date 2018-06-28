@@ -98,7 +98,7 @@ header {
       height: $header-lower-height;
     }
     .mdc-top-app-bar__lower .mdc-top-app-bar__section--align-start {
-      background-image: linear-gradient(60deg, $mdc-theme-primary-dark, $mdc-theme-primary-dark 300px, $mdc-theme-primary 301px, $mdc-theme-primary);
+      background-image: linear-gradient(60deg, $mdc-theme-primary-dark, $mdc-theme-primary-dark 413px, $mdc-theme-primary 414px, $mdc-theme-primary);
     }
     .mdc-top-app-bar__lower .mdc-top-app-bar__section--align-end {
       background-color: $mdc-theme-primary;
@@ -115,7 +115,7 @@ header {
         min-height: $header-lower-height;
         height: $header-lower-height;
         font-weight: 600;
-        padding: 0 $unit*(3/4);
+        padding: 0 $unit/2;
         .mdc-tab--label {
           line-height: $header-lower-height - 4px;
           height: $header-lower-height - 4px;
@@ -124,22 +124,25 @@ header {
           border-bottom: 2px solid transparent;
         }
       }
-      .mdc-tab:first-child {
-        padding-left: $unit;
-      }
       .mdc-tab::after {
         display: none;
       }
     }
     #main-tab-bar {
+      .mdc-tab:first-child {
+        padding-left: $unit;
+      }
+    }
+    #main-tab-bar,
+    #main-extra-tab-bar {
       .mdc-tab {
         color: white;
       }
       .mdc-tab:hover .mdc-tab--label {
-        border-bottom-color: white;
+        border-bottom-color: rgba(255, 255, 255, 0.6);
       }
       .mdc-tab.mdc-tab--active .mdc-tab--label {
-        border-bottom-color: white;
+        border-bottom-color: rgba(255, 255, 255, 0.9);
       }
     }
     #upper-tab-bar {
@@ -159,30 +162,38 @@ header {
     .mdc-top-app-bar__navigation-icon {
       color: $mdc-theme-primary;
     }
-    .mdc-top-app-bar__section {
-      padding: 0;
-      .mdc-top-app-bar__action-item {
-        height: $header-lower-height;
-        color: $mdc-theme-secondary !important;
-      }
+    .mdc-top-app-bar__main,
+    .mdc-top-app-bar__user {
       .mdc-menu-anchor {
+        padding: 0 $unit/4 0 $unit/2;
         .mdc-button {
           border-radius: 0;
+          border-top: 2px solid transparent;
+          border-bottom: 2px solid transparent;
           color: white;
           // color: $mdc-theme-secondary;
           height: $header-lower-height;
-          padding-right: $unit/4;
+          padding: 0;
           text-transform: none;
           .fa-fw {
             margin-right: $unit/2;
           }
           .fa-fw:last-child {
+            padding-left: $unit/4;
             margin-right: 0;
           }
         }
         .mdc-button:hover {
-          background-color: $mdc-theme-primary-dark;
+          background-color: transparent;
+          border-bottom-color: rgba(255, 255, 255, 0.6);
         }
+      }
+    }
+    .mdc-top-app-bar__section {
+      padding: 0;
+      .mdc-top-app-bar__action-item {
+        height: $header-lower-height;
+        color: $mdc-theme-secondary !important;
       }
       #user-menu {
         top: $header-lower-height !important;
@@ -292,8 +303,9 @@ footer h3,
 .mdc-drawer--temporary {
   z-index: 100;
 }
+.mdc-tab .mdc-tab--label,
 .mdc-button {
-  transition: 0.3s;
+  transition: 0.1s;
 }
 .mdc-drawer--temporary .mdc-drawer__header::before {
   padding-top: $header-upper-height;
@@ -313,6 +325,12 @@ footer h3,
   padding-bottom: $unit;
   border-right: none;
   background-color: white !important;
+}
+
+.mdc-checkbox__native-control:enabled:checked ~ .mdc-checkbox__background,
+.mdc-checkbox__native-control:enabled:indeterminate ~ .mdc-checkbox__background {
+  border-color: $mdc-theme-primary;
+  background-color: $mdc-theme-primary;
 }
 
 .goodmoves-page {
@@ -454,13 +472,11 @@ a {
 }
 
 .mdc-button--raised {
-  background-size: 100% 1800%;
-  background-position: 0 0;
-  background-image: linear-gradient(60deg, $mdc-theme-primary-dark 50%, $mdc-theme-primary 50.08%);
+  background-color: $mdc-theme-primary !important;
   transition: all 1s cubic-bezier(0, 1, 0.3, 1);
 }
 .mdc-button--raised:hover {
-  background-position: 0 100%;
+  background-color: $mdc-theme-primary-dark !important;
   transition: all .3s ease-out;
 }
 
@@ -740,9 +756,9 @@ a {
 .mdc-chip-set {
   float: left;
   padding: 0;
-  margin-bottom: $unit;
+  margin-bottom: 0;
   .mdc-chip {
-    margin: 0 $unit 0 0;
+    margin: 0 $unit/2 $unit/2 0;
   }
 }
 .top-jobs .top-job,
@@ -805,6 +821,7 @@ hr {
       .fa-stack {
         width: $header-lower-height;
         height: $header-lower-height;
+        line-height: $header-lower-height;
         .fa-circle {
           font-size: $header-lower-height;
           color: white;
@@ -1274,11 +1291,16 @@ footer,
 .home-banner {
   .banner-search {
     background-size: cover;
+    background-position: center center;
     background-repeat: no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 40vh;
     .content {
-      background-color: rgba(255, 255, 255, 0.65);
-      padding: $unit/2 $unit*1.25 $unit*1.25;
-      margin: $unit*6 0;
+      background-color: rgba(255, 255, 255, 0.6);
+      padding: $unit/2 $unit*1.25 $unit;
+      // margin: $unit*6 0;
       border-radius: 2px;
       .mdc-text-field--box::before, .mdc-text-field--box::after {
         width: 100%;
@@ -1300,6 +1322,20 @@ footer,
       }
       .mdc-menu--open {
         z-index: 100;
+      }
+    }
+  }
+  .banner-search.overlay {
+    display: block;
+    .content {
+      background-image: linear-gradient(60deg, rgba(66, 132, 42, 0.89), rgba(66, 132, 42, 0.91) 47%, transparent 47.08%, transparent);
+      min-height: 40vh;
+      background-color: transparent;
+      display: flex;
+      justify-content: left;
+      align-items: center;
+      form {
+        min-width: 48%;
       }
     }
   }
@@ -1348,6 +1384,7 @@ footer,
       width: 84px;
       height: 84px;
       object-fit: cover;
+      box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
     }
   }
 }
@@ -1651,8 +1688,22 @@ footer {
 }
 
 @media screen and (max-width: $mobile-breakpoint) {
+  .mdc-toolbar-fixed-adjust {
+    padding-top: $header-upper-height;
+  }
   .hide-sm {
     display: none;
+  }
+}
+
+@media screen and (max-width: $mobile-landscape-breakpoint + 1) {
+  .home-banner {
+    .banner-search.overlay {
+      .content {
+        background-image: none;
+        background-color: rgba(66, 132, 42, 0.89);
+      }
+    }
   }
 }
 

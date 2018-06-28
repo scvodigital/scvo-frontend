@@ -1,13 +1,13 @@
 <div class="container-fluid home-banner">
-  <div class="banner-search" style="background-image: url('{{#if data.supplimentaryResponses.splash.hits.hits.[0]._source.original_image}}{{data.supplimentaryResponses.splash.hits.hits.[0]._source.original_image}}{{/if}}');">
-    <div class="content page-content mdc-elevation--z20">
+  <div class="banner-search overlay" style="background-image: url('{{#if data.supplimentaryResponses.splash.hits.hits.[0]._source.original_image}}{{data.supplimentaryResponses.splash.hits.hits.[0]._source.original_image}}{{/if}}');">
+    <div class="content page-content">
       <!-- <div class="mdc-typography--headline5">Charity and voluntary sector recruitment</div> -->
       <form id="search-view" class="search-form" action="/search" method="GET">
         <input type="hidden" name="lat" value="">
         <input type="hidden" name="lng" value="">
         <div class="mdc-layout-grid">
           <div class="mdc-layout-grid__inner">
-            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-5-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
+            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-10-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone">
               <div class="mdc-text-field mdc-text-field--box mdc-text-field--with-leading-icon mdc-text-field-tt" data-mdc-auto-init="MDCTextField">
                 <span class="far fa-search mdc-text-field__icon" tabindex="0" role="button"></span>
                 <input type="text" id="what-jobs" name="keywords" class="mdc-text-field__input">
@@ -18,7 +18,9 @@
               </div>
               <!-- <p id="what-jobs-helper-text" class="mdc-text-field-helper-text" aria-hidden="true">e.g. Fundraising, Carer, Manager</p> -->
             </div>
-            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-2-tablet mdc-layout-grid__cell--span-3-phone">
+          </div>
+          <div class="mdc-layout-grid__inner">
+            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-7-desktop mdc-layout-grid__cell--span-5-tablet mdc-layout-grid__cell--span-3-phone">
               <div class="mdc-text-field mdc-text-field--box mdc-text-field--with-leading-icon" data-mdc-auto-init="MDCTextField">
                 <span class="far fa-map-marker-alt mdc-text-field__icon"></span>
                 <input type="text" id="where-jobs" name="location" class="mdc-text-field__input" placeholder=" " data-location-options='
@@ -35,7 +37,7 @@
               </div>
               <!-- <p id="where-jobs-helper-text" class="mdc-text-field-helper-text" aria-hidden="true">e.g. Glasgow, Edinburgh, Inverness</p> -->
             </div>
-            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-2-desktop mdc-layout-grid__cell--span-1-tablet mdc-layout-grid__cell--span-1-phone">
+            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-3-tablet mdc-layout-grid__cell--span-1-phone">
               <div class="mdc-form-field">
                 <div class="mdc-select mdc-select--box" data-mdc-auto-init="MDCSelect">
                   <select class="mdc-select__native-control" name="distance" id="distance-jobs">
@@ -51,7 +53,9 @@
                 </div>
               </div>
             </div>
-            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-2-desktop mdc-layout-grid__cell--span-1-tablet mdc-layout-grid__cell--span-4-phone">
+          </div>
+          <div class="mdc-layout-grid__inner">
+            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-10-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone">
               <button type="submit" id="search-jobs" class="mdc-button mdc-button--raised mdc-text-field--box mdc-button--search">
                 Search
                 <span class="far fa-search" aria-hidden="true"></span>
