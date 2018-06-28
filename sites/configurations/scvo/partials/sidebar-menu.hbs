@@ -1,0 +1,12 @@
+{{#*inline "childMenu"}}
+{{#each items}}
+<a class="menu-level-{{../level}} mdc-button mdc-button--raised{{#if (regexMatch ../path route "gi")}} mdc-button--active{{/if}}" href="{{path}}">{{{label}}}</a>
+{{#if children}}
+{{> childMenu items=children path=../path level=(add ../level 1)}}
+{{/if}}
+{{/each}}
+{{/inline}}
+
+<nav class="menu-sidebar" id="{{id}}">
+  {{> childMenu items=items path=path level=1}}
+</nav>

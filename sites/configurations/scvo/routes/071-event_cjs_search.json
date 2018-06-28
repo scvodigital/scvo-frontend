@@ -1,0 +1,71 @@
+{
+  "name": "event_cjs_search",
+  "pattern": "/jobs/community-jobs-scotland/training-opportunities",
+  "tasks": [
+    {
+      "name": "primaryResponse",
+      "taskModule": "elasticsearch",
+      "config": {
+        "connectionStringTemplate": "{$../../elasticsearch-url.txt}",
+        "elasticsearchConfig": {
+          "apiVersion": "5.6"
+        },
+        "queryTemplates": {
+          "index": "web-content-production",
+          "type": "scvo-event",
+          "template": ">context.metaData.handlebars.queries.events_event-search"
+        }
+      },
+      "renderer": "handlebars"
+    },
+    {
+      "name": "supplimentaryResponses",
+      "taskModule": "elasticsearch",
+      "config": {
+        "connectionStringTemplate": "{$../../elasticsearch-url.txt}",
+        "elasticsearchConfig": {
+          "apiVersion": "5.6"
+        },
+        "queryTemplates": [
+          {
+            "name": "types",
+            "index": "web-content-production",
+            "type": "scvo-event",
+            "template": ">context.metaData.handlebars.queries.events_event-aggs"
+          },
+          {
+            "name": "splash",
+            "index": "web-content-production",
+            "type": "scvo-cms-media",
+            "template": ">context.metaData.handlebars.queries.events_event-splash"
+          }
+        ]
+      },
+      "renderer": "handlebars"
+    },
+    {
+      "name": "destination",
+      "taskModule": "renderLayout",
+      "renderer": "handlebars",
+      "config": {
+        "logic": {
+          "if": [
+            "default"
+          ]
+        },
+        "output": "body",
+        "layouts": {
+          "default": {
+            "layout": ">context.metaData.handlebars.layouts.default",
+            "parts": {
+              "head": ">context.metaData.handlebars.templates.events_event-cjs-search-head-tags",
+              "body": ">context.metaData.handlebars.templates.events_event-cjs-search",
+              "foot": ""
+            },
+            "contentType": "text/html"
+          }
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,68 @@
+{
+  "name": "event",
+  "pattern": "/training/:slug",
+  "defaultParams": {
+    "context": "detail"
+  },
+  "tasks": [
+    {
+      "name": "primaryResponse",
+      "taskModule": "elasticsearch",
+      "config": {
+        "connectionStringTemplate": "{$../../elasticsearch-url.txt}",
+        "elasticsearchConfig": {
+          "apiVersion": "5.6"
+        },
+        "queryTemplates": {
+          "index": "web-content-production",
+          "type": "scvo-event",
+          "template": ">context.metaData.handlebars.queries.events_event"
+        }
+      },
+      "renderer": "handlebars"
+    },
+    {
+      "name": "supplimentaryResponses",
+      "taskModule": "elasticsearch",
+      "config": {
+        "connectionStringTemplate": "{$../../elasticsearch-url.txt}",
+        "elasticsearchConfig": {
+          "apiVersion": "5.6"
+        },
+        "queryTemplates": [
+          {
+            "name": "not_found",
+            "index": "web-content-production",
+            "type": "scvo-events",
+            "template": ">context.metaData.handlebars.queries.pages_not-found"
+          }
+        ]
+      },
+      "renderer": "handlebars"
+    },
+    {
+      "name": "destination",
+      "taskModule": "renderLayout",
+      "renderer": "handlebars",
+      "config": {
+        "logic": {
+          "if": [
+            "default"
+          ]
+        },
+        "output": "body",
+        "layouts": {
+          "default": {
+            "layout": ">context.metaData.handlebars.layouts.default",
+            "parts": {
+              "head": ">context.metaData.handlebars.templates.events_event-head-tags",
+              "body": ">context.metaData.handlebars.templates.events_event",
+              "foot": ""
+            },
+            "contentType": "text/html"
+          }
+        }
+      }
+    }
+  ]
+}

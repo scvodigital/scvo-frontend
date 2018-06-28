@@ -1,0 +1,68 @@
+{
+  "name": "signatory_search",
+  "pattern": "/signatories",
+  "metaData": {
+    "title": "Signatories – The Scotland Declaration on Human Rights"
+  },
+  "tasks": [
+    {
+      "name": "primaryResponse",
+      "taskModule": "elasticsearch",
+      "config": {
+        "connectionStringTemplate": "{$../../elasticsearch-url.txt}",
+        "elasticsearchConfig": {
+          "apiVersion": "5.6"
+        },
+        "queryTemplates": {
+          "index": "web-content-production",
+          "type": "charter-signatory-humanrights",
+          "template": ">context.metaData.handlebars.queries.signatory-search"
+        }
+      },
+      "renderer": "handlebars"
+    },
+    {
+      "name": "supplimentaryResponses",
+      "taskModule": "elasticsearch",
+      "config": {
+        "connectionStringTemplate": "{$../../elasticsearch-url.txt}",
+        "elasticsearchConfig": {
+          "apiVersion": "5.6"
+        },
+        "queryTemplates": [
+          {
+            "name": "total",
+            "index": "web-content-production",
+            "type": "charter-signatory-humanrights",
+            "template": ">context.metaData.handlebars.queries.signatory-total"
+          }
+        ]
+      },
+      "renderer": "handlebars"
+    },
+    {
+      "name": "destination",
+      "taskModule": "renderLayout",
+      "renderer": "handlebars",
+      "config": {
+        "logic": {
+          "if": [
+            "default"
+          ]
+        },
+        "output": "body",
+        "layouts": {
+          "default": {
+            "layout": ">context.metaData.handlebars.layouts.default",
+            "parts": {
+              "head": ">context.metaData.handlebars.templates.head-tags",
+              "body": ">context.metaData.handlebars.templates.signatory-search",
+              "foot": ""
+            },
+            "contentType": "text/html"
+          }
+        }
+      }
+    }
+  ]
+}

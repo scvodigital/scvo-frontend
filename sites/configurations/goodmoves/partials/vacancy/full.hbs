@@ -1,0 +1,201 @@
+<div class="mdc-card full" data-vacancy-id="{{Id}}">
+  {{> vacancy_key_info}}
+  <hr class="mdc-list-divider" />
+  <div class="vacancy-info-container">
+    <div id="vacancy-tab-bar" class="mdc-tab-bar" data-mdc-auto-init="MDCTabBar" role="tablist">
+      <a class="mdc-tab mdc-tab--active" role="tab" aria-controls="panel-1">
+        <span class="far fa-list-ul fa-fw" aria-hidden="true"></span>
+        Information
+      </a>
+      <a class="mdc-tab" role="tab" aria-controls="panel-2">
+        <span class="far fa-map-marker-alt fa-fw" aria-hidden="true"></span>
+        Location
+      </a>
+      <a class="mdc-tab" role="tab" aria-controls="panel-3">
+        <span class="far fa-edit fa-fw" aria-hidden="true"></span>
+        Your notes
+      </a>
+      <span class="mdc-tab-bar__indicator"></span>
+    </div>
+    <hr class="mdc-list-divider" />
+    <div class="panels" for="vacancy-tab-bar">
+      <div class="panel panel--active mdc-card--full-content" role="tabpanel" aria-hidden="false" id="panel-1">
+        <div class="key-info-extra">
+          <ul class="fa-ul">
+            {{#if start_at ~}}
+            <li class="mdc-card__info--vacancy-closing mdc-typography--body1">
+              <span class="fa-li"><span class="far fa-calendar-plus fa-fw" title="Start date"></span></span>
+              Advertised from {{momentFormat (moment start_at "x") "Do MMMM YYYY"}}
+            </li>
+            {{/if ~}}
+            {{#if salary_info ~}}
+            <li class="mdc-card__info--vacancy-location mdc-typography--body1">
+              <span class="fa-li"><span class="far fa-info-circle fa-fw" title="Salary information"></span></span>
+              {{salary_info}}
+            </li>
+            {{/if ~}}
+            {{#if benefits ~}}
+            <li class="mdc-card__info--vacancy-salary mdc-typography--body1">
+              <span class="fa-li"><span class="far fa-smile fa-fw" title="Benefits"></span></span>
+              {{{benefits}}}
+            </li>
+            {{/if ~}}
+            <!-- {{!--
+            {{#ifAny sectors roles ~}}
+            <li class="mdc-card__info--vacancy-categories mdc-typography--body1">
+              <span class="fa-li"><span class="far fa-tags fa-fw" title="Roles"></span></span>
+              {{#each sectors ~}}
+              <a href="/search?sector={{urlencode this}}" class="mdc-chip">
+                {{this}}
+              </a>
+              {{/each ~}}
+              {{#each roles ~}}
+              <a href="/search?role={{urlencode this}}" class="mdc-chip">
+                {{this}}
+              </a>
+              {{/each ~}}
+            </li>
+            {{/ifAny ~}}
+            --}} -->
+            {{#if reference_number ~}}
+            <li class="mdc-card__info--vacancy-reference mdc-typography--body1">
+              <span class="fa-li"><span class="far fa-hashtag fa-fw" title="Reference"></span></span>
+              {{reference_number}}
+            </li>
+            {{/if ~}}
+            {{#if closing_date ~}}
+            <li class="mdc-card__info--vacancy-closing mdc-typography--body1">
+              <span class="fa-li"><span class="far fa-calendar-alt fa-fw" title="Closing date"></span></span>
+              Closing on {{momentFormat (moment closing_date "x") "dddd \t\h\e Do \o\f MMMM YYYY \a\t h:mm a"}}
+            </li>
+            {{/if ~}}
+          </ul>
+        </div>
+        <div class="detailed-info">
+          {{#if description ~}}
+          <h4>Role</h4>
+          <div class="mdc-typography--body1">
+            {{{description}}}
+          </div>
+          {{/if ~}}
+
+          {{{rendered.goodmoves_sponsor_logos}}}
+
+          {{#if application_notes ~}}
+          <h4>Application notes</h4>
+          <div class="mdc-typography--body1">
+            {{{application_notes}}}
+          </div>
+          {{/if ~}}
+
+          {{{rendered.goodmoves_downloads}}}
+        </div>
+      </div>
+      <div class="panel mdc-card--full-content mdc-typography--body1" role="tabpanel" aria-hidden="true" id="panel-2">
+        {{!--
+        {{#ifAny organisation.profile organisation_website organisation_twitter organisation_facebook organisation_linkedin ~}}
+        <div class="key-info-extra">
+          {{#if organisation.profile ~}}
+          <h4>Organisation profile</h4>
+          <div class="mdc-typography--body1">
+            {{{organisation.profile}}}
+          </div>
+          {{/if ~}}
+          <ul class="fa-ul">
+            {{#if organisation_website ~}}
+            {{#compare organisation_website "!==" null ~}}
+            {{#compare organisation_website "!==" "http://" ~}}
+            <li class="mdc-card__info--vacancy-website mdc-typography--body1">
+              <span class="fa-li"><span class="far fa-link fa-fw" title="Website"></span></span>
+              <a href="{{organisation_website_url}}">
+                {{organisation_website}}
+              </a>
+            </li>
+            {{/compare ~}}
+            {{/compare ~}}
+            {{/if ~}}
+            {{#if organisation_twitter ~}}
+            {{#compare organisation_twitter "!==" null ~}}
+            {{#compare organisation_twitter "!==" "http://" ~}}
+            <li class="mdc-card__info--vacancy-twitter mdc-typography--body1">
+              <span class="fa-li"><span class="fab fa-twitter fa-fw" title="Twitter"></span></span>
+              <a href="{{organisation_twitter_url}}">
+                {{organisation_twitter}}
+              </a>
+            </li>
+            {{/compare ~}}
+            {{/compare ~}}
+            {{/if ~}}
+            {{#if organisation_facebook ~}}
+            {{#compare organisation.acebook "!==" null ~}}
+            {{#compare organisation_facebook "!==" "http://" ~}}
+            <li class="mdc-card__info--vacancy-facebook mdc-typography--body1">
+              <span class="fa-li"><span class="fab fa-facebook fa-fw" title="Facebook"></span></span>
+              <a href="{{organisation_facebook_url}}">
+                {{organisation_facebook}}
+              </a>
+            </li>
+            {{/compare ~}}
+            {{/compare ~}}
+            {{/if ~}}
+            {{#if organisation_linkedin ~}}
+            {{#compare organisation_linkedin "!==" null ~}}
+            {{#compare organisation_linkedin "!==" "http://" ~}}
+            <li class="mdc-card__info--vacancy-linkedin mdc-typography--body1">
+              <span class="fa-li"><span class="fab fa-linkedin fa-fw" title="LinkedIn"></span></span>
+              <a href="{{organisation_linkedin_url}}">
+                {{organisation_linkedin}}
+              </a>
+            </li>
+            {{/compare ~}}
+            {{/compare ~}}
+            {{/if ~}}
+          </ul>
+        </div>
+        {{/ifAny ~}}
+        --}}
+        <div class="detailed-info">
+          {{#if geo_vacancy_coords}}
+          {{#each geo_vacancy_coords}}
+          <p>
+            <strong>TODO:</strong> Map of vacancy location(s)
+          </p>
+          <p>
+            Latitude:{{lat}}<br />
+            Longitude:{{lon}}
+          </p>
+          {{/each}}
+          {{else}}
+          <p>
+            <strong>TODO:</strong> text explaining they have no location entered other than
+            "{{location}}"
+          </p>
+          {{/if}}
+        </div>
+      </div>
+      <div class="panel mdc-card--full-content mdc-typography--body1" role="tabpanel" aria-hidden="true" id="panel-3">
+        <div class="text-field-container user-notes">
+          <div class="mdc-text-field text-field mdc-text-field--fullwidth mdc-text-field--dense mdc-text-field--textarea" data-mdc-auto-init="MDCTextField">
+            <textarea id="user-notes" class="mdc-text-field__input"></textarea>
+            <label class="mdc-floating-label" for="user-notes">
+              Your notes
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="mdc-card__actions">
+      <div class="mdc-card__action-buttons demo-card__action-buttons--text-only mdc-card__actions--full-bleed">
+        <a href="/organisation/{{organisation.slug}}" class="mdc-card__action">Find out more about {{organisation.name}}</a>
+      </div>
+      <div class="mdc-card__action-icons pull-right">
+        <button type="button" onclick="goodmoves.toggleShortlistItem('{{Id}}');" class="mdc-card__action mdc-card__action--shortlist" title="Add to shortlist">
+          <span class="fa-stack fa-lg">
+            <span class="fas fa-circle fa-stack-2x" aria-hidden="true"></span>
+            <span class="far fa-star fa-stack-1x" aria-hidden="true"></span>
+          </span>
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

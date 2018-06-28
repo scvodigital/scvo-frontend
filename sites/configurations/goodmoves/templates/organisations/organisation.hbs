@@ -1,0 +1,96 @@
+{{> vacancy_search_form}}
+
+<div class="container-content goodmoves-organisation">
+  {{#compare data.primaryResponse.hits.total ">" 0}}
+  {{#with data.primaryResponse.hits.hits.[0]._source as |organisation| ~}}
+
+  {{> organisation_full organisation}}
+
+  {{#compare ../data.supplimentaryResponses.vacancies.hits.total ">" 0 ~}}
+  <hr />
+  <div class="mdc-typography--headline4">
+    Current vacancies
+  </div>
+  {{#each ../data.supplimentaryResponses.vacancies.hits.hits ~}}
+  {{> vacancy_list _source}}
+  {{/each ~}}
+  {{else}}
+  <div class="mdc-typography--headline5">
+    No current vacancies
+  </div>
+  {{/compare ~}}
+
+  {{#if goodhq_organisation.xid}}
+  <hr />
+  <div class="mdc-typography--headline4">
+    Find out more about <a href="https://goodhq.org/{{goodhq_organisation.xid}}">{{{organisation.title}}}</a> on <a href="https://goodhq.org">Good HQ</a>
+  </div>
+  {{#compare ../data.goodhq.volunteering.hits.total ">" 0 ~}}
+  <div class="mdc-typography--headline5">
+    Volunteering opportunities
+  </div>
+  <div class="mdc-layout-grid equal-height">
+    <div class="mdc-layout-grid__inner">
+      {{#each ../data.goodhq.volunteering.hits.hits ~}}
+      <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone">
+        {{{_source.rendered.goodmoves_list}}}
+      </div>
+      {{/each ~}}
+    </div>
+  </div>
+  {{#compare ../data.goodhq.volunteering.hits.total ">" 3 ~}}
+  <p class="mdc-typography--body1">
+    <a href="https://goodhq.org/{{organisation.goodhq_organisation.xid}}?mode=volopp">Find more on Good HQ</a>
+  </p>
+  {{/compare ~}}
+  {{/compare ~}}
+
+  {{#compare ../data.goodhq.posts.hits.total ">" 0 ~}}
+  <div class="mdc-typography--headline5">
+    Posts
+  </div>
+  <div class="mdc-layout-grid equal-height">
+    <div class="mdc-layout-grid__inner">
+      {{#each ../data.goodhq.posts.hits.hits ~}}
+      <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone">
+        {{{_source.rendered.goodmoves_list}}}
+      </div>
+      {{/each ~}}
+    </div>
+  </div>
+  {{#compare ../data.goodhq.posts.hits.total ">" 3 ~}}
+  <p class="mdc-typography--body1">
+    <a href="https://goodhq.org/{{organisation.goodhq_organisation.xid}}?mode=post">Read more posts on Good HQ</a>
+  </p>
+  {{/compare ~}}
+  {{/compare ~}}
+
+  <!-- {{#compare ../data.goodhq.reviews.hits.total ">" 0 ~}}
+  <div class="mdc-typography--headline5">
+    Reviews
+  </div>
+  <div class="mdc-layout-grid equal-height">
+    <div class="mdc-layout-grid__inner">
+      {{#each ../data.goodhq.reviews.hits.hits ~}}
+      <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone">
+        {{{_source.rendered.goodmoves_list}}}
+      </div>
+      {{/each ~}}
+    </div>
+  </div>
+  {{#compare ../data.goodhq.reviews.hits.total ">" 3 ~}}
+  <p class="mdc-typography--body1">
+    <a href="https://goodhq.org/{{organisation.goodhq_organisation.xid}}?mode=review">Read more reviews on Good HQ</a>
+  </p>
+  {{/compare ~}}
+  {{/compare ~}} -->
+
+  {{/if}}
+
+  {{/with ~}}
+  {{else}}
+  <p>
+    <strong>Error:</strong> the requested organisation could not be found.
+  </p>
+  {{/compare}}
+</div>

@@ -1,0 +1,33 @@
+{
+  "size": 12,
+  "from": {{multiply (subtract (default request.params.query.page 1) 1) 12}},
+  "_source": [
+    "slug",
+    "title",
+    "rendered.charter_search_result"
+  ],
+  "query": {
+    "bool": {
+      "filter": [
+        {{#if request.params.query.sector}}
+        {
+          "term": {
+            "sector": "{{request.params.query.sector}}"
+          }
+        }
+        {{/if}}
+      ]
+    }
+  },
+  "aggs": {
+    "categories": {
+      "terms": {
+        "field": "category",
+        "order": {
+          "_term": "asc"
+        },
+        "size": 10000
+      }
+    }
+  }
+}

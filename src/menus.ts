@@ -1,5 +1,6 @@
 /* tslint:disable */
 // Module imports
+/*
 import {MenuDictionary, MenuItem} from '@scvo/router';
 import * as request from 'request';
 
@@ -138,4 +139,5 @@ interface IWPMenuItem {
   meta_data: {[key: string]: string[]};
   children: IWPMenuItem[];
 }
+*/
 /* tslint:enable */

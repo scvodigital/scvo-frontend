@@ -16,23 +16,27 @@ import * as util from 'util';
 import { format } from 'date-fns';
 
 const Dot = require('dot-object');
+const hbsFactory = require('clayhandlebars');
 import * as S from 'string';
 
 // Router modules
-import {Router, RouteMatch, MenuDictionary, RouterRequest, RouterResponse, RouterConfiguration, HttpVerb} from '@scvo/router';
-import {ElasticsearchRouterTask} from '@scvo/router-task-elasticsearch';
-import {FirebaseAuthRouterTask, FirebaseGetDataRouterTask, FirebaseSetDataRouterTask} from '@scvo/router-task-firebase';
-import {MySQLRouterTask} from '@scvo/router-task-mysql';
-import {TransformRouterTask} from '@scvo/router-task-transform';
-import {HandlebarsRouterDestination} from '@scvo/router-destination-handlebars';
-import {RedirectRouterDestination} from '@scvo/router-destination-redirect';
+//import {Router, RouteMatch, MenuDictionary, RouterRequest, RouterResponse, RouterConfiguration, HttpVerb} from '@scvo/router';
+//import {ElasticsearchRouterTask} from '@scvo/router-task-elasticsearch';
+//import {FirebaseAuthRouterTask, FirebaseGetDataRouterTask, FirebaseSetDataRouterTask} from '@scvo/router-task-firebase';
+//import {MySQLRouterTask} from '@scvo/router-task-mysql';
+//import {TransformRouterTask} from '@scvo/router-task-transform';
+//import {HandlebarsRouterDestination} from '@scvo/router-destination-handlebars';
+//import {RedirectRouterDestination} from '@scvo/router-destination-redirect';
+import {Helpers} from './helpers';
+
+import {Router, RouterConfiguration, RouterRequest, RouterResponse, HttpVerb, RendererHandlebars, TaskElasticsearch, TaskMySQL, TaskRedirect, TaskRenderLayout, TaskFirebaseAuth, TaskFirebaseRtbGet, TaskFirebaseRtbSet} from '@scvo/router';
 
 // Import internal modules
 import {SECRETS} from './secrets';
 import {ANALYTICS_SECRETS} from './analytics-secrets';
 import {DOMAIN_MAP} from './domain-map';
 import {CMS_MAP} from './cms-map';
-import {getMenus} from './menus';
+//import {getMenus} from './menus';
 import {fsPdf} from './fs-pdf';
 import {AnalyticsProcessor, ViewCount} from './analytics';
 
@@ -48,7 +52,7 @@ const fb = admin.initializeApp(<admin.AppOptions>config);
 const dot = <any>new Dot('/');
 const app = express();
 const port = process.env.PORT || 9000;
-const localDbPath = path.join(__dirname, 'db.json');
+const localDbPath = path.join(__dirname, '../sites/sites.json');
 const assetsPath = path.join(__dirname, 'assets/');
 
 // Setup global routers variable
@@ -125,7 +129,7 @@ async function index(
       body: req.body
     };
 
-    var response = await site.execute(request);
+    var response = await site.go(request);
 
     res.status(response.statusCode || 500);
     res.contentType(response.contentType || 'text/html');
@@ -157,8 +161,8 @@ async function menuUpdate(
       var contextJson: RouterConfiguration =
           await getJson<RouterConfiguration>(path);
       var domain = CMS_MAP[siteKey] || 'cms.scvo.net';
-      var menus: MenuDictionary = await getMenus(domain, contextJson.domains);
-      await putJson('/sites/' + siteKey + '/menus', menus);
+      //var menus: MenuDictionary = await getMenus(domain, contextJson.domains);
+      await putJson('/sites/' + siteKey + '/menus', {});
       res.end();
       return next();
     } else {
@@ -436,6 +440,19 @@ async function loadRouters(): Promise<any> {
     var sites =
         await getJson<{[site: string]: RouterConfiguration}>('/app-engine/');
 
+    var firebaseApps = {};
+
+    var routerTasks = {
+      elasticsearch: new TaskElasticsearch(),
+      redirect: new TaskRedirect(),
+      mysql: new TaskMySQL(SECRETS.mysql),
+      renderLayout: new TaskRenderLayout(),
+      firebaseAuth: new TaskFirebaseAuth(firebaseApps),
+      firebaseRtbGet: new TaskFirebaseRtbGet(firebaseApps),
+      firebaseRtbSet: new TaskFirebaseRtbSet(firebaseApps)
+    }
+
+    /*
     var routerTasks = [
       new ElasticsearchRouterTask({}),
       new FirebaseAuthRouterTask(SECRETS.configs),
@@ -447,11 +464,24 @@ async function loadRouters(): Promise<any> {
 
     var routerDestinations =
         [new HandlebarsRouterDestination({}), new RedirectRouterDestination()]
+    */
 
     routers = {};
 
     for (var name in sites) {
-      routers[name] = new Router(sites[name], routerTasks, routerDestinations);
+      var siteConfig = sites[name];
+      var hbs = hbsFactory();
+      Helpers.register(hbs);
+      Object.keys(siteConfig.metaData.handlebars.partials).forEach((key) => {
+        var template = siteConfig.metaData.handlebars.partials[key];
+        hbs.registerPartial(key, template);
+      }); 
+
+      var renderers = {
+        handlebars: new RendererHandlebars(hbs)
+      }
+      //routers[name] = new Router(sites[name], routerTasks, routerDestinations);
+      routers[name] = new Router(sites[name], routerTasks, renderers);
     };
   } catch (err) {
     console.error('Failed to load sites:', err);

@@ -1,0 +1,33 @@
+{
+  "domains": [
+    "goodmoves.com",
+    "test.goodmoves.com",
+    "beta.goodmoves.com",
+    "goodmoves.eu",
+    "goodmoves.be",
+    "goodmoves.scot",
+    "goodmovesjobs.de",
+    "goodmoves.local"
+  ],
+  "routes": [
+    "{:./routes/*.json}"
+  ],
+  "metaData": {
+    "title": "Goodmoves - charity and voluntary sector recruitment",
+    "menus": "{:./goodmoves-menus.json}",
+    "handlebars": {
+      "partials": {
+        "{$./partials/**/*.*}": "includeRelativePath=false&regexExpression=(-)&regexOptions=gi&regexReplace=_"
+      },
+      "templates": {
+        "{$./templates/**/*.*}": ""
+      },
+      "layouts": {
+        "{$./layouts/**/*.*}": ""
+      },
+      "queries": {
+        "{$./queries/**/*.*}": ""
+      }
+    }
+  }
+}

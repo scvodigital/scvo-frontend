@@ -1,0 +1,183 @@
+<div class="page credit-union">
+  {{> header_splash}}
+  <div class="container-fluid">
+    {{> breadcrumbs}}
+    <div class="mdc-layout-grid">
+      <div class="mdc-layout-grid__inner">
+        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-9-desktop mdc-layout-grid__cell--span-5-tablet mdc-layout-grid__cell--span-4-phone content page-content">
+          <div class="full scvo-cms scvo-cms-page">
+            <p>
+              Loan example is  a standard loan at 1%  (APR 12.68 %)
+            </p>
+            <form class="form-horizontal loan-form" name="loanDetails" id="loanDetails" _lpchecked="1">
+              <div class="control-group">
+                <label class="control-label">
+                  How long would you like to repay the loan?<br>
+                  <small>(from 1 month up to 36 months)</small>
+                </label>
+                <div class="controls">
+                  <input style="width: 75px;" type="text" name="expectedRepaymentTerm" id="expectedRepaymentTerm" onchange="window.displayRepayment()">
+                </div>
+              </div>
+              <div class="control-group">
+                <label class="control-label">How much would you like to borrow?</label>
+                <div class="controls">
+                  &pound; <input style="width: 75px;" type="text" name="sumLent" id="sumLent" onchange="window.displayRepayment()">
+                </div>
+              </div>
+              <div class="control-group">
+                <label class="control-label">Installments:</label>
+                <div class="controls">
+                  &pound; <input style="width: 75px;" type="text" name="meanRepayment" id="meanRepayment" onchange="window.calculateMaxLoan()">
+                  each <input style="width: 75px;" type="text" name="rPeriodDisp" id="rPeriodDisp">
+                </div>
+              </div>
+              <div class="control-group">
+                <label class="control-label">
+                  Total repaid:<br>
+                  <small>(amount borrowed + interest)</small>
+                </label>
+                <div class="controls">
+                  &pound; <input style="width: 75px;" type="text" name="totalRepaid" id="totalRepaid">
+                </div>
+              </div>
+              <div class="control-group">
+                <label class="control-label">Total cost of loan (interest):</label>
+                <div class="controls">
+                  &pound; <input style="width: 75px;" type="text" name="totalInterest" id="totalInterest">
+                </div>
+              </div>
+              <div class="well">
+                <h4>Remember&hellip;</h4>
+                <ul>
+                  <li>there are no hidden charges associated with our loans</li>
+                  <li>the interest is charged on the reducing balance daily</li>
+                  <li>there are no penalties for early full or partial repayments</li>
+                  <li>
+                    there is free loan protection Insurance cover on most of our loans*<br>
+                    <span style="font-size: 12px; line-height: normal;">
+                      (* subject to certain restrictions – please ask the Credit Union office for more details)
+                    </span>
+                  </li>
+                </ul>
+              </div>
+            </form>
+            <h2>Loan products and examples:</h2>
+            <table width="100%" cellspacing="0" cellpadding="2">
+              <thead>
+                <tr>
+                  <th>Loans Products</th>
+                  <th>Borrowed Amount</th>
+                  <th>Representative APR</th>
+                  <th>Monthly Repayment</th>
+                  <th>Repayment Term</th>
+                  <th>Total Repayment</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Standard Loans</td>
+                  <td>£1,000</td>
+                  <td>12.68% APR</td>
+                  <td>£88.84</td>
+                  <td>12 Months</td>
+                  <td>£1,066.01</td>
+                </tr>
+                <tr>
+                  <td>Refinanced Loans</td>
+                  <td>£1,000</td>
+                  <td>19.65% APR</td>
+                  <td>£91.65</td>
+                  <td>12 Months</td>
+                  <td>£1,099.88</td>
+                </tr>
+                <tr>
+                  <td>Loyalty Loan</td>
+                  <td>£7,000</td>
+                  <td>9.38% APR</td>
+                  <td>£174.21</td>
+                  <td>48 Months</td>
+                  <td>£8,361.39</td>
+                </tr>
+                <tr>
+                  <td>Loyalty Loan Plus</td>
+                  <td>£10,000</td>
+                  <td>6.17% APR</td>
+                  <td>£234.85</td>
+                  <td>48 Months</td>
+                  <td>£11,272.87</td>
+                </tr>
+                <tr>
+                  <td>Budgeting Loan</td>
+                  <td>£1,500</td>
+                  <td>26.82% APR</td>
+                  <td>£80.00</td>
+                  <td>24 Months</td>
+                  <td>£1,898.20</td>
+                </tr>
+                <tr>
+                  <td>Starter Loan</td>
+                  <td>£500.00</td>
+                  <td>26.82% APR</td>
+                  <td>£47.26</td>
+                  <td>12 Months</td>
+                  <td>£567.23</td>
+                </tr>
+              </tbody>
+            </table>
+            <table width="100%" cellspacing="0" cellpadding="2">
+              <tbody>
+                <tr>
+                  <th>Budgeting Loan</th>
+                  <th>Borrowed Amount</th>
+                  <th>Representative APR</th>
+                  <th>Monthly Repayment</th>
+                  <th>Repayment Term</th>
+                  <th>Total Repayment</th>
+                </tr>
+                <tr>
+                  <td>Limit</td>
+                  <td>£500.00</td>
+                  <td>26.82% APR</td>
+                  <td>£45.00</td>
+                  <td>12 months</td>
+                  <td>£571.03</td>
+                </tr>
+                <tr>
+                  <td>Limit</td>
+                  <td>£750.00</td>
+                  <td>26.82% APR</td>
+                  <td>£65.00</td>
+                  <td>14 Months</td>
+                  <td>£861.06</td>
+                </tr>
+                <tr>
+                  <td>Limit</td>
+                  <td>£1,000.00</td>
+                  <td>26.82% APR</td>
+                  <td>£80.00</td>
+                  <td>12 months</td>
+                  <td>£1,161.98</td>
+                </tr>
+                <tr>
+                  <td>Limit</td>
+                  <td>£1,500.00</td>
+                  <td>26.82% APR</td>
+                  <td>£80.00</td>
+                  <td>24 months</td>
+                  <td>£1,898.20</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-3-tablet mdc-layout-grid__cell--span-4-phone content sidebar page-sidebar">
+          {{> menu_credit_union}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="/assets/js/scvo/credit-union-loan-calculator.js"></script>
+
+{{> footer_credit_union}}

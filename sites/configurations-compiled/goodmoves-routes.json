@@ -1,0 +1,969 @@
+{
+    "index": {
+        "pattern": "/",
+        "tasks": [
+            {
+                "name": "primaryResponse",
+                "taskType": "elasticsearch",
+                "config": {
+                    "connectionStringTemplate": "https://readonly:onlyread@2e6b5fd9344d4f8565e7d015d861b240.europe-west3.gcp.cloud.es.io:9243",
+                    "elasticsearchConfig": {
+                        "apiVersion": "5.6"
+                    },
+                    "queryTemplates": {
+                        "index": "web-content-production",
+                        "type": "goodmoves-vacancy",
+                        "template": "{\n  \"size\": 5,\n  \"_source\": [\n    \"Id\",\n    \"slug\",\n    \"vacancy_status\",\n    \"rendered.vacancy_status\",\n    \"top_job\",\n    \"description_short\",\n    \"title\",\n    \"geo_vacancy_coords\",\n    \"location\",\n    \"salary\",\n    \"role_status_list\",\n    \"closing_date\",\n    \"organisation.slug\",\n    \"organisation.name\",\n    \"organisation.has_logo\",\n    \"organisation.logo_url\"\n  ],\n  \"query\": {\n    \"bool\": {\n      \"must\": [\n        {\n          \"term\": {\n            \"vacancy_status\": \"vacancy-open\"\n          }\n        }\n      ]\n    }\n  },\n  \"sort\": {\n    \"start_at\": \"desc\"\n  }\n}"
+                    }
+                }
+            },
+            {
+                "name": "supplimentaryResponses",
+                "taskType": "elasticsearch",
+                "config": {
+                    "connectionStringTemplate": "https://readonly:onlyread@2e6b5fd9344d4f8565e7d015d861b240.europe-west3.gcp.cloud.es.io:9243",
+                    "elasticsearchConfig": {
+                        "apiVersion": "5.6"
+                    },
+                    "queryTemplates": [
+                        {
+                            "name": "top",
+                            "index": "web-content-production",
+                            "type": "goodmoves-vacancy",
+                            "template": "{\n  \"size\": 5,\n  \"_source\": [\n    \"Id\",\n    \"slug\",\n    \"vacancy_status\",\n    \"rendered.vacancy_status\",\n    \"top_job\",\n    \"description_short\",\n    \"title\",\n    \"geo_vacancy_coords\",\n    \"location\",\n    \"salary\",\n    \"role_status_list\",\n    \"closing_date\",\n    \"organisation.slug\",\n    \"organisation.name\",\n    \"organisation.has_logo\",\n    \"organisation.logo_url\"\n  ],\n  \"query\": {\n    \"function_score\": {\n      \"query\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"top_job\": true\n              }\n            },\n            {\n              \"term\": {\n                \"vacancy_status\": \"vacancy-open\"\n              }\n            }\n          ]\n        }\n      },\n      \"random_score\": {},\n      \"score_mode\": \"sum\"\n    }\n  }\n}"
+                        },
+                        {
+                            "name": "currently_recruiting",
+                            "index": "web-content-production",
+                            "type": "goodmoves-organisation",
+                            "template": "{\n  \"size\": 12,\n  \"_source\": [\n    \"Id\",\n    \"title\",\n    \"slug\",\n    \"logo_url\"\n  ],\n  \"query\": {\n    \"function_score\": {\n      \"query\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"has_logo\": true\n              }\n            },\n            {\n              \"term\": {\n                \"has_vacancies\": \"true\"\n              }\n            }\n          ]\n        }\n      },\n      \"random_score\": {},\n      \"score_mode\": \"sum\"\n    }\n  }\n}"
+                        },
+                        {
+                            "name": "types",
+                            "index": "web-content-production",
+                            "type": "goodmoves-vacancy",
+                            "template": "{\n  \"size\": 0,\n  \"_source\": false,\n  \"query\": {\n    \"bool\": {\n      \"must\": [\n        {\n          \"term\": {\n            \"country_iso3\": \"GBR\"\n          }\n        },\n        {\n          \"term\": {\n            \"vacancy_status\": \"vacancy-open\"\n          }\n        }\n      ]\n    }\n  },\n  \"aggs\": {\n    \"sectors\": {\n      \"terms\": {\n        \"field\": \"sectors\",\n        \"order\": {\n          \"_term\": \"asc\"\n        },\n        \"size\": 10000\n      }\n    },\n    \"sectors_slugs\": {\n      \"terms\": {\n        \"field\": \"sectors_slugs\",\n        \"order\": {\n          \"_term\": \"asc\"\n        },\n        \"size\": 10000\n      }\n    },\n    \"roles\": {\n      \"terms\": {\n        \"field\": \"roles\",\n        \"order\": {\n          \"_term\": \"asc\"\n        },\n        \"size\": 10000\n      }\n    },\n    \"roles_slugs\": {\n      \"terms\": {\n        \"field\": \"roles_slugs\",\n        \"order\": {\n          \"_term\": \"asc\"\n        },\n        \"size\": 10000\n      }\n    },\n    \"regions\": {\n      \"terms\": {\n        \"field\": \"region\",\n        \"size\": 10000\n      }\n    },\n    \"regions_slugs\": {\n      \"terms\": {\n        \"field\": \"region_slug\",\n        \"size\": 10000\n      }\n    },\n    \"statuses\": {\n      \"terms\": {\n        \"field\": \"role_status\",\n        \"size\": 10000\n      }\n    },\n    \"statuses_slugs\": {\n      \"terms\": {\n        \"field\": \"role_status_slug\",\n        \"size\": 10000\n      }\n    }\n  }\n}"
+                        },
+                        {
+                            "name": "splash",
+                            "index": "web-content-production",
+                            "type": "scvo-cms-media",
+                            "template": "{\n  \"size\": 1,\n  \"_source\": [\n    \"caption\",\n    \"original_image\"\n  ],\n  \"query\": {\n    \"function_score\": {\n      \"query\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"categories_id\": 29\n              }\n            }\n          ]\n        }\n      },\n      \"random_score\": {},\n      \"score_mode\": \"sum\"\n    }\n  }\n}\n"
+                        }
+                    ]
+                }
+            },
+            {
+                "name": "organisations_currently_recruiting",
+                "taskType": "elasticsearch",
+                "config": {
+                    "connectionStringTemplate": "https://readonly:onlyread@2e6b5fd9344d4f8565e7d015d861b240.europe-west3.gcp.cloud.es.io:9243",
+                    "elasticsearchConfig": {
+                        "apiVersion": "5.6"
+                    },
+                    "queryTemplates": [
+                        {
+                            "name": "vacancies",
+                            "index": "web-content-production",
+                            "type": "goodmoves-vacancy",
+                            "template": "{\n  \"size\": 0,\n  \"_source\": false,\n  \"query\": {\n    \"bool\" : {\n      \"should\" : [\n        {\n          \"terms\": {\n            \"organisation.id\": [\n              \"TEST\"\n            ]\n          }\n        }\n      ]\n    }\n  }\n}"
+                        }
+                    ]
+                }
+            },
+            {
+                "name": "posts",
+                "taskType": "elasticsearch",
+                "config": {
+                    "connectionStringTemplate": "https://readonly:onlyread@2e6b5fd9344d4f8565e7d015d861b240.europe-west3.gcp.cloud.es.io:9243",
+                    "elasticsearchConfig": {
+                        "apiVersion": "5.6"
+                    },
+                    "queryTemplates": [
+                        {
+                            "name": "tfn_latest",
+                            "index": "web-content-production",
+                            "type": "tfn-news-post,tfn-feature",
+                            "template": "{\n  \"size\": 4,\n  \"_source\": [\n    \"rendered.scvo_gist\"\n  ],\n  \"query\": {\n    \"match_all\": {}\n  },\n  \"sort\": {\n    \"date_published\": \"desc\"\n  }\n}"
+                        }
+                    ]
+                }
+            }
+        ],
+        "destination": {
+            "destinationType": "handlebars",
+            "config": {
+                "default": {
+                    "head": "<title>Goodmoves – charity and voluntary sector recruitment</title>\n<meta property=\"og:title\" content=\"Goodmoves – charity and voluntary sector recruitment\" data-dynamic=\"true\">",
+                    "body": "<div class=\"container-fluid home-banner\">\n  <div class=\"mdc-layout-grid banner-search\" style=\"background-image: url('{{#if data.supplimentaryResponses.splash.hits.hits.[0]._source.original_image}}{{data.supplimentaryResponses.splash.hits.hits.[0]._source.original_image}}{{/if}}');\">\n    <div class=\"mdc-layout-grid__inner\">\n      <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-2-desktop mdc-layout-grid__cell--span-0-tablet mdc-layout-grid__cell--span-0-phone\">\n      </div>\n      <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-8-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone content page-content mdc-elevation--z20\">\n        <!-- <div class=\"mdc-typography--headline5\">Charity and voluntary sector recruitment</div> -->\n        <form id=\"search-view\" class=\"search-form\" action=\"/search\" method=\"GET\">\n          <input type=\"hidden\" name=\"lat\" value=\"\">\n          <input type=\"hidden\" name=\"lng\" value=\"\">\n          <div class=\"mdc-layout-grid\">\n            <div class=\"mdc-layout-grid__inner\">\n              <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-5-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone\">\n                <div class=\"mdc-text-field mdc-text-field--box mdc-text-field--with-leading-icon mdc-text-field-tt\" data-mdc-auto-init=\"MDCTextField\">\n                  <span class=\"far fa-search mdc-text-field__icon\" tabindex=\"0\" role=\"button\"></span>\n                  <input type=\"text\" id=\"what-jobs\" name=\"keywords\" class=\"mdc-text-field__input\">\n                  <label for=\"what-jobs\" class=\"mdc-floating-label\">\n                    Keywords\n                  </label>\n                  <div class=\"mdc-line-ripple\"></div>\n                </div>\n                <!-- <p id=\"what-jobs-helper-text\" class=\"mdc-text-field-helper-text\" aria-hidden=\"true\">e.g. Fundraising, Carer, Manager</p> -->\n              </div>\n              <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-2-tablet mdc-layout-grid__cell--span-3-phone\">\n                <div class=\"mdc-text-field mdc-text-field--box mdc-text-field--with-leading-icon\" data-mdc-auto-init=\"MDCTextField\">\n                  <span class=\"far fa-map-marker-alt mdc-text-field__icon\" tabindex=\"0\" role=\"button\" onclick=\"geolocate();\"></span>\n                  <input type=\"text\" id=\"where-jobs\" name=\"location\" class=\"mdc-text-field__input\" placeholder=\" \" data-location-options='\n                  {\n                    \"types\": [\"(regions)\"],\n                    \"componentRestrictions\": {\n                      \"country\": \"gb\"\n                    }\n                  }' data-location-lat=\"[name='lat']\" data-location-lng=\"[name='lng']\">\n                  <label for=\"where-jobs\" class=\"mdc-floating-label\">\n                    Location\n                  </label>\n                  <div class=\"mdc-line-ripple\"></div>\n                </div>\n                <!-- <p id=\"where-jobs-helper-text\" class=\"mdc-text-field-helper-text\" aria-hidden=\"true\">e.g. Glasgow, Edinburgh, Inverness</p> -->\n              </div>\n              <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-2-desktop mdc-layout-grid__cell--span-1-tablet mdc-layout-grid__cell--span-1-phone\">\n                <div class=\"mdc-form-field\">\n                  <div class=\"mdc-select mdc-select--box\" data-mdc-auto-init=\"MDCSelect\">\n                    <select class=\"mdc-select__native-control\" name=\"distance\" id=\"distance-jobs\">\n                      <option value=\"8046.72\" selected>within 5 miles</option>\n                      <option value=\"16093.44\">within 10 miles</option>\n                      <option value=\"40233.6\">within 25 miles</option>\n                      <option value=\"80467.2\">within 50 miles</option>\n                      <option value=\"any\">any distance</option>\n                    </select>\n                    <label class=\"mdc-floating-label mdc-floating-label--float-above\" for=\"distance-jobs\">\n                      Distance\n                    </label>\n                  </div>\n                </div>\n              </div>\n              <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-2-desktop mdc-layout-grid__cell--span-1-tablet mdc-layout-grid__cell--span-4-phone\">\n                <button type=\"submit\" id=\"search-jobs\" class=\"mdc-button mdc-button--raised mdc-text-field--box mdc-button--search\">\n                  Search\n                  <span class=\"far fa-search\" aria-hidden=\"true\"></span>\n                </button>\n              </div>\n            </div>\n            <div class=\"mdc-layout-grid__inner\">\n              <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone\">\n                <div id=\"search-terms\" class=\"mdc-chip-set\"></div>\n              </div>\n            </div>\n          </div>\n        </form>\n        <div class=\"mdc-layout-grid\">\n          <div class=\"mdc-layout-grid__inner\">\n            <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone\">\n              <div class=\"mdc-menu-anchor\">\n                <button class=\"mdc-button mdc-button--raised\" data-menu-target=\"#sectors-menu\">\n                  Sectors\n                  <span class=\"far fa-fw fa-angle-down\"></span>\n                </button>\n                <div class=\"mdc-menu\" tabindex=\"-1\" data-mdc-auto-init=\"MDCMenu\" id=\"sectors-menu\">\n                  <div class=\"mdc-menu__items mdc-list\" role=\"menu\" aria-hidden=\"true\">\n                    {{#each data.supplimentaryResponses.types.aggregations.sectors_slugs.buckets ~}}\n                    <a class=\"mdc-list-item\" href=\"/search?sector={{urlencode key}}\" role=\"menuitem\">\n                      <span class=\"mdc-list-item__text\">\n                        {{#with (lookup ../data.supplimentaryResponses.types.aggregations.sectors.buckets @index) ~}}\n                        {{{key}}}\n                        {{/with ~}}\n                      </span>\n                      <span class=\"mdc-list-item__meta\">\n                        {{doc_count}}\n                      </span>\n                    </a>\n                    {{/each ~}}\n                  </div>\n                </div>\n              </div>\n            </div>\n            <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone\">\n              <div class=\"mdc-menu-anchor\">\n                <button class=\"mdc-button mdc-button--raised\" data-menu-target=\"#roles-menu\">\n                  Roles\n                  <span class=\"far fa-fw fa-angle-down\"></span>\n                </button>\n                <div class=\"mdc-menu\" tabindex=\"-1\" data-mdc-auto-init=\"MDCMenu\" id=\"roles-menu\">\n                  <div class=\"mdc-menu__items mdc-list\" role=\"menu\" aria-hidden=\"true\">\n                    {{#each data.supplimentaryResponses.types.aggregations.roles_slugs.buckets ~}}\n                    <a class=\"mdc-list-item\" href=\"/search?role={{urlencode key}}\" role=\"menuitem\">\n                      <span class=\"mdc-list-item__text\">\n                        {{#with (lookup ../data.supplimentaryResponses.types.aggregations.roles.buckets @index) ~}}\n                        {{{key}}}\n                        {{/with ~}}\n                      </span>\n                      <span class=\"mdc-list-item__meta\">\n                        {{doc_count}}\n                      </span>\n                    </a>\n                    {{/each ~}}\n                  </div>\n                </div>\n              </div>\n            </div>\n            <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone\">\n              <div class=\"mdc-menu-anchor\">\n                <button class=\"mdc-button mdc-button--raised\" data-menu-target=\"#statuses-menu\">\n                  Statuses\n                  <span class=\"far fa-fw fa-angle-down\"></span>\n                </button>\n                <div class=\"mdc-menu\" tabindex=\"-1\" data-mdc-auto-init=\"MDCMenu\" id=\"statuses-menu\">\n                  <div class=\"mdc-menu__items mdc-list\" role=\"menu\" aria-hidden=\"true\">\n                    {{#each data.supplimentaryResponses.types.aggregations.statuses_slugs.buckets ~}}\n                    <a class=\"mdc-list-item\" href=\"/search?status={{urlencode key}}\" role=\"menuitem\">\n                      <span class=\"mdc-list-item__text\">\n                        {{#with (lookup ../data.supplimentaryResponses.types.aggregations.statuses.buckets @index) ~}}\n                        {{{key}}}\n                        {{/with ~}}\n                      </span>\n                      <span class=\"mdc-list-item__meta\">\n                        {{doc_count}}\n                      </span>\n                    </a>\n                    {{/each ~}}\n                  </div>\n                </div>\n              </div>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n\n  {{> currently_recruiting}}\n\n  <div class=\"mdc-layout-grid home-jobs\">\n    <div class=\"mdc-layout-grid__inner\">\n      <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone v-margin-full latest-jobs\">\n        <div class=\"mdc-typography--headline5 v-margin-full\">\n          Latest jobs\n        </div>\n        {{#each data.primaryResponse.hits.hits ~}}\n        {{> vacancy_mini _source}}\n        {{/each ~}}\n      </div>\n      <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone v-margin-full top-jobs\">\n        <div class=\"mdc-typography--headline5 v-margin-full\">\n          Top jobs\n        </div>\n        {{#each data.supplimentaryResponses.top.hits.hits ~}}\n        {{> vacancy_mini _source}}\n        {{/each ~}}\n      </div>\n      <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone v-margin-full shortlist\">\n        <div class=\"mdc-typography--headline5 v-margin-full\">\n          Shortlist &amp; notes\n        </div>\n        <p>\n          There are currently no jobs in your shortlist, if you star or write notes on a job it will appear here for easy reference.\n        </p>\n      </div>\n    </div>\n  </div>\n\n  {{> tfn_latest}}\n\n</div>",
+                    "foot": "<script src=\"https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js\"></script>\n<script>\nvar terms = {\n  sectors: [\n    {{#each data.supplimentaryResponses.types.aggregations.sectors.buckets ~}}\n    { field: 'sectors', term: {{{stringify key}}} },\n    {{/each ~}}\n  ],\n  roles: [\n    {{#each data.supplimentaryResponses.types.aggregations.roles.buckets ~}}\n    { field: 'roles', term: {{{stringify key}}} },\n    {{/each ~}}\n  ],\n  regions: [\n    {{#each data.supplimentaryResponses.types.aggregations.regions.buckets ~}}\n    { field: 'regions', term: {{{stringify key}}} },\n    {{/each ~}}\n  ],\n  role_status: [\n    {{#each data.supplimentaryResponses.types.aggregations.role_status.buckets ~}}\n    { field: 'role_status', term: {{{stringify key}}} },\n    {{/each ~}}\n  ]\n};\n</script>\n<script src=\"/assets/js/goodmoves/home.js\" async defer></script>\n"
+                }
+            }
+        }
+    },
+    "browse": {
+        "pattern": "/browse",
+        "tasks": [
+            {
+                "name": "primaryResponse",
+                "taskType": "elasticsearch",
+                "config": {
+                    "connectionStringTemplate": "https://readonly:onlyread@2e6b5fd9344d4f8565e7d015d861b240.europe-west3.gcp.cloud.es.io:9243",
+                    "elasticsearchConfig": {
+                        "apiVersion": "5.6"
+                    },
+                    "queryTemplates": {
+                        "index": "web-content-production",
+                        "type": "goodmoves-vacancy",
+                        "template": "{\n  \"size\": 5,\n  \"_source\": [\n    \"Id\",\n    \"slug\",\n    \"vacancy_status\",\n    \"rendered.vacancy_status\",\n    \"top_job\",\n    \"description_short\",\n    \"title\",\n    \"geo_vacancy_coords\",\n    \"location\",\n    \"salary\",\n    \"role_status_list\",\n    \"closing_date\",\n    \"organisation.slug\",\n    \"organisation.name\",\n    \"organisation.has_logo\",\n    \"organisation.logo_url\"\n  ],\n  \"query\": {\n    \"bool\": {\n      \"must\": [\n        {\n          \"term\": {\n            \"vacancy_status\": \"vacancy-open\"\n          }\n        }\n      ]\n    }\n  },\n  \"sort\": {\n    \"start_at\": \"desc\"\n  }\n}"
+                    }
+                }
+            },
+            {
+                "name": "supplimentaryResponses",
+                "taskType": "elasticsearch",
+                "config": {
+                    "connectionStringTemplate": "https://readonly:onlyread@2e6b5fd9344d4f8565e7d015d861b240.europe-west3.gcp.cloud.es.io:9243",
+                    "elasticsearchConfig": {
+                        "apiVersion": "5.6"
+                    },
+                    "queryTemplates": [
+                        {
+                            "name": "currently_recruiting",
+                            "index": "web-content-production",
+                            "type": "goodmoves-organisation",
+                            "template": "{\n  \"size\": 12,\n  \"_source\": [\n    \"Id\",\n    \"title\",\n    \"slug\",\n    \"logo_url\"\n  ],\n  \"query\": {\n    \"function_score\": {\n      \"query\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"has_logo\": true\n              }\n            },\n            {\n              \"term\": {\n                \"has_vacancies\": \"true\"\n              }\n            }\n          ]\n        }\n      },\n      \"random_score\": {},\n      \"score_mode\": \"sum\"\n    }\n  }\n}"
+                        },
+                        {
+                            "name": "types",
+                            "index": "web-content-production",
+                            "type": "goodmoves-vacancy",
+                            "template": "{\n  \"size\": 0,\n  \"_source\": false,\n  \"query\": {\n    \"bool\": {\n      \"must\": [\n        {\n          \"term\": {\n            \"country_iso3\": \"GBR\"\n          }\n        },\n        {\n          \"term\": {\n            \"vacancy_status\": \"vacancy-open\"\n          }\n        }\n      ]\n    }\n  },\n  \"aggs\": {\n    \"sectors\": {\n      \"terms\": {\n        \"field\": \"sectors\",\n        \"order\": {\n          \"_term\": \"asc\"\n        },\n        \"size\": 10000\n      }\n    },\n    \"sectors_slugs\": {\n      \"terms\": {\n        \"field\": \"sectors_slugs\",\n        \"order\": {\n          \"_term\": \"asc\"\n        },\n        \"size\": 10000\n      }\n    },\n    \"roles\": {\n      \"terms\": {\n        \"field\": \"roles\",\n        \"order\": {\n          \"_term\": \"asc\"\n        },\n        \"size\": 10000\n      }\n    },\n    \"roles_slugs\": {\n      \"terms\": {\n        \"field\": \"roles_slugs\",\n        \"order\": {\n          \"_term\": \"asc\"\n        },\n        \"size\": 10000\n      }\n    },\n    \"regions\": {\n      \"terms\": {\n        \"field\": \"region\",\n        \"size\": 10000\n      }\n    },\n    \"regions_slugs\": {\n      \"terms\": {\n        \"field\": \"region_slug\",\n        \"size\": 10000\n      }\n    },\n    \"statuses\": {\n      \"terms\": {\n        \"field\": \"role_status\",\n        \"size\": 10000\n      }\n    },\n    \"statuses_slugs\": {\n      \"terms\": {\n        \"field\": \"role_status_slug\",\n        \"size\": 10000\n      }\n    }\n  }\n}"
+                        }
+                    ]
+                }
+            }
+        ],
+        "destination": {
+            "destinationType": "handlebars",
+            "config": {
+                "default": {
+                    "head": "{{#if data.primaryResponse.hits.hits.[0] ~}}\n{{#with data.primaryResponse.hits.hits.[0]._source ~}}\n{{#ifAny title og_title ~}}\n<title>Goodmoves – {{{default title og_title}}}</title>\n<meta property=\"og:title\" content=\"Goodmoves – {{{default title og_title}}}\" data-dynamic=\"true\">\n{{else}}\n<title>Goodmoves – charity and voluntary sector recruitment</title>\n<meta property=\"og:title\" content=\"Goodmoves – charity and voluntary sector recruitment\" data-dynamic=\"true\">\n{{/ifAny ~}}\n<!-- <meta property=\"og:image\" content=\"\" data-dynamic=\"true\"> -->\n<meta property=\"og:image:width\" content=\"96\" data-dynamic=\"true\">\n<meta property=\"og:image:height\" content=\"96\" data-dynamic=\"true\">\n{{#ifAny og_summary description ../og_summary ../description ~}}\n<meta property=\"og:summary\" content=\"{{default og_summary (default ../og_summary (default description ../description))}}\" data-dynamic=\"true\">\n<meta name=\"description\" content=\"{{default description (default ../description (default og_summary ../og_summary))}}\" data-dynamic=\"true\">\n{{/ifAny ~}}\n{{#if rendered.json_ld ~}}\n<script type=\"application/ld+json\" data-dynamic=\"true\">\n{{{rendered.json_ld}}}\n</script>\n{{/if ~}}\n{{/with ~}}\n{{else}}\n<title>Goodmoves – charity and voluntary sector recruitment</title>\n<meta property=\"og:title\" content=\"Goodmoves – charity and voluntary sector recruitment\" data-dynamic=\"true\">\n{{/if ~}}",
+                    "body": "<div class=\"container-fluid\">\n  <div class=\"mdc-layout-grid home-jobs\">\n    <div class=\"mdc-layout-grid__inner\">\n      <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone content page-content\">\n        <div class=\"browse-title mdc-typography--headline5\">\n          Roles\n        </div>\n        <ul class=\"mdc-list\">\n          {{#each data.supplimentaryResponses.types.aggregations.roles_slugs.buckets ~}}\n          <a class=\"mdc-list-item\" href=\"/search?role={{urlencode key}}\" role=\"menuitem\">\n            <span class=\"mdc-list-item__text\">\n              {{#with (lookup ../data.supplimentaryResponses.types.aggregations.roles.buckets @index) ~}}\n              {{{key}}}\n              {{/with ~}}\n            </span>\n            <span class=\"mdc-list-item__meta\">\n              {{doc_count}}\n            </span>\n          </a>\n          {{/each ~}}\n        </ul>\n      </div>\n      <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone content page-content\">\n        <div class=\"browse-title mdc-typography--headline5\">\n          Sectors\n        </div>\n        <ul class=\"mdc-list\">\n          {{#each data.supplimentaryResponses.types.aggregations.sectors_slugs.buckets ~}}\n          <a class=\"mdc-list-item\" href=\"/search?sector={{urlencode key}}\" role=\"menuitem\">\n            <span class=\"mdc-list-item__text\">\n              {{#with (lookup ../data.supplimentaryResponses.types.aggregations.sectors.buckets @index) ~}}\n              {{{key}}}\n              {{/with ~}}\n            </span>\n            <span class=\"mdc-list-item__meta\">\n              {{doc_count}}\n            </span>\n          </a>\n          {{/each ~}}\n        </ul>\n      </div>\n      <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone content page-content\">\n        <div class=\"browse-title mdc-typography--headline5\">\n          Statuses\n        </div>\n        <ul class=\"mdc-list\">\n          {{#each data.supplimentaryResponses.types.aggregations.statuses_slugs.buckets ~}}\n          <a class=\"mdc-list-item\" href=\"/search?status={{urlencode key}}\" role=\"menuitem\">\n            <span class=\"mdc-list-item__text\">\n              {{#with (lookup ../data.supplimentaryResponses.types.aggregations.statuses.buckets @index) ~}}\n              {{{key}}}\n              {{/with ~}}\n            </span>\n            <span class=\"mdc-list-item__meta\">\n              {{doc_count}}\n            </span>\n          </a>\n          {{/each ~}}\n        </ul>\n      </div>\n    </div>\n  </div>\n\n  {{> currently_recruiting}}\n</div>",
+                    "foot": ""
+                }
+            }
+        }
+    },
+    "mysql": {
+        "pattern": "/mysql",
+        "tasks": [
+            {
+                "name": "auth",
+                "taskType": "firebase-auth",
+                "config": {
+                    "cookie": "gm_token",
+                    "appName": "scvo",
+                    "noCookieRoute": "five_hundred",
+                    "notAuthenticatedRoute": "five_hundred"
+                }
+            },
+            {
+                "name": "mysql_test",
+                "taskType": "mysql",
+                "config": {
+                    "connectionName": "notifications",
+                    "queryTemplates": {
+                        "emails": "SELECT * FROM recipientEmails_1 WHERE email IN ('calum.macuisdean@gmail.com', '{{data.auth.email}}') AND id = 'goodmoves-weekly';"
+                    }
+                }
+            }
+        ],
+        "destination": {
+            "destinationType": "handlebars",
+            "config": {
+                "data": {
+                    "content": "{{{stringify data.search_query}}}"
+                }
+            }
+        }
+    },
+    "login": {
+        "pattern": "/login",
+        "destination": {
+            "destinationType": "handlebars",
+            "config": {
+                "default": {
+                    "head": "{{#if data.primaryResponse.hits.hits.[0] ~}}\n{{#with data.primaryResponse.hits.hits.[0]._source ~}}\n{{#ifAny title og_title ~}}\n<title>Goodmoves – {{{default title og_title}}}</title>\n<meta property=\"og:title\" content=\"Goodmoves – {{{default title og_title}}}\" data-dynamic=\"true\">\n{{else}}\n<title>Goodmoves – charity and voluntary sector recruitment</title>\n<meta property=\"og:title\" content=\"Goodmoves – charity and voluntary sector recruitment\" data-dynamic=\"true\">\n{{/ifAny ~}}\n<!-- <meta property=\"og:image\" content=\"\" data-dynamic=\"true\"> -->\n<meta property=\"og:image:width\" content=\"96\" data-dynamic=\"true\">\n<meta property=\"og:image:height\" content=\"96\" data-dynamic=\"true\">\n{{#ifAny og_summary description ../og_summary ../description ~}}\n<meta property=\"og:summary\" content=\"{{default og_summary (default ../og_summary (default description ../description))}}\" data-dynamic=\"true\">\n<meta name=\"description\" content=\"{{default description (default ../description (default og_summary ../og_summary))}}\" data-dynamic=\"true\">\n{{/ifAny ~}}\n{{#if rendered.json_ld ~}}\n<script type=\"application/ld+json\" data-dynamic=\"true\">\n{{{rendered.json_ld}}}\n</script>\n{{/if ~}}\n{{/with ~}}\n{{else}}\n<title>Goodmoves – charity and voluntary sector recruitment</title>\n<meta property=\"og:title\" content=\"Goodmoves – charity and voluntary sector recruitment\" data-dynamic=\"true\">\n{{/if ~}}",
+                    "body": "<div class=\"container-fluid\">\n  {{> login}}\n</div>"
+                }
+            }
+        }
+    },
+    "test": {
+        "pattern": "/test",
+        "tasks": [
+            {
+                "name": "auth",
+                "taskType": "firebase-auth",
+                "config": {
+                    "cookie": "gm_token",
+                    "appName": "scvo",
+                    "noCookieRoute": "five_hundred",
+                    "notAuthenticatedRoute": "five_hundred"
+                }
+            },
+            {
+                "name": "user",
+                "taskType": "firebase-get-data",
+                "config": {
+                    "appName": "scvo",
+                    "pathTemplate": "/users/{{data.auth.uid}}",
+                    "defaultData": {
+                        "goodmoves": {
+                            "saved_vacancies": []
+                        }
+                    }
+                }
+            },
+            {
+                "name": "set_response",
+                "taskType": "firebase-set-data",
+                "config": {
+                    "appName": "scvo",
+                    "pathTemplate": "/users/{{data.auth.uid}}/email",
+                    "dataTemplate": "{{data.auth.email}}",
+                    "setOrUpdate": "set"
+                }
+            }
+        ],
+        "destination": {
+            "destinationType": "handlebars",
+            "config": {
+                "data": {
+                    "content": "{{{stringify data}}}"
+                }
+            }
+        }
+    },
+    "four_oh_four": {
+        "pattern": "/404",
+        "tasks": [
+            {
+                "name": "not_found",
+                "taskType": "elasticsearch",
+                "config": {
+                    "connectionStringTemplate": "https://readonly:onlyread@2e6b5fd9344d4f8565e7d015d861b240.europe-west3.gcp.cloud.es.io:9243",
+                    "elasticsearchConfig": {
+                        "apiVersion": "5.6"
+                    },
+                    "queryTemplates": {
+                        "index": "web-content-production",
+                        "type": "goodmoves-page",
+                        "template": "{\n  \"size\": 4,\n  \"_source\": [\n    \"title\",\n    \"rendered.scvo_search_result\"\n  ],\n  \"query\": {\n    {{#if data.primaryResponse.hits.hits.[0] ~}}\n    \"match_none\": {}\n    {{else}}\n    \"query_string\": {\n      \"query\": \"{{{regexReplace (default request.url.path \"\") \"([^a-zA-Z0-9\\s])\" \"gi\" \" \"}}}\",\n      \"default_field\": \"text_bag_boost\",\n      \"default_operator\": \"OR\",\n      \"analyzer\": \"snowball\"\n    }\n    {{/if ~}}\n  }\n}"
+                    }
+                }
+            }
+        ],
+        "destination": {
+            "destinationType": "handlebars",
+            "config": {
+                "default": {
+                    "head": "{{#if data.primaryResponse.hits.hits.[0] ~}}\n{{#with data.primaryResponse.hits.hits.[0]._source ~}}\n{{#ifAny title og_title ~}}\n<title>Goodmoves – {{{default title og_title}}}</title>\n<meta property=\"og:title\" content=\"Goodmoves – {{{default title og_title}}}\" data-dynamic=\"true\">\n{{else}}\n<title>Goodmoves – charity and voluntary sector recruitment</title>\n<meta property=\"og:title\" content=\"Goodmoves – charity and voluntary sector recruitment\" data-dynamic=\"true\">\n{{/ifAny ~}}\n<!-- <meta property=\"og:image\" content=\"\" data-dynamic=\"true\"> -->\n<meta property=\"og:image:width\" content=\"96\" data-dynamic=\"true\">\n<meta property=\"og:image:height\" content=\"96\" data-dynamic=\"true\">\n{{#ifAny og_summary description ../og_summary ../description ~}}\n<meta property=\"og:summary\" content=\"{{default og_summary (default ../og_summary (default description ../description))}}\" data-dynamic=\"true\">\n<meta name=\"description\" content=\"{{default description (default ../description (default og_summary ../og_summary))}}\" data-dynamic=\"true\">\n{{/ifAny ~}}\n{{#if rendered.json_ld ~}}\n<script type=\"application/ld+json\" data-dynamic=\"true\">\n{{{rendered.json_ld}}}\n</script>\n{{/if ~}}\n{{/with ~}}\n{{else}}\n<title>Goodmoves – charity and voluntary sector recruitment</title>\n<meta property=\"og:title\" content=\"Goodmoves – charity and voluntary sector recruitment\" data-dynamic=\"true\">\n{{/if ~}}",
+                    "body": "<div class=\"page\">\n  <div class=\"container-fluid\">\n    <div class=\"mdc-layout-grid\">\n      <div class=\"mdc-layout-grid__inner\">\n        <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-8-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone content page-content\">\n          <h2>The page you requested could not be found</h2>\n          <p>\n            We recently relaunched our website and some page addresses may have changed.\n          </p>\n          {{#ifAll data.supplimentaryResponses.not_found (compare data.supplimentaryResponses.not_found.hits.total \">\" 0) ~}}\n          <h3>Did you mean?</h3>\n          {{#each data.supplimentaryResponses.not_found.hits.hits ~}}\n          {{#compare @index \"===\" 0 ~}}\n          {{>highlight_result}}\n          {{else}}\n          {{/compare ~}}\n          {{/each ~}}\n          {{/ifAll ~}}\n        </div>\n        <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone\">\n          <img src=\"/assets/images/404.png\" class=\"responsive\">\n        </div>\n      </div>\n    </div>\n    {{#ifAll data.not_found (compare data.not_found.hits.total \">\" 1) ~}}\n    <hr />\n    <h3>Other relevant content</h3>\n    {{#each data.not_found.hits.hits ~}}\n    {{#compare @index \"===\" 0 ~}}\n    {{else}}\n    {{>highlight_result}}\n    {{/compare ~}}\n    {{/each ~}}\n    {{else}}\n    <!-- <h3>Try searching for a topic</h3> -->\n    {{/ifAll ~}}\n\n    <script>\n    gtag('event', '404', {\n      event_category: '{{name}}',\n      event_label: '{{request.params.uri.pathname}}'\n    });\n    </script>\n  </div>\n</div>\n",
+                    "foot": ""
+                }
+            }
+        }
+    },
+    "vacancy_search": {
+        "pattern": "/search",
+        "defaultParams": {
+            "context": "results"
+        },
+        "metaData": {
+            "sidebarButton": {
+                "icon": "search",
+                "tooltip": "Search",
+                "classes": "hide-md hide-lg"
+            }
+        },
+        "tasks": [
+            {
+                "name": "search_data",
+                "taskType": "elasticsearch",
+                "config": {
+                    "connectionStringTemplate": "https://readonly:onlyread@2e6b5fd9344d4f8565e7d015d861b240.europe-west3.gcp.cloud.es.io:9243",
+                    "elasticsearchConfig": {
+                        "apiVersion": "5.6",
+                        "log": "debug"
+                    },
+                    "queryTemplates": [
+                        {
+                            "name": "detailed_results",
+                            "index": "web-content-production",
+                            "type": "goodmoves-vacancy",
+                            "template": "{\n  \"size\": 10,\n  \"from\": {{multiply (subtract (default request.params.query.page 1) 1) 10}},\n  \"_source\": [\n    \"Id\",\n    \"slug\",\n    \"vacancy_status\",\n    \"rendered.vacancy_status\",\n    \"top_job\",\n    \"description_short\",\n    \"title\",\n    \"geo_vacancy_coords\",\n    \"location\",\n    \"salary\",\n    \"role_status_list\",\n    \"closing_date\",\n    \"organisation.slug\",\n    \"organisation.name\",\n    \"organisation.has_logo\",\n    \"organisation.logo_url\",\n    \"rendered.goodmoves_rss\"\n  ],\n  \"query\": {\n    \"bool\": {\n      {{#ifAny request.params.query.sectors request.params.query.roles request.params.query.role_status request.params.query.lat}}\n      \"filter\": [\n        {{#if request.params.query.sectors ~}}\n        {\n          \"terms\": {\n            \"sectors\": {{{stringify (arrayify request.params.query.sectors)}}}\n          }\n        }\n        {{#ifAny request.params.query.roles request.params.query.role_status request.params.query.lat}},{{/ifAny}}\n        {{/if ~}}\n        {{#if request.params.query.roles ~}}\n        {\n          \"terms\": {\n            \"roles\": {{{stringify (arrayify request.params.query.roles)}}}\n          }\n        }\n        {{#ifAny request.params.query.role_status request.params.query.lat}},{{/ifAny}}\n        {{/if ~}}\n        {{#if request.params.query.role_status ~}}\n        {\n          \"terms\": {\n            \"status\": {{{stringify (arrayify request.params.query.role_status)}}}\n          }\n        }\n        {{#ifAny request.params.query.lat}},{{/ifAny}}\n        {{/if}}\n        {{#if request.params.query.lat ~}}\n        {\n          \"geo_distance\": {\n            \"distance\": \"{{default request.params.query.distance \"8046.72\"}}meters\",\n            \"geo_vacancy_coords\": {\n              \"lat\": {{request.params.query.lat}},\n              \"lon\": {{request.params.query.lng}}\n            }\n          }\n        }\n        {{/if ~}}\n      ],\n      {{/ifAny ~}}\n      \"must\": [\n        {{#if request.params.query.keywords ~}}\n        {\n          \"query_string\": {\n            \"query\": {{{stringify request.params.query.keywords}}},\n            \"default_field\": \"text_bag\",\n            \"default_operator\": \"AND\",\n            \"analyzer\": \"snowball\"\n          }\n        },\n        {{/if ~}}\n        {\n          \"term\": {\n            \"vacancy_status\": \"vacancy-open\"\n          }\n        }\n      ]\n    }\n  },\n  \"sort\": {\n    \"start_at\": \"desc\"\n  }\n}\n"
+                        }
+                    ]
+                }
+            },
+            {
+                "name": "supplimentaryResponses",
+                "taskType": "elasticsearch",
+                "config": {
+                    "connectionStringTemplate": "https://readonly:onlyread@2e6b5fd9344d4f8565e7d015d861b240.europe-west3.gcp.cloud.es.io:9243",
+                    "elasticsearchConfig": {
+                        "apiVersion": "5.6"
+                    },
+                    "queryTemplates": [
+                        {
+                            "name": "types",
+                            "index": "web-content-production",
+                            "type": "goodmoves-vacancy",
+                            "template": "{\n  \"size\": 0,\n  \"_source\": false,\n  \"query\": {\n    \"bool\": {\n      \"must\": [\n        {\n          \"term\": {\n            \"country_iso3\": \"GBR\"\n          }\n        },\n        {\n          \"term\": {\n            \"vacancy_status\": \"vacancy-open\"\n          }\n        }\n      ]\n    }\n  },\n  \"aggs\": {\n    \"sectors\": {\n      \"terms\": {\n        \"field\": \"sectors\",\n        \"order\": {\n          \"_term\": \"asc\"\n        },\n        \"size\": 10000\n      }\n    },\n    \"sectors_slugs\": {\n      \"terms\": {\n        \"field\": \"sectors_slugs\",\n        \"order\": {\n          \"_term\": \"asc\"\n        },\n        \"size\": 10000\n      }\n    },\n    \"roles\": {\n      \"terms\": {\n        \"field\": \"roles\",\n        \"order\": {\n          \"_term\": \"asc\"\n        },\n        \"size\": 10000\n      }\n    },\n    \"roles_slugs\": {\n      \"terms\": {\n        \"field\": \"roles_slugs\",\n        \"order\": {\n          \"_term\": \"asc\"\n        },\n        \"size\": 10000\n      }\n    },\n    \"regions\": {\n      \"terms\": {\n        \"field\": \"region\",\n        \"size\": 10000\n      }\n    },\n    \"regions_slugs\": {\n      \"terms\": {\n        \"field\": \"region_slug\",\n        \"size\": 10000\n      }\n    },\n    \"statuses\": {\n      \"terms\": {\n        \"field\": \"role_status\",\n        \"size\": 10000\n      }\n    },\n    \"statuses_slugs\": {\n      \"terms\": {\n        \"field\": \"role_status_slug\",\n        \"size\": 10000\n      }\n    }\n  }\n}"
+                        },
+                        {
+                            "name": "not_found",
+                            "index": "web-content-production",
+                            "type": "goodmoves-vacancy",
+                            "template": "{\n  \"size\": 4,\n  \"_source\": [\n    \"title\",\n    \"rendered.scvo_search_result\"\n  ],\n  \"query\": {\n    {{#if data.primaryResponse.hits.hits.[0] ~}}\n    \"match_none\": {}\n    {{else}}\n    \"query_string\": {\n      \"query\": \"{{{regexReplace (default request.url.path \"\") \"([^a-zA-Z0-9\\s])\" \"gi\" \" \"}}}\",\n      \"default_field\": \"text_bag_boost\",\n      \"default_operator\": \"OR\",\n      \"analyzer\": \"snowball\"\n    }\n    {{/if ~}}\n  }\n}"
+                        }
+                    ]
+                }
+            }
+        ],
+        "destination": {
+            "destinationType": "handlebars",
+            "config": {
+                "rss": {
+                    "head": "{{#if data.primaryResponse.hits.hits.[0] ~}}\n{{#with data.primaryResponse.hits.hits.[0]._source ~}}\n<title>Goodmoves – Search results</title>\n{{/with ~}}\n{{else}}\n<title>Goodmoves – Search results</title>\n{{/if ~}}\n<description>{{{description}}}</description>\n<link>https://test.goodmoves.com{{{replace (replace request.params.uri.path \"&rss\" \"\") \"?rss\" \"\"}}}</link>",
+                    "body": "{{#each data.search_data.detailed_results.hits.hits ~}}\n{{{_source.rendered.goodmoves_rss}}}\n{{/each ~}}"
+                },
+                "default": {
+                    "head": "{{#if data.primaryResponse.hits.hits.[0] ~}}\n{{#with data.primaryResponse.hits.hits.[0]._source ~}}\n<title>Goodmoves – Search results</title>\n<meta property=\"og:title\" content=\"Goodmoves – Search results\" data-dynamic=\"true\">\n{{#ifAny og_image ../og_image ~}}\n<meta property=\"og:image\" content=\"{{default og_image ../og_image}}\" data-dynamic=\"true\">\n{{/ifAny ~}}\n{{#ifAny og_summary description ../og_summary ../description ~}}\n<meta property=\"og:summary\" content=\"{{default og_summary (default ../og_summary (default description ../description))}}\" data-dynamic=\"true\">\n<meta name=\"description\" content=\"{{default description (default ../description (default og_summary ../og_summary))}}\" data-dynamic=\"true\">\n{{/ifAny ~}}\n{{#if rendered.json_ld ~}}\n<script type=\"application/ld+json\" data-dynamic=\"true\">\n{{{rendered.json_ld}}}\n</script>\n{{/if ~}}\n{{/with ~}}\n{{else}}\n<title>Goodmoves – Search results</title>\n<meta property=\"og:title\" content=\"Goodmoves – Search results\" data-dynamic=\"true\">\n{{/if ~}}",
+                    "body": "{{> vacancy_search_form this instance_id=\"perm\"}}\n\n<div id=\"detailed-results-container\" class=\"container-content goodmoves-vacancy-search\">\n  {{> vacancy_search_results this}}\n</div>\n",
+                    "foot": "<script src=\"https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js\"></script>\n<script>\nvar terms = {\n  sectors: [\n    {{#each data.supplimentaryResponses.types.aggregations.sectors.buckets ~}}\n    { field: 'sectors', term: {{{stringify key}}} },\n    {{/each ~}}\n  ],\n  roles: [\n    {{#each data.supplimentaryResponses.types.aggregations.roles.buckets ~}}\n    { field: 'roles', term: {{{stringify key}}} },\n    {{/each ~}}\n  ],\n  regions: [\n    {{#each data.supplimentaryResponses.types.aggregations.regions.buckets ~}}\n    { field: 'regions', term: {{{stringify key}}} },\n    {{/each ~}}\n  ],\n  role_status: [\n    {{#each data.supplimentaryResponses.types.aggregations.role_status.buckets ~}}\n    { field: 'role_status', term: {{{stringify key}}} },\n    {{/each ~}}\n  ]\n};\n</script>\n",
+                    "sidebar": "{{#*inline \"term_checkbox\"}}\n<div class=\"mdc-form-field\">\n  <div class=\"mdc-checkbox\">\n    <input type=\"checkbox\" class=\"mdc-checkbox__native-control\" id=\"{{instance_id}}_{{field}}_{{key}}\"\n    name=\"{{field}}[]\" value=\"{{key}}\" {{#if (contains selected key)}}checked{{/if}} />\n    <div class=\"mdc-checkbox__background\">\n      <svg class=\"mdc-checkbox__checkmark\"\n      viewBox=\"0 0 24 24\">\n      <path class=\"mdc-checkbox__checkmark-path\"\n      fill=\"none\"\n      stroke=\"white\"\n      d=\"M1.73,12.91 8.1,19.28 22.79,4.59\"/>\n    </svg>\n    <div class=\"mdc-checkbox__mixedmark\"></div>\n  </div>\n</div>\n<label for=\"{{instance_id}}_{{field}}_{{key}}\">{{key}}</label>\n</div>\n{{/inline}}\n\n<aside class=\"mdc-drawer mdc-drawer--permanent mdc-elevation--z4\">\n  <div class=\"mdc-drawer__content\">\n    <h2 class=\"mdc-drawer__content-heading hide-sm\">Search jobs</h2>\n    <div id=\"search-tab-bar\" class=\"mdc-tab-bar mdc-tab-bar--fullwidth search-tab-bar\" data-mdc-auto-init=\"MDCTabBar\">\n      <a href=\"/search{{request.url.search}}\" class=\"mdc-tab {{#compare request.url.pathname \"/search\"}}mdc-tab--active{{/compare}} details-tab\" id=\"detailed-results\">\n        <span class=\"far fa-list fa-fw\" title=\"Location\"></span>\n        List\n      </a>\n      <a href=\"/map{{request.url.search}}\" class=\"mdc-tab {{#compare request.url.pathname \"/map\"}}mdc-tab--active{{/compare}} map-tab\">\n        <span class=\"far fa-map-marker-alt fa-fw\" title=\"Location\"></span>\n        Map\n      </a>\n      <span class=\"mdc-tab-bar__indicator\"></span>\n    </div>\n    <form action=\"/{{#compare request.url.pathname \"/map\"}}map{{else}}search{{/compare}}\" method=\"GET\" class=\"search-form\">\n      <div class=\"h-padding\">\n        <div class=\"mdc-text-field mdc-text-field--box mdc-text-field--with-leading-icon\" data-mdc-auto-init=\"MDCTextField\">\n          <span class=\"far fa-search mdc-text-field__icon\" tabindex=\"0\" role=\"button\"></span>\n          <input type=\"text\" id=\"{{instance_id}}-keywords\" name=\"keywords\" class=\"mdc-text-field__input mdc-text-field--fullwidth\" value=\"{{request.params.query.keywords}}\" data-lpignore=\"true\" autocomplete=\"off\">\n          <label class=\"mdc-floating-label mdc-floating-label--float-above\" for=\"keywords\">\n            Keywords\n          </label>\n          <div class=\"mdc-line-ripple\"></div>\n        </div>\n      </div>\n\n      <div class=\"h-padding\">\n        <div class=\"mdc-layout-grid\">\n          <div class=\"mdc-layout-grid__inner\">\n            <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-8-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone\">\n              <div class=\"mdc-text-field mdc-text-field--box mdc-text-field--with-leading-icon\" data-mdc-auto-init=\"MDCTextField\">\n                <span class=\"far fa-map-marker-alt mdc-text-field__icon\" tabindex=\"0\" role=\"button\"></span>\n                <input type=\"text\" id=\"{{instance_id}}-location\" name=\"location\" class=\"mdc-text-field__input mdc-text-field--fullwidth\" value=\"{{request.params.query.location}}\" placeholder=\"\" data-lpignore=\"true\" data-location-options='\n                  {\n                    \"types\": [\"(regions)\"],\n                    \"componentRestrictions\": {\n                      \"country\": \"gb\"\n                    }\n                  }' data-location-lat=\"[name='lat']\" data-location-lng=\"[name='lng']\">\n                <label class=\"mdc-floating-label mdc-floating-label--float-above\" for=\"{{instance_id}}-location\">\n                  Location\n                </label>\n                <div class=\"mdc-line-ripple\"></div>\n              </div>\n            </div>\n            <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone\">\n              <div class=\"mdc-select mdc-select--box\" data-mdc-auto-init=\"MDCSelect\">\n                <select class=\"mdc-select__native-control\" id=\"{{instance_id}}-distance\" name=\"distance\">\n                  <option value=\"8046.72\" {{#compare request.params.query.distance \"8046.72\"}}selected{{/compare}}>5 miles</option>\n                  <option value=\"16093.44\" {{#compare request.params.query.distance \"16093.44\"}}selected{{/compare}}>10 miles</option>\n                  <option value=\"40233.6\" {{#compare request.params.query.distance \"40233.6\"}}selected{{/compare}}>25 miles</option>\n                  <option value=\"80467.2\" {{#compare request.params.query.distance \"80467.2\"}}selected{{/compare}}>50 miles</option>\n                  <option value=\"any\" {{#compare request.params.query.distance \"any\"}}selected{{/compare}}>no limit</option>\n                </select>\n                <label class=\"mdc-floating-label mdc-floating-label--float-above\" for=\"{{instance_id}}-distance\">\n                  Within\n                </label>\n              </div>\n            </div>\n          </div>\n        </div>\n      </div>\n\n      <input type=\"hidden\" name=\"lat\" value=\"{{request.params.query.lat}}\" id=\"{{instance_id}}-lat\">\n      <input type=\"hidden\" name=\"lng\" value=\"{{request.params.query.lng}}\" id=\"{{instance_id}}-lat\">\n\n      <div class=\"h-padding\">\n        <div class=\"mdc-text-field mdc-text-field--box mdc-text-field--with-leading-icon\" data-mdc-auto-init=\"MDCTextField\">\n          <span class=\"far fa-arrow-alt-from-left mdc-text-field__icon\" tabindex=\"0\" role=\"button\"></span>\n          <input type=\"text\" id=\"{{instance_id}}-salary_min\" name=\"salary_min\" class=\"mdc-text-field__input mdc-text-field--fullwidth\" value=\"{{request.params.query.q}}\" data-lpignore=\"true\">\n          <label class=\"mdc-floating-label mdc-floating-label--float-above\" for=\"{{instance_id}}-salary_min\">\n            Minimum salary\n          </label>\n          <div class=\"mdc-line-ripple\"></div>\n        </div>\n      </div>\n\n      <div class=\"h-padding\">\n        <div class=\"mdc-text-field mdc-text-field--box mdc-text-field--with-leading-icon\" data-mdc-auto-init=\"MDCTextField\">\n          <span class=\"far fa-arrow-alt-to-right mdc-text-field__icon\" tabindex=\"0\" role=\"button\"></span>\n          <input type=\"text\" id=\"{{instance_id}}-salary_max\" name=\"salary_max\" class=\"mdc-text-field__input mdc-text-field--fullwidth\" value=\"{{request.params.query.q}}\" data-lpignore=\"true\">\n          <label class=\"mdc-floating-label mdc-floating-label--float-above\" for=\"{{instance_id}}-salary_max\">\n            Maximum salary\n          </label>\n          <div class=\"mdc-line-ripple\"></div>\n        </div>\n      </div>\n\n      {{#each (split \"roles,sectors,statuses\" \",\")}}\n        <h3 class=\"mdc-drawer__content-heading\">\n          {{capitalize this}}\n          <span class=\"mdc-icon-toggle pull-right\" data-collapse-target=\"#{{../instance_id}}-{{this}}-collapse\"\n                role=\"button\" aria-pressed=\"false\"\n                aria-label=\"Show roles\" tabindex=\"0\">\n            <i class=\"far {{#if (getProperty ../request.params.query this)}}fa-chevron-up{{else}}fa-chevron-down{{/if}}\" aria-hidden=\"true\"></i>\n          </span>\n        </h3>\n        <div id=\"{{../instance_id}}-{{this}}-collapse\" {{#unless (getProperty ../request.params.query this)}}style=\"display: none;\"{{/unless}}>\n          {{#each (getProperty ../data.supplimentaryResponses.types.aggregations (concat this \".buckets\")) ~}}\n          {{> term_checkbox key=key field=../this selected=(getProperty ../../request.params.query ../this) instance_id=../../instance_id}}\n          {{/each ~}}\n        </div>\n      {{/each}}\n\n      <div class=\"h-margin v-margin\">\n        <button class=\"mdc-button mdc-button--raised mdc-button--fullwidth\" type=\"submit\" id=\"{{instance_id}}-search-submit\">\n          Search jobs\n        </button>\n      </div>\n    </form>\n  </div>\n</aside>\n"
+                },
+                "data": {
+                    "content": "{\n  \"detailed_results\": {{{stringify (component \"vacancy_search_results\" this)}}},\n  \"map_results\": {\n    \"total\": {{data.search_data.map_results.hits.total}},\n    \"hits\":[\n    {{#each data.search_data.map_results.hits.hits}}\n    {\n      \"Id\": {{{stringify _id}}},\n      \"geo_vacancy_coords\": {{{stringify _source.geo_vacancy_coords}}},\n      \"title\": {{{stringify _source.title}}},\n      \"info_window\": {{{stringify (component \"vacancy_map\" _source)}}}\n    }{{#unless @last}},{{/unless}}\n    {{/each}}\n    ]\n    },\n    \"query\": {{{stringify data.search_data.detailed_results.request.query}}}\n}\n"
+                }
+            }
+        }
+    },
+    "vacancy_map": {
+        "pattern": "/map",
+        "defaultParams": {
+            "context": "results"
+        },
+        "metaData": {
+            "sidebarButton": {
+                "icon": "search",
+                "tooltip": "Search",
+                "classes": "hide-md hide-lg"
+            }
+        },
+        "tasks": [
+            {
+                "name": "search_data",
+                "taskType": "elasticsearch",
+                "config": {
+                    "connectionStringTemplate": "https://readonly:onlyread@2e6b5fd9344d4f8565e7d015d861b240.europe-west3.gcp.cloud.es.io:9243",
+                    "elasticsearchConfig": {
+                        "apiVersion": "5.6",
+                        "log": "debug"
+                    },
+                    "queryTemplates": [
+                        {
+                            "name": "map_results",
+                            "index": "web-content-production",
+                            "type": "goodmoves-vacancy",
+                            "template": "{\n  \"size\": 1000,\n  \"_source\": [\n    \"Id\",\n    \"title\",\n    \"organisation.name\",\n    \"geo_vacancy_coords\",\n    \"closing_date\",\n    \"salary\",\n    \"role_status_list\",\n    \"slug\"\n  ],\n  \"query\": {\n    \"bool\": {\n      {{#ifAny request.params.query.sectors request.params.query.roles request.params.query.role_status request.params.query.lat}}\n      \"filter\": [\n        {{#if request.params.query.sectors ~}}\n        {\n          \"terms\": {\n            \"sectors\": {{{stringify (arrayify request.params.query.sectors)}}}\n          }\n        }\n        {{#ifAny request.params.query.roles request.params.query.role_status request.params.query.lat}},{{/ifAny}}\n        {{/if ~}}\n        {{#if request.params.query.roles ~}}\n        {\n          \"terms\": {\n            \"roles\": {{{stringify (arrayify request.params.query.roles)}}}\n          }\n        }\n        {{#ifAny request.params.query.role_status request.params.query.lat}},{{/ifAny}}\n        {{/if ~}}\n        {{#if request.params.query.role_status ~}}\n        {\n          \"terms\": {\n            \"status\": {{{stringify (arrayify request.params.query.role_status)}}}\n          }\n        }\n        {{#ifAny request.params.query.lat}},{{/ifAny}}\n        {{/if}}\n        {{#if request.params.query.lat ~}}\n        {\n          \"geo_distance\": {\n            \"distance\": \"{{default request.params.query.distance \"8046.72\"}}meters\",\n            \"geo_vacancy_coords\": {\n              \"lat\": {{request.params.query.lat}},\n              \"lon\": {{request.params.query.lng}}\n            }\n          }\n        }\n        {{/if ~}}\n      ],\n      {{/ifAny ~}}\n      \"must\": [\n        {{#if request.params.query.keywords ~}}\n        {\n          \"query_string\": {\n            \"query\": {{{stringify request.params.query.keywords}}},\n            \"default_field\": \"text_bag\",\n            \"default_operator\": \"AND\",\n            \"analyzer\": \"snowball\"\n          }\n        },\n        {{/if ~}}\n        {\n          \"term\": {\n            \"vacancy_status\": \"vacancy-open\"\n          }\n        }\n      ]\n    }\n  },\n  \"sort\": {\n    \"start_at\": \"desc\"\n  }\n}\n"
+                        }
+                    ]
+                }
+            },
+            {
+                "name": "supplimentaryResponses",
+                "taskType": "elasticsearch",
+                "config": {
+                    "connectionStringTemplate": "https://readonly:onlyread@2e6b5fd9344d4f8565e7d015d861b240.europe-west3.gcp.cloud.es.io:9243",
+                    "elasticsearchConfig": {
+                        "apiVersion": "5.6"
+                    },
+                    "queryTemplates": [
+                        {
+                            "name": "types",
+                            "index": "web-content-production",
+                            "type": "goodmoves-vacancy",
+                            "template": "{\n  \"size\": 0,\n  \"_source\": false,\n  \"query\": {\n    \"bool\": {\n      \"must\": [\n        {\n          \"term\": {\n            \"country_iso3\": \"GBR\"\n          }\n        },\n        {\n          \"term\": {\n            \"vacancy_status\": \"vacancy-open\"\n          }\n        }\n      ]\n    }\n  },\n  \"aggs\": {\n    \"sectors\": {\n      \"terms\": {\n        \"field\": \"sectors\",\n        \"order\": {\n          \"_term\": \"asc\"\n        },\n        \"size\": 10000\n      }\n    },\n    \"sectors_slugs\": {\n      \"terms\": {\n        \"field\": \"sectors_slugs\",\n        \"order\": {\n          \"_term\": \"asc\"\n        },\n        \"size\": 10000\n      }\n    },\n    \"roles\": {\n      \"terms\": {\n        \"field\": \"roles\",\n        \"order\": {\n          \"_term\": \"asc\"\n        },\n        \"size\": 10000\n      }\n    },\n    \"roles_slugs\": {\n      \"terms\": {\n        \"field\": \"roles_slugs\",\n        \"order\": {\n          \"_term\": \"asc\"\n        },\n        \"size\": 10000\n      }\n    },\n    \"regions\": {\n      \"terms\": {\n        \"field\": \"region\",\n        \"size\": 10000\n      }\n    },\n    \"regions_slugs\": {\n      \"terms\": {\n        \"field\": \"region_slug\",\n        \"size\": 10000\n      }\n    },\n    \"statuses\": {\n      \"terms\": {\n        \"field\": \"role_status\",\n        \"size\": 10000\n      }\n    },\n    \"statuses_slugs\": {\n      \"terms\": {\n        \"field\": \"role_status_slug\",\n        \"size\": 10000\n      }\n    }\n  }\n}"
+                        },
+                        {
+                            "name": "not_found",
+                            "index": "web-content-production",
+                            "type": "goodmoves-vacancy",
+                            "template": "{\n  \"size\": 4,\n  \"_source\": [\n    \"title\",\n    \"rendered.scvo_search_result\"\n  ],\n  \"query\": {\n    {{#if data.primaryResponse.hits.hits.[0] ~}}\n    \"match_none\": {}\n    {{else}}\n    \"query_string\": {\n      \"query\": \"{{{regexReplace (default request.url.path \"\") \"([^a-zA-Z0-9\\s])\" \"gi\" \" \"}}}\",\n      \"default_field\": \"text_bag_boost\",\n      \"default_operator\": \"OR\",\n      \"analyzer\": \"snowball\"\n    }\n    {{/if ~}}\n  }\n}"
+                        }
+                    ]
+                }
+            }
+        ],
+        "destination": {
+            "destinationType": "handlebars",
+            "config": {
+                "rss": {
+                    "head": "{{#if data.primaryResponse.hits.hits.[0] ~}}\n{{#with data.primaryResponse.hits.hits.[0]._source ~}}\n<title>Goodmoves – Search results</title>\n{{/with ~}}\n{{else}}\n<title>Goodmoves – Search results</title>\n{{/if ~}}\n<description>{{{description}}}</description>\n<link>https://test.goodmoves.com{{{replace (replace request.params.uri.path \"&rss\" \"\") \"?rss\" \"\"}}}</link>",
+                    "body": "{{#each data.search_data.detailed_results.hits.hits ~}}\n{{{_source.rendered.goodmoves_rss}}}\n{{/each ~}}"
+                },
+                "default": {
+                    "head": "{{#if data.primaryResponse.hits.hits.[0] ~}}\n{{#with data.primaryResponse.hits.hits.[0]._source ~}}\n<title>Goodmoves – Search results</title>\n<meta property=\"og:title\" content=\"Goodmoves – Search results\" data-dynamic=\"true\">\n{{#ifAny og_image ../og_image ~}}\n<meta property=\"og:image\" content=\"{{default og_image ../og_image}}\" data-dynamic=\"true\">\n{{/ifAny ~}}\n{{#ifAny og_summary description ../og_summary ../description ~}}\n<meta property=\"og:summary\" content=\"{{default og_summary (default ../og_summary (default description ../description))}}\" data-dynamic=\"true\">\n<meta name=\"description\" content=\"{{default description (default ../description (default og_summary ../og_summary))}}\" data-dynamic=\"true\">\n{{/ifAny ~}}\n{{#if rendered.json_ld ~}}\n<script type=\"application/ld+json\" data-dynamic=\"true\">\n{{{rendered.json_ld}}}\n</script>\n{{/if ~}}\n{{/with ~}}\n{{else}}\n<title>Goodmoves – Search results</title>\n<meta property=\"og:title\" content=\"Goodmoves – Search results\" data-dynamic=\"true\">\n{{/if ~}}",
+                    "body": "<!-- \n  TODO: The stringifying of partial rendering component won't let us \n  use @root.request... Instead we might want to render the results in \n  a hidden DIV and pull the HTML from there. This might double up as a \n  backup in case the map fails to render. The results will still be \n  there on the page and we can just display the hidden div instead\n-->\n\n{{> vacancy_search_form this instance_id=\"perm\"}}\n\n<div id=\"detailed-results-container\" class=\"container-content container-map\">\n  <div id=\"map-full\" data-map-options='{\n    \"center\": {\n      \"lat\": 57.1795139,\n      \"lng\": -5.5317967\n    },\n    \"zoom\": 6,\n    \"styles\": [\n      {\n        \"featureType\": \"administrative.country\",\n        \"elementType\": \"labels\",\n        \"stylers\": [{ \"visibility\": \"off\" }]\n      },\n      {\n        \"featureType\": \"poi\",\n        \"elementType\": \"labels\",\n        \"stylers\": [{ \"visibility\": \"off\" }]\n      },\n      {\n        \"elementType\": \"geometry\",\n        \"stylers\": [{ \"color\": \"#d1edc4\" }]\n      },\n      {\n        \"elementType\": \"labels.text.stroke\",\n        \"stylers\": [{ \"color\": \"#ffffff\" }]\n      },\n      {\n        \"elementType\": \"labels.text.fill\",\n        \"stylers\": [{ \"color\": \"#424242\" }]\n      },\n      {\n        \"featureType\": \"administrative.locality\",\n        \"elementType\": \"labels.text.fill\",\n        \"stylers\": [{ \"color\": \"#424242\" }]\n      },\n      {\n        \"featureType\": \"road\",\n        \"elementType\": \"geometry\",\n        \"stylers\": [{ \"color\": \"#888888\" }]\n      },\n      {\n        \"featureType\": \"road\",\n        \"elementType\": \"geometry.stroke\",\n        \"stylers\": [{ \"color\": \"#d1edc4\" }]\n      },\n      {\n        \"featureType\": \"road\",\n        \"elementType\": \"labels.text.fill\",\n        \"stylers\": [{ \"color\": \"#424242\" }]\n      },\n      {\n        \"featureType\": \"road.highway\",\n        \"elementType\": \"geometry\",\n        \"stylers\": [{ \"color\": \"#888888\" }]\n      },\n      {\n        \"featureType\": \"road.highway\",\n        \"elementType\": \"geometry.stroke\",\n        \"stylers\": [{ \"color\": \"#d1edc4\" }]\n      },\n      {\n        \"featureType\": \"road.highway\",\n        \"elementType\": \"labels.text.fill\",\n        \"stylers\": [{ \"color\": \"#424242\" }]\n      },\n      {\n        \"featureType\": \"transit\",\n        \"elementType\": \"geometry\",\n        \"stylers\": [{ \"color\": \"#111111\" }]\n      },\n      {\n        \"featureType\": \"transit.line\",\n        \"elementType\": \"geometry\",\n        \"stylers\": [{ \"color\": \"#111111\" }]\n      },\n      {\n        \"featureType\": \"transit.line\",\n        \"elementType\": \"geometry.stroke\",\n        \"stylers\": [{ \"color\": \"#111111\" }]\n      },\n      {\n        \"featureType\": \"transit.station\",\n        \"elementType\": \"labels.text.fill\",\n        \"stylers\": [{ \"color\": \"#424242\" }]\n      },\n      {\n        \"featureType\": \"transit.station.airport\",\n        \"elementType\": \"geometry\",\n        \"stylers\": [{ \"color\": \"#888888\" }]\n      },\n      {\n        \"featureType\": \"transit.station.bus\",\n        \"elementType\": \"geometry\",\n        \"stylers\": [{ \"color\": \"#333333\" }]\n      },\n      {\n        \"featureType\": \"transit.station.rail\",\n        \"elementType\": \"geometry\",\n        \"stylers\": [{ \"color\": \"#333333\" }]\n      },\n      {\n        \"featureType\": \"water\",\n        \"elementType\": \"geometry\",\n        \"stylers\": [{ \"color\": \"#c4deed\" }]\n      },\n      {\n        \"featureType\": \"water\",\n        \"elementType\": \"labels.text.fill\",\n        \"stylers\": [{ \"color\": \"#424242\" }]\n      },\n      {\n        \"featureType\": \"water\",\n        \"elementType\": \"labels.text.stroke\",\n        \"stylers\": [{ \"color\": \"#424242\" }]\n      }\n    ],\n    \"disableDefaultUI\": true\n  }' data-map-pins='[\n    {{#each data.search_data.map_results.hits.hits}}\n      {{#if _source.geo_vacancy_coords}}\n        {{#each (arrayify _source.geo_vacancy_coords)}}\n          {\n            \"coords\": {{{stringify this}}},\n            \"title\": {{{stringify ../_source.title}}},\n            \"info_window\": {{{stringify (urlencode (getProperty (component \"vacancy_map\" ../_source) \"string\"))}}}\n          }{{#unless @../last}},{{/unless}}\n        {{/each}}\n      {{/if}}\n    {{/each}}\n  ]'></div>\n</div>\n",
+                    "foot": "<script src=\"https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js\"></script>\n<script>\nvar terms = {\n  sectors: [\n    {{#each data.supplimentaryResponses.types.aggregations.sectors.buckets ~}}\n    { field: 'sectors', term: {{{stringify key}}} },\n    {{/each ~}}\n  ],\n  roles: [\n    {{#each data.supplimentaryResponses.types.aggregations.roles.buckets ~}}\n    { field: 'roles', term: {{{stringify key}}} },\n    {{/each ~}}\n  ],\n  regions: [\n    {{#each data.supplimentaryResponses.types.aggregations.regions.buckets ~}}\n    { field: 'regions', term: {{{stringify key}}} },\n    {{/each ~}}\n  ],\n  role_status: [\n    {{#each data.supplimentaryResponses.types.aggregations.role_status.buckets ~}}\n    { field: 'role_status', term: {{{stringify key}}} },\n    {{/each ~}}\n  ]\n};\n</script>\n",
+                    "sidebar": "{{#*inline \"term_checkbox\"}}\n<div class=\"mdc-form-field\">\n  <div class=\"mdc-checkbox\">\n    <input type=\"checkbox\" class=\"mdc-checkbox__native-control\" id=\"{{instance_id}}_{{field}}_{{key}}\"\n    name=\"{{field}}[]\" value=\"{{key}}\" {{#if (contains selected key)}}checked{{/if}} />\n    <div class=\"mdc-checkbox__background\">\n      <svg class=\"mdc-checkbox__checkmark\"\n      viewBox=\"0 0 24 24\">\n      <path class=\"mdc-checkbox__checkmark-path\"\n      fill=\"none\"\n      stroke=\"white\"\n      d=\"M1.73,12.91 8.1,19.28 22.79,4.59\"/>\n    </svg>\n    <div class=\"mdc-checkbox__mixedmark\"></div>\n  </div>\n</div>\n<label for=\"{{instance_id}}_{{field}}_{{key}}\">{{key}}</label>\n</div>\n{{/inline}}\n\n<aside class=\"mdc-drawer mdc-drawer--permanent mdc-elevation--z4\">\n  <div class=\"mdc-drawer__content\">\n    <h2 class=\"mdc-drawer__content-heading hide-sm\">Search jobs</h2>\n    <div id=\"search-tab-bar\" class=\"mdc-tab-bar mdc-tab-bar--fullwidth search-tab-bar\" data-mdc-auto-init=\"MDCTabBar\">\n      <a href=\"/search{{request.url.search}}\" class=\"mdc-tab {{#compare request.url.pathname \"/search\"}}mdc-tab--active{{/compare}} details-tab\" id=\"detailed-results\">\n        <span class=\"far fa-list fa-fw\" title=\"Location\"></span>\n        List\n      </a>\n      <a href=\"/map{{request.url.search}}\" class=\"mdc-tab {{#compare request.url.pathname \"/map\"}}mdc-tab--active{{/compare}} map-tab\">\n        <span class=\"far fa-map-marker-alt fa-fw\" title=\"Location\"></span>\n        Map\n      </a>\n      <span class=\"mdc-tab-bar__indicator\"></span>\n    </div>\n    <form action=\"/{{#compare request.url.pathname \"/map\"}}map{{else}}search{{/compare}}\" method=\"GET\" class=\"search-form\">\n      <div class=\"h-padding\">\n        <div class=\"mdc-text-field mdc-text-field--box mdc-text-field--with-leading-icon\" data-mdc-auto-init=\"MDCTextField\">\n          <span class=\"far fa-search mdc-text-field__icon\" tabindex=\"0\" role=\"button\"></span>\n          <input type=\"text\" id=\"{{instance_id}}-keywords\" name=\"keywords\" class=\"mdc-text-field__input mdc-text-field--fullwidth\" value=\"{{request.params.query.keywords}}\" data-lpignore=\"true\" autocomplete=\"off\">\n          <label class=\"mdc-floating-label mdc-floating-label--float-above\" for=\"keywords\">\n            Keywords\n          </label>\n          <div class=\"mdc-line-ripple\"></div>\n        </div>\n      </div>\n\n      <div class=\"h-padding\">\n        <div class=\"mdc-layout-grid\">\n          <div class=\"mdc-layout-grid__inner\">\n            <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-8-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone\">\n              <div class=\"mdc-text-field mdc-text-field--box mdc-text-field--with-leading-icon\" data-mdc-auto-init=\"MDCTextField\">\n                <span class=\"far fa-map-marker-alt mdc-text-field__icon\" tabindex=\"0\" role=\"button\"></span>\n                <input type=\"text\" id=\"{{instance_id}}-location\" name=\"location\" class=\"mdc-text-field__input mdc-text-field--fullwidth\" value=\"{{request.params.query.location}}\" placeholder=\"\" data-lpignore=\"true\" data-location-options='\n                  {\n                    \"types\": [\"(regions)\"],\n                    \"componentRestrictions\": {\n                      \"country\": \"gb\"\n                    }\n                  }' data-location-lat=\"[name='lat']\" data-location-lng=\"[name='lng']\">\n                <label class=\"mdc-floating-label mdc-floating-label--float-above\" for=\"{{instance_id}}-location\">\n                  Location\n                </label>\n                <div class=\"mdc-line-ripple\"></div>\n              </div>\n            </div>\n            <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone\">\n              <div class=\"mdc-select mdc-select--box\" data-mdc-auto-init=\"MDCSelect\">\n                <select class=\"mdc-select__native-control\" id=\"{{instance_id}}-distance\" name=\"distance\">\n                  <option value=\"8046.72\" {{#compare request.params.query.distance \"8046.72\"}}selected{{/compare}}>5 miles</option>\n                  <option value=\"16093.44\" {{#compare request.params.query.distance \"16093.44\"}}selected{{/compare}}>10 miles</option>\n                  <option value=\"40233.6\" {{#compare request.params.query.distance \"40233.6\"}}selected{{/compare}}>25 miles</option>\n                  <option value=\"80467.2\" {{#compare request.params.query.distance \"80467.2\"}}selected{{/compare}}>50 miles</option>\n                  <option value=\"any\" {{#compare request.params.query.distance \"any\"}}selected{{/compare}}>no limit</option>\n                </select>\n                <label class=\"mdc-floating-label mdc-floating-label--float-above\" for=\"{{instance_id}}-distance\">\n                  Within\n                </label>\n              </div>\n            </div>\n          </div>\n        </div>\n      </div>\n\n      <input type=\"hidden\" name=\"lat\" value=\"{{request.params.query.lat}}\" id=\"{{instance_id}}-lat\">\n      <input type=\"hidden\" name=\"lng\" value=\"{{request.params.query.lng}}\" id=\"{{instance_id}}-lat\">\n\n      <div class=\"h-padding\">\n        <div class=\"mdc-text-field mdc-text-field--box mdc-text-field--with-leading-icon\" data-mdc-auto-init=\"MDCTextField\">\n          <span class=\"far fa-arrow-alt-from-left mdc-text-field__icon\" tabindex=\"0\" role=\"button\"></span>\n          <input type=\"text\" id=\"{{instance_id}}-salary_min\" name=\"salary_min\" class=\"mdc-text-field__input mdc-text-field--fullwidth\" value=\"{{request.params.query.q}}\" data-lpignore=\"true\">\n          <label class=\"mdc-floating-label mdc-floating-label--float-above\" for=\"{{instance_id}}-salary_min\">\n            Minimum salary\n          </label>\n          <div class=\"mdc-line-ripple\"></div>\n        </div>\n      </div>\n\n      <div class=\"h-padding\">\n        <div class=\"mdc-text-field mdc-text-field--box mdc-text-field--with-leading-icon\" data-mdc-auto-init=\"MDCTextField\">\n          <span class=\"far fa-arrow-alt-to-right mdc-text-field__icon\" tabindex=\"0\" role=\"button\"></span>\n          <input type=\"text\" id=\"{{instance_id}}-salary_max\" name=\"salary_max\" class=\"mdc-text-field__input mdc-text-field--fullwidth\" value=\"{{request.params.query.q}}\" data-lpignore=\"true\">\n          <label class=\"mdc-floating-label mdc-floating-label--float-above\" for=\"{{instance_id}}-salary_max\">\n            Maximum salary\n          </label>\n          <div class=\"mdc-line-ripple\"></div>\n        </div>\n      </div>\n\n      {{#each (split \"roles,sectors,statuses\" \",\")}}\n        <h3 class=\"mdc-drawer__content-heading\">\n          {{capitalize this}}\n          <span class=\"mdc-icon-toggle pull-right\" data-collapse-target=\"#{{../instance_id}}-{{this}}-collapse\"\n                role=\"button\" aria-pressed=\"false\"\n                aria-label=\"Show roles\" tabindex=\"0\">\n            <i class=\"far {{#if (getProperty ../request.params.query this)}}fa-chevron-up{{else}}fa-chevron-down{{/if}}\" aria-hidden=\"true\"></i>\n          </span>\n        </h3>\n        <div id=\"{{../instance_id}}-{{this}}-collapse\" {{#unless (getProperty ../request.params.query this)}}style=\"display: none;\"{{/unless}}>\n          {{#each (getProperty ../data.supplimentaryResponses.types.aggregations (concat this \".buckets\")) ~}}\n          {{> term_checkbox key=key field=../this selected=(getProperty ../../request.params.query ../this) instance_id=../../instance_id}}\n          {{/each ~}}\n        </div>\n      {{/each}}\n\n      <div class=\"h-margin v-margin\">\n        <button class=\"mdc-button mdc-button--raised mdc-button--fullwidth\" type=\"submit\" id=\"{{instance_id}}-search-submit\">\n          Search jobs\n        </button>\n      </div>\n    </form>\n  </div>\n</aside>\n"
+                },
+                "data": {
+                    "content": "{\n  \"detailed_results\": {{{stringify (component \"vacancy_search_results\" this)}}},\n  \"map_results\": {\n    \"total\": {{data.search_data.map_results.hits.total}},\n    \"hits\":[\n    {{#each data.search_data.map_results.hits.hits}}\n    {\n      \"Id\": {{{stringify _id}}},\n      \"geo_vacancy_coords\": {{{stringify _source.geo_vacancy_coords}}},\n      \"title\": {{{stringify _source.title}}},\n      \"info_window\": {{{stringify (component \"vacancy_map\" _source)}}}\n    }{{#unless @last}},{{/unless}}\n    {{/each}}\n    ]\n    },\n    \"query\": {{{stringify data.search_data.detailed_results.request.query}}}\n}\n"
+                }
+            }
+        }
+    },
+    "saved_searches": {
+        "pattern": "/saved-searches",
+        "defaultParams": {
+            "context": "results"
+        },
+        "metaData": {
+            "sidebarButton": {
+                "icon": "search",
+                "tooltip": "Search",
+                "classes": "hide-md hide-lg"
+            }
+        },
+        "tasks": [
+            {
+                "name": "search_data",
+                "taskType": "elasticsearch",
+                "config": {
+                    "connectionStringTemplate": "https://readonly:onlyread@2e6b5fd9344d4f8565e7d015d861b240.europe-west3.gcp.cloud.es.io:9243",
+                    "elasticsearchConfig": {
+                        "apiVersion": "5.6",
+                        "log": "debug"
+                    },
+                    "queryTemplates": [
+                        {
+                            "name": "detailed_results",
+                            "index": "web-content-production",
+                            "type": "goodmoves-vacancy",
+                            "template": "{\n  \"size\": 10,\n  \"from\": {{multiply (subtract (default request.params.query.page 1) 1) 10}},\n  \"_source\": [\n    \"Id\",\n    \"slug\",\n    \"vacancy_status\",\n    \"rendered.vacancy_status\",\n    \"top_job\",\n    \"description_short\",\n    \"title\",\n    \"geo_vacancy_coords\",\n    \"location\",\n    \"salary\",\n    \"role_status_list\",\n    \"closing_date\",\n    \"organisation.slug\",\n    \"organisation.name\",\n    \"organisation.has_logo\",\n    \"organisation.logo_url\",\n    \"rendered.goodmoves_rss\"\n  ],\n  \"query\": {\n    \"bool\": {\n      {{#ifAny request.params.query.sectors request.params.query.roles request.params.query.role_status request.params.query.lat}}\n      \"filter\": [\n        {{#if request.params.query.sectors ~}}\n        {\n          \"terms\": {\n            \"sectors\": {{{stringify (arrayify request.params.query.sectors)}}}\n          }\n        }\n        {{#ifAny request.params.query.roles request.params.query.role_status request.params.query.lat}},{{/ifAny}}\n        {{/if ~}}\n        {{#if request.params.query.roles ~}}\n        {\n          \"terms\": {\n            \"roles\": {{{stringify (arrayify request.params.query.roles)}}}\n          }\n        }\n        {{#ifAny request.params.query.role_status request.params.query.lat}},{{/ifAny}}\n        {{/if ~}}\n        {{#if request.params.query.role_status ~}}\n        {\n          \"terms\": {\n            \"status\": {{{stringify (arrayify request.params.query.role_status)}}}\n          }\n        }\n        {{#ifAny request.params.query.lat}},{{/ifAny}}\n        {{/if}}\n        {{#if request.params.query.lat ~}}\n        {\n          \"geo_distance\": {\n            \"distance\": \"{{default request.params.query.distance \"8046.72\"}}meters\",\n            \"geo_vacancy_coords\": {\n              \"lat\": {{request.params.query.lat}},\n              \"lon\": {{request.params.query.lng}}\n            }\n          }\n        }\n        {{/if ~}}\n      ],\n      {{/ifAny ~}}\n      \"must\": [\n        {{#if request.params.query.keywords ~}}\n        {\n          \"query_string\": {\n            \"query\": {{{stringify request.params.query.keywords}}},\n            \"default_field\": \"text_bag\",\n            \"default_operator\": \"AND\",\n            \"analyzer\": \"snowball\"\n          }\n        },\n        {{/if ~}}\n        {\n          \"term\": {\n            \"vacancy_status\": \"vacancy-open\"\n          }\n        }\n      ]\n    }\n  },\n  \"sort\": {\n    \"start_at\": \"desc\"\n  }\n}\n"
+                        }
+                    ]
+                }
+            },
+            {
+                "name": "supplimentaryResponses",
+                "taskType": "elasticsearch",
+                "config": {
+                    "connectionStringTemplate": "https://readonly:onlyread@2e6b5fd9344d4f8565e7d015d861b240.europe-west3.gcp.cloud.es.io:9243",
+                    "elasticsearchConfig": {
+                        "apiVersion": "5.6"
+                    },
+                    "queryTemplates": [
+                        {
+                            "name": "types",
+                            "index": "web-content-production",
+                            "type": "goodmoves-vacancy",
+                            "template": "{\n  \"size\": 0,\n  \"_source\": false,\n  \"query\": {\n    \"bool\": {\n      \"must\": [\n        {\n          \"term\": {\n            \"country_iso3\": \"GBR\"\n          }\n        },\n        {\n          \"term\": {\n            \"vacancy_status\": \"vacancy-open\"\n          }\n        }\n      ]\n    }\n  },\n  \"aggs\": {\n    \"sectors\": {\n      \"terms\": {\n        \"field\": \"sectors\",\n        \"order\": {\n          \"_term\": \"asc\"\n        },\n        \"size\": 10000\n      }\n    },\n    \"sectors_slugs\": {\n      \"terms\": {\n        \"field\": \"sectors_slugs\",\n        \"order\": {\n          \"_term\": \"asc\"\n        },\n        \"size\": 10000\n      }\n    },\n    \"roles\": {\n      \"terms\": {\n        \"field\": \"roles\",\n        \"order\": {\n          \"_term\": \"asc\"\n        },\n        \"size\": 10000\n      }\n    },\n    \"roles_slugs\": {\n      \"terms\": {\n        \"field\": \"roles_slugs\",\n        \"order\": {\n          \"_term\": \"asc\"\n        },\n        \"size\": 10000\n      }\n    },\n    \"regions\": {\n      \"terms\": {\n        \"field\": \"region\",\n        \"size\": 10000\n      }\n    },\n    \"regions_slugs\": {\n      \"terms\": {\n        \"field\": \"region_slug\",\n        \"size\": 10000\n      }\n    },\n    \"statuses\": {\n      \"terms\": {\n        \"field\": \"role_status\",\n        \"size\": 10000\n      }\n    },\n    \"statuses_slugs\": {\n      \"terms\": {\n        \"field\": \"role_status_slug\",\n        \"size\": 10000\n      }\n    }\n  }\n}"
+                        },
+                        {
+                            "name": "not_found",
+                            "index": "web-content-production",
+                            "type": "goodmoves-vacancy",
+                            "template": "{\n  \"size\": 4,\n  \"_source\": [\n    \"title\",\n    \"rendered.scvo_search_result\"\n  ],\n  \"query\": {\n    {{#if data.primaryResponse.hits.hits.[0] ~}}\n    \"match_none\": {}\n    {{else}}\n    \"query_string\": {\n      \"query\": \"{{{regexReplace (default request.url.path \"\") \"([^a-zA-Z0-9\\s])\" \"gi\" \" \"}}}\",\n      \"default_field\": \"text_bag_boost\",\n      \"default_operator\": \"OR\",\n      \"analyzer\": \"snowball\"\n    }\n    {{/if ~}}\n  }\n}"
+                        }
+                    ]
+                }
+            }
+        ],
+        "destination": {
+            "destinationType": "handlebars",
+            "config": {
+                "default": {
+                    "head": "{{#if data.primaryResponse.hits.hits.[0] ~}}\n{{#with data.primaryResponse.hits.hits.[0]._source ~}}\n{{#ifAny title og_title ~}}\n<title>Goodmoves – {{{default title og_title}}}</title>\n<meta property=\"og:title\" content=\"Goodmoves – {{{default title og_title}}}\" data-dynamic=\"true\">\n{{else}}\n<title>Goodmoves – charity and voluntary sector recruitment</title>\n<meta property=\"og:title\" content=\"Goodmoves – charity and voluntary sector recruitment\" data-dynamic=\"true\">\n{{/ifAny ~}}\n<!-- <meta property=\"og:image\" content=\"\" data-dynamic=\"true\"> -->\n<meta property=\"og:image:width\" content=\"96\" data-dynamic=\"true\">\n<meta property=\"og:image:height\" content=\"96\" data-dynamic=\"true\">\n{{#ifAny og_summary description ../og_summary ../description ~}}\n<meta property=\"og:summary\" content=\"{{default og_summary (default ../og_summary (default description ../description))}}\" data-dynamic=\"true\">\n<meta name=\"description\" content=\"{{default description (default ../description (default og_summary ../og_summary))}}\" data-dynamic=\"true\">\n{{/ifAny ~}}\n{{#if rendered.json_ld ~}}\n<script type=\"application/ld+json\" data-dynamic=\"true\">\n{{{rendered.json_ld}}}\n</script>\n{{/if ~}}\n{{/with ~}}\n{{else}}\n<title>Goodmoves – charity and voluntary sector recruitment</title>\n<meta property=\"og:title\" content=\"Goodmoves – charity and voluntary sector recruitment\" data-dynamic=\"true\">\n{{/if ~}}",
+                    "body": "{{> vacancy_search_form this instance_id=\"perm\"}}\n\n<div id=\"detailed-results-container\" class=\"container-content goodmoves-saved-searches\">\n  <h1 class=\"mdc-typography--headline3 v-margin-full\">\n    Saved searches\n  </h1>\n\n  <ul class=\"mdc-list mdc-list--two-line mdc-list--avatar-list mdc-elevation--z3\">\n    <li class=\"mdc-list-item mdc-ripple-upgraded\">\n      <span class=\"mdc-list-item__graphic far fa-search fa-2x\" aria-hidden=\"true\"></span>\n      <div class=\"mdc-layout-grid\">\n        <div class=\"mdc-layout-grid__inner\">\n          <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-9-desktop mdc-layout-grid__cell--span-6-tablet mdc-layout-grid__cell--span-3-phone saved-search\">\n            <span class=\"mdc-list-item__text\">\n              Manager\n              <span class=\"mdc-list-item__secondary-text\">\n                Glasgow\n              </span>\n            </span>\n          </div>\n          <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-2-tablet mdc-layout-grid__cell--span-1-phone saved-search-email-switch\">\n            <div class=\"mdc-switch\">\n              <input type=\"checkbox\" id=\"email-switch\" class=\"mdc-switch__native-control\" role=\"switch\" checked=\"checked\">\n              <div class=\"mdc-switch__background\">\n                <div class=\"mdc-switch__knob\"></div>\n              </div>\n            </div>\n            <label for=\"email-switch\">\n              <span class=\"far fa-envelope\"></span>\n            </label>\n          </div>\n        </div>\n      </div>\n      <span class=\"saved-search-remove mdc-list-item__meta far fa-trash-alt\" aria-hidden=\"true\"></span>\n    </li>\n    <li class=\"mdc-list-divider\" role=\"separator\"></li>\n    <li class=\"mdc-list-item mdc-ripple-upgraded\">\n      <span class=\"mdc-list-item__graphic far fa-search fa-2x\" aria-hidden=\"true\"></span>\n      <div class=\"mdc-layout-grid\">\n        <div class=\"mdc-layout-grid__inner\">\n          <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-9-desktop mdc-layout-grid__cell--span-6-tablet mdc-layout-grid__cell--span-3-phone saved-search\">\n            <span class=\"mdc-list-item__text\">\n              IT Manager\n              <span class=\"mdc-list-item__secondary-text\">\n                Edinburgh, Glasgow\n              </span>\n            </span>\n          </div>\n          <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-2-tablet mdc-layout-grid__cell--span-1-phone saved-search-email-switch\">\n            <div class=\"mdc-switch\">\n              <input type=\"checkbox\" id=\"email-switch2\" class=\"mdc-switch__native-control\" role=\"switch\" checked=\"checked\">\n              <div class=\"mdc-switch__background\">\n                <div class=\"mdc-switch__knob\"></div>\n              </div>\n            </div>\n            <label for=\"email-switch2\">\n              <span class=\"far fa-envelope\"></span>\n            </label>\n          </div>\n        </div>\n      </div>\n      <span class=\"saved-search-remove mdc-list-item__meta far fa-trash-alt\" aria-hidden=\"true\"></span>\n    </li>\n    <li class=\"mdc-list-divider\" role=\"separator\"></li>\n    <li class=\"mdc-list-item mdc-ripple-upgraded\">\n      <span class=\"mdc-list-item__graphic far fa-search fa-2x\" aria-hidden=\"true\"></span>\n      <div class=\"mdc-layout-grid\">\n        <div class=\"mdc-layout-grid__inner\">\n          <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-9-desktop mdc-layout-grid__cell--span-6-tablet mdc-layout-grid__cell--span-3-phone saved-search\">\n            <span class=\"mdc-list-item__text\">\n              (no keywords)\n              <span class=\"mdc-list-item__secondary-text\">\n                Glasgow, Manager\n              </span>\n            </span>\n          </div>\n          <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-2-tablet mdc-layout-grid__cell--span-1-phone saved-search-email-switch\">\n            <div class=\"mdc-switch\">\n              <input type=\"checkbox\" id=\"email-switch3\" class=\"mdc-switch__native-control\" role=\"switch\">\n              <div class=\"mdc-switch__background\">\n                <div class=\"mdc-switch__knob\"></div>\n              </div>\n            </div>\n            <label for=\"email-switch3\">\n              <span class=\"far fa-envelope\"></span>\n            </label>\n          </div>\n        </div>\n      </div>\n      <span class=\"saved-search-remove mdc-list-item__meta far fa-trash-alt\" aria-hidden=\"true\"></span>\n    </li>\n    <li class=\"mdc-list-divider\" role=\"separator\"></li>\n    <li class=\"mdc-list-item mdc-ripple-upgraded\">\n      <span class=\"mdc-list-item__graphic far fa-search fa-2x\" aria-hidden=\"true\"></span>\n      <div class=\"mdc-layout-grid\">\n        <div class=\"mdc-layout-grid__inner\">\n          <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-9-desktop mdc-layout-grid__cell--span-6-tablet mdc-layout-grid__cell--span-3-phone saved-search\">\n            <span class=\"mdc-list-item__text\">\n              Trustee\n              <span class=\"mdc-list-item__secondary-text\">\n                Edinburgh\n              </span>\n            </span>\n          </div>\n          <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-2-tablet mdc-layout-grid__cell--span-1-phone saved-search-email-switch\">\n            <div class=\"mdc-switch\">\n              <input type=\"checkbox\" id=\"email-switch4\" class=\"mdc-switch__native-control\" role=\"switch\" checked=\"checked\">\n              <div class=\"mdc-switch__background\">\n                <div class=\"mdc-switch__knob\"></div>\n              </div>\n            </div>\n            <label for=\"email-switch4\">\n              <span class=\"far fa-envelope\"></span>\n            </label>\n          </div>\n        </div>\n      </div>\n      <span class=\"saved-search-remove mdc-list-item__meta far fa-trash-alt\" aria-hidden=\"true\"></span>\n    </li>\n  </ul>\n\n  <h2 class=\"mdc-typography--headline4 v-margin\">\n    Email alert preferences\n  </h2>\n  <p class=\"mdc-typography--body1\">\n    You have 1 saved search for your email alerts.\n  </p>\n\n  <div class=\"mdc-select mdc-select--box\" data-mdc-auto-init=\"MDCSelect\">\n    <select class=\"mdc-select__native-control\" id=\"frequency\" name=\"frequency\">\n      <option value=\"undefined\">Weekly</option>\n      <option value=\"daily\">Daily</option>\n    </select>\n    <label class=\"mdc-floating-label mdc-floating-label--float-above\" for=\"frequency\">\n      Frequency\n    </label>\n  </div>\n\n  <h3 class=\"mdc-typography--headline5 v-margin\">\n    Select day\n  </h3>\n  <div class=\"mdc-switch\">\n    <input type=\"checkbox\" id=\"email-switch-mon\" class=\"mdc-switch__native-control\" role=\"switch\" checked=\"checked\">\n    <div class=\"mdc-switch__background\">\n      <div class=\"mdc-switch__knob\"></div>\n    </div>\n  </div>\n  <label for=\"email-switch-mon\">\n    Monday\n  </label>\n  <div class=\"mdc-switch\">\n    <input type=\"checkbox\" id=\"email-switch-tue\" class=\"mdc-switch__native-control\" role=\"switch\" checked=\"checked\">\n    <div class=\"mdc-switch__background\">\n      <div class=\"mdc-switch__knob\"></div>\n    </div>\n  </div>\n  <label for=\"email-switch-tue\">\n    Tuesday\n  </label>\n  <div class=\"mdc-switch\">\n    <input type=\"checkbox\" id=\"email-switch-wed\" class=\"mdc-switch__native-control\" role=\"switch\" checked=\"checked\">\n    <div class=\"mdc-switch__background\">\n      <div class=\"mdc-switch__knob\"></div>\n    </div>\n  </div>\n  <label for=\"email-switch-wed\">\n    Wednesday\n  </label>\n  <div class=\"mdc-switch\">\n    <input type=\"checkbox\" id=\"email-switch-thu\" class=\"mdc-switch__native-control\" role=\"switch\" checked=\"checked\">\n    <div class=\"mdc-switch__background\">\n      <div class=\"mdc-switch__knob\"></div>\n    </div>\n  </div>\n  <label for=\"email-switch-thu\">\n    Thursday\n  </label>\n  <div class=\"mdc-switch\">\n    <input type=\"checkbox\" id=\"email-switch-fri\" class=\"mdc-switch__native-control\" role=\"switch\" checked=\"checked\">\n    <div class=\"mdc-switch__background\">\n      <div class=\"mdc-switch__knob\"></div>\n    </div>\n  </div>\n  <label for=\"email-switch-fri\">\n    Friday\n  </label>\n</div>"
+                }
+            }
+        }
+    },
+    "shortlist": {
+        "pattern": "/shortlist",
+        "defaultParams": {
+            "context": "results"
+        },
+        "metaData": {
+            "sidebarButton": {
+                "icon": "search",
+                "tooltip": "Search",
+                "classes": "hide-md hide-lg"
+            }
+        },
+        "tasks": [
+            {
+                "name": "search_data",
+                "taskType": "elasticsearch",
+                "config": {
+                    "connectionStringTemplate": "https://readonly:onlyread@2e6b5fd9344d4f8565e7d015d861b240.europe-west3.gcp.cloud.es.io:9243",
+                    "elasticsearchConfig": {
+                        "apiVersion": "5.6",
+                        "log": "debug"
+                    },
+                    "queryTemplates": [
+                        {
+                            "name": "detailed_results",
+                            "index": "web-content-production",
+                            "type": "goodmoves-vacancy",
+                            "template": "{\n  \"size\": 10,\n  \"from\": {{multiply (subtract (default request.params.query.page 1) 1) 10}},\n  \"_source\": [\n    \"Id\",\n    \"slug\",\n    \"vacancy_status\",\n    \"rendered.vacancy_status\",\n    \"top_job\",\n    \"description_short\",\n    \"title\",\n    \"geo_vacancy_coords\",\n    \"location\",\n    \"salary\",\n    \"role_status_list\",\n    \"closing_date\",\n    \"organisation.slug\",\n    \"organisation.name\",\n    \"organisation.has_logo\",\n    \"organisation.logo_url\",\n    \"rendered.goodmoves_rss\"\n  ],\n  \"query\": {\n    \"bool\": {\n      {{#ifAny request.params.query.sectors request.params.query.roles request.params.query.role_status request.params.query.lat}}\n      \"filter\": [\n        {{#if request.params.query.sectors ~}}\n        {\n          \"terms\": {\n            \"sectors\": {{{stringify (arrayify request.params.query.sectors)}}}\n          }\n        }\n        {{#ifAny request.params.query.roles request.params.query.role_status request.params.query.lat}},{{/ifAny}}\n        {{/if ~}}\n        {{#if request.params.query.roles ~}}\n        {\n          \"terms\": {\n            \"roles\": {{{stringify (arrayify request.params.query.roles)}}}\n          }\n        }\n        {{#ifAny request.params.query.role_status request.params.query.lat}},{{/ifAny}}\n        {{/if ~}}\n        {{#if request.params.query.role_status ~}}\n        {\n          \"terms\": {\n            \"status\": {{{stringify (arrayify request.params.query.role_status)}}}\n          }\n        }\n        {{#ifAny request.params.query.lat}},{{/ifAny}}\n        {{/if}}\n        {{#if request.params.query.lat ~}}\n        {\n          \"geo_distance\": {\n            \"distance\": \"{{default request.params.query.distance \"8046.72\"}}meters\",\n            \"geo_vacancy_coords\": {\n              \"lat\": {{request.params.query.lat}},\n              \"lon\": {{request.params.query.lng}}\n            }\n          }\n        }\n        {{/if ~}}\n      ],\n      {{/ifAny ~}}\n      \"must\": [\n        {{#if request.params.query.keywords ~}}\n        {\n          \"query_string\": {\n            \"query\": {{{stringify request.params.query.keywords}}},\n            \"default_field\": \"text_bag\",\n            \"default_operator\": \"AND\",\n            \"analyzer\": \"snowball\"\n          }\n        },\n        {{/if ~}}\n        {\n          \"term\": {\n            \"vacancy_status\": \"vacancy-open\"\n          }\n        }\n      ]\n    }\n  },\n  \"sort\": {\n    \"start_at\": \"desc\"\n  }\n}\n"
+                        }
+                    ]
+                }
+            },
+            {
+                "name": "supplimentaryResponses",
+                "taskType": "elasticsearch",
+                "config": {
+                    "connectionStringTemplate": "https://readonly:onlyread@2e6b5fd9344d4f8565e7d015d861b240.europe-west3.gcp.cloud.es.io:9243",
+                    "elasticsearchConfig": {
+                        "apiVersion": "5.6"
+                    },
+                    "queryTemplates": [
+                        {
+                            "name": "types",
+                            "index": "web-content-production",
+                            "type": "goodmoves-vacancy",
+                            "template": "{\n  \"size\": 0,\n  \"_source\": false,\n  \"query\": {\n    \"bool\": {\n      \"must\": [\n        {\n          \"term\": {\n            \"country_iso3\": \"GBR\"\n          }\n        },\n        {\n          \"term\": {\n            \"vacancy_status\": \"vacancy-open\"\n          }\n        }\n      ]\n    }\n  },\n  \"aggs\": {\n    \"sectors\": {\n      \"terms\": {\n        \"field\": \"sectors\",\n        \"order\": {\n          \"_term\": \"asc\"\n        },\n        \"size\": 10000\n      }\n    },\n    \"sectors_slugs\": {\n      \"terms\": {\n        \"field\": \"sectors_slugs\",\n        \"order\": {\n          \"_term\": \"asc\"\n        },\n        \"size\": 10000\n      }\n    },\n    \"roles\": {\n      \"terms\": {\n        \"field\": \"roles\",\n        \"order\": {\n          \"_term\": \"asc\"\n        },\n        \"size\": 10000\n      }\n    },\n    \"roles_slugs\": {\n      \"terms\": {\n        \"field\": \"roles_slugs\",\n        \"order\": {\n          \"_term\": \"asc\"\n        },\n        \"size\": 10000\n      }\n    },\n    \"regions\": {\n      \"terms\": {\n        \"field\": \"region\",\n        \"size\": 10000\n      }\n    },\n    \"regions_slugs\": {\n      \"terms\": {\n        \"field\": \"region_slug\",\n        \"size\": 10000\n      }\n    },\n    \"statuses\": {\n      \"terms\": {\n        \"field\": \"role_status\",\n        \"size\": 10000\n      }\n    },\n    \"statuses_slugs\": {\n      \"terms\": {\n        \"field\": \"role_status_slug\",\n        \"size\": 10000\n      }\n    }\n  }\n}"
+                        },
+                        {
+                            "name": "not_found",
+                            "index": "web-content-production",
+                            "type": "goodmoves-vacancy",
+                            "template": "{\n  \"size\": 4,\n  \"_source\": [\n    \"title\",\n    \"rendered.scvo_search_result\"\n  ],\n  \"query\": {\n    {{#if data.primaryResponse.hits.hits.[0] ~}}\n    \"match_none\": {}\n    {{else}}\n    \"query_string\": {\n      \"query\": \"{{{regexReplace (default request.url.path \"\") \"([^a-zA-Z0-9\\s])\" \"gi\" \" \"}}}\",\n      \"default_field\": \"text_bag_boost\",\n      \"default_operator\": \"OR\",\n      \"analyzer\": \"snowball\"\n    }\n    {{/if ~}}\n  }\n}"
+                        }
+                    ]
+                }
+            }
+        ],
+        "destination": {
+            "destinationType": "handlebars",
+            "config": {
+                "default": {
+                    "head": "{{#if data.primaryResponse.hits.hits.[0] ~}}\n{{#with data.primaryResponse.hits.hits.[0]._source ~}}\n{{#ifAny title og_title ~}}\n<title>Goodmoves – {{{default title og_title}}}</title>\n<meta property=\"og:title\" content=\"Goodmoves – {{{default title og_title}}}\" data-dynamic=\"true\">\n{{else}}\n<title>Goodmoves – charity and voluntary sector recruitment</title>\n<meta property=\"og:title\" content=\"Goodmoves – charity and voluntary sector recruitment\" data-dynamic=\"true\">\n{{/ifAny ~}}\n<!-- <meta property=\"og:image\" content=\"\" data-dynamic=\"true\"> -->\n<meta property=\"og:image:width\" content=\"96\" data-dynamic=\"true\">\n<meta property=\"og:image:height\" content=\"96\" data-dynamic=\"true\">\n{{#ifAny og_summary description ../og_summary ../description ~}}\n<meta property=\"og:summary\" content=\"{{default og_summary (default ../og_summary (default description ../description))}}\" data-dynamic=\"true\">\n<meta name=\"description\" content=\"{{default description (default ../description (default og_summary ../og_summary))}}\" data-dynamic=\"true\">\n{{/ifAny ~}}\n{{#if rendered.json_ld ~}}\n<script type=\"application/ld+json\" data-dynamic=\"true\">\n{{{rendered.json_ld}}}\n</script>\n{{/if ~}}\n{{/with ~}}\n{{else}}\n<title>Goodmoves – charity and voluntary sector recruitment</title>\n<meta property=\"og:title\" content=\"Goodmoves – charity and voluntary sector recruitment\" data-dynamic=\"true\">\n{{/if ~}}",
+                    "body": "{{> vacancy_search_form this instance_id=\"perm\"}}\n\n<div id=\"detailed-results-container\" class=\"container-content goodmoves-shortlist\">\n  <h1 class=\"mdc-typography--headline3 v-margin-full\">\n    Shortlist\n  </h1>\n\n  <h2 class=\"mdc-typography--headline4 v-margin-full\">\n    Current vacancies\n  </h3>\n  {{#each data.search_data.detailed_results.hits.hits ~}}\n  {{> vacancy_search_result _source}}\n  {{/each ~}}\n\n  <div class=\"foot\">\n    {{> pagination paging=data.search_data.detailed_results.pagination}}\n  </div>\n</div>"
+                }
+            }
+        }
+    },
+    "vacancy": {
+        "pattern": "/vacancy/:slug",
+        "defaultParams": {
+            "context": "detail"
+        },
+        "tasks": [
+            {
+                "name": "primaryResponse",
+                "taskType": "elasticsearch",
+                "config": {
+                    "connectionStringTemplate": "https://readonly:onlyread@2e6b5fd9344d4f8565e7d015d861b240.europe-west3.gcp.cloud.es.io:9243",
+                    "elasticsearchConfig": {
+                        "apiVersion": "5.6"
+                    },
+                    "queryTemplates": {
+                        "index": "web-content-production",
+                        "type": "goodmoves-vacancy",
+                        "template": "{\n  \"size\": 1,\n  \"_source\": [\n    \"Id\",\n    \"slug\",\n    \"text_bag_boost\",\n    \"vacancy_status\",\n    \"rendered.vacancy_status\",\n    \"top_job\",\n    \"sectors\",\n    \"sectors_slugs\",\n    \"roles\",\n    \"roles_slugs\",\n    \"role_status_list\",\n    \"description\",\n    \"title\",\n    \"start_at\",\n    \"geo_vacancy_coords\",\n    \"location\",\n    \"salary\",\n    \"salary_info\",\n    \"salary_min\",\n    \"remuneration_type\",\n    \"benefits\",\n    \"reference_number\",\n    \"application_notes\",\n    \"closing_date\",\n    \"organisation.slug\",\n    \"organisation.name\",\n    \"organisation.has_logo\",\n    \"organisation.logo_url\",\n    \"organisation.profile\",\n    \"organisation_website\",\n    \"organisation_website_url\",\n    \"organisation_twitter\",\n    \"organisation_twitter_url\",\n    \"organisation_facebook\",\n    \"organisation_facebook_url\",\n    \"organisation_linkedin\",\n    \"organisation_linkedin_url\",\n    \"rendered.goodmoves_sponsor_logos\",\n    \"rendered.goodmoves_downloads\",\n    \"rendered.goodmoves_rss\",\n    \"rendered.json_ld\"\n  ],\n  \"query\": {\n    \"term\": {\n      {{#if (includes request.params.slug \"-\") ~}}\n      \"slug\": \"{{request.params.slug}}\"\n      {{else}}\n      \"Id\": \"{{request.params.slug}}\"\n      {{/if ~}}\n    }\n  }\n}"
+                    }
+                }
+            },
+            {
+                "name": "supplimentaryResponses",
+                "taskType": "elasticsearch",
+                "config": {
+                    "connectionStringTemplate": "https://readonly:onlyread@2e6b5fd9344d4f8565e7d015d861b240.europe-west3.gcp.cloud.es.io:9243",
+                    "elasticsearchConfig": {
+                        "apiVersion": "5.6"
+                    },
+                    "queryTemplates": [
+                        {
+                            "name": "types",
+                            "index": "web-content-production",
+                            "type": "goodmoves-vacancy",
+                            "template": "{\n  \"size\": 0,\n  \"_source\": false,\n  \"query\": {\n    \"bool\": {\n      \"must\": [\n        {\n          \"term\": {\n            \"country_iso3\": \"GBR\"\n          }\n        },\n        {\n          \"term\": {\n            \"vacancy_status\": \"vacancy-open\"\n          }\n        }\n      ]\n    }\n  },\n  \"aggs\": {\n    \"sectors\": {\n      \"terms\": {\n        \"field\": \"sectors\",\n        \"order\": {\n          \"_term\": \"asc\"\n        },\n        \"size\": 10000\n      }\n    },\n    \"sectors_slugs\": {\n      \"terms\": {\n        \"field\": \"sectors_slugs\",\n        \"order\": {\n          \"_term\": \"asc\"\n        },\n        \"size\": 10000\n      }\n    },\n    \"roles\": {\n      \"terms\": {\n        \"field\": \"roles\",\n        \"order\": {\n          \"_term\": \"asc\"\n        },\n        \"size\": 10000\n      }\n    },\n    \"roles_slugs\": {\n      \"terms\": {\n        \"field\": \"roles_slugs\",\n        \"order\": {\n          \"_term\": \"asc\"\n        },\n        \"size\": 10000\n      }\n    },\n    \"regions\": {\n      \"terms\": {\n        \"field\": \"region\",\n        \"size\": 10000\n      }\n    },\n    \"regions_slugs\": {\n      \"terms\": {\n        \"field\": \"region_slug\",\n        \"size\": 10000\n      }\n    },\n    \"statuses\": {\n      \"terms\": {\n        \"field\": \"role_status\",\n        \"size\": 10000\n      }\n    },\n    \"statuses_slugs\": {\n      \"terms\": {\n        \"field\": \"role_status_slug\",\n        \"size\": 10000\n      }\n    }\n  }\n}"
+                        },
+                        {
+                            "name": "related",
+                            "index": "web-content-production",
+                            "type": "goodmoves-vacancy",
+                            "template": "{\n  \"size\": 4,\n  \"_source\": [\n    \"Id\",\n    \"slug\",\n    \"vacancy_status\",\n    \"rendered.vacancy_status\",\n    \"top_job\",\n    \"description_short\",\n    \"title\",\n    \"geo_vacancy_coords\",\n    \"location\",\n    \"salary\",\n    \"salary_min\",\n    \"role_status_list\",\n    \"closing_date\",\n    \"organisation.slug\",\n    \"organisation.name\",\n    \"roles_slugs\",\n    \"sectors_slugs\",\n    \"organisation.has_logo\",\n    \"organisation.logo_url\",\n    \"remuneration_type\"\n  ],\n  \"query\": {\n    \"function_score\": {\n      \"query\": {\n        \"bool\": {\n          \"should\": [\n            {\n              \"match\": {\n                \"remuneration_type\" : {\n                  \"query\" : \"{{data.primaryResponse.hits.hits.[0]._source.remuneration_type}}\",\n                  \"operator\" : \"and\",\n                  \"zero_terms_query\": \"all\"\n                }\n              }\n            },\n            {\n              \"match\": {\n                \"title\" : {\n                  \"query\" : \"{{data.primaryResponse.hits.hits.[0]._source.title}}\",\n                  \"operator\" : \"and\",\n                  \"zero_terms_query\": \"all\"\n                }\n              }\n            },\n            {\n              \"terms\": {\n                \"sectors_slugs\": {{{stringify (arrayify data.primaryResponse.hits.hits.[0]._source.sectors_slugs)}}}\n              }\n            },\n            {\n              \"terms\": {\n                \"roles_slugs\": {{{stringify (arrayify data.primaryResponse.hits.hits.[0]._source.roles_slugs)}}}\n              }\n            }\n          ],\n          \"must\": [\n            {\n              \"term\": {\n                \"vacancy_status\": \"vacancy-open\"\n              }\n            }\n          ],\n          \"must_not\": [\n            {\n              \"term\": {\n                \"Id\": \"{{data.primaryResponse.hits.hits.[0]._source.Id}}\"\n              }\n            }\n          ]\n        }\n      }{{#if data.primaryResponse.hits.hits.[0]._source.salary_min ~}},\n      \"functions\": [\n        {\n          \"gauss\": {\n            \"salary_min\": {\n              \"origin\": \"{{data.primaryResponse.hits.hits.[0]._source.salary_min}}\",\n              \"scale\": \"1000\",\n              \"offset\": \"10000\",\n              \"decay\": 0.05\n            }\n          }\n        }\n      ]{{/if ~}}\n    }\n  }\n}"
+                        },
+                        {
+                            "name": "not_found",
+                            "index": "web-content-production",
+                            "type": "goodmoves-vacancy",
+                            "template": "{\n  \"size\": 4,\n  \"_source\": [\n    \"title\",\n    \"rendered.scvo_search_result\"\n  ],\n  \"query\": {\n    {{#if data.primaryResponse.hits.hits.[0] ~}}\n    \"match_none\": {}\n    {{else}}\n    \"query_string\": {\n      \"query\": \"{{{regexReplace (default request.url.path \"\") \"([^a-zA-Z0-9\\s])\" \"gi\" \" \"}}}\",\n      \"default_field\": \"text_bag_boost\",\n      \"default_operator\": \"OR\",\n      \"analyzer\": \"snowball\"\n    }\n    {{/if ~}}\n  }\n}"
+                        }
+                    ]
+                }
+            },
+            {
+                "name": "posts",
+                "taskType": "elasticsearch",
+                "config": {
+                    "connectionStringTemplate": "https://readonly:onlyread@2e6b5fd9344d4f8565e7d015d861b240.europe-west3.gcp.cloud.es.io:9243",
+                    "elasticsearchConfig": {
+                        "apiVersion": "5.6"
+                    },
+                    "queryTemplates": [
+                        {
+                            "name": "tfn_related",
+                            "index": "web-content-production",
+                            "type": "tfn-news-post,tfn-blog-post,tfn-feature",
+                            "template": "{\n  \"size\": 3,\n  \"_source\": [\n    \"rendered.scvo_gist\"\n  ],\n  \"query\": {\n    \"more_like_this\" : {\n      \"fields\" : [\"text_bag\"],\n      \"like\" : \"{{data.primaryResponse.hits.hits.[0]._source.text_bag_boost}}\",\n      \"min_term_freq\" : 1,\n      \"max_query_terms\" : 12\n    }\n  }\n}"
+                        }
+                    ]
+                }
+            }
+        ],
+        "destination": {
+            "destinationType": "handlebars",
+            "config": {
+                "default": {
+                    "head": "{{#if data.primaryResponse.hits.hits.[0] ~}}\n{{#with data.primaryResponse.hits.hits.[0]._source ~}}\n<title>Goodmoves – Vacancy with {{organisation.name}} – {{title}}</title>\n<meta property=\"og:title\" content=\"Goodmoves – Vacancy with {{organisation.name}} – {{title}}\" data-dynamic=\"true\">\n{{#ifAny og_image ../og_image ~}}\n<meta property=\"og:image\" content=\"{{default og_image ../og_image}}\" data-dynamic=\"true\">\n{{/ifAny ~}}\n{{#ifAny og_summary description ../og_summary ../description ~}}\n<meta property=\"og:summary\" content=\"{{default og_summary (default ../og_summary (default description ../description))}}\" data-dynamic=\"true\">\n<meta name=\"description\" content=\"{{default description (default ../description (default og_summary ../og_summary))}}\" data-dynamic=\"true\">\n{{/ifAny ~}}\n{{#if rendered.json_ld ~}}\n<script type=\"application/ld+json\" data-dynamic=\"true\">\n{{{rendered.json_ld}}}\n</script>\n{{/if ~}}\n{{/with ~}}\n{{else}}\n<title>Goodmoves – Vacancy</title>\n<meta property=\"og:title\" content=\"Goodmoves – Vacancy\" data-dynamic=\"true\">\n{{/if ~}}",
+                    "body": "{{> vacancy_search_form this instance_id=\"perm\"}}\n\n<div class=\"container-content\">\n  {{#compare data.primaryResponse.hits.total \">\" 0}}\n\n  <div class=\"goodmoves-vacancy\">\n    {{#each data.primaryResponse.hits.hits ~}}\n    {{> vacancy_full _source}}\n    {{/each ~}}\n  </div>\n\n  <div class=\"goodmoves-related-jobs\">\n    <div class=\"mdc-typography--headline5 v-margin-full\">\n      Similar jobs\n    </div>\n    <div class=\"mdc-layout-grid\">\n      <div class=\"mdc-layout-grid__inner\">\n        {{#each data.supplimentaryResponses.related.hits.hits ~}}\n        <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone\">\n          {{> vacancy_list _source}}\n        </div>\n        {{/each ~}}\n      </div>\n    </div>\n  </div>\n\n  {{> tfn_related}}\n\n  {{else}}\n  <p>\n    <strong>Error:</strong> the requested job could not be found - it may have expired.\n  </p>\n  {{/compare}}\n</div>\n",
+                    "foot": "<script src=\"https://maps.googleapis.com/maps/api/js?key=AIzaSyBJdxcQpVKQ6HdrjnPXycUoZqsmp-Ep3l0&libraries=places&region=uk&callback=initMap\" async defer></script>\n<script>\n\nvar tabs = new mdc.tabs.MDCTabBar(document.querySelector(\"#vacancy-tab-bar\"));\nvar panels = document.querySelector(\".panels\");\ntabs.preventDefaultOnClick = true;\nfunction updatePanel(index) {\n  var activePanel = panels.querySelector(\".panel.panel--active\");\n  if (activePanel) {\n    activePanel.classList.remove(\"panel--active\");\n  }\n  var newActivePanel = panels.querySelector(\n    \".panel:nth-child(\" + (index + 1) + \")\"\n  );\n  if (newActivePanel) {\n    newActivePanel.classList.add(\"panel--active\");\n  }\n}\ntabs.listen(\"MDCTabBar:change\", function(t) {\n  var tabs = t.detail;\n  var nthChildIndex = tabs.activeTabIndex;\n  updatePanel(nthChildIndex);\n});\n\n{{#with data.primaryResponse.hits.hits.[0]}}\nvar mapResults = [\n    {{#each _source.geo_vacancy_coords as |coords|}}\n    {\n      \"Id\": {{{stringify ../_id}}},\n      \"geo_vacancy_coords\": {{{stringify coords}}},\n      \"title\": {{{stringify ../_source.title}}},\n      \"info_window\": {{{stringify (component \"vacancy_map\" ../_source)}}}\n    }{{#unless @last}},{{/unless}}\n    {{/each}}\n];\n{{/with}}\n</script>\n"
+                }
+            }
+        }
+    },
+    "organisation_search": {
+        "pattern": "/organisations",
+        "defaultParams": {
+            "context": "results"
+        },
+        "metaData": {
+            "sidebarButton": {
+                "icon": "search",
+                "tooltip": "Search",
+                "classes": "hide-md hide-lg"
+            }
+        },
+        "tasks": [
+            {
+                "name": "search_data",
+                "taskType": "elasticsearch",
+                "config": {
+                    "connectionStringTemplate": "https://readonly:onlyread@2e6b5fd9344d4f8565e7d015d861b240.europe-west3.gcp.cloud.es.io:9243",
+                    "elasticsearchConfig": {
+                        "apiVersion": "5.6",
+                        "log": "debug"
+                    },
+                    "queryTemplates": [
+                        {
+                            "name": "detailed_results",
+                            "index": "web-content-production",
+                            "type": "goodmoves-organisation",
+                            "template": "{\n  \"size\": 10,\n  \"from\": {{multiply (subtract (default request.params.query.page 1) 1) 10}},\n  \"_source\": [\n    \"Id\",\n    \"slug\",\n    \"charity_number\",\n    \"title\",\n    \"alias\",\n    \"description\",\n    \"goodhq_organisation\",\n    \"geo_organisation_coords\",\n    \"postcode\",\n    \"has_logo\",\n    \"logo_url\",\n    \"facebook\",\n    \"twitter\",\n    \"website\",\n    \"website_url\",\n    \"rendered.json_ld\"\n  ],\n  \"query\": {\n    \"bool\": {\n      \"must\": [\n        {\n          \"term\": {\n            \"has_logo\": true\n          }\n        },\n        {{#if request.params.query.keywords ~}}\n        {\n          \"query_string\": {\n            \"query\": {{{stringify request.params.query.keywords}}},\n            \"default_field\": \"text_bag\",\n            \"default_operator\": \"AND\",\n            \"analyzer\": \"snowball\"\n          }\n        }\n        {{else}}\n        {\n          \"match_all\": {}\n        }\n        {{/if ~}}\n      ]\n    }\n  }\n}"
+                        }
+                    ]
+                }
+            },
+            {
+                "name": "supplimentaryResponses",
+                "taskType": "elasticsearch",
+                "config": {
+                    "connectionStringTemplate": "https://readonly:onlyread@2e6b5fd9344d4f8565e7d015d861b240.europe-west3.gcp.cloud.es.io:9243",
+                    "elasticsearchConfig": {
+                        "apiVersion": "5.6"
+                    },
+                    "queryTemplates": [
+                        {
+                            "name": "not_found",
+                            "index": "web-content-production",
+                            "type": "goodmoves-vacancy",
+                            "template": "{\n  \"size\": 4,\n  \"_source\": [\n    \"title\",\n    \"rendered.scvo_search_result\"\n  ],\n  \"query\": {\n    {{#if data.primaryResponse.hits.hits.[0] ~}}\n    \"match_none\": {}\n    {{else}}\n    \"query_string\": {\n      \"query\": \"{{{regexReplace (default request.url.path \"\") \"([^a-zA-Z0-9\\s])\" \"gi\" \" \"}}}\",\n      \"default_field\": \"text_bag_boost\",\n      \"default_operator\": \"OR\",\n      \"analyzer\": \"snowball\"\n    }\n    {{/if ~}}\n  }\n}"
+                        }
+                    ]
+                }
+            }
+        ],
+        "destination": {
+            "destinationType": "handlebars",
+            "config": {
+                "default": {
+                    "head": "{{#if data.primaryResponse.hits.hits.[0] ~}}\n{{#with data.primaryResponse.hits.hits.[0]._source ~}}\n<title>Goodmoves – Search results</title>\n<meta property=\"og:title\" content=\"Goodmoves – Search results\" data-dynamic=\"true\">\n{{#ifAny og_image ../og_image ~}}\n<meta property=\"og:image\" content=\"{{default og_image ../og_image}}\" data-dynamic=\"true\">\n{{/ifAny ~}}\n{{#ifAny og_summary description ../og_summary ../description ~}}\n<meta property=\"og:summary\" content=\"{{default og_summary (default ../og_summary (default description ../description))}}\" data-dynamic=\"true\">\n<meta name=\"description\" content=\"{{default description (default ../description (default og_summary ../og_summary))}}\" data-dynamic=\"true\">\n{{/ifAny ~}}\n{{#if rendered.json_ld ~}}\n<script type=\"application/ld+json\" data-dynamic=\"true\">\n{{{rendered.json_ld}}}\n</script>\n{{/if ~}}\n{{/with ~}}\n{{else}}\n<title>Goodmoves – Search results</title>\n<meta property=\"og:title\" content=\"Goodmoves – Search results\" data-dynamic=\"true\">\n{{/if ~}}",
+                    "body": "{{> organisation_search_form this instance_id=\"perm\"}}\n\n<div id=\"detailed-results-container\" class=\"container-content goodmoves-organisation-search\">\n  {{> organisation_search_results this}}\n</div>"
+                }
+            }
+        }
+    },
+    "organisation": {
+        "pattern": "/organisation/:slug",
+        "defaultParams": {
+            "context": "detail"
+        },
+        "tasks": [
+            {
+                "name": "primaryResponse",
+                "taskType": "elasticsearch",
+                "config": {
+                    "connectionStringTemplate": "https://readonly:onlyread@2e6b5fd9344d4f8565e7d015d861b240.europe-west3.gcp.cloud.es.io:9243",
+                    "elasticsearchConfig": {
+                        "apiVersion": "5.6"
+                    },
+                    "queryTemplates": {
+                        "index": "web-content-production",
+                        "type": "goodmoves-organisation",
+                        "template": "{\n  \"size\": 1,\n  \"_source\": [\n    \"Id\",\n    \"slug\",\n    \"charity_number\",\n    \"title\",\n    \"alias\",\n    \"description\",\n    \"goodhq_organisation\",\n    \"geo_organisation_coords\",\n    \"postcode\",\n    \"has_logo\",\n    \"logo_url\",\n    \"facebook\",\n    \"facebook_url\",\n    \"twitter\",\n    \"twitter_url\",\n    \"linkedin\",\n    \"linkedin_url\",\n    \"website\",\n    \"website_url\",\n    \"rendered.json_ld\",\n    \"rendered.goodmoves_charity_info\"\n  ],\n  \"query\": {\n    \"term\": {\n      \"slug\": \"{{request.params.slug}}\"\n    }\n  }\n}"
+                    }
+                }
+            },
+            {
+                "name": "supplimentaryResponses",
+                "taskType": "elasticsearch",
+                "config": {
+                    "connectionStringTemplate": "https://readonly:onlyread@2e6b5fd9344d4f8565e7d015d861b240.europe-west3.gcp.cloud.es.io:9243",
+                    "elasticsearchConfig": {
+                        "apiVersion": "5.6"
+                    },
+                    "queryTemplates": [
+                        {
+                            "name": "vacancies",
+                            "index": "web-content-production",
+                            "type": "goodmoves-vacancy",
+                            "template": "{\n  \"size\": 100,\n  \"_source\": [\n    \"Id\",\n    \"slug\",\n    \"vacancy_status\",\n    \"rendered.vacancy_status\",\n    \"top_job\",\n    \"description_short\",\n    \"title\",\n    \"geo_vacancy_coords\",\n    \"location\",\n    \"salary\",\n    \"salary_info\",\n    \"benefits\",\n    \"reference_number\",\n    \"application_notes\",\n    \"role_status_list\",\n    \"closing_date\",\n    \"organisation.slug\",\n    \"organisation.name\",\n    \"organisation.has_logo\",\n    \"organisation.logo_url\",\n    \"organisation.website\",\n    \"organisation.profile\",\n    \"organisation_website_url\",\n    \"rendered.goodmoves_sponsor_logos\",\n    \"rendered.goodmoves_downloads\",\n    \"rendered.rss\"\n  ],\n  \"query\": {\n    \"bool\": {\n      \"must\": [\n        {\n          \"term\": {\n            \"organisation.id\": \"{{data.primaryResponse.hits.hits.[0]._source.Id}}\"\n          }\n        },\n        {\n          \"term\": {\n            \"vacancy_status\": \"vacancy-open\"\n          }\n        }\n      ]\n    }\n  },\n  \"sort\": {\n    \"start_at\": \"desc\"\n  }\n}"
+                        },
+                        {
+                            "name": "types",
+                            "index": "web-content-production",
+                            "type": "goodmoves-vacancy",
+                            "template": "{\n  \"size\": 0,\n  \"_source\": false,\n  \"query\": {\n    \"bool\": {\n      \"must\": [\n        {\n          \"term\": {\n            \"country_iso3\": \"GBR\"\n          }\n        },\n        {\n          \"term\": {\n            \"vacancy_status\": \"vacancy-open\"\n          }\n        }\n      ]\n    }\n  },\n  \"aggs\": {\n    \"sectors\": {\n      \"terms\": {\n        \"field\": \"sectors\",\n        \"order\": {\n          \"_term\": \"asc\"\n        },\n        \"size\": 10000\n      }\n    },\n    \"sectors_slugs\": {\n      \"terms\": {\n        \"field\": \"sectors_slugs\",\n        \"order\": {\n          \"_term\": \"asc\"\n        },\n        \"size\": 10000\n      }\n    },\n    \"roles\": {\n      \"terms\": {\n        \"field\": \"roles\",\n        \"order\": {\n          \"_term\": \"asc\"\n        },\n        \"size\": 10000\n      }\n    },\n    \"roles_slugs\": {\n      \"terms\": {\n        \"field\": \"roles_slugs\",\n        \"order\": {\n          \"_term\": \"asc\"\n        },\n        \"size\": 10000\n      }\n    },\n    \"regions\": {\n      \"terms\": {\n        \"field\": \"region\",\n        \"size\": 10000\n      }\n    },\n    \"regions_slugs\": {\n      \"terms\": {\n        \"field\": \"region_slug\",\n        \"size\": 10000\n      }\n    },\n    \"statuses\": {\n      \"terms\": {\n        \"field\": \"role_status\",\n        \"size\": 10000\n      }\n    },\n    \"statuses_slugs\": {\n      \"terms\": {\n        \"field\": \"role_status_slug\",\n        \"size\": 10000\n      }\n    }\n  }\n}"
+                        },
+                        {
+                            "name": "not_found",
+                            "index": "web-content-production",
+                            "type": "goodmoves-organisation",
+                            "template": "{\n  \"size\": 4,\n  \"_source\": [\n    \"title\",\n    \"rendered.scvo_search_result\"\n  ],\n  \"query\": {\n    {{#if data.primaryResponse.hits.hits.[0] ~}}\n    \"match_none\": {}\n    {{else}}\n    \"query_string\": {\n      \"query\": \"{{{regexReplace (default request.url.path \"\") \"([^a-zA-Z0-9\\s])\" \"gi\" \" \"}}}\",\n      \"default_field\": \"text_bag_boost\",\n      \"default_operator\": \"OR\",\n      \"analyzer\": \"snowball\"\n    }\n    {{/if ~}}\n  }\n}"
+                        }
+                    ]
+                }
+            },
+            {
+                "name": "goodhq",
+                "taskType": "elasticsearch",
+                "config": {
+                    "connectionStringTemplate": "https://readonly:onlyread@2e6b5fd9344d4f8565e7d015d861b240.europe-west3.gcp.cloud.es.io:9243",
+                    "elasticsearchConfig": {
+                        "apiVersion": "5.6"
+                    },
+                    "queryTemplates": [
+                        {
+                            "name": "posts",
+                            "index": "web-content-production",
+                            "type": "goodhq-post",
+                            "template": "{\n  \"size\": 3,\n  \"_source\": [\n    \"rendered.goodmoves_list\"\n  ],\n  \"query\": {\n    \"term\": {\n      \"goodhq_organisation.xid\": \"{{data.primaryResponse.hits.hits.[0]._source.goodhq_organisation.xid}}\"\n    }\n  },\n  \"sort\": {\n    \"date_posted\": \"desc\"\n  }\n}"
+                        },
+                        {
+                            "name": "reviews",
+                            "index": "web-content-production",
+                            "type": "goodhq-review",
+                            "template": "{\n  \"size\": 3,\n  \"_source\": [\n    \"rendered.goodmoves_list\"\n  ],\n  \"query\": {\n    \"term\": {\n      \"goodhq_organisation.xid\": \"{{data.primaryResponse.hits.hits.[0]._source.goodhq_organisation.xid}}\"\n    }\n  },\n  \"sort\": {\n    \"date_posted\": \"desc\"\n  }\n}"
+                        },
+                        {
+                            "name": "volunteering",
+                            "index": "web-content-production",
+                            "type": "milo-volunteering-opportunity",
+                            "template": "{\n  \"size\": 3,\n  \"_source\": [\n    \"rendered.goodmoves_list\"\n  ],\n  \"query\": {\n    \"term\": {\n      \"goodhq_organisation.xid\": \"{{data.primaryResponse.hits.hits.[0]._source.goodhq_organisation.xid}}\"\n    }\n  },\n  \"sort\": {\n    \"available_from\": \"desc\"\n  }\n}"
+                        }
+                    ]
+                }
+            }
+        ],
+        "destination": {
+            "destinationType": "handlebars",
+            "config": {
+                "default": {
+                    "head": "{{#if data.primaryResponse.hits.hits.[0] ~}}\n{{#with data.primaryResponse.hits.hits.[0]._source ~}}\n<title>Goodmoves – Vacancies with {{title}}</title>\n<meta property=\"og:title\" content=\"Goodmoves – Vacancies with {{title}}\" data-dynamic=\"true\">\n{{#ifAny og_image ../og_image ~}}\n<meta property=\"og:image\" content=\"{{default og_image ../og_image}}\" data-dynamic=\"true\">\n{{/ifAny ~}}\n{{#ifAny og_summary description ../og_summary ../description ~}}\n<meta property=\"og:summary\" content=\"{{default og_summary (default ../og_summary (default description ../description))}}\" data-dynamic=\"true\">\n<meta name=\"description\" content=\"{{default description (default ../description (default og_summary ../og_summary))}}\" data-dynamic=\"true\">\n{{/ifAny ~}}\n{{#if rendered.json_ld ~}}\n<script type=\"application/ld+json\" data-dynamic=\"true\">\n{{{rendered.json_ld}}}\n</script>\n{{/if ~}}\n{{/with ~}}\n{{else}}\n<title>Goodmoves – Organisation</title>\n<meta property=\"og:title\" content=\"Goodmoves – Organisation\" data-dynamic=\"true\">\n{{/if ~}}",
+                    "body": "{{> vacancy_search_form}}\n\n<div class=\"container-content goodmoves-organisation\">\n  {{#compare data.primaryResponse.hits.total \">\" 0}}\n  {{#with data.primaryResponse.hits.hits.[0]._source as |organisation| ~}}\n\n  {{> organisation_full organisation}}\n\n  {{#compare ../data.supplimentaryResponses.vacancies.hits.total \">\" 0 ~}}\n  <hr />\n  <div class=\"mdc-typography--headline4\">\n    Current vacancies\n  </div>\n  {{#each ../data.supplimentaryResponses.vacancies.hits.hits ~}}\n  {{> vacancy_list _source}}\n  {{/each ~}}\n  {{else}}\n  <div class=\"mdc-typography--headline5\">\n    No current vacancies\n  </div>\n  {{/compare ~}}\n\n  {{#if goodhq_organisation.xid}}\n  <hr />\n  <div class=\"mdc-typography--headline4\">\n    Find out more about <a href=\"https://goodhq.org/{{goodhq_organisation.xid}}\">{{{organisation.title}}}</a> on <a href=\"https://goodhq.org\">Good HQ</a>\n  </div>\n  {{#compare ../data.goodhq.volunteering.hits.total \">\" 0 ~}}\n  <div class=\"mdc-typography--headline5\">\n    Volunteering opportunities\n  </div>\n  <div class=\"mdc-layout-grid equal-height\">\n    <div class=\"mdc-layout-grid__inner\">\n      {{#each ../data.goodhq.volunteering.hits.hits ~}}\n      <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone\">\n        {{{_source.rendered.goodmoves_list}}}\n      </div>\n      {{/each ~}}\n    </div>\n  </div>\n  {{#compare ../data.goodhq.volunteering.hits.total \">\" 3 ~}}\n  <p class=\"mdc-typography--body1\">\n    <a href=\"https://goodhq.org/{{organisation.goodhq_organisation.xid}}?mode=volopp\">Find more on Good HQ</a>\n  </p>\n  {{/compare ~}}\n  {{/compare ~}}\n\n  {{#compare ../data.goodhq.posts.hits.total \">\" 0 ~}}\n  <div class=\"mdc-typography--headline5\">\n    Posts\n  </div>\n  <div class=\"mdc-layout-grid equal-height\">\n    <div class=\"mdc-layout-grid__inner\">\n      {{#each ../data.goodhq.posts.hits.hits ~}}\n      <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone\">\n        {{{_source.rendered.goodmoves_list}}}\n      </div>\n      {{/each ~}}\n    </div>\n  </div>\n  {{#compare ../data.goodhq.posts.hits.total \">\" 3 ~}}\n  <p class=\"mdc-typography--body1\">\n    <a href=\"https://goodhq.org/{{organisation.goodhq_organisation.xid}}?mode=post\">Read more posts on Good HQ</a>\n  </p>\n  {{/compare ~}}\n  {{/compare ~}}\n\n  <!-- {{#compare ../data.goodhq.reviews.hits.total \">\" 0 ~}}\n  <div class=\"mdc-typography--headline5\">\n    Reviews\n  </div>\n  <div class=\"mdc-layout-grid equal-height\">\n    <div class=\"mdc-layout-grid__inner\">\n      {{#each ../data.goodhq.reviews.hits.hits ~}}\n      <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone\">\n        {{{_source.rendered.goodmoves_list}}}\n      </div>\n      {{/each ~}}\n    </div>\n  </div>\n  {{#compare ../data.goodhq.reviews.hits.total \">\" 3 ~}}\n  <p class=\"mdc-typography--body1\">\n    <a href=\"https://goodhq.org/{{organisation.goodhq_organisation.xid}}?mode=review\">Read more reviews on Good HQ</a>\n  </p>\n  {{/compare ~}}\n  {{/compare ~}} -->\n\n  {{/if}}\n\n  {{/with ~}}\n  {{else}}\n  <p>\n    <strong>Error:</strong> the requested organisation could not be found.\n  </p>\n  {{/compare}}\n</div>",
+                    "foot": ""
+                }
+            }
+        }
+    },
+    "event_search": {
+        "pattern": "/training",
+        "defaultParams": {
+            "context": "results"
+        },
+        "metaData": {
+            "sidebarButton": {
+                "icon": "search",
+                "tooltip": "Search",
+                "classes": "hide-md hide-lg"
+            }
+        },
+        "tasks": [
+            {
+                "name": "search_data",
+                "taskType": "elasticsearch",
+                "config": {
+                    "connectionStringTemplate": "https://readonly:onlyread@2e6b5fd9344d4f8565e7d015d861b240.europe-west3.gcp.cloud.es.io:9243",
+                    "elasticsearchConfig": {
+                        "apiVersion": "5.6",
+                        "log": "debug"
+                    },
+                    "queryTemplates": [
+                        {
+                            "name": "detailed_results",
+                            "index": "web-content-production",
+                            "type": "scvo-event",
+                            "template": "{\n  \"size\": 10,\n  \"from\": {{multiply (subtract (default request.params.query.page 1) 1) 10}},\n  \"_source\": [\n    \"Id\",\n    \"slug\",\n    \"title\",\n    \"description_short\",\n    \"course_overview_short\",\n    \"rendered.post_info_booked\",\n    \"rendered.post_info_date\",\n    \"rendered.post_info_city\",\n    \"rendered.json_ld\"\n  ],\n  \"query\": {\n    \"bool\": {\n      \"must_not\": [\n        {\n          \"term\": {\n            \"hide_in_results\": true\n          }\n        }\n      ],\n      \"must\": [\n        {\n          \"term\": {\n            \"team\": \"events\"\n          }\n        },\n        {\n          \"term\": {\n            \"course_type\": \"Training Course\"\n          }\n        },\n        {\n          \"range\" : {\n            \"date_start\" : {\n              \"gte\" : \"now/d\"\n            }\n          }\n        },\n        {{#if request.params.query.keywords ~}}\n        {\n          \"query_string\": {\n            \"query\": {{{stringify request.params.query.keywords}}},\n            \"default_field\": \"text_bag\",\n            \"default_operator\": \"AND\",\n            \"analyzer\": \"snowball\"\n          }\n        }\n        {{else}}\n        {\n          \"match_all\": {}\n        }\n        {{/if ~}}\n      ]\n    }\n  }\n}"
+                        }
+                    ]
+                }
+            },
+            {
+                "name": "supplimentaryResponses",
+                "taskType": "elasticsearch",
+                "config": {
+                    "connectionStringTemplate": "https://readonly:onlyread@2e6b5fd9344d4f8565e7d015d861b240.europe-west3.gcp.cloud.es.io:9243",
+                    "elasticsearchConfig": {
+                        "apiVersion": "5.6"
+                    },
+                    "queryTemplates": [
+                        {
+                            "name": "not_found",
+                            "index": "web-content-production",
+                            "type": "goodmoves-vacancy",
+                            "template": "{\n  \"size\": 4,\n  \"_source\": [\n    \"title\",\n    \"rendered.scvo_search_result\"\n  ],\n  \"query\": {\n    {{#if data.primaryResponse.hits.hits.[0] ~}}\n    \"match_none\": {}\n    {{else}}\n    \"query_string\": {\n      \"query\": \"{{{regexReplace (default request.url.path \"\") \"([^a-zA-Z0-9\\s])\" \"gi\" \" \"}}}\",\n      \"default_field\": \"text_bag_boost\",\n      \"default_operator\": \"OR\",\n      \"analyzer\": \"snowball\"\n    }\n    {{/if ~}}\n  }\n}"
+                        }
+                    ]
+                }
+            }
+        ],
+        "destination": {
+            "destinationType": "handlebars",
+            "config": {
+                "default": {
+                    "head": "{{#if data.primaryResponse.hits.hits.[0] ~}}\n{{#with data.primaryResponse.hits.hits.[0]._source ~}}\n<title>Goodmoves – Search results</title>\n<meta property=\"og:title\" content=\"Goodmoves – Search results\" data-dynamic=\"true\">\n{{#ifAny og_image ../og_image ~}}\n<meta property=\"og:image\" content=\"{{default og_image ../og_image}}\" data-dynamic=\"true\">\n{{/ifAny ~}}\n{{#ifAny og_summary description ../og_summary ../description ~}}\n<meta property=\"og:summary\" content=\"{{default og_summary (default ../og_summary (default description ../description))}}\" data-dynamic=\"true\">\n<meta name=\"description\" content=\"{{default description (default ../description (default og_summary ../og_summary))}}\" data-dynamic=\"true\">\n{{/ifAny ~}}\n{{#if rendered.json_ld ~}}\n<script type=\"application/ld+json\" data-dynamic=\"true\">\n{{{rendered.json_ld}}}\n</script>\n{{/if ~}}\n{{/with ~}}\n{{else}}\n<title>Goodmoves – Search results</title>\n<meta property=\"og:title\" content=\"Goodmoves – Search results\" data-dynamic=\"true\">\n{{/if ~}}",
+                    "body": "{{> event_search_form this instance_id=\"perm\"}}\n\n<div id=\"detailed-results-container\" class=\"container-content goodmoves-event-search\">\n  {{> event_search_results this}}\n</div>"
+                }
+            }
+        }
+    },
+    "event": {
+        "pattern": "/training/:slug",
+        "defaultParams": {
+            "context": "detail"
+        },
+        "tasks": [
+            {
+                "name": "primaryResponse",
+                "taskType": "elasticsearch",
+                "config": {
+                    "connectionStringTemplate": "https://readonly:onlyread@2e6b5fd9344d4f8565e7d015d861b240.europe-west3.gcp.cloud.es.io:9243",
+                    "elasticsearchConfig": {
+                        "apiVersion": "5.6"
+                    },
+                    "queryTemplates": {
+                        "index": "web-content-production",
+                        "type": "scvo-event",
+                        "template": "{\n  \"size\": 1,\n  \"_source\": [\n    \"Id\",\n    \"title\",\n    \"slug\",\n    \"course_type\",\n    \"course_overview\",\n    \"description\",\n    \"date_start\",\n    \"date_end\",\n    \"places_available\",\n    \"city\",\n    \"url\",\n    \"event_venue\",\n    \"trainer\",\n    \"categories_id\",\n    \"booking_url\",\n    \"rendered.scvo_speakers\"\n  ],\n  \"query\": {\n    \"term\": {\n      \"slug\": \"{{request.params.slug}}\"\n    }\n  }\n}"
+                    }
+                }
+            },
+            {
+                "name": "supplimentaryResponses",
+                "taskType": "elasticsearch",
+                "config": {
+                    "connectionStringTemplate": "https://readonly:onlyread@2e6b5fd9344d4f8565e7d015d861b240.europe-west3.gcp.cloud.es.io:9243",
+                    "elasticsearchConfig": {
+                        "apiVersion": "5.6"
+                    },
+                    "queryTemplates": [
+                        {
+                            "name": "not_found",
+                            "index": "web-content-production",
+                            "type": "scvo-events",
+                            "template": "{\n  \"size\": 4,\n  \"_source\": [\n    \"title\",\n    \"rendered.scvo_search_result\"\n  ],\n  \"query\": {\n    {{#if data.primaryResponse.hits.hits.[0] ~}}\n    \"match_none\": {}\n    {{else}}\n    \"query_string\": {\n      \"query\": \"{{{regexReplace (default request.url.path \"\") \"([^a-zA-Z0-9\\s])\" \"gi\" \" \"}}}\",\n      \"default_field\": \"text_bag_boost\",\n      \"default_operator\": \"OR\",\n      \"analyzer\": \"snowball\"\n    }\n    {{/if ~}}\n  }\n}"
+                        }
+                    ]
+                }
+            }
+        ],
+        "destination": {
+            "destinationType": "handlebars",
+            "config": {
+                "default": {
+                    "head": "{{#if data.primaryResponse.hits.hits.[0] ~}}\n{{#with data.primaryResponse.hits.hits.[0]._source ~}}\n<title>Goodmoves – Training – {{title}}</title>\n<meta property=\"og:title\" content=\"Goodmoves – Training – {{title}}\" data-dynamic=\"true\">\n{{#ifAny og_image ../og_image ~}}\n<meta property=\"og:image\" content=\"{{default og_image ../og_image}}\" data-dynamic=\"true\">\n{{/ifAny ~}}\n{{#ifAny og_summary description ../og_summary ../description ~}}\n<meta property=\"og:summary\" content=\"{{default og_summary (default ../og_summary (default description ../description))}}\" data-dynamic=\"true\">\n<meta name=\"description\" content=\"{{default description (default ../description (default og_summary ../og_summary))}}\" data-dynamic=\"true\">\n{{/ifAny ~}}\n{{#if rendered.json_ld ~}}\n<script type=\"application/ld+json\" data-dynamic=\"true\">\n{{{rendered.json_ld}}}\n</script>\n{{/if ~}}\n{{/with ~}}\n{{else}}\n<title>Goodmoves – Training</title>\n<meta property=\"og:title\" content=\"Goodmoves – Training\" data-dynamic=\"true\">\n{{/if ~}}",
+                    "body": "{{> event_search_form}}\n\n<div class=\"container-content goodmoves-event\">\n  {{#compare data.primaryResponse.hits.total \">\" 0 ~}}\n  {{#with data.primaryResponse.hits.hits.[0]._source as |event| ~}}\n\n  {{> event_full event}}\n\n  {{/with ~}}\n  {{else}}\n  <p>\n    <strong>Error:</strong> the requested event could not be found.\n  </p>\n  {{/compare ~}}\n</div>",
+                    "foot": ""
+                }
+            }
+        }
+    },
+    "pro_bono": {
+        "pattern": "/test2",
+        "destination": {
+            "destinationType": "redirect",
+            "config": {
+                "statusCode": 301,
+                "location": "/test3"
+            }
+        }
+    },
+    "_default": {
+        "pattern": "/*path",
+        "tasks": [
+            {
+                "name": "primaryResponse",
+                "taskType": "elasticsearch",
+                "config": {
+                    "connectionStringTemplate": "https://readonly:onlyread@2e6b5fd9344d4f8565e7d015d861b240.europe-west3.gcp.cloud.es.io:9243",
+                    "elasticsearchConfig": {
+                        "apiVersion": "5.6"
+                    },
+                    "queryTemplates": {
+                        "index": "web-content-production",
+                        "type": "goodmoves-page",
+                        "template": "{\n  \"size\": 1,\n  \"_source\": [\n    \"wpid\",\n    \"slug\",\n    \"title\",\n    \"sub_title\",\n    \"og_title\",\n    \"content\",\n    \"rendered.json_ld\",\n    \"breadcrumb\",\n    \"categories_id\",\n    \"categories_slug\",\n    \"author\",\n    \"header_background\",\n    \"header_text\",\n    \"hide_overlay\"\n  ],\n  \"query\": {\n    \"term\": {\n      \"slug\": \"{{request.params.path}}\"\n    }\n  }\n}"
+                    }
+                }
+            },
+            {
+                "name": "supplimentaryResponses",
+                "taskType": "elasticsearch",
+                "config": {
+                    "connectionStringTemplate": "https://readonly:onlyread@2e6b5fd9344d4f8565e7d015d861b240.europe-west3.gcp.cloud.es.io:9243",
+                    "elasticsearchConfig": {
+                        "apiVersion": "5.6"
+                    },
+                    "queryTemplates": [
+                        {
+                            "name": "not_found",
+                            "index": "web-content-production",
+                            "type": "goodmoves-page,goodmoves-vacancy",
+                            "template": "{\n  \"size\": 4,\n  \"_source\": [\n    \"title\",\n    \"rendered.scvo_search_result\"\n  ],\n  \"query\": {\n    {{#if data.primaryResponse.hits.hits.[0] ~}}\n    \"match_none\": {}\n    {{else}}\n    \"query_string\": {\n      \"query\": \"{{{regexReplace (default request.url.path \"\") \"([^a-zA-Z0-9\\s])\" \"gi\" \" \"}}}\",\n      \"default_field\": \"text_bag_boost\",\n      \"default_operator\": \"OR\",\n      \"analyzer\": \"snowball\"\n    }\n    {{/if ~}}\n  }\n}"
+                        }
+                    ]
+                }
+            }
+        ],
+        "destination": {
+            "destinationType": "handlebars",
+            "config": {
+                "default": {
+                    "head": "{{#if data.primaryResponse.hits.hits.[0] ~}}\n{{#with data.primaryResponse.hits.hits.[0]._source ~}}\n{{#ifAny title og_title ~}}\n<title>Goodmoves – {{{default title og_title}}}</title>\n<meta property=\"og:title\" content=\"Goodmoves – {{{default title og_title}}}\" data-dynamic=\"true\">\n{{else}}\n<title>Goodmoves – charity and voluntary sector recruitment</title>\n<meta property=\"og:title\" content=\"Goodmoves – charity and voluntary sector recruitment\" data-dynamic=\"true\">\n{{/ifAny ~}}\n<!-- <meta property=\"og:image\" content=\"\" data-dynamic=\"true\"> -->\n<meta property=\"og:image:width\" content=\"96\" data-dynamic=\"true\">\n<meta property=\"og:image:height\" content=\"96\" data-dynamic=\"true\">\n{{#ifAny og_summary description ../og_summary ../description ~}}\n<meta property=\"og:summary\" content=\"{{default og_summary (default ../og_summary (default description ../description))}}\" data-dynamic=\"true\">\n<meta name=\"description\" content=\"{{default description (default ../description (default og_summary ../og_summary))}}\" data-dynamic=\"true\">\n{{/ifAny ~}}\n{{#if rendered.json_ld ~}}\n<script type=\"application/ld+json\" data-dynamic=\"true\">\n{{{rendered.json_ld}}}\n</script>\n{{/if ~}}\n{{/with ~}}\n{{else}}\n<title>Goodmoves – charity and voluntary sector recruitment</title>\n<meta property=\"og:title\" content=\"Goodmoves – charity and voluntary sector recruitment\" data-dynamic=\"true\">\n{{/if ~}}",
+                    "body": "{{> vacancy_search_form this instance_id=\"perm\"}}\n\n<div class=\"container-content goodmoves-page\">\n  {{> banner_ads}}\n\n  <div class=\"mdc-card full mdc-elevation--z3\">\n    {{#compare data.primaryResponse.hits.total \">\" 0 ~}}\n    <h1 class=\"mdc-typography--headline4\">\n      {{{data.primaryResponse.hits.hits.[0]._source.title}}}\n    </h1>\n    {{{data.primaryResponse.hits.hits.[0]._source.content}}}\n    {{else}}\n    <h2 class=\"mdc-typography--headline5\">\n      Error 404: Page not found\n    </h2>\n    {{/compare ~}}\n  </div>\n</div>"
+                }
+            }
+        }
+    }
+}

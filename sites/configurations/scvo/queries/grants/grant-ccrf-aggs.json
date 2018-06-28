@@ -1,0 +1,24 @@
+{
+  "size": 0,
+  "_source": false,
+  "aggs": {
+    "tags": {
+      "terms": {
+        "field": "individuals_supported",
+        "order": {
+          "_term": "asc"
+        },
+        "size": 10000
+      }
+    },
+    "calls": {
+      "terms": {
+        "field": "call",
+        "order": {
+          "_term": "desc"
+        },
+        "size": 10000
+      }
+    }
+  }
+}

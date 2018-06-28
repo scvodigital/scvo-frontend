@@ -1,0 +1,49 @@
+{
+  "name": "signatory",
+  "pattern": "/signatories/:slug",
+  "metaData": {
+    "title": "Signatory – The Scotland Declaration on Human Rights"
+  },
+  "tasks": [
+    {
+      "name": "primaryResponse",
+      "taskModule": "elasticsearch",
+      "config": {
+        "connectionStringTemplate": "{$../../elasticsearch-url.txt}",
+        "elasticsearchConfig": {
+          "apiVersion": "5.6"
+        },
+        "queryTemplates": {
+          "index": "web-content-production",
+          "type": "charter-signatory-humanrights",
+          "template": ">context.metaData.handlebars.queries.signatory"
+        }
+      },
+      "renderer": "handlebars"
+    },
+    {
+      "name": "destination",
+      "taskModule": "renderLayout",
+      "renderer": "handlebars",
+      "config": {
+        "logic": {
+          "if": [
+            "default"
+          ]
+        },
+        "output": "body",
+        "layouts": {
+          "default": {
+            "layout": ">context.metaData.handlebars.layouts.default",
+            "parts": {
+              "head": ">context.metaData.handlebars.templates.head-tags",
+              "body": ">context.metaData.handlebars.templates.signatory",
+              "foot": ""
+            },
+            "contentType": "text/html"
+          }
+        }
+      }
+    }
+  ]
+}

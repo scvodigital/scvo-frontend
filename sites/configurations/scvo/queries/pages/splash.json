@@ -1,0 +1,40 @@
+{
+  "size": 1,
+  "_source": [
+    "caption",
+    "original_image"
+  ],
+  "query": {
+    "function_score": {
+      "query": {
+        "bool": {
+          "should": [
+            {{#if data.primaryResponse.hits.hits.[0]._source.categories_id}}
+            {
+              "terms": {
+                "categories_id": [
+                  {{join data.primaryResponse.hits.hits.[0]._source.categories_id}}
+                ]
+              }
+            },
+            {
+              "term": {
+                "categories_id": 1
+              }
+            }
+            {{else}}
+            {
+              "term": {
+                "categories_id": 1
+              }
+            }
+            {{/if}}
+          ],
+          "minimum_should_match": 1
+        }
+      },
+      "random_score": {},
+      "score_mode": "sum"
+    }
+  }
+}

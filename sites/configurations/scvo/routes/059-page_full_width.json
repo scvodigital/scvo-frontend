@@ -1,0 +1,76 @@
+{
+  "name": "page_full_width",
+  "pattern": {
+    "setting_up_faq": "/setting-up-a-charity/frequently-asked-questions",
+    "bank_comparison": "/running-your-organisation/finance-business-management/bank-accounts/comparison",
+    "services": "/services",
+    "policy_research_policy_committee": "/policy-research/policy-committee",
+    "office_space": "/services/office-space",
+    "offices": "/services/office-space/*",
+    "projects_campaigns": "/projects-campaigns",
+    "projects_campaigns_terrific_trustees": "/projects-campaigns/terrific-trustees",
+    "digital_about": "/digital/about"
+  },
+  "tasks": [
+    {
+      "name": "primaryResponse",
+      "taskModule": "elasticsearch",
+      "config": {
+        "connectionStringTemplate": "{$../../elasticsearch-url.txt}",
+        "elasticsearchConfig": {
+          "apiVersion": "5.6"
+        },
+        "queryTemplates": {
+          "index": "web-content-production",
+          "type": "scvo-cms-page",
+          "template": ">context.metaData.handlebars.queries.pages_page",
+          "noResultsRoute": "four_oh_four"
+        }
+      },
+      "renderer": "handlebars"
+    },
+    {
+      "name": "supplimentaryResponses",
+      "taskModule": "elasticsearch",
+      "config": {
+        "connectionStringTemplate": "{$../../elasticsearch-url.txt}",
+        "elasticsearchConfig": {
+          "apiVersion": "5.6"
+        },
+        "queryTemplates": [
+          {
+            "name": "splash",
+            "index": "web-content-production",
+            "type": "scvo-cms-media",
+            "template": ">context.metaData.handlebars.queries.pages_splash"
+          }
+        ]
+      },
+      "renderer": "handlebars"
+    },
+    {
+      "name": "destination",
+      "taskModule": "renderLayout",
+      "renderer": "handlebars",
+      "config": {
+        "logic": {
+          "if": [
+            "default"
+          ]
+        },
+        "output": "body",
+        "layouts": {
+          "default": {
+            "layout": ">context.metaData.handlebars.layouts.default",
+            "parts": {
+              "head": ">context.metaData.handlebars.templates.pages_page-head-tags",
+              "body": ">context.metaData.handlebars.templates.pages_page-full-width",
+              "foot": ""
+            },
+            "contentType": "text/html"
+          }
+        }
+      }
+    }
+  ]
+}

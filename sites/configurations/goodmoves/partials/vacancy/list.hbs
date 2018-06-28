@@ -1,0 +1,23 @@
+<div class="mdc-card list" data-vacancy-id="{{Id}}">
+  {{> vacancy_key_info}}
+  <hr class="mdc-list-divider" />
+  {{#if description_short ~}}
+  <div class="search-result-article__snippet mdc-typography--body1">
+    {{{description_short}}}
+  </div>
+  <hr class="mdc-list-divider" />
+  {{/if}}
+  <div class="mdc-card__actions">
+    <div class="mdc-card__action-buttons demo-card__action-buttons--text-only mdc-card__actions--full-bleed">
+      <a href="/vacancy/{{slug}}{{@root.request.url.search}}" class="mdc-card__action">Find out more</a>
+    </div>
+    <div class="mdc-card__action-icons pull-right">
+      <button type="button" onclick="goodmoves.toggleShortlistItem('{{Id}}');" class="mdc-card__action mdc-card__action--shortlist" title="Add to shortlist">
+        <span class="fa-stack fa-lg">
+          <span class="fas fa-circle fa-stack-2x" aria-hidden="true"></span>
+          <span class="far fa-star fa-stack-1x" aria-hidden="true"></span>
+        </span>
+      </button>
+    </div>
+  </div>
+</div>

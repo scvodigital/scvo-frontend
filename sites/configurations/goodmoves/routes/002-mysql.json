@@ -1,0 +1,45 @@
+{
+  "name": "mysql",
+  "pattern": "/mysql",
+  "tasks": [
+    {
+      "name": "auth",
+      "taskModule": "firebaseAuth",
+      "config": {}
+    },
+    {
+      "name": "mysql_test",
+      "taskModule": "mysql",
+      "config": {
+        "connectionName": "notifications",
+        "queryTemplates": {
+          "emails": "SELECT * FROM recipientEmails_1 WHERE email IN ('calum.macuisdean@gmail.com', '{{data.auth.email}}') AND id = 'goodmoves-weekly';"
+        }
+      },
+      "renderer": "handlebars"
+    },
+    {
+      "name": "destination",
+      "taskModule": "renderLayout",
+      "renderer": "handlebars",
+      "config": {
+        "logic": {
+          "if": [
+            true,
+            "data"
+          ]
+        },
+        "output": "body",
+        "layouts": {
+          "data": {
+            "layout": ">context.metaData.handlebars.layouts.data",
+            "parts": {
+              "content": "{{{stringify data.search_query}}}"
+            },
+            "contentType": "application/json"
+          }
+        }
+      }
+    }
+  ]
+}

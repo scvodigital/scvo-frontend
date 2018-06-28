@@ -1,0 +1,29 @@
+<div class="page">
+  {{> header_splash}}
+  <div class="container-fluid">
+    <ul class="breadcrumbs">
+      <li><a href="/">Home</a></li>
+      <li><a href="/about">About SCVO</a></li>
+      <li><a href="/about/members">Our members</a></li>
+      {{#if data.primaryResponse.hits.hits.[0] ~}}
+      <li>{{data.primaryResponse.hits.hits.[0]._source.title}}</li>
+      {{else}}
+      <li>Member not found</li>
+      {{/if ~}}
+    </ul>
+    <div class="mdc-layout-grid">
+      <div class="mdc-layout-grid__inner">
+        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-9-desktop mdc-layout-grid__cell--span-5-tablet mdc-layout-grid__cell--span-4-phone content page-content">
+          {{#if data.primaryResponse.hits.hits.[0] ~}}
+          {{{data.primaryResponse.hits.hits.[0]._source.rendered.scvo_full}}}
+          {{else}}
+          <h2>Page not found</h2>
+          {{/if ~}}
+        </div>
+        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-3-tablet mdc-layout-grid__cell--span-4-phone sidebar page-sidebar">
+          {{> menu_about}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

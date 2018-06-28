@@ -1,0 +1,33 @@
+{
+  "name": "why_sign",
+  "pattern": "/why-sign",
+  "metaData": {
+    "title": "Why Sign? – The Scotland Declaration on Human Rights"
+  },
+  "tasks": [
+    {
+      "name": "destination",
+      "taskModule": "renderLayout",
+      "renderer": "handlebars",
+      "config": {
+        "logic": {
+          "if": [
+            "default"
+          ]
+        },
+        "output": "body",
+        "layouts": {
+          "default": {
+            "layout": ">context.metaData.handlebars.layouts.default",
+            "parts": {
+              "head": ">context.metaData.handlebars.templates.head-tags",
+              "body": ">context.metaData.handlebars.templates.why-sign",
+              "foot": ""
+            },
+            "contentType": "text/html"
+          }
+        }
+      }
+    }
+  ]
+}

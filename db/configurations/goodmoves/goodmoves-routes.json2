@@ -177,39 +177,6 @@
             "emails": "SELECT * FROM recipientEmails_1 WHERE email IN ('calum.macuisdean@gmail.com', '{{data.auth.email}}') AND id = 'goodmoves-weekly';"
           }      
         }
-      },
-      {
-        "name": "search_query",
-        "taskType": "transform",
-        "config": [
-          {
-            "list": "data.mysql_test.emails",
-            "item": {
-              "subscriptionName": "subscriptionName",
-              "searchQuery": "searchQuery"
-            },
-            "operate": [
-              {
-                "run": "JSON.parse",
-                "on": "searchQuery"
-              }
-            ]
-          },
-          {
-            "list": "",
-            "item": {
-              "subscriptionName": "subscriptionName",
-              "searchQuery": "searchQuery",
-              "roleSlugs": { 
-                "list": "searchQuery.bool.must",
-                "item": {
-                  "roleSlug": "terms.roles_slugs"
-                }
-              },
-              "alt": "searchQuery.bool.must.*.terms.roles_slugs"
-            }
-          }
-        ]
       }
     ],
     "destination": {

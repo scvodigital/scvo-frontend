@@ -1,0 +1,59 @@
+{
+  "size": 0,
+  "_source": [
+    "rendered.scvo_list"
+  ],
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "term": {
+            "is_active": true
+          }
+        }
+        {{#ifAny request.params.query.city request.params.query.department}},{{/ifAny}}
+        {{#if request.params.query.city}}
+        {
+          "term": {
+            "city_slug": "{{request.params.query.city}}"
+          }
+        }
+        {{#ifAny request.params.query.department}},{{/ifAny}}
+        {{/if}}
+        {{#if request.params.query.department}}
+        {
+          "term": {
+            "department_slug": "{{request.params.query.department}}"
+          }
+        }
+        {{/if}}
+      ]
+    }
+  },
+  "aggs": {
+    "query": {
+      "terms": {
+        "field": "department",
+        "order": {
+          "_term": "asc"
+        },
+        "size": 1000
+      },
+      "aggs": {
+        "staff": {
+          "top_hits": {
+            "size": 1000,
+            "sort": {
+              "name_last": "asc"
+            },
+            "_source": {
+              "includes": [
+                "rendered.scvo_list"
+              ]
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,110 @@
+<h2 class="mdc-card__title mdc-card__title--large">Search vacancies</h2>
+<form action="/jobs/community-jobs-scotland/vacancies/{{request.params.phase}}" method="GET" [searchroute]="'cjs_job_search'" data-auto-search="true">
+  <div class="mdc-textfield mdc-textfield--upgraded">
+    <label class="mdc-textfield__label" for="q">Keywords</label>
+    <input type="text" class="mdc-textfield__input" name="q" id="jobs-keywords" placeholder="" value="{{request.params.query.q}}">
+  </div>
+  <div class="mdc-textfield mdc-textfield--upgraded">
+    <label class="mdc-textfield__label" for="job_number">Job number</label>
+    <input type="text" class="mdc-textfield__input" name="job_number" id="jobs-job_number" placeholder="" value="{{request.params.query.job_number}}">
+  </div>
+  <div class="mdc-textfield mdc-textfield--upgraded">
+    <label class="mdc-textfield__label" for="location">Location</label>
+    <input type="text" class="mdc-textfield__input" name="location" id="jobs-location" placeholder="" value="{{request.params.query.location}}">
+  </div>
+  <div class="mdc-form-field">
+    <label class="mdc-textfield__label" for="sector">Sector</label>
+    <select class="mdc-select" role="listbox" id="jobs-sector" name="sector">
+      <option value="" {{#if request.params.query.sector}}{{else}}selected{{/if}}>All sectors</option>
+      <option value="administration-reception" {{#compare request.params.query.sector "===" "administration-reception"}}selected{{/compare}}>Administration/Reception</option>
+      <option value="advocacy-advice" {{#compare request.params.query.sector "===" "advocacy-advice"}}selected{{/compare}}>Advocacy/Advice</option>
+      <option value="animal-care" {{#compare request.params.query.sector "===" "animal-care"}}selected{{/compare}}>Animal Care</option>
+      <option value="childcare" {{#compare request.params.query.sector "===" "childcare"}}selected{{/compare}}>Childcare</option>
+      <option value="community-arts" {{#compare request.params.query.sector "===" "community-arts"}}selected{{/compare}}>Community Arts</option>
+      <option value="community-third-sector-development" {{#compare request.params.query.sector "===" "community-third-sector-development"}}selected{{/compare}}>Community third sector Development</option>
+      <option value="conservation" {{#compare request.params.query.sector "===" "conservation"}}selected{{/compare}}>Conservation</option>
+      <option value="creative-industries" {{#compare request.params.query.sector "===" "creative-industries"}}selected{{/compare}}>Creative Industries</option>
+      <option value="driving-transport" {{#compare request.params.query.sector "===" "driving-transport"}}selected{{/compare}}>Driving/Transport</option>
+      <option value="education-training-employability-support" {{#compare request.params.query.sector "===" "education-training-employability-support"}}selected{{/compare}}>Education/Training/Employability Support</option>
+      <option value="environmental-green-industries" {{#compare request.params.query.sector "===" "environmental-green-industries"}}selected{{/compare}}>Environmental/Green Industries</option>
+      <option value="finance" {{#compare request.params.query.sector "===" "finance"}}selected{{/compare}}>Finance</option>
+      <option value="health-social-care" {{#compare request.params.query.sector "===" "health-social-care"}}selected{{/compare}}>Health and Social Care</option>
+      <option value="hospitality-catering" {{#compare request.params.query.sector "===" "hospitality-catering"}}selected{{/compare}}>Hospitality and Catering</option>
+      <option value="housing" {{#compare request.params.query.sector "===" "housing"}}selected{{/compare}}>Housing</option>
+      <option value="it" {{#compare request.params.query.sector "===" "it"}}selected{{/compare}}>IT</option>
+      <option value="leisure-tourism" {{#compare request.params.query.sector "===" "leisure-tourism"}}selected{{/compare}}>Leisure/Tourism</option>
+      <option value="manual-work-skilled-trades" {{#compare request.params.query.sector "===" "manual-work-skilled-trades"}}selected{{/compare}}>Manual Work/Skilled Trades</option>
+      <option value="marketing-pr-promotions" {{#compare request.params.query.sector "===" "marketing-pr-promotions"}}selected{{/compare}}>Marketing/PR/Promotions</option>
+      <option value="peer-support" {{#compare request.params.query.sector "===" "peer-support"}}selected{{/compare}}>Peer Support</option>
+      <option value="retail" {{#compare request.params.query.sector "===" "retail"}}selected{{/compare}}>Retail</option>
+      <option value="sports" {{#compare request.params.query.sector "===" "sports"}}selected{{/compare}}>Sports</option>
+      <option value="warehousing" {{#compare request.params.query.sector "===" "warehousing"}}selected{{/compare}}>Warehousing</option>
+      <option value="youth-work" {{#compare request.params.query.sector "===" "youth-work"}}selected{{/compare}}>Youth Work</option>
+      <option value="business-development" {{#compare request.params.query.sector "===" "business-development"}}selected{{/compare}}>Business Development</option>
+      <option value="campaigning-fundraising" {{#compare request.params.query.sector "===" "campaigning-fundraising"}}selected{{/compare}}>Campaigning/Fundraising</option>
+      <option value="communications" {{#compare request.params.query.sector "===" "communications"}}selected{{/compare}}>Communications</option>
+      <option value="community-arts-development" {{#compare request.params.query.sector "===" "community-arts-development"}}selected{{/compare}}>Community Arts Development</option>
+      <option value="data-analysis" {{#compare request.params.query.sector "===" "data-analysis"}}selected{{/compare}}>Data Analysis</option>
+      <option value="database-design-development" {{#compare request.params.query.sector "===" "database-design-development"}}selected{{/compare}}>Database Design/Development</option>
+      <option value="event-festival-planning" {{#compare request.params.query.sector "===" "event-festival-planning"}}selected{{/compare}}>Event/Festival Planning</option>
+      <option value="film-video-production" {{#compare request.params.query.sector "===" "film-video-production"}}selected{{/compare}}>Film/Video Production</option>
+      <option value="graphic-design" {{#compare request.params.query.sector "===" "graphic-design"}}selected{{/compare}}>Graphic Design</option>
+      <option value="marketing-pr-promotion" {{#compare request.params.query.sector "===" "marketing-pr-promotion"}}selected{{/compare}}>Marketing/PR/Promotion</option>
+      <option value="monitoring-evaluation" {{#compare request.params.query.sector "===" "monitoring-evaluation"}}selected{{/compare}}>Monitoring/Evaluation</option>
+      <option value="policy-development" {{#compare request.params.query.sector "===" "policy-development"}}selected{{/compare}}>Policy Development</option>
+      <option value="research" {{#compare request.params.query.sector "===" "research"}}selected{{/compare}}>Research</option>
+      <option value="resource-development" {{#compare request.params.query.sector "===" "resource-development"}}selected{{/compare}}>Resource Development</option>
+      <!-- {{#each supplimentaryResponses.types.aggregations.sectors.buckets}}
+      {{#if key}}
+      <option value="{{key}}" {{#compare ../request.params.query.sector "===" key}}selected{{/compare}}>{{key}}</option>
+      {{/if}}
+      {{/each}} -->
+    </select>
+  </div>
+  <div class="mdc-form-field">
+    <label class="mdc-textfield__label" for="jobs-region">Region</label>
+    <select class="mdc-select" role="listbox" id="region" name="region">
+      <option value="" {{#if request.params.query.region}}{{else}}selected{{/if}}>All regions</option>
+      <option value="aberdeen-city" {{#compare request.params.query.region "===" "aberdeen-city"}}selected{{/compare}}>Aberdeen</option>
+      <option value="aberdeenshire" {{#compare request.params.query.region "===" "aberdeenshire"}}selected{{/compare}}>Aberdeenshire</option>
+      <option value="angus" {{#compare request.params.query.region "===" "angus"}}selected{{/compare}}>Angus</option>
+      <option value="argyll-bute" {{#compare request.params.query.region "===" "argyll-bute"}}selected{{/compare}}>Argyll &amp; Bute</option>
+      <option value="clackmannanshire" {{#compare request.params.query.region "===" "clackmannanshire"}}selected{{/compare}}>Clackmannanshire</option>
+      <option value="dumfries-galloway" {{#compare request.params.query.region "===" "dumfries-galloway"}}selected{{/compare}}>Dumfries &amp; Galloway</option>
+      <option value="dundee-city" {{#compare request.params.query.region "===" "dundee-city"}}selected{{/compare}}>Dundee</option>
+      <option value="east-ayrshire" {{#compare request.params.query.region "===" "east-ayrshire"}}selected{{/compare}}>East Ayrshire</option>
+      <option value="east-dunbartonshire" {{#compare request.params.query.region "===" "east-dunbartonshire"}}selected{{/compare}}>East Dunbartonshire</option>
+      <option value="east-lothian" {{#compare request.params.query.region "===" "east-lothian"}}selected{{/compare}}>East Lothian</option>
+      <option value="east-renfrewshire" {{#compare request.params.query.region "===" "east-renfrewshire"}}selected{{/compare}}>East Renfrewshire</option>
+      <option value="edinburgh-city" {{#compare request.params.query.region "===" "edinburgh-city"}}selected{{/compare}}>Edinburgh</option>
+      <option value="falkirk" {{#compare request.params.query.region "===" "falkirk"}}selected{{/compare}}>Falkirk</option>
+      <option value="fife" {{#compare request.params.query.region "===" "fife"}}selected{{/compare}}>Fife</option>
+      <option value="glasgow-city" {{#compare request.params.query.region "===" "glasgow-city"}}selected{{/compare}}>Glasgow</option>
+      <option value="highland" {{#compare request.params.query.region "===" "highland"}}selected{{/compare}}>Highland</option>
+      <option value="inverclyde" {{#compare request.params.query.region "===" "inverclyde"}}selected{{/compare}}>Inverclyde</option>
+      <option value="midlothian" {{#compare request.params.query.region "===" "midlothian"}}selected{{/compare}}>Midlothian</option>
+      <option value="moray" {{#compare request.params.query.region "===" "moray"}}selected{{/compare}}>Moray</option>
+      <option value="north-ayrshire" {{#compare request.params.query.region "===" "north-ayrshire"}}selected{{/compare}}>North Ayrshire</option>
+      <option value="north-lanarkshire" {{#compare request.params.query.region "===" "north-lanarkshire"}}selected{{/compare}}>North Lanarkshire</option>
+      <option value="orkney-islands" {{#compare request.params.query.region "===" "orkney-islands"}}selected{{/compare}}>Orkney Islands</option>
+      <option value="perth-kinross" {{#compare request.params.query.region "===" "perth-kinross"}}selected{{/compare}}>Perth &amp; Kinross</option>
+      <option value="renfrewshire" {{#compare request.params.query.region "===" "renfrewshire"}}selected{{/compare}}>Renfrewshire</option>
+      <option value="scottish-borders" {{#compare request.params.query.region "===" "scottish-borders"}}selected{{/compare}}>Scottish Borders</option>
+      <option value="shetland" {{#compare request.params.query.region "===" "shetland"}}selected{{/compare}}>Shetland</option>
+      <option value="south-ayrshire" {{#compare request.params.query.region "===" "south-ayrshire"}}selected{{/compare}}>South Ayrshire</option>
+      <option value="south-lanarkshire" {{#compare request.params.query.region "===" "south-lanarkshire"}}selected{{/compare}}>South Lanarkshire</option>
+      <option value="stirling" {{#compare request.params.query.region "===" "stirling"}}selected{{/compare}}>Stirling</option>
+      <option value="west-dunbartonshire" {{#compare request.params.query.region "===" "west-dunbartonshire"}}selected{{/compare}}>West Dunbartonshire</option>
+      <option value="west-lothian" {{#compare request.params.query.region "===" "west-lothian"}}selected{{/compare}}>West Lothian</option>
+      <option value="western-isles" {{#compare request.params.query.region "===" "western-isles"}}selected{{/compare}}>Western Isles</option>
+      <!-- {{#each supplimentaryResponses.types.aggregations.regions.buckets}}
+      {{#if key}}
+      <option value="{{key}}" {{#compare ../request.params.query.region "===" key}}selected{{/compare}}>{{key}}</option>
+      {{/if}}
+      {{/each}} -->
+    </select>
+  </div>
+  <button class="mdc-button mdc-button--raised" type="submit">
+    Search jobs
+  </button>
+</form>
