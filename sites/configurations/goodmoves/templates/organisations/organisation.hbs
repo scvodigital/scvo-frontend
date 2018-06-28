@@ -15,14 +15,15 @@
   {{> vacancy_list _source}}
   {{/each ~}}
   {{else}}
-  <div class="mdc-typography--headline5">
+  <hr />
+  <div class="mdc-typography--headline4">
     No current vacancies
   </div>
   {{/compare ~}}
 
   {{#if goodhq_organisation.xid}}
   <hr />
-  <div class="mdc-typography--headline4">
+  <div class="mdc-typography--headline5">
     Find out more about <a href="https://goodhq.org/{{goodhq_organisation.xid}}">{{{organisation.title}}}</a> on <a href="https://goodhq.org">Good HQ</a>
   </div>
   {{#compare ../data.goodhq.volunteering.hits.total ">" 0 ~}}

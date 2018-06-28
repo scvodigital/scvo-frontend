@@ -1,6 +1,6 @@
 {
-  "name": "vacancy",
-  "pattern": "/vacancy/:slug",
+  "name": "event",
+  "pattern": "/training/:slug",
   "defaultParams": {
     "context": "detail"
   },
@@ -15,8 +15,8 @@
         },
         "queryTemplates": {
           "index": "web-content-production",
-          "type": "goodmoves-vacancy",
-          "template": ">context.metaData.handlebars.queries.vacancies_vacancy"
+          "type": "scvo-event",
+          "template": ">context.metaData.handlebars.queries.events_event"
         }
       },
       "renderer": "handlebars"
@@ -31,41 +31,22 @@
         },
         "queryTemplates": [
           {
+            "name": "home_based",
+            "index": "web-content-production",
+            "type": "goodmoves-vacancy",
+            "template": ">context.metaData.handlebars.queries.vacancies_home-based"
+          },
+          {
             "name": "types",
             "index": "web-content-production",
             "type": "goodmoves-vacancy",
             "template": ">context.metaData.handlebars.queries.vacancies_types"
           },
           {
-            "name": "related",
-            "index": "web-content-production",
-            "type": "goodmoves-vacancy",
-            "template": ">context.metaData.handlebars.queries.vacancies_related"
-          },
-          {
             "name": "not_found",
             "index": "web-content-production",
-            "type": "goodmoves-vacancy",
+            "type": "scvo-events",
             "template": ">context.metaData.handlebars.queries.pages_not-found"
-          }
-        ]
-      },
-      "renderer": "handlebars"
-    },
-    {
-      "name": "posts",
-      "taskModule": "elasticsearch",
-      "config": {
-        "connectionStringTemplate": "{$../../elasticsearch-url.txt}",
-        "elasticsearchConfig": {
-          "apiVersion": "5.6"
-        },
-        "queryTemplates": [
-          {
-            "name": "tfn_related",
-            "index": "web-content-production",
-            "type": "tfn-news-post,tfn-blog-post,tfn-feature",
-            "template": ">context.metaData.handlebars.queries.posts_tfn-related"
           }
         ]
       },
@@ -86,9 +67,9 @@
           "default": {
             "layout": ">context.metaData.handlebars.layouts.default",
             "parts": {
-              "head": ">context.metaData.handlebars.templates.vacancies_vacancy-head-tags",
-              "body": ">context.metaData.handlebars.templates.vacancies_vacancy",
-              "foot": ">context.metaData.handlebars.templates.vacancies_vacancy-foot"
+              "head": ">context.metaData.handlebars.templates.events_event-head-tags",
+              "body": ">context.metaData.handlebars.templates.events_event",
+              "foot": ""
             },
             "contentType": "text/html"
           }

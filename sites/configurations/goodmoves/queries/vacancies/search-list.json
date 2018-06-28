@@ -22,28 +22,38 @@
   ],
   "query": {
     "bool": {
-      {{#ifAny request.params.query.sectors request.params.query.roles request.params.query.role_status request.params.query.lat}}
+      {{#ifAny request.params.query.type request.params.query.sectors request.params.query.roles request.params.query.statuses request.params.query.lat ~}}
       "filter": [
+        {{#if request.params.query.type ~}}
+        {{#compare request.params.query.type "===" "home-based" ~}}
+        {
+          "terms": {
+            "remote_working": true
+          }
+        }
+        {{#ifAny request.params.query.sectors request.params.query.roles request.params.query.statuses request.params.query.lat}},{{/ifAny}}
+        {{/compare ~}}
+        {{/if ~}}
         {{#if request.params.query.sectors ~}}
         {
           "terms": {
-            "sectors": {{{stringify (arrayify request.params.query.sectors)}}}
+            "sectors_slugs": {{{stringify (arrayify request.params.query.sectors)}}}
           }
         }
-        {{#ifAny request.params.query.roles request.params.query.role_status request.params.query.lat}},{{/ifAny}}
+        {{#ifAny request.params.query.roles request.params.query.statuses request.params.query.lat}},{{/ifAny}}
         {{/if ~}}
         {{#if request.params.query.roles ~}}
         {
           "terms": {
-            "roles": {{{stringify (arrayify request.params.query.roles)}}}
+            "roles_slugs": {{{stringify (arrayify request.params.query.roles)}}}
           }
         }
-        {{#ifAny request.params.query.role_status request.params.query.lat}},{{/ifAny}}
+        {{#ifAny request.params.query.statuses request.params.query.lat}},{{/ifAny}}
         {{/if ~}}
-        {{#if request.params.query.role_status ~}}
+        {{#if request.params.query.statuses ~}}
         {
           "terms": {
-            "status": {{{stringify (arrayify request.params.query.role_status)}}}
+            "role_status_slug": {{{stringify (arrayify request.params.query.statuses)}}}
           }
         }
         {{#ifAny request.params.query.lat}},{{/ifAny}}
@@ -72,6 +82,11 @@
           }
         },
         {{/if ~}}
+        {
+          "term": {
+            "country_iso3": "GBR"
+          }
+        },
         {
           "term": {
             "vacancy_status": "vacancy-open"

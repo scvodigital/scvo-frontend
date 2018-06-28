@@ -1,34 +1,20 @@
 {
-  "name": "shortlist",
-  "pattern": "/shortlist",
-  "metaData": {
-    "sidebarButton": {
-      "icon": "search",
-      "tooltip": "Search",
-      "classes": "hide-md hide-lg"
-    }
-  },
-  "defaultParams": {
-    "context": "results"
-  },
+  "name": "browse",
+  "pattern": "/browse",
   "tasks": [
     {
-      "name": "search_data",
+      "name": "primaryResponse",
       "taskModule": "elasticsearch",
       "config": {
         "connectionStringTemplate": "{$../../elasticsearch-url.txt}",
         "elasticsearchConfig": {
-          "apiVersion": "5.6",
-          "log": "debug"
+          "apiVersion": "5.6"
         },
-        "queryTemplates": [
-          {
-            "name": "detailed_results",
-            "index": "web-content-production",
-            "type": "goodmoves-vacancy",
-            "template": ">context.metaData.handlebars.queries.vacancies_search-list"
-          }
-        ]
+        "queryTemplates": {
+          "index": "web-content-production",
+          "type": "goodmoves-vacancy",
+          "template": ">context.metaData.handlebars.queries.vacancies_latest"
+        }
       },
       "renderer": "handlebars"
     },
@@ -42,16 +28,22 @@
         },
         "queryTemplates": [
           {
+            "name": "currently_recruiting",
+            "index": "web-content-production",
+            "type": "goodmoves-organisation",
+            "template": ">context.metaData.handlebars.queries.organisations_currently-recruiting"
+          },
+          {
+            "name": "home_based",
+            "index": "web-content-production",
+            "type": "goodmoves-vacancy",
+            "template": ">context.metaData.handlebars.queries.vacancies_home-based"
+          },
+          {
             "name": "types",
             "index": "web-content-production",
             "type": "goodmoves-vacancy",
             "template": ">context.metaData.handlebars.queries.vacancies_types"
-          },
-          {
-            "name": "not_found",
-            "index": "web-content-production",
-            "type": "goodmoves-vacancy",
-            "template": ">context.metaData.handlebars.queries.pages_not-found"
           }
         ]
       },
@@ -73,7 +65,8 @@
             "layout": ">context.metaData.handlebars.layouts.default",
             "parts": {
               "head": ">context.metaData.handlebars.templates.pages_page-head-tags",
-              "body": ">context.metaData.handlebars.templates.vacancies_shortlist"
+              "body": ">context.metaData.handlebars.templates.pages_browse",
+              "foot": ""
             },
             "contentType": "text/html"
           }

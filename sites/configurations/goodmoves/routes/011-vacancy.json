@@ -1,6 +1,6 @@
 {
-  "name": "organisation",
-  "pattern": "/organisation/:slug",
+  "name": "vacancy",
+  "pattern": "/vacancy/:slug",
   "defaultParams": {
     "context": "detail"
   },
@@ -15,8 +15,8 @@
         },
         "queryTemplates": {
           "index": "web-content-production",
-          "type": "goodmoves-organisation",
-          "template": ">context.metaData.handlebars.queries.organisations_organisation"
+          "type": "goodmoves-vacancy",
+          "template": ">context.metaData.handlebars.queries.vacancies_vacancy"
         }
       },
       "renderer": "handlebars"
@@ -31,10 +31,10 @@
         },
         "queryTemplates": [
           {
-            "name": "vacancies",
+            "name": "home_based",
             "index": "web-content-production",
             "type": "goodmoves-vacancy",
-            "template": ">context.metaData.handlebars.queries.vacancies_organisation-vacancies"
+            "template": ">context.metaData.handlebars.queries.vacancies_home-based"
           },
           {
             "name": "types",
@@ -43,9 +43,15 @@
             "template": ">context.metaData.handlebars.queries.vacancies_types"
           },
           {
+            "name": "related",
+            "index": "web-content-production",
+            "type": "goodmoves-vacancy",
+            "template": ">context.metaData.handlebars.queries.vacancies_related"
+          },
+          {
             "name": "not_found",
             "index": "web-content-production",
-            "type": "goodmoves-organisation",
+            "type": "goodmoves-vacancy",
             "template": ">context.metaData.handlebars.queries.pages_not-found"
           }
         ]
@@ -53,7 +59,7 @@
       "renderer": "handlebars"
     },
     {
-      "name": "goodhq",
+      "name": "posts",
       "taskModule": "elasticsearch",
       "config": {
         "connectionStringTemplate": "{$../../elasticsearch-url.txt}",
@@ -62,22 +68,10 @@
         },
         "queryTemplates": [
           {
-            "name": "posts",
+            "name": "tfn_related",
             "index": "web-content-production",
-            "type": "goodhq-post",
-            "template": ">context.metaData.handlebars.queries.goodhq_posts"
-          },
-          {
-            "name": "reviews",
-            "index": "web-content-production",
-            "type": "goodhq-review",
-            "template": ">context.metaData.handlebars.queries.goodhq_reviews"
-          },
-          {
-            "name": "volunteering",
-            "index": "web-content-production",
-            "type": "milo-volunteering-opportunity",
-            "template": ">context.metaData.handlebars.queries.goodhq_volunteering"
+            "type": "tfn-news-post,tfn-blog-post,tfn-feature",
+            "template": ">context.metaData.handlebars.queries.posts_tfn-related"
           }
         ]
       },
@@ -98,9 +92,9 @@
           "default": {
             "layout": ">context.metaData.handlebars.layouts.default",
             "parts": {
-              "head": ">context.metaData.handlebars.templates.organisations_organisation-head-tags",
-              "body": ">context.metaData.handlebars.templates.organisations_organisation",
-              "foot": ""
+              "head": ">context.metaData.handlebars.templates.vacancies_vacancy-head-tags",
+              "body": ">context.metaData.handlebars.templates.vacancies_vacancy",
+              "foot": ">context.metaData.handlebars.templates.vacancies_vacancy-foot"
             },
             "contentType": "text/html"
           }

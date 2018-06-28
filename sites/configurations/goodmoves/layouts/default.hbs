@@ -141,9 +141,96 @@ if(location.host.indexOf('.local') > -1){
             </section>
           </div>
           <div class="mdc-top-app-bar__row mdc-top-app-bar__lower hide-sm hide-md">
-            <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
-              <nav class="mdc-tab-bar mdc-tab-bar__left hide-sm hide-md" id="main-tab-bar">
+            <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start mdc-top-app-bar__main">
+              <nav class="mdc-tab-bar mdc-tab-bar__left" id="main-tab-bar">
                 {{#each context.metaData.menus.main ~}}
+                <a class="mdc-tab{{#if (regexMatch ../request.url.pathname route "gi")}} mdc-tab--active{{/if}}" href="{{stripTrailingSlash path}}">
+                  <span class="mdc-tab--label">{{{label}}}</span>
+                </a>
+                {{/each ~}}
+              </nav>
+              <div class="mdc-menu-anchor">
+                <button class="mdc-button" data-menu-target="#roles-menu">
+                  Roles
+                  <span class="far fa-fw fa-angle-down"></span>
+                </button>
+                <div class="mdc-menu" tabindex="-1" data-mdc-auto-init="MDCMenu" id="roles-menu">
+                  <div class="mdc-menu__items mdc-list" role="menu" aria-hidden="true">
+                    {{#each data.supplimentaryResponses.types.aggregations.roles_slugs.buckets ~}}
+                    <a class="mdc-list-item" href="/search?roles={{urlencode key}}" role="menuitem">
+                      <span class="mdc-list-item__text">
+                        {{#with (lookup ../data.supplimentaryResponses.types.aggregations.roles.buckets @index) ~}}
+                        {{{key}}}
+                        {{/with ~}}
+                      </span>
+                      <span class="mdc-list-item__meta">
+                        {{doc_count}}
+                      </span>
+                    </a>
+                    {{/each ~}}
+                  </div>
+                </div>
+              </div>
+              <div class="mdc-menu-anchor">
+                <button class="mdc-button" data-menu-target="#sectors-menu">
+                  Sectors
+                  <span class="far fa-fw fa-angle-down"></span>
+                </button>
+                <div class="mdc-menu" tabindex="-1" data-mdc-auto-init="MDCMenu" id="sectors-menu">
+                  <div class="mdc-menu__items mdc-list" role="menu" aria-hidden="true">
+                    {{#each data.supplimentaryResponses.types.aggregations.sectors_slugs.buckets ~}}
+                    <a class="mdc-list-item" href="/search?sectors={{urlencode key}}" role="menuitem">
+                      <span class="mdc-list-item__text">
+                        {{#with (lookup ../data.supplimentaryResponses.types.aggregations.sectors.buckets @index) ~}}
+                        {{{key}}}
+                        {{/with ~}}
+                      </span>
+                      <span class="mdc-list-item__meta">
+                        {{doc_count}}
+                      </span>
+                    </a>
+                    {{/each ~}}
+                  </div>
+                </div>
+              </div>
+              <div class="mdc-menu-anchor">
+                <button class="mdc-button" data-menu-target="#statuses-menu">
+                  Types
+                  <span class="far fa-fw fa-angle-down"></span>
+                </button>
+                <div class="mdc-menu" tabindex="-1" data-mdc-auto-init="MDCMenu" id="statuses-menu">
+                  <div class="mdc-menu__items mdc-list" role="menu" aria-hidden="true">
+                    {{#each data.supplimentaryResponses.types.aggregations.statuses_slugs.buckets ~}}
+                    <a class="mdc-list-item" href="/search?statuses={{urlencode key}}" role="menuitem">
+                      <span class="mdc-list-item__text">
+                        {{#compare key "===" "management-board" ~}}
+                        Trustee
+                        {{else}}
+                        {{#with (lookup ../data.supplimentaryResponses.types.aggregations.statuses.buckets @index) ~}}
+                        {{{key}}}
+                        {{/with ~}}
+                        {{/compare ~}}
+                      </span>
+                      <span class="mdc-list-item__meta">
+                        {{doc_count}}
+                      </span>
+                    </a>
+                    {{/each ~}}
+                    {{#compare data.supplimentaryResponses.home_based.hits.total ">" 0 ~}}
+                    <a class="mdc-list-item" href="/search?type=home-based" role="menuitem">
+                      <span class="mdc-list-item__text">
+                        Home-based
+                      </span>
+                      <span class="mdc-list-item__meta">
+                        {{data.supplimentaryResponses.home_based.hits.total}}
+                      </span>
+                    </a>
+                    {{/compare ~}}
+                  </div>
+                </div>
+              </div>
+              <nav class="mdc-tab-bar mdc-tab-bar__left" id="main-extra-tab-bar">
+                {{#each context.metaData.menus.main-extra ~}}
                 <a class="mdc-tab{{#if (regexMatch ../request.url.pathname route "gi")}} mdc-tab--active{{/if}}" href="{{stripTrailingSlash path}}">
                   <span class="mdc-tab--label">{{{label}}}</span>
                 </a>
@@ -167,7 +254,7 @@ if(location.host.indexOf('.local') > -1){
                 </div>
               </div> -->
             </section>
-            <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end">
+            <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end mdc-top-app-bar__user">
               <div class="mdc-menu-anchor">
                 <!-- Logged in: -->
                 <button class="mdc-button" data-menu-target="#user-menu">
