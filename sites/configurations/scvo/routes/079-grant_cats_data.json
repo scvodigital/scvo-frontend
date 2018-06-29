@@ -45,7 +45,14 @@
       "config": {
         "logic": {
           "if": [
-            true,
+            {
+              "in": [
+                "view=json",
+                {
+                  "var": "request.fullUrl"
+                }
+              ]
+            },
             "data"
           ]
         },

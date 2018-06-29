@@ -3,6 +3,16 @@
     "pattern": "/",
     "tasks": [
       {
+        "name": "auth",
+        "taskType": "firebase-auth",
+        "config": {
+          "cookie": "gm_token",
+          "appName": "scvo",
+          "noCookieRoute": "five_hundred",
+          "notAuthenticatedRoute": "five_hundred"
+        }
+      },
+      {
         "name": "primaryResponse",
         "taskType": "elasticsearch",
         "config": {
@@ -320,6 +330,54 @@
       }
     }
   },
+  "logout": {
+    "pattern": "/logout",
+    "destination": {
+      "destinationType": "handlebars",
+      "config": {
+        "default": {
+          "head": "{$./templates/pages/page-head-tags.hbs}",
+          "body": "{$./templates/pages/logout.hbs}"
+        }
+      }
+    }
+  },
+  "save-search": {
+    "pattern": "/save-search",
+    "tasks": [
+      {
+        "name": "auth",
+        "taskType": "firebase-auth",
+        "config": {
+          "cookie": "gm_token",
+          "appName": "scvo",
+          "noCookieRoute": "five_hundred",
+          "notAuthenticatedRoute": "five_hundred"
+        }
+      },
+      {
+        "name": "save-search",
+        "taskType": "mysql",
+        "config": {
+          "connectionName": "notifications",
+          "queryTemplates": {
+            "create_or_replace_subscriber": "{$./queries/notifications/create-replace-subscriber.sql}",
+            "add_saved_search": "{$./queries/notifications/add-saved-search.sql}",
+            "add_saved_search_parameters": "{$./queries/notifications/add-saved-search-parameters.sql}"
+          }
+        }
+      }
+    ],
+    "destination": {
+      "destinationType": "handlebars",
+      "config": {
+        "default": {
+          "head": "{$./templates/pages/page-head-tags.hbs}",
+          "body": "{$./templates/pages/login.hbs}"
+        }
+      }
+    }
+  },
   "test": {
     "pattern": "/test",
     "tasks": [
@@ -494,7 +552,7 @@
           "head": "{$./templates/vacancies/search-head-tags.hbs}",
           "body": "{$./templates/vacancies/search.hbs}",
           "foot": "{$./templates/vacancies/search-foot.hbs}",
-          "sidebar": "{$./partials/vacancy-search-form.hbs}"
+          "sidebar": "{$./templates/vacancies/search-form.hbs}"
         },
         "data": {
           "content": "{$./templates/vacancies/search-json.hbs}"
@@ -576,7 +634,7 @@
           "head": "{$./templates/vacancies/search-head-tags.hbs}",
           "body": "{$./templates/vacancies/map.hbs}",
           "foot": "{$./templates/vacancies/map-foot.hbs}",
-          "sidebar": "{$./partials/vacancy-search-form.hbs}"
+          "sidebar": "{$./templates/vacancies/search-form.hbs}"
         },
         "data": {
           "content": "{$./templates/vacancies/search-json.hbs}"

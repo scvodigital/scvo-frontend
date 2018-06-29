@@ -5,7 +5,12 @@
     {
       "name": "auth",
       "taskModule": "firebaseAuth",
-      "config": {}
+      "config": {
+        "tokenPath": "request.cookies.gm_token",
+        "appName": "scvo",
+        "noTokenRoute": "five_hundred",
+        "notAuthenticatedRoute": "five_hundred"
+      }
     },
     {
       "name": "user",
@@ -39,7 +44,14 @@
       "config": {
         "logic": {
           "if": [
-            true,
+            {
+              "in": [
+                "view=json",
+                {
+                  "var": "request.fullUrl"
+                }
+              ]
+            },
             "data"
           ]
         },

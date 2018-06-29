@@ -1,6 +1,6 @@
 {
-  "name": "vacancy_map",
-  "pattern": "/map",
+  "name": "vacancy_search",
+  "pattern": "/search",
   "metaData": {
     "sidebarButton": {
       "icon": "search",
@@ -23,10 +23,10 @@
         },
         "queryTemplates": [
           {
-            "name": "map_results",
+            "name": "detailed_results",
             "index": "web-content-production",
             "type": "goodmoves-vacancy",
-            "template": ">context.metaData.handlebars.queries.vacancies_search-map"
+            "template": ">context.metaData.handlebars.queries.vacancies_search-list"
           }
         ]
       },
@@ -79,7 +79,14 @@
               ]
             },
             "rss",
-            true,
+            {
+              "in": [
+                "view=json",
+                {
+                  "var": "request.fullUrl"
+                }
+              ]
+            },
             "data",
             "default"
           ]
@@ -98,9 +105,9 @@
             "layout": ">context.metaData.handlebars.layouts.default",
             "parts": {
               "head": ">context.metaData.handlebars.templates.vacancies_search-head-tags",
-              "body": ">context.metaData.handlebars.templates.vacancies_map",
-              "foot": ">context.metaData.handlebars.templates.vacancies_map-foot",
-              "sidebar": ">context.metaData.handlebars.partials.vacancy-search-form"
+              "body": ">context.metaData.handlebars.templates.vacancies_search",
+              "foot": ">context.metaData.handlebars.templates.vacancies_search-foot",
+              "sidebar": ">context.metaData.handlebars.templates.vacancies_search-form"
             },
             "contentType": "text/html"
           },

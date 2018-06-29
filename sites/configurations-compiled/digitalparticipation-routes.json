@@ -50,6 +50,40 @@
             }
         }
     },
+    "sign-up-stage-1": {
+        "pattern": "/sign-up/start",
+        "metaData": {
+            "title": "Sign up – Scotland's Digital Participation Charter"
+        },
+        "tasks": [],
+        "destination": {
+            "destinationType": "handlebars",
+            "config": {
+                "default": {
+                    "head": "{{#compare request.params.path \"===\" \"signatories\" ~}}\n<title>{{route.metaData.title}}</title>\n<meta property=\"og:title\" content=\"{{route.metaData.title}}\" data-dynamic=\"true\">\n{{else}}\n{{#if data.primaryResponse.hits.hits.[0] ~}}\n{{#with data.primaryResponse.hits.hits.[0]._source ~}}\n{{#if title ~}}\n<title>{{{title}}} is a signatory of Scotland's Digital Participation Charter</title>\n<meta property=\"og:title\" content=\"{{{title}}} is a signatory of Scotland's Digital Participation Charter\" data-dynamic=\"true\">\n{{else}}\n<title>{{route.metaData.title}}</title>\n<meta property=\"og:title\" content=\"{{route.metaData.title}}\" data-dynamic=\"true\">\n{{/if ~}}\n{{#if files.0.uploadUrl ~}}\n<meta property=\"og:image\" content=\"{{files.0.uploadUrl}}\" data-dynamic=\"true\">\n<meta property=\"og:image:width\" content=\"128\" data-dynamic=\"true\">\n<meta property=\"og:image:height\" content=\"128\" data-dynamic=\"true\">\n{{/if ~}}\n{{#if description ~}}\n<meta property=\"og:summary\" content=\"{{description}}\" data-dynamic=\"true\">\n<meta name=\"description\" content=\"{{description}}\" data-dynamic=\"true\">\n{{/if ~}}\n{{#if rendered.json_ld ~}}\n<script type=\"application/ld+json\" data-dynamic=\"true\">\n{{{rendered.json_ld}}}\n</script>\n{{/if ~}}\n{{/with ~}}\n{{else}}\n<title>{{route.metaData.title}}</title>\n<meta property=\"og:title\" content=\"{{route.metaData.title}}\" data-dynamic=\"true\">\n{{/if ~}}\n{{/compare ~}}",
+                    "body": "<iframe src=\"https://www.surveygizmo.eu/s3/90088286/Digital-Participation-Charter-Sign-Up-Stage-1\" frameborder=\"0\" width=\"100%\" height=\"400\" style=\"overflow:hidden\"></iframe>",
+                    "foot": ""
+                }
+            }
+        }
+    },
+    "sign-up-stage-2": {
+        "pattern": "/sign-up/continue",
+        "metaData": {
+            "title": "Sign up – Scotland's Digital Participation Charter"
+        },
+        "tasks": [],
+        "destination": {
+            "destinationType": "handlebars",
+            "config": {
+                "default": {
+                    "head": "{{#compare request.params.path \"===\" \"signatories\" ~}}\n<title>{{route.metaData.title}}</title>\n<meta property=\"og:title\" content=\"{{route.metaData.title}}\" data-dynamic=\"true\">\n{{else}}\n{{#if data.primaryResponse.hits.hits.[0] ~}}\n{{#with data.primaryResponse.hits.hits.[0]._source ~}}\n{{#if title ~}}\n<title>{{{title}}} is a signatory of Scotland's Digital Participation Charter</title>\n<meta property=\"og:title\" content=\"{{{title}}} is a signatory of Scotland's Digital Participation Charter\" data-dynamic=\"true\">\n{{else}}\n<title>{{route.metaData.title}}</title>\n<meta property=\"og:title\" content=\"{{route.metaData.title}}\" data-dynamic=\"true\">\n{{/if ~}}\n{{#if files.0.uploadUrl ~}}\n<meta property=\"og:image\" content=\"{{files.0.uploadUrl}}\" data-dynamic=\"true\">\n<meta property=\"og:image:width\" content=\"128\" data-dynamic=\"true\">\n<meta property=\"og:image:height\" content=\"128\" data-dynamic=\"true\">\n{{/if ~}}\n{{#if description ~}}\n<meta property=\"og:summary\" content=\"{{description}}\" data-dynamic=\"true\">\n<meta name=\"description\" content=\"{{description}}\" data-dynamic=\"true\">\n{{/if ~}}\n{{#if rendered.json_ld ~}}\n<script type=\"application/ld+json\" data-dynamic=\"true\">\n{{{rendered.json_ld}}}\n</script>\n{{/if ~}}\n{{/with ~}}\n{{else}}\n<title>{{route.metaData.title}}</title>\n<meta property=\"og:title\" content=\"{{route.metaData.title}}\" data-dynamic=\"true\">\n{{/if ~}}\n{{/compare ~}}",
+                    "body": "<iframe src=\"https://www.surveygizmo.eu/s3/90088287/Digital-Participation-Charter-Sign-Up-Stage-2?key={{request.params.query.id}}\" frameborder=\"0\" width=\"100%\" height=\"400\" style=\"overflow:hidden\"></iframe>",
+                    "foot": ""
+                }
+            }
+        }
+    },
     "sign-up-complete": {
         "pattern": "/sign-up/complete",
         "metaData": {

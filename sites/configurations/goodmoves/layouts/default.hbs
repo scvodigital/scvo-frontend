@@ -259,19 +259,34 @@ if(location.host.indexOf('.local') > -1){
                 <!-- Logged in: -->
                 <button class="mdc-button" data-menu-target="#user-menu">
                   <span class="far fa-fw fa-user-circle"></span>
-                  Richard Nisbet
+                  {{#if data.auth.email}}
+                    {{data.auth.email}}
+                  {{else}}
+                    Not logged in
+                  {{/if}}
                   <span class="far fa-fw fa-angle-down"></span>
                 </button>
                 <div class="mdc-menu" tabindex="-1" data-mdc-auto-init="MDCMenu" id="user-menu">
                   <div class="mdc-menu__items mdc-list" role="menu" aria-hidden="true">
-                    {{#each context.metaData.menus.user ~}}
-                    <a class="mdc-list-item {{#if (regexMatch ../request.url.pathname route "gi")}} mdc-list-item--activated{{/if}}" href="{{stripTrailingSlash path}}" role="menuitem">
-                      {{#if icon ~}}
-                      <span class="far fa-{{icon}} mdc-list-item__graphic" aria-hidden="true"></span>
-                      {{/if ~}}
-                      {{{label}}}
-                    </a>
-                    {{/each ~}}
+                    {{#if data.auth.email}}
+                      {{#each context.metaData.menus.user ~}}
+                      <a class="mdc-list-item {{#if (regexMatch ../request.url.pathname route "gi")}} mdc-list-item--activated{{/if}}" href="{{stripTrailingSlash path}}" role="menuitem">
+                        {{#if icon ~}}
+                        <span class="far fa-{{icon}} mdc-list-item__graphic" aria-hidden="true"></span>
+                        {{/if ~}}
+                        {{{label}}}
+                      </a>
+                      {{/each ~}}
+                    {{else}}
+                      {{#each context.metaData.menus.unauthenticated ~}}
+                      <a class="mdc-list-item {{#if (regexMatch ../request.url.pathname route "gi")}} mdc-list-item--activated{{/if}}" href="{{stripTrailingSlash path}}" role="menuitem">
+                        {{#if icon ~}}
+                        <span class="far fa-{{icon}} mdc-list-item__graphic" aria-hidden="true"></span>
+                        {{/if ~}}
+                        {{{label}}}
+                      </a>
+                      {{/each ~}}
+                    {{/if}}
                   </div>
                 </div>
               </div>
@@ -345,7 +360,7 @@ if(location.host.indexOf('.local') > -1){
         {{#if route.metaData.sidebarButton}}
         <aside class="mdc-drawer mdc-drawer--temporary" id="sidebar-temporary" data-mdc-auto-init="MDCTemporaryDrawer">
           <div class="mdc-drawer__drawer">
-            {{{layoutParts.sidebar instance_id=[temp]}}}
+            {{!-- {{{layoutParts.sidebar instance_id="temp"}}} --}}
           </div>
         </aside>
         {{/if}}

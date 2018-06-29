@@ -17,6 +17,7 @@ import { format } from 'date-fns';
 
 const Dot = require('dot-object');
 const hbsFactory = require('clayhandlebars');
+import Handlebars = require('handlebars');
 import * as S from 'string';
 
 // Router modules
@@ -432,6 +433,33 @@ if (process.env.devmode) {
   });
 }
 
+export interface FirebaseAppConfig {
+  credential: {
+    type: string;
+    project_id: string;
+    private_key_id: string;
+    private_key: string;
+    client_email: string;
+    client_id: string;
+    auth_uri: string;
+    token_uri: string;
+    auth_provider_x509_cert_url: string;
+    client_x509_cert_url: string;
+  },
+  databaseURL: string;
+}
+
+const firebaseApps: { [name: string]: admin.app.App } = {};
+Object.keys(SECRETS.configs).forEach((key) => {
+  var config: FirebaseAppConfig = (SECRETS.configs as { [name: string]: FirebaseAppConfig })[key];
+  firebaseApps[key] = admin.initializeApp({
+    credential: admin.credential.cert(
+      (config.credential as admin.ServiceAccount)
+    ),
+    databaseURL: config.databaseURL
+  }, key);
+});
+
 // Utility functions!
 async function loadRouters(): Promise<any> {
   try {
@@ -439,8 +467,6 @@ async function loadRouters(): Promise<any> {
 
     var sites =
         await getJson<{[site: string]: RouterConfiguration}>('/app-engine/');
-
-    var firebaseApps = {};
 
     var routerTasks = {
       elasticsearch: new TaskElasticsearch(),
@@ -470,7 +496,8 @@ async function loadRouters(): Promise<any> {
 
     for (var name in sites) {
       var siteConfig = sites[name];
-      var hbs = hbsFactory();
+      var hbsEnv = Handlebars.create();
+      var hbs = hbsFactory(hbsEnv);
       Helpers.register(hbs);
       Object.keys(siteConfig.metaData.handlebars.partials).forEach((key) => {
         var template = siteConfig.metaData.handlebars.partials[key];

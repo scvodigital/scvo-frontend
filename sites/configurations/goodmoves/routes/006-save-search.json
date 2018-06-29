@@ -1,6 +1,6 @@
 {
-  "name": "mysql",
-  "pattern": "/mysql",
+  "name": "save-search",
+  "pattern": "/save-search",
   "tasks": [
     {
       "name": "auth",
@@ -13,12 +13,14 @@
       }
     },
     {
-      "name": "mysql_test",
+      "name": "save-search",
       "taskModule": "mysql",
       "config": {
         "connectionName": "notifications",
         "queryTemplates": {
-          "emails": "SELECT * FROM recipientEmails_1 WHERE email IN ('calum.macuisdean@gmail.com', '{{data.auth.email}}') AND id = 'goodmoves-weekly';"
+          "create_or_replace_subscriber": ">context.metaData.handlebars.queries.notifications_create-replace-subscriber",
+          "add_saved_search": ">context.metaData.handlebars.queries.notifications_add-saved-search",
+          "add_saved_search_parameters": ">context.metaData.handlebars.queries.notifications_add-saved-search-parameters"
         }
       },
       "renderer": "handlebars"
@@ -30,25 +32,18 @@
       "config": {
         "logic": {
           "if": [
-            {
-              "in": [
-                "view=json",
-                {
-                  "var": "request.fullUrl"
-                }
-              ]
-            },
-            "data"
+            "default"
           ]
         },
         "output": "body",
         "layouts": {
-          "data": {
-            "layout": ">context.metaData.handlebars.layouts.data",
+          "default": {
+            "layout": ">context.metaData.handlebars.layouts.default",
             "parts": {
-              "content": "{{{stringify data.search_query}}}"
+              "head": ">context.metaData.handlebars.templates.pages_page-head-tags",
+              "body": ">context.metaData.handlebars.templates.pages_login"
             },
-            "contentType": "application/json"
+            "contentType": "text/html"
           }
         }
       }
