@@ -1,5 +1,5 @@
 Arguments: 
-  /home/tonicblue/.nvm/versions/node/v8.11.1/bin/node /home/tonicblue/.nvm/versions/node/v8.11.1/bin/yarn add @scvo/router
+  /home/tonicblue/.nvm/versions/node/v8.11.1/bin/node /home/tonicblue/.nvm/versions/node/v8.11.1/bin/yarn add -D @scvo/json-inc
 
 PATH: 
   /home/tonicblue/.nvm/versions/node/v8.11.1/bin:/opt/google-cloud-sdk/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/opt/android-sdk/platform-tools:/usr/lib/jvm/default/bin:/opt/nessus/bin:/opt/nessus/sbin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/home/tonicblue/.nvm/versions/node/v8.11.1/bin:/opt/google-cloud-sdk/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/home/tonicblue/bin:/home/tonicblue/scripts:/home/tonicblue/bin:/home/tonicblue/scripts:/home/tonicblue/.vimpkg/bin:/home/tonicblue/.vimpkg/bin:/home/tonicblue/.gem/ruby/2.4.0/bin:/home/tonicblue/.cargo/bin:/usr/lib/python3.6/site-packages:/home/tonicblue/.pyenv/bin:/home/tonicblue/.pyenv/lib:/home/tonicblue/go:/home/tonicblue/go/bin:/home/tonicblue/go/src:/home/tonicblue/.gem/ruby/2.5.0/bin:/home/tonicblue/.nvm/versions/node/v6.11.3/bin:/opt/google-cloud-sdk/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/home/tonicblue/bin:/home/tonicblue/scripts:/home/tonicblue/bin:/home/tonicblue/scripts:/home/tonicblue/.vimpkg/bin:/home/tonicblue/.vimpkg/bin:/home/tonicblue/.gem/ruby/2.4.0/bin:/home/tonicblue/.cargo/bin:/usr/lib/python3.6/site-packages:/home/tonicblue/.pyenv/bin:/home/tonicblue/.pyenv/lib:/home/tonicblue/go:/home/tonicblue/go/bin:/home/tonicblue/go/src:/home/tonicblue/.gem/ruby/2.5.0/bin
@@ -25,17 +25,17 @@ npm manifest:
     "scripts": {
       "test": "echo \"Error: no test specified\" && exit 1",
       "cleanup": "rm -rf ./build/**",
-      "json2": "json-inc ./db/configurations/**/*.json2 ./db/configurations-compiled; json-inc ./db/db.json2 ./db",
       "copy": "cp ./db/db.json ./build/db.json; cp -r ./assets ./build/assets",
       "sass": "node-sass --include-path=./node_modules ./build/assets/css -o build/assets/css",
       "upgrade-router": "yarn add -E @scvo/router @scvo/router-task-firebase @scvo/router-task-elasticsearch @scvo/router-destination-handlebars @scvo/router-destination-redirect",
-      "build": "npm run cleanup; npm run compile; npm run json2; npm run copy; npm run sass; npm run uglify",
+      "build": "npm run cleanup; npm run compile; npm run build-db; npm run copy; npm run sass; npm run uglify",
+      "build-db": "json-inc compile --input ./sites/sites.inc.json --output ./sites/sites.json",
       "start": "npm run compile; node build/index.js",
       "dev": "npm run build; devmode=true node build/index.js",
       "dev-router": "npm run router; npm run dev",
       "deploy-dispatch": "gcloud app deploy dispatch.yaml --quiet",
       "clear-cache": "curl -s https://scvo.org.uk/reload-sites",
-      "deploy-db": "npm run build; firebase database:set -y /app-engine ./db/db.json; npm run clear-cache",
+      "deploy-db": "npm run build-db; firebase database:set -y /contexts ./sites/sites.json; npm run clear-cache",
       "deploy-app": "npm run build; npm run deploy-dispatch; gcloud beta app deploy --quiet; npm run deploy-db",
       "router": "cd ../router && npm run local && cd ../frontend && npm run l-router && npm run l-elastic && npm run l-handlebars && npm run l-redirect && npm run l-firebase",
       "l-router": "npm link @scvo/router",
@@ -58,7 +58,7 @@ npm manifest:
     "author": "Matthew Wilkes (https://scvo.org.uk)",
     "license": "GPL-3.0",
     "dependencies": {
-      "@scvo/router": "^1.2.4",
+      "@scvo/router": "^1.2.6",
       "@scvo/router-destination-handlebars": "0.0.29",
       "@scvo/router-destination-redirect": "0.0.7",
       "@scvo/router-task-elasticsearch": "0.0.16",
@@ -761,9 +761,9 @@ Lockfile:
       route-recognizer "^0.3.3"
       string "^3.3.3"
   
-  "@scvo/router@^1.2.4":
-    version "1.2.4"
-    resolved "https://registry.yarnpkg.com/@scvo/router/-/router-1.2.4.tgz#715a4e31a79b7de15ea6349f6cc8af32521edfa9"
+  "@scvo/router@^1.2.6":
+    version "1.2.6"
+    resolved "https://registry.yarnpkg.com/@scvo/router/-/router-1.2.6.tgz#a98e86ae88753818136113300f20f4765e93547f"
     dependencies:
       "@types/deep-extend" "^0.4.31"
       "@types/elasticsearch" "^5.0.24"
