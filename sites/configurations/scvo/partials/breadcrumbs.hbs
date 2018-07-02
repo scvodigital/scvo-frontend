@@ -2,7 +2,7 @@
 <ul class="breadcrumbs breadcrumbs-length-{{breadcrumb.length}}">
   <li><a href="/">Home</a></li>
   {{#each breadcrumb ~}}
-  <li><a href="{{replace url 'https://cms.scvo.org' ''}}">{{{striptags title}}}</a></li>
+  <li><a href="{{replace (replace url 'http://cms.scvo.org' '') 'https://cms.scvo.org' ''}}">{{{striptags title}}}</a></li>
   {{/each ~}}
   <li>{{{striptags title}}}</li>
 </ul>

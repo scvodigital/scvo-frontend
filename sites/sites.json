@@ -231,72 +231,6 @@
         ]
       },
       {
-        "name": "main_search",
-        "pattern": "/search",
-        "tasks": [
-          {
-            "name": "primaryResponse",
-            "taskModule": "elasticsearch",
-            "config": {
-              "connectionStringTemplate": "https://readonly:onlyread@2e6b5fd9344d4f8565e7d015d861b240.europe-west3.gcp.cloud.es.io:9243",
-              "elasticsearchConfig": {
-                "apiVersion": "5.6",
-                "log": "debug"
-              },
-              "queryTemplates": {
-                "index": "web-content-production",
-                "type": "scvo-cms-page,scvo-cms-post,scvo-staff,scvo-member,cjs-job,charter-signatory-digitalparticipation,charter-signatory-humanrights,charter-signatory-europe,goodmoves-job,funding-scotland-fund,goodhq-organisation,goodhq-post,scvo-document-evidence,scvo-event,scvo-grant-charter,oscr-charity,tfn-news-post,tfn-blog-post,tfn-poll,tfn-event,tfn-list,tfn-feature",
-                "template": ">context.metaData.handlebars.queries.main_search_search"
-              }
-            },
-            "renderer": "handlebars"
-          },
-          {
-            "name": "supplimentaryResponses",
-            "taskModule": "elasticsearch",
-            "config": {
-              "connectionStringTemplate": "https://readonly:onlyread@2e6b5fd9344d4f8565e7d015d861b240.europe-west3.gcp.cloud.es.io:9243",
-              "elasticsearchConfig": {
-                "apiVersion": "5.6"
-              },
-              "queryTemplates": [
-                {
-                  "name": "splash",
-                  "index": "web-content-production",
-                  "type": "scvo-cms-media",
-                  "template": ">context.metaData.handlebars.queries.pages_splash"
-                }
-              ]
-            },
-            "renderer": "handlebars"
-          },
-          {
-            "name": "destination",
-            "taskModule": "renderLayout",
-            "renderer": "handlebars",
-            "config": {
-              "logic": {
-                "if": [
-                  "default"
-                ]
-              },
-              "output": "body",
-              "layouts": {
-                "default": {
-                  "layout": ">context.metaData.handlebars.layouts.default",
-                  "parts": {
-                    "head": ">context.metaData.handlebars.templates.main_search_search-head-tags",
-                    "body": ">context.metaData.handlebars.templates.main_search_search",
-                    "foot": ""
-                  },
-                  "contentType": "text/html"
-                }
-              }
-            }
-          }
-        ]
-      },
-      {
         "name": "page_digital_participation_charter_funding",
         "pattern": {
           "index": "/digital/participation/charter-fund/call-for-funding",
@@ -583,6 +517,72 @@
                   "parts": {
                     "head": ">context.metaData.handlebars.templates.pages_page-head-tags",
                     "body": ">context.metaData.handlebars.templates.grants_grant-charter",
+                    "foot": ""
+                  },
+                  "contentType": "text/html"
+                }
+              }
+            }
+          }
+        ]
+      },
+      {
+        "name": "main_search",
+        "pattern": "/search",
+        "tasks": [
+          {
+            "name": "primaryResponse",
+            "taskModule": "elasticsearch",
+            "config": {
+              "connectionStringTemplate": "https://readonly:onlyread@2e6b5fd9344d4f8565e7d015d861b240.europe-west3.gcp.cloud.es.io:9243",
+              "elasticsearchConfig": {
+                "apiVersion": "5.6",
+                "log": "debug"
+              },
+              "queryTemplates": {
+                "index": "web-content-production",
+                "type": "scvo-cms-page,scvo-cms-post,scvo-staff,scvo-member,cjs-job,charter-signatory-digitalparticipation,charter-signatory-humanrights,charter-signatory-europe,goodmoves-job,funding-scotland-fund,goodhq-organisation,goodhq-post,scvo-document-evidence,scvo-event,scvo-grant-charter,oscr-charity,tfn-news-post,tfn-blog-post,tfn-poll,tfn-event,tfn-list,tfn-feature",
+                "template": ">context.metaData.handlebars.queries.main_search_search"
+              }
+            },
+            "renderer": "handlebars"
+          },
+          {
+            "name": "supplimentaryResponses",
+            "taskModule": "elasticsearch",
+            "config": {
+              "connectionStringTemplate": "https://readonly:onlyread@2e6b5fd9344d4f8565e7d015d861b240.europe-west3.gcp.cloud.es.io:9243",
+              "elasticsearchConfig": {
+                "apiVersion": "5.6"
+              },
+              "queryTemplates": [
+                {
+                  "name": "splash",
+                  "index": "web-content-production",
+                  "type": "scvo-cms-media",
+                  "template": ">context.metaData.handlebars.queries.pages_splash"
+                }
+              ]
+            },
+            "renderer": "handlebars"
+          },
+          {
+            "name": "destination",
+            "taskModule": "renderLayout",
+            "renderer": "handlebars",
+            "config": {
+              "logic": {
+                "if": [
+                  "default"
+                ]
+              },
+              "output": "body",
+              "layouts": {
+                "default": {
+                  "layout": ">context.metaData.handlebars.layouts.default",
+                  "parts": {
+                    "head": ">context.metaData.handlebars.templates.main_search_search-head-tags",
+                    "body": ">context.metaData.handlebars.templates.main_search_search",
                     "foot": ""
                   },
                   "contentType": "text/html"
@@ -4051,6 +4051,75 @@
         ]
       },
       {
+        "name": "page_keystone",
+        "pattern": {
+          "index": "/services/keystone",
+          "section": "/services/keystone/*path"
+        },
+        "tasks": [
+          {
+            "name": "primaryResponse",
+            "taskModule": "elasticsearch",
+            "config": {
+              "connectionStringTemplate": "https://readonly:onlyread@2e6b5fd9344d4f8565e7d015d861b240.europe-west3.gcp.cloud.es.io:9243",
+              "elasticsearchConfig": {
+                "apiVersion": "5.6"
+              },
+              "queryTemplates": {
+                "index": "web-content-production",
+                "type": "scvo-cms-page",
+                "template": ">context.metaData.handlebars.queries.pages_page",
+                "noResultsRoute": "four_oh_four"
+              }
+            },
+            "renderer": "handlebars"
+          },
+          {
+            "name": "supplimentaryResponses",
+            "taskModule": "elasticsearch",
+            "config": {
+              "connectionStringTemplate": "https://readonly:onlyread@2e6b5fd9344d4f8565e7d015d861b240.europe-west3.gcp.cloud.es.io:9243",
+              "elasticsearchConfig": {
+                "apiVersion": "5.6"
+              },
+              "queryTemplates": [
+                {
+                  "name": "splash",
+                  "index": "web-content-production",
+                  "type": "scvo-cms-media",
+                  "template": ">context.metaData.handlebars.queries.pages_splash"
+                }
+              ]
+            },
+            "renderer": "handlebars"
+          },
+          {
+            "name": "destination",
+            "taskModule": "renderLayout",
+            "renderer": "handlebars",
+            "config": {
+              "logic": {
+                "if": [
+                  "default"
+                ]
+              },
+              "output": "body",
+              "layouts": {
+                "default": {
+                  "layout": ">context.metaData.handlebars.layouts.default",
+                  "parts": {
+                    "head": ">context.metaData.handlebars.templates.pages_page-head-tags",
+                    "body": ">context.metaData.handlebars.templates.pages_page-keystone",
+                    "foot": ""
+                  },
+                  "contentType": "text/html"
+                }
+              }
+            }
+          }
+        ]
+      },
+      {
         "name": "post_credit_union",
         "pattern": "/credit-union/important-news",
         "tasks": [
@@ -6710,20 +6779,6 @@
         ]
       },
       {
-        "name": "digital_evolution_digital_pioneers_sve",
-        "pattern": "/digital/evolution/digital-pioneers/sve",
-        "tasks": [
-          {
-            "name": "destination",
-            "taskModule": "redirect",
-            "config": {
-              "location": "/digital/evolution/digital-pioneers/stirlingshire-voluntary-enterprise",
-              "statusCode": 301
-            }
-          }
-        ]
-      },
-      {
         "name": "digital_evolution_digital_pioneers_grampian_ha",
         "pattern": "/digital/evolution/digital-pioneers/grampian-ha",
         "tasks": [
@@ -6732,6 +6787,20 @@
             "taskModule": "redirect",
             "config": {
               "location": "/digital/evolution/digital-pioneers/grampian-housing-association",
+              "statusCode": 301
+            }
+          }
+        ]
+      },
+      {
+        "name": "digital_evolution_digital_pioneers_sve",
+        "pattern": "/digital/evolution/digital-pioneers/sve",
+        "tasks": [
+          {
+            "name": "destination",
+            "taskModule": "redirect",
+            "config": {
+              "location": "/digital/evolution/digital-pioneers/stirlingshire-voluntary-enterprise",
               "statusCode": 301
             }
           }
@@ -7032,20 +7101,6 @@
         ]
       },
       {
-        "name": "news_campaigns_policy_europe_and_the_third_sector",
-        "pattern": "/news-campaigns-policy/europe-and-the-third-sector",
-        "tasks": [
-          {
-            "name": "destination",
-            "taskModule": "redirect",
-            "config": {
-              "location": "/projects-campaigns/europe-and-the-third-sector",
-              "statusCode": 301
-            }
-          }
-        ]
-      },
-      {
         "name": "news_campaigns_policy_campaigns_welfare_reform",
         "pattern": "/news-campaigns-policy/campaigns/welfare-reform",
         "tasks": [
@@ -7054,6 +7109,20 @@
             "taskModule": "redirect",
             "config": {
               "location": "/projects-campaigns/welfare-reform",
+              "statusCode": 301
+            }
+          }
+        ]
+      },
+      {
+        "name": "news_campaigns_policy_europe_and_the_third_sector",
+        "pattern": "/news-campaigns-policy/europe-and-the-third-sector",
+        "tasks": [
+          {
+            "name": "destination",
+            "taskModule": "redirect",
+            "config": {
+              "location": "/projects-campaigns/europe-and-the-third-sector",
               "statusCode": 301
             }
           }
@@ -10725,6 +10794,174 @@
             "route": "^/running-your-organisation$"
           }
         ],
+        "services-keystone": [
+          {
+            "children": [
+              {
+                "children": [
+                  {
+                    "label": "Governance",
+                    "metaData": {
+                      "_menu_item_classes": "a:1:{i:0;s:0:\"\";}",
+                      "_menu_item_menu_item_parent": "25654",
+                      "_menu_item_object": "page",
+                      "_menu_item_object_id": "25624",
+                      "_menu_item_target": "",
+                      "_menu_item_type": "post_type",
+                      "_menu_item_url": "",
+                      "_menu_item_xfn": "",
+                      "breadcrumbs": "a:2:{i:0;a:4:{s:2:\"id\";i:20090;s:5:\"title\";s:8:\"Services\";s:3:\"url\";s:29:\"http://cms.scvo.org/services/\";s:7:\"excerpt\";s:0:\"\";}i:1;a:4:{s:2:\"id\";i:20098;s:5:\"title\";s:8:\"KeyStone\";s:3:\"url\";s:38:\"http://cms.scvo.org/services/keystone/\";s:7:\"excerpt\";s:170:\"\n                Keystone. KeyStone is a quality award and management toolkit for the people who manage village halls and community buildings. It provides...\n            \";}}",
+                      "breadcrumbs_json": "[{\"id\":20090,\"title\":\"Services\",\"url\":\"http://cms.scvo.org/services/\",\"excerpt\":\"\"},{\"id\":20098,\"title\":\"KeyStone\",\"url\":\"http://cms.scvo.org/services/keystone/\",\"excerpt\":\"n                Keystone. KeyStone is a quality award and management toolkit for the people who manage village halls and community buildings. It provides...n            \"}]",
+                      "menu-item-route-pattern": "^/services/keystone/governance$"
+                    },
+                    "path": "/services/keystone/governance",
+                    "route": "^/services/keystone/governance$"
+                  },
+                  {
+                    "label": "Managing people",
+                    "metaData": {
+                      "_menu_item_classes": "a:1:{i:0;s:0:\"\";}",
+                      "_menu_item_menu_item_parent": "25654",
+                      "_menu_item_object": "page",
+                      "_menu_item_object_id": "25627",
+                      "_menu_item_target": "",
+                      "_menu_item_type": "post_type",
+                      "_menu_item_url": "",
+                      "_menu_item_xfn": "",
+                      "breadcrumbs": "a:2:{i:0;a:4:{s:2:\"id\";i:20090;s:5:\"title\";s:8:\"Services\";s:3:\"url\";s:29:\"http://cms.scvo.org/services/\";s:7:\"excerpt\";s:0:\"\";}i:1;a:4:{s:2:\"id\";i:20098;s:5:\"title\";s:8:\"KeyStone\";s:3:\"url\";s:38:\"http://cms.scvo.org/services/keystone/\";s:7:\"excerpt\";s:170:\"\n                Keystone. KeyStone is a quality award and management toolkit for the people who manage village halls and community buildings. It provides...\n            \";}}",
+                      "breadcrumbs_json": "[{\"id\":20090,\"title\":\"Services\",\"url\":\"http://cms.scvo.org/services/\",\"excerpt\":\"\"},{\"id\":20098,\"title\":\"KeyStone\",\"url\":\"http://cms.scvo.org/services/keystone/\",\"excerpt\":\"n                Keystone. KeyStone is a quality award and management toolkit for the people who manage village halls and community buildings. It provides...n            \"}]",
+                      "menu-item-route-pattern": "^/services/keystone/managing-people$"
+                    },
+                    "path": "/services/keystone/managing-people",
+                    "route": "^/services/keystone/managing-people$"
+                  },
+                  {
+                    "label": "Managing money",
+                    "metaData": {
+                      "_menu_item_classes": "a:1:{i:0;s:0:\"\";}",
+                      "_menu_item_menu_item_parent": "25654",
+                      "_menu_item_object": "page",
+                      "_menu_item_object_id": "25630",
+                      "_menu_item_target": "",
+                      "_menu_item_type": "post_type",
+                      "_menu_item_url": "",
+                      "_menu_item_xfn": "",
+                      "breadcrumbs": "a:2:{i:0;a:4:{s:2:\"id\";i:20090;s:5:\"title\";s:8:\"Services\";s:3:\"url\";s:29:\"http://cms.scvo.org/services/\";s:7:\"excerpt\";s:0:\"\";}i:1;a:4:{s:2:\"id\";i:20098;s:5:\"title\";s:8:\"KeyStone\";s:3:\"url\";s:38:\"http://cms.scvo.org/services/keystone/\";s:7:\"excerpt\";s:170:\"\n                Keystone. KeyStone is a quality award and management toolkit for the people who manage village halls and community buildings. It provides...\n            \";}}",
+                      "breadcrumbs_json": "[{\"id\":20090,\"title\":\"Services\",\"url\":\"http://cms.scvo.org/services/\",\"excerpt\":\"\"},{\"id\":20098,\"title\":\"KeyStone\",\"url\":\"http://cms.scvo.org/services/keystone/\",\"excerpt\":\"n                Keystone. KeyStone is a quality award and management toolkit for the people who manage village halls and community buildings. It provides...n            \"}]",
+                      "menu-item-route-pattern": "^/services/keystone/managing-money$"
+                    },
+                    "path": "/services/keystone/managing-money",
+                    "route": "^/services/keystone/managing-money$"
+                  },
+                  {
+                    "label": "Managing resources",
+                    "metaData": {
+                      "_menu_item_classes": "a:1:{i:0;s:0:\"\";}",
+                      "_menu_item_menu_item_parent": "25654",
+                      "_menu_item_object": "page",
+                      "_menu_item_object_id": "25633",
+                      "_menu_item_target": "",
+                      "_menu_item_type": "post_type",
+                      "_menu_item_url": "",
+                      "_menu_item_xfn": "",
+                      "breadcrumbs": "a:2:{i:0;a:4:{s:2:\"id\";i:20090;s:5:\"title\";s:8:\"Services\";s:3:\"url\";s:29:\"http://cms.scvo.org/services/\";s:7:\"excerpt\";s:0:\"\";}i:1;a:4:{s:2:\"id\";i:20098;s:5:\"title\";s:8:\"KeyStone\";s:3:\"url\";s:38:\"http://cms.scvo.org/services/keystone/\";s:7:\"excerpt\";s:170:\"\n                Keystone. KeyStone is a quality award and management toolkit for the people who manage village halls and community buildings. It provides...\n            \";}}",
+                      "breadcrumbs_json": "[{\"id\":20090,\"title\":\"Services\",\"url\":\"http://cms.scvo.org/services/\",\"excerpt\":\"\"},{\"id\":20098,\"title\":\"KeyStone\",\"url\":\"http://cms.scvo.org/services/keystone/\",\"excerpt\":\"n                Keystone. KeyStone is a quality award and management toolkit for the people who manage village halls and community buildings. It provides...n            \"}]",
+                      "menu-item-route-pattern": "^/services/keystone/managing-resources$"
+                    },
+                    "path": "/services/keystone/managing-resources",
+                    "route": "^/services/keystone/managing-resources$"
+                  },
+                  {
+                    "label": "Working with users",
+                    "metaData": {
+                      "_menu_item_classes": "a:1:{i:0;s:0:\"\";}",
+                      "_menu_item_menu_item_parent": "25654",
+                      "_menu_item_object": "page",
+                      "_menu_item_object_id": "25636",
+                      "_menu_item_target": "",
+                      "_menu_item_type": "post_type",
+                      "_menu_item_url": "",
+                      "_menu_item_xfn": "",
+                      "breadcrumbs": "a:2:{i:0;a:4:{s:2:\"id\";i:20090;s:5:\"title\";s:8:\"Services\";s:3:\"url\";s:29:\"http://cms.scvo.org/services/\";s:7:\"excerpt\";s:0:\"\";}i:1;a:4:{s:2:\"id\";i:20098;s:5:\"title\";s:8:\"KeyStone\";s:3:\"url\";s:38:\"http://cms.scvo.org/services/keystone/\";s:7:\"excerpt\";s:170:\"\n                Keystone. KeyStone is a quality award and management toolkit for the people who manage village halls and community buildings. It provides...\n            \";}}",
+                      "breadcrumbs_json": "[{\"id\":20090,\"title\":\"Services\",\"url\":\"http://cms.scvo.org/services/\",\"excerpt\":\"\"},{\"id\":20098,\"title\":\"KeyStone\",\"url\":\"http://cms.scvo.org/services/keystone/\",\"excerpt\":\"n                Keystone. KeyStone is a quality award and management toolkit for the people who manage village halls and community buildings. It provides...n            \"}]",
+                      "menu-item-route-pattern": "^/services/keystone/working-with-users$"
+                    },
+                    "path": "/services/keystone/working-with-users",
+                    "route": "^/services/keystone/working-with-users$"
+                  },
+                  {
+                    "label": "Legislation &#038; regulation",
+                    "metaData": {
+                      "_menu_item_classes": "a:1:{i:0;s:0:\"\";}",
+                      "_menu_item_menu_item_parent": "25654",
+                      "_menu_item_object": "page",
+                      "_menu_item_object_id": "25639",
+                      "_menu_item_target": "",
+                      "_menu_item_type": "post_type",
+                      "_menu_item_url": "",
+                      "_menu_item_xfn": "",
+                      "breadcrumbs": "a:2:{i:0;a:4:{s:2:\"id\";i:20090;s:5:\"title\";s:8:\"Services\";s:3:\"url\";s:29:\"http://cms.scvo.org/services/\";s:7:\"excerpt\";s:0:\"\";}i:1;a:4:{s:2:\"id\";i:20098;s:5:\"title\";s:8:\"KeyStone\";s:3:\"url\";s:38:\"http://cms.scvo.org/services/keystone/\";s:7:\"excerpt\";s:170:\"\n                Keystone. KeyStone is a quality award and management toolkit for the people who manage village halls and community buildings. It provides...\n            \";}}",
+                      "breadcrumbs_json": "[{\"id\":20090,\"title\":\"Services\",\"url\":\"http://cms.scvo.org/services/\",\"excerpt\":\"\"},{\"id\":20098,\"title\":\"KeyStone\",\"url\":\"http://cms.scvo.org/services/keystone/\",\"excerpt\":\"n                Keystone. KeyStone is a quality award and management toolkit for the people who manage village halls and community buildings. It provides...n            \"}]",
+                      "menu-item-route-pattern": "^/services/keystone/legislation-regulation$"
+                    },
+                    "path": "/services/keystone/legislation-regulation",
+                    "route": "^/services/keystone/legislation-regulation$"
+                  },
+                  {
+                    "label": "Glossary",
+                    "metaData": {
+                      "_menu_item_classes": "a:1:{i:0;s:0:\"\";}",
+                      "_menu_item_menu_item_parent": "25654",
+                      "_menu_item_object": "page",
+                      "_menu_item_object_id": "25642",
+                      "_menu_item_target": "",
+                      "_menu_item_type": "post_type",
+                      "_menu_item_url": "",
+                      "_menu_item_xfn": "",
+                      "breadcrumbs": "a:2:{i:0;a:4:{s:2:\"id\";i:20090;s:5:\"title\";s:8:\"Services\";s:3:\"url\";s:29:\"http://cms.scvo.org/services/\";s:7:\"excerpt\";s:0:\"\";}i:1;a:4:{s:2:\"id\";i:20098;s:5:\"title\";s:8:\"KeyStone\";s:3:\"url\";s:38:\"http://cms.scvo.org/services/keystone/\";s:7:\"excerpt\";s:170:\"\n                Keystone. KeyStone is a quality award and management toolkit for the people who manage village halls and community buildings. It provides...\n            \";}}",
+                      "breadcrumbs_json": "[{\"id\":20090,\"title\":\"Services\",\"url\":\"http://cms.scvo.org/services/\",\"excerpt\":\"\"},{\"id\":20098,\"title\":\"KeyStone\",\"url\":\"http://cms.scvo.org/services/keystone/\",\"excerpt\":\"n                Keystone. KeyStone is a quality award and management toolkit for the people who manage village halls and community buildings. It provides...n            \"}]",
+                      "menu-item-route-pattern": "^/services/keystone/glossary$"
+                    },
+                    "path": "/services/keystone/glossary",
+                    "route": "^/services/keystone/glossary$"
+                  }
+                ],
+                "label": "KeyStone",
+                "metaData": {
+                  "_menu_item_classes": "a:1:{i:0;s:0:\"\";}",
+                  "_menu_item_menu_item_parent": "25653",
+                  "_menu_item_object": "page",
+                  "_menu_item_object_id": "20098",
+                  "_menu_item_target": "",
+                  "_menu_item_type": "post_type",
+                  "_menu_item_url": "",
+                  "_menu_item_xfn": "",
+                  "breadcrumbs": "a:1:{i:0;a:4:{s:2:\"id\";i:20090;s:5:\"title\";s:8:\"Services\";s:3:\"url\";s:29:\"http://cms.scvo.org/services/\";s:7:\"excerpt\";s:0:\"\";}}",
+                  "breadcrumbs_json": "[{\"id\":20090,\"title\":\"Services\",\"url\":\"http://cms.scvo.org/services/\",\"excerpt\":\"\"}]",
+                  "menu-item-route-pattern": "^/services/keystone$"
+                },
+                "path": "/services/keystone",
+                "route": "^/services/keystone$"
+              }
+            ],
+            "label": "Services",
+            "metaData": {
+              "_menu_item_classes": "a:1:{i:0;s:0:\"\";}",
+              "_menu_item_menu_item_parent": "0",
+              "_menu_item_object": "page",
+              "_menu_item_object_id": "20090",
+              "_menu_item_target": "",
+              "_menu_item_type": "post_type",
+              "_menu_item_url": "",
+              "_menu_item_xfn": "",
+              "breadcrumbs": "a:0:{}",
+              "breadcrumbs_json": "[]",
+              "menu-item-route-pattern": "^/services$"
+            },
+            "path": "/services",
+            "route": "^/services$"
+          }
+        ],
         "services-membership": [
           {
             "children": [
@@ -10991,7 +11228,7 @@
       "handlebars": {
         "partials": {
           "breadcrumbs_posts": "",
-          "breadcrumbs": "{{#with data.primaryResponse.hits.hits.[0]._source ~}}\n<ul class=\"breadcrumbs breadcrumbs-length-{{breadcrumb.length}}\">\n  <li><a href=\"/\">Home</a></li>\n  {{#each breadcrumb ~}}\n  <li><a href=\"{{replace url 'https://cms.scvo.org' ''}}\">{{{striptags title}}}</a></li>\n  {{/each ~}}\n  <li>{{{striptags title}}}</li>\n</ul>\n{{/with ~}}",
+          "breadcrumbs": "{{#with data.primaryResponse.hits.hits.[0]._source ~}}\n<ul class=\"breadcrumbs breadcrumbs-length-{{breadcrumb.length}}\">\n  <li><a href=\"/\">Home</a></li>\n  {{#each breadcrumb ~}}\n  <li><a href=\"{{replace (replace url 'http://cms.scvo.org' '') 'https://cms.scvo.org' ''}}\">{{{striptags title}}}</a></li>\n  {{/each ~}}\n  <li>{{{striptags title}}}</li>\n</ul>\n{{/with ~}}",
           "footer_cjs": "<div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone grid-info v-margin\">\n  <div class=\"social\">\n    <p>\n      <strong>Community Jobs Scotland is supported by</strong>\n    </p>\n    <a class=\"noext\" href=\"http://gov.scot\"><img class=\"alignnone size-full wp-image-23699\" src=\"https://cms.scvo.org/wp-content/uploads/2018/01/Scot-Gov-Logo.jpg\" alt=\"Scottish Government\" width=\"300\" /></a>\n  </div>\n</div>",
           "footer_credit_union": "<div class=\"footer-image join-our-hub credit-union\">\n  <div class=\"container-fluid\">\n    <div class=\"mdc-layout-grid\">\n      <div class=\"mdc-layout-grid__inner\">\n        <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-2\">\n        </div>\n        <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-4\">\n          <h2 style=\"text-align:left;\">\n            Contact SCVO Credit Union\n          </h2>\n          <ul class=\"fa-ul\">\n            <li style=\"text-align:left;\">\n              <span class=\"fa-li\"><span class=\"fas fa-envelope-square\"></span></span>\n              <a href=\"mailto:credit.union@scvo.org.uk\">credit.union@scvo.org.uk</a>\n            </li>\n            <li style=\"text-align:left;\">\n              <span class=\"fa-li\"><span class=\"fas fa-phone-square\"></span></span>\n              <a href=\"tel:+441314748003\">0131 474 8003</a>\n            </li>\n          </ul>\n        </div>\n        <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-4\">\n          <h2 style=\"text-align:left;\">\n            Office opening hours\n          </h2>\n          <p style=\"text-align:left;\">\n            Monday to Thursday 9.30am to 4.00pm<br />\n            Friday 9.30am to 12.00pm\n          </p>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>",
           "footer_join_our_hub": "<div class=\"footer-image join-our-hub\">\n  <div class=\"container-fluid\">\n    <div class=\"mdc-layout-grid\">\n      <div class=\"mdc-layout-grid__inner\">\n        <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-12\">\n          <h2>\n            Affordable and flexible office space for third sector organisations\n          </h2>\n          <p>\n            We think everyone in the third sector should have great places to work,\n            so we’ve opened our doors to create shared office spaces for other charities and social enterprises.\n          </p>\n          <p>\n            Office locations in Glasgow, Edinburgh and Inverness.\n          </p>\n          <a href=\"/services/office-space\" class=\"mdc-button mdc-button--raised\">Join our hub</a>\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n",
@@ -11021,6 +11258,7 @@
           "menu_running_legislation": "{{>sidebar_menu items=context.metaData.menus.running-legislation path=request.url.pathname id=\"running-legislation-menu\"}}\n{{> sidebar_running}}",
           "menu_running_staff": "{{>sidebar_menu items=context.metaData.menus.running-staff path=request.url.pathname id=\"running-staff-menu\"}}\n{{> sidebar_running}}",
           "menu_running": "{{>sidebar_menu items=context.metaData.menus.running path=request.url.pathname id=\"running-menu\"}}\n{{> sidebar_running}}",
+          "menu_services_keystone": "{{>sidebar_menu items=context.metaData.menus.services-keystone path=request.url.pathname id=\"keystone-menu\"}}",
           "menu_services_membership": "{{>sidebar_menu items=context.metaData.menus.services-membership path=request.url.pathname id=\"running-services-membership-menu\"}}",
           "menu_setting_up": "{{>sidebar_menu items=context.metaData.menus.setting-up-a-charity path=request.url.pathname id=\"setting-up-a-charity-menu\"}}\n{{> sidebar_running}}",
           "pagination": "{{#compare paging.totalPages \">\" 1 ~}}\n<ul class=\"pagination inline-list\">\n  <li class=\"{{#if paging.prevPage}}{{else}}disabled{{/if}}\">\n    <a class=\"pagination-arrow\" href=\"{{request.params.uri.pathname}}?{{{querystringify ../request.params.query page=paging.prevPage}}}\"><i class=\"far fa-fw fa-chevron-left\"></i></a>\n  </li>\n  {{#each paging.pageRange ~}}\n  <li class=\"{{#compare ../paging.currentPage \"===\" this.pageNumber}}current-page {{/compare}}pagination-distance-{{this.distance}}\">\n    <a class=\"pagination-page\" href=\"{{../request.params.uri.pathname}}?{{{querystringify ../request.params.query page=this.pageNumber}}}\">\n      {{this.pageNumber}}\n    </a>\n  </li>\n  {{/each ~}}\n  <li class=\"{{#if paging.nextPage}}{{else}}disabled{{/if}}\">\n    <a class=\"pagination-arrow\" href=\"{{request.params.uri.pathname}}?{{{querystringify ../request.params.query page=paging.nextPage}}}\"><i class=\"far fa-fw fa-chevron-right\"></i></a>\n  </li>\n</ul>\n{{/compare ~}}",
@@ -11105,6 +11343,7 @@
           "pages_page-home": "<div class=\"splash-image hello\" style=\"{{> header_splash_image}}\">\n  <div class=\"splash-overlay\">\n    <div class=\"container-fluid\">\n      <div class=\"mdc-layout-grid\">\n        <h1 class=\"header-text\">\n          <span class=\"header-text-banner\">\n            Hello,<br />\n            we're SCVO\n          </span>\n        </h1>\n        <p class=\"header-extra\">\n          Championing Scotland's vibrant charities,<br />\n          voluntary organisations &amp; social enterprises\n        </p>\n        <p>\n          <a href=\"/about\" class=\"mdc-button\">Find out more</a>\n        </p>\n      </div>\n      <!-- {{> header_caption}} -->\n    </div>\n  </div>\n</div>\n\n<section class=\"search\">\n  <div class=\"container-fluid\">\n    <div class=\"mdc-layout-grid\">\n      <div class=\"mdc-layout-grid__inner\">\n        <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone\">\n          <h3>What can we help you with?</h3>\n          <div class=\"main_search\">\n            <form action=\"/search\" method=\"GET\" [searchroute]=\"'main_search'\" class=\"search_form\" autocomplete=\"off\">\n              <input type=\"text\" class=\"mdc-textfield__input white-text mdc-text-field searchRoute\" placeholder=\"Search SCVO, Goodmoves, TFN, and more\" id=\"q\" name=\"q\">\n              <button type=\"submit\" class=\"mdc-toolbar__icon mdc-toolbar__search search-button-large\" aria-label=\"Search\" alt=\"Search\">\n                <span class=\"far fa-2x fa-search\" aria-hidden=\"true\"></span>\n              </button>\n            </form>\n          </div>\n        </div>\n        <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone\">\n          <h3>Trending topics</h3>\n          <div class=\"mdc-layout-grid\">\n            <div class=\"mdc-layout-grid__inner\">\n              <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone\">\n                <a href=\"/projects-campaigns/datawareness\">GDPR</a>\n              </div>\n              <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone\">\n                <a href=\"/digital\">Digital</a>\n              </div>\n              <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone\">\n                <a href=\"/running-your-organisation/business-planning/writing-business-plan\">Writing a business plan</a>\n              </div>\n              <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone\">\n                <a href=\"/jobs/community-jobs-scotland/information-for-employers/become-an-employer\">Become a CJS employer</a>\n              </div>\n              <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone\">\n                <a href=\"/funding\">Funding</a>\n              </div>\n              <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone\">\n                <a href=\"/running-your-organisation/governance/roles-responsibilities\">Governance roles & responsibilites</a>\n              </div>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n</section>\n\n<section class=\"featured-content\">\n\n  <div class=\"featured-background-image charity-awards\" style=\"background-image: url('https://storage.googleapis.com/scvo-cms/wp-content/uploads/2018/01/SCA-2018-SCVOWEB-MAIN-1400x400.jpg');\">\n    <div class=\"container-fluid\">\n      <div class=\"featured scvo-cms scvo-cms-page scvo-cms-page-20536 mdc-layout-grid\">\n        <div class=\"mdc-layout-grid__inner\">\n          <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone\">\n            <a href=\"/scottish-charity-awards\">\n              <img alt=\"Scottish Charity Awards\" class=\"header-text\" src=\"https://storage.googleapis.com/scvo-cms/wp-content/uploads/2018/01/SCA_2018_LOGO_MAIN.png\">\n            </a>\n          </div>\n          <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-8-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone c-align\">\n            <div class=\"mdc-card\">\n              <div class=\"mdc-card-inner\">\n                <h3>\n                  Congratulations to our Scottish Charity Awards 2018 winners!\n                </h3>\n                <p>\n                  Charities and individuals from across Scotland have been recognised for the life-changing difference they make at the 2018 Scottish Charity Awards, which took place at the Edinburgh International Conference Centre on Thursday 14 June.\n                  <a href=\"/scottish-charity-awards\">Read more</a>\n                </p>\n              </div>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n\n  <div class=\"featured-background-image i-love-charity\">\n    <div class=\"container-fluid\">\n      <div class=\"featured scvo-cms scvo-cms-page scvo-cms-page-20536 mdc-layout-grid\">\n        <div class=\"mdc-layout-grid__inner\" style=\"position: relative;\">\n          <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-7-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone\" style=\"text-align: center;\">\n            <a href=\"/projects-campaigns/i-love-charity\">\n              <img class=\"header-image\" src=\"https://storage.googleapis.com/scvo-cms/wp-content/uploads/2018/02/i-love-charity-lp-banner.png\" style=\"max-width: 100%; height: auto;\">\n            </a>\n          </div>\n          <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-5-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone\">\n            <div class=\"mdc-card v-margin-full\">\n              <section class=\"mdc-card__supporting-text\" style=\"color: black !important;\">\n                The <strong>‘I Love Charity’ campaign</strong> aims to inspire trust in charities by supporting good governance within organisations to ensure they are well run, open and transparent, and to encourage charities to work harder at promoting the positive impact of their work.\n              </section>\n              <section class=\"mdc-card__actions\">\n                <ul>\n                  <li><a class=\"mdc-card__action mdc-button\" href=\"/projects-campaigns/i-love-charity\">Find out more</a></li>\n                </ul>\n              </section>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n\n  <!-- <div class=\"featured-background-image\" style=\"padding: 1rem 0; background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/scvo-hp-g2018-banner-gb-1400x400.jpg');\">\n  <div class=\"container-fluid\">\n  <div class=\"featured scvo-cms scvo-cms-page scvo-cms-page-20536 mdc-layout-grid\">\n  <div class=\"mdc-layout-grid__inner\" style=\"position: relative;\">\n  <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-9-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone\" style=\"text-align: center;\">\n  <a href=\"/the-gathering\">\n  <img class=\"header-image\" src=\"https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/g2018-logo-WHITE-DETAIL.png\" style=\"max-width: 100%; height: auto;\">\n  </a>\n  </div>\n  <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone\">\n  <div class=\"mdc-card\" style=\"background-color: rgba(0,0,0,0.5);\">\n  <section class=\"mdc-card__supporting-text\">\n  The Gathering is the largest free third sector event in the UK, a place for all the amazing people working in the third sector to network, showcase what they do and learn from each other.\n  </section>\n  <section class=\"mdc-card__actions\">\n  <ul>\n  <li><a class=\"mdc-card__action mdc-button\" href=\"/the-gathering\">Find out more</a></li>\n  <li><a class=\"mdc-card__action mdc-button\" href=\"https://thegathering.scot/events/\">Book to attend <span class=\"far fa-external-link\"></span></a></li>\n  </ul>\n  </section>\n  </div>\n  </div>\n  </div>\n  </div>\n  </div>\n  </div> -->\n\n  <div class=\"container-fluid\">\n    <h2>\n      Latest blog post\n      <a href=\"/blogs\" class=\"mdc-typography--caption\">See all</a>\n    </h2>\n  </div>\n  {{#with data.supplimentaryResponses.blogs_latest.hits.hits.[0] ~}}\n  <!-- <div {{#if _source.header_background}}class=\"featured-background-image\" style=\"background-image: url('{{_source.header_background}}');\"{{else}}class=\"featured-text\"{{/if}}> -->\n  <div class=\"featured-text\">\n    <div class=\"container-fluid\">\n      {{{_source.rendered.scvo_featured}}}\n    </div>\n  </div>\n  {{/with ~}}\n\n  <div class=\"featured-background-image eu-are-valued\" style=\"background-image: url('https://storage.googleapis.com/scvo-cms/wp-content/uploads/2017/10/eu-are-valued-bg-1400x400.jpg');\">\n    <div class=\"container-fluid\">\n      <div class=\"featured scvo-cms scvo-cms-page scvo-cms-page-20536 mdc-layout-grid\">\n        <div class=\"mdc-layout-grid__inner\">\n          <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-3-tablet mdc-layout-grid__cell--span-4-phone\">\n            <a href=\"/projects-campaigns/europe-and-the-third-sector/eu-are-valued\">\n              <img alt=\"#EUareValued\" class=\"header-text\" src=\"https://storage.googleapis.com/scvo-cms/wp-content/uploads/2017/10/eu-are-valued-text.png\">\n            </a>\n          </div>\n          <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-8-desktop mdc-layout-grid__cell--span-5-tablet mdc-layout-grid__cell--span-4-phone c-align\">\n            <p>\n              Here at SCVO, we love charities. We believe every person who works to make a difference to Scottish communities should be valued, and that includes our colleagues who have come from other EU countries to live and work here. Scotland’s third sector is strengthened thanks to their contribution&hellip;\n              <a href=\"/projects-campaigns/europe-and-the-third-sector/eu-are-valued\">Read more</a>\n            </p>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n\n  <div class=\"container-fluid\">\n    <h2>\n      Latest press release\n      <a href=\"/press-media\" class=\"mdc-typography--caption\">See all</a>\n    </h2>\n  </div>\n  {{#with data.supplimentaryResponses.press_latest.hits.hits.[0] ~}}\n  <!-- <div {{#if _source.header_background}}class=\"featured-background-image\" style=\"background-image: url('{{_source.header_background}}');\"{{else}}class=\"featured-text\"{{/if}}> -->\n  <div class=\"featured-text\">\n    <div class=\"container-fluid\">\n      {{{_source.rendered.scvo_featured}}}\n    </div>\n  </div>\n  {{/with ~}}\n\n  <!-- {{#each supplimentaryResponses.featured.hits.hits}}\n  <div {{#if _source.header_background}}class=\"featured-background-image\" style=\"background-image: url('{{_source.header_background}}');\"{{else}}class=\"featured-text\"{{/if}}>\n  <div class=\"container-fluid\">\n  {{{_source.rendered.featured}}}\n  </div>\n  </div>\n  {{/each}} -->\n</section>\n\n<section class=\"callout-image cta-content\">\n  <div class=\"container-fluid\">\n    <div class=\"cta-grid mdc-layout-grid\">\n      <div class=\"mdc-layout-grid__inner\">\n        <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-12\">\n          <h2>\n            Find information on&hellip;\n          </h2>\n        </div>\n        <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone\">\n          <h3>\n            <a href=\"/setting-up-a-charity\">\n              <span class=\"fal fa-book fa-fw fa-3x\" aria-hidden=\"true\"></span>\n              <span class=\"underline\">Setting up an organisation</span>\n            </a>\n          </h3>\n        </div>\n        <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone\">\n          <h3>\n            <a href=\"/funding\">\n              <span class=\"fal fa-chart-bar fa-fw fa-3x\" aria-hidden=\"true\"></span>\n              <span class=\"underline\">Funding for my project</span>\n            </a>\n          </h3>\n        </div>\n        <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone\">\n          <h3>\n            <a href=\"/events\">\n              <span class=\"fal fa-graduation-cap fa-fw fa-3x\" aria-hidden=\"true\"></span>\n              <span class=\"underline\">Training courses &amp; events</span>\n            </a>\n          </h3>\n        </div>\n        <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone\">\n          <h3>\n            <a href=\"/jobs\">\n              <span class=\"fal fa-handshake fa-fw fa-3x\" aria-hidden=\"true\"></span>\n              <span class=\"underline\">Jobs in the sector</span>\n            </a>\n          </h3>\n        </div>\n      </div>\n    </div>\n  </div>\n</section>\n\n<section class=\"latest-content\">\n  <div class=\"container-fluid\">\n    <div class=\"latest-grid mdc-layout-grid\">\n      <div class=\"mdc-layout-grid__inner\">\n        <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone\">\n          <h2>\n            Recent SCVO blog posts\n          </h2>\n          {{{data.supplimentaryResponses.blogs_latest.hits.hits.[1]._source.rendered.scvo_gist}}}\n          {{{data.supplimentaryResponses.blogs_latest.hits.hits.[2]._source.rendered.scvo_gist}}}\n          {{{data.supplimentaryResponses.blogs_latest.hits.hits.[3]._source.rendered.scvo_gist}}}\n          <h2>\n            <a href=\"/blogs\">Read more SCVO blogs</a>\n          </h2>\n        </div>\n        <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone\">\n          <h2>\n            Latest TFN news\n          </h2>\n          {{#each data.supplimentaryResponses.tfn_latest.hits.hits ~}}\n          {{{_source.rendered.scvo_gist}}}\n          {{/each ~}}\n          <h2>\n            <a href=\"http://thirdforcenews.org.uk\">Read more on TFN</a>\n          </h2>\n        </div>\n        <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone no-border\">\n          <h2>\n            Top third sector jobs\n          </h2>\n          {{#each data.supplimentaryResponses.goodmoves_latest.hits.hits ~}}\n          {{{_source.rendered.scvo_gist}}}\n          {{/each ~}}\n          <h2>\n            <a href=\"https://goodmoves.com\">See more on <strong>good</strong>moves</a>\n          </h2>\n        </div>\n      </div>\n    </div>\n  </div>\n</section>\n\n{{> footer_services}}\n",
           "pages_page-jobs-landing": "<div class=\"page jobs-landing\">\n  {{> header_splash}}\n  <div class=\"container-fluid\">\n    {{> breadcrumbs}}\n    <div class=\"mdc-layout-grid equal-height support v-margin-full\">\n      <div class=\"mdc-layout-grid__inner\">\n        <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone content page-content search\">\n          <div class=\"mdc-card goodmoves-brand v-margin\">\n            <section class=\"mdc-card__media\"><a href=\"https://goodmoves.com\">&nbsp;</a></section>\n            <section class=\"mdc-card__supporting-text\">\n              <h3>Find a job in the third sector</h3>\n              <form action=\"/jobs/search\" method=\"GET\" [searchroute]=\"'goodmoves_job_search'\" class=\"search_form\" data-auto-search=\"true\">\n                <div class=\"mdc-textfield mdc-textfield--upgraded\">\n                  <input type=\"text\" class=\"mdc-textfield__input\" name=\"q\" id=\"jobs-keywords\" placeholder=\"Keywords\" value=\"{{request.params.query.q}}\">\n                  <button type=\"submit\" class=\"mdc-toolbar__icon mdc-toolbar__search search-button-large\" aria-label=\"Search\" alt=\"Search\">\n                    <span class=\"far fa-2x fa-search\" aria-hidden=\"true\"></span>\n                  </button>\n                </div>\n              </form>\n              <p>\n                Try: <a href=\"/jobs/search?region=East+of+Scotland\">East of Scotland</a>, <a href=\"/jobs/search?role=Management\">Management</a>, <a href=\"/jobs/search?sector=Social+Care\">Social Care</a>\n              </p>\n            </section>\n            <section class=\"mdc-card__actions\">\n              <a href=\"https://goodmoves.com/recruiting\" class=\"mdc-action\">Advertise with us <span class=\"far fa-external-link\"></span></a>\n            </section>\n          </div>\n        </div>\n        <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone content page-content\">\n          <div class=\"mdc-card cjs-brand v-margin\">\n            <section class=\"mdc-card__media\"><a href=\"/jobs/community-jobs-scotland\">&nbsp;</a></section>\n            <section class=\"mdc-card__supporting-text\">\n              <h3>Creating jobs in Scotland's third sector for unemployed young people</h3>\n              <p>\n                Community Jobs Scotland works with hundreds of third sector organisations and has supported over 8,000 unemployed young people into work.\n              </p>\n            </section>\n            <section class=\"mdc-card__actions\">\n              <ul>\n                <li><a href=\"/jobs/community-jobs-scotland\" class=\"mdc-action\">Find out more</a></li>\n                <li><a href=\"http://jobs.scvo.org.uk\" class=\"mdc-action\">JCP & SDS vacancy access</a></li>\n              </ul>\n            </section>\n          </div>\n        </div>\n      </div>\n    </div>\n    <div class=\"mdc-layout-grid\">\n      <div class=\"mdc-layout-grid__inner\">\n        <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone top-jobs content page-content\">\n          <h2>Top jobs on <strong>good</strong>moves</h2>\n          <div class=\"mdc-layout-grid\">\n            <div class=\"mdc-layout-grid__inner\">\n              {{#each data.supplimentaryResponses.goodmoves_latest.hits.hits ~}}\n              <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet  mdc-layout-grid__cell--span-4-phone\">\n                {{{_source.rendered.scvo_gist}}}\n              </div>\n              {{/each ~}}\n            </div>\n          </div>\n          <p>\n            <a href=\"/jobs/search\" class=\"mdc-button mdc-button--raised\">Find more jobs</a>\n          </p>\n        </div>\n        {{#compare data.supplimentaryResponses.related_training.hits.total \">\" 0 ~}}\n        <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone related page-related\">\n          <h2>Our training courses</h2>\n          <div class=\"mdc-layout-grid\">\n            <div class=\"mdc-layout-grid__inner\">\n              {{#each data.supplimentaryResponses.related_training.hits.hits ~}}\n              <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet  mdc-layout-grid__cell--span-4-phone\">\n                {{{_source.rendered.scvo_gist}}}\n              </div>\n              {{/each ~}}\n            </div>\n          </div>\n          <p>\n            <a href=\"/events?course_type=Training+Course\" class=\"mdc-button mdc-button--raised\">See all courses</a>\n          </p>\n        </div>\n        {{/compare ~}}\n      </div>\n    </div>\n  </div>\n</div>\n",
           "pages_page-json-ld": "{{#if multipleResults ~}}\n{ \"error\": \"404\" }\n{{else}}\n{{{data.primaryResponse.hits.hits.[0]._source.rendered.json_ld}}}\n{{/if ~}}",
+          "pages_page-keystone": "<div class=\"page credit-union\">\n  {{> header_splash}}\n  <div class=\"container-fluid\">\n    {{> breadcrumbs}}\n    <div class=\"mdc-layout-grid\">\n      <div class=\"mdc-layout-grid__inner\">\n        <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-9-desktop mdc-layout-grid__cell--span-5-tablet mdc-layout-grid__cell--span-4-phone content page-content\">\n          {{{data.primaryResponse.hits.hits.[0]._source.rendered.scvo_full}}}\n        </div>\n        <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-3-tablet mdc-layout-grid__cell--span-4-phone content sidebar page-sidebar\">\n          {{> menu_services_keystone}}\n        </div>\n      </div>\n    </div>\n  </div>\n</div>",
           "pages_page-membership": "<div class=\"page membership\">\n  {{> header_splash}}\n  <div class=\"container-fluid\">\n    {{> breadcrumbs}}\n    <div class=\"mdc-layout-grid\">\n      <div class=\"mdc-layout-grid__inner\">\n        <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-9-desktop mdc-layout-grid__cell--span-5-tablet mdc-layout-grid__cell--span-4-phone content page-content\">\n          {{{data.primaryResponse.hits.hits.[0]._source.rendered.scvo_full}}}\n        </div>\n        <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-3-tablet mdc-layout-grid__cell--span-4-phone content sidebar page-sidebar\">\n          {{> menu_services_membership}}\n        </div>\n      </div>\n    </div>\n  </div>\n</div>\n",
           "pages_page-no-margin": "<div class=\"page\">\n  {{> header_splash}}\n  <div class=\"container-fluid\">\n    {{> breadcrumbs}}\n  </div>\n  <div class=\"page-content\">\n    {{{data.primaryResponse.hits.hits.[0]._source.rendered.scvo_full}}}\n  </div>\n</div>\n",
           "pages_page-policy": "<div class=\"page\">\n  {{> header_splash}}\n  <div class=\"container-fluid content page-content\">\n    {{> breadcrumbs}}\n    <div class=\"mdc-layout-grid support support-policy v-margin\">\n      <div class=\"mdc-layout-grid__inner\">\n        <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-8-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone\">\n          {{{data.primaryResponse.hits.hits.[0]._source.rendered.scvo_full}}}\n        </div>\n        <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone\">\n          <div class=\"mdc-card v-margin\">\n            <section class=\"mdc-card__primary\">\n              <h1 class=\"mdc-card__title mdc-card__title--large\">\n                <a href=\"/projects-campaigns\"><span class=\"fal fa-fw fa-flag fa-2x\"> </span>Campaigns</a>\n              </h1>\n            </section>\n            <section class=\"mdc-card__supporting-text\">\n              Learn more about our campaigns\n            </section>\n            <section class=\"mdc-card__actions\"><a class=\"mdc-card__action\" href=\"/projects-campaigns\">Find out more</a></section>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n\n  <div class=\"container-fluid content page-content\">\n    <div class=\"mdc-layout-grid latest-content\">\n      <div class=\"mdc-layout-grid__inner\">\n        <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone\">\n          <h3>Briefings</h3>\n\n          {{#if data.supplimentaryResponses.latest_briefings.hits.hits ~}}\n          {{{data.supplimentaryResponses.latest_briefings.hits.hits.[0]._source.rendered.scvo_gist}}}\n          {{{data.supplimentaryResponses.latest_briefings.hits.hits.[1]._source.rendered.scvo_gist}}}\n          {{{data.supplimentaryResponses.latest_briefings.hits.hits.[2]._source.rendered.scvo_gist}}}\n          {{/if ~}}\n\n          <a href=\"/policy-research/briefings\" class=\"v-margin\">More briefings</a>\n        </div>\n        <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone\">\n          <h3>Consultation responses</h3>\n\n          {{#if data.supplimentaryResponses.latest_consultation_responses.hits.hits ~}}\n          {{{data.supplimentaryResponses.latest_consultation_responses.hits.hits.[0]._source.rendered.scvo_gist}}}\n          {{{data.supplimentaryResponses.latest_consultation_responses.hits.hits.[1]._source.rendered.scvo_gist}}}\n          {{{data.supplimentaryResponses.latest_consultation_responses.hits.hits.[2]._source.rendered.scvo_gist}}}\n          {{/if ~}}\n\n          <a href=\"/policy-research/consultation-responses\" class=\"v-margin\">More consultation responses</a>\n        </div>\n        <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone no-border\">\n          <h3>Research</h3>\n\n          {{#if data.supplimentaryResponses.latest_research.hits.hits ~}}\n          {{{data.supplimentaryResponses.latest_research.hits.hits.[0]._source.rendered.scvo_gist}}}\n          {{{data.supplimentaryResponses.latest_research.hits.hits.[1]._source.rendered.scvo_gist}}}\n          {{{data.supplimentaryResponses.latest_research.hits.hits.[2]._source.rendered.scvo_gist}}}\n          {{/if ~}}\n\n          <a href=\"/policy-research/research\" class=\"v-margin\">More research</a>\n        </div>\n      </div>\n    </div>\n  </div>\n\n  <div class=\"cta-content callout-image policy-stats v-margin-full\">\n    <div class=\"container-fluid\">\n      <h2>\n        The Scottish third sector\n        <span class=\"mdc-typography--caption\">(Detailed statistics will be published soon)</span>\n      </h2>\n      <div class=\"mdc-layout-grid\">\n        <div class=\"mdc-layout-grid__inner v-margin\">\n          <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone\">\n            <span class=\"fal fa-fw fa-hands-heart fa-5x\"> </span>\n            <p>\n              <strong>1,200,000+ volunteers</strong>\n            </p>\n          </div>\n          <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone\">\n            <span class=\"fal fa-fw fa-bullhorn fa-5x\"> </span>\n            <p>\n              <strong>250,000+ trustees</strong>\n            </p>\n          </div>\n          <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone\">\n            <span class=\"fal fa-fw fa-users fa-5x\"> </span>\n            <p>\n              <strong>106,000+ paid staff</strong>\n            </p>\n          </div>\n          <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone\">\n            <span class=\"fal fa-fw fa-building fa-5x\"> </span>\n            <p>\n              <strong>40,000+ voluntary organisations</strong>\n            </p>\n          </div>\n        </div>\n        <div class=\"mdc-layout-grid__inner v-margin\">\n          <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone\">\n            <span class=\"fal fa-fw fa-hand-holding-heart fa-5x\"> </span>\n            <p>\n              <strong><a href=\"http://www.volunteerscotland.net/policy-and-research/\">More than a quarter of Scottish adults volunteered in 2016</a></strong>\n              </p>\n            </div>\n            <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone\">\n              <span class=\"fal fa-fw fa-chart-bar fa-5x\"> </span>\n              <p>\n                <strong>£11,713,200,000 in assets</strong>\n              </p>\n            </div>\n            <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone\">\n              <span class=\"fal fa-fw fa-chart-line fa-5x\"> </span>\n              <p>\n                <strong>£5.9billion annual turnover in 2017</strong>\n              </p>\n            </div>\n            <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone\">\n              <span class=\"fal fa-fw fa-home-heart fa-5x\"> </span>\n              <p>\n                <strong>937 new charities in 2017</strong>\n              </p>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n\n    <div class=\"container-fluid content page-content\">\n      <div class=\"mdc-layout-grid equal-height support support-policy\">\n        <div class=\"mdc-layout-grid__inner\">\n          <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone\">\n            <div class=\"mdc-card\">\n              <section class=\"mdc-card__primary\">\n                <h1 class=\"mdc-card__title mdc-card__title--large\">\n                  <a href=\"/policy-research/events\"><span class=\"fal fa-fw fa-comments fa-2x\"> </span>Events</a>\n                </h1>\n              </section>\n              <section class=\"mdc-card__supporting-text\">\n                {{#with data.supplimentaryResponses.events_total.hits ~}}\n                {{#compare total \">\" 0 ~}}\n                We have {{total}} upcoming event{{#compare total \">\" 1}}s{{/compare}}\n                {{else}}\n                We don't have any upcoming events\n                {{/compare ~}}\n              </section>\n              {{#compare total \">\" 0 ~}}\n              <section class=\"mdc-card__actions\">\n                <a class=\"mdc-card__action\" href=\"/policy-research/events\">Find out more</a>\n              </section>\n              {{/compare ~}}\n              {{/with ~}}\n            </div>\n          </div>\n          <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone\">\n            <div class=\"mdc-card\">\n              <section class=\"mdc-card__primary\">\n                <h1 class=\"mdc-card__title mdc-card__title--large\">\n                  <a href=\"/policy-research/evidence-library\"><span class=\"fal fa-fw fa-folder-open fa-2x\"> </span>Evidence Library</a>\n                </h1>\n              </section>\n              <section class=\"mdc-card__supporting-text\">\n                A resource for anyone interested in learning about the third sector in Scotland\n              </section>\n              <section class=\"mdc-card__actions\"><a class=\"mdc-card__action\" href=\"/policy-research/evidence-library\">Find out more</a></section>\n            </div>\n          </div>\n          <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone\">\n            <div class=\"mdc-card\">\n              <section class=\"mdc-card__primary\">\n                <h1 class=\"mdc-card__title mdc-card__title--large\">\n                  <a href=\"/policy-research/policy-committee\"><span class=\"fal fa-fw fa-book-heart fa-2x\"> </span>Policy Committee</a>\n                </h1>\n              </section>\n              <section class=\"mdc-card__supporting-text\">\n                Advising us on policies which reflect the best interests of the third sector in Scotland\n              </section>\n              <section class=\"mdc-card__actions\"><a class=\"mdc-card__action\" href=\"/policy-research/policy-committee\">Find out more</a></section>\n            </div>\n          </div>\n        </div>\n      </div>\n    </div>\n  </div>\n",
