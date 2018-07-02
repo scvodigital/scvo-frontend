@@ -178,6 +178,58 @@
     ],
     "menus": "{:./configurations/goodmoves/goodmoves-menus.json}",
     "metaData": {
+      "commonTasks": {
+        "auth_secure": {
+          "name": "auth",
+          "taskType": "firebase-auth",
+          "config": {
+            "cookie": "gm_token",
+            "appName": "scvo",
+            "noCookieRoute": "not_authorised",
+            "notAuthenticatedRoute": "not_authorised"
+          }
+        },
+        "auth_not_secure": {
+          "name": "auth",
+          "taskType": "firebase-auth",
+          "config": {
+            "cookie": "gm_token",
+            "appName": "scvo",
+            "noCookieRoute": "",
+            "notAuthenticatedRoute": ""
+          },
+          "common_elastic": {
+            "name": "common_elastic",
+            "taskType": "elasticsearch",
+            "config": {
+              "connectionStringTemplate": "{$../elasticsearch-url.txt}",
+              "elasticsearchConfig": {
+                "apiVersion": "5.6"
+              },
+              "queryTemplates": [
+                {
+                  "name": "currently_recruiting",
+                  "index": "web-content-production",
+                  "type": "goodmoves-organisation",
+                  "template": "{$./queries/organisations/currently-recruiting.json}"
+                },
+                {
+                  "name": "home_based",
+                  "index": "web-content-production",
+                  "type": "goodmoves-vacancy",
+                  "template": "{$./queries/vacancies/home-based.json}"
+                },
+                {
+                  "name": "types",
+                  "index": "web-content-production",
+                  "type": "goodmoves-vacancy",
+                  "template": "{$./queries/vacancies/types.json}"
+                }
+              ]
+            }
+          }
+        }
+      },
       "handlebarsPartials": {
         "handle_404": "{$./configurations/goodmoves/partials/handle-404.hbs}",
         "search_info": "{$./configurations/goodmoves/partials/search-info.hbs}",

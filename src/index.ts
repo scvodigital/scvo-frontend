@@ -476,20 +476,6 @@ async function loadRouters(): Promise<any> {
       firebaseRtbSet: new TaskFirebaseRtbSet(firebaseApps)
     }
 
-    /*
-    var routerTasks = [
-      new ElasticsearchRouterTask({}),
-      new FirebaseAuthRouterTask(SECRETS.configs),
-      new FirebaseGetDataRouterTask(SECRETS.configs),
-      new FirebaseSetDataRouterTask(SECRETS.configs),
-      new MySQLRouterTask(SECRETS.mysql, {}),
-      new TransformRouterTask()
-    ];
-
-    var routerDestinations =
-        [new HandlebarsRouterDestination({}), new RedirectRouterDestination()]
-    */
-
     routers = {};
 
     for (var name in sites) {
