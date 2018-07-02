@@ -3,6 +3,7 @@ deploy:
   keyfile: app-engine-service-account.json
   project: scvo-net
   on: dev-next
+
 before_install:
 - openssl aes-256-cbc -K $encrypted_9025fc4e977a_key -iv $encrypted_9025fc4e977a_iv
   -in analytics-secrets.ts.enc -out src/analytics-secrets.ts -d
@@ -10,3 +11,4 @@ before_install:
   -in secrets.ts.enc -out src/secrets.ts -d
 - openssl aes-256-cbc -K $encrypted_9025fc4e977a_key -iv $encrypted_9025fc4e977a_iv
   -in app-engine-service-account.json.enc -out app-engine-service-account.json -d
+
