@@ -1,8 +1,11 @@
-language: node_js
-node_js:
-  - "8.11.1"
-
-before_script: 
-  - "yarn"
-  - "npm run build"
-
+deploy:
+  provider: gae
+  keyfile: app-engine-service-account.json
+  project: scvo-net
+before_install:
+- openssl aes-256-cbc -K $encrypted_9025fc4e977a_key -iv $encrypted_9025fc4e977a_iv
+  -in analytics-secrets.ts.enc -out src/analytics-secrets.ts -d
+- openssl aes-256-cbc -K $encrypted_9025fc4e977a_key -iv $encrypted_9025fc4e977a_iv
+  -in secrets.ts.enc -out src/secrets.ts -d
+- openssl aes-256-cbc -K $encrypted_9025fc4e977a_key -iv $encrypted_9025fc4e977a_iv
+  -in app-engine-service-account.json.enc -out app-engine-service-account.json -d
