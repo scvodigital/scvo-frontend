@@ -414,14 +414,12 @@ function sendError(
 
 var server: any = null;
 if (process.env.devmode) {
-  const keyPath = path.join(__dirname, '../test-cert/server.key');
-  const crtPath = path.join(__dirname, '../test-cert/server.crt');
+  const keyPath = path.join(__dirname, '../test-cert/_wildcard.local-key.pem');
+  const crtPath = path.join(__dirname, '../test-cert/_wildcard.local.pem');
 
   const options = {
     key: fs.readFileSync(keyPath),
-    cert: fs.readFileSync(crtPath),
-    requestCert: false,
-    rejectUnauthorized: false
+    cert: fs.readFileSync(crtPath)
   };
 
   server = https.createServer(options, app).listen(port, () => {
