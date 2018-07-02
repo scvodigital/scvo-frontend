@@ -14,7 +14,7 @@
     "upgrade-router": "yarn add -E @scvo/router @scvo/router-task-firebase @scvo/router-task-elasticsearch @scvo/router-destination-handlebars @scvo/router-destination-redirect",
     "build": "npm run cleanup; npm run compile; npm run build-db; npm run copy; npm run sass; npm run uglify",
     "build-db": "node_modules/@scvo/json-inc/bin/json-inc compile --input ./sites/sites.inc.json --output ./sites/sites.json",
-    "start": "ls node_modules/; npm run compile; node build/index.js",
+    "start": "yarn; ls node_modules/; npm run compile; node build/index.js",
     "dev": "npm run build; devmode=true node build/index.js",
     "dev-router": "npm run router; npm run dev",
     "deploy-dispatch": "gcloud app deploy dispatch.yaml --quiet",
