@@ -8,8 +8,8 @@
                 "config": {
                     "cookie": "gm_token",
                     "appName": "scvo",
-                    "noCookieRoute": "five_hundred",
-                    "notAuthenticatedRoute": "five_hundred"
+                    "noCookieRoute": "four_oh_four",
+                    "notAuthenticatedRoute": "four_oh_four"
                 }
             },
             {
@@ -294,8 +294,8 @@
                 "config": {
                     "cookie": "gm_token",
                     "appName": "scvo",
-                    "noCookieRoute": "five_hundred",
-                    "notAuthenticatedRoute": "five_hundred"
+                    "noCookieRoute": "four_oh_four",
+                    "notAuthenticatedRoute": "four_oh_four"
                 }
             },
             {
@@ -351,8 +351,8 @@
                 "config": {
                     "cookie": "gm_token",
                     "appName": "scvo",
-                    "noCookieRoute": "five_hundred",
-                    "notAuthenticatedRoute": "five_hundred"
+                    "noCookieRoute": "four_oh_four",
+                    "notAuthenticatedRoute": "four_oh_four"
                 }
             },
             {
@@ -362,7 +362,7 @@
                     "connectionName": "notifications",
                     "queryTemplates": {
                         "create_or_replace_subscriber": "INSERT INTO recipients (email, name) VALUES ('{{data.auth.email}}', '{{data.auth.email}}') \n  ON DUPLICATE KEY UPDATE name = '{{data.auth.email}}';\n",
-                        "add_saved_search": "INSERT INTO subscriptions (campaign, email, name) VALUES ('goodmoves-saved-searches', '{{data.auth.email}}', '{{default request.query.params.name \"My Search\"}}') \n  ON DUPLICATE KEY UPDATE name = '{{default request.query.params.name \"My Search\"}}';\n",
+                        "add_saved_search": "INSERT INTO subscriptions (campaign, email, name) VALUES ('goodmoves-saved-searches', '{{data.auth.email}}', '{{default request.params.query.name \"My Search\"}}') \n  ON DUPLICATE KEY UPDATE name = '{{default request.params.query.name \"My Search\"}}';\n",
                         "add_saved_search_parameters": "{{#*inline \"insertParam\"}}\n  {{#if (getProperty @root.request.params.query parameter)}}\n    {{#each (arrayify (getProperty @root.request.params.query parameter))}}\n      ('goodmoves-saved-searches', '{{@root.data.auth.email}}', '{{default @root.request.params.query.name \"My Search\"}}', '{{../parameter}}', '{{this}}'),\n    {{/each}}\n  {{/if}}\n{{/inline}}\n\nINSERT INTO subscriptionParameters (campaign, email, name, parameter, value) VALUES\n{{#each (split \"keywords,roles,statuses,sectors\" \",\")}}\n  {{>insertParam parameter=this}}\n{{/each}}\n('goodmoves-saved-searches', '{{@root.data.auth.email}}', '{{default @root.request.params.query.name \"My Search\"}}', 'stopper', 'stopper');\n"
                     }
                 }
@@ -387,8 +387,8 @@
                 "config": {
                     "cookie": "gm_token",
                     "appName": "scvo",
-                    "noCookieRoute": "five_hundred",
-                    "notAuthenticatedRoute": "five_hundred"
+                    "noCookieRoute": "four_oh_four",
+                    "notAuthenticatedRoute": "four_oh_four"
                 }
             },
             {
