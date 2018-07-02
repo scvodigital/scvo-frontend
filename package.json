@@ -4,7 +4,7 @@
   "description": "The App Engine service that runs the SCVO=>Router",
   "main": "build/index.js",
   "engines": {
-    "node": ">=6.11.3"
+    "node": ">=8.11.1"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\"",
@@ -14,7 +14,7 @@
     "upgrade-router": "yarn add -E @scvo/router @scvo/router-task-firebase @scvo/router-task-elasticsearch @scvo/router-destination-handlebars @scvo/router-destination-redirect",
     "build": "npm run cleanup; npm run compile; npm run build-db; npm run copy; npm run sass; npm run uglify",
     "build-db": "node_modules/@scvo/json-inc/bin/json-inc compile --input ./sites/sites.inc.json --output ./sites/sites.json",
-    "start": "yarn; ls node_modules/; npm run compile; node build/index.js",
+    "start": "npm run compile; node build/index.js",
     "dev": "npm run build; devmode=true node build/index.js",
     "dev-router": "npm run router; npm run dev",
     "deploy-dispatch": "gcloud app deploy dispatch.yaml --quiet",
@@ -61,6 +61,7 @@
     "express": "^4.16.2",
     "firebase-admin": "^5.12.1",
     "googleapis": "^30.0.0",
+    "gts": "^0.5.4",
     "handlebars": "^4.0.11",
     "jsforce": "^1.8.4",
     "livereload": "^0.7.0",
@@ -69,8 +70,6 @@
     "pdfmake": "^0.1.36",
     "string": "^3.3.3",
     "typescript": "^2.9.2"
-  },
-  "devDependencies": {
     "@scvo/json-inc": "^0.0.14",
     "@types/body-parser": "^1.16.8",
     "@types/chalk": "^2.2.0",
@@ -85,7 +84,6 @@
     "@types/q": "^1.0.7",
     "@types/request": "^2.47.0",
     "@types/string": "^0.0.29",
-    "gts": "^0.5.4",
     "material-components-web": "^0.35.0",
     "node-sass": "^4.7.2"
   }
