@@ -3,23 +3,6 @@
   "pattern": "/transparency-open-data/data.json",
   "tasks": [
     {
-      "name": "primaryResponse",
-      "taskModule": "elasticsearch",
-      "config": {
-        "connectionStringTemplate": "{$../../elasticsearch-url.txt}",
-        "elasticsearchConfig": {
-          "apiVersion": "5.6"
-        },
-        "queryTemplates": {
-          "index": "web-content-production",
-          "type": "scvo-grant-cyber",
-          "template": ">context.metaData.handlebars.queries.grants_grant-data",
-          "noResultsRoute": "four_oh_four"
-        }
-      },
-      "renderer": "handlebars"
-    },
-    {
       "name": "destination",
       "taskModule": "renderLayout",
       "renderer": "handlebars",
@@ -40,7 +23,7 @@
         "output": "body",
         "layouts": {
           "data": {
-            "layout": ">context.metaData.handlebars.layouts.data",
+            "layout": ">context.metaData.handlebars.layouts.json",
             "parts": {
               "content": ">context.metaData.handlebars.templates.grants_data"
             },
