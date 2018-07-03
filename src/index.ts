@@ -46,7 +46,7 @@ const fb = admin.initializeApp(<admin.AppOptions>config);
 // Setup constants
 const dot = <any>new Dot('/');
 const app = express();
-const port = process.env.PORT || 9000;
+const port = 8080; //process.env.PORT || 9000;
 const localDbPath = path.join(__dirname, '../sites/sites.json');
 const assetsPath = path.join(__dirname, 'assets/');
 
