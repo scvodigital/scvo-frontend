@@ -23,7 +23,7 @@ before_deploy:
   - source /home/travis/google-cloud-sdk/path.bash.inc
   - gcloud --quiet version
   - gcloud --quiet components update
-  - gcloud auth activate-service-account --key-file app-engine-service-key.json
+  - gcloud auth activate-service-account --key-file app-engine-service-account.json
   - gcloud config set project scvo-net
 
 deploy:
