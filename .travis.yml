@@ -20,7 +20,7 @@ before_deploy:
   # - source /home/travis/google-cloud-sdk/path.bash.inc
   - rm -rf $HOME/google-cloud-sdk 
   - export CLOUDSDK_CORE_DISABLE_PROMPTS=1
-  - curl https://sdk.cloud.google.com | bash
+  - curl https://sdk.cloud.google.com | bash >/dev/null
   - gcloud --quiet version
   - gcloud --quiet components update
   - gcloud auth activate-service-account --key-file app-engine-service-key.json
