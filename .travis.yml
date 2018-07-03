@@ -24,6 +24,7 @@ before_deploy:
   - gcloud --quiet version
   - gcloud --quiet components update
   - gcloud auth activate-service-account --key-file app-engine-service-account.json
+  - gcloud beta app update --split-health-checks --project scvo-net
   - gcloud config set project scvo-net
   - gcloud config set app/use_deprecated_preparation True
   - gcloud beta app update --split-health-checks --project scvo-net

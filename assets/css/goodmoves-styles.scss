@@ -37,7 +37,7 @@ $desktop-landscape-breakpoint: 1280px;
 
 @import "./node_modules/material-components-web/material-components-web.scss";
 @import url('//cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css');
-@import url('//fonts.googleapis.com/css?family=Montserrat:700|Open+Sans:400,500,600');
+@import url('//fonts.googleapis.com/css?family=Montserrat:700,400|Open+Sans:400,500,600');
 
 body {
   background-color: $mdc-theme-footer-dark;
@@ -1078,6 +1078,14 @@ body {
   padding: 0;
   margin: 0;
 }
+::-moz-selection {
+  color: white;
+  background: $mdc-theme-primary-dark;
+}
+::selection {
+  color: white;
+  background: $mdc-theme-primary-dark;
+}
 .container-fluid {
   max-width: 100%;
   width: 100%;
@@ -1436,6 +1444,13 @@ footer,
           font-size: 4.8rem;
           line-height: 4rem;
           letter-spacing: -0.2rem;
+          .normal {
+            letter-spacing: -0.4rem;
+            font-weight: 400;
+          }
+          .normal.moves {
+            margin-left: -0.45rem;
+          }
         }
       }
     }
