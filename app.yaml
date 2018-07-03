@@ -3,7 +3,6 @@ env: flexible
 runtime: nodejs
 api_version: '1.0'
 threadsafe: true
-split_health_checks: false
 
 manual_scaling:
   instances: 2
@@ -14,6 +13,13 @@ resources:
   cpu: 1
   memory_gb: 1.75
   disk_size_gb: 10
+
+health_check:
+  enable_health_check: True
+  check_interval_sec: 10
+  timeout_sec: 8
+  unhealthy_threshold: 3
+  healthy_threshold: 2
 
 readiness_check:
   path: "/readiness_check"
