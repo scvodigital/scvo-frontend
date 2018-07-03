@@ -9,21 +9,13 @@
       "config": {
         "logic": {
           "if": [
-            {
-              "in": [
-                "view=json",
-                {
-                  "var": "request.fullUrl"
-                }
-              ]
-            },
             "data"
           ]
         },
         "output": "body",
         "layouts": {
           "data": {
-            "layout": ">context.metaData.handlebars.layouts.json",
+            "layout": ">context.metaData.handlebars.layouts.data",
             "parts": {
               "content": ">context.metaData.handlebars.templates.grants_data"
             },
