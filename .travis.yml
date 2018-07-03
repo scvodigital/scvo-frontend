@@ -24,13 +24,13 @@ before_deploy:
   - gcloud --quiet version
   - gcloud --quiet components update
   - gcloud auth activate-service-account --key-file app-engine-service-account.json
-  - gcloud config set app/use_deprecated_preparation True
   - gcloud config set project scvo-net
+  - gcloud config set app/use_deprecated_preparation True
 
 deploy:
   - provider: script
     script:
-      - gcloud beta app deploy
+      - gcloud beta app deploy --verbosity=info
     skip_cleanup: true
     on:
       branch: dev-next
