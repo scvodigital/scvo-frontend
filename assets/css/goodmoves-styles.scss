@@ -451,6 +451,27 @@ a:hover {
 .mdc-chip {
   color: white
 }
+.mdc-card .mdc-chip-set {
+  .mdc-chip {
+    margin: 0;
+    color: $mdc-theme-primary-dark;
+    background: white;
+    font-weight: 600;
+    .mdc-chip__text {
+      margin-left: $unit/2;
+    }
+  }
+}
+
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+}
 
 a {
   font-weight: 600;
@@ -1220,6 +1241,7 @@ body {
     cursor: default;
     pointer-events: none;
     color: $mdc-theme-secondary-dark;
+    opacity: 0.5;
   }
   li:first-child a {
     padding-left: 0;
