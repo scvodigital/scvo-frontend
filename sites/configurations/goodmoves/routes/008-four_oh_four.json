@@ -3,6 +3,16 @@
   "pattern": "/404",
   "tasks": [
     {
+      "name": "auth",
+      "taskModule": "firebaseAuth",
+      "config": {
+        "tokenPath": "request.cookies.gm_token",
+        "appName": "scvo",
+        "noTokenRoute": "",
+        "notAuthenticatedRoute": ""
+      }
+    },
+    {
       "name": "not_found",
       "taskModule": "elasticsearch",
       "config": {

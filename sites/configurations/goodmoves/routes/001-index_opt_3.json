@@ -1,9 +1,6 @@
 {
-  "name": "organisation",
-  "pattern": "/organisation/:slug",
-  "defaultParams": {
-    "context": "detail"
-  },
+  "name": "index_opt_3",
+  "pattern": "/home-option-3",
   "tasks": [
     {
       "name": "auth",
@@ -25,8 +22,8 @@
         },
         "queryTemplates": {
           "index": "web-content-production",
-          "type": "goodmoves-organisation",
-          "template": ">context.metaData.handlebars.queries.organisations_organisation"
+          "type": "goodmoves-vacancy",
+          "template": ">context.metaData.handlebars.queries.vacancies_latest"
         }
       },
       "renderer": "handlebars"
@@ -41,10 +38,16 @@
         },
         "queryTemplates": [
           {
-            "name": "vacancies",
+            "name": "top",
             "index": "web-content-production",
             "type": "goodmoves-vacancy",
-            "template": ">context.metaData.handlebars.queries.vacancies_organisation-vacancies"
+            "template": ">context.metaData.handlebars.queries.vacancies_top"
+          },
+          {
+            "name": "currently_recruiting",
+            "index": "web-content-production",
+            "type": "goodmoves-organisation",
+            "template": ">context.metaData.handlebars.queries.organisations_currently-recruiting"
           },
           {
             "name": "home_based",
@@ -59,17 +62,17 @@
             "template": ">context.metaData.handlebars.queries.vacancies_types"
           },
           {
-            "name": "not_found",
+            "name": "splash",
             "index": "web-content-production",
-            "type": "goodmoves-organisation",
-            "template": ">context.metaData.handlebars.queries.pages_not-found"
+            "type": "scvo-cms-media",
+            "template": ">context.metaData.handlebars.queries.pages_splash"
           }
         ]
       },
       "renderer": "handlebars"
     },
     {
-      "name": "goodhq",
+      "name": "organisations_currently_recruiting",
       "taskModule": "elasticsearch",
       "config": {
         "connectionStringTemplate": "{$../../elasticsearch-url.txt}",
@@ -78,22 +81,29 @@
         },
         "queryTemplates": [
           {
-            "name": "posts",
+            "name": "vacancies",
             "index": "web-content-production",
-            "type": "goodhq-post",
-            "template": ">context.metaData.handlebars.queries.goodhq_posts"
-          },
+            "type": "goodmoves-vacancy",
+            "template": ">context.metaData.handlebars.queries.vacancies_currently-recruiting"
+          }
+        ]
+      },
+      "renderer": "handlebars"
+    },
+    {
+      "name": "posts",
+      "taskModule": "elasticsearch",
+      "config": {
+        "connectionStringTemplate": "{$../../elasticsearch-url.txt}",
+        "elasticsearchConfig": {
+          "apiVersion": "5.6"
+        },
+        "queryTemplates": [
           {
-            "name": "reviews",
+            "name": "tfn_latest",
             "index": "web-content-production",
-            "type": "goodhq-review",
-            "template": ">context.metaData.handlebars.queries.goodhq_reviews"
-          },
-          {
-            "name": "volunteering",
-            "index": "web-content-production",
-            "type": "milo-volunteering-opportunity",
-            "template": ">context.metaData.handlebars.queries.goodhq_volunteering"
+            "type": "tfn-news-post,tfn-feature",
+            "template": ">context.metaData.handlebars.queries.posts_tfn-latest"
           }
         ]
       },
@@ -114,9 +124,9 @@
           "default": {
             "layout": ">context.metaData.handlebars.layouts.default",
             "parts": {
-              "head": ">context.metaData.handlebars.templates.organisations_organisation-head-tags",
-              "body": ">context.metaData.handlebars.templates.organisations_organisation",
-              "foot": ""
+              "head": ">context.metaData.handlebars.templates.pages_home-head-tags",
+              "body": ">context.metaData.handlebars.templates.pages_home-opt-3",
+              "foot": ">context.metaData.handlebars.templates.pages_home-foot"
             },
             "contentType": "text/html"
           }

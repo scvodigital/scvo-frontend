@@ -1,7 +1,17 @@
 {
-  "name": "index_alt",
-  "pattern": "/home-alternative",
+  "name": "index_opt_2",
+  "pattern": "/home-option-2",
   "tasks": [
+    {
+      "name": "auth",
+      "taskModule": "firebaseAuth",
+      "config": {
+        "tokenPath": "request.cookies.gm_token",
+        "appName": "scvo",
+        "noTokenRoute": "",
+        "notAuthenticatedRoute": ""
+      }
+    },
     {
       "name": "primaryResponse",
       "taskModule": "elasticsearch",
@@ -115,7 +125,7 @@
             "layout": ">context.metaData.handlebars.layouts.default",
             "parts": {
               "head": ">context.metaData.handlebars.templates.pages_home-head-tags",
-              "body": ">context.metaData.handlebars.templates.pages_home-alt",
+              "body": ">context.metaData.handlebars.templates.pages_home-opt-2",
               "foot": ">context.metaData.handlebars.templates.pages_home-foot"
             },
             "contentType": "text/html"
