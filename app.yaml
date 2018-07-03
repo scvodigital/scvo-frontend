@@ -7,28 +7,13 @@ threadsafe: true
 manual_scaling:
   instances: 2
 
-network: 
+network:
   name: default
 
 resources:
   cpu: 1
   memory_gb: 1.75
   disk_size_gb: 10
-
-readiness_check:
-  path: "/readiness_check"
-  check_interval_sec: 5
-  timeout_sec: 4
-  failure_threshold: 2
-  success_threshold: 2
-  app_start_timeout_sec: 300
-
-liveness_check:
-  path: "/liveness_check"
-  check_interval_sec: 30
-  timeout_sec: 4
-  failure_threshold: 2
-  success_threshold: 2
 
 health_check:
   enable_health_check: False
