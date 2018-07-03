@@ -29,9 +29,6 @@ before_deploy:
 deploy:
   - provider: script
     script:
-      - pwd
-      - ls
-      - gcloud app deploy dispatch.yaml 
       - gcloud beta app deploy
     skip_cleanup: true
     on:
