@@ -29,8 +29,8 @@ before_deploy:
 deploy:
   - provider: script
     script:
-      - gcloud app deploy dispatch.yaml --quiet
-      - gcloud beta app deploy --quiet
+      - gcloud app deploy dispatch.yaml 
+      - gcloud beta app deploy
     skip_cleanup: true
     on:
       branch: dev-next
