@@ -22,6 +22,7 @@ $base-font-weight:                  400;
 
 $heading-font-family:               "Montserrat", Helvetica, Arial, sans-serif;
 $heading-font-weight:               700;
+$heading-light-font-weight:         500;
 
 $footer-font-family:                "Open Sans", Helvetica, Arial, sans-serif;
 $footer-font-weight:                400;
@@ -37,7 +38,7 @@ $desktop-landscape-breakpoint: 1280px;
 
 @import "./node_modules/material-components-web/material-components-web.scss";
 @import url('//cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css');
-@import url('//fonts.googleapis.com/css?family=Montserrat:700,400|Open+Sans:400,500,600');
+@import url('//fonts.googleapis.com/css?family=Montserrat:700,500|Open+Sans:400,500,600');
 
 body {
   background-color: $mdc-theme-footer-dark;
@@ -433,6 +434,7 @@ footer h3,
 }
 
 .x-items {
+  text-align: center;
   display: inline-block;
   margin: 0 auto;
   width: 100%;
@@ -779,7 +781,7 @@ a {
     h4 {
       margin: 0 0 $unit;
       font-size: 1.5rem;
-      font-weight: 400;
+      font-weight: $heading-light-font-weight;
     }
     .key-info-extra {
       // margin-top: $unit*1.5;
@@ -1449,10 +1451,10 @@ footer,
           letter-spacing: -0.2rem;
           .normal {
             letter-spacing: -0.4rem;
-            font-weight: 400;
+            font-weight: $heading-light-font-weight;
           }
           .normal.moves {
-            margin-left: -0.45rem;
+            margin-left: -0.4rem;
           }
         }
       }
@@ -1538,12 +1540,12 @@ footer,
   }
   .gist {
     .mdc-typography--headline {
-      font-weight: 400;
+      font-weight: $heading-light-font-weight;
       font-size: 1.1rem;
       margin: 0;
     }
     .mdc-card__subtitle {
-      font-weight: 400;
+      font-weight: $heading-light-font-weight;
       margin: $unit/2 0;
       color: $mdc-theme-secondary-dark;
     }
