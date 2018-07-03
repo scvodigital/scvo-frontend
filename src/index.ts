@@ -5,6 +5,7 @@ import * as compression from 'compression';
 import * as cookieParser from 'cookie-parser';
 import * as cors from 'cors';
 import {format} from 'date-fns';
+
 // Import NPM modules
 import * as express from 'express';
 import * as admin from 'firebase-admin';
