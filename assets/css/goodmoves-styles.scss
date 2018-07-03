@@ -390,10 +390,10 @@ footer h3,
 
 .goodmoves-page {
   margin: $unit*1.5 0;
-  // .x-items {
-  //   margin-top: 0;
-  //   margin-bottom: $unit*1.5;
-  // }
+  .x-items {
+    margin-top: 0;
+    // margin-bottom: $unit*1.5;
+  }
   .mdc-card {
     padding: $unit;
     .mdc-typography--headline4 {
@@ -436,7 +436,7 @@ footer h3,
 .x-items {
   text-align: center;
   display: inline-block;
-  margin: 0 auto;
+  margin: $unit*1.5 auto 0;
   width: 100%;
   .x-item {
     line-height: 0;
@@ -551,6 +551,11 @@ a {
 }
 .mdc-button--raised .mdc-list-item__graphic {
   color: white;
+}
+.mdc-button .mdc-list-item__graphic {
+  position: relative;
+  left: 0;
+  margin-right: $unit/2;
 }
 
 .mdc-button--raised {
@@ -1407,21 +1412,32 @@ footer,
       background-image: linear-gradient(60deg, rgba(66, 132, 42, 0.89), rgba(66, 132, 42, 0.91) 47%, transparent 47.08%, transparent);
       min-height: 40vh;
       background-color: transparent;
-      padding: 0;
+      padding: 0 0 $unit*2;
       .mdc-card__actions {
-        margin: 0 0 $unit/4;
+        margin: 0;
         padding: 0;
         .mdc-button {
+          line-height: $unit*2;
+          margin-right: $unit/2;
+          padding: 0 $unit/2;
           background: transparent !important;
           border: 0.125rem solid white !important;
           color: white !important;
-          margin-right: $unit;
         }
         .mdc-button:hover {
           background: white !important;
           color: $mdc-theme-primary !important;
           border-color: $mdc-theme-primary-dark !important;
         }
+        .mdc-menu-anchor {
+          display: inline-block;
+          .mdc-button {
+            padding-right: $unit/5;
+          }
+        }
+      }
+      .mdc-menu {
+        z-index: 500;
       }
       .mdc-button--search {
         border-radius: 2px;
@@ -1431,11 +1447,14 @@ footer,
           right: $unit*(2/3);
         }
       }
-      form {
+      .search-form {
         min-width: 48%;
+        max-width: 1080px;
+        margin: 0 auto;
+        border-radius: 2px;
       }
       .overlay-content {
-        padding: $unit/2 $unit $unit*1.25;
+        padding: $unit/2 $unit $unit;
         .header-extra,
         .header-text {
           font-weight: 600;
@@ -1498,12 +1517,14 @@ footer,
 .home-banner.option-3 {
   .banner-search {
     .content {
+      padding: 0;
       display: flex;
       justify-content: left;
       align-items: center;
       width: 100%;
       .search-form {
         width: 50%;
+        margin: 0;
         padding: 0 $unit $unit;
       }
     }
