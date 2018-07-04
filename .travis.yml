@@ -40,6 +40,9 @@ deploy:
   skip_cleanup: true
   verbosity: debug
 
+after_deploy:
+  - npm run deploy-db
+
 # deploy:
   #  - provider: script
   #  script:
