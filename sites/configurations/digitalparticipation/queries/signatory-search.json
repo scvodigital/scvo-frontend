@@ -1,0 +1,68 @@
+{
+  "size": 12,
+  "from": {{multiply (subtract (default request.params.query.page 1) 1) 12}},
+  "_source": [
+    "slug",
+    "title",
+    "rendered.charter_search_result"
+  ],
+  "query": {
+    "bool": {
+      {{#ifAny request.params.query.sector request.params.query.category ~}}
+      "filter": [
+        {{#if request.params.query.sector ~}}
+        {
+          "term": {
+            "sector": "{{request.params.query.sector}}"
+          }
+        }{{#if request.params.query.category}},{{/if}}
+        {{/if ~}}
+        {{#if request.params.query.category ~}}
+        {
+          "term": {
+            "category": "{{request.params.query.category}}"
+          }
+        }
+        {{/if ~}}
+      ],
+      {{/ifAny ~}}
+      {{#if request.params.query.q ~}}
+      "should": [
+        {
+          "query_string": {
+            "query": {{{stringify (default request.params.query.q "")}}},
+            "default_field": "text_bag_boost",
+            "default_operator": "AND",
+            "analyzer": "snowball"
+          }
+        },
+        {
+          "match_phrase": {
+            "title": {
+              "query": {{{stringify (default request.params.query.q "")}}},
+              "boost": 10
+            }
+          }
+        }
+      ]
+      {{else}}
+      "must": [
+        {
+          "match_all": {}
+        }
+      ]
+      {{/if ~}}
+    }
+  },
+  "sort": {
+    {{#if request.params.query.sort ~}}
+    "slug": "asc"
+    {{else}}
+    {{#if request.params.query.q ~}}
+    "_score": "desc"
+    {{else}}
+    "date_signed": "desc"
+    {{/if ~}}
+    {{/if ~}}
+  }
+}

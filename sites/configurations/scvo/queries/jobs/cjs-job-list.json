@@ -1,0 +1,31 @@
+{
+  "size": 6,
+  "_source": [
+    "rendered.scvo_gist"
+  ],
+  "query": {
+    "function_score": {
+      "query": {
+        "bool": {
+          "must": [
+            {
+              "term": {
+                "status": "Subbed"
+              }
+            },
+            {
+              "wildcard" : {
+                "cjs_lookup": "CJS PH8*"
+              }
+            }
+          ]
+        }
+      },
+      "random_score": {},
+      "score_mode": "sum"
+    }
+  },
+  "sort": {
+    "_score": "desc"
+  }
+}

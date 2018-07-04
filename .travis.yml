@@ -1,0 +1,46 @@
+language: node_js
+node_js:
+  - "8.11.1"
+
+cache:
+  yarn: true
+  directories:
+  - "$HOME/google-cloud-sdk/"
+
+before_install:
+  - openssl aes-256-cbc -K $encrypted_9025fc4e977a_key -iv $encrypted_9025fc4e977a_iv -in secrets.tar.enc -out secrets.tar -d
+  - tar xvf secrets.tar
+
+install:
+  - yarn
+  - npm run build
+
+before_deploy:
+  # - if [ ! -d "$HOME/google-cloud-sdk/bin" ]; then rm -rf $HOME/google-cloud-sdk; export CLOUDSDK_CORE_DISABLE_PROMPTS=1; curl https://sdk.cloud.google.com | bash; fi
+  - rm -rf $HOME/google-cloud-sdk
+  - export CLOUDSDK_CORE_DISABLE_PROMPTS=1
+  - curl https://sdk.cloud.google.com | bash >/dev/null
+  - source /home/travis/google-cloud-sdk/path.bash.inc
+  - gcloud --quiet version
+  - gcloud --quiet components update
+  - gcloud auth activate-service-account --key-file app-engine-service-account.json
+  - gcloud beta app update --split-health-checks --project scvo-net
+  - gcloud config set project scvo-net
+  - gcloud config set app/use_deprecated_preparation True
+
+deploy:
+  provider: gae
+  keyfile: app-engine-service-account.json
+  project: scvo-net
+  on: release
+  skip_cleanup: true
+  verbosity: debug
+
+# deploy:
+  #  - provider: script
+  #  script:
+  #    - gcloud beta app deploy --verbosity=debug
+  #  skip_cleanup: true
+  #  on:
+  #    branch: dev-next
+

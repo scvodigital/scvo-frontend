@@ -4,6 +4,8 @@ import * as bodyParser from 'body-parser';
 import * as compression from 'compression';
 import * as cookieParser from 'cookie-parser';
 import * as cors from 'cors';
+import {format} from 'date-fns';
+
 // Import NPM modules
 import * as express from 'express';
 import * as admin from 'firebase-admin';
@@ -13,26 +15,23 @@ import * as path from 'path';
 import * as stream from 'stream';
 import * as url from 'url';
 import * as util from 'util';
-import { format } from 'date-fns';
 
 const Dot = require('dot-object');
+const hbsFactory = require('clayhandlebars');
+import Handlebars = require('handlebars');
 import * as S from 'string';
 
 // Router modules
-import {Router, RouteMatch, MenuDictionary, RouterRequest, RouterResponse, RouterConfiguration, HttpVerb} from '@scvo/router';
-import {ElasticsearchRouterTask} from '@scvo/router-task-elasticsearch';
-import {FirebaseAuthRouterTask, FirebaseGetDataRouterTask, FirebaseSetDataRouterTask} from '@scvo/router-task-firebase';
-import {MySQLRouterTask} from '@scvo/router-task-mysql';
-import {TransformRouterTask} from '@scvo/router-task-transform';
-import {HandlebarsRouterDestination} from '@scvo/router-destination-handlebars';
-import {RedirectRouterDestination} from '@scvo/router-destination-redirect';
+import {Helpers} from './helpers';
+
+import {Router, RouterConfiguration, RouterRequest, RouterResponse, HttpVerb, RendererHandlebars, TaskElasticsearch, TaskMySQL, TaskRedirect, TaskRenderLayout, TaskFirebaseAuth, TaskFirebaseRtbGet, TaskFirebaseRtbSet} from '@scvo/router';
 
 // Import internal modules
 import {SECRETS} from './secrets';
 import {ANALYTICS_SECRETS} from './analytics-secrets';
 import {DOMAIN_MAP} from './domain-map';
 import {CMS_MAP} from './cms-map';
-import {getMenus} from './menus';
+import {getMenus, MenuDictionary} from './menus';
 import {fsPdf} from './fs-pdf';
 import {AnalyticsProcessor, ViewCount} from './analytics';
 
@@ -47,8 +46,8 @@ const fb = admin.initializeApp(<admin.AppOptions>config);
 // Setup constants
 const dot = <any>new Dot('/');
 const app = express();
-const port = process.env.PORT || 9000;
-const localDbPath = path.join(__dirname, 'db.json');
+const port = process.env.PORT || 8080;
+const localDbPath = path.join(__dirname, '../sites/sites.json');
 const assetsPath = path.join(__dirname, 'assets/');
 
 // Setup global routers variable
@@ -125,7 +124,7 @@ async function index(
       body: req.body
     };
 
-    var response = await site.execute(request);
+    var response = await site.go(request);
 
     res.status(response.statusCode || 500);
     res.contentType(response.contentType || 'text/html');
@@ -152,13 +151,13 @@ async function menuUpdate(
 
     if (process.env.devmode || req.query.test || postType === 'nav_menu_item') {
       console.log('UPDATING SITE MENUS:', siteKey);
-      var path = '/sites/' + siteKey;
+      var path = '/contexts/' + siteKey;
 
       var contextJson: RouterConfiguration =
           await getJson<RouterConfiguration>(path);
       var domain = CMS_MAP[siteKey] || 'cms.scvo.net';
       var menus: MenuDictionary = await getMenus(domain, contextJson.domains);
-      await putJson('/sites/' + siteKey + '/menus', menus);
+      await putJson('/contexts/' + siteKey + '/metaData/menus', {});
       res.end();
       return next();
     } else {
@@ -193,14 +192,18 @@ async function goodmovesVacanciesAnalytics(
     if (req.query.year && req.query.month) {
       const year = Number(req.query.year);
       const month = Number(req.query.month) - 1;
-      startDate = new Date(year, month, 1);  
+      startDate = new Date(year, month, 1);
     }
-  } catch(err) {
-    console.error('Failed to parse date from querystring. Using beginning of this month.', err);
+  } catch (err) {
+    console.error(
+        'Failed to parse date from querystring. Using beginning of this month.',
+        err);
     startDate = new Date();
   }
   try {
-    console.log('Starting Analytics import of Goodmoves Vacancies for', format(startDate, 'YYYY-MM-DD'));
+    console.log(
+        'Starting Analytics import of Goodmoves Vacancies for',
+        format(startDate, 'YYYY-MM-DD'));
     gmHits = await analyticsProcessor.getGMHitEvents(startDate);
     response = await analyticsProcessor.updateSalesforce(gmHits);
   } catch (err) {
@@ -227,18 +230,21 @@ async function goodmovesVacancyFilesAnalytics(
   let gmHits: ViewCount[] = [];
   let startDate = new Date();
   try {
-
     if (req.query.year && req.query.month) {
       const year = Number(req.query.year);
       const month = Number(req.query.month) - 1;
-      startDate = new Date(year, month, 1);  
+      startDate = new Date(year, month, 1);
     }
-  } catch(err) {
-    console.error('Failed to parse date from querystring. Using beginning of this month.', err);
+  } catch (err) {
+    console.error(
+        'Failed to parse date from querystring. Using beginning of this month.',
+        err);
     startDate = new Date();
   }
   try {
-    console.log('Starting Analytics import of Goodmoves Vacancy Files for', format(startDate, 'YYYY-MM-DD'));
+    console.log(
+        'Starting Analytics import of Goodmoves Vacancy Files for',
+        format(startDate, 'YYYY-MM-DD'));
     gmHits = await analyticsProcessor.getGMDownloadEvents(startDate);
     response = await analyticsProcessor.updateSalesforce(gmHits);
   } catch (err) {
@@ -409,14 +415,12 @@ function sendError(
 
 var server: any = null;
 if (process.env.devmode) {
-  const keyPath = path.join(__dirname, '../test-cert/server.key');
-  const crtPath = path.join(__dirname, '../test-cert/server.crt');
+  const keyPath = path.join(__dirname, '../test-cert/_wildcard.local-key.pem');
+  const crtPath = path.join(__dirname, '../test-cert/_wildcard.local.pem');
 
   const options = {
     key: fs.readFileSync(keyPath),
-    cert: fs.readFileSync(crtPath),
-    requestCert: false,
-    rejectUnauthorized: false
+    cert: fs.readFileSync(crtPath)
   };
 
   server = https.createServer(options, app).listen(port, () => {
@@ -428,30 +432,67 @@ if (process.env.devmode) {
   });
 }
 
+export interface FirebaseAppConfig {
+  credential: {
+    type: string; project_id: string; private_key_id: string;
+    private_key: string;
+    client_email: string;
+    client_id: string;
+    auth_uri: string;
+    token_uri: string;
+    auth_provider_x509_cert_url: string;
+    client_x509_cert_url: string;
+  },
+      databaseURL: string;
+}
+
+const firebaseApps: {[name: string]: admin.app.App} = {};
+Object.keys(SECRETS.configs).forEach((key) => {
+  var config: FirebaseAppConfig =
+      (SECRETS.configs as {[name: string]: FirebaseAppConfig})[key];
+  firebaseApps[key] = admin.initializeApp(
+      {
+        credential:
+            admin.credential.cert((config.credential as admin.ServiceAccount)),
+        databaseURL: config.databaseURL
+      },
+      key);
+});
+
 // Utility functions!
 async function loadRouters(): Promise<any> {
   try {
     if (routers && !process.env.devmode) return;
 
     var sites =
-        await getJson<{[site: string]: RouterConfiguration}>('/app-engine/');
+        await getJson<{[site: string]: RouterConfiguration}>('/contexts/');
 
-    var routerTasks = [
-      new ElasticsearchRouterTask({}),
-      new FirebaseAuthRouterTask(SECRETS.configs),
-      new FirebaseGetDataRouterTask(SECRETS.configs),
-      new FirebaseSetDataRouterTask(SECRETS.configs),
-      new MySQLRouterTask(SECRETS.mysql, {}),
-      new TransformRouterTask()
-    ];
-
-    var routerDestinations =
-        [new HandlebarsRouterDestination({}), new RedirectRouterDestination()]
+    var routerTasks = {
+      elasticsearch: new TaskElasticsearch(),
+      redirect: new TaskRedirect(),
+      mysql: new TaskMySQL(SECRETS.mysql),
+      renderLayout: new TaskRenderLayout(),
+      firebaseAuth: new TaskFirebaseAuth(firebaseApps),
+      firebaseRtbGet: new TaskFirebaseRtbGet(firebaseApps),
+      firebaseRtbSet: new TaskFirebaseRtbSet(firebaseApps)
+    }
 
     routers = {};
 
     for (var name in sites) {
-      routers[name] = new Router(sites[name], routerTasks, routerDestinations);
+      var siteConfig = sites[name];
+      var hbsEnv = Handlebars.create();
+      var hbs = hbsFactory(hbsEnv);
+      Helpers.register(hbs);
+      Object.keys(siteConfig.metaData.handlebars.partials).forEach((key) => {
+        var template = siteConfig.metaData.handlebars.partials[key];
+        hbs.registerPartial(key, template);
+      });
+
+      var renderers = {handlebars: new RendererHandlebars(hbs)}
+      // routers[name] = new Router(sites[name], routerTasks,
+      // routerDestinations);
+      routers[name] = new Router(sites[name], routerTasks, renderers);
     };
   } catch (err) {
     console.error('Failed to load sites:', err);

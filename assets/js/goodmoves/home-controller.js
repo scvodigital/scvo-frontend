@@ -22,7 +22,7 @@ typeaheadController.addListener(function(field, term) {
 
 $where.on('keypress', function(evt) {
   var keyCode = evt.keyCode || evt.which;
-  if (keyCode === 13) { 
+  if (keyCode === 13) {
     evt.preventDefault();
     return false;
   }
@@ -66,6 +66,7 @@ function reverseLookup(latitude, longitude) {
 }
 
 function addChip(field, term) {
+  var slug = slugify(term);
   var $chip = $('<div />')
     .addClass('mdc-chip mdc-theme--primary-bg')
     .attr({ tabindex: 0 })
@@ -75,15 +76,24 @@ function addChip(field, term) {
     .html(term)
     .appendTo($chip);
   var $chipField = $('<input />')
-    .attr({ type: 'hidden', name: field + '[]', value: term })
+    .attr({ type: 'hidden', name: field + '[]', value: slug })
     .appendTo($chip);
   var $chipClose = $('<i />')
     .addClass('far fa-times-circle mdc-chip__icon mdc-chip__icon--trailing')
-    .data({ field: field, term: term })
+    .data({ field: field, term: slug })
     .attr({ tabindex: 0, role: 'button' })
     .on('click', function(evt) {
       console.log(evt);
       $chip.remove();
     })
     .appendTo($chip);
+}
+
+function slugify(text) {
+  return text.toString().toLowerCase()
+    .replace(/\s+/g, '-')           // Replace spaces with -
+    .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
+    .replace(/\-\-+/g, '-')         // Replace multiple - with single -
+    .replace(/^-+/, '')             // Trim - from start of text
+    .replace(/-+$/, '');            // Trim - from end of text
 }

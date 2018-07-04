@@ -1,0 +1,50 @@
+{
+  "size": 16,
+  "from": {{multiply (subtract (default request.params.query.page 1) 1) 16}},
+  "_source": [
+    "slug",
+    "title",
+    "rendered.humanrightsdeclaration_search_result"
+  ],
+  "query": {
+    "bool": {
+      {{#if request.params.query.q ~}}
+      "should": [
+        {
+          "query_string": {
+            "query": {{{stringify (default request.params.query.q "")}}},
+            "default_field": "text_bag",
+            "default_operator": "AND",
+            "analyzer": "snowball"
+          }
+        },
+        {
+          "match_phrase": {
+            "title": {
+              "query": {{{stringify (default request.params.query.q "")}}},
+              "boost": 10
+            }
+          }
+        }
+      ]
+      {{else}}
+      "must": [
+        {
+          "match_all": {}
+        }
+      ]
+      {{/if ~}}
+    }
+  },
+  "sort": {
+    {{#if request.params.query.sort ~}}
+    "slug": "asc"
+    {{else}}
+    {{#if request.params.query.q ~}}
+    "_score": "desc"
+    {{else}}
+    "date_signed": "desc"
+    {{/if ~}}
+    {{/if ~}}
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "domains": [
+    "localhost",
+    "digitalparticipation.local",
+    "127.0.0.1",
+    "test.digitalparticipation.scot",
+    "digitalparticipation.scot",
+    "www.digitalparticipation.scot"
+  ],
+  "routes": [
+    "{:./routes/*.json}"
+  ],
+  "metaData": {
+    "title": "Scotland's Digital Participation Charter",
+    "menus": "{:./digitalparticipation-menus.json}",
+    "handlebars": {
+      "partials": {
+        "{$./partials/**/*.*}": "includeRelativePath=false&regexExpression=(-)&regexOptions=gi&regexReplace=_"
+      },
+      "templates": {
+        "{$./templates/**/*.*}": ""
+      },
+      "layouts": {
+        "{$./layouts/**/*.*}": ""
+      },
+      "queries": {
+        "{$./queries/**/*.*}": ""
+      }
+    }
+  }
+}

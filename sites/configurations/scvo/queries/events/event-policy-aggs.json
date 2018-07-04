@@ -1,0 +1,55 @@
+{
+  "size": 0,
+  "_source": false,
+  "query": {
+    "bool": {
+      "must_not": [
+        {
+          "term": {
+            "hide_in_results": true
+          }
+        }
+      ],
+      "must": [
+        {
+          "range" : {
+            "date_start" : {
+              "gte" : "now/d"
+            }
+          }
+        },
+        {
+          "term": {
+            "team": "policy"
+          }
+        }
+      ]
+    }
+  },
+  "aggs": {
+    "types": {
+      "terms": {
+        "field": "course_type",
+        "order": {
+          "_term": "asc"
+        },
+        "size": 10000
+      }
+    },
+    "months": {
+      "terms": {
+        "field": "month",
+        "size": 10000
+      }
+    },
+    "locations": {
+      "terms": {
+        "field": "city",
+        "order": {
+          "_term": "asc"
+        },
+        "size": 10000
+      }
+    }
+  }
+}

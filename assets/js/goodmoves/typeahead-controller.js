@@ -16,8 +16,8 @@ function TypeaheadController(textbox, terms, options) {
     .on('typeahead:autocomplete', typeaheadSelect)
     .on('keydown', function(ev) {
       switch (ev.keyCode) {
-        case (9): 
-          ev.preventDefault(); 
+        case (9):
+          ev.preventDefault();
           break;
         case (13):
           ev.preventDefault();
@@ -30,7 +30,7 @@ function TypeaheadController(textbox, terms, options) {
           break;
       }
     });
-  
+
   this.addListener = function(listener) {
     if (listeners.indexOf(listener) === -1) {
       listeners.push(listener);
@@ -43,13 +43,13 @@ function TypeaheadController(textbox, terms, options) {
       listeners.splice(index, 1);
     }
   }
-  
+
   function typeaheadSelect(ev, suggestion) {
     updateTrigger(suggestion.field, suggestion.term);
     textbox.typeahead('val', '').typeahead('close');
     refocus();
   }
-  
+
   function refocus() {
     setTimeout(function() {
       textbox.focus();
@@ -75,10 +75,10 @@ function TypeaheadController(textbox, terms, options) {
       }
     };
   }
-  
+
   function updateTrigger(field, value) {
     for (var i = 0; i < listeners.length; ++i) {
       listeners[i](field, value);
-    } 
+    }
   }
 }

@@ -1,0 +1,49 @@
+{
+  "size": 12,
+  "from": {{multiply (subtract (default request.params.query.page 1) 1) 12}},
+  "_source": [
+    "rendered.scvo_card",
+    "rendered.json_ld"
+  ],
+  "query": {
+    "bool": {
+      "must": [
+        {{#ifAny request.params.query.call request.params.query.tag request.params.query.q ~}}
+        {{#if request.params.query.call ~}}
+        {
+          "term": {
+            "call-slug": "{{request.params.query.call}}"
+          }
+        }
+        {{#if request.params.query.tag}},{{else}}{{#if request.params.query.q}},{{/if}}{{/if}}
+        {{/if ~}}
+        {{#if request.params.query.tag ~}}
+        {
+          "term": {
+            "individuals_supported-slugs": "{{request.params.query.tag}}"
+          }
+        }
+        {{#if request.params.query.q}},{{/if}}
+        {{/if ~}}
+        {{#if request.params.query.q ~}}
+        {
+          "query_string": {
+            "query": {{{stringify (default request.params.query.q "")}}},
+            "default_field": "text_bag",
+            "default_operator": "AND",
+            "analyzer": "snowball"
+          }
+        }
+        {{/if ~}}
+        {{else}}
+        {
+          "match_all": {}
+        }
+        {{/ifAny ~}}
+      ]
+    }
+  },
+  "sort": {
+    "recipient_name": "asc"
+  }
+}

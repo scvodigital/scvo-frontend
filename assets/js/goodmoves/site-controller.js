@@ -126,7 +126,7 @@ var GoodmovesController = Class.extend({
         response.subscriptions.forEach(function(subscription) {
           var savedSearch = new SavedSearch(subscription);
           that.savedSearches.push(savedSearch);
-        });        
+        });
       }
       if (cb) cb.call(that);
     });
@@ -154,7 +154,7 @@ var GoodmovesController = Class.extend({
       if ($target.is(':visible')) {
         $target.hide();
         $icon.removeClass('fa-chevron-up').addClass('fa-chevron-down');
-      } else { 
+      } else {
         $target.show();
         $icon.removeClass('fa-chevron-down').addClass('fa-chevron-up');
       }
@@ -199,6 +199,10 @@ var GoodmovesController = Class.extend({
   },
 
   toggleShortlistItem: function(id) {
+
+    // Add mdc-chip--selected to mdc-chip
+    // Add mdc-chip__icon--leading-hidden to mdc-chip__icon
+
     var userProfile = this.userProfile;
     var shortlist = userProfile.goodmoves.saved_vacancies;
     var index = shortlist.indexOf(id);
@@ -293,12 +297,12 @@ function handleMaps() {
         });
         infoWindow.open(map, marker);
       });
-      
+
       pins.push({
         marker: marker,
         infoWindow: infoWindow
       });
       pinBounds.extend(markerOptions.position);
-    }); 
+    });
   });
 }

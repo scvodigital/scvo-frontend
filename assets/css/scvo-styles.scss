@@ -1,6 +1,6 @@
 @import "./node_modules/material-components-web/material-components-web.scss";
 @import url('//cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css');
-@import url('//fonts.googleapis.com/css?family=Montserrat:700|Open+Sans:400,600');
+@import url('//fonts.googleapis.com/css?family=Montserrat:500,700|Open+Sans:400,600');
 
 $unit: 1rem;
 $nav-height: 38px;
@@ -11,6 +11,7 @@ $base-font-family:                  "Open Sans", Helvetica, Arial, sans-serif;
 $base-font-weight:                  400;
 
 $heading-font-family:               "Montserrat", Helvetica, Arial, sans-serif;
+$heading-light-font-weight:         500;
 $heading-font-weight:               700;
 
 $footer-font-family:                "Open Sans", Helvetica, Arial, sans-serif;
@@ -1719,7 +1720,7 @@ form#settled_status {
           min-height: $nav-height;
           height: $nav-height;
           font-weight: 600;
-          padding: 0 $unit*(3/4);
+          padding: 0 $unit/2;
           .mdc-tab--label {
             text-transform: none;
             line-height: $nav-height - 4px;
@@ -2123,6 +2124,11 @@ form#settled_status {
         h1.header-text {
           font-size: 4.8rem;
           line-height: 4rem;
+          letter-spacing: -0.1rem;
+          .normal {
+            letter-spacing: -0.4rem;
+            font-weight: $heading-light-font-weight;
+          }
         }
       }
     }

@@ -1,0 +1,60 @@
+<div class="staff">
+  <div class="splash-image splash-image-{{data.primaryResponse.hits.hits.[0]._type}}" style="{{> header_splash_image}}">
+    <div class="splash-overlay{{#if data.primaryResponse.hits.hits.[0]._source.hide_overlay}} splash-overlay-hidden{{/if}}">
+      <div class="container-fluid">
+        <div class="mdc-layout-grid">
+          {{#if data.primaryResponse.hits.hits.[0]._source.header_text ~}}
+          <img src="{{data.primaryResponse.hits.hits.[0]._source.header_text}}" alt="{{data.primaryResponse.hits.hits.[0]._source.title}}" class="header-text" />
+          {{else}}
+          <h1 class="header-text">
+            <span class="header-text-banner">
+              {{{data.primaryResponse.hits.hits.[0]._source.rendered.scvo_header}}}
+            </span>
+          </h1>
+          {{/if ~}}
+        </div>
+        {{> header_caption}}
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <ul class="breadcrumbs">
+      <li><a href="/">Home</a></li>
+      <li><a href="/about">About SCVO</a></li>
+      <li><a href="/about/staff-team">Staff team</a></li>
+      <li>{{{data.primaryResponse.hits.hits.[0]._source.name_full}}}</li>
+    </ul>
+    <div class="mdc-layout-grid">
+      <div class="mdc-layout-grid__inner">
+        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-9-desktop mdc-layout-grid__cell--span-5-tablet mdc-layout-grid__cell--span-4-phone content page-content">
+          {{{data.primaryResponse.hits.hits.[0]._source.rendered.scvo_full}}}
+        </div>
+        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-3-tablet mdc-layout-grid__cell--span-4-phone sidebar page-sidebar">
+          {{> menu_about}}
+        </div>
+        {{#compare data.supplimentaryResponses.author_posts.hits.total ">" 0 ~}}
+        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 related page-related">
+          <h3 class="blogs">
+            Latest post{{#compare data.supplimentaryResponses.author_posts.hits.total ">" 1}}s{{/compare}}
+            by {{{data.primaryResponse.hits.hits.[0]._source.name_full}}}
+          </h3>
+          <div class="mdc-layout-grid">
+            <div class="mdc-layout-grid__inner">
+              {{#each data.supplimentaryResponses.author_posts.hits.hits ~}}
+              <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet  mdc-layout-grid__cell--span-4-phone">
+                {{{_source.rendered.scvo_list}}}
+              </div>
+              {{/each ~}}
+            </div>
+          </div>
+          {{#compare data.supplimentaryResponses.author_posts.hits.total ">" 3 ~}}
+          <p class="v-margin read-more">
+            <a href="/post/author/{{{data.supplimentaryResponses.author_posts.hits.hits.[0]._source.author_slug}}}" class="mdc-button mdc-button--raised">More posts</a>
+          </p>
+          {{/compare ~}}
+        </div>
+        {{/compare ~}}
+      </div>
+    </div>
+  </div>
+</div>

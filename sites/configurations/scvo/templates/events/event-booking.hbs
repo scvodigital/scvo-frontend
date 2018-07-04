@@ -1,0 +1,31 @@
+<div class="event event-booking">
+  {{> header_splash_event}}
+  <div class="container-fluid page-content">
+    {{#with data.primaryResponse.hits.hits.[0]._source ~}}
+    <ul class="breadcrumbs">
+      <li><a href="/">Home</a></li>
+      <li><a href="/events">Events</a></li>
+      <li><a href="/events/{{slug}}">{{{title}}}</a></li>
+      <li>Booking</li>
+    </ul>
+    <div class="mdc-layout-grid">
+      <div class="mdc-layout-grid__inner">
+        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-9-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone content event-content">
+          {{#if booking_url}}
+          <iframe src="{{booking_url}}?sfid={{Id}}" frameborder="0" width="100%" height="400" style="overflow:hidden"></iframe>
+          {{else}}
+          {{#compare course_type "===" "Training Course" ~}}
+          <iframe src="https://www.surveygizmo.eu/s3/90055302/Events-Booking-Training-Events?sfid={{Id}}" frameborder="0" width="100%" height="400" style="overflow:hidden"></iframe>
+          {{else}}
+          <iframe src="https://www.surveygizmo.eu/s3/90066146/Event-Booking-Events?sfid={{Id}}" frameborder="0" width="100%" height="400" style="overflow:hidden"></iframe>
+          {{/compare ~}}
+          {{/if}}
+          <p>
+            <strong>The information you provide will be stored in our database to allow us to respond to your booking request. <a href="/privacy/training-and-events" target="_blank">Read our full privacy notice</a>.</strong>
+          </p>
+        </div>
+      </div>
+    </div>
+    {{/with ~}}
+  </div>
+</div>

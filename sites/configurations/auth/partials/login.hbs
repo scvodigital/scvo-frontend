@@ -1,0 +1,211 @@
+{{#if context.metaData.firebaseDefaultDomain.name}}
+    <button id="logout" type="button" class="button-primary">Logout</button>
+    <form id="login-form" method="POST">
+        <h2>Login</h2>
+        <div class="login-form-section" id="form-section-message">
+            <div class="row">
+                <div class="twelve columns" id="form-message"></div>
+            </div>
+        </div>
+        <div class="login-form-section" id="form-section-sign-in-method">
+            <label>Choose your sign-in method</label>
+            <div class="row">
+                <div class="three columns">
+                    <label class="button u-full-width" id="login-provider-email">
+                        <input type="radio" name="login-provider" value="email" checked>
+                        <span class="label-body">Email</span>
+                    </label>
+                </div>
+                <div class="three columns">
+                    <label class="button u-full-width" id="login-provider-google">
+                        <input type="radio" name="login-provider" value="google">
+                        <span class="label-body">Google</span>
+                    </label>
+                </div>
+                <div class="three columns">
+                    <label class="button u-full-width" id="login-provider-facebook">
+                        <input type="radio" name="login-provider" value="facebook">
+                        <span class="label-body">Facebook</span>
+                    </label>
+                </div>
+                <div class="three columns">
+                    <label class="button u-full-width" id="login-provider-twitter">
+                        <input type="radio" name="login-provider" value="twitter">
+                        <span class="label-body">twitter</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="login-form-section" id="form-section-email">
+            <div class="row">
+                <div class="six columns">
+                    <label for="login-email">Email address</label>
+                    <input type="email" id="login-email" placeholder="me@there.co.uk" class="u-full-width">
+                </div>
+                <div class="six columns">
+                    <label for="login-password">Password</label>
+                    <input type="password" id="login-password" placeholder="Super$ecr3tP455worD" class="u-full-width">
+                </div>
+            </div>
+        </div>
+        <div class="login-form-section" id="form-section-login-buttons">
+            <div class="row">
+                <div class="eight columns">
+                    {{#if context.metaData.firebaseDomains.[1]}}
+                        <label for="login-domain">Domain</label>
+                        <select id="login-domain" name="login-domain" class="u-full-width">
+                            <option value="default">{{context.metaData.firebaseDefaultDomain.label}}</option>
+                            {{#each context.metaData.firebaseDomains}}
+                                <option value="{{name}}">{{label}}</option>
+                            {{/each}}
+                        </select>
+                    {{else}}
+                        <label>&nbsp;</label>
+                        <input type="hidden" id="login-domain" name="login-domain" value="{{context.metaData.firebaseApps.[0].name}}">
+                    {{/if}}
+                </div>
+                <div class="four columns">
+                    <label>&nbsp;</label>
+                    <button class="button-primary u-full-width" type="submit" id="login-submit">Login</button>
+                </div>
+            </div>
+        </div>
+    </form>
+    <script>
+        function multiDomainAuth(defaultDomain, otherDomains) {
+            setLoginMessage();
+            var firebaseDomains = {
+                default: firebase.initializeApp(defaultDomain.config, 'default')
+            };
+            var firebaseUsers = {
+                default: null
+            };
+
+            if (otherDomains) {
+                for (var i = 0; i < otherDomains.length; i++) {
+                    firebaseDomains[otherDomains[i].name] = firebase.initializeApp(otherDomains[i].config, otherDomains[i].name);
+                    firebaseUsers[otherDomains[i].name] = null;
+                }
+            }
+
+            for (let loginDomain in firebaseDomains) {
+                firebaseDomains[loginDomain].auth().onAuthStateChanged(function(user) {
+                    authStateChanged(loginDomain, user);
+                });
+            }
+
+            var loginProviders = $('[name="login-provider"]');
+            for (var i = 0; i < loginProviders.length; i++) {
+                loginProviders[i].addEventListener('change', function(evt) {
+                    if (evt.srcElement.value === 'email') {
+                        $('#form-section-email')[0].style.display = 'block';
+                        $('#login-email')[0].select();
+                    } else {
+                        $('#form-section-email')[0].style.display = 'none';
+                    }
+                });
+            }
+
+            $('#login-form')[0].addEventListener('submit', login);
+            $('#logout')[0].addEventListener('click', logout);
+
+            function authStateChanged(loginDomain, user) {
+                console.log('AuthState for domain', loginDomain, 'has change to the following user:', user);
+                firebaseUsers[loginDomain] = user || null;
+                if (loginDomain !== 'default' && user) {
+                    centralLogin(loginDomain, user);
+                }
+                showHideLogin();
+            }
+
+            function centralLogin(loginDomain, user) {
+                console.log('Doing central login for user:', user);
+                user.getIdToken().then(function(token) {
+                    console.log('User Id Token?:', token);
+                    $.post('/centralAuthLogin', { loginDomain: loginDomain, idToken: token }, function(response) {
+                        console.log(response);
+                        firebaseDomains.default.auth().signInWithCustomToken(response.customToken).then(function(centralUser) {
+                            console.log('Signed in with custom token', centralUser);
+                            centralUser.getIdToken().then(function(idToken) {
+                                console.log('Id token', idToken);
+                                setCookie('__session', idToken, 7);
+                            }).catch(function(err) {
+                                console.error('Failed to get id token for central user', err);
+                            })
+                        }).catch(function(err) {
+                            console.error('Failed to sign in with custom token', err);  
+                        });
+                    }, 'json');
+                });
+            }
+
+            function showHideLogin() {
+                console.log('Show/Hide Login');
+                var loggedIn = !!firebaseUsers.default;
+                $('#logout')[0].style.display = loggedIn ? 'block' : 'none';
+                $('#login-form')[0].style.display = loggedIn ? 'none' : 'block';
+            }
+
+            function logout(evt) {
+                console.log(firebaseUsers);
+                for (let loginDomain in firebaseUsers) {
+                    if (firebaseUsers[loginDomain]) {
+                        firebaseDomains[loginDomain].auth().signOut().then(function() {
+                            console.log('Logged out of', loginDomain);
+                        }).catch(function(err) {
+                            console.error('Error logging out of', loginDomain, err);
+                        });
+                    }
+                }
+            }
+
+            function login(evt) {
+                var loginDomain = $('#login-domain')[0].value;
+                var email = $('#login-email')[0].value;
+                var password = $('#login-password')[0].value;
+
+                emailLogin(loginDomain, email, password);
+
+                evt.preventDefault();
+            }
+
+            function emailLogin(loginDomain, email, password) {
+                if (!firebaseDomains.hasOwnProperty(loginDomain)) {
+                    setLoginMessage('Invalid Login Domain', '#990000');
+                    return;
+                }
+
+                firebaseDomains[loginDomain].auth().signInWithEmailAndPassword(email, password).then(function(resp) {
+                    console.log('Logged in:', resp);
+                    setLoginMessage('Logged in');
+                }).catch(function(err) {
+                    console.error('Error logging in:', err);
+                    setLoginMessage(err.message, '#990000');
+                });
+            }
+
+            function setLoginMessage(message = '', colour = '#000000') {
+                var messageSection = $('#form-section-message')[0];
+                var messageDiv = $('#form-message')[0];
+                
+                messageSection.style.display = !message ? 'none' : 'block';
+                messageDiv.style.color = colour;
+                messageDiv.innerHTML = message;
+            }
+
+            function setCookie(name, value, days) {
+                var expires = "";
+                if (days) {
+                    var date = new Date();
+                    date.setTime(date.getTime() + (days*24*60*60*1000));
+                    expires = "; expires=" + date.toUTCString();
+                }
+                document.cookie = name + "=" + (value || "")  + expires + "; path=/";
+            }
+        }
+        
+        multiDomainAuth({{{stringify context.metaData.firebaseDefaultDomain}}}, {{{stringify context.metaData.firebaseDomains}}});
+    </script>
+{{else}}
+    <strong>No firebase app configurations set in context meta-data</strong>
+{{/if}}

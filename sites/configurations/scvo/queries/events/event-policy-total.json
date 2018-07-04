@@ -1,0 +1,29 @@
+{
+  "size": 0,
+  "_source": false,
+  "query": {
+    "bool": {
+      "must_not": [
+        {
+          "term": {
+            "hide_in_results": true
+          }
+        }
+      ],
+      "must": [
+        {
+          "range" : {
+            "date_start" : {
+              "gte" : "now/d"
+            }
+          }
+        },
+        {
+          "term": {
+            "team": "policy"
+          }
+        }
+      ]
+    }
+  }
+}

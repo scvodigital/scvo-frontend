@@ -1,0 +1,58 @@
+{
+  "size": 0,
+  "_source": false,
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "term": {
+            "status": "Subbed"
+          }
+        },
+        {
+          "term" : {
+            "cjs_lookup": "{{#compare request.params.phase "aag"}}AA PH8{{else}}{{#compare request.params.phase "p52"}}CJS PH8 PT 78wks{{else}}CJS PH8{{/compare}}{{/compare}}"
+          }
+        }
+      ]
+    }
+  },
+  "aggs": {
+    "sectors": {
+      "terms": {
+        "field": "sector",
+        "order": {
+          "_term": "asc"
+        },
+        "size": 10000
+      }
+    },
+    "sectors_slugs": {
+      "terms": {
+        "field": "sector_slug",
+        "order": {
+          "_term": "asc"
+        },
+        "size": 10000
+      }
+    },
+    "regions": {
+      "terms": {
+        "field": "region",
+        "order": {
+          "_term": "asc"
+        },
+        "size": 10000
+      }
+    },
+    "regions_slugs": {
+      "terms": {
+        "field": "region_slug",
+        "order": {
+          "_term": "asc"
+        },
+        "size": 10000
+      }
+    }
+  }
+}

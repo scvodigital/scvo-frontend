@@ -1,0 +1,30 @@
+{
+  "domains": [
+    "localhost",
+    "getinvolved.local",
+    "127.0.0.1",
+    "test.getinvolved.scot",
+    "getinvolved.scot",
+    "www.getinvolved.scot"
+  ],
+  "routes": [
+    "{:./routes/*.json}"
+  ],
+  "metaData": {
+    "menus": "{:./getinvolved-menus.json}",
+    "handlebars": {
+      "partials": {
+        "{$./partials/**/*.*}": "includeRelativePath=false&regexExpression=(-)&regexOptions=gi&regexReplace=_"
+      },
+      "templates": {
+        "{$./templates/**/*.*}": ""
+      },
+      "layouts": {
+        "{$./layouts/**/*.*}": ""
+      },
+      "queries": {
+        "{$./queries/**/*.*}": ""
+      }
+    }
+  }
+}

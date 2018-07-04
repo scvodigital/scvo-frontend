@@ -1,0 +1,137 @@
+{
+  "name": "index",
+  "pattern": "/",
+  "tasks": [
+    {
+      "name": "auth",
+      "taskModule": "firebaseAuth",
+      "config": {
+        "tokenPath": "request.cookies.gm_token",
+        "appName": "scvo",
+        "noTokenRoute": "",
+        "notAuthenticatedRoute": ""
+      }
+    },
+    {
+      "name": "primaryResponse",
+      "taskModule": "elasticsearch",
+      "config": {
+        "connectionStringTemplate": "{$../../elasticsearch-url.txt}",
+        "elasticsearchConfig": {
+          "apiVersion": "5.6"
+        },
+        "queryTemplates": {
+          "index": "web-content-production",
+          "type": "goodmoves-vacancy",
+          "template": ">context.metaData.handlebars.queries.vacancies_latest"
+        }
+      },
+      "renderer": "handlebars"
+    },
+    {
+      "name": "supplimentaryResponses",
+      "taskModule": "elasticsearch",
+      "config": {
+        "connectionStringTemplate": "{$../../elasticsearch-url.txt}",
+        "elasticsearchConfig": {
+          "apiVersion": "5.6"
+        },
+        "queryTemplates": [
+          {
+            "name": "top",
+            "index": "web-content-production",
+            "type": "goodmoves-vacancy",
+            "template": ">context.metaData.handlebars.queries.vacancies_top"
+          },
+          {
+            "name": "currently_recruiting",
+            "index": "web-content-production",
+            "type": "goodmoves-organisation",
+            "template": ">context.metaData.handlebars.queries.organisations_currently-recruiting"
+          },
+          {
+            "name": "home_based",
+            "index": "web-content-production",
+            "type": "goodmoves-vacancy",
+            "template": ">context.metaData.handlebars.queries.vacancies_home-based"
+          },
+          {
+            "name": "types",
+            "index": "web-content-production",
+            "type": "goodmoves-vacancy",
+            "template": ">context.metaData.handlebars.queries.vacancies_types"
+          },
+          {
+            "name": "splash",
+            "index": "web-content-production",
+            "type": "scvo-cms-media",
+            "template": ">context.metaData.handlebars.queries.pages_splash"
+          }
+        ]
+      },
+      "renderer": "handlebars"
+    },
+    {
+      "name": "organisations_currently_recruiting",
+      "taskModule": "elasticsearch",
+      "config": {
+        "connectionStringTemplate": "{$../../elasticsearch-url.txt}",
+        "elasticsearchConfig": {
+          "apiVersion": "5.6"
+        },
+        "queryTemplates": [
+          {
+            "name": "vacancies",
+            "index": "web-content-production",
+            "type": "goodmoves-vacancy",
+            "template": ">context.metaData.handlebars.queries.vacancies_currently-recruiting"
+          }
+        ]
+      },
+      "renderer": "handlebars"
+    },
+    {
+      "name": "posts",
+      "taskModule": "elasticsearch",
+      "config": {
+        "connectionStringTemplate": "{$../../elasticsearch-url.txt}",
+        "elasticsearchConfig": {
+          "apiVersion": "5.6"
+        },
+        "queryTemplates": [
+          {
+            "name": "tfn_latest",
+            "index": "web-content-production",
+            "type": "tfn-news-post,tfn-feature",
+            "template": ">context.metaData.handlebars.queries.posts_tfn-latest"
+          }
+        ]
+      },
+      "renderer": "handlebars"
+    },
+    {
+      "name": "destination",
+      "taskModule": "renderLayout",
+      "renderer": "handlebars",
+      "config": {
+        "logic": {
+          "if": [
+            "default"
+          ]
+        },
+        "output": "body",
+        "layouts": {
+          "default": {
+            "layout": ">context.metaData.handlebars.layouts.default",
+            "parts": {
+              "head": ">context.metaData.handlebars.templates.pages_home-head-tags",
+              "body": ">context.metaData.handlebars.templates.pages_home",
+              "foot": ">context.metaData.handlebars.templates.pages_home-foot"
+            },
+            "contentType": "text/html"
+          }
+        }
+      }
+    }
+  ]
+}

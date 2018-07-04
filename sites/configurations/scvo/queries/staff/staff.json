@@ -1,0 +1,25 @@
+{
+  "size": 1,
+  "_source": [
+    "Id",
+    "name_full",
+    "rendered.scvo_header",
+    "rendered.scvo_full"
+  ],
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "term": {
+            "is_active": true
+          }
+        },
+        {
+          "term": {
+            "slug": "{{request.params.slug}}"
+          }
+        }
+      ]
+    }
+  }
+}

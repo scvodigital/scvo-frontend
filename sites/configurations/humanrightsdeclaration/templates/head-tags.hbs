@@ -1,0 +1,33 @@
+{{#compare request.params.path "===" "signatories" ~}}
+<title>{{route.metaData.title}}</title>
+<meta property="og:title" content="{{route.metaData.title}}" data-dynamic="true">
+{{else}}
+{{#if data.primaryResponse.hits.hits.[0] ~}}
+{{#with data.primaryResponse.hits.hits.[0]._source ~}}
+{{#if title ~}}
+<title>{{{title}}} is a signatory of the Scotland Declaration on Human Rights</title>
+<meta property="og:title" content="{{{title}}} is a signatory of the Scotland Declaration on Human Rights" data-dynamic="true">
+{{else}}
+<title>{{route.metaData.title}}</title>
+<meta property="og:title" content="{{route.metaData.title}}" data-dynamic="true">
+{{/if ~}}
+{{#if files.0.uploadUrl ~}}
+<meta property="og:image" content="{{files.0.uploadUrl}}" data-dynamic="true">
+<meta property="og:image:width" content="128" data-dynamic="true">
+<meta property="og:image:height" content="128" data-dynamic="true">
+{{/if ~}}
+{{#if description ~}}
+<meta property="og:summary" content="{{description}}" data-dynamic="true">
+<meta name="description" content="{{description}}" data-dynamic="true">
+{{/if ~}}
+{{#if rendered.json_ld ~}}
+<script type="application/ld+json" data-dynamic="true">
+{{{rendered.json_ld}}}
+</script>
+{{/if ~}}
+{{/with ~}}
+{{else}}
+<title>{{route.metaData.title}}</title>
+<meta property="og:title" content="{{route.metaData.title}}" data-dynamic="true">
+{{/if ~}}
+{{/compare ~}}

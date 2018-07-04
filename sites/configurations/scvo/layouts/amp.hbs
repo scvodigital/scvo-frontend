@@ -1,0 +1,314 @@
+<!doctype html>
+<html amp lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <script async src="https://cdn.ampproject.org/v0.js"></script>
+  <link rel="canonical" href="{{regexReplace request.params.uri.href " (//amp.) " "gi" "// "}}">
+  {{{layoutParts.head}}}
+  <meta name="viewport" content="width=device-width,minimum-scale=1,initial-scale=1">
+  <script type="application/ld+json">
+  {{{rendered.json_ld}}}
+  </script>
+  <style amp-boilerplate>body{-webkit-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-moz-animation:-amp-start 8s steps(1,end) 0s 1 normal both;-ms-animation:-amp-start 8s steps(1,end) 0s 1 normal both;animation:-amp-start 8s steps(1,end) 0s 1 normal both}@-webkit-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-moz-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-ms-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@-o-keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}@keyframes -amp-start{from{visibility:hidden}to{visibility:visible}}</style><noscript><style amp-boilerplate>body{-webkit-animation:none;-moz-animation:none;-ms-animation:none;animation:none}</style></noscript>
+  <script async custom-element="amp-sidebar" src="https://cdn.ampproject.org/v0/amp-sidebar-0.1.js"></script>
+  <script async custom-element="amp-fit-text" src="https://cdn.ampproject.org/v0/amp-fit-text-0.1.js"></script>
+  <script async custom-element="amp-form" src="https://cdn.ampproject.org/v0/amp-form-0.1.js"></script>
+  <style amp-custom>
+  body {
+    font-size: 16px;
+    color: #292929;
+    background-color: #e3e3e3;
+    font-family: sans-serif;
+  }
+
+  header {
+    background-color: #292929;
+    color: #e3e3e3;
+    padding: 10px;
+  }
+
+  .menu-button {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    background-color: transparent;
+    border: none;
+    float: right;
+  }
+
+  .menu-button svg {
+    vertical-align: middle;
+  }
+
+  amp-sidebar {
+    font-size: 1.2rem;
+  }
+
+  amp-sidebar ul {
+    padding: 0;
+  }
+
+  amp-sidebar ul li a {
+    display: block;
+    padding: 10px 40px;
+    color: #000000;
+    text-decoration: none;
+  }
+
+  amp-sidebar ul li a.active {
+    background-color: #ffffff;
+    font-weight: bold;
+  }
+
+  amp-sidebar form {
+    line-height: 50px;
+    padding: 0;
+    background-color: #292929;
+    color: #e3e3e3;
+  }
+
+  amp-sidebar form input {
+    border: none;
+    color: #292929;
+    width: 90%;
+    line-height: 44px;
+    vertical-align: middle;
+    margin: 15px;
+    padding: 0 15px;
+  }
+
+  .container-fluid {
+    margin: 0 auto;
+    max-width: 1024px;
+  }
+
+  article, footer {
+    font-size: 1.2rem;
+    padding: 30px 0;
+  }
+
+  .header-inner, .article-inner, .footer-inner {
+    padding: 0 15px;
+  }
+
+  article li {
+    margin: 0.75rem 0;
+  }
+
+  article p, article li {
+    line-height: 1.75rem;
+  }
+
+  article h1 {
+    font-size: 3rem;
+  }
+
+  .scvo-cms-post > p::first-letter {
+    font-size: 4rem;
+    line-height: 4rem;
+    font-family: serif;
+    font-weight: 500;
+  }
+
+  .scvo-cms-post > p~ p::first-letter {
+    font-size: 1.2rem;
+    font-family: sans-serif;
+    font-weight: normal;
+  }
+
+  .post-info {
+    border-top: 1px solid #000000;
+    border-bottom: 1px solid #000000;
+    padding: 30px 0;
+    margin-bottom: 15px;
+  }
+
+  .post-info-author amp-img {
+    float: left;
+    margin-right: 15px;
+  }
+
+  .post-info-author amp-img img {
+    border-radius: 50%;
+  }
+
+  .post-info-author span.underline::before {
+    content: 'Author: ';
+    font-weight: bold;
+    text-decoration: none;
+    color: #000000;
+  }
+
+  .post-info-published::before {
+    content: 'Published: ';
+    font-weight: bold;
+  }
+
+  .post-info-categories::before {
+    content: 'In: ';
+    font-weight: bold;
+  }
+
+  .inline-list {
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+  }
+
+  .inline-list li {
+    display: inline-block;
+    padding-left: 15px;
+    margin: 0;
+    line-height: initial;
+  }
+
+  .inline-list li:first-child {
+    padding-left: 0;
+  }
+
+  footer {
+    background-color: #292929;
+    color: #e3e3e3;
+  }
+
+  footer a {
+    color: #e3e3e3;
+  }
+
+  footer li {
+    line-height: 1.75rem;
+  }
+
+  footer .brand-logo {
+    float: right;
+    margin-left: 15px;
+  }
+
+  /* Hide Regular Stuff */
+
+  #share-menu-button,
+  .mdc-simple-menu {
+    display: none;
+  }
+  </style>
+</head>
+
+<body>
+  <amp-sidebar id="sidebar" layout="nodisplay" side="right">
+    <nav>
+      <form action="/search" method="GET" target="_top">
+        <label>
+          <input type="search" name="q" placeholder="Search">
+        </label>
+      </form>
+      <ul>
+        {{#each menus.main ~}}
+        <li>
+          <a class="{{#if match}}active{{/if}}" href="{{stripTrailingSlash path}}">{{{label}}}</a>
+        </li>
+        {{/each ~}}
+      </ul>
+      <hr>
+      <ul>
+        {{#each menus.main-upper ~}}
+        <li>
+          <a class="{{#if match}}active{{/if}}" href="{{stripTrailingSlash path}}">{{{label}}}</a>
+        </li>
+        {{/each ~}}
+      </ul>
+    </nav>
+  </amp-sidebar>
+  <header>
+    <div class="container-fluid">
+      <div class="header-inner">
+        <a href="/" class="brand-logo" title="Scottish Council for Voluntary Organisations">
+          <amp-img src="https://storage.googleapis.com/scvo-assets/scvo-frontend/assets/images/logos/scvo.png" height="50px" width="162px" />
+        </a>
+        <button on="tap:sidebar.toggle" class="menu-button" title="Open menu">
+          <svg width="30" height="30" fill="#ffffff" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" x="0px" y="0px" viewBox="0 0 100 100" enable-background="new 0 0 100 100" xml:space="preserve"><g><path d="M92.028,25h-84c-1.657,0-3-1.343-3-3V8c0-1.657,1.343-3,3-3h84c1.657,0,3,1.343,3,3v14C95.028,23.657,93.685,25,92.028,25z   "/></g><g><path d="M92.028,59.938h-84c-1.657,0-3-1.343-3-3v-14c0-1.657,1.343-3,3-3h84c1.657,0,3,1.343,3,3v14   C95.028,58.594,93.685,59.938,92.028,59.938z"/></g><g><path d="M92.028,94.875h-84c-1.657,0-3-1.343-3-3v-14c0-1.657,1.343-3,3-3h84c1.657,0,3,1.343,3,3v14   C95.028,93.532,93.685,94.875,92.028,94.875z"/></g></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+  <article>
+    <div class="container-fluid">
+      <div class="article-inner">
+        {{{layoutParts.body}}}
+      </div>
+    </div>
+  </article>
+  <footer>
+    <div class="container-fluid">
+      <div class="footer-inner">
+        <section>
+          <h1>Contact</h1>
+          <ul>
+            <li>
+              <strong>Email:</strong>
+              <a href="mailto:enquiries@scvo.org.uk">enquiries@scvo.org.uk</a>
+            </li>
+            <li>
+              <strong>Phone:</strong>
+              <a href="tel:+441314748000">0131 474 8000</a>
+            </li>
+            <li>
+              <strong>Information service helpline:</strong>
+              <a href="tel:+448001690022">0800 169 0022</a>
+            </li>
+            <li>
+              <strong>Membership:</strong>
+              <a href="/services/membership">Become a member</a>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <h1>Social</h1>
+          <ul class="fa-ul">
+            <li>
+              <a href="https://twitter.com/scvotweet">Twitter</a>
+            </li>
+            <li>
+              <a href="https://www.facebook.com/SCVO1939">Facebook</a>
+            </li>
+            <li>
+              <a href="https://goodhq.org/scvo">Good HQ</a>
+            </li>
+            <li>
+              <a href="https://www.youtube.com/user/SCVOtv">YouTube</a>
+            </li>
+            <li>
+              <a href="https://www.linkedin.com/company/scvo">LinkedIn</a>
+            </li>
+          </ul>
+        </section>
+        <section>
+          <h1>Help</h1>
+          <ul class="mdc-list">
+            {{#each menus.footer ~}}
+            <li class="mdc-list-item"><a href="{{path}}">{{{label}}}</a></li>
+            {{/each ~}}
+          </ul>
+        </section>
+        <section>
+          <h1>About</h1>
+          <p>
+            The <strong>Scottish Council for Voluntary Organisations</strong> is the membership organisation for Scotland's charities, voluntary organisations and social enterprises. <a href="/about">Find out more</a>
+          </p>
+        </section>
+        <hr>
+        <section>
+          <a href="/" class="brand-logo" title="Scottish Council for Voluntary Organisations">
+            <amp-img src="https://storage.googleapis.com/scvo-assets/scvo-frontend/assets/images/logos/scvo.png" alt="Scottish Council for Voluntary Organisations" height="50px" width="162px" />
+          </a>
+          <p>
+            &copy; {{momentFormat (moment) "YYYY"}}. The Scottish Council for Voluntary Organisations (SCVO) is a Scottish Charitable Incorporated Organisation. Charity registered in Scotland <a href="https://www.oscr.org.uk/about-charities/search-the-register/charity-details?number=SC003558">SC003558</a>. Registered office Mansfield Traquair Centre, 15 Mansfield Place, Edinburgh EH3 6BB.
+          </p>
+        </section>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

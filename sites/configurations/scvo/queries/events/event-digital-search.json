@@ -1,0 +1,79 @@
+{
+  "size": 10,
+  "from": {{multiply (subtract (default request.params.query.page 1) 1) 10}},
+  "_source": [
+    "slug",
+    "title",
+    "course_type",
+    "date_start",
+    "rendered.scvo_list",
+    "rendered.scvo_gist",
+    "rendered.json_ld"
+  ],
+  "query": {
+    "bool": {
+      "must_not": [
+        {{#if request.params.query.free ~}}
+        {
+          "exists": {
+            "field": "cost"
+          }
+        },
+        {{/if ~}}
+        {
+          "term": {
+            "hide_in_results": true
+          }
+        }
+      ],
+      "must": [
+        {{#if request.params.query.course_type}}
+        {
+          "term": {
+            "course_type": "{{request.params.query.course_type}}"
+          }
+        },
+        {{/if}}
+        {{#if request.params.query.month}}
+        {
+          "term": {
+            "month": "{{request.params.query.month}}"
+          }
+        },
+        {{/if}}
+        {{#if request.params.query.location}}
+        {
+          "term": {
+            "city": "{{request.params.query.location}}"
+          }
+        },
+        {{/if}}
+        {{#if request.params.query.q}}
+        {
+          "query_string": {
+            "query": {{{stringify (default request.params.query.q "")}}},
+            "default_field": "text_bag",
+            "default_operator": "AND",
+            "analyzer": "snowball"
+          }
+        },
+        {{/if}}
+        {
+          "range" : {
+            "date_start" : {
+              "gte" : "now/d"
+            }
+          }
+        },
+        {
+          "term": {
+            "team": "digital"
+          }
+        }
+      ]
+    }
+  },
+  "sort": {
+    "date_start": "asc"
+  }
+}

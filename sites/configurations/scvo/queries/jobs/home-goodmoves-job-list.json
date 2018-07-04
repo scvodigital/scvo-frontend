@@ -1,0 +1,33 @@
+{
+  "size": 3,
+  "_source": [
+    "rendered.scvo_gist"
+  ],
+  "query": {
+    "function_score": {
+      "query": {
+        "bool": {
+          "must": [
+            {
+              "term": {
+                "country_iso3": "GBR"
+              }
+            },
+            {
+              "term": {
+                "vacancy_status": "vacancy-open"
+              }
+            },
+            {
+              "term": {
+                "top_job": true
+              }
+            }
+          ]
+        }
+      },
+      "random_score": {},
+      "score_mode": "sum"
+    }
+  }
+}

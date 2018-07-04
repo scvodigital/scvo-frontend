@@ -1,0 +1,66 @@
+<div class="mdc-card full" data-organisation-id="{{Id}}">
+  <div class="mdc-card__info--organisation-row">
+    <div class="mdc-card__info--organisation">
+      <div class="mdc-card__info--organisation-title mdc-typography--headline3">
+        {{{title}}}
+      </div>
+      {{{rendered.goodmoves_charity_info}}}
+      <div class="detailed-info">
+        {{#if description ~}}
+        <div class="mdc-typography--body1 v-margin">
+          {{{description}}}
+        </div>
+        {{/if ~}}
+      </div>
+      <div class="key-info-extra">
+        <ul class="fa-ul last">
+          {{#if website ~}}
+          {{#compare website "!==" null ~}}
+          {{#compare website "!==" "http://" ~}}
+          <li class="mdc-card__info--vacancy-website mdc-typography--body1">
+            <span class="fa-li"><span class="far fa-link fa-fw" title="Website"></span></span>
+            <a href="{{website_url}}" target="_blank">{{website}}</a>
+          </li>
+          {{/compare ~}}
+          {{/compare ~}}
+          {{/if ~}}
+          {{#if twitter ~}}
+          {{#compare twitter "!==" null ~}}
+          {{#compare twitter "!==" "http://" ~}}
+          <li class="mdc-card__info--vacancy-twitter mdc-typography--body1">
+            <span class="fa-li"><span class="fab fa-twitter fa-fw" title="Twitter"></span></span>
+            <a href="{{twitter_url}}" target="_blank">{{twitter}}</a>
+          </li>
+          {{/compare ~}}
+          {{/compare ~}}
+          {{/if ~}}
+          {{#if facebook ~}}
+          {{#compare facebook "!==" null ~}}
+          {{#compare facebook "!==" "http://" ~}}
+          <li class="mdc-card__info--vacancy-facebook mdc-typography--body1">
+            <span class="fa-li"><span class="fab fa-facebook fa-fw" title="Facebook"></span></span>
+            <a href="{{facebook_url}}" target="_blank">{{facebook}}</a>
+          </li>
+          {{/compare ~}}
+          {{/compare ~}}
+          {{/if ~}}
+          {{#if linkedin ~}}
+          {{#compare linkedin "!==" null ~}}
+          {{#compare linkedin "!==" "http://" ~}}
+          <li class="mdc-card__info--vacancy-linkedin mdc-typography--body1">
+            <span class="fa-li"><span class="fab fa-linkedin fa-fw" title="LinkedIn"></span></span>
+            <a href="{{linkedin_url}}" target="_blank">{{linkedin}}</a>
+          </li>
+          {{/compare ~}}
+          {{/compare ~}}
+          {{/if ~}}
+        </ul>
+      </div>
+    </div>
+    {{#if has_logo ~}}
+    <div class="mdc-card__media mdc-card__media--square mdc-card__media--organisation">
+      <img src="{{logo_url}}" alt="{{title}}" />
+    </div>
+    {{/if ~}}
+  </div>
+</div>

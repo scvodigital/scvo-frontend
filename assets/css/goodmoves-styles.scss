@@ -22,6 +22,7 @@ $base-font-weight:                  400;
 
 $heading-font-family:               "Montserrat", Helvetica, Arial, sans-serif;
 $heading-font-weight:               700;
+$heading-light-font-weight:         500;
 
 $footer-font-family:                "Open Sans", Helvetica, Arial, sans-serif;
 $footer-font-weight:                400;
@@ -37,7 +38,7 @@ $desktop-landscape-breakpoint: 1280px;
 
 @import "./node_modules/material-components-web/material-components-web.scss";
 @import url('//cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css');
-@import url('//fonts.googleapis.com/css?family=Montserrat:700|Open+Sans:400,500,600');
+@import url('//fonts.googleapis.com/css?family=Montserrat:700,500|Open+Sans:400,500,600');
 
 body {
   background-color: $mdc-theme-footer-dark;
@@ -52,6 +53,18 @@ body {
 .mdc-top-app-bar {
   background-color: white;
 }
+h1,
+h2,
+h3,
+h4 {
+  margin-bottom: $unit/2;
+  font-family: $heading-font-family, $base-font-family, Helvetica, Arial, sans-serif;
+  font-weight: $base-font-weight;
+  strong {
+    font-weight: 700;
+  }
+}
+
 header {
   .container-fluid {
     padding: 0;
@@ -273,6 +286,25 @@ footer h3,
 .mdc-temporary-drawer .mdc-list-item,
 .mdc-list {
   font-family: $base-font-family, Helvetica, Arial, sans-serif;
+  font-weight: $base-font-weight;
+  letter-spacing: 0.01rem;
+}
+.mdc-card__title,
+.mdc-textfield__label,
+.mdc-typography--title,
+.supplimentary-list-title {
+  font-family: $heading-font-family, $base-font-family, Helvetica, Arial, sans-serif;
+  font-weight: $heading-font-weight;
+}
+.mdc-typography--headline1,
+.mdc-typography--headline2,
+.mdc-typography--headline3,
+.mdc-typography--headline4,
+.mdc-typography--headline5,
+.mdc-typography--headline6,
+.mdc-typography--headline7,
+.mdc-typography--headline {
+  font-weight: $base-font-weight;
 }
 .mdc-typography--body1 {
   font-size: 1rem;
@@ -333,11 +365,34 @@ footer h3,
   background-color: $mdc-theme-primary;
 }
 
+.login-form {
+  margin: 10vh auto;
+  .mdc-card {
+    position: relative;
+  }
+  #login-message {
+    display: none;
+  }
+}
+
+.card-loader {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  background-color: $mdc-theme-complimentary-light;
+  opacity: 0.7;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  .card-loader-inner {
+  }
+}
+
 .goodmoves-page {
   margin: $unit*1.5 0;
   .x-items {
     margin-top: 0;
-    margin-bottom: $unit*1.5;
+    // margin-bottom: $unit*1.5;
   }
   .mdc-card {
     padding: $unit;
@@ -379,11 +434,13 @@ footer h3,
 }
 
 .x-items {
-  margin-top: $unit*1.5;
-  display: flex;
+  text-align: center;
+  display: inline-block;
+  margin: $unit*1.5 auto 0;
+  width: 100%;
   .x-item {
     line-height: 0;
-    align-items: flex-start;
+    display: inline-block;
   }
   .x-item-side {
     display: inline-flex;
@@ -428,6 +485,31 @@ a:hover {
 .mdc-chip {
   color: white
 }
+.mdc-card .mdc-chip-set {
+  .mdc-chip {
+    margin: 0;
+    color: rgba(0, 0, 0, 0.54);
+    background-color: white;
+    font-weight: 600;
+    .mdc-chip__text {
+      margin-left: $unit/2;
+    }
+  }
+  .mdc-chip.mdc-chip--selected {
+    background-color: $mdc-theme-secondary-light;
+    color: $mdc-theme-primary-dark;
+  }
+}
+
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+  -webkit-user-select: none; /* Safari */
+  -khtml-user-select: none; /* Konqueror HTML */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* Internet Explorer/Edge */
+  user-select: none; /* Non-prefixed version, currently
+  supported by Chrome and Opera */
+}
 
 a {
   font-weight: 600;
@@ -469,6 +551,11 @@ a {
 }
 .mdc-button--raised .mdc-list-item__graphic {
   color: white;
+}
+.mdc-button .mdc-list-item__graphic {
+  position: relative;
+  left: 0;
+  margin-right: $unit/2;
 }
 
 .mdc-button--raised {
@@ -699,7 +786,7 @@ a {
     h4 {
       margin: 0 0 $unit;
       font-size: 1.5rem;
-      font-weight: 400;
+      font-weight: $heading-light-font-weight;
     }
     .key-info-extra {
       // margin-top: $unit*1.5;
@@ -731,7 +818,7 @@ a {
         background: transparent;
       }
       h4 {
-        margin: $unit/2 0 $unit/2;
+        margin: $unit*1.25 0 $unit*(3/4);
       }
       h4:first-child {
         margin-top: 0;
@@ -758,7 +845,7 @@ a {
   padding: 0;
   margin-bottom: 0;
   .mdc-chip {
-    margin: 0 $unit/2 $unit/2 0;
+    margin: 0 $unit/2 $unit/4 0;
   }
 }
 .top-jobs .top-job,
@@ -1001,6 +1088,14 @@ body {
   padding: 0;
   margin: 0;
 }
+::-moz-selection {
+  color: white;
+  background: $mdc-theme-primary-dark;
+}
+::selection {
+  color: white;
+  background: $mdc-theme-primary-dark;
+}
 .container-fluid {
   max-width: 100%;
   width: 100%;
@@ -1197,6 +1292,7 @@ body {
     cursor: default;
     pointer-events: none;
     color: $mdc-theme-secondary-dark;
+    opacity: 0.5;
   }
   li:first-child a {
     padding-left: 0;
@@ -1293,17 +1389,55 @@ footer,
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     min-height: 40vh;
-    .content {
-      background-color: rgba(255, 255, 255, 0.6);
-      padding: $unit/2 $unit*1.25 $unit;
-      // margin: $unit*6 0;
-      border-radius: 2px;
-      .mdc-text-field--box::before, .mdc-text-field--box::after {
+    .page-content {
+      min-height: 40vh;
+      // position: absolute;
+      // top: 0;
+      // left: 0;
+      .search-form {
+        background-color: rgba(255, 255, 255, 0.6);
         width: 100%;
+        padding: 0 $unit $unit/2;
+        box-sizing: border-box;
+      }
+      // .overlay-content {
+      //   min-width: 48%;
+      // }
+    }
+  }
+  .banner-search.overlay {
+    display: block;
+    .content {
+      background-image: linear-gradient(60deg, rgba(66, 132, 42, 0.89), rgba(66, 132, 42, 0.91) 47%, transparent 47.08%, transparent);
+      min-height: 40vh;
+      background-color: transparent;
+      padding: 0 0 $unit*2;
+      .mdc-card__actions {
+        margin: 0;
+        padding: 0;
+        .mdc-button {
+          line-height: $unit*2;
+          margin-right: $unit/2;
+          padding: 0 $unit/2;
+          background: transparent !important;
+          border: 0.125rem solid white !important;
+          color: white !important;
+        }
+        .mdc-button:hover {
+          background: white !important;
+          color: $mdc-theme-primary-dark !important;
+          border-color: $mdc-theme-primary-dark !important;
+        }
+        .mdc-menu-anchor {
+          display: inline-block;
+          .mdc-button {
+            padding-right: $unit/5;
+          }
+        }
+      }
+      .mdc-menu {
+        z-index: 500;
       }
       .mdc-button--search {
         border-radius: 2px;
@@ -1313,36 +1447,112 @@ footer,
           right: $unit*(2/3);
         }
       }
-      .mdc-button--raised {
-        width: 100%;
-        .far {
-          position: absolute;
-          right: $unit/2;
+      .search-form {
+        min-width: 48%;
+        max-width: 1080px;
+        margin: 0 auto;
+        border-radius: 2px;
+        .extra-options {
+          margin: $unit/2 0;
+          text-align: center;
+          font-size: 0.88rem;
+          color: #777;
+          a {
+            font-weight: 400;
+            color: #555;
+          }
         }
       }
-      .mdc-menu--open {
-        z-index: 100;
-      }
-    }
-  }
-  .banner-search.overlay {
-    display: block;
-    .content {
-      background-image: linear-gradient(60deg, rgba(66, 132, 42, 0.89), rgba(66, 132, 42, 0.91) 47%, transparent 47.08%, transparent);
-      min-height: 40vh;
-      background-color: transparent;
-      display: flex;
-      justify-content: left;
-      align-items: center;
-      form {
-        min-width: 48%;
+      .overlay-content {
+        padding: $unit*2.5 $unit $unit*2 3%;
+        .header-extra,
+        .header-text {
+          font-weight: 600;
+          color: white;
+          font-size: 1.5rem;
+          padding: $unit/2 0;
+          margin: 0;
+        }
+        .header-text {
+          padding: 0 0 $unit*1.5;
+          font-size: 4.8rem;
+          line-height: 4rem;
+          letter-spacing: -0.2rem;
+          .normal {
+            letter-spacing: -0.4rem;
+            font-weight: $heading-light-font-weight;
+          }
+          .normal.moves {
+            margin-left: -0.4rem;
+          }
+        }
       }
     }
   }
 }
+.home-banner.option-2 {
+  .banner-search,
+  .banner-search .page-content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .page-content {
+    padding: $unit/2 $unit*1.25 $unit;
+    // margin: $unit*6 0;
+    border-radius: 2px;
+    .mdc-text-field--box::before, .mdc-text-field--box::after {
+      width: 100%;
+    }
+    .mdc-button--search {
+      border-radius: 2px;
+      width: 100%;
+      .fa-search {
+        position: absolute;
+        right: $unit*(2/3);
+      }
+    }
+    .mdc-button--raised {
+      width: 100%;
+      .far {
+        position: absolute;
+        right: $unit/2;
+      }
+    }
+    .mdc-menu--open {
+      z-index: 100;
+    }
+  }
+}
+.home-banner.option-3 {
+  .banner-search {
+    .content {
+      padding: 0;
+      display: flex;
+      justify-content: left;
+      align-items: center;
+      width: 100%;
+      .search-form {
+        width: 50%;
+        margin: 0;
+        padding: 0 $unit $unit;
+      }
+    }
+  }
+}
+
 .mdc-list-item {
+  height: $header-lower-height;
   .mdc-list-item__meta {
     padding-left: $unit*(3/4);
+  }
+}
+.browse {
+  .browse-title {
+    margin: $unit/2 0 $unit/2;
+  }
+  .mdc-list-item {
+    height: auto;
   }
 }
 
@@ -1370,12 +1580,12 @@ footer,
   }
   .gist {
     .mdc-typography--headline {
-      font-weight: 400;
+      font-weight: $heading-light-font-weight;
       font-size: 1.1rem;
       margin: 0;
     }
     .mdc-card__subtitle {
-      font-weight: 400;
+      font-weight: $heading-light-font-weight;
       margin: $unit/2 0;
       color: $mdc-theme-secondary-dark;
     }
@@ -1488,7 +1698,7 @@ footer {
     padding: 0 $unit;
   }
   .footer-main {
-    margin-bottom: $unit/2;
+    margin-bottom: $unit;
   }
   h3 {
     color: white;
@@ -1642,6 +1852,17 @@ footer {
 .h-padding {
   padding-left: $unit/2;
   padding-right: $unit/2;
+}
+.h-padding-full {
+  padding-left: $unit;
+  padding-right: $unit;
+}
+
+.x-padding {
+  padding: $unit/2;
+}
+.x-padding-full {
+  padding: $unit;
 }
 
 .t-padding { padding-top: $unit/2; }
