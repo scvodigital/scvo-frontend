@@ -1,0 +1,51 @@
+{
+  "size": 10,
+  "from": {{multiply (subtract (default request.params.query.page 1) 1) 10}},
+  "_source": [
+    "rendered.scvo_list",
+    "rendered.json_ld"
+  ],
+  "query": {
+    "function_score": {
+      "query": {
+        "bool": {
+          "must": [
+            {{#if request.params.query.classification}}
+            {
+              "term": {
+                "library_classification_slug": "{{request.params.query.classification}}"
+              }
+            },
+            {{/if}}
+            {{#if request.params.query.q}}
+            {
+              "query_string": {
+                "query": {{{stringify (default request.params.query.q "")}}},
+                "default_field": "text_bag",
+                "default_operator": "AND",
+                "analyzer": "snowball"
+              }
+            }
+            {{else}}
+            {
+              "match_all": {}
+            }
+            {{/if}}
+          ]
+        }
+      },
+      "boost_mode": "multiply",
+      "functions": [
+        {
+          "weight": "8",
+          "gauss": {
+            "when_posted": {
+              "scale": "84d",
+              "decay": "0.1"
+            }
+          }
+        }
+      ]
+    }
+  }
+}

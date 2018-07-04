@@ -1,0 +1,39 @@
+{
+  "domains": [
+    "localhost",
+    "scvo.local",
+    "amp.scvo.local",
+    "127.0.0.1",
+    "scvo.net",
+    "scvo.org.uk",
+    "scvo.org",
+    "www.scvo.net",
+    "www.scvo.org.uk",
+    "www.scvo.org",
+    "beta.scvo.org",
+    "cms.scvo.org",
+    "amp.scvo.org",
+    "test.scvo.org"
+  ],
+  "routes": [
+    "{:./routes/*.json}"
+  ],
+  "metaData": {
+    "title": "SCVO",
+    "menus": "{:./scvo-menus.json}",
+    "handlebars": {
+      "partials": {
+        "{$./partials/**/*.*}": "includeRelativePath=false&regexExpression=(-)&regexOptions=gi&regexReplace=_"
+      },
+      "templates": {
+        "{$./templates/**/*.*}": ""
+      },
+      "layouts": {
+        "{$./layouts/**/*.*}": ""
+      },
+      "queries": {
+        "{$./queries/**/*.*}": ""
+      }
+    }
+  }
+}

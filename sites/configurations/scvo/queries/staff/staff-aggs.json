@@ -1,0 +1,24 @@
+{
+  "size": 0,
+  "_source": false,
+  "aggs": {
+    "cities": {
+      "terms": {
+        "field": "city",
+        "order": {
+          "_term": "asc"
+        },
+        "size": 10000
+      }
+    },
+    "departments": {
+      "terms": {
+        "field": "department",
+        "order": {
+          "_term": "asc"
+        },
+        "size": 10000
+      }
+    }
+  }
+}

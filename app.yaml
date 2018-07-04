@@ -1,9 +1,10 @@
 service: scvo-frontend
 env: flex
 runtime: nodejs
+api_version: '1.0'
+threadsafe: true
 
-manual_scaling:
-  instances: 2 
+network: {}
 
 resources:
   cpu: 1
@@ -11,15 +12,15 @@ resources:
   disk_size_gb: 10
 
 readiness_check:
-  path: "/readiness_check"
-  check_interval_sec: 5
+  path: /readiness_check
+  check_interval_sec: 30
   timeout_sec: 4
   failure_threshold: 2
   success_threshold: 2
   app_start_timeout_sec: 300
 
 liveness_check:
-  path: "/liveness_check"
+  path: /liveness_check
   check_interval_sec: 30
   timeout_sec: 4
   failure_threshold: 2

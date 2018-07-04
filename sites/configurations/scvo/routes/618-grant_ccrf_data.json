@@ -1,0 +1,64 @@
+{
+  "name": "grant_ccrf_data",
+  "pattern": "/running-your-organisation/funding/community-capacity-resilience-fund/projects/data.json",
+  "tasks": [
+    {
+      "name": "primaryResponse",
+      "taskModule": "elasticsearch",
+      "config": {
+        "connectionStringTemplate": "{$../../elasticsearch-url.txt}",
+        "elasticsearchConfig": {
+          "apiVersion": "5.6"
+        },
+        "queryTemplates": {
+          "index": "web-content-production",
+          "type": "scvo-grant-ccrf",
+          "template": ">context.metaData.handlebars.queries.grants_grant-data",
+          "noResultsRoute": "four_oh_four"
+        }
+      },
+      "renderer": "handlebars"
+    },
+    {
+      "name": "supplimentaryResponses",
+      "taskModule": "elasticsearch",
+      "config": {
+        "connectionStringTemplate": "{$../../elasticsearch-url.txt}",
+        "elasticsearchConfig": {
+          "apiVersion": "5.6"
+        },
+        "queryTemplates": [
+          {
+            "name": "types",
+            "index": "web-content-production",
+            "type": "scvo-grant-ccrf",
+            "template": ">context.metaData.handlebars.queries.grants_grant-ccrf-aggs"
+          }
+        ]
+      },
+      "renderer": "handlebars"
+    },
+    {
+      "name": "destination",
+      "taskModule": "renderLayout",
+      "renderer": "handlebars",
+      "config": {
+        "logic": {
+          "if": [
+            "data"
+          ]
+        },
+        "output": "body",
+        "layouts": {
+          "data": {
+            "layout": ">context.metaData.handlebars.layouts.data",
+            "parts": {
+              "content": ">context.metaData.handlebars.templates.grants_grant-data"
+            },
+            "contentType": "application/json"
+          }
+        }
+      }
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 /* tslint:disable */
 // Module imports
-import {MenuDictionary, MenuItem} from '@scvo/router';
+
 import * as request from 'request';
 
 export async function getMenus(
@@ -137,5 +137,17 @@ interface IWPMenuItem {
   type_label: string;
   meta_data: {[key: string]: string[]};
   children: IWPMenuItem[];
+}
+
+export interface MenuDictionary { [name: string]: MenuItem[]; }
+
+export interface MenuItem {
+  label: string;
+  path: string;
+  route: string;
+  children: MenuItem[];
+  metaData: any;
+  level?: number;
+  match?: boolean;
 }
 /* tslint:enable */

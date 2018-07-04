@@ -1,0 +1,5 @@
+{{#ifAll (contains _source.rendered.scvo_search_result "%highlights%") (contains _source.rendered.scvo_search_result "%/highlights%") highlight.text_bag ~}}
+{{{regexReplace _source.rendered.scvo_search_result "(%highlights%)(.|[\r\n])*?(%/highlights%)" "img" (removeEntities (concat "<p class=\"results-highlights\">&hellip;" (join highlight.text_bag " &hellip; ") " &hellip;</p>"))}}}
+{{else}}
+{{{regexReplace _source.rendered.scvo_search_result "(%/?highlights%)" "img" ""}}}
+{{/ifAll ~}}

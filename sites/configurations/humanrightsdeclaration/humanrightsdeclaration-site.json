@@ -1,0 +1,30 @@
+{
+  "domains": [
+    "localhost",
+    "humanrightsdeclaration.local",
+    "127.0.0.1",
+    "test.humanrightsdeclaration.scot",
+    "humanrightsdeclaration.scot",
+    "www.humanrightsdeclaration.scot"
+  ],
+  "routes": [
+    "{:./routes/*.json}"
+  ],
+  "metaData": {
+    "menus": "{:./humanrightsdeclaration-menus.json}",
+    "handlebars": {
+      "partials": {
+        "{$./partials/**/*.*}": "includeRelativePath=false&regexExpression=(-)&regexOptions=gi&regexReplace=_"
+      },
+      "templates": {
+        "{$./templates/**/*.*}": ""
+      },
+      "layouts": {
+        "{$./layouts/**/*.*}": ""
+      },
+      "queries": {
+        "{$./queries/**/*.*}": ""
+      }
+    }
+  }
+}

@@ -1,0 +1,33 @@
+<div class="mdc-card search-result" data-event-id="{{Id}}">
+  <div class="mdc-card__info--event-row">
+    <div class="mdc-card__info--event">
+      <div class="mdc-card__info--event-title mdc-typography--headline6">
+        <a href="/training/{{slug}}">
+          {{trim title}}
+        </a>
+      </div>
+      <div class="post-info">
+        {{{rendered.post_info_booked}}}
+        {{{rendered.post_info_date}}}
+        {{{rendered.post_info_city}}}
+      </div>
+    </div>
+  </div>
+  <hr class="mdc-list-divider" />
+  <div class="search-result-article__snippet mdc-typography--body1">
+    <p>
+      {{#if course_overview_short ~}}
+      {{{course_overview_short}}}
+      {{else}}
+      {{#if description_short ~}}
+      {{{description_short}}}
+      {{/if ~}}
+      {{/if ~}}
+    </p>
+  </div>
+  <div class="mdc-card__actions">
+    <div class="mdc-card__action-buttons demo-card__action-buttons--text-only mdc-card__actions--full-bleed">
+      <a href="/training/{{slug}}" class="mdc-card__action">Find out more</a>
+    </div>
+  </div>
+</div>

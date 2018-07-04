@@ -1,0 +1,27 @@
+{
+  "size": 4,
+  "_source": [
+    "header_background",
+    "rendered.scvo_featured",
+    "rendered.scvo_gist"
+  ],
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "term": {
+            "categories_slug": "posts"
+          }
+        },
+        {
+          "term": {
+            "is_press_release": false
+          }
+        }
+      ]
+    }
+  },
+  "sort": {
+    "publish_on": "desc"
+  }
+}

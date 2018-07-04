@@ -3,6 +3,16 @@
     "pattern": "/",
     "tasks": [
       {
+        "name": "auth",
+        "taskType": "firebase-auth",
+        "config": {
+          "cookie": "gm_token",
+          "appName": "scvo",
+          "noCookieRoute": "",
+          "notAuthenticatedRoute": ""
+        }
+      },
+      {
         "name": "primaryResponse",
         "taskType": "elasticsearch",
         "config": {
@@ -37,6 +47,12 @@
               "index": "web-content-production",
               "type": "goodmoves-organisation",
               "template": "{$./queries/organisations/currently-recruiting.json}"
+            },
+            {
+              "name": "home_based",
+              "index": "web-content-production",
+              "type": "goodmoves-vacancy",
+              "template": "{$./queries/vacancies/home-based.json}"
             },
             {
               "name": "types",
@@ -101,6 +117,114 @@
       }
     }
   },
+  "index_alt": {
+    "pattern": "/home-alternative",
+    "tasks": [
+      {
+        "name": "primaryResponse",
+        "taskType": "elasticsearch",
+        "config": {
+          "connectionStringTemplate": "{$../elasticsearch-url.txt}",
+          "elasticsearchConfig": {
+            "apiVersion": "5.6"
+          },
+          "queryTemplates": {
+            "index": "web-content-production",
+            "type": "goodmoves-vacancy",
+            "template": "{$./queries/vacancies/latest.json}"
+          }
+        }
+      },
+      {
+        "name": "supplimentaryResponses",
+        "taskType": "elasticsearch",
+        "config": {
+          "connectionStringTemplate": "{$../elasticsearch-url.txt}",
+          "elasticsearchConfig": {
+            "apiVersion": "5.6"
+          },
+          "queryTemplates": [
+            {
+              "name": "top",
+              "index": "web-content-production",
+              "type": "goodmoves-vacancy",
+              "template": "{$./queries/vacancies/top.json}"
+            },
+            {
+              "name": "currently_recruiting",
+              "index": "web-content-production",
+              "type": "goodmoves-organisation",
+              "template": "{$./queries/organisations/currently-recruiting.json}"
+            },
+            {
+              "name": "home_based",
+              "index": "web-content-production",
+              "type": "goodmoves-vacancy",
+              "template": "{$./queries/vacancies/home-based.json}"
+            },
+            {
+              "name": "types",
+              "index": "web-content-production",
+              "type": "goodmoves-vacancy",
+              "template": "{$./queries/vacancies/types.json}"
+            },
+            {
+              "name": "splash",
+              "index": "web-content-production",
+              "type": "scvo-cms-media",
+              "template": "{$./queries/pages/splash.json}"
+            }
+          ]
+        }
+      },
+      {
+        "name": "organisations_currently_recruiting",
+        "taskType": "elasticsearch",
+        "config": {
+          "connectionStringTemplate": "{$../elasticsearch-url.txt}",
+          "elasticsearchConfig": {
+            "apiVersion": "5.6"
+          },
+          "queryTemplates": [
+            {
+              "name": "vacancies",
+              "index": "web-content-production",
+              "type": "goodmoves-vacancy",
+              "template": "{$./queries/vacancies/currently-recruiting.json}"
+            }
+          ]
+        }
+      },
+      {
+        "name": "posts",
+        "taskType": "elasticsearch",
+        "config": {
+          "connectionStringTemplate": "{$../elasticsearch-url.txt}",
+          "elasticsearchConfig": {
+            "apiVersion": "5.6"
+          },
+          "queryTemplates": [
+            {
+              "name": "tfn_latest",
+              "index": "web-content-production",
+              "type": "tfn-news-post,tfn-feature",
+              "template": "{$./queries/posts/tfn-latest.json}"
+            }
+          ]
+        }
+      }
+    ],
+    "destination": {
+      "destinationType": "handlebars",
+      "config": {
+        "default": {
+          "head": "{$./templates/pages/home-head-tags.hbs}",
+          "body": "{$./templates/pages/home-alt.hbs}",
+          "foot": "{$./templates/pages/home-foot.hbs}"
+        }
+      }
+    }
+  },
   "browse": {
     "pattern": "/browse",
     "tasks": [
@@ -135,6 +259,12 @@
               "template": "{$./queries/organisations/currently-recruiting.json}"
             },
             {
+              "name": "home_based",
+              "index": "web-content-production",
+              "type": "goodmoves-vacancy",
+              "template": "{$./queries/vacancies/home-based.json}"
+            },
+            {
               "name": "types",
               "index": "web-content-production",
               "type": "goodmoves-vacancy",
@@ -155,8 +285,89 @@
       }
     }
   },
+  "mysql": {
+    "pattern": "/mysql",
+    "tasks": [
+      {
+        "name": "auth",
+        "taskType": "firebase-auth",
+        "config": {
+          "cookie": "gm_token",
+          "appName": "scvo",
+          "noCookieRoute": "four_oh_four",
+          "notAuthenticatedRoute": "four_oh_four"
+        }
+      },
+      {
+        "name": "mysql_test",
+        "taskType": "mysql",
+        "config": {
+          "connectionName": "notifications",
+          "queryTemplates": {
+            "emails": "SELECT * FROM recipientEmails_1 WHERE email IN ('calum.macuisdean@gmail.com', '{{data.auth.email}}') AND id = 'goodmoves-weekly';"
+          }
+        }
+      }
+    ],
+    "destination": {
+      "destinationType": "handlebars",
+      "config": {
+        "data": {
+          "content": "{{{stringify data.search_query}}}"
+        }
+      }
+    }
+  },
   "login": {
     "pattern": "/login",
+    "destination": {
+      "destinationType": "handlebars",
+      "config": {
+        "default": {
+          "head": "{$./templates/pages/page-head-tags.hbs}",
+          "body": "{$./templates/pages/login.hbs}"
+        }
+      }
+    }
+  },
+  "logout": {
+    "pattern": "/logout",
+    "destination": {
+      "destinationType": "handlebars",
+      "config": {
+        "default": {
+          "head": "{$./templates/pages/page-head-tags.hbs}",
+          "body": "{$./templates/pages/logout.hbs}"
+        }
+      }
+    }
+  },
+  "save-search": {
+    "pattern": "/save-search",
+    "tasks": [
+      {
+        "name": "auth",
+        "taskType": "firebase-auth",
+        "config": {
+          "cookie": "gm_token",
+          "appName": "scvo",
+          "noCookieRoute": "four_oh_four",
+          "notAuthenticatedRoute": "four_oh_four"
+        }
+      },
+      {
+        "name": "save-search",
+        "taskType": "mysql",
+        "config": {
+          "connectionName": "notifications",
+          "queryTemplates": {
+            "create_or_replace_subscriber": "{$./queries/notifications/create-replace-subscriber.sql}",
+            "add_saved_search": "{$./queries/notifications/add-saved-search.sql}",
+            "add_saved_search_parameters": "{$./queries/notifications/add-saved-search-parameters.sql}"
+          }
+        }
+      }
+    ],
     "destination": {
       "destinationType": "handlebars",
       "config": {
@@ -176,8 +387,8 @@
         "config": {
           "cookie": "gm_token",
           "appName": "scvo",
-          "noCookieRoute": "five_hundred",
-          "notAuthenticatedRoute": "five_hundred"
+          "noCookieRoute": "four_oh_four",
+          "notAuthenticatedRoute": "four_oh_four"
         }
       },
       {
@@ -229,6 +440,30 @@
             "type": "goodmoves-page",
             "template": "{$./queries/pages/not-found.json}"
           }
+        }
+      },
+      {
+        "name": "supplimentaryResponses",
+        "taskType": "elasticsearch",
+        "config": {
+          "connectionStringTemplate": "{$../elasticsearch-url.txt}",
+          "elasticsearchConfig": {
+            "apiVersion": "5.6"
+          },
+          "queryTemplates": [
+            {
+              "name": "home_based",
+              "index": "web-content-production",
+              "type": "goodmoves-vacancy",
+              "template": "{$./queries/vacancies/home-based.json}"
+            },
+            {
+              "name": "types",
+              "index": "web-content-production",
+              "type": "goodmoves-vacancy",
+              "template": "{$./queries/vacancies/types.json}"
+            }
+          ]
         }
       }
     ],
@@ -285,6 +520,12 @@
           },
           "queryTemplates": [
             {
+              "name": "home_based",
+              "index": "web-content-production",
+              "type": "goodmoves-vacancy",
+              "template": "{$./queries/vacancies/home-based.json}"
+            },
+            {
               "name": "types",
               "index": "web-content-production",
               "type": "goodmoves-vacancy",
@@ -311,7 +552,7 @@
           "head": "{$./templates/vacancies/search-head-tags.hbs}",
           "body": "{$./templates/vacancies/search.hbs}",
           "foot": "{$./templates/vacancies/search-foot.hbs}",
-          "sidebar": "{$./partials/vacancy-search-form.hbs}"
+          "sidebar": "{$./templates/vacancies/search-form.hbs}"
         },
         "data": {
           "content": "{$./templates/vacancies/search-json.hbs}"
@@ -361,6 +602,12 @@
           },
           "queryTemplates": [
             {
+              "name": "home_based",
+              "index": "web-content-production",
+              "type": "goodmoves-vacancy",
+              "template": "{$./queries/vacancies/home-based.json}"
+            },
+            {
               "name": "types",
               "index": "web-content-production",
               "type": "goodmoves-vacancy",
@@ -387,7 +634,7 @@
           "head": "{$./templates/vacancies/search-head-tags.hbs}",
           "body": "{$./templates/vacancies/map.hbs}",
           "foot": "{$./templates/vacancies/map-foot.hbs}",
-          "sidebar": "{$./partials/vacancy-search-form.hbs}"
+          "sidebar": "{$./templates/vacancies/search-form.hbs}"
         },
         "data": {
           "content": "{$./templates/vacancies/search-json.hbs}"
@@ -436,6 +683,12 @@
             "apiVersion": "5.6"
           },
           "queryTemplates": [
+            {
+              "name": "home_based",
+              "index": "web-content-production",
+              "type": "goodmoves-vacancy",
+              "template": "{$./queries/vacancies/home-based.json}"
+            },
             {
               "name": "types",
               "index": "web-content-production",
@@ -504,6 +757,12 @@
           },
           "queryTemplates": [
             {
+              "name": "home_based",
+              "index": "web-content-production",
+              "type": "goodmoves-vacancy",
+              "template": "{$./queries/vacancies/home-based.json}"
+            },
+            {
               "name": "types",
               "index": "web-content-production",
               "type": "goodmoves-vacancy",
@@ -559,6 +818,12 @@
             "apiVersion": "5.6"
           },
           "queryTemplates": [
+            {
+              "name": "home_based",
+              "index": "web-content-production",
+              "type": "goodmoves-vacancy",
+              "template": "{$./queries/vacancies/home-based.json}"
+            },
             {
               "name": "types",
               "index": "web-content-production",
@@ -652,6 +917,18 @@
           },
           "queryTemplates": [
             {
+              "name": "home_based",
+              "index": "web-content-production",
+              "type": "goodmoves-vacancy",
+              "template": "{$./queries/vacancies/home-based.json}"
+            },
+            {
+              "name": "types",
+              "index": "web-content-production",
+              "type": "goodmoves-vacancy",
+              "template": "{$./queries/vacancies/types.json}"
+            },
+            {
               "name": "not_found",
               "index": "web-content-production",
               "type": "goodmoves-vacancy",
@@ -706,6 +983,12 @@
               "index": "web-content-production",
               "type": "goodmoves-vacancy",
               "template": "{$./queries/vacancies/organisation-vacancies.json}"
+            },
+            {
+              "name": "home_based",
+              "index": "web-content-production",
+              "type": "goodmoves-vacancy",
+              "template": "{$./queries/vacancies/home-based.json}"
             },
             {
               "name": "types",
@@ -806,6 +1089,18 @@
           },
           "queryTemplates": [
             {
+              "name": "home_based",
+              "index": "web-content-production",
+              "type": "goodmoves-vacancy",
+              "template": "{$./queries/vacancies/home-based.json}"
+            },
+            {
+              "name": "types",
+              "index": "web-content-production",
+              "type": "goodmoves-vacancy",
+              "template": "{$./queries/vacancies/types.json}"
+            },
+            {
               "name": "not_found",
               "index": "web-content-production",
               "type": "goodmoves-vacancy",
@@ -856,6 +1151,18 @@
           },
           "queryTemplates": [
             {
+              "name": "home_based",
+              "index": "web-content-production",
+              "type": "goodmoves-vacancy",
+              "template": "{$./queries/vacancies/home-based.json}"
+            },
+            {
+              "name": "types",
+              "index": "web-content-production",
+              "type": "goodmoves-vacancy",
+              "template": "{$./queries/vacancies/types.json}"
+            },
+            {
               "name": "not_found",
               "index": "web-content-production",
               "type": "scvo-events",
@@ -904,6 +1211,18 @@
             "apiVersion": "5.6"
           },
           "queryTemplates": [
+            {
+              "name": "home_based",
+              "index": "web-content-production",
+              "type": "goodmoves-vacancy",
+              "template": "{$./queries/vacancies/home-based.json}"
+            },
+            {
+              "name": "types",
+              "index": "web-content-production",
+              "type": "goodmoves-vacancy",
+              "template": "{$./queries/vacancies/types.json}"
+            },
             {
               "name": "not_found",
               "index": "web-content-production",

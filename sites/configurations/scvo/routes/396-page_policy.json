@@ -1,0 +1,90 @@
+{
+  "name": "page_policy",
+  "pattern": "/policy-research",
+  "tasks": [
+    {
+      "name": "primaryResponse",
+      "taskModule": "elasticsearch",
+      "config": {
+        "connectionStringTemplate": "{$../../elasticsearch-url.txt}",
+        "elasticsearchConfig": {
+          "apiVersion": "5.6"
+        },
+        "queryTemplates": {
+          "index": "web-content-production",
+          "type": "scvo-cms-page",
+          "template": ">context.metaData.handlebars.queries.pages_page",
+          "noResultsRoute": "four_oh_four"
+        }
+      },
+      "renderer": "handlebars"
+    },
+    {
+      "name": "supplimentaryResponses",
+      "taskModule": "elasticsearch",
+      "config": {
+        "connectionStringTemplate": "{$../../elasticsearch-url.txt}",
+        "elasticsearchConfig": {
+          "apiVersion": "5.6"
+        },
+        "queryTemplates": [
+          {
+            "name": "latest_briefings",
+            "index": "web-content-production",
+            "type": "scvo-cms-post",
+            "template": ">context.metaData.handlebars.queries.posts_post-briefings"
+          },
+          {
+            "name": "latest_consultation_responses",
+            "index": "web-content-production",
+            "type": "scvo-cms-post",
+            "template": ">context.metaData.handlebars.queries.posts_post-consultation-responses"
+          },
+          {
+            "name": "latest_research",
+            "index": "web-content-production",
+            "type": "scvo-cms-post",
+            "template": ">context.metaData.handlebars.queries.posts_post-reports"
+          },
+          {
+            "name": "events_total",
+            "index": "web-content-production",
+            "type": "scvo-event",
+            "template": ">context.metaData.handlebars.queries.events_event-policy-total"
+          },
+          {
+            "name": "splash",
+            "index": "web-content-production",
+            "type": "scvo-cms-media",
+            "template": ">context.metaData.handlebars.queries.pages_splash"
+          }
+        ]
+      },
+      "renderer": "handlebars"
+    },
+    {
+      "name": "destination",
+      "taskModule": "renderLayout",
+      "renderer": "handlebars",
+      "config": {
+        "logic": {
+          "if": [
+            "default"
+          ]
+        },
+        "output": "body",
+        "layouts": {
+          "default": {
+            "layout": ">context.metaData.handlebars.layouts.default",
+            "parts": {
+              "head": ">context.metaData.handlebars.templates.pages_page-head-tags",
+              "body": ">context.metaData.handlebars.templates.pages_page-policy",
+              "foot": ""
+            },
+            "contentType": "text/html"
+          }
+        }
+      }
+    }
+  ]
+}

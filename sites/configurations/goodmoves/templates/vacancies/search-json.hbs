@@ -1,0 +1,17 @@
+{
+  "detailed_results": {{{stringify (component "vacancy_search_results" this)}}},
+  "map_results": {
+    "total": {{data.search_data.map_results.hits.total}},
+    "hits": [
+      {{#each data.search_data.map_results.hits.hits}}
+      {
+        "Id": {{{stringify _id}}},
+        "geo_vacancy_coords": {{{stringify _source.geo_vacancy_coords}}},
+        "title": {{{stringify _source.title}}},
+        "info_window": {{{stringify (component "vacancy_map" _source)}}}
+      }{{#unless @last}},{{/unless}}
+      {{/each}}
+    ]
+  },
+  "query": {{{stringify data.search_data.detailed_results.request.query}}}
+}

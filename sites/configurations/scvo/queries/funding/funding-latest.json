@@ -1,0 +1,20 @@
+{
+  "size": 6,
+  "_source": [
+    "rendered.scvo_gist"
+  ],
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "terms": {
+            "fundStatus": [ "Open" ]
+          }
+        }
+      ]
+    }
+  },
+  "sort": {
+    "lastImportantActivity": "desc"
+  }
+}

@@ -1,0 +1,37 @@
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBJdxcQpVKQ6HdrjnPXycUoZqsmp-Ep3l0&libraries=places&region=uk&callback=initMap" async defer></script>
+<script>
+
+var tabs = new mdc.tabs.MDCTabBar(document.querySelector("#vacancy-tab-bar"));
+var panels = document.querySelector(".panels");
+tabs.preventDefaultOnClick = true;
+function updatePanel(index) {
+  var activePanel = panels.querySelector(".panel.panel--active");
+  if (activePanel) {
+    activePanel.classList.remove("panel--active");
+  }
+  var newActivePanel = panels.querySelector(
+    ".panel:nth-child(" + (index + 1) + ")"
+  );
+  if (newActivePanel) {
+    newActivePanel.classList.add("panel--active");
+  }
+}
+tabs.listen("MDCTabBar:change", function(t) {
+  var tabs = t.detail;
+  var nthChildIndex = tabs.activeTabIndex;
+  updatePanel(nthChildIndex);
+});
+
+{{#with data.primaryResponse.hits.hits.[0]}}
+var mapResults = [
+    {{#each _source.geo_vacancy_coords as |coords|}}
+    {
+      "Id": {{{stringify ../_id}}},
+      "geo_vacancy_coords": {{{stringify coords}}},
+      "title": {{{stringify ../_source.title}}},
+      "info_window": {{{stringify (component "vacancy_map" ../_source)}}}
+    }{{#unless @last}},{{/unless}}
+    {{/each}}
+];
+{{/with}}
+</script>

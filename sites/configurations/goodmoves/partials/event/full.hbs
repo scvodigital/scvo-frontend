@@ -1,0 +1,218 @@
+<div class="mdc-card full" data-event-id="{{Id}}">
+  <div class="mdc-card__info--event-row">
+    <div class="mdc-card__info--event">
+      <div class="mdc-card__info--event-title mdc-typography--headline4">
+        {{{title}}}
+      </div>
+      <div class="detailed-info">
+        <div class="mdc-layout-grid">
+          <div class="mdc-layout-grid__inner">
+            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-8-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone content event-content">
+              <dl class="inline-dl">
+                <dt>Details</dt>
+                <dd>
+                  <div class="mdc-layout-grid">
+                    <!-- {{#if date_start ~}}
+                    <div class="mdc-layout-grid__inner">
+                      <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-2-desktop mdc-layout-grid__cell--span-3-tablet mdc-layout-grid__cell--span-4-phone">
+                        <strong>Starts</strong>
+                      </div>
+                      <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-10-desktop mdc-layout-grid__cell--span-5-tablet mdc-layout-grid__cell--span-4-phone">
+                        {{moment date_start 'Do MMMM YYYY HH:mm' dstr local=true}}
+                      </div>
+                    </div>
+                    {{/if ~}}
+                    {{#if date_end ~}}
+                    <div class="mdc-layout-grid__inner">
+                      <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-2-desktop mdc-layout-grid__cell--span-3-tablet mdc-layout-grid__cell--span-4-phone">
+                        <strong>Ends</strong>
+                      </div>
+                      <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-10-desktop mdc-layout-grid__cell--span-5-tablet mdc-layout-grid__cell--span-4-phone">
+                        {{moment date_end 'Do MMMM YYYY HH:mm' dstr local=true}}
+                      </div>
+                    </div>
+                    {{/if ~}} -->
+                    {{#if trainer ~}}
+                    <div class="mdc-layout-grid__inner">
+                      <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-2-desktop mdc-layout-grid__cell--span-3-tablet mdc-layout-grid__cell--span-4-phone">
+                        <strong>Trainer</strong>
+                      </div>
+                      <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-10-desktop mdc-layout-grid__cell--span-5-tablet mdc-layout-grid__cell--span-4-phone">
+                        {{trainer}}
+                      </div>
+                    </div>
+                    {{/if ~}}
+                    {{#if contact ~}}
+                    <div class="mdc-layout-grid__inner">
+                      <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-2-desktop mdc-layout-grid__cell--span-3-tablet mdc-layout-grid__cell--span-4-phone">
+                        <strong>Contact</strong>
+                      </div>
+                      <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-10-desktop mdc-layout-grid__cell--span-5-tablet mdc-layout-grid__cell--span-4-phone">
+                        {{#if contact_email ~}}
+                        <span class="far fa-envelope fa-fw"></span> <a href="mailto:{{contact_email}}">{{{contact}}}</a>
+                        {{else}}
+                        {{{contact}}}
+                        {{/if ~}}
+                        {{#if contact_phone ~}}<br />
+                        <span class="fas fa-phone fa-fw"></span> {{contact_phone}}{{/if ~}}
+                      </div>
+                    </div>
+                    {{/if ~}}
+                    {{#if costs ~}}
+                    <div class="mdc-layout-grid__inner">
+                      <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-2-desktop mdc-layout-grid__cell--span-3-tablet mdc-layout-grid__cell--span-4-phone">
+                        <strong>Cost</strong>
+                      </div>
+                      <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-10-desktop mdc-layout-grid__cell--span-5-tablet mdc-layout-grid__cell--span-4-phone">
+                        {{{costs}}}
+                      </div>
+                    </div>
+                    {{else}}
+                    {{#if cost_structures ~}}
+                    <div class="mdc-layout-grid__inner">
+                      <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-2-desktop mdc-layout-grid__cell--span-3-tablet mdc-layout-grid__cell--span-4-phone">
+                        <strong>Cost</strong>
+                      </div>
+                      <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-10-desktop mdc-layout-grid__cell--span-5-tablet mdc-layout-grid__cell--span-4-phone">
+                        {{#forEach cost_structures ~}}
+                        {{Description__c}} &pound;{{Total_Amount__c}}{{#unless isLast}}, {{/unless}}
+                        {{/forEach ~}}
+                      </div>
+                    </div>
+                    {{else}}
+                    {{#if rate ~}}
+                    <div class="mdc-layout-grid__inner">
+                      <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-2-desktop mdc-layout-grid__cell--span-3-tablet mdc-layout-grid__cell--span-4-phone">
+                        <strong>Cost</strong>
+                      </div>
+                      <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-10-desktop mdc-layout-grid__cell--span-5-tablet mdc-layout-grid__cell--span-4-phone">
+                        &pound;{{rate}}
+                      </div>
+                    </div>
+                    {{/if ~}}
+                    {{/if ~}}
+                    {{/if ~}}
+                  </div>
+                </dd>
+                {{#if course_overview ~}}
+                <dt>
+                  {{#compare course_type "===" "Training Course" ~}}
+                  Course overview
+                  {{else}}
+                  Overview
+                  {{/compare ~}}
+                </dt>
+                <dd>
+                  {{{course_overview}}}
+                </dd>
+                {{/if ~}}
+                {{#if aims ~}}
+                <dt>
+                  {{#compare course_type "===" "Training Course" ~}}
+                  Overall course aim
+                  {{else}}
+                  Overall aim
+                  {{/compare ~}}
+                </dt>
+                <dd>
+                  {{{aims}}}
+                </dd>
+                {{/if ~}}
+                {{#if description ~}}
+                <dt>
+                  {{#compare course_type "===" "Training Course" ~}}
+                  Course objectives
+                  {{else}}
+                  Description
+                  {{/compare ~}}
+                </dt>
+                <dd>
+                  {{{description}}}
+                </dd>
+                {{/if ~}}
+                {{#if aimed_at ~}}
+                <dt>
+                  {{#compare course_type "===" "Training Course" ~}}
+                  Who is the course aimed at?
+                  {{else}}
+                  Who is this event aimed at?
+                  {{/compare ~}}
+                </dt>
+                <dd>
+                  {{{aimed_at}}}
+                </dd>
+                {{/if ~}}
+                {{#if entry_requirements ~}}
+                <dt>
+                  Entry requirements
+                </dt>
+                <dd>
+                  {{{entry_requirements}}}
+                </dd>
+                {{/if ~}}
+              </dl>
+              {{#if places_available ~}}
+              {{#compare places_available ">" 0 ~}}
+              {{#compare places_available "<" 5 ~}}
+              <p class="booking course-almost-full">
+                <strong>Note:</strong> Only a few places left!
+              </p>
+              {{/compare ~}}
+              <p class="book-now">
+                <a href="{{#if booking_url}}{{#startsWith "https://www.surveygizmo.eu" booking_url}}https://scvo.org{{url}}/book{{else}}{{{booking_url}}}{{/startsWith}}{{else}}https://scvo.org{{url}}/book{{/if}}" class="mdc-button mdc-button--raised">
+                  Book now
+                </a>
+              </p>
+              {{else}}
+              <p class="booking course-full">
+                <strong>Please note this {{#compare course_type "===" "Training Course"}}course{{else}}event{{/compare}} is now fully booked!</strong>
+              </p>
+              {{/compare ~}}
+              {{else}}
+              <p class="booking course-full">
+                <strong>Please note this {{#compare course_type "===" "Training Course"}}course{{else}}event{{/compare}} is now fully booked!</strong>
+              </p>
+              {{/if ~}}
+            </div>
+            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4 mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone sidebar event-sidebar">
+              <div class="mdc-layout-grid__inner">
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-2-desktop mdc-layout-grid__cell--span-3-tablet mdc-layout-grid__cell--span-4-phone">
+                  <strong>Venue</strong>
+                </div>
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-10-desktop mdc-layout-grid__cell--span-5-tablet mdc-layout-grid__cell--span-4-phone">
+                  {{#if event_venue.postcode ~}}
+                  {{#if event_venue.name ~}}{{event_venue.name}}<br />{{/if ~}}
+                  {{#if event_venue.organisation_name ~}}{{event_venue.organisation_name}}<br />{{/if ~}}
+                  {{#if event_venue.address_1 ~}}{{event_venue.address_1}}<br />{{/if ~}}
+                  {{#if event_venue.address_2 ~}}{{event_venue.address_2}}<br />{{/if ~}}
+                  {{#if rendered.city ~}}{{#compare rendered.city "!==" event_venue.address_2 ~}}{{rendered.city}}<br />{{/compare ~}}{{/if ~}}
+                  {{#if event_venue.postcode ~}}{{event_venue.postcode}}{{/if ~}}
+                  {{#if event_venue.accessible ~}}
+                  <br /><span class="fab fa-accessible-icon" aria-hidden="true"></span> Wheelchair accessible
+                  {{/if ~}}
+                  {{else}}
+                  {{#if venue_alt ~}}
+                  {{venue_alt}}
+                  {{else}}
+                  TBC
+                  {{#if rendered.city ~}}({{rendered.city}}){{else}}{{#if event_venue.address_2 ~}}({{event_venue.address_2}}){{/if ~}}{{/if ~}}
+                  {{/if ~}}
+                  {{/if ~}}
+                </div>
+                {{#if rendered.map_image ~}}
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone">
+                  <a href="https://maps.google.co.uk/?q={{encodeURI event_venue.address_1}},+{{encodeURI event_venue.postcode}}">
+                    <img src="{{rendered.map_image}}" />
+                  </a>
+                </div>
+                {{/if ~}}
+              </div>
+            </div>
+
+            {{{rendered.scvo_speakers}}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

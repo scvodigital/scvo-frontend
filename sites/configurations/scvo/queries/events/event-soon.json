@@ -1,0 +1,39 @@
+{
+  "size": 4,
+  "_source": [
+    "rendered.scvo_gist"
+  ],
+  "query": {
+    "bool": {
+      "must_not": [
+        {
+          "term": {
+            "hide_in_results": true
+          }
+        }
+      ],
+      "must": [
+        {
+          "range" : {
+            "date_start" : {
+              "gte" : "now/d"
+            }
+          }
+        },
+        {
+          "term": {
+            "team": "events"
+          }
+        },
+        {
+          "term": {
+            "course_type": "Training Course"
+          }
+        }
+      ]
+    }
+  },
+  "sort": {
+    "date_start": "asc"
+  }
+}

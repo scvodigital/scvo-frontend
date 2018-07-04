@@ -1,0 +1,19 @@
+{
+  "size": 4,
+  "_source": [
+    "title",
+    "rendered.scvo_search_result"
+  ],
+  "query": {
+    {{#if data.primaryResponse.hits.hits.[0] ~}}
+    "match_none": {}
+    {{else}}
+    "query_string": {
+      "query": "{{{regexReplace (default request.url.path "") "([^a-zA-Z0-9\s])" "gi" " "}}}",
+      "default_field": "text_bag_boost",
+      "default_operator": "OR",
+      "analyzer": "snowball"
+    }
+    {{/if ~}}
+  }
+}

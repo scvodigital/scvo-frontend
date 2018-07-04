@@ -1,0 +1,141 @@
+<!--
+  TODO: The stringifying of partial rendering component won't let us
+  use @root.request... Instead we might want to render the results in
+  a hidden DIV and pull the HTML from there. This might double up as a
+  backup in case the map fails to render. The results will still be
+  there on the page and we can just display the hidden div instead
+-->
+
+{{> vacancy_search_form this instance_id="perm"}}
+
+<div id="detailed-results-container" class="container-content container-map">
+  <div id="map-full" data-map-options='{
+    "center": {
+      "lat": 57.1795139,
+      "lng": -5.5317967
+    },
+    "zoom": 6,
+    "styles": [
+      {
+        "featureType": "administrative.country",
+        "elementType": "labels",
+        "stylers": [{ "visibility": "off" }]
+      },
+      {
+        "featureType": "poi",
+        "elementType": "labels",
+        "stylers": [{ "visibility": "off" }]
+      },
+      {
+        "elementType": "geometry",
+        "stylers": [{ "color": "#d1edc4" }]
+      },
+      {
+        "elementType": "labels.text.stroke",
+        "stylers": [{ "color": "#ffffff" }]
+      },
+      {
+        "elementType": "labels.text.fill",
+        "stylers": [{ "color": "#424242" }]
+      },
+      {
+        "featureType": "administrative.locality",
+        "elementType": "labels.text.fill",
+        "stylers": [{ "color": "#424242" }]
+      },
+      {
+        "featureType": "road",
+        "elementType": "geometry",
+        "stylers": [{ "color": "#888888" }]
+      },
+      {
+        "featureType": "road",
+        "elementType": "geometry.stroke",
+        "stylers": [{ "color": "#d1edc4" }]
+      },
+      {
+        "featureType": "road",
+        "elementType": "labels.text.fill",
+        "stylers": [{ "color": "#424242" }]
+      },
+      {
+        "featureType": "road.highway",
+        "elementType": "geometry",
+        "stylers": [{ "color": "#888888" }]
+      },
+      {
+        "featureType": "road.highway",
+        "elementType": "geometry.stroke",
+        "stylers": [{ "color": "#d1edc4" }]
+      },
+      {
+        "featureType": "road.highway",
+        "elementType": "labels.text.fill",
+        "stylers": [{ "color": "#424242" }]
+      },
+      {
+        "featureType": "transit",
+        "elementType": "geometry",
+        "stylers": [{ "color": "#111111" }]
+      },
+      {
+        "featureType": "transit.line",
+        "elementType": "geometry",
+        "stylers": [{ "color": "#111111" }]
+      },
+      {
+        "featureType": "transit.line",
+        "elementType": "geometry.stroke",
+        "stylers": [{ "color": "#111111" }]
+      },
+      {
+        "featureType": "transit.station",
+        "elementType": "labels.text.fill",
+        "stylers": [{ "color": "#424242" }]
+      },
+      {
+        "featureType": "transit.station.airport",
+        "elementType": "geometry",
+        "stylers": [{ "color": "#888888" }]
+      },
+      {
+        "featureType": "transit.station.bus",
+        "elementType": "geometry",
+        "stylers": [{ "color": "#333333" }]
+      },
+      {
+        "featureType": "transit.station.rail",
+        "elementType": "geometry",
+        "stylers": [{ "color": "#333333" }]
+      },
+      {
+        "featureType": "water",
+        "elementType": "geometry",
+        "stylers": [{ "color": "#c4deed" }]
+      },
+      {
+        "featureType": "water",
+        "elementType": "labels.text.fill",
+        "stylers": [{ "color": "#424242" }]
+      },
+      {
+        "featureType": "water",
+        "elementType": "labels.text.stroke",
+        "stylers": [{ "color": "#424242" }]
+      }
+    ],
+    "disableDefaultUI": true
+  }' data-map-pins='[
+    {{#each data.search_data.map_results.hits.hits}}
+      {{#if _source.geo_vacancy_coords}}
+        {{#each (arrayify _source.geo_vacancy_coords)}}
+          {
+            "coords": {{{stringify this}}},
+            "title": {{{stringify ../_source.title}}},
+            "info_window": {{{stringify (urlencode (getProperty (component "vacancy_map" ../_source) "string"))}}}
+          }{{#unless @../last}},{{/unless}}
+        {{/each}}
+      {{/if}}
+    {{/each}}
+  ]'></div>
+</div>

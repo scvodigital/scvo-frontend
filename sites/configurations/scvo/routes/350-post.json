@@ -1,0 +1,113 @@
+{
+  "name": "post",
+  "pattern": "/post/*path",
+  "tasks": [
+    {
+      "name": "primaryResponse",
+      "taskModule": "elasticsearch",
+      "config": {
+        "connectionStringTemplate": "{$../../elasticsearch-url.txt}",
+        "elasticsearchConfig": {
+          "apiVersion": "5.6"
+        },
+        "queryTemplates": {
+          "index": "web-content-production",
+          "type": "scvo-cms-post",
+          "template": ">context.metaData.handlebars.queries.posts_post",
+          "noResultsRoute": "four_oh_four"
+        }
+      },
+      "renderer": "handlebars"
+    },
+    {
+      "name": "supplimentaryResponses",
+      "taskModule": "elasticsearch",
+      "config": {
+        "connectionStringTemplate": "{$../../elasticsearch-url.txt}",
+        "elasticsearchConfig": {
+          "apiVersion": "5.6"
+        },
+        "queryTemplates": [
+          {
+            "name": "author_profile",
+            "index": "web-content-production",
+            "type": "scvo-cms-author",
+            "template": ">context.metaData.handlebars.queries.posts_post-author-profile"
+          },
+          {
+            "name": "staff_profile",
+            "index": "web-content-production",
+            "type": "scvo-staff",
+            "template": ">context.metaData.handlebars.queries.posts_post-staff-profile"
+          },
+          {
+            "name": "authors_posts",
+            "index": "web-content-production",
+            "type": "scvo-cms-post",
+            "template": ">context.metaData.handlebars.queries.posts_post-author-posts"
+          },
+          {
+            "name": "category_posts",
+            "index": "web-content-production",
+            "type": "scvo-cms-post",
+            "template": ">context.metaData.handlebars.queries.posts_post-category-posts"
+          },
+          {
+            "name": "tfn_related_posts",
+            "index": "web-content-production",
+            "type": "tfn-news-post,tfn-blog-post,tfn-feature",
+            "template": ">context.metaData.handlebars.queries.posts_tfn-related"
+          },
+          {
+            "name": "splash",
+            "index": "web-content-production",
+            "type": "scvo-cms-media",
+            "template": ">context.metaData.handlebars.queries.pages_splash"
+          }
+        ]
+      },
+      "renderer": "handlebars"
+    },
+    {
+      "name": "destination",
+      "taskModule": "renderLayout",
+      "renderer": "handlebars",
+      "config": {
+        "logic": {
+          "if": [
+            {
+              "in": [
+                "//amp.",
+                {
+                  "var": "request.fullUrl"
+                }
+              ]
+            },
+            "amp",
+            "default"
+          ]
+        },
+        "output": "body",
+        "layouts": {
+          "amp": {
+            "layout": ">context.metaData.handlebars.layouts.amp",
+            "parts": {
+              "head": ">context.metaData.handlebars.templates.pages_page-head-tags",
+              "body": ">context.metaData.handlebars.templates.posts_post-amp"
+            },
+            "contentType": "text/html"
+          },
+          "default": {
+            "layout": ">context.metaData.handlebars.layouts.default",
+            "parts": {
+              "head": ">context.metaData.handlebars.templates.posts_post-head-tags",
+              "body": ">context.metaData.handlebars.templates.posts_post",
+              "foot": ""
+            },
+            "contentType": "text/html"
+          }
+        }
+      }
+    }
+  ]
+}

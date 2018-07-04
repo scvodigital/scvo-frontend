@@ -95,23 +95,24 @@ export class AnalyticsProcessor {
     return viewCountArray;
   }
 
-  async getContentVersions(contentVersions: { [id: string]: number }): Promise<ContentVersionMapping[]> {
+  async getContentVersions(contentVersions: {[id: string]: number}):
+      Promise<ContentVersionMapping[]> {
     console.log('Getting ContentVersions:');
     const contentVersionIds = Object.keys(contentVersions);
     const map: ContentVersionMapping[] = [];
     while (contentVersionIds.length > 0) {
       const page = contentVersionIds.splice(0, 50);
-      const contentVersionIdsIn =
-          '(\'' + page.join('\', \'') + '\')';
+      const contentVersionIdsIn = '(\'' + page.join('\', \'') + '\')';
       const contentVersionSoql =
           'SELECT Id, ContentDocumentId FROM ContentVersion WHERE Id IN ' +
           contentVersionIdsIn;
 
-      const contentVersionResponse = await this.sfClient.query(contentVersionSoql);
-      
+      const contentVersionResponse =
+          await this.sfClient.query(contentVersionSoql);
+
       const contentVersionRecords =
           (contentVersionResponse.records as ContentVersionRecord[]);
-      
+
       contentVersionRecords.forEach((record) => {
         map.push({
           contentVersionId: record.Id,
@@ -123,17 +124,18 @@ export class AnalyticsProcessor {
     return map;
   }
 
-  async getContentDocumentLinks(contentDocumentIds: string[]): Promise<ContentDocumentLinkRecord[]> {
+  async getContentDocumentLinks(contentDocumentIds: string[]):
+      Promise<ContentDocumentLinkRecord[]> {
     console.log('Getting ContentDocumentLinks');
     const allRecords: ContentDocumentLinkRecord[] = [];
-    while(contentDocumentIds.length > 0) {
+    while (contentDocumentIds.length > 0) {
       const page = contentDocumentIds.splice(0, 50);
-      const contentDocumentIdsIn =
-          '(\'' + page.join('\', \'') + '\')';
+      const contentDocumentIdsIn = '(\'' + page.join('\', \'') + '\')';
       const contentDocumentLinkSoql =
           'SELECT ContentDocumentId, LinkedEntityId FROM ContentDocumentLink WHERE ContentDocumentId IN ' +
           contentDocumentIdsIn;
-      const contentDocumentLinkResponse = await this.sfClient.query(contentDocumentLinkSoql);
+      const contentDocumentLinkResponse =
+          await this.sfClient.query(contentDocumentLinkSoql);
       const contentDocumentLinkRecords =
           (contentDocumentLinkResponse.records as ContentDocumentLinkRecord[]);
       allRecords.push(...contentDocumentLinkRecords);
@@ -194,14 +196,15 @@ export class AnalyticsProcessor {
       return item.contentDocumentId;
     });
 
-    const contentDocumentLinkRecords = await this.getContentDocumentLinks(contentDocumentIds);
+    const contentDocumentLinkRecords =
+        await this.getContentDocumentLinks(contentDocumentIds);
 
     contentDocumentLinkRecords.forEach((record) => {
       map.forEach((item) => {
         if (item.contentDocumentId === record.ContentDocumentId) {
           const viewCount = new ViewCount(
-              'Goodmoves_Files__c', record.LinkedEntityId, startDate, 'Download',
-              'goodmoves.org.uk');
+              'Goodmoves_Files__c', record.LinkedEntityId, startDate,
+              'Download', 'goodmoves.org.uk');
           if (!viewCounts.hasOwnProperty(record.LinkedEntityId)) {
             viewCounts[record.LinkedEntityId] = viewCount;
           }
@@ -232,13 +235,14 @@ export class AnalyticsProcessor {
           viewCounts.map((viewCount: ViewCount) => {
             return viewCount.sObject;
           });
-      //console.log(records);
+      // console.log(records);
       const bulkOptions = {
         extIdField: 'Name__c',
         concurrencyMode: ('Parallel' as 'Parallel' | 'Serial')
       };
-      
-      const job = this.sfClient.bulk.createJob('View_Count__c', 'upsert', bulkOptions);
+
+      const job =
+          this.sfClient.bulk.createJob('View_Count__c', 'upsert', bulkOptions);
       const batch = job.createBatch();
 
       batch.execute(records);
@@ -250,8 +254,8 @@ export class AnalyticsProcessor {
         console.log('Batch Queue:', batchInfo);
       });
       batch.on('response', (rets) => {
-        let errors: any[] = [];
-        let successes: any[] = [];
+        const errors: any[] = [];
+        const successes: any[] = [];
         rets.forEach((ret: any) => {
           if (!ret.success) {
             errors.push(ret);
@@ -259,11 +263,13 @@ export class AnalyticsProcessor {
             successes.push(ret);
           }
         });
-        console.log('Batch completed.', successes.length, 'succeeded, and', errors.length, 'failed.');
+        console.log(
+            'Batch completed.', successes.length, 'succeeded, and',
+            errors.length, 'failed.');
         if (errors.length > 0) {
           console.error('Failed upserts:', errors);
         }
-        resolve({ successes: successes, errors: errors });
+        resolve({successes, errors});
       });
     });
   }

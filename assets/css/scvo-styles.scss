@@ -1,6 +1,6 @@
 @import "./node_modules/material-components-web/material-components-web.scss";
 @import url('//cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css');
-@import url('//fonts.googleapis.com/css?family=Montserrat:700|Open+Sans:400,600');
+@import url('//fonts.googleapis.com/css?family=Montserrat:500,700|Open+Sans:400,600');
 
 $unit: 1rem;
 $nav-height: 38px;
@@ -11,6 +11,7 @@ $base-font-family:                  "Open Sans", Helvetica, Arial, sans-serif;
 $base-font-weight:                  400;
 
 $heading-font-family:               "Montserrat", Helvetica, Arial, sans-serif;
+$heading-light-font-weight:         500;
 $heading-font-weight:               700;
 
 $footer-font-family:                "Open Sans", Helvetica, Arial, sans-serif;
@@ -330,6 +331,9 @@ primary-dark: #263238
   }
   .support.funding .mdc-card__primary {
     background-color: map-get($themeFunding, 'primary') !important;
+  }
+  .running-your-organisation .support.support-organisation .mdc-card__primary {
+    background-color: map-get($themeCharity, 'primary') !important;
   }
   .support.support-policy .mdc-card__primary {
     background-color: map-get($themePosts, 'primary') !important;
@@ -1716,7 +1720,7 @@ form#settled_status {
           min-height: $nav-height;
           height: $nav-height;
           font-weight: 600;
-          padding: 0 $unit*(3/4);
+          padding: 0 $unit/2;
           .mdc-tab--label {
             text-transform: none;
             line-height: $nav-height - 4px;
@@ -2120,6 +2124,11 @@ form#settled_status {
         h1.header-text {
           font-size: 4.8rem;
           line-height: 4rem;
+          letter-spacing: -0.1rem;
+          .normal {
+            letter-spacing: -0.4rem;
+            font-weight: $heading-light-font-weight;
+          }
         }
       }
     }
@@ -2135,28 +2144,7 @@ form#settled_status {
   }
 }
 .credit-union {
-  // .cu-hero {
-  //   background-image: url('https://members.scvocreditunion.scot/images/scvo-hero.png');
-  //   background-repeat: no-repeat;
-  //   background-size: cover;
-  //   background-position: center center;
-  //   display: flex;
-  //   align-items: center;
-  //   padding: $unit*1.5 0;
-  //   .mdc-layout-grid {
-  //     padding: 0 $unit*1.5;
-  //     width: 100%;
-  //     .mdc-button {
-  //       display: inline-grid;
-  //       height: auto;
-  //       width: 100%;
-  //     }
-  //   }
-  //   img {
-  //     display: none;
-  //   }
-  // }
-  .mdc-layout-grid {
+  .page-content .mdc-layout-grid {
     margin-bottom: $unit*1.25;
     width: 100%;
     .mdc-button {
@@ -2365,6 +2353,7 @@ body.i-love-charity .page-info,
       margin: $unit*1.2 0;
     }
     .mdc-card {
+      background: transparent;
       box-shadow: none;
       -webkit-box-shadow: none;
       h3 {
@@ -2512,7 +2501,7 @@ body.i-love-charity .page-info,
   display: inline-table;
   line-height: 1.96rem;
   outline: none;
-  transition: 0.3s;
+  transition: background-color 0.1s linear;
 }
 .mdc-button.mdc-button--raised.pull-right {
   margin-top: $unit/2;

@@ -1,0 +1,83 @@
+{
+  "size": 10,
+  "from": {{multiply (subtract (default request.params.query.page 1) 1) 10}},
+  "_source": [
+    "rendered.scvo_search_result"
+  ],
+  "query": {
+    "bool": {
+      "must": [
+        {{#if request.params.query.q}}
+        {
+          "query_string": {
+            "query": {{{stringify (default request.params.query.q "")}}},
+            "default_field": "text_bag",
+            "default_operator": "AND",
+            "analyzer": "snowball"
+          }
+        },
+        {{/if}}
+        {{#if request.params.query.sector}}
+        {
+          "term": {
+            "sectors": "{{request.params.query.sector}}"
+          }
+        },
+        {{/if}}
+        {{#if request.params.query.role}}
+        {
+          "term": {
+            "roles": "{{request.params.query.role}}"
+          }
+        },
+        {{/if}}
+        {{#if request.params.query.region}}
+        {
+          "term": {
+            "region": "{{request.params.query.region}}"
+          }
+        },
+        {{/if}}
+        {{#if request.params.query.status}}
+        {
+          "term": {
+            "status": "{{request.params.query.status}}"
+          }
+        },
+        {{/if}}
+        {{#if request.params.query.minimum_salary}}
+        {
+          "range": {
+            "salary_min": {
+              "gte": "{{request.params.query.minimum_salary}}"
+            }
+          }
+        },
+        {{/if}}
+        {
+          "term": {
+            "country_iso3": "GBR"
+          }
+        },
+        {
+          "term": {
+            "vacancy_status": "vacancy-open"
+          }
+        }
+      ],
+      "should": [
+        {
+          "term": {
+            "top_job": {
+              "value": true,
+              "boost": 100
+            }
+          }
+        }
+      ]
+    }
+  },
+  "sort": {
+    "_score": "desc"
+  }
+}

@@ -231,8 +231,10 @@ function generatePdf(
 }
 
 function fundCode(fund: any) {
-  const nextDeadlineDate: null | Date = fund.nextDeadline ? new Date(fund.nextDeadline) : null;
-  const nextDeadlineString: null | string = nextDeadlineDate ? moment(nextDeadlineDate).format('DD MMMM YYYY') : null;
+  const nextDeadlineDate: null|Date =
+      fund.nextDeadline ? new Date(fund.nextDeadline) : null;
+  const nextDeadlineString: null|string =
+      nextDeadlineDate ? moment(nextDeadlineDate).format('DD MMMM YYYY') : null;
   return [
     {style: 'h1', text: fund.name}, {style: 'h2', text: 'Summary'},
     {text: fund.fundSummary}, {
