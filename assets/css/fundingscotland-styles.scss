@@ -74,6 +74,9 @@ h4 {
 .headroom--unpinned {
   transform: translateY(-100%);
 }
+.mdc-text-field--box.mdc-ripple-upgraded::before {
+  transform: none;
+}
 
 header {
   .container-fluid {
@@ -82,7 +85,14 @@ header {
       padding-right: $unit/2 !important;
     }
     .mdc-top-app-bar__title {
+      font-weight: $heading-font-weight;
+      font-family: $heading-font-family;
+      font-variant: all-small-caps;
+      letter-spacing: -0.1rem;
+      font-size: 3rem;
+      line-height: 3rem;
       padding: 0;
+      margin: 0 $unit;
       a {
         display: block;
       }
@@ -573,7 +583,7 @@ a {
   padding: $unit/3 $unit/2;
   box-sizing: border-box;
 }
-.fundingscotland-funder-search .search-info {
+.fundingscotland-organisation-search .search-info {
   margin-bottom: $unit*1.5;
 }
 
@@ -806,7 +816,7 @@ a {
   }
 }
 .fundingscotland-event .mdc-card.full,
-.fundingscotland-funder .mdc-card.full,
+.fundingscotland-organisation .mdc-card.full,
 .fundingscotland-fund .mdc-card.full {
   box-shadow: none;
 }
@@ -824,7 +834,7 @@ a {
   }
 }
 .top-funds .top-job,
-.fundingscotland-funder .mdc-card.list .mdc-card__info--fund-funder {
+.fundingscotland-organisation .mdc-card.list .mdc-card__info--fund-funder {
   display: none !important;
 }
 
@@ -1158,7 +1168,7 @@ body {
     }
   }
 }
-.fundingscotland-funder {
+.fundingscotland-organisation {
   .mdc-card.full {
     background-color: transparent;
   }
@@ -1409,8 +1419,10 @@ footer,
             letter-spacing: -0.4rem;
             font-weight: $heading-light-font-weight;
           }
-          .normal.moves {
-            margin-left: -0.4rem;
+          .normal.brand {
+            font-weight: 700;
+            font-variant: all-small-caps;
+            letter-spacing: -0.1rem;
           }
         }
       }
