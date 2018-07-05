@@ -1,9 +1,0 @@
-{{#if data.primaryResponse.hits.hits.[0] ~}}
-{{#with data.primaryResponse.hits.hits.[0]._source ~}}
-<title>Goodmoves – Search results</title>
-{{/with ~}}
-{{else}}
-<title>Goodmoves – Search results</title>
-{{/if ~}}
-<description>{{{description}}}</description>
-<link>https://test.goodmoves.com{{{replace (replace request.params.uri.path "&rss" "") "?rss" ""}}}</link>

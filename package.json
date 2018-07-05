@@ -9,7 +9,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\"",
     "cleanup": "rm -rf ./build/**",
-    "copy": "cp ./db/db.json ./build/db.json; cp -r ./assets ./build/assets",
+    "copy": "cp -r ./assets ./build/assets",
     "sass": "node_modules/node-sass/bin/node-sass --include-path=./node_modules ./build/assets/css -o build/assets/css",
     "upgrade-router": "yarn add -E @scvo/router @scvo/router-task-firebase @scvo/router-task-elasticsearch @scvo/router-destination-handlebars @scvo/router-destination-redirect",
     "build": "npm run cleanup; npm run compile; npm run build-db; npm run copy; npm run sass; npm run uglify",
@@ -34,10 +34,13 @@
     "prepare": "npm run compile",
     "pretest": "npm run compile",
     "posttest": "npm run check",
-    "uglify": "npm run uglify-main; npm run uglify-search; npm run uglify-home",
-    "uglify-main": "node_modules/uglify-js/bin/uglifyjs --compress --output=./build/assets/js/goodmoves/main.js ./build/assets/js/jquery-deserialize.js ./build/assets/js/cookieinfo.min.js ./build/assets/js/class-inheritance.js ./build/assets/js/goodmoves/site-controller.js",
-    "uglify-home": "node_modules/uglify-js/bin/uglifyjs --compress --output=./build/assets/js/goodmoves/home.js ./build/assets/js/goodmoves/typeahead-controller.js ./build/assets/js/goodmoves/home-controller.js",
-    "uglify-search": "node_modules/uglify-js/bin/uglifyjs --compress --output=./build/assets/js/goodmoves/search.js ./build/assets/js/goodmoves/typeahead-controller.js ./build/assets/js/goodmoves/search-controller.js"
+    "uglify": "npm run uglify-goodmoves-main; npm run uglify-goodmoves-search; npm run uglify-goodmoves-home; npm run uglify-fundingscotland-main; npm run uglify-fundingscotland-search; npm run uglify-fundingscotland-home",
+    "uglify-goodmoves-main": "node_modules/uglify-js/bin/uglifyjs --compress --output=./build/assets/js/goodmoves/main.js ./build/assets/js/jquery-deserialize.js ./build/assets/js/cookieinfo.min.js ./build/assets/js/class-inheritance.js ./build/assets/js/goodmoves/site-controller.js",
+    "uglify-goodmoves-home": "node_modules/uglify-js/bin/uglifyjs --compress --output=./build/assets/js/goodmoves/home.js ./build/assets/js/goodmoves/typeahead-controller.js ./build/assets/js/goodmoves/home-controller.js",
+    "uglify-goodmoves-search": "node_modules/uglify-js/bin/uglifyjs --compress --output=./build/assets/js/goodmoves/search.js ./build/assets/js/goodmoves/typeahead-controller.js ./build/assets/js/goodmoves/search-controller.js",
+    "uglify-fundingscotland-main": "node_modules/uglify-js/bin/uglifyjs --compress --output=./build/assets/js/fundingscotland/main.js ./build/assets/js/jquery-deserialize.js ./build/assets/js/cookieinfo.min.js ./build/assets/js/class-inheritance.js ./build/assets/js/fundingscotland/site-controller.js",
+    "uglify-fundingscotland-home": "node_modules/uglify-js/bin/uglifyjs --compress --output=./build/assets/js/fundingscotland/home.js ./build/assets/js/fundingscotland/typeahead-controller.js ./build/assets/js/fundingscotland/home-controller.js",
+    "uglify-fundingscotland-search": "node_modules/uglify-js/bin/uglifyjs --compress --output=./build/assets/js/fundingscotland/search.js ./build/assets/js/fundingscotland/typeahead-controller.js ./build/assets/js/fundingscotland/search-controller.js"
   },
   "author": "Matthew Wilkes (https://scvo.org.uk)",
   "license": "GPL-3.0",
