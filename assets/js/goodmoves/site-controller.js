@@ -180,10 +180,10 @@ var GoodmovesController = Class.extend({
         resolve();
       } else {
         that.updateUserProfile(userProfile).then(function(userProfile) {
-          console.log('Saved default Goodmoves profile');
+          console.log('Saved default profile');
           resolve();
         }).catch(function(err) {
-          console.error('Error saving default Goodmoves profile', err);
+          console.error('Error saving default profile', err);
           resolve();
         });
       }
