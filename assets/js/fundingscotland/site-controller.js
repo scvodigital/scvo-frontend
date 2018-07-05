@@ -1,4 +1,4 @@
-var GoodmovesController = Class.extend({
+var FundingScotlandController = Class.extend({
   userProfile: null,
   uid: null,
   app: null,
@@ -127,7 +127,7 @@ var GoodmovesController = Class.extend({
   getSavedSearches: function(user, cb) {
     if (!user.email) return;
     var that = this;
-    var url = 'https://scvo.net/subscriber/' + user.email + '/goodmoves-weekly';
+    var url = 'https://scvo.net/subscriber/' + user.email + '/fundingscotland-weekly';
     $.getJSON(url, function(response) {
       that.savedSearches = [];
       if (response.message === 'Found') {
@@ -141,18 +141,6 @@ var GoodmovesController = Class.extend({
   },
 
   updateComponents: function() {
-    if (this.userProfile) {
-      var userProfile = this.userProfile;
-      $('[data-vacancy-id]').removeClass('vacancy-shortlisted');
-      if (userProfile.goodmoves && userProfile.goodmoves.saved_vacancies) {
-        var savedVacancies = userProfile.goodmoves.saved_vacancies;
-        var selectors = savedVacancies.map(function(vid) {
-          return '[data-vacancy-id="' + vid + '"]';
-        });
-        $(selectors.join(',')).addClass('vacancy-shortlisted');
-      }
-    }
-
     $('[data-collapse-target]').off('click').on('click', function(evt) {
       console.log('Collapse click:', evt);
       var $el = $(evt.currentTarget);
@@ -173,17 +161,15 @@ var GoodmovesController = Class.extend({
     var that = this;
     return new Promise(function(resolve, reject) {
       var userProfile = that.userProfile;
-      userProfile.goodmoves = userProfile.goodmoves || {};
-      userProfile.goodmoves.saved_vacancies = userProfile.goodmoves.saved_vacancies || [];
       if (userProfile === that.userProfile) {
         that.updateComponents();
         resolve();
       } else {
         that.updateUserProfile(userProfile).then(function(userProfile) {
-          console.log('Saved default Goodmoves profile');
+          console.log('Saved default profile');
           resolve();
         }).catch(function(err) {
-          console.error('Error saving default Goodmoves profile', err);
+          console.error('Error saving default profile', err);
           resolve();
         });
       }
@@ -204,33 +190,12 @@ var GoodmovesController = Class.extend({
         reject();
       });
     });
-  },
-
-  toggleShortlistItem: function(id) {
-
-    // Add mdc-chip--selected to mdc-chip
-    // Add mdc-chip__icon--leading-hidden to mdc-chip__icon
-
-    var userProfile = this.userProfile;
-    var shortlist = userProfile.goodmoves.saved_vacancies;
-    var index = shortlist.indexOf(id);
-    if (index > -1) {
-      shortlist.splice(index, 1);
-    } else {
-      shortlist.push(id);
-    }
-    userProfile.goodmoves.saved_vacancies = shortlist;
-    this.updateUserProfile(userProfile).then(function() {
-      console.log('Shortlist updated');
-    }).catch(function(err) {
-      console.error('Failed to update shortlist', err);
-    });
   }
 });
 
-var goodmoves = null;
+var fundingscotland = null;
 $(document).ready(function() {
-  goodmoves = new GoodmovesController({
+  fundingscotland = new FundingScotlandController({
       apiKey: "AIzaSyDIUNnyGeZY3sO8gGIf-_2dgO49xKij5zI",
       authDomain: "scvo-net.firebaseapp.com",
       databaseURL: "https://scvo-net.firebaseio.com",

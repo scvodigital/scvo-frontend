@@ -1,0 +1,32 @@
+{{> fund_search_form this instance_id="perm"}}
+
+<div class="container-content">
+  {{#compare data.primaryResponse.hits.total ">" 0}}
+
+  <div class="fundingscotland-fund">
+    {{#each data.primaryResponse.hits.hits ~}}
+    {{> fund_full _source}}
+    {{/each ~}}
+  </div>
+
+  <div class="fundingscotland-related-funds">
+    <div class="mdc-typography--headline5 v-margin-full">
+      Similar funds
+    </div>
+    <div class="mdc-layout-grid">
+      <div class="mdc-layout-grid__inner">
+        {{#each data.supplimentaryResponses.related.hits.hits ~}}
+        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone">
+          {{> fund_list _source}}
+        </div>
+        {{/each ~}}
+      </div>
+    </div>
+  </div>
+
+  {{else}}
+  <p>
+    <strong>Error:</strong> the requested job could not be found - it may have expired.
+  </p>
+  {{/compare}}
+</div>

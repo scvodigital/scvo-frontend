@@ -1,0 +1,14 @@
+{
+  "size": 3,
+  "_source": [
+    "rendered.scvo_gist"
+  ],
+  "query": {
+    "more_like_this" : {
+      "fields" : ["text_bag"],
+      "like" : "{{data.primaryResponse.hits.hits.[0]._source.text_bag_boost}}",
+      "min_term_freq" : 1,
+      "max_query_terms" : 12
+    }
+  }
+}

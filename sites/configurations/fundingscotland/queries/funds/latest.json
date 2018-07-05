@@ -1,0 +1,35 @@
+{
+  "size": 5,
+  "_source": [
+    "Id",
+    "slug",
+    "fund_status",
+    "rendered.fund_status",
+    "top_job",
+    "description_short",
+    "title",
+    "geo_fund_coords",
+    "location",
+    "salary",
+    "role_status_list",
+    "closing_date",
+    "funder_organisation.slug",
+    "funder_organisation.name",
+    "funder_organisation.has_logo",
+    "funder_organisation.logo_url"
+  ],
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "term": {
+            "fund_status": "Open"
+          }
+        }
+      ]
+    }
+  },
+  "sort": {
+    "start_at": "desc"
+  }
+}

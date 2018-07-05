@@ -1,0 +1,104 @@
+{{#*inline "term_checkbox"}}
+<div class="mdc-form-field">
+  <div class="mdc-checkbox">
+    <input type="checkbox" class="mdc-checkbox__native-control" id="{{instance_id}}_{{field}}_{{slug}}"
+    name="{{#compare field "===" "type"}}{{field}}{{else}}{{field}}[]{{/compare}}" value="{{slug}}"{{#if (contains selected slug)}} checked{{/if}} />
+    <div class="mdc-checkbox__background">
+      <svg class="mdc-checkbox__checkmark"
+      viewBox="0 0 24 24">
+      <path class="mdc-checkbox__checkmark-path"
+      fill="none"
+      stroke="white"
+      d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+    </svg>
+    <div class="mdc-checkbox__mixedmark"></div>
+  </div>
+</div>
+<label for="{{instance_id}}_{{field}}_{{slug}}">
+  {{#compare value.key "===" "Management Board" ~}}
+  Trustee
+  {{else}}
+  {{{default value.key value}}}
+  {{/compare ~}}
+</label>
+</div>
+{{/inline}}
+
+<aside class="mdc-drawer mdc-drawer--permanent mdc-elevation--z4">
+  <div class="mdc-drawer__content">
+    <h2 class="mdc-drawer__content-heading hide-sm">Search funds</h2>
+
+    <form action="/search" method="GET" class="search-form">
+      <div class="h-padding">
+        <div class="mdc-text-field mdc-text-field--box mdc-text-field--with-leading-icon" data-mdc-auto-init="MDCTextField">
+          <span class="far fa-search mdc-text-field__icon" tabindex="0" role="button"></span>
+          <input type="text" id="{{instance_id}}-keywords" name="keywords" class="mdc-text-field__input mdc-text-field--fullwidth" value="{{request.params.query.keywords}}" data-lpignore="true" autocomplete="off">
+          <label class="mdc-floating-label mdc-floating-label--float-above" for="keywords">
+            Keywords
+          </label>
+          <div class="mdc-line-ripple"></div>
+        </div>
+      </div>
+
+      <div class="h-padding">
+        <div class="mdc-text-field mdc-text-field--box mdc-text-field--with-leading-icon" data-mdc-auto-init="MDCTextField">
+          <span class="far fa-arrow-alt-from-left mdc-text-field__icon" tabindex="0" role="button"></span>
+          <input type="text" id="{{instance_id}}-salary_min" name="salary_min" class="mdc-text-field__input mdc-text-field--fullwidth" value="{{request.params.query.q}}" data-lpignore="true">
+          <label class="mdc-floating-label mdc-floating-label--float-above" for="{{instance_id}}-salary_min">
+            Minimum salary
+          </label>
+          <div class="mdc-line-ripple"></div>
+        </div>
+      </div>
+
+      <div class="h-padding">
+        <div class="mdc-text-field mdc-text-field--box mdc-text-field--with-leading-icon" data-mdc-auto-init="MDCTextField">
+          <span class="far fa-arrow-alt-to-right mdc-text-field__icon" tabindex="0" role="button"></span>
+          <input type="text" id="{{instance_id}}-salary_max" name="salary_max" class="mdc-text-field__input mdc-text-field--fullwidth" value="{{request.params.query.q}}" data-lpignore="true">
+          <label class="mdc-floating-label mdc-floating-label--float-above" for="{{instance_id}}-salary_max">
+            Maximum salary
+          </label>
+          <div class="mdc-line-ripple"></div>
+        </div>
+      </div>
+
+      {{#each (split "roles,sectors" ",")}}
+        <h3 class="mdc-drawer__content-heading">
+          {{capitalize this}}
+          <span class="mdc-icon-toggle pull-right" data-collapse-target="#{{../instance_id}}-{{this}}-collapse"
+                role="button" aria-pressed="false"
+                aria-label="Show roles" tabindex="0">
+            <i class="far {{#if (getProperty ../request.params.query this)}}fa-chevron-up{{else}}fa-chevron-down{{/if}}" aria-hidden="true"></i>
+          </span>
+        </h3>
+        <div id="{{../instance_id}}-{{this}}-collapse"{{#unless (getProperty ../request.params.query this)}} style="display: none;"{{/unless}}>
+          {{#each (getProperty ../data.supplimentaryResponses.types.aggregations (concat this "_slugs.buckets")) ~}}
+          {{> term_checkbox slug=key field=../this selected=(getProperty ../../request.params.query ../this) instance_id=../../instance_id value=(lookup (getProperty ../../data.supplimentaryResponses.types.aggregations (concat ../this ".buckets")) @index)}}
+          {{/each ~}}
+        </div>
+      {{/each}}
+
+      <h3 class="mdc-drawer__content-heading">
+        Types
+        <span class="mdc-icon-toggle pull-right" data-collapse-target="#{{instance_id}}-statuses-collapse"
+              role="button" aria-pressed="false"
+              aria-label="Show roles" tabindex="0">
+          <i class="far {{#if request.params.query.statuses}}fa-chevron-up{{else}}fa-chevron-down{{/if}}" aria-hidden="true"></i>
+        </span>
+      </h3>
+      <div id="{{instance_id}}-statuses-collapse"{{#unless request.params.query.statuses}} style="display: none;"{{/unless}}>
+        {{#each data.supplimentaryResponses.types.aggregations.statuses_slugs.buckets ~}}
+        {{> term_checkbox value=(lookup ../data.supplimentaryResponses.types.aggregations.statuses.buckets @index) slug=key field="statuses" selected=../request.params.query.statuses instance_id=../instance_id}}
+        {{/each ~}}
+        {{> term_checkbox value="Home-based" slug="home-based" field="type" selected=request.params.query.type instance_id=instance_id}}
+      </div>
+
+      <div class="h-margin v-margin">
+        <button class="mdc-button mdc-button--raised mdc-button--fullwidth mdc-ripple-surface mdc-ripple-surface--primary" type="submit" id="{{instance_id}}-search-submit" data-mdc-auto-init="MDCRipple">
+          <span class="far fa-search fa-fw mdc-list-item__graphic" aria-hidden="true"></span>
+          Search
+        </button>
+      </div>
+    </form>
+  </div>
+</aside>

@@ -1,0 +1,50 @@
+{
+  "size": 100,
+  "_source": [
+    "Id",
+    "slug",
+    "fund_status",
+    "rendered.fund_status",
+    "top_job",
+    "description_short",
+    "title",
+    "geo_fund_coords",
+    "location",
+    "salary",
+    "salary_info",
+    "benefits",
+    "reference_number",
+    "application_notes",
+    "role_status_list",
+    "closing_date",
+    "funder_organisation.slug",
+    "funder_organisation.name",
+    "funder_organisation.has_logo",
+    "funder_organisation.logo_url",
+    "funder_organisation.website",
+    "funder_organisation.profile",
+    "funder_organisation_website_url",
+    "rendered.goodmoves_sponsor_logos",
+    "rendered.goodmoves_downloads",
+    "rendered.rss"
+  ],
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "term": {
+            "funder_organisation.id": "{{data.primaryResponse.hits.hits.[0]._source.Id}}"
+          }
+        },
+        {
+          "term": {
+            "fund_status": "Open"
+          }
+        }
+      ]
+    }
+  },
+  "sort": {
+    "start_at": "desc"
+  }
+}

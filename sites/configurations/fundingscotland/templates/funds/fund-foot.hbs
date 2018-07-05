@@ -1,0 +1,23 @@
+<script>
+
+var tabs = new mdc.tabs.MDCTabBar(document.querySelector("#fund-tab-bar"));
+var panels = document.querySelector(".panels");
+tabs.preventDefaultOnClick = true;
+function updatePanel(index) {
+  var activePanel = panels.querySelector(".panel.panel--active");
+  if (activePanel) {
+    activePanel.classList.remove("panel--active");
+  }
+  var newActivePanel = panels.querySelector(
+    ".panel:nth-child(" + (index + 1) + ")"
+  );
+  if (newActivePanel) {
+    newActivePanel.classList.add("panel--active");
+  }
+}
+tabs.listen("MDCTabBar:change", function(t) {
+  var tabs = t.detail;
+  var nthChildIndex = tabs.activeTabIndex;
+  updatePanel(nthChildIndex);
+});
+</script>

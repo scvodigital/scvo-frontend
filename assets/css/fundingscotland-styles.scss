@@ -1,9 +1,9 @@
-$mdc-theme-primary: #42842A;
-$mdc-theme-primary-light: #538F3D;
-$mdc-theme-primary-dark: #244817;
+$mdc-theme-primary: #00796A;
+$mdc-theme-primary-light: #198678;
+$mdc-theme-primary-dark: #006054;
 
-$mdc-theme-complimentary: #BAD2B1;
-$mdc-theme-complimentary-light: #DCE8D8;
+$mdc-theme-complimentary: rgba(0,121,106,0.89);
+$mdc-theme-complimentary-light: rgba(0,121,106,0.91);
 
 $mdc-theme-secondary: #E0E0E0; // Gray 300
 $mdc-theme-secondary-light: #F5F5F5; // Gray 100
@@ -377,7 +377,7 @@ footer h3,
   }
 }
 
-.goodmoves-page {
+.fundingscotland-page {
   margin: $unit*1.5 0;
   .x-items {
     margin-top: 0;
@@ -389,11 +389,11 @@ footer h3,
     }
   }
 }
-.goodmoves-vacancy,
-.goodmoves-related-jobs {
+.fundingscotland-fund,
+.fundingscotland-related-funds {
   margin-bottom: $unit*2.5;
 }
-.goodmoves-vacancy-search {
+.fundingscotland-fund-search {
   .head {
     margin-bottom: $unit/2;
     .mdc-select {
@@ -407,7 +407,7 @@ footer h3,
     }
   }
 }
-.goodmoves-saved-searches {
+.fundingscotland-saved-searches {
   .mdc-list {
     background-color: white;
     .saved-search-email-switch {
@@ -573,7 +573,7 @@ a {
   padding: $unit/3 $unit/2;
   box-sizing: border-box;
 }
-.goodmoves-organisation-search .search-info {
+.fundingscotland-funder-search .search-info {
   margin-bottom: $unit*1.5;
 }
 
@@ -622,10 +622,10 @@ a {
   width: 100%;
   background-color: #fff;
   margin-bottom: $unit*1.5;
-  .mdc-card__info--organisation-title {
+  .mdc-card__info--funder-title {
     padding: $unit;
   }
-  .mdc-card__media--organisation {
+  .mdc-card__media--funder {
     margin-right: $unit;
   }
   .search-result-article__snippet {
@@ -697,18 +697,18 @@ a {
     padding: $unit/2;
     font-weight: 600;
   }
-  .mdc-card__info--organisation-title {
+  .mdc-card__info--funder-title {
     margin: 0 0 $unit/2;
   }
-  .mdc-card__info--vacancy .detailed-info,
-  .organisation-type {
+  .mdc-card__info--fund .detailed-info,
+  .funder-type {
     margin: $unit/2 0 $unit;
     small {
       font-size: 0.92rem;
     }
   }
-  .mdc-card__info--vacancy-title a,
-  .mdc-card__info--vacancy-title a:hover {
+  .mdc-card__info--fund-title a,
+  .mdc-card__info--fund-title a:hover {
     color: inherit;
     pointer-events: none;
     cursor: default;
@@ -732,7 +732,7 @@ a {
       background: white !important;
     }
   }
-  #vacancy-tab-bar {
+  #fund-tab-bar {
     width: 100%;
     background-color: $mdc-theme-complimentary;
     display: flex;
@@ -753,7 +753,7 @@ a {
   .panel.panel--active {
     display: block;
   }
-  .vacancy-info-container {
+  .fund-info-container {
     border-radius: 2px;
     background-color: white;
     box-shadow: 0px 6px 6px -3px rgba(0, 0, 0, 0.2), 0px 10px 14px 1px rgba(0, 0, 0, 0.14), 0px 4px 18px 3px rgba(0, 0, 0, 0.12);
@@ -805,12 +805,12 @@ a {
     }
   }
 }
-.goodmoves-event .mdc-card.full,
-.goodmoves-organisation .mdc-card.full,
-.goodmoves-vacancy .mdc-card.full {
+.fundingscotland-event .mdc-card.full,
+.fundingscotland-funder .mdc-card.full,
+.fundingscotland-fund .mdc-card.full {
   box-shadow: none;
 }
-.goodmoves-page .mdc-card.full {
+.fundingscotland-page .mdc-card.full {
   width: 100%;
   background-color: #fff;
 }
@@ -823,8 +823,8 @@ a {
     margin: 0 $unit/2 $unit/4 0;
   }
 }
-.top-jobs .top-job,
-.goodmoves-organisation .mdc-card.list .mdc-card__info--vacancy-organisation {
+.top-funds .top-job,
+.fundingscotland-funder .mdc-card.list .mdc-card__info--fund-funder {
   display: none !important;
 }
 
@@ -892,7 +892,7 @@ hr {
     }
   }
 }
-.mdc-card.vacancy-shortlisted {
+.mdc-card.fund-shortlisted {
   .mdc-card__actions {
     .mdc-card__action--shortlist .fa-heart {
       font-weight: 900;
@@ -1043,19 +1043,19 @@ body {
 
 .mdc-card {
   padding: 0;
-  .mdc-card__info--organisation-row,
-  .mdc-card__info--vacancy-row {
+  .mdc-card__info--funder-row,
+  .mdc-card__info--fund-row {
     display: flex;
   }
-  .mdc-card__info--vacancy-row {
+  .mdc-card__info--fund-row {
     padding: $unit/2;
   }
-  .mdc-card__info--organisation,
-  .mdc-card__info--vacancy {
+  .mdc-card__info--funder,
+  .mdc-card__info--fund {
     width: 100%;
     flex-direction: column;
     padding: 0 $unit/2;
-    .mdc-card__info--vacancy-title {
+    .mdc-card__info--fund-title {
       margin: $unit/2 0 $unit*(3/4);
       a .top-job {
         margin-left: 0;
@@ -1089,7 +1089,7 @@ body {
         margin-bottom: 0;
       }
     }
-    .mdc-card__info--vacancy-title a:hover {
+    .mdc-card__info--fund-title a:hover {
       text-decoration: none;
       .hover-underline {
         text-decoration: underline;
@@ -1102,17 +1102,17 @@ body {
     .fa-fw {
       margin-right: $unit/4;
     }
-    .mdc-card__info--vacancy-organisation {
+    .mdc-card__info--fund-funder {
       padding: $unit/2 0;
     }
   }
-  .mdc-card__info--organisation {
+  .mdc-card__info--funder {
     padding: 0;
   }
   .mdc-card__info--event {
     padding: $unit;
   }
-  .mdc-card__media--organisation {
+  .mdc-card__media--funder {
     max-width: 120px;
     height: auto;
     display: flex;
@@ -1126,16 +1126,16 @@ body {
   }
 }
 .mdc-card.list {
-  .mdc-card__media--organisation {
+  .mdc-card__media--funder {
     display: none;
   }
 }
 .mdc-card.full {
   background-color: transparent;
   margin-top: $unit;
-  .mdc-card__info--vacancy-row {
+  .mdc-card__info--fund-row {
     padding: 0 0 $unit;
-    .mdc-card__info--vacancy {
+    .mdc-card__info--fund {
       padding: 0;
     }
     .mdc-card__media {
@@ -1145,9 +1145,9 @@ body {
       color: $mdc-theme-secondary-dark;
     }
   }
-  .mdc-card__info--vacancy-row,
-  .mdc-card__info--organisation-row {
-    .mdc-card__media--organisation {
+  .mdc-card__info--fund-row,
+  .mdc-card__info--funder-row {
+    .mdc-card__media--funder {
       align-items: flex-start;
       mix-blend-mode: multiply;
       max-width: 200px;
@@ -1158,7 +1158,7 @@ body {
     }
   }
 }
-.goodmoves-organisation {
+.fundingscotland-funder {
   .mdc-card.full {
     background-color: transparent;
   }
@@ -1335,7 +1335,7 @@ footer,
   .banner-search.overlay {
     display: block;
     .content {
-      background-image: linear-gradient(60deg, rgba(66, 132, 42, 0.89), rgba(66, 132, 42, 0.91) 47%, transparent 47.08%, transparent);
+      background-image: linear-gradient(60deg, rgba(0, 121, 106, 0.89), rgba(0, 121, 106, 0.91) 47%, transparent 47.08%, transparent);
       min-height: 40vh;
       background-color: transparent;
       padding: 0 0 $unit*2;
@@ -1391,6 +1391,7 @@ footer,
       }
       .overlay-content {
         padding: $unit*2.5 $unit $unit*2 3%;
+        max-width: 40%;
         .header-extra,
         .header-text {
           font-weight: 600;
@@ -1416,55 +1417,6 @@ footer,
     }
   }
 }
-.home-banner.option-2 {
-  .banner-search,
-  .banner-search .page-content {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  .page-content {
-    padding: $unit/2 $unit*1.25 $unit;
-    border-radius: 2px;
-    .mdc-text-field--box::before, .mdc-text-field--box::after {
-      width: 100%;
-    }
-    .mdc-button--search {
-      border-radius: 2px;
-      width: 100%;
-      .fa-search {
-        position: absolute;
-        right: $unit*(2/3);
-      }
-    }
-    .mdc-button--raised {
-      width: 100%;
-      .far {
-        position: absolute;
-        right: $unit/2;
-      }
-    }
-    .mdc-menu--open {
-      z-index: 100;
-    }
-  }
-}
-.home-banner.option-3 {
-  .banner-search {
-    .content {
-      padding: 0;
-      display: flex;
-      justify-content: left;
-      align-items: center;
-      width: 100%;
-      .search-form {
-        width: 50%;
-        margin: 0;
-        padding: 0 $unit $unit;
-      }
-    }
-  }
-}
 
 .mdc-list-item {
   height: $header-lower-height;
@@ -1481,12 +1433,12 @@ footer,
   }
 }
 
-.home-jobs {
+.home-funds {
   background-color: $mdc-theme-secondary-light;
   padding: 0 $unit*1.5 $unit !important;
 }
 // .currently-recruiting,
-// .home-jobs {
+// .home-funds {
 //   box-shadow: $toolbar-shadow-reverse;
 // }
 .home .tfn-latest {
@@ -1526,12 +1478,12 @@ footer,
 .currently-recruiting {
   padding: $unit/4 $unit*1.5 $unit/3 !important;
   background-color: $mdc-theme-secondary;
-  .organisation-logo:before {
+  .funder-logo:before {
     content: "";
     display: block;
     padding-top: 100%;
   }
-  .organisation-logo {
+  .funder-logo {
     border-radius: 5px;
     position: relative;
     width: 100%;

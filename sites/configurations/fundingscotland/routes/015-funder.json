@@ -1,0 +1,121 @@
+{
+  "name": "funder",
+  "pattern": "/funder/:slug",
+  "defaultParams": {
+    "context": "detail"
+  },
+  "tasks": [
+    {
+      "name": "auth",
+      "taskModule": "firebaseAuth",
+      "config": {
+        "tokenPath": "request.cookies.gm_token",
+        "appName": "scvo",
+        "noTokenRoute": "",
+        "notAuthenticatedRoute": ""
+      }
+    },
+    {
+      "name": "primaryResponse",
+      "taskModule": "elasticsearch",
+      "config": {
+        "connectionStringTemplate": "{$../../elasticsearch-url.txt}",
+        "elasticsearchConfig": {
+          "apiVersion": "5.6"
+        },
+        "queryTemplates": {
+          "index": "web-content-production",
+          "type": "fundingscotland-organisation",
+          "template": ">context.metaData.handlebars.queries.funders_funder"
+        }
+      },
+      "renderer": "handlebars"
+    },
+    {
+      "name": "supplimentaryResponses",
+      "taskModule": "elasticsearch",
+      "config": {
+        "connectionStringTemplate": "{$../../elasticsearch-url.txt}",
+        "elasticsearchConfig": {
+          "apiVersion": "5.6"
+        },
+        "queryTemplates": [
+          {
+            "name": "funds",
+            "index": "web-content-production",
+            "type": "fundingscotland-fund",
+            "template": ">context.metaData.handlebars.queries.funds_funder-funds"
+          },
+          {
+            "name": "types",
+            "index": "web-content-production",
+            "type": "fundingscotland-fund",
+            "template": ">context.metaData.handlebars.queries.funds_types"
+          },
+          {
+            "name": "not_found",
+            "index": "web-content-production",
+            "type": "fundingscotland-organisation",
+            "template": ">context.metaData.handlebars.queries.pages_not-found"
+          }
+        ]
+      },
+      "renderer": "handlebars"
+    },
+    {
+      "name": "goodhq",
+      "taskModule": "elasticsearch",
+      "config": {
+        "connectionStringTemplate": "{$../../elasticsearch-url.txt}",
+        "elasticsearchConfig": {
+          "apiVersion": "5.6"
+        },
+        "queryTemplates": [
+          {
+            "name": "posts",
+            "index": "web-content-production",
+            "type": "goodhq-post",
+            "template": ">context.metaData.handlebars.queries.goodhq_posts"
+          },
+          {
+            "name": "reviews",
+            "index": "web-content-production",
+            "type": "goodhq-review",
+            "template": ">context.metaData.handlebars.queries.goodhq_reviews"
+          },
+          {
+            "name": "volunteering",
+            "index": "web-content-production",
+            "type": "milo-volunteering-opportunity",
+            "template": ">context.metaData.handlebars.queries.goodhq_volunteering"
+          }
+        ]
+      },
+      "renderer": "handlebars"
+    },
+    {
+      "name": "destination",
+      "taskModule": "renderLayout",
+      "renderer": "handlebars",
+      "config": {
+        "logic": {
+          "if": [
+            "default"
+          ]
+        },
+        "output": "body",
+        "layouts": {
+          "default": {
+            "layout": ">context.metaData.handlebars.layouts.default",
+            "parts": {
+              "head": ">context.metaData.handlebars.templates.funders_funder-head-tags",
+              "body": ">context.metaData.handlebars.templates.funders_funder",
+              "foot": ""
+            },
+            "contentType": "text/html"
+          }
+        }
+      }
+    }
+  ]
+}
