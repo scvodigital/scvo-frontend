@@ -22,31 +22,23 @@
   ],
   "query": {
     "bool": {
-      {{#ifAny request.params.query.sectors request.params.query.roles ~}}
+      {{#ifAny request.params.query.activities request.params.query.beneficiaries ~}}
       "filter": [
-        {{#if request.params.query.sectors ~}}
+        {{#if request.params.query.activities ~}}
         {
           "terms": {
-            "sectors_slugs": {{{stringify (arrayify request.params.query.sectors)}}}
+            "activities_slugs": {{{stringify (arrayify request.params.query.activities)}}}
           }
         }
-        {{#ifAny request.params.query.roles request.params.query.statuses request.params.query.lat}},{{/ifAny}}
+        {{#ifAny request.params.query.beneficiaries}},{{/ifAny}}
         {{/if ~}}
-        {{#if request.params.query.roles ~}}
+        {{#if request.params.query.beneficiaries ~}}
         {
           "terms": {
-            "roles_slugs": {{{stringify (arrayify request.params.query.roles)}}}
+            "beneficiaries_slugs": {{{stringify (arrayify request.params.query.beneficiaries)}}}
           }
         }
-        {{#ifAny request.params.query.statuses request.params.query.lat}},{{/ifAny}}
         {{/if ~}}
-        {{#if request.params.query.statuses ~}}
-        {
-          "terms": {
-            "role_status_slug": {{{stringify (arrayify request.params.query.statuses)}}}
-          }
-        }
-        {{/if}}
       ],
       {{/ifAny ~}}
       "must": [
@@ -69,6 +61,6 @@
     }
   },
   "sort": {
-    "start_at": "desc"
+    "date_last_modified": "desc"
   }
 }

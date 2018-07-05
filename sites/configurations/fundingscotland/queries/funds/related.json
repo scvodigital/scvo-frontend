@@ -29,15 +29,6 @@
           "should": [
             {
               "match": {
-                "remuneration_type" : {
-                  "query" : "{{data.primaryResponse.hits.hits.[0]._source.remuneration_type}}",
-                  "operator" : "and",
-                  "zero_terms_query": "all"
-                }
-              }
-            },
-            {
-              "match": {
                 "title" : {
                   "query" : "{{data.primaryResponse.hits.hits.[0]._source.title}}",
                   "operator" : "and",
@@ -47,12 +38,12 @@
             },
             {
               "terms": {
-                "sectors_slugs": {{{stringify (arrayify data.primaryResponse.hits.hits.[0]._source.sectors_slugs)}}}
+                "activies_slugs": {{{stringify (arrayify data.primaryResponse.hits.hits.[0]._source.activies_slugs)}}}
               }
             },
             {
               "terms": {
-                "roles_slugs": {{{stringify (arrayify data.primaryResponse.hits.hits.[0]._source.roles_slugs)}}}
+                "beneficiaries_slugs": {{{stringify (arrayify data.primaryResponse.hits.hits.[0]._source.beneficiaries_slugs)}}}
               }
             }
           ],
@@ -71,19 +62,7 @@
             }
           ]
         }
-      }{{#if data.primaryResponse.hits.hits.[0]._source.salary_min ~}},
-      "functions": [
-        {
-          "gauss": {
-            "salary_min": {
-              "origin": "{{data.primaryResponse.hits.hits.[0]._source.salary_min}}",
-              "scale": "1000",
-              "offset": "10000",
-              "decay": 0.05
-            }
-          }
-        }
-      ]{{/if ~}}
+      }
     }
   }
 }

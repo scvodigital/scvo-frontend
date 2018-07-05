@@ -40,7 +40,7 @@
         </div>
       </div>
 
-      <div class="h-padding">
+      <!-- <div class="h-padding">
         <div class="mdc-text-field mdc-text-field--box mdc-text-field--with-leading-icon" data-mdc-auto-init="MDCTextField">
           <span class="far fa-arrow-alt-from-left mdc-text-field__icon" tabindex="0" role="button"></span>
           <input type="text" id="{{instance_id}}-salary_min" name="salary_min" class="mdc-text-field__input mdc-text-field--fullwidth" value="{{request.params.query.q}}" data-lpignore="true">
@@ -49,9 +49,9 @@
           </label>
           <div class="mdc-line-ripple"></div>
         </div>
-      </div>
+      </div> -->
 
-      <div class="h-padding">
+      <!-- <div class="h-padding">
         <div class="mdc-text-field mdc-text-field--box mdc-text-field--with-leading-icon" data-mdc-auto-init="MDCTextField">
           <span class="far fa-arrow-alt-to-right mdc-text-field__icon" tabindex="0" role="button"></span>
           <input type="text" id="{{instance_id}}-salary_max" name="salary_max" class="mdc-text-field__input mdc-text-field--fullwidth" value="{{request.params.query.q}}" data-lpignore="true">
@@ -60,9 +60,9 @@
           </label>
           <div class="mdc-line-ripple"></div>
         </div>
-      </div>
+      </div> -->
 
-      {{#each (split "roles,sectors" ",")}}
+      {{#each (split "activities,beneficiaries" ",")}}
         <h3 class="mdc-drawer__content-heading">
           {{capitalize this}}
           <span class="mdc-icon-toggle pull-right" data-collapse-target="#{{../instance_id}}-{{this}}-collapse"
@@ -77,21 +77,6 @@
           {{/each ~}}
         </div>
       {{/each}}
-
-      <h3 class="mdc-drawer__content-heading">
-        Types
-        <span class="mdc-icon-toggle pull-right" data-collapse-target="#{{instance_id}}-statuses-collapse"
-              role="button" aria-pressed="false"
-              aria-label="Show roles" tabindex="0">
-          <i class="far {{#if request.params.query.statuses}}fa-chevron-up{{else}}fa-chevron-down{{/if}}" aria-hidden="true"></i>
-        </span>
-      </h3>
-      <div id="{{instance_id}}-statuses-collapse"{{#unless request.params.query.statuses}} style="display: none;"{{/unless}}>
-        {{#each data.supplimentaryResponses.types.aggregations.statuses_slugs.buckets ~}}
-        {{> term_checkbox value=(lookup ../data.supplimentaryResponses.types.aggregations.statuses.buckets @index) slug=key field="statuses" selected=../request.params.query.statuses instance_id=../instance_id}}
-        {{/each ~}}
-        {{> term_checkbox value="Home-based" slug="home-based" field="type" selected=request.params.query.type instance_id=instance_id}}
-      </div>
 
       <div class="h-margin v-margin">
         <button class="mdc-button mdc-button--raised mdc-button--fullwidth mdc-ripple-surface mdc-ripple-surface--primary" type="submit" id="{{instance_id}}-search-submit" data-mdc-auto-init="MDCRipple">
