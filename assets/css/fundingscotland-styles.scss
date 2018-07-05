@@ -2,8 +2,8 @@ $mdc-theme-primary: #00796A;
 $mdc-theme-primary-light: #198678;
 $mdc-theme-primary-dark: #006054;
 
-$mdc-theme-complimentary: rgba(0,121,106,0.89);
-$mdc-theme-complimentary-light: rgba(0,121,106,0.91);
+$mdc-theme-complimentary: #b2cfcb;
+$mdc-theme-complimentary-light: #e5efed;
 
 $mdc-theme-secondary: #E0E0E0; // Gray 300
 $mdc-theme-secondary-light: #F5F5F5; // Gray 100
@@ -74,6 +74,9 @@ h4 {
 .headroom--unpinned {
   transform: translateY(-100%);
 }
+.mdc-text-field--box.mdc-ripple-upgraded::before {
+  transform: none;
+}
 
 header {
   .container-fluid {
@@ -82,7 +85,14 @@ header {
       padding-right: $unit/2 !important;
     }
     .mdc-top-app-bar__title {
+      font-weight: $heading-font-weight;
+      font-family: $heading-font-family;
+      font-variant: all-small-caps;
+      letter-spacing: -0.1rem;
+      font-size: 3rem;
+      line-height: 3rem;
       padding: 0;
+      margin: 0 $unit;
       a {
         display: block;
       }
@@ -573,7 +583,7 @@ a {
   padding: $unit/3 $unit/2;
   box-sizing: border-box;
 }
-.fundingscotland-funder-search .search-info {
+.fundingscotland-organisation-search .search-info {
   margin-bottom: $unit*1.5;
 }
 
@@ -628,15 +638,15 @@ a {
   .mdc-card__media--funder {
     margin-right: $unit;
   }
-  .search-result-article__snippet {
-    padding: $unit;
-    background-color: $mdc-theme-complimentary-light;
-  }
+  // .search-result-article__snippet {
+  //   padding: $unit;
+  //   background-color: $mdc-theme-complimentary-light;
+  // }
   .user-notes {
     display: none;
   }
   .mdc-card__actions {
-    background-color: $mdc-theme-complimentary;
+    background-color: $mdc-theme-complimentary-light;
     .mdc-card__action {
       color: $mdc-theme-primary-dark;
     }
@@ -806,7 +816,7 @@ a {
   }
 }
 .fundingscotland-event .mdc-card.full,
-.fundingscotland-funder .mdc-card.full,
+.fundingscotland-organisation .mdc-card.full,
 .fundingscotland-fund .mdc-card.full {
   box-shadow: none;
 }
@@ -824,7 +834,7 @@ a {
   }
 }
 .top-funds .top-job,
-.fundingscotland-funder .mdc-card.list .mdc-card__info--fund-funder {
+.fundingscotland-organisation .mdc-card.list .mdc-card__info--fund-funder {
   display: none !important;
 }
 
@@ -1158,7 +1168,7 @@ body {
     }
   }
 }
-.fundingscotland-funder {
+.fundingscotland-organisation {
   .mdc-card.full {
     background-color: transparent;
   }
@@ -1409,8 +1419,10 @@ footer,
             letter-spacing: -0.4rem;
             font-weight: $heading-light-font-weight;
           }
-          .normal.moves {
-            margin-left: -0.4rem;
+          .normal.brand {
+            font-weight: 700;
+            font-variant: all-small-caps;
+            letter-spacing: -0.1rem;
           }
         }
       }
