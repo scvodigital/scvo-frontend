@@ -1,7 +1,7 @@
 {{#*inline "insertParam"}}
   {{#if (getProperty @root.request.params.query parameter)}}
     {{#each (arrayify (getProperty @root.request.params.query parameter))}}
-      ('goodmoves-saved-searches', '{{@root.data.auth.email}}', '{{default @root.request.params.query.name "My Search"}}', '{{../parameter}}', '{{this}}'),
+      ('{{@root.context.metaData.emailCampaignName}}', '{{@root.data.auth.email}}', '{{default @root.request.params.query.name "My Search"}}', '{{../parameter}}', '{{this}}'),
     {{/each}}
   {{/if}}
 {{/inline}}
@@ -10,4 +10,4 @@ INSERT INTO subscriptionParameters (campaign, email, name, parameter, value) VAL
 {{#each (split "keywords,roles,statuses,sectors" ",")}}
   {{>insertParam parameter=this}}
 {{/each}}
-('goodmoves-saved-searches', '{{@root.data.auth.email}}', '{{default @root.request.params.query.name "My Search"}}', 'stopper', 'stopper');
+('{{@root.context.metaData.emailCampaignName}}', '{{@root.data.auth.email}}', '{{default @root.request.params.query.name "My Search"}}', 'stopper', 'stopper');

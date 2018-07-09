@@ -2,16 +2,7 @@
   "name": "save-search",
   "pattern": "/save-search",
   "tasks": [
-    {
-      "name": "auth",
-      "taskModule": "firebaseAuth",
-      "config": {
-        "tokenPath": "request.cookies.gm_token",
-        "appName": "scvo",
-        "noTokenRoute": "four_oh_four",
-        "notAuthenticatedRoute": "four_oh_four"
-      }
-    },
+    "metaData.commonTasks.authRequired",
     {
       "name": "notifications",
       "taskModule": "mysql",
@@ -26,26 +17,19 @@
       "renderer": "handlebars"
     },
     {
-      "name": "destination",
-      "taskModule": "renderLayout",
+      "name": "searchUrl",
+      "taskModule": "render",
       "renderer": "handlebars",
       "config": {
-        "logic": {
-          "if": [
-            "default"
-          ]
-        },
-        "output": "body",
-        "layouts": {
-          "default": {
-            "layout": ">context.metaData.handlebars.layouts.default",
-            "parts": {
-              "head": ">context.metaData.handlebars.templates.pages_page-head-tags",
-              "body": ">context.metaData.handlebars.templates.pages_login"
-            },
-            "contentType": "text/html"
-          }
-        }
+        "output": "data",
+        "template": "/search{{{request.url.search}}}"
+      }
+    },
+    {
+      "name": "destination",
+      "taskModule": "redirect",
+      "config": {
+        "location": ">data.searchUrl"
       }
     }
   ]

@@ -8,5 +8,6 @@ FROM subscriptions s
 		s.name = p.name
 WHERE 
   s.email = '{{data.auth.email}}' AND
+  s.campaign = '{{context.metaData.emailCampaignName}}' AND
   p.`parameter` <> 'stopper'
 GROUP BY p.campaign, p.email, p.name
