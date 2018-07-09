@@ -14,6 +14,7 @@
   ],
   "metaData": {
     "title": "Goodmoves - charity and voluntary sector recruitment",
+    "emailCampaignName": "goodmoves-saved-searches",
     "menus": "{:./goodmoves-menus.json}",
     "handlebars": {
       "partials": {
@@ -27,6 +28,39 @@
       },
       "queries": {
         "{$./queries/**/*.*}": ""
+      }
+    },
+    "commonTasks": {
+      "authNotRequired": {
+        "name": "auth",
+        "taskModule": "firebaseAuth",
+        "config": {
+          "tokenPath": "request.cookies.gm_token",
+          "appName": "scvo",
+          "noTokenRoute": "",
+          "notAuthenticatedRoute": ""
+        }
+      },
+      "authRequired": {
+        "name": "auth",
+        "taskModule": "firebaseAuth",
+        "config": {
+          "tokenPath": "request.cookies.gm_token",
+          "appName": "scvo",
+          "noTokenRoute": "login",
+          "notAuthenticatedRoute": "login"
+        }
+      },
+      "savedSearches": {
+        "name": "saved_searches",
+        "taskModule": "mysql",
+        "config": {
+          "connectionName": "notifications",
+          "queryTemplates": {
+            "items": ">context.metaData.handlebars.queries.notifications_get-saved-searches"
+          }
+        },
+        "renderer": "handlebars"
       }
     },
     "firebaseDefaultDomain": {

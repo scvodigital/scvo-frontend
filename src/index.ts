@@ -24,7 +24,10 @@ import * as S from 'string';
 // Router modules
 import {Helpers} from './helpers';
 
-import {Router, RouterConfiguration, RouterRequest, RouterResponse, HttpVerb, RendererHandlebars, TaskElasticsearch, TaskMySQL, TaskRedirect, TaskRenderLayout, TaskFirebaseAuth, TaskFirebaseRtbGet, TaskFirebaseRtbSet} from '@scvo/router';
+import {
+  Router, RouterConfiguration, RouterRequest, RouterResponse, HttpVerb, 
+  RendererHandlebars, 
+  TaskElasticsearch, TaskMySQL, TaskRedirect, TaskRenderLayout, TaskRender, TaskFirebaseAuth, TaskFirebaseRtbGet, TaskFirebaseRtbSet} from '@scvo/router';
 
 // Import internal modules
 import {SECRETS} from './secrets';
@@ -471,6 +474,7 @@ async function loadRouters(): Promise<any> {
       elasticsearch: new TaskElasticsearch(),
       redirect: new TaskRedirect(),
       mysql: new TaskMySQL(SECRETS.mysql),
+      render: new TaskRender(),
       renderLayout: new TaskRenderLayout(),
       firebaseAuth: new TaskFirebaseAuth(firebaseApps),
       firebaseRtbGet: new TaskFirebaseRtbGet(firebaseApps),

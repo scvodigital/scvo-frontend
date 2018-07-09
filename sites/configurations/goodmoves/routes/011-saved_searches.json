@@ -12,16 +12,8 @@
     "context": "results"
   },
   "tasks": [
-    {
-      "name": "auth",
-      "taskModule": "firebaseAuth",
-      "config": {
-        "tokenPath": "request.cookies.gm_token",
-        "appName": "scvo",
-        "noTokenRoute": "",
-        "notAuthenticatedRoute": ""
-      }
-    },
+    "metaData.commonTasks.authRequired",
+    "metaData.commonTasks.savedSearches",
     {
       "name": "search_data",
       "taskModule": "elasticsearch",
