@@ -20,6 +20,14 @@ var GoodmovesController = Class.extend({
       that.windowResized.call(that);
     });
     this.windowResized();
+
+    // Headroom
+    var header = document.querySelector("header.top-bar-stuck");
+    var headroom  = new Headroom(header, {
+        "offset": 138,
+        "tolerance": 5
+    });
+    headroom.init();
   },
 
   windowResized: function() {
@@ -172,10 +180,10 @@ var GoodmovesController = Class.extend({
         resolve();
       } else {
         that.updateUserProfile(userProfile).then(function(userProfile) {
-          console.log('Saved default Goodmoves profile');
+          console.log('Saved default profile');
           resolve();
         }).catch(function(err) {
-          console.error('Error saving default Goodmoves profile', err);
+          console.error('Error saving default profile', err);
           resolve();
         });
       }

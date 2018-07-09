@@ -1,0 +1,68 @@
+{
+  "size": 4,
+  "_source": [
+    "Id",
+    "slug",
+    "fund_status",
+    "rendered.fund_status",
+    "top_job",
+    "description_short",
+    "title",
+    "geo_fund_coords",
+    "location",
+    "salary",
+    "salary_min",
+    "role_status_list",
+    "closing_date",
+    "funder_organisation.slug",
+    "funder_organisation.name",
+    "roles_slugs",
+    "sectors_slugs",
+    "funder_organisation.has_logo",
+    "funder_organisation.logo_url",
+    "remuneration_type"
+  ],
+  "query": {
+    "function_score": {
+      "query": {
+        "bool": {
+          "should": [
+            {
+              "match": {
+                "title" : {
+                  "query" : "{{data.primaryResponse.hits.hits.[0]._source.title}}",
+                  "operator" : "and",
+                  "zero_terms_query": "all"
+                }
+              }
+            },
+            {
+              "terms": {
+                "activities_slugs": {{{stringify (arrayify data.primaryResponse.hits.hits.[0]._source.activities_slugs)}}}
+              }
+            },
+            {
+              "terms": {
+                "beneficiaries_slugs": {{{stringify (arrayify data.primaryResponse.hits.hits.[0]._source.beneficiaries_slugs)}}}
+              }
+            }
+          ],
+          "must": [
+            {
+              "term": {
+                "fund_status": "Open"
+              }
+            }
+          ],
+          "must_not": [
+            {
+              "term": {
+                "Id": "{{data.primaryResponse.hits.hits.[0]._source.Id}}"
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}

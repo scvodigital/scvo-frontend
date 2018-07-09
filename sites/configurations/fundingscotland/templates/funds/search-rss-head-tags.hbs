@@ -1,0 +1,9 @@
+{{#if data.primaryResponse.hits.hits.[0] ~}}
+{{#with data.primaryResponse.hits.hits.[0]._source ~}}
+<title>Funding Scotland – Search results</title>
+{{/with ~}}
+{{else}}
+<title>Funding Scotland – Search results</title>
+{{/if ~}}
+<description>{{{description}}}</description>
+<link>https://test.fundingscotland.com{{{replace (replace request.params.uri.path "&rss" "") "?rss" ""}}}</link>

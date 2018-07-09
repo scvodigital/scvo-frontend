@@ -1,0 +1,23 @@
+<div class="mdc-card gist" data-fund-id="{{Id}}">
+  <div class="mdc-card__info--fund-row">
+    <div class="mdc-card__media mdc-card__media--square demo-card__media search-result-card__media--funder" style="background-image:url({{funder.logo_url}});"></div>
+    <div class="mdc-card__info--fund">
+      <div class="mdc-card__info--fund-title mdc-typography--headline7">
+        {{title}}
+      </div>
+      <div class="mdc-card__info--fund-funder mdc-typography--body1">
+        <a href="/funder/{{funder.slug}}{{@root.request.url.search}}">{{funder.name}}</a>
+      </div>
+      <div class="mdc-card__info--fund-details mdc-typography--caption">
+        <span class="far fa-calendar-alt fa-fw" title="Closing date"></span>
+        {{{momentFormat (moment closing_date "x") "Do MMMM YYYY"}}}
+      </div>
+    </div>
+  </div>
+  <hr class="mdc-list-divider">
+  <div class="mdc-card__actions">
+    <div class="mdc-card__action-buttons demo-card__action-buttons--text-only mdc-card__actions--full-bleed">
+      <a href="/fund/{{slug}}{{@root.request.url.search}}" class="mdc-card__action">Find out more</a>
+    </div>
+  </div>
+</div>
