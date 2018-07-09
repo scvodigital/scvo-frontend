@@ -396,6 +396,7 @@ footer h3,
 .goodmoves-vacancy-search {
   .head {
     margin-bottom: $unit/2;
+    .mdc-text-field,
     .mdc-select {
       margin-top: 0;
     }
@@ -410,9 +411,12 @@ footer h3,
 .goodmoves-saved-searches {
   .mdc-list {
     background-color: white;
+    .mdc-layout-grid {
+      width: 100%;
+    }
     .saved-search-email-switch {
       display: flex;
-      justify-content: center;
+      justify-content: flex-end;
       align-items: center;
       label {
         margin-left: $unit;
@@ -850,6 +854,11 @@ hr {
   .far.pull-right {
     line-height: $unit*1.7;
   }
+}
+
+.mdc-icon-button {
+  border: none;
+  background: transparent;
 }
 
 .drawer-container {
