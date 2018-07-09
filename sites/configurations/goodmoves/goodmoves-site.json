@@ -50,6 +50,17 @@
           "noTokenRoute": "login",
           "notAuthenticatedRoute": "login"
         }
+      },
+      "savedSearches": {
+        "name": "saved_searches",
+        "taskModule": "mysql",
+        "config": {
+          "connectionName": "notifications",
+          "queryTemplates": {
+            "items": ">context.metaData.handlebars.queries.notifications_get-saved-searches"
+          }
+        },
+        "renderer": "handlebars"
       }
     },
     "firebaseDefaultDomain": {

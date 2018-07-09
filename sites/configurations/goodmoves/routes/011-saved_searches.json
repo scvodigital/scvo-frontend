@@ -13,17 +13,7 @@
   },
   "tasks": [
     "metaData.commonTasks.authRequired",
-    {
-      "name": "notifications",
-      "taskModule": "mysql",
-      "config": {
-        "connectionName": "notifications",
-        "queryTemplates": {
-          "saved_searches": ">context.metaData.handlebars.queries.notifications_get-saved-searches"
-        }
-      },
-      "renderer": "handlebars"
-    },
+    "metaData.commonTasks.savedSearches",
     {
       "name": "search_data",
       "taskModule": "elasticsearch",
