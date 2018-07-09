@@ -3,7 +3,7 @@ INSERT INTO subscriptions (
 ) VALUES (
   '{{@root.context.metaData.emailCampaignName}}', 
   '{{@root.data.auth.email}}', 
-  '{{default @root.request.params.query.name "My Search"}}',
+  '{{default @root.request.body.name "My Search"}}',
   IFNULL(
     (
       SELECT days 
@@ -21,4 +21,4 @@ INSERT INTO subscriptions (
     ''
   )
 ) 
-ON DUPLICATE KEY UPDATE name = '{{default @root.request.params.query.name "My Search"}}';
+ON DUPLICATE KEY UPDATE name = '{{default @root.request.body.name "My Search"}}';
