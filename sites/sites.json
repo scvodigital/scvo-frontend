@@ -11592,16 +11592,7 @@
         "name": "index",
         "pattern": "/",
         "tasks": [
-          {
-            "name": "auth",
-            "taskModule": "firebaseAuth",
-            "config": {
-              "tokenPath": "request.cookies.gm_token",
-              "appName": "scvo",
-              "noTokenRoute": "",
-              "notAuthenticatedRoute": ""
-            }
-          },
+          "metaData.commonTasks.authNotRequired",
           {
             "name": "primaryResponse",
             "taskModule": "elasticsearch",
@@ -13761,6 +13752,28 @@
           "vacancies_top": "{\n  \"size\": 5,\n  \"_source\": [\n    \"Id\",\n    \"slug\",\n    \"vacancy_status\",\n    \"rendered.vacancy_status\",\n    \"top_job\",\n    \"description_short\",\n    \"title\",\n    \"geo_vacancy_coords\",\n    \"location\",\n    \"salary\",\n    \"role_status_list\",\n    \"closing_date\",\n    \"organisation.slug\",\n    \"organisation.name\",\n    \"organisation.has_logo\",\n    \"organisation.logo_url\"\n  ],\n  \"query\": {\n    \"function_score\": {\n      \"query\": {\n        \"bool\": {\n          \"must\": [\n            {\n              \"term\": {\n                \"top_job\": true\n              }\n            },\n            {\n              \"term\": {\n                \"country_iso3\": \"GBR\"\n              }\n            },\n            {\n              \"term\": {\n                \"vacancy_status\": \"vacancy-open\"\n              }\n            }\n          ]\n        }\n      },\n      \"random_score\": {},\n      \"score_mode\": \"sum\"\n    }\n  }\n}",
           "vacancies_types": "{\n  \"size\": 0,\n  \"_source\": false,\n  \"query\": {\n    \"bool\": {\n      \"must\": [\n        {\n          \"term\": {\n            \"country_iso3\": \"GBR\"\n          }\n        },\n        {\n          \"term\": {\n            \"vacancy_status\": \"vacancy-open\"\n          }\n        }\n      ]\n    }\n  },\n  \"aggs\": {\n    \"sectors\": {\n      \"terms\": {\n        \"field\": \"sectors\",\n        \"order\": {\n          \"_term\": \"asc\"\n        },\n        \"size\": 10000\n      }\n    },\n    \"sectors_slugs\": {\n      \"terms\": {\n        \"field\": \"sectors_slugs\",\n        \"order\": {\n          \"_term\": \"asc\"\n        },\n        \"size\": 10000\n      }\n    },\n    \"roles\": {\n      \"terms\": {\n        \"field\": \"roles\",\n        \"order\": {\n          \"_term\": \"asc\"\n        },\n        \"size\": 10000\n      }\n    },\n    \"roles_slugs\": {\n      \"terms\": {\n        \"field\": \"roles_slugs\",\n        \"order\": {\n          \"_term\": \"asc\"\n        },\n        \"size\": 10000\n      }\n    },\n    \"regions\": {\n      \"terms\": {\n        \"field\": \"region\",\n        \"size\": 10000\n      }\n    },\n    \"regions_slugs\": {\n      \"terms\": {\n        \"field\": \"region_slug\",\n        \"size\": 10000\n      }\n    },\n    \"statuses\": {\n      \"terms\": {\n        \"field\": \"role_status\",\n        \"size\": 10000\n      }\n    },\n    \"statuses_slugs\": {\n      \"terms\": {\n        \"field\": \"role_status_slug\",\n        \"size\": 10000\n      }\n    }\n  }\n}",
           "vacancies_vacancy": "{\n  \"size\": 1,\n  \"_source\": [\n    \"Id\",\n    \"slug\",\n    \"text_bag_boost\",\n    \"vacancy_status\",\n    \"rendered.vacancy_status\",\n    \"top_job\",\n    \"sectors\",\n    \"sectors_slugs\",\n    \"roles\",\n    \"roles_slugs\",\n    \"role_status_list\",\n    \"description\",\n    \"title\",\n    \"start_at\",\n    \"geo_vacancy_coords\",\n    \"location\",\n    \"salary\",\n    \"salary_info\",\n    \"salary_min\",\n    \"remuneration_type\",\n    \"benefits\",\n    \"reference_number\",\n    \"application_notes\",\n    \"closing_date\",\n    \"organisation.slug\",\n    \"organisation.name\",\n    \"organisation.has_logo\",\n    \"organisation.logo_url\",\n    \"organisation.profile\",\n    \"organisation_website\",\n    \"organisation_website_url\",\n    \"organisation_twitter\",\n    \"organisation_twitter_url\",\n    \"organisation_facebook\",\n    \"organisation_facebook_url\",\n    \"organisation_linkedin\",\n    \"organisation_linkedin_url\",\n    \"rendered.goodmoves_sponsor_logos\",\n    \"rendered.goodmoves_downloads\",\n    \"rendered.goodmoves_rss\",\n    \"rendered.json_ld\"\n  ],\n  \"query\": {\n    \"term\": {\n      {{#if (includes request.params.slug \"-\") ~}}\n      \"slug\": \"{{request.params.slug}}\"\n      {{else}}\n      \"Id\": \"{{request.params.slug}}\"\n      {{/if ~}}\n    }\n  }\n}"
+        }
+      },
+      "commonTasks": {
+        "authNotRequired": {
+          "name": "auth",
+          "taskModule": "firebaseAuth",
+          "config": {
+            "tokenPath": "request.cookies.gm_token",
+            "appName": "scvo",
+            "noTokenRoute": "",
+            "notAuthenticatedRoute": ""
+          }
+        },
+        "authRequired": {
+          "name": "auth",
+          "taskModule": "firebaseAuth",
+          "config": {
+            "tokenPath": "request.cookies.gm_token",
+            "appName": "scvo",
+            "noTokenRoute": "login",
+            "notAuthenticatedRoute": "login"
+          }
         }
       },
       "firebaseDefaultDomain": {

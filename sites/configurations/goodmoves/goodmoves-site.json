@@ -29,6 +29,28 @@
         "{$./queries/**/*.*}": ""
       }
     },
+    "commonTasks": {
+      "authNotRequired": {
+        "name": "auth",
+        "taskModule": "firebaseAuth",
+        "config": {
+          "tokenPath": "request.cookies.gm_token",
+          "appName": "scvo",
+          "noTokenRoute": "",
+          "notAuthenticatedRoute": ""
+        }
+      },
+      "authRequired": {
+        "name": "auth",
+        "taskModule": "firebaseAuth",
+        "config": {
+          "tokenPath": "request.cookies.gm_token",
+          "appName": "scvo",
+          "noTokenRoute": "login",
+          "notAuthenticatedRoute": "login"
+        }
+      }
+    },
     "firebaseDefaultDomain": {
       "name": "scvo",
       "label": "SCVO",
