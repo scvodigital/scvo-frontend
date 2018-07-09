@@ -15,11 +15,7 @@
   </div>
 </div>
 <label for="{{instance_id}}_{{field}}_{{slug}}">
-  {{#compare value.key "===" "Management Board" ~}}
-  Trustee
-  {{else}}
   {{{default value.key value}}}
-  {{/compare ~}}
 </label>
 </div>
 {{/inline}}
@@ -129,7 +125,7 @@
       {{/each}}
 
       <h3 class="mdc-drawer__content-heading">
-        Types
+        Working patterns
         <span class="mdc-icon-toggle pull-right" data-collapse-target="#{{instance_id}}-statuses-collapse"
               role="button" aria-pressed="false"
               aria-label="Show roles" tabindex="0">
@@ -140,7 +136,6 @@
         {{#each data.supplimentaryResponses.types.aggregations.statuses_slugs.buckets ~}}
         {{> term_checkbox value=(lookup ../data.supplimentaryResponses.types.aggregations.statuses.buckets @index) slug=key field="statuses" selected=../request.params.query.statuses instance_id=../instance_id}}
         {{/each ~}}
-        {{> term_checkbox value="Home-based" slug="home-based" field="type" selected=request.params.query.type instance_id=instance_id}}
       </div>
 
       <div class="h-margin v-margin">
