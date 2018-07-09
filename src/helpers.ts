@@ -123,6 +123,19 @@ export class Helpers {
     return obj;
   }
 
+  static helper_querystring(str: string, sep: string = '&', eq: string = '=') {
+    if (typeof str !== 'string') {
+      return {};
+    }
+    try {
+      const out = querystring.parse(str, sep, eq);
+      return out;
+    } catch(err) {
+      console.error('Handlebars helper "querystring" failed to parse the following string:', str, err);
+      return {};
+    }
+  }
+
   static helper_keyValue(obj: any) {
     const props: Array < {
       key: string;

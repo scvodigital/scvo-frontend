@@ -12,15 +12,17 @@
     "context": "results"
   },
   "tasks": [
+    "metaData.commonTasks.authRequired",
     {
-      "name": "auth",
-      "taskModule": "firebaseAuth",
+      "name": "notifications",
+      "taskModule": "mysql",
       "config": {
-        "tokenPath": "request.cookies.gm_token",
-        "appName": "scvo",
-        "noTokenRoute": "",
-        "notAuthenticatedRoute": ""
-      }
+        "connectionName": "notifications",
+        "queryTemplates": {
+          "saved_searches": ">context.metaData.handlebars.queries.notifications_get-saved-searches"
+        }
+      },
+      "renderer": "handlebars"
     },
     {
       "name": "search_data",
