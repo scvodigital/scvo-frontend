@@ -1,0 +1,16 @@
+{{> fund_search_form this instance_id="perm"}}
+
+<div class="container-content fundingscotland-page">
+  <div class="mdc-card full mdc-elevation--z3">
+    {{#compare data.primaryResponse.hits.total ">" 0 ~}}
+    <h1 class="mdc-typography--headline4">
+      {{{data.primaryResponse.hits.hits.[0]._source.title}}}
+    </h1>
+    {{{data.primaryResponse.hits.hits.[0]._source.content}}}
+    {{else}}
+    <h2 class="mdc-typography--headline5">
+      Error 404: Page not found
+    </h2>
+    {{/compare ~}}
+  </div>
+</div>

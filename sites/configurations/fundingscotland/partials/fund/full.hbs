@@ -1,0 +1,108 @@
+<div class="mdc-card full" data-fund-id="{{Id}}">
+  {{> fund_key_info}}
+  <hr class="mdc-list-divider" />
+  <div class="fund-info-container">
+    <div id="fund-tab-bar" class="mdc-tab-bar" data-mdc-auto-init="MDCTabBar" role="tablist">
+      <a class="mdc-tab mdc-tab--active" role="tab" aria-controls="panel-1">
+        <span class="far fa-list-ul fa-fw" aria-hidden="true"></span>
+        Information
+      </a>
+      <a class="mdc-tab" role="tab" aria-controls="panel-2">
+        <span class="far fa-map-marker-alt fa-fw" aria-hidden="true"></span>
+        Extra?
+      </a>
+      <a class="mdc-tab" role="tab" aria-controls="panel-3">
+        <span class="far fa-edit fa-fw" aria-hidden="true"></span>
+        Your notes
+      </a>
+      <span class="mdc-tab-bar__indicator"></span>
+    </div>
+    <hr class="mdc-list-divider" />
+    <div class="panels" for="fund-tab-bar">
+      <div class="panel panel--active mdc-card--full-content" role="tabpanel" aria-hidden="false" id="panel-1">
+        <div class="key-info-extra">
+          <ul class="fa-ul">
+            {{#if start_at ~}}
+            <li class="mdc-card__info--fund-closing mdc-typography--body1">
+              <span class="fa-li"><span class="far fa-calendar-plus fa-fw" title="Start date"></span></span>
+              Advertised from {{momentFormat (moment start_at "x") "Do MMMM YYYY"}}
+            </li>
+            {{/if ~}}
+            {{#if salary_info ~}}
+            <li class="mdc-card__info--fund-location mdc-typography--body1">
+              <span class="fa-li"><span class="far fa-info-circle fa-fw" title="Salary information"></span></span>
+              {{salary_info}}
+            </li>
+            {{/if ~}}
+            {{#if benefits ~}}
+            <li class="mdc-card__info--fund-salary mdc-typography--body1">
+              <span class="fa-li"><span class="far fa-smile fa-fw" title="Benefits"></span></span>
+              {{{benefits}}}
+            </li>
+            {{/if ~}}
+            {{#if reference_number ~}}
+            <li class="mdc-card__info--fund-reference mdc-typography--body1">
+              <span class="fa-li"><span class="far fa-hashtag fa-fw" title="Reference"></span></span>
+              {{reference_number}}
+            </li>
+            {{/if ~}}
+            {{#if closing_date ~}}
+            <li class="mdc-card__info--fund-closing mdc-typography--body1">
+              <span class="fa-li"><span class="far fa-calendar-alt fa-fw" title="Closing date"></span></span>
+              Closing on {{momentFormat (moment closing_date "x") "dddd \t\h\e Do \o\f MMMM YYYY \a\t h:mm a"}}
+            </li>
+            {{/if ~}}
+          </ul>
+        </div>
+        <div class="detailed-info">
+          {{#if description ~}}
+          <h4 class="mdc-typography--headline6">Summary</h4>
+          <div class="mdc-typography--body1">
+            {{{description}}}
+          </div>
+          {{/if ~}}
+
+          {{{rendered.goodmoves_sponsor_logos}}}
+
+          {{#if application_notes ~}}
+          <h4 class="mdc-typography--headline6">Application notes</h4>
+          <div class="mdc-typography--body1">
+            {{{application_notes}}}
+          </div>
+          {{/if ~}}
+        </div>
+      </div>
+      <div class="panel mdc-card--full-content mdc-typography--body1" role="tabpanel" aria-hidden="true" id="panel-2">
+        <div class="detailed-info">
+
+        </div>
+      </div>
+      <div class="panel mdc-card--full-content mdc-typography--body1" role="tabpanel" aria-hidden="true" id="panel-3">
+        <div class="text-field-container user-notes">
+          <div class="mdc-text-field text-field mdc-text-field--fullwidth mdc-text-field--dense mdc-text-field--textarea" data-mdc-auto-init="MDCTextField">
+            <textarea id="user-notes" class="mdc-text-field__input"></textarea>
+            <label class="mdc-floating-label" for="user-notes">
+              Your notes
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="mdc-card__actions">
+      <div class="mdc-card__action-buttons demo-card__action-buttons--text-only mdc-card__actions--full-bleed">
+        <a href="/funder/{{funder_organisation.slug}}" class="mdc-card__action">Find out more about {{funder_organisation.name}}</a>
+      </div>
+      <div class="mdc-card__action-icons mdc-chip-set pull-right">
+        <div class="mdc-chip" onclick="goodmoves.toggleShortlistItem('{{Id}}');" data-mdc-auto-init="MDCChip">
+          <span class="far fa-star mdc-chip__icon mdc-chip__icon--leading" aria-hidden="true"></span>
+          <div class="mdc-chip__checkmark">
+            <svg class="mdc-chip__checkmark-svg" viewBox="-2 -3 30 30">
+              <path class="mdc-chip__checkmark-path" fill="none" stroke="#244817" d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+            </svg>
+          </div>
+          <div class="mdc-chip__text noselect">Shortlist</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,41 @@
+{
+  "size": 1,
+  "_source": [
+    "Id",
+    "slug",
+    "text_bag_boost",
+    "fund_status",
+    "activities",
+    "activities_slugs",
+    "beneficiaries",
+    "beneficiaries_slugs",
+    "description",
+    "title",
+    "geo_fund_coords",
+    "location",
+    "salary",
+    "funder_organisation.slug",
+    "funder_organisation.name",
+    "funder_organisation.has_logo",
+    "funder_organisation.logo_url",
+    "funder_organisation.profile",
+    "funder_organisation_website",
+    "funder_organisation_website_url",
+    "funder_organisation_twitter",
+    "funder_organisation_twitter_url",
+    "funder_organisation_facebook",
+    "funder_organisation_facebook_url",
+    "funder_organisation_linkedin",
+    "funder_organisation_linkedin_url",
+    "rendered.json_ld"
+  ],
+  "query": {
+    "term": {
+      {{#if (includes request.params.slug "-") ~}}
+      "slug": "{{request.params.slug}}"
+      {{else}}
+      "Id": "{{request.params.slug}}"
+      {{/if ~}}
+    }
+  }
+}

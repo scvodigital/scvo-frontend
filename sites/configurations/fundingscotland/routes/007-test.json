@@ -1,0 +1,71 @@
+{
+  "name": "test",
+  "pattern": "/test",
+  "tasks": [
+    {
+      "name": "auth",
+      "taskModule": "firebaseAuth",
+      "config": {
+        "tokenPath": "request.cookies.gm_token",
+        "appName": "scvo",
+        "noTokenRoute": "four_oh_four",
+        "notAuthenticatedRoute": "four_oh_four"
+      }
+    },
+    {
+      "name": "user",
+      "taskModule": "firebaseRtbGet",
+      "config": {
+        "appName": "scvo",
+        "pathTemplate": "/users/{{data.auth.uid}}",
+        "defaultData": {
+          "goodmoves": {
+            "saved_funds": []
+          }
+        }
+      },
+      "renderer": "handlebars"
+    },
+    {
+      "name": "set_response",
+      "taskModule": "firebaseRtbSet",
+      "config": {
+        "appName": "scvo",
+        "pathTemplate": "/users/{{data.auth.uid}}/email",
+        "dataTemplate": "{{data.auth.email}}",
+        "setOrUpdate": "set"
+      },
+      "renderer": "handlebars"
+    },
+    {
+      "name": "destination",
+      "taskModule": "renderLayout",
+      "renderer": "handlebars",
+      "config": {
+        "logic": {
+          "if": [
+            {
+              "in": [
+                "view=json",
+                {
+                  "var": "request.fullUrl"
+                }
+              ]
+            },
+            "data"
+          ]
+        },
+        "output": "body",
+        "layouts": {
+          "data": {
+            "layout": ">context.metaData.handlebars.layouts.data",
+            "parts": {
+              "content": "{{{stringify data}}}"
+            },
+            "contentType": "application/json"
+          }
+        }
+      }
+    }
+  ]
+}

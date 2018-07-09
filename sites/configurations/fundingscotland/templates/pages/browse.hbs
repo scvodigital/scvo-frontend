@@ -1,0 +1,44 @@
+<div class="container-fluid">
+  <div class="mdc-layout-grid home-jobs">
+    <div class="mdc-layout-grid__inner">
+      <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone content page-content">
+        <div class="browse-title mdc-typography--headline5">
+          Activities
+        </div>
+        <ul class="mdc-list">
+          {{#each data.supplimentaryResponses.types.aggregations.activities_slugs.buckets ~}}
+          <a class="mdc-list-item" href="/search?activity={{urlencode key}}" role="menuitem">
+            <span class="mdc-list-item__text">
+              {{#with (lookup ../data.supplimentaryResponses.types.aggregations.activities.buckets @index) ~}}
+              {{{key}}}
+              {{/with ~}}
+            </span>
+            <span class="mdc-list-item__meta">
+              {{doc_count}}
+            </span>
+          </a>
+          {{/each ~}}
+        </ul>
+      </div>
+      <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone content page-content">
+        <div class="browse-title mdc-typography--headline5">
+          Beneficiaries
+        </div>
+        <ul class="mdc-list">
+          {{#each data.supplimentaryResponses.types.aggregations.beneficiaries_slugs.buckets ~}}
+          <a class="mdc-list-item" href="/search?beneficiary={{urlencode key}}" role="menuitem">
+            <span class="mdc-list-item__text">
+              {{#with (lookup ../data.supplimentaryResponses.types.aggregations.beneficiaries.buckets @index) ~}}
+              {{{key}}}
+              {{/with ~}}
+            </span>
+            <span class="mdc-list-item__meta">
+              {{doc_count}}
+            </span>
+          </a>
+          {{/each ~}}
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
