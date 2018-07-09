@@ -2,16 +2,7 @@
   "name": "test",
   "pattern": "/test",
   "tasks": [
-    {
-      "name": "auth",
-      "taskModule": "firebaseAuth",
-      "config": {
-        "tokenPath": "request.cookies.gm_token",
-        "appName": "scvo",
-        "noTokenRoute": "four_oh_four",
-        "notAuthenticatedRoute": "four_oh_four"
-      }
-    },
+    "metaData.commonTasks.authNotRequired",
     {
       "name": "user",
       "taskModule": "firebaseRtbGet",
