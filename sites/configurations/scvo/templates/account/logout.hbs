@@ -10,9 +10,9 @@
   <script>
     document.addEventListener("DOMContentLoaded", function(event) {
       window.setTimeout(function() {
-        scvo.app.auth().signOut().then(function() {
-          window.location.href = '/';
-          scvo.setCookie('gm_token');
+        cjsFirebase.app.auth().signOut().then(function() {
+          window.location.href = '/jobs/community-jobs-scotland';
+          setCookie('gm_token');
         }).catch(function(err) {
           console.error('Error logging out:', err);
         });
