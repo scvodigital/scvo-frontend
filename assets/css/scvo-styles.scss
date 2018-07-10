@@ -1592,8 +1592,21 @@ form#settled_status {
   .mdc-menu-anchor {
     .mdc-button {
       text-transform: none;
+      padding: 0;
       background: transparent;
-      padding-right: 0;
+      border-bottom: 2px solid transparent;
+      border-radius: 0;
+      height: $nav-height;
+    }
+    .mdc-button:hover {
+      background: transparent !important;
+      border-bottom-color: rgba(255, 255, 255, 0.6);
+    }
+    .mdc-button:hover::before,
+    .mdc-button:hover::after,
+    .mdc-button:focus::before,
+    .mdc-button:focus::after {
+      opacity: 0 !important;
     }
     #user-menu {
       top: $nav-height !important;
