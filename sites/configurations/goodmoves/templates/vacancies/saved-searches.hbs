@@ -6,6 +6,27 @@
   </h1>
 
   <ul class="mdc-list mdc-list--two-line mdc-list--avatar-list mdc-elevation--z3">
+    <li class="mdc-list-item">
+      <span class="mdc-list-item__graphic far" aria-hidden="true"></span>
+      <div class="mdc-layout-grid">
+        <div class="mdc-layout-grid__inner">
+          <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-9-desktop mdc-layout-grid__cell--span-6-tablet mdc-layout-grid__cell--span-3-phone saved-search">
+            <span class="mdc-list-item__text">
+              <strong>Search name</strong>
+              <span class="mdc-list-item__secondary-text">
+                Search parameters
+              </span>
+            </span>
+          </div>
+          <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-2-tablet mdc-layout-grid__cell--span-1-phone saved-search-email-switch">
+            <span class="mdc-list-item__secondary-text">
+              Add to email alert
+            </span>
+          </div>
+        </div>
+      </div>
+      <span class="saved-search-remove mdc-list-item__meta" aria-hidden="true"></span>
+    </li>
     {{#each data.saved_searches.items}}
       {{!-- {{#querystring querystring}} --}}
         <li class="mdc-list-item mdc-ripple-upgraded">
@@ -22,12 +43,12 @@
               </div>
               <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-2-tablet mdc-layout-grid__cell--span-1-phone saved-search-email-switch">
                 <div class="mdc-switch">
-                  <input type="checkbox" id="email-switch" class="mdc-switch__native-control" role="switch" checked="checked">
+                  <input type="checkbox" id="email-switch-" class="mdc-switch__native-control" role="switch" checked="checked">
                   <div class="mdc-switch__background">
                     <div class="mdc-switch__knob"></div>
                   </div>
                 </div>
-                <label for="email-switch">
+                <label for="email-switch-">
                   <span class="far fa-envelope"></span>
                 </label>
               </div>

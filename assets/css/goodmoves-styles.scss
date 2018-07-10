@@ -260,6 +260,7 @@ footer h3,
 .mdc-card__title--large,
 .mdc-typography--caption,
 .mdc-menu .mdc-list-item,
+.supplimentary-list-title,
 .mdc-typography--headline,
 .mdc-typography--headline1,
 .mdc-typography--headline2,
@@ -268,9 +269,9 @@ footer h3,
 .mdc-typography--headline5,
 .mdc-typography--headline6,
 .mdc-typography--headline7,
-.supplimentary-list-title,
 .mdc-card__supporting-text,
 .mdc-typography--subheading2,
+.mdc-list-item__secondary-text,
 .mdc-simple-menu .mdc-list-item,
 .mdc-temporary-drawer .mdc-list-item,
 .mdc-list {
@@ -396,8 +397,9 @@ footer h3,
 .goodmoves-vacancy-search {
   .head {
     margin-bottom: $unit/2;
+    .mdc-text-field,
     .mdc-select {
-      margin-top: 0;
+      margin-top: $unit/2;
     }
     .mdc-button.save-search {
       margin-top: $unit;
@@ -410,9 +412,12 @@ footer h3,
 .goodmoves-saved-searches {
   .mdc-list {
     background-color: white;
+    .mdc-layout-grid {
+      width: 100%;
+    }
     .saved-search-email-switch {
       display: flex;
-      justify-content: center;
+      justify-content: flex-end;
       align-items: center;
       label {
         margin-left: $unit;
@@ -850,6 +855,17 @@ hr {
   .far.pull-right {
     line-height: $unit*1.7;
   }
+}
+
+.mdc-icon-button {
+  border: none;
+  background: transparent;
+  font-size: 1.5rem;
+  bottom: 8px !important;
+  right: 8px !important;
+}
+.mdc-icon-button:focus {
+  outline: none;
 }
 
 .drawer-container {

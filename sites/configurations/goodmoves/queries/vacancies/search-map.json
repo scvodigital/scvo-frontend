@@ -66,7 +66,7 @@
         {
           "query_string": {
             "query": {{{stringify request.params.query.keywords}}},
-            "default_field": "text_bag",
+            "fields": ["text_bag_boost^5", "text_bag"],
             "default_operator": "AND",
             "analyzer": "snowball"
           }
