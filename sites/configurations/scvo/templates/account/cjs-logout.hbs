@@ -1,17 +1,29 @@
-<form id="logout-form" method="POST" class="logout-form">
-  <div class="mdc-card">
-    <div class="mdc-card__info--vacancy">
-      <div class="mdc-card__info--vacancy-title mdc-typography--headline4">
-        Logging out&hellip;
+<div class="cjs-job">
+  {{> header_splash}}
+  <div class="container-fluid page-content">
+    <ul class="breadcrumbs">
+      <li><a href="/">Home</a></li>
+      <li><a href="/jobs">Jobs</a></li>
+      <li><a href="/jobs/community-jobs-scotland">Community Jobs Scotland</a></li>
+      <li><a href="/jobs/community-jobs-scotland/vacancies">Vacancies</a></li>
+      <li>Login</li>
+    </ul>
+    <form id="logout-form" method="POST" class="logout-form">
+      <div class="mdc-card">
+        <div class="mdc-card__info--vacancy">
+          <div class="mdc-card__info--vacancy-title mdc-typography--headline5">
+            Logging out&hellip;
+          </div>
+        </div>
       </div>
-    </div>
+    </form>
   </div>
-</form>
+</div>
 <script>
 document.addEventListener("DOMContentLoaded", function(event) {
   window.setTimeout(function() {
     cjsFirebase.auth().signOut().then(function() {
-      window.location.href = '/jobs/community-jobs-scotland/vacancies';
+      window.location.href = '/jobs/community-jobs-scotland/vacancies/login';
       setCookie('gm_token');
     }).catch(function(err) {
       console.error('Error logging out:', err);
