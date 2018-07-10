@@ -14983,6 +14983,39 @@
         ]
       },
       {
+        "name": "sign-up-pilot",
+        "pattern": "/sign-up/pilot",
+        "metaData": {
+          "title": "Sign up for the Charter Plus pilot – Scotland's Digital Participation Charter"
+        },
+        "tasks": [
+          {
+            "name": "destination",
+            "taskModule": "renderLayout",
+            "renderer": "handlebars",
+            "config": {
+              "logic": {
+                "if": [
+                  "default"
+                ]
+              },
+              "output": "body",
+              "layouts": {
+                "default": {
+                  "layout": ">context.metaData.handlebars.layouts.default",
+                  "parts": {
+                    "head": ">context.metaData.handlebars.templates.head-tags",
+                    "body": ">context.metaData.handlebars.templates.sign-up-pilot",
+                    "foot": ""
+                  },
+                  "contentType": "text/html"
+                }
+              }
+            }
+          }
+        ]
+      },
+      {
         "name": "skill-up",
         "pattern": "/skill-up",
         "metaData": {
@@ -15362,39 +15395,6 @@
         ]
       },
       {
-        "name": "accessibility",
-        "pattern": "/accessibility",
-        "metaData": {
-          "title": "Accessibility – Scotland's Digital Participation Charter"
-        },
-        "tasks": [
-          {
-            "name": "destination",
-            "taskModule": "renderLayout",
-            "renderer": "handlebars",
-            "config": {
-              "logic": {
-                "if": [
-                  "default"
-                ]
-              },
-              "output": "body",
-              "layouts": {
-                "default": {
-                  "layout": ">context.metaData.handlebars.layouts.default",
-                  "parts": {
-                    "head": ">context.metaData.handlebars.templates.head-tags",
-                    "body": ">context.metaData.handlebars.templates.accessibility",
-                    "foot": ""
-                  },
-                  "contentType": "text/html"
-                }
-              }
-            }
-          }
-        ]
-      },
-      {
         "name": "contact",
         "pattern": "/contact-us",
         "metaData": {
@@ -15418,6 +15418,39 @@
                   "parts": {
                     "head": ">context.metaData.handlebars.templates.head-tags",
                     "body": ">context.metaData.handlebars.templates.contact",
+                    "foot": ""
+                  },
+                  "contentType": "text/html"
+                }
+              }
+            }
+          }
+        ]
+      },
+      {
+        "name": "accessibility",
+        "pattern": "/accessibility",
+        "metaData": {
+          "title": "Accessibility – Scotland's Digital Participation Charter"
+        },
+        "tasks": [
+          {
+            "name": "destination",
+            "taskModule": "renderLayout",
+            "renderer": "handlebars",
+            "config": {
+              "logic": {
+                "if": [
+                  "default"
+                ]
+              },
+              "output": "body",
+              "layouts": {
+                "default": {
+                  "layout": ">context.metaData.handlebars.layouts.default",
+                  "parts": {
+                    "head": ">context.metaData.handlebars.templates.head-tags",
+                    "body": ">context.metaData.handlebars.templates.accessibility",
                     "foot": ""
                   },
                   "contentType": "text/html"
@@ -15620,6 +15653,7 @@
           "sign-up-form-stage-1": "<iframe src=\"https://www.surveygizmo.eu/s3/90088286/Digital-Participation-Charter-Sign-Up-Stage-1\" frameborder=\"0\" width=\"100%\" height=\"400\" style=\"overflow:hidden\"></iframe>",
           "sign-up-form-stage-2": "<iframe src=\"https://www.surveygizmo.eu/s3/90088287/Digital-Participation-Charter-Sign-Up-Stage-2?key={{request.params.query.id}}\" frameborder=\"0\" width=\"100%\" height=\"400\" style=\"overflow:hidden\"></iframe>",
           "sign-up-form": "<iframe src=\"https://www.surveygizmo.eu/s3/90025985/charter-sign-up\" frameborder=\"0\" width=\"100%\" height=\"400\" style=\"overflow:hidden\"></iframe>",
+          "sign-up-pilot": "<iframe src=\"https://www.surveygizmo.eu/s3/90088734/Charter-Pilot\" frameborder=\"0\" width=\"100%\" height=\"200\" style=\"overflow:hidden\"></iframe>",
           "sign-up-title": "Sign Up to Scotland's Digital Participation Charter",
           "sign-up": "<div class=\"mdc-layout-grid\">\n  <div class=\"mdc-layout-grid__inner title\">\n    <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-5 mdc-layout-grid__cell-4-phone\">\n      <h1>Sign The Charter &amp; Skill Up for Scotland</h1>\n      <p>\n        Joining up is simple. Just sign up using the form below and take a step towards a digitally smarter Scotland. We'll ask you for some details about your organisation (so you'll need to make sure you're authorised to sign on their behalf), then we'll ask what your commitment is going to be. This is something you'll define for yourself: anything your organisation can do to help build essential digital skills, big or small, is important. We won't pass your contact details on to any third parties. Thank you - we really value your support.\n      </p>\n      <img src=\"https://storage.googleapis.com/digitalparticipation/images/illustrations/Sign-Charter-RGB-04.png\" alt=\"Sign up illustration\" class=\"responsive-img hide-on-med-and-up\" />\n    </div>\n    <div class=\"mdc-layout-grid__cell hide-on-small-only mdc-layout-grid__cell--span-1\">\n      &nbsp;\n    </div>\n    <div class=\"mdc-layout-grid__cell hide-on-small-only mdc-layout-grid__cell--span-5 mdc-layout-grid__cell-4-phone\">\n      <img src=\"https://storage.googleapis.com/digitalparticipation/images/illustrations/Sign-Charter-RGB-04.png\" alt=\"Sign up illustration\" class=\"responsive-img\" />\n    </div>\n    <div class=\"mdc-layout-grid__cell hide-on-small-only mdc-layout-grid__cell--span-1\">\n      &nbsp;\n    </div>\n    <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-8-desktop mdc-layout-grid__cell-4-phone\">\n      <hr />\n    </div>\n  </div>\n  <div class=\"mdc-layout-grid__inner title\">\n    <div class=\"mdc-layout-grid__cell hide-on-small-only mdc-layout-grid__cell--span-1\">\n      &nbsp;\n    </div>\n    <div class=\"mdc-layout-grid__cell hide-on-small-only mdc-layout-grid__cell--span-4 mdc-layout-grid__cell-4-phone\">\n      <img src=\"https://storage.googleapis.com/digitalparticipation/images/illustrations/Eligibility-RGB-04.png\" alt=\"Eligibility illustration\" class=\"responsive-img\" />\n    </div>\n    <div class=\"mdc-layout-grid__cell hide-on-small-only mdc-layout-grid__cell--span-1\">\n      &nbsp;\n    </div>\n    <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-6 mdc-layout-grid__cell--span-4-phone\">\n      <h1>Eligibility</h1>\n      <p>\n        Who can sign the Charter?\n      </p>\n      <p>\n        Any organisation from the public, private or third sectors can sign the Charter. Big or small, Scotland-based or international – as long as your organisation operates in Scotland, you can sign.\n      </p>\n      <p>\n        All we ask is that you make a commitment to digital participation. That could mean a plan to skill up your own workforce, an offer you’re making to the wider community, a commitment to building essential digital skills for your tenants, clients or service users, or whatever fits best for your organisation. We’re happy to work with you to find out what might work best. You can see <a href=\"/stories\">case study examples</a> of what some other organisations have done, or you can <a href=\"/contact-us\">contact us</a> for more information.\n      </p>\n      <img src=\"https://storage.googleapis.com/digitalparticipation/images/illustrations/Eligibility-RGB-04.png\" alt=\"Eligibility illustration\" class=\"responsive-img hide-on-med-and-up\" />\n    </div>\n    <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-8-desktop mdc-layout-grid__cell-4-phone\">\n      <hr />\n    </div>\n  </div>\n  <div class=\"mdc-layout-grid__inner description\">\n    <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-8-desktop mdc-layout-grid__cell-4-phone\">\n      <a href=\"/sign-up/form\" class=\"mdc-button mdc-button--raised\">Okay, let's get started</a>\n      <hr />\n    </div>\n  </div>\n</div>",
           "signatory-search": "<div class=\"signatories\">\n  <h1>Signatories <span class=\"small\">({{data.supplimentaryResponses.total.hits.total}})</span></h1>\n\n  <form action=\"/signatories\" [searchroute]=\"'signatory_search'\" data-auto-search=\"true\" id=\"signatory-search\">\n    <div class=\"mdc-layout-grid\">\n      <div class=\"mdc-layout-grid__inner\">\n        <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone\">\n          <h4>Search</h4>\n          <div class=\"mdc-textfield mdc-textfield--upgraded keywords\">\n            <input type=\"text\" class=\"mdc-textfield__input\" name=\"q\" id=\"charter-keywords\" value=\"{{request.params.query.q}}\" placeholder=\"Search for a charter signatory\" autofocus>\n            <button type=\"submit\" class=\"mdc-toolbar__icon mdc-toolbar__search search-button-large\" aria-label=\"Search\" alt=\"Search\">\n              <span class=\"far fa-2x fa-search\" aria-hidden=\"true\"></span>\n            </button>\n          </div>\n        </div>\n        <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone\">\n          <h4>Sector</h4>\n          <div class=\"mdc-form-field sector\">\n            <select class=\"mdc-select\" role=\"listbox\" id=\"charter-sector\" name=\"sector\" data-clear-input=\"#charter-category\">\n              <option value=\"\" {{#if request.params.query.sector}}{{else}}selected{{/if}}>All sectors</option>\n              {{#each data.supplimentaryResponses.types.aggregations.sectors.buckets}}\n              <option value=\"{{key}}\" {{#compare ../request.params.query.sector \"===\" key}}selected{{/compare}}>{{key}}</option>\n              {{/each}}\n            </select>\n          </div>\n        </div>\n        <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone\">\n          <h4>Category</h4>\n          <div class=\"mdc-form-field category\">\n            <select class=\"mdc-select\" role=\"listbox\" id=\"charter-category\" name=\"category\">\n              <option value=\"\" {{#if request.params.query.category}}{{else}}selected{{/if}}>All categories</option>\n              {{#each data.supplimentaryResponses.categories.aggregations.categories.buckets}}\n              <option value=\"{{key}}\" {{#compare ../request.params.query.category \"===\" key}}selected{{/compare}}>{{key}}</option>\n              {{/each}}\n            </select>\n          </div>\n        </div>\n      </div>\n      <div class=\"mdc-layout-grid__inner\">\n        <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-8-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone\">\n          <h4>Total signatories found: {{data.primaryResponse.hits.total}}</h4>\n        </div>\n        <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-1 mdc-layout-grid__cell--span-3-tablet mdc-layout-grid__cell--span-1-phone\">\n          <h4 class=\"sort\">Sort</h4>\n        </div>\n        <div class=\"mdc-layout-grid__cell mdc-layout-grid__cell--span-3 mdc-layout-grid__cell--span-5-tablet mdc-layout-grid__cell--span-3-phone\">\n          <div class=\"mdc-form-field sort\">\n            <select class=\"mdc-select\" role=\"listbox\" id=\"charter-sort\" name=\"sort\">\n              <option value=\"\" {{#if request.params.query.sort}}{{else}}selected{{/if}}>Date signed</option>\n              <option value=\"AZ\" {{#if request.params.query.sort}}selected{{else}}{{/if}}>Alphabetical</option>\n            </select>\n          </div>\n        </div>\n      </div>\n    </div>\n  </form>\n\n  <div class=\"mdc-layout-grid signatories-search\">\n    <div class=\"mdc-layout-grid__inner\">\n      {{#each data.primaryResponse.hits.hits}}\n      <div class=\"mdc-layout-grid__cell signatory inner mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone\">\n        {{{_source.rendered.charter_search_result}}}\n      </div>\n      {{/each}}\n    </div>\n  </div>\n\n  {{> pagination paging=data.primaryResponse.pagination}}\n</div>\n",
