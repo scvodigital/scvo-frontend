@@ -10,7 +10,7 @@
   <script>
     document.addEventListener("DOMContentLoaded", function(event) {
       window.setTimeout(function() {
-        cjsFirebase.app.auth().signOut().then(function() {
+        cjsFirebase.auth().signOut().then(function() {
           window.location.href = '/jobs/community-jobs-scotland';
           setCookie('gm_token');
         }).catch(function(err) {
