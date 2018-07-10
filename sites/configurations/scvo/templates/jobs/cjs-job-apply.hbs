@@ -15,9 +15,104 @@
         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-9-desktop mdc-layout-grid__cell--span-5-tablet mdc-layout-grid__cell--span-4-phone content page-content v-margin">
           {{#if data.auth ~}}
           {{#with data.primaryResponse.hits.hits.[0]._source ~}}
+          <h3>Contact Details</h3>
+          <ul class="fa-ul">
+            {{#if supervisor.first_name ~}}
+            <li>
+              <span class="fa-li"><i class="far fa-user-alt"></i></span>
+              {{{supervisor.first_name}}} {{{supervisor.last_name}}}
+            </li>
+            {{/if ~}}
+            {{#if supervisor.email ~}}
+            <li>
+              <span class="fa-li"><i class="far fa-envelope"></i></span>
+              <a href="mailto:{{{supervisor.email}}}">{{{supervisor.email}}}</a>
+            </li>
+            {{/if ~}}
+            {{#if supervisor.phone ~}}
+            <li>
+              <span class="fa-li"><i class="far fa-phone"></i></span>
+              {{{supervisor.phone}}}
+            </li>
+            {{/if ~}}
+            <li>
+              <span class="fa-li"><i class="far fa-building"></i></span>
+              {{#if organisation.street}}{{{organisation.street}}}, {{/if}}
+              {{#if organisation.area_town}}{{{organisation.area_town}}}, {{/if}}
+              {{#if organisation.city_county}}{{{organisation.city_county}}}, {{/if}}
+              {{#if organisation.postcode}}{{{organisation.postcode}}}{{/if}}
+            </li>
+          </ul>
+
+          {{#if application_arrangements ~}}
+          <h3>Referral methods including arrangement details</h3>
           <p>
-            Further details for {{{title}}}
+            {{{application_arrangements}}}
           </p>
+          {{/if ~}}
+
+          {{#if application_notes ~}}
+          <h3>Additional application arrangements</h3>
+          <p>
+            {{{application_notes}}}
+          </p>
+          {{/if ~}}
+
+          <h3>Application forms</h3>
+          <ul class="mdc-list downloads">
+            {{#compare organisation.name "===" "Kibble" ~}}
+            <li class="mdc-list-item">
+              <span class="mdc-list-item__graphic far fa-file fa-file-word-o" aria-hidden="true"></span>
+              <span class="mdc-list-item__text">
+                <a href="https://storage.googleapis.com/elasticsauce.appspot.com/cjs/Kibble%20Self%20Declaration%20Form.rtf" target="_blank">
+                  <span class="title">Kibble Self Declaration Form</span>
+                </a>
+              </span>
+            </li>
+            <li class="mdc-list-item">
+              <span class="mdc-list-item__graphic far fa-file fa-file-word-o" aria-hidden="true"></span>
+              <span class="mdc-list-item__text">
+                <a href="https://storage.googleapis.com/elasticsauce.appspot.com/cjs/KibbleWorks%20Application%20Form%20(2015).doc" target="_blank">
+                  <span class="title">KibbleWorks Application Form</span>
+                </a>
+              </span>
+            </li>
+            {{else}}
+            <li class="mdc-list-item">
+              <span class="mdc-list-item__graphic far fa-file fa-file-word-o" aria-hidden="true"></span>
+              <span class="mdc-list-item__text">
+                <a href="https://storage.googleapis.com/elasticsauce.appspot.com/cjs/JCP%20CJS%20Eligibility%20Referral%20v8.doc" target="_blank">
+                  <span class="title">JCP CJS Eligibility Referral Form</span>
+                </a>
+              </span>
+            </li>
+            <li class="mdc-list-item">
+              <span class="mdc-list-item__graphic far fa-file fa-file-word-o" aria-hidden="true"></span>
+              <span class="mdc-list-item__text">
+                <a href="https://storage.googleapis.com/elasticsauce.appspot.com/cjs/JCP%20CJS%20Application%20v8.doc" target="_blank">
+                  <span class="title">JCP CJS Application</span>
+                </a>
+              </span>
+            </li>
+            <li class="mdc-list-item">
+              <span class="mdc-list-item__graphic far fa-file fa-file-word-o" aria-hidden="true"></span>
+              <span class="mdc-list-item__text">
+                <a href="https://storage.googleapis.com/elasticsauce.appspot.com/cjs/Vulnerable%20Group%20Criteria%20v8.docx" target="_blank">
+                  <span class="title">Vulnerable group criteria</span>
+                </a>
+              </span>
+            </li>
+            <li class="mdc-list-item">
+              <span class="mdc-list-item__graphic far fa-file fa-file-word-o" aria-hidden="true"></span>
+              <span class="mdc-list-item__text">
+                <a href="https://storage.googleapis.com/elasticsauce.appspot.com/cjs/SDS%20CJS%20Elig%20Ref%20Appl%20v8.doc" target="_blank">
+                  <span class="title">SDS CJS Eligibility Referral Application</span>
+                </a>
+              </span>
+            </li>
+            {{/compare ~}}
+          </ul>
+
           {{/with ~}}
           {{else}}
           <p>
@@ -33,7 +128,7 @@
           {{/if ~}}
           <hr />
           <p>
-             Read our full <a href="/privacy/community-jobs-scotland" target="_blank" rel="noopener">Privacy Notice</a>.
+            Read our full <a href="/privacy/community-jobs-scotland" target="_blank" rel="noopener">Privacy Notice</a>.
           </p>
         </div>
         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-3-tablet mdc-layout-grid__cell--span-4-phone sidebar page-sidebar">
