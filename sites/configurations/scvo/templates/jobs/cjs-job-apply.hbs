@@ -17,10 +17,10 @@
           {{#with data.primaryResponse.hits.hits.[0]._source ~}}
           <h3>Contact Details</h3>
           <ul class="fa-ul">
-            {{#if supervisor.name ~}}
+            {{#if supervisor.first_name ~}}
             <li>
               <span class="fa-li"><i class="far fa-user-alt"></i></span>
-              {{{supervisor.name}}}
+              {{{supervisor.first_name}}} {{{supervisor.last_name}}}
             </li>
             {{/if ~}}
             {{#if supervisor.email ~}}
