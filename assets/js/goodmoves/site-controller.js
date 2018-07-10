@@ -82,8 +82,9 @@ var GoodmovesController = Class.extend({
       if (user) {
         console.log('User logged in', user);
         that.uid = user.uid;
-        user.getIdToken().then(function(idToken) {
-          that.setCookie('gm_token', idToken, 7);
+        user.getIdTokenResult().then(function(idTokenResult) {
+          console.log('ID Token Result', idTokenResult);
+          that.setCookie('gm_token', idTokenResult.token, 7);
           that.getUserProfile(user, function() {});
         });
       } else {
