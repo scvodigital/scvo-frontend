@@ -21,6 +21,28 @@
   "metaData": {
     "title": "SCVO",
     "menus": "{:./scvo-menus.json}",
+    "commonTasks": {
+      "authNotRequired": {
+        "name": "auth",
+        "taskModule": "firebaseAuth",
+        "config": {
+          "tokenPath": "request.cookies.cjs_token",
+          "appName": "cjs",
+          "noTokenRoute": "",
+          "notAuthenticatedRoute": ""
+        }
+      },
+      "authRequired": {
+        "name": "auth",
+        "taskModule": "firebaseAuth",
+        "config": {
+          "tokenPath": "request.cookies.cjs_token",
+          "appName": "cjs",
+          "noTokenRoute": "login",
+          "notAuthenticatedRoute": "login"
+        }
+      }
+    },
     "handlebars": {
       "partials": {
         "{$./partials/**/*.*}": "includeRelativePath=false&regexExpression=(-)&regexOptions=gi&regexReplace=_"

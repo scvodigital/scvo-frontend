@@ -118,3 +118,35 @@ document.addEventListener('DOMContentLoaded', function() {
     try {document.addEventListener("DOMContentLoaded", $buo_f,false)}
     catch(e){window.attachEvent("onload", $buo_f)}
 });
+
+var cjsConfig = {
+  apiKey: "AIzaSyBi394RRo4NADgb_slJOYgzOugxXQPjKT8",
+  authDomain: "scvo-auth-cjs.firebaseapp.com",
+  databaseURL: "https://scvo-auth-cjs.firebaseio.com",
+  projectId: "scvo-auth-cjs",
+  storageBucket: "scvo-auth-cjs.appspot.com",
+  messagingSenderId: "550823198000"
+};
+var cjsFirebase = firebase.initializeApp(cjsConfig, 'cjs');
+
+// Firebase Auth Functions
+cjsFirebase.auth().onAuthStateChanged(function(user) {
+  if (user) {
+    console.log('User logged in', user);
+    user.getIdToken().then(function(idToken) {
+      setCookie('cjs_token', idToken, 7);
+    });
+  } else {
+    console.log('User logged out');
+  }
+});
+  
+function setCookie(name, value, days) {
+  var expires = "";
+  if (days) {
+    var date = new Date();
+    date.setTime(date.getTime() + (days*24*60*60*1000));
+    expires = "; expires=" + date.toUTCString();
+  }
+  document.cookie = name + "=" + (value || "")  + expires + "; path=/; secure";
+}
