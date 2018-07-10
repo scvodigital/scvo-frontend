@@ -1,5 +1,5 @@
 <div class="cjs-job">
-  {{> header_splash}}
+  {{> header_splash headerTextOverride="CJS vacancies" typeOverride="page"}}
   <div class="container-fluid page-content">
     <ul class="breadcrumbs">
       <li><a href="/">Home</a></li>
@@ -9,8 +9,18 @@
       <li>Login</li>
     </ul>
     <form id="logout-form" method="POST" class="logout-form">
-      <div class="mdc-typography--headline5">
+      <p class="mdc-typography--title">
         Logging out&hellip;
+      </p>
+      <div role="progressbar" class="mdc-linear-progress mdc-linear-progress--indeterminate">
+        <div class="mdc-linear-progress__buffering-dots"></div>
+        <div class="mdc-linear-progress__buffer"></div>
+        <div class="mdc-linear-progress__bar mdc-linear-progress__primary-bar">
+          <span class="mdc-linear-progress__bar-inner"></span>
+        </div>
+        <div class="mdc-linear-progress__bar mdc-linear-progress__secondary-bar">
+          <span class="mdc-linear-progress__bar-inner"></span>
+        </div>
       </div>
     </form>
   </div>
