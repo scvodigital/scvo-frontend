@@ -31,17 +31,10 @@
           }
         },
         {{/if}}
-        {{#if request.params.query.region}}
-        {
-          "term": {
-            "region": "{{request.params.query.region}}"
-          }
-        },
-        {{/if}}
         {{#if request.params.query.status}}
         {
           "term": {
-            "status": "{{request.params.query.status}}"
+            "role_status": "{{request.params.query.status}}"
           }
         },
         {{/if}}
@@ -70,7 +63,7 @@
           "term": {
             "top_job": {
               "value": true,
-              "boost": 100
+              "boost": 50
             }
           }
         }

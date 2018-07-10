@@ -40,17 +40,6 @@
                     </select>
                   </div>
                   <div class="mdc-form-field">
-                    <label class="mdc-textfield__label" for="jobs-region">Region</label>
-                    <select class="mdc-select" role="listbox" id="region" name="region">
-                      <option value="" {{#if request.params.query.region}}{{else}}selected{{/if}}>Any region</option>
-                      {{#each data.supplimentaryResponses.types.aggregations.regions.buckets ~}}
-                      {{#if key ~}}
-                      <option value="{{key}}" {{#compare ../request.params.query.region "===" key}}selected{{/compare}}>{{key}}</option>
-                      {{/if ~}}
-                      {{/each ~}}
-                    </select>
-                  </div>
-                  <div class="mdc-form-field">
                     <label class="mdc-textfield__label" for="status">Status</label>
                     <select class="mdc-select" role="listbox" id="jobs-status" name="status">
                       <option value="" {{#if request.params.query.status}}{{else}}selected{{/if}}>Any status</option>
