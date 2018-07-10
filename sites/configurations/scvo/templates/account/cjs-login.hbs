@@ -12,7 +12,7 @@
       <div class="mdc-typography--title">
         Login
       </div>
-      <div class="mdc-card__info x-padding-full mdc-theme--primary-bg mdc-theme--on-primary" id="login-message">
+      <div class="mdc-card__info x-padding-full mdc-theme--primary-dark" id="login-message">
         <span id="form-message"></span>
       </div>
       <div class="mdc-typography--body1" id="form-section-email">
@@ -40,11 +40,21 @@
           </button>
         </div>
       </div>
-      <div class="card-loader" id="login-loader">
+      <div role="progressbar" id="login-loader" class="mdc-linear-progress mdc-linear-progress--indeterminate">
+        <div class="mdc-linear-progress__buffering-dots"></div>
+        <div class="mdc-linear-progress__buffer"></div>
+        <div class="mdc-linear-progress__bar mdc-linear-progress__primary-bar">
+          <span class="mdc-linear-progress__bar-inner"></span>
+        </div>
+        <div class="mdc-linear-progress__bar mdc-linear-progress__secondary-bar">
+          <span class="mdc-linear-progress__bar-inner"></span>
+        </div>
+      </div>
+      <!-- <div class="card-loader" id="login-loader">
         <div class="card-loader-inner">
           <span class="far fa-2x fa-circle-notch fa-spin"></span>
         </div>
-      </div>
+      </div> -->
     </form>
   </div>
 </div>
@@ -60,7 +70,8 @@ document.addEventListener("DOMContentLoaded", function(event) {
   $form.on('submit', function(evt) {
     var email = $email.val();
     var password = $password.val();
-    $loader.css('display', 'flex');
+    $loader.css('display', 'block');
+    $login.css('display', 'none');
     evt.preventDefault();
 
     cjsFirebase.auth().signInWithEmailAndPassword(email, password).then(function(user) {
@@ -69,10 +80,12 @@ document.addEventListener("DOMContentLoaded", function(event) {
       } else {
         $message.text('Something went wrong, logged in but no user?').show();
         $loader.css('display', 'none');
+        $login.css('display', 'block');
       }
     }).catch(function(err) {
       $message.text(err.message).show();
       $loader.css('display', 'none');
+      $login.css('display', 'block');
     });
   });
 });
