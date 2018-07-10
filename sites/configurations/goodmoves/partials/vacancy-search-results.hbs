@@ -5,12 +5,42 @@
 <div class="mdc-layout-grid head">
   <div class="mdc-layout-grid__inner">
     <form class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone" action="/save-search{{{@root.request.url.search}}}" method="POST">
+      {{#compare
+        (indexOf 
+          (map @root.data.saved_searches.items (getProp 'querystring'))
+          (querystringify (obj) 
+            keywords=@root.request.params.query.keywords
+            roles=@root.request.params.query.roles
+            sectors=@root.request.params.query.sectors
+            statuses=@root.request.params.query.statuses
+          )
+        ) ">" -1
+      }}
+        <strong>Search saved: </strong>
+        {{getProperty
+          (itemAt
+            @root.data.saved_searches.items
+            (indexOf 
+              (map @root.data.saved_searches.items (getProp 'querystring'))
+              (querystringify (obj) 
+                keywords=@root.request.params.query.keywords
+                roles=@root.request.params.query.roles
+                sectors=@root.request.params.query.sectors
+                statuses=@root.request.params.query.statuses
+              )
+            )
+          ) 'name'
+        }}
+      {{else}}
       <div class="mdc-text-field mdc-text-field--box mdc-text-field--with-trailing-icon" data-mdc-auto-init="MDCTextField">
         <input type="text" id="saved-search-name" name="name" class="mdc-text-field__input">
         <label for="saved-search-name" class="mdc-floating-label mdc-floating-label--float-above">Save search</label>
-        <button class="mdc-icon-button mdc-text-field__icon fas fa-save" tabindex="0" role="role"></button>
+        <button class="mdc-icon-button mdc-text-field__icon" tabindex="0" role="role">
+          <span class="far fa-save" aria-hidden="true"></span>
+        </button>
         <div class="mdc-line-ripple"></div>
       </div>
+      {{/compare}}
     </form>
     <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
       {{> pagination paging=data.search_data.detailed_results.pagination}}

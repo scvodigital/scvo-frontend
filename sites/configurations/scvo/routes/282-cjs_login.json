@@ -1,21 +1,24 @@
 {
-  "name": "four_oh_four",
-  "pattern": "/404",
-  "defaultStatusCode": 404,
+  "name": "cjs_login",
+  "pattern": "/jobs/community-jobs-scotland/vacancies/login",
   "tasks": [
+    "metaData.commonTasks.authNotRequired",
     {
-      "name": "not_found",
+      "name": "supplimentaryResponses",
       "taskModule": "elasticsearch",
       "config": {
         "connectionStringTemplate": "{$../../elasticsearch-url.txt}",
         "elasticsearchConfig": {
           "apiVersion": "5.6"
         },
-        "queryTemplates": {
-          "index": "web-content-production",
-          "type": "scvo-cms-page,scvo-cms-post,scvo-event",
-          "template": ">context.metaData.handlebars.queries.errors_relevant-content"
-        }
+        "queryTemplates": [
+          {
+            "name": "splash",
+            "index": "web-content-production",
+            "type": "scvo-cms-media",
+            "template": ">context.metaData.handlebars.queries.pages_splash"
+          }
+        ]
       },
       "renderer": "handlebars"
     },
@@ -35,8 +38,7 @@
             "layout": ">context.metaData.handlebars.layouts.default",
             "parts": {
               "head": ">context.metaData.handlebars.templates.pages_page-head-tags",
-              "body": ">context.metaData.handlebars.templates.errors_404",
-              "foot": ""
+              "body": ">context.metaData.handlebars.templates.account_cjs-login"
             },
             "contentType": "text/html"
           }

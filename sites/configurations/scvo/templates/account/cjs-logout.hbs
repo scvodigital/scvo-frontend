@@ -1,0 +1,39 @@
+<div class="cjs-job">
+  {{> header_splash headerTextOverride="CJS vacancies" typeOverride="page"}}
+  <div class="container-fluid page-content">
+    <ul class="breadcrumbs">
+      <li><a href="/">Home</a></li>
+      <li><a href="/jobs">Jobs</a></li>
+      <li><a href="/jobs/community-jobs-scotland">Community Jobs Scotland</a></li>
+      <li><a href="/jobs/community-jobs-scotland/vacancies">Vacancies</a></li>
+      <li>Login</li>
+    </ul>
+    <form id="logout-form" method="POST" class="logout-form">
+      <p class="mdc-typography--title">
+        Logging out&hellip;
+      </p>
+      <div role="progressbar" class="mdc-linear-progress mdc-linear-progress--indeterminate">
+        <div class="mdc-linear-progress__buffering-dots"></div>
+        <div class="mdc-linear-progress__buffer"></div>
+        <div class="mdc-linear-progress__bar mdc-linear-progress__primary-bar">
+          <span class="mdc-linear-progress__bar-inner"></span>
+        </div>
+        <div class="mdc-linear-progress__bar mdc-linear-progress__secondary-bar">
+          <span class="mdc-linear-progress__bar-inner"></span>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<script>
+document.addEventListener("DOMContentLoaded", function(event) {
+  window.setTimeout(function() {
+    cjsFirebase.auth().signOut().then(function() {
+      window.location.href = '/jobs/community-jobs-scotland/vacancies/login';
+      setCookie('cjs_token');
+    }).catch(function(err) {
+      console.error('Error logging out:', err);
+    });
+  }, 1000);
+});
+</script>

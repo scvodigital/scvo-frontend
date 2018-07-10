@@ -1,5 +1,5 @@
 Arguments: 
-  /home/tonicblue/.nvm/versions/node/v8.11.1/bin/node /home/tonicblue/.nvm/versions/node/v8.11.1/bin/yarn add -D @scvo/json-inc
+  /home/tonicblue/.nvm/versions/node/v8.11.1/bin/node /home/tonicblue/.nvm/versions/node/v8.11.1/bin/yarn add @scvo/router
 
 PATH: 
   /home/tonicblue/.nvm/versions/node/v8.11.1/bin:/opt/google-cloud-sdk/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/opt/android-sdk/platform-tools:/usr/lib/jvm/default/bin:/opt/nessus/bin:/opt/nessus/sbin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/home/tonicblue/.nvm/versions/node/v8.11.1/bin:/opt/google-cloud-sdk/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/home/tonicblue/bin:/home/tonicblue/scripts:/home/tonicblue/bin:/home/tonicblue/scripts:/home/tonicblue/.vimpkg/bin:/home/tonicblue/.vimpkg/bin:/home/tonicblue/.gem/ruby/2.4.0/bin:/home/tonicblue/.cargo/bin:/usr/lib/python3.6/site-packages:/home/tonicblue/.pyenv/bin:/home/tonicblue/.pyenv/lib:/home/tonicblue/go:/home/tonicblue/go/bin:/home/tonicblue/go/src:/home/tonicblue/.gem/ruby/2.5.0/bin:/home/tonicblue/.nvm/versions/node/v6.11.3/bin:/opt/google-cloud-sdk/bin:/usr/local/sbin:/usr/local/bin:/usr/bin:/usr/lib/jvm/default/bin:/usr/bin/site_perl:/usr/bin/vendor_perl:/usr/bin/core_perl:/home/tonicblue/bin:/home/tonicblue/scripts:/home/tonicblue/bin:/home/tonicblue/scripts:/home/tonicblue/.vimpkg/bin:/home/tonicblue/.vimpkg/bin:/home/tonicblue/.gem/ruby/2.4.0/bin:/home/tonicblue/.cargo/bin:/usr/lib/python3.6/site-packages:/home/tonicblue/.pyenv/bin:/home/tonicblue/.pyenv/lib:/home/tonicblue/go:/home/tonicblue/go/bin:/home/tonicblue/go/src:/home/tonicblue/.gem/ruby/2.5.0/bin
@@ -20,77 +20,56 @@ npm manifest:
     "description": "The App Engine service that runs the SCVO=>Router",
     "main": "build/index.js",
     "engines": {
-      "node": ">=6.11.3"
+      "node": ">=8.11.1"
     },
     "scripts": {
-      "test": "echo \"Error: no test specified\" && exit 1",
+      "test": "echo \"Error: no test specified\"",
       "cleanup": "rm -rf ./build/**",
-      "copy": "cp ./db/db.json ./build/db.json; cp -r ./assets ./build/assets",
-      "sass": "node-sass --include-path=./node_modules ./build/assets/css -o build/assets/css",
+      "copy": "cp -r ./assets ./build/assets",
+      "sass": "node_modules/node-sass/bin/node-sass --include-path=./node_modules ./build/assets/css -o build/assets/css",
       "upgrade-router": "yarn add -E @scvo/router @scvo/router-task-firebase @scvo/router-task-elasticsearch @scvo/router-destination-handlebars @scvo/router-destination-redirect",
       "build": "npm run cleanup; npm run compile; npm run build-db; npm run copy; npm run sass; npm run uglify",
-      "build-db": "json-inc compile --input ./sites/sites.inc.json --output ./sites/sites.json",
-      "start": "npm run compile; node build/index.js",
+      "build-db": "node_modules/@scvo/json-inc/bin/json-inc compile --input ./sites/sites.inc.json --output ./sites/sites.json",
+      "start": "yarn; npm run build; node build/index.js",
       "dev": "npm run build; devmode=true node build/index.js",
       "dev-router": "npm run router; npm run dev",
       "deploy-dispatch": "gcloud app deploy dispatch.yaml --quiet",
       "clear-cache": "curl -s https://scvo.org.uk/reload-sites",
       "deploy-db": "npm run build-db; firebase database:set -y /contexts ./sites/sites.json; npm run clear-cache",
       "deploy-app": "npm run build; npm run deploy-dispatch; gcloud beta app deploy --quiet; npm run deploy-db",
-      "router": "cd ../router && npm run local && cd ../frontend && npm run l-router && npm run l-elastic && npm run l-handlebars && npm run l-redirect && npm run l-firebase",
-      "l-router": "npm link @scvo/router",
-      "l-firebase": "npm link @scvo/router-task-firebase",
-      "l-elastic": "npm link @scvo/router-task-elasticsearch",
-      "l-handlebars": "npm link @scvo/router-destination-handlebars",
-      "l-redirect": "npm link @scvo/router-destination-redirect",
-      "check": "gts check",
+      "router": "cd ../router2; npm run fix; npm run check; npm run compile; npm link; cd ../frontend",
+      "check": "gts fix; gts check",
       "clean": "gts clean",
-      "compile": "tsc -p .",
+      "compile": "node_modules/typescript/bin/tsc -p .",
       "fix": "gts fix",
       "prepare": "npm run compile",
       "pretest": "npm run compile",
       "posttest": "npm run check",
-      "uglify": "npm run uglify-main; npm run uglify-search; npm run uglify-home",
-      "uglify-main": "uglifyjs --compress --output=./build/assets/js/goodmoves/main.js ./build/assets/js/jquery-deserialize.js ./build/assets/js/cookieinfo.min.js ./build/assets/js/class-inheritance.js ./build/assets/js/goodmoves/site-controller.js",
-      "uglify-home": "uglifyjs --compress --output=./build/assets/js/goodmoves/home.js ./build/assets/js/goodmoves/typeahead-controller.js ./build/assets/js/goodmoves/home-controller.js",
-      "uglify-search": "uglifyjs --compress --output=./build/assets/js/goodmoves/search.js ./build/assets/js/goodmoves/typeahead-controller.js ./build/assets/js/goodmoves/search-controller.js"
+      "uglify": "npm run uglify-goodmoves-main; npm run uglify-goodmoves-search; npm run uglify-goodmoves-home; npm run uglify-fundingscotland-main; npm run uglify-fundingscotland-search; npm run uglify-fundingscotland-home",
+      "uglify-goodmoves-main": "node_modules/uglify-js/bin/uglifyjs --compress --output=./build/assets/js/goodmoves/main.js ./build/assets/js/jquery-deserialize.js ./build/assets/js/cookieinfo.min.js ./build/assets/js/class-inheritance.js ./build/assets/js/goodmoves/site-controller.js",
+      "uglify-goodmoves-home": "node_modules/uglify-js/bin/uglifyjs --compress --output=./build/assets/js/goodmoves/home.js ./build/assets/js/goodmoves/typeahead-controller.js ./build/assets/js/goodmoves/home-controller.js",
+      "uglify-goodmoves-search": "node_modules/uglify-js/bin/uglifyjs --compress --output=./build/assets/js/goodmoves/search.js ./build/assets/js/goodmoves/typeahead-controller.js ./build/assets/js/goodmoves/search-controller.js",
+      "uglify-fundingscotland-main": "node_modules/uglify-js/bin/uglifyjs --compress --output=./build/assets/js/fundingscotland/main.js ./build/assets/js/jquery-deserialize.js ./build/assets/js/cookieinfo.min.js ./build/assets/js/class-inheritance.js ./build/assets/js/fundingscotland/site-controller.js",
+      "uglify-fundingscotland-home": "node_modules/uglify-js/bin/uglifyjs --compress --output=./build/assets/js/fundingscotland/home.js ./build/assets/js/fundingscotland/typeahead-controller.js ./build/assets/js/fundingscotland/home-controller.js",
+      "uglify-fundingscotland-search": "node_modules/uglify-js/bin/uglifyjs --compress --output=./build/assets/js/fundingscotland/search.js ./build/assets/js/fundingscotland/typeahead-controller.js ./build/assets/js/fundingscotland/search-controller.js"
     },
     "author": "Matthew Wilkes (https://scvo.org.uk)",
     "license": "GPL-3.0",
     "dependencies": {
-      "@scvo/router": "^1.2.6",
+      "@scvo/json-inc": "^0.0.14",
+      "@scvo/router": "^1.2.13",
       "@scvo/router-destination-handlebars": "0.0.29",
       "@scvo/router-destination-redirect": "0.0.7",
       "@scvo/router-task-elasticsearch": "0.0.16",
       "@scvo/router-task-firebase": "0.0.2",
       "@scvo/router-task-mysql": "^0.0.3",
       "@scvo/router-task-transform": "^0.0.3",
-      "@types/cookie-parser": "^1.4.1",
-      "body-parser": "^1.18.2",
-      "chalk": "^2.3.1",
-      "clayhandlebars": "^3.2.3",
-      "compression": "^1.7.2",
-      "cookie-parser": "^1.4.3",
-      "cors": "^2.8.4",
-      "date-fns": "^1.29.0",
-      "dot-object": "^1.7.0",
-      "express": "^4.16.2",
-      "firebase-admin": "^5.12.1",
-      "googleapis": "^30.0.0",
-      "handlebars": "^4.0.11",
-      "jsforce": "^1.8.4",
-      "livereload": "^0.7.0",
-      "moment": "^2.22.2",
-      "nsfw": "^1.0.16",
-      "pdfmake": "^0.1.36",
-      "string": "^3.3.3"
-    },
-    "devDependencies": {
-      "@scvo/json-inc": "0.0.5",
       "@types/body-parser": "^1.16.8",
       "@types/chalk": "^2.2.0",
       "@types/compression": "^0.0.35",
+      "@types/cookie-parser": "^1.4.1",
       "@types/cors": "^2.8.3",
+      "@types/deep-diff": "^0.0.31",
       "@types/dot-object": "^1.5.0",
       "@types/elasticsearch": "^5.0.22",
       "@types/express": "^4.11.1",
@@ -100,10 +79,31 @@ npm manifest:
       "@types/q": "^1.0.7",
       "@types/request": "^2.47.0",
       "@types/string": "^0.0.29",
+      "arr-diff": "^4.0.0",
+      "body-parser": "^1.18.2",
+      "chalk": "^2.3.1",
+      "clayhandlebars": "^3.2.3",
+      "compression": "^1.7.2",
+      "cookie-parser": "^1.4.3",
+      "cors": "^2.8.4",
+      "date-fns": "^1.29.0",
+      "deep-diff": "^1.0.1",
+      "dot-object": "^1.7.0",
+      "express": "^4.16.2",
+      "firebase-admin": "^5.12.1",
+      "googleapis": "^30.0.0",
       "gts": "^0.5.4",
+      "handlebars": "^4.0.11",
+      "jsforce": "^1.8.4",
+      "livereload": "^0.7.0",
       "material-components-web": "^0.35.0",
+      "moment": "^2.22.2",
       "node-sass": "^4.7.2",
-      "typescript": "~2.6.1"
+      "nsfw": "^1.0.16",
+      "pdfmake": "^0.1.36",
+      "string": "^3.3.3",
+      "typescript": "^2.9.2",
+      "uglify-js": "^3.4.3"
     }
   }
 
@@ -654,12 +654,14 @@ Lockfile:
     version "1.1.0"
     resolved "https://registry.yarnpkg.com/@protobufjs/utf8/-/utf8-1.1.0.tgz#a777360b5b39a1a2e5106f8e858f2fd2d060c570"
   
-  "@scvo/json-inc@0.0.5":
-    version "0.0.5"
-    resolved "https://registry.yarnpkg.com/@scvo/json-inc/-/json-inc-0.0.5.tgz#acc23bc3376dde794744f358a926b8ddfcc0871b"
+  "@scvo/json-inc@^0.0.14":
+    version "0.0.14"
+    resolved "https://registry.yarnpkg.com/@scvo/json-inc/-/json-inc-0.0.14.tgz#df0c081ec8383aaefbbbec228959d8f38037c09e"
     dependencies:
-      chalk "^2.3.1"
+      coa "^2.0.1"
       dot-object "^1.7.0"
+      glob "^7.1.2"
+      glob-promise "^3.4.0"
   
   "@scvo/router-destination-handlebars@0.0.29":
     version "0.0.29"
@@ -761,9 +763,9 @@ Lockfile:
       route-recognizer "^0.3.3"
       string "^3.3.3"
   
-  "@scvo/router@^1.2.6":
-    version "1.2.6"
-    resolved "https://registry.yarnpkg.com/@scvo/router/-/router-1.2.6.tgz#a98e86ae88753818136113300f20f4765e93547f"
+  "@scvo/router@^1.2.13":
+    version "1.2.13"
+    resolved "https://registry.yarnpkg.com/@scvo/router/-/router-1.2.13.tgz#f5a82a62c6f987df8b2ee4b8d9ea7432c0966fe6"
     dependencies:
       "@types/deep-extend" "^0.4.31"
       "@types/elasticsearch" "^5.0.24"
@@ -780,6 +782,7 @@ Lockfile:
       handlebars "^4.0.11"
       json-logic-js "^1.2.2"
       mysql "^2.15.0"
+      node-json-transform "^1.0.16"
       request "^2.87.0"
       request-promise-native "^1.0.5"
       route-parser "^0.0.5"
@@ -819,6 +822,10 @@ Lockfile:
     resolved "https://registry.yarnpkg.com/@types/cors/-/cors-2.8.3.tgz#eaf6e476da0d36bee6b061a24d57e343ddce86d6"
     dependencies:
       "@types/express" "*"
+  
+  "@types/deep-diff@^0.0.31":
+    version "0.0.31"
+    resolved "https://registry.yarnpkg.com/@types/deep-diff/-/deep-diff-0.0.31.tgz#0632b274d1db23cb80f0c1d4e4254c3392fd8219"
   
   "@types/deep-extend@^0.4.31":
     version "0.4.31"
@@ -867,6 +874,14 @@ Lockfile:
     dependencies:
       "@types/node" "*"
   
+  "@types/glob@*":
+    version "5.0.35"
+    resolved "https://registry.yarnpkg.com/@types/glob/-/glob-5.0.35.tgz#1ae151c802cece940443b5ac246925c85189f32a"
+    dependencies:
+      "@types/events" "*"
+      "@types/minimatch" "*"
+      "@types/node" "*"
+  
   "@types/google-cloud__storage@^1.1.7":
     version "1.1.7"
     resolved "https://registry.yarnpkg.com/@types/google-cloud__storage/-/google-cloud__storage-1.1.7.tgz#f4b568b163cce16314f32f954f5b7d5c9001fa86"
@@ -890,6 +905,10 @@ Lockfile:
   "@types/mime@*":
     version "2.0.0"
     resolved "https://registry.yarnpkg.com/@types/mime/-/mime-2.0.0.tgz#5a7306e367c539b9f6543499de8dd519fac37a8b"
+  
+  "@types/minimatch@*":
+    version "3.0.3"
+    resolved "https://registry.yarnpkg.com/@types/minimatch/-/minimatch-3.0.3.tgz#3dca0e3f33b200fc7d1139c0cd96c1268cadfd9d"
   
   "@types/mysql@^2.15.5":
     version "2.15.5"
@@ -1638,6 +1657,12 @@ Lockfile:
     version "4.6.0"
     resolved "https://registry.yarnpkg.com/co/-/co-4.6.0.tgz#6ea6bdf3d853ae54ccb8e47bfa0bf3f9031fb184"
   
+  coa@^2.0.1:
+    version "2.0.1"
+    resolved "https://registry.yarnpkg.com/coa/-/coa-2.0.1.tgz#f3f8b0b15073e35d70263fb1042cb2c023db38af"
+    dependencies:
+      q "^1.1.2"
+  
   code-point-at@^1.0.0:
     version "1.1.0"
     resolved "https://registry.yarnpkg.com/code-point-at/-/code-point-at-1.1.0.tgz#0d070b4d043a5bea33a2f1a40e2edb3d9a4ccf77"
@@ -1688,6 +1713,10 @@ Lockfile:
   commander@^2.9.0:
     version "2.15.0"
     resolved "https://registry.yarnpkg.com/commander/-/commander-2.15.0.tgz#ad2a23a1c3b036e392469b8012cec6b33b4c1322"
+  
+  commander@~2.16.0:
+    version "2.16.0"
+    resolved "https://registry.yarnpkg.com/commander/-/commander-2.16.0.tgz#f16390593996ceb4f3eeb020b31d78528f7f8a50"
   
   component-emitter@^1.2.1:
     version "1.2.1"
@@ -1879,6 +1908,10 @@ Lockfile:
   decode-uri-component@^0.2.0:
     version "0.2.0"
     resolved "https://registry.yarnpkg.com/decode-uri-component/-/decode-uri-component-0.2.0.tgz#eb3913333458775cb84cd1a1fae062106bb87545"
+  
+  deep-diff@^1.0.1:
+    version "1.0.1"
+    resolved "https://registry.yarnpkg.com/deep-diff/-/deep-diff-1.0.1.tgz#ac437a691e88baf4205b83ae1aa095a13c6c10ac"
   
   deep-equal@^1.0.0, deep-equal@^1.0.1:
     version "1.0.1"
@@ -2631,6 +2664,12 @@ Lockfile:
     dependencies:
       is-glob "^3.1.0"
       path-dirname "^1.0.0"
+  
+  glob-promise@^3.4.0:
+    version "3.4.0"
+    resolved "https://registry.yarnpkg.com/glob-promise/-/glob-promise-3.4.0.tgz#b6b8f084504216f702dc2ce8c9bc9ac8866fdb20"
+    dependencies:
+      "@types/glob" "*"
   
   glob-to-regexp@^0.3.0:
     version "0.3.0"
@@ -4622,6 +4661,10 @@ Lockfile:
     version "2.1.1"
     resolved "https://registry.yarnpkg.com/punycode/-/punycode-2.1.1.tgz#b58b010ac40c22c5657616c8d2c2c02c7bf479ec"
   
+  q@^1.1.2:
+    version "1.5.1"
+    resolved "https://registry.yarnpkg.com/q/-/q-1.5.1.tgz#7e32f75b41381291d04611f1bf14109ac00651d7"
+  
   qs@6.5.1, qs@~6.5.1:
     version "6.5.1"
     resolved "https://registry.yarnpkg.com/qs/-/qs-6.5.1.tgz#349cdf6eef89ec45c12d7d5eb3fc0c870343a6d8"
@@ -5737,9 +5780,9 @@ Lockfile:
     version "0.0.6"
     resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   
-  typescript@~2.6.1:
-    version "2.6.2"
-    resolved "https://registry.yarnpkg.com/typescript/-/typescript-2.6.2.tgz#3c5b6fd7f6de0914269027f03c0946758f7673a4"
+  typescript@^2.9.2:
+    version "2.9.2"
+    resolved "https://registry.yarnpkg.com/typescript/-/typescript-2.9.2.tgz#1cbf61d05d6b96269244eb6a3bce4bd914e0f00c"
   
   uglify-js@^2.6:
     version "2.8.29"
@@ -5749,6 +5792,13 @@ Lockfile:
       yargs "~3.10.0"
     optionalDependencies:
       uglify-to-browserify "~1.0.0"
+  
+  uglify-js@^3.4.3:
+    version "3.4.3"
+    resolved "https://registry.yarnpkg.com/uglify-js/-/uglify-js-3.4.3.tgz#a4fd757b6f34a95f717f7a7a0dccafcaaa60cf7f"
+    dependencies:
+      commander "~2.16.0"
+      source-map "~0.6.1"
   
   uglify-to-browserify@~1.0.0:
     version "1.0.2"

@@ -1,6 +1,9 @@
 {
-  "name": "logout",
-  "pattern": "/logout",
+  "name": "sign-up-pilot",
+  "pattern": "/sign-up/essential",
+  "metaData": {
+    "title": "Sign up for the Charter Plus pilot – Scotland's Digital Participation Charter"
+  },
   "tasks": [
     {
       "name": "destination",
@@ -17,8 +20,9 @@
           "default": {
             "layout": ">context.metaData.handlebars.layouts.default",
             "parts": {
-              "head": ">context.metaData.handlebars.templates.pages_page-head-tags",
-              "body": ">context.metaData.handlebars.templates.account_logout"
+              "head": ">context.metaData.handlebars.templates.head-tags",
+              "body": ">context.metaData.handlebars.templates.sign-up-pilot",
+              "foot": ""
             },
             "contentType": "text/html"
           }

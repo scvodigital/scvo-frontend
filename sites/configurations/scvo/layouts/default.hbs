@@ -8,13 +8,13 @@
 
   <!--
 
-    Powered by:
-    ███████╗ ██████╗██╗   ██╗ ██████╗ ██╗  ██████╗  ██████╗ ██╗   ██╗████████╗███████╗██████╗
-    ██╔════╝██╔════╝██║   ██║██╔═══██╗╚██╗ ██╔══██╗██╔═══██╗██║   ██║╚══██╔══╝██╔════╝██╔══██╗
-    ███████╗██║     ██║   ██║██║   ██║ ╚██╗██████╔╝██║   ██║██║   ██║   ██║   █████╗  ██████╔╝
-    ╚════██║██║     ╚██╗ ██╔╝██║   ██║ ██╔╝██╔══██╗██║   ██║██║   ██║   ██║   ██╔══╝  ██╔══██╗
-    ███████║╚██████╗ ╚████╔╝ ╚██████╔╝██╔╝ ██║  ██║╚██████╔╝╚██████╔╝   ██║   ███████╗██║  ██║
-    ╚══════╝ ╚═════╝  ╚═══╝   ╚═════╝ ╚═╝  ╚═╝  ╚═╝ ╚═════╝  ╚═════╝    ╚═╝   ╚══════╝╚═╝  ╚═╝
+  Powered by:
+  ███████╗ ██████╗██╗   ██╗ ██████╗ ██╗  ██████╗  ██████╗ ██╗   ██╗████████╗███████╗██████╗
+  ██╔════╝██╔════╝██║   ██║██╔═══██╗╚██╗ ██╔══██╗██╔═══██╗██║   ██║╚══██╔══╝██╔════╝██╔══██╗
+  ███████╗██║     ██║   ██║██║   ██║ ╚██╗██████╔╝██║   ██║██║   ██║   ██║   █████╗  ██████╔╝
+  ╚════██║██║     ╚██╗ ██╔╝██║   ██║ ██╔╝██╔══██╗██║   ██║██║   ██║   ██║   ██╔══╝  ██╔══██╗
+  ███████║╚██████╗ ╚████╔╝ ╚██████╔╝██╔╝ ██║  ██║╚██████╔╝╚██████╔╝   ██║   ███████╗██║  ██║
+  ╚══════╝ ╚═════╝  ╚═══╝   ╚═════╝ ╚═╝  ╚═╝  ╚═╝ ╚═════╝  ╚═════╝    ╚═╝   ╚══════╝╚═╝  ╚═╝
 
   -->
 
@@ -39,33 +39,33 @@
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-3467930-2"></script>
   <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
-    gtag('config', 'UA-3467930-2', { 'send_page_view': true, 'anonymize_ip': true });
+  gtag('config', 'UA-3467930-2', { 'send_page_view': true, 'anonymize_ip': true });
 
-    {{#each route.primaryResponse.hits.hits ~}}
-    gtag('event', 'document_hit', {
-      'event_category': '{{_type}}',
-      'event_label': '{{_id}}'
-    });
-    {{/each ~}}
+  {{#each route.primaryResponse.hits.hits ~}}
+  gtag('event', 'document_hit', {
+    'event_category': '{{_type}}',
+    'event_label': '{{_id}}'
+  });
+  {{/each ~}}
 
-    {{#if request.params.query.debug ~}}
-    console.log('#### DEBUG MODE ON ####');
-    console.log('Request:', {{{regexReplace (regexReplace (stringify request) "(<\/script)" "gi" '</scr\" + \"ipt') "(\r|\n)" "gi" ""}}});
-    console.log('Route:', {{{regexReplace (regexReplace (stringify route) "(<\/script)" "gi" '</scr\" + \"ipt') "(\r|\n)" "gi" ""}}});
-    console.log('Data:', {{{regexReplace (regexReplace (stringify data) "(<\/script)" "gi" '</scr\" + \"ipt') "(\r|\n)" "gi" ""}}});
-    console.log('Menus:', {{{regexReplace (regexReplace (stringify context.metaData.menus) "(<\/script)" "gi" '</scr\" + \"ipt') "(\r|\n)" "gi" ""}}});
-    {{/if ~}}
+  {{#if request.params.query.debug ~}}
+  console.log('#### DEBUG MODE ON ####');
+  console.log('Request:', {{{regexReplace (regexReplace (stringify request) "(<\/script)" "gi" '</scr\" + \"ipt') "(\r|\n)" "gi" ""}}});
+  console.log('Route:', {{{regexReplace (regexReplace (stringify route) "(<\/script)" "gi" '</scr\" + \"ipt') "(\r|\n)" "gi" ""}}});
+  console.log('Data:', {{{regexReplace (regexReplace (stringify data) "(<\/script)" "gi" '</scr\" + \"ipt') "(\r|\n)" "gi" ""}}});
+  console.log('Menus:', {{{regexReplace (regexReplace (stringify context.metaData.menus) "(<\/script)" "gi" '</scr\" + \"ipt') "(\r|\n)" "gi" ""}}});
+  {{/if ~}}
   </script>
   <link type="text/css" rel="stylesheet" href="/assets/css/material-components-web.min.css">
   <link type="text/css" rel="stylesheet" href="/assets/fonts/fontawesome/css/fontawesome-all.min.css">
   <link type="text/css" rel="stylesheet" href="/assets/css/scvo-styles.css">
   <!-- <script>
   if(location.host.indexOf('.local') > -1){
-    document.write('<script src="https://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')
+  document.write('<script src="https://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')
   }
   </script> -->
 </head>
@@ -85,10 +85,6 @@
             <section class="mdc-toolbar__section upper-menu mdc-toolbar__section--align-end">
               <nav id="upper-tab-bar" class="mdc-tab-bar" [menu]="'main-upper'" [menulinkselector]="''" [menulabelselector]="'span.mdc-tab--label'" [menuactiveclass]="'mdc-tab--active'">
                 {{#each context.metaData.menus.main-upper ~}}
-                  <!--
-                    Path Name: {{../request.url.pathname}}
-                    Route Pattern: {{route}}
-                  -->
                 <a class="mdc-tab{{#if (regexMatch ../request.url.pathname route "gi")}} mdc-tab--active{{/if}}" href="{{stripTrailingSlash path}}"><span class="mdc-tab--label">{{{label}}}</span></a>
                 {{/each ~}}
               </nav>
@@ -115,14 +111,29 @@
             <section class="mdc-toolbar__section mdc-toolbar__section--align-start toolbar-menu">
               <nav id="main-tab-bar" class="mdc-tab-bar" [menu]="'main'" [menulinkselector]="''" [menulabelselector]="'span.mdc-tab--label'" [menuactiveclass]="'mdc-tab--active'">
                 {{#each context.metaData.menus.main ~}}
-                  <!--
-                    Path Name: {{../request.url.pathname}}
-                    Route Pattern: {{route}}
-                  -->
                 <a class="mdc-tab{{#if (regexMatch ../request.url.pathname route "gi")}} mdc-tab--active{{/if}}" href="{{stripTrailingSlash path}}"><span class="mdc-tab--label">{{{label}}}</span></a>
                 {{/each ~}}
               </nav>
             </section>
+            {{#if data.auth ~}}
+            <section class="toolbar-user">
+              <div class="mdc-menu-anchor">
+                <button class="mdc-button" data-menu-target="#user-menu">
+                  <span class="far fa-fw fa-user-circle"></span>
+                  {{{data.auth.email}}}
+                  <span class="far fa-fw fa-angle-down"></span>
+                </button>
+                <div class="mdc-menu" tabindex="-1" data-mdc-auto-init="MDCMenu" id="user-menu">
+                  <div class="mdc-menu__items mdc-list" role="menu" aria-hidden="true">
+                    <a class="mdc-list-item " href="/jobs/community-jobs-scotland/vacancies/logout" role="menuitem">
+                      <span class="far fa-sign-out-alt mdc-list-item__graphic" aria-hidden="true"></span>
+                      Logout
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </section>
+            {{/if ~}}
           </div>
         </div>
       </header>
@@ -266,6 +277,7 @@
   <script type="text/javascript" src="/assets/js/headroom.min.js"></script>
   <script type="text/javascript" src="/assets/js/swiper.min.js"></script>
   <script type="text/javascript" id="cookieinfo" src="/assets/js/cookieinfo.min.js" data-message="We use cookies to track anonymous usage statistics and do not collect any personal information that can be used to identify you. By continuing to visit this site you agree to our use of cookies." data-moreinfo="/cookies" data-cookie="CookieInfoScript" data-text-align="left"></script>
+  <script src="https://www.gstatic.com/firebasejs/5.2.0/firebase.js"></script>
   <script type="text/javascript" src="/assets/js/scvo/root.js"></script>
   {{{layoutParts.foot}}}
 </body>

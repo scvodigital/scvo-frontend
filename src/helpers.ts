@@ -1,3 +1,5 @@
+import arrDiff = require('arr-diff');
+import deepDiff = require('deep-diff');
 import * as dot from 'dot-object';
 import * as moment from 'moment';
 import * as querystring from 'querystring';
@@ -56,10 +58,19 @@ export class Helpers {
 
   static helper_querystringify(obj: any = {}) {
     const args: IHelperArgs = arguments[1];
+    const newObj: any = {};
     if (args && args.hash) {
       Object.assign(obj, args.hash);
     }
-    const qs = querystring.stringify(obj);
+    Object.keys(obj).sort().forEach((key) => {
+      if (obj[key]) {
+        newObj[key] = obj[key];
+        if (Array.isArray(newObj[key])) {
+          newObj[key].sort();
+        }
+      }
+    });
+    const qs = querystring.stringify(newObj);
     return qs;
   }
 
@@ -106,16 +117,37 @@ export class Helpers {
     return target[srcIndex];
   }
 
-  static helper_contains(input: any[]|string, val: any) {
-    let found = false;
-    if (typeof input === 'string') {
-      if (typeof val === 'string') {
-        found = input.indexOf(val.toString()) > -1;
-      }
-    } else if (Array.isArray(input)) {
-      found = input.indexOf(val) > -1;
+  static helper_contains(haystack: any[]|string, val: any) {
+    if (!Array.isArray(haystack) && typeof haystack !== 'string') {
+      return false;
     }
-    return found;
+
+    if (typeof val === 'string' || typeof val === 'number') {
+      return (haystack as string).indexOf((val as string)) > -1;
+    }
+
+    for (let i = 0; i < haystack.length; ++i) {
+      const item = haystack[i];
+      const diff = deepDiff.diff(item, val);
+
+      //console.log(
+      //  '\n#### TEST', i, '####\n',
+      //  'LHS:', item, '\n',
+      //  'RHS:', val, '\n',
+      //  'DIFF:', diff
+      //);
+
+      if (!diff) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
+  static helper_obj(options: any) {
+    //console.log(options);
+    return options.hash;
   }
 
   static helper_parse(str: string) {
@@ -128,12 +160,46 @@ export class Helpers {
       return {};
     }
     try {
-      const out = querystring.parse(str, sep, eq);
+      const out = querystring.parse(str);
       return out;
-    } catch(err) {
-      console.error('Handlebars helper "querystring" failed to parse the following string:', str, err);
+    } catch (err) {
+      console.error(
+          'Handlebars helper "querystring" failed to parse the following string:',
+          str, err);
       return {};
     }
+  }
+
+  static helper_arrMatch(src: any[], dst: any[]) {
+    if (!src && !dst) {
+      return true;
+    }
+    if (!src || !dst) {
+      return false;
+    }
+
+    src = Array.isArray(src) ? src : [src];
+    dst = Array.isArray(dst) ? dst : [dst];
+
+    let srcItems: any[] = [];
+    let dstItems: any[] = [];
+
+    src.forEach((item: any) => {
+      if (item && srcItems.indexOf(item) === -1) {
+        srcItems.push(item);
+      }
+    });
+    srcItems.sort();
+    dst.forEach((item: any) => {
+      if (item && dstItems.indexOf(item) === -1) {
+        dstItems.push(item);
+      }
+    });
+    dstItems.sort();
+
+    const diff = arrDiff(srcItems, dstItems);
+
+    return diff.length === 0;
   }
 
   static helper_keyValue(obj: any) {
@@ -184,6 +250,20 @@ export class Helpers {
 
   static helper_removeEntities(str: string) {
     const out = s(str).decodeHTMLEntities().s;
+    return out;
+  }
+
+  static helper_getProps(arr: any[], props: string[]) {
+    const out: any[] = [];
+
+    arr.forEach((item: any) => {
+      const newItem: any = {};
+      props.forEach((prop) => {
+        newItem[prop] = item[prop];
+      });
+      out.push(newItem);
+    });
+
     return out;
   }
 
