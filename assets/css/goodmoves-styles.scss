@@ -412,16 +412,33 @@ footer h3,
 .goodmoves-saved-searches {
   .mdc-list {
     background-color: white;
+    .mdc-list-item--header {
+      height: auto;
+    }
     .mdc-layout-grid {
       width: 100%;
     }
-    .saved-search-email-switch {
+    .saved-search-email-switch,
+    .saved-search-remove {
       display: flex;
-      justify-content: flex-end;
+      justify-content: center;
       align-items: center;
+      .far {
+        color: $mdc-theme-primary-light;
+      }
+    }
+    .saved-search-email-switch {
+      .mdc-switch__native-control:enabled:not(:checked) ~ .mdc-switch__background::before {
+        background-color: $mdc-theme-primary;
+        opacity: 1;
+      }
       label {
         margin-left: $unit;
       }
+    }
+    .saved-search-remove {
+      margin: 0 auto;
+      height: 40px;
     }
   }
 }
@@ -501,6 +518,14 @@ a:hover {
   user-select: none; /* Non-prefixed version, currently
   supported by Chrome and Opera */
 }
+.mdc-text-field__icon.noselect {
+  cursor: default;
+}
+.mdc-text-field.noselect,
+.mdc-text-field__input.noselect,
+.mdc-text-field__icon.noselect {
+  pointer-events: none;
+}
 
 a {
   font-weight: 600;
@@ -512,6 +537,10 @@ a {
 .mdc-toolbar a:hover {
   text-decoration: none;
 }
+.mdc-list-item--header:focus::before,
+.mdc-list-item--header:focus::after,
+.mdc-list-item--header:hover::before,
+.mdc-list-item--header:hover::after,
 .mdc-tab:active::before,
 .mdc-tab:focus::before,
 .mdc-tab:hover::before,
@@ -814,6 +843,13 @@ a {
         margin-right: $unit;
       }
     }
+    .location-info {
+      .container-map {
+        height: 40vh;
+        padding: 0;
+        margin: 0;
+      }
+    }
   }
 }
 .goodmoves-event .mdc-card.full,
@@ -869,6 +905,9 @@ hr {
   font-size: 1.5rem;
   bottom: 8px !important;
   right: 8px !important;
+  .far:hover {
+    color: $mdc-theme-primary-dark;
+  }
 }
 .mdc-icon-button:focus {
   outline: none;
@@ -1211,6 +1250,9 @@ body {
 }
 .gm-style .gm-style-iw {
   font-size: 0.9rem;
+  h3 {
+    margin-top: 0;
+  }
 }
 
 /* End Search results card */
