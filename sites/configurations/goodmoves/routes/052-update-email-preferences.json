@@ -1,0 +1,26 @@
+{
+  "name": "update-email-preferences",
+  "pattern": "/update-email-preferences",
+  "acceptedVerbs": "POST",
+  "tasks": [
+    "metaData.commonTasks.authRequired",
+    {
+      "name": "notifications",
+      "taskModule": "mysql",
+      "config": {
+        "connectionName": "notifications",
+        "queryTemplates": {
+          "update_email_prefs": ">context.metaData.handlebars.queries.notifications_update-email-preferences"
+        }
+      },
+      "renderer": "handlebars"
+    },
+    {
+      "name": "destination",
+      "taskModule": "redirect",
+      "config": {
+        "location": "/saved-searches"
+      }
+    }
+  ]
+}

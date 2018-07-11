@@ -1,8 +1,14 @@
 {{> vacancy_search_form this instance_id="perm"}}
 
 <div id="detailed-results-container" class="container-content goodmoves-saved-searches">
+  <div class="pull-right">
+    <a class="mdc-button mdc-button--raised v-margin-full" href="/settings">
+      <span class="far fa-cog mdc-list-item__graphic" aria-hidden="true"></span>
+      Email settings
+    </a>
+  </div>
   <h1 class="mdc-typography--headline3 v-margin-full">
-    Saved searches
+    Searches &amp; email preferences
   </h1>
 
   <ul class="mdc-list mdc-list--two-line mdc-list--avatar-list mdc-elevation--z3">
@@ -17,7 +23,7 @@
           </div>
           <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-2-desktop mdc-layout-grid__cell--span-2-tablet mdc-layout-grid__cell--span-1-phone saved-search-email-switch">
             <span class="mdc-list-item__text">
-              <strong>Send by email</strong>
+              <strong>Add to email</strong>
             </span>
           </div>
           <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-1-desktop mdc-layout-grid__cell--span-1-tablet mdc-layout-grid__cell--span-1-phone saved-search-email-switch">
@@ -66,71 +72,29 @@
     {{/each}}
   </ul>
 
-  <hr />
-
-  <h2 class="mdc-typography--headline4 v-margin">
+  <!-- <h2 class="mdc-typography--headline4 v-margin">
     Email alert preferences
   </h2>
   <p class="mdc-typography--body1">
     You have 1 saved search for your email alerts.
   </p>
 
-  <div class="mdc-select mdc-select--box" data-mdc-auto-init="MDCSelect">
-    <select class="mdc-select__native-control" id="frequency" name="frequency">
-      <option value="undefined">Weekly</option>
-      <option value="daily">Daily</option>
-    </select>
-    <label class="mdc-floating-label mdc-floating-label--float-above" for="frequency">
-      Frequency
-    </label>
-  </div>
-
-  <h3 class="mdc-typography--headline5 v-margin">
-    Select day
-  </h3>
-  <div class="mdc-switch">
-    <input type="checkbox" id="email-switch-mon" class="mdc-switch__native-control" role="switch" checked="checked">
-    <div class="mdc-switch__background">
-      <div class="mdc-switch__knob"></div>
-    </div>
-  </div>
-  <label for="email-switch-mon">
-    Monday
-  </label>
-  <div class="mdc-switch">
-    <input type="checkbox" id="email-switch-tue" class="mdc-switch__native-control" role="switch" checked="checked">
-    <div class="mdc-switch__background">
-      <div class="mdc-switch__knob"></div>
-    </div>
-  </div>
-  <label for="email-switch-tue">
-    Tuesday
-  </label>
-  <div class="mdc-switch">
-    <input type="checkbox" id="email-switch-wed" class="mdc-switch__native-control" role="switch" checked="checked">
-    <div class="mdc-switch__background">
-      <div class="mdc-switch__knob"></div>
-    </div>
-  </div>
-  <label for="email-switch-wed">
-    Wednesday
-  </label>
-  <div class="mdc-switch">
-    <input type="checkbox" id="email-switch-thu" class="mdc-switch__native-control" role="switch" checked="checked">
-    <div class="mdc-switch__background">
-      <div class="mdc-switch__knob"></div>
-    </div>
-  </div>
-  <label for="email-switch-thu">
-    Thursday
-  </label>
-  <div class="mdc-switch">
-    <input type="checkbox" id="email-switch-fri" class="mdc-switch__native-control" role="switch" checked="checked">
-    <div class="mdc-switch__background">
-      <div class="mdc-switch__knob"></div>
-    </div>
-  </div>
-  <label for="email-switch-fri">
-    Friday
-  </label>
+  <form action="/update-email-preferences" method="POST" class="v-margin-full">
+    <h3 class="mdc-typography--headline5 v-margin">
+      Select day
+    </h3>
+    {{#each (split "monday,tuesday,wednesday,thursday,friday,saturday,sunday" ",")}}
+      <div class="mdc-switch">
+        <input type="checkbox" id="email-switch-{{this}}" class="mdc-switch__native-control" role="switch"
+          {{~#if (contains @root.data.email_days this)~}}checked="checked"{{/if}} name="{{this}}" onchange="$('#email-preferences-submit').prop('disabled', false);">
+        <div class="mdc-switch__background">
+          <div class="mdc-switch__knob"></div>
+        </div>
+      </div>
+      <label for="email-switch-{{this}}">
+        {{capitalize this}}
+      </label>
+    {{/each}}
+    <button class="mdc-button mdc-button--raised mdc-ripple-surface mdc-ripple-surface--primary" type="submit" id="email-preferences-submit" data-mdc-auto-init="MDCRipple" disabled>Update preferences</button> -->
+  </form>
 </div>

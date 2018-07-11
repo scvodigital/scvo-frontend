@@ -5,6 +5,9 @@ var $searchTerms = $('#search-terms');
 var $detailedResults = $('#detailed-results-container');
 var $forms = $('[action="/search"]');
 
+var $saveSearchButton = $('#save-search-button');
+var $saveSearchDialog = $('#save-search-dialog');
+
 function geolocate() {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function(position) {
@@ -34,3 +37,18 @@ function reverseLookup(latitude, longitude) {
     }
   });
 }
+
+var dialog = new mdc.dialog.MDCDialog(document.querySelector('#save-search-dialog'));
+
+dialog.listen('MDCDialog:accept', function() {
+  console.log('saved');
+})
+
+dialog.listen('MDCDialog:cancel', function() {
+  console.log('canceled');
+})
+
+document.querySelector('#save-search-button').addEventListener('click', function (evt) {
+  dialog.lastFocusedTarget = evt.target;
+  dialog.show();
+})

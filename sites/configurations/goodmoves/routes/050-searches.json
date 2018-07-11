@@ -1,23 +1,28 @@
 {
-  "name": "_default",
-  "pattern": "/*path",
+  "name": "searches",
+  "pattern": "/searches",
+  "metaData": {
+    "sidebarButton": {
+      "icon": "search",
+      "tooltip": "Search",
+      "classes": "hide-md hide-lg"
+    }
+  },
+  "defaultParams": {
+    "context": "results"
+  },
   "tasks": [
-    "metaData.commonTasks.authNotRequired",
+    "metaData.commonTasks.authRequired",
+    "metaData.commonTasks.savedSearches",
+    "metaData.commonTasks.termsMaps",
     {
-      "name": "primaryResponse",
-      "taskModule": "elasticsearch",
+      "name": "email_days",
+      "taskModule": "render",
+      "renderer": "handlebars",
       "config": {
-        "connectionStringTemplate": "{$../../elasticsearch-url.txt}",
-        "elasticsearchConfig": {
-          "apiVersion": "5.6"
-        },
-        "queryTemplates": {
-          "index": "web-content-production",
-          "type": "goodmoves-page",
-          "template": ">context.metaData.handlebars.queries.pages_page"
-        }
-      },
-      "renderer": "handlebars"
+        "output": "data",
+        "template": ">context.metaData.handlebars.partials.email_days"
+      }
     },
     "metaData.commonTasks.supplimentaryResponses",
     {
@@ -36,7 +41,7 @@
             "layout": ">context.metaData.handlebars.layouts.default",
             "parts": {
               "head": ">context.metaData.handlebars.templates.pages_page-head-tags",
-              "body": ">context.metaData.handlebars.templates.pages_page"
+              "body": ">context.metaData.handlebars.templates.vacancies_saved-searches"
             },
             "contentType": "text/html"
           }

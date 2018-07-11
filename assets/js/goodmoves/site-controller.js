@@ -114,6 +114,7 @@ var GoodmovesController = Class.extend({
         that.userProfile = response.val();
         that.userProfile.email = user.email;
         that.userProfile.displayName = user.displayName;
+        console.log("User profile: ")
         console.log(that.userProfile);
         that.setUserProfileDefaults().then(function() { }).catch(function(err) { });
       } else {
