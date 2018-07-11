@@ -518,6 +518,14 @@ a:hover {
   user-select: none; /* Non-prefixed version, currently
   supported by Chrome and Opera */
 }
+.mdc-text-field__icon.noselect {
+  cursor: default;
+}
+.mdc-text-field.noselect,
+.mdc-text-field__input.noselect,
+.mdc-text-field__icon.noselect {
+  pointer-events: none;
+}
 
 a {
   font-weight: 600;
@@ -890,6 +898,9 @@ hr {
   font-size: 1.5rem;
   bottom: 8px !important;
   right: 8px !important;
+  .far:hover {
+    color: $mdc-theme-primary-dark;
+  }
 }
 .mdc-icon-button:focus {
   outline: none;
