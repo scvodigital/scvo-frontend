@@ -82,6 +82,24 @@
           }
         },
         {{/if ~}}
+        {{#if request.params.query.salary_min ~}}
+        {
+          "range": {
+            "salary_min": {
+              "gte": {{replace (trim request.params.query.salary_min) "," ""}}
+            }
+          }
+        },
+        {{/if ~}}
+        {{#if request.params.query.salary_max ~}}
+        {
+          "range": {
+            "salary_min": {
+              "lte": {{replace (trim request.params.query.salary_max) "," ""}}
+            }
+          }
+        },
+        {{/if ~}}
         {
           "term": {
             "country_iso3": "GBR"
