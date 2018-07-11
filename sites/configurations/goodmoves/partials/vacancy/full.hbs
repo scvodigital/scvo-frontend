@@ -154,21 +154,139 @@
         </div>
         {{/ifAny ~}}
         --}}
-        <div class="detailed-info">
+        <div class="location-info">
           {{#if geo_vacancy_coords}}
-          {{#each geo_vacancy_coords}}
-          <p>
-            <strong>TODO:</strong> Map of vacancy location(s)
-          </p>
-          <p>
-            Latitude:{{lat}}<br />
-            Longitude:{{lon}}
-          </p>
-          {{/each}}
+          <div class="container-content container-map">
+            <div id="map-full" data-map-options='{
+              "center": {
+                "lat": 57.1795139,
+                "lng": -5.5317967
+              },
+              "zoom": 6,
+              "styles": [
+                {
+                  "featureType": "administrative.country",
+                  "elementType": "labels",
+                  "stylers": [{ "visibility": "off" }]
+                },
+                {
+                  "featureType": "poi",
+                  "elementType": "labels",
+                  "stylers": [{ "visibility": "off" }]
+                },
+                {
+                  "elementType": "geometry",
+                  "stylers": [{ "color": "#d1edc4" }]
+                },
+                {
+                  "elementType": "labels.text.stroke",
+                  "stylers": [{ "color": "#ffffff" }]
+                },
+                {
+                  "elementType": "labels.text.fill",
+                  "stylers": [{ "color": "#424242" }]
+                },
+                {
+                  "featureType": "administrative.locality",
+                  "elementType": "labels.text.fill",
+                  "stylers": [{ "color": "#424242" }]
+                },
+                {
+                  "featureType": "road",
+                  "elementType": "geometry",
+                  "stylers": [{ "color": "#888888" }]
+                },
+                {
+                  "featureType": "road",
+                  "elementType": "geometry.stroke",
+                  "stylers": [{ "color": "#d1edc4" }]
+                },
+                {
+                  "featureType": "road",
+                  "elementType": "labels.text.fill",
+                  "stylers": [{ "color": "#424242" }]
+                },
+                {
+                  "featureType": "road.highway",
+                  "elementType": "geometry",
+                  "stylers": [{ "color": "#888888" }]
+                },
+                {
+                  "featureType": "road.highway",
+                  "elementType": "geometry.stroke",
+                  "stylers": [{ "color": "#d1edc4" }]
+                },
+                {
+                  "featureType": "road.highway",
+                  "elementType": "labels.text.fill",
+                  "stylers": [{ "color": "#424242" }]
+                },
+                {
+                  "featureType": "transit",
+                  "elementType": "geometry",
+                  "stylers": [{ "color": "#111111" }]
+                },
+                {
+                  "featureType": "transit.line",
+                  "elementType": "geometry",
+                  "stylers": [{ "color": "#111111" }]
+                },
+                {
+                  "featureType": "transit.line",
+                  "elementType": "geometry.stroke",
+                  "stylers": [{ "color": "#111111" }]
+                },
+                {
+                  "featureType": "transit.station",
+                  "elementType": "labels.text.fill",
+                  "stylers": [{ "color": "#424242" }]
+                },
+                {
+                  "featureType": "transit.station.airport",
+                  "elementType": "geometry",
+                  "stylers": [{ "color": "#888888" }]
+                },
+                {
+                  "featureType": "transit.station.bus",
+                  "elementType": "geometry",
+                  "stylers": [{ "color": "#333333" }]
+                },
+                {
+                  "featureType": "transit.station.rail",
+                  "elementType": "geometry",
+                  "stylers": [{ "color": "#333333" }]
+                },
+                {
+                  "featureType": "water",
+                  "elementType": "geometry",
+                  "stylers": [{ "color": "#c4deed" }]
+                },
+                {
+                  "featureType": "water",
+                  "elementType": "labels.text.fill",
+                  "stylers": [{ "color": "#424242" }]
+                },
+                {
+                  "featureType": "water",
+                  "elementType": "labels.text.stroke",
+                  "stylers": [{ "color": "#424242" }]
+                }
+              ],
+              "disableDefaultUI": true
+            }' data-map-pins='[
+            {{#each (arrayify geo_vacancy_coords)}}
+              {
+                "coords": {{{stringify this}}},
+                "title": "{{{../organisation.name}}} - {{{../title}}}",
+                "info_window": "<h3>{{{../organisation.name}}}</h3><p>{{{../title}}}</p>"
+              }{{#unless @last}},{{/unless}}
+            {{/each}}
+            ]'></div>
+          </div>
           {{else}}
+          <h4 class="mdc-typography--headline6">Location</h4>
           <p>
-            <strong>TODO:</strong> text explaining they have no location entered other than
-            "{{location}}"
+            {{{location}}}
           </p>
           {{/if}}
         </div>
