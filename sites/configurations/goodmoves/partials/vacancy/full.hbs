@@ -277,8 +277,8 @@
             {{#each (arrayify geo_vacancy_coords)}}
               {
                 "coords": {{{stringify this}}},
-                "title": "{{{../organisation.name}}} - {{{../title}}}",
-                "info_window": "<h3>{{{../organisation.name}}}</h3><p>{{{../title}}}</p>"
+                "title": "{{../organisation.name}} - {{../title}}",
+                "info_window": "<h3>{{../organisation.name}}</h3><p>{{../title}}</p>"
               }{{#unless @last}},{{/unless}}
             {{/each}}
             ]'></div>
