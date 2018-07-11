@@ -412,16 +412,33 @@ footer h3,
 .goodmoves-saved-searches {
   .mdc-list {
     background-color: white;
+    .mdc-list-item--header {
+      height: auto;
+    }
     .mdc-layout-grid {
       width: 100%;
     }
-    .saved-search-email-switch {
+    .saved-search-email-switch,
+    .saved-search-remove {
       display: flex;
-      justify-content: flex-end;
+      justify-content: center;
       align-items: center;
+      .far {
+        color: $mdc-theme-primary-light;
+      }
+    }
+    .saved-search-email-switch {
+      .mdc-switch__native-control:enabled:not(:checked) ~ .mdc-switch__background::before {
+        background-color: $mdc-theme-primary;
+        opacity: 1;
+      }
       label {
         margin-left: $unit;
       }
+    }
+    .saved-search-remove {
+      margin: 0 auto;
+      height: 40px;
     }
   }
 }
@@ -512,6 +529,10 @@ a {
 .mdc-toolbar a:hover {
   text-decoration: none;
 }
+.mdc-list-item--header:focus::before,
+.mdc-list-item--header:focus::after,
+.mdc-list-item--header:hover::before,
+.mdc-list-item--header:hover::after,
 .mdc-tab:active::before,
 .mdc-tab:focus::before,
 .mdc-tab:hover::before,
