@@ -1,21 +1,35 @@
 {
-  "name": "_default",
-  "pattern": "/*path",
+  "name": "event_search",
+  "pattern": "/training",
+  "metaData": {
+    "sidebarButton": {
+      "icon": "search",
+      "tooltip": "Search",
+      "classes": "hide-md hide-lg"
+    }
+  },
+  "defaultParams": {
+    "context": "results"
+  },
   "tasks": [
     "metaData.commonTasks.authNotRequired",
     {
-      "name": "primaryResponse",
+      "name": "search_data",
       "taskModule": "elasticsearch",
       "config": {
         "connectionStringTemplate": "{$../../elasticsearch-url.txt}",
         "elasticsearchConfig": {
-          "apiVersion": "5.6"
+          "apiVersion": "5.6",
+          "log": "debug"
         },
-        "queryTemplates": {
-          "index": "web-content-production",
-          "type": "goodmoves-page",
-          "template": ">context.metaData.handlebars.queries.pages_page"
-        }
+        "queryTemplates": [
+          {
+            "name": "detailed_results",
+            "index": "web-content-production",
+            "type": "scvo-event",
+            "template": ">context.metaData.handlebars.queries.events_search-list"
+          }
+        ]
       },
       "renderer": "handlebars"
     },
@@ -35,8 +49,8 @@
           "default": {
             "layout": ">context.metaData.handlebars.layouts.default",
             "parts": {
-              "head": ">context.metaData.handlebars.templates.pages_page-head-tags",
-              "body": ">context.metaData.handlebars.templates.pages_page"
+              "head": ">context.metaData.handlebars.templates.events_search-head-tags",
+              "body": ">context.metaData.handlebars.templates.events_search"
             },
             "contentType": "text/html"
           }

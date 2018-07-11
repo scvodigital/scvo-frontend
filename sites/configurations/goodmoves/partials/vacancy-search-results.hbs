@@ -2,6 +2,39 @@
 
 {{> search_info paging=data.search_data.detailed_results.pagination}}
 
+<aside id="save-search-dialog"
+  class="mdc-dialog"
+  role="alertdialog"
+  aria-labelledby="save-search-dialog-label"
+  aria-describedby="save-search-dialog-description"
+  data-mdc-auto-init="MDCDialog">
+  <div class="mdc-dialog__surface">
+    <header class="mdc-dialog__header">
+      <h2 id="save-search-dialog-label" class="mdc-dialog__header__title">
+        Give your search a name
+      </h2>
+    </header>
+    <section id="save-search-dialog-description" class="mdc-dialog__body">
+      Name your search<br />
+      Set up email alerts
+      <div class="mdc-switch">
+        <input type="checkbox" id="email-switch-0" class="mdc-switch__native-control" role="switch" checked="checked">
+        <div class="mdc-switch__background">
+          <div class="mdc-switch__knob"></div>
+        </div>
+      </div>
+      <label for="email-switch-0">
+        <span class="far fa-envelope fa-2x"></span>
+      </label>
+    </section>
+    <footer class="mdc-dialog__footer">
+      <button type="button" class="mdc-button mdc-dialog__footer__button mdc-dialog__footer__button--cancel">Cancel</button>
+      <button type="button" class="mdc-button mdc-dialog__footer__button mdc-dialog__footer__button--accept">Save</button>
+    </footer>
+  </div>
+  <div class="mdc-dialog__backdrop"></div>
+</aside>
+
 <div class="mdc-layout-grid head">
   <div class="mdc-layout-grid__inner">
     <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone">
@@ -20,7 +53,16 @@
       }}
       <button class="mdc-button mdc-button--large saved-search">
         <span class="far fa-cog mdc-list-item__graphic" aria-hidden="true"></span>
-        Search: {{getProperty
+        <div class="mdc-switch">
+          <input type="checkbox" id="email-switch-0" class="mdc-switch__native-control" role="switch" checked="checked">
+          <div class="mdc-switch__background">
+            <div class="mdc-switch__knob"></div>
+          </div>
+        </div>
+        <label for="email-switch-0">
+          <span class="far fa-fw fa-envelope fa-2x"></span>
+        </label>
+        {{getProperty
           (itemAt
             @root.data.saved_searches.items
             (indexOf
@@ -36,19 +78,10 @@
             )
           ) 'name'
         }}
-        <div class="mdc-switch">
-          <input type="checkbox" id="email-switch-0" class="mdc-switch__native-control" role="switch" checked="checked">
-          <div class="mdc-switch__background">
-            <div class="mdc-switch__knob"></div>
-          </div>
-        </div>
-        <label for="email-switch-0">
-          <span class="far fa-envelope fa-2x"></span>
-        </label>
       </button>
       {{else}}
-      <button class="mdc-button mdc-button--raised mdc-button--large saved-search">
-        <span class="far fa-save mdc-list-item__graphic" aria-hidden="true"></span>
+      <button class="mdc-button mdc-button--raised mdc-button--large save-search" id="save-search-button">
+        <span class="far fa-search-plus mdc-list-item__graphic" aria-hidden="true"></span>
         Save/email this search
       </button>
       <!-- <form class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone" action="/save-search{{{@root.request.url.search}}}" method="POST">

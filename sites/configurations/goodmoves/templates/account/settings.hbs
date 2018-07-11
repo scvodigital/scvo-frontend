@@ -1,0 +1,51 @@
+{{> vacancy_search_form this instance_id="perm"}}
+
+<div id="detailed-results-container" class="container-content goodmoves-saved-searches">
+  <h1 class="mdc-typography--headline3 v-margin-full">
+    Settings
+  </h1>
+
+  <h2 class="mdc-typography--headline4 v-margin">
+    Email alert preferences
+  </h2>
+  <p class="mdc-typography--body1">
+    You have _ saved search for your email alerts.
+  </p>
+
+  <form action="/update-email-preferences" method="POST" class="v-margin-full">
+    <h3 class="mdc-typography--headline5 v-margin">
+      Select day
+    </h3>
+    {{#each (split "monday,tuesday,wednesday,thursday,friday,saturday,sunday" ",")}}
+      <div class="mdc-switch">
+        <input type="checkbox" id="email-switch-{{this}}" class="mdc-switch__native-control" role="switch"
+          {{~#if (contains @root.data.email_days this)~}}checked="checked"{{/if}} name="{{this}}" onchange="$('#email-preferences-submit').prop('disabled', false);">
+        <div class="mdc-switch__background">
+          <div class="mdc-switch__knob"></div>
+        </div>
+      </div>
+      <label for="email-switch-{{this}}">
+        {{capitalize this}}
+      </label>
+    {{/each}}
+    <button class="mdc-button mdc-button--raised mdc-ripple-surface mdc-ripple-surface--primary" type="submit" id="email-preferences-submit" data-mdc-auto-init="MDCRipple" disabled>Update preferences</button>
+  </form>
+
+  <hr />
+
+  <h2 class="mdc-typography--headline4 v-margin">
+    Change password
+  </h2>
+  <p class="mdc-typography--body1">
+    TBC
+  </p>
+
+  <hr />
+
+  <h2 class="mdc-typography--headline4 v-margin">
+    Delete account
+  </h2>
+  <p class="mdc-typography--body1">
+    TBC
+  </p>
+</div>

@@ -1,10 +1,10 @@
 {
-  "name": "browse",
-  "pattern": "/browse",
+  "name": "four_oh_four",
+  "pattern": "/404",
   "tasks": [
     "metaData.commonTasks.authNotRequired",
     {
-      "name": "primaryResponse",
+      "name": "not_found",
       "taskModule": "elasticsearch",
       "config": {
         "connectionStringTemplate": "{$../../elasticsearch-url.txt}",
@@ -13,8 +13,8 @@
         },
         "queryTemplates": {
           "index": "web-content-production",
-          "type": "goodmoves-vacancy",
-          "template": ">context.metaData.handlebars.queries.vacancies_latest"
+          "type": "goodmoves-page",
+          "template": ">context.metaData.handlebars.queries.pages_not-found"
         }
       },
       "renderer": "handlebars"
@@ -28,18 +28,6 @@
           "apiVersion": "5.6"
         },
         "queryTemplates": [
-          {
-            "name": "currently_recruiting",
-            "index": "web-content-production",
-            "type": "goodmoves-organisation",
-            "template": ">context.metaData.handlebars.queries.organisations_currently-recruiting"
-          },
-          {
-            "name": "home_based",
-            "index": "web-content-production",
-            "type": "goodmoves-vacancy",
-            "template": ">context.metaData.handlebars.queries.vacancies_home-based"
-          },
           {
             "name": "types",
             "index": "web-content-production",
@@ -66,7 +54,7 @@
             "layout": ">context.metaData.handlebars.layouts.default",
             "parts": {
               "head": ">context.metaData.handlebars.templates.pages_page-head-tags",
-              "body": ">context.metaData.handlebars.templates.pages_browse",
+              "body": ">context.metaData.handlebars.templates.errors_404",
               "foot": ""
             },
             "contentType": "text/html"

@@ -247,9 +247,10 @@ footer h3,
 .mdc-card,
 .mdc-select,
 .mdc-button,
+.mdc-typography,
 .mdc-form-field,
 .mdc-text-field,
-.mdc-typography,
+.mdc-dialog__body,
 .mdc-floating-label,
 .mdc-card__subtitle,
 .mdc-textfield__input,
@@ -270,6 +271,7 @@ footer h3,
 .mdc-typography--headline6,
 .mdc-typography--headline7,
 .mdc-card__supporting-text,
+.mdc-dialog__header__title,
 .mdc-select__native-control,
 .mdc-typography--subheading2,
 .mdc-list-item__secondary-text,
@@ -402,12 +404,20 @@ footer h3,
   .head {
     margin-bottom: $unit/2;
     .mdc-button.saved-search,
+    .mdc-button.save-search,
     .mdc-text-field,
     .mdc-select {
-      margin-top: $unit/2;
+      margin: $unit/2 0 $unit;
     }
-    .mdc-button.save-search {
-      margin-top: $unit;
+    .mdc-button.saved-search {
+      color: $mdc-theme-secondary-dark;
+      cursor: default;
+      label {
+        margin: 0 $unit;
+        .far {
+          color: $mdc-theme-primary-light;
+        }
+      }
     }
     .pagination {
       margin-top: $unit*1.25;
@@ -417,6 +427,7 @@ footer h3,
 .goodmoves-saved-searches {
   .mdc-list {
     background-color: white;
+    margin-bottom: $unit*1.5;
     .mdc-list-item--header {
       height: auto;
     }
@@ -1642,7 +1653,7 @@ footer,
 
 // Footer ======================================================================
 
-footer {
+footer.mdc-layout__footer {
   border-top: $unit solid $mdc-theme-primary;
   background-color: $mdc-theme-footer;
   box-shadow: $toolbar-shadow-reverse;
@@ -1858,7 +1869,7 @@ footer {
 }
 
 @include mdc-switch-knob-color($mdc-theme-primary);
-@include mdc-switch-track-color($mdc-theme-primary-dark);
+@include mdc-switch-track-color($mdc-theme-primary);
 
 @media screen and (max-width: $mobile-breakpoint) {
   .mdc-toolbar-fixed-adjust {

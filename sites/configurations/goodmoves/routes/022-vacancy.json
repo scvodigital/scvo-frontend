@@ -1,6 +1,9 @@
 {
-  "name": "index_opt_3",
-  "pattern": "/home-option-3",
+  "name": "vacancy",
+  "pattern": "/vacancy/:slug",
+  "defaultParams": {
+    "context": "detail"
+  },
   "tasks": [
     "metaData.commonTasks.authNotRequired",
     {
@@ -14,7 +17,7 @@
         "queryTemplates": {
           "index": "web-content-production",
           "type": "goodmoves-vacancy",
-          "template": ">context.metaData.handlebars.queries.vacancies_latest"
+          "template": ">context.metaData.handlebars.queries.vacancies_vacancy"
         }
       },
       "renderer": "handlebars"
@@ -29,53 +32,22 @@
         },
         "queryTemplates": [
           {
-            "name": "top",
-            "index": "web-content-production",
-            "type": "goodmoves-vacancy",
-            "template": ">context.metaData.handlebars.queries.vacancies_top"
-          },
-          {
-            "name": "currently_recruiting",
-            "index": "web-content-production",
-            "type": "goodmoves-organisation",
-            "template": ">context.metaData.handlebars.queries.organisations_currently-recruiting"
-          },
-          {
-            "name": "home_based",
-            "index": "web-content-production",
-            "type": "goodmoves-vacancy",
-            "template": ">context.metaData.handlebars.queries.vacancies_home-based"
-          },
-          {
             "name": "types",
             "index": "web-content-production",
             "type": "goodmoves-vacancy",
             "template": ">context.metaData.handlebars.queries.vacancies_types"
           },
           {
-            "name": "splash",
-            "index": "web-content-production",
-            "type": "scvo-cms-media",
-            "template": ">context.metaData.handlebars.queries.pages_splash"
-          }
-        ]
-      },
-      "renderer": "handlebars"
-    },
-    {
-      "name": "organisations_currently_recruiting",
-      "taskModule": "elasticsearch",
-      "config": {
-        "connectionStringTemplate": "{$../../elasticsearch-url.txt}",
-        "elasticsearchConfig": {
-          "apiVersion": "5.6"
-        },
-        "queryTemplates": [
-          {
-            "name": "vacancies",
+            "name": "related",
             "index": "web-content-production",
             "type": "goodmoves-vacancy",
-            "template": ">context.metaData.handlebars.queries.vacancies_currently-recruiting"
+            "template": ">context.metaData.handlebars.queries.vacancies_related"
+          },
+          {
+            "name": "not_found",
+            "index": "web-content-production",
+            "type": "goodmoves-vacancy",
+            "template": ">context.metaData.handlebars.queries.pages_not-found"
           }
         ]
       },
@@ -91,10 +63,10 @@
         },
         "queryTemplates": [
           {
-            "name": "tfn_latest",
+            "name": "tfn_related",
             "index": "web-content-production",
-            "type": "tfn-news-post,tfn-feature",
-            "template": ">context.metaData.handlebars.queries.posts_tfn-latest"
+            "type": "tfn-news-post,tfn-blog-post,tfn-feature",
+            "template": ">context.metaData.handlebars.queries.posts_tfn-related"
           }
         ]
       },
@@ -115,9 +87,9 @@
           "default": {
             "layout": ">context.metaData.handlebars.layouts.default",
             "parts": {
-              "head": ">context.metaData.handlebars.templates.pages_home-head-tags",
-              "body": ">context.metaData.handlebars.templates.pages_home-opt-3",
-              "foot": ">context.metaData.handlebars.templates.pages_home-foot"
+              "head": ">context.metaData.handlebars.templates.vacancies_vacancy-head-tags",
+              "body": ">context.metaData.handlebars.templates.vacancies_vacancy",
+              "foot": ">context.metaData.handlebars.templates.vacancies_vacancy-foot"
             },
             "contentType": "text/html"
           }
