@@ -152,10 +152,19 @@
     "_score"
     {{else}}
     {{#compare request.params.query.sort "===" "distance" ~}}
+    {{#if request.params.query.lat ~}}
     {
-      "_score": "asc"
-    },
+      "_geo_distance" : {
+        "geo_vacancy_coords" : [{{request.params.query.lat}}, {{request.params.query.lng}}],
+        "order" : "asc",
+        "unit" : "m",
+        "mode" : "min",
+        "distance_type" : "arc"
+      }
+    }
+    {{else}}
     "_score"
+    {{/if ~}}
     {{/compare ~}}
     {{/compare ~}}
     {{/compare ~}}
