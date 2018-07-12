@@ -52,6 +52,7 @@ body {
 }
 .mdc-top-app-bar {
   background-color: white;
+  z-index: 2 !important;
 }
 h1,
 h2,
@@ -277,6 +278,7 @@ footer h3,
 .mdc-list-item__secondary-text,
 .mdc-simple-menu .mdc-list-item,
 .mdc-temporary-drawer .mdc-list-item,
+.mdc-drawer--temporary .mdc-list-item,
 .mdc-list {
   font-family: $base-font-family, Helvetica, Arial, sans-serif;
   font-weight: $base-font-weight;
@@ -346,13 +348,19 @@ footer h3,
 }
 .mdc-drawer--permanent {
   align-items: flex-start;
-  z-index: 20;
+  z-index: 1;
   width: 320px;
   margin-right: $unit*1.5;
   margin-bottom: 0;
   padding-bottom: $unit;
   border-right: none;
   background-color: white !important;
+}
+.mdc-dialog__backdrop {
+  z-index: 10;
+}
+.mdc-dialog--open .mdc-dialog__surface {
+  z-index: 11;
 }
 
 .mdc-checkbox__native-control:enabled:checked ~ .mdc-checkbox__background,
