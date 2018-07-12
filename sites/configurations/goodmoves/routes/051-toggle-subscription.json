@@ -1,0 +1,26 @@
+{
+  "name": "toggle-subscription",
+  "pattern": "/toggle-subscription",
+  "acceptedVerbs": "POST",
+  "tasks": [
+    "metaData.commonTasks.authRequired",
+    {
+      "name": "notifications",
+      "taskModule": "mysql",
+      "config": {
+        "connectionName": "notifications",
+        "queryTemplates": {
+          "toggle_subscription": ">context.metaData.handlebars.queries.notifications_toggle-subscription"
+        }
+      },
+      "renderer": "handlebars"
+    },
+    {
+      "name": "destination",
+      "taskModule": "redirect",
+      "config": {
+        "location": "/searches"
+      }
+    }
+  ]
+}
