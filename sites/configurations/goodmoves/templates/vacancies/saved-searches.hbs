@@ -42,9 +42,37 @@
             <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-9-desktop mdc-layout-grid__cell--span-5-tablet mdc-layout-grid__cell--span-2-phone saved-search">
               <span class="mdc-list-item__text">
                 <a href="/search?{{{this.querystring}}}">{{name}}</a>
-                <span class="mdc-list-item__secondary-text">
-                  {{this.querystring}}
-                </span>
+                <div class="mdc-list-item__secondary-text">
+                  {{#with (querystring querystring)}}
+                    {{#if keywords}}
+                      <strong>Keywords: </strong> {{keywords}}
+                    {{/if}}
+                    {{#if roles}}
+                      <strong>Roles: </strong>
+                      {{#each (arrayify roles)}}
+                         {{getProperty @root.data.termsMaps.roles.slugsMap (concat this ".term")}}
+                        {{#unless @last}}, {{/unless}}
+                      {{/each}}
+                    {{/if}}
+                    {{#if sectors}}
+                      <strong>Sectors: </strong>
+                      {{#each (arrayify sectors)}}
+                         {{getProperty @root.data.termsMaps.sectors.slugsMap (concat this ".term")}}
+                        {{#unless @last}}, {{/unless}}
+                      {{/each}}
+                    {{/if}}
+                    {{#if statuses}}
+                      <strong>Statuses: </strong>
+                      {{#each (arrayify statuses)}}
+                         {{getProperty @root.data.termsMaps.statuses.slugsMap (concat this ".term")}}
+                        {{#unless @last}}, {{/unless}}
+                      {{/each}}
+                    {{/if}}
+                    {{#ifAll location distance}}
+                        Within <strong>{{round (multiply distance 0.00062137)}}</strong> miles of <strong>{{location}}</strong>
+                    {{/ifAll}}
+                  {{/with}}
+                </div>
               </span>
             </div>
             <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-2-desktop mdc-layout-grid__cell--span-2-tablet mdc-layout-grid__cell--span-1-phone saved-search-email-switch">

@@ -7,7 +7,7 @@
 {{/inline}}
 
 INSERT INTO subscriptionParameters (campaign, email, name, parameter, value) VALUES
-{{#each (split "keywords,roles,statuses,sectors" ",")}}
+{{#each (split "keywords,roles,statuses,sectors,distance,location,lat,lng" ",")}}
   {{>insertParam parameter=this}}
 {{/each}}
 ('{{@root.context.metaData.emailCampaignName}}', '{{@root.data.auth.email}}', '{{default @root.request.body.name "My Search"}}', 'stopper', 'stopper');
