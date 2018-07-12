@@ -60,6 +60,15 @@ var GoodmovesController = Class.extend({
       });
     });
 
+    // Dialog activator buttons
+    $('[data-dialog-target]').each(function(i, o) {
+      var selector = $(o).attr('data-dialog-target');
+      var dialogEl = $(selector)[0];
+      $(o).on('click', function() {
+        dialogEl.MDCDialog.show();
+      });
+    });
+    
     // Temporary drawer buttons
     $('[data-drawer-target]').each(function(i, o) {
       var selector = $(o).attr('data-drawer-target');

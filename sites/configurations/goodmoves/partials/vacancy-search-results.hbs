@@ -8,17 +8,53 @@
   aria-labelledby="save-search-dialog-label"
   aria-describedby="save-search-dialog-description"
   data-mdc-auto-init="MDCDialog">
-  <div class="mdc-dialog__surface">
+  <form action="/save-search{{{@root.request.url.search}}}" method="POST" class="mdc-dialog__surface">
     <header class="mdc-dialog__header">
       <h2 id="save-search-dialog-label" class="mdc-dialog__header__title">
         Give your search a name
       </h2>
     </header>
     <section id="save-search-dialog-description" class="mdc-dialog__body">
-      Name your search<br />
+      <div class="mdc-text-field mdc-text-field--box" data-mdc-auto-init="MDCTextField">
+        <p>
+        {{~#each @root.request.params.query.roles~}}
+          {{~getProperty (getProperty @root.data.termsMaps.roles.slugsMap this) "term"~}}
+        {{~/each~}}
+        </p>
+        <input type="text" id="saved-search-name" name="name" class="mdc-text-field__input" value="
+{{~#if @root.request.params.query.keywords~}}
+  {{~@root.request.params.query.keywords~}}
+  {{~#ifAny @root.request.params.query.roles @root.request.params.query.sectors @root.request.params.query.statuses}}, {{/ifAny~}}
+{{~/if~}}
+{{~#if @root.request.params.query.roles~}}
+  {{~#each (arrayify @root.request.params.query.roles)~}}
+    {{~getProperty (getProperty @root.data.termsMaps.roles.slugsMap this) "term"~}}
+    {{~#unless @last}}, {{/unless~}}
+  {{~/each~}}
+  {{~#ifAny @root.request.params.query.sectors @root.request.params.query.statuses}}, {{/ifAny~}}
+{{~/if~}}
+{{~#if @root.request.params.query.sectors~}}
+  {{~#each (arrayify @root.request.params.query.sectors)~}}
+    {{~getProperty (getProperty @root.data.termsMaps.sectors.slugsMap this) "term"~}}
+    {{~#unless @last}}, {{/unless~}}
+  {{~/each~}}
+  {{~#ifAny @root.request.params.query.statuses}}, {{/ifAny~}}
+{{~/if~}}
+{{~#if @root.request.params.query.statuses~}}
+  {{~#each (arrayify @root.request.params.query.statuses)~}}
+    {{~getProperty (getProperty @root.data.termsMaps.statuses.slugsMap this) "term"~}}
+    {{~#unless @last}}, {{/unless~}}
+  {{~/each~}}
+{{~/if}} jobs {{#if @root.request.params.query.location~}}
+  in {{@root.request.params.query.location~}}
+{{~/if~}}
+        ">
+        <label for="saved-search-name" class="mdc-floating-label mdc-floating-label--float-above">Save search</label>
+        <div class="mdc-line-ripple"></div>
+      </div>
       Set up email alerts
       <div class="mdc-switch">
-        <input type="checkbox" id="email-switch-0" class="mdc-switch__native-control" role="switch" checked="checked">
+        <input type="checkbox" id="email-switch-0" class="mdc-switch__native-control" role="switch" checked="checked" name="subscribe">
         <div class="mdc-switch__background">
           <div class="mdc-switch__knob"></div>
         </div>
@@ -29,9 +65,9 @@
     </section>
     <footer class="mdc-dialog__footer">
       <button type="button" class="mdc-button mdc-dialog__footer__button mdc-dialog__footer__button--cancel">Cancel</button>
-      <button type="button" class="mdc-button mdc-dialog__footer__button mdc-dialog__footer__button--accept">Save</button>
+      <button type="submit" class="mdc-button mdc-dialog__footer__button mdc-dialog__footer__button--accept">Save</button>
     </footer>
-  </div>
+  </form>
   <div class="mdc-dialog__backdrop"></div>
 </aside>
 
@@ -81,7 +117,7 @@
       </button>
       {{else}}
       <!-- <form action="/save-search{{{@root.request.url.search}}}" method="POST"> -->
-      <button class="mdc-button mdc-button--raised mdc-button--large save-search" id="save-search-button">
+      <button class="mdc-button mdc-button--raised mdc-button--large save-search" id="save-search-button" data-dialog-target="#save-search-dialog">
         <span class="far fa-search-plus mdc-list-item__graphic" aria-hidden="true"></span>
         Save/email this search
       </button>

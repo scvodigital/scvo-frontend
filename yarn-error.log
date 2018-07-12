@@ -29,6 +29,7 @@ npm manifest:
       "sass": "node_modules/node-sass/bin/node-sass --include-path=./node_modules ./build/assets/css -o build/assets/css",
       "upgrade-router": "yarn add -E @scvo/router @scvo/router-task-firebase @scvo/router-task-elasticsearch @scvo/router-destination-handlebars @scvo/router-destination-redirect",
       "build": "npm run cleanup; npm run compile; npm run build-db; npm run copy; npm run sass; npm run uglify",
+      "secrets": "tar cvf secrets.tar app-engine-service-account.json src/secrets.ts src/analytics-secrets.ts; travis encrypt-file --no-interactive -f secrets.tar",
       "build-db": "node_modules/@scvo/json-inc/bin/json-inc compile --input ./sites/sites.inc.json --output ./sites/sites.json",
       "start": "yarn; npm run build; node build/index.js",
       "dev": "npm run build; devmode=true node build/index.js",
@@ -36,7 +37,7 @@ npm manifest:
       "deploy-dispatch": "gcloud app deploy dispatch.yaml --quiet",
       "clear-cache": "curl -s https://scvo.org.uk/reload-sites",
       "deploy-db": "npm run build-db; firebase database:set -y /contexts ./sites/sites.json; npm run clear-cache",
-      "deploy-app": "npm run build; npm run deploy-dispatch; gcloud beta app deploy --quiet; npm run deploy-db",
+      "deploy-app": "npm run build; npm run secrets; npm run deploy-dispatch; gcloud beta app deploy --quiet; npm run deploy-db",
       "router": "cd ../router2; npm run fix; npm run check; npm run compile; npm link; cd ../frontend",
       "check": "gts fix; gts check",
       "clean": "gts clean",
@@ -57,7 +58,7 @@ npm manifest:
     "license": "GPL-3.0",
     "dependencies": {
       "@scvo/json-inc": "^0.0.14",
-      "@scvo/router": "^1.2.13",
+      "@scvo/router": "^1.2.15",
       "@scvo/router-destination-handlebars": "0.0.29",
       "@scvo/router-destination-redirect": "0.0.7",
       "@scvo/router-task-elasticsearch": "0.0.16",
@@ -763,9 +764,9 @@ Lockfile:
       route-recognizer "^0.3.3"
       string "^3.3.3"
   
-  "@scvo/router@^1.2.13":
-    version "1.2.13"
-    resolved "https://registry.yarnpkg.com/@scvo/router/-/router-1.2.13.tgz#f5a82a62c6f987df8b2ee4b8d9ea7432c0966fe6"
+  "@scvo/router@^1.2.15":
+    version "1.2.15"
+    resolved "https://registry.yarnpkg.com/@scvo/router/-/router-1.2.15.tgz#a734d9ee6860834c7ee3de30e787a9af6636b11c"
     dependencies:
       "@types/deep-extend" "^0.4.31"
       "@types/elasticsearch" "^5.0.24"
@@ -6096,4 +6097,4 @@ Lockfile:
       window-size "0.1.0"
 
 Trace: 
-  Error: ENOENT: no such file or directory, lstat '/home/tonicblue/code/scvo/frontend/node_modules/@scvo/router/node_modules/chalk/index.js.flow'
+  Error: ENOENT: no such file or directory, scandir '/home/tonicblue/code/scvo/frontend/node_modules/@scvo/router/node_modules/lodash'

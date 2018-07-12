@@ -49,7 +49,7 @@
             </div>
             <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-2-desktop mdc-layout-grid__cell--span-2-tablet mdc-layout-grid__cell--span-1-phone saved-search-email-switch">
               <div class="mdc-switch">
-                <input type="checkbox" id="email-switch-{{@index}}" class="mdc-switch__native-control" role="switch" checked="checked">
+                <input type="checkbox" id="email-switch-{{@index}}" class="mdc-switch__native-control" role="switch" {{#if this.subscribed}}checked="checked"{{/if}}>
                 <div class="mdc-switch__background">
                   <div class="mdc-switch__knob"></div>
                 </div>
@@ -58,11 +58,12 @@
                 <span class="far fa-envelope fa-2x"></span>
               </label>
             </div>
-            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-1-desktop mdc-layout-grid__cell--span-1-tablet mdc-layout-grid__cell--span-1-phone">
-              <button class="saved-search-remove mdc-icon-button" data-mdc-auto-init="MDCRipple">
+            <form action="/delete-search" method="POST" class="mdc-layout-grid__cell mdc-layout-grid__cell--span-1-desktop mdc-layout-grid__cell--span-1-tablet mdc-layout-grid__cell--span-1-phone">
+              <input type="hidden" name="name" value="{{name}}">
+              <button type="submit" class="saved-search-remove mdc-icon-button" data-mdc-auto-init="MDCRipple">
                 <span class="far fa-trash-alt" aria-hidden="true"></span>
               </button>
-            </div>
+            </form>
           </div>
         </div>
       </li>
