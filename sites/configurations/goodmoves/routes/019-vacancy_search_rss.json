@@ -1,19 +1,10 @@
 {
-  "name": "vacancy_search",
-  "pattern": "/search",
-  "metaData": {
-    "sidebarButton": {
-      "icon": "search",
-      "tooltip": "Search",
-      "classes": "hide-md hide-lg"
-    }
-  },
+  "name": "vacancy_search_rss",
+  "pattern": "/search?rss",
   "defaultParams": {
     "context": "results"
   },
   "tasks": [
-    "metaData.commonTasks.authNotRequired",
-    "metaData.commonTasks.savedSearches",
     {
       "name": "search_data",
       "taskModule": "elasticsearch",
@@ -28,7 +19,7 @@
             "name": "detailed_results",
             "index": "web-content-production",
             "type": "goodmoves-vacancy",
-            "template": ">context.metaData.handlebars.queries.vacancies_search-list"
+            "template": ">context.metaData.handlebars.queries.vacancies_search-rss"
           }
         ]
       },
@@ -51,15 +42,6 @@
               ]
             },
             "rss",
-            {
-              "in": [
-                "view=json",
-                {
-                  "var": "request.fullUrl"
-                }
-              ]
-            },
-            "data",
             "default"
           ]
         },
@@ -72,23 +54,6 @@
               "body": ">context.metaData.handlebars.templates.vacancies_search-rss"
             },
             "contentType": "application/rss+xml"
-          },
-          "default": {
-            "layout": ">context.metaData.handlebars.layouts.default",
-            "parts": {
-              "head": ">context.metaData.handlebars.templates.vacancies_search-head-tags",
-              "body": ">context.metaData.handlebars.templates.vacancies_search",
-              "foot": ">context.metaData.handlebars.templates.vacancies_search-foot",
-              "sidebar": ">context.metaData.handlebars.templates.vacancies_search-form"
-            },
-            "contentType": "text/html"
-          },
-          "data": {
-            "layout": ">context.metaData.handlebars.layouts.data",
-            "parts": {
-              "content": ">context.metaData.handlebars.templates.vacancies_search-json"
-            },
-            "contentType": "application/json"
           }
         }
       }
