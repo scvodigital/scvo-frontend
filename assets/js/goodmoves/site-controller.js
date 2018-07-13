@@ -80,6 +80,53 @@ var GoodmovesController = Class.extend({
         });
       }
     });
+
+    // Ajax Chips
+    $('[data-ajax-chip]').each(function(i, o) {
+      var $chip = $(o);
+      var options = $chip.data('ajax-chip');
+      var chip = new mdc.chips.MDCChip(o);
+
+      options.onUrl = options.onUrl || options.toggleUrl;
+      options.offUrl = options.offUrl || options.onUrl;
+      options.onData = options.onData || options.toggleData || null;
+      options.offData = options.offData || options.onData;
+      options.onMethod = options.onMethod || options.toggleMethod || 'GET';
+      options.offMethod = options.offMethod || options.onMethod;
+
+      $chip.on('click', function() {
+        var selected = $chip.hasClass('mdc-chip--selected');
+        var ajax = {
+          url: selected ? options.offUrl || options.onUrl : options.onUrl,
+          method: selected ? options.offMethod || options.onMethod : options.onMethod,
+          data: selected ? options.offData || options.onData || null : options.onData || null,
+          dataType: 'html',
+          success: function() {
+            if (options.onClasses) {
+              var selectors = Object.keys(options.onClasses);
+              for (var s = 0; s < selectors.length; ++s) {
+                var selector = selectors[s];
+                var cssClass = options.onClasses[selector];
+                $(selector)[selected ? 'removeClass' : 'addClass'](cssClass);
+              }
+            }
+            if (options.offClasses) {
+              var selectors = Object.keys(options.offClasses);
+              for (var s = 0; s < selectors.length; ++s) {
+                var selector = selectors[s];
+                var cssClass = options.onClasses[selector];
+                $(selector)[!selected ? 'removeClass' : 'addClass'](cssClass);
+              }
+            }
+            chip.toggleSelected();
+          },
+          error: function() {
+            console.error('Failed toggle', options, arguments);
+          }
+        };
+        $.ajax(ajax);
+      });
+    });
   },
 
   setupFirebase: function() {

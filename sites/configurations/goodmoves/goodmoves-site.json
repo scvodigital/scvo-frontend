@@ -15,6 +15,7 @@
   "metaData": {
     "title": "Goodmoves - charity and voluntary sector recruitment",
     "emailCampaignName": "goodmoves-saved-searches",
+    "shortlistCampaignName": "goodmoves-shortlist",
     "menus": "{:./goodmoves-menus.json}",
     "handlebars": {
       "partials": {
@@ -93,6 +94,17 @@
           "connectionName": "notifications",
           "queryTemplates": {
             "items": ">context.metaData.handlebars.queries.notifications_get-saved-searches"
+          }
+        },
+        "renderer": "handlebars"
+      },
+      "shortlistIds": {
+        "name": "shortlist_ids",
+        "taskModule": "mysql",
+        "config": {
+          "connectionName": "notifications",
+          "queryTemplates": {
+            "items": ">context.metaData.handlebars.queries.notifications_get-shortlist"
           }
         },
         "renderer": "handlebars"
