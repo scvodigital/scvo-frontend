@@ -1,18 +1,22 @@
-<div class="mdc-chip {{#if (contains (map @root.data.shortlist_ids.items (getProp "id")) id)}}mdc-chip--selected{{/if}}" data-vacancy-id="{{id}}" data-ajax-chip='{
-    "onUrl": "/add-to-shortlist?id={{id}}",
-    "offUrl": "/remove-from-shortlist?id={{id}}",
-    "onClasses": {
-      ".mdc-card[data-vacancy-id=\"{{id}}\"]": "mdc-elevation--z15"
-    },
-    "offClasses": {
+{{#with (if (contains (map @root.data.shortlist_ids.items (getProp "id")) id) "on" else="off")}}
+  <div class="mdc-chip {{#compare this "on"}}mdc-chip--selected{{/compare}}" data-vacancy-id="{{../id}}" data-ajax-chip='{
+      "onUrl": "/add-to-shortlist?id={{../id}}",
+      "offUrl": "/remove-from-shortlist?id={{../id}}",
+      "onClasses": {
+        ".mdc-card[data-vacancy-id=\"{{../id}}\"]": "mdc-elevation--z15"
+      },
+      "offClasses": {
 
-    }
-  }'>
-  <span class="far fa-star mdc-chip__icon mdc-chip__icon--leading" aria-hidden="true"></span>
-  <div class="mdc-chip__checkmark">
-    <svg class="mdc-chip__checkmark-svg" viewBox="-2 -3 30 30">
-      <path class="mdc-chip__checkmark-path" fill="none" stroke="#244817" d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
-    </svg>
+      },
+      "onText": "Shortlisted",
+      "offText": "Add to shortlist"
+    }'>
+    <span class="far fa-star mdc-chip__icon mdc-chip__icon--leading" aria-hidden="true"></span>
+    <div class="mdc-chip__checkmark">
+      <svg class="mdc-chip__checkmark-svg" viewBox="-2 -3 30 30">
+        <path class="mdc-chip__checkmark-path" fill="none" stroke="#244817" d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+      </svg>
+    </div>
+    <div class="mdc-chip__text noselect">{{#compare this "on"}}Shortlisted{{else}}Add to shortlist{{/compare}}</div>
   </div>
-  <div class="mdc-chip__text noselect">Shortlist</div>
-</div>
+{{/with}}

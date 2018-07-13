@@ -118,6 +118,7 @@ var GoodmovesController = Class.extend({
                 $(selector)[!selected ? 'removeClass' : 'addClass'](cssClass);
               }
             }
+            $chip.find('.mdc-chip__text').text(!selected ? options.onText : options.offText);
             chip.toggleSelected();
           },
           error: function() {
