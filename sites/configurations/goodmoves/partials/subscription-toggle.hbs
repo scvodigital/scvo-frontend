@@ -1,0 +1,6 @@
+<form action="/toggle-subscription" method="POST">
+  <input type="hidden" name="name" value="{{name}}">
+  <button type="submit" class="saved-search-remove mdc-icon-button" data-mdc-auto-init="MDCRipple" title="{{#if subscribed}}Remove search from{{else}}Add search to{{/if}} my email summary">
+    <span class="far fa-envelope {{#unless subscribed}}icon-toggle-off {{/unless}}" aria-hidden="true"></span>
+  </button>
+</form>
