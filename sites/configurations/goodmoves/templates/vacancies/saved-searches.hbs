@@ -76,7 +76,25 @@
               </span>
             </div>
             <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-2-desktop mdc-layout-grid__cell--span-2-tablet mdc-layout-grid__cell--span-1-phone saved-search-email-switch">
-              {{> subscription_toggle name=name subscribed=subscribed}}
+              {{#> ajax_chip 
+                onUrl="/toggle-subscription"
+                offUrl="/toggle-subscription"
+                onText="Added to email"
+                offText="Add to email"
+                onMethod="POST"
+                offMethod="POST"
+                iconClasses="far fa-envelope"
+                on=subscribed
+              }}
+              {
+                "onData": {
+                  "name": {{{stringify ../name}}}
+                },
+                "offData": {
+                  "name": {{{stringify ../name}}}
+                }
+              }
+              {{/ajax_chip}}
             </div>
             <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-1-desktop mdc-layout-grid__cell--span-1-tablet mdc-layout-grid__cell--span-1-phone">
               {{> delete_search name=name}}

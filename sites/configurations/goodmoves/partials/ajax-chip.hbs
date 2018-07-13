@@ -2,6 +2,14 @@
   <div class="mdc-chip {{if ../on "mdc-chip--selected"}}" {{extraAttributes}} data-ajax-chip='{
       "onUrl": "{{../onUrl}}",
       "offUrl": "{{../offUrl}}",
+      "onMethod": "{{default ../onMethod "GET"}}",
+      "offMethod": "{{default ../offMethod "GET"}}",
+      {{#if onData}}
+        "onData": {{{stringify onData}}},
+      {{/if}}
+      {{#if offData}}
+        "offData": {{{stringify offData}}},
+      {{/if}}
       {{#if onClasses}}
       "onClasses": {{{stringify onClasses}}},
       {{/if}}

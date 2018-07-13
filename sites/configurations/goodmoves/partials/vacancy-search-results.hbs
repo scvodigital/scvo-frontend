@@ -103,7 +103,25 @@
         </script>
         {{#with (itemAt @root.data.saved_searches.items (indexOf (map @root.data.saved_searches.items (getProp 'querystring')) this))}}
           <span class="mdc-typography--headline5">{{name}}</span>
-          {{> subscription_toggle name=name subscribed=subscribed formClasses="inline-form"}}
+          {{#> ajax_chip 
+            onUrl="/toggle-subscription"
+            offUrl="/toggle-subscription"
+            onText="Added to email"
+            offText="Add to email"
+            onMethod="POST"
+            offMethod="POST"
+            iconClasses="far fa-envelope"
+            on=subscribed
+          }}
+          {
+            "onData": {
+              "name": {{{stringify ../name}}}
+            },
+            "offData": {
+              "name": {{{stringify ../name}}}
+            }
+          }
+          {{/ajax_chip}}
           {{> delete_search name=name formClasses="inline-form"}}
         {{else}}
           <button class="mdc-button mdc-button--raised mdc-button--large save-search" id="save-search-button" data-dialog-target="#save-search-dialog">
