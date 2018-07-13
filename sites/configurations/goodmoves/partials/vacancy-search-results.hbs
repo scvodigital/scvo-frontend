@@ -22,32 +22,41 @@
         {{~/each~}}
         </p>
         <input type="text" id="saved-search-name" name="name" class="mdc-text-field__input" value="
-{{~#if @root.request.params.query.keywords~}}
-  {{~@root.request.params.query.keywords~}}
-  {{~#ifAny @root.request.params.query.roles @root.request.params.query.sectors @root.request.params.query.statuses}}, {{/ifAny~}}
-{{~/if~}}
-{{~#if @root.request.params.query.roles~}}
-  {{~#each (arrayify @root.request.params.query.roles)~}}
-    {{~getProperty (getProperty @root.data.termsMaps.roles.slugsMap this) "term"~}}
-    {{~#unless @last}}, {{/unless~}}
-  {{~/each~}}
-  {{~#ifAny @root.request.params.query.sectors @root.request.params.query.statuses}}, {{/ifAny~}}
-{{~/if~}}
-{{~#if @root.request.params.query.sectors~}}
-  {{~#each (arrayify @root.request.params.query.sectors)~}}
-    {{~getProperty (getProperty @root.data.termsMaps.sectors.slugsMap this) "term"~}}
-    {{~#unless @last}}, {{/unless~}}
-  {{~/each~}}
-  {{~#ifAny @root.request.params.query.statuses}}, {{/ifAny~}}
-{{~/if~}}
-{{~#if @root.request.params.query.statuses~}}
-  {{~#each (arrayify @root.request.params.query.statuses)~}}
-    {{~getProperty (getProperty @root.data.termsMaps.statuses.slugsMap this) "term"~}}
-    {{~#unless @last}}, {{/unless~}}
-  {{~/each~}}
-{{~/if}} jobs {{#if @root.request.params.query.location~}}
-  in {{@root.request.params.query.location~}}
-{{~/if~}}
+{{~#with @root.request.params.query~}}
+  {{~#if keywords~}}
+    {{~keywords~}}
+    {{~#ifAny roles sectors statuses}}, {{/ifAny~}}
+  {{~/if~}}
+  {{~#if roles~}}
+    {{~#each (arrayify roles)~}}
+      {{~getProperty (getProperty @root.data.termsMaps.roles.slugsMap this) "term"~}}
+      {{~#unless @last}}, {{/unless~}}
+    {{~/each~}}
+    {{~#ifAny sectors statuses}}, {{/ifAny~}}
+  {{~/if~}}
+  {{~#if sectors~}}
+    {{~#each (arrayify sectors)~}}
+      {{~getProperty (getProperty @root.data.termsMaps.sectors.slugsMap this) "term"~}}
+      {{~#unless @last}}, {{/unless~}}
+    {{~/each~}}
+    {{~#ifAny statuses}}, {{/ifAny~}}
+  {{~/if~}}
+  {{~#if statuses~}}
+    {{~#each (arrayify statuses)~}}
+      {{~getProperty (getProperty @root.data.termsMaps.statuses.slugsMap this) "term"~}}
+      {{~#unless @last}}, {{/unless~}}
+    {{~/each~}}
+  {{~/if}}
+  {{~#if location~}} in {{location}} {{/if~}}
+  {{~#if salary_min~}}
+    {{~#if salary_max}} between £{{addCommas salary_min}} and {{addCommas salary_max}}
+    {{~else}} over £{{addCommas salary_min}}
+    {{~/if~}}
+  {{~else~}}
+    {{~#if salary_max}} up to £{{addCommas salary_max}}
+    {{~/if}}
+  {{~/if~}}
+{{~/with~}}
         ">
         <label for="saved-search-name" class="mdc-floating-label mdc-floating-label--float-above">Save search</label>
         <div class="mdc-line-ripple"></div>
