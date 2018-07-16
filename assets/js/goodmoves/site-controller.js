@@ -203,16 +203,18 @@ function handleMaps() {
     var options = $(o).data('map-options');
     var map = new google.maps.Map(o, options);
 
-    var pinOptions = $(o).data('map-pins');
+    var mapName = $(o).data('map-name');
+    var $markers = $('marker[data-map="' + mapName + '"]');
     var pinBounds = new google.maps.LatLngBounds();
-    var pins = [];
+    var markers = [];
 
-    pinOptions.forEach(function(pinOption) {
+    $markers.each(function(i, o) {
+      var $marker = $(o);
       var markerOptions = {
         map: map,
         position: {
-          lat: pinOption.coords.lat,
-          lng: pinOption.coords.lon
+          lat: $marker.data('lat'),
+          lng: $marker.data('lng')
         },
         icon: {
           path: google.maps.SymbolPath.CIRCLE,
@@ -223,23 +225,23 @@ function handleMaps() {
           strokeOpacity: 0.8,
           strokeWeight: 2
         },
-        title: pinOption.title,
+        title: $marker.data('title'),
         opacity: 1
       };
       var infoWindowOptions = {
-        content: decodeURIComponent(pinOption.info_window),
+        content: $marker.innerHTML
       };
 
       var marker = new google.maps.Marker(markerOptions);
       var infoWindow = new google.maps.InfoWindow(infoWindowOptions);
       marker.addListener('click', function() {
-        pins.forEach(function(pin) {
-          pin.infoWindow.close();
+        markers.forEach(function(marker) {
+          marker.infoWindow.close();
         });
         infoWindow.open(map, marker);
       });
 
-      pins.push({
+      markers.push({
         marker: marker,
         infoWindow: infoWindow
       });
