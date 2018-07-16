@@ -255,5 +255,6 @@ function handleMaps() {
       });
       pinBounds.extend(markerOptions.position);
     });
+    map.fitBounds(pinBounds);
   });
 }
