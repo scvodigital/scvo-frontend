@@ -108,20 +108,9 @@
   </form>
   <script>
     document.addEventListener("DOMContentLoaded", function(event) {
-      var registrationMethod = 'email';
-      $('[name="registration-method"]').on('change', function(evt) {
-        registrationMethod = evt.currentTarget.value;
-        console.log('REGISTRATION METHOD CHANGE:', registrationMethod);
-
-        if (registrationMethod === 'email') {
-          $('#email-password-form').show();
-        } else {
-          $('#email-password-form').hide();
-        }
-      });
-
       var $form = $('#register-form');
       var $message = $('#register-message');
+      var $emailForm = $('#email-password-form');
       var $email = $('#register-email');
       var $emailConfirm = $('#register-email-confirm');
       var $password = $('#register-password');
@@ -129,40 +118,75 @@
       var $register = $('#register-submit');
       var $loader = $('#register-loader');
 
+      var registrationMethod = 'email';
+      $('[name="registration-method"]').on('change', function(evt) {
+        registrationMethod = evt.currentTarget.value;
+        console.log('REGISTRATION METHOD CHANGE:', registrationMethod);
+
+        if (registrationMethod === 'email') {
+          $emailForm.show();
+        } else {
+          $emailForm.hide();
+        }
+      });
+      
       $form.on('submit', function(evt) {
-        var email = $email.val();
-        var emailConfirm = $emailConfirm.val();
-        var password = $password.val();
-        var passwordConfirm = $passwordConfirm.val();
-
-        if (email !== emailConfirm) {
-          $message.text('The two email addresses entered do not match').show();
-          return;
-        }
-
-        if (password !== passwordConfirm) {
-          $message.text('The two passwords entered do not match').show();
-          return;
-        }
-
         $loader.css('display', 'flex');
         evt.preventDefault();
-        goodmoves.app.auth().createUserWithEmailAndPassword(email, password).then(function(user) {
-          if (user) {
-            console.log('Registered user:', user);
-            user.user.getIdTokenResult().then(function(idTokenResult) {
-              console.log('ID Token Result', idTokenResult);
-              goodmoves.setCookie('gm_token', idTokenResult.token, 7);
-              window.location.href = '/';
-            });
-          } else {
-            $message.text('Something went wrong, registerd but no user?').show();
-            $loader.css('display', 'none');
+
+        if (registrationMethod === 'email') {
+          var email = $email.val();
+          var emailConfirm = $emailConfirm.val();
+          var password = $password.val();
+          var passwordConfirm = $passwordConfirm.val();
+
+          if (email !== emailConfirm) {
+            $message.text('The two email addresses entered do not match').show();
+            return;
           }
-        }).catch(function(err) {
-          $message.text(err.message).show();
-          $loader.css('display', 'none');
-        });
+
+          if (password !== passwordConfirm) {
+            $message.text('The two passwords entered do not match').show();
+            return;
+          }
+
+          goodmoves.app.auth().createUserWithEmailAndPassword(email, password).then(function(user) {
+            if (user) {
+              console.log('Registered user:', user);
+              user.user.getIdTokenResult().then(function(idTokenResult) {
+                console.log('ID Token Result', idTokenResult);
+                goodmoves.setCookie('gm_token', idTokenResult.token, 7);
+                window.location.href = '/';
+              });
+            } else {
+              $message.text('Something went wrong, registerd but no user?').show();
+              $loader.css('display', 'none');
+            }
+          }).catch(function(err) {
+            $message.text(err.message).show();
+            $loader.css('display', 'none');
+          });
+        } else {
+          var provider = new firebase.auth.GoogleAuthProvider();
+          provider.addScope('email');
+          goodmoves.app.auth().signInWithPopup(provider).then(function(result) {
+            if (result) {
+              console.log('Registered user:', result);
+              result.user.getIdTokenResult().then(function(idTokenResult) {
+                console.log('ID Token Result', idTokenResult);
+                goodmoves.setCookie('gm_token', idTokenResult.token, 7);
+                window.location.href = '/';
+              });
+            } else {
+              $message.text('Something went wrong, registerd but no user?').show();
+              $loader.css('display', 'none');
+            }
+          }).catch(function(err) {
+            console.error('GOOGLE ERROR:', err);
+            $message.text(err.message).show();
+            $loader.css('display', 'none');
+          });
+        }
       });
     });
   </script>
