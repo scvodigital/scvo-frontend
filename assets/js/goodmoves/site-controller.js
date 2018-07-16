@@ -133,7 +133,7 @@ var GoodmovesController = Class.extend({
               }
             }
             $chip.find('.mdc-chip__text').text(!selected ? options.onText : options.offText);
-            chip.setSelected(selected);
+            chip.foundation.setSelected(!selected);
           },
           error: function() {
             console.error('Failed toggle', options, arguments);
