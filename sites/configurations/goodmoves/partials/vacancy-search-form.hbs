@@ -109,11 +109,11 @@
       </div>
 
       {{#each (split "roles,sectors,statuses" ",")}}
-        <h3 class="mdc-drawer__content-heading">
-          {{getProperty @root.context.metaData.termTypeLabels (concat this ".plural")}}
-          <span class="mdc-icon-toggle pull-right" data-collapse-target="#{{../instance_id}}-{{this}}-collapse"
+        <h3 class="mdc-drawer__content-heading cursor-pointer" data-collapse-target="#{{../instance_id}}-{{this}}-collapse"
                 role="button" aria-pressed="false"
                 aria-label="Show roles" tabindex="0">
+          {{getProperty @root.context.metaData.termTypeLabels (concat this ".plural")}}
+          <span class="mdc-icon-toggle pull-right" >
             <i class="far {{#if (getProperty ../request.params.query this)}}fa-chevron-up{{else}}fa-chevron-down{{/if}}" aria-hidden="true"></i>
           </span>
         </h3>

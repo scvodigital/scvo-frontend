@@ -79,6 +79,22 @@ var GoodmovesController = Class.extend({
       }
     });
 
+    // Collapsibles
+    $('[data-collapse-target]').off('click').on('click', function(evt) {
+      console.log('Collapse click:', evt);
+      var $el = $(evt.currentTarget);
+      var selector = $el.attr('data-collapse-target');
+      var $target = $(selector);
+      var $icon = $el.find('.far');
+      if ($target.is(':visible')) {
+        $target.hide();
+        $icon.removeClass('fa-chevron-up').addClass('fa-chevron-down');
+      } else {
+        $target.show();
+        $icon.removeClass('fa-chevron-down').addClass('fa-chevron-up');
+      }
+    });
+
     // Ajax Chips
     $('[data-ajax-chip]').each(function(i, o) {
       var $chip = $(o);
