@@ -1,6 +1,4 @@
 var GoodmovesController = Class.extend({
-  userProfile: null,
-  uid: null,
   app: null,
   config: null,
   displayMode: null,
@@ -133,24 +131,6 @@ var GoodmovesController = Class.extend({
   setupFirebase: function() {
     // Initialize Firebase
     this.app = firebase.initializeApp(this.firebaseConfig);
-    var that = this;
-    // Firebase Auth Functions
-    this.app.auth().onAuthStateChanged(function(user) {
-      if (user) {
-        console.log('User logged in', user);
-        that.uid = user.uid;
-        user.getIdTokenResult().then(function(idTokenResult) {
-          console.log('ID Token Result', idTokenResult);
-          that.setCookie('gm_token', idTokenResult.token, 7);
-          that.getUserProfile(user, function() {});
-        });
-      } else {
-        console.log('User logged out');
-        that.userProfile = null;
-        that.uid = null;
-        that.updateComponents.call(that);
-      }
-    });
   },
 
   // Utility functions
@@ -162,128 +142,6 @@ var GoodmovesController = Class.extend({
       expires = "; expires=" + date.toUTCString();
     }
     document.cookie = name + "=" + (value || "")  + expires + "; path=/; secure";
-  },
-
-  getUserProfile: function(user, cb) {
-    var that = this;
-    this.app.database().ref('/users/' + user.uid).once('value').then(function(response) {
-      if (response.exists()) {
-        that.userProfile = response.val();
-        that.userProfile.email = user.email;
-        that.userProfile.displayName = user.displayName;
-        console.log("User profile: ")
-        console.log(that.userProfile);
-        that.setUserProfileDefaults().then(function() { }).catch(function(err) { });
-      } else {
-        console.error('User profile does not exist');
-      }
-      if (cb) cb.call(that);
-    }).catch(function(err) {
-      console.error('Failed to get user profile info', err);
-    });
-  },
-
-  getSavedSearches: function(user, cb) {
-    if (!user.email) return;
-    var that = this;
-    var url = 'https://scvo.net/subscriber/' + user.email + '/goodmoves-weekly';
-    $.getJSON(url, function(response) {
-      that.savedSearches = [];
-      if (response.message === 'Found') {
-        response.subscriptions.forEach(function(subscription) {
-          var savedSearch = new SavedSearch(subscription);
-          that.savedSearches.push(savedSearch);
-        });
-      }
-      if (cb) cb.call(that);
-    });
-  },
-
-  updateComponents: function() {
-    if (this.userProfile) {
-      var userProfile = this.userProfile;
-      $('[data-vacancy-id]').removeClass('vacancy-shortlisted');
-      if (userProfile.goodmoves && userProfile.goodmoves.saved_vacancies) {
-        var savedVacancies = userProfile.goodmoves.saved_vacancies;
-        var selectors = savedVacancies.map(function(vid) {
-          return '[data-vacancy-id="' + vid + '"]';
-        });
-        $(selectors.join(',')).addClass('vacancy-shortlisted');
-      }
-    }
-
-    $('[data-collapse-target]').off('click').on('click', function(evt) {
-      console.log('Collapse click:', evt);
-      var $el = $(evt.currentTarget);
-      var selector = $el.attr('data-collapse-target');
-      var $target = $(selector);
-      var $icon = $el.find('.far');
-      if ($target.is(':visible')) {
-        $target.hide();
-        $icon.removeClass('fa-chevron-up').addClass('fa-chevron-down');
-      } else {
-        $target.show();
-        $icon.removeClass('fa-chevron-down').addClass('fa-chevron-up');
-      }
-    });
-  },
-
-  setUserProfileDefaults: function() {
-    var that = this;
-    return new Promise(function(resolve, reject) {
-      var userProfile = that.userProfile;
-      userProfile.goodmoves = userProfile.goodmoves || {};
-      userProfile.goodmoves.saved_vacancies = userProfile.goodmoves.saved_vacancies || [];
-      if (userProfile === that.userProfile) {
-        that.updateComponents();
-        resolve();
-      } else {
-        that.updateUserProfile(userProfile).then(function(userProfile) {
-          console.log('Saved default profile');
-          resolve();
-        }).catch(function(err) {
-          console.error('Error saving default profile', err);
-          resolve();
-        });
-      }
-    });
-  },
-
-  updateUserProfile: function(userProfile) {
-    var that = this;
-    return new Promise(function(resolve, reject) {
-      var path = '/users/' + that.uid;
-      that.app.database().ref(path).update(that.userProfile).then(function() {
-        console.log('User profile updated', path);
-        that.userProfile = userProfile;
-        that.updateComponents();
-        resolve();
-      }).catch(function(err) {
-        console.error('Failed to update user profile:', path, this.userProfile);
-        reject();
-      });
-    });
-  },
-
-  toggleShortlistItem: function(id) {
-
-    // Add mdc-chip--selected to mdc-chip
-    // Add mdc-chip__icon--leading-hidden to mdc-chip__icon
-
-    var userProfile = this.userProfile;
-    var shortlist = userProfile.goodmoves.saved_vacancies;
-    var index = shortlist.indexOf(id);
-    if (index > -1) {
-      shortlist.splice(index, 1);
-    } else {
-      shortlist.push(id);
-    }
-    userProfile.goodmoves.saved_vacancies = shortlist;
-    this.updateUserProfile(userProfile).then(function() {
-      console.log('Shortlist updated');
-    }).catch(function(err) {
-      console.error('Failed to update shortlist', err);
-    });
   }
 });
 
