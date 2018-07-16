@@ -109,37 +109,45 @@ var GoodmovesController = Class.extend({
       options.offMethod = options.offMethod || options.onMethod;
 
       $chip.on('click', function() {
-        var selected = $chip.hasClass('mdc-chip--selected');
-        var ajax = {
-          url: selected ? options.offUrl || options.onUrl : options.onUrl,
-          method: selected ? options.offMethod || options.onMethod : options.onMethod,
-          data: selected ? options.offData || options.onData || null : options.onData || null,
-          dataType: 'html',
-          success: function() {
-            if (options.onClasses) {
-              var selectors = Object.keys(options.onClasses);
-              for (var s = 0; s < selectors.length; ++s) {
-                var selector = selectors[s];
-                var cssClass = options.onClasses[selector];
-                $(selector)[selected ? 'removeClass' : 'addClass'](cssClass);
+        if (!$chip.data('disabled')) {
+          $chip.data('disabled', true);
+          $chip.css('opacity', 0.5);
+          var selected = $chip.hasClass('mdc-chip--selected');
+          var ajax = {
+            url: selected ? options.offUrl || options.onUrl : options.onUrl,
+            method: selected ? options.offMethod || options.onMethod : options.onMethod,
+            data: selected ? options.offData || options.onData || null : options.onData || null,
+            dataType: 'html',
+            success: function() {
+              if (options.onClasses) {
+                var selectors = Object.keys(options.onClasses);
+                for (var s = 0; s < selectors.length; ++s) {
+                  var selector = selectors[s];
+                  var cssClass = options.onClasses[selector];
+                  $(selector)[selected ? 'removeClass' : 'addClass'](cssClass);
+                }
               }
-            }
-            if (options.offClasses) {
-              var selectors = Object.keys(options.offClasses);
-              for (var s = 0; s < selectors.length; ++s) {
-                var selector = selectors[s];
-                var cssClass = options.onClasses[selector];
-                $(selector)[!selected ? 'removeClass' : 'addClass'](cssClass);
+              if (options.offClasses) {
+                var selectors = Object.keys(options.offClasses);
+                for (var s = 0; s < selectors.length; ++s) {
+                  var selector = selectors[s];
+                  var cssClass = options.onClasses[selector];
+                  $(selector)[!selected ? 'removeClass' : 'addClass'](cssClass);
+                }
               }
+              $chip.find('.mdc-chip__text').text(!selected ? options.onText : options.offText);
+              chip.foundation.setSelected(!selected);
+              $chip.data('disabled', false);
+              $chip.css('opacity', 1);
+            },
+            error: function() {
+              console.error('Failed toggle', options, arguments);
+              $chip.data('disabled', false);
+              $chip.css('opacity', 1);
             }
-            $chip.find('.mdc-chip__text').text(!selected ? options.onText : options.offText);
-            chip.foundation.setSelected(!selected);
-          },
-          error: function() {
-            console.error('Failed toggle', options, arguments);
-          }
-        };
-        $.ajax(ajax);
+          };
+          $.ajax(ajax);
+        }
       });
     });
   },
