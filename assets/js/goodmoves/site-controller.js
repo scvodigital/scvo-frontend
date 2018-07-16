@@ -131,7 +131,7 @@ var GoodmovesController = Class.extend({
                 var selectors = Object.keys(options.offClasses);
                 for (var s = 0; s < selectors.length; ++s) {
                   var selector = selectors[s];
-                  var cssClass = options.onClasses[selector];
+                  var cssClass = options.offClasses[selector];
                   $(selector)[!selected ? 'removeClass' : 'addClass'](cssClass);
                 }
               }
