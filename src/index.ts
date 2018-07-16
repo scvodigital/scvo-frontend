@@ -134,6 +134,10 @@ async function index(
       res.setHeader(header, response.headers[header]);
     });
 
+    Object.keys(response.cookies).forEach((cookie) => {
+      res.cookie(cookie, response.cookies[cookie], { expires: new Date(Date.now() + 900000) });
+    });
+
     res.send(response.body || 'Something went bad');
     res.end();
 
