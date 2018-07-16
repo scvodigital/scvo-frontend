@@ -237,7 +237,7 @@ function handleMaps() {
         opacity: 1
       };
       var infoWindowOptions = {
-        content: $marker.innerHTML
+        content: $marker.html()
       };
 
       var marker = new google.maps.Marker(markerOptions);
