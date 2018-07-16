@@ -1,11 +1,10 @@
-{{#> ajax_chip 
-  onUrl=(concat "/add-to-shortlist?id=" id) 
-  offUrl=(concat "/remove-from-shortlist?id=" id) 
-  onText="Shortlisted"
-  offText="Add to shortlist"
+{{#> ajax_chip
+  onUrl=(concat "/add-to-shortlist?id=" id)
+  offUrl=(concat "/remove-from-shortlist?id=" id)
+  onText="Shortlist"
+  offText="Shortlist"
   iconClasses="far fa-star"
   on=(contains (map @root.data.shortlist_ids.items (getProp "id")) id)
-
 }}
 {
   "extraAttributes": "data-vacancy-id=\"{{../id}}\"",

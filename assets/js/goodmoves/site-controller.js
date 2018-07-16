@@ -66,7 +66,7 @@ var GoodmovesController = Class.extend({
         dialogEl.MDCDialog.show();
       });
     });
-    
+
     // Temporary drawer buttons
     $('[data-drawer-target]').each(function(i, o) {
       var selector = $(o).attr('data-drawer-target');
@@ -133,7 +133,7 @@ var GoodmovesController = Class.extend({
               }
             }
             $chip.find('.mdc-chip__text').text(!selected ? options.onText : options.offText);
-            chip.toggleSelected();
+            chip.setSelected(selected);
           },
           error: function() {
             console.error('Failed toggle', options, arguments);
