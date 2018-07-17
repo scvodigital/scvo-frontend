@@ -524,21 +524,22 @@ a:hover {
 }
 
 .mdc-chip {
-  color: white
+  background-color: $mdc-theme-secondary-light;
+  color: $mdc-theme-primary-dark;
 }
 .mdc-card .mdc-chip-set {
   .mdc-chip {
     margin: 0;
     color: rgba(0, 0, 0, 0.54);
-    background-color: white;
+    // background-color: white;
     font-weight: 600;
     .mdc-chip__text {
       margin-left: $unit/2;
     }
   }
   .mdc-chip.mdc-chip--selected {
-    background-color: $mdc-theme-secondary-light;
-    color: $mdc-theme-primary-dark;
+    background-color: $mdc-theme-primary;
+    color: white;
   }
 }
 
@@ -1007,6 +1008,13 @@ hr {
       color: $mdc-theme-primary-dark;
     }
   }
+}
+.removed-from-shortlist {
+  opacity: 0.75;
+}
+.removed-from-shortlist::after,
+.removed-from-shortlist:hover::after {
+  opacity: 0.25 !important;
 }
 
 .mdc-form-field,
