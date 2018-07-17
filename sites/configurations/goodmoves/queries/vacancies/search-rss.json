@@ -1,5 +1,5 @@
 {
-  "size": 100,
+  "size": 1000,
   "_source": [
     "Id",
     "slug",
@@ -16,25 +16,28 @@
     "organisation.slug",
     "organisation.name",
     "organisation.has_logo",
-    "organisation.logo_url"
+    "organisation.logo_url",
+    "rendered.goodmoves_rss"
   ],
   "query": {
     "bool": {
       "must": [
         {
-          "terms": {
-            "Id": {{{stringify (map data.shortlist_ids.items (getProp "id"))}}}
+          "term": {
+            "country_iso3": "GBR"
           }
         },
         {
           "term": {
-            "country_iso3": "GBR"
+            "vacancy_status": "vacancy-open"
           }
         }
       ]
     }
   },
-  "sort": {
-    "closing_date": "asc"
-  }
+  "sort": [
+    {
+      "start_at": "desc"
+    }
+  ]
 }

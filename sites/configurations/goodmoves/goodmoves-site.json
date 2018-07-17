@@ -15,7 +15,22 @@
   "metaData": {
     "title": "Goodmoves - charity and voluntary sector recruitment",
     "emailCampaignName": "goodmoves-saved-searches",
+    "shortlistCampaignName": "goodmoves-shortlist",
     "menus": "{:./goodmoves-menus.json}",
+    "termTypeLabels": {
+      "roles": {
+        "singular": "Role",
+        "plural": "Roles"
+      },
+      "sectors": {
+        "singular": "Sector",
+        "plural": "Sectors"
+      },
+      "statuses": {
+        "singular": "Working pattern",
+        "plural": "Working patterns"
+      }
+    },
     "handlebars": {
       "partials": {
         "{$./partials/**/*.*}": "includeRelativePath=false&regexExpression=(-)&regexOptions=gi&regexReplace=_"
@@ -36,6 +51,7 @@
         "taskModule": "firebaseAuth",
         "config": {
           "tokenPath": "request.cookies.gm_token",
+          "cookieName": "gm_cookie",
           "appName": "scvo",
           "noTokenRoute": "",
           "notAuthenticatedRoute": ""
@@ -46,6 +62,7 @@
         "taskModule": "firebaseAuth",
         "config": {
           "tokenPath": "request.cookies.gm_token",
+          "cookieName": "gm_cookie",
           "appName": "scvo",
           "noTokenRoute": "login",
           "notAuthenticatedRoute": "login"
@@ -56,7 +73,7 @@
         "taskModule": "render",
         "renderer": "handlebars",
         "config": {
-          "template": ">context.metaData.handlebars.partials.terms_map",
+          "template": ">context.metaData.handlebars.partials.terms_maps",
           "output": "data",
           "parseJson": true
         }
@@ -93,6 +110,17 @@
           "connectionName": "notifications",
           "queryTemplates": {
             "items": ">context.metaData.handlebars.queries.notifications_get-saved-searches"
+          }
+        },
+        "renderer": "handlebars"
+      },
+      "shortlistIds": {
+        "name": "shortlist_ids",
+        "taskModule": "mysql",
+        "config": {
+          "connectionName": "notifications",
+          "queryTemplates": {
+            "items": ">context.metaData.handlebars.queries.notifications_get-shortlist"
           }
         },
         "renderer": "handlebars"

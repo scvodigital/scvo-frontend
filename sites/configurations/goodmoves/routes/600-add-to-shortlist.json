@@ -1,0 +1,30 @@
+{
+  "name": "add-to-shortlist",
+  "pattern": "/add-to-shortlist",
+  "acceptedVerbs": "GET",
+  "tasks": [
+    "metaData.commonTasks.authRequired",
+    {
+      "name": "notifications",
+      "taskModule": "mysql",
+      "config": {
+        "connectionName": "notifications",
+        "queryTemplates": {
+          "create_or_replace_subscriber": ">context.metaData.handlebars.queries.notifications_create-replace-subscriber",
+          "create_or_replace_shortlist": ">context.metaData.handlebars.queries.notifications_create-replace-shortlist",
+          "add_to_shortlist": ">context.metaData.handlebars.queries.notifications_add-to-shortlist"
+        }
+      },
+      "renderer": "handlebars"
+    },
+    {
+      "name": "destination",
+      "taskModule": "render",
+      "renderer": "handlebars",
+      "config": {
+        "output": "body",
+        "template": "Added {{@root.request.params.query.id}}"
+      }
+    }
+  ]
+}

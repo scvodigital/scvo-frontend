@@ -1,5 +1,5 @@
 INSERT INTO subscriptions (
-  campaign, email, name, days
+  campaign, email, name, days, subscribed
 ) VALUES (
   '{{@root.context.metaData.emailCampaignName}}', 
   '{{@root.data.auth.email}}', 
@@ -19,6 +19,7 @@ INSERT INTO subscriptions (
       ) AS daysInner
     ), 
     ''
-  )
+  ),
+  {{#if @root.request.body.subscribe}}1{{else}}0{{/if}}
 ) 
 ON DUPLICATE KEY UPDATE name = '{{default @root.request.body.name "My Search"}}';

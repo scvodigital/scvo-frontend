@@ -1,19 +1,10 @@
 {
-  "name": "shortlist",
-  "pattern": "/shortlist",
-  "metaData": {
-    "sidebarButton": {
-      "icon": "search",
-      "tooltip": "Search",
-      "classes": "hide-md hide-lg"
-    }
-  },
+  "name": "vacancy_search_rss",
+  "pattern": "/search?rss",
   "defaultParams": {
     "context": "results"
   },
   "tasks": [
-    "metaData.commonTasks.authRequired",
-    "metaData.commonTasks.shortlistIds",
     {
       "name": "search_data",
       "taskModule": "elasticsearch",
@@ -28,7 +19,7 @@
             "name": "detailed_results",
             "index": "web-content-production",
             "type": "goodmoves-vacancy",
-            "template": ">context.metaData.handlebars.queries.vacancies_shortlist"
+            "template": ">context.metaData.handlebars.queries.vacancies_search-rss"
           }
         ]
       },
@@ -42,18 +33,27 @@
       "config": {
         "logic": {
           "if": [
+            {
+              "in": [
+                "rss",
+                {
+                  "var": "request.fullUrl"
+                }
+              ]
+            },
+            "rss",
             "default"
           ]
         },
         "output": "body",
         "layouts": {
-          "default": {
-            "layout": ">context.metaData.handlebars.layouts.default",
+          "rss": {
+            "layout": ">context.metaData.handlebars.layouts.rss",
             "parts": {
-              "head": ">context.metaData.handlebars.templates.pages_page-head-tags",
-              "body": ">context.metaData.handlebars.templates.vacancies_shortlist"
+              "head": ">context.metaData.handlebars.templates.vacancies_search-rss-head-tags",
+              "body": ">context.metaData.handlebars.templates.vacancies_search-rss"
             },
-            "contentType": "text/html"
+            "contentType": "application/rss+xml"
           }
         }
       }

@@ -1,0 +1,20 @@
+{{#if @root.data.auth }}
+  {{#> ajax_chip
+    onUrl=(concat "/add-to-shortlist?id=" id)
+    offUrl=(concat "/remove-from-shortlist?id=" id)
+    onText="Shortlist"
+    offText="Shortlist"
+    iconClasses="far fa-star"
+    on=(contains (map @root.data.shortlist_ids.items (getProp "id")) id)
+  }}
+  {
+    "extraAttributes": "data-vacancy-id=\"{{../id}}\"",
+    "onClasses": {
+      ".mdc-card[data-vacancy-id=\"{{../id}}\"]": "mdc-elevation--z15"
+      },
+    "offClasses": {
+      ".mdc-card[data-vacancy-id=\"{{../id}}\"]": "removed-from-shortlist"
+    }
+  }
+  {{/ajax_chip}}
+{{/if}}

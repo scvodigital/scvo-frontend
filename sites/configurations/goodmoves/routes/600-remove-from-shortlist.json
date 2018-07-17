@@ -1,0 +1,30 @@
+{
+  "name": "remove-from-shortlist",
+  "pattern": "/remove-from-shortlist",
+  "acceptedVerbs": "GET",
+  "tasks": [
+    "metaData.commonTasks.authRequired",
+    {
+      "name": "notifications",
+      "taskModule": "mysql",
+      "config": {
+        "connectionName": "notifications",
+        "queryTemplates": {
+          "create_or_replace_subscriber": ">context.metaData.handlebars.queries.notifications_create-replace-subscriber",
+          "create_or_replace_shortlist": ">context.metaData.handlebars.queries.notifications_create-replace-shortlist",
+          "remove_from_shortlist": ">context.metaData.handlebars.queries.notifications_remove-from-shortlist"
+        }
+      },
+      "renderer": "handlebars"
+    },
+    {
+      "name": "destination",
+      "taskModule": "render",
+      "renderer": "handlebars",
+      "config": {
+        "output": "body",
+        "template": "Removed {{@root.request.params.query.id}}"
+      }
+    }
+  ]
+}

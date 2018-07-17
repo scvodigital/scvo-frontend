@@ -1,6 +1,4 @@
 var GoodmovesController = Class.extend({
-  userProfile: null,
-  uid: null,
   app: null,
   config: null,
   displayMode: null,
@@ -60,6 +58,15 @@ var GoodmovesController = Class.extend({
       });
     });
 
+    // Dialog activator buttons
+    $('[data-dialog-target]').each(function(i, o) {
+      var selector = $(o).attr('data-dialog-target');
+      var dialogEl = $(selector)[0];
+      $(o).on('click', function() {
+        dialogEl.MDCDialog.show();
+      });
+    });
+
     // Temporary drawer buttons
     $('[data-drawer-target]').each(function(i, o) {
       var selector = $(o).attr('data-drawer-target');
@@ -71,90 +78,8 @@ var GoodmovesController = Class.extend({
         });
       }
     });
-  },
 
-  setupFirebase: function() {
-    // Initialize Firebase
-    this.app = firebase.initializeApp(this.firebaseConfig);
-    var that = this;
-    // Firebase Auth Functions
-    this.app.auth().onAuthStateChanged(function(user) {
-      if (user) {
-        console.log('User logged in', user);
-        that.uid = user.uid;
-        user.getIdTokenResult().then(function(idTokenResult) {
-          console.log('ID Token Result', idTokenResult);
-          that.setCookie('gm_token', idTokenResult.token, 7);
-          that.getUserProfile(user, function() {});
-        });
-      } else {
-        console.log('User logged out');
-        that.userProfile = null;
-        that.uid = null;
-        that.updateComponents.call(that);
-      }
-    });
-  },
-
-  // Utility functions
-  setCookie: function(name, value, days) {
-    var expires = "";
-    if (days) {
-      var date = new Date();
-      date.setTime(date.getTime() + (days*24*60*60*1000));
-      expires = "; expires=" + date.toUTCString();
-    }
-    document.cookie = name + "=" + (value || "")  + expires + "; path=/; secure";
-  },
-
-  getUserProfile: function(user, cb) {
-    var that = this;
-    this.app.database().ref('/users/' + user.uid).once('value').then(function(response) {
-      if (response.exists()) {
-        that.userProfile = response.val();
-        that.userProfile.email = user.email;
-        that.userProfile.displayName = user.displayName;
-        console.log("User profile: ")
-        console.log(that.userProfile);
-        that.setUserProfileDefaults().then(function() { }).catch(function(err) { });
-      } else {
-        console.error('User profile does not exist');
-      }
-      if (cb) cb.call(that);
-    }).catch(function(err) {
-      console.error('Failed to get user profile info', err);
-    });
-  },
-
-  getSavedSearches: function(user, cb) {
-    if (!user.email) return;
-    var that = this;
-    var url = 'https://scvo.net/subscriber/' + user.email + '/goodmoves-weekly';
-    $.getJSON(url, function(response) {
-      that.savedSearches = [];
-      if (response.message === 'Found') {
-        response.subscriptions.forEach(function(subscription) {
-          var savedSearch = new SavedSearch(subscription);
-          that.savedSearches.push(savedSearch);
-        });
-      }
-      if (cb) cb.call(that);
-    });
-  },
-
-  updateComponents: function() {
-    if (this.userProfile) {
-      var userProfile = this.userProfile;
-      $('[data-vacancy-id]').removeClass('vacancy-shortlisted');
-      if (userProfile.goodmoves && userProfile.goodmoves.saved_vacancies) {
-        var savedVacancies = userProfile.goodmoves.saved_vacancies;
-        var selectors = savedVacancies.map(function(vid) {
-          return '[data-vacancy-id="' + vid + '"]';
-        });
-        $(selectors.join(',')).addClass('vacancy-shortlisted');
-      }
-    }
-
+    // Collapsibles
     $('[data-collapse-target]').off('click').on('click', function(evt) {
       console.log('Collapse click:', evt);
       var $el = $(evt.currentTarget);
@@ -169,64 +94,78 @@ var GoodmovesController = Class.extend({
         $icon.removeClass('fa-chevron-down').addClass('fa-chevron-up');
       }
     });
-  },
 
-  setUserProfileDefaults: function() {
-    var that = this;
-    return new Promise(function(resolve, reject) {
-      var userProfile = that.userProfile;
-      userProfile.goodmoves = userProfile.goodmoves || {};
-      userProfile.goodmoves.saved_vacancies = userProfile.goodmoves.saved_vacancies || [];
-      if (userProfile === that.userProfile) {
-        that.updateComponents();
-        resolve();
-      } else {
-        that.updateUserProfile(userProfile).then(function(userProfile) {
-          console.log('Saved default profile');
-          resolve();
-        }).catch(function(err) {
-          console.error('Error saving default profile', err);
-          resolve();
-        });
-      }
-    });
-  },
+    // Ajax Chips
+    $('[data-ajax-chip]').each(function(i, o) {
+      var $chip = $(o);
+      var options = $chip.data('ajax-chip');
+      var chip = new mdc.chips.MDCChip(o);
 
-  updateUserProfile: function(userProfile) {
-    var that = this;
-    return new Promise(function(resolve, reject) {
-      var path = '/users/' + that.uid;
-      that.app.database().ref(path).update(that.userProfile).then(function() {
-        console.log('User profile updated', path);
-        that.userProfile = userProfile;
-        that.updateComponents();
-        resolve();
-      }).catch(function(err) {
-        console.error('Failed to update user profile:', path, this.userProfile);
-        reject();
+      options.onUrl = options.onUrl || options.toggleUrl;
+      options.offUrl = options.offUrl || options.onUrl;
+      options.onData = options.onData || options.toggleData || null;
+      options.offData = options.offData || options.onData;
+      options.onMethod = options.onMethod || options.toggleMethod || 'GET';
+      options.offMethod = options.offMethod || options.onMethod;
+
+      $chip.on('click', function() {
+        if (!$chip.data('disabled')) {
+          $chip.data('disabled', true);
+          $chip.css('opacity', 0.5);
+          var selected = $chip.hasClass('mdc-chip--selected');
+          var ajax = {
+            url: selected ? options.offUrl || options.onUrl : options.onUrl,
+            method: selected ? options.offMethod || options.onMethod : options.onMethod,
+            data: selected ? options.offData || options.onData || null : options.onData || null,
+            dataType: 'html',
+            success: function() {
+              if (options.onClasses) {
+                var selectors = Object.keys(options.onClasses);
+                for (var s = 0; s < selectors.length; ++s) {
+                  var selector = selectors[s];
+                  var cssClass = options.onClasses[selector];
+                  $(selector)[selected ? 'removeClass' : 'addClass'](cssClass);
+                }
+              }
+              if (options.offClasses) {
+                var selectors = Object.keys(options.offClasses);
+                for (var s = 0; s < selectors.length; ++s) {
+                  var selector = selectors[s];
+                  var cssClass = options.offClasses[selector];
+                  $(selector)[!selected ? 'removeClass' : 'addClass'](cssClass);
+                }
+              }
+              $chip.find('.mdc-chip__text').text(!selected ? options.onText : options.offText);
+              chip.foundation.setSelected(!selected);
+              $chip.data('disabled', false);
+              $chip.css('opacity', 1);
+            },
+            error: function() {
+              console.error('Failed toggle', options, arguments);
+              $chip.data('disabled', false);
+              $chip.css('opacity', 1);
+            }
+          };
+          $.ajax(ajax);
+        }
       });
     });
   },
 
-  toggleShortlistItem: function(id) {
+  setupFirebase: function() {
+    // Initialize Firebase
+    this.app = firebase.initializeApp(this.firebaseConfig);
+  },
 
-    // Add mdc-chip--selected to mdc-chip
-    // Add mdc-chip__icon--leading-hidden to mdc-chip__icon
-
-    var userProfile = this.userProfile;
-    var shortlist = userProfile.goodmoves.saved_vacancies;
-    var index = shortlist.indexOf(id);
-    if (index > -1) {
-      shortlist.splice(index, 1);
-    } else {
-      shortlist.push(id);
+  // Utility functions
+  setCookie: function(name, value, days) {
+    var expires = "";
+    if (days) {
+      var date = new Date();
+      date.setTime(date.getTime() + (days*24*60*60*1000));
+      expires = "; expires=" + date.toUTCString();
     }
-    userProfile.goodmoves.saved_vacancies = shortlist;
-    this.updateUserProfile(userProfile).then(function() {
-      console.log('Shortlist updated');
-    }).catch(function(err) {
-      console.error('Failed to update shortlist', err);
-    });
+    document.cookie = name + "=" + (value || "")  + expires + "; path=/; secure";
   }
 });
 
@@ -272,16 +211,18 @@ function handleMaps() {
     var options = $(o).data('map-options');
     var map = new google.maps.Map(o, options);
 
-    var pinOptions = $(o).data('map-pins');
+    var mapName = $(o).data('map-name');
+    var $markers = $('marker[data-map="' + mapName + '"]');
     var pinBounds = new google.maps.LatLngBounds();
-    var pins = [];
+    var markers = [];
 
-    pinOptions.forEach(function(pinOption) {
+    $markers.each(function(i, o) {
+      var $marker = $(o);
       var markerOptions = {
         map: map,
         position: {
-          lat: pinOption.coords.lat,
-          lng: pinOption.coords.lon
+          lat: $marker.data('lat'),
+          lng: $marker.data('lng')
         },
         icon: {
           path: google.maps.SymbolPath.CIRCLE,
@@ -292,27 +233,28 @@ function handleMaps() {
           strokeOpacity: 0.8,
           strokeWeight: 2
         },
-        title: pinOption.title,
+        title: $marker.data('title'),
         opacity: 1
       };
       var infoWindowOptions = {
-        content: decodeURIComponent(pinOption.info_window),
+        content: $marker.html()
       };
 
       var marker = new google.maps.Marker(markerOptions);
       var infoWindow = new google.maps.InfoWindow(infoWindowOptions);
       marker.addListener('click', function() {
-        pins.forEach(function(pin) {
-          pin.infoWindow.close();
+        markers.forEach(function(marker) {
+          marker.infoWindow.close();
         });
         infoWindow.open(map, marker);
       });
 
-      pins.push({
+      markers.push({
         marker: marker,
         infoWindow: infoWindow
       });
       pinBounds.extend(markerOptions.position);
     });
+    map.fitBounds(pinBounds);
   });
 }

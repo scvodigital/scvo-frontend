@@ -1,0 +1,27 @@
+{
+  "name": "delete-search",
+  "pattern": "/delete-search",
+  "acceptedVerbs": "POST",
+  "tasks": [
+    "metaData.commonTasks.authRequired",
+    {
+      "name": "notifications",
+      "taskModule": "mysql",
+      "config": {
+        "connectionName": "notifications",
+        "queryTemplates": {
+          "delete_search_parameters": ">context.metaData.handlebars.queries.notifications_delete-search-parameters",
+          "delete_search": ">context.metaData.handlebars.queries.notifications_delete-search"
+        }
+      },
+      "renderer": "handlebars"
+    },
+    {
+      "name": "destination",
+      "taskModule": "redirect",
+      "config": {
+        "location": ">request.headers.referer"
+      }
+    }
+  ]
+}
