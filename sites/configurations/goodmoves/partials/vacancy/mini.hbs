@@ -1,10 +1,10 @@
-<div class="mdc-card mini" data-vacancy-id="{{Id}}">
+<div class="mdc-card mini {{if top_job "top-job"}}" data-vacancy-id="{{Id}}">
   {{> vacancy_key_info}}
   <div class="mdc-card__actions">
     <div class="mdc-card__action-buttons demo-card__action-buttons--text-only mdc-card__actions--full-bleed">
       <a href="/vacancy/{{slug}}{{@root.request.url.search}}" class="mdc-card__action">Find out more</a>
     </div>
-    <div class="mdc-card__action-icons mdc-chip-set pull-right">
+    <div class="mdc-card__action-icons pull-right">
       {{> shortlist_chip id=Id}}
     </div>
   </div>

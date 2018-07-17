@@ -1,8 +1,6 @@
 <div class="container-fluid home-banner">
-  <!-- <div class="banner-search overlay" style="background-image: url('{{#if data.supplimentaryResponses.splash.hits.hits.[0]._source.original_image}}{{data.supplimentaryResponses.splash.hits.hits.[0]._source.original_image}}{{/if}}');"> -->
   <div class="banner-search overlay" style="background-image: url('http://cms.scvo.org/wp-content/uploads/2017/11/Teapot-Trust-09.jpg');">
     <div class="content page-content">
-      <!-- <div class="mdc-typography--headline5">Charity and voluntary sector recruitment</div> -->
       <div class="overlay-content">
         <div class="mdc-layout-grid">
           <div class="mdc-layout-grid__inner">
@@ -15,90 +13,6 @@
               <p class="header-extra">
                 Charity and voluntary sector recruitment
               </p>
-              <!-- <a href="/about" class="mdc-button">Find out more</a> -->
-              <!-- <div class="mdc-card__actions">
-                <div class="mdc-menu-anchor">
-                  <button class="mdc-button" data-menu-target="#sectors-menu">
-                    Sectors
-                    <span class="far fa-fw fa-angle-down"></span>
-                  </button>
-                  <div class="mdc-menu" tabindex="-1" data-mdc-auto-init="MDCMenu" id="sectors-menu">
-                    <div class="mdc-menu__items mdc-list" role="menu" aria-hidden="true">
-                      {{#each data.supplimentaryResponses.types.aggregations.sectors_slugs.buckets ~}}
-                      <a class="mdc-list-item" href="/search?sector={{urlencode key}}" role="menuitem">
-                        <span class="mdc-list-item__text">
-                          {{#with (lookup ../data.supplimentaryResponses.types.aggregations.sectors.buckets @index) ~}}
-                          {{{key}}}
-                          {{/with ~}}
-                        </span>
-                        <span class="mdc-list-item__meta">
-                          {{doc_count}}
-                        </span>
-                      </a>
-                      {{/each ~}}
-                    </div>
-                  </div>
-                </div>
-                <div class="mdc-menu-anchor">
-                  <button class="mdc-button" data-menu-target="#roles-menu">
-                    Roles
-                    <span class="far fa-fw fa-angle-down"></span>
-                  </button>
-                  <div class="mdc-menu" tabindex="-1" data-mdc-auto-init="MDCMenu" id="roles-menu">
-                    <div class="mdc-menu__items mdc-list" role="menu" aria-hidden="true">
-                      {{#each data.supplimentaryResponses.types.aggregations.roles_slugs.buckets ~}}
-                      <a class="mdc-list-item" href="/search?role={{urlencode key}}" role="menuitem">
-                        <span class="mdc-list-item__text">
-                          {{#with (lookup ../data.supplimentaryResponses.types.aggregations.roles.buckets @index) ~}}
-                          {{{key}}}
-                          {{/with ~}}
-                        </span>
-                        <span class="mdc-list-item__meta">
-                          {{doc_count}}
-                        </span>
-                      </a>
-                      {{/each ~}}
-                    </div>
-                  </div>
-                </div>
-                <div class="mdc-menu-anchor">
-                  <button class="mdc-button" data-menu-target="#statuses-menu">
-                    Types
-                    <span class="far fa-fw fa-angle-down"></span>
-                  </button>
-                  <div class="mdc-menu" tabindex="-1" data-mdc-auto-init="MDCMenu" id="statuses-menu">
-                    <div class="mdc-menu__items mdc-list" role="menu" aria-hidden="true">
-                      {{#each data.supplimentaryResponses.types.aggregations.statuses_slugs.buckets ~}}
-                      <a class="mdc-list-item" href="/search?status={{urlencode key}}" role="menuitem">
-                        <span class="mdc-list-item__text">
-                          {{#compare key "===" "management-board" ~}}
-                          Trustee
-                          {{else}}
-                          {{#with (lookup ../data.supplimentaryResponses.types.aggregations.statuses.buckets @index) ~}}
-                          {{{key}}}
-                          {{/with ~}}
-                          {{/compare ~}}
-                        </span>
-                        <span class="mdc-list-item__meta">
-                          {{doc_count}}
-                        </span>
-                      </a>
-                      {{/each ~}}
-                      {{#compare data.supplimentaryResponses.home_based.hits.total ">" 0 ~}}
-                      <a class="mdc-list-item" href="/search?type=home-based" role="menuitem">
-                        <span class="mdc-list-item__text">
-                          Home-based
-                        </span>
-                        <span class="mdc-list-item__meta">
-                          {{data.supplimentaryResponses.home_based.hits.total}}
-                        </span>
-                      </a>
-                      {{/compare ~}}
-                    </div>
-                  </div>
-                </div>
-                <a href="/search" class="mdc-button">Advanced search</a>
-              </div> -->
             </div>
           </div>
         </div>
@@ -172,36 +86,66 @@
     </div>
   </div>
 
-  {{> currently_recruiting}}
-
-  <div class="mdc-layout-grid home-jobs">
+  <div class="mdc-layout-grid equal-height home-jobs home-shortlist">
     <div class="mdc-layout-grid__inner">
-      <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone v-margin-full latest-jobs">
-        <div class="mdc-typography--headline5 v-margin-full">
-          Latest jobs
+      <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone v-margin-full">
+        <div class="mdc-typography--headline5">
+          Your shortlist
         </div>
-        {{#each data.primaryResponse.hits.hits ~}}
-        {{> vacancy_mini _source}}
-        {{/each ~}}
-      </div>
-      <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone v-margin-full top-jobs">
-        <div class="mdc-typography--headline5 v-margin-full">
-          Top jobs
-        </div>
-        {{#each data.supplimentaryResponses.top.hits.hits ~}}
-        {{> vacancy_mini _source}}
-        {{/each ~}}
-      </div>
-      <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone v-margin-full shortlist">
-        <div class="mdc-typography--headline5 v-margin-full">
-          Shortlist &amp; notes
-        </div>
-        <p>
-          There are currently no jobs in your shortlist, if you star or write notes on a job it will appear here for easy reference.
-        </p>
       </div>
     </div>
+    <div class="mdc-layout-grid__inner">
+      {{#compare data.supplimentaryResponses.shortlist.hits.total ">" 0}}
+      {{#each data.supplimentaryResponses.shortlist.hits.hits ~}}
+      <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone shortlist-jobs">
+        {{> vacancy_mini _source}}
+      </div>
+      {{/each ~}}
+      {{else}}
+      <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone v-margin-full">
+        <p>
+          There are currently no jobs in your shortlist, if you shortlist a job it will appear here for easy reference.
+        </p>
+      </div>
+      {{/compare}}
+    </div>
   </div>
+
+  <div class="mdc-layout-grid equal-height home-jobs home-latest">
+    <div class="mdc-layout-grid__inner">
+      <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone">
+        <div class="mdc-typography--headline5">
+          Latest jobs
+        </div>
+      </div>
+    </div>
+    <div class="mdc-layout-grid__inner">
+      {{#each data.primaryResponse.hits.hits ~}}
+      <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone latest-jobs">
+        {{> vacancy_mini _source}}
+      </div>
+      {{/each ~}}
+    </div>
+  </div>
+
+  <div class="mdc-layout-grid equal-height home-jobs home-top">
+    <div class="mdc-layout-grid__inner">
+      <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone">
+        <div class="mdc-typography--headline5">
+          Top jobs
+        </div>
+      </div>
+    </div>
+    <div class="mdc-layout-grid__inner">
+      {{#each data.supplimentaryResponses.top.hits.hits ~}}
+      <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone top-jobs">
+        {{> vacancy_mini _source}}
+      </div>
+      {{/each ~}}
+    </div>
+  </div>
+
+  {{> currently_recruiting}}
 
   {{> tfn_latest}}
 

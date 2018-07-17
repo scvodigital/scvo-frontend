@@ -3,6 +3,7 @@
   "pattern": "/",
   "tasks": [
     "metaData.commonTasks.authNotRequired",
+    "metaData.commonTasks.shortlistIds",
     {
       "name": "primaryResponse",
       "taskModule": "elasticsearch",
@@ -14,7 +15,7 @@
         "queryTemplates": {
           "index": "web-content-production",
           "type": "goodmoves-vacancy",
-          "template": ">context.metaData.handlebars.queries.vacancies_latest"
+          "template": ">context.metaData.handlebars.queries.vacancies_home-latest"
         }
       },
       "renderer": "handlebars"
@@ -32,7 +33,13 @@
             "name": "top",
             "index": "web-content-production",
             "type": "goodmoves-vacancy",
-            "template": ">context.metaData.handlebars.queries.vacancies_top"
+            "template": ">context.metaData.handlebars.queries.vacancies_home-top"
+          },
+          {
+            "name": "shortlist",
+            "index": "web-content-production",
+            "type": "goodmoves-vacancy",
+            "template": ">context.metaData.handlebars.queries.vacancies_shortlist"
           },
           {
             "name": "currently_recruiting",

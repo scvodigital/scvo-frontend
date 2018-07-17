@@ -1,4 +1,4 @@
-<div class="mdc-card full" data-vacancy-id="{{Id}}">
+<div class="mdc-card full {{if top_job "top-job"}}" data-vacancy-id="{{Id}}">
   <!-- <div class="mdc-card__action-icons mdc-chip-set">
     {{> shortlist_chip id=Id}}
   </div> -->
@@ -309,7 +309,7 @@
       <div class="mdc-card__action-buttons demo-card__action-buttons--text-only mdc-card__actions--full-bleed">
         <a href="/organisation/{{organisation.slug}}" class="mdc-card__action">Find out more about {{organisation.name}}</a>
       </div>
-      <div class="mdc-card__action-icons mdc-chip-set pull-right">
+      <div class="mdc-card__action-icons pull-right">
         {{> shortlist_chip id=Id}}
       </div>
     </div>

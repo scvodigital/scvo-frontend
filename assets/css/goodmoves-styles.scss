@@ -525,7 +525,21 @@ a:hover {
 
 .mdc-chip {
   background-color: $mdc-theme-secondary-light;
-  color: $mdc-theme-primary-dark;
+  color: $mdc-theme-secondary-dark;
+  margin: 0;
+  color: rgba(0, 0, 0, 0.54);
+  font-weight: 600;
+  .mdc-chip__text {
+    margin-left: $unit/2;
+  }
+  .mdc-chip__checkmark-path {
+    stroke: white !important;
+  }
+}
+.mdc-chip:hover {
+  .mdc-chip__icon--leading {
+    color: #000;
+  }
 }
 .mdc-chip.mdc-chip--selected {
   background-color: $mdc-theme-primary;
@@ -535,24 +549,6 @@ a:hover {
   background-color: $mdc-theme-primary-dark;
   color: white;
 }
-.mdc-chip .mdc-chip__checkmark-path {
-  stroke: white !important;
-}
-// .mdc-card .mdc-chip-set {
-  .mdc-chip {
-    margin: 0;
-    color: rgba(0, 0, 0, 0.54);
-    // background-color: white;
-    font-weight: 600;
-    .mdc-chip__text {
-      margin-left: $unit/2;
-    }
-  }
-  .mdc-chip.mdc-chip--selected {
-    background-color: $mdc-theme-primary;
-    color: white;
-  }
-// }
 
 .noselect {
   -webkit-touch-callout: none; /* iOS Safari */
@@ -707,6 +703,13 @@ a {
   width: 100%;
   background-color: #fff;
   margin-bottom: $unit*1.5;
+  .mdc-card__info--vacancy-row {
+    padding: $unit/2;
+  }
+  .search-result-article__snippet,
+  .mdc-card__info--vacancy-row {
+    flex: 1 0 auto;
+  }
   .mdc-card__info--organisation-title {
     padding: $unit;
   }
@@ -714,19 +717,40 @@ a {
     margin-right: $unit;
   }
   .search-result-article__snippet {
-    padding: $unit;
-    background-color: $mdc-theme-complimentary-light;
+    padding: 0 $unit $unit/2;
+    // background-color: $mdc-theme-complimentary-light;
   }
   .user-notes {
     display: none;
   }
   .mdc-card__actions {
-    background-color: $mdc-theme-complimentary;
+    // background-color: $mdc-theme-complimentary;
+    background-color: $mdc-theme-complimentary-light;
     .mdc-card__action {
       color: $mdc-theme-primary-dark;
     }
   }
 }
+.mdc-card.search-result {
+  border-top: $unit/4 solid #42842A;
+  .mdc-card__info--vacancy-row {
+    padding-bottom: 0;
+  }
+}
+.mdc-card.search-result.top-job {
+  border-top: $unit/2 solid #42842A;
+  .mdc-card__info--vacancy-row {
+    padding-bottom: $unit/2;
+  }
+  .search-result-article__snippet {
+    padding: $unit;
+    background-color: $mdc-theme-complimentary-light;
+  }
+  .mdc-card__actions {
+    background-color: $mdc-theme-complimentary;
+  }
+}
+
 .mdc-card.gist.tfn-post,
 .mdc-card.gist.tfn-feature {
   background-color: transparent;
@@ -915,6 +939,18 @@ a {
   background-color: #fff;
 }
 
+// Grid Cards ==================================================================
+
+.mdc-layout-grid.equal-height .mdc-layout-grid__cell {
+  display: flex;
+  .mdc-card {
+    justify-content: start;
+    .mdc-card__supporting-text {
+      flex: 1 0 auto;
+    }
+  }
+}
+
 .mdc-chip-set {
   float: left;
   padding: 0;
@@ -923,7 +959,7 @@ a {
     margin: 0 $unit/2 $unit/4 0;
   }
 }
-.top-jobs .top-job,
+.top-jobs .mdc-card__info--vacancy-title .top-job,
 .goodmoves-organisation .mdc-card.list .mdc-card__info--vacancy-organisation {
   display: none !important;
 }
@@ -1020,9 +1056,11 @@ hr {
     }
   }
 }
+.home-shortlist,
 body.shortlist {
   .removed-from-shortlist {
-    opacity: 0.75;
+    opacity: 0.6;
+    transition: opacity .5s ease-in-out;
   }
   .removed-from-shortlist::after,
   .removed-from-shortlist:hover::after {
