@@ -32,6 +32,11 @@
       twitter: {
         getProvider: function() { return new firebase.auth.TwitterAuthProvider(); },
         label: 'Twitter'
+      },
+      github: {
+        gitProvider: function() { return new firebase.auth.GithubAuthProvider(); },
+        scopes: [ 'user:email' ],
+        label: 'Github'
       }
     }
 
