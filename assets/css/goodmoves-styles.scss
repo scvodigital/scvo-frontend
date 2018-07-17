@@ -1855,6 +1855,11 @@ footer.mdc-layout__footer {
 .l-padding { padding-left: $unit/2; }
 .r-padding { padding-right: $unit/2; }
 
+.t-padding-full { padding-top: $unit; }
+.b-padding-full { padding-bottom: $unit; }
+.l-padding-full { padding-left: $unit; }
+.r-padding-full { padding-right: $unit; }
+
 .v-margin {
   margin-top: $unit/2;
   margin-bottom: $unit/2;
@@ -1878,6 +1883,11 @@ footer.mdc-layout__footer {
 .l-margin { margin-left: $unit/2; }
 .r-margin { margin-right: $unit/2; }
 
+.t-margin-full { margin-top: $unit; }
+.b-margin-full { margin-bottom: $unit; }
+.l-margin-full { margin-left: $unit; }
+.r-margin-full { margin-right: $unit; }
+
 .cursor-pointer { cursor: pointer; }
 .cursor-arrow { cursor: default; }
 
@@ -1894,6 +1904,28 @@ footer.mdc-layout__footer {
 }
 .mdc-tab-bar--left {
   margin: 0;
+}
+
+.middle-line-text {
+  border-bottom: 1px solid $mdc-theme-primary-light;
+  line-height: 0;
+  text-align: center;
+  vertical-align: middle;
+
+  span {
+    background-color: #f5f5f5;
+    padding: $unit;
+  }
+}
+
+.button-row {
+  display: flex;
+  flex-direction: row;
+  margin: $unit 0;
+
+  button {
+    flex: 1;
+  }
 }
 
 @include mdc-switch-knob-color($mdc-theme-primary);
