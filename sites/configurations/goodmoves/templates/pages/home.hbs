@@ -95,13 +95,21 @@
           </div>
         </div>
       </div>
-      <div class="mdc-layout-grid__inner">
+    </div>
+    <div class="mdc-layout-grid equal-height home-jobs home-shortlist">
+      <div class="mdc-layout-grid__inner scrolling-grid">
         {{#compare data.supplimentaryResponses.shortlist.hits.total ">" 0}}
         {{#each data.supplimentaryResponses.shortlist.hits.hits ~}}
         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone shortlist-jobs">
           {{> vacancy_mini _source}}
         </div>
         {{/each ~}}
+        <div class="scroll-left">
+          <span class="far fa-angle-left fa-5x"></span>
+        </div>
+        <div class="scroll-right">
+          <span class="far fa-angle-right fa-5x"></span>
+        </div>
         {{else}}
         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone v-margin-full">
           <p>

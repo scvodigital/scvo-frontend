@@ -1994,6 +1994,37 @@ form.inline-form {
   display: inline-block;
 }
 
+.scrolling-grid {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+  padding-bottom: $unit;
+  
+  .mdc-layout-grid__cell {
+    flex: 0 0 auto;
+    
+    .mdc-card {
+      width: 35vw;
+      min-width: 300px;
+      margin: 0 7px;
+    }
+  }
+
+  .scroll-left {
+    position: absolute;
+    left: $unit;
+    z-index: 1;
+  }
+
+  .scroll-right {
+    position: absolute;
+    right: $unit;
+    z-index: 1;
+  }
+}
+
 @media screen and (max-width: $mobile-breakpoint) {
   .mdc-toolbar-fixed-adjust {
     padding-top: $header-upper-height;
