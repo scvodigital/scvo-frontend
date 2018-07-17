@@ -1,0 +1,70 @@
+<div class="button-row">
+  <button class="mdc-button mdc-button--raised mdc-button--large mdc-ripple-surface mdc-ripple-surface--primary" id="continue-with-google" type="button">
+    <span class="fa fa-google"></span> Google
+  </button>
+  <button class="mdc-button mdc-button--raised mdc-button--large mdc-ripple-surface mdc-ripple-surface--primary" id="continue-with-twitter" type="button">
+    <span class="fa fa-twitter"></span> Twitter
+  </button>
+  <button class="mdc-button mdc-button--raised mdc-button--large mdc-ripple-surface mdc-ripple-surface--primary" id="continue-with-facebook" type="button">
+    <span class="fa fa-facebook"></span> Facebook
+  </button>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var $message = $('{{messageSelector}}');
+    var $loader = $('{{loaderSelector}}');
+    var $google = $('#continue-with-google');
+    var $twitter = $('#continue-with-twitter');
+    var $facebook = $('#continue-with-facebook');
+
+    var providers = {
+      google: {
+        getProvider: function() { return new firebase.auth.GoogleAuthProvider(); },
+        scopes: [ 'email' ],
+        label: 'Google'
+      },
+      facebook: {
+        getProvider: function() { return new firebase.auth.FacebookAuthProvider(); },
+        scopes: [ 'email' ],
+        label: 'Facebook'
+      },
+      twitter: {
+        getProvider: function() { return new firebase.auth.TwitterAuthProvider(); },
+        label: 'Twitter'
+      }
+    }
+
+    $google.on('click', function(evt) { socialLogin('google'); });
+    $facebook.on('click', function(evt) { socialLogin('facebook'); });
+    $twitter.on('click', function(evt) { socialLogin('twitter'); });
+
+    function socialLogin(providerName) {
+      $loader.show();
+      var providerInfo = providers[providerName];
+      var provider = providerInfo.getProvider();
+      if (providerInfo.scopes) {
+        providerInfo.scopes.forEach(function(scope) {
+          provider.addScope(scope);
+        });
+      }
+      goodmoves.app.auth().signInWithPopup(provider).then(function(result) {
+        if (result) {
+          console.log('Registered user:', result);
+          result.user.getIdTokenResult().then(function(idTokenResult) {
+            console.log('ID Token Result', idTokenResult);
+            goodmoves.setCookie('gm_token', idTokenResult.token, 7);
+            window.location.href = '{{@root.request.headers.referer}}';
+          });
+        } else {
+          $message.text('Something went wrong, registerd but no user?').show();
+          $loader.css('display', 'none');
+        }
+      }).catch(function(err) {
+        console.error(providerInfo.label, 'Error:', err);
+        $message.text(err.message).show();
+        $loader.css('display', 'none');
+      });
+    }
+  });
+</script>

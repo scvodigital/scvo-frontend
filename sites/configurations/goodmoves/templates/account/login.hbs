@@ -12,17 +12,7 @@
           <div class="middle-line-text">
             <span>Continue with</span>
           </div>
-          <div class="button-row">
-            <button class="mdc-button mdc-button--raised mdc-button--large mdc-ripple-surface mdc-ripple-surface--primary" id="continue-with-google" type="button">
-              <span class="fa fa-google"></span> Google
-            </button>
-            <button class="mdc-button mdc-button--raised mdc-button--large mdc-ripple-surface mdc-ripple-surface--primary" id="continue-with-twitter" type="button">
-              <span class="fa fa-twitter"></span> Twitter
-            </button>
-            <button class="mdc-button mdc-button--raised mdc-button--large mdc-ripple-surface mdc-ripple-surface--primary" id="continue-with-facebook" type="button">
-              <span class="fa fa-facebook"></span> Facebook
-            </button>
-          </div>
+          {{> social_login loaderSelector="#login-loader" messageSelector="#login-message"}}
 
           <div class="middle-line-text">
             <span>Or login with an email and password</span>
@@ -67,9 +57,6 @@
       var $password = $('#login-password');
       var $login = $('#login-submit');
       var $loader = $('#login-loader');
-      var $google = $('#continue-with-google');
-      var $twitter = $('#continue-with-twitter');
-      var $facebook = $('#continue-with-facebook');
 
       $form.on('submit', function(evt) {
         var email = $email.val();
@@ -89,28 +76,6 @@
             $loader.css('display', 'none');
           }
         }).catch(function(err) {
-          $message.text(err.message).show();
-          $loader.css('display', 'none');
-        });
-      });
-      
-      $google.on('click', function(evt) {
-        var provider = new firebase.auth.GoogleAuthProvider();
-        provider.addScope('email');
-        goodmoves.app.auth().signInWithPopup(provider).then(function(result) {
-          if (result) {
-            console.log('Registered user:', result);
-            result.user.getIdTokenResult().then(function(idTokenResult) {
-              console.log('ID Token Result', idTokenResult);
-              goodmoves.setCookie('gm_token', idTokenResult.token, 7);
-              window.location.href = '/';
-            });
-          } else {
-            $message.text('Something went wrong, registerd but no user?').show();
-            $loader.css('display', 'none');
-          }
-        }).catch(function(err) {
-          console.error('GOOGLE ERROR:', err);
           $message.text(err.message).show();
           $loader.css('display', 'none');
         });
