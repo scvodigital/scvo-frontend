@@ -140,23 +140,6 @@ header {
         display: none;
       }
     }
-    #main-tab-bar {
-      .mdc-tab:first-child {
-        padding-left: $unit;
-      }
-    }
-    #main-tab-bar,
-    #main-extra-tab-bar {
-      .mdc-tab {
-        color: white;
-      }
-      .mdc-tab:hover .mdc-tab--label {
-        border-bottom-color: rgba(255, 255, 255, 0.6);
-      }
-      .mdc-tab.mdc-tab--active .mdc-tab--label {
-        border-bottom-color: rgba(255, 255, 255, 0.9);
-      }
-    }
     #upper-tab-bar {
       .mdc-tab {
         min-width: auto;
@@ -167,6 +150,23 @@ header {
       }
       .mdc-tab.mdc-tab--active .mdc-tab--label {
         border-bottom-color: $mdc-theme-primary;
+      }
+    }
+    #main-tab-bar {
+      .mdc-tab:first-child {
+        padding-left: $unit;
+      }
+    }
+    .mdc-top-app-bar__main .mdc-tab-bar,
+    .mdc-top-app-bar__user .mdc-tab-bar {
+      .mdc-tab {
+        color: white;
+      }
+      .mdc-tab:hover .mdc-tab--label {
+        border-bottom-color: rgba(255, 255, 255, 0.6);
+      }
+      .mdc-tab.mdc-tab--active .mdc-tab--label {
+        border-bottom-color: rgba(255, 255, 255, 0.9);
       }
     }
     .mdc-top-app-bar__navigation-icon {
@@ -429,6 +429,8 @@ footer h3,
   position: absolute;
   height: 100%;
   width: 100%;
+  top: 0;
+  left: 0;
   background-color: $mdc-theme-secondary-light;
   opacity: 0.7;
   display: none;
@@ -1108,7 +1110,7 @@ hr {
 body.shortlist {
   .removed-from-shortlist {
     opacity: 0.6;
-    transition: opacity .5s ease-in-out;
+    transition: opacity .3s ease-in-out;
   }
   .removed-from-shortlist::after,
   .removed-from-shortlist:hover::after {
@@ -2060,6 +2062,7 @@ form.inline-form {
     z-index: 1;
     align-self: center;
     opacity: 0.4;
+    transition: opacity .1s ease-in-out;
   }
 
   .scroll-button:hover {
