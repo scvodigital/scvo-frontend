@@ -1,3 +1,13 @@
+{{#if data.auth ~}}
+{{> sign_out_loader}}
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    window.setTimeout(function() {
+      window.location.href = '/';
+    }, 100);
+  });
+</script>
+{{else}}
 <form id="sign-in-form" method="POST" class="sign-in-form">
   <div class="mdc-card mdc-elevation--z0">
     <div class="mdc-card__info--vacancy">
@@ -79,3 +89,4 @@ document.addEventListener("DOMContentLoaded", function(event) {
   });
 });
 </script>
+{{/if ~}}
