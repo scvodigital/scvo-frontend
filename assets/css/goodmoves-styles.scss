@@ -40,6 +40,14 @@ $desktop-landscape-breakpoint: 1280px;
 @import url('//cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css');
 @import url('//fonts.googleapis.com/css?family=Montserrat:500,700|Open+Sans:400,500,600');
 
+// @include mdc-switch-knob-color($mdc-theme-primary);
+// @include mdc-switch-track-color($mdc-theme-primary);
+//
+// @include mdc-radio-unchecked-stroke-color($mdc-theme-secondary);
+// @include mdc-radio-checked-stroke-color($mdc-theme-primary);
+// @include mdc-radio-ink-color($mdc-theme-primary);
+// @include mdc-radio-focus-indicator-color($mdc-theme-primary);
+
 body {
   background-color: $mdc-theme-footer-dark;
 }
@@ -486,7 +494,35 @@ footer h3,
     }
   }
 }
+.goodmoves-settings {
+  .mdc-button {
+    width: 100%;
+  }
+  .mdc-button.mdc-button--delete {
+    background-color: #dd4b39 !important;
+  }
+}
 .goodmoves-saved-searches {
+  .pull-right {
+    .mdc-typography--body1 {
+      position: relative;
+      display: inline;
+      top: $unit/10;
+      margin-right: $unit/2;
+    }
+    .mdc-form-field {
+      display: inline;
+      .mdc-radio {
+        top: $unit*.9;
+        .mdc-radio__outer-circle {
+          border-color: $mdc-theme-primary !important;
+        }
+        .mdc-radio__inner-circle {
+          background-color: $mdc-theme-primary !important;
+        }
+      }
+    }
+  }
   .mdc-list {
     background-color: white;
     margin-bottom: $unit*1.5;
@@ -496,20 +532,13 @@ footer h3,
     .mdc-layout-grid {
       width: 100%;
     }
-    .saved-search-email-switch,
-    .saved-search-remove {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-    }
-    .saved-search-email-switch {
-      label {
-        margin-left: $unit;
-      }
-    }
     .saved-search-remove {
       margin: 0 auto;
       height: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
     }
   }
 }
@@ -2029,9 +2058,6 @@ footer.mdc-layout__footer {
 .mdc-tab-bar--left {
   margin: 0;
 }
-
-@include mdc-switch-knob-color($mdc-theme-primary);
-@include mdc-switch-track-color($mdc-theme-primary);
 
 form.inline-form {
   display: inline-block;
