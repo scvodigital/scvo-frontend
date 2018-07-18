@@ -853,8 +853,15 @@ img.responsive {
 .mdc-card__title--large,
 .mdc-typography--caption,
 .mdc-menu .mdc-list-item,
-.mdc-typography--headline,
 .supplimentary-list-title,
+.mdc-typography--headline,
+.mdc-typography--headline1,
+.mdc-typography--headline2,
+.mdc-typography--headline3,
+.mdc-typography--headline4,
+.mdc-typography--headline5,
+.mdc-typography--headline6,
+.mdc-typography--headline7,
 .mdc-card__supporting-text,
 .mdc-typography--subheading2,
 .mdc-simple-menu .mdc-list-item,
@@ -990,15 +997,30 @@ figure {
   }
 }
 
-#login-form #login-loader,
-#login-form #login-message {
+#sign-in-form #sign-in-loader,
+#sign-in-form #sign-in-message {
   display: none;
 }
-
+.sign-in-form {
+  position: relative;
+  margin: 3vh auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 500px;
+  .mdc-card,
+  .mdc-button,
+  .mdc-text-field {
+    width: 100%;
+    display: block;
+  }
+}
 .card-loader {
   position: absolute;
   height: 100%;
   width: 100%;
+  top: 0;
+  left: 0;
   background-color: rgba(255, 255, 255, 0.75);
   opacity: 0.7;
   display: none;
@@ -3522,6 +3544,9 @@ p:last-child {
 .v-margin-full {
   margin-top: $unit;
   margin-bottom: $unit;
+}
+.no-margin {
+  margin: 0;
 }
 
 .h-margin {

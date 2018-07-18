@@ -40,13 +40,13 @@ function browseView() {
 function geolocate() {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function(position) {
-      console.log('GEOLOCATION:', position, $distance.val());
+      // console.log('GEOLOCATION:', position, $distance.val());
       searchTermsController.lat = position.coords.latitude;
       searchTermsController.lng = position.coords.longitude;
       reverseLookup(position.coords.latitude, position.coords.longitude);
     });
   } else {
-    console.log('Getting All');
+    // console.log('Getting All');
   }
 }
 
@@ -83,7 +83,7 @@ function addChip(field, term) {
     .data({ field: field, term: slug })
     .attr({ tabindex: 0, role: 'button' })
     .on('click', function(evt) {
-      console.log(evt);
+      // console.log(evt);
       $chip.remove();
     })
     .appendTo($chip);
@@ -100,13 +100,13 @@ function slugify(text) {
 
 $(document).ready(function() {
   $('.scrolling-grid').each(function(i, o) {
-    console.log(o);
+    // console.log(o);
     $(o).find('.scroll-left').on('click', function() {
-      var by = $(o).scrollLeft() - ($(o).width() / 2);
+      var by = $(o).scrollLeft() - ($(o).width() * (3/4));
       o.scroll({ left: by, top: 0, behavior: 'smooth'});
     });
     $(o).find('.scroll-right').on('click', function() {
-      var by = $(o).scrollLeft() + ($(o).width() / 2);
+      var by = $(o).scrollLeft() + ($(o).width() * (3/4));
       o.scroll({ left: by, top: 0, behavior: 'smooth' });
     });
   });

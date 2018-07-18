@@ -1,3 +1,13 @@
+{{#if data.auth ~}}
+{{> sign_out_loader}}
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    window.setTimeout(function() {
+      window.location.href = '/';
+    }, 100);
+  });
+</script>
+{{else}}
 <form id="sign-up-form" method="POST" class="sign-in-form sign-up-form">
   <div class="mdc-card mdc-elevation--z0">
     <div class="mdc-card__info--vacancy">
@@ -17,7 +27,7 @@
         </div>
         <div class="mdc-text-field mdc-text-field--box mdc-text-field--with-leading-icon" data-mdc-auto-init="MDCTextField">
           <span class="far fa-at mdc-text-field__icon" tabindex="-1"></span>
-          <input type="text" id="sign-up-email" class="mdc-text-field__input mdc-text-field--fullwidth" data-lpignore="true" autocomplete="off">
+          <input type="text" id="sign-up-email" class="mdc-text-field__input mdc-text-field--fullwidth" data-lpignore="true" autocomplete="off" />
           <label class="mdc-floating-label mdc-floating-label--float-above" for="sign-up-email">
             Email
           </label>
@@ -25,7 +35,7 @@
         </div>
         <div class="mdc-text-field mdc-text-field--box mdc-text-field--with-leading-icon" data-mdc-auto-init="MDCTextField">
           <span class="far fa-at mdc-text-field__icon" tabindex="-1"></span>
-          <input type="text" id="sign-up-email-confirm" class="mdc-text-field__input mdc-text-field--fullwidth" data-lpignore="true" autocomplete="off">
+          <input type="text" id="sign-up-email-confirm" class="mdc-text-field__input mdc-text-field--fullwidth" data-lpignore="true" autocomplete="off" />
           <label class="mdc-floating-label mdc-floating-label--float-above" for="sign-up-email-confirm">
             Confirm email
           </label>
@@ -34,7 +44,7 @@
 
         <div class="mdc-text-field mdc-text-field--box mdc-text-field--with-leading-icon" data-mdc-auto-init="MDCTextField">
           <span class="far fa-key mdc-text-field__icon" tabindex="-1"></span>
-          <input type="password" id="sign-up-password" class="mdc-text-field__input mdc-text-field--fullwidth" data-lpignore="true" autocomplete="off">
+          <input type="password" id="sign-up-password" class="mdc-text-field__input mdc-text-field--fullwidth" data-lpignore="true" autocomplete="off" />
           <label class="mdc-floating-label mdc-floating-label--float-above" for="sign-up-password">
             Password
           </label>
@@ -42,7 +52,7 @@
         </div>
         <div class="mdc-text-field mdc-text-field--box mdc-text-field--with-leading-icon" data-mdc-auto-init="MDCTextField">
           <span class="far fa-key mdc-text-field__icon" tabindex="-1"></span>
-          <input type="password" id="sign-up-password-confirm" class="mdc-text-field__input mdc-text-field--fullwidth" data-lpignore="true" autocomplete="off">
+          <input type="password" id="sign-up-password-confirm" class="mdc-text-field__input mdc-text-field--fullwidth" data-lpignore="true" autocomplete="off" />
           <label class="mdc-floating-label mdc-floating-label--float-above" for="sign-up-password-confirm">
             Confirm password
           </label>
@@ -112,3 +122,4 @@ document.addEventListener("DOMContentLoaded", function(event) {
   });
 });
 </script>
+{{/if ~}}

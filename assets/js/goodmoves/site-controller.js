@@ -43,7 +43,7 @@ var GoodmovesController = Class.extend({
   },
 
   displayModeChanged: function() {
-    console.log('Display Mode:', this.displayMode);
+    // console.log('Display Mode:', this.displayMode);
   },
 
   setupMaterialDesignComponents: function() {
@@ -81,7 +81,7 @@ var GoodmovesController = Class.extend({
 
     // Collapsibles
     $('[data-collapse-target]').off('click').on('click', function(evt) {
-      console.log('Collapse click:', evt);
+      // console.log('Collapse click:', evt);
       var $el = $(evt.currentTarget);
       var selector = $el.attr('data-collapse-target');
       var $target = $(selector);

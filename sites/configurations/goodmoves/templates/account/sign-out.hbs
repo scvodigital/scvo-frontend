@@ -1,22 +1,14 @@
-  <form id="sign-out-form" method="POST" class="sign-in-form sign-out-form">
-    <div class="mdc-card mdc-elevation--z0">
-      <div class="card-loader" id="sign-out-loader">
-        <div class="card-loader-inner">
-          <span class="far fa-2x fa-circle-notch fa-spin"></span>
-        </div>
-      </div>
-    </div>
-  </form>
-  <script>
-    document.addEventListener("DOMContentLoaded", function(event) {
-      window.setTimeout(function() {
-        goodmoves.app.auth().signOut().then(function() {
-          // window.location.href = '/';
-          goodmoves.setCookie('gm_token');
-          goodmoves.setCookie('gm_cookie');
-        }).catch(function(err) {
-          console.error('Error logging out:', err);
-        });
-      }, 1000);
+{{> sign_out_loader}}
+<script>
+document.addEventListener("DOMContentLoaded", function(event) {
+  window.setTimeout(function() {
+    goodmoves.app.auth().signOut().then(function() {
+      goodmoves.setCookie('gm_token');
+      goodmoves.setCookie('gm_cookie');
+      window.location.href = '/';
+    }).catch(function(err) {
+      console.error('Error signing out:', err);
     });
-  </script>
+  }, 1000);
+});
+</script>
