@@ -2033,11 +2033,25 @@ form.inline-form {
   
   .mdc-layout-grid__cell {
     flex: 0 0 auto;
-    
+   
     .mdc-card {
-      width: 35vw;
-      min-width: 300px;
       margin: 0 7px;
+    }
+     
+    @media screen and (min-width: $desktop-landscape-breakpoint + 1) {
+      .mdc-card {
+        width: 33.333vw;
+      }
+    }
+    @media screen and (min-width: $mobile-breakpoint + 1) and (max-width: $mobile-landscape-breakpoint) {
+      .mdc-card {
+        width: 50vw;
+      }
+    }
+    @media screen and (max-width: $mobile-breakpoint) {
+      .mdc-card {
+        width: 90vw;
+      }
     }
   }
 
