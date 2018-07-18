@@ -6,11 +6,11 @@
       <li><a href="/jobs">Jobs</a></li>
       <li><a href="/jobs/community-jobs-scotland">Community Jobs Scotland</a></li>
       <li><a href="/jobs/community-jobs-scotland/vacancies">Vacancies</a></li>
-      <li>Login</li>
+      <li>Sign out</li>
     </ul>
-    <form id="logout-form" method="POST" class="logout-form">
+    <form id="sign-out-form" method="POST" class="sign-out-form">
       <p class="mdc-typography--title">
-        Logging out&hellip;
+        Signing out&hellip;
       </p>
       <div role="progressbar" class="mdc-linear-progress mdc-linear-progress--indeterminate">
         <div class="mdc-linear-progress__buffering-dots"></div>
@@ -29,10 +29,11 @@
 document.addEventListener("DOMContentLoaded", function(event) {
   window.setTimeout(function() {
     cjsFirebase.auth().signOut().then(function() {
-      window.location.href = '/jobs/community-jobs-scotland/vacancies/login';
       setCookie('cjs_token');
+      setCookie('cjs_cookie');
+      window.location.href = '/jobs/community-jobs-scotland/vacancies/sign-in';
     }).catch(function(err) {
-      console.error('Error logging out:', err);
+      console.error('Error signing out:', err);
     });
   }, 1000);
 });

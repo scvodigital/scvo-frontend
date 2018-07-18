@@ -140,7 +140,7 @@ cjsFirebase.auth().onAuthStateChanged(function(user) {
     console.log('User logged out');
   }
 });
-  
+
 function setCookie(name, value, days) {
   var expires = "";
   if (days) {
