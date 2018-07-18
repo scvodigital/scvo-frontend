@@ -2077,14 +2077,18 @@ form.inline-form {
   -ms-overflow-style: -ms-autohiding-scrollbar;
   padding-bottom: $unit;
   margin: 0 0 $unit/2;
-  .mdc-layout-grid__cell {
+  .mdc-layout-grid__cell.shortlist-jobs,
+  .mdc-layout-grid__cell.latest-jobs,
+  .mdc-layout-grid__cell.top-jobs {
     margin: 0 $unit/2;
   }
-  .mdc-layout-grid__cell:first-child {
+  .mdc-layout-grid__cell.shortlist-jobs:first-child,
+  .mdc-layout-grid__cell.latest-jobs:first-child,
+  .mdc-layout-grid__cell.top-jobs:first-child {
     margin-left: $unit*3;
   }
-  .mdc-layout-grid__cell:last-child {
-    margin-right: $unit*3;
+  .last-card {
+    padding-right: $unit*2.5;
   }
   .mdc-card.align-centre {
     box-shadow: none;

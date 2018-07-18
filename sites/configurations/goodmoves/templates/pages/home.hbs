@@ -105,6 +105,11 @@
             {{> vacancy_mini _source}}
           </div>
           {{/each ~}}
+          <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone shortlist-jobs last-card">
+            <div class="mdc-card align-centre">
+              <a href="/search">Find more jobs for your shortlist</a>
+            </div>
+          </div>
           <div class="scroll-button scroll-left">
             <span class="fal fa-chevron-circle-left fa-3x"></span>
           </div>
@@ -153,7 +158,7 @@
           {{> vacancy_mini _source}}
         </div>
         {{/each ~}}
-        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone latest-jobs">
+        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone latest-jobs last-card">
           <div class="mdc-card align-centre">
             {{#if data.auth ~}}
             <a href="/search?sort=newest">All latest jobs</a>
@@ -189,21 +194,21 @@
   <div class="home-jobs">
     <div class="mdc-layout-grid equal-height home-top">
       <div class="mdc-layout-grid__inner scrolling-grid">
-        {{#each data.supplimentaryResponses.top.hits.hits ~}}
-        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone top-jobs">
-          {{> vacancy_mini _source}}
-        </div>
-        {{/each ~}}
-        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone latest-jobs">
-          <div class="mdc-card align-centre">
-            <a href="/search">Find more jobs</a>
-          </div>
-        </div>
         <div class="scroll-button scroll-left">
           <span class="fal fa-chevron-circle-left fa-3x"></span>
         </div>
         <div class="scroll-button scroll-right">
           <span class="fal fa-chevron-circle-right fa-3x"></span>
+        </div>
+        {{#each data.supplimentaryResponses.top.hits.hits ~}}
+        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone top-jobs">
+          {{> vacancy_mini _source}}
+        </div>
+        {{/each ~}}
+        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone top-jobs last-card">
+          <div class="mdc-card align-centre">
+            <a href="/search">Find more jobs</a>
+          </div>
         </div>
       </div>
     </div>
