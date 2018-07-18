@@ -1743,7 +1743,8 @@ footer,
 }
 .home-jobs {
   background-color: $mdc-theme-secondary-light;
-  padding: 0 $unit*1.5 0 !important;
+  padding: 0 $unit 0 !important;
+  position: relative;
 }
 // .currently-recruiting,
 // .home-jobs {
@@ -2075,15 +2076,15 @@ form.inline-form {
   -webkit-overflow-scrolling: touch;
   -ms-overflow-style: -ms-autohiding-scrollbar;
   padding-bottom: $unit;
-  margin: 0 $unit*2.5 $unit/2;
+  margin: 0 0 $unit/2;
   .mdc-layout-grid__cell {
     margin: 0 $unit/2;
   }
   .mdc-layout-grid__cell:first-child {
-    margin-left: 0;
+    margin-left: $unit*3;
   }
   .mdc-layout-grid__cell:last-child {
-    margin-right: 0;
+    margin-right: $unit*3;
   }
   .mdc-card.align-centre {
     box-shadow: none;
@@ -2109,7 +2110,7 @@ form.inline-form {
   }
   .scroll-button {
     position: absolute;
-    z-index: 1;
+    z-index: 2;
     align-self: center;
     // opacity: 0.4;
     // transition: opacity .1s ease-in-out;
@@ -2125,6 +2126,17 @@ form.inline-form {
   .scroll-right {
     right: $unit/2;
   }
+}
+.scrolling-grid::after {
+  pointer-events: none
+  content: '';
+  position: absolute;
+  left: 0; right: 0;
+  top: 0; bottom: 0;
+  z-index: 1;
+  background-image:
+    linear-gradient(to right, $mdc-theme-secondary-light, $mdc-theme-secondary-light $unit*2, rgba(255, 255, 255, 0) $unit*4),
+    linear-gradient(to left , $mdc-theme-secondary-light, $mdc-theme-secondary-light $unit*2, rgba(255, 255, 255, 0) $unit*4);
 }
 
 @media screen and (max-width: $mobile-breakpoint) {
