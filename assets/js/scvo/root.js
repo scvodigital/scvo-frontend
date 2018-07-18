@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
     mdc.autoInit();
 
     // Resize iframes
-    window.addEventListener("message", (event) => {
+    window.addEventListener("message", function (event) {
         if (event.data.hasOwnProperty('event')) {
             console.log(event);
             switch (event.data.event) {
@@ -116,27 +116,15 @@ document.addEventListener('DOMContentLoaded', function() {
       storageBucket: "scvo-auth-cjs.appspot.com",
       messagingSenderId: "550823198000"
     };
-    var cjsFirebase = firebase.initializeApp(cjsConfig, 'cjs');
-
-    // Firebase Auth Functions
-    cjsFirebase.auth().onAuthStateChanged(function(user) {
-      if (user) {
-        console.log('User logged in', user);
-        user.getIdToken().then(function(idToken) {
-          setCookie('cjs_token', idToken, 7);
-        });
-      } else {
-        console.log('User logged out');
-      }
-    });
-
-    function setCookie(name, value, days) {
-      var expires = "";
-      if (days) {
-        var date = new Date();
-        date.setTime(date.getTime() + (days*24*60*60*1000));
-        expires = "; expires=" + date.toUTCString();
-      }
-      document.cookie = name + "=" + (value || "")  + expires + "; path=/; secure";
-    }
+    cjsFirebase = firebase.initializeApp(cjsConfig, 'cjs');
 });
+var cjsFirebase;
+function setCookie(name, value, days) {
+  var expires = "";
+  if (days) {
+    var date = new Date();
+    date.setTime(date.getTime() + (days*24*60*60*1000));
+    expires = "; expires=" + date.toUTCString();
+  }
+  document.cookie = name + "=" + (value || "")  + expires + "; path=/; secure";
+}
