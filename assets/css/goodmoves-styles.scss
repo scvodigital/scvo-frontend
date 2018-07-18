@@ -2038,9 +2038,9 @@ form.inline-form {
       margin: 0 7px;
     }
      
-    @media screen and (min-width: $desktop-landscape-breakpoint + 1) {
+    @media screen and (min-width: $mobile-landscape-breakpoint + 1) {
       .mdc-card {
-        width: 33.333vw;
+        width: 33vw;
       }
     }
     @media screen and (min-width: $mobile-breakpoint + 1) and (max-width: $mobile-landscape-breakpoint) {
@@ -2055,16 +2055,23 @@ form.inline-form {
     }
   }
 
-  .scroll-left {
+  .scroll-button {
     position: absolute;
-    left: $unit;
     z-index: 1;
+    align-self: center;
+    opacity: 0.4;
+  }
+
+  .scroll-button:hover {
+    opacity: 1;
+  }
+
+  .scroll-left {
+    left: $unit;
   }
 
   .scroll-right {
-    position: absolute;
     right: $unit;
-    z-index: 1;
   }
 }
 
