@@ -108,45 +108,35 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     window.setupAutoSearchForms();
 
-    // Browser Update
-    var $buoop = {notify:{i:-5,f:-4,o:-4,s:-2,c:-4},insecure:true,api:5};
-    function $buo_f(){
-        var e = document.createElement("script");
-        e.src = "/assets/js/browser-update.min.js";
-        document.body.appendChild(e);
+    var cjsConfig = {
+      apiKey: "AIzaSyBi394RRo4NADgb_slJOYgzOugxXQPjKT8",
+      authDomain: "scvo-auth-cjs.firebaseapp.com",
+      databaseURL: "https://scvo-auth-cjs.firebaseio.com",
+      projectId: "scvo-auth-cjs",
+      storageBucket: "scvo-auth-cjs.appspot.com",
+      messagingSenderId: "550823198000"
     };
-    try {document.addEventListener("DOMContentLoaded", $buo_f,false)}
-    catch(e){window.attachEvent("onload", $buo_f)}
-});
+    var cjsFirebase = firebase.initializeApp(cjsConfig, 'cjs');
 
-var cjsConfig = {
-  apiKey: "AIzaSyBi394RRo4NADgb_slJOYgzOugxXQPjKT8",
-  authDomain: "scvo-auth-cjs.firebaseapp.com",
-  databaseURL: "https://scvo-auth-cjs.firebaseio.com",
-  projectId: "scvo-auth-cjs",
-  storageBucket: "scvo-auth-cjs.appspot.com",
-  messagingSenderId: "550823198000"
-};
-var cjsFirebase = firebase.initializeApp(cjsConfig, 'cjs');
-
-// Firebase Auth Functions
-cjsFirebase.auth().onAuthStateChanged(function(user) {
-  if (user) {
-    console.log('User logged in', user);
-    user.getIdToken().then(function(idToken) {
-      setCookie('cjs_token', idToken, 7);
+    // Firebase Auth Functions
+    cjsFirebase.auth().onAuthStateChanged(function(user) {
+      if (user) {
+        console.log('User logged in', user);
+        user.getIdToken().then(function(idToken) {
+          setCookie('cjs_token', idToken, 7);
+        });
+      } else {
+        console.log('User logged out');
+      }
     });
-  } else {
-    console.log('User logged out');
-  }
-});
 
-function setCookie(name, value, days) {
-  var expires = "";
-  if (days) {
-    var date = new Date();
-    date.setTime(date.getTime() + (days*24*60*60*1000));
-    expires = "; expires=" + date.toUTCString();
-  }
-  document.cookie = name + "=" + (value || "")  + expires + "; path=/; secure";
-}
+    function setCookie(name, value, days) {
+      var expires = "";
+      if (days) {
+        var date = new Date();
+        date.setTime(date.getTime() + (days*24*60*60*1000));
+        expires = "; expires=" + date.toUTCString();
+      }
+      document.cookie = name + "=" + (value || "")  + expires + "; path=/; secure";
+    }
+});
