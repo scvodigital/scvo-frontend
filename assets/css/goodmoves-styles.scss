@@ -369,10 +369,13 @@ footer h3,
   background-color: $mdc-theme-primary;
 }
 
-.login-form,
-.register-form {
-  max-width: 40vw;
-  margin: 10vh auto;
+.sign-in-form {
+  margin: 4vh auto;
+  .mdc-card {
+    min-height: 40vh;
+    max-width: 500px;
+    margin: 0 auto;
+  }
   .middle-line-text {
     margin: $unit*2 0 $unit;
     border-bottom: 2px solid #dfdfdf;
@@ -413,10 +416,13 @@ footer h3,
   .mdc-card {
     position: relative;
   }
-  #login-message,
-  #register-message {
+  #sign-in-message,
+  #sign-up-message {
     display: none;
   }
+}
+#sign-out-loader {
+  display: flex;
 }
 
 .card-loader {
@@ -429,7 +435,7 @@ footer h3,
   align-items: center;
   justify-content: center;
   .card-loader-inner {
-    color: $mdc-theme-primary;
+    color: $mdc-theme-primary-dark;
   }
 }
 
@@ -759,41 +765,32 @@ a {
   }
   .search-result-article__snippet {
     padding: 0 $unit $unit/2;
-    // background-color: $mdc-theme-complimentary-light;
   }
   .user-notes {
     display: none;
   }
   .mdc-card__actions {
-    // background-color: $mdc-theme-complimentary;
     background-color: $mdc-theme-complimentary-light;
     .mdc-card__action {
       color: $mdc-theme-primary-dark;
     }
   }
 }
-.mdc-card.list,
-.mdc-card.mini,
-.mdc-card.gist,
-.mdc-card.search-result {
+.goodmoves-vacancy.mdc-card.list,
+.goodmoves-vacancy.mdc-card.mini,
+.goodmoves-vacancy.mdc-card.gist,
+.goodmoves-vacancy.mdc-card.search-result {
   border-top: $unit/3 solid $mdc-theme-complimentary;
   .mdc-card__info--vacancy-row {
     padding-top: $unit/4;
     padding-bottom: 0;
   }
 }
-.mdc-card.list.top-job,
-.mdc-card.mini.top-job,
-.mdc-card.gist.top-job,
-.mdc-card.search-result.top-job {
+.goodmoves-vacancy.mdc-card.list.top-job,
+.goodmoves-vacancy.mdc-card.mini.top-job,
+.goodmoves-vacancy.mdc-card.gist.top-job,
+.goodmoves-vacancy.mdc-card.search-result.top-job {
   border-top-color: $mdc-theme-primary;
-  .mdc-card__info--vacancy-row {
-    // padding-bottom: $unit/2;
-  }
-  .search-result-article__snippet {
-    // padding: $unit;
-    // background-color: $mdc-theme-complimentary-light;
-  }
   .mdc-card__actions {
     background-color: $mdc-theme-primary;
     .mdc-card__action {
@@ -1699,9 +1696,12 @@ footer,
   }
 }
 
+.home-heading {
+  padding: $unit $unit*1.9;
+}
 .home-jobs {
   background-color: $mdc-theme-secondary-light;
-  padding: 0 $unit*1.5 $unit !important;
+  padding: 0 $unit*1.5 0 !important;
 }
 // .currently-recruiting,
 // .home-jobs {
@@ -2030,14 +2030,14 @@ form.inline-form {
   -webkit-overflow-scrolling: touch;
   -ms-overflow-style: -ms-autohiding-scrollbar;
   padding-bottom: $unit;
-  
+
   .mdc-layout-grid__cell {
     flex: 0 0 auto;
-   
+
     .mdc-card {
       margin: 0 7px;
     }
-     
+
     @media screen and (min-width: $mobile-landscape-breakpoint + 1) {
       .mdc-card {
         width: 33vw;

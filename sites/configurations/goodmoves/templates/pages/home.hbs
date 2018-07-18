@@ -87,15 +87,16 @@
   </div>
 
   {{#if data.auth}}
-    <div class="mdc-layout-grid equal-height home-jobs home-shortlist">
+    <div class="mdc-layout-grid home-heading">
       <div class="mdc-layout-grid__inner">
-        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone v-margin-full">
+        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone">
           <div class="mdc-typography--headline5">
             Your shortlist
           </div>
         </div>
       </div>
     </div>
+
     <div class="mdc-layout-grid equal-height home-jobs home-shortlist">
       <div class="mdc-layout-grid__inner scrolling-grid">
         {{#compare data.supplimentaryResponses.shortlist.hits.total ">" 0}}
@@ -121,7 +122,8 @@
     </div>
   {{/if}}
 
-  <div class="mdc-layout-grid equal-height home-jobs home-latest">
+  {{#compare data.primaryResponse.hits.total ">" 0}}
+  <div class="mdc-layout-grid home-heading">
     <div class="mdc-layout-grid__inner">
       <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone">
         <div class="mdc-typography--headline5">
@@ -129,16 +131,26 @@
         </div>
       </div>
     </div>
-    <div class="mdc-layout-grid__inner">
+  </div>
+  <div class="mdc-layout-grid equal-height home-jobs home-latest">
+    <div class="mdc-layout-grid__inner scrolling-grid">
       {{#each data.primaryResponse.hits.hits ~}}
       <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone latest-jobs">
         {{> vacancy_mini _source}}
       </div>
       {{/each ~}}
+      <div class="scroll-button scroll-left">
+        <span class="fas fa-chevron-circle-left fa-3x"></span>
+      </div>
+      <div class="scroll-button scroll-right">
+        <span class="fas fa-chevron-circle-right fa-3x"></span>
+      </div>
     </div>
   </div>
+  {{/compare}}
 
-  <div class="mdc-layout-grid equal-height home-jobs home-top">
+  {{#compare data.supplimentaryResponses.top.hits.total ">" 0}}
+  <div class="mdc-layout-grid home-heading">
     <div class="mdc-layout-grid__inner">
       <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone">
         <div class="mdc-typography--headline5">
@@ -146,14 +158,23 @@
         </div>
       </div>
     </div>
-    <div class="mdc-layout-grid__inner">
+  </div>
+  <div class="mdc-layout-grid equal-height home-jobs home-top">
+    <div class="mdc-layout-grid__inner scrolling-grid">
       {{#each data.supplimentaryResponses.top.hits.hits ~}}
       <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone top-jobs">
         {{> vacancy_mini _source}}
       </div>
       {{/each ~}}
+      <div class="scroll-button scroll-left">
+        <span class="fas fa-chevron-circle-left fa-3x"></span>
+      </div>
+      <div class="scroll-button scroll-right">
+        <span class="fas fa-chevron-circle-right fa-3x"></span>
+      </div>
     </div>
   </div>
+  {{/compare}}
 
   {{> currently_recruiting}}
 

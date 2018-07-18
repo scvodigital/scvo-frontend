@@ -1,32 +1,32 @@
-<form id="register-form" method="POST" class="register-form">
+<form id="sign-up-form" method="POST" class="sign-in-form sign-up-form">
   <div class="mdc-card mdc-elevation--z0">
     <div class="mdc-card__info--vacancy">
       <div class="mdc-card__info--vacancy-title mdc-typography--headline4 x-padding">
-        Register
+        Sign up
       </div>
     </div>
-    <div class="mdc-card__info x-padding-full mdc-theme--primary-bg mdc-theme--on-primary" id="register-message">
+    <div class="mdc-card__info x-padding-full mdc-theme--primary-bg mdc-theme--on-primary" id="sign-up-message">
       <span id="form-message"></span>
     </div>
     <div class="mdc-card__info x-padding-full">
       <div class="mdc-typography--body1" id="form-section-email">
-        {{> social_login loaderSelector="#register-loader" messageSelector="#register-message"}}
+        {{> sign_in_social loaderSelector="#sign-up-loader" messageSelector="#sign-up-message"}}
 
         <div class="middle-line-text">
           <span>or</span>
         </div>
         <div class="mdc-text-field mdc-text-field--box mdc-text-field--with-leading-icon" data-mdc-auto-init="MDCTextField">
           <span class="far fa-at mdc-text-field__icon" tabindex="-1"></span>
-          <input type="text" id="register-email" class="mdc-text-field__input mdc-text-field--fullwidth" data-lpignore="true" autocomplete="off">
-          <label class="mdc-floating-label mdc-floating-label--float-above" for="register-email">
+          <input type="text" id="sign-up-email" class="mdc-text-field__input mdc-text-field--fullwidth" data-lpignore="true" autocomplete="off">
+          <label class="mdc-floating-label mdc-floating-label--float-above" for="sign-up-email">
             Email
           </label>
           <div class="mdc-line-ripple"></div>
         </div>
         <div class="mdc-text-field mdc-text-field--box mdc-text-field--with-leading-icon" data-mdc-auto-init="MDCTextField">
           <span class="far fa-at mdc-text-field__icon" tabindex="-1"></span>
-          <input type="text" id="register-email-confirm" class="mdc-text-field__input mdc-text-field--fullwidth" data-lpignore="true" autocomplete="off">
-          <label class="mdc-floating-label mdc-floating-label--float-above" for="register-email-confirm">
+          <input type="text" id="sign-up-email-confirm" class="mdc-text-field__input mdc-text-field--fullwidth" data-lpignore="true" autocomplete="off">
+          <label class="mdc-floating-label mdc-floating-label--float-above" for="sign-up-email-confirm">
             Confirm email
           </label>
           <div class="mdc-line-ripple"></div>
@@ -34,45 +34,45 @@
 
         <div class="mdc-text-field mdc-text-field--box mdc-text-field--with-leading-icon" data-mdc-auto-init="MDCTextField">
           <span class="far fa-key mdc-text-field__icon" tabindex="-1"></span>
-          <input type="password" id="register-password" class="mdc-text-field__input mdc-text-field--fullwidth" data-lpignore="true" autocomplete="off">
-          <label class="mdc-floating-label mdc-floating-label--float-above" for="register-password">
+          <input type="password" id="sign-up-password" class="mdc-text-field__input mdc-text-field--fullwidth" data-lpignore="true" autocomplete="off">
+          <label class="mdc-floating-label mdc-floating-label--float-above" for="sign-up-password">
             Password
           </label>
           <div class="mdc-line-ripple"></div>
         </div>
         <div class="mdc-text-field mdc-text-field--box mdc-text-field--with-leading-icon" data-mdc-auto-init="MDCTextField">
           <span class="far fa-key mdc-text-field__icon" tabindex="-1"></span>
-          <input type="password" id="register-password-confirm" class="mdc-text-field__input mdc-text-field--fullwidth" data-lpignore="true" autocomplete="off">
-          <label class="mdc-floating-label mdc-floating-label--float-above" for="register-password-confirm">
+          <input type="password" id="sign-up-password-confirm" class="mdc-text-field__input mdc-text-field--fullwidth" data-lpignore="true" autocomplete="off">
+          <label class="mdc-floating-label mdc-floating-label--float-above" for="sign-up-password-confirm">
             Confirm password
           </label>
           <div class="mdc-line-ripple"></div>
         </div>
       </div>
-    </div>
-    <div id="form-section-register-buttons">
-      <button class="mdc-button mdc-button--raised" type="submit" id="register-submit">
-        Register
-      </button>
-    </div>
-    <div class="card-loader" id="register-loader">
-      <div class="card-loader-inner">
-        <span class="far fa-2x fa-circle-notch fa-spin"></span>
+      <div id="form-section-sign-up-buttons">
+        <button class="mdc-button mdc-button--raised" type="submit" id="sign-up-submit">
+          Sign up
+        </button>
+      </div>
+      <div class="card-loader" id="sign-up-loader">
+        <div class="card-loader-inner">
+          <span class="far fa-2x fa-circle-notch fa-spin"></span>
+        </div>
       </div>
     </div>
   </div>
 </form>
 <script>
 document.addEventListener("DOMContentLoaded", function(event) {
-  var $form = $('#register-form');
-  var $message = $('#register-message');
+  var $form = $('#sign-up-form');
+  var $message = $('#sign-up-message');
   var $emailForm = $('#email-password-form');
-  var $email = $('#register-email');
-  var $emailConfirm = $('#register-email-confirm');
-  var $password = $('#register-password');
-  var $passwordConfirm = $('#register-password-confirm');
-  var $register = $('#register-submit');
-  var $loader = $('#register-loader');
+  var $email = $('#sign-up-email');
+  var $emailConfirm = $('#sign-up-email-confirm');
+  var $password = $('#sign-up-password');
+  var $passwordConfirm = $('#sign-up-password-confirm');
+  var $register = $('#sign-up-submit');
+  var $loader = $('#sign-up-loader');
 
   $form.on('submit', function(evt) {
     $loader.css('display', 'flex');
@@ -102,7 +102,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
           window.location.href = '/';
         });
       } else {
-        $message.text('Something went wrong, registerd but no user?').show();
+        $message.text('Something went wrong, signed up but no user?').show();
         $loader.css('display', 'none');
       }
     }).catch(function(err) {

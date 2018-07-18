@@ -40,11 +40,11 @@
       }
     };
 
-    $google.on('click', function(evt) { socialLogin('google'); });
-    $facebook.on('click', function(evt) { socialLogin('facebook'); });
-    $twitter.on('click', function(evt) { socialLogin('twitter'); });
+    $google.on('click', function(evt) { socialSignIn('google'); });
+    $facebook.on('click', function(evt) { socialSignIn('facebook'); });
+    $twitter.on('click', function(evt) { socialSignIn('twitter'); });
 
-    function socialLogin(providerName) {
+    function socialSignIn(providerName) {
       $loader.show();
       var providerInfo = providers[providerName];
       var provider = providerInfo.getProvider();
