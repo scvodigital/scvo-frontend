@@ -46,9 +46,41 @@
     Account
   </h2>
   <p class="mdc-typography--body1">
-    <button class="mdc-button mdc-button--raised">
+    <button class="mdc-button mdc-button--raised" data-dialog-target="#delete-user-dialog">
       <span class="far fa-trash mdc-list-item__graphic" aria-hidden="true"></span>
       Delete my account
     </button>
   </p>
 </div>
+
+<aside id="delete-user-dialog"
+  class="mdc-dialog"
+  role="alertdialog"
+  aria-labelledby="delete-user-dialog-label"
+  aria-describedby="delete-user-dialog-description"
+  data-mdc-auto-init="MDCDialog">
+  <div action="/delete-user" method="GET" class="mdc-dialog__surface">
+    <header class="mdc-dialog__header">
+      <h2 id="delete-user-dialog-label" class="mdc-dialog__header__title">
+        Are you sure you want to delete your account?
+      </h2>
+    </header>
+    <section id="delete-user-dialog-description" class="mdc-dialog__body">
+      <p>
+        Deleting your account will:
+      </p>
+      <ul>
+        <li>Remove all email subscriptions</li>
+        <li>Remove all saved searches</li>
+        <li>Remove all shortlisted vacancies</li>
+        <li>Remove all all notes</li>
+        <li>Remove your account from the Goodmoves system</li>
+      </ul>
+    </section>
+    <footer class="mdc-dialog__footer">
+      <button type="button" class="mdc-button mdc-dialog__footer__button mdc-dialog__footer__button--cancel">No</button>
+      <a href="/delete-user" class="mdc-button mdc-dialog__footer__button mdc-dialog__footer__button--accept">Yes</a>
+    </footer>
+  </div>
+  <div class="mdc-dialog__backdrop"></div>
+</aside>

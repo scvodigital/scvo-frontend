@@ -369,26 +369,73 @@ footer h3,
   background-color: $mdc-theme-primary;
 }
 
-.login-form, .register-form{
-  margin: 10vh auto;
+.sign-in-form {
+  margin: 4vh auto;
+  .mdc-card {
+    min-height: 40vh;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  .middle-line-text {
+    margin: $unit*2 0 $unit;
+    border-bottom: 2px solid #dfdfdf;
+    line-height: 0;
+    text-align: center;
+    vertical-align: middle;
+    span {
+      background-color: $mdc-theme-secondary-light;
+      padding: $unit;
+      color: #555;
+    }
+  }
+  .mdc-button {
+    position: relative;
+    display: block;
+    margin-bottom: $unit/2;
+    width: 100%;
+    color: white;
+    width: 100%;
+    color: white;
+    line-height: $unit*3;
+    height: $unit*3;
+    .fa-2x {
+      position: absolute;
+      top: .6rem;
+      left: .5rem;
+    }
+  }
+  #continue-with-google {
+    background-color: #dd4b39;
+  }
+  #continue-with-twitter {
+    background-color: #0084b4;
+  }
+  #continue-with-facebook {
+    background-color: #3b5998;
+  }
   .mdc-card {
     position: relative;
   }
-  #login-message, #register-message {
+  #sign-in-message,
+  #sign-up-message {
     display: none;
   }
+}
+#sign-out-loader {
+  display: flex;
 }
 
 .card-loader {
   position: absolute;
   height: 100%;
   width: 100%;
-  background-color: $mdc-theme-complimentary-light;
+  background-color: $mdc-theme-secondary-light;
   opacity: 0.7;
   display: none;
   align-items: center;
   justify-content: center;
   .card-loader-inner {
+    color: $mdc-theme-primary-dark;
   }
 }
 
@@ -525,7 +572,21 @@ a:hover {
 
 .mdc-chip {
   background-color: $mdc-theme-secondary-light;
-  color: $mdc-theme-primary-dark;
+  color: $mdc-theme-secondary-dark;
+  margin: 0;
+  color: rgba(0, 0, 0, 0.54);
+  font-weight: 600;
+  .mdc-chip__text {
+    margin-left: $unit/2;
+  }
+  .mdc-chip__checkmark-path {
+    stroke: white !important;
+  }
+}
+.mdc-chip:hover {
+  .mdc-chip__icon--leading {
+    color: #000;
+  }
 }
 .mdc-chip.mdc-chip--selected {
   background-color: $mdc-theme-primary;
@@ -535,24 +596,6 @@ a:hover {
   background-color: $mdc-theme-primary-dark;
   color: white;
 }
-.mdc-chip .mdc-chip__checkmark-path {
-  stroke: white !important;
-}
-// .mdc-card .mdc-chip-set {
-  .mdc-chip {
-    margin: 0;
-    color: rgba(0, 0, 0, 0.54);
-    // background-color: white;
-    font-weight: 600;
-    .mdc-chip__text {
-      margin-left: $unit/2;
-    }
-  }
-  .mdc-chip.mdc-chip--selected {
-    background-color: $mdc-theme-primary;
-    color: white;
-  }
-// }
 
 .noselect {
   -webkit-touch-callout: none; /* iOS Safari */
@@ -707,6 +750,13 @@ a {
   width: 100%;
   background-color: #fff;
   margin-bottom: $unit*1.5;
+  .mdc-card__info--vacancy-row {
+    padding: $unit/2;
+  }
+  .search-result-article__snippet,
+  .mdc-card__info--vacancy-row {
+    flex: 1 0 auto;
+  }
   .mdc-card__info--organisation-title {
     padding: $unit;
   }
@@ -714,19 +764,41 @@ a {
     margin-right: $unit;
   }
   .search-result-article__snippet {
-    padding: $unit;
-    background-color: $mdc-theme-complimentary-light;
+    padding: 0 $unit $unit/2;
   }
   .user-notes {
     display: none;
   }
   .mdc-card__actions {
-    background-color: $mdc-theme-complimentary;
+    background-color: $mdc-theme-complimentary-light;
     .mdc-card__action {
       color: $mdc-theme-primary-dark;
     }
   }
 }
+.goodmoves-vacancy.mdc-card.list,
+.goodmoves-vacancy.mdc-card.mini,
+.goodmoves-vacancy.mdc-card.gist,
+.goodmoves-vacancy.mdc-card.search-result {
+  border-top: $unit/3 solid $mdc-theme-complimentary;
+  .mdc-card__info--vacancy-row {
+    padding-top: $unit/4;
+    padding-bottom: 0;
+  }
+}
+.goodmoves-vacancy.mdc-card.list.top-job,
+.goodmoves-vacancy.mdc-card.mini.top-job,
+.goodmoves-vacancy.mdc-card.gist.top-job,
+.goodmoves-vacancy.mdc-card.search-result.top-job {
+  border-top-color: $mdc-theme-primary;
+  .mdc-card__actions {
+    background-color: $mdc-theme-primary;
+    .mdc-card__action {
+      color: white;
+    }
+  }
+}
+
 .mdc-card.gist.tfn-post,
 .mdc-card.gist.tfn-feature {
   background-color: transparent;
@@ -915,6 +987,18 @@ a {
   background-color: #fff;
 }
 
+// Grid Cards ==================================================================
+
+.mdc-layout-grid.equal-height .mdc-layout-grid__cell {
+  display: flex;
+  .mdc-card {
+    justify-content: start;
+    .mdc-card__supporting-text {
+      flex: 1 0 auto;
+    }
+  }
+}
+
 .mdc-chip-set {
   float: left;
   padding: 0;
@@ -923,7 +1007,7 @@ a {
     margin: 0 $unit/2 $unit/4 0;
   }
 }
-.top-jobs .top-job,
+.top-jobs .mdc-card__info--vacancy-title .top-job,
 .goodmoves-organisation .mdc-card.list .mdc-card__info--vacancy-organisation {
   display: none !important;
 }
@@ -1020,9 +1104,11 @@ hr {
     }
   }
 }
+.home-shortlist,
 body.shortlist {
   .removed-from-shortlist {
-    opacity: 0.75;
+    opacity: 0.6;
+    transition: opacity .5s ease-in-out;
   }
   .removed-from-shortlist::after,
   .removed-from-shortlist:hover::after {
@@ -1193,9 +1279,9 @@ body {
         text-align: center;
         white-space: nowrap;
         vertical-align: baseline;
-        color: $mdc-theme-secondary-dark;
-        background-color: $mdc-theme-secondary !important;
         border-radius: $unit;
+        background-color: $mdc-theme-primary !important;
+        color: white;
         position: relative;
         top: -2px;
         left: 0;
@@ -1610,9 +1696,12 @@ footer,
   }
 }
 
+.home-heading {
+  padding: $unit $unit*1.9;
+}
 .home-jobs {
   background-color: $mdc-theme-secondary-light;
-  padding: 0 $unit*1.5 $unit !important;
+  padding: 0 $unit*1.5 0 !important;
 }
 // .currently-recruiting,
 // .home-jobs {
@@ -1927,33 +2016,63 @@ footer.mdc-layout__footer {
   margin: 0;
 }
 
-.middle-line-text {
-  border-bottom: 1px solid $mdc-theme-primary-light;
-  line-height: 0;
-  text-align: center;
-  vertical-align: middle;
-
-  span {
-    background-color: #f5f5f5;
-    padding: $unit;
-  }
-}
-
-.button-row {
-  display: flex;
-  flex-direction: row;
-  margin: $unit 0;
-
-  button {
-    flex: 1;
-  }
-}
-
 @include mdc-switch-knob-color($mdc-theme-primary);
 @include mdc-switch-track-color($mdc-theme-primary);
 
 form.inline-form {
   display: inline-block;
+}
+
+.scrolling-grid {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+  padding-bottom: $unit;
+
+  .mdc-layout-grid__cell {
+    flex: 0 0 auto;
+
+    .mdc-card {
+      margin: 0 7px;
+    }
+
+    @media screen and (min-width: $mobile-landscape-breakpoint + 1) {
+      .mdc-card {
+        width: 33vw;
+      }
+    }
+    @media screen and (min-width: $mobile-breakpoint + 1) and (max-width: $mobile-landscape-breakpoint) {
+      .mdc-card {
+        width: 50vw;
+      }
+    }
+    @media screen and (max-width: $mobile-breakpoint) {
+      .mdc-card {
+        width: 90vw;
+      }
+    }
+  }
+
+  .scroll-button {
+    position: absolute;
+    z-index: 1;
+    align-self: center;
+    opacity: 0.4;
+  }
+
+  .scroll-button:hover {
+    opacity: 1;
+  }
+
+  .scroll-left {
+    left: $unit;
+  }
+
+  .scroll-right {
+    right: $unit;
+  }
 }
 
 @media screen and (max-width: $mobile-breakpoint) {

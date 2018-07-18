@@ -97,3 +97,17 @@ function slugify(text) {
     .replace(/^-+/, '')             // Trim - from start of text
     .replace(/-+$/, '');            // Trim - from end of text
 }
+
+$(document).ready(function() {
+  $('.scrolling-grid').each(function(i, o) {
+    console.log(o);
+    $(o).find('.scroll-left').on('click', function() {
+      var by = $(o).scrollLeft() - ($(o).width() / 2);
+      o.scroll({ left: by, top: 0, behavior: 'smooth'});
+    });
+    $(o).find('.scroll-right').on('click', function() {
+      var by = $(o).scrollLeft() + ($(o).width() / 2);
+      o.scroll({ left: by, top: 0, behavior: 'smooth' });
+    });
+  });
+});
