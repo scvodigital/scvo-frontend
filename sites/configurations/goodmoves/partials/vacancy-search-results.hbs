@@ -83,26 +83,26 @@
   <div class="mdc-layout-grid__inner">
     <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone">
       {{#if data.auth ~}}
-      {{#with (querystringify (obj)
-              keywords=@root.request.params.query.keywords
-              salary_min=@root.request.params.query.salary_min
-              salary_max=@root.request.params.query.salary_max
-              roles=@root.request.params.query.roles
-              sectors=@root.request.params.query.sectors
-              statuses=@root.request.params.query.statuses
-              distance=@root.request.params.query.distance
-              lat=@root.request.params.query.lat
-              lng=@root.request.params.query.lng
-              location=@root.request.params.query.location
-            )
-          ~}}
+      {{#with (
+                querystringify (obj)
+                keywords=@root.request.params.query.keywords
+                salary_min=@root.request.params.query.salary_min
+                salary_max=@root.request.params.query.salary_max
+                roles=@root.request.params.query.roles
+                sectors=@root.request.params.query.sectors
+                statuses=@root.request.params.query.statuses
+                distance=@root.request.params.query.distance
+                lat=@root.request.params.query.lat
+                lng=@root.request.params.query.lng
+                location=@root.request.params.query.location
+              ) ~}}
         <script>
           document.addEventListener('DOMContentLoaded', function() {
             console.log('Current Query String:', {{{stringify this}}});
             console.log('Saved Search Query Strings:', {{{stringify (map @root.data.saved_searches.items (getProp 'querystring'))}}});
           });
         </script>
-        {{#with (itemAt @root.data.saved_searches.items (indexOf (map @root.data.saved_searches.items (getProp 'querystring')) this)) ~}}
+        {{#if (itemAt @root.data.saved_searches.items (indexOf (map @root.data.saved_searches.items (getProp 'querystring')) this)) ~}}
           <span class="mdc-typography--headline5">{{name}}</span>
           {{#> ajax_chip
             onUrl="/toggle-subscription"
@@ -128,7 +128,7 @@
             <span class="far fa-search-plus mdc-list-item__graphic" aria-hidden="true"></span>
             Save/email this search
           </button>
-        {{/with ~}}
+        {{/if ~}}
       {{/with ~}}
       {{else}}
       <a href="/sign-up" class="mdc-button mdc-button--raised mdc-button--large save-search" id="save-search-button">
@@ -159,7 +159,7 @@
             <option value="salary_high"{{#compare request.params.query.sort "===" "salary_high"}} selected{{/compare}}>Salary - high to low</option>
             <option value="salary_low"{{#compare request.params.query.sort "===" "salary_low"}} selected{{/compare}}>Salary - low to high</option>
           </select>
-          <label class="mdc-floating-label mdc-floating-label--float-above" for="sort">
+          <label class="mdc-floating-label" for="sort">
             Sort
           </label>
         </div>
