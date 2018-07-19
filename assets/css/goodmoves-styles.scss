@@ -370,6 +370,9 @@ footer h3,
 .mdc-dialog--open .mdc-dialog__surface {
   z-index: 11;
 }
+.mdc-dialog__body {
+  padding-bottom: 0;
+}
 
 .mdc-checkbox__native-control:enabled:checked ~ .mdc-checkbox__background,
 .mdc-checkbox__native-control:enabled:indeterminate ~ .mdc-checkbox__background {
@@ -494,7 +497,7 @@ footer h3,
     }
   }
 }
-.goodmoves-settings {
+.goodmoves-settings-account {
   .mdc-button {
     width: 100%;
   }
@@ -520,6 +523,11 @@ footer h3,
         background-color: $mdc-theme-primary !important;
       }
     }
+  }
+}
+.goodmoves-settings {
+  .settings {
+    float: none;
   }
 }
 .goodmoves-saved-searches {
@@ -559,6 +567,7 @@ footer h3,
   margin-top: $unit/4;
   .goog-te-menu-value:hover {
     text-decoration: none;
+    color: black;
   }
 }
 
@@ -840,6 +849,18 @@ a {
     }
   }
 }
+.goodmoves-vacancy.mdc-card.mini {
+  .mdc-typography--headline5 {
+    font-size: 1.2rem;
+    line-height: 1.3rem;
+  }
+  // .fa-ul li:last-child {
+  //   margin-bottom: 0;
+  // }
+  .mdc-card .mdc-card__actions {
+    padding: $unit/3 $unit/2;
+  }
+}
 
 .mdc-card.gist.tfn-post,
 .mdc-card.gist.tfn-feature {
@@ -1076,6 +1097,9 @@ hr {
   .far.pull-right {
     line-height: $unit*1.7;
   }
+}
+.mdc-drawer__content-heading:focus {
+  outline: none;
 }
 
 .mdc-icon-button {
