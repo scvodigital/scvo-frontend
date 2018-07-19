@@ -1,6 +1,7 @@
 {{> vacancy_search_form this instance_id="perm"}}
 
 <div id="detailed-results-container" class="container-content goodmoves-shortlist">
+  {{#compare data.search_data.shortlist.hits.total ">" 0}}
   <div class="settings v-margin-full">
     <div class="mdc-form-field">
       <div class="mdc-checkbox">
@@ -20,13 +21,20 @@
       <label for="closing-alerts">Send ‘closing soon’ alerts</label>
     </div>
   </div>
+  {{/compare}}
   <h1 class="mdc-typography--headline3 v-margin-full">
     Shortlist
   </h1>
 
+  {{#compare data.search_data.shortlist.hits.total ">" 0}}
   {{#each data.search_data.shortlist.hits.hits ~}}
   {{> vacancy_search_result _source}}
   {{/each ~}}
+  {{else}}
+  <p class="mdc-typography--body1">
+    You don't yet have any jobs on your shortlist. To add a job, click the &ensp;<strong><span class="far fa-star mdc-chip__icon mdc-chip__icon--leading" aria-hidden="true"></span>Shortlist</strong>&ensp;button.
+  </p>
+  {{/compare}}
 
   <div class="foot">
     {{> pagination paging=data.search_data.detailed_results.pagination}}

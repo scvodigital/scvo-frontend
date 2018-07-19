@@ -1,9 +1,9 @@
 $mdc-theme-primary: #42842A;
-$mdc-theme-primary-light: #538F3D;
-$mdc-theme-primary-dark: #244817;
+$mdc-theme-primary-light: #9cd986;
+$mdc-theme-primary-dark: #336621;
 
-$mdc-theme-complimentary: #BAD2B1;
-$mdc-theme-complimentary-light: #DCE8D8;
+$mdc-theme-complimentary: #C1D0B1;
+$mdc-theme-complimentary-light: #dee6d6;
 
 $mdc-theme-secondary: #E0E0E0; // Gray 300
 $mdc-theme-secondary-light: #F5F5F5; // Gray 100
@@ -118,7 +118,7 @@ header {
       height: $header-lower-height;
     }
     .mdc-top-app-bar__lower .mdc-top-app-bar__section--align-start {
-      background-image: linear-gradient(60deg, $mdc-theme-primary-dark, $mdc-theme-primary-dark 310px, $mdc-theme-primary 311px, $mdc-theme-primary);
+      background-image: linear-gradient(60deg, $mdc-theme-primary-dark, $mdc-theme-primary-dark 220px, $mdc-theme-primary 221px, $mdc-theme-primary);
     }
     .mdc-top-app-bar__lower .mdc-top-app-bar__section--align-end {
       background-color: $mdc-theme-primary;
@@ -954,7 +954,7 @@ a {
   }
   #vacancy-tab-bar {
     width: 100%;
-    background-color: $mdc-theme-complimentary;
+    background-color: $mdc-theme-complimentary-light;
     display: flex;
     border-radius: 2px 2px 0 0;
     .mdc-tab {
@@ -986,8 +986,8 @@ a {
       font-weight: $heading-light-font-weight;
     }
     .key-info-extra {
-      padding: $unit;
-      background-color: $mdc-theme-complimentary-light;
+      padding: $unit $unit 0;
+      // background-color: $mdc-theme-complimentary-light;
       .mdc-chip {
         margin-bottom: $unit/4;
         padding: $unit/5 $unit/2;
@@ -1665,7 +1665,7 @@ footer,
           font-size: 0.88rem;
           color: #777;
           a {
-            font-weight: 400;
+            font-weight: 600;
             color: #555;
           }
         }
@@ -2122,24 +2122,28 @@ form.inline-form {
     flex: 0 0 auto;
     @media screen and (min-width: $mobile-landscape-breakpoint + 1) {
       .mdc-card {
-        width: 33vw;
+        width: 30vw;
       }
     }
     @media screen and (min-width: $mobile-breakpoint + 1) and (max-width: $mobile-landscape-breakpoint) {
       .mdc-card {
-        width: 50vw;
+        width: 47vw;
       }
     }
     @media screen and (max-width: $mobile-breakpoint) {
       .mdc-card {
-        width: 90vw;
+        width: 70vw;
       }
     }
   }
   .scroll-button {
     position: absolute;
-    z-index: 2;
+    height: 100%;
+    display: flex;
+    align-items: center;
     align-self: center;
+    width: $unit*3;
+    z-index: 2;
     // opacity: 0.4;
     // transition: opacity .1s ease-in-out;
     color: $mdc-theme-primary;
@@ -2163,8 +2167,8 @@ form.inline-form {
   top: 0; bottom: 0;
   z-index: 1;
   background-image:
-    linear-gradient(to right, $mdc-theme-secondary-light, $mdc-theme-secondary-light $unit*2, rgba(255, 255, 255, 0) $unit*4),
-    linear-gradient(to left , $mdc-theme-secondary-light, $mdc-theme-secondary-light $unit*2, rgba(255, 255, 255, 0) $unit*4);
+    linear-gradient(to right, $mdc-theme-secondary-light, $mdc-theme-secondary-light $unit*3, rgba(245, 245, 245, 0) $unit*4.5),
+    linear-gradient(to left , $mdc-theme-secondary-light, $mdc-theme-secondary-light $unit*3, rgba(245, 245, 245, 0) $unit*4.5);
 }
 
 @media screen and (max-width: $mobile-breakpoint) {

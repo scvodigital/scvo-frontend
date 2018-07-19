@@ -1,6 +1,7 @@
 {{> vacancy_search_form this instance_id="perm"}}
 
 <div id="detailed-results-container" class="container-content goodmoves-saved-searches">
+  {{#if data.saved_searches.items ~}}
   <div class="settings">
     <p class="mdc-typography--body1">
       Email frequency
@@ -26,10 +27,12 @@
       <label for="weekly">Weekly</label>
     </div>
   </div>
+  {{/if ~}}
   <h1 class="mdc-typography--headline3 v-margin-full">
     Searches
   </h1>
 
+  {{#if data.saved_searches.items ~}}
   <ul class="mdc-list mdc-list--two-line mdc-list--avatar-list mdc-elevation--z3">
     <li class="mdc-list-item mdc-list-item--header">
       <span class="mdc-list-item__graphic far" aria-hidden="true"></span>
@@ -53,7 +56,7 @@
         </div>
       </div>
     </li>
-    {{#each data.saved_searches.items}}
+    {{#each data.saved_searches.items ~}}
       <li class="mdc-list-item mdc-ripple-upgraded">
         <span class="mdc-list-item__graphic far fa-search fa-2x" aria-hidden="true"></span>
         <div class="mdc-layout-grid">
@@ -62,35 +65,35 @@
               <span class="mdc-list-item__text">
                 <a href="/search?{{{this.querystring}}}">{{name}}</a>
                 <div class="mdc-list-item__secondary-text">
-                  {{#with (querystring querystring)}}
-                    {{#if keywords}}
+                  {{#with (querystring querystring) ~}}
+                    {{#if keywords ~}}
                       <strong>Keywords: </strong> {{keywords}}
-                    {{/if}}
-                    {{#if roles}}
+                    {{/if ~}}
+                    {{#if roles ~}}
                       <strong>Roles: </strong>
                       {{#each (arrayify roles)}}
                          {{getProperty @root.data.termsMaps.roles.slugsMap (concat this ".term")}}
                         {{#unless @last}}, {{/unless}}
-                      {{/each}}
-                    {{/if}}
-                    {{#if sectors}}
+                      {{/each ~}}
+                    {{/if ~}}
+                    {{#if sectors ~}}
                       <strong>Sectors: </strong>
-                      {{#each (arrayify sectors)}}
+                      {{#each (arrayify sectors) ~}}
                          {{getProperty @root.data.termsMaps.sectors.slugsMap (concat this ".term")}}
                         {{#unless @last}}, {{/unless}}
-                      {{/each}}
-                    {{/if}}
-                    {{#if statuses}}
+                      {{/each ~}}
+                    {{/if ~}}
+                    {{#if statuses ~}}
                       <strong>Statuses: </strong>
                       {{#each (arrayify statuses)}}
                          {{getProperty @root.data.termsMaps.statuses.slugsMap (concat this ".term")}}
                         {{#unless @last}}, {{/unless}}
-                      {{/each}}
-                    {{/if}}
-                    {{#ifAll location distance}}
+                      {{/each ~}}
+                    {{/if ~}}
+                    {{#ifAll location distance ~}}
                         Within <strong>{{round (multiply distance 0.00062137)}}</strong> miles of <strong>{{location}}</strong>
-                    {{/ifAll}}
-                  {{/with}}
+                    {{/ifAll ~}}
+                  {{/with ~}}
                 </div>
               </span>
             </div>
@@ -123,33 +126,13 @@
       </li>
       {{#unless @last}}
         <li class="mdc-list-divider" role="separator"></li>
-      {{/unless}}
-    {{/each}}
+      {{/unless ~}}
+    {{/each ~}}
   </ul>
-
-  <!-- <h2 class="mdc-typography--headline4 v-margin">
-    Email alert preferences
-  </h2>
+  {{else}}
   <p class="mdc-typography--body1">
-    You have 1 saved search for your email alerts.
+    You don't yet have any searches saved. To save a search, click the &ensp;<strong><span class="far fa-search-plus mdc-chip__icon mdc-chip__icon--leading" aria-hidden="true"></span>Save/email this search</strong>&ensp;button once you've entered some search parameters.
   </p>
-
-  <form action="/update-email-preferences" method="POST" class="v-margin-full">
-    <h3 class="mdc-typography--headline5 v-margin">
-      Select day
-    </h3>
-    {{#each (split "monday,tuesday,wednesday,thursday,friday,saturday,sunday" ",")}}
-      <div class="mdc-switch">
-        <input type="checkbox" id="email-switch-{{this}}" class="mdc-switch__native-control" role="switch"
-          {{~#if (contains @root.data.email_days this)~}}checked="checked"{{/if}} name="{{this}}" onchange="$('#email-preferences-submit').prop('disabled', false);">
-        <div class="mdc-switch__background">
-          <div class="mdc-switch__knob"></div>
-        </div>
-      </div>
-      <label for="email-switch-{{this}}">
-        {{capitalize this}}
-      </label>
-    {{/each}}
-    <button class="mdc-button mdc-button--raised mdc-ripple-surface mdc-ripple-surface--primary" type="submit" id="email-preferences-submit" data-mdc-auto-init="MDCRipple" disabled>Update preferences</button> -->
+  {{/if ~}}
   </form>
 </div>
