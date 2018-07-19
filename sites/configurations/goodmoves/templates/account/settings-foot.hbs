@@ -42,38 +42,69 @@
     };
     var currentUser;
     goodmoves.app.auth().onAuthStateChanged(function(user) {
+      currentUser = user;
       if (user) {
-        currentUser = user;
+        checkProviders();
       }
     });
 
-    $('[data-provider]').each(function(i, o) {
-      var $o = $(o);
-      var providerName = $o.data('provider');
+    $('[data-provider-link]').each(function(i, o) {
+      var $chip = $(o);
+      var $linkAction = $chip.find('.link-action');
+      var chip = new mdc.chips.MDCChip(o);
+      var providerName = $chip.data('provider-link');
       var providerInfo = providers[providerName];
       var provider = providerInfo.getProvider();
 
-      $o.on('change', function(evt) {
-        if (currentUser) {
-          if (evt.currentTarget.checked) {
-            currentUser.linkWithPopup(provider).then(function(result) {
-              console.log('Linked to', providerName, result);
-              $o.prop('checked', true);
-            }).catch(function(err) {
-              console.error('Failed to link to', providerName, err);
-              $o.prop('checked', false);
-            });
-          } else {
-            currentUser.unlink(provider.providerId).then(function(result) {
-              console.log('Unlinked from', providerName, result);
-              $o.prop('checked', false);
-            }).catch(function(err) {
-              console.error('Failed to unlink from', providerName, err);
-              $o.prop('checked', true);
-            });
+      $chip.on('click', function(evt) {
+        if (!$chip.data('disabled')) {
+          $chip.data('disabled', true);
+          $chip.css('opacity', 0.5);
+          if (currentUser) {
+            var selected = $chip.hasClass('mdc-chip--selected');
+            if (!selected) {
+              currentUser.linkWithPopup(provider).then(function(result) {
+                console.log('Linked to', providerName, result);
+                chip.foundation.setSelected(!selected);
+                $linkAction.text('Unlink from');
+                $chip.data('disabled', false);
+                $chip.css('opacity', 1);
+                checkProviders();
+              }).catch(function(err) {
+                console.error('Failed to link to', providerName, err);
+                $chip.data('disabled', false);
+                $chip.css('opacity', 1);
+                checkProviders();
+              });
+            } else {
+              currentUser.unlink(provider.providerId).then(function(result) {
+                console.log('Unlinked from', providerName, result);
+                chip.foundation.setSelected(!selected);
+                $linkAction.text('Link to');
+                $chip.data('disabled', false);
+                $chip.css('opacity', 1);
+                checkProviders();
+              }).catch(function(err) {
+                console.error('Failed to unlink from', providerName, err);
+                $chip.data('disabled', false);
+                $chip.css('opacity', 1);
+                checkProviders();
+              });
+            }
           }
         }
       });
     }); 
+
+    function checkProviders() {
+      var enabled = currentUser.providerData.length > 1;
+      $('.mdc-chip--selected[data-provider-link]')
+        .data('disabled', !enabled)
+        .css({
+          'opacity': enabled ? 1 : 0.5,
+          'cursor': enabled ? 'pointer' : 'default'
+        })
+        .attr('title', !enabled ? 'You must have at least one account linked to your Goodmoves account' : '');
+    }
   });
 </script>
