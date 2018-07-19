@@ -254,6 +254,17 @@ function handleMaps() {
         infoWindow: infoWindow
       });
       pinBounds.extend(markerOptions.position);
+      // Sorry for the timeout hack.
+      // Getting and setting zoom right after pinBounds doesn't
+      // work, think pinBounds is async with no promise or callback
+      window.setTimeout(function() {
+        console.log('MAP ZOOM BEFORE:', map.getZoom());
+        var maxZoom = 15;
+        if (map.getZoom() >= maxZoom) {
+          map.setZoom(maxZoom);
+        }
+        console.log('MAP ZOOM AFTER:', map.getZoom());
+      }, 1000);
     });
     map.fitBounds(pinBounds);
   });

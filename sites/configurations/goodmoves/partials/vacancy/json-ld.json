@@ -1,0 +1,57 @@
+{
+  "@context": "http://schema.org",
+  "@type": "JobPosting",
+  "@id": "https://{{@root.request.url.host}}/vacancy/{{slug}}",
+  "url": "https://{{@root.request.url.host}}/vacancy/{{slug}}",
+  "identifier": "{{reference_number}}",
+  "baseSalary": {
+    "@type": "MonetaryAmount",
+    "currency": "GBP",
+    "value": {
+      "@type": "QuantitativeValue",
+      "unitText": "YEAR",
+      "value": "{{stripTags (regexReplace salary '\r|\n' 'gi' '')}}",
+      "minValue": "{{salary_min}}",
+      "maxValue": "{{salary_max}}"
+    }
+  },
+  "jobBenefits": "{{benefits}}",
+  "datePosted": "{{momentFormat (moment start_at 'x') 'YYYY-MM-DDTHH:mm:ss'}}",
+  "validThrough": "{{momentFormat (moment closing_date 'x') 'YYYY-MM-DDTHH:mm:ss'}}",
+  "description": "{{stripTags (regexReplace description '\r|\n' 'gi' '')}}",
+  "employmentType": "{{{role_status_list}}}",
+  "industry": {{{stringify sectors}}},
+  {{#if geo_vacancy_info.[0]}}
+  "jobLocation": {
+    "@type": "Place",
+    "address": {
+      "@type": "PostalAddress",
+      {{#with geo_vacancy_info.[0]}}
+      "addressLocality": "{{parliamentary_constituency}}",
+      "addressRegion": "{{admin_district}}",
+      "addressCountry": "{{country}}",
+      "postalCode": "{{postcode}}"
+      {{/with}}
+    }
+  },
+  {{else}}
+  "jobLocation": "{{location}}",
+  {{/if}}
+  "hiringOrganization": {
+    "@type": "Organization",
+    "name": "{{organisation.name}}",
+    "logo": "{{organisation.logo_url}}",
+    "location": "{{organisation.postcode}}",
+    {{#if organisation.website}}
+    "website": "{{fixUrl organisation.website}}",
+    {{/if}}
+    "description": "{{organisation.profile}}"
+  },
+  "occupationalCategory": "{{join roles ', '}}",
+  "qualifications": "None specified",
+  "responsibilities": "None specified",
+  "salaryCurrency": "GBP",
+  "skills": "None specified",
+  "title": "{{default title_full title}}",
+  "workHours": "{{stripTags (regexReplace salary_info '(\r|\n)' 'gi' '')}}"
+}
