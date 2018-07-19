@@ -1,5 +1,6 @@
 import arrDiff = require('arr-diff');
 import deepDiff = require('deep-diff');
+import stripHtml = require('string-strip-html');
 import * as dot from 'dot-object';
 import * as moment from 'moment';
 import * as querystring from 'querystring';
@@ -54,6 +55,19 @@ export class Helpers {
   static helper_slugify(str: string) {
     const slug = s(str).slugify().s;
     return slug;
+  }
+
+  static helper_fixUrl(url: string, protocol: string = 'https') {
+    if (!url) {
+      return '';
+    }
+    if (url.indexOf('http') === 0) {
+      return url;
+    }
+    if (url.indexOf('//') === 0) {
+      return protocol + ':' + url;
+    }
+    return protocol + '://' + url;
   }
 
   static helper_querystringify(obj: any = {}) {
@@ -319,6 +333,13 @@ export class Helpers {
       reversed.push(input.pop());
     }
     return reversed;
+  }
+
+  static helper_stripTags(html: string) {
+    if (!html) {
+      return '';
+    }
+    return stripHtml(html);
   }
 
   static helper_stripTrailingSlash(input: string) {
