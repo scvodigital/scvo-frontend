@@ -13,13 +13,13 @@
       "value": "{{stripTags (regexReplace salary '\r|\n' 'gi' '')}}",
       "minValue": "{{salary_min}}",
       "maxValue": "{{salary_max}}"
-    } 
+    }
   },
   "jobBenefits": "{{benefits}}",
   "datePosted": "{{momentFormat (moment start_at 'x') 'YYYY-MM-DDTHH:mm:ss'}}",
   "validThrough": "{{momentFormat (moment closing_date 'x') 'YYYY-MM-DDTHH:mm:ss'}}",
   "description": "{{stripTags (regexReplace description '\r|\n' 'gi' '')}}",
-  "employmentType": {{{stringify role_status_list}}},
+  "employmentType": "{{{role_status_list}}}",
   "industry": {{{stringify sectors}}},
   {{#if geo_vacancy_info.[0]}}
   "jobLocation": {
@@ -27,9 +27,9 @@
     "address": {
       "@type": "PostalAddress",
       {{#with geo_vacancy_info.[0]}}
-      "addressCountry": "{{country}}",
       "addressLocality": "{{parliamentary_constituency}}",
       "addressRegion": "{{admin_district}}",
+      "addressCountry": "{{country}}",
       "postalCode": "{{postcode}}"
       {{/with}}
     }
@@ -42,7 +42,7 @@
     "name": "{{organisation.name}}",
     "logo": "{{organisation.logo_url}}",
     "location": "{{organisation.postcode}}",
-    {{#if organisation.url}}
+    {{#if organisation.website}}
     "website": "{{fixUrl organisation.website}}",
     {{/if}}
     "description": "{{organisation.profile}}"
