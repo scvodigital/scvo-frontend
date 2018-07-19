@@ -1,0 +1,79 @@
+<script>
+  /*
+  document.addEventListener('DOMContentLoaded', function() {
+    console.log('LOADED!');
+
+    setTimeout(function() {
+      goodmoves.app.auth().onAuthStateChanged(function(user) {
+        if (user) {
+          user.providerData.forEach(function(provider) {
+            if (provider.providerId.indexOf('google') > -1) {
+              $('#linked-account-google').prop('checked', true);
+            } else if (provider.providerId.indexOf('facebook') > -1) {
+              $('#linked-account-google').prop('checked', true);
+            }
+          });
+        }
+      }); 
+    }, 250);
+  });
+  */
+  $(document).ready(function() {
+    var providers = {
+      google: {
+        getProvider: function() { return new firebase.auth.GoogleAuthProvider(); },
+        scopes: [ 'email' ],
+        label: 'Google'
+      },
+      facebook: {
+        getProvider: function() { return new firebase.auth.FacebookAuthProvider(); },
+        scopes: [ 'email' ],
+        label: 'Facebook'
+      },
+      twitter: {
+        getProvider: function() { return new firebase.auth.TwitterAuthProvider(); },
+        label: 'Twitter'
+      },
+      github: {
+        gitProvider: function() { return new firebase.auth.GithubAuthProvider(); },
+        scopes: [ 'user:email' ],
+        label: 'Github'
+      }
+    };
+    var currentUser;
+    goodmoves.app.auth().onAuthStateChanged(function(user) {
+      if (user) {
+        currentUser = user;
+      }
+    });
+
+    $('[data-provider]').each(function(i, o) {
+      var $o = $(o);
+      var providerName = $o.data('provider');
+      var providerInfo = providers[providerName];
+      var provider = providerInfo.getProvider();
+
+      $o.on('change', function(evt) {
+        if (currentUser) {
+          if (evt.currentTarget.checked) {
+            currentUser.linkWithPopup(provider).then(function(result) {
+              console.log('Linked to', providerName, result);
+              $o.prop('checked', true);
+            }).catch(function(err) {
+              console.error('Failed to link to', providerName, err);
+              $o.prop('checked', false);
+            });
+          } else {
+            currentUser.unlink(provider.providerId).then(function(result) {
+              console.log('Unlinked from', providerName, result);
+              $o.prop('checked', false);
+            }).catch(function(err) {
+              console.error('Failed to unlink from', providerName, err);
+              $o.prop('checked', true);
+            });
+          }
+        }
+      });
+    }); 
+  });
+</script>
