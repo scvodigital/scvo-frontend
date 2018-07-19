@@ -110,6 +110,7 @@
           });
         </script>
         {{#if (itemAt @root.data.saved_searches.items (indexOf (map @root.data.saved_searches.items (getProp 'querystring')) this)) ~}}
+        {{#with (itemAt @root.data.saved_searches.items (indexOf (map @root.data.saved_searches.items (getProp 'querystring')) this))}}
           <span class="mdc-typography--headline5">{{name}}</span>
           {{#> ajax_chip
             onUrl="/toggle-subscription"
@@ -122,14 +123,15 @@
             on=subscribed}}
           {
             "onData": {
-              "name": {{{stringify ../name}}}
+              "name": {{{stringify name}}}
             },
             "offData": {
-              "name": {{{stringify ../name}}}
+              "name": {{{stringify name}}}
             }
           }
           {{/ajax_chip}}
           {{> delete_search name=name formClasses="inline-form"}}
+          {{/with}}
         {{else}}
           <button class="mdc-button mdc-button--raised mdc-button--large save-search" id="save-search-button" data-dialog-target="#save-search-dialog">
             <span class="far fa-search-plus mdc-list-item__graphic" aria-hidden="true"></span>

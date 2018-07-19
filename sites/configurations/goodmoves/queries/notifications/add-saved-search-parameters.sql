@@ -1,7 +1,7 @@
 {{#*inline "insertParam"}}
   {{#if (getProperty @root.request.params.query parameter)}}
     {{#each (arrayify (getProperty @root.request.params.query parameter))}}
-      ('{{@root.context.metaData.emailCampaignName}}', '{{@root.data.auth.email}}', '{{default @root.request.body.name "My Search"}}', '{{../parameter}}', '{{this}}'),
+      ('{{@root.context.metaData.emailCampaignName}}', '{{@root.data.auth.email}}', '{{default @root.request.body.name "My Search"}}', '{{../parameter}}', '{{encodeURIComponent this}}'),
     {{/each}}
   {{/if}}
 {{/inline}}

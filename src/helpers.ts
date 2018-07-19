@@ -268,6 +268,32 @@ export class Helpers {
     return out;
   }
 
+  static helper_decodeURIComponent(str: string) {
+    if (!str) return '';
+    console.log('DECODE URI COMPONENT BEFORE:', str);
+    const out = decodeURIComponent(str);
+    console.log('DECODE URI COMPONENT AFTER:', out);
+    return out;
+  }
+  
+  static helper_encodeURIComponent(str: string) {
+    if (!str) return '';
+    const out = encodeURIComponent(str);
+    return out;
+  }
+  
+  static helper_decodeURI(str: string) {
+    if (!str) return '';
+    const out = decodeURI(str);
+    return out;
+  }
+  
+  static helper_encodeURI(str: string) {
+    if (!str) return '';
+    const out = encodeURI(str);
+    return out;
+  }
+
   static helper_getProps(arr: any[], props: string[]) {
     const out: any[] = [];
 
