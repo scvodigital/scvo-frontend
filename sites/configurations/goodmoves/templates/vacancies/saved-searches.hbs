@@ -44,31 +44,50 @@
                 <div class="mdc-list-item__secondary-text">
                   {{#with (querystring querystring) ~}}
                     {{#if keywords ~}}
-                      <strong>Keywords: </strong> {{{keywords}}}
+                      Keywords: <strong>{{{keywords}}}</strong>
                     {{/if ~}}
+
+                    {{#ifAny salary_min salary_max ~}}
+                      Salary
+                    {{/ifAny ~}}
+                    {{#if salary_min ~}}
+                      minimum: <strong>£{{addCommas salary_min}}</strong>
+                    {{/if ~}}
+                    {{#if salary_max ~}}
+                      {{#if salary_min ~}}and{{/if}}
+                      maximum: <strong>£{{addCommas salary_max}}</strong>
+                    {{/if ~}}
+
                     {{#if roles ~}}
-                      <strong>Roles: </strong>
-                      {{#each (arrayify roles)}}
-                         {{{getProperty @root.data.termsMaps.roles.slugsMap (concat this ".term")}}}
-                        {{#unless @last}}, {{/unless}}
+                      {{inflect (length (arrayify roles)) "Role" "Roles"}}:
+                      {{#each (arrayify roles) ~}}
+                        <strong>{{{getProperty @root.data.termsMaps.roles.slugsMap (concat this ".term")}}}{{#unless @last}}, {{/unless}}</strong>
                       {{/each ~}}
                     {{/if ~}}
+
                     {{#if sectors ~}}
-                      <strong>Sectors: </strong>
+                      {{inflect (length (arrayify sectors)) "Sector" "Sectors"}}:
                       {{#each (arrayify sectors) ~}}
-                         {{{getProperty @root.data.termsMaps.sectors.slugsMap (concat this ".term")}}}
-                        {{#unless @last}}, {{/unless}}
+                        <strong>{{{getProperty @root.data.termsMaps.sectors.slugsMap (concat this ".term")}}}{{#unless @last}}, {{/unless}}</strong>
                       {{/each ~}}
                     {{/if ~}}
+
                     {{#if statuses ~}}
-                      <strong>Statuses: </strong>
+                      Working {{inflect (length (arrayify statuses)) "pattern" "patterns"}}:
                       {{#each (arrayify statuses)}}
-                         {{{getProperty @root.data.termsMaps.statuses.slugsMap (concat this ".term")}}}
-                        {{#unless @last}}, {{/unless}}
+                        <strong>{{{getProperty @root.data.termsMaps.statuses.slugsMap (concat this ".term")}}}{{#unless @last}}, {{/unless}}</strong>
                       {{/each ~}}
                     {{/if ~}}
+
                     {{#ifAll location distance ~}}
-                        Within <strong>{{round (multiply distance 0.00062137)}}</strong> miles of <strong>{{{location}}}</strong>
+                      {{#ifAny keywords roles sectors statuses ~}}
+                        Within
+                      {{else}}
+                        within
+                      {{/ifAny ~}}
+                      <strong>{{round (multiply distance 0.00062137)}}</strong>
+                      miles of
+                      <strong>{{{location}}}</strong>
                     {{/ifAll ~}}
                   {{/with ~}}
                 </div>
