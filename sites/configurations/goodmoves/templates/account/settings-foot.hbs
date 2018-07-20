@@ -97,13 +97,6 @@
       }
 
       var hasEmailProvider = false;
-      currentUser.providerData.forEach(function(providerData) {
-        if (providerData.providerId.indexOf('email') > -1) {
-          hasEmailProvider = true;
-        }
-      });
-      console.log('Has Email Provider:', hasEmailProvider);
-
       currentUser.updatePassword(password1).then(function(result) {
         console.log('Password updated:', result);
       }).catch(function(err) {

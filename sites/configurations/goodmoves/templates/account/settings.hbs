@@ -94,7 +94,12 @@
     </h2>
 
     <h3 class="mdc-typography--headline5">
-      Change/set password
+      {{#if (contains (map @root.data.auth.providerData (getProp "providerId")) "password")}}
+        Change password
+      {{else}}
+        Set password
+        <small>allows sign-in with the email address {{@root.data.auth.email}}</small>
+      {{/if}}
     </h3>
     <div class="mdc-layout-grid">
       <div class="mdc-layout-grid__inner">
