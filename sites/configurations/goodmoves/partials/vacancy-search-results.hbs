@@ -113,7 +113,7 @@
         {{#if (itemAt @root.data.saved_searches.items (indexOf (map @root.data.saved_searches.items (getProp 'querystring')) this)) ~}}
         {{#with (itemAt @root.data.saved_searches.items (indexOf (map @root.data.saved_searches.items (getProp 'querystring')) this)) ~}}
         <span class="mdc-typography--body1">
-          <strong>{{name}}</strong>
+          <strong>{{{name}}}</strong>
         </span>
         {{/with ~}}
         {{/if ~}}
@@ -177,7 +177,7 @@
           <h3 class="mdc-typography--headline6">
             Your search
             <span class="mdc-typography--body1">
-              <a name="#" data-dialog-target="#edit-search-dialog" style="padding-left:.5rem;cursor:pointer;">{{name}}</a>
+              <a name="#" data-dialog-target="#edit-search-dialog" style="padding-left:.5rem;cursor:pointer;">{{{name}}}</a>
             </span>
           </h3>
           <!-- {{#> ajax_chip

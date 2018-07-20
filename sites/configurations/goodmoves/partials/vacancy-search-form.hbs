@@ -72,7 +72,7 @@
                   <option value="16093.44" {{#compare request.params.query.distance "16093.44"}}selected{{/compare}}>10 miles</option>
                   <option value="40233.6" {{#compare request.params.query.distance "40233.6"}}selected{{/compare}}>25 miles</option>
                   <option value="80467.2" {{#compare request.params.query.distance "80467.2"}}selected{{/compare}}>50 miles</option>
-                  <option value="any" {{#compare request.params.query.distance "any"}}selected{{/compare}}>no limit</option>
+                  <option value="" {{#compare request.params.query.distance ""}}selected{{/compare}}>no limit</option>
                 </select>
                 <label class="mdc-floating-label mdc-floating-label--float-above" for="{{instance_id}}-distance">
                   Within
@@ -84,7 +84,7 @@
       </div>
 
       <input type="hidden" name="lat" value="{{request.params.query.lat}}" id="{{instance_id}}-lat">
-      <input type="hidden" name="lng" value="{{request.params.query.lng}}" id="{{instance_id}}-lat">
+      <input type="hidden" name="lng" value="{{request.params.query.lng}}" id="{{instance_id}}-lng">
 
       <div class="h-padding">
         <div class="mdc-text-field mdc-text-field--box mdc-text-field--with-leading-icon" data-mdc-auto-init="MDCTextField">
