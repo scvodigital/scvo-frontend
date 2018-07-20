@@ -1,15 +1,17 @@
 {{> vacancy_search_form this instance_id="perm"}}
 
 <div id="detailed-results-container" class="container-content goodmoves-saved-searches">
+  {{#compare (length data.saved_searches.items) ">" 0 ~}}
   <div class="settings">
     <span class="mdc-typography--body1">Email frequency</span>
     {{> email_frequency}}
   </div>
+  {{/compare}}
   <h1 class="mdc-typography--headline3 v-margin-full">
     Searches
   </h1>
 
-  {{#if data.saved_searches.items ~}}
+  {{#compare (length data.saved_searches.items) ">" 0 ~}}
   <ul class="mdc-list mdc-list--two-line mdc-list--avatar-list mdc-elevation--z3">
     <li class="mdc-list-item mdc-list-item--header">
       <span class="mdc-list-item__graphic far" aria-hidden="true"></span>
@@ -129,6 +131,5 @@
   <p class="mdc-typography--body1">
     You don't yet have any searches saved. To save a search, click the &ensp;<strong><span class="far fa-search-plus mdc-chip__icon mdc-chip__icon--leading" aria-hidden="true"></span>Save/email this search</strong>&ensp;button once you've entered some search parameters.
   </p>
-  {{/if ~}}
-  </form>
+  {{/compare ~}}
 </div>
