@@ -194,7 +194,7 @@ var GoodmovesController = Class.extend({
       $snackbar.css('background-color', options.backgroundColor);
       delete options.backgroundColor;
     }
-    if(options.color) {
+    if (options.color) {
       $snackbar.css('color', options.color);
       delete options.color;
     }

@@ -168,7 +168,7 @@ if(location.host.indexOf('.local') > -1){
                 </button>
                 <div class="mdc-menu" tabindex="-1" data-mdc-auto-init="MDCMenu" id="user-menu">
                   <div class="mdc-menu__items mdc-list" role="menu" aria-hidden="true">
-                    {{#each context.metaData.menus.user ~}}
+                    {{#each context.metaData.menus.user-signed-in ~}}
                     <a class="mdc-list-item {{#if (regexMatch ../request.url.pathname route "gi")}} mdc-list-item--activated{{/if}}" href="{{stripTrailingSlash path}}" role="menuitem">
                       {{#if icon ~}}
                       <span class="far fa-{{icon}} mdc-list-item__graphic" aria-hidden="true"></span>
@@ -180,8 +180,8 @@ if(location.host.indexOf('.local') > -1){
                 </div>
               </div>
               {{else}}
-              <nav class="mdc-tab-bar mdc-tab-bar__right" id="unauthenticated-tab-bar">
-                {{#each context.metaData.menus.unauthenticated ~}}
+              <nav class="mdc-tab-bar mdc-tab-bar__right" id="user-not-signed-in-tab-bar">
+                {{#each context.metaData.menus.user-not-signed-in ~}}
                 <a class="mdc-tab{{#if (regexMatch ../request.url.pathname route "gi")}} mdc-tab--active{{/if}}" href="{{stripTrailingSlash path}}">
                   <span class="mdc-tab--label">{{{label}}}</span>
                 </a>
