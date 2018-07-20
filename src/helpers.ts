@@ -449,6 +449,14 @@ export class Helpers {
     return found;
   }
 
+  static helper_sort(items: any[]) {
+    if (!Array.isArray(items)) {
+      return null;
+    }
+    const out = items.sort();
+    return out;
+  }
+
   static helper_component(partialName: string, options: any) {
     if (typeof partialName !== 'string' ||
         !Helpers.handlebars.partials.hasOwnProperty(partialName)) {
