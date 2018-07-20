@@ -6,28 +6,35 @@
 
   {{> organisation_full organisation}}
 
-  {{#compare ../data.supplimentaryResponses.vacancies.hits.total ">" 0 ~}}
+  {{#compare ../data.supplimentaryResponses.vacancies_open.hits.total ">" 0 ~}}
   <hr />
   <div class="mdc-typography--headline5">
     Current vacancies
   </div>
-  {{#each ../data.supplimentaryResponses.vacancies.hits.hits ~}}
+  {{#each ../data.supplimentaryResponses.vacancies_open.hits.hits ~}}
   {{> vacancy_list _source}}
   {{/each ~}}
-  {{else}}
-  <hr />
-  <div class="mdc-typography--headline6">
-    No current vacancies
-  </div>
   {{/compare ~}}
 
   {{#compare ../data.supplimentaryResponses.vacancies_closed.hits.total ">" 0 ~}}
-  {{#compare ../data.supplimentaryResponses.vacancies.hits.total ">" 0 ~}}
+  {{#compare ../data.supplimentaryResponses.vacancies_open.hits.total "===" 0 ~}}
   <hr />
   {{/compare}}
+  <div class="mdc-typography--headline5">
+    Closed vacancies
+  </div>
   {{#each ../data.supplimentaryResponses.vacancies_closed.hits.hits ~}}
   {{> vacancy_list _source}}
   {{/each ~}}
+  {{/compare ~}}
+
+  {{#compare ../data.supplimentaryResponses.vacancies_open.hits.total "===" 0 ~}}
+  {{#compare ../data.supplimentaryResponses.vacancies_closed.hits.total "===" 0 ~}}
+  <hr />
+  <div class="mdc-typography--headline6">
+    There are no current or recently closed vacancies available
+  </div>
+  {{/compare ~}}
   {{/compare ~}}
 
   {{#if goodhq_organisation.xid}}

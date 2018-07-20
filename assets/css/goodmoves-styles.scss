@@ -856,11 +856,10 @@ a {
     }
   }
 }
-.goodmoves-vacancy-closed.mdc-card.list,
-.goodmoves-vacancy-closed.mdc-card.mini,
-.goodmoves-vacancy-closed.mdc-card.gist,
-.goodmoves-vacancy-closed.mdc-card.search-result {
-  border-top: none;
+.goodmoves-vacancy-inactive.mdc-card,
+.goodmoves-vacancy-not-published.mdc-card,
+.goodmoves-vacancy-closed.mdc-card {
+  border-top: none !important;
 }
 .goodmoves-vacancy.mdc-card.list,
 .goodmoves-vacancy.mdc-card.gist,
@@ -2120,8 +2119,12 @@ form.inline-form {
 
 .scrolling-grid {
   display: flex;
+  display: -webkit-flex;
+  flex: 1;
+  -webkit-flex-wrap: nowrap;
   flex-wrap: nowrap;
   overflow-x: auto;
+  -webkit-justify-content: space-between;
   -webkit-overflow-scrolling: touch;
   -ms-overflow-style: -ms-autohiding-scrollbar;
   padding-bottom: $unit;
