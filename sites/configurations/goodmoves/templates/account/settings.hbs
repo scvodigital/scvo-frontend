@@ -48,10 +48,17 @@
           <h3 class="mdc-typography--headline5 v-margin-full">
             Unsubscribe 
           </h3>
-          <button class="mdc-button mdc-button--raised mdc-button--fullwidth">
-            <span class="far fa-envelope mdc-list-item__graphic" aria-hidden="true"></span>
-            Stop all emails
-          </button>
+          {{#ifAny 
+            (compare (length (filter @root.data.saved_searches.items "subscribed" "===" 1)) ">" 0)
+            (compare @root.data.shortlist_ids.[0].subscribed 1)
+          }}
+            <a href="/stop-all-emails" class="mdc-button mdc-button--raised mdc-button--fullwidth">
+              <span class="far fa-envelope mdc-list-item__graphic" aria-hidden="true"></span>
+              Stop all emails
+            </a>
+          {{else}}
+            You currently have no subscriptions
+          {{/ifAny}}
         </div>
       </div>
     </div>

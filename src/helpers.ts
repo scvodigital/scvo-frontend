@@ -408,6 +408,38 @@ export class Helpers {
     return output;
   }
 
+  static helper_filter(items: any[], property: string, comparator: string, test: any) {
+    const found: any[] = [];
+    items.forEach(item => {
+      const value: any = property === null ? item : dot.pick(property, item);
+      let match = false;
+      try {
+        switch (comparator) {
+          case ('==='): match = value === test;
+            break;
+          case ('=='): match = value == test;
+            break;
+          case ('>='): match = value >= test;
+            break;
+          case ('>'): match = value > test;
+            break;
+          case ('<='): match = value <= test;
+            break;
+          case ('<'): match = value < test;
+            break;
+          case ('testIn'): match = value.indexOf(test) > -1;
+            break;
+          case ('valueIn'): match = test.indexOf(value) > -1;
+            break;
+        }
+      } catch(err) { }
+      if (match) {
+        found.push(item);
+      }
+    });
+    return found;
+  }
+
   static helper_component(partialName: string, options: any) {
     if (typeof partialName !== 'string' ||
         !Helpers.handlebars.partials.hasOwnProperty(partialName)) {
