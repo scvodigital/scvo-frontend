@@ -27,6 +27,7 @@
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {
+    var days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
     $('input[name="frequency"]').on('change', function(evt) {
       var request = {
         url: '/update-email-preferences',
@@ -41,13 +42,12 @@
         }
       };
       if (evt.currentTarget.id === 'daily') {
-        request.data = {
-          monday: true, tuesday: true, wednesday: true, thursday: true, friday: true, saturday: true, sunday: true
-        };
-      } else if (evt.currentTarget.id === 'weekly') {
-        request.data = {
-          thursday: true
+        for (var d = 0; d < days.length; ++d) {
+          request.data[days[d]] = true;
         }
+      } else if (evt.currentTarget.id === 'weekly') {
+        var day = new Date().getDay();
+        request.data[days[day]] = true;
       }
       $.ajax(request);
     });
