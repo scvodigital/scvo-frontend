@@ -62,7 +62,7 @@
               @{{goodhq_organisation.xid}}
             </a>
             {{#compare @root.data.goodhq.reviews.hits.total ">" 0 ~}}
-            – {{{@root.data.goodhq.reviews.hits.total}}} reviews
+            – {{inflect @root.data.goodhq.reviews.hits.total "review" "reviews" true}}
             {{/compare ~}}
             on
             <a href="https://goodhq.org">
