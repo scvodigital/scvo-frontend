@@ -50,7 +50,7 @@
           </h3>
           {{#ifAny 
             (compare (length (filter @root.data.saved_searches.items "subscribed" "===" 1)) ">" 0)
-            (compare @root.data.shortlist_ids.[0].subscribed 1)
+            @root.data.shortlist_ids.items.[0].subscribed
           }}
             <a href="/stop-all-emails" class="mdc-button mdc-button--raised mdc-button--fullwidth">
               <span class="far fa-envelope mdc-list-item__graphic" aria-hidden="true"></span>
