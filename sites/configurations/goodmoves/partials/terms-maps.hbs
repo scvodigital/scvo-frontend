@@ -11,7 +11,7 @@
       },
       "termsMap": {
         {{#each (getProperty @root.data.supplimentaryResponses.types.aggregations (concat this ".buckets")) ~}}
-          {{{stringify key}}}: { 
+          {{{stringify key}}}: {
             "slug": "{{slugify key}}",
             "count": {{doc_count}}
           }{{#unless @last}},{{/unless}}
@@ -19,7 +19,7 @@
       },
       "all": [
         {{#each (getProperty @root.data.supplimentaryResponses.types.aggregations (concat this ".buckets")) ~}}
-          { 
+          {
             "term": "{{key}}",
             "slug": "{{slugify key}}",
             "count": {{doc_count}}

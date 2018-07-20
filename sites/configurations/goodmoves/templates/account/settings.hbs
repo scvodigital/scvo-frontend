@@ -1,7 +1,7 @@
 {{> vacancy_search_form this instance_id="perm"}}
 
 {{#*inline "linkChip"}}
-  <div class="mdc-chip {{#if linked}}mdc-chip--selected{{/if}}" data-provider-link="{{provider}}">
+  <div class="mdc-chip{{#if linked}} mdc-chip--selected{{/if}} provider-{{provider}}" data-provider-link="{{provider}}">
     <span class="fab fa-{{provider}} mdc-chip__icon mdc-chip__icon--leading {{#if linked}}mdc-chip__icon--leading-hidden{{/if}}" aria-hidden="true"></span>
     <div class="mdc-chip__checkmark">
       <svg class="mdc-chip__checkmark-svg" viewBox="-2 -3 30 30">
@@ -74,14 +74,16 @@
     <div class="mdc-layout-grid">
       <div class="mdc-layout-grid__inner">
         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-6-tablet mdc-layout-grid__cell--span-12-phone">
+          {{#if (contains (map @root.data.auth.providerData (getProp "providerId")) "password") ~}}
           <h3 class="mdc-typography--headline6">
-            {{#if (contains (map @root.data.auth.providerData (getProp "providerId")) "password")}}
-              Change password
-            {{else}}
-              Set password
-              <!-- <span class="mdc-typography--body1">to allow sign-in with {{@root.data.auth.email}}</span> -->
-            {{/if}}
+            Change password
           </h3>
+          {{else}}
+          <h3 class="mdc-typography--headline6">
+            Set password
+          </h3>
+          <span class="mdc-typography--body1">You are currently using a social media account to sign in. If you set a password you will also be able to sign in with your email address.</span>
+          {{/if ~}}
           <div class="mdc-text-field mdc-text-field--box mdc-text-field--with-leading-icon" data-mdc-auto-init="MDCTextField">
             <span class="far fa-key mdc-text-field__icon" tabindex="-1"></span>
             <input type="password" id="change-password-password" class="mdc-text-field__input" data-lpignore="true" autocomplete="off" />
@@ -100,21 +102,27 @@
           </div>
           <button class="mdc-button mdc-button--raised mdc-button--change_password mdc-button--fullwidth" id="change-password">
             <span class="far fa-lock mdc-list-item__graphic" aria-hidden="true"></span>
+            {{#if (contains (map @root.data.auth.providerData (getProp "providerId")) "password") ~}}
             Change password
+            {{else}}
+            Set password
+            {{/if ~}}
           </button>
         </div>
         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-6-tablet mdc-layout-grid__cell--span-12-phone">
           <h3 class="mdc-typography--headline6">
             Linked accounts
           </h3>
-          {{#each (split "google,facebook,twitter" ",")}}
-            <div class="v-margin">
-              {{> linkChip
-                  provider=this
-                  linked=(contains (map @root.data.auth.providerData (getProp "providerId")) (concat this ".com"))
-              }}
-            </div>
-          {{/each}}
+          <div class="v-margin">
+            {{#each (split "google,facebook,twitter" ",") ~}}
+              <div class="v-margin">
+                {{> linkChip
+                    provider=this
+                    linked=(contains (map @root.data.auth.providerData (getProp "providerId")) (concat this ".com"))
+                }}
+              </div>
+            {{/each ~}}
+          </div>
         </div>
         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-6-tablet mdc-layout-grid__cell--span-12-phone">
           <h3 class="mdc-typography--headline6">
