@@ -1,0 +1,45 @@
+{
+  "size": 100,
+  "_source": [
+    "Id",
+    "slug",
+    "vacancy_status",
+    "rendered.vacancy_status",
+    "top_job",
+    "description_short",
+    "title",
+    "geo_vacancy_coords",
+    "location",
+    "salary",
+    "role_status_list",
+    "closing_date",
+    "organisation.slug",
+    "organisation.name",
+    "organisation.has_logo",
+    "organisation.logo_url"
+  ],
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "term": {
+            "vacancy_status": "vacancy-open"
+          }
+        },
+        {
+          "terms": {
+            "Id": {{{stringify (map data.shortlist_ids.items (getProp "id"))}}}
+          }
+        },
+        {
+          "term": {
+            "country_iso3": "GBR"
+          }
+        }
+      ]
+    }
+  },
+  "sort": {
+    "closing_date": "asc"
+  }
+}

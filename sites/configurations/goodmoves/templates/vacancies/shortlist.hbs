@@ -26,17 +26,36 @@
     Shortlist
   </h1>
 
-  {{#compare data.search_data.shortlist.hits.total ">" 0}}
-  {{#each data.search_data.shortlist.hits.hits ~}}
-  {{> vacancy_search_result _source}}
-  {{/each ~}}
-  {{else}}
+  {{#compare data.shortlist.open.hits.total "===" 0}}
+  {{#compare data.shortlist.closed.hits.total "===" 0}}
   <p class="mdc-typography--body1">
     You don't yet have any jobs on your shortlist. To add a job, click the &ensp;<strong><span class="far fa-star mdc-chip__icon mdc-chip__icon--leading" aria-hidden="true"></span>Shortlist</strong>&ensp;button.
   </p>
+  {{else}}
+  <p class="mdc-typography--body1">
+    You don't have any open jobs on your shortlist.
+  </p>
+  {{/compare}}
   {{/compare}}
 
+  {{#compare data.shortlist.open.hits.total ">" 0}}
+  {{#each data.shortlist.open.hits.hits ~}}
+  {{> vacancy_search_result _source}}
+  {{/each ~}}
   <div class="foot">
-    {{> pagination paging=data.search_data.detailed_results.pagination}}
+    {{> pagination paging=data.shortlist.open.pagination}}
   </div>
+  {{/compare}}
+
+  {{#compare data.shortlist.closed.hits.total ">" 0}}
+  <h2 class="mdc-typography--headline5 v-margin-full">
+    Closed jobs
+  </h2>
+  {{#each data.shortlist.closed.hits.hits ~}}
+  {{> vacancy_search_result _source}}
+  {{/each ~}}
+  <div class="foot">
+    {{> pagination paging=data.shortlist.closed.pagination}}
+  </div>
+  {{/compare}}
 </div>
