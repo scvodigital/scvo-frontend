@@ -11,9 +11,9 @@
     <div class="mdc-chip__text noselect">
       <span class="link-action">
         {{#if linked}}
-          Unlink from 
+          Unlink from
         {{else}}
-          Link to  
+          Link to
         {{/if}}
       </span>
       {{capitalize provider}}
@@ -26,29 +26,29 @@
     Settings
   </h1>
 
-  <section class="settings-section">
-    <h2 class="mdc-typography--headline4 v-margin-full">
-      Emails settings
+  <section class="settings-section goodmoves-settings-email">
+    <h2 class="mdc-typography--headline5 v-margin-full">
+      Email alerts
     </h2>
     <div class="mdc-layout-grid">
       <div class="mdc-layout-grid__inner">
         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-6-tablet mdc-layout-grid__cell--span-12-phone">
-          <h3 class="mdc-typography--headline5 v-margin-full">
+          <h3 class="mdc-typography--headline6 v-margin-full">
             Email frequency for new job alerts
           </h3>
           {{> email_frequency}}
         </div>
         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-6-tablet mdc-layout-grid__cell--span-12-phone">
-          <h3 class="mdc-typography--headline5 v-margin-full">
+          <h3 class="mdc-typography--headline6 v-margin-full">
             Shortlist alerts
           </h3>
           {{> shortlist_alerts}}
         </div>
         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-6-tablet mdc-layout-grid__cell--span-12-phone">
-          <h3 class="mdc-typography--headline5 v-margin-full">
-            Unsubscribe 
+          <h3 class="mdc-typography--headline6 v-margin-full">
+            Unsubscribe
           </h3>
-          {{#ifAny 
+          {{#ifAny
             (compare (length (filter @root.data.saved_searches.items "subscribed" "===" 1)) ">" 0)
             (compare @root.data.shortlist_ids.[0].subscribed 1)
           }}
@@ -66,20 +66,20 @@
 
   <hr />
 
-  <section class="settings-section">
-    <h2 class="mdc-typography--headline4 v-margin-full">
-      Account settings
+  <section class="settings-section goodmoves-settings-account">
+    <h2 class="mdc-typography--headline5 v-margin-full">
+      Account
     </h2>
 
     <div class="mdc-layout-grid">
       <div class="mdc-layout-grid__inner">
         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-6-tablet mdc-layout-grid__cell--span-12-phone">
-          <h3 class="mdc-typography--headline5">
+          <h3 class="mdc-typography--headline6">
             {{#if (contains (map @root.data.auth.providerData (getProp "providerId")) "password")}}
               Change password
             {{else}}
               Set password
-              <small>allows sign-in with the email address {{@root.data.auth.email}}</small>
+              <!-- <span class="mdc-typography--body1">to allow sign-in with {{@root.data.auth.email}}</span> -->
             {{/if}}
           </h3>
           <div class="mdc-text-field mdc-text-field--box mdc-text-field--with-leading-icon" data-mdc-auto-init="MDCTextField">
@@ -104,20 +104,20 @@
           </button>
         </div>
         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-6-tablet mdc-layout-grid__cell--span-12-phone">
-          <h3 class="mdc-typography--headline5">
-            Linked accounts 
+          <h3 class="mdc-typography--headline6">
+            Linked accounts
           </h3>
           {{#each (split "google,facebook,twitter" ",")}}
             <div class="v-margin">
-              {{> linkChip 
-                  provider=this 
+              {{> linkChip
+                  provider=this
                   linked=(contains (map @root.data.auth.providerData (getProp "providerId")) (concat this ".com"))
               }}
             </div>
           {{/each}}
         </div>
         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-6-tablet mdc-layout-grid__cell--span-12-phone">
-          <h3 class="mdc-typography--headline5">
+          <h3 class="mdc-typography--headline6">
             Account data
           </h3>
           <button class="mdc-button mdc-button--raised mdc-button--export mdc-button--fullwidth v-margin" data-dialog-target="#export-user-dialog">
