@@ -1,11 +1,15 @@
 {{> vacancy_search_form this instance_id="perm"}}
 
 <div id="detailed-results-container" class="container-content goodmoves-shortlist">
+  {{#compare data.shortlist.open.hits.total "===" 0}}
+  {{#compare data.shortlist.closed.hits.total "===" 0}}
   <div class="t-margin-full pull-right">
     <div class="t-margin">
       {{> shortlist_alerts}}
     </div>
   </div>
+  {{/compare}}
+  {{/compare}}
   <h1 class="mdc-typography--headline3 v-margin-full">
     Shortlist
   </h1>
