@@ -166,6 +166,15 @@ var GoodmovesController = Class.extend({
       expires = "; expires=" + date.toUTCString();
     }
     document.cookie = name + "=" + (value || "")  + expires + "; path=/; secure";
+  },
+
+  disable: function(elements, disable) {
+    disable = typeof disable === 'undefined' ? true : disable;
+    for (var e = 0; e < elements.length; ++e) {
+      var element = elements[e];
+      var opacity = disable ? 0.5 : 1;
+      $(element).prop('disabled', disable).css('opacity', opacity);
+    }
   }
 });
 
