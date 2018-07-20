@@ -115,7 +115,9 @@
         $password1.val('');
         $password2.val('');
         $password1.focus();
-        console.error('Passwords do not match');
+        goodmoves.snackbarShow({
+          message: 'The two passwords entered do not match'
+        });
         return;
       }
 
@@ -124,7 +126,10 @@
         window.location.reload();
       }).catch(function(err) {
         goodmoves.disable([$changePassword, $password1, $password2], false);
-        console.error('Failed to update password:', err);
+        goodmoves.snackbarShow({
+          message: err.message,
+          backgroundColor: '#dd4b39'
+        });
       });
     }
   });
