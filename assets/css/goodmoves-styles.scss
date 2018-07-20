@@ -329,6 +329,10 @@ footer h3,
   font-size: 1.3rem;
   line-height: 1.4rem;
 }
+.mdc-typography--headline7 {
+  font-size: 1.15rem;
+  line-height: 1.2rem;
+}
 .mdc-card__title,
 .mdc-textfield__label,
 .mdc-typography--title,
@@ -468,9 +472,11 @@ footer h3,
     }
   }
 }
-.goodmoves-vacancy,
+.goodmoves-vacancy {
+  margin-bottom: $unit*2.2;
+}
 .goodmoves-related-jobs {
-  margin-bottom: $unit*2.5;
+  margin-bottom: $unit*1.5;
 }
 .goodmoves-vacancy-search {
   .head {
@@ -856,14 +862,13 @@ a {
 .goodmoves-vacancy-closed.mdc-card.search-result {
   border-top: none;
 }
+.goodmoves-vacancy.mdc-card.list,
+.goodmoves-vacancy.mdc-card.gist,
 .goodmoves-vacancy.mdc-card.mini {
   .mdc-typography--headline5 {
     font-size: 1.2rem;
     line-height: 1.3rem;
   }
-  // .fa-ul li:last-child {
-  //   margin-bottom: 0;
-  // }
   .mdc-card .mdc-card__actions {
     padding: $unit/3 $unit/2;
   }
@@ -1422,9 +1427,11 @@ body {
     }
   }
 }
-.mdc-card.list {
-  .mdc-card__media--organisation {
-    display: none;
+.goodmoves-organisation {
+  .mdc-card.list {
+    .mdc-card__media--organisation {
+      display: none;
+    }
   }
 }
 .mdc-card.full {
@@ -1791,13 +1798,15 @@ footer,
   position: relative;
 }
 .home .tfn-latest {
+  padding: 0 $unit*1.5 0 !important;
   background-color: $mdc-theme-secondary-light;
+  margin-bottom: 0 !important;
   .mdc-typography--headline5 {
     margin-top: 0;
   }
 }
 .tfn-latest {
-  padding: 0 $unit*1.5 0 !important;
+  margin-bottom: $unit*1.5;
   .mdc-card {
     box-shadow: none;
   }

@@ -1,0 +1,55 @@
+{
+  "size": 100,
+  "_source": [
+    "Id",
+    "slug",
+    "vacancy_status",
+    "rendered.vacancy_status",
+    "top_job",
+    "description_short",
+    "title",
+    "geo_vacancy_coords",
+    "location",
+    "salary",
+    "salary_info",
+    "benefits",
+    "reference_number",
+    "application_notes",
+    "role_status_list",
+    "closing_date",
+    "organisation.slug",
+    "organisation.name",
+    "organisation.has_logo",
+    "organisation.logo_url",
+    "organisation.website",
+    "organisation.profile",
+    "organisation_website_url",
+    "rendered.goodmoves_sponsor_logos",
+    "rendered.goodmoves_downloads",
+    "rendered.rss"
+  ],
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "term": {
+            "vacancy_status": "vacancy-open"
+          }
+        },
+        {
+          "term": {
+            "organisation.id": "{{data.primaryResponse.hits.hits.[0]._source.Id}}"
+          }
+        },
+        {
+          "term": {
+            "country_iso3": "GBR"
+          }
+        }
+      ]
+    }
+  },
+  "sort": {
+    "start_at": "desc"
+  }
+}

@@ -8,7 +8,7 @@
 
   {{#compare ../data.supplimentaryResponses.vacancies.hits.total ">" 0 ~}}
   <hr />
-  <div class="mdc-typography--headline4">
+  <div class="mdc-typography--headline5">
     Current vacancies
   </div>
   {{#each ../data.supplimentaryResponses.vacancies.hits.hits ~}}
@@ -16,18 +16,27 @@
   {{/each ~}}
   {{else}}
   <hr />
-  <div class="mdc-typography--headline4">
+  <div class="mdc-typography--headline6">
     No current vacancies
   </div>
   {{/compare ~}}
 
+  {{#compare ../data.supplimentaryResponses.vacancies_closed.hits.total ">" 0 ~}}
+  {{#compare ../data.supplimentaryResponses.vacancies.hits.total ">" 0 ~}}
+  <hr />
+  {{/compare}}
+  {{#each ../data.supplimentaryResponses.vacancies_closed.hits.hits ~}}
+  {{> vacancy_list _source}}
+  {{/each ~}}
+  {{/compare ~}}
+
   {{#if goodhq_organisation.xid}}
   <hr />
-  <div class="mdc-typography--headline5">
+  <div class="mdc-typography--headline6">
     Find out more about <a href="https://goodhq.org/{{goodhq_organisation.xid}}">{{{organisation.title}}}</a> on <a href="https://goodhq.org">Good HQ</a>
   </div>
   {{#compare ../data.goodhq.volunteering.hits.total ">" 0 ~}}
-  <div class="mdc-typography--headline5">
+  <div class="mdc-typography--headline7">
     Volunteering opportunities
   </div>
   <div class="mdc-layout-grid equal-height">
@@ -47,7 +56,7 @@
   {{/compare ~}}
 
   {{#compare ../data.goodhq.posts.hits.total ">" 0 ~}}
-  <div class="mdc-typography--headline5">
+  <div class="mdc-typography--headline7">
     Posts
   </div>
   <div class="mdc-layout-grid equal-height">
