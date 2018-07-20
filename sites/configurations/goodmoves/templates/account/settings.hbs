@@ -26,67 +26,35 @@
     Settings
   </h1>
 
-  <h2 class="mdc-typography--headline4 v-margin-full">
-    Emails settings
-  </h2>
-  <div class="goodmoves-saved-searches">
-    <div class="settings">
-      <p class="mdc-typography--body1">
-        Email frequency for new job alerts
-      </p>
-      <div class="mdc-form-field">
-        <div class="mdc-radio">
-          <input class="mdc-radio__native-control" type="radio" id="daily" name="frequency" checked>
-          <div class="mdc-radio__background">
-            <div class="mdc-radio__outer-circle"></div>
-            <div class="mdc-radio__inner-circle"></div>
-          </div>
+  <section class="settings-section">
+    <h2 class="mdc-typography--headline4 v-margin-full">
+      Emails settings
+    </h2>
+    <div class="mdc-layout-grid">
+      <div class="mdc-layout-grid__inner">
+        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-6-tablet mdc-layout-grid__cell--span-12-phone">
+          <h3 class="mdc-typography--headline5 v-margin-full">
+            Email frequency for new job alerts
+          </h3>
+          {{> email_frequency}}
         </div>
-        <label for="daily">Daily</label>
-      </div>
-      <div class="mdc-form-field">
-        <div class="mdc-radio">
-          <input class="mdc-radio__native-control" type="radio" id="weekly" name="frequency" checked>
-          <div class="mdc-radio__background">
-            <div class="mdc-radio__outer-circle"></div>
-            <div class="mdc-radio__inner-circle"></div>
-          </div>
+        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-6-tablet mdc-layout-grid__cell--span-12-phone">
+          <h3 class="mdc-typography--headline5 v-margin-full">
+            Shortlist alerts
+          </h3>
+          {{> shortlist_alerts}}
         </div>
-        <label for="weekly">Weekly</label>
       </div>
     </div>
-    <p class="mdc-typography--body1">
-      <a href="/searches">Edit searches</a>
-    </p>
-  </div>
-  <div class="goodmoves-shortlist">
-    <div class="settings">
-      <div class="mdc-form-field">
-        <div class="mdc-checkbox">
-          <input type="checkbox"
-                 class="mdc-checkbox__native-control"
-                 id="closing-alerts"/>
-          <div class="mdc-checkbox__background">
-            <svg class="mdc-checkbox__checkmark"
-                 viewBox="0 0 24 24">
-              <path class="mdc-checkbox__checkmark-path"
-                    fill="none"
-                    d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
-            </svg>
-            <div class="mdc-checkbox__mixedmark"></div>
-          </div>
-        </div>
-        <label for="closing-alerts">Send ‘closing soon’ alerts</label>
-      </div>
-    </div>
-    <p class="mdc-typography--body1">
-      <a href="/shortlist">Edit shortlist</a>
-    </p>
-  </div>
-  <button class="mdc-button mdc-button--raised">
-    <span class="far fa-envelope mdc-list-item__graphic" aria-hidden="true"></span>
-    Stop all emails
-  </button>
+    
+    <h3 class="mdc-typography--headline5 v-margin-full">
+      Unsubscribe 
+    </h3>
+    <button class="mdc-button mdc-button--raised">
+      <span class="far fa-envelope mdc-list-item__graphic" aria-hidden="true"></span>
+      Stop all emails
+    </button>
+  </section>
 
   <section class="settings-section">
     <h2 class="mdc-typography--headline4 v-margin-full">

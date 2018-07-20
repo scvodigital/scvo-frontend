@@ -389,7 +389,7 @@ export class Helpers {
   }
 
   static helper_length(input: any[]|string) {
-    if (typeof input !== 'string' || !Array.isArray(input)) {
+    if (typeof input !== 'string' && !Array.isArray(input)) {
       return -1;
     }
     return input.length;
