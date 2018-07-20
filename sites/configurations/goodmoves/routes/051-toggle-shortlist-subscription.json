@@ -1,0 +1,28 @@
+{
+  "name": "toggle-shortlist-subscription",
+  "pattern": "/toggle-shortlist-subscription",
+  "acceptedVerbs": "POST",
+  "tasks": [
+    "metaData.commonTasks.authRequired",
+    {
+      "name": "notifications",
+      "taskModule": "mysql",
+      "config": {
+        "connectionName": "notifications",
+        "queryTemplates": {
+          "toggle_subscription": ">context.metaData.handlebars.queries.notifications_toggle-shortlist-subscription"
+        }
+      },
+      "renderer": "handlebars"
+    },
+    {
+      "name": "destination",
+      "taskModule": "render",
+      "renderer": "handlebars",
+      "config": {
+        "output": "body",
+        "template": "Toggled subscription"
+      }
+    }
+  ]
+}
