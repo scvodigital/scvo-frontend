@@ -90,7 +90,7 @@
     <div class="mdc-layout-grid home-heading">
       <div class="mdc-layout-grid__inner">
         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone">
-          <div class="mdc-typography--headline5">
+          <div class="mdc-typography--headline5 v-margin-full">
             Your shortlist
           </div>
         </div>
@@ -99,12 +99,19 @@
     <div class="home-jobs">
       <div class="mdc-layout-grid equal-height home-shortlist">
         <div class="mdc-layout-grid__inner scrolling-grid">
-          {{#compare data.supplimentaryResponses.shortlist.hits.total ">" 0}}
-          {{#each data.supplimentaryResponses.shortlist.hits.hits ~}}
+          {{#compare data.supplimentaryResponses.shortlist_open.hits.total ">" 0}}
+          {{#each data.supplimentaryResponses.shortlist_open.hits.hits ~}}
           <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone shortlist-jobs">
             {{> vacancy_mini _source}}
           </div>
           {{/each ~}}
+          {{#compare data.supplimentaryResponses.shortlist_closed.hits.total ">" 0}}
+          {{#each data.supplimentaryResponses.shortlist_closed.hits.hits ~}}
+          <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone shortlist-jobs">
+            {{> vacancy_mini _source}}
+          </div>
+          {{/each ~}}
+          {{/compare}}
           <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone shortlist-jobs last-card">
             <div class="mdc-card align-centre">
               <a href="/search">Find more jobs for your shortlist</a>
@@ -118,9 +125,15 @@
           </div>
           {{else}}
           <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone v-margin-full">
+            {{#compare data.supplimentaryResponses.shortlist_closed.hits.total ">" 0}}
+            <p>
+              There are currently no open jobs in your shortlist. <a href="/shortlist">See closed jobs</a>.
+            </p>
+            {{else}}
             <p>
               There are currently no jobs in your shortlist, if you shortlist a job it will appear here for easy reference.
             </p>
+            {{/compare}}
           </div>
           {{/compare}}
         </div>
@@ -134,14 +147,14 @@
       <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone">
         {{#if data.auth ~}}
         <div class="mdc-typography--headline5">
-          Your latest jobs
+          Your latest jobs&ensp;
           <span class="mdc-typography--body1">
             <a href="/searches">Your searches</a>
           </span>
         </div>
         {{else}}
         <div class="mdc-typography--headline5">
-          Latest jobs
+          Latest jobs&ensp;
           <span class="mdc-typography--body1">
             <a href="/search?sort=newest&page=2">Find more</a>
           </span>
@@ -183,7 +196,7 @@
     <div class="mdc-layout-grid__inner">
       <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone">
         <div class="mdc-typography--headline5">
-          Top jobs
+          Top jobs&ensp;
           <span class="mdc-typography--body1">
             <a href="/search">Find more</a>
           </span>

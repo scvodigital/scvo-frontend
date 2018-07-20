@@ -6,24 +6,15 @@
     "organisation.name",
     "geo_vacancy_coords",
     "closing_date",
+    "vacancy_status",
     "salary",
     "role_status_list",
     "slug"
   ],
   "query": {
     "bool": {
-      {{#ifAny request.params.query.type request.params.query.sectors request.params.query.roles request.params.query.statuses request.params.query.lat ~}}
+      {{#ifAny request.params.query.sectors request.params.query.roles request.params.query.statuses request.params.query.lat ~}}
       "filter": [
-        {{#if request.params.query.type ~}}
-        {{#compare request.params.query.type "===" "home-based" ~}}
-        {
-          "terms": {
-            "remote_working": true
-          }
-        }
-        {{#ifAny request.params.query.sectors request.params.query.roles request.params.query.statuses request.params.query.lat}},{{/ifAny}}
-        {{/compare ~}}
-        {{/if ~}}
         {{#if request.params.query.sectors ~}}
         {
           "terms": {

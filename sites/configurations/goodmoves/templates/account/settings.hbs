@@ -1,141 +1,148 @@
 {{> vacancy_search_form this instance_id="perm"}}
 
+{{#*inline "linkChip"}}
+  <div class="mdc-chip {{#if linked}}mdc-chip--selected{{/if}}" data-provider-link="{{provider}}">
+    <span class="fab fa-{{provider}} mdc-chip__icon mdc-chip__icon--leading {{#if linked}}mdc-chip__icon--leading-hidden{{/if}}" aria-hidden="true"></span>
+    <div class="mdc-chip__checkmark">
+      <svg class="mdc-chip__checkmark-svg" viewBox="-2 -3 30 30">
+        <path class="mdc-chip__checkmark-path" fill="none" stroke="#ffffff" d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+      </svg>
+    </div>
+    <div class="mdc-chip__text noselect">
+      <span class="link-action">
+        {{#if linked}}
+          Unlink from 
+        {{else}}
+          Link to  
+        {{/if}}
+      </span>
+      {{capitalize provider}}
+    </div>
+  </div>
+{{/inline}}
+
 <div id="detailed-results-container" class="container-content goodmoves-settings">
   <h1 class="mdc-typography--headline3 v-margin-full">
     Settings
   </h1>
 
-  <h2 class="mdc-typography--headline4 v-margin-full">
-    Emails
-  </h2>
-  <div class="goodmoves-saved-searches">
-    <div class="settings">
-      <p class="mdc-typography--body1">
-        Email frequency for new job alerts
-      </p>
-      <div class="mdc-form-field">
-        <div class="mdc-radio">
-          <input class="mdc-radio__native-control" type="radio" id="daily" name="frequency" checked>
-          <div class="mdc-radio__background">
-            <div class="mdc-radio__outer-circle"></div>
-            <div class="mdc-radio__inner-circle"></div>
-          </div>
-        </div>
-        <label for="daily">Daily</label>
-      </div>
-      <div class="mdc-form-field">
-        <div class="mdc-radio">
-          <input class="mdc-radio__native-control" type="radio" id="weekly" name="frequency" checked>
-          <div class="mdc-radio__background">
-            <div class="mdc-radio__outer-circle"></div>
-            <div class="mdc-radio__inner-circle"></div>
-          </div>
-        </div>
-        <label for="weekly">Weekly</label>
-      </div>
-    </div>
-    <p class="mdc-typography--body1">
-      <a href="/searches">Edit searches</a>
-    </p>
-  </div>
-  <div class="goodmoves-shortlist">
-    <div class="settings">
-      <div class="mdc-form-field">
-        <div class="mdc-checkbox">
-          <input type="checkbox"
-                 class="mdc-checkbox__native-control"
-                 id="closing-alerts"/>
-          <div class="mdc-checkbox__background">
-            <svg class="mdc-checkbox__checkmark"
-                 viewBox="0 0 24 24">
-              <path class="mdc-checkbox__checkmark-path"
-                    fill="none"
-                    d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
-            </svg>
-            <div class="mdc-checkbox__mixedmark"></div>
-          </div>
-        </div>
-        <label for="closing-alerts">Send ‘closing soon’ alerts</label>
-      </div>
-    </div>
-    <p class="mdc-typography--body1">
-      <a href="/shortlist">Edit shortlist</a>
-    </p>
-  </div>
-  <button class="mdc-button mdc-button--raised">
-    <span class="far fa-envelope mdc-list-item__graphic" aria-hidden="true"></span>
-    Stop all emails
-  </button>
-
-  <!-- <h2 class="mdc-typography--headline4 v-margin">
-    Email alerts
-  </h2>
-  <p class="mdc-typography--body1">
-    You have 1 saved search for your email alerts.
-  </p>
-
-  <form action="/update-email-preferences" method="POST" class="v-margin-full">
-    <h3 class="mdc-typography--headline5 v-margin">
-      Select day
-    </h3>
-    {{#each (split "monday,tuesday,wednesday,thursday,friday,saturday,sunday" ",")}}
-      <div class="mdc-switch">
-        <input type="checkbox" id="email-switch-{{this}}" class="mdc-switch__native-control" role="switch"
-          {{~#if (contains @root.data.email_days this)~}}checked="checked"{{/if}} name="{{this}}" onchange="$('#email-preferences-submit').prop('disabled', false);">
-        <div class="mdc-switch__background">
-          <div class="mdc-switch__knob"></div>
-        </div>
-      </div>
-      <label for="email-switch-{{this}}">
-        {{capitalize this}}
-      </label>
-    {{/each}}
-    <button class="mdc-button mdc-button--raised mdc-ripple-surface mdc-ripple-surface--primary" type="submit" id="email-preferences-submit" data-mdc-auto-init="MDCRipple" disabled>Update preferences</button>
-  </form>
-
-  <hr /> -->
-
-  <h2 class="mdc-typography--headline4 v-margin-full">
-    Change/set password
-  </h2>
-  <div class="mdc-text-field mdc-text-field--box mdc-text-field--with-leading-icon" data-mdc-auto-init="MDCTextField">
-    <span class="far fa-key mdc-text-field__icon" tabindex="-1"></span>
-    <input type="password" id="sign-in-password" class="mdc-text-field__input" data-lpignore="true" autocomplete="off" />
-    <label class="mdc-floating-label mdc-floating-label--float-above" for="sign-in-password">
-      Password
-    </label>
-    <div class="mdc-line-ripple"></div>
-  </div>
-
-  <!-- <hr /> -->
-
-  <h2 class="mdc-typography--headline4 v-margin-full">
-    Account
-  </h2>
-  <div class="goodmoves-settings-account">
+  <section class="settings-section">
+    <h2 class="mdc-typography--headline4 v-margin-full">
+      Emails settings
+    </h2>
     <div class="mdc-layout-grid">
       <div class="mdc-layout-grid__inner">
-        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
-          <button class="mdc-button mdc-button--raised mdc-button--export" data-dialog-target="#export-user-dialog">
-            <span class="far fa-upload mdc-list-item__graphic" aria-hidden="true"></span>
-            Export account settings
-          </button>
+        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-6-tablet mdc-layout-grid__cell--span-12-phone">
+          <h3 class="mdc-typography--headline5 v-margin-full">
+            Email frequency for new job alerts
+          </h3>
+          {{> email_frequency}}
         </div>
-        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
-          <button class="mdc-button mdc-button--raised mdc-button--import" data-dialog-target="#import-user-dialog">
-            <span class="far fa-download mdc-list-item__graphic" aria-hidden="true"></span>
-            Import account settings
-          </button>
-        </div>
-        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
-          <button class="mdc-button mdc-button--raised mdc-button--delete" data-dialog-target="#delete-user-dialog">
-            <span class="far fa-trash mdc-list-item__graphic" aria-hidden="true"></span>
-            Delete account
-          </button>
+        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-6-tablet mdc-layout-grid__cell--span-12-phone">
+          <h3 class="mdc-typography--headline5 v-margin-full">
+            Shortlist alerts
+          </h3>
+          {{> shortlist_alerts}}
         </div>
       </div>
     </div>
-  </div>
+    
+    <h3 class="mdc-typography--headline5 v-margin-full">
+      Unsubscribe 
+    </h3>
+    <button class="mdc-button mdc-button--raised">
+      <span class="far fa-envelope mdc-list-item__graphic" aria-hidden="true"></span>
+      Stop all emails
+    </button>
+  </section>
+
+  <section class="settings-section">
+    <h2 class="mdc-typography--headline4 v-margin-full">
+      Account settings
+    </h2>
+
+    <h3 class="mdc-typography--headline5">
+      {{#if (contains (map @root.data.auth.providerData (getProp "providerId")) "password")}}
+        Change password
+      {{else}}
+        Set password
+        <small>allows sign-in with the email address {{@root.data.auth.email}}</small>
+      {{/if}}
+    </h3>
+    <div class="mdc-layout-grid">
+      <div class="mdc-layout-grid__inner">
+        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-6-tablet mdc-layout-grid__cell--span-12-phone">
+          <div class="mdc-text-field mdc-text-field--box mdc-text-field--with-leading-icon" data-mdc-auto-init="MDCTextField">
+            <span class="far fa-key mdc-text-field__icon" tabindex="-1"></span>
+            <input type="password" id="change-password-password" class="mdc-text-field__input" data-lpignore="true" autocomplete="off" />
+            <label class="mdc-floating-label mdc-floating-label--float-above" for="change-password">
+              Password
+            </label>
+            <div class="mdc-line-ripple"></div>
+          </div>
+        </div>
+        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-6-tablet mdc-layout-grid__cell--span-12-phone">
+          <div class="mdc-text-field mdc-text-field--box mdc-text-field--with-leading-icon" data-mdc-auto-init="MDCTextField">
+            <span class="far fa-key mdc-text-field__icon" tabindex="-1"></span>
+            <input type="password" id="change-password-confirm" class="mdc-text-field__input" data-lpignore="true" autocomplete="off" />
+            <label class="mdc-floating-label mdc-floating-label--float-above" for="change-password-confirm">
+              Confirm password
+            </label>
+            <div class="mdc-line-ripple"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <button class="mdc-button mdc-button--raised mdc-button--change_password pull-right" id="change-password">
+      <span class="far fa-lock mdc-list-item__graphic" aria-hidden="true"></span>
+      Change password
+    </button>
+
+    <h3 class="mdc-typography--headline5">
+      Linked accounts 
+    </h3>
+    <div class="mdc-layout-grid">
+      <div class="mdc-layout-grid__inner">
+        {{#each (split "google,facebook,twitter" ",")}}
+          <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
+            {{> linkChip 
+                provider=this 
+                linked=(contains (map @root.data.auth.providerData (getProp "providerId")) (concat this ".com"))
+            }}
+          </div>
+        {{/each}}
+      </div>
+    </div>
+
+    <h3 class="mdc-typography--headline5">
+      Account data
+    </h3>
+    <div class="goodmoves-settings-account">
+      <div class="mdc-layout-grid">
+        <div class="mdc-layout-grid__inner">
+          <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
+            <button class="mdc-button mdc-button--raised mdc-button--export" data-dialog-target="#export-user-dialog">
+              <span class="far fa-upload mdc-list-item__graphic" aria-hidden="true"></span>
+              Export account settings
+            </button>
+          </div>
+          <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
+            <button class="mdc-button mdc-button--raised mdc-button--import" data-dialog-target="#import-user-dialog">
+              <span class="far fa-download mdc-list-item__graphic" aria-hidden="true"></span>
+              Import account settings
+            </button>
+          </div>
+          <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
+            <button class="mdc-button mdc-button--raised mdc-button--delete" data-dialog-target="#delete-user-dialog">
+              <span class="far fa-trash mdc-list-item__graphic" aria-hidden="true"></span>
+              Delete account
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 </div>
 
 <aside id="delete-user-dialog"

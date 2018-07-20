@@ -13,7 +13,7 @@ $mdc-theme-footer: #37474F; // Blue Gray 800
 $mdc-theme-footer-light: #455A64; // Blue Gray 700
 $mdc-theme-footer-dark: #263238; // Blue Gray 900
 
-$mdc-theme-error: #a93f34;
+$mdc-theme-error: #832A2C;
 
 $mdc-theme-tfn: #3b9db1;
 
@@ -287,6 +287,7 @@ footer h3,
 .mdc-simple-menu .mdc-list-item,
 .mdc-temporary-drawer .mdc-list-item,
 .mdc-drawer--temporary .mdc-list-item,
+.gm-style-iw,
 .mdc-list {
   font-family: $base-font-family, Helvetica, Arial, sans-serif;
   font-weight: $base-font-weight;
@@ -327,6 +328,10 @@ footer h3,
 .mdc-typography--headline6 {
   font-size: 1.3rem;
   line-height: 1.4rem;
+}
+.mdc-typography--headline7 {
+  font-size: 1.15rem;
+  line-height: 1.2rem;
 }
 .mdc-card__title,
 .mdc-textfield__label,
@@ -467,9 +472,11 @@ footer h3,
     }
   }
 }
-.goodmoves-vacancy,
+.goodmoves-vacancy {
+  margin-bottom: $unit*2.2;
+}
 .goodmoves-related-jobs {
-  margin-bottom: $unit*2.5;
+  margin-bottom: $unit*1.5;
 }
 .goodmoves-vacancy-search {
   .head {
@@ -545,15 +552,15 @@ footer h3,
     .mdc-layout-grid {
       width: 100%;
     }
-    .saved-search-remove {
-      margin: 0 auto;
-      height: 40px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      cursor: pointer;
-    }
   }
+}
+.saved-search-remove {
+  margin: 0 auto;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
 }
 
 .icon-toggle-off {
@@ -849,14 +856,19 @@ a {
     }
   }
 }
+.goodmoves-vacancy-closed.mdc-card.list,
+.goodmoves-vacancy-closed.mdc-card.mini,
+.goodmoves-vacancy-closed.mdc-card.gist,
+.goodmoves-vacancy-closed.mdc-card.search-result {
+  border-top: none;
+}
+.goodmoves-vacancy.mdc-card.list,
+.goodmoves-vacancy.mdc-card.gist,
 .goodmoves-vacancy.mdc-card.mini {
   .mdc-typography--headline5 {
     font-size: 1.2rem;
     line-height: 1.3rem;
   }
-  // .fa-ul li:last-child {
-  //   margin-bottom: 0;
-  // }
   .mdc-card .mdc-card__actions {
     padding: $unit/3 $unit/2;
   }
@@ -909,16 +921,28 @@ a {
 .mdc-card.search-result:hover::after {
   opacity: 1;
 }
+.panel-heading {
+  margin: 0;
+  padding: $unit*(2/3) $unit;
+  background: $mdc-theme-error;
+  color: white;
+  font-weight: 600;
+  border-radius: 2px 2px 0 0;
+}
+.mdc-card.mini {
+  .panel-heading {
+    padding: $unit/3 $unit;
+  }
+}
 .mdc-card.full {
   .panel-heading {
-    background: $mdc-theme-error;
     margin: $unit/2 0 $unit;
-    color: white;
     padding: $unit/2;
-    font-weight: 600;
+    border-radius: 2px;
+    box-shadow: 0px 3px 3px -2px rgba(0, 0, 0, 0.2), 0px 3px 4px 0px rgba(0, 0, 0, 0.14), 0px 1px 8px 0px rgba(0, 0, 0, 0.12);
   }
   .mdc-card__info--organisation-title {
-    margin: 0 0 $unit/2;
+    margin: 0 0 $unit;
   }
   .mdc-card__info--vacancy .detailed-info,
   .organisation-type {
@@ -1395,7 +1419,7 @@ body {
     height: auto;
     display: flex;
     align-items: top;
-    margin: $unit/2 0 0 $unit;
+    margin: 0 0 0 $unit;
     padding: 0;
     img {
       width: 100%;
@@ -1403,9 +1427,11 @@ body {
     }
   }
 }
-.mdc-card.list {
-  .mdc-card__media--organisation {
-    display: none;
+.goodmoves-organisation {
+  .mdc-card.list {
+    .mdc-card__media--organisation {
+      display: none;
+    }
   }
 }
 .mdc-card.full {
@@ -1437,6 +1463,7 @@ body {
   }
 }
 .goodmoves-organisation {
+  margin-bottom: $unit*1.5;
   .mdc-card.full {
     background-color: transparent;
   }
@@ -1770,18 +1797,16 @@ footer,
   padding: 0 $unit 0 !important;
   position: relative;
 }
-// .currently-recruiting,
-// .home-jobs {
-//   box-shadow: $toolbar-shadow-reverse;
-// }
 .home .tfn-latest {
+  padding: 0 $unit*1.5 0 !important;
   background-color: $mdc-theme-secondary-light;
+  margin-bottom: 0 !important;
   .mdc-typography--headline5 {
     margin-top: 0;
   }
 }
 .tfn-latest {
-  padding: 0 $unit*1.5 0 !important;
+  margin-bottom: $unit*1.5;
   .mdc-card {
     box-shadow: none;
   }
@@ -1810,7 +1835,7 @@ footer,
 }
 .currently-recruiting {
   padding: $unit/4 $unit*1.5 $unit/3 !important;
-  background-color: $mdc-theme-secondary;
+  background-color: white;
   .organisation-logo:before {
     content: "";
     display: block;
@@ -2167,8 +2192,8 @@ form.inline-form {
   top: 0; bottom: 0;
   z-index: 1;
   background-image:
-    linear-gradient(to right, $mdc-theme-secondary-light, $mdc-theme-secondary-light $unit*3, rgba(245, 245, 245, 0) $unit*4.5),
-    linear-gradient(to left , $mdc-theme-secondary-light, $mdc-theme-secondary-light $unit*3, rgba(245, 245, 245, 0) $unit*4.5);
+  linear-gradient(to right, $mdc-theme-secondary-light, $mdc-theme-secondary-light $unit*3, rgba(245, 245, 245, 0) $unit*4.1),
+  linear-gradient(to left , $mdc-theme-secondary-light, $mdc-theme-secondary-light $unit*3, rgba(245, 245, 245, 0) $unit*4.1);
 }
 
 @media screen and (max-width: $mobile-breakpoint) {

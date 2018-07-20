@@ -11,45 +11,37 @@
     "geo_vacancy_coords",
     "location",
     "salary",
-    "salary_info",
-    "benefits",
-    "reference_number",
-    "application_notes",
     "role_status_list",
     "closing_date",
     "organisation.slug",
     "organisation.name",
     "organisation.has_logo",
-    "organisation.logo_url",
-    "organisation.website",
-    "organisation.profile",
-    "organisation_website_url",
-    "rendered.goodmoves_sponsor_logos",
-    "rendered.goodmoves_downloads",
-    "rendered.rss"
+    "organisation.logo_url"
   ],
   "query": {
     "bool": {
-      "must": [
+      "must_not": [
         {
           "term": {
-            "organisation.id": "{{data.primaryResponse.hits.hits.[0]._source.Id}}"
+            "vacancy_status": "vacancy-open"
+          }
+        }
+      ],
+      "must": [
+        {
+          "terms": {
+            "Id": {{{stringify (map data.shortlist_ids.items (getProp "id"))}}}
           }
         },
         {
           "term": {
             "country_iso3": "GBR"
           }
-        },
-        {
-          "term": {
-            "vacancy_status": "vacancy-open"
-          }
         }
       ]
     }
   },
   "sort": {
-    "start_at": "desc"
+    "closing_date": "asc"
   }
 }
