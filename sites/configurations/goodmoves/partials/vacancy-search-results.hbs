@@ -93,36 +93,32 @@
   aria-describedby="edit-search-dialog-description"
   data-mdc-auto-init="MDCDialog">
   <div class="mdc-dialog__surface">
+    {{#if data.auth ~}}
+    {{#with (
+              querystringify (obj)
+              keywords=@root.request.params.query.keywords
+              salary_min=@root.request.params.query.salary_min
+              salary_max=@root.request.params.query.salary_max
+              roles=@root.request.params.query.roles
+              sectors=@root.request.params.query.sectors
+              statuses=@root.request.params.query.statuses
+              distance=@root.request.params.query.distance
+              lat=@root.request.params.query.lat
+              lng=@root.request.params.query.lng
+              location=@root.request.params.query.location
+            ) ~}}
+    {{#if (itemAt @root.data.saved_searches.items (indexOf (map @root.data.saved_searches.items (getProp 'querystring')) this)) ~}}
+    {{#with (itemAt @root.data.saved_searches.items (indexOf (map @root.data.saved_searches.items (getProp 'querystring')) this)) ~}}
     <header class="mdc-dialog__header">
       <h2 id="edit-search-dialog-label" class="mdc-dialog__header__title">
-        Your search
-        {{#if data.auth ~}}
-        {{#with (
-                  querystringify (obj)
-                  keywords=@root.request.params.query.keywords
-                  salary_min=@root.request.params.query.salary_min
-                  salary_max=@root.request.params.query.salary_max
-                  roles=@root.request.params.query.roles
-                  sectors=@root.request.params.query.sectors
-                  statuses=@root.request.params.query.statuses
-                  distance=@root.request.params.query.distance
-                  lat=@root.request.params.query.lat
-                  lng=@root.request.params.query.lng
-                  location=@root.request.params.query.location
-                ) ~}}
-        {{#if (itemAt @root.data.saved_searches.items (indexOf (map @root.data.saved_searches.items (getProp 'querystring')) this)) ~}}
-        {{#with (itemAt @root.data.saved_searches.items (indexOf (map @root.data.saved_searches.items (getProp 'querystring')) this)) ~}}
+        Your search&ensp;
         <span class="mdc-typography--body1">
           <strong>{{{name}}}</strong>
         </span>
-        {{/with ~}}
-        {{/if ~}}
-        {{/with ~}}
-        {{/if ~}}
       </h2>
     </header>
     <section id="edit-search-dialog-description" class="mdc-dialog__body">
-      <div class="mdc-form-field">
+      <!-- <div class="mdc-form-field">
         <div class="mdc-checkbox">
           <input type="checkbox"
                  class="mdc-checkbox__native-control"
@@ -138,13 +134,36 @@
           </div>
         </div>
         <label for="email-on-edit">Send jobs matching this search by email</label>
-      </div>
+      </div> -->
+      {{#> ajax_chip
+        onUrl="/toggle-subscription"
+        offUrl="/toggle-subscription"
+        onText="Don't send jobs matching this search by email"
+        offText="Send jobs matching this search by email"
+        onMethod="POST"
+        offMethod="POST"
+        iconClasses="far fa-envelope"
+        on=subscribed
+      }}
+      {
+        "onData": {
+          "name": {{{stringify name}}}
+        },
+        "offData": {
+          "name": {{{stringify name}}}
+        }
+      }
+      {{/ajax_chip}}
     </section>
     <footer class="mdc-dialog__footer">
       <button type="button" class="mdc-button mdc-dialog__footer__button mdc-dialog__footer__button--cancel">Cancel</button>
       <button type="button" class="mdc-button mdc-dialog__footer__button mdc-dialog__footer__button--delete">Delete search</button>
       <button type="submit" class="mdc-button mdc-dialog__footer__button mdc-dialog__footer__button--accept">Save</button>
     </footer>
+    {{/with ~}}
+    {{/if ~}}
+    {{/with ~}}
+    {{/if ~}}
   </div>
   <div class="mdc-dialog__backdrop"></div>
 </aside>
@@ -175,9 +194,9 @@
         {{#if (itemAt @root.data.saved_searches.items (indexOf (map @root.data.saved_searches.items (getProp 'querystring')) this)) ~}}
         {{#with (itemAt @root.data.saved_searches.items (indexOf (map @root.data.saved_searches.items (getProp 'querystring')) this))}}
           <h3 class="mdc-typography--headline6">
-            Your search
+            Your search&ensp;
             <span class="mdc-typography--body1">
-              <a name="#" data-dialog-target="#edit-search-dialog" style="padding-left:.5rem;cursor:pointer;">{{{name}}}</a>
+              <a name="#" data-dialog-target="#edit-search-dialog" style="cursor:pointer;">{{{name}}}</a>
             </span>
           </h3>
           <!-- {{#> ajax_chip
