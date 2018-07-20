@@ -164,7 +164,7 @@
 
 <div class="mdc-layout-grid head">
   <div class="mdc-layout-grid__inner">
-    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone">
+    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone action">
       {{#if data.auth ~}}
       {{#with (
                 querystringify (obj)
@@ -227,10 +227,10 @@
       </a>
       {{/if ~}}
     </div>
-    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
+    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone pagination-desktop">
       {{> pagination paging=data.search_data.detailed_results.pagination}}
     </div>
-    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
+    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone action">
       <form action="{{{request.url.path}}}" method="GET">
         <input type="hidden" name="keywords" value="{{request.params.query.keywords}}" />
         <input type="hidden" name="location" value="{{request.params.query.location}}" />
@@ -254,6 +254,9 @@
           </label>
         </div>
       </form>
+    </div>
+    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone pagination-mobile">
+      {{> pagination paging=data.search_data.detailed_results.pagination}}
     </div>
   </div>
 </div>
