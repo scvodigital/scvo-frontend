@@ -107,6 +107,15 @@ export class Helpers {
     return haystack.indexOf(needle);
   }
 
+  static helper_inflect(count: number, singular: any, plural: any, includeCount: boolean) {
+    var word = (count > 1 || count === 0) ? plural : singular;
+    if (includeCount === true) {
+      return String(count) + ' ' + word;
+    } else {
+      return word;
+    }
+  };
+
   static helper_itemAt(haystack: any[], index: number): any {
     if (!Array.isArray(haystack) || typeof index !== 'number') {
       return null;
@@ -275,19 +284,19 @@ export class Helpers {
     console.log('DECODE URI COMPONENT AFTER:', out);
     return out;
   }
-  
+
   static helper_encodeURIComponent(str: string) {
     if (!str) return '';
     const out = encodeURIComponent(str);
     return out;
   }
-  
+
   static helper_decodeURI(str: string) {
     if (!str) return '';
     const out = decodeURI(str);
     return out;
   }
-  
+
   static helper_encodeURI(str: string) {
     if (!str) return '';
     const out = encodeURI(str);
