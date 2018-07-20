@@ -35,10 +35,15 @@
         method: 'POST',
         dataType: 'html',
         success: function(data, status, xhr) {
-          console.log('Updated email preferences', status, data);
+          goodmoves.snackbarShow({
+            message: 'Email frequency updated'
+          });
         },
         error: function(xhr, status, error) {
-          console.error('Failed to update email preferences', status, error);
+          goodmoves.snackbarShow({
+            message: 'Failed to update email frequency',
+            backgroundColor: '#dd4b39'
+          });
         }
       };
       if (evt.currentTarget.id === 'daily') {
