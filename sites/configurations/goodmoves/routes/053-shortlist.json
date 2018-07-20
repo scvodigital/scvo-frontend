@@ -15,7 +15,7 @@
     "metaData.commonTasks.authRequired",
     "metaData.commonTasks.shortlistIds",
     {
-      "name": "search_data",
+      "name": "shortlist",
       "taskModule": "elasticsearch",
       "config": {
         "connectionStringTemplate": "{$../../elasticsearch-url.txt}",
@@ -25,10 +25,16 @@
         },
         "queryTemplates": [
           {
-            "name": "shortlist",
+            "name": "open",
             "index": "web-content-production",
             "type": "goodmoves-vacancy",
-            "template": ">context.metaData.handlebars.queries.vacancies_shortlist"
+            "template": ">context.metaData.handlebars.queries.vacancies_shortlist-open"
+          },
+          {
+            "name": "closed",
+            "index": "web-content-production",
+            "type": "goodmoves-vacancy",
+            "template": ">context.metaData.handlebars.queries.vacancies_shortlist-closed"
           }
         ]
       },

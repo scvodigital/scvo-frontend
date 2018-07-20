@@ -20,6 +20,13 @@
   ],
   "query": {
     "bool": {
+      "must_not": [
+        {
+          "term": {
+            "vacancy_status": "vacancy-open"
+          }
+        }
+      ],
       "must": [
         {
           "terms": {
