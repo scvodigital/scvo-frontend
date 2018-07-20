@@ -626,11 +626,13 @@ a:hover {
 }
 
 .mdc-chip {
-  background-color: $mdc-theme-secondary-light;
+  background-color: $mdc-theme-secondary;
   color: $mdc-theme-secondary-dark;
   margin: 0;
-  color: rgba(0, 0, 0, 0.54);
   font-weight: 600;
+  .mdc-chip__icon.mdc-chip__icon--leading {
+    color: $mdc-theme-secondary-dark;
+  }
   .mdc-chip__text {
     margin-left: $unit/2;
   }
@@ -643,13 +645,17 @@ a:hover {
     color: #000;
   }
 }
+.mdc-card .mdc-chip {
+  background-color: $mdc-theme-complimentary
+}
+.mdc-card .mdc-chip.mdc-chip--selected,
 .mdc-chip.mdc-chip--selected {
   background-color: $mdc-theme-primary;
   color: white;
 }
+.mdc-card .mdc-chip.mdc-chip--selected:hover,
 .mdc-chip.mdc-chip--selected:hover {
   background-color: $mdc-theme-primary-dark;
-  color: white;
 }
 
 .noselect {

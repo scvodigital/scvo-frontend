@@ -54,6 +54,23 @@
           {{/compare ~}}
           {{/compare ~}}
           {{/if ~}}
+          {{#if goodhq_organisation ~}}
+          {{#compare goodhq_organisation.xid "!==" null ~}}
+          <li class="mdc-card__info--vacancy-goodhq mdc-typography--body1">
+            <span class="fa-li"><span class="fas fa-heart fa-fw" title="Good HQ"></span></span>
+            <a href="https://goodhq.org/{{goodhq_organisation.xid}}" target="_blank">
+              @{{goodhq_organisation.xid}}
+            </a>
+            {{#compare @root.data.goodhq.reviews.hits.total ">" 0 ~}}
+            – {{{@root.data.goodhq.reviews.hits.total}}} reviews
+            {{/compare ~}}
+            on
+            <a href="https://goodhq.org">
+              Good HQ
+            </a>
+          </li>
+          {{/compare ~}}
+          {{/if ~}}
         </ul>
       </div>
     </div>
