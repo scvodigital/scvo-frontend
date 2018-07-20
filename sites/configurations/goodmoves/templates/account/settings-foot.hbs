@@ -1,23 +1,4 @@
 <script>
-  /*
-  document.addEventListener('DOMContentLoaded', function() {
-    console.log('LOADED!');
-
-    setTimeout(function() {
-      goodmoves.app.auth().onAuthStateChanged(function(user) {
-        if (user) {
-          user.providerData.forEach(function(provider) {
-            if (provider.providerId.indexOf('google') > -1) {
-              $('#linked-account-google').prop('checked', true);
-            } else if (provider.providerId.indexOf('facebook') > -1) {
-              $('#linked-account-google').prop('checked', true);
-            }
-          });
-        }
-      }); 
-    }, 250);
-  });
-  */
   $(document).ready(function() {
     var providers = {
       google: {
@@ -106,5 +87,29 @@
         })
         .attr('title', !enabled ? 'You must have at least one account linked to your Goodmoves account' : '');
     }
+
+    $('#change-password').on('click', function() {
+      var password1 = $('#change-password-password').val();
+      var password2 = $('#change-password-confirm').val();
+      if (password1 !== password2) {
+        console.error('Passwords do not match');
+        return;
+      }
+
+      var hasEmailProvider = false;
+      currentUser.providerData.forEach(function(providerData) {
+        if (providerData.providerId.indexOf('email') > -1) {
+          hasEmailProvider = true;
+        }
+      });
+      console.log('Has Email Provider:', hasEmailProvider);
+
+      currentUser.updatePassword(password1).then(function(result) {
+        console.log('Password updated:', result);
+      }).catch(function(err) {
+        console.error('Failed to update password:', err);
+      });
+
+    });
   });
 </script>
