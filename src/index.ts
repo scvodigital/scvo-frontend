@@ -134,9 +134,19 @@ async function index(
       res.setHeader(header, response.headers[header]);
     });
 
-    Object.keys(response.cookies).forEach((cookie) => {
-      res.cookie(cookie, response.cookies[cookie], { expires: new Date(Date.now() + 900000) });
+    Object.keys(response.cookies).forEach((cookieName) => {
+      const cookie = response.cookies[cookieName];
+      res.cookie(cookieName, cookie.value, cookie.options || {});
     });
+
+    if (response.clearCookies) {
+      Object.keys(response.clearCookies).forEach((cookieName) => {
+        if (response.clearCookies) { // weird that I need to do this in here too to satisfy TSC
+          const cookie = response.clearCookies[cookieName];
+          res.clearCookie(cookieName, cookie.options || {});
+        }
+      });
+    }
 
     res.send(response.body || 'Something went bad');
     res.end();

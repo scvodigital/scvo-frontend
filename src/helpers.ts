@@ -364,8 +364,8 @@ export class Helpers {
       return [];
     }
     const reversed = [];
-    while (input.length > 0) {
-      reversed.push(input.pop());
+    for (var i = input.length; i  >= 0; --i) {
+      reversed.push(input[i]);
     }
     return reversed;
   }

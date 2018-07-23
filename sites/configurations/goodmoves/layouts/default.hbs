@@ -242,7 +242,7 @@ if(location.host.indexOf('.local') > -1){
             </a>
             {{/each ~}}
             <div role="separator" class="mdc-list-divider"></div>
-            {{#each (reverse context.metaData.menus.unauthenticated) ~}}
+            {{#each (reverse context.metaData.menus.user-not-signed-in) ~}}
             <a class="mdc-list-item{{#if (regexMatch ../request.url.pathname route "gi")}} mdc-list-item--activated{{/if}}" href="{{stripTrailingSlash path}}">
               {{#if icon ~}}
               <span class="far fa-{{icon}} mdc-list-item__graphic" aria-hidden="true"></span>
