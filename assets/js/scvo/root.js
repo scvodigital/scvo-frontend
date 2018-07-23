@@ -128,3 +128,27 @@ function setCookie(name, value, days) {
   }
   document.cookie = name + "=" + (value || "")  + expires + "; path=/; secure";
 }
+
+function initMap() {
+  handleLocationBoxes();
+}
+function handleLocationBoxes() {
+  var boxes = $('[data-location-options]');
+  boxes.each(function(i, o) {
+    var options = $(o).data('location-options');
+    var latSelector = $(o).data('location-lat');
+    var lngSelector = $(o).data('location-lng');
+
+    var autocomplete = new google.maps.places.Autocomplete(o, options);
+    autocomplete.addListener('place_changed', function(evt) {
+      var place = this.getPlace();
+      // console.log(place.formatted_address);
+      if (place.geometry.location) {
+        $(latSelector).val(place.geometry.location.lat());
+        $(lngSelector).val(place.geometry.location.lng());
+        $(o).val(place.formatted_address);
+      }
+    });
+  });
+}
+
