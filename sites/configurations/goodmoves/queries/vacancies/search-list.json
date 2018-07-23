@@ -114,6 +114,18 @@
       ]
     }
   },
+  "script_fields" : {
+    "distance" : {
+      "script" : {
+        "inline": "doc['geo_vacancy_coords'].arcDistance(params.lat,params.lon) * 0.001",
+        "lang": "painless",
+        "params": {
+          "lat": {{request.params.query.lat}},
+          "lon": {{request.params.query.lng}}
+        }
+      }
+    }
+  },
   "sort": [
     {{#if request.params.query.sort ~}}
     {{#compare request.params.query.sort "===" "salary_low" ~}}
@@ -146,9 +158,8 @@
     {
       "closing_date": "asc"
     }
-    {{else}}
     {{#compare request.params.query.sort "===" "distance" ~}}
-    {{#if request.params.query.lat ~}}
+    {{#ifAll request.params.query.location request.params.query.lat request.params.query.lng ~}}
     {
       "_geo_distance" : {
         "geo_vacancy_coords" : {
@@ -163,7 +174,10 @@
     }
     {{else}}
     "_score"
-    {{/if ~}}
+    {{/ifAll ~}}
+    {{#compare request.params.query.sort "===" "relevance" ~}}
+    "_score",
+    {{/compare ~}}
     {{/compare ~}}
     {{/compare ~}}
     {{/compare ~}}
