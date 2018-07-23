@@ -83,8 +83,11 @@
         </div>
       </div>
 
+      {{#if request.params.query.location ~}}
       <input type="hidden" name="lat" value="{{request.params.query.lat}}" id="{{instance_id}}-lat">
       <input type="hidden" name="lng" value="{{request.params.query.lng}}" id="{{instance_id}}-lng">
+      <input type="hidden" name="sort" value="distance" id="sort">
+      {{/if ~}}
 
       <div class="h-padding">
         <div class="mdc-text-field mdc-text-field--box mdc-text-field--with-leading-icon" data-mdc-auto-init="MDCTextField">
@@ -109,9 +112,7 @@
       </div>
 
       {{#each (split "roles,sectors,statuses" ",")}}
-        <h3 class="mdc-drawer__content-heading cursor-pointer" data-collapse-target="#{{../instance_id}}-{{this}}-collapse"
-                role="button" aria-pressed="false"
-                aria-label="Show {{getProperty @root.context.metaData.termTypeLabels (concat this ".plural")}}" tabindex="0">
+        <h3 class="mdc-drawer__content-heading cursor-pointer" data-collapse-target="#{{../instance_id}}-{{this}}-collapse" role="button" aria-pressed="false" aria-label="Show {{getProperty @root.context.metaData.termTypeLabels (concat this ".plural")}}" tabindex="0">
           {{getProperty @root.context.metaData.termTypeLabels (concat this ".plural")}}
           <span class="mdc-icon-toggle pull-right" >
             <i class="far {{#if (getProperty ../request.params.query this)}}fa-chevron-up{{else}}fa-chevron-down{{/if}}" aria-hidden="true"></i>

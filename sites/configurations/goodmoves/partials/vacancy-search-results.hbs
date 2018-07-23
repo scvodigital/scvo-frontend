@@ -241,7 +241,7 @@
         <input type="hidden" name="salary_max" value="{{request.params.query.salary_max}}" />
         <div class="mdc-select mdc-select--box pull-right" data-mdc-auto-init="MDCSelect">
           <select class="mdc-select__native-control" id="sort" name="sort" onchange="this.form.submit();">
-            <option value=""{{#compare request.params.query.sort "===" ""}} selected{{/compare}}>Relevance</option>
+            <option value="relevance"{{#compare request.params.query.sort "===" "relevance"}} selected{{/compare}}>Relevance</option>
             <option value="distance"{{#compare request.params.query.sort "===" "distance"}} selected{{/compare}}{{#compare request.params.query.location "===" ""}} disabled{{/compare}}>Distance</option>
             <option value="closing_soon"{{#compare request.params.query.sort "===" "closing_soon"}} selected{{/compare}}>Closing soon</option>
             <option value="newest"{{#compare request.params.query.sort "===" "newest"}} selected{{/compare}}>Newest</option>
