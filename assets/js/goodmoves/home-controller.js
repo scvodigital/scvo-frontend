@@ -101,7 +101,7 @@ function slugify(text) {
 $(document).ready(function() {
   $('.scrolling-grid').each(function(i, o) {
     // console.log(o);
-    $(o).find('.scroll-left').on('click', function() {
+    $(o).prev('.scroll-left').on('click', function() {
       var by = $(o).scrollLeft() - ($(o).width() * (3/4));
       if (o.scroll) {
         o.scroll({ left: by, top: 0, behavior: 'smooth'});
@@ -109,7 +109,7 @@ $(document).ready(function() {
         $(o).scrollLeft(by);
       }
     });
-    $(o).find('.scroll-right').on('click', function() {
+    $(o).prev('.scroll-right').on('click', function() {
       var by = $(o).scrollLeft() + ($(o).width() * (3/4));
       if (o.scroll) {
         o.scroll({ left: by, top: 0, behavior: 'smooth'});
