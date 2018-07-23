@@ -116,6 +116,16 @@ export class Helpers {
     }
   };
 
+  static helper_toFixed(input: number|string, precision: number = 2) {
+    try {
+      const parsed = Number(input);
+      const output = parsed.toFixed(precision);
+      return output;
+    } catch(err) {
+      return null;
+    }
+  }
+
   static helper_itemAt(haystack: any[], index: number): any {
     if (!Array.isArray(haystack) || typeof index !== 'number') {
       return null;
