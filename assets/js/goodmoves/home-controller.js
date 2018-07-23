@@ -103,11 +103,19 @@ $(document).ready(function() {
     // console.log(o);
     $(o).find('.scroll-left').on('click', function() {
       var by = $(o).scrollLeft() - ($(o).width() * (3/4));
-      o.scroll({ left: by, top: 0, behavior: 'smooth'});
+      if (o.scroll) {
+        o.scroll({ left: by, top: 0, behavior: 'smooth'});
+      } else {
+        $(o).scrollLeft(by);
+      }
     });
     $(o).find('.scroll-right').on('click', function() {
       var by = $(o).scrollLeft() + ($(o).width() * (3/4));
-      o.scroll({ left: by, top: 0, behavior: 'smooth' });
+      if (o.scroll) {
+        o.scroll({ left: by, top: 0, behavior: 'smooth'});
+      } else {
+        $(o).scrollLeft(by);
+      }
     });
   });
 });
