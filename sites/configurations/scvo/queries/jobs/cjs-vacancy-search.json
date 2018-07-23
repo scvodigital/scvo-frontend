@@ -7,7 +7,7 @@
   "query": {
     "bool": {
       "filter": [
-        {{#if request.params.query.location ~}}
+        {{#ifAll request.params.query.location request.params.query.lat request.params.query.lng ~}}
         {
           "geo_distance": {
             "distance": "{{default request.params.query.distance "804672"}}meters",
@@ -17,7 +17,7 @@
             }
           }
         },
-        {{/if ~}}
+        {{/ifAll ~}}
         {{#if request.params.query.job_number ~}}
         {
           "term": {
@@ -65,7 +65,7 @@
     }
   },
   "sort": [
-    {{#if request.params.query.lat ~}}
+    {{#ifAll request.params.query.location request.params.query.lat request.params.query.lng ~}}
     {
       "_geo_distance" : {
         "geo_vacancy_coords" : [{{request.params.query.lat}}, {{request.params.query.lng}}],
@@ -77,6 +77,6 @@
     }
     {{else}}
     "_score"
-    {{/if ~}}
+    {{/ifAll ~}}
   ]
 }
