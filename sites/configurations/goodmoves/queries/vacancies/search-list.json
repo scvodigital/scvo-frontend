@@ -114,6 +114,7 @@
       ]
     }
   },
+  {{#ifAll request.params.query.location request.params.query.lat request.params.query.lng ~}}
   "script_fields" : {
     "distance" : {
       "script" : {
@@ -126,6 +127,7 @@
       }
     }
   },
+  {{/ifAll ~}}
   "sort": [
     {{#if request.params.query.sort ~}}
     {{#compare request.params.query.sort "===" "salary_low" ~}}
