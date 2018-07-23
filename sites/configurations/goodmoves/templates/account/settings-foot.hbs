@@ -1,5 +1,9 @@
 <script>
   $(document).ready(function() {
+    var $changePassword = $('#change-password');
+    var $password1 = $('#change-password-password');
+    var $password2 = $('#change-password-confirm');
+
     var providers = {
       google: {
         getProvider: function() { return new firebase.auth.GoogleAuthProvider(); },
@@ -87,22 +91,46 @@
         })
         .attr('title', !enabled ? 'You must have at least one account linked to your Goodmoves account' : '');
     }
+  
+    $changePassword.on('click', changePassword);
+    $password1.on('keypress', function(evt) {
+      if (evt.which === 13) {
+        $password2.focus();
+      }
+    });
+    $password2.on('keypress', function(evt) {
+      if (evt.which === 13) {
+        changePassword();
+      }
+    });
 
-    $('#change-password').on('click', function() {
-      var password1 = $('#change-password-password').val();
-      var password2 = $('#change-password-confirm').val();
+    function changePassword() {
+      var password1 = $password1.val();
+      var password2 = $password2.val();
+
+      goodmoves.disable([$changePassword, $password1, $password2]);
+
       if (password1 !== password2) {
-        console.error('Passwords do not match');
+        goodmoves.disable([$changePassword, $password1, $password2], false);
+        $password1.val('');
+        $password2.val('');
+        $password1.focus();
+        goodmoves.snackbarShow({
+          message: 'The two passwords entered do not match'
+        });
         return;
       }
 
       var hasEmailProvider = false;
       currentUser.updatePassword(password1).then(function(result) {
-        console.log('Password updated:', result);
+        window.location.reload();
       }).catch(function(err) {
-        console.error('Failed to update password:', err);
+        goodmoves.disable([$changePassword, $password1, $password2], false);
+        goodmoves.snackbarShow({
+          message: err.message,
+          backgroundColor: '#dd4b39'
+        });
       });
-
-    });
+    }
   });
 </script>

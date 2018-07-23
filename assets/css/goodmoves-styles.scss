@@ -13,7 +13,7 @@ $mdc-theme-footer: #37474F; // Blue Gray 800
 $mdc-theme-footer-light: #455A64; // Blue Gray 700
 $mdc-theme-footer-dark: #263238; // Blue Gray 900
 
-$mdc-theme-error: #832A2C;
+$mdc-theme-error: #A9201E;
 
 $mdc-theme-tfn: #3b9db1;
 
@@ -208,6 +208,13 @@ header {
     }
     .mdc-top-app-bar__section {
       padding: 0;
+      .mdc-menu-anchor {
+        .user-avatar {
+          height: 30px;
+          width: 30px;
+          border-radius: 50%;
+        }
+      }
       .mdc-top-app-bar__action-item {
         height: $header-lower-height;
         color: $mdc-theme-secondary !important;
@@ -287,6 +294,7 @@ footer h3,
 .mdc-simple-menu .mdc-list-item,
 .mdc-temporary-drawer .mdc-list-item,
 .mdc-drawer--temporary .mdc-list-item,
+.mdc-snackbar__text,
 .gm-style-iw,
 .mdc-list {
   font-family: $base-font-family, Helvetica, Arial, sans-serif;
@@ -391,6 +399,7 @@ footer h3,
     min-height: 40vh;
     max-width: 500px;
     margin: 0 auto;
+    position: relative;
   }
   .middle-line-text {
     margin: $unit*2 0 $unit;
@@ -419,18 +428,6 @@ footer h3,
       top: .6rem;
       left: .5rem;
     }
-  }
-  #continue-with-google {
-    background-color: #dd4b39;
-  }
-  #continue-with-twitter {
-    background-color: #0084b4;
-  }
-  #continue-with-facebook {
-    background-color: #3b5998;
-  }
-  .mdc-card {
-    position: relative;
   }
   #sign-in-message,
   #sign-up-message {
@@ -504,6 +501,23 @@ footer h3,
     }
   }
 }
+@media screen and (max-width: 1100px) {
+  .goodmoves-vacancy-search .head {
+    .mdc-layout-grid__cell.action {
+      grid-column-end: span 6;
+    }
+    .mdc-layout-grid__cell.pagination-desktop {
+      display: none;
+    }
+    .mdc-layout-grid__cell.pagination-mobile {
+      display: block !important;
+      .pagination {
+        margin-top: -$unit;
+      }
+    }
+  }
+}
+
 .goodmoves-settings-account {
   .mdc-button {
     width: 100%;
@@ -522,7 +536,6 @@ footer h3,
   }
   .mdc-form-field {
     .mdc-radio {
-      top: $unit*.9;
       .mdc-radio__outer-circle {
         border-color: $mdc-theme-primary !important;
       }
@@ -533,6 +546,7 @@ footer h3,
   }
 }
 .goodmoves-settings {
+  margin-bottom: $unit*1.5;
   .settings {
     float: none;
   }
@@ -541,6 +555,9 @@ footer h3,
   .settings {
     .mdc-form-field {
       display: inline;
+      .mdc-radio {
+        top: $unit*.9;
+      }
     }
   }
   .mdc-list {
@@ -571,11 +588,33 @@ footer h3,
 }
 
 #google_translate_element {
-  margin-top: $unit/4;
-  .goog-te-menu-value:hover {
-    text-decoration: none;
-    color: black;
+  // margin-top: $unit/4;
+  .goog-te-gadget-simple {
+    background: transparent;
+    border: none;
+    // .goog-te-gadget-icon {
+    //   display: none;
+    // }
+    .goog-te-menu-value {
+      color: white;
+      // margin: 0;
+      span {
+        border: none !important;
+        color: white !important;
+      }
+      img,
+      span:last-child {
+        display: none;
+      }
+    }
+    .goog-te-menu-value:hover {
+      text-decoration: underline;
+      color: white;
+    }
   }
+}
+.goog-te-menu-frame {
+  box-shadow: none;
 }
 
 .x-items {
@@ -626,11 +665,13 @@ a:hover {
 }
 
 .mdc-chip {
-  background-color: $mdc-theme-secondary-light;
+  background-color: $mdc-theme-secondary;
   color: $mdc-theme-secondary-dark;
   margin: 0;
-  color: rgba(0, 0, 0, 0.54);
   font-weight: 600;
+  .mdc-chip__icon.mdc-chip__icon--leading {
+    color: $mdc-theme-secondary-dark;
+  }
   .mdc-chip__text {
     margin-left: $unit/2;
   }
@@ -643,13 +684,34 @@ a:hover {
     color: #000;
   }
 }
+.mdc-card .mdc-chip {
+  background-color: $mdc-theme-complimentary
+}
+.mdc-card .mdc-chip.mdc-chip--selected,
 .mdc-chip.mdc-chip--selected {
   background-color: $mdc-theme-primary;
   color: white;
 }
+.mdc-card .mdc-chip.mdc-chip--selected:hover,
 .mdc-chip.mdc-chip--selected:hover {
   background-color: $mdc-theme-primary-dark;
   color: white;
+}
+
+.provider-google.mdc-chip--selected,
+.provider-google.mdc-chip--selected:hover,
+#continue-with-google {
+  background-color: #DB3633 !important;
+}
+.provider-twitter.mdc-chip--selected,
+.provider-twitter.mdc-chip--selected:hover,
+#continue-with-twitter {
+  background-color: #007DA3 !important;
+}
+.provider-facebook.mdc-chip--selected,
+.provider-facebook.mdc-chip--selected:hover,
+#continue-with-facebook {
+  background-color: #2C5797 !important;
 }
 
 .noselect {
@@ -783,6 +845,9 @@ a {
       margin-right: $unit;
       color: $mdc-theme-primary-dark;
     }
+    ul.mdc-card__action {
+      cursor: default;
+    }
     .mdc-card__action:last-child {
       margin-right: 0;
     }
@@ -856,11 +921,10 @@ a {
     }
   }
 }
-.goodmoves-vacancy-closed.mdc-card.list,
-.goodmoves-vacancy-closed.mdc-card.mini,
-.goodmoves-vacancy-closed.mdc-card.gist,
-.goodmoves-vacancy-closed.mdc-card.search-result {
-  border-top: none;
+.goodmoves-vacancy-inactive.mdc-card,
+.goodmoves-vacancy-not-published.mdc-card,
+.goodmoves-vacancy-closed.mdc-card {
+  border-top: none !important;
 }
 .goodmoves-vacancy.mdc-card.list,
 .goodmoves-vacancy.mdc-card.gist,
@@ -942,7 +1006,7 @@ a {
     box-shadow: 0px 3px 3px -2px rgba(0, 0, 0, 0.2), 0px 3px 4px 0px rgba(0, 0, 0, 0.14), 0px 1px 8px 0px rgba(0, 0, 0, 0.12);
   }
   .mdc-card__info--organisation-title {
-    margin: 0 0 $unit;
+    margin: 0 0 $unit/2;
   }
   .mdc-card__info--vacancy .detailed-info,
   .organisation-type {
@@ -1094,6 +1158,7 @@ a {
     margin: 0 $unit/2 $unit/4 0;
   }
 }
+.pagination-mobile,
 .top-jobs .mdc-card__info--vacancy-title .top-job,
 .goodmoves-organisation .mdc-card.list .mdc-card__info--vacancy-organisation {
   display: none !important;
@@ -1172,15 +1237,9 @@ hr {
         }
       }
     }
-    // .mdc-card__action--shortlist .fa-heart {
-    //   color: $mdc-theme-primary-dark;
-    // }
     .mdc-chip .mdc-chip__checkmark-path {
       stroke: white;
     }
-    // .mdc-card__action--shortlist:hover .fa-heart {
-    //   font-weight: 900;
-    // }
   }
 }
 .mdc-card.vacancy-shortlisted {
@@ -1370,8 +1429,8 @@ body {
         white-space: nowrap;
         vertical-align: baseline;
         border-radius: $unit;
-        background-color: $mdc-theme-primary !important;
-        color: white;
+        background-color: $mdc-theme-primary-light !important;
+        color: black;
         position: relative;
         top: -2px;
         left: 0;
@@ -1419,7 +1478,7 @@ body {
     height: auto;
     display: flex;
     align-items: top;
-    margin: 0 0 0 $unit;
+    margin: $unit/2 0 0 $unit;
     padding: 0;
     img {
       width: 100%;
@@ -1431,6 +1490,11 @@ body {
   .mdc-card.list {
     .mdc-card__media--organisation {
       display: none;
+    }
+  }
+  .mdc-card {
+    .mdc-card__media--organisation {
+      margin-top: 0;
     }
   }
 }
@@ -1627,7 +1691,7 @@ footer,
 .home-banner {
   .banner-search {
     background-size: cover;
-    background-position: center center;
+    background-position: center bottom;
     background-repeat: no-repeat;
     min-height: 40vh;
     .page-content {
@@ -1643,7 +1707,6 @@ footer,
   .banner-search.overlay {
     display: block;
     .content {
-      background-image: linear-gradient(60deg, rgba(66, 132, 42, 0.89), rgba(66, 132, 42, 0.91) 47%, transparent 47.08%, transparent);
       min-height: 40vh;
       background-color: transparent;
       padding: 0 0 $unit*2;
@@ -1724,53 +1787,25 @@ footer,
     }
   }
 }
-.home-banner.option-2 {
-  .banner-search,
-  .banner-search .page-content {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
-  .page-content {
-    padding: $unit/2 $unit*1.25 $unit;
-    border-radius: 2px;
-    .mdc-text-field--box::before, .mdc-text-field--box::after {
-      width: 100%;
-    }
-    .mdc-button--search {
-      border-radius: 2px;
-      width: 100%;
-      .fa-search {
-        position: absolute;
-        right: $unit*(2/3);
-      }
-    }
-    .mdc-button--raised {
-      width: 100%;
-      .far {
-        position: absolute;
-        right: $unit/2;
-      }
-    }
-    .mdc-menu--open {
-      z-index: 100;
-    }
+@media screen and (min-width: $desktop-landscape-breakpoint + 1) {
+  .home-banner .banner-search.overlay .content {
+    background-image: linear-gradient(60deg, rgba(66, 132, 42, 0.89), rgba(66, 132, 42, 0.91) 47%, transparent 47.08%, transparent);
   }
 }
-.home-banner.option-3 {
-  .banner-search {
-    .content {
-      padding: 0;
-      display: flex;
-      justify-content: left;
-      align-items: center;
-      width: 100%;
-      .search-form {
-        width: 50%;
-        margin: 0;
-        padding: 0 $unit $unit;
-      }
-    }
+@media screen and (min-width: $mobile-landscape-breakpoint + 1) and (max-width: $desktop-landscape-breakpoint) {
+  .home-banner .banner-search.overlay .content {
+    background-image: linear-gradient(60deg, rgba(66, 132, 42, 0.89), rgba(66, 132, 42, 0.91) 57%, transparent 57.08%, transparent);
+  }
+}
+@media screen and (min-width: $mobile-breakpoint + 1) and (max-width: $mobile-landscape-breakpoint) {
+  .home-banner .banner-search.overlay .content {
+    background-image: linear-gradient(60deg, rgba(66, 132, 42, 0.89), rgba(66, 132, 42, 0.91) 77%, transparent 77.08%, transparent);
+  }
+}
+@media screen and (max-width: $mobile-breakpoint) {
+  .home-banner .banner-search.overlay .content {
+    background-image: none;
+    background-color: rgba(66, 132, 42, 0.89);
   }
 }
 
@@ -2120,8 +2155,12 @@ form.inline-form {
 
 .scrolling-grid {
   display: flex;
+  display: -webkit-flex;
+  flex: 1;
+  -webkit-flex-wrap: nowrap;
   flex-wrap: nowrap;
   overflow-x: auto;
+  -webkit-justify-content: space-between;
   -webkit-overflow-scrolling: touch;
   -ms-overflow-style: -ms-autohiding-scrollbar;
   padding-bottom: $unit;
@@ -2131,14 +2170,14 @@ form.inline-form {
   .mdc-layout-grid__cell.top-jobs {
     margin: 0 $unit/2;
   }
-  .mdc-layout-grid__cell.shortlist-jobs:first-child,
-  .mdc-layout-grid__cell.latest-jobs:first-child,
-  .mdc-layout-grid__cell.top-jobs:first-child {
-    margin-left: $unit*3;
-  }
-  .last-card {
-    padding-right: $unit*2.5;
-  }
+  // .mdc-layout-grid__cell.shortlist-jobs:first-child,
+  // .mdc-layout-grid__cell.latest-jobs:first-child,
+  // .mdc-layout-grid__cell.top-jobs:first-child {
+  //   margin-left: $unit*3;
+  // }
+  // .last-card {
+  //   padding-right: $unit*2.5;
+  // }
   .mdc-card.align-centre {
     box-shadow: none;
     width: 18vw !important;
@@ -2161,39 +2200,43 @@ form.inline-form {
       }
     }
   }
-  .scroll-button {
-    position: absolute;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    align-self: center;
-    width: $unit*3;
-    z-index: 2;
-    // opacity: 0.4;
-    // transition: opacity .1s ease-in-out;
-    color: $mdc-theme-primary;
-    cursor: pointer;
-  }
-  .scroll-button:hover {
-    color: $mdc-theme-primary-dark;
-  }
-  .scroll-left {
-    left: $unit/2;
-  }
-  .scroll-right {
-    right: $unit/2;
-  }
 }
-.scrolling-grid::after {
-  pointer-events: none;
-  content: '';
+.scroll-button {
   position: absolute;
-  left: 0; right: 0;
-  top: 0; bottom: 0;
-  z-index: 1;
-  background-image:
-  linear-gradient(to right, $mdc-theme-secondary-light, $mdc-theme-secondary-light $unit*3, rgba(245, 245, 245, 0) $unit*4.1),
-  linear-gradient(to left , $mdc-theme-secondary-light, $mdc-theme-secondary-light $unit*3, rgba(245, 245, 245, 0) $unit*4.1);
+  height: 100%;
+  display: flex;
+  align-items: center;
+  align-self: center;
+  justify-content: center;
+  width: $unit*4;
+  z-index: 2;
+  opacity: 0.7;
+  transition: opacity .1s ease-in-out;
+  color: $mdc-theme-primary;
+  cursor: pointer;
+}
+.scroll-button:hover {
+  color: $mdc-theme-primary-dark;
+  opacity: 1;
+}
+.scroll-left {
+  left: $unit;
+  background: linear-gradient(to left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.3));
+}
+.scroll-right {
+  right: $unit;
+  background: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.3));
+}
+
+#app-snackbar {
+  z-index: 1000;
+  background-color: $mdc-theme-primary-dark;
+  .mdc-snackbar__text {
+    padding: 0;
+  }
+  .mdc-snackbar__action-wrapper {
+    display: none;
+  }
 }
 
 @media screen and (max-width: $mobile-breakpoint) {
@@ -2206,14 +2249,6 @@ form.inline-form {
 }
 
 @media screen and (max-width: $mobile-landscape-breakpoint + 1) {
-  .home-banner {
-    .banner-search.overlay {
-      .content {
-        background-image: none;
-        background-color: rgba(66, 132, 42, 0.89);
-      }
-    }
-  }
 }
 
 @media screen and (min-width: $mobile-breakpoint + 1) and (max-width: $mobile-landscape-breakpoint) {

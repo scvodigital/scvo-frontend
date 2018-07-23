@@ -6,45 +6,39 @@
   ],
   "query": {
     "bool": {
-      "must": [
-        {{#if request.params.query.q}}
+      "filter": [
+        {{#ifAll request.params.query.location request.params.query.lat request.params.query.lng ~}}
         {
-          "query_string": {
-            "query": {{{stringify (default request.params.query.q "")}}},
-            "default_field": "text_bag",
-            "default_operator": "AND",
-            "analyzer": "snowball"
+          "geo_distance": {
+            "distance": "{{default request.params.query.distance "804672"}}meters",
+            "geo_vacancy_coords": {
+              "lat": {{request.params.query.lat}},
+              "lon": {{request.params.query.lng}}
+            }
           }
         },
-        {{/if}}
-        {{#if request.params.query.job_number}}
+        {{/ifAll ~}}
+        {{#if request.params.query.job_number ~}}
         {
           "term": {
             "job_number": "{{request.params.query.job_number}}"
           }
         },
-        {{/if}}
-        {{#if request.params.query.location}}
-        {
-          "term": {
-            "organisation.area_town": "{{request.params.query.location}}"
-          }
-        },
-        {{/if}}
-        {{#if request.params.query.sector}}
+        {{/if ~}}
+        {{#if request.params.query.sector ~}}
         {
           "term": {
             "sector_slug": "{{request.params.query.sector}}"
           }
         },
-        {{/if}}
-        {{#if request.params.query.region}}
+        {{/if ~}}
+        {{#if request.params.query.region ~}}
         {
           "term": {
             "region_slug": "{{request.params.query.region}}"
           }
         },
-        {{/if}}
+        {{/if ~}}
         {
           "term": {
             "status": "Subbed"
@@ -55,10 +49,37 @@
             "cjs_lookup": "{{#compare request.params.phase "aag"}}AA PH8{{else}}{{#compare request.params.phase "p52"}}CJS PH8 PT 78wks{{else}}CJS PH8{{/compare}}{{/compare}}"
           }
         }
+      ],
+      "must": [
+        {{#if request.params.query.q ~}}
+        {
+          "query_string": {
+            "query": {{{stringify (default request.params.query.q "")}}},
+            "default_field": "text_bag",
+            "default_operator": "AND",
+            "analyzer": "snowball"
+          }
+        }
+        {{/if ~}}
       ]
     }
   },
-  "sort": {
-    "_score": "desc"
-  }
+  "sort": [
+    {{#ifAll request.params.query.location request.params.query.lat request.params.query.lng ~}}
+    {
+      "_geo_distance": {
+        "geo_vacancy_coords": {
+          "lat": {{request.params.query.lat}},
+          "lon": {{request.params.query.lng}}
+        },
+        "order": "asc",
+        "unit": "m",
+        "mode": "min",
+        "distance_type": "arc"
+      }
+    }
+    {{else}}
+    "_score"
+    {{/ifAll ~}}
+  ]
 }

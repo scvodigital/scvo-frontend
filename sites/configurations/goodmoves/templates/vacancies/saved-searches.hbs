@@ -1,38 +1,17 @@
 {{> vacancy_search_form this instance_id="perm"}}
 
 <div id="detailed-results-container" class="container-content goodmoves-saved-searches">
-  {{#if data.saved_searches.items ~}}
+  {{#compare (length data.saved_searches.items) ">" 0 ~}}
   <div class="settings">
-    <p class="mdc-typography--body1">
-      Email frequency
-    </p>
-    <div class="mdc-form-field">
-      <div class="mdc-radio">
-        <input class="mdc-radio__native-control" type="radio" id="daily" name="frequency" checked>
-        <div class="mdc-radio__background">
-          <div class="mdc-radio__outer-circle"></div>
-          <div class="mdc-radio__inner-circle"></div>
-        </div>
-      </div>
-      <label for="daily">Daily</label>
-    </div>
-    <div class="mdc-form-field">
-      <div class="mdc-radio">
-        <input class="mdc-radio__native-control" type="radio" id="weekly" name="frequency" checked>
-        <div class="mdc-radio__background">
-          <div class="mdc-radio__outer-circle"></div>
-          <div class="mdc-radio__inner-circle"></div>
-        </div>
-      </div>
-      <label for="weekly">Weekly</label>
-    </div>
+    <span class="mdc-typography--body1">Email frequency</span>
+    {{> email_frequency}}
   </div>
-  {{/if ~}}
+  {{/compare}}
   <h1 class="mdc-typography--headline3 v-margin-full">
     Searches
   </h1>
 
-  {{#if data.saved_searches.items ~}}
+  {{#compare (length data.saved_searches.items) ">" 0 ~}}
   <ul class="mdc-list mdc-list--two-line mdc-list--avatar-list mdc-elevation--z3">
     <li class="mdc-list-item mdc-list-item--header">
       <span class="mdc-list-item__graphic far" aria-hidden="true"></span>
@@ -67,31 +46,50 @@
                 <div class="mdc-list-item__secondary-text">
                   {{#with (querystring querystring) ~}}
                     {{#if keywords ~}}
-                      <strong>Keywords: </strong> {{{keywords}}}
+                      Keywords: <strong>{{{keywords}}}</strong>
                     {{/if ~}}
+
+                    {{#ifAny salary_min salary_max ~}}
+                      Salary
+                    {{/ifAny ~}}
+                    {{#if salary_min ~}}
+                      minimum: <strong>£{{addCommas salary_min}}</strong>
+                    {{/if ~}}
+                    {{#if salary_max ~}}
+                      {{#if salary_min ~}}and{{/if}}
+                      maximum: <strong>£{{addCommas salary_max}}</strong>
+                    {{/if ~}}
+
                     {{#if roles ~}}
-                      <strong>Roles: </strong>
-                      {{#each (arrayify roles)}}
-                         {{{getProperty @root.data.termsMaps.roles.slugsMap (concat this ".term")}}}
-                        {{#unless @last}}, {{/unless}}
+                      {{inflect (length (arrayify roles)) "Role" "Roles"}}:
+                      {{#each (arrayify roles) ~}}
+                        <strong>{{{getProperty @root.data.termsMaps.roles.slugsMap (concat this ".term")}}}{{#unless @last}}, {{/unless}}</strong>
                       {{/each ~}}
                     {{/if ~}}
+
                     {{#if sectors ~}}
-                      <strong>Sectors: </strong>
+                      {{inflect (length (arrayify sectors)) "Sector" "Sectors"}}:
                       {{#each (arrayify sectors) ~}}
-                         {{{getProperty @root.data.termsMaps.sectors.slugsMap (concat this ".term")}}}
-                        {{#unless @last}}, {{/unless}}
+                        <strong>{{{getProperty @root.data.termsMaps.sectors.slugsMap (concat this ".term")}}}{{#unless @last}}, {{/unless}}</strong>
                       {{/each ~}}
                     {{/if ~}}
+
                     {{#if statuses ~}}
-                      <strong>Statuses: </strong>
+                      Working {{inflect (length (arrayify statuses)) "pattern" "patterns"}}:
                       {{#each (arrayify statuses)}}
-                         {{{getProperty @root.data.termsMaps.statuses.slugsMap (concat this ".term")}}}
-                        {{#unless @last}}, {{/unless}}
+                        <strong>{{{getProperty @root.data.termsMaps.statuses.slugsMap (concat this ".term")}}}{{#unless @last}}, {{/unless}}</strong>
                       {{/each ~}}
                     {{/if ~}}
+
                     {{#ifAll location distance ~}}
-                        Within <strong>{{round (multiply distance 0.00062137)}}</strong> miles of <strong>{{{location}}}</strong>
+                      {{#ifAny keywords roles sectors statuses ~}}
+                        Within
+                      {{else}}
+                        within
+                      {{/ifAny ~}}
+                      <strong>{{round (multiply distance 0.00062137)}}</strong>
+                      miles of
+                      <strong>{{{location}}}</strong>
                     {{/ifAll ~}}
                   {{/with ~}}
                 </div>
@@ -133,6 +131,5 @@
   <p class="mdc-typography--body1">
     You don't yet have any searches saved. To save a search, click the &ensp;<strong><span class="far fa-search-plus mdc-chip__icon mdc-chip__icon--leading" aria-hidden="true"></span>Save/email this search</strong>&ensp;button once you've entered some search parameters.
   </p>
-  {{/if ~}}
-  </form>
+  {{/compare ~}}
 </div>

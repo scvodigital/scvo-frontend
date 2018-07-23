@@ -1,0 +1,26 @@
+{
+  "name": "stop-all-emails",
+  "pattern": "/stop-all-emails",
+  "acceptedVerbs": "GET",
+  "tasks": [
+    "metaData.commonTasks.authRequired",
+    {
+      "name": "notifications",
+      "taskModule": "mysql",
+      "config": {
+        "connectionName": "notifications",
+        "queryTemplates": {
+          "stop_all_emails": ">context.metaData.handlebars.queries.notifications_stop-all-emails"
+        }
+      },
+      "renderer": "handlebars"
+    },
+    {
+      "name": "destination",
+      "taskModule": "redirect",
+      "config": {
+        "location": ">request.headers.referer"
+      }
+    }
+  ]
+}

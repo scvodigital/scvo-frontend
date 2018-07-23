@@ -107,6 +107,25 @@ export class Helpers {
     return haystack.indexOf(needle);
   }
 
+  static helper_inflect(count: number, singular: any, plural: any, includeCount: boolean) {
+    var word = (count > 1 || count === 0) ? plural : singular;
+    if (includeCount === true) {
+      return String(count) + ' ' + word;
+    } else {
+      return word;
+    }
+  };
+
+  static helper_toFixed(input: number|string, precision: number = 2) {
+    try {
+      const parsed = Number(input);
+      const output = parsed.toFixed(precision);
+      return output;
+    } catch(err) {
+      return null;
+    }
+  }
+
   static helper_itemAt(haystack: any[], index: number): any {
     if (!Array.isArray(haystack) || typeof index !== 'number') {
       return null;
@@ -275,19 +294,19 @@ export class Helpers {
     console.log('DECODE URI COMPONENT AFTER:', out);
     return out;
   }
-  
+
   static helper_encodeURIComponent(str: string) {
     if (!str) return '';
     const out = encodeURIComponent(str);
     return out;
   }
-  
+
   static helper_decodeURI(str: string) {
     if (!str) return '';
     const out = decodeURI(str);
     return out;
   }
-  
+
   static helper_encodeURI(str: string) {
     if (!str) return '';
     const out = encodeURI(str);
@@ -355,8 +374,8 @@ export class Helpers {
       return [];
     }
     const reversed = [];
-    while (input.length > 0) {
-      reversed.push(input.pop());
+    for (var i = input.length; i  >= 0; --i) {
+      reversed.push(input[i]);
     }
     return reversed;
   }
@@ -406,6 +425,46 @@ export class Helpers {
     });
 
     return output;
+  }
+
+  static helper_filter(items: any[], property: string, comparator: string, test: any) {
+    const found: any[] = [];
+    items.forEach(item => {
+      const value: any = property === null ? item : dot.pick(property, item);
+      let match = false;
+      try {
+        switch (comparator) {
+          case ('==='): match = value === test;
+            break;
+          case ('=='): match = value == test;
+            break;
+          case ('>='): match = value >= test;
+            break;
+          case ('>'): match = value > test;
+            break;
+          case ('<='): match = value <= test;
+            break;
+          case ('<'): match = value < test;
+            break;
+          case ('testIn'): match = value.indexOf(test) > -1;
+            break;
+          case ('valueIn'): match = test.indexOf(value) > -1;
+            break;
+        }
+      } catch(err) { }
+      if (match) {
+        found.push(item);
+      }
+    });
+    return found;
+  }
+
+  static helper_sort(items: any[]) {
+    if (!Array.isArray(items)) {
+      return null;
+    }
+    const out = items.sort();
+    return out;
   }
 
   static helper_component(partialName: string, options: any) {

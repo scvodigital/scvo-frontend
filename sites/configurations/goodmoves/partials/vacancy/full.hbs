@@ -1,7 +1,4 @@
 <div class="mdc-card goodmoves-vacancy goodmoves-{{vacancy_status}} full {{if top_job "top-job"}}" data-vacancy-id="{{Id}}">
-  <!-- <div class="mdc-card__action-icons mdc-chip-set">
-    {{> shortlist_chip id=Id}}
-  </div> -->
   {{> vacancy_key_info}}
   <hr class="mdc-list-divider" />
   <div class="vacancy-info-container">
@@ -69,7 +66,13 @@
             {{#if closing_date ~}}
             <li class="mdc-card__info--vacancy-closing mdc-typography--body1">
               <span class="fa-li"><span class="far fa-calendar-alt fa-fw" title="Closing date"></span></span>
-              Closing on {{momentFormat (moment closing_date "x") "dddd \t\h\e Do \o\f MMMM YYYY \a\t h:mm a"}}
+              {{#compare vacancy_status "===" "vacancy-closed" ~}}
+              Closed
+              {{else}}
+              Closing
+              {{/compare ~}}
+              on
+              {{momentFormat (moment closing_date "x") "dddd \t\h\e Do \o\f MMMM YYYY \a\t h:mm a"}}
             </li>
             {{/if ~}}
           </ul>

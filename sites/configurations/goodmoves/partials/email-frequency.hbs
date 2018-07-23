@@ -21,12 +21,13 @@
       <label for="weekly">Weekly</label>
     </div>
   {{else}}
-    You currently have no saved searches
+    You have no saved searches.
   {{/with}}
 {{/if}}
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {
+    var days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
     $('input[name="frequency"]').on('change', function(evt) {
       var request = {
         url: '/update-email-preferences',
@@ -34,20 +35,24 @@
         method: 'POST',
         dataType: 'html',
         success: function(data, status, xhr) {
-          console.log('Updated email preferences', status, data);
+          goodmoves.snackbarShow({
+            message: 'New jobs alert email frequency changed to '+evt.currentTarget.id
+          });
         },
         error: function(xhr, status, error) {
-          console.error('Failed to update email preferences', status, error);
+          goodmoves.snackbarShow({
+            message: 'Failed to change email frequency to '+evt.currentTarget.id,
+            backgroundColor: '#A9201E'
+          });
         }
       };
       if (evt.currentTarget.id === 'daily') {
-        request.data = {
-          monday: true, tuesday: true, wednesday: true, thursday: true, friday: true, saturday: true, sunday: true
-        };
-      } else if (evt.currentTarget.id === 'weekly') {
-        request.data = {
-          thursday: true
+        for (var d = 0; d < days.length; ++d) {
+          request.data[days[d]] = true;
         }
+      } else if (evt.currentTarget.id === 'weekly') {
+        var day = new Date().getDay();
+        request.data[days[day]] = true;
       }
       $.ajax(request);
     });

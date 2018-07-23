@@ -7,6 +7,7 @@ var GoodmovesController = Class.extend({
     { name: 'tablet', min: 600, max: 959 },
     { name: 'desktop', min: 960, max: 20000 }
   ],
+  snackbar: null,
 
   init: function(firebaseConfig) {
     this.firebaseConfig = firebaseConfig;
@@ -48,6 +49,14 @@ var GoodmovesController = Class.extend({
 
   setupMaterialDesignComponents: function() {
     mdc.autoInit();
+
+    // Think we just need the one global snackbar
+    var $snackbar = $('#app-snackbar');
+    this.snackbar = new mdc.snackbar.MDCSnackbar($snackbar[0]);
+    $snackbar.data('defaultCss', {
+      'background-color': $snackbar.css('background-color'),
+      color: $snackbar.css('color')
+    });
 
     // Menu buttons
     $('[data-menu-target]').each(function(i, o) {
@@ -166,6 +175,30 @@ var GoodmovesController = Class.extend({
       expires = "; expires=" + date.toUTCString();
     }
     document.cookie = name + "=" + (value || "")  + expires + "; path=/; secure";
+  },
+
+  disable: function(elements, disable) {
+    disable = typeof disable === 'undefined' ? true : disable;
+    for (var e = 0; e < elements.length; ++e) {
+      var element = elements[e];
+      var opacity = disable ? 0.5 : 1;
+      $(element).prop('disabled', disable).css('opacity', opacity);
+    }
+  },
+
+  snackbarShow: function(options) {
+    var $snackbar = $('#app-snackbar');
+    $snackbar.css($snackbar.data('defaultCss'));
+
+    if (options.backgroundColor) {
+      $snackbar.css('background-color', options.backgroundColor);
+      delete options.backgroundColor;
+    }
+    if (options.color) {
+      $snackbar.css('color', options.color);
+      delete options.color;
+    }
+    this.snackbar.show(options);
   }
 });
 

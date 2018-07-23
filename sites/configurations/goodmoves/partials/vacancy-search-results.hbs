@@ -16,11 +16,6 @@
     </header>
     <section id="save-search-dialog-description" class="mdc-dialog__body">
       <div class="mdc-text-field mdc-text-field--box" data-mdc-auto-init="MDCTextField">
-        <p>
-        {{~#each @root.request.params.query.roles~}}
-          {{~getProperty (getProperty @root.data.termsMaps.roles.slugsMap this) "term"~}}
-        {{~/each~}}
-        </p>
         <input type="text" id="saved-search-name" name="name" class="mdc-text-field__input" value="
 {{~#with @root.request.params.query~}}
   {{~#if keywords~}}
@@ -99,9 +94,9 @@
               keywords=@root.request.params.query.keywords
               salary_min=@root.request.params.query.salary_min
               salary_max=@root.request.params.query.salary_max
-              roles=@root.request.params.query.roles
-              sectors=@root.request.params.query.sectors
-              statuses=@root.request.params.query.statuses
+              roles=(sort @root.request.params.query.roles)
+              sectors=(sort @root.request.params.query.sectors)
+              statuses=(sort @root.request.params.query.statuses)
               distance=@root.request.params.query.distance
               lat=@root.request.params.query.lat
               lng=@root.request.params.query.lng
@@ -138,7 +133,7 @@
       {{#> ajax_chip
         onUrl="/toggle-subscription"
         offUrl="/toggle-subscription"
-        onText="Don't send jobs matching this search by email"
+        onText="Send jobs matching this search by email"
         offText="Send jobs matching this search by email"
         onMethod="POST"
         offMethod="POST"
@@ -147,10 +142,10 @@
       }}
       {
         "onData": {
-          "name": {{{stringify name}}}
+          "name": {{{stringify ../name}}}
         },
         "offData": {
-          "name": {{{stringify name}}}
+          "name": {{{stringify ../name}}}
         }
       }
       {{/ajax_chip}}
@@ -169,7 +164,7 @@
 
 <div class="mdc-layout-grid head">
   <div class="mdc-layout-grid__inner">
-    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone">
+    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone action">
       {{#if data.auth ~}}
       {{#with (
                 querystringify (obj)
@@ -232,10 +227,11 @@
       </a>
       {{/if ~}}
     </div>
-    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
+    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone pagination-desktop">
       {{> pagination paging=data.search_data.detailed_results.pagination}}
     </div>
-    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
+    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone action">
+      {{#compare data.search_data.detailed_results.hits.total ">" 0 ~}}
       <form action="{{{request.url.path}}}" method="GET">
         <input type="hidden" name="keywords" value="{{request.params.query.keywords}}" />
         <input type="hidden" name="location" value="{{request.params.query.location}}" />
@@ -246,8 +242,8 @@
         <input type="hidden" name="salary_max" value="{{request.params.query.salary_max}}" />
         <div class="mdc-select mdc-select--box pull-right" data-mdc-auto-init="MDCSelect">
           <select class="mdc-select__native-control" id="sort" name="sort" onchange="this.form.submit();">
-            <option value=""{{#compare request.params.query.sort "===" ""}} selected{{/compare}}>Relevance</option>
-            <option value="distance"{{#compare request.params.query.sort "===" "distance"}} selected{{/compare}}{{#compare request.params.query.location "===" ""}} disabled{{/compare}}>Distance</option>
+            <option value="relevance"{{#compare request.params.query.sort "===" "relevance"}} selected{{/compare}}>Relevance</option>
+            <option value="distance"{{#compare request.params.query.sort "===" "distance"}} selected{{/compare}}{{#if request.params.query.location}}{{#compare request.params.query.location "===" ""}} disabled{{/compare}}{{else}} disabled{{/if}}>Distance</option>
             <option value="closing_soon"{{#compare request.params.query.sort "===" "closing_soon"}} selected{{/compare}}>Closing soon</option>
             <option value="newest"{{#compare request.params.query.sort "===" "newest"}} selected{{/compare}}>Newest</option>
             <option value="oldest"{{#compare request.params.query.sort "===" "oldest"}} selected{{/compare}}>Oldest</option>
@@ -259,12 +255,16 @@
           </label>
         </div>
       </form>
+      {{/compare ~}}
+    </div>
+    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone pagination-mobile">
+      {{> pagination paging=data.search_data.detailed_results.pagination}}
     </div>
   </div>
 </div>
 
 {{#each data.search_data.detailed_results.hits.hits ~}}
-{{> vacancy_search_result _source}}
+{{> vacancy_search_result _source sort=sort distance=fields.distance.[0]}}
 {{/each ~}}
 
 <div class="foot">

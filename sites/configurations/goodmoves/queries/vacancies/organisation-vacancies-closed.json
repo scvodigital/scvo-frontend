@@ -37,7 +37,7 @@
           }
         }
       ],
-      "must_not": [
+      "must": [
         {
           "term": {
             "organisation.id": "{{data.primaryResponse.hits.hits.[0]._source.Id}}"
@@ -52,6 +52,6 @@
     }
   },
   "sort": {
-    "start_at": "desc"
+    "start_at": "asc"
   }
 }
