@@ -2206,30 +2206,22 @@ form.inline-form {
   align-self: center;
   width: $unit*3;
   z-index: 2;
-  // opacity: 0.4;
-  // transition: opacity .1s ease-in-out;
+  opacity: 0.4;
+  transition: opacity .1s ease-in-out;
   color: $mdc-theme-primary;
   cursor: pointer;
 }
 .scroll-button:hover {
   color: $mdc-theme-primary-dark;
+  opacity: 1;
 }
 .scroll-left {
   left: $unit/2;
+  background: linear-gradient(to left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.3));
 }
 .scroll-right {
   right: $unit/2;
-}
-.scrolling-grid::after {
-  pointer-events: none;
-  content: '';
-  position: absolute;
-  left: 0; right: 0;
-  top: 0; bottom: 0;
-  z-index: 1;
-  background-image:
-  linear-gradient(to right, $mdc-theme-secondary-light, $mdc-theme-secondary-light $unit*3, rgba(245, 245, 245, 0) $unit*4.1),
-  linear-gradient(to left , $mdc-theme-secondary-light, $mdc-theme-secondary-light $unit*3, rgba(245, 245, 245, 0) $unit*4.1);
+  background: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.3));
 }
 
 #app-snackbar {

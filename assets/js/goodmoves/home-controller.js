@@ -101,21 +101,54 @@ function slugify(text) {
 $(document).ready(function() {
   $('.scrolling-grid').each(function(i, o) {
     // console.log(o);
-    $(o).prev('.scroll-left').on('click', function() {
-      var by = $(o).scrollLeft() - ($(o).width() * (3/4));
+    $(o).parent().find('.scroll-left').on('click', function() {
+      var $o = $(o);
+      var currentLeft = $o.scrollLeft();
+      var third = $o.width() * (3/4);
+      var by = currentLeft - third;
       if (o.scroll) {
         o.scroll({ left: by, top: 0, behavior: 'smooth'});
       } else {
-        $(o).scrollLeft(by);
+        $o.scrollLeft(by);
       }
     });
-    $(o).prev('.scroll-right').on('click', function() {
-      var by = $(o).scrollLeft() + ($(o).width() * (3/4));
+    $(o).parent().find('.scroll-right').on('click', function() {
+      var $o = $(o);
+      var currentLeft = $o.scrollLeft();
+      var third = $o.width() * (3/4);
+      var by = currentLeft + third;
       if (o.scroll) {
         o.scroll({ left: by, top: 0, behavior: 'smooth'});
       } else {
-        $(o).scrollLeft(by);
+        $o.scrollLeft(by);
       }
     });
+
+    showHideScrollButtons(o);
   });
+ 
+  $('.scrolling-grid').on('scroll', function(evt) { 
+    showHideScrollButtons(evt.currentTarget);
+  });
+  function showHideScrollButtons(o) {
+    var $o = $(o);
+    
+    var $leftButton = $o.parent().find('.scroll-left');
+    var $rightButton = $o.parent().find('.scroll-right');
+    var currentLeft = $o.scrollLeft();
+    var maxLeft = $o[0].scrollWidth - $o.width();
+
+    if (currentLeft <= 0) {
+      $leftButton.hide();
+    } else {
+      $leftButton.show();
+    }
+
+    if (currentLeft >= maxLeft) {
+      $rightButton.hide();
+    } else {
+      $rightButton.show();
+    }
+
+  }
 });
