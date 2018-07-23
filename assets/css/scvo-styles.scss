@@ -904,7 +904,6 @@ iframe {
 figure {
   margin: $unit 0;
 }
-.mdc-select,
 .mdc-textfield__input,
 .mdc-textfield__input:focus,
 .mdc-textfield__input:hover {
@@ -1522,15 +1521,25 @@ form#settled_status {
   box-sizing: border-box;
   width: 100%;
   max-width: 100%;
-  background-position-x: 97%;
+  -webkit-appearance: none;
+  margin-top: 16px;
+  margin-bottom: 8px;
+  // background-position-x: 97%;
+  .mdc-select__native-control {
+    width: 100%;
+    box-sizing: content-box;
+    height: 30px;
+  }
 }
 .mdc-select:focus {
   border-bottom-color: inherit;
 }
-.mdc-select,
 .mdc-textfield {
   width: 100%;
   margin: 0 0 $unit/2;
+}
+.mdc-text-field {
+  width: 100%;
 }
 .mdc-form-field>label {
   padding: 0;
