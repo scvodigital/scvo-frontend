@@ -68,11 +68,11 @@
             <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone">
               <div class="mdc-select mdc-select--box" data-mdc-auto-init="MDCSelect">
                 <select class="mdc-select__native-control" id="{{instance_id}}-distance" name="distance">
-                  <option value="8046.72" {{#compare request.params.query.distance "8046.72"}}selected{{/compare}}>5 miles</option>
-                  <option value="16093.44" {{#compare request.params.query.distance "16093.44"}}selected{{/compare}}>10 miles</option>
-                  <option value="40233.6" {{#compare request.params.query.distance "40233.6"}}selected{{/compare}}>25 miles</option>
-                  <option value="80467.2" {{#compare request.params.query.distance "80467.2"}}selected{{/compare}}>50 miles</option>
-                  <option value="" {{#compare request.params.query.distance ""}}selected{{/compare}}>no limit</option>
+                  <option value="8046.72"{{#compare request.params.query.distance "8046.72"}} selected{{/compare}}>5 miles</option>
+                  <option value="16093.44"{{#compare request.params.query.distance "16093.44"}} selected{{/compare}}>10 miles</option>
+                  <option value="40233.6"{{#compare request.params.query.distance "40233.6"}} selected{{/compare}}>25 miles</option>
+                  <option value="80467.2"{{#compare request.params.query.distance "80467.2"}} selected{{/compare}}>50 miles</option>
+                  <option value=""{{#compare request.params.query.distance ""}} selected{{/compare}}>no limit</option>
                 </select>
                 <label class="mdc-floating-label mdc-floating-label--float-above" for="{{instance_id}}-distance">
                   Within
@@ -83,8 +83,11 @@
         </div>
       </div>
 
+      {{#if request.params.query.location ~}}
       <input type="hidden" name="lat" value="{{request.params.query.lat}}" id="{{instance_id}}-lat">
       <input type="hidden" name="lng" value="{{request.params.query.lng}}" id="{{instance_id}}-lng">
+      <input type="hidden" name="sort" value="distance" id="sort">
+      {{/if ~}}
 
       <div class="h-padding">
         <div class="mdc-text-field mdc-text-field--box mdc-text-field--with-leading-icon" data-mdc-auto-init="MDCTextField">
@@ -109,9 +112,7 @@
       </div>
 
       {{#each (split "roles,sectors,statuses" ",")}}
-        <h3 class="mdc-drawer__content-heading cursor-pointer" data-collapse-target="#{{../instance_id}}-{{this}}-collapse"
-                role="button" aria-pressed="false"
-                aria-label="Show {{getProperty @root.context.metaData.termTypeLabels (concat this ".plural")}}" tabindex="0">
+        <h3 class="mdc-drawer__content-heading cursor-pointer" data-collapse-target="#{{../instance_id}}-{{this}}-collapse" role="button" aria-pressed="false" aria-label="Show {{getProperty @root.context.metaData.termTypeLabels (concat this ".plural")}}" tabindex="0">
           {{getProperty @root.context.metaData.termTypeLabels (concat this ".plural")}}
           <span class="mdc-icon-toggle pull-right" >
             <i class="far {{#if (getProperty ../request.params.query this)}}fa-chevron-up{{else}}fa-chevron-down{{/if}}" aria-hidden="true"></i>
