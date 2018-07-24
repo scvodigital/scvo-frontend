@@ -7,6 +7,7 @@
         </div>
         <ul class="mdc-list">
           {{#each data.supplimentaryResponses.types.aggregations.roles_slugs.buckets ~}}
+          {{#if key ~}}
           <a class="mdc-list-item" href="/search?roles%5B%5D={{urlencode key}}" role="menuitem">
             <span class="mdc-list-item__text">
               {{#with (lookup ../data.supplimentaryResponses.types.aggregations.roles.buckets @index) ~}}
@@ -17,6 +18,7 @@
               {{doc_count}}
             </span>
           </a>
+          {{/if ~}}
           {{/each ~}}
         </ul>
       </div>
@@ -26,6 +28,7 @@
         </div>
         <ul class="mdc-list">
           {{#each data.supplimentaryResponses.types.aggregations.sectors_slugs.buckets ~}}
+          {{#if key ~}}
           <a class="mdc-list-item" href="/search?sectors%5B%5D={{urlencode key}}" role="menuitem">
             <span class="mdc-list-item__text">
               {{#with (lookup ../data.supplimentaryResponses.types.aggregations.sectors.buckets @index) ~}}
@@ -36,6 +39,7 @@
               {{doc_count}}
             </span>
           </a>
+          {{/if ~}}
           {{/each ~}}
         </ul>
       </div>
@@ -45,6 +49,7 @@
         </div>
         <ul class="mdc-list">
           {{#each data.supplimentaryResponses.types.aggregations.statuses_slugs.buckets ~}}
+          {{#if key ~}}
           <a class="mdc-list-item" href="/search?statuses%5B%5D={{urlencode key}}" role="menuitem">
             <span class="mdc-list-item__text">
               {{#with (lookup ../data.supplimentaryResponses.types.aggregations.statuses.buckets @index) ~}}
@@ -55,6 +60,7 @@
               {{doc_count}}
             </span>
           </a>
+          {{/if ~}}
           {{/each ~}}
 
           <div class="browse-title mdc-typography--headline5">
@@ -62,6 +68,7 @@
           </div>
           <ul class="mdc-list">
             {{#each data.supplimentaryResponses.types.aggregations.regions_slugs.buckets ~}}
+            {{#if key ~}}
             <a class="mdc-list-item" href="/search?regions%5B%5D={{urlencode key}}" role="menuitem">
               <span class="mdc-list-item__text">
                 {{#with (lookup ../data.supplimentaryResponses.types.aggregations.regions.buckets @index) ~}}
@@ -72,6 +79,7 @@
                 {{doc_count}}
               </span>
             </a>
+            {{/if ~}}
             {{/each ~}}
           </ul>
         </ul>
