@@ -47,9 +47,9 @@
             "role_status_slug": {{{stringify (arrayify request.params.query.statuses)}}}
           }
         }
-        {{#ifAll request.params.query.lat request.params.query.lng}},{{/ifAll}}
+        {{#ifAll request.params.query.location request.params.query.lat request.params.query.lng}},{{/ifAll}}
         {{/if}}
-        {{#ifAll request.params.query.lat request.params.query.lng ~}}
+        {{#ifAll request.params.query.location request.params.query.lat request.params.query.lng ~}}
         {
           "geo_distance": {
             "distance": "{{default request.params.query.distance "804672"}}meters",
@@ -118,7 +118,7 @@
   "script_fields" : {
     "distance" : {
       "script" : {
-        "inline": "doc['geo_vacancy_coords'].arcDistance(params.lat,params.lon) * 0.001",
+        "inline": "doc['geo_vacancy_coords'].arcDistance(params.lat,params.lon) * 0.000621371",
         "lang": "painless",
         "params": {
           "lat": {{request.params.query.lat}},
@@ -160,18 +160,19 @@
     {
       "closing_date": "asc"
     }
+    {{else}}
     {{#compare request.params.query.sort "===" "distance" ~}}
     {{#ifAll request.params.query.location request.params.query.lat request.params.query.lng ~}}
     {
-      "_geo_distance" : {
-        "geo_vacancy_coords" : {
+      "_geo_distance": {
+        "geo_vacancy_coords": {
           "lat": {{request.params.query.lat}},
           "lon": {{request.params.query.lng}}
         },
-        "order" : "asc",
-        "unit" : "mi",
-        "mode" : "min",
-        "distance_type" : "arc"
+        "order": "asc",
+        "unit": "m",
+        "mode": "min",
+        "distance_type": "arc"
       }
     }
     {{else}}

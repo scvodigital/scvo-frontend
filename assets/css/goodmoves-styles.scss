@@ -355,6 +355,10 @@ footer h3,
 .mdc-button {
   transition: 0.1s;
 }
+.mdc-button {
+  height: auto;
+  min-height: 36px;
+}
 .mdc-button--large {
   height: 56px;
 }
@@ -808,6 +812,12 @@ a {
 }
 #map-full.hidden {
   opacity: 0;
+}
+.leaflet-container {
+  a {
+    color: $mdc-theme-primary;
+    -webkit-tap-highlight-color: transparent;
+  }
 }
 
 .search-info {
@@ -2212,7 +2222,6 @@ form.inline-form {
   border-radius: $unit/4;
   z-index: 2;
   // opacity: 0.7;
-  transition: background-image .2s ease-in-out;
   cursor: pointer;
   .scroll-icon {
     background-color: $mdc-theme-primary;
@@ -2248,10 +2257,10 @@ form.inline-form {
   text-align: right;
 }
 .scroll-button.scroll-left:hover {
-  background-image: linear-gradient(to left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 0.4));
+  background-image: linear-gradient(to left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 0.3));
 }
 .scroll-button.scroll-right:hover {
-  background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 0.4));
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 0.3));
 }
 
 #app-snackbar {

@@ -57,7 +57,7 @@
                     "componentRestrictions": {
                       "country": "gb"
                     }
-                  }' data-location-lat="[name='lat']" data-location-lng="[name='lng']">
+                  }' data-location-lat="[name='lat']" data-location-lng="[name='lng']" data-location-types="[name='location_types']">
                 <label class="mdc-floating-label mdc-floating-label--float-above" for="{{instance_id}}-location">
                   Location
                 </label>
@@ -88,7 +88,37 @@
       <input type="hidden" name="sort" value="distance" id="sort">
       {{/if ~}}
 
-      <div class="h-padding">
+      <h3 class="mdc-drawer__content-heading cursor-pointer" data-collapse-target="#{{instance_id}}-salary-collapse" role="button" aria-pressed="false" aria-label="Show salary search options" tabindex="0">
+        Salary
+        <span class="mdc-icon-toggle pull-right">
+          <i class="far {{#if (getProperty request.params.query "salary_min")}}fa-chevron-up{{else}}fa-chevron-down{{/if}}" aria-hidden="true"></i>
+        </span>
+      </h3>
+      <div id="{{instance_id}}-salary-collapse" style="{{#unless (getProperty request.params.query "salary_min")}}display: none;{{else}}{{#unless (getProperty request.params.query "salary_max")}}display: none;{{/unless}}{{/unless}}">
+        <div class="h-padding">
+          <div class="mdc-text-field mdc-text-field--box mdc-text-field--with-leading-icon" data-mdc-auto-init="MDCTextField">
+            <span class="far fa-arrow-alt-from-left mdc-text-field__icon" tabindex="-1"></span>
+            <input type="number" id="{{instance_id}}-salary_min" name="salary_min" class="mdc-text-field__input mdc-text-field--fullwidth" value="{{request.params.query.salary_min}}" data-lpignore="true">
+            <label class="mdc-floating-label mdc-floating-label--float-above" for="{{instance_id}}-salary_min">
+              Minimum salary
+            </label>
+            <div class="mdc-line-ripple"></div>
+          </div>
+        </div>
+
+        <div class="h-padding">
+          <div class="mdc-text-field mdc-text-field--box mdc-text-field--with-leading-icon" data-mdc-auto-init="MDCTextField">
+            <span class="far fa-arrow-alt-to-right mdc-text-field__icon" tabindex="-1"></span>
+            <input type="number" id="{{instance_id}}-salary_max" name="salary_max" class="mdc-text-field__input mdc-text-field--fullwidth" value="{{request.params.query.salary_max}}" data-lpignore="true">
+            <label class="mdc-floating-label mdc-floating-label--float-above" for="{{instance_id}}-salary_max">
+              Maximum salary
+            </label>
+            <div class="mdc-line-ripple"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- <div class="h-padding">
         <div class="mdc-text-field mdc-text-field--box mdc-text-field--with-leading-icon" data-mdc-auto-init="MDCTextField">
           <span class="far fa-arrow-alt-from-left mdc-text-field__icon" tabindex="-1"></span>
           <input type="number" id="{{instance_id}}-salary_min" name="salary_min" class="mdc-text-field__input mdc-text-field--fullwidth" value="{{request.params.query.salary_min}}" data-lpignore="true">
@@ -108,12 +138,12 @@
           </label>
           <div class="mdc-line-ripple"></div>
         </div>
-      </div>
+      </div> -->
 
       {{#each (split "roles,sectors,statuses" ",")}}
         <h3 class="mdc-drawer__content-heading cursor-pointer" data-collapse-target="#{{../instance_id}}-{{this}}-collapse" role="button" aria-pressed="false" aria-label="Show {{getProperty @root.context.metaData.termTypeLabels (concat this ".plural")}}" tabindex="0">
           {{getProperty @root.context.metaData.termTypeLabels (concat this ".plural")}}
-          <span class="mdc-icon-toggle pull-right" >
+          <span class="mdc-icon-toggle pull-right">
             <i class="far {{#if (getProperty ../request.params.query this)}}fa-chevron-up{{else}}fa-chevron-down{{/if}}" aria-hidden="true"></i>
           </span>
         </h3>

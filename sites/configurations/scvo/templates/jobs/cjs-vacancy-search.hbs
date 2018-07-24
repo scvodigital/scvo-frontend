@@ -27,7 +27,15 @@
           {{> pagination paging=data.primaryResponse.pagination}}
           {{else}}
           <div class="search-info mdc-elevation--z3">
-            No vacancies in the selected category. Please check back soon.
+            {{#if request.params.query.q ~}}
+            No vacancies could be found for your search, please try different keywords.
+            {{else}}
+            {{#if request.params.query.job_number ~}}
+            The job number <strong>{{request.params.query.job_number}}</strong> does not match any current vacancies.
+            {{else}}
+            No current vacancies in the selected category, please check again soon.
+            {{/if ~}}
+            {{/if ~}}
           </div>
           {{/if ~}}
           {{else}}
