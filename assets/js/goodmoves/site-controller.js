@@ -242,63 +242,27 @@ function handleLocationBoxes() {
 function handleMaps() {
   var maps = $('[data-map-options]').each(function(i, o) {
     var options = $(o).data('map-options');
-    var map = new google.maps.Map(o, options);
+    var map = L.map(o).setView([51.505, -0.09], 13);
+    L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1Ijoic2N2b2RpZ2l0YWwiLCJhIjoiY2pqemVqbTA4MDNibTNrbzV2OHpkb3BkcCJ9.Tz193u3OIAAMDT9GJOV50g', {
+        attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+        maxZoom: 18,
+        id: 'mapbox.streets',
+        accessToken: 'pk.eyJ1Ijoic2N2b2RpZ2l0YWwiLCJhIjoiY2pqemVqbTA4MDNibTNrbzV2OHpkb3BkcCJ9.Tz193u3OIAAMDT9GJOV50g'
+    }).addTo(map);
 
     var mapName = $(o).data('map-name');
     var $markers = $('marker[data-map="' + mapName + '"]');
-    var pinBounds = new google.maps.LatLngBounds();
-    var markers = [];
+    var markers = new L.featureGroup();
 
     $markers.each(function(i, o) {
       var $marker = $(o);
-      var markerOptions = {
-        map: map,
-        position: {
-          lat: $marker.data('lat'),
-          lng: $marker.data('lng')
-        },
-        icon: {
-          path: google.maps.SymbolPath.CIRCLE,
-          scale: 15,
-          fillColor: '#58a934',
-          fillOpacity: 0.6,
-          strokeColor: '#3c7524',
-          strokeOpacity: 0.8,
-          strokeWeight: 2
-        },
-        title: $marker.data('title'),
-        opacity: 1
-      };
-      var infoWindowOptions = {
-        content: $marker.html()
-      };
-
-      var marker = new google.maps.Marker(markerOptions);
-      var infoWindow = new google.maps.InfoWindow(infoWindowOptions);
-      marker.addListener('click', function() {
-        markers.forEach(function(marker) {
-          marker.infoWindow.close();
-        });
-        infoWindow.open(map, marker);
-      });
-
-      markers.push({
-        marker: marker,
-        infoWindow: infoWindow
-      });
-      pinBounds.extend(markerOptions.position);
-      // Sorry for the timeout hack.
-      // Getting and setting zoom right after pinBounds doesn't
-      // work, think pinBounds is async with no promise or callback
-      window.setTimeout(function() {
-        console.log('MAP ZOOM BEFORE:', map.getZoom());
-        var maxZoom = 15;
-        if (map.getZoom() >= maxZoom) {
-          map.setZoom(maxZoom);
-        }
-        console.log('MAP ZOOM AFTER:', map.getZoom());
-      }, 1000);
+      var lat = $marker.data('lat');
+      var lng = $marker.data('lng');
+      var marker = L.marker([lat, lng]).addTo(map);
+      marker.bindPopup($marker.html());
+      markers.addLayer(marker);
     });
-    map.fitBounds(pinBounds);
+
+    map.fitBounds(markers.getBounds());
   });
 }
