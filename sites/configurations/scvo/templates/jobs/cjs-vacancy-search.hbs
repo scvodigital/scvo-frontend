@@ -1,4 +1,4 @@
-<div class="cjs-job-search">
+<div class="cjs-vacancy-search">
   {{> header_splash headerTextOverride="CJS vacancies" typeOverride="page"}}
   <div class="container-fluid page-content">
     <ul class="breadcrumbs">
@@ -6,7 +6,7 @@
       <li><a href="/jobs">Jobs</a></li>
       <li><a href="/jobs/community-jobs-scotland">Community Jobs Scotland</a></li>
       <li><a href="/jobs/community-jobs-scotland/vacancies">Vacancies</a></li>
-      <li>Search</li>
+      <li>{{#compare request.params.phase "===" "p19v"}}16–29 year olds{{else}}16–29 year olds with a disability{{/compare}}</li>
     </ul>
     <div class="mdc-layout-grid full">
       <div class="mdc-layout-grid__inner">
@@ -27,7 +27,15 @@
           {{> pagination paging=data.primaryResponse.pagination}}
           {{else}}
           <div class="search-info mdc-elevation--z3">
-            No vacancies in the selected category. Please check back soon.
+            {{#if request.params.query.q ~}}
+            No vacancies could be found for your search, please try different keywords.
+            {{else}}
+            {{#if request.params.query.job_number ~}}
+            The job number <strong>{{request.params.query.job_number}}</strong> does not match any current vacancies.
+            {{else}}
+            No current vacancies in the selected category, please check again soon.
+            {{/if ~}}
+            {{/if ~}}
           </div>
           {{/if ~}}
           {{else}}

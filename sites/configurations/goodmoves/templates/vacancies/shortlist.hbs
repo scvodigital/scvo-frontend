@@ -1,37 +1,45 @@
-{{> vacancy_search_form this instance_id="perm"}}
-
 <div id="detailed-results-container" class="container-content goodmoves-shortlist">
-  <div class="settings v-margin-full">
-    <!-- <p class="mdc-typography--body1">
-      <strong></strong>
-    </p> -->
-    <div class="mdc-form-field">
-      <div class="mdc-checkbox">
-        <input type="checkbox"
-               class="mdc-checkbox__native-control"
-               id="closing-alerts"/>
-        <div class="mdc-checkbox__background">
-          <svg class="mdc-checkbox__checkmark"
-               viewBox="0 0 24 24">
-            <path class="mdc-checkbox__checkmark-path"
-                  fill="none"
-                  d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
-          </svg>
-          <div class="mdc-checkbox__mixedmark"></div>
-        </div>
-      </div>
-      <label for="closing-alerts">Send ‘closing soon’ alerts</label>
+  {{#compare data.shortlist.open.hits.total ">" 0}}
+  <div class="t-margin-full pull-right">
+    <div class="t-margin">
+      {{> shortlist_alerts}}
     </div>
   </div>
+  {{/compare}}
   <h1 class="mdc-typography--headline3 v-margin-full">
     Shortlist
   </h1>
 
-  {{#each data.search_data.shortlist.hits.hits ~}}
+  {{#compare data.shortlist.open.hits.total "===" 0}}
+  {{#compare data.shortlist.closed.hits.total "===" 0}}
+  <p class="mdc-typography--body1">
+    You don't yet have any jobs on your shortlist. To add a job, click the &ensp;<strong><span class="far fa-star mdc-chip__icon mdc-chip__icon--leading" aria-hidden="true"></span>Shortlist</strong>&ensp;button.
+  </p>
+  {{else}}
+  <p class="mdc-typography--body1">
+    You don't have any open jobs on your shortlist.
+  </p>
+  {{/compare}}
+  {{/compare}}
+
+  {{#compare data.shortlist.open.hits.total ">" 0}}
+  {{#each data.shortlist.open.hits.hits ~}}
   {{> vacancy_search_result _source}}
   {{/each ~}}
-
   <div class="foot">
-    {{> pagination paging=data.search_data.detailed_results.pagination}}
+    {{> pagination paging=data.shortlist.open.pagination}}
   </div>
+  {{/compare}}
+
+  {{#compare data.shortlist.closed.hits.total ">" 0}}
+  <h2 class="mdc-typography--headline5 v-margin-full">
+    Closed jobs
+  </h2>
+  {{#each data.shortlist.closed.hits.hits ~}}
+  {{> vacancy_search_result _source}}
+  {{/each ~}}
+  <div class="foot">
+    {{> pagination paging=data.shortlist.closed.pagination}}
+  </div>
+  {{/compare}}
 </div>

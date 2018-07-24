@@ -32,10 +32,16 @@
         },
         "queryTemplates": [
           {
-            "name": "vacancies",
+            "name": "vacancies_open",
             "index": "web-content-production",
             "type": "goodmoves-vacancy",
-            "template": ">context.metaData.handlebars.queries.vacancies_organisation-vacancies"
+            "template": ">context.metaData.handlebars.queries.vacancies_organisation-vacancies-open"
+          },
+          {
+            "name": "vacancies_closed",
+            "index": "web-content-production",
+            "type": "goodmoves-vacancy",
+            "template": ">context.metaData.handlebars.queries.vacancies_organisation-vacancies-closed"
           },
           {
             "name": "types",
@@ -101,7 +107,9 @@
             "parts": {
               "head": ">context.metaData.handlebars.templates.organisations_organisation-head-tags",
               "body": ">context.metaData.handlebars.templates.organisations_organisation",
-              "foot": ""
+              "foot": "",
+              "sidebar": ">context.metaData.handlebars.templates.vacancies_search-form"
+
             },
             "contentType": "text/html"
           }

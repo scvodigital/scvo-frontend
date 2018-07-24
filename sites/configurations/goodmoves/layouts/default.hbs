@@ -37,6 +37,11 @@
 <meta name="msapplication-TileImage" content="https://storage.googleapis.com/scvo-assets/scvo-frontend/assets/images/icons/goodmoves/ms-icon-144x144.png">
 <meta name="theme-color" content="#3c7524">
 <link rel="search" type="application/opensearchdescription+xml" title="Goodmoves" href="/assets/opensearch.xml" />
+
+<link rel="canonical" href="https://goodmoves.com{{request.params.uri.pathname}}" />
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.3/dist/leaflet.css"
+  integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
+  crossorigin=""/>
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-3467930-6"></script>
 <script>
@@ -54,13 +59,13 @@ gtag('event', 'document_hit', {
 });
 {{/each ~}}
 
-{{#if request.params.query.debug ~}}
+{{#ifAny request.params.query.debug (compare request.url.hostname "goodmoves.local") ~}}
 console.log('#### DEBUG MODE ON ####');
 console.log('Request:', {{{regexReplace (regexReplace (stringify request) "(<\/script)" "gi" '</scr\" + \"ipt') "(\r|\n)" "gi" ""}}});
 console.log('Route:', {{{regexReplace (regexReplace (stringify route) "(<\/script)" "gi" '</scr\" + \"ipt') "(\r|\n)" "gi" ""}}});
 console.log('Data:', {{{regexReplace (regexReplace (stringify data) "(<\/script)" "gi" '</scr\" + \"ipt') "(\r|\n)" "gi" ""}}});
 console.log('Menus:', {{{regexReplace (regexReplace (stringify context.metaData.menus) "(<\/script)" "gi" '</scr\" + \"ipt') "(\r|\n)" "gi" ""}}});
-{{/if ~}}
+{{/ifAny ~}}
 </script>
 <link type="text/css" rel="stylesheet" href="/assets/fonts/fontawesome/css/fontawesome-all.min.css">
 <link type="text/css" rel="stylesheet" href="/assets/css/goodmoves-styles.css">
@@ -80,11 +85,11 @@ if(location.host.indexOf('.local') > -1){
               <button class="mdc-top-app-bar__navigation-icon hide-lg" data-drawer-target="#mobile-menu">
                 <span class="far fa-fw fa-2x fa-bars"></span>
               </button>
-              {{#if route.metaData.sidebarButton}}
-              <button class="mdc-top-app-bar__navigation-icon {{route.metaData.sidebarButton.classes}}" data-drawer-target="#sidebar-temporary" title="{{route.metaData.sidebarButton.tooltip}}">
-                <span class="far fa-fw fa-{{route.metaData.sidebarButton.icon}}"></span>
+              {{#unless route.metaData.hideSearch}}
+              <button class="mdc-top-app-bar__navigation-icon hide-lg" data-drawer-target="#sidebar-temporary" title="Search">
+                <span class="far fa-fw fa-search"></span>
               </button>
-              {{/if}}
+              {{/unless}}
               <span class="mdc-top-app-bar__title hide-md hide-lg">
                 <svg width="61" height="42" xmlns="http://www.w3.org/2000/svg">
                   <metadata id="metadata7">image/svg+xml</metadata>
@@ -160,13 +165,17 @@ if(location.host.indexOf('.local') > -1){
               {{#if data.auth ~}}
               <div class="mdc-menu-anchor">
                 <button class="mdc-button" data-menu-target="#user-menu">
+                  {{#if data.auth.photoURL ~}}
+                  <img src="{{data.auth.photoURL}}" class="far fa-fw user-avatar" />
+                  {{else}}
                   <span class="far fa-fw fa-user-circle"></span>
+                  {{/if ~}}
                   {{{data.auth.email}}}
                   <span class="far fa-fw fa-angle-down"></span>
                 </button>
                 <div class="mdc-menu" tabindex="-1" data-mdc-auto-init="MDCMenu" id="user-menu">
                   <div class="mdc-menu__items mdc-list" role="menu" aria-hidden="true">
-                    {{#each context.metaData.menus.user ~}}
+                    {{#each context.metaData.menus.user-signed-in ~}}
                     <a class="mdc-list-item {{#if (regexMatch ../request.url.pathname route "gi")}} mdc-list-item--activated{{/if}}" href="{{stripTrailingSlash path}}" role="menuitem">
                       {{#if icon ~}}
                       <span class="far fa-{{icon}} mdc-list-item__graphic" aria-hidden="true"></span>
@@ -178,8 +187,8 @@ if(location.host.indexOf('.local') > -1){
                 </div>
               </div>
               {{else}}
-              <nav class="mdc-tab-bar mdc-tab-bar__right" id="unauthenticated-tab-bar">
-                {{#each context.metaData.menus.unauthenticated ~}}
+              <nav class="mdc-tab-bar mdc-tab-bar__right" id="user-not-signed-in-tab-bar">
+                {{#each context.metaData.menus.user-not-signed-in ~}}
                 <a class="mdc-tab{{#if (regexMatch ../request.url.pathname route "gi")}} mdc-tab--active{{/if}}" href="{{stripTrailingSlash path}}">
                   <span class="mdc-tab--label">{{{label}}}</span>
                 </a>
@@ -240,7 +249,7 @@ if(location.host.indexOf('.local') > -1){
             </a>
             {{/each ~}}
             <div role="separator" class="mdc-list-divider"></div>
-            {{#each (reverse context.metaData.menus.unauthenticated) ~}}
+            {{#each (reverse context.metaData.menus.user-not-signed-in) ~}}
             <a class="mdc-list-item{{#if (regexMatch ../request.url.pathname route "gi")}} mdc-list-item--activated{{/if}}" href="{{stripTrailingSlash path}}">
               {{#if icon ~}}
               <span class="far fa-{{icon}} mdc-list-item__graphic" aria-hidden="true"></span>
@@ -252,11 +261,11 @@ if(location.host.indexOf('.local') > -1){
         </nav>
       </aside>
 
-      <main class="mdc-theme--background mdc-toolbar-fixed-adjust {{#if route.metaData.sidebarIcon}}drawer-container-temporary{{else}}drawer-container-permanent{{/if}}">
-        {{#if route.metaData.sidebarButton}}
-        <aside class="mdc-drawer mdc-drawer--temporary" id="sidebar-temporary" data-mdc-auto-init="MDCTemporaryDrawer">
+      <main class="mdc-theme--background mdc-toolbar-fixed-adjust {{#if layoutParts.sidebar}}drawer-container-permanent{{else}}drawer-container-temporary{{/if}}">
+        {{#if layoutParts.sidebar }}
+        <aside class="mdc-drawer mdc-drawer--temporary mdc-drawer--occasional" id="sidebar-temporary" data-mdc-auto-init="MDCTemporaryDrawer">
           <div class="mdc-drawer__drawer">
-            {{!-- {{{layoutParts.sidebar instance_id="temp"}}} --}}
+            {{{layoutParts.sidebar}}}
           </div>
         </aside>
         {{/if}}
@@ -337,6 +346,16 @@ if(location.host.indexOf('.local') > -1){
         </div>
       </footer>
     </div>
+    <div class="mdc-snackbar mdc-elevation--z10"
+         aria-live="assertive"
+         aria-atomic="true"
+         aria-hidden="true"
+         id="app-snackbar">
+      <div class="mdc-snackbar__text"></div>
+      <div class="mdc-snackbar__action-wrapper">
+        <button type="button" class="mdc-snackbar__action-button"></button>
+      </div>
+    </div>
   </goodmoves-site>
   <script src="https://www.gstatic.com/firebasejs/5.2.0/firebase.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -345,7 +364,10 @@ if(location.host.indexOf('.local') > -1){
   <script type="text/javascript" src="https://unpkg.com/material-components-web@latest/dist/material-components-web.js"></script>
   {{else}}
   <script type="text/javascript" src="https://unpkg.com/material-components-web@latest/dist/material-components-web.min.js"></script>
-  {{/if}}
+{{/if}}
+  <script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js"
+    integrity="sha512-tAGcCfR4Sc5ZP5ZoVz0quoZDYX5aCtEm/eu1KhSLj2c9eFrylXZknQYmxUssFaVJKvvc0dJQixhGjG2yXWiV9Q=="
+    crossorigin=""></script>
   <script src="https://cdn.jsdelivr.net/npm/promise-polyfill@7/dist/polyfill.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/string.js/3.3.3/string.min.js"></script>
   <script type="text/javascript">
@@ -374,7 +396,8 @@ if(location.host.indexOf('.local') > -1){
   <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
   <script type="text/javascript" id="cookieinfo" src="/assets/js/cookieinfo.min.js" data-message="We use cookies to track anonymous usage statistics and do not collect any personal information that can be used to identify you. By continuing to visit this site you agree to our use of cookies." data-moreinfo="/cookies" data-cookie="CookieInfoScript" data-text-align="left"></script>
   <script type="text/javascript" src="/assets/js/goodmoves/main.js"></script>
-  {{{layoutParts.foot}}}
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBJdxcQpVKQ6HdrjnPXycUoZqsmp-Ep3l0&libraries=places&region=uk&callback=initMap" async defer></script>
+
+  {{{layoutParts.foot}}}
 </body>
 </html>

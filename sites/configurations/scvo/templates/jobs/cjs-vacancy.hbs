@@ -1,4 +1,4 @@
-<div class="cjs-job">
+<div class="cjs-vacancy">
   {{> header_splash sub_title="cjs"}}
   <div class="container-fluid page-content">
     <ul class="breadcrumbs">
@@ -6,7 +6,7 @@
       <li><a href="/jobs">Jobs</a></li>
       <li><a href="/jobs/community-jobs-scotland">Community Jobs Scotland</a></li>
       <li><a href="/jobs/community-jobs-scotland/vacancies">Vacancies</a></li>
-      <li><a href="/jobs/community-jobs-scotland/vacancies/{{request.params.phase}}">Search</a></li>
+      <li><a href="/jobs/community-jobs-scotland/vacancies/{{request.params.phase}}">{{#compare request.params.phase "===" "p19v"}}16–29 year olds{{else}}16–29 year olds with a disability{{/compare}}</a></li>
       <li>{{data.primaryResponse.hits.hits.[0]._source.title}}</li>
     </ul>
     <div class="mdc-layout-grid">

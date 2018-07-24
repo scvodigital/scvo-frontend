@@ -22,6 +22,11 @@
     "bool": {
       "must": [
         {
+          "term": {
+            "vacancy_status": "vacancy-open"
+          }
+        },
+        {
           "terms": {
             "Id": {{{stringify (map data.shortlist_ids.items (getProp "id"))}}}
           }

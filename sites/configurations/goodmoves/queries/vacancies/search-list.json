@@ -23,17 +23,15 @@
   ],
   "query": {
     "bool": {
-      {{#ifAny request.params.query.type request.params.query.sectors request.params.query.roles request.params.query.statuses request.params.query.lat ~}}
+      {{#ifAny request.params.query.regions request.params.query.sectors request.params.query.roles request.params.query.statuses request.params.query.lat ~}}
       "filter": [
-        {{#if request.params.query.type ~}}
-        {{#compare request.params.query.type "===" "home-based" ~}}
+        {{#if request.params.query.regions ~}}
         {
           "terms": {
-            "remote_working": true
+            "local_authority_slug": {{{stringify (arrayify request.params.query.regions)}}}
           }
         }
         {{#ifAny request.params.query.sectors request.params.query.roles request.params.query.statuses request.params.query.lat}},{{/ifAny}}
-        {{/compare ~}}
         {{/if ~}}
         {{#if request.params.query.sectors ~}}
         {
@@ -57,19 +55,19 @@
             "role_status_slug": {{{stringify (arrayify request.params.query.statuses)}}}
           }
         }
-        {{#ifAny request.params.query.lat}},{{/ifAny}}
+        {{#ifAll request.params.query.location request.params.query.lat request.params.query.lng}},{{/ifAll}}
         {{/if}}
-        {{#if request.params.query.lat ~}}
+        {{#ifAll request.params.query.location request.params.query.lat request.params.query.lng ~}}
         {
           "geo_distance": {
-            "distance": "{{default request.params.query.distance "8046.72"}}meters",
+            "distance": "{{default request.params.query.distance "804672"}}meters",
             "geo_vacancy_coords": {
               "lat": {{request.params.query.lat}},
               "lon": {{request.params.query.lng}}
             }
           }
         }
-        {{/if ~}}
+        {{/ifAll ~}}
       ],
       {{/ifAny ~}}
       "must": [
@@ -124,6 +122,20 @@
       ]
     }
   },
+  {{#ifAll request.params.query.location request.params.query.lat request.params.query.lng ~}}
+  "script_fields" : {
+    "distance" : {
+      "script" : {
+        "inline": "doc['geo_vacancy_coords'].arcDistance(params.lat,params.lon) * 0.000621371",
+        "lang": "painless",
+        "params": {
+          "lat": {{request.params.query.lat}},
+          "lon": {{request.params.query.lng}}
+        }
+      }
+    }
+  },
+  {{/ifAll ~}}
   "sort": [
     {{#if request.params.query.sort ~}}
     {{#compare request.params.query.sort "===" "salary_low" ~}}
@@ -158,19 +170,25 @@
     }
     {{else}}
     {{#compare request.params.query.sort "===" "distance" ~}}
-    {{#if request.params.query.lat ~}}
+    {{#ifAll request.params.query.location request.params.query.lat request.params.query.lng ~}}
     {
-      "_geo_distance" : {
-        "geo_vacancy_coords" : [{{request.params.query.lat}}, {{request.params.query.lng}}],
-        "order" : "asc",
-        "unit" : "m",
-        "mode" : "min",
-        "distance_type" : "arc"
+      "_geo_distance": {
+        "geo_vacancy_coords": {
+          "lat": {{request.params.query.lat}},
+          "lon": {{request.params.query.lng}}
+        },
+        "order": "asc",
+        "unit": "m",
+        "mode": "min",
+        "distance_type": "arc"
       }
     }
     {{else}}
     "_score"
-    {{/if ~}}
+    {{/ifAll ~}}
+    {{#compare request.params.query.sort "===" "relevance" ~}}
+    "_score",
+    {{/compare ~}}
     {{/compare ~}}
     {{/compare ~}}
     {{/compare ~}}

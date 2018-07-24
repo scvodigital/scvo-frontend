@@ -18,8 +18,8 @@
         </div>
       </div>
       <form id="search-view" class="search-form mdc-elevation--z5" action="/search" method="GET">
-        <input type="hidden" name="lat" value="">
-        <input type="hidden" name="lng" value="">
+        <input type="hidden" name="lat" value="" />
+        <input type="hidden" name="lng" value="" />
         <div class="mdc-layout-grid">
           <div class="mdc-layout-grid__inner">
             <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-5-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
@@ -65,7 +65,7 @@
               </div>
             </div>
             <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-2-desktop mdc-layout-grid__cell--span-1-tablet mdc-layout-grid__cell--span-4-phone">
-              <button type="submit" id="search-jobs" class="mdc-button mdc-button--raised mdc-text-field--box mdc-button--search mdc-ripple-surface mdc-ripple-surface--primary" data-mdc-auto-init="MDCRipple">
+              <button type="submit" id="search-jobs" class="mdc-button mdc-button--raised mdc-button--large mdc-text-field--box mdc-button--search mdc-ripple-surface mdc-ripple-surface--primary" data-mdc-auto-init="MDCRipple">
                 Search
                 <span class="far fa-search" aria-hidden="true"></span>
               </button>
@@ -90,7 +90,7 @@
     <div class="mdc-layout-grid home-heading">
       <div class="mdc-layout-grid__inner">
         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone">
-          <div class="mdc-typography--headline5">
+          <div class="mdc-typography--headline5 v-margin-full">
             Your shortlist
           </div>
         </div>
@@ -98,29 +98,42 @@
     </div>
     <div class="home-jobs">
       <div class="mdc-layout-grid equal-height home-shortlist">
+        <div class="scroll-button scroll-left">
+          <span class="fal fa-fw fa-angle-left scroll-icon"></span>
+        </div>
+        <div class="scroll-button scroll-right">
+          <span class="fal fa-fw fa-angle-right scroll-icon"></span>
+        </div>
         <div class="mdc-layout-grid__inner scrolling-grid">
-          {{#compare data.supplimentaryResponses.shortlist.hits.total ">" 0}}
-          {{#each data.supplimentaryResponses.shortlist.hits.hits ~}}
+          {{#compare data.supplimentaryResponses.shortlist_open.hits.total ">" 0}}
+          {{#each data.supplimentaryResponses.shortlist_open.hits.hits ~}}
           <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone shortlist-jobs">
             {{> vacancy_mini _source}}
           </div>
           {{/each ~}}
+          {{#compare data.supplimentaryResponses.shortlist_closed.hits.total ">" 0}}
+          {{#each data.supplimentaryResponses.shortlist_closed.hits.hits ~}}
+          <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone shortlist-jobs">
+            {{> vacancy_mini _source}}
+          </div>
+          {{/each ~}}
+          {{/compare}}
           <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone shortlist-jobs last-card">
             <div class="mdc-card align-centre">
               <a href="/search">Find more jobs for your shortlist</a>
             </div>
           </div>
-          <div class="scroll-button scroll-left">
-            <span class="fal fa-chevron-circle-left fa-3x"></span>
-          </div>
-          <div class="scroll-button scroll-right">
-            <span class="fal fa-chevron-circle-right fa-3x"></span>
-          </div>
           {{else}}
           <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone v-margin-full">
+            {{#compare data.supplimentaryResponses.shortlist_closed.hits.total ">" 0}}
+            <p>
+              There are currently no open jobs in your shortlist. <a href="/shortlist">See closed jobs</a>.
+            </p>
+            {{else}}
             <p>
               There are currently no jobs in your shortlist, if you shortlist a job it will appear here for easy reference.
             </p>
+            {{/compare}}
           </div>
           {{/compare}}
         </div>
@@ -134,14 +147,14 @@
       <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone">
         {{#if data.auth ~}}
         <div class="mdc-typography--headline5">
-          Your latest jobs
+          Your latest jobs&ensp;
           <span class="mdc-typography--body1">
             <a href="/searches">Your searches</a>
           </span>
         </div>
         {{else}}
-        <div class="mdc-typography--headline5">
-          Latest jobs
+        <div class="mdc-typography--headline5 v-margin-full">
+          Latest jobs&ensp;
           <span class="mdc-typography--body1">
             <a href="/search?sort=newest&page=2">Find more</a>
           </span>
@@ -152,6 +165,12 @@
   </div>
   <div class="home-jobs">
     <div class="mdc-layout-grid equal-height home-latest">
+      <div class="scroll-button scroll-left">
+        <span class="fal fa-fw fa-angle-left scroll-icon"></span>
+      </div>
+      <div class="scroll-button scroll-right">
+        <span class="fal fa-fw fa-angle-right scroll-icon"></span>
+      </div>
       <div class="mdc-layout-grid__inner scrolling-grid">
         {{#each data.primaryResponse.hits.hits ~}}
         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone latest-jobs">
@@ -167,12 +186,6 @@
             {{/if ~}}
           </div>
         </div>
-        <div class="scroll-button scroll-left">
-          <span class="fal fa-chevron-circle-left fa-3x"></span>
-        </div>
-        <div class="scroll-button scroll-right">
-          <span class="fal fa-chevron-circle-right fa-3x"></span>
-        </div>
       </div>
     </div>
   </div>
@@ -183,7 +196,7 @@
     <div class="mdc-layout-grid__inner">
       <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone">
         <div class="mdc-typography--headline5">
-          Top jobs
+          Top jobs&ensp;
           <span class="mdc-typography--body1">
             <a href="/search">Find more</a>
           </span>
@@ -193,6 +206,12 @@
   </div>
   <div class="home-jobs">
     <div class="mdc-layout-grid equal-height home-top">
+      <div class="scroll-button scroll-left">
+        <span class="fal fa-fw fa-angle-left scroll-icon"></span>
+      </div>
+      <div class="scroll-button scroll-right">
+        <span class="fal fa-fw fa-angle-right scroll-icon"></span>
+      </div>
       <div class="mdc-layout-grid__inner scrolling-grid">
         {{#each data.supplimentaryResponses.top.hits.hits ~}}
         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone top-jobs">
@@ -203,12 +222,6 @@
           <div class="mdc-card align-centre">
             <a href="/search">Find more jobs</a>
           </div>
-        </div>
-        <div class="scroll-button scroll-left">
-          <span class="fal fa-chevron-circle-left fa-3x"></span>
-        </div>
-        <div class="scroll-button scroll-right">
-          <span class="fal fa-chevron-circle-right fa-3x"></span>
         </div>
       </div>
     </div>

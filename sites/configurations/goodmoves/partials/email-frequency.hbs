@@ -1,0 +1,60 @@
+{{#if @root.data.auth}}
+  {{#with @root.data.saved_searches.items.[0]}}
+    <div class="mdc-form-field">
+      <div class="mdc-radio">
+        <input class="mdc-radio__native-control" type="radio" id="daily" name="frequency" {{#compare days "1234567"}}checked{{/compare}}>
+        <div class="mdc-radio__background">
+          <div class="mdc-radio__outer-circle"></div>
+          <div class="mdc-radio__inner-circle"></div>
+        </div>
+      </div>
+      <label for="daily">Daily</label>
+    </div>
+    <div class="mdc-form-field">
+      <div class="mdc-radio">
+        <input class="mdc-radio__native-control" type="radio" id="weekly" name="frequency" {{#compare (length days) 1}}checked{{/compare}}>
+        <div class="mdc-radio__background">
+          <div class="mdc-radio__outer-circle"></div>
+          <div class="mdc-radio__inner-circle"></div>
+        </div>
+      </div>
+      <label for="weekly">Weekly</label>
+    </div>
+  {{else}}
+    You have no saved searches.
+  {{/with}}
+{{/if}}
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    var days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+    $('input[name="frequency"]').on('change', function(evt) {
+      var request = {
+        url: '/update-email-preferences',
+        data: {},
+        method: 'POST',
+        dataType: 'html',
+        success: function(data, status, xhr) {
+          goodmoves.snackbarShow({
+            message: 'New jobs alert email frequency changed to '+evt.currentTarget.id
+          });
+        },
+        error: function(xhr, status, error) {
+          goodmoves.snackbarShow({
+            message: 'Failed to change email frequency to '+evt.currentTarget.id,
+            backgroundColor: '#A9201E'
+          });
+        }
+      };
+      if (evt.currentTarget.id === 'daily') {
+        for (var d = 0; d < days.length; ++d) {
+          request.data[days[d]] = true;
+        }
+      } else if (evt.currentTarget.id === 'weekly') {
+        var day = new Date().getDay();
+        request.data[days[day]] = true;
+      }
+      $.ajax(request);
+    });
+  });
+</script>

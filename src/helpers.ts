@@ -1,5 +1,6 @@
 import arrDiff = require('arr-diff');
 import deepDiff = require('deep-diff');
+import stripHtml = require('string-strip-html');
 import * as dot from 'dot-object';
 import * as moment from 'moment';
 import * as querystring from 'querystring';
@@ -56,6 +57,19 @@ export class Helpers {
     return slug;
   }
 
+  static helper_fixUrl(url: string, protocol: string = 'https') {
+    if (!url) {
+      return '';
+    }
+    if (url.indexOf('http') === 0) {
+      return url;
+    }
+    if (url.indexOf('//') === 0) {
+      return protocol + ':' + url;
+    }
+    return protocol + '://' + url;
+  }
+
   static helper_querystringify(obj: any = {}) {
     const args: IHelperArgs = arguments[1];
     const newObj: any = {};
@@ -91,6 +105,25 @@ export class Helpers {
       return null;
     }
     return haystack.indexOf(needle);
+  }
+
+  static helper_inflect(count: number, singular: any, plural: any, includeCount: boolean) {
+    var word = (count > 1 || count === 0) ? plural : singular;
+    if (includeCount === true) {
+      return String(count) + ' ' + word;
+    } else {
+      return word;
+    }
+  };
+
+  static helper_toFixed(input: number|string, precision: number = 2) {
+    try {
+      const parsed = Number(input);
+      const output = parsed.toFixed(precision);
+      return output;
+    } catch(err) {
+      return null;
+    }
   }
 
   static helper_itemAt(haystack: any[], index: number): any {
@@ -254,6 +287,32 @@ export class Helpers {
     return out;
   }
 
+  static helper_decodeURIComponent(str: string) {
+    if (!str) return '';
+    console.log('DECODE URI COMPONENT BEFORE:', str);
+    const out = decodeURIComponent(str);
+    console.log('DECODE URI COMPONENT AFTER:', out);
+    return out;
+  }
+
+  static helper_encodeURIComponent(str: string) {
+    if (!str) return '';
+    const out = encodeURIComponent(str);
+    return out;
+  }
+
+  static helper_decodeURI(str: string) {
+    if (!str) return '';
+    const out = decodeURI(str);
+    return out;
+  }
+
+  static helper_encodeURI(str: string) {
+    if (!str) return '';
+    const out = encodeURI(str);
+    return out;
+  }
+
   static helper_getProps(arr: any[], props: string[]) {
     const out: any[] = [];
 
@@ -315,10 +374,17 @@ export class Helpers {
       return [];
     }
     const reversed = [];
-    while (input.length > 0) {
-      reversed.push(input.pop());
+    for (var i = input.length; i  >= 0; --i) {
+      reversed.push(input[i]);
     }
     return reversed;
+  }
+
+  static helper_stripTags(html: string) {
+    if (!html) {
+      return '';
+    }
+    return stripHtml(html);
   }
 
   static helper_stripTrailingSlash(input: string) {
@@ -342,7 +408,7 @@ export class Helpers {
   }
 
   static helper_length(input: any[]|string) {
-    if (typeof input !== 'string' || !Array.isArray(input)) {
+    if (typeof input !== 'string' && !Array.isArray(input)) {
       return -1;
     }
     return input.length;
@@ -359,6 +425,46 @@ export class Helpers {
     });
 
     return output;
+  }
+
+  static helper_filter(items: any[], property: string, comparator: string, test: any) {
+    const found: any[] = [];
+    items.forEach(item => {
+      const value: any = property === null ? item : dot.pick(property, item);
+      let match = false;
+      try {
+        switch (comparator) {
+          case ('==='): match = value === test;
+            break;
+          case ('=='): match = value == test;
+            break;
+          case ('>='): match = value >= test;
+            break;
+          case ('>'): match = value > test;
+            break;
+          case ('<='): match = value <= test;
+            break;
+          case ('<'): match = value < test;
+            break;
+          case ('testIn'): match = value.indexOf(test) > -1;
+            break;
+          case ('valueIn'): match = test.indexOf(value) > -1;
+            break;
+        }
+      } catch(err) { }
+      if (match) {
+        found.push(item);
+      }
+    });
+    return found;
+  }
+
+  static helper_sort(items: any[]) {
+    if (!Array.isArray(items)) {
+      return null;
+    }
+    const out = items.sort();
+    return out;
   }
 
   static helper_component(partialName: string, options: any) {

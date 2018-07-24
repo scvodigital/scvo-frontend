@@ -7,6 +7,7 @@ var GoodmovesController = Class.extend({
     { name: 'tablet', min: 600, max: 959 },
     { name: 'desktop', min: 960, max: 20000 }
   ],
+  snackbar: null,
 
   init: function(firebaseConfig) {
     this.firebaseConfig = firebaseConfig;
@@ -44,10 +45,27 @@ var GoodmovesController = Class.extend({
 
   displayModeChanged: function() {
     // console.log('Display Mode:', this.displayMode);
+    if (this.displayMode === 'desktop') {
+      //$('#sidebar-temporary')
+      //  .removeClass('mdc-drawer--temporary')
+      //  .addClass('mdc-drawer--permanent');
+    } else {
+      //$('#sidebar-temporary')
+      //  .removeClass('mdc-drawer--permanent')
+      //  .addClass('mdc-drawer--temporary');
+    }
   },
 
   setupMaterialDesignComponents: function() {
     mdc.autoInit();
+
+    // Think we just need the one global snackbar
+    var $snackbar = $('#app-snackbar');
+    this.snackbar = new mdc.snackbar.MDCSnackbar($snackbar[0]);
+    $snackbar.data('defaultCss', {
+      'background-color': $snackbar.css('background-color'),
+      color: $snackbar.css('color')
+    });
 
     // Menu buttons
     $('[data-menu-target]').each(function(i, o) {
@@ -166,6 +184,30 @@ var GoodmovesController = Class.extend({
       expires = "; expires=" + date.toUTCString();
     }
     document.cookie = name + "=" + (value || "")  + expires + "; path=/; secure";
+  },
+
+  disable: function(elements, disable) {
+    disable = typeof disable === 'undefined' ? true : disable;
+    for (var e = 0; e < elements.length; ++e) {
+      var element = elements[e];
+      var opacity = disable ? 0.5 : 1;
+      $(element).prop('disabled', disable).css('opacity', opacity);
+    }
+  },
+
+  snackbarShow: function(options) {
+    var $snackbar = $('#app-snackbar');
+    $snackbar.css($snackbar.data('defaultCss'));
+
+    if (options.backgroundColor) {
+      $snackbar.css('background-color', options.backgroundColor);
+      delete options.backgroundColor;
+    }
+    if (options.color) {
+      $snackbar.css('color', options.color);
+      delete options.color;
+    }
+    this.snackbar.show(options);
   }
 });
 
@@ -192,14 +234,17 @@ function handleLocationBoxes() {
     var options = $(o).data('location-options');
     var latSelector = $(o).data('location-lat');
     var lngSelector = $(o).data('location-lng');
+    // var typesSelector = $(o).data('location-types');
 
     var autocomplete = new google.maps.places.Autocomplete(o, options);
     autocomplete.addListener('place_changed', function(evt) {
       var place = this.getPlace();
       // console.log(place.formatted_address);
+      // console.log(place);
       if (place.geometry.location) {
         $(latSelector).val(place.geometry.location.lat());
         $(lngSelector).val(place.geometry.location.lng());
+        // $(typesSelector).val(place.types);
         $(o).val(place.formatted_address);
       }
     });
@@ -209,52 +254,26 @@ function handleLocationBoxes() {
 function handleMaps() {
   var maps = $('[data-map-options]').each(function(i, o) {
     var options = $(o).data('map-options');
-    var map = new google.maps.Map(o, options);
+    var map = L.map(o).setView([51.505, -0.09], 13);
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: 'Imagery &amp; Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
+        maxZoom: 18,
+        id: 'mapbox.streets'
+    }).addTo(map);
 
     var mapName = $(o).data('map-name');
     var $markers = $('marker[data-map="' + mapName + '"]');
-    var pinBounds = new google.maps.LatLngBounds();
-    var markers = [];
+    var markers = new L.featureGroup();
 
     $markers.each(function(i, o) {
       var $marker = $(o);
-      var markerOptions = {
-        map: map,
-        position: {
-          lat: $marker.data('lat'),
-          lng: $marker.data('lng')
-        },
-        icon: {
-          path: google.maps.SymbolPath.CIRCLE,
-          scale: 15,
-          fillColor: '#58a934',
-          fillOpacity: 0.6,
-          strokeColor: '#3c7524',
-          strokeOpacity: 0.8,
-          strokeWeight: 2
-        },
-        title: $marker.data('title'),
-        opacity: 1
-      };
-      var infoWindowOptions = {
-        content: $marker.html()
-      };
-
-      var marker = new google.maps.Marker(markerOptions);
-      var infoWindow = new google.maps.InfoWindow(infoWindowOptions);
-      marker.addListener('click', function() {
-        markers.forEach(function(marker) {
-          marker.infoWindow.close();
-        });
-        infoWindow.open(map, marker);
-      });
-
-      markers.push({
-        marker: marker,
-        infoWindow: infoWindow
-      });
-      pinBounds.extend(markerOptions.position);
+      var lat = $marker.data('lat');
+      var lng = $marker.data('lng');
+      var marker = L.marker([lat, lng]).addTo(map);
+      marker.bindPopup($marker.html());
+      markers.addLayer(marker);
     });
-    map.fitBounds(pinBounds);
+
+    map.fitBounds(markers.getBounds());
   });
 }

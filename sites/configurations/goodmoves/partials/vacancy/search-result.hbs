@@ -1,4 +1,4 @@
-<div class="mdc-card goodmoves-vacancy search-result {{if top_job "top-job"}}" data-vacancy-id="{{Id}}">
+<div class="mdc-card goodmoves-vacancy goodmoves-{{vacancy_status}} search-result {{if top_job "top-job"}}" data-vacancy-id="{{Id}}">
   {{> vacancy_key_info}}
   <hr class="mdc-list-divider" />
   {{#if description_short ~}}
@@ -9,6 +9,20 @@
   {{/if}}
   <div class="mdc-card__actions">
     <div class="mdc-card__action-buttons demo-card__action-buttons--text-only mdc-card__actions--full-bleed">
+      {{#ifAll @root.request.params.query.location @root.request.params.query.lat @root.request.params.query.lng ~}}
+      {{#if distance ~}}
+      <ul class="fa-ul mdc-card__action">
+        <li class="mdc-card__info--vacancy-status mdc-typography--body2">
+          <span class="fa-li"><span class="far fa-location-arrow fa-fw" title="Distance"></span></span>
+          {{#compare distance "<" 3 ~}}
+            Less than {{inflect (round distance "up") "mile" "miles" true}} from {{@root.request.params.query.location}}
+          {{else}}
+            Within {{inflect (round distance "up") "mile" "miles" true}} of {{@root.request.params.query.location}}
+          {{/compare ~}}
+        </li>
+      </ul>
+      {{/if ~}}
+      {{/ifAll ~}}
       <a href="/vacancy/{{slug}}{{@root.request.url.search}}" class="mdc-card__action">Find out more</a>
     </div>
     <div class="mdc-card__action-icons pull-right">

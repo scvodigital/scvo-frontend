@@ -9,12 +9,13 @@
       "config": {
         "connectionStringTemplate": "{$../../elasticsearch-url.txt}",
         "elasticsearchConfig": {
-          "apiVersion": "5.6"
+          "apiVersion": "5.6",
+          "log": "debug"
         },
         "queryTemplates": {
           "index": "web-content-production",
-          "type": "cjs-job",
-          "template": ">context.metaData.handlebars.queries.jobs_cjs-job-search"
+          "type": "cjs-vacancy",
+          "template": ">context.metaData.handlebars.queries.jobs_cjs-vacancy-search"
         }
       },
       "renderer": "handlebars"
@@ -31,8 +32,8 @@
           {
             "name": "types",
             "index": "web-content-production",
-            "type": "cjs-job",
-            "template": ">context.metaData.handlebars.queries.jobs_cjs-job-aggs"
+            "type": "cjs-vacancy",
+            "template": ">context.metaData.handlebars.queries.jobs_cjs-vacancy-aggs"
           },
           {
             "name": "splash",
@@ -59,8 +60,8 @@
           "default": {
             "layout": ">context.metaData.handlebars.layouts.default",
             "parts": {
-              "head": ">context.metaData.handlebars.templates.jobs_cjs-job-search-head-tags",
-              "body": ">context.metaData.handlebars.templates.jobs_cjs-job-search",
+              "head": ">context.metaData.handlebars.templates.jobs_cjs-vacancy-search-head-tags",
+              "body": ">context.metaData.handlebars.templates.jobs_cjs-vacancy-search",
               "foot": ""
             },
             "contentType": "text/html"
