@@ -2211,22 +2211,32 @@ form.inline-form {
   width: $unit*4;
   border-radius: $unit/4;
   z-index: 2;
-  opacity: 0.7;
-  transition: opacity .2s ease-in-out;
-  color: $mdc-theme-primary;
+  // opacity: 0.7;
+  transition: background-image .2s ease-in-out;
   cursor: pointer;
+  .scroll-icon {
+    color: $mdc-theme-primary;
+  }
 }
 .scroll-button:hover {
-  color: $mdc-theme-primary-dark;
-  opacity: 1;
+  // opacity: 1;
+  .scroll-icon {
+    color: $mdc-theme-primary-dark;
+  }
 }
-.scroll-left {
+.scroll-button.scroll-left {
   left: $unit;
-  background: linear-gradient(to left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 0.3));
+  background-image: linear-gradient(to left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 0.1));
 }
-.scroll-right {
+.scroll-button.scroll-right {
   right: $unit;
-  background: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 0.3));
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 0.1));
+}
+.scroll-button.scroll-left:hover {
+  background-image: linear-gradient(to left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 0.4));
+}
+.scroll-button.scroll-right:hover {
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 0.4));
 }
 
 #app-snackbar {
