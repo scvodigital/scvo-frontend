@@ -56,6 +56,24 @@
             </span>
           </a>
           {{/each ~}}
+
+          <div class="browse-title mdc-typography--headline5">
+            Regions
+          </div>
+          <ul class="mdc-list">
+            {{#each data.supplimentaryResponses.types.aggregations.regions_slugs.buckets ~}}
+            <a class="mdc-list-item" href="/search?regions%5B%5D={{urlencode key}}" role="menuitem">
+              <span class="mdc-list-item__text">
+                {{#with (lookup ../data.supplimentaryResponses.types.aggregations.regions.buckets @index) ~}}
+                {{{key}}}
+                {{/with ~}}
+              </span>
+              <span class="mdc-list-item__meta">
+                {{doc_count}}
+              </span>
+            </a>
+            {{/each ~}}
+          </ul>
         </ul>
       </div>
     </div>
