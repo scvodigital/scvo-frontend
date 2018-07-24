@@ -261,14 +261,14 @@ if(location.host.indexOf('.local') > -1){
         </nav>
       </aside>
 
-      <main class="mdc-theme--background mdc-toolbar-fixed-adjust {{#if route.metaData.sidebarIcon}}drawer-container-temporary{{else}}drawer-container-permanent{{/if}}">
-        {{#unless route.metaData.hideSearch}}
+      <main class="mdc-theme--background mdc-toolbar-fixed-adjust {{#if layoutParts.sidebar}}drawer-container-permanent{{else}}drawer-container-temporary{{/if}}">
+        {{#if layoutParts.sidebar }}
         <aside class="mdc-drawer mdc-drawer--temporary mdc-drawer--occasional" id="sidebar-temporary" data-mdc-auto-init="MDCTemporaryDrawer">
           <div class="mdc-drawer__drawer">
-            {{>vacancy_search_form instance_id="temp"}}
+            {{{layoutParts.sidebar}}}
           </div>
         </aside>
-        {{/unless}}
+        {{/if}}
         {{{layoutParts.body}}}
       </main>
 
