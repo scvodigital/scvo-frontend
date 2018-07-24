@@ -13,8 +13,16 @@
   ],
   "query": {
     "bool": {
-      {{#ifAny request.params.query.sectors request.params.query.roles request.params.query.statuses request.params.query.lat ~}}
+      {{#ifAny request.params.query.regions request.params.query.sectors request.params.query.roles request.params.query.statuses request.params.query.lat ~}}
       "filter": [
+        {{#if request.params.query.regions ~}}
+        {
+          "terms": {
+            "local_authority": {{{stringify (arrayify request.params.query.regions)}}}
+          }
+        }
+        {{#ifAny request.params.query.sectors request.params.query.roles request.params.query.statuses request.params.query.lat}},{{/ifAny}}
+        {{/if ~}}
         {{#if request.params.query.sectors ~}}
         {
           "terms": {

@@ -140,7 +140,7 @@
         </div>
       </div> -->
 
-      {{#each (split "roles,sectors,statuses" ",")}}
+      {{#each (split "regions,roles,sectors,statuses" ",")}}
         <h3 class="mdc-drawer__content-heading cursor-pointer" data-collapse-target="#{{../instance_id}}-{{this}}-collapse" role="button" aria-pressed="false" aria-label="Show {{getProperty @root.context.metaData.termTypeLabels (concat this ".plural")}}" tabindex="0">
           {{getProperty @root.context.metaData.termTypeLabels (concat this ".plural")}}
           <span class="mdc-icon-toggle pull-right">
@@ -149,7 +149,9 @@
         </h3>
         <div id="{{../instance_id}}-{{this}}-collapse"{{#unless (getProperty ../request.params.query this)}} style="display: none;"{{/unless}}>
           {{#each (getProperty ../data.supplimentaryResponses.types.aggregations (concat this "_slugs.buckets")) ~}}
+          {{#if key ~}}
           {{> term_checkbox slug=key field=../this selected=(getProperty ../../request.params.query ../this) instance_id=../../instance_id value=(lookup (getProperty ../../data.supplimentaryResponses.types.aggregations (concat ../this ".buckets")) @index)}}
+          {{/if ~}}
           {{/each ~}}
         </div>
       {{/each}}
