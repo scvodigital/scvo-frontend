@@ -2163,7 +2163,7 @@ form.inline-form {
   -webkit-justify-content: space-between;
   -webkit-overflow-scrolling: touch;
   -ms-overflow-style: -ms-autohiding-scrollbar;
-  padding-bottom: $unit;
+  padding: $unit*1.5 0 $unit;
   margin: 0 0 $unit/2;
   .mdc-layout-grid__cell.shortlist-jobs,
   .mdc-layout-grid__cell.latest-jobs,
@@ -2209,9 +2209,10 @@ form.inline-form {
   align-self: center;
   justify-content: center;
   width: $unit*4;
+  border-radius: $unit/4;
   z-index: 2;
   opacity: 0.7;
-  transition: opacity .1s ease-in-out;
+  transition: opacity .2s ease-in-out;
   color: $mdc-theme-primary;
   cursor: pointer;
 }
@@ -2221,11 +2222,11 @@ form.inline-form {
 }
 .scroll-left {
   left: $unit;
-  background: linear-gradient(to left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.3));
+  background: linear-gradient(to left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 0.3));
 }
 .scroll-right {
   right: $unit;
-  background: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.3));
+  background: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 0.3));
 }
 
 #app-snackbar {
