@@ -242,11 +242,11 @@ function handleLocationBoxes() {
 function handleMaps() {
   var maps = $('[data-map-options]').each(function(i, o) {
     var options = $(o).data('map-options');
-    var map = L.map(o).setView([51.505, -0.09], 13);
-    L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1Ijoic2N2b2RpZ2l0YWwiLCJhIjoiY2pqemVqbTA4MDNibTNrbzV2OHpkb3BkcCJ9.Tz193u3OIAAMDT9GJOV50g', {
+    var map = L.map(o, options).setView([51.505, -0.09], 13);
+    L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.jpg80?access_token=pk.eyJ1Ijoic2N2b2RpZ2l0YWwiLCJhIjoiY2pqemVqbTA4MDNibTNrbzV2OHpkb3BkcCJ9.Tz193u3OIAAMDT9GJOV50g', {
         attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
         maxZoom: 18,
-        id: 'mapbox.streets',
+        id: 'mapbox.emerald',
         accessToken: 'pk.eyJ1Ijoic2N2b2RpZ2l0YWwiLCJhIjoiY2pqemVqbTA4MDNibTNrbzV2OHpkb3BkcCJ9.Tz193u3OIAAMDT9GJOV50g'
     }).addTo(map);
 
