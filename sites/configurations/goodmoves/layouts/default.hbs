@@ -85,11 +85,11 @@ if(location.host.indexOf('.local') > -1){
               <button class="mdc-top-app-bar__navigation-icon hide-lg" data-drawer-target="#mobile-menu">
                 <span class="far fa-fw fa-2x fa-bars"></span>
               </button>
-              {{#if route.metaData.sidebarButton}}
-              <button class="mdc-top-app-bar__navigation-icon {{route.metaData.sidebarButton.classes}}" data-drawer-target="#sidebar-temporary" title="{{route.metaData.sidebarButton.tooltip}}">
-                <span class="far fa-fw fa-{{route.metaData.sidebarButton.icon}}"></span>
+              {{#unless route.metaData.hideSearch}}
+              <button class="mdc-top-app-bar__navigation-icon hide-lg" data-drawer-target="#sidebar-temporary" title="Search">
+                <span class="far fa-fw fa-search"></span>
               </button>
-              {{/if}}
+              {{/unless}}
               <span class="mdc-top-app-bar__title hide-md hide-lg">
                 <svg width="61" height="42" xmlns="http://www.w3.org/2000/svg">
                   <metadata id="metadata7">image/svg+xml</metadata>
@@ -262,13 +262,13 @@ if(location.host.indexOf('.local') > -1){
       </aside>
 
       <main class="mdc-theme--background mdc-toolbar-fixed-adjust {{#if route.metaData.sidebarIcon}}drawer-container-temporary{{else}}drawer-container-permanent{{/if}}">
-        {{#if route.metaData.sidebarButton}}
-        <aside class="mdc-drawer mdc-drawer--temporary" id="sidebar-temporary" data-mdc-auto-init="MDCTemporaryDrawer">
+        {{#unless route.metaData.hideSearch}}
+        <aside class="mdc-drawer mdc-drawer--temporary mdc-drawer--occasional" id="sidebar-temporary" data-mdc-auto-init="MDCTemporaryDrawer">
           <div class="mdc-drawer__drawer">
-            {{!-- {{{layoutParts.sidebar instance_id="temp"}}} --}}
+            {{>vacancy_search_form instance_id="temp"}}
           </div>
         </aside>
-        {{/if}}
+        {{/unless}}
         {{{layoutParts.body}}}
       </main>
 
