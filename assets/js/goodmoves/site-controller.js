@@ -225,14 +225,17 @@ function handleLocationBoxes() {
     var options = $(o).data('location-options');
     var latSelector = $(o).data('location-lat');
     var lngSelector = $(o).data('location-lng');
+    // var typesSelector = $(o).data('location-types');
 
     var autocomplete = new google.maps.places.Autocomplete(o, options);
     autocomplete.addListener('place_changed', function(evt) {
       var place = this.getPlace();
       // console.log(place.formatted_address);
+      // console.log(place);
       if (place.geometry.location) {
         $(latSelector).val(place.geometry.location.lat());
         $(lngSelector).val(place.geometry.location.lng());
+        // $(typesSelector).val(place.types);
         $(o).val(place.formatted_address);
       }
     });

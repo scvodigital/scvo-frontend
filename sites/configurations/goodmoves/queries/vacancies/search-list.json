@@ -160,18 +160,19 @@
     {
       "closing_date": "asc"
     }
+    {{else}}
     {{#compare request.params.query.sort "===" "distance" ~}}
     {{#ifAll request.params.query.location request.params.query.lat request.params.query.lng ~}}
     {
-      "_geo_distance" : {
-        "geo_vacancy_coords" : {
+      "_geo_distance": {
+        "geo_vacancy_coords": {
           "lat": {{request.params.query.lat}},
           "lon": {{request.params.query.lng}}
         },
-        "order" : "asc",
-        "unit" : "mi",
-        "mode" : "min",
-        "distance_type" : "arc"
+        "order": "asc",
+        "unit": "m",
+        "mode": "min",
+        "distance_type": "arc"
       }
     }
     {{else}}
