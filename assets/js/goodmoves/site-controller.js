@@ -256,20 +256,16 @@ function handleMaps() {
 
   var maps = $('[data-map-options]').each(function(i, o) {
     var options = $(o).data('map-options');
-    var map = L.map(o, {
-      scrollWheelZoom: false,
-      fullscreenControl: {
-        pseudoFullscreen: false // if true, fullscreen to page width and height
-      },
-    }).setView([51.505, -0.09], 13);
+    var map = L.map(o).setView([51.505, -0.09], 13);
     var osmAttrib = 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>';
     L.tileLayer('https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png', {
         attribution: osmAttrib,
         minZoom: 6,
-        maxZoom: 15,
+        maxZoom: 18,
         opacity: 0.8,
         scrollWheelZoom: false
     }).addTo(map);
+    map.addControl(new L.Control.Fullscreen());
     var mapName = $(o).data('map-name');
     var $markers = $('marker[data-map="' + mapName + '"]');
     var markers = new L.featureGroup();
@@ -278,7 +274,11 @@ function handleMaps() {
       var $marker = $(o);
       var lat = $marker.data('lat');
       var lng = $marker.data('lng');
-      var marker = L.marker([lat, lng]).addTo(map);
+      var redMarker = L.AwesomeMarkers.icon({
+        icon: 'coffee',
+        markerColor: 'green'
+      });
+      var marker = L.marker([lat, lng], {icon: greenMarker}).addTo(map);
       marker.bindPopup($marker.html());
       markers.addLayer(marker);
     });
