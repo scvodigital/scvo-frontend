@@ -256,16 +256,24 @@ function handleMaps() {
 
   var maps = $('[data-map-options]').each(function(i, o) {
     var options = $(o).data('map-options');
+    var initialLat = 51.505;
+    var initialLng = -0.09;
+    var initialZoom = 7;
+    if (options.center) {
+      var initialLat = options.center.lat;
+      var initialLng = options.center.lng;
+      var initialZoom = options.zoom;
+    }
     var map = L.map(o, {
       fullscreenControl: true,
       scrollWheelZoom: false
-    }).setView([51.505, -0.09], 13);
+    }).setView([initialLat, initialLng], initialZoom);
     var osmAttrib = 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>';
     L.tileLayer('https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png', {
       attribution: osmAttrib,
       minZoom: 6,
       maxZoom: 18,
-      opacity: 0.8,
+      opacity: 0.8
     }).addTo(map);
     var mapName = $(o).data('map-name');
     var $vacancies = $('marker[data-map="' + mapName + '"]');
@@ -336,7 +344,9 @@ function handleMaps() {
       markers.addLayer(marker);
     }
 
-    map.fitBounds(markers.getBounds());
+    if (!options.center) {
+      map.fitBounds(markers.getBounds());
+    }
 
     window.maps[mapName] = map;
   });

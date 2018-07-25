@@ -163,22 +163,23 @@
         <div class="location-info">
           {{#if geo_vacancy_coords}}
           <div class="container-content container-map">
-            <div id="map-full" data-map-name="vacancyMap" data-map-options='{
+            <div id="map-vacancy" data-map-name="vacancyMap" data-map-options='{
               "center": {
                 "lat": {{geo_vacancy_coords.0.lat}},
                 "lng": {{geo_vacancy_coords.0.lon}}
               },
-              "zoom": 12
+              "zoom": 13
             }'></div>
           </div>
             {{#each (arrayify geo_vacancy_coords)}}
               <marker style="display:none;" data-map="vacancyMap" data-lat="{{lat}}" data-lng="{{lon}}" data-title="{{../organisation.name}} - {{../title}}">
-                <h3>{{../organisation.name}}</h3><p>{{../title}}</p>
+                <h3 class="mdc-typography--headline7">{{../organisation.name}}</h3>
+                <p class="mdc-typography--body2">{{../title}}</p>
               </marker>
             {{/each}}
           {{else}}
           <h4 class="mdc-typography--headline6">Location</h4>
-          <p>
+          <p class="mdc-typography--body1">
             {{{location}}}
           </p>
           {{/if}}
