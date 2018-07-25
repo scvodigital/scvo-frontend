@@ -294,7 +294,7 @@ function handleMaps() {
       var vacancyMarker = vacancyMarkers[vacancyPosition];
       var html;
       if (vacancyMarker.contents.length > 1) {
-        var iconType = vacancyMarker.shortlisted ? '-check' : '-alt';
+        var iconType = vacancyMarker.shortlisted ? ' shortlisted' : '';
         var id = 'popup-pager-' + p;
         var content = $('<div>');
         var pager = $('<div>')
