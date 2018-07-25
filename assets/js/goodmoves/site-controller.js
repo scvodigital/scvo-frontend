@@ -292,6 +292,13 @@ function handleMaps() {
     for (var p = 0; p < vacancyPositions.length; p++) {
       var vacancyPosition = vacancyPositions[p];
       var vacancyMarker = vacancyMarkers[vacancyPosition];
+      var icon = L.divIcon({
+        html: '<i class="marker-icon fas fa-map-marker' + iconType + '"></i><span class="map-marker-overlay">' + vacancyMarker.contents.length  + '</span>',
+        iconSize: [30, 40],
+        iconAnchor: [15, 40],
+        className: 'vacancy_icon'
+      });
+      var marker = L.marker([vacancyMarker.position.lat, vacancyMarker.position.lng], {icon: icon}).addTo(map);
       var html;
       if (vacancyMarker.contents.length > 1) {
         var iconType = vacancyMarker.shortlisted ? ' shortlisted' : '';
@@ -321,22 +328,9 @@ function handleMaps() {
           popupPage(pager, 'next');
         });
         html = content.html();
-        icon = L.divIcon({
-          html: '<i class="marker-icon fas fa-map-marker' + iconType + '"></i><span class="map-marker-overlay">' + vacancyMarker.contents.length  + '</span>',
-          iconSize: [30, 40],
-          iconAnchor: [15, 40],
-          className: 'vacancy_icon'
-        });
       } else {
-        icon = L.divIcon({
-          html: '<i class="marker-icon fas fa-map-marker' + iconType +'"></i>',
-          iconSize: [30, 40],
-          iconAnchor: [15, 40],
-          className: 'vacancy_icon'
-        });
         html = vacancyMarker.contents[0];
       }
-      var marker = L.marker([vacancyMarker.position.lat, vacancyMarker.position.lng], {icon: icon}).addTo(map);
       marker.bindPopup(html);
       markers.addLayer(marker);
     }
