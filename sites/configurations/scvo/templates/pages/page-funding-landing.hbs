@@ -5,14 +5,14 @@
     <div class="mdc-layout-grid">
       <div class="mdc-layout-grid__inner">
         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 content page-content">
-          {{{data.primaryResponse.hits.hits.[0]._source.rendered.scvo_full}}}
+          {{{@root.data.primaryResponse.hits.hits.[0]._source.rendered.scvo_full}}}
         </div>
-        {{#compare data.supplimentaryResponses.recently_updated_funds.hits.total ">" 0 ~}}
+        {{#compare @root.data.supplimentaryResponses.recently_updated_funds.hits.total ">" 0 ~}}
         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 related page-related">
           <h3 class="blogs">Recently updated funds</h3>
           <div class="mdc-layout-grid">
             <div class="mdc-layout-grid__inner">
-              {{#each data.supplimentaryResponses.recently_updated_funds.hits.hits ~}}
+              {{#each @root.data.supplimentaryResponses.recently_updated_funds.hits.hits ~}}
               <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet  mdc-layout-grid__cell--span-4-phone">
                 {{{_source.rendered.scvo_gist}}}
               </div>
@@ -22,12 +22,12 @@
           <a href="http://fundingscotland.com" class="mdc-button v-margin-full pull-right">Find more</a>
         </div>
         {{/compare ~}}
-        {{#compare data.supplimentaryResponses.related_posts.hits.total ">" 0 ~}}
+        {{#compare @root.data.supplimentaryResponses.related_posts.hits.total ">" 0 ~}}
         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 related page-related">
           <h3 class="blogs">Related posts</h3>
           <div class="mdc-layout-grid">
             <div class="mdc-layout-grid__inner">
-              {{#with data.supplimentaryResponses.related_posts.hits.hits ~}}
+              {{#with @root.data.supplimentaryResponses.related_posts.hits.hits ~}}
               <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet  mdc-layout-grid__cell--span-4-phone">
                 {{{[0]._source.rendered.scvo_gist}}}
               </div>

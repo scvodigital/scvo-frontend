@@ -19,7 +19,7 @@
                   <div class="mdc-form-field">
                     <select class="mdc-select" role="listbox" id="department" name="department" onchange="this.form.submit();">
                       <option value="" {{#if request.params.query.department}}{{else}}selected{{/if}}>All departments</option>
-                      {{#each data.supplimentaryResponses.departments.aggregations.departments.buckets ~}}
+                      {{#each @root.data.supplimentaryResponses.departments.aggregations.departments.buckets ~}}
                       <option value="{{slugify key}}" {{#compare ../request.params.query.department "===" (slugify key)}}selected{{/compare}}>{{key}}</option>
                       {{/each ~}}
                     </select>
@@ -29,7 +29,7 @@
                   <div class="mdc-form-field">
                     <select class="mdc-select" role="listbox" id="city" name="city" onchange="this.form.submit();">
                       <option value="" {{#if request.params.query.city}}{{else}}selected{{/if}}>All cities</option>
-                      {{#each data.supplimentaryResponses.departments.aggregations.cities.buckets ~}}
+                      {{#each @root.data.supplimentaryResponses.departments.aggregations.cities.buckets ~}}
                       <option value="{{slugify key}}" {{#compare ../request.params.query.city "===" (slugify key)}}selected{{/compare}}>{{key}}</option>
                       {{/each ~}}
                     </select>
@@ -39,7 +39,7 @@
             </div>
           </form>
 
-          {{#each data.primaryResponse.aggregations.query.buckets ~}}
+          {{#each @root.data.primaryResponse.aggregations.query.buckets ~}}
           <div class="v-margin staff-list">
             <h2>{{key}}</h2>
             {{#each staff.hits.hits ~}}

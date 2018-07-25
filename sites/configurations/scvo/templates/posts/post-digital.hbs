@@ -5,13 +5,13 @@
     <div class="mdc-layout-grid">
       <div class="mdc-layout-grid__inner">
         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-9-desktop mdc-layout-grid__cell--span-5-tablet mdc-layout-grid__cell--span-4-phone content page-content">
-          {{#compare data.supplimentaryResponses.posts.hits.total ">" 0 ~}}
+          {{#compare @root.data.supplimentaryResponses.posts.hits.total ">" 0 ~}}
           <ul class="supplimentary-list">
-            {{#each data.supplimentaryResponses.posts.hits.hits ~}}
+            {{#each @root.data.supplimentaryResponses.posts.hits.hits ~}}
             {{{_source.rendered.scvo_list}}}
             {{/each ~}}
           </ul>
-          {{> pagination paging=data.supplimentaryResponses.posts.pagination}}
+          {{> pagination paging=@root.data.supplimentaryResponses.posts.pagination}}
           {{else}}
           <p>
             No posts in this category could be loaded.
@@ -19,7 +19,7 @@
           {{/compare ~}}
         </div>
         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-3-tablet mdc-layout-grid__cell--span-4-phone content sidebar page-sidebar">
-          {{{data.primaryResponse.hits.hits.[0]._source.rendered.scvo_full}}}
+          {{{@root.data.primaryResponse.hits.hits.[0]._source.rendered.scvo_full}}}
         </div>
       </div>
     </div>

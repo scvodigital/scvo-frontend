@@ -1,8 +1,8 @@
-{{#if data.saved_searches.items.[0] ~}}
-  {{~#with data.saved_searches.items.[0] ~}}
+{{#if @root.data.saved_searches.items.[0] ~}}
+  {{~#with @root.data.saved_searches.items.[0] ~}}
     {{~#each (split "sunday,monday,tuesday,wednesday,thursday,friday,saturday" ",")~}}
       {{~#if (contains ../days (add @index 1))~}}
-        {{~ this ~}}, 
+        {{~ this ~}},
       {{~/if~}}
     {{~/each~}}
   {{~/with~}}

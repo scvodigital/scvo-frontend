@@ -1,10 +1,10 @@
 <div class="funding-updates">
-  <div class="splash-image splash-image-{{data.primaryResponse.hits.hits.[0]._type}}" style="{{> header_splash_image}}">
-    <div class="splash-overlay{{#if data.primaryResponse.hits.hits.[0]._source.hide_overlay}} splash-overlay-hidden{{/if}}">
+  <div class="splash-image splash-image-{{@root.data.primaryResponse.hits.hits.[0]._type}}" style="{{> header_splash_image}}">
+    <div class="splash-overlay{{#if @root.data.primaryResponse.hits.hits.[0]._source.hide_overlay}} splash-overlay-hidden{{/if}}">
       <div class="container-fluid">
         <div class="mdc-layout-grid">
-          {{#if data.primaryResponse.hits.hits.[0]._source.header_text ~}}
-          <img src="{{data.primaryResponse.hits.hits.[0]._source.header_text}}" alt="{{data.primaryResponse.hits.hits.[0]._source.title}}" class="header-text" />
+          {{#if @root.data.primaryResponse.hits.hits.[0]._source.header_text ~}}
+          <img src="{{data.primaryResponse.hits.hits.[0]._source.header_text}}" alt="{{@root.data.primaryResponse.hits.hits.[0]._source.title}}" class="header-text" />
           {{else}}
           <h1 class="header-text">
             <span class="header-text-banner">
@@ -38,13 +38,13 @@
 
     <div class="mdc-layout-grid equal-height">
       <div class="mdc-layout-grid__inner">
-        {{#each data.primaryResponse.hits.hits ~}}
+        {{#each @root.data.primaryResponse.hits.hits ~}}
         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
           {{{_source.rendered.scvo_list}}}
         </div>
         {{/each ~}}
       </div>
     </div>
-    {{> pagination paging=data.primaryResponse.pagination}}
+    {{> pagination paging=@root.data.primaryResponse.pagination}}
   </div>
 </div>

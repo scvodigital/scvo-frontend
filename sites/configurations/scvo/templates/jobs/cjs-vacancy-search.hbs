@@ -6,7 +6,7 @@
       <li><a href="/jobs">Jobs</a></li>
       <li><a href="/jobs/community-jobs-scotland">Community Jobs Scotland</a></li>
       <li><a href="/jobs/community-jobs-scotland/vacancies">Vacancies</a></li>
-      <li>{{#compare request.params.phase "===" "p19v"}}16–29 year olds{{else}}16–29 year olds with a disability{{/compare}}</li>
+      <li>{{#compare @root.request.params.phase "===" "p19v"}}16–29 year olds{{else}}16–29 year olds with a disability{{/compare}}</li>
     </ul>
     <div class="mdc-layout-grid full">
       <div class="mdc-layout-grid__inner">
@@ -18,13 +18,13 @@
         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-9-desktop mdc-layout-grid__cell--span-5-tablet mdc-layout-grid__cell--span-4-phone content page-content">
           {{#ifAny request.params.query.q request.params.query.job_number request.params.query.location request.params.query.sector request.params.query.region ~}}
           {{#if data.primaryResponse.hits.total ~}}
-          {{> search_info paging=data.primaryResponse.pagination}}
+          {{> search_info paging=@root.data.primaryResponse.pagination}}
 
-          {{#each data.primaryResponse.hits.hits ~}}
+          {{#each @root.data.primaryResponse.hits.hits ~}}
           {{{_source.rendered.scvo_list}}}
           {{/each ~}}
 
-          {{> pagination paging=data.primaryResponse.pagination}}
+          {{> pagination paging=@root.data.primaryResponse.pagination}}
           {{else}}
           <div class="search-info mdc-elevation--z3">
             {{#if request.params.query.q ~}}
@@ -44,7 +44,7 @@
               <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
                 <h2>Jobs by sector</h2>
                 {{#*inline "sector_result_count" ~}}
-                {{#each data.supplimentaryResponses.types.aggregations.sectors_slugs.buckets ~}}
+                {{#each @root.data.supplimentaryResponses.types.aggregations.sectors_slugs.buckets ~}}
                 {{#compare key "===" ../input ~}}
                 {{doc_count}}
                 {{/compare ~}}

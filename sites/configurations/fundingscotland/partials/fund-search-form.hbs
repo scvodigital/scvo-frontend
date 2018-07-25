@@ -32,7 +32,7 @@
       <div class="h-padding">
         <div class="mdc-text-field mdc-text-field--box mdc-text-field--with-leading-icon" data-mdc-auto-init="MDCTextField">
           <span class="far fa-search mdc-text-field__icon" tabindex="0" role="button"></span>
-          <input type="text" id="{{instance_id}}-keywords" name="keywords" class="mdc-text-field__input mdc-text-field--fullwidth" value="{{request.params.query.keywords}}" data-lpignore="true" autocomplete="off">
+          <input type="text" id="{{instance_id}}-keywords" name="keywords" class="mdc-text-field__input mdc-text-field--fullwidth" value="{{@root.request.params.query.keywords}}" data-lpignore="true" autocomplete="off">
           <label class="mdc-floating-label mdc-floating-label--float-above" for="keywords">
             Keywords
           </label>
@@ -43,7 +43,7 @@
       <!-- <div class="h-padding">
         <div class="mdc-text-field mdc-text-field--box mdc-text-field--with-leading-icon" data-mdc-auto-init="MDCTextField">
           <span class="far fa-arrow-alt-from-left mdc-text-field__icon" tabindex="0" role="button"></span>
-          <input type="text" id="{{instance_id}}-salary_min" name="salary_min" class="mdc-text-field__input mdc-text-field--fullwidth" value="{{request.params.query.q}}" data-lpignore="true">
+          <input type="text" id="{{instance_id}}-salary_min" name="salary_min" class="mdc-text-field__input mdc-text-field--fullwidth" value="{{@root.request.params.query.q}}" data-lpignore="true">
           <label class="mdc-floating-label mdc-floating-label--float-above" for="{{instance_id}}-salary_min">
             Minimum salary
           </label>
@@ -54,7 +54,7 @@
       <!-- <div class="h-padding">
         <div class="mdc-text-field mdc-text-field--box mdc-text-field--with-leading-icon" data-mdc-auto-init="MDCTextField">
           <span class="far fa-arrow-alt-to-right mdc-text-field__icon" tabindex="0" role="button"></span>
-          <input type="text" id="{{instance_id}}-salary_max" name="salary_max" class="mdc-text-field__input mdc-text-field--fullwidth" value="{{request.params.query.q}}" data-lpignore="true">
+          <input type="text" id="{{instance_id}}-salary_max" name="salary_max" class="mdc-text-field__input mdc-text-field--fullwidth" value="{{@root.request.params.query.q}}" data-lpignore="true">
           <label class="mdc-floating-label mdc-floating-label--float-above" for="{{instance_id}}-salary_max">
             Maximum salary
           </label>
@@ -68,12 +68,12 @@
           <span class="mdc-icon-toggle pull-right" data-collapse-target="#{{../instance_id}}-{{this}}-collapse"
                 role="button" aria-pressed="false"
                 aria-label="Show roles" tabindex="0">
-            <i class="far {{#if (getProperty ../request.params.query this)}}fa-chevron-up{{else}}fa-chevron-down{{/if}}" aria-hidden="true"></i>
+            <i class="far {{#if (getProperty @root.request.params.query this)}}fa-chevron-up{{else}}fa-chevron-down{{/if}}" aria-hidden="true"></i>
           </span>
         </h3>
-        <div id="{{../instance_id}}-{{this}}-collapse"{{#unless (getProperty ../request.params.query this)}} style="display: none;"{{/unless}}>
-          {{#each (getProperty ../data.supplimentaryResponses.types.aggregations (concat this "_slugs.buckets")) ~}}
-          {{> term_checkbox slug=key field=../this selected=(getProperty ../../request.params.query ../this) instance_id=../../instance_id value=(lookup (getProperty ../../data.supplimentaryResponses.types.aggregations (concat ../this ".buckets")) @index)}}
+        <div id="{{../instance_id}}-{{this}}-collapse"{{#unless (getProperty @root.request.params.query this)}} style="display: none;"{{/unless}}>
+          {{#each (getProperty @root.data.supplimentaryResponses.types.aggregations (concat this "_slugs.buckets")) ~}}
+          {{> term_checkbox slug=key field=../this selected=(getProperty @root.request.params.query ../this) instance_id=../../instance_id value=(lookup (getProperty @root.data.supplimentaryResponses.types.aggregations (concat ../this ".buckets")) @index)}}
           {{/each ~}}
         </div>
       {{/each}}

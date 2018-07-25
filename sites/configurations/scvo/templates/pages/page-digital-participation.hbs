@@ -5,11 +5,11 @@
     <div class="mdc-layout-grid">
       <div class="mdc-layout-grid__inner">
         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-9-desktop mdc-layout-grid__cell--span-5-tablet mdc-layout-grid__cell--span-4-phone content page-content">
-          {{{data.primaryResponse.hits.hits.[0]._source.rendered.scvo_full}}}
+          {{{@root.data.primaryResponse.hits.hits.[0]._source.rendered.scvo_full}}}
         </div>
         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-3-tablet mdc-layout-grid__cell--span-4-phone sidebar page-sidebar">
           {{> menu_digital_participation}}
-          <!-- <iframe src="https://www.surveygizmo.eu/s3/90081961/Website-How-useful-was-this-page?path=/{{urlencode (replace request.params.path '_' '/')}}&title={{urlencode data.primaryResponse.hits.hits.[0]._source.title}}" frameborder="0" width="100%" height="100" style="overflow:hidden"></iframe> -->
+          <!-- <iframe src="https://www.surveygizmo.eu/s3/90081961/Website-How-useful-was-this-page?path=/{{urlencode (replace request.params.path '_' '/')}}&title={{urlencode @root.data.primaryResponse.hits.hits.[0]._source.title}}" frameborder="0" width="100%" height="100" style="overflow:hidden"></iframe> -->
         </div>
         {{> related_posts}}
       </div>

@@ -4,7 +4,7 @@
   <strong>Current page:</strong> {{addCommas paging.currentPage}} of {{addCommas paging.totalPages}}
 </div>
 {{else}}
-{{#ifAny request.params.query.type request.params.query.regions request.params.query.sectors request.params.query.statuses request.params.query.location request.params.query.job_number request.params.query.q ~}}
+{{#ifAny @root.request.params.query.type @root.request.params.query.regions @root.request.params.query.sectors @root.request.params.query.statuses @root.request.params.query.location @root.request.params.query.job_number @root.request.params.query.q ~}}
 <div class="search-info mdc-elevation--z1">
   No results, please try a different search query
 </div>

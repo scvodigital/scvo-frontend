@@ -2,7 +2,7 @@
   <h2 class="mdc-card__title mdc-card__title--large">{{title}}</h2>
   <form action="{{searchPath}}" method="GET" [searchroute]="'{{searchRoute}}'" class="search_form" autocomplete="off">
     <div class="mdc-textfield mdc-textfield--upgraded">
-      <input type="text" class="mdc-textfield__input" name="q" id="wee-query" value="{{request.params.query.q}}">
+      <input type="text" class="mdc-textfield__input" name="q" id="wee-query" value="{{@root.request.params.query.q}}">
       <button type="submit" class="mdc-toolbar__icon mdc-toolbar__search search-button-large" aria-label="Search" alt="Search">
         <span class="far fa-2x fa-search" aria-hidden="true"></span>
       </button>

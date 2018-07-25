@@ -6,16 +6,16 @@
   </div>
   {{/if ~}}
   <div class="mdc-typography--body2 post-info">
+    {{#if role_status_list ~}}
+    <div class="post-info-item post-info-status">
+      <span class="far fa-clock fa-fw" title="Working pattern"></span>
+      {{{role_status_list}}}
+    </div>
+    {{/if ~}}
     {{#if salary ~}}
     <div class="post-info-item post-info-salary">
       <span class="far fa-calculator fa-fw" title="Salary"></span>
       {{{salary}}}
-    </div>
-    {{/if ~}}
-    {{#if closing_date ~}}
-    <div class="post-info-item post-info-closing">
-      <span class="far fa-calendar-alt fa-fw" title="Closing date"></span>
-      {{{momentFormat (moment closing_date "x") "Do MMMM YYYY"}}}
     </div>
     {{/if ~}}
   </div>
