@@ -214,13 +214,13 @@ var GoodmovesController = Class.extend({
 var goodmoves = null;
 $(document).ready(function() {
   goodmoves = new GoodmovesController({
-      apiKey: "AIzaSyDIUNnyGeZY3sO8gGIf-_2dgO49xKij5zI",
-      authDomain: "scvo-net.firebaseapp.com",
-      databaseURL: "https://scvo-net.firebaseio.com",
-      projectId: "scvo-net",
-      storageBucket: "scvo-net.appspot.com",
-      messagingSenderId: "782194712584"
-    });
+    apiKey: "AIzaSyDIUNnyGeZY3sO8gGIf-_2dgO49xKij5zI",
+    authDomain: "scvo-net.firebaseapp.com",
+    databaseURL: "https://scvo-net.firebaseio.com",
+    projectId: "scvo-net",
+    storageBucket: "scvo-net.appspot.com",
+    messagingSenderId: "782194712584"
+  });
 });
 
 function initMap() {
@@ -256,20 +256,16 @@ function handleMaps() {
 
   var maps = $('[data-map-options]').each(function(i, o) {
     var options = $(o).data('map-options');
-    var map = L.map(o, {
-      scrollWheelZoom: false,
-      fullscreenControl: {
-        pseudoFullscreen: false // if true, fullscreen to page width and height
-      },
-    }).setView([51.505, -0.09], 13);
+    var map = L.map(o).setView([51.505, -0.09], 13);
     var osmAttrib = 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>';
     L.tileLayer('https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png', {
-        attribution: osmAttrib,
-        minZoom: 6,
-        maxZoom: 18,
-        opacity: 0.8,
-        scrollWheelZoom: false
+      attribution: osmAttrib,
+      minZoom: 6,
+      maxZoom: 18,
+      opacity: 0.8,
+      scrollWheelZoom: false
     }).addTo(map);
+    map.addControl(new L.Control.Fullscreen());
     var mapName = $(o).data('map-name');
     var $vacancies = $('marker[data-map="' + mapName + '"]');
     var vacancyMarkers = {};
