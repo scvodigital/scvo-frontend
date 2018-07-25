@@ -262,7 +262,6 @@ function handleMaps() {
         maxZoom: 18,
         id: 'mapbox.streets',
         scrollWheelZoom: false,
-        fullscreenControl: true,
     }).addTo(map);
     map.addControl(new L.Control.Fullscreen());
     var mapName = $(o).data('map-name');
