@@ -293,12 +293,6 @@ function handleMaps() {
       var vacancyPosition = vacancyPositions[p];
       var vacancyMarker = vacancyMarkers[vacancyPosition];
       var iconType = vacancyMarker.shortlisted ? '-check' : '-alt';
-      var vacancyMarkerIcon = L.divIcon({
-        html: '<i class="fas fa-map-marker'+iconType+'"></i>',
-        iconSize: [40, 30],
-        className: 'vacancy_icon'
-      });
-      var marker = L.marker([vacancyMarker.position.lat, vacancyMarker.position.lng], {icon: vacancyMarkerIcon}).addTo(map);
       var html;
       if (vacancyMarker.contents.length > 1) {
         var id = 'popup-pager-' + p;
@@ -328,13 +322,13 @@ function handleMaps() {
         });
         html = content.html();
         icon = L.divIcon({
-          html: '<i class="fas fa-map-marker"></i>',
+          html: '<i class="fas fa-map-marker' + iconType + '"></i>',
           iconSize: [32, 24],
           className: 'vacancy_icon'
         });
       } else {
         icon = L.divIcon({
-          html: '<i class="fas fa-map-marker"></i>',
+          html: '<i class="fas fa-map-marker' + iconType +'"></i>',
           iconSize: [32, 24],
           className: 'vacancy_icon'
         });
