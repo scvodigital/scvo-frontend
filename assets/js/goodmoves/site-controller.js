@@ -292,9 +292,9 @@ function handleMaps() {
     for (var p = 0; p < vacancyPositions.length; p++) {
       var vacancyPosition = vacancyPositions[p];
       var vacancyMarker = vacancyMarkers[vacancyPosition];
-      var iconType = vacancyMarker.shortlisted ? '-check' : '-alt';
       var html;
       if (vacancyMarker.contents.length > 1) {
+        var iconType = vacancyMarker.shortlisted ? '-check' : '-alt';
         var id = 'popup-pager-' + p;
         var content = $('<div>');
         var pager = $('<div>')
@@ -323,7 +323,8 @@ function handleMaps() {
         html = content.html();
         icon = L.divIcon({
           html: '<i class="fas fa-map-marker' + iconType + '"></i>',
-          iconSize: [32, 24],
+          iconSize: [30, 40],
+          iconAnchor: [15, 40],
           className: 'vacancy_icon'
         });
       } else {
