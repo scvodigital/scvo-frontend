@@ -255,10 +255,12 @@ function handleMaps() {
   var maps = $('[data-map-options]').each(function(i, o) {
     var options = $(o).data('map-options');
     var map = L.map(o).setView([51.505, -0.09], 13);
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: 'Imagery &amp; Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
-        maxZoom: 18,
-        id: 'mapbox.streets'
+    var osmAttrib = 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors';
+    L.tileLayer('https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png', {
+        attribution: osmAttrib,
+        minZoom: 6,
+        maxZoom: 15,
+        opacity: 0.8
     }).addTo(map);
 
     var mapName = $(o).data('map-name');
