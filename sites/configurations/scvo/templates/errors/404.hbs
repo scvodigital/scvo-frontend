@@ -31,19 +31,19 @@
               </form>
             </div>
           </div>
-          {{#ifAll data.not_found (compare data.not_found.hits.total ">" 0) ~}}
+          {{#ifAll @root.data.not_found (compare @root.data.not_found.hits.total ">" 0) ~}}
           <h2>Did you mean?</h2>
-          {{#each data.not_found.hits.hits ~}}
+          {{#each @root.data.not_found.hits.hits ~}}
           {{#compare @index "===" 0 ~}}
           {{>highlight_result}}
           {{else}}
           {{/compare ~}}
           {{/each ~}}
           {{/ifAll ~}}
-          {{#ifAll data.not_found (compare data.not_found.hits.total ">" 1) ~}}
+          {{#ifAll @root.data.not_found (compare @root.data.not_found.hits.total ">" 1) ~}}
           <!-- <hr /> -->
           <h3>Other relevant content</h3>
-          {{#each data.not_found.hits.hits ~}}
+          {{#each @root.data.not_found.hits.hits ~}}
           {{#compare @index "===" 0 ~}}
           {{else}}
           {{>highlight_result}}

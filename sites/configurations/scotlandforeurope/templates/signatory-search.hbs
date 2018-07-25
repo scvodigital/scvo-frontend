@@ -1,5 +1,5 @@
 <div class="signatories">
-  <h1>Signatories <span class="small">({{data.supplimentaryResponses.total.hits.total}})</span></h1>
+  <h1>Signatories <span class="small">({{@root.data.supplimentaryResponses.total.hits.total}})</span></h1>
 
   <form action="/signatories" [searchroute]="'signatory_search'" data-auto-search="true">
     <div class="mdc-layout-grid">
@@ -7,7 +7,7 @@
         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
           <h4>Search</h4>
           <div class="mdc-textfield mdc-textfield--upgraded keywords">
-            <input type="text" class="mdc-textfield__input" name="q" id="keywords" value="{{request.params.query.q}}" placeholder="Search for a declaration signatory">
+            <input type="text" class="mdc-textfield__input" name="q" id="keywords" value="{{@root.request.params.query.q}}" placeholder="Search for a declaration signatory">
             <button type="submit" class="mdc-toolbar__icon mdc-toolbar__search search-button-large" aria-label="Search" alt="Search">
               <span class="far fa-2x fa-search" aria-hidden="true"></span>
             </button>
@@ -16,7 +16,7 @@
       </div>
       <div class="mdc-layout-grid__inner">
         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-8">
-          <h4>Total signatories found: {{data.primaryResponse.hits.total}}</h4>
+          <h4>Total signatories found: {{@root.data.primaryResponse.hits.total}}</h4>
         </div>
         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-1">
           <h4 class="sort">Sort</h4>
@@ -24,8 +24,8 @@
         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3">
           <div class="mdc-form-field sort">
             <select class="mdc-select" role="listbox" id="sort" name="sort">
-              <option value="" {{#if request.params.query.sort}}{{else}}selected{{/if}}>Date signed</option>
-              <option value="AZ" {{#if request.params.query.sort}}selected{{else}}{{/if}}>Alphabetical</option>
+              <option value="" {{#if @root.request.params.query.sort}}{{else}}selected{{/if}}>Date signed</option>
+              <option value="AZ" {{#if @root.request.params.query.sort}}selected{{else}}{{/if}}>Alphabetical</option>
             </select>
           </div>
         </div>
@@ -35,7 +35,7 @@
 
   <div class="mdc-layout-grid signatories-search">
     <div class="mdc-layout-grid__inner">
-      {{#each data.primaryResponse.hits.hits}}
+      {{#each @root.data.primaryResponse.hits.hits}}
       <div class="mdc-layout-grid__cell signatory inner mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
         {{{_source.rendered.scotlandforeurope_search_result}}}
       </div>
@@ -43,5 +43,5 @@
     </div>
   </div>
 
-  {{> pagination paging=data.primaryResponse.pagination}}
+  {{> pagination paging=@root.data.primaryResponse.pagination}}
 </div>

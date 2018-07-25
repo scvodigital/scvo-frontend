@@ -1,14 +1,14 @@
-<div class="splash-image splash-image-scvo-event splash-image-{{data.primaryResponse.hits.hits.[0]._type}}" style="{{> header_splash_image}}">
-  <div class="splash-overlay{{#if data.primaryResponse.hits.hits.[0]._source.hide_overlay}} splash-overlay-hidden{{/if}}">
+<div class="splash-image splash-image-scvo-event splash-image-{{@root.data.primaryResponse.hits.hits.[0]._type}}" style="{{> header_splash_image}}">
+  <div class="splash-overlay{{#if @root.data.primaryResponse.hits.hits.[0]._source.hide_overlay}} splash-overlay-hidden{{/if}}">
     <div class="container-fluid">
       <div class="mdc-layout-grid">
-        {{#if data.primaryResponse.hits.hits.[0]._source.header_text ~}}
-        <img src="{{data.primaryResponse.hits.hits.[0]._source.header_text}}" alt="{{data.primaryResponse.hits.hits.[0]._source.title}}" class="header-text" />
+        {{#if @root.data.primaryResponse.hits.hits.[0]._source.header_text ~}}
+        <img src="{{@root.data.primaryResponse.hits.hits.[0]._source.header_text}}" alt="{{@root.data.primaryResponse.hits.hits.[0]._source.title}}" class="header-text" />
         {{else}}
         <h1 class="header-text">
           <span class="header-text-banner">
-            {{#if data.primaryResponse.hits.hits.[0] ~}}
-            {{#with data.primaryResponse.hits.hits.[0]._source ~}}
+            {{#if @root.data.primaryResponse.hits.hits.[0] ~}}
+            {{#with @root.data.primaryResponse.hits.hits.[0]._source ~}}
             {{#unless hide_overlay ~}}
             {{{title}}}
             {{#ifAny date_start city ~}}

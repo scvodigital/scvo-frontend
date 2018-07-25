@@ -22,19 +22,19 @@
                   <div class="mdc-form-field">
                     <label class="mdc-textfield__label" for="role">Role</label>
                     <select class="mdc-select" role="listbox" id="jobs-role" name="role">
-                      <option value="" {{#if request.params.query.role}}{{else}}selected{{/if}}>Any role</option>
-                      {{#each data.supplimentaryResponses.types.aggregations.roles.buckets ~}}
-                      <option value="{{key}}" {{#compare ../request.params.query.role "===" key}}selected{{/compare}}>{{key}}</option>
+                      <option value="" {{#if @root.request.params.query.role}}{{else}}selected{{/if}}>Any role</option>
+                      {{#each @root.data.supplimentaryResponses.types.aggregations.roles.buckets ~}}
+                      <option value="{{key}}" {{#compare @root.request.params.query.role "===" key}}selected{{/compare}}>{{key}}</option>
                       {{/each ~}}
                     </select>
                   </div>
                   <div class="mdc-form-field">
                     <label class="mdc-textfield__label" for="sector">Sector</label>
                     <select class="mdc-select" role="listbox" id="jobs-sector" name="sector">
-                      <option value="" {{#if request.params.query.sector}}{{else}}selected{{/if}}>Any sector</option>
-                      {{#each data.supplimentaryResponses.types.aggregations.sectors.buckets ~}}
+                      <option value="" {{#if @root.request.params.query.sector}}{{else}}selected{{/if}}>Any sector</option>
+                      {{#each @root.data.supplimentaryResponses.types.aggregations.sectors.buckets ~}}
                       {{#if key ~}}
-                      <option value="{{key}}" {{#compare ../request.params.query.sector "===" key}}selected{{/compare}}>{{key}}</option>
+                      <option value="{{key}}" {{#compare @root.request.params.query.sector "===" key}}selected{{/compare}}>{{key}}</option>
                       {{/if ~}}
                       {{/each ~}}
                     </select>
@@ -42,10 +42,10 @@
                   <div class="mdc-form-field">
                     <label class="mdc-textfield__label" for="status">Status</label>
                     <select class="mdc-select" role="listbox" id="jobs-status" name="status">
-                      <option value="" {{#if request.params.query.status}}{{else}}selected{{/if}}>Any status</option>
-                      {{#each data.supplimentaryResponses.types.aggregations.statuses.buckets ~}}
+                      <option value="" {{#if @root.request.params.query.status}}{{else}}selected{{/if}}>Any status</option>
+                      {{#each @root.data.supplimentaryResponses.types.aggregations.statuses.buckets ~}}
                       {{#if key ~}}
-                      <option value="{{key}}" {{#compare ../request.params.query.status "===" key}}selected{{/compare}}>{{key}}</option>
+                      <option value="{{key}}" {{#compare @root.request.params.query.status "===" key}}selected{{/compare}}>{{key}}</option>
                       {{/if ~}}
                       {{/each ~}}
                     </select>
@@ -63,13 +63,13 @@
           </form>
         </div>
         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-9-desktop mdc-layout-grid__cell--span-5-tablet mdc-layout-grid__cell--span-4-phone content page-content v-margin">
-          {{> search_info paging=data.primaryResponse.pagination}}
+          {{> search_info paging=@root.data.primaryResponse.pagination}}
 
-          {{#each data.primaryResponse.hits.hits ~}}
+          {{#each @root.data.primaryResponse.hits.hits ~}}
           {{{_source.rendered.scvo_search_result}}}
           {{/each ~}}
 
-          {{> pagination paging=data.primaryResponse.pagination}}
+          {{> pagination paging=@root.data.primaryResponse.pagination}}
         </div>
       </div>
     </div>
