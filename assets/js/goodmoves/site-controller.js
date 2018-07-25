@@ -214,13 +214,13 @@ var GoodmovesController = Class.extend({
 var goodmoves = null;
 $(document).ready(function() {
   goodmoves = new GoodmovesController({
-      apiKey: "AIzaSyDIUNnyGeZY3sO8gGIf-_2dgO49xKij5zI",
-      authDomain: "scvo-net.firebaseapp.com",
-      databaseURL: "https://scvo-net.firebaseio.com",
-      projectId: "scvo-net",
-      storageBucket: "scvo-net.appspot.com",
-      messagingSenderId: "782194712584"
-    });
+    apiKey: "AIzaSyDIUNnyGeZY3sO8gGIf-_2dgO49xKij5zI",
+    authDomain: "scvo-net.firebaseapp.com",
+    databaseURL: "https://scvo-net.firebaseio.com",
+    projectId: "scvo-net",
+    storageBucket: "scvo-net.appspot.com",
+    messagingSenderId: "782194712584"
+  });
 });
 
 function initMap() {
@@ -259,11 +259,11 @@ function handleMaps() {
     var map = L.map(o).setView([51.505, -0.09], 13);
     var osmAttrib = 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>';
     L.tileLayer('https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png', {
-        attribution: osmAttrib,
-        minZoom: 6,
-        maxZoom: 18,
-        opacity: 0.8,
-        scrollWheelZoom: false
+      attribution: osmAttrib,
+      minZoom: 6,
+      maxZoom: 18,
+      opacity: 0.8,
+      scrollWheelZoom: false
     }).addTo(map);
     map.addControl(new L.Control.Fullscreen());
     var mapName = $(o).data('map-name');
@@ -274,11 +274,13 @@ function handleMaps() {
       var $marker = $(o);
       var lat = $marker.data('lat');
       var lng = $marker.data('lng');
-      var redMarker = L.AwesomeMarkers.icon({
-        icon: 'coffee',
-        markerColor: 'green'
+      var onShortlist = $marker.data('shortlist') ? '-check' : '-alt';
+      var vacancyMarker = L.divIcon({
+        html: '<i class="fas fa-map-marker'+onShortlist+'"></i>',
+        iconSize: [32, 24],
+        className: 'vacancy_icon'
       });
-      var marker = L.marker([lat, lng], {icon: greenMarker}).addTo(map);
+      var marker = L.marker([lat, lng], {icon: vacancyMarker}).addTo(map);
       marker.bindPopup($marker.html());
       markers.addLayer(marker);
     });
