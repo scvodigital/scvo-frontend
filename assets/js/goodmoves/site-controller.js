@@ -267,27 +267,97 @@ function handleMaps() {
     }).addTo(map);
     map.addControl(new L.Control.Fullscreen());
     var mapName = $(o).data('map-name');
-    var $markers = $('marker[data-map="' + mapName + '"]');
-    var markers = new L.featureGroup();
+    var $vacancies = $('marker[data-map="' + mapName + '"]');
+    var vacancyMarkers = {};
 
-    $markers.each(function(i, o) {
-      var $marker = $(o);
-      var lat = $marker.data('lat');
-      var lng = $marker.data('lng');
-      var onShortlist = $marker.data('shortlist') ? '-check' : '-alt';
-      var vacancyMarker = L.divIcon({
-        html: '<i class="fas fa-map-marker'+onShortlist+'"></i>',
+    $vacancies.each(function(i, o) {
+      var $o = $(o);
+      var key = $o.data('lat') + ',' + $o.data('lng');
+      if (!vacancyMarkers.hasOwnProperty(key)) {
+        vacancyMarkers[key] = {
+          position: {
+            lat: $o.data('lat'),
+            lng: $o.data('lng')
+          },
+          shortlisted: $o.data('shortlisted'),
+          contents: []
+        };
+      }
+      vacancyMarkers[key].contents.push($o.html());
+    });
+
+    var markers = new L.featureGroup();
+    var vacancyPositions = Object.keys(vacancyMarkers);
+
+    for (var p = 0; p < vacancyPositions.length; p++) {
+      var vacancyPosition = vacancyPositions[p];
+      var vacancyMarker = vacancyMarkers[vacancyPosition];
+      var iconType = vacancyMarker.shortlisted ? '-check' : '-alt';
+      var vacancyMarkerIcon = L.divIcon({
+        html: '<i class="fas fa-map-marker'+iconType+'"></i>',
         iconSize: [40, 30],
-        iconAnchor: [0, 30],
         className: 'vacancy_icon'
       });
-      var marker = L.marker([lat, lng], {icon: vacancyMarker}).addTo(map);
-      marker.bindPopup($marker.html());
+      var marker = L.marker([vacancyMarker.position.lat, vacancyMarker.position.lng], {icon: vacancyMarkerIcon}).addTo(map);
+      var html;
+      if (vacancyMarker.contents.length > 1) {
+        var id = 'popup-pager-' + p;
+        var content = $('<div>');
+        var pager = $('<div>')
+          .attr('id', id)
+          .addClass('popup-pager')
+          .append(vacancyMarker.contents.join('\n'))
+          .appendTo(content);
+        var back = $('<a>')
+          .attr('href', 'javascript:popupPagerPage("#' + id + '", "back")')
+          .addClass('scroll-button pager-left')
+          .append('<span class="fas fa-fw fa-angle-left fa-2x"></span>')
+          .appendTo(content);
+        var next = $('<a>')
+          .attr('href', 'javascript:popupPagerPage("#' + id + '", "next")')
+          .addClass('scroll-button pager-right')
+          .append('<span class="fas fa-fw fa-angle-right fa-2x"></span>')
+          .appendTo(content);
+        back.on('click', function(evt) {
+          var pager = $(evt.currentTarget).parent();
+          popupPage(pager, 'back');
+        });
+        next.on('click', function(evt) {
+          var pager = $(evt.currentTarget).parent();
+          popupPage(pager, 'next');
+        });
+        html = content.html();
+      } else {
+        html = vacancyMarker.contents[0];
+      }
+      marker.bindPopup(html);
       markers.addLayer(marker);
-    });
+    }
 
     map.fitBounds(markers.getBounds());
 
     window.maps[mapName] = map;
   });
+}
+
+function popupPagerPage(pager, direction) {
+  var currentPage = $(pager).find('.map-content:visible');
+  var nextPage = currentPage;
+  if (direction === 'next') {
+    var nextElement = currentPage.next();
+    if (!nextElement || nextElement.length === 0) {
+      nextPage = $(pager).children().first();
+    } else {
+      nextPage = nextElement;
+    }
+  } else if (direction === 'back') {
+    var prevElement = currentPage.prev();
+    if (!prevElement || prevElement.length === 0) {
+      nextPage = $(pager).children().last();
+    } else {
+      nextPage = prevElement;
+    }
+  }
+  currentPage.hide();
+  nextPage.show();
 }
