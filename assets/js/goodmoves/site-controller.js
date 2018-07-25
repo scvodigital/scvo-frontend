@@ -258,7 +258,9 @@ function handleMaps() {
     var options = $(o).data('map-options');
     var map = L.map(o, {
       scrollWheelZoom: false,
-      fullscreenControl: true,
+      fullscreenControl: {
+        pseudoFullscreen: false // if true, fullscreen to page width and height
+      },
     }).setView([51.505, -0.09], 13);
     var osmAttrib = 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>';
     L.tileLayer('https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png', {
