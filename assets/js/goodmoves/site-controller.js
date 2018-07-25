@@ -291,8 +291,7 @@ function handleMaps() {
     for (var p = 0; p < vacancyPositions.length; p++) {
       var vacancyPosition = vacancyPositions[p];
       var vacancyMarker = vacancyMarkers[vacancyPosition];
-      var marker = L.marker([vacancyMarker.position.lat, vacancyMarker.position.lng]).addTo(map);
-      var html;
+      var html, icon;
       if (vacancyMarker.contents.length > 1) {
         var id = 'popup-pager-' + p;
         var content = $('<div>');
@@ -320,9 +319,20 @@ function handleMaps() {
           popupPage(pager, 'next');
         });
         html = content.html();
+        icon = L.divIcon({
+          html: '<i class="fas fa-map-marker"></i>',
+          iconSize: [32, 24],
+          className: 'vacancy_icon'
+        });
       } else {
+        icon = L.divIcon({
+          html: '<i class="fas fa-map-marker"></i>',
+          iconSize: [32, 24],
+          className: 'vacancy_icon'
+        });
         html = vacancyMarker.contents[0];
       }
+      var marker = L.marker([vacancyMarker.position.lat, vacancyMarker.position.lng], {icon: icon}).addTo(map);
       marker.bindPopup(html);
       markers.addLayer(marker);
     }
