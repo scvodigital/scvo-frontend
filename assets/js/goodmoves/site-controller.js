@@ -252,15 +252,19 @@ function handleLocationBoxes() {
 }
 
 function handleMaps() {
+  window.maps = {};
+
   var maps = $('[data-map-options]').each(function(i, o) {
     var options = $(o).data('map-options');
     var map = L.map(o).setView([51.505, -0.09], 13);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
         attribution: 'Imagery &amp; Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
         maxZoom: 18,
-        id: 'mapbox.streets'
+        id: 'mapbox.streets',
+        scrollWheelZoom: false,
+        fullscreenControl: true,
     }).addTo(map);
-
+    map.addControl(new L.Control.Fullscreen());
     var mapName = $(o).data('map-name');
     var $markers = $('marker[data-map="' + mapName + '"]');
     var markers = new L.featureGroup();
@@ -275,5 +279,7 @@ function handleMaps() {
     });
 
     map.fitBounds(markers.getBounds());
+
+    window.maps[mapName] = map;
   });
 }
