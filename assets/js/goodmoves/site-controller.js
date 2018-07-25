@@ -256,9 +256,9 @@ function handleMaps() {
 
   var maps = $('[data-map-options]').each(function(i, o) {
     var options = $(o).data('map-options');
-    var initialLat = 51.505;
-    var initialLng = -0.09;
-    var initialZoom = 7;
+    var initialLat = 55.94528820000001;
+    var initialLng = -3.200755699999945;
+    var initialZoom = 9;
     if (options.center) {
       var initialLat = options.center.lat;
       var initialLng = options.center.lng;
@@ -320,12 +320,12 @@ function handleMaps() {
           .appendTo(content);
         var back = $('<a>')
           .attr('href', 'javascript:popupPagerPage("#' + id + '", "back")')
-          .addClass('scroll-button pager-left')
+          .addClass('scroll-button pager pager-left')
           .append('<span class="fas fa-fw fa-angle-left fa-2x"></span>')
           .appendTo(content);
         var next = $('<a>')
           .attr('href', 'javascript:popupPagerPage("#' + id + '", "next")')
-          .addClass('scroll-button pager-right')
+          .addClass('scroll-button pager pager-right')
           .append('<span class="fas fa-fw fa-angle-right fa-2x"></span>')
           .appendTo(content);
         back.on('click', function(evt) {
