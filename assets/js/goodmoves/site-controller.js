@@ -329,7 +329,7 @@ function handleMaps() {
         });
       } else {
         icon = L.divIcon({
-          html: '<i class="marker-icon fas fa-map-marker' + iconType +'"></i>',
+          html: '<i class="marker-icon fas fa-map-marker' + iconType +'"></i><span class="map-marker-overlay">' + vacancyMarker.contents.length  + '</span>',
           iconSize: [30, 40],
           iconAnchor: [15, 40],
           className: 'vacancy_icon'
