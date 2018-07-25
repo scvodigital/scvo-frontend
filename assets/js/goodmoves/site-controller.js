@@ -257,7 +257,7 @@ function handleMaps() {
   var maps = $('[data-map-options]').each(function(i, o) {
     var options = $(o).data('map-options');
     var map = L.map(o, {
-      fullscreenControl: true, 
+      fullscreenControl: true,
       scrollWheelZoom: false
     }).setView([51.505, -0.09], 13);
     var osmAttrib = 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>';
@@ -293,8 +293,9 @@ function handleMaps() {
     for (var p = 0; p < vacancyPositions.length; p++) {
       var vacancyPosition = vacancyPositions[p];
       var vacancyMarker = vacancyMarkers[vacancyPosition];
+      var iconType = vacancyMarker.shortlisted ? ' shortlisted' : '';
       var icon = L.divIcon({
-        html: '<i class="marker-icon fas fa-map-marker' + iconType + '"></i><span class="map-marker-overlay">' + vacancyMarker.contents.length  + '</span>',
+        html: '<i class="marker-icon fas fa-map-marker' + iconType + '"></i><span class="map-marker-overlay' + iconType + '">' + vacancyMarker.contents.length  + '</span>',
         iconSize: [30, 40],
         iconAnchor: [15, 40],
         className: 'vacancy_icon'
@@ -302,7 +303,6 @@ function handleMaps() {
       var marker = L.marker([vacancyMarker.position.lat, vacancyMarker.position.lng], {icon: icon}).addTo(map);
       var html;
       if (vacancyMarker.contents.length > 1) {
-        var iconType = vacancyMarker.shortlisted ? ' shortlisted' : '';
         var id = 'popup-pager-' + p;
         var content = $('<div>');
         var pager = $('<div>')
