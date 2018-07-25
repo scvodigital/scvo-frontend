@@ -277,7 +277,8 @@ function handleMaps() {
       var onShortlist = $marker.data('shortlist') ? '-check' : '-alt';
       var vacancyMarker = L.divIcon({
         html: '<i class="fas fa-map-marker'+onShortlist+'"></i>',
-        iconSize: [32, 24],
+        iconSize: [40, 30],
+        iconAnchor: [0, 30],
         className: 'vacancy_icon'
       });
       var marker = L.marker([lat, lng], {icon: vacancyMarker}).addTo(map);
