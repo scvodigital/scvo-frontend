@@ -261,8 +261,8 @@ function handleMaps() {
         attribution: 'Imagery &amp; Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
         maxZoom: 18,
         id: 'mapbox.streets',
-        scrollWheelZoom: false,
     }).addTo(map);
+    map.scrollWheelZoom.disable();
     map.addControl(new L.Control.Fullscreen());
     var mapName = $(o).data('map-name');
     var $markers = $('marker[data-map="' + mapName + '"]');
