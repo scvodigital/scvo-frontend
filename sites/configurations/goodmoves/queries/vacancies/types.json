@@ -66,16 +66,24 @@
         "size": 10000
       }
     },
-    "regions": {
+    "countries": {
       "terms": {
-        "field": "local_authority",
+        "field": "country",
         "size": 10000
-      }
-    },
-    "regions_slugs": {
-      "terms": {
-        "field": "local_authority_slug",
-        "size": 10000
+      },
+      "aggs": {
+        "regions": {
+          "terms": {
+            "field": "local_authority",
+            "size": 10000
+          }
+        },
+        "regions_slugs": {
+          "terms": {
+            "field": "local_authority_slug",
+            "size": 10000
+          }
+        }
       }
     }
   }

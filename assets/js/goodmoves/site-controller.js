@@ -214,13 +214,13 @@ var GoodmovesController = Class.extend({
 var goodmoves = null;
 $(document).ready(function() {
   goodmoves = new GoodmovesController({
-      apiKey: "AIzaSyDIUNnyGeZY3sO8gGIf-_2dgO49xKij5zI",
-      authDomain: "scvo-net.firebaseapp.com",
-      databaseURL: "https://scvo-net.firebaseio.com",
-      projectId: "scvo-net",
-      storageBucket: "scvo-net.appspot.com",
-      messagingSenderId: "782194712584"
-    });
+    apiKey: "AIzaSyDIUNnyGeZY3sO8gGIf-_2dgO49xKij5zI",
+    authDomain: "scvo-net.firebaseapp.com",
+    databaseURL: "https://scvo-net.firebaseio.com",
+    projectId: "scvo-net",
+    storageBucket: "scvo-net.appspot.com",
+    messagingSenderId: "782194712584"
+  });
 });
 
 function initMap() {
@@ -252,28 +252,114 @@ function handleLocationBoxes() {
 }
 
 function handleMaps() {
+  window.maps = {};
+
   var maps = $('[data-map-options]').each(function(i, o) {
     var options = $(o).data('map-options');
-    var map = L.map(o).setView([51.505, -0.09], 13);
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: 'Imagery &amp; Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
-        maxZoom: 18,
-        id: 'mapbox.streets'
+    var map = L.map(o, {
+      fullscreenControl: true,
+      scrollWheelZoom: false
+    }).setView([51.505, -0.09], 13);
+    var osmAttrib = 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>';
+    L.tileLayer('https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png', {
+      attribution: osmAttrib,
+      minZoom: 6,
+      maxZoom: 18,
+      opacity: 0.8,
     }).addTo(map);
-
     var mapName = $(o).data('map-name');
-    var $markers = $('marker[data-map="' + mapName + '"]');
-    var markers = new L.featureGroup();
+    var $vacancies = $('marker[data-map="' + mapName + '"]');
+    var vacancyMarkers = {};
 
-    $markers.each(function(i, o) {
-      var $marker = $(o);
-      var lat = $marker.data('lat');
-      var lng = $marker.data('lng');
-      var marker = L.marker([lat, lng]).addTo(map);
-      marker.bindPopup($marker.html());
-      markers.addLayer(marker);
+    $vacancies.each(function(i, o) {
+      var $o = $(o);
+      var key = $o.data('lat') + ',' + $o.data('lng');
+      if (!vacancyMarkers.hasOwnProperty(key)) {
+        vacancyMarkers[key] = {
+          position: {
+            lat: $o.data('lat'),
+            lng: $o.data('lng')
+          },
+          shortlisted: $o.data('shortlisted'),
+          contents: []
+        };
+      }
+      vacancyMarkers[key].contents.push($o.html());
     });
 
+    var markers = new L.featureGroup();
+    var vacancyPositions = Object.keys(vacancyMarkers);
+
+    for (var p = 0; p < vacancyPositions.length; p++) {
+      var vacancyPosition = vacancyPositions[p];
+      var vacancyMarker = vacancyMarkers[vacancyPosition];
+      var iconType = vacancyMarker.shortlisted ? ' shortlisted' : '';
+      var icon = L.divIcon({
+        html: '<i class="marker-icon fas fa-map-marker' + iconType + '"></i><span class="map-marker-overlay' + iconType + '">' + vacancyMarker.contents.length  + '</span>',
+        iconSize: [30, 40],
+        iconAnchor: [15, 40],
+        className: 'vacancy_icon'
+      });
+      var marker = L.marker([vacancyMarker.position.lat, vacancyMarker.position.lng], {icon: icon}).addTo(map);
+      var html;
+      if (vacancyMarker.contents.length > 1) {
+        var id = 'popup-pager-' + p;
+        var content = $('<div>');
+        var pager = $('<div>')
+          .attr('id', id)
+          .addClass('popup-pager')
+          .append(vacancyMarker.contents.join('\n'))
+          .appendTo(content);
+        var back = $('<a>')
+          .attr('href', 'javascript:popupPagerPage("#' + id + '", "back")')
+          .addClass('scroll-button pager-left')
+          .append('<span class="fas fa-fw fa-angle-left fa-2x"></span>')
+          .appendTo(content);
+        var next = $('<a>')
+          .attr('href', 'javascript:popupPagerPage("#' + id + '", "next")')
+          .addClass('scroll-button pager-right')
+          .append('<span class="fas fa-fw fa-angle-right fa-2x"></span>')
+          .appendTo(content);
+        back.on('click', function(evt) {
+          var pager = $(evt.currentTarget).parent();
+          popupPage(pager, 'back');
+        });
+        next.on('click', function(evt) {
+          var pager = $(evt.currentTarget).parent();
+          popupPage(pager, 'next');
+        });
+        html = content.html();
+      } else {
+        html = vacancyMarker.contents[0];
+      }
+      marker.bindPopup(html);
+      markers.addLayer(marker);
+    }
+
     map.fitBounds(markers.getBounds());
+
+    window.maps[mapName] = map;
   });
+}
+
+function popupPagerPage(pager, direction) {
+  var currentPage = $(pager).find('.map-content:visible');
+  var nextPage = currentPage;
+  if (direction === 'next') {
+    var nextElement = currentPage.next();
+    if (!nextElement || nextElement.length === 0) {
+      nextPage = $(pager).children().first();
+    } else {
+      nextPage = nextElement;
+    }
+  } else if (direction === 'back') {
+    var prevElement = currentPage.prev();
+    if (!prevElement || prevElement.length === 0) {
+      nextPage = $(pager).children().last();
+    } else {
+      nextPage = prevElement;
+    }
+  }
+  currentPage.hide();
+  nextPage.show();
 }

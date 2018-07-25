@@ -7,18 +7,38 @@
         </div>
         <ul class="mdc-list">
           {{#each data.supplimentaryResponses.types.aggregations.roles_slugs.buckets ~}}
-          {{#if key ~}}
-          <a class="mdc-list-item" href="/search?roles%5B%5D={{urlencode key}}" role="menuitem">
-            <span class="mdc-list-item__text">
-              {{#with (lookup ../data.supplimentaryResponses.types.aggregations.roles.buckets @index) ~}}
-              {{{key}}}
-              {{/with ~}}
-            </span>
-            <span class="mdc-list-item__meta">
-              {{doc_count}}
-            </span>
-          </a>
-          {{/if ~}}
+            {{#if key ~}}
+              <a class="mdc-list-item" href="/search?roles%5B%5D={{urlencode key}}" role="menuitem">
+                <span class="mdc-list-item__text">
+                  {{#with (lookup ../data.supplimentaryResponses.types.aggregations.roles.buckets @index) ~}}
+                    {{{key}}}
+                  {{/with ~}}
+                </span>
+                <span class="mdc-list-item__meta">
+                  {{doc_count}}
+                </span>
+              </a>
+            {{/if ~}}
+          {{/each ~}}
+        </ul>
+
+        <div class="browse-title mdc-typography--headline5">
+          Working patterns
+        </div>
+        <ul class="mdc-list">
+          {{#each data.supplimentaryResponses.types.aggregations.statuses_slugs.buckets ~}}
+            {{#if key ~}}
+              <a class="mdc-list-item" href="/search?statuses%5B%5D={{urlencode key}}" role="menuitem">
+                <span class="mdc-list-item__text">
+                  {{#with (lookup ../data.supplimentaryResponses.types.aggregations.statuses.buckets @index) ~}}
+                    {{{key}}}
+                  {{/with ~}}
+                </span>
+                <span class="mdc-list-item__meta">
+                  {{doc_count}}
+                </span>
+              </a>
+            {{/if ~}}
           {{/each ~}}
         </ul>
       </div>
@@ -28,60 +48,47 @@
         </div>
         <ul class="mdc-list">
           {{#each data.supplimentaryResponses.types.aggregations.sectors_slugs.buckets ~}}
-          {{#if key ~}}
-          <a class="mdc-list-item" href="/search?sectors%5B%5D={{urlencode key}}" role="menuitem">
-            <span class="mdc-list-item__text">
-              {{#with (lookup ../data.supplimentaryResponses.types.aggregations.sectors.buckets @index) ~}}
-              {{{key}}}
-              {{/with ~}}
-            </span>
-            <span class="mdc-list-item__meta">
-              {{doc_count}}
-            </span>
-          </a>
-          {{/if ~}}
+            {{#if key ~}}
+              <a class="mdc-list-item" href="/search?sectors%5B%5D={{urlencode key}}" role="menuitem">
+                <span class="mdc-list-item__text">
+                  {{#with (lookup ../data.supplimentaryResponses.types.aggregations.sectors.buckets @index) ~}}
+                    {{{key}}}
+                  {{/with ~}}
+                </span>
+                <span class="mdc-list-item__meta">
+                  {{doc_count}}
+                </span>
+              </a>
+            {{/if ~}}
           {{/each ~}}
         </ul>
       </div>
       <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone content page-content">
         <div class="browse-title mdc-typography--headline5">
-          Working pattern
+          Regions
         </div>
         <ul class="mdc-list">
-          {{#each data.supplimentaryResponses.types.aggregations.statuses_slugs.buckets ~}}
-          {{#if key ~}}
-          <a class="mdc-list-item" href="/search?statuses%5B%5D={{urlencode key}}" role="menuitem">
-            <span class="mdc-list-item__text">
-              {{#with (lookup ../data.supplimentaryResponses.types.aggregations.statuses.buckets @index) ~}}
-              {{{key}}}
-              {{/with ~}}
-            </span>
-            <span class="mdc-list-item__meta">
-              {{doc_count}}
-            </span>
-          </a>
-          {{/if ~}}
-          {{/each ~}}
-
-          <div class="browse-title mdc-typography--headline5">
-            Regions
-          </div>
-          <ul class="mdc-list">
-            {{#each data.supplimentaryResponses.types.aggregations.regions_slugs.buckets ~}}
+          {{#each data.supplimentaryResponses.types.aggregations.countries.buckets ~}}
             {{#if key ~}}
-            <a class="mdc-list-item" href="/search?regions%5B%5D={{urlencode key}}" role="menuitem">
-              <span class="mdc-list-item__text">
-                {{#with (lookup ../data.supplimentaryResponses.types.aggregations.regions.buckets @index) ~}}
-                {{{key}}}
-                {{/with ~}}
-              </span>
-              <span class="mdc-list-item__meta">
-                {{doc_count}}
-              </span>
-            </a>
+              <li class="mdc-list-item mdc-list-item--{{@index}}">
+                <h3 class="mdc-typography--headline7">{{{key}}}</h3>
+              </li>
             {{/if ~}}
+            {{#each this.regions_slugs.buckets ~}}
+              {{#if key ~}}
+                <a class="mdc-list-item" href="/search?regions%5B%5D={{urlencode key}}" role="menuitem">
+                  <span class="mdc-list-item__text">
+                    {{#with (lookup ../regions.buckets @index) ~}}
+                      {{{key}}}
+                    {{/with ~}}
+                  </span>
+                  <span class="mdc-list-item__meta">
+                    {{doc_count}}
+                  </span>
+                </a>
+              {{/if ~}}
             {{/each ~}}
-          </ul>
+          {{/each ~}}
         </ul>
       </div>
     </div>
