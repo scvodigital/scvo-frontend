@@ -52,7 +52,19 @@
     "@type": "Organization",
     "name": "{{organisation.name}}",
     "logo": "{{organisation.logo_url}}",
-    "location": "{{organisation.postcode}}",
+    "location": {
+      "@type": "Place",
+      "address": {
+        "@type": "PostalAddress",
+        {{#if organisation.street_address ~}}
+        "streetAddress": "{{organisation.street_address}}",
+        {{/if ~}}
+        {{#if geo_vacancy_info.[0] ~}}
+        "addressCountry": "{{geo_vacancy_info.[0].country}}",
+        {{/if ~}}
+        "postalCode": "{{organisation.postcode}}"
+      }
+    },
     {{#if organisation.website}}
     "website": "{{fixUrl organisation.website}}",
     {{/if}}
