@@ -306,6 +306,7 @@ function handleMaps() {
         html: '<i class="marker-icon fas fa-map-marker' + iconType + '"></i><span class="map-marker-overlay' + iconType + '">' + vacancyMarker.contents.length  + '</span>',
         iconSize: [30, 40],
         iconAnchor: [15, 40],
+        popupAnchor: [0, -42],
         className: 'vacancy_icon'
       });
       var marker = L.marker([vacancyMarker.position.lat, vacancyMarker.position.lng], {icon: icon}).addTo(map);
