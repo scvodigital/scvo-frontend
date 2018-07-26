@@ -42,7 +42,7 @@
       {{~#unless @last}}, {{/unless~}}
     {{~/each~}}
   {{~/if}}
-  {{~#if location~}} in {{location}} {{/if~}}
+  {{~#if location~}} near {{location}} {{/if~}}
   {{~#if salary_min~}}
     {{~#if salary_max}} between {{salary_currency}}{{addCommas salary_min}} and {{salary_currency}}{{addCommas salary_max}}
     {{~else}} over {{salary_currency}}{{addCommas salary_min}}
@@ -113,23 +113,6 @@
       </h2>
     </header>
     <section id="edit-search-dialog-description" class="mdc-dialog__body">
-      <!-- <div class="mdc-form-field">
-        <div class="mdc-checkbox">
-          <input type="checkbox"
-                 class="mdc-checkbox__native-control"
-                 id="email-on-edit" />
-          <div class="mdc-checkbox__background">
-            <svg class="mdc-checkbox__checkmark"
-                 viewBox="0 0 24 24">
-              <path class="mdc-checkbox__checkmark-path"
-                    fill="none"
-                    d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
-            </svg>
-            <div class="mdc-checkbox__mixedmark"></div>
-          </div>
-        </div>
-        <label for="email-on-edit">Send jobs matching this search by email</label>
-      </div> -->
       {{#> ajax_chip
         onUrl="/toggle-subscription"
         offUrl="/toggle-subscription"
@@ -158,6 +141,25 @@
     {{/if ~}}
     {{/with ~}}
     {{/if ~}}
+  </div>
+  <div class="mdc-dialog__backdrop"></div>
+</aside>
+
+<aside id="shortlist-dialog" class="mdc-dialog" role="alertdialog" aria-labelledby="shortlist-dialog-label" aria-describedby="shortlist-dialog-description" data-mdc-auto-init="MDCDialog">
+  <div class="mdc-dialog__surface">
+    <header class="mdc-dialog__header">
+      <h2 id="shortlist-dialog-label" class="mdc-dialog__header__title">
+        Shortlist
+      </h2>
+    </header>
+    <section id="shortlist-dialog-description" class="mdc-dialog__body">
+      If you have an account on Goodmoves you can shortlist jobs you are interested in.
+    </section>
+    <footer class="mdc-dialog__footer">
+      <button type="button" class="mdc-button mdc-dialog__footer__button mdc-dialog__footer__button--cancel">Cancel</button>
+      <a href="/sign-in" class="mdc-button mdc-dialog__footer__button mdc-dialog__footer__button--accept">Sign in</a>
+      <a href="/sign-up" class="mdc-button mdc-dialog__footer__button mdc-dialog__footer__button--accept">Sign up</a>
+    </footer>
   </div>
   <div class="mdc-dialog__backdrop"></div>
 </aside>
@@ -223,7 +225,7 @@
       {{else}}
       <a href="/sign-up" class="mdc-button mdc-button--raised mdc-button--large save-search" id="save-search-button">
         <span class="far fa-sign-in-alt mdc-list-item__graphic" aria-hidden="true"></span>
-        Sign up for email alerts
+        Sign up to create email alerts
       </a>
       {{/if ~}}
     </div>
