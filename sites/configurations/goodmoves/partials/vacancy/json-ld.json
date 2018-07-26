@@ -1,8 +1,8 @@
 {
   "@context": "http://schema.org",
   "@type": "JobPosting",
-  "@id": "https://{{@root.request.url.host}}/vacancy/{{slug}}",
-  "url": "https://{{@root.request.url.host}}/vacancy/{{slug}}",
+  "@id": "https://goodmoves.com/vacancy/{{slug}}",
+  "url": "https://goodmoves.com/vacancy/{{slug}}",
   "identifier": "{{reference_number}}",
   "baseSalary": {
     "@type": "MonetaryAmount",
@@ -27,6 +27,7 @@
     "address": {
       "@type": "PostalAddress",
       {{#with geo_vacancy_info.[0]}}
+      "streetAddress": "{{../organisation.street_address}}",
       "addressLocality": "{{parliamentary_constituency}}",
       "addressRegion": "{{admin_district}}",
       "addressCountry": "{{country}}",
