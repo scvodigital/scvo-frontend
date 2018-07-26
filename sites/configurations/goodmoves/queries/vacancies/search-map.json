@@ -4,6 +4,7 @@
     "Id",
     "title",
     "organisation.name",
+    "organisation.logo",
     "geo_vacancy_coords",
     "closing_date",
     "vacancy_status",
@@ -13,53 +14,9 @@
   ],
   "query": {
     "bool": {
-      {{#ifAny request.params.query.regions request.params.query.sectors request.params.query.roles request.params.query.statuses request.params.query.lat ~}}
       "filter": [
-        {{#if request.params.query.regions ~}}
-        {
-          "terms": {
-            "local_authority": {{{stringify (arrayify request.params.query.regions)}}}
-          }
-        }
-        {{#ifAny request.params.query.sectors request.params.query.roles request.params.query.statuses request.params.query.lat}},{{/ifAny}}
-        {{/if ~}}
-        {{#if request.params.query.sectors ~}}
-        {
-          "terms": {
-            "sectors_slugs": {{{stringify (arrayify request.params.query.sectors)}}}
-          }
-        }
-        {{#ifAny request.params.query.roles request.params.query.statuses request.params.query.lat}},{{/ifAny}}
-        {{/if ~}}
-        {{#if request.params.query.roles ~}}
-        {
-          "terms": {
-            "roles_slugs": {{{stringify (arrayify request.params.query.roles)}}}
-          }
-        }
-        {{#ifAny request.params.query.statuses request.params.query.lat}},{{/ifAny}}
-        {{/if ~}}
-        {{#if request.params.query.statuses ~}}
-        {
-          "terms": {
-            "role_status_slug": {{{stringify (arrayify request.params.query.statuses)}}}
-          }
-        }
-        {{#ifAny request.params.query.lat}},{{/ifAny}}
-        {{/if}}
-        {{#if request.params.query.lat ~}}
-        {
-          "geo_distance": {
-            "distance": "{{default request.params.query.distance "8046.72"}}meters",
-            "geo_vacancy_coords": {
-              "lat": {{request.params.query.lat}},
-              "lon": {{request.params.query.lng}}
-            }
-          }
-        }
-        {{/if ~}}
+        {{>search_filters}}
       ],
-      {{/ifAny ~}}
       "must": [
         {{#if request.params.query.keywords ~}}
         {
