@@ -1,9 +1,8 @@
-{{!-- <div class="hide-sm hide-md">
-  {{> vacancy_search_form this instance_id="perm"}}
-</div> --}}
-
 <div class="container-content goodmoves-organisation">
   {{#compare data.primaryResponse.hits.total ">" 0}}
+
+  {{> dialog_shortlist}}
+
   {{#with data.primaryResponse.hits.hits.[0]._source as |organisation| ~}}
 
   {{> organisation_full organisation}}

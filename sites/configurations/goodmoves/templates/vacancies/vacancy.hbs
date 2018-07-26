@@ -1,6 +1,8 @@
 <div class="container-content">
   {{#compare data.primaryResponse.hits.total ">" 0}}
 
+  {{> dialog_shortlist}}
+
   <div class="goodmoves-vacancy">
     {{#each data.primaryResponse.hits.hits ~}}
     {{> vacancy_full _source}}
