@@ -12,7 +12,7 @@ var GoodmovesController = Class.extend({
 
   init: function(firebaseConfig) {
     this.firebaseConfig = firebaseConfig;
-    this.setupMaterialDesignComponents();
+    this.setupComponents();
     this.setupFirebase();
 
     var that = this;
@@ -57,7 +57,7 @@ var GoodmovesController = Class.extend({
     }
   },
 
-  setupMaterialDesignComponents: function() {
+  setupComponents: function() {
     var that = this;
     mdc.autoInit();
 
