@@ -38,7 +38,7 @@
         <div class="mdc-text-field mdc-text-field--box mdc-text-field--with-leading-icon" data-mdc-auto-init="MDCTextField">
           <span class="far fa-search mdc-text-field__icon" tabindex="-1"></span>
           <input type="text" id="{{instance_id}}-keywords" name="keywords" class="mdc-text-field__input mdc-text-field--fullwidth" value="{{@root.request.params.query.keywords}}" data-lpignore="true" autocomplete="off">
-          <label class="mdc-floating-label mdc-floating-label--float-above" for="keywords">
+          <label class="mdc-floating-label" for="keywords">
             Keywords
           </label>
           <div class="mdc-line-ripple"></div>
@@ -58,7 +58,7 @@
                       "country": "gb"
                     }
                   }' data-location-lat="[name='lat']" data-location-lng="[name='lng']" data-location-types="[name='location_types']">
-                <label class="mdc-floating-label mdc-floating-label--float-above" for="{{instance_id}}-location">
+                <label class="mdc-floating-label" for="{{instance_id}}-location">
                   Location
                 </label>
                 <div class="mdc-line-ripple"></div>
@@ -73,7 +73,7 @@
                   <option value="80467.2"{{#compare @root.request.params.query.distance "80467.2"}} selected{{/compare}}>50 miles</option>
                   <option value=""{{#compare @root.request.params.query.distance ""}} selected{{/compare}}>no limit</option>
                 </select>
-                <label class="mdc-floating-label mdc-floating-label--float-above" for="{{instance_id}}-distance">
+                <label class="mdc-floating-label" for="{{instance_id}}-distance">
                   Within
                 </label>
               </div>
@@ -82,11 +82,9 @@
         </div>
       </div>
 
-      {{#if @root.request.params.query.location ~}}
       <input type="hidden" name="lat" value="{{@root.request.params.query.lat}}" id="{{instance_id}}-lat">
       <input type="hidden" name="lng" value="{{@root.request.params.query.lng}}" id="{{instance_id}}-lng">
       <input type="hidden" name="sort" value="distance" id="sort">
-      {{/if ~}}
 
       <h3 class="mdc-drawer__content-heading cursor-pointer" data-collapse-target="#{{instance_id}}-salary-collapse" role="button" aria-pressed="false" aria-label="Show salary search options" tabindex="0">
         Salary
@@ -94,12 +92,12 @@
           <i class="far {{#if (getProperty @root.request.params.query "salary_min")}}fa-chevron-up{{else}}fa-chevron-down{{/if}}" aria-hidden="true"></i>
         </span>
       </h3>
-      <div id="{{instance_id}}-salary-collapse" style="{{#unless (getProperty @root.request.params.query "salary_min")}}display: none;{{else}}{{#unless (getProperty @root.request.params.query "salary_max")}}display: none;{{/unless}}{{/unless}}">
+      <div id="{{instance_id}}-salary-collapse"{{#unless (getProperty @root.request.params.query "salary_min")}}{{#unless (getProperty @root.request.params.query "salary_max")}} style="display: none;"{{/unless}}{{/unless}}>
         <div class="h-padding">
           <div class="mdc-text-field mdc-text-field--box mdc-text-field--with-leading-icon" data-mdc-auto-init="MDCTextField">
             <span class="far fa-arrow-alt-from-left mdc-text-field__icon" tabindex="-1"></span>
             <input type="number" id="{{instance_id}}-salary_min" name="salary_min" class="mdc-text-field__input mdc-text-field--fullwidth" value="{{@root.request.params.query.salary_min}}" data-lpignore="true">
-            <label class="mdc-floating-label mdc-floating-label--float-above" for="{{instance_id}}-salary_min">
+            <label class="mdc-floating-label" for="{{instance_id}}-salary_min">
               Minimum salary
             </label>
             <div class="mdc-line-ripple"></div>
@@ -110,7 +108,7 @@
           <div class="mdc-text-field mdc-text-field--box mdc-text-field--with-leading-icon" data-mdc-auto-init="MDCTextField">
             <span class="far fa-arrow-alt-to-right mdc-text-field__icon" tabindex="-1"></span>
             <input type="number" id="{{instance_id}}-salary_max" name="salary_max" class="mdc-text-field__input mdc-text-field--fullwidth" value="{{@root.request.params.query.salary_max}}" data-lpignore="true">
-            <label class="mdc-floating-label mdc-floating-label--float-above" for="{{instance_id}}-salary_max">
+            <label class="mdc-floating-label" for="{{instance_id}}-salary_max">
               Maximum salary
             </label>
             <div class="mdc-line-ripple"></div>
@@ -122,7 +120,7 @@
         <div class="mdc-text-field mdc-text-field--box mdc-text-field--with-leading-icon" data-mdc-auto-init="MDCTextField">
           <span class="far fa-arrow-alt-from-left mdc-text-field__icon" tabindex="-1"></span>
           <input type="number" id="{{instance_id}}-salary_min" name="salary_min" class="mdc-text-field__input mdc-text-field--fullwidth" value="{{@root.request.params.query.salary_min}}" data-lpignore="true">
-          <label class="mdc-floating-label mdc-floating-label--float-above" for="{{instance_id}}-salary_min">
+          <label class="mdc-floating-label" for="{{instance_id}}-salary_min">
             Minimum salary
           </label>
           <div class="mdc-line-ripple"></div>
@@ -133,7 +131,7 @@
         <div class="mdc-text-field mdc-text-field--box mdc-text-field--with-leading-icon" data-mdc-auto-init="MDCTextField">
           <span class="far fa-arrow-alt-to-right mdc-text-field__icon" tabindex="-1"></span>
           <input type="number" id="{{instance_id}}-salary_max" name="salary_max" class="mdc-text-field__input mdc-text-field--fullwidth" value="{{@root.request.params.query.salary_max}}" data-lpignore="true">
-          <label class="mdc-floating-label mdc-floating-label--float-above" for="{{instance_id}}-salary_max">
+          <label class="mdc-floating-label" for="{{instance_id}}-salary_max">
             Maximum salary
           </label>
           <div class="mdc-line-ripple"></div>
