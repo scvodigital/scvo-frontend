@@ -24,47 +24,10 @@
   "query": {
     "bool": {
       "filter": [
-        {{>search_filters}}
+        {{>elasticsearch_search_filters request.params.query}}
       ],
       "must": [
-        {{#if request.params.query.keywords ~}}
-        {
-          "query_string": {
-            "query": {{{stringify request.params.query.keywords}}},
-            "fields": ["text_bag_boost^5", "text_bag"],
-            "default_operator": "AND",
-            "analyzer": "snowball"
-          }
-        },
-        {{/if ~}}
-        {{#if request.params.query.salary_min ~}}
-        {
-          "range": {
-            "salary_min": {
-              "gte": {{replace (trim request.params.query.salary_min) "," ""}}
-            }
-          }
-        },
-        {{/if ~}}
-        {{#if request.params.query.salary_max ~}}
-        {
-          "range": {
-            "salary_min": {
-              "lte": {{replace (trim request.params.query.salary_max) "," ""}}
-            }
-          }
-        },
-        {{/if ~}}
-        {
-          "term": {
-            "country_iso3": "GBR"
-          }
-        },
-        {
-          "term": {
-            "vacancy_status": "vacancy-open"
-          }
-        }
+        {{>elasticsearch_search_must request.params.query}}
       ],
       "should": [
         {
