@@ -1604,7 +1604,7 @@ body {
       padding: 0;
     }
     .mdc-card__media {
-      margin: 0;
+      margin: 0 auto;
     }
     .fa-li .fa-fw {
       color: $mdc-theme-secondary-dark;
@@ -1940,6 +1940,9 @@ footer,
       display: block;
       margin: 1rem auto 0;
     }
+    .mdc-card__media--square::before {
+      margin: 0;
+    }
   }
   #search-view {
     padding-top: $unit;
@@ -2228,6 +2231,15 @@ footer.mdc-layout__footer {
 @media screen and (max-width: $mobile-breakpoint) {
   .mdc-top-app-bar__title svg {
     zoom: 0.9;
+  }
+  footer.mdc-layout__footer p,
+  footer.mdc-layout__footer li,
+  footer.mdc-layout__footer div,
+  footer.mdc-layout__footer .mdc-list .mdc-list-item a {
+    font-size: $unit*.9;
+  }
+  footer.mdc-layout__footer .footer-copyright p {
+    font-size: $unit*.85;
   }
   footer.mdc-layout__footer .brand-logo {
     text-align: center;
