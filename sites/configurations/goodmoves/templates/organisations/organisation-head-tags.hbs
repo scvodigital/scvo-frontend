@@ -2,8 +2,8 @@
 {{#with data.primaryResponse.hits.hits.[0]._source ~}}
 <title>Goodmoves – Vacancies with {{title}}</title>
 <meta property="og:title" content="Goodmoves – Vacancies with {{title}}" data-dynamic="true">
-{{#ifAny og_image ../og_image ~}}
-<meta property="og:image" content="{{default og_image ../og_image}}" data-dynamic="true">
+{{#ifAny logo_url og_image ../og_image ~}}
+<meta property="og:image" content="{{default logo_url og_image ../og_image}}" data-dynamic="true">
 {{/ifAny ~}}
 {{#ifAny og_summary description ../og_summary ../description ~}}
 <meta property="og:summary" content="{{stripTags (regexReplace (default og_summary (default ../og_summary (default description ../description))) '\r|\n' 'gi' '')}}" data-dynamic="true">
