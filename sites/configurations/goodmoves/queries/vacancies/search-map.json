@@ -4,6 +4,7 @@
     "Id",
     "title",
     "organisation.name",
+    "organisation.logo",
     "geo_vacancy_coords",
     "closing_date",
     "vacancy_status",
@@ -13,92 +14,11 @@
   ],
   "query": {
     "bool": {
-      {{#ifAny request.params.query.regions request.params.query.sectors request.params.query.roles request.params.query.statuses request.params.query.lat ~}}
       "filter": [
-        {{#if request.params.query.regions ~}}
-        {
-          "terms": {
-            "local_authority": {{{stringify (arrayify request.params.query.regions)}}}
-          }
-        }
-        {{#ifAny request.params.query.sectors request.params.query.roles request.params.query.statuses request.params.query.lat}},{{/ifAny}}
-        {{/if ~}}
-        {{#if request.params.query.sectors ~}}
-        {
-          "terms": {
-            "sectors_slugs": {{{stringify (arrayify request.params.query.sectors)}}}
-          }
-        }
-        {{#ifAny request.params.query.roles request.params.query.statuses request.params.query.lat}},{{/ifAny}}
-        {{/if ~}}
-        {{#if request.params.query.roles ~}}
-        {
-          "terms": {
-            "roles_slugs": {{{stringify (arrayify request.params.query.roles)}}}
-          }
-        }
-        {{#ifAny request.params.query.statuses request.params.query.lat}},{{/ifAny}}
-        {{/if ~}}
-        {{#if request.params.query.statuses ~}}
-        {
-          "terms": {
-            "role_status_slug": {{{stringify (arrayify request.params.query.statuses)}}}
-          }
-        }
-        {{#ifAny request.params.query.lat}},{{/ifAny}}
-        {{/if}}
-        {{#if request.params.query.lat ~}}
-        {
-          "geo_distance": {
-            "distance": "{{default request.params.query.distance "8046.72"}}meters",
-            "geo_vacancy_coords": {
-              "lat": {{request.params.query.lat}},
-              "lon": {{request.params.query.lng}}
-            }
-          }
-        }
-        {{/if ~}}
+        {{>elasticsearch_search_filters request.params.query}}
       ],
-      {{/ifAny ~}}
       "must": [
-        {{#if request.params.query.keywords ~}}
-        {
-          "query_string": {
-            "query": {{{stringify request.params.query.keywords}}},
-            "fields": ["text_bag_boost^5", "text_bag"],
-            "default_operator": "AND",
-            "analyzer": "snowball"
-          }
-        },
-        {{/if ~}}
-        {{#if request.params.query.salary_min ~}}
-        {
-          "range": {
-            "salary_min": {
-              "gte": {{replace (trim request.params.query.salary_min) "," ""}}
-            }
-          }
-        },
-        {{/if ~}}
-        {{#if request.params.query.salary_max ~}}
-        {
-          "range": {
-            "salary_min": {
-              "lte": {{replace (trim request.params.query.salary_max) "," ""}}
-            }
-          }
-        },
-        {{/if ~}}
-        {
-          "term": {
-            "country_iso3": "GBR"
-          }
-        },
-        {
-          "term": {
-            "vacancy_status": "vacancy-open"
-          }
-        }
+        {{>elasticsearch_search_must request.params.query}}
       ]
     }
   },
