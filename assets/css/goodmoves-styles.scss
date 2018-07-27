@@ -50,6 +50,8 @@ $desktop-landscape-breakpoint: 1280px;
 
 body {
   background-color: $mdc-theme-footer-dark;
+  word-break: break-word;
+  -webkit-tap-highlight-color: transparent;
 }
 .mdc-theme--background {
   background-color: $mdc-theme-secondary-light !important;
@@ -592,12 +594,12 @@ footer h3,
   .goog-te-gadget-simple {
     background: transparent;
     border: none;
-    // .goog-te-gadget-icon {
-    //   display: none;
-    // }
+    .goog-te-gadget-icon {
+      display: none;
+    }
     .goog-te-menu-value {
       color: white;
-      // margin: 0;
+      margin: 0;
       span {
         border: none !important;
         color: white !important;
@@ -1909,8 +1911,10 @@ footer,
   .home-banner .banner-search.overlay .content {
     background-image: none;
     background-color: rgba(66, 132, 42, 0.89);
+    margin: 0;
+    padding: $unit;
     .overlay-content {
-      padding: $unit*1.5 $unit $unit*(3/4);
+      padding: $unit/2 0 $unit*(3/4);
       .header-text {
         padding: 0 0 $unit;
         font-size: 2.8rem;
@@ -1927,6 +1931,14 @@ footer,
         font-size: 1.1rem;
         padding: $unit/4 0;
       }
+    }
+  }
+  .mdc-card .mdc-card__info--vacancy-row,
+  .mdc-card .mdc-card__info--organisation-row {
+    display: block;
+    .mdc-card__media {
+      display: block;
+      margin: 1rem auto 0;
     }
   }
   #search-view {
@@ -1967,12 +1979,18 @@ footer,
   padding: 0 $unit 0 !important;
   position: relative;
 }
-.home .tfn-latest {
-  padding: 0 $unit*1.5 0 !important;
-  background-color: $mdc-theme-secondary-light;
-  margin-bottom: 0 !important;
-  .mdc-typography--headline5 {
-    margin-top: 0;
+.home {
+  .currently-recruiting {
+    box-shadow: none !important;
+    margin: $unit 0 $unit/2;
+  }
+  .tfn-latest {
+    padding: 0 $unit*1.5 0 !important;
+    background-color: $mdc-theme-secondary-light;
+    margin-bottom: 0 !important;
+    .mdc-typography--headline5 {
+      margin-top: 0;
+    }
   }
 }
 .tfn-latest {
@@ -2218,6 +2236,10 @@ footer.mdc-layout__footer {
 @media screen and (max-width: 450px) {
   .mdc-top-app-bar__title svg {
     zoom: 0.8;
+  }
+  .gist .thumbnail img {
+    height: 64px;
+    width: 64px;
   }
 }
 @media screen and (max-width: 330px) {
