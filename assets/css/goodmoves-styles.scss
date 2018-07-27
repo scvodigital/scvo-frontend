@@ -1644,8 +1644,10 @@ body {
     z-index: 4;
     overflow: visible;
   }
-  .mdc-text-field--box::before, .mdc-text-field--box::after {
+  .mdc-text-field--box::before,
+  .mdc-text-field--box::after {
     background-color: transparent;
+    width: 100%;
   }
   .mdc-floating-label {
     transform: translateY(-50%) scale(0.75);
@@ -1901,9 +1903,41 @@ footer,
   }
 }
 @media screen and (max-width: $mobile-breakpoint) {
+  header .container-fluid .mdc-top-app-bar__title svg {
+    margin-top: $unit;
+  }
   .home-banner .banner-search.overlay .content {
     background-image: none;
     background-color: rgba(66, 132, 42, 0.89);
+    .overlay-content {
+      padding: $unit*1.5 $unit $unit*(3/4);
+      .header-text {
+        padding: 0 0 $unit;
+        font-size: 2.8rem;
+        line-height: 2.5rem;
+        letter-spacing: -0.15rem;
+        .normal {
+          letter-spacing: -0.25rem;
+        }
+        .normal.moves {
+          margin-left: -0.2rem;
+        }
+      }
+      .header-extra {
+        font-size: 1.1rem;
+        padding: $unit/4 0;
+      }
+    }
+  }
+  #search-view {
+    padding-top: $unit;
+    .mdc-text-field,
+    .mdc-select {
+      margin: 0;
+    }
+    #search-jobs {
+      margin-top: $unit*.15;
+    }
   }
 }
 
@@ -1913,7 +1947,7 @@ footer,
     padding-left: $unit*(3/4);
   }
 }
-.browse .container-content {
+.browse main {
   .browse-title {
     margin: $unit/2 0 $unit/2;
   }
@@ -2266,6 +2300,9 @@ footer.mdc-layout__footer {
   margin-top: $unit;
   margin-bottom: $unit;
 }
+.v-margin-full-bottom {
+  margin-bottom: $unit;
+}
 
 .h-margin {
   margin-left: $unit/2;
@@ -2330,12 +2367,10 @@ form.inline-form {
   // .mdc-layout-grid__cell.top-jobs:first-child {
   //   margin-left: $unit*3;
   // }
-  // .last-card {
-  //   padding-right: $unit*2.5;
-  // }
   .mdc-card.align-centre {
     box-shadow: none;
     width: 18vw !important;
+    min-width: 200px;
   }
   .mdc-layout-grid__cell {
     flex: 0 0 auto;
