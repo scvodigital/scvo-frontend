@@ -17,7 +17,6 @@ typeaheadController.addListener(function(field, term) {
   } else {
     $search[0].click();
   }
-  refreshChips();
 });
 
 $where.on('keypress', function(evt) {
@@ -67,6 +66,7 @@ function reverseLookup(latitude, longitude) {
 
 function addChip(field, term) {
   var slug = slugify(term);
+  if ($('input[name="' + field + '[]"][value="' + slug + '"]').length > 0) return;
   var $chip = $('<div />')
     .addClass('mdc-chip mdc-theme--primary-bg')
     .attr({ tabindex: 0 })
