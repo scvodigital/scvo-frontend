@@ -61,15 +61,15 @@
             <a href="https://goodhq.org/{{goodhq_organisation.xid}}">@{{goodhq_organisation.xid}}</a>
             –
             {{#compare @root.data.goodhq.reviews.hits.total ">" 0 ~}}
-            {{@root.data.goodhq.reviews.hits.total}}
-            <a href="https://goodhq.org/{{goodhq_organisation.xid}}?mode=review">{{inflect @root.data.goodhq.reviews.hits.total "review" "reviews" false}}</a>{{#compare @root.data.goodhq.posts.hits.total ">" 0}}{{#compare @root.data.goodhq.volunteering.hits.total "===" 0}} and {{else}}, {{/compare}}{{else}}{{#compare @root.data.goodhq.volunteering.hits.total ">" 0}} and {{/compare}}{{/compare}}{{/compare ~}}
+            <!-- Change to mode=reviews -->
+            <a href="https://goodhq.org/{{goodhq_organisation.xid}}?mode=review">{{inflect @root.data.goodhq.reviews.hits.total "review" "reviews" true}}</a>{{#compare @root.data.goodhq.posts.hits.total ">" 0}}{{#compare @root.data.goodhq.volunteering.hits.total "===" 0}} and {{else}}, {{/compare}}{{else}}{{#compare @root.data.goodhq.volunteering.hits.total ">" 0}} and {{/compare}}{{/compare}}{{/compare ~}}
             {{#compare @root.data.goodhq.posts.hits.total ">" 0}}
-            {{@root.data.goodhq.posts.hits.total}}
-            <a href="https://goodhq.org/{{goodhq_organisation.xid}}?mode=post">{{inflect @root.data.goodhq.posts.hits.total "post" "posts" false}}</a>{{#compare @root.data.goodhq.volunteering.hits.total ">" 0}}, and{{/compare}}
+            <!-- Change to mode=posts -->
+            <a href="https://goodhq.org/{{goodhq_organisation.xid}}?mode=post">{{inflect @root.data.goodhq.posts.hits.total "post" "posts" true}}</a>{{#compare @root.data.goodhq.volunteering.hits.total ">" 0}}, and{{/compare}}
             {{/compare}}
             {{#compare @root.data.goodhq.volunteering.hits.total ">" 0}}
-            {{@root.data.goodhq.volunteering.hits.total}}
-            <a href="https://goodhq.org/{{goodhq_organisation.xid}}?mode=volopp">{{inflect @root.data.goodhq.volunteering.hits.total "volunteering opportunity" "volunteering opportunities" false}}</a>
+            <!-- Change to mode=volunteer -->
+            <a href="https://goodhq.org/{{goodhq_organisation.xid}}?mode=volopp">{{inflect @root.data.goodhq.volunteering.hits.total "volunteering opportunity" "volunteering opportunities" true}}</a>
             {{/compare}}
             on
             <a href="https://goodhq.org/{{goodhq_organisation.xid}}">Good HQ</a>
