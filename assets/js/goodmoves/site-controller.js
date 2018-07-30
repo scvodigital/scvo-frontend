@@ -199,7 +199,7 @@ var GoodmovesController = Class.extend({
       L.circle(
         [options.circle.lat, options.circle.lng],
         {
-          radius: options.circle.radius,
+          radius: options.circle.radius*1000,
           color: '#9cd986',
           fillColor: '#9cd986',
           fillOpacity: 0.1

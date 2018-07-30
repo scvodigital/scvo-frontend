@@ -45,7 +45,7 @@
   "script_fields" : {
     "distance" : {
       "script" : {
-        "inline": "doc['geo_vacancy_coords'].arcDistance(params.lat,params.lon) * 0.000621371",
+        "inline": "doc['geo_vacancy_coords'].arcDistance(params.lat,params.lon) * 0.621371",
         "lang": "painless",
         "params": {
           "lat": {{request.params.query.lat}},
@@ -97,7 +97,7 @@
           "lon": {{request.params.query.lng}}
         },
         "order": "asc",
-        "unit": "m",
+        "unit": "km",
         "mode": "min",
         "distance_type": "arc"
       }
