@@ -57,7 +57,7 @@
                     "componentRestrictions": {
                       "country": "gb"
                     }
-                  }'>
+                  }' data-location-lat="[name='lat']" data-location-lng="[name='lng']">
                 <label class="mdc-floating-label" for="{{instance_id}}-location">
                   Location
                 </label>
@@ -82,10 +82,12 @@
         </div>
       </div>
 
-      <input type="hidden" data-location-inner-ne="{{instance_id}}-location" name="inner-ne" value="{{@root.request.params.query.inner-ne}}" id="{{instance_id}}-location-inner-ne">
+      <!-- <input type="hidden" data-location-inner-ne="{{instance_id}}-location" name="inner-ne" value="{{@root.request.params.query.inner-ne}}" id="{{instance_id}}-location-inner-ne">
       <input type="hidden" data-location-inner-sw="{{instance_id}}-location" name="inner-sw" value="{{@root.request.params.query.inner-sw}}" id="{{instance_id}}-location-inner-sw">
       <input type="hidden" data-location-outer-ne="{{instance_id}}-location" name="outer-ne" value="{{@root.request.params.query.outer-ne}}" id="{{instance_id}}-location-outer-ne">
-      <input type="hidden" data-location-outer-sw="{{instance_id}}-location" name="outer-sw" value="{{@root.request.params.query.outer-sw}}" id="{{instance_id}}-location-outer-sw">
+      <input type="hidden" data-location-outer-sw="{{instance_id}}-location" name="outer-sw" value="{{@root.request.params.query.outer-sw}}" id="{{instance_id}}-location-outer-sw"> -->
+      <input type="hidden" name="lat" value="{{@root.request.params.query.lat}}" id="{{instance_id}}-lat">
+      <input type="hidden" name="lng" value="{{@root.request.params.query.lng}}" id="{{instance_id}}-lng">
       <input type="hidden" name="sort" value="distance" id="sort">
 
       <h3 class="mdc-drawer__content-heading cursor-pointer" data-collapse-target="#{{instance_id}}-salary-collapse" role="button" aria-pressed="false" aria-label="Show salary search options" tabindex="0">

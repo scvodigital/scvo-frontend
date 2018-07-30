@@ -18,10 +18,12 @@
         </div>
       </div>
       <form id="search-view" class="search-form mdc-elevation--z5" action="/search" method="GET">
-        <input type="hidden" data-location-inner-ne="where-jobs" name="inner-ne" value="{{@root.request.params.query.inner-ne}}" id="location-inner-ne">
+        <!-- <input type="hidden" data-location-inner-ne="where-jobs" name="inner-ne" value="{{@root.request.params.query.inner-ne}}" id="location-inner-ne">
         <input type="hidden" data-location-inner-sw="where-jobs" name="inner-sw" value="{{@root.request.params.query.inner-sw}}" id="location-inner-sw">
         <input type="hidden" data-location-outer-ne="where-jobs" name="outer-ne" value="{{@root.request.params.query.outer-ne}}" id="location-outer-ne">
-        <input type="hidden" data-location-outer-sw="where-jobs" name="outer-sw" value="{{@root.request.params.query.outer-sw}}" id="location-outer-sw">
+        <input type="hidden" data-location-outer-sw="where-jobs" name="outer-sw" value="{{@root.request.params.query.outer-sw}}" id="location-outer-sw"> -->
+        <input type="hidden" name="lat" value="{{@root.request.params.query.lat}}" id="location-lat">
+        <input type="hidden" name="lng" value="{{@root.request.params.query.lng}}" id="location-lng">
         <div class="mdc-layout-grid">
           <div class="mdc-layout-grid__inner">
             <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-5-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">

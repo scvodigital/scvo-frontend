@@ -10,12 +10,13 @@
 {{#if statuses ~}}
   {{>elasticsearch_terms field="role_status_slug" terms=statuses}},
 {{/if}}
-{{#ifAll location outer-ne outer-sw ~}}
+{{#ifAll lat lng ~}}
 {
-  "geo_bounding_box": {
+  "geo_distance": {
+    "distance": "{{default distance "8046.72"}}meters",
     "geo_vacancy_coords": {
-      "top_right": {{{stringify outer-ne}}},
-      "bottom_left": {{{stringify outer-sw}}}
+      "lat": {{lat}},
+      "lon": {{lng}}
     }
   }
 },
