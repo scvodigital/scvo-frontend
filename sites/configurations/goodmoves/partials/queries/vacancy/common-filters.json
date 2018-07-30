@@ -1,0 +1,9 @@
+{{>queries_term field="vacancy_status" term="vacancy-open"}},
+{{#compare @root.request.url.hostname "===" "goodmoves.local" ~}}
+  {{>queries_term field="country" term="Scotland"}},
+{{/compare ~}}
+{
+  "exists": {
+    "field": "title"
+  }
+}

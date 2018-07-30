@@ -15,10 +15,11 @@
   "query": {
     "bool": {
       "filter": [
-        {{>elasticsearch_search_filters request.params.query}}
+        {{>queries_vacancy_common_filters request.params.query}},
+        {{>queries_vacancy_search_filters request.params.query}}
       ],
       "must": [
-        {{>elasticsearch_search_must request.params.query}}
+        {{>queries_vacancy_search_must request.params.query}}
       ]
     }
   },

@@ -30,20 +30,13 @@
   ],
   "query": {
     "bool": {
+      "filter": [
+        {{>queries_vacancy_common_filters request.params.query}}
+      ],
       "must": [
         {
           "term": {
-            "vacancy_status": "vacancy-open"
-          }
-        },
-        {
-          "term": {
             "organisation.id": "{{data.primaryResponse.hits.hits.[0]._source.Id}}"
-          }
-        },
-        {
-          "term": {
-            "country_iso3": "GBR"
           }
         }
       ]

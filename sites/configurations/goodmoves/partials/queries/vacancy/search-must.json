@@ -1,0 +1,17 @@
+{{#if keywords ~}}
+{{>queries_query_string
+  querystring=keywords
+  fields=(split "text_bag_boost^5,text_bag" ",")
+}},
+{{/if ~}}
+{{#if salary_min ~}}
+  {{>queries_number_range field="salary_min" lte=salary_min}},
+{{/if ~}}
+{{#if salary_max ~}}
+  {{>queries_number_range field="salary_min" lte=salary_max}},
+{{/if ~}}
+{
+  "exists": {
+    "field": "title"
+  }
+}
