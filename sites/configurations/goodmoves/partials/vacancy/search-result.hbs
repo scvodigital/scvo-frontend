@@ -14,10 +14,14 @@
       <ul class="fa-ul mdc-card__action">
         <li class="mdc-card__info--vacancy-status mdc-typography--body2">
           <span class="fa-li"><span class="far fa-location-arrow fa-fw" title="Distance"></span></span>
-          {{#compare distance "<" 3 ~}}
+          {{#compare distance "<" 4 ~}}
             Less than {{inflect (round distance "up") "mile" "miles" true}} from {{@root.request.params.query.location}}
           {{else}}
-            Within {{inflect (round distance "up") "mile" "miles" true}} of {{@root.request.params.query.location}}
+            {{#compare distance "<" 10 ~}}
+              Within {{round distance "up"}} miles of {{@root.request.params.query.location}}
+            {{else}}
+              {{round distance "up"}} miles from {{@root.request.params.query.location}}
+            {{/compare ~}}
           {{/compare ~}}
         </li>
       </ul>
