@@ -42,7 +42,7 @@
       {{~#unless @last}}, {{/unless~}}
     {{~/each~}}
   {{~/if}}
-  {{~#if location~}} in {{location}} {{/if~}}
+  {{~#if location~}} near {{location}} {{/if~}}
   {{~#if salary_min~}}
     {{~#if salary_max}} between {{salary_currency}}{{addCommas salary_min}} and {{salary_currency}}{{addCommas salary_max}}
     {{~else}} over {{salary_currency}}{{addCommas salary_min}}
@@ -52,13 +52,14 @@
     {{~/if}}
   {{~/if~}}
 {{~/with~}}">
-        <label for="saved-search-name" class="mdc-floating-label mdc-floating-label--float-above">Save search</label>
+        <label for="saved-search-name" class="mdc-floating-label">Save search</label>
         <div class="mdc-line-ripple"></div>
       </div>
       <div class="mdc-form-field">
         <div class="mdc-checkbox">
           <input type="checkbox"
                  class="mdc-checkbox__native-control"
+                 name="subscribe"
                  id="email-on"/>
           <div class="mdc-checkbox__background">
             <svg class="mdc-checkbox__checkmark"
@@ -88,7 +89,7 @@
   aria-describedby="edit-search-dialog-description"
   data-mdc-auto-init="MDCDialog">
   <div class="mdc-dialog__surface">
-    {{#if data.auth ~}}
+    {{#if @root.data.auth ~}}
     {{#with (
               querystringify (obj)
               keywords=@root.request.params.query.keywords
@@ -113,23 +114,6 @@
       </h2>
     </header>
     <section id="edit-search-dialog-description" class="mdc-dialog__body">
-      <!-- <div class="mdc-form-field">
-        <div class="mdc-checkbox">
-          <input type="checkbox"
-                 class="mdc-checkbox__native-control"
-                 id="email-on-edit" />
-          <div class="mdc-checkbox__background">
-            <svg class="mdc-checkbox__checkmark"
-                 viewBox="0 0 24 24">
-              <path class="mdc-checkbox__checkmark-path"
-                    fill="none"
-                    d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
-            </svg>
-            <div class="mdc-checkbox__mixedmark"></div>
-          </div>
-        </div>
-        <label for="email-on-edit">Send jobs matching this search by email</label>
-      </div> -->
       {{#> ajax_chip
         onUrl="/toggle-subscription"
         offUrl="/toggle-subscription"
@@ -161,6 +145,8 @@
   </div>
   <div class="mdc-dialog__backdrop"></div>
 </aside>
+
+{{> dialog_shortlist}}
 
 <div class="mdc-layout-grid head">
   <div class="mdc-layout-grid__inner">
@@ -223,7 +209,7 @@
       {{else}}
       <a href="/sign-up" class="mdc-button mdc-button--raised mdc-button--large save-search" id="save-search-button">
         <span class="far fa-sign-in-alt mdc-list-item__graphic" aria-hidden="true"></span>
-        Sign up for email alerts
+        Sign up to create email alerts
       </a>
       {{/if ~}}
     </div>
@@ -236,6 +222,10 @@
         <input type="hidden" name="keywords" value="{{@root.request.params.query.keywords}}" />
         <input type="hidden" name="location" value="{{@root.request.params.query.location}}" />
         <input type="hidden" name="distance" value="{{@root.request.params.query.distance}}" />
+        <input type="hidden" name="roles" value="{{@root.request.params.query.roles}}" />
+        <input type="hidden" name="sectors" value="{{@root.request.params.query.sectors}}" />
+        <input type="hidden" name="regions" value="{{@root.request.params.query.regions}}" />
+        <input type="hidden" name="statuses" value="{{@root.request.params.query.statuses}}" />
         <input type="hidden" name="lat" value="{{@root.request.params.query.lat}}" />
         <input type="hidden" name="lng" value="{{@root.request.params.query.lng}}" />
         <input type="hidden" name="salary_min" value="{{@root.request.params.query.salary_min}}" />

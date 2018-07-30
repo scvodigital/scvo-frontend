@@ -8,10 +8,11 @@ var GoodmovesController = Class.extend({
     { name: 'desktop', min: 960, max: 20000 }
   ],
   snackbar: null,
+  maps: {},
 
   init: function(firebaseConfig) {
     this.firebaseConfig = firebaseConfig;
-    this.setupMaterialDesignComponents();
+    this.setupComponents();
     this.setupFirebase();
 
     var that = this;
@@ -56,7 +57,8 @@ var GoodmovesController = Class.extend({
     }
   },
 
-  setupMaterialDesignComponents: function() {
+  setupComponents: function() {
+    var that = this;
     mdc.autoInit();
 
     // Think we just need the one global snackbar
@@ -168,6 +170,105 @@ var GoodmovesController = Class.extend({
         }
       });
     });
+    
+    $('[data-map-options]').each(function(i, o) {
+      var options = $(o).data('map-options');
+      var initialLat = 55.94528820000001;
+      var initialLng = -3.200755699999945;
+      var initialZoom = 9;
+      if (options.center) {
+        var initialLat = options.center.lat;
+        var initialLng = options.center.lng;
+        var initialZoom = options.zoom;
+      }
+      var map = L.map(o, {
+        fullscreenControl: true,
+        scrollWheelZoom: false
+      }).setView([initialLat, initialLng], initialZoom);
+      var osmAttrib = 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>';
+      L.tileLayer('https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png', {
+        attribution: osmAttrib,
+        minZoom: 6,
+        maxZoom: 18,
+        opacity: 0.8
+      }).addTo(map);
+      L.control.scale().addTo(map);
+      var mapName = $(o).data('map-name');
+      var $vacancies = $('marker[data-map="' + mapName + '"]');
+      var vacancyMarkers = {};
+
+      $vacancies.each(function(i, o) {
+        var $o = $(o);
+        var key = $o.data('lat') + ',' + $o.data('lng');
+        if (!vacancyMarkers.hasOwnProperty(key)) {
+          vacancyMarkers[key] = {
+            position: {
+              lat: $o.data('lat'),
+              lng: $o.data('lng')
+            },
+            shortlisted: $o.data('shortlisted'),
+            contents: []
+          };
+        }
+        vacancyMarkers[key].contents.push($o.html());
+      });
+
+      var markers = new L.featureGroup();
+      var vacancyPositions = Object.keys(vacancyMarkers);
+
+      for (var p = 0; p < vacancyPositions.length; p++) {
+        var vacancyPosition = vacancyPositions[p];
+        var vacancyMarker = vacancyMarkers[vacancyPosition];
+        var iconType = vacancyMarker.shortlisted ? ' shortlisted' : '';
+        var icon = L.divIcon({
+          html: '<i class="marker-icon fas fa-map-marker' + iconType + '"></i><span class="map-marker-overlay' + iconType + '">' + vacancyMarker.contents.length  + '</span>',
+          iconSize: [30, 40],
+          iconAnchor: [15, 40],
+          popupAnchor: [0, -42],
+          className: 'vacancy_icon'
+        });
+        var marker = L.marker([vacancyMarker.position.lat, vacancyMarker.position.lng], {icon: icon}).addTo(map);
+        var html;
+        if (vacancyMarker.contents.length > 1) {
+          var id = 'popup-pager-' + p;
+          var content = $('<div>');
+          var pager = $('<div>')
+            .attr('id', id)
+            .addClass('popup-pager')
+            .append(vacancyMarker.contents.join('\n'))
+            .appendTo(content);
+          var back = $('<a>')
+            .attr('href', 'javascript:goodmoves.popupPagerPage("#' + id + '", "back")')
+            .addClass('scroll-button pager pager-left')
+            .append('<span class="fas fa-fw fa-angle-left fa-2x"></span>')
+            .appendTo(content);
+          var next = $('<a>')
+            .attr('href', 'javascript:goodmoves.popupPagerPage("#' + id + '", "next")')
+            .addClass('scroll-button pager pager-right')
+            .append('<span class="fas fa-fw fa-angle-right fa-2x"></span>')
+            .appendTo(content);
+          back.on('click', function(evt) {
+            var pager = $(evt.currentTarget).parent();
+            popupPage(pager, 'back');
+          });
+          next.on('click', function(evt) {
+            var pager = $(evt.currentTarget).parent();
+            popupPage(pager, 'next');
+          });
+          html = content.html();
+        } else {
+          html = vacancyMarker.contents[0];
+        }
+        marker.bindPopup(html);
+        markers.addLayer(marker);
+      }
+
+      if (!options.center) {
+        map.fitBounds(markers.getBounds());
+      }
+      
+      that.maps[mapName] = map;
+    });
   },
 
   setupFirebase: function() {
@@ -208,6 +309,28 @@ var GoodmovesController = Class.extend({
       delete options.color;
     }
     this.snackbar.show(options);
+  },
+
+  popupPagerPage: function(pager, direction) {
+    var currentPage = $(pager).find('.map-content:visible');
+    var nextPage = currentPage;
+    if (direction === 'next') {
+      var nextElement = currentPage.next();
+      if (!nextElement || nextElement.length === 0) {
+        nextPage = $(pager).children().first();
+      } else {
+        nextPage = nextElement;
+      }
+    } else if (direction === 'back') {
+      var prevElement = currentPage.prev();
+      if (!prevElement || prevElement.length === 0) {
+        nextPage = $(pager).children().last();
+      } else {
+        nextPage = prevElement;
+      }
+    }
+    currentPage.hide();
+    nextPage.show();
   }
 });
 
@@ -225,151 +348,164 @@ $(document).ready(function() {
 
 function initMap() {
   handleLocationBoxes();
-  handleMaps();
 }
 
 function handleLocationBoxes() {
-  var boxes = $('[data-location-options]');
-  boxes.each(function(i, o) {
-    var options = $(o).data('location-options');
-    var latSelector = $(o).data('location-lat');
-    var lngSelector = $(o).data('location-lng');
-    // var typesSelector = $(o).data('location-types');
+  window.autocompletes = {};
+  $('[data-location-options]').each(function(i, o) {
+    var $o = $(o);
+    var id = $o.attr('id');
+    var options = $o.data('location-options');
 
     var autocomplete = new google.maps.places.Autocomplete(o, options);
     autocomplete.addListener('place_changed', function(evt) {
-      var place = this.getPlace();
-      // console.log(place.formatted_address);
-      // console.log(place);
-      if (place.geometry.location) {
-        $(latSelector).val(place.geometry.location.lat());
-        $(lngSelector).val(place.geometry.location.lng());
-        // $(typesSelector).val(place.types);
-        $(o).val(place.formatted_address);
-      }
+      setPlace($o);
     });
+
+    window.autocompletes[id] = autocomplete;
+    
+    $('select[data-location="' + id + '"]').on('change', function(evt) {
+      var $distance = $(evt.currentTarget);
+      var $innerNe = $('input[data-location-inner-ne="' + id + '"]');
+      var $innerSw = $('input[data-location-inner-sw="' + id + '"]');
+      var $outerNe = $('input[data-location-outer-ne="' + id + '"]');
+      var $outerSw = $('input[data-location-outer-sw="' + id + '"]');
+      if (!$innerNe.val() || !$innerSw.val()) return;
+
+      var innerNe = $innerNe.val().split(', ');
+      var innerSw = $innerSw.val().split(', ');
+      var distance = $distance.val();
+      var outer = extendBounds(innerNe[0], innerNe[1], innerSw[0], innerSw[1], distance);
+      var outerNorthEast = outer.getNorthEast();
+      var outerSouthWest = outer.getSouthWest();
+
+      $outerNe.val(outerNorthEast.lat() + ', ' + outerNorthEast.lng());
+      $outerSw.val(outerSouthWest.lat() + ', ' + outerSouthWest.lng());
+    });
+  }).on('keypress', function(evt) {
+    if (evt.which === 13) {
+      evt.preventDefault();
+      return false;
+    }
+  }).on('blur', function(evt) {
+    setPlace(evt.currentTarget);
   });
 }
 
-function handleMaps() {
-  window.maps = {};
+var innerSquare = null;
+var outerSquare = null;
 
-  var maps = $('[data-map-options]').each(function(i, o) {
-    var options = $(o).data('map-options');
-    var initialLat = 55.94528820000001;
-    var initialLng = -3.200755699999945;
-    var initialZoom = 9;
-    if (options.center) {
-      var initialLat = options.center.lat;
-      var initialLng = options.center.lng;
-      var initialZoom = options.zoom;
-    }
-    var map = L.map(o, {
-      fullscreenControl: true,
-      scrollWheelZoom: false
-    }).setView([initialLat, initialLng], initialZoom);
-    var osmAttrib = 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>';
-    L.tileLayer('https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png', {
-      attribution: osmAttrib,
-      minZoom: 6,
-      maxZoom: 18,
-      opacity: 0.8
-    }).addTo(map);
-    var mapName = $(o).data('map-name');
-    var $vacancies = $('marker[data-map="' + mapName + '"]');
-    var vacancyMarkers = {};
+function setPlace(field) {
+  var $o = $(field);
+  var id = $o.attr('id');
+  var $innerNe = $('input[data-location-inner-ne="' + id + '"]');
+  var $innerSw = $('input[data-location-inner-sw="' + id + '"]');
+  var $outerNe = $('input[data-location-outer-ne="' + id + '"]');
+  var $outerSw = $('input[data-location-outer-sw="' + id + '"]');
+  var $distance = $('select[data-location="' + id + '"]');
+  var autocomplete = window.autocompletes[$o.attr('id')];
 
-    $vacancies.each(function(i, o) {
-      var $o = $(o);
-      var key = $o.data('lat') + ',' + $o.data('lng');
-      if (!vacancyMarkers.hasOwnProperty(key)) {
-        vacancyMarkers[key] = {
-          position: {
-            lat: $o.data('lat'),
-            lng: $o.data('lng')
-          },
-          shortlisted: $o.data('shortlisted'),
-          contents: []
-        };
-      }
-      vacancyMarkers[key].contents.push($o.html());
-    });
+  if (autocomplete) {
+    var place = autocomplete.getPlace();
+    if (place && place.geometry && place.geometry.location) {
+      var inner = place.geometry.viewport;
+      var innerNorthEast = inner.getNorthEast();
+      var innerSouthWest = inner.getSouthWest();
+      var distance = $distance.val();
 
-    var markers = new L.featureGroup();
-    var vacancyPositions = Object.keys(vacancyMarkers);
+      $innerNe.val(innerNorthEast.lat() + ', ' + innerNorthEast.lng());
+      $innerSw.val(innerSouthWest.lat() + ', ' + innerSouthWest.lng());
 
-    for (var p = 0; p < vacancyPositions.length; p++) {
-      var vacancyPosition = vacancyPositions[p];
-      var vacancyMarker = vacancyMarkers[vacancyPosition];
-      var iconType = vacancyMarker.shortlisted ? ' shortlisted' : '';
-      var icon = L.divIcon({
-        html: '<i class="marker-icon fas fa-map-marker' + iconType + '"></i><span class="map-marker-overlay' + iconType + '">' + vacancyMarker.contents.length  + '</span>',
-        iconSize: [30, 40],
-        iconAnchor: [15, 40],
-        className: 'vacancy_icon'
-      });
-      var marker = L.marker([vacancyMarker.position.lat, vacancyMarker.position.lng], {icon: icon}).addTo(map);
-      var html;
-      if (vacancyMarker.contents.length > 1) {
-        var id = 'popup-pager-' + p;
-        var content = $('<div>');
-        var pager = $('<div>')
-          .attr('id', id)
-          .addClass('popup-pager')
-          .append(vacancyMarker.contents.join('\n'))
-          .appendTo(content);
-        var back = $('<a>')
-          .attr('href', 'javascript:popupPagerPage("#' + id + '", "back")')
-          .addClass('scroll-button pager pager-left')
-          .append('<span class="fas fa-fw fa-angle-left fa-2x"></span>')
-          .appendTo(content);
-        var next = $('<a>')
-          .attr('href', 'javascript:popupPagerPage("#' + id + '", "next")')
-          .addClass('scroll-button pager pager-right')
-          .append('<span class="fas fa-fw fa-angle-right fa-2x"></span>')
-          .appendTo(content);
-        back.on('click', function(evt) {
-          var pager = $(evt.currentTarget).parent();
-          popupPage(pager, 'back');
-        });
-        next.on('click', function(evt) {
-          var pager = $(evt.currentTarget).parent();
-          popupPage(pager, 'next');
-        });
-        html = content.html();
-      } else {
-        html = vacancyMarker.contents[0];
-      }
-      marker.bindPopup(html);
-      markers.addLayer(marker);
-    }
+      var outer = extendBounds(innerNorthEast.lat(), innerNorthEast.lng(), innerSouthWest.lat(), innerSouthWest.lng(), distance);
+      var outerNorthEast = outer.getNorthEast();
+      var outerSouthWest = outer.getSouthWest();
 
-    if (!options.center) {
-      map.fitBounds(markers.getBounds());
-    }
+      $outerNe.val(outerNorthEast.lat() + ', ' + outerNorthEast.lng());
+      $outerSw.val(outerSouthWest.lat() + ', ' + outerSouthWest.lng());
 
-    window.maps[mapName] = map;
-  });
-}
-
-function popupPagerPage(pager, direction) {
-  var currentPage = $(pager).find('.map-content:visible');
-  var nextPage = currentPage;
-  if (direction === 'next') {
-    var nextElement = currentPage.next();
-    if (!nextElement || nextElement.length === 0) {
-      nextPage = $(pager).children().first();
+      $o.val(place.formatted_address);
     } else {
-      nextPage = nextElement;
-    }
-  } else if (direction === 'back') {
-    var prevElement = currentPage.prev();
-    if (!prevElement || prevElement.length === 0) {
-      nextPage = $(pager).children().last();
-    } else {
-      nextPage = prevElement;
+      $o.val('');
+      $innerNe.val('');
+      $innerSw.val('');
+      $outerNe.val('');
+      $outerSw.val('');
     }
   }
-  currentPage.hide();
-  nextPage.show();
+}
+
+// returns latlng of new coordinate which is dist from the longitude given
+function lngDistance(lat1, lng1, dist) {
+    var R = 6371000; // m
+    lat1 = deg2rad(lat1);
+    lng1 = deg2rad(lng1);
+    var lng2 = (R*lng1*Math.cos(lat1)-dist)/(R*Math.cos(lat1));
+    return(rad2lng(lng2));
+}
+
+// returns latlng of new coordinate which is dist from the latitude given
+function latDistance(lat1, dist) {
+    var R = 6371000; // m
+    var lat1 = deg2rad(lat1);
+    var lat2 = (R*lat1-dist)/R;
+    return(rad2lat(lat2));
+}
+
+function extendBounds(latNE, lngNE, latSW, lngSW, dist) {
+    var latlngNE = new google.maps.LatLng(latDistance(latNE, -dist), lngDistance(latNE,lngNE, -dist));
+    var latlngSW = new google.maps.LatLng(latDistance(latSW, dist), lngDistance(latSW, lngSW, dist));
+    return (new google.maps.LatLngBounds(latlngSW, latlngNE));
+}
+
+function deg2rad(deg) {
+  return deg * .017453292519943295
+}
+
+// convert radians into latitude
+// 90 to -90
+function rad2lat(rad) {
+    // first of all get everthing into the range -2pi to 2pi
+    rad = rad % (Math.PI*2);
+
+    // convert negatives to equivalent positive angle
+    if (rad < 0)
+        rad = 2*Math.PI + rad;
+    
+    // restict to 0 - 180
+    var rad180 = rad % (Math.PI);
+    
+    // anything above 90 is subtracted from 180
+    if (rad180 > Math.PI/2)
+        rad180 = Math.PI - rad180;
+    // if it is greater than 180 then make negative
+    if (rad > Math.PI)
+        rad = -rad180;
+    else
+        rad = rad180;
+
+    return(rad/Math.PI*180);
+}
+
+// convert radians into longitude
+// 180 to -180
+function rad2lng(rad) {
+    // first of all get everthing into the range -2pi to 2pi
+    rad = rad % (Math.PI*2);
+    if (rad < 0)
+        rad = 2*Math.PI + rad;
+
+    // convert negatives to equivalent positive angle
+    var rad360 = rad % (Math.PI*2);         
+
+    // anything above 90 is subtracted from 360
+    if (rad360 > Math.PI)
+        rad360 = Math.PI*2 - rad360;
+
+    // if it is greater than 180 then make negative
+    if (rad > Math.PI)
+        rad = -rad360;
+    else
+        rad = rad360;
+
+    return(rad/Math.PI*180);
 }

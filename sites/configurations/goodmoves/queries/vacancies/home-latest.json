@@ -20,18 +20,29 @@
   ],
   "query": {
     "bool": {
-      "must": [
-        {
-          "term": {
-            "country_iso3": "GBR"
+      "filter": [
+        {{>elasticsearch_term field="country_iso3" term="GBR"}},
+        {{>elasticsearch_term field="vacancy_status" term="vacancy-open"}}
+      ],
+      {{#ifAll @root.data.auth @root.data.saved_searches.items.[0]}}
+      "should": [
+        {{#each @root.data.saved_searches.items}}
+          {{#with (querystring querystring)}}
+          {
+            "bool": {
+              "filter": [
+                {{>elasticsearch_search_filters querystring}}
+              ],
+              "must": [
+                {{>elasticsearch_search_must querystring}}
+              ]
+            }
           }
-        },
-        {
-          "term": {
-            "vacancy_status": "vacancy-open"
-          }
-        }
+          {{/with}}
+          {{#unless @last}},{{/unless}}
+        {{/each}} 
       ]
+      {{/ifAll}}
     }
   },
   "sort": {

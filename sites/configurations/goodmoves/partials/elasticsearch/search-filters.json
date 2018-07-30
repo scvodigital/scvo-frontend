@@ -1,0 +1,27 @@
+{{#if regions ~}}
+  {{>elasticsearch_terms field="local_authority_slug" terms=regions}},
+{{/if ~}}
+{{#if sectors ~}}
+  {{>elasticsearch_terms field="sectors_slugs" terms=sectors}},
+{{/if ~}}
+{{#if roles ~}}
+  {{>elasticsearch_terms field="roles_slugs" terms=roles}},
+{{/if ~}}
+{{#if statuses ~}}
+  {{>elasticsearch_terms field="role_status_slug" terms=statuses}},
+{{/if}}
+{{#ifAll location outer-ne outer-sw ~}}
+{
+  "geo_bounding_box": {
+    "geo_vacancy_coords": {
+      "top_right": {{{stringify outer-ne}}},
+      "bottom_left": {{{stringify outer-sw}}}
+    }
+  }
+},
+{{/ifAll ~}}
+{
+  "exists": {
+    "field": "title"
+  }
+}

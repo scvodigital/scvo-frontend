@@ -12,8 +12,8 @@
 <meta property="og:image:height" content="190" data-dynamic="true">
 <meta property="og:type" content="article" data-dynamic="true">
 {{#ifAny og_summary description ../og_summary ../description ~}}
-<meta property="og:summary" content="{{default og_summary (default ../og_summary (default description ../description))}}" data-dynamic="true">
-<meta name="description" content="{{default description (default ../description (default og_summary ../og_summary))}}" data-dynamic="true">
+<meta property="og:summary" content="{{stripTags (regexReplace (default og_summary (default ../og_summary (default description ../description))) '\r|\n' 'gi' '')}}" data-dynamic="true">
+<meta name="description" content="{{stripTags (regexReplace (default description (default ../description (default og_summary ../og_summary))) '\r|\n' 'gi' '')}}" data-dynamic="true">
 {{/ifAny ~}}
 {{#if rendered.json_ld ~}}
 <script type="application/ld+json" data-dynamic="true">

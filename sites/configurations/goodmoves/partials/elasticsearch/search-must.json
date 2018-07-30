@@ -1,0 +1,13 @@
+{{#if keywords ~}}
+{{>elasticsearch_query_string 
+  querystring=keywords 
+  fields=(split "text_bag_boost^5,text_bag" ",")
+}},
+{{/if ~}}
+{{#if salary_min ~}}
+  {{>elasticsearch_number_range field="salary_min" lte=salary_min}},
+{{/if ~}}
+{{#if salary_max ~}}
+  {{>elasticsearch_number_range field="salary_min" lte=salary_max}},
+{{/if ~}}
+{{>elasticsearch_term field="vacancy_status" term="vacancy-open"}}

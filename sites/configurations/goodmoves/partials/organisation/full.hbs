@@ -19,7 +19,7 @@
           {{#compare website "!==" "http://" ~}}
           <li class="mdc-card__info--vacancy-website mdc-typography--body1">
             <span class="fa-li"><span class="far fa-link fa-fw" title="Website"></span></span>
-            <a href="{{website_url}}" target="_blank">{{website}}</a>
+            <a href="{{website_url}}">{{website}}</a>
           </li>
           {{/compare ~}}
           {{/compare ~}}
@@ -29,7 +29,7 @@
           {{#compare twitter "!==" "http://" ~}}
           <li class="mdc-card__info--vacancy-twitter mdc-typography--body1">
             <span class="fa-li"><span class="fab fa-twitter fa-fw" title="Twitter"></span></span>
-            <a href="{{twitter_url}}" target="_blank">{{twitter}}</a>
+            <a href="{{twitter_url}}">{{twitter}}</a>
           </li>
           {{/compare ~}}
           {{/compare ~}}
@@ -39,7 +39,7 @@
           {{#compare facebook "!==" "http://" ~}}
           <li class="mdc-card__info--vacancy-facebook mdc-typography--body1">
             <span class="fa-li"><span class="fab fa-facebook fa-fw" title="Facebook"></span></span>
-            <a href="{{facebook_url}}" target="_blank">{{facebook}}</a>
+            <a href="{{facebook_url}}">{{facebook}}</a>
           </li>
           {{/compare ~}}
           {{/compare ~}}
@@ -49,7 +49,7 @@
           {{#compare linkedin "!==" "http://" ~}}
           <li class="mdc-card__info--vacancy-linkedin mdc-typography--body1">
             <span class="fa-li"><span class="fab fa-linkedin fa-fw" title="LinkedIn"></span></span>
-            <a href="{{linkedin_url}}" target="_blank">{{linkedin}}</a>
+            <a href="{{linkedin_url}}">{{linkedin}}</a>
           </li>
           {{/compare ~}}
           {{/compare ~}}
@@ -58,12 +58,21 @@
           {{#compare goodhq_organisation.xid "!==" null ~}}
           <li class="mdc-card__info--vacancy-goodhq mdc-typography--body1">
             <span class="fa-li"><span class="fas fa-heart fa-fw" title="Good HQ"></span></span>
-            <a href="https://goodhq.org/{{goodhq_organisation.xid}}" target="_blank">@{{goodhq_organisation.xid}}</a>
+            <a href="https://goodhq.org/{{goodhq_organisation.xid}}">@{{goodhq_organisation.xid}}</a>
+            –
             {{#compare @root.data.goodhq.reviews.hits.total ">" 0 ~}}
-            – {{inflect @root.data.goodhq.reviews.hits.total "review" "reviews" true}}
-            {{/compare ~}}
+            {{@root.data.goodhq.reviews.hits.total}}
+            <a href="https://goodhq.org/{{goodhq_organisation.xid}}?mode=review">{{inflect @root.data.goodhq.reviews.hits.total "review" "reviews" false}}</a>{{#compare @root.data.goodhq.posts.hits.total ">" 0}}{{#compare @root.data.goodhq.volunteering.hits.total "===" 0}} and {{else}}, {{/compare}}{{else}}{{#compare @root.data.goodhq.volunteering.hits.total ">" 0}} and {{/compare}}{{/compare}}{{/compare ~}}
+            {{#compare @root.data.goodhq.posts.hits.total ">" 0}}
+            {{@root.data.goodhq.posts.hits.total}}
+            <a href="https://goodhq.org/{{goodhq_organisation.xid}}?mode=post">{{inflect @root.data.goodhq.posts.hits.total "post" "posts" false}}</a>{{#compare @root.data.goodhq.volunteering.hits.total ">" 0}}, and{{/compare}}
+            {{/compare}}
+            {{#compare @root.data.goodhq.volunteering.hits.total ">" 0}}
+            {{@root.data.goodhq.volunteering.hits.total}}
+            <a href="https://goodhq.org/{{goodhq_organisation.xid}}?mode=volopp">{{inflect @root.data.goodhq.volunteering.hits.total "volunteering opportunity" "volunteering opportunities" false}}</a>
+            {{/compare}}
             on
-            <a href="https://goodhq.org">Good HQ</a>
+            <a href="https://goodhq.org/{{goodhq_organisation.xid}}">Good HQ</a>
           </li>
           {{/compare ~}}
           {{/if ~}}

@@ -1,8 +1,8 @@
 {
   "@context": "http://schema.org",
   "@type": "JobPosting",
-  "@id": "https://{{@root.request.url.host}}/vacancy/{{slug}}",
-  "url": "https://{{@root.request.url.host}}/vacancy/{{slug}}",
+  "@id": "https://goodmoves.com/vacancy/{{slug}}",
+  "url": "https://goodmoves.com/vacancy/{{slug}}",
   "identifier": "{{reference_number}}",
   "baseSalary": {
     "@type": "MonetaryAmount",
@@ -21,27 +21,50 @@
   "description": "{{stripTags (regexReplace description '\r|\n' 'gi' '')}}",
   "employmentType": "{{{role_status_list}}}",
   "industry": {{{stringify sectors}}},
-  {{#if geo_vacancy_info.[0]}}
+  {{#ifAny geo_vacancy_info.[0] organisation.street_address organisation.postcode ~}}
   "jobLocation": {
     "@type": "Place",
     "address": {
       "@type": "PostalAddress",
-      {{#with geo_vacancy_info.[0]}}
-      "addressLocality": "{{parliamentary_constituency}}",
-      "addressRegion": "{{admin_district}}",
-      "addressCountry": "{{country}}",
-      "postalCode": "{{postcode}}"
-      {{/with}}
+      {{#compare organisation.postcode "===" geo_vacancy_info.[0].postcode ~}}
+      {{#if organisation.street_address ~}}
+      "streetAddress": "{{organisation.street_address}}",
+      {{else}}
+      "streetAddress": "{{geo_vacancy_info.[0].admin_ward}}",
+      {{/if ~}}
+      {{else}}
+      "streetAddress": "{{geo_vacancy_info.[0].admin_ward}}",
+      {{/compare ~}}
+      {{#if geo_vacancy_info.[0] ~}}
+      "addressLocality": "{{geo_vacancy_info.[0].parliamentary_constituency}}",
+      "addressRegion": "{{geo_vacancy_info.[0].admin_district}}",
+      "addressCountry": "{{geo_vacancy_info.[0].country}}",
+      "postalCode": "{{geo_vacancy_info.[0].postcode}}"
+      {{else}}
+      "postalCode": "{{organisation.postcode}}"
+      {{/if ~}}
     }
   },
   {{else}}
   "jobLocation": "{{location}}",
-  {{/if}}
+  {{/ifAny ~}}
   "hiringOrganization": {
     "@type": "Organization",
     "name": "{{organisation.name}}",
     "logo": "{{organisation.logo_url}}",
-    "location": "{{organisation.postcode}}",
+    "location": {
+      "@type": "Place",
+      "address": {
+        "@type": "PostalAddress",
+        {{#if organisation.street_address ~}}
+        "streetAddress": "{{organisation.street_address}}",
+        {{/if ~}}
+        {{#if geo_vacancy_info.[0] ~}}
+        "addressCountry": "{{geo_vacancy_info.[0].country}}",
+        {{/if ~}}
+        "postalCode": "{{organisation.postcode}}"
+      }
+    },
     {{#if organisation.website}}
     "website": "{{fixUrl organisation.website}}",
     {{/if}}

@@ -5,10 +5,6 @@
 {{#ifAny og_image ../og_image}}
 <meta property="og:image" content="{{default og_image ../og_image}}" data-dynamic="true">
 {{/ifAny ~}}
-{{#ifAny og_summary description ../og_summary ../description ~}}
-<meta property="og:summary" content="{{default og_summary (default ../og_summary (default description ../description))}}" data-dynamic="true">
-<meta name="description" content="{{default description (default ../description (default og_summary ../og_summary))}}" data-dynamic="true">
-{{/ifAny ~}}
 {{#if rendered.json_ld ~}}
 <script type="application/ld+json" data-dynamic="true">
 {{{rendered.json_ld}}}

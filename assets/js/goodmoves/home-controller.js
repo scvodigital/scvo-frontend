@@ -17,7 +17,6 @@ typeaheadController.addListener(function(field, term) {
   } else {
     $search[0].click();
   }
-  refreshChips();
 });
 
 $where.on('keypress', function(evt) {
@@ -67,6 +66,7 @@ function reverseLookup(latitude, longitude) {
 
 function addChip(field, term) {
   var slug = slugify(term);
+  if ($('input[name="' + field + '[]"][value="' + slug + '"]').length > 0) return;
   var $chip = $('<div />')
     .addClass('mdc-chip mdc-theme--primary-bg')
     .attr({ tabindex: 0 })
@@ -104,7 +104,7 @@ $(document).ready(function() {
     $(o).parent().find('.scroll-left').on('click', function() {
       var $o = $(o);
       var currentLeft = $o.scrollLeft();
-      var third = $o.width() * (3/4);
+      var third = $o.width() * (4/5);
       var by = currentLeft - third;
       if (o.scroll) {
         o.scroll({ left: by, top: 0, behavior: 'smooth'});
@@ -115,7 +115,7 @@ $(document).ready(function() {
     $(o).parent().find('.scroll-right').on('click', function() {
       var $o = $(o);
       var currentLeft = $o.scrollLeft();
-      var third = $o.width() * (3/4);
+      var third = $o.width() * (4/5);
       var by = currentLeft + third;
       if (o.scroll) {
         o.scroll({ left: by, top: 0, behavior: 'smooth'});
@@ -126,13 +126,13 @@ $(document).ready(function() {
 
     showHideScrollButtons(o);
   });
- 
-  $('.scrolling-grid').on('scroll', function(evt) { 
+
+  $('.scrolling-grid').on('scroll', function(evt) {
     showHideScrollButtons(evt.currentTarget);
   });
   function showHideScrollButtons(o) {
     var $o = $(o);
-    
+
     var $leftButton = $o.parent().find('.scroll-left');
     var $rightButton = $o.parent().find('.scroll-right');
     var currentLeft = $o.scrollLeft();

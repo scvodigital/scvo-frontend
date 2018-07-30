@@ -1,4 +1,4 @@
-{{#if @root.data.auth }}
+{{#if @root.data.auth ~}}
   {{#> ajax_chip
     onUrl=(concat "/add-to-shortlist?id=" id)
     offUrl=(concat "/remove-from-shortlist?id=" id)
@@ -17,4 +17,9 @@
     }
   }
   {{/ajax_chip}}
-{{/if}}
+{{else}}
+  <div class="mdc-chip" data-dialog-target="#shortlist-dialog">
+    <span class="far fa-star mdc-chip__icon mdc-chip__icon--leading" aria-hidden="true"></span>
+    <div class="mdc-chip__text noselect">Shortlist</div>
+  </div>
+{{/if ~}}
