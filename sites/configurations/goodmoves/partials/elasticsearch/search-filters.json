@@ -10,7 +10,7 @@
 {{#if statuses ~}}
   {{>elasticsearch_terms field="role_status_slug" terms=statuses}},
 {{/if}}
-{{#ifAll lat lng ~}}
+{{#ifAll location lat lng distance ~}}
 {
   "geo_distance": {
     "distance": "{{default distance "8.04672"}}km",
