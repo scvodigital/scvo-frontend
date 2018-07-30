@@ -39,13 +39,13 @@
             <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-2-tablet mdc-layout-grid__cell--span-3-phone">
               <div class="mdc-text-field mdc-text-field--box mdc-text-field--with-leading-icon" data-mdc-auto-init="MDCTextField">
                 <span class="far fa-map-marker-alt mdc-text-field__icon"></span>
-                <input type="text" id="where-jobs" name="location" class="mdc-text-field__input" placeholder=" " data-location-options='
-                {
-                  "types": ["(regions)"],
-                  "componentRestrictions": {
-                    "country": "gb"
-                  }
-                }'>
+                <input type="text" id="where-jobs" name="location" class="mdc-text-field__inputZz" value="{{@root.request.params.query.location}}" placeholder="" data-lpignore="true" data-location-options='
+                  {
+                    "types": ["(regions)"],
+                    "componentRestrictions": {
+                      "country": "gb"
+                    }
+                  }' data-location-lat="[name='lat']" data-location-lng="[name='lng']">
                 <label for="where-jobs" class="mdc-floating-label">
                   Location
                 </label>
