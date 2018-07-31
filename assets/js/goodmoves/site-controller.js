@@ -24,8 +24,8 @@ var GoodmovesController = Class.extend({
     // Headroom
     var header = document.querySelector("header.top-bar-stuck");
     var headroom  = new Headroom(header, {
-        "offset": 138,
-        "tolerance": 5
+      "offset": 138,
+      "tolerance": 5
     });
     headroom.init();
   },
@@ -170,7 +170,7 @@ var GoodmovesController = Class.extend({
         }
       });
     });
-    
+
     $('[data-map-options]').each(function(i, o) {
       var options = $(o).data('map-options');
       var initialLat = 55.94528820000001;
@@ -183,7 +183,8 @@ var GoodmovesController = Class.extend({
       }
       var map = L.map(o, {
         fullscreenControl: true,
-        scrollWheelZoom: false
+        scrollWheelZoom: false,
+        trackResize: false
       }).setView([initialLat, initialLng], initialZoom);
       var osmAttrib = 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>';
       L.tileLayer('https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png', {
@@ -194,6 +195,20 @@ var GoodmovesController = Class.extend({
       }).addTo(map);
       L.control.scale().addTo(map);
       var mapName = $(o).data('map-name');
+
+      // console.log(options.circle);
+      if (options.circle) {
+        L.circle(
+          [options.circle.lat, options.circle.lng],
+          {
+            radius: options.circle.radius*1000,
+            color: '#9cd986',
+            fillColor: '#9cd986',
+            fillOpacity: 0.1
+          }
+        ).addTo(map);
+      }
+
       var $vacancies = $('marker[data-map="' + mapName + '"]');
       var vacancyMarkers = {};
 
@@ -233,20 +248,20 @@ var GoodmovesController = Class.extend({
           var id = 'popup-pager-' + p;
           var content = $('<div>');
           var pager = $('<div>')
-            .attr('id', id)
-            .addClass('popup-pager')
-            .append(vacancyMarker.contents.join('\n'))
-            .appendTo(content);
+          .attr('id', id)
+          .addClass('popup-pager')
+          .append(vacancyMarker.contents.join('\n'))
+          .appendTo(content);
           var back = $('<a>')
-            .attr('href', 'javascript:goodmoves.popupPagerPage("#' + id + '", "back")')
-            .addClass('scroll-button pager pager-left')
-            .append('<span class="fas fa-fw fa-angle-left fa-2x"></span>')
-            .appendTo(content);
+          .attr('href', 'javascript:goodmoves.popupPagerPage("#' + id + '", "back")')
+          .addClass('scroll-button pager pager-left')
+          .append('<span class="fas fa-fw fa-angle-left fa-2x"></span>')
+          .appendTo(content);
           var next = $('<a>')
-            .attr('href', 'javascript:goodmoves.popupPagerPage("#' + id + '", "next")')
-            .addClass('scroll-button pager pager-right')
-            .append('<span class="fas fa-fw fa-angle-right fa-2x"></span>')
-            .appendTo(content);
+          .attr('href', 'javascript:goodmoves.popupPagerPage("#' + id + '", "next")')
+          .addClass('scroll-button pager pager-right')
+          .append('<span class="fas fa-fw fa-angle-right fa-2x"></span>')
+          .appendTo(content);
           back.on('click', function(evt) {
             var pager = $(evt.currentTarget).parent();
             popupPage(pager, 'back');
@@ -266,7 +281,7 @@ var GoodmovesController = Class.extend({
       if (!options.center) {
         map.fitBounds(markers.getBounds());
       }
-      
+
       that.maps[mapName] = map;
     });
   },
@@ -349,163 +364,189 @@ $(document).ready(function() {
 function initMap() {
   handleLocationBoxes();
 }
+$(document).ready(function() {
+  handleLocationBoxes();
+});
 
 function handleLocationBoxes() {
-  window.autocompletes = {};
   $('[data-location-options]').each(function(i, o) {
-    var $o = $(o);
-    var id = $o.attr('id');
-    var options = $o.data('location-options');
+    var options = $(o).data('location-options');
+    var latSelector = $(o).data('location-lat');
+    var lngSelector = $(o).data('location-lng');
 
     var autocomplete = new google.maps.places.Autocomplete(o, options);
     autocomplete.addListener('place_changed', function(evt) {
-      setPlace($o);
-    });
-
-    window.autocompletes[id] = autocomplete;
-    
-    $('select[data-location="' + id + '"]').on('change', function(evt) {
-      var $distance = $(evt.currentTarget);
-      var $innerNe = $('input[data-location-inner-ne="' + id + '"]');
-      var $innerSw = $('input[data-location-inner-sw="' + id + '"]');
-      var $outerNe = $('input[data-location-outer-ne="' + id + '"]');
-      var $outerSw = $('input[data-location-outer-sw="' + id + '"]');
-      if (!$innerNe.val() || !$innerSw.val()) return;
-
-      var innerNe = $innerNe.val().split(', ');
-      var innerSw = $innerSw.val().split(', ');
-      var distance = $distance.val();
-      var outer = extendBounds(innerNe[0], innerNe[1], innerSw[0], innerSw[1], distance);
-      var outerNorthEast = outer.getNorthEast();
-      var outerSouthWest = outer.getSouthWest();
-
-      $outerNe.val(outerNorthEast.lat() + ', ' + outerNorthEast.lng());
-      $outerSw.val(outerSouthWest.lat() + ', ' + outerSouthWest.lng());
+      var place = this.getPlace();
+      if (place.geometry.location) {
+        $(latSelector).val(place.geometry.location.lat());
+        $(lngSelector).val(place.geometry.location.lng());
+        $(o).val(place.formatted_address);
+      }
     });
   }).on('keypress', function(evt) {
     if (evt.which === 13) {
       evt.preventDefault();
       return false;
     }
-  }).on('blur', function(evt) {
-    setPlace(evt.currentTarget);
   });
 }
 
-var innerSquare = null;
-var outerSquare = null;
+// function handleLocationBoxes() {
+//   window.autocompletes = {};
+//   $('[data-location-options]').each(function(i, o) {
+//     var $o = $(o);
+//     var id = $o.attr('id');
+//     var options = $o.data('location-options');
+//
+//     var autocomplete = new google.maps.places.Autocomplete(o, options);
+//     autocomplete.addListener('place_changed', function(evt) {
+//       setPlace($o);
+//     });
+//
+//     window.autocompletes[id] = autocomplete;
+//
+//     $('select[data-location="' + id + '"]').on('change', function(evt) {
+//       var $distance = $(evt.currentTarget);
+//       var $innerNe = $('input[data-location-inner-ne="' + id + '"]');
+//       var $innerSw = $('input[data-location-inner-sw="' + id + '"]');
+//       var $outerNe = $('input[data-location-outer-ne="' + id + '"]');
+//       var $outerSw = $('input[data-location-outer-sw="' + id + '"]');
+//       if (!$innerNe.val() || !$innerSw.val()) return;
+//
+//       var innerNe = $innerNe.val().split(', ');
+//       var innerSw = $innerSw.val().split(', ');
+//       var distance = $distance.val();
+//       var outer = extendBounds(innerNe[0], innerNe[1], innerSw[0], innerSw[1], distance);
+//       var outerNorthEast = outer.getNorthEast();
+//       var outerSouthWest = outer.getSouthWest();
+//
+//       $outerNe.val(outerNorthEast.lat() + ', ' + outerNorthEast.lng());
+//       $outerSw.val(outerSouthWest.lat() + ', ' + outerSouthWest.lng());
+//     });
+//   }).on('keypress', function(evt) {
+//     if (evt.which === 13) {
+//       evt.preventDefault();
+//       return false;
+//     }
+//   }).on('blur', function(evt) {
+//     setPlace(evt.currentTarget);
+//   });
+// }
 
-function setPlace(field) {
-  var $o = $(field);
-  var id = $o.attr('id');
-  var $innerNe = $('input[data-location-inner-ne="' + id + '"]');
-  var $innerSw = $('input[data-location-inner-sw="' + id + '"]');
-  var $outerNe = $('input[data-location-outer-ne="' + id + '"]');
-  var $outerSw = $('input[data-location-outer-sw="' + id + '"]');
-  var $distance = $('select[data-location="' + id + '"]');
-  var autocomplete = window.autocompletes[$o.attr('id')];
+// var innerSquare = null;
+// var outerSquare = null;
+//
+// function setPlace(field) {
+//   var $o = $(field);
+//   var id = $o.attr('id');
+//   var $innerNe = $('input[data-location-inner-ne="' + id + '"]');
+//   var $innerSw = $('input[data-location-inner-sw="' + id + '"]');
+//   var $outerNe = $('input[data-location-outer-ne="' + id + '"]');
+//   var $outerSw = $('input[data-location-outer-sw="' + id + '"]');
+//   var $distance = $('select[data-location="' + id + '"]');
+//   var autocomplete = window.autocompletes[$o.attr('id')];
+//
+//   if (autocomplete) {
+//     var place = autocomplete.getPlace();
+//     if (place && place.geometry && place.geometry.location) {
+//       var inner = place.geometry.viewport;
+//       var innerNorthEast = inner.getNorthEast();
+//       var innerSouthWest = inner.getSouthWest();
+//       var distance = $distance.val();
+//
+//       $innerNe.val(innerNorthEast.lat() + ', ' + innerNorthEast.lng());
+//       $innerSw.val(innerSouthWest.lat() + ', ' + innerSouthWest.lng());
+//
+//       var outer = extendBounds(innerNorthEast.lat(), innerNorthEast.lng(), innerSouthWest.lat(), innerSouthWest.lng(), distance);
+//       var outerNorthEast = outer.getNorthEast();
+//       var outerSouthWest = outer.getSouthWest();
+//
+//       $outerNe.val(outerNorthEast.lat() + ', ' + outerNorthEast.lng());
+//       $outerSw.val(outerSouthWest.lat() + ', ' + outerSouthWest.lng());
+//
+//       $o.val(place.formatted_address);
+//     } else {
+//       $o.val('');
+//       $innerNe.val('');
+//       $innerSw.val('');
+//       $outerNe.val('');
+//       $outerSw.val('');
+//     }
+//   }
+// }
 
-  if (autocomplete) {
-    var place = autocomplete.getPlace();
-    if (place && place.geometry && place.geometry.location) {
-      var inner = place.geometry.viewport;
-      var innerNorthEast = inner.getNorthEast();
-      var innerSouthWest = inner.getSouthWest();
-      var distance = $distance.val();
-
-      $innerNe.val(innerNorthEast.lat() + ', ' + innerNorthEast.lng());
-      $innerSw.val(innerSouthWest.lat() + ', ' + innerSouthWest.lng());
-
-      var outer = extendBounds(innerNorthEast.lat(), innerNorthEast.lng(), innerSouthWest.lat(), innerSouthWest.lng(), distance);
-      var outerNorthEast = outer.getNorthEast();
-      var outerSouthWest = outer.getSouthWest();
-
-      $outerNe.val(outerNorthEast.lat() + ', ' + outerNorthEast.lng());
-      $outerSw.val(outerSouthWest.lat() + ', ' + outerSouthWest.lng());
-
-      $o.val(place.formatted_address);
-    } else {
-      $o.val('');
-      $innerNe.val('');
-      $innerSw.val('');
-      $outerNe.val('');
-      $outerSw.val('');
-    }
-  }
-}
-
-// returns latlng of new coordinate which is dist from the longitude given
-function lngDistance(lat1, lng1, dist) {
-    var R = 6371000; // m
-    lat1 = deg2rad(lat1);
-    lng1 = deg2rad(lng1);
-    var lng2 = (R*lng1*Math.cos(lat1)-dist)/(R*Math.cos(lat1));
-    return(rad2lng(lng2));
-}
-
-// returns latlng of new coordinate which is dist from the latitude given
-function latDistance(lat1, dist) {
-    var R = 6371000; // m
-    var lat1 = deg2rad(lat1);
-    var lat2 = (R*lat1-dist)/R;
-    return(rad2lat(lat2));
-}
-
-function extendBounds(latNE, lngNE, latSW, lngSW, dist) {
-    var latlngNE = new google.maps.LatLng(latDistance(latNE, -dist), lngDistance(latNE,lngNE, -dist));
-    var latlngSW = new google.maps.LatLng(latDistance(latSW, dist), lngDistance(latSW, lngSW, dist));
-    return (new google.maps.LatLngBounds(latlngSW, latlngNE));
-}
-
-function deg2rad(deg) {
-  return deg * .017453292519943295
-}
-
-// convert radians into latitude
-// 90 to -90
-function rad2lat(rad) {
-    // first of all get everthing into the range -2pi to 2pi
-    rad = rad % (Math.PI*2);
-
-    // convert negatives to equivalent positive angle
-    if (rad < 0)
-        rad = 2*Math.PI + rad;
-    
-    // restict to 0 - 180
-    var rad180 = rad % (Math.PI);
-    
-    // anything above 90 is subtracted from 180
-    if (rad180 > Math.PI/2)
-        rad180 = Math.PI - rad180;
-    // if it is greater than 180 then make negative
-    if (rad > Math.PI)
-        rad = -rad180;
-    else
-        rad = rad180;
-
-    return(rad/Math.PI*180);
-}
-
-// convert radians into longitude
-// 180 to -180
-function rad2lng(rad) {
-    // first of all get everthing into the range -2pi to 2pi
-    rad = rad % (Math.PI*2);
-    if (rad < 0)
-        rad = 2*Math.PI + rad;
-
-    // convert negatives to equivalent positive angle
-    var rad360 = rad % (Math.PI*2);         
-
-    // anything above 90 is subtracted from 360
-    if (rad360 > Math.PI)
-        rad360 = Math.PI*2 - rad360;
-
-    // if it is greater than 180 then make negative
-    if (rad > Math.PI)
-        rad = -rad360;
-    else
-        rad = rad360;
-
-    return(rad/Math.PI*180);
-}
+// // returns latlng of new coordinate which is dist from the longitude given
+// function lngDistance(lat1, lng1, dist) {
+//     var R = 6371000; // m
+//     lat1 = deg2rad(lat1);
+//     lng1 = deg2rad(lng1);
+//     var lng2 = (R*lng1*Math.cos(lat1)-dist)/(R*Math.cos(lat1));
+//     return(rad2lng(lng2));
+// }
+//
+// // returns latlng of new coordinate which is dist from the latitude given
+// function latDistance(lat1, dist) {
+//     var R = 6371000; // m
+//     var lat1 = deg2rad(lat1);
+//     var lat2 = (R*lat1-dist)/R;
+//     return(rad2lat(lat2));
+// }
+//
+// function extendBounds(latNE, lngNE, latSW, lngSW, dist) {
+//     var latlngNE = new google.maps.LatLng(latDistance(latNE, -dist), lngDistance(latNE,lngNE, -dist));
+//     var latlngSW = new google.maps.LatLng(latDistance(latSW, dist), lngDistance(latSW, lngSW, dist));
+//     return (new google.maps.LatLngBounds(latlngSW, latlngNE));
+// }
+//
+// function deg2rad(deg) {
+//   return deg * .017453292519943295
+// }
+//
+// // convert radians into latitude
+// // 90 to -90
+// function rad2lat(rad) {
+//     // first of all get everthing into the range -2pi to 2pi
+//     rad = rad % (Math.PI*2);
+//
+//     // convert negatives to equivalent positive angle
+//     if (rad < 0)
+//         rad = 2*Math.PI + rad;
+//
+//     // restict to 0 - 180
+//     var rad180 = rad % (Math.PI);
+//
+//     // anything above 90 is subtracted from 180
+//     if (rad180 > Math.PI/2)
+//         rad180 = Math.PI - rad180;
+//     // if it is greater than 180 then make negative
+//     if (rad > Math.PI)
+//         rad = -rad180;
+//     else
+//         rad = rad180;
+//
+//     return(rad/Math.PI*180);
+// }
+//
+// // convert radians into longitude
+// // 180 to -180
+// function rad2lng(rad) {
+//     // first of all get everthing into the range -2pi to 2pi
+//     rad = rad % (Math.PI*2);
+//     if (rad < 0)
+//         rad = 2*Math.PI + rad;
+//
+//     // convert negatives to equivalent positive angle
+//     var rad360 = rad % (Math.PI*2);
+//
+//     // anything above 90 is subtracted from 360
+//     if (rad360 > Math.PI)
+//         rad360 = Math.PI*2 - rad360;
+//
+//     // if it is greater than 180 then make negative
+//     if (rad > Math.PI)
+//         rad = -rad360;
+//     else
+//         rad = rad360;
+//
+//     return(rad/Math.PI*180);
+// }

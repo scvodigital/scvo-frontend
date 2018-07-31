@@ -1,0 +1,28 @@
+{{#if regions ~}}
+  {{>queries_terms field="local_authority_slug" terms=regions}},
+{{/if ~}}
+{{#if sectors ~}}
+  {{>queries_terms field="sectors_slugs" terms=sectors}},
+{{/if ~}}
+{{#if roles ~}}
+  {{>queries_terms field="roles_slugs" terms=roles}},
+{{/if ~}}
+{{#if statuses ~}}
+  {{>queries_terms field="role_status_slug" terms=statuses}},
+{{/if}}
+{{#ifAll location lat lng distance ~}}
+{
+  "geo_distance": {
+    "distance": "{{default distance "8.04672"}}km",
+    "geo_vacancy_coords": {
+      "lat": {{lat}},
+      "lon": {{lng}}
+    }
+  }
+},
+{{/ifAll ~}}
+{
+  "exists": {
+    "field": "title"
+  }
+}

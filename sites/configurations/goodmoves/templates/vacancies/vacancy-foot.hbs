@@ -1,3 +1,4 @@
+<script src="/assets/js/autosize.min.js"></script>
 <script type="text/javascript">
 var tabs = new mdc.tabs.MDCTabBar(document.querySelector("#vacancy-tab-bar"));
 var panels = document.querySelector(".panels");
@@ -18,18 +19,41 @@ tabs.listen("MDCTabBar:change", function(t) {
   var tabs = t.detail;
   var nthChildIndex = tabs.activeTabIndex;
   updatePanel(nthChildIndex);
+  if (goodmoves.maps.vacancyMap) {
+    window.setTimeout(function() {
+      var map = goodmoves.maps.vacancyMap;
+      map.invalidateSize();
+    }, 0);
+  }
 });
 
-{{#with data.primaryResponse.hits.hits.[0]}}
-var mapResults = [
-    {{#each _source.geo_vacancy_coords as |coords|}}
-    {
-      "Id": {{{stringify ../_id}}},
-      "geo_vacancy_coords": {{{stringify coords}}},
-      "title": {{{stringify ../_source.title}}},
-      "info_window": {{{stringify (component "vacancy_map" ../_source)}}}
-    }{{#unless @last}},{{/unless}}
-    {{/each}}
-];
-{{/with}}
+{{#if data.auth}}
+$(document).ready(function() {
+  $('textarea[data-user-notes]').each(function(i, o) {
+    var $o = $(o);
+    var id = $o.data('user-notes');
+    var path = '/notes/{{@root.data.auth.uid}}/' + id;
+    goodmoves.app.database().ref(path).once('value', function(response) {
+      if (response.exists()) {
+        var notes = response.val();
+        $o.parent()[0].MDCTextField.value = notes;
+      } 
+      autosize($o);
+    });
+  });
+  $('button[data-user-notes]').on('click', function(evt) {
+    var id = $(evt.currentTarget).data('user-notes');
+    var userNotes = $('textarea[data-user-notes="' + id + '"]').val();
+    var path = '/notes/{{@root.data.auth.uid}}/' + id;
+    console.log('About to save to path:', path, ', the following notes:\n', userNotes);
+    goodmoves.app.database().ref(path).set(userNotes).then(function(result) {
+      goodmoves.snackbarShow({
+        message: 'Notes saved'
+      });
+    }).catch(function(err) {
+      console.error('Failed to save notes:', err);
+    });  
+  });
+});
+{{/if}}
 </script>

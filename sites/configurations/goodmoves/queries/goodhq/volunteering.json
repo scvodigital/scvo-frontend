@@ -4,8 +4,21 @@
     "rendered.goodmoves_list"
   ],
   "query": {
-    "term": {
-      "goodhq_organisation.xid": "{{data.primaryResponse.hits.hits.[0]._source.goodhq_organisation.xid}}"
+    "bool": {
+      "filter": [
+        {
+          "term": {
+            "goodhq_organisation.xid": "{{data.primaryResponse.hits.hits.[0]._source.goodhq_organisation.xid}}"
+          }
+        }
+      ],
+      "must_not": [
+        {
+          "terms": {
+            "work_type-slugs": ["committee-work"]
+          }
+        }
+      ]
     }
   },
   "sort": {

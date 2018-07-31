@@ -6,7 +6,7 @@
       <li><a href="/jobs">Jobs</a></li>
       <li><a href="/jobs/community-jobs-scotland">Community Jobs Scotland</a></li>
       <li><a href="/jobs/community-jobs-scotland/vacancies">Vacancies</a></li>
-      <li><a href="/jobs/community-jobs-scotland/vacancies/{{request.params.phase}}">Search</a></li>
+      <li><a href="/jobs/community-jobs-scotland/vacancies/{{request.params.phase}}">{{#compare request.params.phase "===" "p19v"}}16–29 year olds{{else}}16–29 year olds with a disability{{/compare}}</a></li>
       <li><a href="/jobs/community-jobs-scotland/vacancies/{{request.params.phase}}/{{request.params.slug}}">{{data.primaryResponse.hits.hits.[0]._source.title}}</a></li>
       <li>Apply</li>
     </ul>
@@ -62,7 +62,7 @@
           <ul class="mdc-list downloads">
             {{#compare organisation.name "===" "Kibble" ~}}
             <li class="mdc-list-item">
-              <span class="mdc-list-item__graphic far fa-file fa-file-word-o" aria-hidden="true"></span>
+              <span class="mdc-list-item__graphic far fa-file fa-file-word" aria-hidden="true"></span>
               <span class="mdc-list-item__text">
                 <a href="https://storage.googleapis.com/elasticsauce.appspot.com/cjs/Kibble%20Self%20Declaration%20Form.rtf" target="_blank">
                   <span class="title">Kibble Self Declaration Form</span>
@@ -70,7 +70,7 @@
               </span>
             </li>
             <li class="mdc-list-item">
-              <span class="mdc-list-item__graphic far fa-file fa-file-word-o" aria-hidden="true"></span>
+              <span class="mdc-list-item__graphic far fa-file fa-file-word" aria-hidden="true"></span>
               <span class="mdc-list-item__text">
                 <a href="https://storage.googleapis.com/elasticsauce.appspot.com/cjs/KibbleWorks%20Application%20Form%20(2015).doc" target="_blank">
                   <span class="title">KibbleWorks Application Form</span>
@@ -79,7 +79,15 @@
             </li>
             {{else}}
             <li class="mdc-list-item">
-              <span class="mdc-list-item__graphic far fa-file fa-file-word-o" aria-hidden="true"></span>
+              <span class="mdc-list-item__graphic far fa-file fa-file-word" aria-hidden="true"></span>
+              <span class="mdc-list-item__text">
+                <a href="https://storage.googleapis.com/scvo-assets/scvo-frontend/assets/cjs/JCP%20CJS%20Application%20v8.doc" target="_blank">
+                  <span class="title">JCP CJS Application</span>
+                </a>
+              </span>
+            </li>
+            <li class="mdc-list-item">
+              <span class="mdc-list-item__graphic far fa-file fa-file-word" aria-hidden="true"></span>
               <span class="mdc-list-item__text">
                 <a href="https://storage.googleapis.com/scvo-assets/scvo-frontend/assets/cjs/JCP%20CJS%20Eligibility%20Referral%20v8.2.doc" target="_blank">
                   <span class="title">JCP CJS Eligibility Referral</span>
@@ -87,23 +95,23 @@
               </span>
             </li>
             <li class="mdc-list-item">
-              <span class="mdc-list-item__graphic far fa-file fa-file-word-o" aria-hidden="true"></span>
+              <span class="mdc-list-item__graphic far fa-file fa-file-word" aria-hidden="true"></span>
               <span class="mdc-list-item__text">
                 <a href="https://storage.googleapis.com/scvo-assets/scvo-frontend/assets/cjs/CJS%20PT%20Dis%20Eligibility%20Referral%20Form%20v8.2.doc" target="_blank">
-                  <span class="title">CJS PT Dis Eligibility Referral Form</span>
+                  <span class="title">CJS PT Disability Eligibility Referral Form</span>
                 </a>
               </span>
             </li>
             <li class="mdc-list-item">
-              <span class="mdc-list-item__graphic far fa-file fa-file-word-o" aria-hidden="true"></span>
+              <span class="mdc-list-item__graphic far fa-file fa-file-word" aria-hidden="true"></span>
               <span class="mdc-list-item__text">
                 <a href="https://storage.googleapis.com/elasticsauce.appspot.com/cjs/Vulnerable%20Group%20Criteria%20v8.docx" target="_blank">
-                  <span class="title">Vulnerable group criteria</span>
+                  <span class="title">Vulnerable Group Criteria</span>
                 </a>
               </span>
             </li>
             <li class="mdc-list-item">
-              <span class="mdc-list-item__graphic far fa-file fa-file-word-o" aria-hidden="true"></span>
+              <span class="mdc-list-item__graphic far fa-file fa-file-word" aria-hidden="true"></span>
               <span class="mdc-list-item__text">
                 <a href="https://storage.googleapis.com/scvo-assets/scvo-frontend/assets/cjs/SDS%20CJS%20Elig%20Ref%20Appl%20v8.2.doc" target="_blank">
                   <span class="title">SDS CJS Eligibility Referral Application</span>
