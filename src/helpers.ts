@@ -178,6 +178,22 @@ export class Helpers {
     return false;
   }
 
+  static helper_containsAny(haystack: any[], vals: any[]) {
+    if (!Array.isArray(haystack) || !vals) {
+      return false;
+    }
+
+    vals = Helpers.helper_arrayify(vals);
+
+    for (var v = 0; v < vals.length; v++) {
+      if (Helpers.helper_contains(haystack, vals[v])) {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
   static helper_obj(options: any) {
     //console.log(options);
     return options.hash;
