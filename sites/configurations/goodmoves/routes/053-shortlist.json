@@ -21,7 +21,7 @@
         "connectionStringTemplate": "{$../../elasticsearch-url.txt}",
         "elasticsearchConfig": {
           "apiVersion": "5.6",
-          "log": "debug"
+          "log": "warning"
         },
         "queryTemplates": [
           {
@@ -39,6 +39,15 @@
         ]
       },
       "renderer": "handlebars"
+    },
+    {
+      "name": "shortlist_notes",
+      "taskModule": "firebaseRtbGet",
+      "renderer": "handlebars",
+      "config": {
+        "appName": "scvo",
+        "pathTemplate": "/notes/{{data.auth.uid}}"
+      }
     },
     "metaData.commonTasks.supplimentaryResponses",
     {

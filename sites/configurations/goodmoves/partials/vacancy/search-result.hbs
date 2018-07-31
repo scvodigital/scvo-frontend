@@ -4,6 +4,13 @@
   {{#if description_short ~}}
   <div class="search-result-article__snippet mdc-typography--body1">
     {{{description_short}}}
+    {{#if (getProperty @root.data.shortlist_notes Id)}}
+      <hr />
+      <div class="b-padding-full">
+        <h3 class="mdc-typography--headline6">Your notes</h3>
+        {{{regexReplace (getProperty @root.data.shortlist_notes Id) "(\r\n)|(\r|\n)" "gi" "<br />"}}}
+      </div>
+    {{/if}}
   </div>
   <hr class="mdc-list-divider" />
   {{/if}}
