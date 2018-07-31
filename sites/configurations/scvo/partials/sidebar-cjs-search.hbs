@@ -3,18 +3,18 @@
   <div class="mdc-text-field mdc-text-field--box mdc-text-field--with-leading-icon" data-mdc-auto-init="MDCTextField">
     <span class="far fa-search mdc-text-field__icon" tabindex="0" role="button"></span>
     <input type="text" class="mdc-text-field__input mdc-text-field--fullwidth" name="q" id="keywords" data-lpignore="true" placeholder="" value="{{@root.request.params.query.q}}">
-    <label class="mdc-floating-label mdc-floating-label--float-above" for="q">Keywords</label>
+    <label class="mdc-floating-label" for="q">Keywords</label>
   </div>
 
   <div class="mdc-text-field mdc-text-field--box mdc-text-field--with-leading-icon" data-mdc-auto-init="MDCTextField">
     <span class="far fa-hashtag mdc-text-field__icon" tabindex="0" role="button"></span>
     <input type="text" class="mdc-text-field__input mdc-text-field--fullwidth" name="job_number" id="job_number" data-lpignore="true" placeholder="" value="{{@root.request.params.query.job_number}}">
-    <label class="mdc-floating-label mdc-floating-label--float-above" for="job_number">Job number</label>
+    <label class="mdc-floating-label" for="job_number">Job number</label>
   </div>
 
   <div class="mdc-form-field mdc-select mdc-select--box" data-mdc-auto-init="MDCSelect">
     <select class="mdc-select__native-control" role="listbox" id="sector" name="sector">
-      <option value=""{{#if @root.request.params.query.sector}}{{else}} selected{{/if}}>All sectors</option>
+      <option value=""{{#if @root.request.params.query.sector}}{{else}} selected{{/if}}></option>
       <option value="administration-reception"{{#compare @root.request.params.query.sector "===" "administration-reception"}} selected{{/compare}}>Administration/Reception</option>
       <option value="advocacy-advice"{{#compare @root.request.params.query.sector "===" "advocacy-advice"}} selected{{/compare}}>Advocacy/Advice</option>
       <option value="animal-care"{{#compare @root.request.params.query.sector "===" "animal-care"}} selected{{/compare}}>Animal Care</option>
@@ -102,7 +102,7 @@
 
   <div class="mdc-form-field mdc-select mdc-select--box" data-mdc-auto-init="MDCSelect">
     <select class="mdc-select__native-control" role="listbox" id="region" name="region">
-      <option value="" {{#if @root.request.params.query.region}}{{else}} selected{{/if}}>All regions</option>
+      <option value="" {{#if @root.request.params.query.region}}{{else}} selected{{/if}}></option>
       <option value="aberdeen-city"{{#compare @root.request.params.query.region "===" "aberdeen-city"}} selected{{/compare}}>Aberdeen</option>
       <option value="aberdeenshire"{{#compare @root.request.params.query.region "===" "aberdeenshire"}} selected{{/compare}}>Aberdeenshire</option>
       <option value="angus"{{#compare @root.request.params.query.region "===" "angus"}} selected{{/compare}}>Angus</option>
