@@ -1,4 +1,3 @@
-<script src="/assets/js/autosize.min.js"></script>
 <script type="text/javascript">
 var tabs = new mdc.tabs.MDCTabBar(document.querySelector("#vacancy-tab-bar"));
 var panels = document.querySelector(".panels");
@@ -29,18 +28,6 @@ tabs.listen("MDCTabBar:change", function(t) {
 
 {{#if data.auth}}
 $(document).ready(function() {
-  $('textarea[data-user-notes]').each(function(i, o) {
-    var $o = $(o);
-    var id = $o.data('user-notes');
-    var path = '/notes/{{@root.data.auth.uid}}/' + id;
-    goodmoves.app.database().ref(path).once('value', function(response) {
-      if (response.exists()) {
-        var notes = response.val();
-        $o.parent()[0].MDCTextField.value = notes;
-      } 
-      autosize($o);
-    });
-  });
   $('button[data-user-notes]').on('click', function(evt) {
     var id = $(evt.currentTarget).data('user-notes');
     var userNotes = $('textarea[data-user-notes="' + id + '"]').val();
