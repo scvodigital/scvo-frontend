@@ -18,18 +18,28 @@ tabs.listen("MDCTabBar:change", function(t) {
   var tabs = t.detail;
   var nthChildIndex = tabs.activeTabIndex;
   updatePanel(nthChildIndex);
+  if (goodmoves.maps.vacancyMap) {
+    window.setTimeout(function() {
+      goodmoves.maps.vacancyMap.eachLayer(function(layer) {
+        if (layer.redraw) {
+          layer.redraw();
+        }
+      });
+    }, 500);
+  }
 });
 
-{{#with data.primaryResponse.hits.hits.[0]}}
-var mapResults = [
-    {{#each _source.geo_vacancy_coords as |coords|}}
-    {
-      "Id": {{{stringify ../_id}}},
-      "geo_vacancy_coords": {{{stringify coords}}},
-      "title": {{{stringify ../_source.title}}},
-      "info_window": {{{stringify (component "vacancy_map" ../_source)}}}
-    }{{#unless @last}},{{/unless}}
-    {{/each}}
-];
-{{/with}}
+{{#if data.auth}}
+$('button[data-user-notes]').on('click', function(evt) {
+  var id = $(evt.currentTarget).data('user-notes');
+  var userNotes = $('textarea[data-user-notes="' + id + '"]').val();
+  var path = '/notes/{{@root.data.auth.uid}}/' + id;
+  console.log('About to save to path:', path, ', the following notes:\n', userNotes);
+  goodmoves.app.database().ref(path).update(userNotes).then(function(result) {
+    console.log('Saved notes:', result);
+  }).catch(function(err) {
+    console.error('Failed to save notes:', err);
+  });  
+});
+{{/if}}
 </script>

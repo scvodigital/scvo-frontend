@@ -196,15 +196,17 @@ var GoodmovesController = Class.extend({
       var mapName = $(o).data('map-name');
 
       // console.log(options.circle);
-      L.circle(
-        [options.circle.lat, options.circle.lng],
-        {
-          radius: options.circle.radius*1000,
-          color: '#9cd986',
-          fillColor: '#9cd986',
-          fillOpacity: 0.1
-        }
-      ).addTo(map);
+      if (options.circle) {
+        L.circle(
+          [options.circle.lat, options.circle.lng],
+          {
+            radius: options.circle.radius*1000,
+            color: '#9cd986',
+            fillColor: '#9cd986',
+            fillOpacity: 0.1
+          }
+        ).addTo(map);
+      }
 
       var $vacancies = $('marker[data-map="' + mapName + '"]');
       var vacancyMarkers = {};
@@ -276,7 +278,12 @@ var GoodmovesController = Class.extend({
       }
 
       if (!options.center) {
-        map.fitBounds(markers.getBounds());
+        if (vacancyPositions.length > 1) {
+          map.fitBounds(markers.getBounds());
+        } else {
+          var pos = vacancyPositions[0];
+          map.panTo(pos.split(','));
+        }
       }
 
       that.maps[mapName] = map;

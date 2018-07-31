@@ -2,7 +2,7 @@
   {{> vacancy_key_info}}
   <hr class="mdc-list-divider" />
   <div class="vacancy-info-container">
-    <div id="vacancy-tab-bar" class="mdc-tab-bar" data-mdc-auto-init="MDCTabBar" role="tablist">
+    <div id="vacancy-tab-bar" class="mdc-tab-bar" role="tablist">
       <a class="mdc-tab mdc-tab--active" role="tab" aria-controls="panel-1">
         <span class="far fa-list-ul fa-fw" aria-hidden="true"></span>
         Information
@@ -163,13 +163,7 @@
         <div class="location-info">
           {{#if geo_vacancy_coords}}
             <div class="container-content container-map">
-              <div id="map-vacancy" data-map-name="vacancyMap" data-map-options='{
-                "center": {
-                  "lat": {{geo_vacancy_coords.0.lat}},
-                  "lng": {{geo_vacancy_coords.0.lon}}
-                },
-                "zoom": 13
-              }'></div>
+              <div id="map-vacancy" data-map-name="vacancyMap" data-map-options=''></div>
             </div>
             {{#each (arrayify geo_vacancy_coords)}}
               <marker style="display:none;" data-map="vacancyMap" data-lat="{{lat}}" data-lng="{{lon}}" data-title="{{../organisation.name}} - {{../title}}">
@@ -189,10 +183,13 @@
         <div class="text-field-container user-notes">
           {{#if @root.data.auth ~}}
             <div class="mdc-text-field text-field mdc-text-field--fullwidth mdc-text-field--dense mdc-text-field--textarea" data-mdc-auto-init="MDCTextField">
-              <textarea id="user-notes" class="mdc-text-field__input"></textarea>
+              <textarea class="mdc-text-field__input" data-user-notes="{{Id}}"></textarea>
               <label class="mdc-floating-label" for="user-notes">
                 Your notes
               </label>
+            </div>
+            <div class="text-right">
+              <button type="button" class="mdc-button mdc-button--raised" data-user-notes="{{Id}}">Save notes</button>
             </div>
           {{else}}
             <div class="detailed-info">
