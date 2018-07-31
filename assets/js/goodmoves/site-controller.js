@@ -278,7 +278,12 @@ var GoodmovesController = Class.extend({
       }
 
       if (!options.center) {
-        map.fitBounds(markers.getBounds());
+        if (vacancyPositions.length > 1) {
+          map.fitBounds(markers.getBounds());
+        } else {
+          var pos = vacancyPositions[0];
+          map.panTo(pos.split(','));
+        }
       }
 
       that.maps[mapName] = map;
