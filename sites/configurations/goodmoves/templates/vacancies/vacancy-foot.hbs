@@ -27,16 +27,31 @@ tabs.listen("MDCTabBar:change", function(t) {
 });
 
 {{#if data.auth}}
-$('button[data-user-notes]').on('click', function(evt) {
-  var id = $(evt.currentTarget).data('user-notes');
-  var userNotes = $('textarea[data-user-notes="' + id + '"]').val();
-  var path = '/notes/{{@root.data.auth.uid}}/' + id;
-  console.log('About to save to path:', path, ', the following notes:\n', userNotes);
-  goodmoves.app.database().ref(path).update(userNotes).then(function(result) {
-    console.log('Saved notes:', result);
-  }).catch(function(err) {
-    console.error('Failed to save notes:', err);
-  });  
+$(document).ready(function() {
+  $('textarea[data-user-notes]').each(function(i, o) {
+    var $o = $(o);
+    var id = $o.data('user-notes');
+    var path = '/notes/{{@root.data.auth.uid}}/' + id;
+    goodmoves.app.database().ref(path).once('value', function(response) {
+      if (response.exists()) {
+        var notes = response.val();
+        $o.parent()[0].MDCTextField.value = notes;
+      } 
+    });
+  });
+  $('button[data-user-notes]').on('click', function(evt) {
+    var id = $(evt.currentTarget).data('user-notes');
+    var userNotes = $('textarea[data-user-notes="' + id + '"]').val();
+    var path = '/notes/{{@root.data.auth.uid}}/' + id;
+    console.log('About to save to path:', path, ', the following notes:\n', userNotes);
+    goodmoves.app.database().ref(path).set(userNotes).then(function(result) {
+      goodmoves.snackbarShow({
+        message: 'Notes saved'
+      });
+    }).catch(function(err) {
+      console.error('Failed to save notes:', err);
+    });  
+  });
 });
 {{/if}}
 </script>
