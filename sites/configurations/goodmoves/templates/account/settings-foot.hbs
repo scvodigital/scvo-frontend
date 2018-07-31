@@ -60,6 +60,9 @@
                 $chip.data('disabled', false);
                 $chip.css('opacity', 1);
                 checkProviders();
+                if (err.code === 'auth/requires-recent-login') {
+                  window.location.href = '/sign-in?reauth=true';
+                }
               });
             } else {
               currentUser.unlink(provider.providerId).then(function(result) {
@@ -74,6 +77,9 @@
                 $chip.data('disabled', false);
                 $chip.css('opacity', 1);
                 checkProviders();
+                if (err.code === 'auth/requires-recent-login') {
+                  window.location.href = '/sign-in?reauth=true';
+                }
               });
             }
           }
@@ -130,6 +136,9 @@
           message: err.message,
           backgroundColor: '#dd4b39'
         });
+        if (err.code === 'auth/requires-recent-login') {
+          window.location.href = '/sign-in?reauth=true';
+        }
       });
     }
   });

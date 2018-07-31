@@ -1,0 +1,45 @@
+{{#if charity_number ~}}
+<p class="organisation-type">
+  {{#if (test charity_number (toRegex "^SC[0-9]{6}")) ~}}
+  <small class="organisation-type-sco-charity">
+    <span class="far fa-check-circle" aria-hidden="true"></span>
+    Charity registered in Scotland <a target="_blank" href="http://www.oscr.org.uk/about-charities/search-the-register/charity-details?number={{charity_number}}">{{charity_number}}</a>
+  </small>
+  {{else}}
+  {{#if (test charity_number (toRegex "^SC")) ~}}
+  {{#compare charity_number "===" "null" ~}}
+  {{else}}
+  <small class="organisation-type-sco-other">
+    <i class="far fa-info-circle" aria-hidden="true"></i>
+    Organisation type: {{charity_number}}
+  </small>
+  {{/compare ~}}
+  {{else}}
+  {{#if (test (upcase charity_number) (toRegex "NGO")) ~}}
+  <small class="organisation-type-ngo">
+    <i class="far fa-info-circle" aria-hidden="true"></i>
+    NGO
+  </small>
+  {{else}}
+  {{#if (test (upcase charity_number) (toRegex "NOT A CHARITY")) ~}}
+  {{else}}
+  {{#if (test charity_number (toRegex "[0-9]+")) ~}}
+  <small class="organisation-type-ruk-charity">
+    <i class="far fa-check-circle" aria-hidden="true"></i>
+    Charity number <a href="http://apps.charitycommission.gov.uk/Showcharity/RegisterOfCharities/CharityWithPartB.aspx?RegisteredCharityNumber={{charity_number}}" target="_blank">{{charity_number}}</a>
+  </small>
+  {{else}}
+  {{#compare charity_number "===" "null" ~}}
+  {{else}}
+  <small class="organisation-type-sco-other">
+    <i class="far fa-info-circle" aria-hidden="true"></i>
+    Organisation type: {{charity_number}}
+  </small>
+  {{/compare ~}}
+  {{/if ~}}
+  {{/if ~}}
+  {{/if ~}}
+  {{/if ~}}
+  {{/if ~}}
+</p>
+{{/if ~}}
