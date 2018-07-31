@@ -286,16 +286,25 @@ var GoodmovesController = Class.extend({
     });
     
     $('textarea[data-autosize]').each(function() {
-      var that = this;
       var offset = this.offsetHeight - this.clientHeight;
      
       var resizeTextarea = function(el) {
-        $(el).css('height', 'auto').css('height', Math.max(el.scrollHeight, offset));
+        var $el = $(el);
+        if ($el.is(':visible')) {
+          $el.css('height', 'auto').css('height', Math.max(el.scrollHeight, offset));
+        } else {
+          var hiddenParent = $el;
+          while (hiddenParent.parent()[0] && !hiddenParent.parent().is(':visible')) {
+            hiddenParent = hiddenParent.parent();
+          }
+          var state = hiddenParent.attr('style') || '';
+          hiddenParent.css({ 'visibility': 'hidden', 'display': 'block' });
+          $el.css('height', 'auto').css('height', Math.max(el.scrollHeight, offset));
+          hiddenParent.attr('style', state);
+        }
       };
       $(this).on('keyup input', function() { resizeTextarea(this); });
-      setTimeout(function() {
-        resizeTextarea(this);
-      }, 10);
+      resizeTextarea(this);
     });
   },
 
