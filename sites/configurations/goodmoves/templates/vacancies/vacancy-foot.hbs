@@ -1,3 +1,4 @@
+<script src="/assets/js/autosize.min.js"></script>
 <script type="text/javascript">
 var tabs = new mdc.tabs.MDCTabBar(document.querySelector("#vacancy-tab-bar"));
 var panels = document.querySelector(".panels");
@@ -37,6 +38,7 @@ $(document).ready(function() {
         var notes = response.val();
         $o.parent()[0].MDCTextField.value = notes;
       } 
+      autosize($o);
     });
   });
   $('button[data-user-notes]').on('click', function(evt) {
