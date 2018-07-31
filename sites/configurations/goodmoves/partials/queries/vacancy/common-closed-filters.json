@@ -1,6 +1,9 @@
 {{>queries_term field="vacancy_status" term="vacancy-closed"}},
-{{#compare @root.request.url.hostname "===" "goodmoves.local" ~}}
+{{#compare @root.request.url.hostname "===" "goodmoves.scot" ~}}
   {{>queries_term field="country" term="Scotland"}},
+{{/compare ~}}
+{{#compare @root.request.url.hostname "===" "goodmoves.be" ~}}
+  {{>queries_term field="country" term="Belgium"}},
 {{/compare ~}}
 {
   "exists": {
