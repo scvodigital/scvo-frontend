@@ -183,7 +183,8 @@ var GoodmovesController = Class.extend({
       }
       var map = L.map(o, {
         fullscreenControl: true,
-        scrollWheelZoom: false
+        scrollWheelZoom: false,
+        trackResize: false
       }).setView([initialLat, initialLng], initialZoom);
       var osmAttrib = 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, <a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>';
       L.tileLayer('https://maps.wikimedia.org/osm-intl/{z}/{x}/{y}.png', {
@@ -278,12 +279,7 @@ var GoodmovesController = Class.extend({
       }
 
       if (!options.center) {
-        if (vacancyPositions.length > 1) {
-          map.fitBounds(markers.getBounds());
-        } else {
-          var pos = vacancyPositions[0];
-          map.panTo(pos.split(','));
-        }
+        map.fitBounds(markers.getBounds());
       }
 
       that.maps[mapName] = map;

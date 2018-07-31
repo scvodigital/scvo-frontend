@@ -20,12 +20,9 @@ tabs.listen("MDCTabBar:change", function(t) {
   updatePanel(nthChildIndex);
   if (goodmoves.maps.vacancyMap) {
     window.setTimeout(function() {
-      goodmoves.maps.vacancyMap.eachLayer(function(layer) {
-        if (layer.redraw) {
-          layer.redraw();
-        }
-      });
-    }, 500);
+      var map = goodmoves.maps.vacancyMap;
+      map.invalidateSize();
+    }, 0);
   }
 });
 
