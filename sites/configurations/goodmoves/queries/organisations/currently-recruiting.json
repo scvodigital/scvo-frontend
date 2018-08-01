@@ -10,6 +10,9 @@
     "function_score": {
       "query": {
         "bool": {
+          "filter": [
+            {{>queries_organisation_common_filters request.params.query}}
+          ],
           "must": [
             {
               "term": {

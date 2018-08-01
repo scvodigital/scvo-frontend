@@ -24,8 +24,17 @@
     "rendered.goodmoves_charity_info"
   ],
   "query": {
-    "term": {
-      "slug": "{{request.params.slug}}"
+    "bool": {
+      "filter": [
+        {{>queries_organisation_common_filters request.params.query}}
+      ],
+      "must": [
+        {
+          "term": {
+            "slug": "{{request.params.slug}}"
+          }
+        }
+      ]
     }
   }
 }

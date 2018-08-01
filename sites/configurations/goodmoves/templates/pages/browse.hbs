@@ -69,11 +69,11 @@
         </div>
         <ul class="mdc-list">
           {{#each data.supplimentaryResponses.types.aggregations.countries.buckets ~}}
-            <!-- {{#if key ~}}
+            {{#if key ~}}
               <li class="mdc-list-item mdc-list-item--{{@index}}">
                 <h3 class="mdc-typography--headline7">{{{key}}}</h3>
               </li>
-            {{/if ~}} -->
+            {{/if ~}}
             {{#each this.regions_slugs.buckets ~}}
               {{#if key ~}}
                 <a class="mdc-list-item" href="/search?regions%5B%5D={{urlencode key}}" role="menuitem">
