@@ -60,9 +60,9 @@
                 $chip.data('disabled', false);
                 $chip.css('opacity', 1);
                 checkProviders();
-                if (err.code === 'auth/requires-recent-login') {
+                window.setTimeout(function() {
                   window.location.href = '/sign-in?reauth=true';
-                }
+                }, 1000);
               });
             } else {
               currentUser.unlink(provider.providerId).then(function(result) {
@@ -78,7 +78,9 @@
                 $chip.css('opacity', 1);
                 checkProviders();
                 if (err.code === 'auth/requires-recent-login') {
-                  window.location.href = '/sign-in?reauth=true';
+                  window.setTimeout(function() {
+                    window.location.href = '/sign-in?reauth=true';
+                  }, 1000);
                 }
               });
             }
@@ -129,7 +131,12 @@
 
       var hasEmailProvider = false;
       currentUser.updatePassword(password1).then(function(result) {
-        window.location.reload();
+        goodmoves.snackbarShow({
+          message: 'Password changed, please wait',
+        });
+        window.setTimeout(function() {
+          window.location.reload();
+        }, 1000);
       }).catch(function(err) {
         goodmoves.disable([$changePassword, $password1, $password2], false);
         goodmoves.snackbarShow({
@@ -137,7 +144,9 @@
           backgroundColor: '#dd4b39'
         });
         if (err.code === 'auth/requires-recent-login') {
-          window.location.href = '/sign-in?reauth=true';
+          window.setTimeout(function() {
+            window.location.href = '/sign-in?reauth=true';
+          }, 1000);
         }
       });
     }

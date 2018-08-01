@@ -88,7 +88,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
         user.user.getIdTokenResult().then(function(idTokenResult) {
           console.log('ID Token Result', idTokenResult);
           goodmoves.setCookie('gm_token', idTokenResult.token, 7);
-          window.location.href = '/';
+          window.location.href = '{{default @root.request.headers.referer "/"}}';
         });
       } else {
         $message.text('Something went wrong, signed in but no user?').show();
