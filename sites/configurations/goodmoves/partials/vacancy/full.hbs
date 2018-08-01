@@ -178,10 +178,11 @@
               </marker>
             {{/each ~}}
           {{else}}
-            <h4 class="mdc-typography--headline6">Location</h4>
-            <p class="mdc-typography--body1">
-              {{{location}}}
-            </p>
+            <div class="container-content v-margin-full">
+              <p class="mdc-typography--body1">
+                Area: {{{location}}}. Specific job location not provided.
+              </p>
+            </div>
           {{/compare ~}}
         </div>
       </div>
@@ -194,8 +195,11 @@
                 Your notes
               </label>
             </div>
-            <div class="text-right">
-              <button type="button" class="mdc-button mdc-button--raised" data-user-notes="{{Id}}">Save notes</button>
+            <div class="save-button-block">
+              <button type="button" class="mdc-button mdc-button--raised" data-user-notes="{{Id}}">
+                <span class="far fa-save mdc-list-item__graphic" aria-hidden="true"></span>
+                Save notes
+              </button>
             </div>
           {{else}}
             <div class="detailed-info">
