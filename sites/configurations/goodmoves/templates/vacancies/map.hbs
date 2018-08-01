@@ -1,11 +1,12 @@
-{{#ifAll @root.request.params.query.lat @root.request.params.query.lng ~}}
 <div id="detailed-results-container" class="container-content container-map">
   <div id="map-full" data-map-name="fullMap" data-map-options='{
+    {{#ifAll @root.request.params.query.lat @root.request.params.query.lng ~}}
     "circle": {
       "lat": {{@root.request.params.query.lat}},
       "lng": {{@root.request.params.query.lng}},
       "radius": {{default @root.request.params.query.distance 0}}
     }
+    {{/ifAll ~}}
   }'></div>
 </div>
 {{#each @root.data.search_data.map_results.hits.hits}}
@@ -17,4 +18,3 @@
     {{/each}}
   {{/if}}
 {{/each}}
-{{/ifAll ~}}
