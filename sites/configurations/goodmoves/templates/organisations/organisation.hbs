@@ -1,9 +1,9 @@
 <div class="container-content goodmoves-organisation">
-  {{#compare data.primaryResponse.hits.total ">" 0}}
+  {{#compare data.primaryResponse.hits.total ">" 0 ~}}
 
   {{> dialog_shortlist}}
 
-  {{#with data.primaryResponse.hits.hits.[0]._source as |organisation| ~}}
+  {{#with @root.data.primaryResponse.hits.hits.[0]._source as |organisation| ~}}
 
   {{> organisation_full organisation}}
 
@@ -38,7 +38,8 @@
   {{/compare ~}}
   {{/compare ~}}
 
-  {{#if goodhq_organisation.xid}}
+  {{#if goodhq_organisation.xid ~}}
+  {{#compare goodhq_organisation.status "===" "Open" ~}}
   <hr />
   <div class="mdc-typography--headline6">
     Find out more about <a href="https://goodhq.org/{{goodhq_organisation.xid}}">{{{organisation.title}}}</a> on <a href="https://goodhq.org">Good HQ</a>
@@ -63,12 +64,13 @@
   {{/compare ~}}
   {{/compare ~}}
 
-  {{/if}}
+  {{/compare ~}}
+  {{/if ~}}
 
   {{/with ~}}
   {{else}}
   <p>
     <strong>Error:</strong> the requested organisation could not be found.
   </p>
-  {{/compare}}
+  {{/compare ~}}
 </div>

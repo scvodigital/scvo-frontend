@@ -62,7 +62,7 @@ body {
 }
 .mdc-top-app-bar {
   background-color: white;
-  z-index: 3 !important;
+  z-index: 5 !important;
 }
 h1,
 h2,
@@ -1246,8 +1246,10 @@ hr {
   padding: $unit 0 $unit*2;
 }
 .mdc-drawer__content {
-  .regions {
-    margin-left: $unit;
+  padding: 0 $unit/2;
+  #search-tab-bar {
+    padding: 0 $unit/2;
+    box-sizing: border-box;
   }
 }
 .mdc-drawer__content-padded {
@@ -1255,7 +1257,7 @@ hr {
 }
 .mdc-drawer__content-heading {
   margin: 0;
-  padding: $unit;
+  padding: $unit $unit/2;
   .mdc-icon-toggle {
     margin-top: -$unit*(3/4);
   }
@@ -1578,7 +1580,7 @@ body {
     max-width: 120px;
     height: auto;
     display: flex;
-    align-items: top;
+    align-items: flex-start;
     margin: $unit/2 0 0 $unit;
     padding: 0;
     img {

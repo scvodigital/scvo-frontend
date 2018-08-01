@@ -47,12 +47,21 @@
     "rendered.json_ld"
   ],
   "query": {
-    "term": {
-      {{#if (includes request.params.slug "-") ~}}
-      "slug": "{{request.params.slug}}"
-      {{else}}
-      "Id": "{{request.params.slug}}"
-      {{/if ~}}
+    "bool": {
+      "filter": [
+        {{>queries_vacancy_common_filters request.params.query}}
+      ],
+      "must": [
+        {
+          "term": {
+            {{#if (includes request.params.slug "-") ~}}
+            "slug": "{{request.params.slug}}"
+            {{else}}
+            "Id": "{{request.params.slug}}"
+            {{/if ~}}
+          }
+        }
+      ]
     }
   }
 }

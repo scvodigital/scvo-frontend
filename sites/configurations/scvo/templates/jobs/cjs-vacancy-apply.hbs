@@ -60,6 +60,24 @@
 
           <h3>Application forms</h3>
           <ul class="mdc-list downloads">
+            {{#compare job_number "===" "8552" ~}}
+            <li class="mdc-list-item">
+              <span class="mdc-list-item__graphic far fa-file fa-file-word" aria-hidden="true"></span>
+              <span class="mdc-list-item__text">
+                <a href="https://storage.googleapis.com/scvo-assets/scvo-frontend/assets/cjs/Application%20Form.docx" target="_blank">
+                  <span class="title">Application Form</span>
+                </a>
+              </span>
+            </li>
+            <li class="mdc-list-item">
+              <span class="mdc-list-item__graphic far fa-file fa-file-word" aria-hidden="true"></span>
+              <span class="mdc-list-item__text">
+                <a href="https://storage.googleapis.com/scvo-assets/scvo-frontend/assets/cjs/Guidance%20Notes.docx" target="_blank">
+                  <span class="title">Guidance Notes</span>
+                </a>
+              </span>
+            </li>
+            {{else}}
             {{#compare organisation.name "===" "Kibble" ~}}
             <li class="mdc-list-item">
               <span class="mdc-list-item__graphic far fa-file fa-file-word" aria-hidden="true"></span>
@@ -118,6 +136,7 @@
                 </a>
               </span>
             </li>
+            {{/compare ~}}
             {{/compare ~}}
           </ul>
 
