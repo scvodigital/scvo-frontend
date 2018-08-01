@@ -1,13 +1,14 @@
 {
   "name": "vacancy",
   "pattern": "/vacancy/:slug",
+  "debug": true,
   "defaultParams": {
     "context": "detail"
   },
   "tasks": [
     "metaData.commonTasks.authNotRequired",
-    "metaData.commonTasks.shortlistIds",
-    "metaData.commonTasks.shortlistNotes",
+    "metaData.commonTasks.shortlistData",
+    "metaData.commonTasks.notesData",
     {
       "name": "primaryResponse",
       "taskModule": "elasticsearch",

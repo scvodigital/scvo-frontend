@@ -12,7 +12,7 @@
 {{#each @root.data.search_data.map_results.hits.hits}}
   {{#if _source.geo_vacancy_coords}}
     {{#each (arrayify _source.geo_vacancy_coords)}}
-      <marker style="display:none;" data-map="fullMap" data-lat="{{lat}}" data-lng="{{lon}}" data-shortlisted="{{#each @root.data.shortlist_ids.items}}{{#compare id "===" ../../_source.Id}}true{{/compare}}{{/each}}" data-title="{{../_source.title}}">
+      <marker style="display:none;" data-map="fullMap" data-lat="{{lat}}" data-lng="{{lon}}" data-shortlisted="{{#each @root.data.shortlist.items}}{{#compare id "===" ../../_source.Id}}true{{/compare}}{{/each}}" data-title="{{../_source.title}}">
         {{>vacancy_map ../_source}}
       </marker>
     {{/each}}

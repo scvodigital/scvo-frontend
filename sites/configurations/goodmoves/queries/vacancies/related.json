@@ -33,7 +33,7 @@
             {
               "match": {
                 "remuneration_type" : {
-                  "query" : "{{data.primaryResponse.hits.hits.[0]._source.remuneration_type}}",
+                  "query" : "{{@root.data.primaryResponse.hits.hits.[0]._source.remuneration_type}}",
                   "operator" : "and",
                   "zero_terms_query": "all"
                 }
@@ -42,7 +42,7 @@
             {
               "match": {
                 "title" : {
-                  "query" : "{{data.primaryResponse.hits.hits.[0]._source.title}}",
+                  "query" : "{{@root.data.primaryResponse.hits.hits.[0]._source.title}}",
                   "operator" : "and",
                   "zero_terms_query": "all"
                 }
@@ -50,19 +50,19 @@
             },
             {
               "terms": {
-                "sectors_slugs": {{{stringify (arrayify data.primaryResponse.hits.hits.[0]._source.sectors_slugs)}}}
+                "sectors_slugs": {{{stringify (arrayify @root.data.primaryResponse.hits.hits.[0]._source.sectors_slugs)}}}
               }
             },
             {
               "terms": {
-                "roles_slugs": {{{stringify (arrayify data.primaryResponse.hits.hits.[0]._source.roles_slugs)}}}
+                "roles_slugs": {{{stringify (arrayify @root.data.primaryResponse.hits.hits.[0]._source.roles_slugs)}}}
               }
             }
           ],
           "must_not": [
             {
               "term": {
-                "Id": "{{data.primaryResponse.hits.hits.[0]._source.Id}}"
+                "Id": "{{@root.data.primaryResponse.hits.hits.[0]._source.Id}}"
               }
             }
           ]
@@ -72,10 +72,10 @@
         {
           "gauss": {
             "salary_min": {
-              "origin": "{{data.primaryResponse.hits.hits.[0]._source.salary_min}}",
+              "origin": "{{@root.data.primaryResponse.hits.hits.[0]._source.salary_min}}",
               "scale": "1000",
               "offset": "10000",
-              "decay": 0.05
+              "decay": 0.1
             }
           }
         }
