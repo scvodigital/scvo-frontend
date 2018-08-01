@@ -221,7 +221,7 @@
       <form action="{{{@root.request.url.path}}}" method="GET">
         <input type="hidden" name="keywords" value="{{@root.request.params.query.keywords}}" />
         <input type="hidden" name="location" value="{{@root.request.params.query.location}}" />
-        <input type="hidden" name="distance" value="{{@root.request.params.query.distance}}" />
+        <input type="hidden" name="distance" value="{{#if @root.request.params.query.distance}}{{@root.request.params.query.distance}}{{else}}8.04672{{/if}}" />
         <input type="hidden" name="roles" value="{{@root.request.params.query.roles}}" />
         <input type="hidden" name="sectors" value="{{@root.request.params.query.sectors}}" />
         <input type="hidden" name="regions" value="{{@root.request.params.query.regions}}" />

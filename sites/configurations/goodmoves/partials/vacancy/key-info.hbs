@@ -15,7 +15,7 @@
     </ul>
     <div class="mdc-layout-grid hide-md hide-lg">
       <p class="mdc-typography--body2 v-margin-full-bottom">
-        {{#compare (trim location) "===" ""}}This is a {{lowercase role_status_list}} position{{else}}This {{lowercase role_status_list}} position is based in {{trim (replace location "Based in" "")}}{{/compare}}{{#compare salary "!==" "TBC"}}{{#compare (trim salary) "!==" "Sessional"}}, with a salary of {{{trim (lowercase salary)}}}{{/compare}}{{/compare}}. The closing date for applications is the {{{momentFormat (moment closing_date "x") "Do \o\f MMMM, YYYY"}}}.
+        {{#compare (trim location) "===" ""}}This is a {{lowercase role_status_list}} position{{else}}This {{lowercase role_status_list}} position is based in {{trim (replace location "Based in" "")}}{{/compare}}{{#compare salary "!==" "TBC"}}{{#compare (trim salary) "!==" "Unpaid"}}{{#compare (trim salary) "!==" "Sessional"}}, with a salary of {{{trim (lowercase salary)}}}{{/compare}}{{else}} and is unpaid{{/compare}}{{/compare}}. The closing date for applications is the {{{momentFormat (moment closing_date "x") "Do \o\f MMMM YYYY"}}}.
       </p>
     </div>
     <div class="mdc-layout-grid hide-sm">
