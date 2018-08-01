@@ -22,9 +22,9 @@
     "bool": {
       "filter": [
         {{>queries_vacancy_common_filters request.params.query}}
-      ],
+      ]
       {{#ifAll @root.data.auth @root.data.saved_searches.items.[0]}}
-      "should": [
+      ,"should": [
         {{#each @root.data.saved_searches.items}}
           {{#with (querystring querystring)}}
           {
