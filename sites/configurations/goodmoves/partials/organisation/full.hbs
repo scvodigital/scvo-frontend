@@ -59,18 +59,20 @@
           <li class="mdc-card__info--vacancy-goodhq mdc-typography--body1">
             <span class="fa-li"><span class="fas fa-heart fa-fw" title="Good HQ"></span></span>
             <a href="https://goodhq.org/{{goodhq_organisation.xid}}">@{{goodhq_organisation.xid}}</a>
+            {{#compare goodhq_organisation.status "===" "Open" ~}}
             –
             {{#compare @root.data.goodhq.reviews.hits.total ">" 0 ~}}
             <!-- Change to mode=reviews -->
             <a href="https://goodhq.org/{{goodhq_organisation.xid}}?mode=review">{{inflect @root.data.goodhq.reviews.hits.total "review" "reviews" true}}</a>{{#compare @root.data.goodhq.posts.hits.total ">" 0}}{{#compare @root.data.goodhq.volunteering.hits.total "===" 0}} and {{else}}, {{/compare}}{{else}}{{#compare @root.data.goodhq.volunteering.hits.total ">" 0}} and {{/compare}}{{/compare}}{{/compare ~}}
-            {{#compare @root.data.goodhq.posts.hits.total ">" 0}}
+            {{#compare @root.data.goodhq.posts.hits.total ">" 0 ~}}
             <!-- Change to mode=posts -->
             <a href="https://goodhq.org/{{goodhq_organisation.xid}}?mode=post">{{inflect @root.data.goodhq.posts.hits.total "post" "posts" true}}</a>{{#compare @root.data.goodhq.volunteering.hits.total ">" 0}}, and{{/compare}}
-            {{/compare}}
-            {{#compare @root.data.goodhq.volunteering.hits.total ">" 0}}
+            {{/compare ~}}
+            {{#compare @root.data.goodhq.volunteering.hits.total ">" 0 ~}}
             <!-- Change to mode=volunteer -->
             <a href="https://goodhq.org/{{goodhq_organisation.xid}}?mode=volopp">{{inflect @root.data.goodhq.volunteering.hits.total "volunteering opportunity" "volunteering opportunities" true}}</a>
-            {{/compare}}
+            {{/compare ~}}
+            {{/compare ~}}
             on
             <a href="https://goodhq.org/{{goodhq_organisation.xid}}">Good HQ</a>
           </li>
