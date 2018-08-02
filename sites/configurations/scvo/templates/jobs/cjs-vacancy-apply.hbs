@@ -104,6 +104,9 @@
                 </a>
               </span>
             </li>
+            {{/compare ~}}
+            {{/compare ~}}
+            {{#compare request.params.phase "===" "p19v" ~}}
             <li class="mdc-list-item">
               <span class="mdc-list-item__graphic far fa-file fa-file-word" aria-hidden="true"></span>
               <span class="mdc-list-item__text">
@@ -112,6 +115,7 @@
                 </a>
               </span>
             </li>
+            {{else}}
             <li class="mdc-list-item">
               <span class="mdc-list-item__graphic far fa-file fa-file-word" aria-hidden="true"></span>
               <span class="mdc-list-item__text">
@@ -120,6 +124,7 @@
                 </a>
               </span>
             </li>
+            {{/compare ~}}
             <li class="mdc-list-item">
               <span class="mdc-list-item__graphic far fa-file fa-file-word" aria-hidden="true"></span>
               <span class="mdc-list-item__text">
@@ -136,8 +141,6 @@
                 </a>
               </span>
             </li>
-            {{/compare ~}}
-            {{/compare ~}}
           </ul>
 
           {{/with ~}}
