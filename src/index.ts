@@ -96,7 +96,20 @@ async function index(
 
     // Enforce SSL
     const toEnforce = ['goodmoves.local', 'test.goodmoves.com'];
-    if (req.secure && toEnforce.indexOf(host) > -1) {
+    if (toEnforce.indexOf(host)) {
+      console.log('req:', {
+        secure: req.secure,
+        protocol: req.protocol,
+        baseUrl: req.baseUrl,
+        originalUrl: req.originalUrl,
+        url: req.url,
+        path: req.path,
+        host: req.host,
+        hostname: req.hostname,
+        httpVersion: req.httpVersion
+      });
+    }
+    if (!req.secure && toEnforce.indexOf(host) > -1) {
       const secureUrl = `https://${hostname}${req.originalUrl}`;
       //console.log('Redirecting to HTTPS:', secureUrl);
       res.redirect(secureUrl);
