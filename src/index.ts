@@ -61,6 +61,7 @@ app.use(compression());
 app.use(cookieParser());
 app.options('*', cors());
 app.use('/assets', express.static(assetsPath));
+app.set('trust proxy', true);
 
 // Setup express routes
 app.get('/favicon.ico', favicon);
@@ -97,7 +98,7 @@ async function index(
     // Enforce SSL
     const toEnforce = ['goodmoves.local', 'test.goodmoves.com'];
     if (toEnforce.indexOf(host) > -1) {
-      console.log('req:', {
+      console.log('REQUEST DEBUG:', JSON.stringify({
         secure: req.secure || 'NULL',
         protocol: req.protocol || 'NULL',
         baseUrl: req.baseUrl || 'NULL',
@@ -106,8 +107,10 @@ async function index(
         path: req.path || 'NULL',
         host: req.host || 'NULL',
         hostname: req.hostname || 'NULL',
-        httpVersion: req.httpVersion || 'NULL'
-      });
+        httpVersion: req.httpVersion || 'NULL',
+        rawHeaders: req.rawHeaders || 'NULL',
+        headers: req.headers || 'NULL'
+      }));
     }
     if (!req.secure && toEnforce.indexOf(host) > -1) {
       const secureUrl = `https://${hostname}${req.originalUrl}`;
