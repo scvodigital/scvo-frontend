@@ -65,7 +65,6 @@ app.use('/assets', express.static(assetsPath));
 // Setup express routes
 app.get('/favicon.ico', favicon);
 app.get('/menuUpdate', menuUpdate);
-app.post('/centralAuthLogin', centralAuthLogin);
 app.get('/getFsPdf', getFsPdf);
 app.get('/reload-sites', clearSitesCache);
 app.get('/liveness_check', livenessCheck);
@@ -96,9 +95,15 @@ async function index(
     fullUrl = fullUrl.replace(/(\/)($|\?)/gi, '$2');
 
     // Enforce SSL
-    // if (req.protocol == 'http') {
-    //  res.redirect(`https://${hostname}${req.originalUrl}`);
-    //}
+    const toEnforce = ['goodmoves.local', 'test.goodmoves.com'];
+    if (req.protocol == 'http' && toEnforce.indexOf(host) > -1) {
+      const secureUrl = `https://${hostname}${req.originalUrl}`;
+      //console.log('Redirecting to HTTPS:', secureUrl);
+      res.redirect(secureUrl);
+      res.send();
+      res.end();
+      return next();
+    }
 
     if (routers === null) {
       return next();
@@ -350,70 +355,6 @@ async function getFsPdf(
   }
 }
 
-async function centralAuthLogin(
-    req: express.Request, res: express.Response,
-    next: express.NextFunction): Promise<any> {
-  var loginApp;
-  var loginDomainName = req.body.loginDomain;
-  var idToken = req.body.idToken;
-
-  try {
-    admin.apps.forEach((app: any) => {
-      if (app.name === loginDomainName) {
-        loginApp = app;
-      }
-    });
-
-    if (!loginApp) {
-      if (!SECRETS.configs.hasOwnProperty(loginDomainName)) {
-        var err = new Error(
-            'Login domain \'' + loginDomainName + '\' does not exist');
-        sendError('Could not find login domain', 500, err, res);
-        return;
-      }
-
-      var config = {
-        credential: admin.credential.cert({
-          projectId:
-              (SECRETS.configs as any)[loginDomainName].credential.project_id,
-          clientEmail:
-              (SECRETS.configs as any)[loginDomainName].credential.client_email,
-          privateKey:
-              (SECRETS.configs as any)[loginDomainName].credential.private_key
-        }),
-        databaseURL: (SECRETS.configs as any)[loginDomainName].databaseURL
-      };
-
-      loginApp = admin.initializeApp(<admin.AppOptions>config, loginDomainName);
-    }
-  } catch (err) {
-    sendError('Error loading login app', 500, err, res);
-    return;
-  }
-
-  try {
-    var decodedToken: admin.auth.DecodedIdToken =
-        await loginApp.auth().verifyIdToken(idToken);
-    console.log('Decoded Token:', decodedToken);
-    var loginUser: admin.auth.UserRecord =
-        await loginApp.auth().getUser(decodedToken.uid);
-    console.log('Login User:', loginUser);
-    var email = loginUser.email;
-    var centralUser: admin.auth.UserRecord =
-        await fb.auth().getUserByEmail(email);
-    console.log('Central User:', centralUser);
-    var centralUid = centralUser.uid;
-    var customToken: string = await fb.auth().createCustomToken(centralUid);
-    console.log('Custom Token:', customToken);
-    res.json({customToken: customToken, user: centralUser});
-    res.end();
-    return next();
-  } catch (err) {
-    sendError('Error authorising user', 500, err, res);
-    return;
-  }
-}
-
 function sendError(
     message: string, code: number, error: any, res: express.Response) {
   var errorResponse = {message: message, error: error};
@@ -440,6 +381,10 @@ if (process.env.devmode) {
 
   server = https.createServer(options, app).listen(port, () => {
     console.log('Listening securely on port', port);
+  });
+  const httpPort = Number(port) + 1;
+  app.listen(httpPort, function() {
+    console.log('And also listening not securely on port', httpPort);
   });
 } else {
   app.listen(port, function() {
