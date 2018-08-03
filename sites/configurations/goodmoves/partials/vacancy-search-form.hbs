@@ -152,7 +152,9 @@
           {{#compare this "===" "regions" ~}}
             {{#each @root.data.supplimentaryResponses.types.aggregations.countries.buckets ~}}
               {{#if key ~}}
-                <h3 class="mdc-typography--headline7">{{{key}}}</h3>
+                {{#compare (length @root.data.supplimentaryResponses.types.aggregations.countries.buckets) ">" 1 ~}}
+                  <h3 class="mdc-typography--headline7">{{{key}}}</h3>
+                {{/compare ~}}
               {{/if ~}}
               {{#each this.regions_slugs.buckets ~}}
                 {{#if key ~}}
