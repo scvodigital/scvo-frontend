@@ -149,11 +149,26 @@
           </span>
         </h3>
         <div id="{{../instance_id}}-{{this}}-collapse"{{#unless (getProperty @root.request.params.query this)}} style="display: none;"{{/unless}}>
-          {{#each (getProperty @root.data.supplimentaryResponses.types.aggregations (concat this "_slugs.buckets")) ~}}
-            {{#if key ~}}
-              {{> term_checkbox slug=key field=../this selected=(getProperty @root.request.params.query ../this) instance_id=../../instance_id value=(lookup (getProperty @root.data.supplimentaryResponses.types.aggregations (concat ../this ".buckets")) @index)}}
-            {{/if ~}}
-          {{/each ~}}
+          {{#compare this "===" "regions" ~}}
+            {{#each @root.data.supplimentaryResponses.types.aggregations.countries.buckets ~}}
+              {{#if key ~}}
+                {{#compare (length @root.data.supplimentaryResponses.types.aggregations.countries.buckets) ">" 1 ~}}
+                  <h3 class="mdc-typography--headline7">{{{key}}}</h3>
+                {{/compare ~}}
+              {{/if ~}}
+              {{#each this.regions_slugs.buckets ~}}
+                {{#if key ~}}
+                  {{> term_checkbox slug=key field="regions" selected=@root.request.params.query.regions instance_id=../../../instance_id value=(lookup ../this.regions.buckets @index)}}
+                {{/if ~}}
+              {{/each ~}}
+            {{/each ~}}
+          {{else}}
+            {{#each (getProperty @root.data.supplimentaryResponses.types.aggregations (concat this "_slugs.buckets")) ~}}
+              {{#if key ~}}
+                {{> term_checkbox slug=key field=../this selected=(getProperty @root.request.params.query ../this) instance_id=../../instance_id value=(lookup (getProperty @root.data.supplimentaryResponses.types.aggregations (concat ../this ".buckets")) @index)}}
+              {{/if ~}}
+            {{/each ~}}
+          {{/compare ~}}
         </div>
       {{/each}}
 

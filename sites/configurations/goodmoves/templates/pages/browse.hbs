@@ -6,11 +6,11 @@
           Roles
         </div>
         <ul class="mdc-list">
-          {{#each data.supplimentaryResponses.types.aggregations.roles_slugs.buckets ~}}
+          {{#each @root.data.supplimentaryResponses.types.aggregations.roles_slugs.buckets ~}}
             {{#if key ~}}
               <a class="mdc-list-item" href="/search?roles%5B%5D={{urlencode key}}" role="menuitem">
                 <span class="mdc-list-item__text">
-                  {{#with (lookup ../data.supplimentaryResponses.types.aggregations.roles.buckets @index) ~}}
+                  {{#with (lookup @root.data.supplimentaryResponses.types.aggregations.roles.buckets @index) ~}}
                     {{{key}}}
                   {{/with ~}}
                 </span>
@@ -27,11 +27,11 @@
           Sectors
         </div>
         <ul class="mdc-list">
-          {{#each data.supplimentaryResponses.types.aggregations.sectors_slugs.buckets ~}}
+          {{#each @root.data.supplimentaryResponses.types.aggregations.sectors_slugs.buckets ~}}
             {{#if key ~}}
               <a class="mdc-list-item" href="/search?sectors%5B%5D={{urlencode key}}" role="menuitem">
                 <span class="mdc-list-item__text">
-                  {{#with (lookup ../data.supplimentaryResponses.types.aggregations.sectors.buckets @index) ~}}
+                  {{#with (lookup @root.data.supplimentaryResponses.types.aggregations.sectors.buckets @index) ~}}
                     {{{key}}}
                   {{/with ~}}
                 </span>
@@ -48,11 +48,11 @@
           Working patterns
         </div>
         <ul class="mdc-list">
-          {{#each data.supplimentaryResponses.types.aggregations.statuses_slugs.buckets ~}}
+          {{#each @root.data.supplimentaryResponses.types.aggregations.statuses_slugs.buckets ~}}
             {{#if key ~}}
               <a class="mdc-list-item" href="/search?statuses%5B%5D={{urlencode key}}" role="menuitem">
                 <span class="mdc-list-item__text">
-                  {{#with (lookup ../data.supplimentaryResponses.types.aggregations.statuses.buckets @index) ~}}
+                  {{#with (lookup @root.data.supplimentaryResponses.types.aggregations.statuses.buckets @index) ~}}
                     {{{key}}}
                   {{/with ~}}
                 </span>
@@ -68,11 +68,13 @@
           Regions
         </div>
         <ul class="mdc-list">
-          {{#each data.supplimentaryResponses.types.aggregations.countries.buckets ~}}
+          {{#each @root.data.supplimentaryResponses.types.aggregations.countries.buckets ~}}
             {{#if key ~}}
+            {{#compare (length @root.data.supplimentaryResponses.types.aggregations.countries.buckets) ">" 1 ~}}
               <li class="mdc-list-item mdc-list-item--{{@index}}">
                 <h3 class="mdc-typography--headline7">{{{key}}}</h3>
               </li>
+              {{/compare ~}}
             {{/if ~}}
             {{#each this.regions_slugs.buckets ~}}
               {{#if key ~}}
