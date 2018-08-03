@@ -103,8 +103,8 @@
               lng=@root.request.params.query.lng
               location=@root.request.params.query.location
             ) ~}}
-    {{#if (itemAt @root.data.saved_searches.items (indexOf (map @root.data.saved_searches.items (getProp 'querystring')) this)) ~}}
-    {{#with (itemAt @root.data.saved_searches.items (indexOf (map @root.data.saved_searches.items (getProp 'querystring')) this)) ~}}
+    {{#if (itemAt @root.data.searches.items (indexOf (map @root.data.searches.items (getProp 'querystring')) this)) ~}}
+    {{#with (itemAt @root.data.searches.items (indexOf (map @root.data.searches.items (getProp 'querystring')) this)) ~}}
     <header class="mdc-dialog__header">
       <h2 id="edit-search-dialog-label" class="mdc-dialog__header__title">
         Your search&ensp;
@@ -168,11 +168,11 @@
         <script>
           document.addEventListener('DOMContentLoaded', function() {
             console.log('Current Query String:', {{{stringify this}}});
-            console.log('Saved Search Query Strings:', {{{stringify (map @root.data.saved_searches.items (getProp 'querystring'))}}});
+            console.log('Saved Search Query Strings:', {{{stringify (map @root.data.searches.items (getProp 'querystring'))}}});
           });
         </script>
-        {{#if (itemAt @root.data.saved_searches.items (indexOf (map @root.data.saved_searches.items (getProp 'querystring')) this)) ~}}
-        {{#with (itemAt @root.data.saved_searches.items (indexOf (map @root.data.saved_searches.items (getProp 'querystring')) this))}}
+        {{#if (itemAt @root.data.searches.items (indexOf (map @root.data.searches.items (getProp 'querystring')) this)) ~}}
+        {{#with (itemAt @root.data.searches.items (indexOf (map @root.data.searches.items (getProp 'querystring')) this))}}
           <h3 class="mdc-typography--headline6">
             Your search&ensp;
             <span class="mdc-typography--body1">

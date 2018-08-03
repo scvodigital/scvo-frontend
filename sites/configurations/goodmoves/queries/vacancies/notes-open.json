@@ -21,18 +21,18 @@
   "query": {
     "bool": {
       "filter": [
-        {{>queries_vacancy_common_filters_closed request.params.query}}
+        {{>queries_vacancy_common_filters request.params.query}}
       ],
       "must": [
         {
           "terms": {
-            "Id": {{{stringify (map data.shortlist.items (getProp "id"))}}}
+            "Id": {{{stringify (map data.notes (getProp @key))}}}
           }
         }
       ]
     }
   },
   "sort": {
-    "closing_date": "desc"
+    "closing_date": "asc"
   }
 }

@@ -6,15 +6,15 @@
       <li><a href="/jobs">Jobs</a></li>
       <li><a href="/jobs/community-jobs-scotland">Community Jobs Scotland</a></li>
       <li><a href="/jobs/community-jobs-scotland/vacancies">Vacancies</a></li>
-      <li><a href="/jobs/community-jobs-scotland/vacancies/{{request.params.phase}}">{{#compare request.params.phase "===" "p19v"}}16–29 year olds{{else}}16–29 year olds with a disability{{/compare}}</a></li>
-      <li><a href="/jobs/community-jobs-scotland/vacancies/{{request.params.phase}}/{{request.params.slug}}">{{data.primaryResponse.hits.hits.[0]._source.title}}</a></li>
+      <li><a href="/jobs/community-jobs-scotland/vacancies/{{@root.request.params.phase}}">{{#compare request.params.phase "===" "p19v"}}16–29 year olds{{else}}16–29 year olds with a disability{{/compare}}</a></li>
+      <li><a href="/jobs/community-jobs-scotland/vacancies/{{@root.request.params.phase}}/{{@root.request.params.slug}}">{{@root.data.primaryResponse.hits.hits.[0]._source.title}}</a></li>
       <li>Apply</li>
     </ul>
     <div class="mdc-layout-grid">
       <div class="mdc-layout-grid__inner">
         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-9-desktop mdc-layout-grid__cell--span-5-tablet mdc-layout-grid__cell--span-4-phone content page-content v-margin">
-          {{#if data.auth ~}}
-          {{#with data.primaryResponse.hits.hits.[0]._source ~}}
+          {{#if @root.data.auth ~}}
+          {{#with @root.data.primaryResponse.hits.hits.[0]._source ~}}
           <h3>Contact Details</h3>
           <ul class="fa-ul">
             {{#if supervisor.first_name ~}}
@@ -104,6 +104,9 @@
                 </a>
               </span>
             </li>
+            {{/compare ~}}
+            {{/compare ~}}
+            {{#compare @root.request.params.phase "===" "p19v" ~}}
             <li class="mdc-list-item">
               <span class="mdc-list-item__graphic far fa-file fa-file-word" aria-hidden="true"></span>
               <span class="mdc-list-item__text">
@@ -112,6 +115,7 @@
                 </a>
               </span>
             </li>
+            {{else}}
             <li class="mdc-list-item">
               <span class="mdc-list-item__graphic far fa-file fa-file-word" aria-hidden="true"></span>
               <span class="mdc-list-item__text">
@@ -120,6 +124,7 @@
                 </a>
               </span>
             </li>
+            {{/compare ~}}
             <li class="mdc-list-item">
               <span class="mdc-list-item__graphic far fa-file fa-file-word" aria-hidden="true"></span>
               <span class="mdc-list-item__text">
@@ -136,8 +141,6 @@
                 </a>
               </span>
             </li>
-            {{/compare ~}}
-            {{/compare ~}}
           </ul>
 
           {{/with ~}}
@@ -153,7 +156,7 @@
             If you work for SDS or JCP please <a href="http://jobs.scvo.org.uk/Account/Login">log in here</a> to start the referral/application process.
           </p> -->
           <p>
-            If you work for SDS or JCP please <a href="/jobs/community-jobs-scotland/vacancies/sign-in?vacancy={{replace (replace request.url.path "/jobs/community-jobs-scotland/vacancies/" "") "/" "_"}}">sign in here</a> to start the referral/application process.
+            If you work for SDS or JCP please <a href="/jobs/community-jobs-scotland/vacancies/sign-in?vacancy={{replace (replace request.url.path "/jobs/community-jobs-scotland/vacancies/" "") "/" "_"}}">sign in</a> to start the referral/application process for this job.
           </p>
           {{/if ~}}
           <hr />

@@ -23,9 +23,9 @@
       "filter": [
         {{>queries_vacancy_common_filters request.params.query}}
       ]
-      {{#ifAll @root.data.auth @root.data.saved_searches.items.[0]}}
+      {{#ifAll @root.data.auth @root.data.searches.items.[0]}}
       ,"should": [
-        {{#each @root.data.saved_searches.items}}
+        {{#each @root.data.searches.items}}
           {{#with (querystring querystring)}}
           {
             "bool": {

@@ -1,6 +1,7 @@
 {
-  "name": "searches",
-  "pattern": "/searches",
+  "name": "notes",
+  "pattern": "/notes",
+  "debug": true,
   "metaData": {
     "sidebarButton": {
       "icon": "search",
@@ -13,18 +14,34 @@
   },
   "tasks": [
     "metaData.commonTasks.authRequired",
-    "metaData.commonTasks.searchesData",
+    "metaData.commonTasks.notesData",
     {
-      "name": "email_days",
-      "taskModule": "render",
-      "renderer": "handlebars",
+      "name": "notes_vacancies",
+      "taskModule": "elasticsearch",
       "config": {
-        "output": "data",
-        "template": ">context.metaData.handlebars.partials.email_days"
-      }
+        "connectionStringTemplate": "{$../../elasticsearch-url.txt}",
+        "elasticsearchConfig": {
+          "apiVersion": "5.6",
+          "log": "warning"
+        },
+        "queryTemplates": [
+          {
+            "name": "open",
+            "index": "web-content-production",
+            "type": "goodmoves-vacancy",
+            "template": ">context.metaData.handlebars.queries.vacancies_notes-open"
+          },
+          {
+            "name": "closed",
+            "index": "web-content-production",
+            "type": "goodmoves-vacancy",
+            "template": ">context.metaData.handlebars.queries.vacancies_notes-closed"
+          }
+        ]
+      },
+      "renderer": "handlebars"
     },
     "metaData.commonTasks.supplimentaryResponses",
-    "metaData.commonTasks.termsMaps",
     {
       "name": "destination",
       "taskModule": "renderLayout",
@@ -41,7 +58,7 @@
             "layout": ">context.metaData.handlebars.layouts.default",
             "parts": {
               "head": ">context.metaData.handlebars.templates.pages_page-head-tags",
-              "body": ">context.metaData.handlebars.templates.vacancies_saved-searches",
+              "body": ">context.metaData.handlebars.templates.vacancies_notes",
               "sidebar": ">context.metaData.handlebars.templates.vacancies_search-form"
 
             },

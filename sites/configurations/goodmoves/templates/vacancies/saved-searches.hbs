@@ -1,5 +1,5 @@
 <div id="detailed-results-container" class="container-content goodmoves-saved-searches">
-  {{#compare (length data.saved_searches.items) ">" 0 ~}}
+  {{#compare (length @root.data.searches.items) ">" 0 ~}}
   <div class="settings">
     <span class="mdc-typography--body1">Email frequency</span>
     {{> email_frequency}}
@@ -9,7 +9,7 @@
     Searches
   </h1>
 
-  {{#compare (length data.saved_searches.items) ">" 0 ~}}
+  {{#compare (length @root.data.searches.items) ">" 0 ~}}
   <ul class="mdc-list mdc-list--two-line mdc-list--avatar-list mdc-elevation--z3">
     <li class="mdc-list-item mdc-list-item--header">
       <span class="mdc-list-item__graphic far" aria-hidden="true"></span>
@@ -33,7 +33,7 @@
         </div>
       </div>
     </li>
-    {{#each data.saved_searches.items ~}}
+    {{#each @root.data.searches.items ~}}
       <li class="mdc-list-item mdc-ripple-upgraded">
         <span class="mdc-list-item__graphic far fa-search fa-2x" aria-hidden="true"></span>
         <div class="mdc-layout-grid">

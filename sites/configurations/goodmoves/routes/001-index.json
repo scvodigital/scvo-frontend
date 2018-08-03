@@ -4,8 +4,8 @@
   "debug": true,
   "tasks": [
     "metaData.commonTasks.authNotRequired",
-    "metaData.commonTasks.shortlistIds",
-    "metaData.commonTasks.savedSearches",
+    "metaData.commonTasks.shortlistData",
+    "metaData.commonTasks.searchesData",
     {
       "name": "primaryResponse",
       "taskModule": "elasticsearch",
@@ -38,13 +38,13 @@
             "template": ">context.metaData.handlebars.queries.vacancies_home-top"
           },
           {
-            "name": "shortlist_open",
+            "name": "shortlist_vacancies_open",
             "index": "web-content-production",
             "type": "goodmoves-vacancy",
             "template": ">context.metaData.handlebars.queries.vacancies_shortlist-open"
           },
           {
-            "name": "shortlist_closed",
+            "name": "shortlist_vacancies_closed",
             "index": "web-content-production",
             "type": "goodmoves-vacancy",
             "template": ">context.metaData.handlebars.queries.vacancies_shortlist-closed"
