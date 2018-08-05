@@ -223,6 +223,7 @@ header {
       }
       #user-menu {
         top: $header-lower-height !important;
+        left: $unit/2 !important;
         border-radius: 0 0 2px 2px;
       }
       .mdc-top-app-bar__action-item::before,
@@ -826,6 +827,11 @@ a {
   .leaflet-control.leaflet-bar a {
     color: black;
   }
+  .leaflet-popup-content {
+    h3 {
+      margin-top: 0;
+    }
+  }
 }
 .vacancy_icon {
   text-align: center;
@@ -888,6 +894,15 @@ a {
   padding: $unit/3 $unit/2;
   box-sizing: border-box;
   border-radius: 2px;
+  a .mdc-list-item__graphic {
+    margin-right: $unit/2;
+  }
+  a:hover {
+    text-decoration: none;
+    .underline {
+      text-decoration: underline;
+    }
+  }
 }
 .goodmoves-organisation-search .search-info {
   margin-bottom: $unit*1.5;
@@ -1246,7 +1261,7 @@ hr {
   padding: $unit 0 $unit*2;
 }
 .mdc-drawer__content {
-  padding: 0 $unit/2;
+  padding: 0 $unit/2 $unit;
   #search-tab-bar {
     padding: 0 $unit/2;
     box-sizing: border-box;
@@ -1389,6 +1404,9 @@ body.shortlist {
 }
 
 #search-terms {
+  .mdc-chip {
+    padding: $unit/4 $unit*.6 $unit/4 $unit/5;
+  }
   .mdc-chip,
   .mdc-chip:hover {
     .mdc-chip__icon,
@@ -1666,6 +1684,7 @@ body {
   }
   .search-distance {
     font-variant: all-small-caps;
+    font-size: 0.9rem;
     font-weight: 600;
     color: rgba(0, 0, 0, 0.7);
   }
@@ -1767,7 +1786,8 @@ body {
 }
 
 footer,
-.browse main {
+.browse main,
+.home-browse {
   .mdc-list {
     .mdc-list-item--0 .mdc-typography--headline7 {
       margin-top: 0;
@@ -1785,6 +1805,7 @@ footer,
       }
       .mdc-list-item__meta {
         text-decoration: none;
+        white-space: nowrap;
       }
     }
     .mdc-list-item:hover::before,
@@ -1977,6 +1998,7 @@ footer,
     padding-left: $unit*(3/4);
   }
 }
+.home-browse,
 .browse main {
   .browse-title {
     margin: $unit/2 0 $unit/2;
@@ -1985,9 +2007,22 @@ footer,
     height: auto;
   }
 }
+.home-browse {
+  .mdc-icon-toggle {
+    display: inline-block;
+    vertical-align: top;
+    margin-left: $unit/2;
+    .far {
+      vertical-align: top;
+    }
+  }
+  .page-content {
+    padding: 0;
+  }
+}
 
 .home-heading {
-  padding: $unit $unit*1.5;
+  padding: 0 $unit*1.5;
   .mdc-typography--headline5 {
     margin: $unit/2 0 0;
   }
@@ -2441,12 +2476,12 @@ form.inline-form {
   }
 }
 .scroll-button {
-  position: absolute;
-  height: 100%;
-  display: flex;
+  display: none;
   align-items: center;
   align-self: center;
   justify-content: center;
+  position: absolute;
+  height: 100%;
   width: $unit*4;
   border-radius: $unit/4;
   z-index: 2;
