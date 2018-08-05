@@ -73,25 +73,6 @@
     },
     "metaData.commonTasks.termsMaps",
     {
-      "name": "organisations_currently_recruiting",
-      "taskModule": "elasticsearch",
-      "config": {
-        "connectionStringTemplate": "{$../../elasticsearch-url.txt}",
-        "elasticsearchConfig": {
-          "apiVersion": "5.6"
-        },
-        "queryTemplates": [
-          {
-            "name": "vacancies",
-            "index": "web-content-production",
-            "type": "goodmoves-vacancy",
-            "template": ">context.metaData.handlebars.queries.vacancies_currently-recruiting"
-          }
-        ]
-      },
-      "renderer": "handlebars"
-    },
-    {
       "name": "posts",
       "taskModule": "elasticsearch",
       "config": {

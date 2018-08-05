@@ -142,12 +142,14 @@ $(document).ready(function() {
       $leftButton.hide();
     } else {
       $leftButton.show();
+      $leftButton.css('display', 'flex');
     }
 
     if (currentLeft >= maxLeft) {
       $rightButton.hide();
     } else {
       $rightButton.show();
+      $rightButton.css('display', 'flex');
     }
 
   }

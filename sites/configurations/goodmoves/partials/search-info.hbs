@@ -1,16 +1,18 @@
 {{#if paging.totalResults ~}}
 <div class="search-info mdc-elevation--z3">
-  <strong>Total results:</strong> {{addCommas paging.totalResults}} |
+  <strong>Total results:</strong> {{addCommas paging.totalResults}}
+  {{#compare paging.totalResults ">" 10 ~}} |
   <strong>Current page:</strong> {{addCommas paging.currentPage}} of {{addCommas paging.totalPages}}
+  {{/compare ~}}
   <a href="/map{{@root.request.url.search}}" class="pull-right">
     <span class="far fa-map-marker-alt fa-fw mdc-list-item__graphic" title="Map"></span>
-    <span class="underline">View results on map</a>
+    <span class="underline">Show {{inflect paging.totalResults "vacancy" "vacancies"}} on map</a>
   </a>
 </div>
 {{else}}
 {{#ifAny @root.request.params.query.roles @root.request.params.query.sectors @root.request.params.query.statuses @root.request.params.query.location @root.request.params.query.job_number @root.request.params.query.q ~}}
 <div class="search-info mdc-elevation--z1">
-  No results, please try a different search query
+  No vacancies could be found, please try a different search query
 </div>
 {{/ifAny ~}}
 {{/if ~}}
