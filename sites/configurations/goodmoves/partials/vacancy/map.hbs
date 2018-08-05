@@ -1,7 +1,9 @@
 <div class="goodmoves-{{vacancy_status}} map-content">
-  <h3 class="mdc-typography--headline7">{{title}}</h3>
+  <h3 class="mdc-typography--headline7">
+    <a href="/vacancy/{{slug}}{{@root.request.url.search}}">{{title}}</a>
+  </h3>
   {{#if organisation.name ~}}
-  <div class="mdc-typography--body2 v-margin">
+  <div class="mdc-typography--body1 v-margin">
     <strong>{{organisation.name}}</strong>
   </div>
   {{/if ~}}
@@ -19,7 +21,7 @@
     </div>
     {{/if ~}}
   </div>
-  <div class="mdc-typography--body1">
+  <div class="mdc-typography--body2">
     <a href="/vacancy/{{slug}}{{@root.request.url.search}}" class="mdc-card__action">Find out more</a>
   </div>
 </div>
