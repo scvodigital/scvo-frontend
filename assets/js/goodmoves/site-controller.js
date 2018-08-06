@@ -240,8 +240,13 @@ var GoodmovesController = Class.extend({
       for (var p = 0; p < vacancyPositions.length; p++) {
         var vacancyPosition = vacancyPositions[p];
         var vacancyMarker = vacancyMarkers[vacancyPosition];
-        var iconType = vacancyMarker.homebased ? ' homebased' : '';
-        var iconType = vacancyMarker.shortlisted ? ' shortlisted' : '';
+        var iconType = '';
+        if (vacancyMarker.homebased) {
+          iconType = ' homebased';
+        }
+        if (vacancyMarker.shortlisted) {
+          iconType = ' shortlisted';
+        }
         var icon = L.divIcon({
           html: '<i class="marker-icon fas fa-map-marker' + iconType + '"></i><span class="map-marker-overlay' + iconType + '">' + vacancyMarker.contents.length  + '</span>',
           iconSize: [30, 40],
