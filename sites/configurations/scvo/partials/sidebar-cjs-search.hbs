@@ -122,6 +122,7 @@
       <option value="inverclyde"{{#compare @root.request.params.query.region "===" "inverclyde"}} selected{{/compare}}>Inverclyde</option>
       <option value="midlothian"{{#compare @root.request.params.query.region "===" "midlothian"}} selected{{/compare}}>Midlothian</option>
       <option value="moray"{{#compare @root.request.params.query.region "===" "moray"}} selected{{/compare}}>Moray</option>
+      <option value="western-isles"{{#compare @root.request.params.query.region "===" "western-isles"}} selected{{/compare}}>Na h-Eileanan Siar</option>
       <option value="north-ayrshire"{{#compare @root.request.params.query.region "===" "north-ayrshire"}} selected{{/compare}}>North Ayrshire</option>
       <option value="north-lanarkshire"{{#compare @root.request.params.query.region "===" "north-lanarkshire"}} selected{{/compare}}>North Lanarkshire</option>
       <option value="orkney-islands"{{#compare @root.request.params.query.region "===" "orkney-islands"}} selected{{/compare}}>Orkney Islands</option>
@@ -134,12 +135,13 @@
       <option value="stirling"{{#compare @root.request.params.query.region "===" "stirling"}} selected{{/compare}}>Stirling</option>
       <option value="west-dunbartonshire"{{#compare @root.request.params.query.region "===" "west-dunbartonshire"}} selected{{/compare}}>West Dunbartonshire</option>
       <option value="west-lothian"{{#compare @root.request.params.query.region "===" "west-lothian"}} selected{{/compare}}>West Lothian</option>
-      <option value="western-isles"{{#compare @root.request.params.query.region "===" "western-isles"}} selected{{/compare}}>Western Isles</option>
-      <!-- {{#each supplimentaryResponses.types.aggregations.regions.buckets}}
-      {{#if key}}
-      <option value="{{key}}"{{#compare @root.request.params.query.region "===" key}} selected{{/compare}}>{{key}}</option>
-      {{/if}}
-      {{/each}} -->
+      <!-- {{#each @root.supplimentaryResponses.types.aggregations.regions_slugs.buckets ~}}
+      {{#if key ~}}
+      <option value="{{key}}"{{#compare @root.request.params.query.region "===" key}} selected{{/compare}}>
+        {{itemAt @root.supplimentaryResponses.types.aggregations.regions.buckets @index}}
+      </option>
+      {{/if ~}}
+      {{/each ~}} -->
     </select>
     <label class="mdc-floating-label mdc-floating-label--float-above" for="region">Region</label>
   </div>
