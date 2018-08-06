@@ -4,10 +4,12 @@
   {{#compare paging.totalResults ">" 10 ~}} |
   <strong>Current page:</strong> {{addCommas paging.currentPage}} of {{addCommas paging.totalPages}}
   {{/compare ~}}
+  {{#compare @root.request.params.path "===" "search" ~}}
   <a href="/map{{@root.request.url.search}}" class="pull-right">
     <span class="far fa-map-marker-alt fa-fw mdc-list-item__graphic" title="Map"></span>
     <span class="underline">Show {{inflect paging.totalResults "vacancy" "vacancies"}} on map</a>
   </a>
+  {{/compare ~}}
 </div>
 {{else}}
 {{#ifAny @root.request.params.query.roles @root.request.params.query.sectors @root.request.params.query.statuses @root.request.params.query.location @root.request.params.query.job_number @root.request.params.query.q ~}}

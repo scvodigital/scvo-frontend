@@ -1,0 +1,22 @@
+{{#ifAll location lat lng distance ~}}
+{
+  "geo_distance": {
+    "distance": "{{default distance "8.04672"}}km",
+    "geo_vacancy_coords": {
+      "lat": {{lat}},
+      "lon": {{lng}}
+    }
+  }
+},
+{
+  "term": {
+    "home_based": true
+  }
+}
+{{else}}
+{
+  "exists": {
+    "field": "title"
+  }
+}
+{{/ifAll ~}}
