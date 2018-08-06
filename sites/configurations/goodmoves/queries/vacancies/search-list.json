@@ -22,24 +22,37 @@
     "rendered.goodmoves_rss"
   ],
   "query": {
-    "bool": {
-      "filter": [
-        {{>queries_vacancy_common_filters request.params.query}},
-        {{>queries_vacancy_search_filters request.params.query}}
-      ],
-      "must": [
-        {{>queries_vacancy_search_must request.params.query}}
-      ],
-      "should": [
-        {
-          "term": {
-            "top_job": {
-              "value": true,
-              "boost": 10
-            }
-          }
+    "function_score": {
+      "query": {
+        "bool": {
+          "filter": [
+            {{>queries_vacancy_common_filters request.params.query}},
+            {{>queries_vacancy_search_filters request.params.query}}
+          ],
+          "must": [
+            {{>queries_vacancy_search_must request.params.query}}
+          ],
+          "should": [
+            {{>queries_vacancy_search_should request.params.query}}
+          ],
+          "minimum_should_match": 1
         }
-      ]
+      },
+      "boost": 1,
+      "functions": [
+        {
+          "filter": {
+            "match": {
+              "top_job": true
+            }
+          },
+          "weight": 20
+        }
+      ],
+      "max_boost": 50,
+      "score_mode": "max",
+      "boost_mode": "multiply",
+      "min_score" : 0
     }
   },
   {{#ifAll request.params.query.location request.params.query.lat request.params.query.lng ~}}

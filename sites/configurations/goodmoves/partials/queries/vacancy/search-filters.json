@@ -13,17 +13,6 @@
 {{#if roles ~}}
   {{>queries_terms field="roles_slugs" terms=roles}},
 {{/if ~}}
-{{#ifAll location lat lng distance ~}}
-{
-  "geo_distance": {
-    "distance": "{{default distance "8.04672"}}km",
-    "geo_vacancy_coords": {
-      "lat": {{lat}},
-      "lon": {{lng}}
-    }
-  }
-},
-{{/ifAll ~}}
 {{>queries_vacancy_common_filters_open}},
 {
   "exists": {

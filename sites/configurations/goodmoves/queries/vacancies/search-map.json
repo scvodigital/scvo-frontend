@@ -20,7 +20,11 @@
       ],
       "must": [
         {{>queries_vacancy_search_must request.params.query}}
-      ]
+      ],
+      "should": [
+        {{>queries_vacancy_search_should request.params.query}}
+      ],
+      "minimum_should_match": 1
     }
   },
   "sort": {

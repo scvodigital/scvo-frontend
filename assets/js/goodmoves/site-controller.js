@@ -197,16 +197,21 @@ var GoodmovesController = Class.extend({
       var mapName = $(o).data('map-name');
 
       // console.log(options.circle);
+      var searchArea;
+      var searchAreaShown = false;
       if (options.circle) {
-        L.circle(
-          [options.circle.lat, options.circle.lng],
-          {
-            radius: options.circle.radius*1000,
-            color: '#9cd986',
-            fillColor: '#9cd986',
-            fillOpacity: 0.1
-          }
-        ).addTo(map);
+        if (options.circle.radius > 0) {
+          searchArea = L.circle(
+            [options.circle.lat, options.circle.lng],
+            {
+              radius: options.circle.radius*1000,
+              color: '#9cd986',
+              fillColor: '#9cd986',
+              fillOpacity: 0.1
+            }
+          ).addTo(map);
+          searchAreaShown = true;
+        }
       }
 
       var $vacancies = $('marker[data-map="' + mapName + '"]');
@@ -222,6 +227,7 @@ var GoodmovesController = Class.extend({
               lng: $o.data('lng')
             },
             shortlisted: $o.data('shortlisted'),
+            homebased: $o.data('homebased'),
             contents: []
           };
         }
@@ -234,6 +240,7 @@ var GoodmovesController = Class.extend({
       for (var p = 0; p < vacancyPositions.length; p++) {
         var vacancyPosition = vacancyPositions[p];
         var vacancyMarker = vacancyMarkers[vacancyPosition];
+        var iconType = vacancyMarker.homebased ? ' homebased' : '';
         var iconType = vacancyMarker.shortlisted ? ' shortlisted' : '';
         var icon = L.divIcon({
           html: '<i class="marker-icon fas fa-map-marker' + iconType + '"></i><span class="map-marker-overlay' + iconType + '">' + vacancyMarker.contents.length  + '</span>',
@@ -279,15 +286,19 @@ var GoodmovesController = Class.extend({
       }
 
       if (!options.center) {
-        map.fitBounds(markers.getBounds());
+        if (searchAreaShown) {
+          map.fitBounds(searchArea.getBounds());
+        } else {
+          map.fitBounds(markers.getBounds());
+        }
       }
 
       that.maps[mapName] = map;
     });
-    
+
     $('textarea[data-autosize]').each(function() {
       var offset = this.offsetHeight - this.clientHeight;
-     
+
       var resizeTextarea = function(el) {
         var $el = $(el);
         if ($el.is(':visible')) {
