@@ -62,15 +62,12 @@
             {{#compare goodhq_organisation.status "===" "Open" ~}}
             –
             {{#compare @root.data.goodhq.reviews.hits.total ">" 0 ~}}
-            <!-- Change to mode=reviews -->
-            <a href="https://goodhq.org/{{goodhq_organisation.xid}}?mode=review">{{inflect @root.data.goodhq.reviews.hits.total "review" "reviews" true}}</a>{{#compare @root.data.goodhq.posts.hits.total ">" 0}}{{#compare @root.data.goodhq.volunteering.hits.total "===" 0}} and {{else}}, {{/compare}}{{else}}{{#compare @root.data.goodhq.volunteering.hits.total ">" 0}} and {{/compare}}{{/compare}}{{/compare ~}}
+            <a href="https://goodhq.org/{{goodhq_organisation.xid}}?mode=reviews">{{inflect @root.data.goodhq.reviews.hits.total "review" "reviews" true}}</a>{{#compare @root.data.goodhq.posts.hits.total ">" 0}}{{#compare @root.data.goodhq.volunteering.hits.total "===" 0}} and {{else}}, {{/compare}}{{else}}{{#compare @root.data.goodhq.volunteering.hits.total ">" 0}} and {{/compare}}{{/compare}}{{/compare ~}}
             {{#compare @root.data.goodhq.posts.hits.total ">" 0 ~}}
-            <!-- Change to mode=posts -->
-            <a href="https://goodhq.org/{{goodhq_organisation.xid}}?mode=post">{{inflect @root.data.goodhq.posts.hits.total "post" "posts" true}}</a>{{#compare @root.data.goodhq.volunteering.hits.total ">" 0}}, and{{/compare}}
+            <a href="https://goodhq.org/{{goodhq_organisation.xid}}?mode=posts">{{inflect @root.data.goodhq.posts.hits.total "post" "posts" true}}</a>{{#compare @root.data.goodhq.volunteering.hits.total ">" 0}}, and{{/compare}}
             {{/compare ~}}
             {{#compare @root.data.goodhq.volunteering.hits.total ">" 0 ~}}
-            <!-- Change to mode=volunteer -->
-            <a href="https://goodhq.org/{{goodhq_organisation.xid}}?mode=volopp">{{inflect @root.data.goodhq.volunteering.hits.total "volunteering opportunity" "volunteering opportunities" true}}</a>
+            <a href="https://goodhq.org/{{goodhq_organisation.xid}}?mode=volunteer">{{inflect @root.data.goodhq.volunteering.hits.total "volunteering opportunity" "volunteering opportunities" true}}</a>
             {{/compare ~}}
             {{/compare ~}}
             on

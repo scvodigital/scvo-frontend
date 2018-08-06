@@ -1,3 +1,32 @@
+{{#*inline "sector"}}
+<li class="mdc-list-item">
+  <span class="mdc-list-item__text">
+    <a href="/jobs/community-jobs-scotland/vacancies/{{@root.request.params.phase}}?sector={{slug}}">{{title}}</a>
+  </span>
+  <span class="mdc-list-item__meta">
+    {{#each @root.data.supplimentaryResponses.types.aggregations.sectors_slugs.buckets ~}}
+    {{#compare key "===" ../slug ~}}
+    {{doc_count}}
+    {{/compare ~}}
+    {{/each ~}}
+  </span>
+</li>
+{{/inline}}
+{{#*inline "region"}}
+<li class="mdc-list-item">
+  <span class="mdc-list-item__text">
+    <a href="/jobs/community-jobs-scotland/vacancies/{{@root.request.params.phase}}?region={{slug}}">{{title}}</a>
+  </span>
+  <span class="mdc-list-item__meta">
+    {{#each @root.data.supplimentaryResponses.types.aggregations.regions_slugs.buckets}}
+    {{#compare key "===" ../slug}}
+    {{doc_count}}
+    {{/compare}}
+    {{/each}}
+  </span>
+</li>
+{{/inline}}
+
 <div class="cjs-vacancy-search">
   {{> header_splash headerTextOverride="CJS vacancies" typeOverride="page"}}
   <div class="container-fluid page-content">
@@ -16,8 +45,8 @@
           </p>
         </div>
         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-9-desktop mdc-layout-grid__cell--span-5-tablet mdc-layout-grid__cell--span-4-phone content page-content">
-          {{#ifAny request.params.query.q request.params.query.job_number request.params.query.location request.params.query.sector request.params.query.region ~}}
-          {{#if data.primaryResponse.hits.total ~}}
+          {{#ifAny @root.request.params.query.q @root.request.params.query.job_number @root.request.params.query.location @root.request.params.query.sector request.params.query.region ~}}
+          {{#if @root.data.primaryResponse.hits.total ~}}
           {{> search_info paging=@root.data.primaryResponse.pagination}}
 
           {{#each @root.data.primaryResponse.hits.hits ~}}
@@ -27,10 +56,10 @@
           {{> pagination paging=@root.data.primaryResponse.pagination}}
           {{else}}
           <div class="search-info mdc-elevation--z3">
-            {{#if request.params.query.q ~}}
+            {{#if @root.request.params.query.q ~}}
             No vacancies could be found for your search, please try different keywords.
             {{else}}
-            {{#if request.params.query.job_number ~}}
+            {{#if @root.request.params.query.job_number ~}}
             The job number <strong>{{request.params.query.job_number}}</strong> does not match any current vacancies.
             {{else}}
             No current vacancies in the selected category, please check again soon.
@@ -43,589 +72,85 @@
             <div class="mdc-layout-grid__inner">
               <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
                 <h2>Jobs by sector</h2>
-                {{#*inline "sector_result_count" ~}}
-                {{#each @root.data.supplimentaryResponses.types.aggregations.sectors_slugs.buckets ~}}
-                {{#compare key "===" ../input ~}}
-                {{doc_count}}
-                {{/compare ~}}
-                {{/each ~}}
-                {{/inline ~}}
-                <div class="list-">
+                <div class="list-sector">
                   <ul class="mdc-list">
-                    <li class="mdc-list-item">
-                      <span class="mdc-list-item__text">
-                        <a href="/jobs/community-jobs-scotland/vacancies/{{request.params.phase}}?sector=administration-reception">Administration/Reception</a>
-                      </span>
-                      <span class="mdc-list-item__meta">
-                        {{> sector_result_count input="administration-reception"}}
-                      </span>
-                    </li>
-                    <li class="mdc-list-item">
-                      <span class="mdc-list-item__text">
-                        <a href="/jobs/community-jobs-scotland/vacancies/{{request.params.phase}}?sector=advocacy-advice">Advocacy/Advice</a>
-                      </span>
-                      <span class="mdc-list-item__meta">
-                        {{> sector_result_count input="advocacy-advice"}}
-                      </span>
-                    </li>
-                    <li class="mdc-list-item">
-                      <span class="mdc-list-item__text">
-                        <a href="/jobs/community-jobs-scotland/vacancies/{{request.params.phase}}?sector=animal-care">Animal Care</a>
-                      </span>
-                      <span class="mdc-list-item__meta">
-                        {{> sector_result_count input="animal-care"}}
-                      </span>
-                    </li>
-                    <li class="mdc-list-item">
-                      <span class="mdc-list-item__text">
-                        <a href="/jobs/community-jobs-scotland/vacancies/{{request.params.phase}}?sector=childcare">Childcare</a>
-                      </span>
-                      <span class="mdc-list-item__meta">
-                        {{> sector_result_count input="childcare"}}
-                      </span>
-                    </li>
-                    <li class="mdc-list-item">
-                      <span class="mdc-list-item__text">
-                        <a href="/jobs/community-jobs-scotland/vacancies/{{request.params.phase}}?sector=community-arts">Community Arts</a>
-                      </span>
-                      <span class="mdc-list-item__meta">
-                        {{> sector_result_count input="community-arts"}}
-                      </span>
-                    </li>
-                    <li class="mdc-list-item">
-                      <span class="mdc-list-item__text">
-                        <a href="/jobs/community-jobs-scotland/vacancies/{{request.params.phase}}?sector=community-third-sector-development">Community third sector Development</a>
-                      </span>
-                      <span class="mdc-list-item__meta">
-                        {{> sector_result_count input="community-third-sector-development"}}
-                      </span>
-                    </li>
-                    <li class="mdc-list-item">
-                      <span class="mdc-list-item__text">
-                        <a href="/jobs/community-jobs-scotland/vacancies/{{request.params.phase}}?sector=conservation">Conservation</a>
-                      </span>
-                      <span class="mdc-list-item__meta">
-                        {{> sector_result_count input="conservation"}}
-                      </span>
-                    </li>
-                    <li class="mdc-list-item">
-                      <span class="mdc-list-item__text">
-                        <a href="/jobs/community-jobs-scotland/vacancies/{{request.params.phase}}?sector=creative-industries">Creative Industries</a>
-                      </span>
-                      <span class="mdc-list-item__meta">
-                        {{> sector_result_count input="creative-industries"}}
-                      </span>
-                    </li>
-                    <li class="mdc-list-item">
-                      <span class="mdc-list-item__text">
-                        <a href="/jobs/community-jobs-scotland/vacancies/{{request.params.phase}}?sector=driving-transport">Driving/Transport</a>
-                      </span>
-                      <span class="mdc-list-item__meta">
-                        {{> sector_result_count input="driving-transport"}}
-                      </span>
-                    </li>
-                    <li class="mdc-list-item">
-                      <span class="mdc-list-item__text">
-                        <a href="/jobs/community-jobs-scotland/vacancies/{{request.params.phase}}?sector=education-training-employability-support">Education/Training/Employability Support</a>
-                      </span>
-                      <span class="mdc-list-item__meta">
-                        {{> sector_result_count input="education-training-employability-support"}}
-                      </span>
-                    </li>
-                    <li class="mdc-list-item">
-                      <span class="mdc-list-item__text">
-                        <a href="/jobs/community-jobs-scotland/vacancies/{{request.params.phase}}?sector=environmental-green-industries">Environmental/Green Industries</a>
-                      </span>
-                      <span class="mdc-list-item__meta">
-                        {{> sector_result_count input="environmental-green-industries"}}
-                      </span>
-                    </li>
-                    <li class="mdc-list-item">
-                      <span class="mdc-list-item__text">
-                        <a href="/jobs/community-jobs-scotland/vacancies/{{request.params.phase}}?sector=finance">Finance</a>
-                      </span>
-                      <span class="mdc-list-item__meta">
-                        {{> sector_result_count input="finance"}}
-                      </span>
-                    </li>
-                    <li class="mdc-list-item">
-                      <span class="mdc-list-item__text">
-                        <a href="/jobs/community-jobs-scotland/vacancies/{{request.params.phase}}?sector=health-social-care">Health and Social Care</a>
-                      </span>
-                      <span class="mdc-list-item__meta">
-                        {{> sector_result_count input="health-social-care"}}
-                      </span>
-                    </li>
-                    <li class="mdc-list-item">
-                      <span class="mdc-list-item__text">
-                        <a href="/jobs/community-jobs-scotland/vacancies/{{request.params.phase}}?sector=hospitality-catering">Hospitality and Catering</a>
-                      </span>
-                      <span class="mdc-list-item__meta">
-                        {{> sector_result_count input="hospitality-catering"}}
-                      </span>
-                    </li>
-                    <li class="mdc-list-item">
-                      <span class="mdc-list-item__text">
-                        <a href="/jobs/community-jobs-scotland/vacancies/{{request.params.phase}}?sector=housing">Housing</a>
-                      </span>
-                      <span class="mdc-list-item__meta">
-                        {{> sector_result_count input="housing"}}
-                      </span>
-                    </li>
-                    <li class="mdc-list-item">
-                      <span class="mdc-list-item__text">
-                        <a href="/jobs/community-jobs-scotland/vacancies/{{request.params.phase}}?sector=it">IT</a>
-                      </span>
-                      <span class="mdc-list-item__meta">
-                        {{> sector_result_count input="it"}}
-                      </span>
-                    </li>
-                    <li class="mdc-list-item">
-                      <span class="mdc-list-item__text">
-                        <a href="/jobs/community-jobs-scotland/vacancies/{{request.params.phase}}?sector=leisure-tourism">Leisure/Tourism</a>
-                      </span>
-                      <span class="mdc-list-item__meta">
-                        {{> sector_result_count input="leisure-tourism"}}
-                      </span>
-                    </li>
-                    <li class="mdc-list-item">
-                      <span class="mdc-list-item__text">
-                        <a href="/jobs/community-jobs-scotland/vacancies/{{request.params.phase}}?sector=manual-work-skilled-trades">Manual Work/Skilled Trades</a>
-                      </span>
-                      <span class="mdc-list-item__meta">
-                        {{> sector_result_count input="manual-work-skilled-trades"}}
-                      </span>
-                    </li>
-                    <li class="mdc-list-item">
-                      <span class="mdc-list-item__text">
-                        <a href="/jobs/community-jobs-scotland/vacancies/{{request.params.phase}}?sector=marketing-pr-promotions">Marketing/PR/Promotions</a>
-                      </span>
-                      <span class="mdc-list-item__meta">
-                        {{> sector_result_count input="marketing-pr-promotions"}}
-                      </span>
-                    </li>
-                    <li class="mdc-list-item">
-                      <span class="mdc-list-item__text">
-                        <a href="/jobs/community-jobs-scotland/vacancies/{{request.params.phase}}?sector=peer-support">Peer Support</a>
-                      </span>
-                      <span class="mdc-list-item__meta">
-                        {{> sector_result_count input="peer-support"}}
-                      </span>
-                    </li>
-                    <li class="mdc-list-item">
-                      <span class="mdc-list-item__text">
-                        <a href="/jobs/community-jobs-scotland/vacancies/{{request.params.phase}}?sector=retail">Retail</a>
-                      </span>
-                      <span class="mdc-list-item__meta">
-                        {{> sector_result_count input="retail"}}
-                      </span>
-                    </li>
-                    <li class="mdc-list-item">
-                      <span class="mdc-list-item__text">
-                        <a href="/jobs/community-jobs-scotland/vacancies/{{request.params.phase}}?sector=sports">Sports</a>
-                      </span>
-                      <span class="mdc-list-item__meta">
-                        {{> sector_result_count input="sports"}}
-                      </span>
-                    </li>
-                    <li class="mdc-list-item">
-                      <span class="mdc-list-item__text">
-                        <a href="/jobs/community-jobs-scotland/vacancies/{{request.params.phase}}?sector=warehousing">Warehousing</a>
-                      </span>
-                      <span class="mdc-list-item__meta">
-                        {{> sector_result_count input="warehousing"}}
-                      </span>
-                    </li>
-                    <li class="mdc-list-item">
-                      <span class="mdc-list-item__text">
-                        <a href="/jobs/community-jobs-scotland/vacancies/{{request.params.phase}}?sector=youth-work">Youth Work</a>
-                      </span>
-                      <span class="mdc-list-item__meta">
-                        {{> sector_result_count input="youth-work"}}
-                      </span>
-                    </li>
-                    <li class="mdc-list-item">
-                      <span class="mdc-list-item__text">
-                        <a href="/jobs/community-jobs-scotland/vacancies/{{request.params.phase}}?sector=business-development">Business Development</a>
-                      </span>
-                      <span class="mdc-list-item__meta">
-                        {{> sector_result_count input="business-development"}}
-                      </span>
-                    </li>
-                    <li class="mdc-list-item">
-                      <span class="mdc-list-item__text">
-                        <a href="/jobs/community-jobs-scotland/vacancies/{{request.params.phase}}?sector=campaigning-fundraising">Campaigning/Fundraising</a>
-                      </span>
-                      <span class="mdc-list-item__meta">
-                        {{> sector_result_count input="campaigning-fundraising"}}
-                      </span>
-                    </li>
-                    <li class="mdc-list-item">
-                      <span class="mdc-list-item__text">
-                        <a href="/jobs/community-jobs-scotland/vacancies/{{request.params.phase}}?sector=communications">Communications</a>
-                      </span>
-                      <span class="mdc-list-item__meta">
-                        {{> sector_result_count input="communications"}}
-                      </span>
-                    </li>
-                    <li class="mdc-list-item">
-                      <span class="mdc-list-item__text">
-                        <a href="/jobs/community-jobs-scotland/vacancies/{{request.params.phase}}?sector=community-arts-development">Community Arts Development</a>
-                      </span>
-                      <span class="mdc-list-item__meta">
-                        {{> sector_result_count input="community-arts-development"}}
-                      </span>
-                    </li>
-                    <li class="mdc-list-item">
-                      <span class="mdc-list-item__text">
-                        <a href="/jobs/community-jobs-scotland/vacancies/{{request.params.phase}}?sector=data-analysis">Data Analysis</a>
-                      </span>
-                      <span class="mdc-list-item__meta">
-                        {{> sector_result_count input="data-analysis"}}
-                      </span>
-                    </li>
-                    <li class="mdc-list-item">
-                      <span class="mdc-list-item__text">
-                        <a href="/jobs/community-jobs-scotland/vacancies/{{request.params.phase}}?sector=database-design-development">Database Design/Development</a>
-                      </span>
-                      <span class="mdc-list-item__meta">
-                        {{> sector_result_count input="database-design-development"}}
-                      </span>
-                    </li>
-                    <li class="mdc-list-item">
-                      <span class="mdc-list-item__text">
-                        <a href="/jobs/community-jobs-scotland/vacancies/{{request.params.phase}}?sector=event-festival-planning">Event/Festival Planning</a>
-                      </span>
-                      <span class="mdc-list-item__meta">
-                        {{> sector_result_count input="event-festival-planning"}}
-                      </span>
-                    </li>
-                    <li class="mdc-list-item">
-                      <span class="mdc-list-item__text">
-                        <a href="/jobs/community-jobs-scotland/vacancies/{{request.params.phase}}?sector=film-video-production">Film/Video Production</a>
-                      </span>
-                      <span class="mdc-list-item__meta">
-                        {{> sector_result_count input="film-video-production"}}
-                      </span>
-                    </li>
-                    <li class="mdc-list-item">
-                      <span class="mdc-list-item__text">
-                        <a href="/jobs/community-jobs-scotland/vacancies/{{request.params.phase}}?sector=graphic-design">Graphic Design</a>
-                      </span>
-                      <span class="mdc-list-item__meta">
-                        {{> sector_result_count input="graphic-design"}}
-                      </span>
-                    </li>
-                    <li class="mdc-list-item">
-                      <span class="mdc-list-item__text">
-                        <a href="/jobs/community-jobs-scotland/vacancies/{{request.params.phase}}?sector=marketing-pr-promotion">Marketing/PR/Promotion</a>
-                      </span>
-                      <span class="mdc-list-item__meta">
-                        {{> sector_result_count input="marketing-pr-promotion"}}
-                      </span>
-                    </li>
-                    <li class="mdc-list-item">
-                      <span class="mdc-list-item__text">
-                        <a href="/jobs/community-jobs-scotland/vacancies/{{request.params.phase}}?sector=monitoring-evaluation">Monitoring/Evaluation</a>
-                      </span>
-                      <span class="mdc-list-item__meta">
-                        {{> sector_result_count input="monitoring-evaluation"}}
-                      </span>
-                    </li>
-                    <li class="mdc-list-item">
-                      <span class="mdc-list-item__text">
-                        <a href="/jobs/community-jobs-scotland/vacancies/{{request.params.phase}}?sector=policy-development">Policy Development</a>
-                      </span>
-                      <span class="mdc-list-item__meta">
-                        {{> sector_result_count input="policy-development"}}
-                      </span>
-                    </li>
-                    <li class="mdc-list-item">
-                      <span class="mdc-list-item__text">
-                        <a href="/jobs/community-jobs-scotland/vacancies/{{request.params.phase}}?sector=research">Research</a>
-                      </span>
-                      <span class="mdc-list-item__meta">
-                        {{> sector_result_count input="research"}}
-                      </span>
-                    </li>
-                    <li class="mdc-list-item">
-                      <span class="mdc-list-item__text">
-                        <a href="/jobs/community-jobs-scotland/vacancies/{{request.params.phase}}?sector=resource-development">Resource Development</a>
-                      </span>
-                      <span class="mdc-list-item__meta">
-                        {{> sector_result_count input="resource-development"}}
-                      </span>
-                    </li>
+                    {{> sector title="Administration/reception" slug="administration-reception"}}
+                    {{> sector title="Advocacy/advice" slug="advocacy-advice"}}
+                    {{> sector title="Animal care" slug="animal-care"}}
+                    {{> sector title="Business development" slug="business-development"}}
+                    {{> sector title="Campaigning/fundraising" slug="campaigning-fundraising"}}
+                    {{> sector title="Childcare" slug="childcare"}}
+                    {{> sector title="Communications" slug="communications"}}
+                    {{> sector title="Community arts development" slug="community-arts-development"}}
+                    {{> sector title="Community arts" slug="community-arts"}}
+                    {{> sector title="Community third sector development" slug="community-third-sector-development"}}
+                    {{> sector title="Conservation" slug="conservation"}}
+                    {{> sector title="Creative industries" slug="creative-industries"}}
+                    {{> sector title="Data analysis" slug="data-analysis"}}
+                    {{> sector title="Database design/development" slug="database-design-development"}}
+                    {{> sector title="Driving/transport" slug="driving-transport"}}
+                    {{> sector title="Education/training/employability support" slug="education-training-employability-support"}}
+                    {{> sector title="Environmental/green industries" slug="environmental-green-industries"}}
+                    {{> sector title="Event/festival planning" slug="event-festival-planning"}}
+                    {{> sector title="Film/video production" slug="film-video-production"}}
+                    {{> sector title="Finance" slug="finance"}}
+                    {{> sector title="Graphic design" slug="graphic-design"}}
+                    {{> sector title="Health and social care" slug="health-social-care"}}
+                    {{> sector title="Hospitality and catering" slug="hospitality-catering"}}
+                    {{> sector title="Housing" slug="housing"}}
+                    {{> sector title="IT" slug="it"}}
+                    {{> sector title="Leisure/tourism" slug="leisure-tourism"}}
+                    {{> sector title="Manual work/skilled trades" slug="manual-work-skilled-trades"}}
+                    {{> sector title="Marketing/PR/promotion" slug="marketing-pr-promotion"}}
+                    {{> sector title="Marketing/PR/promotions" slug="marketing-pr-promotions"}}
+                    {{> sector title="Monitoring/evaluation" slug="monitoring-evaluation"}}
+                    {{> sector title="Peer support" slug="peer-support"}}
+                    {{> sector title="Policy development" slug="policy-development"}}
+                    {{> sector title="Research" slug="research"}}
+                    {{> sector title="Resource development" slug="resource-development"}}
+                    {{> sector title="Retail" slug="retail"}}
+                    {{> sector title="Sports" slug="sports"}}
+                    {{> sector title="Warehousing" slug="warehousing"}}
+                    {{> sector title="Youth work" slug="youth-work"}}
                   </ul>
                 </div>
               </div>
               <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
                 <h2>Jobs by region</h2>
-                {{#*inline "region_result_count"}}
-                {{#each data.supplimentaryResponses.types.aggregations.regions_slugs.buckets}}
-                {{#compare key "===" ../input}}
-                {{doc_count}}
-                {{/compare}}
-                {{/each}}
-                {{/inline}}
-                <div class="list-">
+                <div class="list-region">
                   <ul class="mdc-list">
-                    <li class="mdc-list-item">
-                      <span class="mdc-list-item__text">
-                        <a href="/jobs/community-jobs-scotland/vacancies/{{request.params.phase}}?region=aberdeen-city">Aberdeen</a>
-                      </span>
-                      <span class="mdc-list-item__meta">
-                        {{> region_result_count input="aberdeen-city"}}
-                      </span>
-                    </li>
-                    <li class="mdc-list-item">
-                      <span class="mdc-list-item__text">
-                        <a href="/jobs/community-jobs-scotland/vacancies/{{request.params.phase}}?region=aberdeenshire">Aberdeenshire</a>
-                      </span>
-                      <span class="mdc-list-item__meta">
-                        {{> region_result_count input="aberdeenshire"}}
-                      </span>
-                    </li>
-                    <li class="mdc-list-item">
-                      <span class="mdc-list-item__text">
-                        <a href="/jobs/community-jobs-scotland/vacancies/{{request.params.phase}}?region=angus">Angus</a>
-                      </span>
-                      <span class="mdc-list-item__meta">
-                        {{> region_result_count input="angus"}}
-                      </span>
-                    </li>
-                    <li class="mdc-list-item">
-                      <span class="mdc-list-item__text">
-                        <a href="/jobs/community-jobs-scotland/vacancies/{{request.params.phase}}?region=argyll-bute">Argyll &amp; Bute</a>
-                      </span>
-                      <span class="mdc-list-item__meta">
-                        {{> region_result_count input="argyll-bute"}}
-                      </span>
-                    </li>
-                    <li class="mdc-list-item">
-                      <span class="mdc-list-item__text">
-                        <a href="/jobs/community-jobs-scotland/vacancies/{{request.params.phase}}?region=clackmannanshire">Clackmannanshire</a>
-                      </span>
-                      <span class="mdc-list-item__meta">
-                        {{> region_result_count input="clackmannanshire"}}
-                      </span>
-                    </li>
-                    <li class="mdc-list-item">
-                      <span class="mdc-list-item__text">
-                        <a href="/jobs/community-jobs-scotland/vacancies/{{request.params.phase}}?region=dumfries-galloway">Dumfries &amp; Galloway</a>
-                      </span>
-                      <span class="mdc-list-item__meta">
-                        {{> region_result_count input="dumfries-galloway"}}
-                      </span>
-                    </li>
-                    <li class="mdc-list-item">
-                      <span class="mdc-list-item__text">
-                        <a href="/jobs/community-jobs-scotland/vacancies/{{request.params.phase}}?region=dundee-city">Dundee</a>
-                      </span>
-                      <span class="mdc-list-item__meta">
-                        {{> region_result_count input="dundee-city"}}
-                      </span>
-                    </li>
-                    <li class="mdc-list-item">
-                      <span class="mdc-list-item__text">
-                        <a href="/jobs/community-jobs-scotland/vacancies/{{request.params.phase}}?region=east-ayrshire">East Ayrshire</a>
-                      </span>
-                      <span class="mdc-list-item__meta">
-                        {{> region_result_count input="east-ayrshire"}}
-                      </span>
-                    </li>
-                    <li class="mdc-list-item">
-                      <span class="mdc-list-item__text">
-                        <a href="/jobs/community-jobs-scotland/vacancies/{{request.params.phase}}?region=east-dunbartonshire">East Dunbartonshire</a>
-                      </span>
-                      <span class="mdc-list-item__meta">
-                        {{> region_result_count input="east-dunbartonshire"}}
-                      </span>
-                    </li>
-                    <li class="mdc-list-item">
-                      <span class="mdc-list-item__text">
-                        <a href="/jobs/community-jobs-scotland/vacancies/{{request.params.phase}}?region=east-lothian">East Lothian</a>
-                      </span>
-                      <span class="mdc-list-item__meta">
-                        {{> region_result_count input="east-lothian"}}
-                      </span>
-                    </li>
-                    <li class="mdc-list-item">
-                      <span class="mdc-list-item__text">
-                        <a href="/jobs/community-jobs-scotland/vacancies/{{request.params.phase}}?region=east-renfrewshire">East Renfrewshire</a>
-                      </span>
-                      <span class="mdc-list-item__meta">
-                        {{> region_result_count input="east-renfrewshire"}}
-                      </span>
-                    </li>
-                    <li class="mdc-list-item">
-                      <span class="mdc-list-item__text">
-                        <a href="/jobs/community-jobs-scotland/vacancies/{{request.params.phase}}?region=edinburgh-city">Edinburgh</a>
-                      </span>
-                      <span class="mdc-list-item__meta">
-                        {{> region_result_count input="edinburgh-city"}}
-                      </span>
-                    </li>
-                    <li class="mdc-list-item">
-                      <span class="mdc-list-item__text">
-                        <a href="/jobs/community-jobs-scotland/vacancies/{{request.params.phase}}?region=falkirk">Falkirk</a>
-                      </span>
-                      <span class="mdc-list-item__meta">
-                        {{> region_result_count input="falkirk"}}
-                      </span>
-                    </li>
-                    <li class="mdc-list-item">
-                      <span class="mdc-list-item__text">
-                        <a href="/jobs/community-jobs-scotland/vacancies/{{request.params.phase}}?region=fife">Fife</a>
-                      </span>
-                      <span class="mdc-list-item__meta">
-                        {{> region_result_count input="fife"}}
-                      </span>
-                    </li>
-                    <li class="mdc-list-item">
-                      <span class="mdc-list-item__text">
-                        <a href="/jobs/community-jobs-scotland/vacancies/{{request.params.phase}}?region=glasgow-city">Glasgow</a>
-                      </span>
-                      <span class="mdc-list-item__meta">
-                        {{> region_result_count input="glasgow-city"}}
-                      </span>
-                    </li>
-                    <li class="mdc-list-item">
-                      <span class="mdc-list-item__text">
-                        <a href="/jobs/community-jobs-scotland/vacancies/{{request.params.phase}}?region=highland">Highland</a>
-                      </span>
-                      <span class="mdc-list-item__meta">
-                        {{> region_result_count input="highland"}}
-                      </span>
-                    </li>
-                    <li class="mdc-list-item">
-                      <span class="mdc-list-item__text">
-                        <a href="/jobs/community-jobs-scotland/vacancies/{{request.params.phase}}?region=inverclyde">Inverclyde</a>
-                      </span>
-                      <span class="mdc-list-item__meta">
-                        {{> region_result_count input="inverclyde"}}
-                      </span>
-                    </li>
-                    <li class="mdc-list-item">
-                      <span class="mdc-list-item__text">
-                        <a href="/jobs/community-jobs-scotland/vacancies/{{request.params.phase}}?region=midlothian">Midlothian</a>
-                      </span>
-                      <span class="mdc-list-item__meta">
-                        {{> region_result_count input="midlothian"}}
-                      </span>
-                    </li>
-                    <li class="mdc-list-item">
-                      <span class="mdc-list-item__text">
-                        <a href="/jobs/community-jobs-scotland/vacancies/{{request.params.phase}}?region=moray">Moray</a>
-                      </span>
-                      <span class="mdc-list-item__meta">
-                        {{> region_result_count input="moray"}}
-                      </span>
-                    </li>
-                    <li class="mdc-list-item">
-                      <span class="mdc-list-item__text">
-                        <a href="/jobs/community-jobs-scotland/vacancies/{{request.params.phase}}?region=north-ayrshire">North Ayrshire</a>
-                      </span>
-                      <span class="mdc-list-item__meta">
-                        {{> region_result_count input="north-ayrshire"}}
-                      </span>
-                    </li>
-                    <li class="mdc-list-item">
-                      <span class="mdc-list-item__text">
-                        <a href="/jobs/community-jobs-scotland/vacancies/{{request.params.phase}}?region=north-lanarkshire">North Lanarkshire</a>
-                      </span>
-                      <span class="mdc-list-item__meta">
-                        {{> region_result_count input="north-lanarkshire"}}
-                      </span>
-                    </li>
-                    <li class="mdc-list-item">
-                      <span class="mdc-list-item__text">
-                        <a href="/jobs/community-jobs-scotland/vacancies/{{request.params.phase}}?region=orkney-islands">Orkney Islands</a>
-                      </span>
-                      <span class="mdc-list-item__meta">
-                        {{> region_result_count input="orkney-islands"}}
-                      </span>
-                    </li>
-                    <li class="mdc-list-item">
-                      <span class="mdc-list-item__text">
-                        <a href="/jobs/community-jobs-scotland/vacancies/{{request.params.phase}}?region=perth-kinross">Perth &amp; Kinross</a>
-                      </span>
-                      <span class="mdc-list-item__meta">
-                        {{> region_result_count input="perth-kinross"}}
-                      </span>
-                    </li>
-                    <li class="mdc-list-item">
-                      <span class="mdc-list-item__text">
-                        <a href="/jobs/community-jobs-scotland/vacancies/{{request.params.phase}}?region=renfrewshire">Renfrewshire</a>
-                      </span>
-                      <span class="mdc-list-item__meta">
-                        {{> region_result_count input="renfrewshire"}}
-                      </span>
-                    </li>
-                    <li class="mdc-list-item">
-                      <span class="mdc-list-item__text">
-                        <a href="/jobs/community-jobs-scotland/vacancies/{{request.params.phase}}?region=scottish-borders">Scottish Borders</a>
-                      </span>
-                      <span class="mdc-list-item__meta">
-                        {{> region_result_count input="scottish-borders"}}
-                      </span>
-                    </li>
-                    <li class="mdc-list-item">
-                      <span class="mdc-list-item__text">
-                        <a href="/jobs/community-jobs-scotland/vacancies/{{request.params.phase}}?region=shetland">Shetland</a>
-                      </span>
-                      <span class="mdc-list-item__meta">
-                        {{> region_result_count input="shetland"}}
-                      </span>
-                    </li>
-                    <li class="mdc-list-item">
-                      <span class="mdc-list-item__text">
-                        <a href="/jobs/community-jobs-scotland/vacancies/{{request.params.phase}}?region=south-ayrshire">South Ayrshire</a>
-                      </span>
-                      <span class="mdc-list-item__meta">
-                        {{> region_result_count input="south-ayrshire"}}
-                      </span>
-                    </li>
-                    <li class="mdc-list-item">
-                      <span class="mdc-list-item__text">
-                        <a href="/jobs/community-jobs-scotland/vacancies/{{request.params.phase}}?region=south-lanarkshire">South Lanarkshire</a>
-                      </span>
-                      <span class="mdc-list-item__meta">
-                        {{> region_result_count input="south-lanarkshire"}}
-                      </span>
-                    </li>
-                    <li class="mdc-list-item">
-                      <span class="mdc-list-item__text">
-                        <a href="/jobs/community-jobs-scotland/vacancies/{{request.params.phase}}?region=stirling">Stirling</a>
-                      </span>
-                      <span class="mdc-list-item__meta">
-                        {{> region_result_count input="stirling"}}
-                      </span>
-                    </li>
-                    <li class="mdc-list-item">
-                      <span class="mdc-list-item__text">
-                        <a href="/jobs/community-jobs-scotland/vacancies/{{request.params.phase}}?region=west-dunbartonshire">West Dunbartonshire</a>
-                      </span>
-                      <span class="mdc-list-item__meta">
-                        {{> region_result_count input="west-dunbartonshire"}}
-                      </span>
-                    </li>
-                    <li class="mdc-list-item">
-                      <span class="mdc-list-item__text">
-                        <a href="/jobs/community-jobs-scotland/vacancies/{{request.params.phase}}?region=west-lothian">West Lothian</a>
-                      </span>
-                      <span class="mdc-list-item__meta">
-                        {{> region_result_count input="west-lothian"}}
-                      </span>
-                    </li>
-                    <li class="mdc-list-item">
-                      <span class="mdc-list-item__text">
-                        <a href="/jobs/community-jobs-scotland/vacancies/{{request.params.phase}}?region=western-isles">Western Isles</a>
-                      </span>
-                      <span class="mdc-list-item__meta">
-                        {{> region_result_count input="western-isles"}}
-                      </span>
-                    </li>
+                    {{> region title="Aberdeen" slug="aberdeen-city"}}
+                    {{> region title="Aberdeenshire" slug="aberdeenshire"}}
+                    {{> region title="Angus" slug="angus"}}
+                    {{> region title="Argyll & Bute" slug="argyll-bute"}}
+                    {{> region title="Clackmannanshire" slug="clackmannanshire"}}
+                    {{> region title="Dumfries & Galloway" slug="dumfries-galloway"}}
+                    {{> region title="Dundee" slug="dundee-city"}}
+                    {{> region title="East Ayrshire" slug="east-ayrshire"}}
+                    {{> region title="East Dunbartonshire" slug="east-dunbartonshire"}}
+                    {{> region title="East Lothian" slug="east-lothian"}}
+                    {{> region title="East Renfrewshire" slug="east-renfrewshire"}}
+                    {{> region title="Edinburgh" slug="edinburgh-city"}}
+                    {{> region title="Falkirk" slug="falkirk"}}
+                    {{> region title="Fife" slug="fife"}}
+                    {{> region title="Glasgow" slug="glasgow-city"}}
+                    {{> region title="Highland" slug="highland"}}
+                    {{> region title="Inverclyde" slug="inverclyde"}}
+                    {{> region title="Midlothian" slug="midlothian"}}
+                    {{> region title="Moray" slug="moray"}}
+                    {{> region title="Na h-Eileanan Siar" slug="western-isles"}}
+                    {{> region title="North Ayrshire" slug="north-ayrshire"}}
+                    {{> region title="North Lanarkshire" slug="north-lanarkshire"}}
+                    {{> region title="Orkney Islands" slug="orkney-islands"}}
+                    {{> region title="Perth & Kinross" slug="perth-kinross"}}
+                    {{> region title="Renfrewshire" slug="renfrewshire"}}
+                    {{> region title="Scottish Borders" slug="scottish-borders"}}
+                    {{> region title="Shetland Islands" slug="shetland"}}
+                    {{> region title="South Ayrshire" slug="south-ayrshire"}}
+                    {{> region title="South Lanarkshire" slug="south-lanarkshire"}}
+                    {{> region title="Stirling" slug="stirling"}}
+                    {{> region title="West Dunbartonshire" slug="west-dunbartonshire"}}
+                    {{> region title="West Lothian" slug="west-lothian"}}
                   </ul>
                 </div>
               </div>

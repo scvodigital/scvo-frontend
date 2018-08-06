@@ -4,11 +4,11 @@
       <div class="container-fluid">
         <div class="mdc-layout-grid">
           {{#if @root.data.primaryResponse.hits.hits.[0]._source.header_text ~}}
-          <img src="{{data.primaryResponse.hits.hits.[0]._source.header_text}}" alt="{{data.primaryResponse.hits.hits.[0]._source.title}}" class="header-text" />
+          <img src="{{@root.data.primaryResponse.hits.hits.[0]._source.header_text}}" alt="{{@root.data.primaryResponse.hits.hits.[0]._source.title}}" class="header-text" />
           {{else}}
           <h1 class="header-text">
             <span class="header-text-banner">
-              {{{data.supplimentaryResponses.page.hits.hits.[0]._source.title}}}
+              {{{@root.data.supplimentaryResponses.page.hits.hits.[0]._source.title}}}
             </span>
           </h1>
           {{/if ~}}
@@ -23,12 +23,12 @@
       <li><a href="/digital">Digital</a></li>
       <li><a href="/digital/evolution">Evolution</a></li>
       <li><a href="/digital/evolution/cyber-resilience">Cyber Resilience and Cyber Essentials Grants</a></li>
-      <li>{{{data.supplimentaryResponses.page.hits.hits.[0]._source.title}}}</li>
+      <li>{{{@root.data.supplimentaryResponses.page.hits.hits.[0]._source.title}}}</li>
     </ul>
     <div class="mdc-layout-grid">
       <div class="mdc-layout-grid__inner">
         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 content grant-content">
-          {{{data.supplimentaryResponses.page.hits.hits.[0]._source.rendered.scvo_full}}}
+          {{{@root.data.supplimentaryResponses.page.hits.hits.[0]._source.rendered.scvo_full}}}
 
           <hr />
 

@@ -6,7 +6,7 @@
       <li><a href="/jobs">Jobs</a></li>
       <li><a href="/jobs/community-jobs-scotland">Community Jobs Scotland</a></li>
       <li><a href="/jobs/community-jobs-scotland/vacancies">Vacancies</a></li>
-      <li><a href="/jobs/community-jobs-scotland/vacancies/{{@root.request.params.phase}}">{{#compare request.params.phase "===" "p19v"}}16–29 year olds{{else}}16–29 year olds with a disability{{/compare}}</a></li>
+      <li><a href="/jobs/community-jobs-scotland/vacancies/{{@root.request.params.phase}}">{{#compare @root.request.params.phase "===" "p19v"}}16–29 year olds{{else}}16–29 year olds with a disability{{/compare}}</a></li>
       <li><a href="/jobs/community-jobs-scotland/vacancies/{{@root.request.params.phase}}/{{@root.request.params.slug}}">{{@root.data.primaryResponse.hits.hits.[0]._source.title}}</a></li>
       <li>Apply</li>
     </ul>
@@ -152,9 +152,6 @@
             <a href="https://www.skillsdevelopmentscotland.co.uk/contact-us/">Find your nearest Skills Development Scotland office</a><br />
             <a href="http://los.direct.gov.uk">Find your nearest Jobcentre Plus</a>
           </p>
-          <!-- <p>
-            If you work for SDS or JCP please <a href="http://jobs.scvo.org.uk/Account/Login">log in here</a> to start the referral/application process.
-          </p> -->
           <p>
             If you work for SDS or JCP please <a href="/jobs/community-jobs-scotland/vacancies/sign-in?vacancy={{replace (replace request.url.path "/jobs/community-jobs-scotland/vacancies/" "") "/" "_"}}">sign in</a> to start the referral/application process for this job.
           </p>
