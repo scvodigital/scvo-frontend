@@ -22,11 +22,11 @@
   <div class="mdc-drawer__content">
     <h2 class="mdc-drawer__content-heading hide-sm">Search jobs</h2>
     <div id="search-tab-bar" class="mdc-tab-bar mdc-tab-bar--fullwidth search-tab-bar" data-mdc-auto-init="MDCTabBar">
-      <a href="/search{{@root.request.url.search}}" class="mdc-tab {{#compare @root.request.url.pathname "/search"}}mdc-tab--active{{/compare}} details-tab" id="detailed-results">
+      <a href="/search{{@root.request.url.search}}" class="mdc-tab{{#compare @root.request.url.pathname "===" "/search"}} mdc-tab--active{{/compare}} details-tab" id="detailed-results">
         <span class="far fa-list fa-fw" title="List"></span>
         List
       </a>
-      <a href="/map{{@root.request.url.search}}" class="mdc-tab {{#compare @root.request.url.pathname "/map"}}mdc-tab--active{{/compare}} map-tab">
+      <a href="/map{{@root.request.url.search}}" class="mdc-tab{{#compare @root.request.url.pathname "===" "/map"}} mdc-tab--active{{/compare}} map-tab">
         <span class="far fa-map-marker-alt fa-fw" title="Map"></span>
         Map
       </a>

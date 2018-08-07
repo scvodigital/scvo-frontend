@@ -1,28 +1,18 @@
 {{#*inline "sector"}}
 <li class="mdc-list-item">
   <span class="mdc-list-item__text">
-    <a href="/jobs/community-jobs-scotland/vacancies/{{@root.request.params.phase}}?sector={{slug}}">{{title}}</a>
+    <a href="/jobs/community-jobs-scotland/vacancies/{{@root.request.params.phase}}?sector={{slug}}">{{title.key}}</a>
   </span>
-  <span class="mdc-list-item__meta">
-    {{#each @root.data.supplimentaryResponses.types.aggregations.sectors_slugs.buckets ~}}
-    {{#compare key "===" ../slug ~}}
-    {{doc_count}}
-    {{/compare ~}}
-    {{/each ~}}
-  </span>
+  <span class="mdc-list-item__meta">{{doc_count}}</span>
 </li>
 {{/inline}}
 {{#*inline "region"}}
 <li class="mdc-list-item">
   <span class="mdc-list-item__text">
-    <a href="/jobs/community-jobs-scotland/vacancies/{{@root.request.params.phase}}?region={{slug}}">{{title}}</a>
+    <a href="/jobs/community-jobs-scotland/vacancies/{{@root.request.params.phase}}?region={{slug}}">{{title.key}}</a>
   </span>
   <span class="mdc-list-item__meta">
-    {{#each @root.data.supplimentaryResponses.types.aggregations.regions_slugs.buckets}}
-    {{#compare key "===" ../slug}}
-    {{doc_count}}
-    {{/compare}}
-    {{/each}}
+    <span class="mdc-list-item__meta">{{doc_count}}</span>
   </span>
 </li>
 {{/inline}}
@@ -39,127 +29,176 @@
     </ul>
     <div class="mdc-layout-grid full">
       <div class="mdc-layout-grid__inner">
-        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone content page-content" style="padding-bottom: 0;">
-          <p>
-            Please view the opportunities available but if you cannot see a CJS job that would suit your customer then please contact the CJS team at <a href="mailto:communityjobsscotland@scvo.org.uk">communityjobsscotland@scvo.org.uk</a> with details and we can try and arrange an another opportunity. Read our full <a href="/privacy/community-jobs-scotland" target="_blank" rel="noopener">Privacy Notice</a>.
-          </p>
-        </div>
         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-9-desktop mdc-layout-grid__cell--span-5-tablet mdc-layout-grid__cell--span-4-phone content page-content">
-          {{#ifAny @root.request.params.query.q @root.request.params.query.job_number @root.request.params.query.location @root.request.params.query.sector request.params.query.region ~}}
-          {{#if @root.data.primaryResponse.hits.total ~}}
-          {{> search_info paging=@root.data.primaryResponse.pagination}}
-
-          {{#each @root.data.primaryResponse.hits.hits ~}}
-          {{{_source.rendered.scvo_list}}}
-          {{/each ~}}
-
-          {{> pagination paging=@root.data.primaryResponse.pagination}}
-          {{else}}
-          <div class="search-info mdc-elevation--z3">
-            {{#if @root.request.params.query.q ~}}
-            No vacancies could be found for your search, please try different keywords.
-            {{else}}
-            {{#if @root.request.params.query.job_number ~}}
-            The job number <strong>{{request.params.query.job_number}}</strong> does not match any current vacancies.
-            {{else}}
-            No current vacancies in the selected category, please check again soon.
-            {{/if ~}}
-            {{/if ~}}
-          </div>
-          {{/if ~}}
-          {{else}}
-          <div class="mdc-layout-grid cjs-search-list">
-            <div class="mdc-layout-grid__inner">
-              <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
-                <h2>Jobs by sector</h2>
-                <div class="list-sector">
-                  <ul class="mdc-list">
-                    {{> sector title="Administration/reception" slug="administration-reception"}}
-                    {{> sector title="Advocacy/advice" slug="advocacy-advice"}}
-                    {{> sector title="Animal care" slug="animal-care"}}
-                    {{> sector title="Business development" slug="business-development"}}
-                    {{> sector title="Campaigning/fundraising" slug="campaigning-fundraising"}}
-                    {{> sector title="Childcare" slug="childcare"}}
-                    {{> sector title="Communications" slug="communications"}}
-                    {{> sector title="Community arts development" slug="community-arts-development"}}
-                    {{> sector title="Community arts" slug="community-arts"}}
-                    {{> sector title="Community third sector development" slug="community-third-sector-development"}}
-                    {{> sector title="Conservation" slug="conservation"}}
-                    {{> sector title="Creative industries" slug="creative-industries"}}
-                    {{> sector title="Data analysis" slug="data-analysis"}}
-                    {{> sector title="Database design/development" slug="database-design-development"}}
-                    {{> sector title="Driving/transport" slug="driving-transport"}}
-                    {{> sector title="Education/training/employability support" slug="education-training-employability-support"}}
-                    {{> sector title="Environmental/green industries" slug="environmental-green-industries"}}
-                    {{> sector title="Event/festival planning" slug="event-festival-planning"}}
-                    {{> sector title="Film/video production" slug="film-video-production"}}
-                    {{> sector title="Finance" slug="finance"}}
-                    {{> sector title="Graphic design" slug="graphic-design"}}
-                    {{> sector title="Health and social care" slug="health-social-care"}}
-                    {{> sector title="Hospitality and catering" slug="hospitality-catering"}}
-                    {{> sector title="Housing" slug="housing"}}
-                    {{> sector title="IT" slug="it"}}
-                    {{> sector title="Leisure/tourism" slug="leisure-tourism"}}
-                    {{> sector title="Manual work/skilled trades" slug="manual-work-skilled-trades"}}
-                    {{> sector title="Marketing/PR/promotion" slug="marketing-pr-promotion"}}
-                    {{> sector title="Marketing/PR/promotions" slug="marketing-pr-promotions"}}
-                    {{> sector title="Monitoring/evaluation" slug="monitoring-evaluation"}}
-                    {{> sector title="Peer support" slug="peer-support"}}
-                    {{> sector title="Policy development" slug="policy-development"}}
-                    {{> sector title="Research" slug="research"}}
-                    {{> sector title="Resource development" slug="resource-development"}}
-                    {{> sector title="Retail" slug="retail"}}
-                    {{> sector title="Sports" slug="sports"}}
-                    {{> sector title="Warehousing" slug="warehousing"}}
-                    {{> sector title="Youth work" slug="youth-work"}}
-                  </ul>
-                </div>
+          {{#ifAny @root.request.params.query.view @root.request.params.query.q @root.request.params.query.job_number @root.request.params.query.location @root.request.params.query.sector request.params.query.region ~}}
+            {{#compare @root.request.params.query.view "===" "map" ~}}
+              <div id="detailed-results-container" class="container-content container-map">
+                <div id="map-full" data-map-name="fullMap" data-map-options='{
+                  {{#ifAll @root.request.params.query.lat @root.request.params.query.lng ~}}
+                  "circle": {
+                    "lat": {{@root.request.params.query.lat}},
+                    "lng": {{@root.request.params.query.lng}},
+                    "radius": {{default @root.request.params.query.distance 0}}
+                  }
+                  {{/ifAll ~}}
+                }'></div>
               </div>
-              <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
-                <h2>Jobs by region</h2>
-                <div class="list-region">
-                  <ul class="mdc-list">
-                    {{> region title="Aberdeen" slug="aberdeen-city"}}
-                    {{> region title="Aberdeenshire" slug="aberdeenshire"}}
-                    {{> region title="Angus" slug="angus"}}
-                    {{> region title="Argyll & Bute" slug="argyll-bute"}}
-                    {{> region title="Clackmannanshire" slug="clackmannanshire"}}
-                    {{> region title="Dumfries & Galloway" slug="dumfries-galloway"}}
-                    {{> region title="Dundee" slug="dundee-city"}}
-                    {{> region title="East Ayrshire" slug="east-ayrshire"}}
-                    {{> region title="East Dunbartonshire" slug="east-dunbartonshire"}}
-                    {{> region title="East Lothian" slug="east-lothian"}}
-                    {{> region title="East Renfrewshire" slug="east-renfrewshire"}}
-                    {{> region title="Edinburgh" slug="edinburgh-city"}}
-                    {{> region title="Falkirk" slug="falkirk"}}
-                    {{> region title="Fife" slug="fife"}}
-                    {{> region title="Glasgow" slug="glasgow-city"}}
-                    {{> region title="Highland" slug="highland"}}
-                    {{> region title="Inverclyde" slug="inverclyde"}}
-                    {{> region title="Midlothian" slug="midlothian"}}
-                    {{> region title="Moray" slug="moray"}}
-                    {{> region title="Na h-Eileanan Siar" slug="western-isles"}}
-                    {{> region title="North Ayrshire" slug="north-ayrshire"}}
-                    {{> region title="North Lanarkshire" slug="north-lanarkshire"}}
-                    {{> region title="Orkney Islands" slug="orkney-islands"}}
-                    {{> region title="Perth & Kinross" slug="perth-kinross"}}
-                    {{> region title="Renfrewshire" slug="renfrewshire"}}
-                    {{> region title="Scottish Borders" slug="scottish-borders"}}
-                    {{> region title="Shetland Islands" slug="shetland"}}
-                    {{> region title="South Ayrshire" slug="south-ayrshire"}}
-                    {{> region title="South Lanarkshire" slug="south-lanarkshire"}}
-                    {{> region title="Stirling" slug="stirling"}}
-                    {{> region title="West Dunbartonshire" slug="west-dunbartonshire"}}
-                    {{> region title="West Lothian" slug="west-lothian"}}
-                  </ul>
+              {{#each @root.data.primaryResponse.hits.hits ~}}
+                {{#if _source.geo_vacancy_coords ~}}
+                  {{#each (arrayify _source.geo_vacancy_coords) ~}}
+                    <marker style="display:none;" data-map="fullMap" data-lat="{{lat}}" data-lng="{{lon}}" data-title="{{../_source.title}}">
+                      {{#with ../_source ~}}
+                      <div class="map-content">
+                        <h3 class="mdc-typography--headline6">
+                          <a href="{{@root.request.url.pathname}}/{{slug}}{{@root.request.url.search}}">{{title}}</a>
+                        </h3>
+                        {{#if organisation.name ~}}
+                        <div class="mdc-typography--body1 v-margin">
+                          {{organisation.name}}
+                        </div>
+                        {{/if ~}}
+                        <div class="mdc-typography--body2">
+                          <a href="{{@root.request.url.pathname}}/{{slug}}{{@root.request.url.search}}" class="mdc-card__action">Find out more</a>
+                        </div>
+                      </div>
+                      {{/with ~}}
+                    </marker>
+                  {{/each ~}}
+                {{/if ~}}
+              {{/each ~}}
+              <script src="/assets/js/scvo/cjs-vacancies-search.js"></script>
+            {{else}}
+              {{#compare @root.data.primaryResponse.hits.total ">" 0 ~}}
+                {{> search_info paging=@root.data.primaryResponse.pagination}}
+
+                {{#each @root.data.primaryResponse.hits.hits ~}}
+                  {{{_source.rendered.scvo_list}}}
+                {{/each ~}}
+
+                {{> pagination paging=@root.data.primaryResponse.pagination}}
+              {{else}}
+                <div class="search-info mdc-elevation--z3">
+                  {{#if @root.request.params.query.q ~}}
+                    No vacancies could be found for your search, please try different keywords.
+                  {{else}}
+                    {{#if @root.request.params.query.job_number ~}}
+                      The job number <strong>{{request.params.query.job_number}}</strong> does not match any current vacancies.
+                    {{else}}
+                      No current vacancies in the selected category, please check again soon.
+                    {{/if ~}}
+                  {{/if ~}}
+                </div>
+              {{/compare ~}}
+            {{/compare ~}}
+          {{else}}
+            <div class="mdc-layout-grid cjs-search-list">
+              <div class="mdc-layout-grid__inner">
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
+                  <h2>Sectors</h2>
+                  <div class="list-sector">
+                    <ul class="mdc-list">
+                      {{#each @root.data.supplimentaryResponses.types.aggregations.sectors_slugs.buckets ~}}
+                        {{#if key ~}}
+                          {{> sector title=(lookup @root.data.supplimentaryResponses.types.aggregations.sectors.buckets @index) slug=key doc_count=doc_count}}
+                        {{/if ~}}
+                      {{/each ~}}
+                      <!-- {{> sector title="Administration/reception" slug="administration-reception"}}
+                      {{> sector title="Advocacy/advice" slug="advocacy-advice"}}
+                      {{> sector title="Animal care" slug="animal-care"}}
+                      {{> sector title="Business development" slug="business-development"}}
+                      {{> sector title="Campaigning/fundraising" slug="campaigning-fundraising"}}
+                      {{> sector title="Childcare" slug="childcare"}}
+                      {{> sector title="Communications" slug="communications"}}
+                      {{> sector title="Community arts development" slug="community-arts-development"}}
+                      {{> sector title="Community arts" slug="community-arts"}}
+                      {{> sector title="Community third sector development" slug="community-third-sector-development"}}
+                      {{> sector title="Conservation" slug="conservation"}}
+                      {{> sector title="Creative industries" slug="creative-industries"}}
+                      {{> sector title="Data analysis" slug="data-analysis"}}
+                      {{> sector title="Database design/development" slug="database-design-development"}}
+                      {{> sector title="Driving/transport" slug="driving-transport"}}
+                      {{> sector title="Education/training/employability support" slug="education-training-employability-support"}}
+                      {{> sector title="Environmental/green industries" slug="environmental-green-industries"}}
+                      {{> sector title="Event/festival planning" slug="event-festival-planning"}}
+                      {{> sector title="Film/video production" slug="film-video-production"}}
+                      {{> sector title="Finance" slug="finance"}}
+                      {{> sector title="Graphic design" slug="graphic-design"}}
+                      {{> sector title="Health and social care" slug="health-social-care"}}
+                      {{> sector title="Hospitality and catering" slug="hospitality-catering"}}
+                      {{> sector title="Housing" slug="housing"}}
+                      {{> sector title="IT" slug="it"}}
+                      {{> sector title="Leisure/tourism" slug="leisure-tourism"}}
+                      {{> sector title="Manual work/skilled trades" slug="manual-work-skilled-trades"}}
+                      {{> sector title="Marketing/PR/promotions" slug="marketing-pr-promotions"}}
+                      {{> sector title="Monitoring/evaluation" slug="monitoring-evaluation"}}
+                      {{> sector title="Peer support" slug="peer-support"}}
+                      {{> sector title="Policy development" slug="policy-development"}}
+                      {{> sector title="Research" slug="research"}}
+                      {{> sector title="Resource development" slug="resource-development"}}
+                      {{> sector title="Retail" slug="retail"}}
+                      {{> sector title="Sports" slug="sports"}}
+                      {{> sector title="Warehousing" slug="warehousing"}}
+                      {{> sector title="Youth work" slug="youth-work"}} -->
+                    </ul>
+                  </div>
+                </div>
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
+                  <h2>Regions</h2>
+                  <div class="list-region">
+                    <ul class="mdc-list">
+                      {{#each @root.data.supplimentaryResponses.types.aggregations.regions_slugs.buckets ~}}
+                        {{#if key ~}}
+                          {{> region title=(lookup @root.data.supplimentaryResponses.types.aggregations.regions.buckets @index) slug=key doc_count=doc_count}}
+                        {{/if ~}}
+                      {{/each ~}}
+                      <!-- {{> region title="Aberdeen" slug="aberdeen-city"}}
+                      {{> region title="Aberdeenshire" slug="aberdeenshire"}}
+                      {{> region title="Angus" slug="angus"}}
+                      {{> region title="Argyll & Bute" slug="argyll-bute"}}
+                      {{> region title="Clackmannanshire" slug="clackmannanshire"}}
+                      {{> region title="Dumfries & Galloway" slug="dumfries-galloway"}}
+                      {{> region title="Dundee" slug="dundee-city"}}
+                      {{> region title="East Ayrshire" slug="east-ayrshire"}}
+                      {{> region title="East Dunbartonshire" slug="east-dunbartonshire"}}
+                      {{> region title="East Lothian" slug="east-lothian"}}
+                      {{> region title="East Renfrewshire" slug="east-renfrewshire"}}
+                      {{> region title="Edinburgh" slug="edinburgh-city"}}
+                      {{> region title="Falkirk" slug="falkirk"}}
+                      {{> region title="Fife" slug="fife"}}
+                      {{> region title="Glasgow" slug="glasgow-city"}}
+                      {{> region title="Highland" slug="highland"}}
+                      {{> region title="Inverclyde" slug="inverclyde"}}
+                      {{> region title="Midlothian" slug="midlothian"}}
+                      {{> region title="Moray" slug="moray"}}
+                      {{> region title="Na h-Eileanan Siar" slug="western-isles"}}
+                      {{> region title="North Ayrshire" slug="north-ayrshire"}}
+                      {{> region title="North Lanarkshire" slug="north-lanarkshire"}}
+                      {{> region title="Orkney Islands" slug="orkney-islands"}}
+                      {{> region title="Perth & Kinross" slug="perth-kinross"}}
+                      {{> region title="Renfrewshire" slug="renfrewshire"}}
+                      {{> region title="Scottish Borders" slug="scottish-borders"}}
+                      {{> region title="Shetland Islands" slug="shetland"}}
+                      {{> region title="South Ayrshire" slug="south-ayrshire"}}
+                      {{> region title="South Lanarkshire" slug="south-lanarkshire"}}
+                      {{> region title="Stirling" slug="stirling"}}
+                      {{> region title="West Dunbartonshire" slug="west-dunbartonshire"}}
+                      {{> region title="West Lothian" slug="west-lothian"}} -->
+                    </ul>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
           {{/ifAny ~}}
         </div>
         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-3-tablet mdc-layout-grid__cell--span-4-phone sidebar page-sidebar">
           {{> sidebar_cjs_search}}
+        </div>
+      </div>
+      <div class="mdc-layout-grid__inner">
+        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone content page-content" style="padding-bottom: 0;">
+          <p>
+            Please view the opportunities available but if you cannot see a CJS job that would suit your customer then please contact the CJS team at <a href="mailto:communityjobsscotland@scvo.org.uk">communityjobsscotland@scvo.org.uk</a> with details and we can try and arrange an another opportunity. Read our full <a href="/privacy/community-jobs-scotland" target="_blank" rel="noopener">Privacy Notice</a>.
+          </p>
         </div>
         {{> footer_cjs}}
       </div>

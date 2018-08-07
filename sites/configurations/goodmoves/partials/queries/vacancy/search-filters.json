@@ -13,9 +13,4 @@
 {{#if roles ~}}
   {{>queries_terms field="roles_slugs" terms=roles}},
 {{/if ~}}
-{{>queries_vacancy_common_filters_open}},
-{
-  "exists": {
-    "field": "title"
-  }
-}
+{{>queries_vacancy_common_filters}}

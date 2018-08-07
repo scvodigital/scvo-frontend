@@ -1,10 +1,79 @@
+{{#*inline "sector"}}
+  {{#if key ~}}
+    <option value="{{key}}"{{#compare @root.request.params.query.sector "===" key}} selected{{/compare}}>
+      {{title.key}}
+    </option>
+  {{/if ~}}
+{{/inline}}
+{{#*inline "region"}}
+  {{#if key ~}}
+    <option value="{{key}}"{{#compare @root.request.params.query.region "===" key}} selected{{/compare}}>
+      {{title.key}}
+    </option>
+  {{/if ~}}
+{{/inline}}
+
 <h2 class="mdc-card__title mdc-card__title--large">Search vacancies</h2>
+
 <form action="/jobs/community-jobs-scotland/vacancies/{{@root.request.params.phase}}" method="GET" [searchroute]="'cjs_job_search'" data-auto-search="false">
+  <input type="hidden" name="view" value="{{@root.request.params.query.view}}" />
+
+  <div id="search-tab-bar" class="mdc-tab-bar mdc-tab-bar--fullwidth search-tab-bar" data-mdc-auto-init="MDCTabBar">
+    <a href="/jobs/community-jobs-scotland/vacancies/{{@root.request.params.phase}}?q={{@root.request.params.query.q}}&sector={{@root.request.params.query.sector}}&region={{@root.request.params.query.region}}&location={{@root.request.params.query.location}}&distance={{@root.request.params.query.distance}}&lat={{@root.request.params.query.lat}}&lng={{@root.request.params.query.lng}}&job_number={{@root.request.params.query.job_number}}" class="mdc-tab{{#compare @root.request.params.query.view "!==" "map"}} mdc-tab--active{{/compare}} details-tab" id="detailed-results">
+      <span class="far fa-list fa-fw" title="List"></span>
+      List
+    </a>
+    <a href="/jobs/community-jobs-scotland/vacancies/{{@root.request.params.phase}}?q={{@root.request.params.query.q}}&sector={{@root.request.params.query.sector}}&region={{@root.request.params.query.region}}&location={{@root.request.params.query.location}}&distance={{@root.request.params.query.distance}}&lat={{@root.request.params.query.lat}}&lng={{@root.request.params.query.lng}}&job_number={{@root.request.params.query.job_number}}&view=map" class="mdc-tab{{#compare @root.request.params.query.view "===" "map"}} mdc-tab--active{{/compare}} map-tab">
+      <span class="far fa-map-marker-alt fa-fw" title="Map"></span>
+      Map
+    </a>
+    <span class="mdc-tab-bar__indicator"></span>
+  </div>
+
   <div class="mdc-text-field mdc-text-field--box mdc-text-field--with-leading-icon" data-mdc-auto-init="MDCTextField">
     <span class="far fa-search mdc-text-field__icon" tabindex="0" role="button"></span>
     <input type="text" class="mdc-text-field__input mdc-text-field--fullwidth" name="q" id="keywords" data-lpignore="true" placeholder="" value="{{@root.request.params.query.q}}">
     <label class="mdc-floating-label" for="q">Keywords</label>
   </div>
+
+  <div class="mdc-layout-grid">
+    <div class="mdc-layout-grid__inner">
+      <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-7-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone">
+        <div class="mdc-text-field mdc-text-field--box mdc-text-field--with-leading-icon" data-mdc-auto-init="MDCTextField">
+          <span class="far fa-map-marker-alt mdc-text-field__icon" tabindex="0" role="button"></span>
+          <input type="text" id="location" name="location" class="mdc-text-field__input mdc-text-field--fullwidth search-location" value="{{@root.request.params.query.location}}" placeholder="" data-lpignore="true" data-location-options='
+            {
+              "types": ["(regions)"],
+              "componentRestrictions": {
+                "country": "gb"
+              }
+            }' data-location-lat="[name='lat']" data-location-lng="[name='lng']">
+          <label class="mdc-floating-label" for="location">
+            Location
+          </label>
+          <div class="mdc-line-ripple"></div>
+        </div>
+      </div>
+      <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-5-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone">
+        <div class="mdc-select mdc-select--box" data-mdc-auto-init="MDCSelect">
+          <select data-location="location" class="mdc-select__native-control search-distance" id="distance" name="distance">
+            <option value="8.04672"{{#compare @root.request.params.query.distance "8.04672"}} selected{{/compare}}>5 miles</option>
+            <option value="16.09344"{{#compare @root.request.params.query.distance "16.09344"}} selected{{/compare}}>10 miles</option>
+            <option value="40.2336"{{#compare @root.request.params.query.distance "40.2336"}} selected{{/compare}}>25 miles</option>
+            <option value="80.4672"{{#compare @root.request.params.query.distance "80.4672"}} selected{{/compare}}>50 miles</option>
+            <option value=""{{#compare @root.request.params.query.distance ""}} selected{{/compare}}>no limit</option>
+          </select>
+          <label class="mdc-floating-label mdc-floating-label--float-above" for="distance">
+            Within
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <input type="hidden" name="lat" value="{{@root.request.params.query.lat}}" id="lat">
+  <input type="hidden" name="lng" value="{{@root.request.params.query.lng}}" id="lng">
+  <input type="hidden" name="sort" value="distance" id="sort">
 
   <div class="mdc-text-field mdc-text-field--box mdc-text-field--with-leading-icon" data-mdc-auto-init="MDCTextField">
     <span class="far fa-hashtag mdc-text-field__icon" tabindex="0" role="button"></span>
@@ -15,7 +84,10 @@
   <div class="mdc-form-field mdc-select mdc-select--box" data-mdc-auto-init="MDCSelect">
     <select class="mdc-select__native-control" role="listbox" id="sector" name="sector">
       <option value=""{{#if @root.request.params.query.sector}}{{else}} selected{{/if}}></option>
-      <option value="administration-reception"{{#compare @root.request.params.query.sector "===" "administration-reception"}} selected{{/compare}}>Administration/Reception</option>
+      {{#each @root.data.supplimentaryResponses.types.aggregations.sectors_slugs.buckets ~}}
+        {{> sector title=(lookup @root.data.supplimentaryResponses.types.aggregations.sectors.buckets @index) slug=key}}
+      {{/each ~}}
+      <!-- <option value="administration-reception"{{#compare @root.request.params.query.sector "===" "administration-reception"}} selected{{/compare}}>Administration/Reception</option>
       <option value="advocacy-advice"{{#compare @root.request.params.query.sector "===" "advocacy-advice"}} selected{{/compare}}>Advocacy/Advice</option>
       <option value="animal-care"{{#compare @root.request.params.query.sector "===" "animal-care"}} selected{{/compare}}>Animal Care</option>
       <option value="business-development"{{#compare @root.request.params.query.sector "===" "business-development"}} selected{{/compare}}>Business Development</option>
@@ -42,7 +114,6 @@
       <option value="it"{{#compare @root.request.params.query.sector "===" "it"}} selected{{/compare}}>IT</option>
       <option value="leisure-tourism"{{#compare @root.request.params.query.sector "===" "leisure-tourism"}} selected{{/compare}}>Leisure/Tourism</option>
       <option value="manual-work-skilled-trades"{{#compare @root.request.params.query.sector "===" "manual-work-skilled-trades"}} selected{{/compare}}>Manual Work/Skilled Trades</option>
-      <option value="marketing-pr-promotion"{{#compare @root.request.params.query.sector "===" "marketing-pr-promotion"}} selected{{/compare}}>Marketing/PR/Promotion</option>
       <option value="marketing-pr-promotions"{{#compare @root.request.params.query.sector "===" "marketing-pr-promotions"}} selected{{/compare}}>Marketing/PR/Promotions</option>
       <option value="monitoring-evaluation"{{#compare @root.request.params.query.sector "===" "monitoring-evaluation"}} selected{{/compare}}>Monitoring/Evaluation</option>
       <option value="peer-support"{{#compare @root.request.params.query.sector "===" "peer-support"}} selected{{/compare}}>Peer Support</option>
@@ -52,48 +123,10 @@
       <option value="retail"{{#compare @root.request.params.query.sector "===" "retail"}} selected{{/compare}}>Retail</option>
       <option value="sports"{{#compare @root.request.params.query.sector "===" "sports"}} selected{{/compare}}>Sports</option>
       <option value="warehousing"{{#compare @root.request.params.query.sector "===" "warehousing"}} selected{{/compare}}>Warehousing</option>
-      <option value="youth-work"{{#compare @root.request.params.query.sector "===" "youth-work"}} selected{{/compare}}>Youth Work</option>
-      <!-- {{#each supplimentaryResponses.types.aggregations.sectors.buckets}}
-      {{#if key}}
-      <option value="{{key}}"{{#compare @root.request.params.query.sector "===" key}} selected{{/compare}}>{{key}}</option>
-      {{/if}}
-      {{/each}} -->
+      <option value="youth-work"{{#compare @root.request.params.query.sector "===" "youth-work"}} selected{{/compare}}>Youth Work</option> -->
     </select>
     <label class="mdc-floating-label mdc-floating-label--float-above" for="sector">Sector</label>
   </div>
-
-  <!-- <div class="mdc-text-field mdc-text-field--box mdc-text-field--with-leading-icon" data-mdc-auto-init="MDCTextField">
-    <span class="far fa-map-marker-alt mdc-text-field__icon" tabindex="0" role="button"></span>
-    <input type="text" id="location" name="location" class="mdc-text-field__input mdc-text-field--fullwidth" value="{{@root.request.params.query.location}}" placeholder="" data-lpignore="true" data-location-options='
-      {
-        "types": ["(regions)"],
-        "componentRestrictions": {
-          "country": "gb"
-        }
-      }' data-location-lat="[name='lat']" data-location-lng="[name='lng']">
-    <label class="mdc-floating-label mdc-floating-label--float-above" for="location">
-      Location
-    </label>
-    <div class="mdc-line-ripple"></div>
-  </div>
-
-  <div class="mdc-form-field mdc-select mdc-select--box" data-mdc-auto-init="MDCSelect">
-    <select class="mdc-select__native-control" id="distance" name="distance">
-      <option value="8046.72"{{#compare @root.request.params.query.distance "8046.72"}} selected{{/compare}}>5 miles</option>
-      <option value="16093.44"{{#compare @root.request.params.query.distance "16093.44"}} selected{{/compare}}>10 miles</option>
-      <option value="40233.6"{{#compare @root.request.params.query.distance "40233.6"}} selected{{/compare}}>25 miles</option>
-      <option value="80467.2"{{#compare @root.request.params.query.distance "80467.2"}} selected{{/compare}}>50 miles</option>
-      <option value=""{{#compare @root.request.params.query.distance ""}} selected{{/compare}}>no limit</option>
-    </select>
-    <label class="mdc-floating-label mdc-floating-label--float-above" for="distance">
-      Within
-    </label>
-  </div> -->
-
-  {{#if @root.request.params.query.location ~}}
-  <input type="hidden" name="lat" value="{{@root.request.params.query.lat}}" id="lat">
-  <input type="hidden" name="lng" value="{{@root.request.params.query.lng}}" id="lng">
-  {{/if ~}}
 
   <!-- <div class="mdc-textfield mdc-textfield--upgraded">
     <label class="mdc-textfield__label" for="location">Location</label>
@@ -103,7 +136,10 @@
   <div class="mdc-form-field mdc-select mdc-select--box" data-mdc-auto-init="MDCSelect">
     <select class="mdc-select__native-control" role="listbox" id="region" name="region">
       <option value="" {{#if @root.request.params.query.region}}{{else}} selected{{/if}}></option>
-      <option value="aberdeen-city"{{#compare @root.request.params.query.region "===" "aberdeen-city"}} selected{{/compare}}>Aberdeen</option>
+      {{#each @root.data.supplimentaryResponses.types.aggregations.regions_slugs.buckets ~}}
+        {{> region title=(lookup @root.data.supplimentaryResponses.types.aggregations.regions.buckets @index) slug=key}}
+      {{/each ~}}
+      <!-- <option value="aberdeen-city"{{#compare @root.request.params.query.region "===" "aberdeen-city"}} selected{{/compare}}>Aberdeen</option>
       <option value="aberdeenshire"{{#compare @root.request.params.query.region "===" "aberdeenshire"}} selected{{/compare}}>Aberdeenshire</option>
       <option value="angus"{{#compare @root.request.params.query.region "===" "angus"}} selected{{/compare}}>Angus</option>
       <option value="argyll-bute"{{#compare @root.request.params.query.region "===" "argyll-bute"}} selected{{/compare}}>Argyll &amp; Bute</option>
@@ -134,18 +170,11 @@
       <option value="south-lanarkshire"{{#compare @root.request.params.query.region "===" "south-lanarkshire"}} selected{{/compare}}>South Lanarkshire</option>
       <option value="stirling"{{#compare @root.request.params.query.region "===" "stirling"}} selected{{/compare}}>Stirling</option>
       <option value="west-dunbartonshire"{{#compare @root.request.params.query.region "===" "west-dunbartonshire"}} selected{{/compare}}>West Dunbartonshire</option>
-      <option value="west-lothian"{{#compare @root.request.params.query.region "===" "west-lothian"}} selected{{/compare}}>West Lothian</option>
-      <!-- {{#each @root.supplimentaryResponses.types.aggregations.regions_slugs.buckets ~}}
-      {{#if key ~}}
-      <option value="{{key}}"{{#compare @root.request.params.query.region "===" key}} selected{{/compare}}>
-        {{itemAt @root.supplimentaryResponses.types.aggregations.regions.buckets @index}}
-      </option>
-      {{/if ~}}
-      {{/each ~}} -->
+      <option value="west-lothian"{{#compare @root.request.params.query.region "===" "west-lothian"}} selected{{/compare}}>West Lothian</option> -->
     </select>
     <label class="mdc-floating-label mdc-floating-label--float-above" for="region">Region</label>
   </div>
-  <button class="mdc-button mdc-button--raised" type="submit">
+  <button class="mdc-button mdc-button--raised v-margin" type="submit">
     Search jobs
   </button>
 </form>
