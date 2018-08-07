@@ -24,11 +24,7 @@
         {{>queries_vacancy_common_filters request.params.query}}
       ],
       "must": [
-        {
-          "terms": {
-            "Id": {{{stringify (map data.notes (getProp @key))}}}
-          }
-        }
+        {{>queries_terms field="Id" terms=(getKeys data.notes)}}
       ]
     }
   },

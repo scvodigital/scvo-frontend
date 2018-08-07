@@ -38,6 +38,13 @@ export class Helpers {
     return [input];
   }
 
+  static helper_getKeys(input: any) {
+    if (!input) {
+      return null;
+    }
+    return Object.keys(input);
+  }
+
   static helper_firstItem(arr: any[]) {
     if (!arr) return null;
     if (!Array.isArray(arr)) return null;

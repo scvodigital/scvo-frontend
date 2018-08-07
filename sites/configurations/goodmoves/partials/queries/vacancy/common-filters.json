@@ -1,7 +1,2 @@
-{{>queries_term field="vacancy_status" term="vacancy-open"}},
-{{>queries_common_country}},
-{
-  "exists": {
-    "field": "title"
-  }
-}
+{{>queries_vacancy_common_filters_open request.params.query}},
+{{>queries_common_country request.params.query}}
