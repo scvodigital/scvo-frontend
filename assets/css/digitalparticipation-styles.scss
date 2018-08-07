@@ -1,4 +1,5 @@
-@import url("//cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css");
+@import "./node_modules/material-components-web/material-components-web.scss";
+@import url('//cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css');
 @import url("//fonts.googleapis.com/icon?family=Material+Icons");
 
 @import url('//fonts.googleapis.com/css?family=Roboto:300,400,700|Poppins:700|Open+Sans:400,600');
@@ -229,10 +230,18 @@ a {
   }
   .mdc-toolbar__icon--menu {
     display: none;
+    color: $brand-typography;
+  }
+  .mdc-toolbar__section--align-start {
+    padding: 0;
   }
   .mdc-toolbar__section--align-end {
+    padding: 0;
     float: right;
-    margin: 2.5rem 0 0;
+    margin: $unit*2.5 0 0;
+  }
+  .mdc-toolbar__section--align-end.mdc-toolbar__section--shrink-to-fit {
+    margin-top: 0;
   }
   .mdc-tab-bar {
     margin: 0;
@@ -247,6 +256,7 @@ a {
       display: inline-block;
       height: auto;
       min-height: auto;
+      line-height: $unit*1.5;
       letter-spacing: normal;
       min-width: 0;
       font-size: 1.4rem;
@@ -266,62 +276,6 @@ a {
     .mdc-tab:hover {
       color: $brand-typography;
     }
-  }
-}
-
-.resources.support,
-.resources.help-others,
-.resources.reports,
-.resources.logos,
-.stories.govan-housing-association,
-.stories.cre8te-opportunites,
-.stories.glasgow-life,
-.stories.queens-cross,
-.skill-up.foundations,
-.skill-up.communicating,
-.skill-up.handling-info,
-.skill-up.transacting,
-.skill-up.problem-solving,
-.skill-up.safety {
-  main {
-    background: $brand-typography;
-    hr {
-      border-bottom-color: white;
-    }
-    #menu_button,
-    h1, h2, h3, h4, p {
-      color: white;
-    }
-    header {
-      .brand-logo {
-        color: white;
-        .participation {
-          background-color: $brand-typography;
-          border-color: white;
-        }
-        .participation::after {
-          color: white;
-          text-shadow: 0.1rem 0 0 $brand-typography, 0 -0.1rem 0 $brand-typography, 0 0.1rem 0 $brand-typography, -0.1rem 0 0 $brand-typography;
-        }
-      }
-      .button-collapse {
-        color: white;
-      }
-      .mdc-tab-bar {
-        .mdc-tab {
-          color: white;
-        }
-        .mdc-tab:hover,
-        .mdc-tab--active {
-          background-color: $brand-typography;
-          border-color: white;
-          opacity: 1;
-        }
-      }
-    }
-  }
-  footer .footer-main {
-    border-top-color: white !important;
   }
 }
 
@@ -434,9 +388,10 @@ main {
   .mdc-form-field.sort {
     margin-top: 1.35rem;
   }
-  // .mdc-select {
-  //     background-image: none;
-  // }
+  .mdc-select {
+    background-image: none;
+    background-color: white !important;
+  }
   .mdc-select,
   .mdc-form-field {
     width: 100%;
@@ -446,7 +401,7 @@ main {
     font-size: 1.1rem;
     font-weight: bold;
     color: $brand-typography;
-    line-height: 2rem;
+    line-height: 3rem;
     height: 3rem;
     background-color: white;
     padding: 0 $unit/2;
@@ -844,6 +799,7 @@ h4 {
   font-weight: $heading-font-weight;
   color: $brand-typography;
 }
+.mdc-top-app-bar__navigation-icon,
 .mdc-toolbar__icon,
 a {
   color: $brand-typography;
@@ -885,8 +841,8 @@ hr {
       .search-button-large {
         padding: 1px 0 0;
         position: absolute;
-        top: $unit/2;
-        right: $unit/2;
+        top: 0;
+        right: 0;
         .fa-search {
           color: $brand-typography;
         }
@@ -1227,10 +1183,70 @@ footer {
   }
 }
 
+.hide-lg,
 .mdc-temporary-drawer__header,
 .hide-on-med-and-up {
   display: none;
 }
+
+
+.resources.support,
+.resources.help-others,
+.resources.reports,
+.resources.logos,
+.stories.govan-housing-association,
+.stories.cre8te-opportunites,
+.stories.glasgow-life,
+.stories.queens-cross,
+.skill-up.foundations,
+.skill-up.communicating,
+.skill-up.handling-info,
+.skill-up.transacting,
+.skill-up.problem-solving,
+.skill-up.safety {
+  main {
+    background: $brand-typography;
+    hr {
+      border-bottom-color: white;
+    }
+    .mdc-top-app-bar__navigation-icon,
+    #menu_button,
+    h1, h2, h3, h4, p {
+      color: white;
+    }
+    header {
+      .brand-logo {
+        color: white;
+        .participation {
+          background-color: $brand-typography;
+          border-color: white;
+        }
+        .participation::after {
+          color: white;
+          text-shadow: 0.1rem 0 0 $brand-typography, 0 -0.1rem 0 $brand-typography, 0 0.1rem 0 $brand-typography, -0.1rem 0 0 $brand-typography;
+        }
+      }
+      .button-collapse {
+        color: white;
+      }
+      .mdc-tab-bar {
+        .mdc-tab {
+          color: white;
+        }
+        .mdc-tab:hover,
+        .mdc-tab--active {
+          background-color: $brand-typography;
+          border-color: white;
+          opacity: 1;
+        }
+      }
+    }
+  }
+  footer .footer-main {
+    border-top-color: white !important;
+  }
+}
+
 
 @media only screen and (max-width: 1245px) {
   .mdc-tab-bar .mdc-tab {
@@ -1382,6 +1398,9 @@ footer {
   .mdc-toolbar {
     .mdc-tab-bar {
       display: none;
+    }
+    .hide-lg {
+      display: block;
     }
     .mdc-toolbar__icon--menu {
       display: block;
