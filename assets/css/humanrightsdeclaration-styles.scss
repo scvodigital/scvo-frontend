@@ -58,9 +58,16 @@ main {
 .mdc-drawer__header-content img.brand-logo-mobile {
   max-width: 100%;
 }
-.mdc-drawer__header:before {
-  padding-top: 34%;
+.mdc-drawer--temporary .mdc-drawer__header::before {
+  padding-top: 0;
 }
+.mdc-drawer--temporary .mdc-drawer__header {
+  padding: $unit;
+  img {
+    max-width: 100%;
+  }
+}
+
 .mdc-list-item {
   direction: ltr;
 }
@@ -186,7 +193,7 @@ a:hover {
   width: 95%;
   margin: 0 auto;
   overflow: auto;
-  overflow: -webkit-paged-x;
+  // overflow: -webkit-paged-x;
   padding: $unit 0;
 }
 .mdc-toolbar {
@@ -212,11 +219,9 @@ a:hover {
       }
     }
   }
-  .mdc-toolbar__icon--menu {
-    display: none;
-  }
   .mdc-toolbar__section--align-end {
     display: block;
+    padding: 0;
   }
   .mdc-tab-bar {
     margin: 0;
@@ -233,7 +238,6 @@ a:hover {
       text-transform: none;
       .mdc-tab--label {
         text-transform: uppercase;
-        padding-bottom: $unit/2;
         display: block;
         border-bottom: 3px solid white;
       }
@@ -242,6 +246,10 @@ a:hover {
     .mdc-tab:hover {
       opacity: 1;
       text-decoration: none;
+    }
+    .mdc-tab:not(.mdc-ripple-upgraded):focus::before, .mdc-tab.mdc-ripple-upgraded--background-focused::before,
+    .mdc-tab:hover::before {
+      opacity: 0;
     }
     .mdc-tab--active .mdc-tab--label,
     .mdc-tab:hover .mdc-tab--label {
@@ -252,6 +260,10 @@ a:hover {
       color: $mdc-theme-secondary;
     }
   }
+}
+
+.hide-lg {
+  display: none !important;
 }
 
 .mdc-button {
@@ -738,8 +750,11 @@ footer {
 }
 
 @media screen and (max-width: 800px) {
-  .mdc-temporary-drawer {
-    display: block;
+  .mdc-toolbar__section.hide-lg {
+    display: block !important;
+    position: absolute;
+    top: 0;
+    right: 0;
   }
   .mdc-toolbar {
     .mdc-toolbar__title {

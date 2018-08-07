@@ -185,7 +185,7 @@ a:hover {
   width: 95%;
   margin: 0 auto;
   overflow: auto;
-  overflow: -webkit-paged-x;
+  // overflow: -webkit-paged-x;
   padding: $unit 0;
 }
 .mdc-toolbar {
@@ -221,27 +221,51 @@ a:hover {
     display: block;
   }
   .navbar {
+    min-height: 38px;
     background-image: linear-gradient(90deg, rgba(0, 0, 0, 0.16), rgba(0, 0, 0, 0.16) 60%, rgba(0, 0, 0, 0.08) 120%, rgba(0, 0, 0, 0.08));
-    .mdc-tab-bar {
-      margin: 0;
-      .mdc-tab:first-child {
-        margin-left: 0 !important;
-      }
-      .mdc-tab {
-        min-width: 0;
-        font-size: 1rem;
-        padding: $unit/2 0;
-        text-transform: none;
-        margin: 0 $unit*(3/4);
-        display: inline-block;
-      }
-      .mdc-tab--active,
-      .mdc-tab:hover {
-        opacity: 1;
-        text-decoration: none;
+    .container-fluid {
+      height: 38px;
+    }
+    .mdc-toolbar__section {
+      padding: 0;
+      .mdc-tab-bar {
+        margin: 0;
+        .mdc-tab:first-child {
+          margin-left: 0 !important;
+        }
+        .mdc-tab {
+          height: 38px;
+          min-height: 38px;
+          min-width: 0;
+          font-size: 1rem;
+          padding: 0;
+          text-transform: none;
+          margin: 0 $unit*(3/4);
+          display: inline-block;
+          color: white;
+        }
+        .mdc-tab--active,
+        .mdc-tab:hover {
+          opacity: 1;
+          text-decoration: none;
+        }
       }
     }
   }
+}
+.mdc-drawer--temporary .mdc-drawer__header::before {
+  padding-top: 0;
+}
+.mdc-drawer--temporary .mdc-drawer__header {
+  padding: $unit;
+  background-color: $mdc-theme-primary;
+  img {
+    max-width: 100%;
+  }
+}
+
+.hide-lg {
+  display: none !important;
 }
 
 .mdc-button, .btn {
@@ -449,8 +473,14 @@ footer {
 }
 
 @media screen and (max-width: 800px) {
-  .mdc-temporary-drawer {
-    display: block;
+  .mdc-toolbar__section.hide-lg {
+    display: block !important;
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+  .mdc-top-app-bar__navigation-icon {
+    color: white;
   }
   .mdc-toolbar {
     .navbar {
