@@ -268,11 +268,20 @@ a:hover {
         margin: 0;
         display: inline-block;
         color: white;
+        .mdc-tab--label {
+          height: 36px;
+          display: block;
+          border-bottom: 2px solid transparent;
+        }
       }
       .mdc-tab--active,
       .mdc-tab:hover {
         opacity: 1;
         text-decoration: none;
+      }
+      .mdc-tab--active .mdc-tab--label,
+      .mdc-tab:hover .mdc-tab--label {
+        border-bottom-color: white;
       }
       .mdc-tab:not(.mdc-ripple-upgraded):active::after,
       .mdc-tab:not(.mdc-ripple-upgraded):focus::before, .mdc-tab.mdc-ripple-upgraded--background-focused::before,
