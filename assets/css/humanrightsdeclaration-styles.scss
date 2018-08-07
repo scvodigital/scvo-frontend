@@ -248,10 +248,6 @@ a:hover {
       opacity: 1;
       text-decoration: none;
     }
-    .mdc-tab:not(.mdc-ripple-upgraded):focus::before, .mdc-tab.mdc-ripple-upgraded--background-focused::before,
-    .mdc-tab:hover::before {
-      opacity: 0;
-    }
     .mdc-tab--active .mdc-tab--label,
     .mdc-tab:hover .mdc-tab--label {
       border-bottom-color: $mdc-theme-secondary;
@@ -265,6 +261,20 @@ a:hover {
 
 .hide-lg {
   display: none !important;
+}
+
+.mdc-list-item--header:focus::before,
+.mdc-list-item--header:focus::after,
+.mdc-list-item--header:hover::before,
+.mdc-list-item--header:hover::after,
+.mdc-tab:active::before,
+.mdc-tab:focus::before,
+.mdc-tab:hover::before,
+.mdc-button:not(.mdc-ripple-upgraded):active:after,
+.mdc-button:not(.mdc-ripple-upgraded):focus:before,
+.mdc-button:not(.mdc-ripple-upgraded):hover:before {
+  opacity: 0;
+  background-color: transparent;
 }
 
 .mdc-button {
