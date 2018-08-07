@@ -7,6 +7,7 @@ import * as querystring from 'querystring';
 import * as s from 'string';
 import * as Url from 'url';
 import * as util from 'util';
+import * as dateMath from '@elastic/datemath';
 
 /* tslint:disable */
 export interface Handlebars { registerHelper: (...args: any[]) => void; }
@@ -75,6 +76,11 @@ export class Helpers {
       return protocol + ':' + url;
     }
     return protocol + '://' + url;
+  }
+
+  static helper_dateMath(expression: string) {
+    const output: Date = dateMath.parse(expression);
+    return output;
   }
 
   static helper_querystringify(obj: any = {}) {
