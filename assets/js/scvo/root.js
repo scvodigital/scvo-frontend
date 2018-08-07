@@ -132,9 +132,12 @@ function setCookie(name, value, days) {
 function initMap() {
   handleLocationBoxes();
 }
+$(document).ready(function() {
+  handleLocationBoxes();
+});
+
 function handleLocationBoxes() {
-  var boxes = $('[data-location-options]');
-  boxes.each(function(i, o) {
+  $('[data-location-options]').each(function(i, o) {
     var options = $(o).data('location-options');
     var latSelector = $(o).data('location-lat');
     var lngSelector = $(o).data('location-lng');
@@ -142,13 +145,16 @@ function handleLocationBoxes() {
     var autocomplete = new google.maps.places.Autocomplete(o, options);
     autocomplete.addListener('place_changed', function(evt) {
       var place = this.getPlace();
-      // console.log(place.formatted_address);
       if (place.geometry.location) {
         $(latSelector).val(place.geometry.location.lat());
         $(lngSelector).val(place.geometry.location.lng());
         $(o).val(place.formatted_address);
       }
     });
+  }).on('keypress', function(evt) {
+    if (evt.which === 13) {
+      evt.preventDefault();
+      return false;
+    }
   });
 }
-
