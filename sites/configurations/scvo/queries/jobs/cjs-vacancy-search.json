@@ -1,41 +1,46 @@
 {
-  "size": 10,
-  "from": {{multiply (subtract (default request.params.query.page 1) 1) 10}},
+  "size": {{#compare @root.request.params.query.view "===" "map"}}1000{{else}}10{{/compare}},
+  "from": {{multiply (subtract (default @root.request.params.query.page 1) 1) 10}},
   "_source": [
+    "Id",
+    "slug",
+    "title",
+    "organisation.name",
+    "geo_vacancy_coords",
     "rendered.scvo_list"
   ],
   "query": {
     "bool": {
       "filter": [
-        {{#ifAll request.params.query.location request.params.query.lat request.params.query.lng ~}}
+        {{#ifAll @root.request.params.query.location @root.request.params.query.lat @root.request.params.query.lng ~}}
         {
           "geo_distance": {
-            "distance": "{{default request.params.query.distance "804672"}}meters",
+            "distance": "{{default @root.request.params.query.distance "80.4672"}}km",
             "geo_vacancy_coords": {
-              "lat": {{request.params.query.lat}},
-              "lon": {{request.params.query.lng}}
+              "lat": {{@root.request.params.query.lat}},
+              "lon": {{@root.request.params.query.lng}}
             }
           }
         },
         {{/ifAll ~}}
-        {{#if request.params.query.job_number ~}}
+        {{#if @root.request.params.query.job_number ~}}
         {
           "term": {
-            "job_number": "{{request.params.query.job_number}}"
+            "job_number": "{{@root.request.params.query.job_number}}"
           }
         },
         {{/if ~}}
-        {{#if request.params.query.sector ~}}
+        {{#if @root.request.params.query.sector ~}}
         {
           "term": {
-            "sector_slug": "{{request.params.query.sector}}"
+            "sector_slug": "{{@root.request.params.query.sector}}"
           }
         },
         {{/if ~}}
-        {{#if request.params.query.region ~}}
+        {{#if @root.request.params.query.region ~}}
         {
           "term": {
-            "region_slug": "{{request.params.query.region}}"
+            "region_group_slug": "{{@root.request.params.query.region}}"
           }
         },
         {{/if ~}}
@@ -46,15 +51,15 @@
         },
         {
           "term" : {
-            "cjs_lookup": "{{#compare request.params.phase "aag"}}AA PH8{{else}}{{#compare request.params.phase "p52"}}CJS PH8 PT 78wks{{else}}CJS PH8{{/compare}}{{/compare}}"
+            "cjs_lookup": "{{#compare @root.request.params.phase "aag"}}AA PH8{{else}}{{#compare @root.request.params.phase "p52"}}CJS PH8 PT 78wks{{else}}CJS PH8{{/compare}}{{/compare}}"
           }
         }
       ],
       "must": [
-        {{#if request.params.query.q ~}}
+        {{#if @root.request.params.query.q ~}}
         {
           "query_string": {
-            "query": {{{stringify (default request.params.query.q "")}}},
+            "query": {{{stringify (default @root.request.params.query.q "")}}},
             "default_field": "text_bag",
             "default_operator": "AND",
             "analyzer": "snowball"
@@ -65,15 +70,15 @@
     }
   },
   "sort": [
-    {{#ifAll request.params.query.location request.params.query.lat request.params.query.lng ~}}
+    {{#ifAll @root.request.params.query.location @root.request.params.query.lat @root.request.params.query.lng ~}}
     {
       "_geo_distance": {
         "geo_vacancy_coords": {
-          "lat": {{request.params.query.lat}},
-          "lon": {{request.params.query.lng}}
+          "lat": {{@root.request.params.query.lat}},
+          "lon": {{@root.request.params.query.lng}}
         },
         "order": "asc",
-        "unit": "m",
+        "unit": "km",
         "mode": "min",
         "distance_type": "arc"
       }
