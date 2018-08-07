@@ -233,35 +233,62 @@ a:hover {
       }
     }
   }
-  .mdc-toolbar__icon--menu {
-    display: none;
+  .mdc-toolbar__section--align-start {
+    padding: 0;
   }
   .mdc-toolbar__section--align-end {
-    display: block;
+    padding: 0;
+    position: absolute;
+    top: 0;
+    left: $unit/2;
   }
+  .mdc-top-app-bar__navigation-icon {
+    color: white;
+  }
+  // .mdc-toolbar__section--align-end {
+  //   display: block;
+  // }
   .navbar {
     background-image: linear-gradient(90deg, rgba(0, 0, 0, 0.16), rgba(0, 0, 0, 0.16) 60%, rgba(0, 0, 0, 0.08) 120%, rgba(0, 0, 0, 0.08));
     .mdc-tab-bar {
       margin: 0;
+      height: 38px;
       .mdc-tab:first-child {
-        margin-left: 0 !important;
+        padding-left: 0 !important;
       }
       .mdc-tab {
         transition: 0.2s;
         min-width: 0;
         font-size: 1rem;
-        padding: $unit/2 0;
+        height: 38px;
+        min-height: 38px;
         text-transform: none;
-        margin: 0 $unit*(3/4);
+        padding: 0 $unit*(3/4);
+        margin: 0;
         display: inline-block;
+        color: white;
       }
       .mdc-tab--active,
       .mdc-tab:hover {
         opacity: 1;
         text-decoration: none;
       }
+      .mdc-tab:not(.mdc-ripple-upgraded):focus::before, .mdc-tab.mdc-ripple-upgraded--background-focused::before {
+        opacity: 0;
+      }
     }
   }
+}
+
+.mdc-drawer--temporary .mdc-drawer__header::before {
+  padding-top: 0;
+}
+.mdc-drawer--temporary .mdc-drawer__header img {
+  width: 100%;
+}
+
+.hide-lg {
+  display: none;
 }
 
 .mdc-button {
@@ -318,10 +345,6 @@ p.quote {
 blockquote {
   font-size: 1.2rem;
   margin: 0;
-}
-
-.mdc-toolbar__icon {
-  float: right;
 }
 
 .signatories main {
@@ -750,7 +773,7 @@ footer {
 }
 
 @media screen and (max-width: 800px) {
-  .mdc-temporary-drawer {
+  .hide-lg {
     display: block;
   }
   .mdc-toolbar {
