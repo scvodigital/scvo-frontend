@@ -1,3 +1,4 @@
+@import "./node_modules/material-components-web/material-components-web.scss";
 @import url("//cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css");
 @import url('//fonts.googleapis.com/css?family=Rubik:400,500,700|Open+Sans:400,600');
 
@@ -57,11 +58,19 @@ main {
 .mdc-drawer__header-content img.brand-logo-mobile {
   max-width: 100%;
 }
-.mdc-drawer__header:before {
-  padding-top: 34%;
+.mdc-drawer--temporary .mdc-drawer__header::before {
+  padding-top: 0;
 }
+.mdc-drawer--temporary .mdc-drawer__header {
+  padding: $unit;
+  img {
+    max-width: 100%;
+  }
+}
+
 .mdc-list-item {
   direction: ltr;
+  padding: 0;
 }
 .cookieinfo {
   box-shadow: $toolbar-shadow-reverse;
@@ -184,8 +193,8 @@ a:hover {
   max-width: 1280px;
   width: 95%;
   margin: 0 auto;
-  overflow: auto;
-  overflow: -webkit-paged-x;
+  overflow: hidden;
+  // overflow: -webkit-paged-x;
   padding: $unit 0;
 }
 .mdc-toolbar {
@@ -211,11 +220,9 @@ a:hover {
       }
     }
   }
-  .mdc-toolbar__icon--menu {
-    display: none;
-  }
   .mdc-toolbar__section--align-end {
     display: block;
+    padding: 0;
   }
   .mdc-tab-bar {
     margin: 0;
@@ -232,7 +239,6 @@ a:hover {
       text-transform: none;
       .mdc-tab--label {
         text-transform: uppercase;
-        padding-bottom: $unit/2;
         display: block;
         border-bottom: 3px solid white;
       }
@@ -251,6 +257,25 @@ a:hover {
       color: $mdc-theme-secondary;
     }
   }
+}
+
+.hide-lg {
+  display: none !important;
+}
+
+.mdc-list-item--header:focus::before,
+.mdc-list-item--header:focus::after,
+.mdc-list-item--header:hover::before,
+.mdc-list-item--header:hover::after,
+.mdc-tab:active::before,
+.mdc-tab:focus::before,
+.mdc-tab:hover::before,
+.mdc-tab:not(.mdc-ripple-upgraded):active::after,
+.mdc-button:not(.mdc-ripple-upgraded):active:after,
+.mdc-button:not(.mdc-ripple-upgraded):focus:before,
+.mdc-button:not(.mdc-ripple-upgraded):hover:before {
+  opacity: 0;
+  background-color: transparent;
 }
 
 .mdc-button {
@@ -737,8 +762,11 @@ footer {
 }
 
 @media screen and (max-width: 800px) {
-  .mdc-temporary-drawer {
-    display: block;
+  .mdc-toolbar__section.hide-lg {
+    display: block !important;
+    position: absolute;
+    top: 0;
+    right: 0;
   }
   .mdc-toolbar {
     .mdc-toolbar__title {

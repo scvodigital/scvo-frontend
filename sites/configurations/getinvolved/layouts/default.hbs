@@ -23,7 +23,7 @@
   <meta name="msapplication-TileImage" content="https://storage.googleapis.com/scvo-assets/assets/icons/ms-icon-144x144.png">
   <meta name="theme-color" content="#00838f">
   <link rel="search" type="application/opensearchdescription+xml" title="SCVO" href="https://storage.googleapis.com/scvo-assets/assets/opensearch.xml" />
-  <link type="text/css" rel="stylesheet" href="/assets/css/material-components-web.min.css">
+  <link type="text/css" rel="stylesheet" href="https://unpkg.com/material-components-web@0.37.1/dist/material-components-web.min.css">
   <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-TXfwrfuHVznxCssTxWoPZjhcss/hp38gEOH8UPZG/JcXonvBQ6SlsIF49wUzsGno" crossorigin="anonymous">
   <link type="text/css" rel="stylesheet" href="/assets/css/getinvolved-styles.css">
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-3467930-4"></script>
@@ -56,8 +56,10 @@
                   <img src="https://storage.googleapis.com/scvo-assets/scvo-frontend/assets/images/logos/get-involved.png" class="brand-logo-desktop" />
                 </a>
               </span>
-              <button id="menu_button" class="menu mdc-toolbar__icon mdc-toolbar__icon--menu" onclick="window.drawer.open = true">
-                <span class="far fa-2x fa-bars" aria-hidden="true"></span>
+            </section>
+            <section class="mdc-toolbar__section mdc-toolbar__section--align-end mdc-toolbar__section--shrink-to-fit hide-lg">
+              <button class="mdc-top-app-bar__navigation-icon" data-drawer-target="#mobile-menu">
+                <span class="far fa-fw fa-2x fa-bars"></span>
               </button>
             </section>
           </div>
@@ -75,21 +77,22 @@
         </div>
       </header>
 
-      <aside class="mdc-temporary-drawer" id="menu_draw" dir="rtl">
-        <nav class="mdc-temporary-drawer__drawer">
-          <header class="mdc-temporary-drawer__header">
+      <aside class="mdc-drawer mdc-drawer--temporary" id="mobile-menu" data-mdc-auto-init="MDCTemporaryDrawer">
+        <nav class="mdc-drawer__drawer">
+          <header class="mdc-drawer__header">
             <div class="mdc-temporary-drawer__header-content mdc-theme--text-primary-on-primary">
               <img src="https://storage.googleapis.com/scvo-assets/scvo-frontend/assets/images/logos/get-involved.png" class="brand-logo-mobile" />
             </div>
           </header>
-          <nav class="mdc-temporary-drawer__content mdc-list-group">
-            <div id="icon-with-text-demo" class="mdc-list" [menu]="'main'" [menulinkselector]="''" [menulabelselector]="'span.menu-label'" [menuactiveclass]="'active'">
-              {{#each context.metaData.menus.mobile}}
-              <a class="mdc-list-item{{#if (regexMatch ../request.url.pathname route "gi")}} mdc-tab--active{{/if}}" href="{{path}}" data-mdc-tabindex-handled="true" tabindex="-" onclick="window.drawer.open = false">
-                <span class="menu-label">{{{label}}}</span>
-              </a>
-              {{/each}}
-            </div>
+          <nav class="mdc-drawer__content mdc-list">
+            {{#each @root.context.metaData.menus.mobile ~}}
+            <a class="mdc-list-item{{#if (regexMatch @root.request.url.pathname route "gi")}} mdc-list-item--activated{{/if}}" href="{{stripTrailingSlash path}}">
+              {{#if icon ~}}
+              <span class="far fa-{{icon}} mdc-list-item__graphic" aria-hidden="true"></span>
+              {{/if ~}}
+              {{{label}}}
+            </a>
+            {{/each ~}}
           </nav>
         </nav>
       </aside>
@@ -147,7 +150,22 @@
       </footer>
     </div>
   </scvo-site>
-  <script type="text/javascript" src="/assets/js/material-components-web.js"></script>
+  {{#if (contains request.url.host '.local')}}
+  <script type="text/javascript" src="https://unpkg.com/material-components-web@0.37.1/dist/material-components-web.js"></script>
+  {{else}}
+  <script type="text/javascript" src="https://unpkg.com/material-components-web@0.37.1/dist/material-components-web.min.js"></script>
+  {{/if}}
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script type="text/javascript">
+  var $buoop = {required:{e:-3,f:-3,o:-3,s:-1,c:-3},insecure:true,unsupported:true,api:2018.07 };
+  function $buo_f(){
+   var e = document.createElement("script");
+   e.src = "//browser-update.org/update.min.js";
+   document.body.appendChild(e);
+  };
+  try {document.addEventListener("DOMContentLoaded", $buo_f,false)}
+  catch(e){window.attachEvent("onload", $buo_f)}
+  </script>
   <script type="text/javascript" id="cookieinfo" src="/assets/js/cookieinfo.min.js" data-message="We use cookies to track anonymous usage statistics and do not collect any personal information that can be used to identify you. By continuing to visit this site you agree to our use of cookies." data-moreinfo="/cookies" data-cookie="CookieInfoScript" data-text-align="left"></script>
   <script type="text/javascript" src="/assets/js/getinvolved/root.js"></script>
   {{{layoutParts.foot}}}
