@@ -66,21 +66,27 @@
             {{#if _source.geo_vacancy_coords ~}}
               {{#each (arrayify _source.geo_vacancy_coords) ~}}
                 <marker style="display:none;" data-map="fullMap" data-lat="{{lat}}" data-lng="{{lon}}" data-title="{{../_source.title}}" data-type="{{../_type}}">
-                  {{#with ../_source ~}}
-                  <div class="map-content">
+                  <div class="map-content map-content-{{../_type}}">
                     <h3 class="mdc-typography--headline6">
-                      <a href="{{@root.request.url.pathname}}/{{slug}}{{@root.request.url.search}}">{{title}}</a>
+                      {{#compare ../_type "===" "goodmoves-vacancy"}}
+                        <a href="https://goodmoves.com/vacancy/{{../_source.slug}}" class="mdc-card__action">{{../_source.title}}</a>
+                      {{else}}
+                        <a href="/jobs/community-jobs-scotland/vacancies/p19v/{{../_source.slug}}" class="mdc-card__action">{{../_source.title}}</a>
+                      {{/compare}}
                     </h3>
-                    {{#if organisation.name ~}}
+                    {{#if ../_source.organisation.name ~}}
                     <div class="mdc-typography--body1 v-margin">
-                      {{organisation.name}}
+                      {{../_source.organisation.name}}
                     </div>
                     {{/if ~}}
                     <div class="mdc-typography--body2">
-                      <a href="{{@root.request.url.pathname}}/{{slug}}{{@root.request.url.search}}" class="mdc-card__action">Find out more</a>
+                      {{#compare ../_type "===" "goodmoves-vacancy"}}
+                        <a href="https://goodmoves.com/vacancy/{{../_source.slug}}" class="mdc-card__action">Find out more on Goodmoves</a>
+                      {{else}}
+                        <a href="/jobs/community-jobs-scotland/vacancies/p19v/{{../_source.slug}}" class="mdc-card__action">Find out more</a>
+                      {{/compare}}
                     </div>
                   </div>
-                  {{/with ~}}
                 </marker>
               {{/each ~}}
             {{/if ~}}

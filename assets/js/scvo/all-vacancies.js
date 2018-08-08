@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded', function() {
         iconType = ' shortlisted';
       }
       var icon = L.divIcon({
-        html: '<i class="marker-icon-' + type + iconType + ' fas fa-map-marker"></i><span class="map-marker-overlay">' + vacancyMarker.contents.length  + '</span>',
+        html: '<i class="marker-icon-'+type+iconType+' fas fa-map-marker"></i><span class="map-marker-overlay map-marker-overlay-'+type+'">' + vacancyMarker.contents.length  + '</span>',
         iconSize: [30, 40],
         iconAnchor: [15, 40],
         popupAnchor: [0, -42],
