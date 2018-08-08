@@ -88,7 +88,7 @@
       <input type="hidden" data-location-outer-sw="{{instance_id}}-location" name="outer-sw" value="{{@root.request.params.query.outer-sw}}" id="{{instance_id}}-location-outer-sw"> -->
       <input type="hidden" name="lat" value="{{@root.request.params.query.lat}}" id="{{instance_id}}-lat">
       <input type="hidden" name="lng" value="{{@root.request.params.query.lng}}" id="{{instance_id}}-lng">
-      <input type="hidden" name="sort" value="distance" id="sort">
+      <!-- <input type="hidden" name="sort" value="distance" id="sort"> -->
 
       <h3 class="mdc-drawer__content-heading cursor-pointer noselect" data-collapse-target="#{{instance_id}}-salary-collapse" role="button" aria-pressed="false" aria-label="Show salary search options" tabindex="0">
         Salary
@@ -166,7 +166,7 @@
             {{#compare (length @root.data.supplimentaryResponses.types.aggregations.countries.buckets) ">" 1 ~}}
               <h3 class="mdc-typography--headline7">Other</h3>
             {{/compare ~}}
-            {{> term_checkbox slug="home_based" field="home_based" selected=@root.request.params.query.home_based instance_id=../instance_id value="Home-based"}}
+            {{> term_checkbox slug="true" field="home_based" selected=@root.request.params.query.home_based instance_id=../instance_id value="Home-based"}}
           {{else}}
             {{#each (getProperty @root.data.supplimentaryResponses.types.aggregations (concat this "_slugs.buckets")) ~}}
               {{#if key ~}}
