@@ -80,15 +80,15 @@ if(location.host.indexOf('.local') > -1){
 </script>
 </head>
 <body class="mdc-theme--site-bg {{#if request.params.path}}{{replace request.params.path '_' ' '}}{{else}}home{{/if}}">
-  {{#ifAny request.params.query.debug (compare request.url.hostname "goodmoves.local") ~}}
-    {{#if errors.[0]}}
-      <div style="position:fixed;top:0;right:0;padding:5px;background-color:#ff0000;color:#ffffff;">
-        Route Task Errors (F12)
-      </div>
-    {{/if}}
-  {{/ifAny}}
   <goodmoves-site>
     <div class="mdc-typography">
+      {{#ifAny request.params.query.debug (compare request.url.hostname "goodmoves.local") ~}}
+        {{#if errors.[0]}}
+          <div style="z-index:100;position:fixed;top:0;right:0;padding:5px;background-color:#ff0000;color:#ffffff;">
+            Route Task Errors (F12)
+          </div>
+        {{/if}}
+      {{/ifAny}}
       <header class="mdc-top-app-bar mdc-elevation--z5 top-bar-stuck" id="top-bar">
         <div class="container-fluid">
           <div class="mdc-top-app-bar__row mdc-top-app-bar__upper">

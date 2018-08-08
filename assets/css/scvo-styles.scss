@@ -49,6 +49,17 @@ secondary: #FF8F00,
 secondary-light: #FFA000,
 secondary-dark: #FF6F00
 ),
+cjs: (
+primary: #0081BB,
+primary-overlay-light: rgba(0, 129, 187, 0.65),
+primary-overlay-start: rgba(0, 129, 187, 0.89),
+primary-overlay-end: rgba(0, 129, 187, 0.91),
+primary-light: #0081BB,
+primary-dark: #005a82,
+secondary: #FF8F00,
+secondary-light: #FFA000,
+secondary-dark: #FF6F00
+),
 goodmoves: (
 primary: #42842A,
 primary-overlay-start: rgba(66, 132, 42, 0.89),
@@ -196,6 +207,7 @@ primary-dark: #263238
   $themeLoveCharity: map-get($colours, 'i-love-charity');
   $themeDigital: map-get($colours, 'digital');
   $themeJobs: map-get($colours, 'jobs');
+  $themeCJS: map-get($colours, 'cjs');
   $themeGathering: map-get($colours, 'gathering');
   $themeFunding: map-get($colours, 'funding');
 
@@ -329,6 +341,14 @@ primary-dark: #263238
   }
   .running-your-organisation .support.support-organisation .mdc-card__primary {
     background-color: map-get($themeCharity, 'primary') !important;
+  }
+  .support .cjs-brand .mdc-card__media,
+  .jobs.community-jobs-scotland .support.support-organisation .mdc-card__primary {
+    background-color: map-get($themeCJS, 'primary') !important;
+  }
+  .jobs.community-jobs-scotland #search-tab-bar {
+    background-color: whitesmoke !important;
+    color: white !important;
   }
   .support.support-policy .mdc-card__primary {
     background-color: map-get($themePosts, 'primary') !important;
@@ -517,15 +537,22 @@ primary-dark: #263238
       color: map-get($themeJobs, 'primary') !important;
     }
   }
-  .leaflet-container a,
-  .vacancy_icon .marker-icon,
-  .map-marker-overlay {
+  .jobs .leaflet-container a,
+  .leaflet-popup-content .map-content-goodmoves-vacancy a,
+  .vacancy_icon .marker-icon-goodmoves-vacancy,
+  .vacancy_icon .map-marker-overlay-goodmoves-vacancy {
     color: map-get($themeJobs, 'primary') !important;
   }
+  .jobs.community-jobs-scotland .leaflet-container a,
+  .leaflet-popup-content .map-content-cjs-vacancy a,
+  .vacancy_icon .marker-icon-cjs-vacancy,
+  .vacancy_icon .map-marker-overlay-cjs-vacancy {
+    color: map-get($themeCJS, 'primary') !important;
+  }
   .community-jobs-scotland .callout-image .caption {
-    background-color: rgba(255,255,255,0.5);
+    background-color: map-get($themeCJS, 'primary-overlay-light');
     .caption-inner {
-      background-color: map-get($themeJobs, 'primary-overlay-start');
+      background-color: map-get($themeCJS, 'primary-overlay-end');
     }
   }
   .swiper-container .swiper-pagination-bullet {
@@ -700,11 +727,12 @@ primary-dark: #263238
 .running-your-organisation {
   @include theme-colours('charity');
 }
-.search-result.cjs-vacancy,
-.employability,
-.employment,
 .jobs {
   @include theme-colours('jobs');
+}
+.search-result.cjs-vacancy,
+.jobs.community-jobs-scotland {
+  @include theme-colours('cjs');
 }
 .goodmoves,
 .search-result.goodmoves-vacancy,
@@ -1557,8 +1585,8 @@ form#settled_status {
   // background-position-x: 97%;
   .mdc-select__native-control {
     width: 100%;
-    box-sizing: content-box;
-    height: 30px;
+    // box-sizing: border-box;
+    // height: 30px;
   }
 }
 .mdc-select:focus {
@@ -2794,7 +2822,7 @@ table.membership-fees {
     background-size: unset;
   }
   .cjs-brand .mdc-card__media {
-    background-color: #e6e6e6 !important;
+    // background-color: #e6e6e6 !important;
     background-image: url('https://storage.googleapis.com/scvo-cms/scvo-cms-content/images/banners/cjs-logo.png');
     background-size: contain;
   }
@@ -2962,6 +2990,9 @@ table.membership-fees {
       margin-top: 0;
     }
   }
+}
+.map-content {
+  padding: 0 $unit/2;
 }
 .popup-pager .map-content:not(:first-child) {
   display: none;

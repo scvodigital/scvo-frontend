@@ -34,7 +34,7 @@
             {{#compare @root.request.params.query.view "===" "map" ~}}
               <div id="detailed-results-container" class="container-content container-map">
                 <div id="map-full" data-map-name="fullMap" data-map-options='{
-                  {{#ifAll @root.request.params.query.lat @root.request.params.query.lng ~}}
+                  {{#ifAll @root.request.params.query.location @root.request.params.query.lat @root.request.params.query.lng ~}}
                   "circle": {
                     "lat": {{@root.request.params.query.lat}},
                     "lng": {{@root.request.params.query.lng}},
@@ -46,7 +46,7 @@
               {{#each @root.data.primaryResponse.hits.hits ~}}
                 {{#if _source.geo_vacancy_coords ~}}
                   {{#each (arrayify _source.geo_vacancy_coords) ~}}
-                    <marker style="display:none;" data-map="fullMap" data-lat="{{lat}}" data-lng="{{lon}}" data-title="{{../_source.title}}">
+                    <marker style="display:none;" data-map="fullMap" data-lat="{{lat}}" data-lng="{{lon}}" data-title="{{../_source.title}}" data-type="{{../_type}}">
                       {{#with ../_source ~}}
                       <div class="map-content">
                         <h3 class="mdc-typography--headline6">

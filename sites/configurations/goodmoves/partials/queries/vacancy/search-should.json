@@ -1,22 +1,48 @@
+{{#if regions ~}}
+  {{>queries_terms field="region_group_slug" terms=regions}},
+{{else}}
+  {
+    "exists": {
+      "field": "title"
+    }
+  },
+{{/if ~}}
 {{#ifAll location lat lng distance ~}}
-{
-  "geo_distance": {
-    "distance": "{{default distance "8.04672"}}km",
-    "geo_vacancy_coords": {
-      "lat": {{lat}},
-      "lon": {{lng}}
+  {
+    "geo_distance": {
+      "distance": "{{default distance "8.04672"}}km",
+      "geo_vacancy_coords": {
+        "lat": {{lat}},
+        "lon": {{lng}}
+      }
     }
   }
-},
-{
-  "term": {
-    "home_based": true
-  }
-}
+  {{#compare @root.route.name "!==" "vacancy_map" ~}},
+    {
+      "term": {
+        "home_based": true
+      }
+    }
+  {{else}}
+    {{#if home_based ~}},
+      {
+        "term": {
+          "home_based": true
+        }
+      }
+    {{/if ~}}
+  {{/compare ~}}
 {{else}}
-{
-  "exists": {
-    "field": "title"
+  {{#if home_based ~}}
+    {
+      "term": {
+        "home_based": true
+      }
+    },
+  {{/if ~}}
+  {
+    "exists": {
+      "field": "title"
+    }
   }
-}
 {{/ifAll ~}}
