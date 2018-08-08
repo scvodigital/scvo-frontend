@@ -7,16 +7,21 @@
       "lon": {{lng}}
     }
   }
-},
+}{{#compare @root.route.name "!==" "vacancy_map" ~}},
 {
   "term": {
     "home_based": true
   }
 }
+{{/compare ~}}
+{{else}}
+{{#if home_based ~}}
+  {{>queries_term field="home_based" term=home_based}}
 {{else}}
 {
   "exists": {
     "field": "title"
   }
 }
+{{/if ~}}
 {{/ifAll ~}}
