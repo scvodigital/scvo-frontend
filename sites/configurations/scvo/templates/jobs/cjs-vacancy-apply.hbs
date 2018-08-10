@@ -60,6 +60,16 @@
 
           <h3>Application forms</h3>
           <ul class="mdc-list downloads">
+            {{#compare job_number "===" "8500" ~}}
+            <li class="mdc-list-item">
+              <span class="mdc-list-item__graphic far fa-file fa-file-word" aria-hidden="true"></span>
+              <span class="mdc-list-item__text">
+                <a href="https://storage.googleapis.com/scvo-assets/scvo-frontend/assets/cjs/Admin%20Support%20Worker%20Application%20form%20090818.doc" target="_blank">
+                  <span class="title">Application Form</span>
+                </a>
+              </span>
+            </li>
+            {{else}}
             {{#compare job_number "===" "8495" ~}}
             <li class="mdc-list-item">
               <span class="mdc-list-item__graphic far fa-file fa-file-word" aria-hidden="true"></span>
@@ -114,6 +124,7 @@
                 </a>
               </span>
             </li>
+            {{/compare ~}}
             {{/compare ~}}
             {{/compare ~}}
             {{/compare ~}}
