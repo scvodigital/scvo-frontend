@@ -15,35 +15,6 @@
         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-9-desktop mdc-layout-grid__cell--span-5-tablet mdc-layout-grid__cell--span-4-phone content page-content v-margin">
           {{#if @root.data.auth ~}}
           {{#with @root.data.primaryResponse.hits.hits.[0]._source ~}}
-          <h3>Contact Details</h3>
-          <ul class="fa-ul">
-            {{#if supervisor.first_name ~}}
-            <li>
-              <span class="fa-li"><i class="far fa-user-alt"></i></span>
-              {{{supervisor.first_name}}} {{{supervisor.last_name}}}
-            </li>
-            {{/if ~}}
-            {{#if supervisor.email ~}}
-            <li>
-              <span class="fa-li"><i class="far fa-envelope"></i></span>
-              <a href="mailto:{{{supervisor.email}}}">{{{supervisor.email}}}</a>
-            </li>
-            {{/if ~}}
-            {{#if supervisor.phone ~}}
-            <li>
-              <span class="fa-li"><i class="far fa-phone"></i></span>
-              {{{supervisor.phone}}}
-            </li>
-            {{/if ~}}
-            <li>
-              <span class="fa-li"><i class="far fa-building"></i></span>
-              {{#if organisation.street}}{{{organisation.street}}}, {{/if}}
-              {{#if organisation.area_town}}{{{organisation.area_town}}}, {{/if}}
-              {{#if organisation.city_county}}{{{organisation.city_county}}}, {{/if}}
-              {{#if organisation.postcode}}{{{organisation.postcode}}}{{/if}}
-            </li>
-          </ul>
-
           {{#if application_arrangements ~}}
           <h3>Referral methods including arrangement details</h3>
           <p>
@@ -165,6 +136,34 @@
             </li>
           </ul>
 
+          <h3>Contact Details</h3>
+          <ul class="fa-ul">
+            {{#if supervisor.first_name ~}}
+            <li>
+              <span class="fa-li"><i class="far fa-user-alt"></i></span>
+              {{{supervisor.first_name}}} {{{supervisor.last_name}}}
+            </li>
+            {{/if ~}}
+            {{#if supervisor.email ~}}
+            <li>
+              <span class="fa-li"><i class="far fa-envelope"></i></span>
+              <a href="mailto:{{{supervisor.email}}}">{{{supervisor.email}}}</a>
+            </li>
+            {{/if ~}}
+            {{#if supervisor.phone ~}}
+            <li>
+              <span class="fa-li"><i class="far fa-phone"></i></span>
+              {{{supervisor.phone}}}
+            </li>
+            {{/if ~}}
+            <li>
+              <span class="fa-li"><i class="far fa-building"></i></span>
+              {{#if organisation.street}}{{{organisation.street}}}, {{/if}}
+              {{#if organisation.area_town}}{{{organisation.area_town}}}, {{/if}}
+              {{#if organisation.city_county}}{{{organisation.city_county}}}, {{/if}}
+              {{#if organisation.postcode}}{{{organisation.postcode}}}{{/if}}
+            </li>
+          </ul>
           {{/with ~}}
           {{else}}
           <p>
