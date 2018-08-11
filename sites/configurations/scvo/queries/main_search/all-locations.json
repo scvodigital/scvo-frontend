@@ -1,5 +1,5 @@
 {
-  "size": 1000,
+  "size": 10000,
   "from": 0,
   "_source": [
     "geo_vacancy_coords",
@@ -81,21 +81,13 @@
               {
                 "term": {
                   "_type": {
-                    "value" : "scvo-member"
-                  }
-                }
-              }
-            ]
-          }
-        },
-        {
-          "bool": {
-            "must": [
-              {
-                "term": {
-                  "_type": {
                     "value" : "goodhq-organisation"
                   }
+                }
+              },
+              {
+                "term": {
+                  "status": "Open"
                 }
               }
             ]
