@@ -133,6 +133,19 @@ if(location.host.indexOf('.local') > -1){
             </section>
             <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end">
               <nav class="mdc-tab-bar mdc-tab-bar__right hide-sm hide-md" id="upper-tab-bar">
+                {{#if @root.data.auth ~}}
+                {{#each @root.context.metaData.menus.upper-signed-in ~}}
+                <a class="mdc-tab{{#if (regexMatch @root.request.url.pathname route "gi")}} mdc-tab--active{{/if}}" href="{{stripTrailingSlash path}}">
+                  <span class="mdc-tab--label">{{{label}}}</span>
+                </a>
+                {{/each ~}}
+                {{else}}
+                {{#each @root.context.metaData.menus.upper-not-signed-in ~}}
+                <a class="mdc-tab{{#if (regexMatch @root.request.url.pathname route "gi")}} mdc-tab--active{{/if}}" href="{{stripTrailingSlash path}}">
+                  <span class="mdc-tab--label">{{{label}}}</span>
+                </a>
+                {{/each ~}}
+                {{/if ~}}
                 {{#each @root.context.metaData.menus.upper ~}}
                 <a class="mdc-tab{{#if (regexMatch @root.request.url.pathname route "gi")}} mdc-tab--active{{/if}}" href="{{stripTrailingSlash path}}">
                   <span class="mdc-tab--label">{{{label}}}</span>
