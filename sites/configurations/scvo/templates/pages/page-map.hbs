@@ -1,0 +1,107 @@
+<!-- <div class="page jobs-landing">
+  {{> header_splash}}
+  <div class="container-fluid">
+    {{> breadcrumbs}}
+    <div class="mdc-layout-grid">
+      <div class="mdc-layout-grid__inner">
+        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone top-jobs content page-content">
+          <div id="detailed-results-container" class="container-content container-map">
+            <div id="map-full" data-map-name="fullMap" data-map-options='{
+              {{#ifAll @root.request.params.query.location @root.request.params.query.lat @root.request.params.query.lng ~}}
+              "circle": {
+                "lat": {{@root.request.params.query.lat}},
+                "lng": {{@root.request.params.query.lng}},
+                "radius": {{default @root.request.params.query.distance 0}}
+              }
+              {{/ifAll ~}}
+            }'></div>
+          </div>
+          {{#each @root.data.supplimentaryResponses.all_locations.hits.hits ~}}
+            {{#if _source.geo_vacancy_coords ~}}
+              {{#each (arrayify _source.geo_vacancy_coords) ~}}
+                <marker style="display:none;" data-map="fullMap" data-lat="{{lat}}" data-lng="{{lon}}" data-title="{{../_source.title}}" data-type="{{../_type}}">
+                  <div class="map-content map-content-{{../_type}}">
+                    <h3 class="mdc-typography--headline6">
+                      {{#compare ../_type "===" "goodmoves-vacancy"}}
+                        <a href="https://goodmoves.com/vacancy/{{../_source.slug}}" class="mdc-card__action">{{../_source.title}}</a>
+                      {{else}}
+                        <a href="/jobs/community-jobs-scotland/vacancies/p19v/{{../_source.slug}}" class="mdc-card__action">{{../_source.title}}</a>
+                      {{/compare}}
+                    </h3>
+                    {{#if ../_source.organisation.name ~}}
+                    <div class="mdc-typography--body1 v-margin">
+                      {{../_source.organisation.name}}
+                    </div>
+                    {{/if ~}}
+                    <div class="mdc-typography--body2">
+                      {{#compare ../_type "===" "goodmoves-vacancy"}}
+                        <a href="https://goodmoves.com/vacancy/{{../_source.slug}}" class="mdc-card__action">Find out more on Goodmoves</a>
+                      {{else}}
+                        <a href="/jobs/community-jobs-scotland/vacancies/p19v/{{../_source.slug}}" class="mdc-card__action">Find out more</a>
+                      {{/compare}}
+                    </div>
+                  </div>
+                </marker>
+              {{/each ~}}
+            {{/if ~}}
+            {{#if _source.geo_coords ~}}
+              {{#each (arrayify _source.geo_coords) ~}}
+                <marker style="display:none;" data-map="fullMap" data-lat="{{lat}}" data-lng="{{lon}}" data-title="{{../_source.title}}" data-type="{{../_type}}">
+                  <div class="map-content map-content-{{../_type}}">
+                    <h3 class="mdc-typography--headline6">
+                      {{#compare ../_type "===" "scvo-event"}}
+                        <a href="https://scvo.org/events/{{../_source.slug}}" class="mdc-card__action">{{../_source.title}}</a>
+                      {{else}}
+                        <a href="/{{../_source.slug}}" class="mdc-card__action">{{../_source.title}}</a>
+                      {{/compare}}
+                    </h3>
+                    {{#if ../_source.organisation.name ~}}
+                    <div class="mdc-typography--body1 v-margin">
+                      {{../_source.organisation.name}}
+                    </div>
+                    {{/if ~}}
+                    <div class="mdc-typography--body2">
+                      {{#compare ../_type "===" "scvo-event"}}
+                        <a href="https://scvo.org/events/{{../_source.slug}}" class="mdc-card__action">Find out more</a>
+                      {{else}}
+                        <a href="/{{../_source.slug}}" class="mdc-card__action">Find out more</a>
+                      {{/compare}}
+                    </div>
+                  </div>
+                </marker>
+              {{/each ~}}
+            {{/if ~}}
+            {{#if _source.geo_organisation_coords ~}}
+              {{#each (arrayify _source.geo_coords) ~}}
+                <marker style="display:none;" data-map="fullMap" data-lat="{{lat}}" data-lng="{{lon}}" data-title="{{../_source.title}}" data-type="{{../_type}}">
+                  <div class="map-content map-content-{{../_type}}">
+                    <h3 class="mdc-typography--headline6">
+                      {{#compare ../_type "===" "scvo-event"}}
+                        <a href="https://scvo.org/events/{{../_source.slug}}" class="mdc-card__action">{{../_source.title}}</a>
+                      {{else}}
+                        <a href="/{{../_source.slug}}" class="mdc-card__action">{{../_source.title}}</a>
+                      {{/compare}}
+                    </h3>
+                    {{#if ../_source.organisation.name ~}}
+                    <div class="mdc-typography--body1 v-margin">
+                      {{../_source.organisation.name}}
+                    </div>
+                    {{/if ~}}
+                    <div class="mdc-typography--body2">
+                      {{#compare ../_type "===" "scvo-event"}}
+                        <a href="https://scvo.org/events/{{../_source.slug}}" class="mdc-card__action">Find out more</a>
+                      {{else}}
+                        <a href="/{{../_source.slug}}" class="mdc-card__action">Find out more</a>
+                      {{/compare}}
+                    </div>
+                  </div>
+                </marker>
+              {{/each ~}}
+            {{/if ~}}
+          {{/each ~}}
+          <script src="/assets/js/scvo/all-vacancies.js"></script>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->

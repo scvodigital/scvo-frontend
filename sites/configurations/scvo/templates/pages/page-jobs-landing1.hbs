@@ -1,0 +1,135 @@
+<div class="page jobs-landing">
+  {{> header_splash}}
+  <div class="container-fluid">
+    {{> breadcrumbs}}
+    <div class="mdc-layout-grid equal-height support v-margin-full">
+      <div class="mdc-layout-grid__inner">
+        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone content page-content search">
+          <div class="mdc-card goodmoves-brand v-margin">
+            <section class="mdc-card__media"><a href="https://goodmoves.com">&nbsp;</a></section>
+            <section class="mdc-card__supporting-text">
+              <h3>
+                Find a job in the third sector&ensp;
+                <span class="mdc-typography--body2"><a href="/jobs/search">Browse</a></span>
+              </h3>
+              <form action="/jobs/search" method="GET" [searchroute]="'goodmoves_job_search'" class="search_form" data-auto-search="true">
+                <div class="mdc-textfield mdc-textfield--upgraded">
+                  <input type="text" class="mdc-textfield__input" name="q" id="jobs-keywords" placeholder="Keywords" value="{{request.params.query.q}}">
+                  <button type="submit" class="mdc-toolbar__icon mdc-toolbar__search search-button-large" aria-label="Search" alt="Search">
+                    <span class="far fa-2x fa-search" aria-hidden="true"></span>
+                  </button>
+                </div>
+              </form>
+              <p>
+                Try: <a href="/jobs/search?role=Management">Management</a>, <a href="/jobs/search?sector=Social+Care">Social Care</a>, <a href="/jobs/search?role=Board+Membership%2Ftrustee">Board Membership/trustee</a>
+              </p>
+            </section>
+            <section class="mdc-card__actions">
+              <a href="https://goodmoves.com/recruiting" class="mdc-action">Advertise with us <span class="far fa-external-link"></span></a>
+            </section>
+          </div>
+        </div>
+        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone content page-content">
+          <div class="mdc-card cjs-brand v-margin">
+            <section class="mdc-card__media"><a href="/jobs/community-jobs-scotland">&nbsp;</a></section>
+            <section class="mdc-card__supporting-text">
+              <h3>Creating jobs in Scotland's third sector for unemployed young people</h3>
+              <p>
+                Community Jobs Scotland works with hundreds of third sector organisations and has supported over 8,000 unemployed young people into work.
+              </p>
+            </section>
+            <section class="mdc-card__actions">
+              <ul>
+                <li><a href="/jobs/community-jobs-scotland" class="mdc-action">Find out more</a></li>
+                <li><a href="/jobs/community-jobs-scotland/vacancies/sign-in" class="mdc-action">JCP & SDS vacancy access</a></li>
+              </ul>
+            </section>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="mdc-layout-grid">
+      <div class="mdc-layout-grid__inner">
+        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone top-jobs content page-content">
+          <div id="detailed-results-container" class="container-content container-map">
+            <div id="map-full" data-map-name="fullMap" data-map-options='{
+              {{#ifAll @root.request.params.query.location @root.request.params.query.lat @root.request.params.query.lng ~}}
+              "circle": {
+                "lat": {{@root.request.params.query.lat}},
+                "lng": {{@root.request.params.query.lng}},
+                "radius": {{default @root.request.params.query.distance 0}}
+              }
+              {{/ifAll ~}}
+            }'></div>
+          </div>
+          {{#each @root.data.supplimentaryResponses.all_vacancies.hits.hits ~}}
+            {{#if _source.geo_vacancy_coords ~}}
+              {{#each (arrayify _source.geo_vacancy_coords) ~}}
+                <marker style="display:none;" data-map="fullMap" data-lat="{{lat}}" data-lng="{{lon}}" data-title="{{../_source.title}}" data-type="{{../_type}}">
+                  <div class="map-content map-content-{{../_type}}">
+                    <h3 class="mdc-typography--headline6">
+                      {{#compare ../_type "===" "goodmoves-vacancy"}}
+                        <a href="https://goodmoves.com/vacancy/{{../_source.slug}}" class="mdc-card__action">{{../_source.title}}</a>
+                      {{else}}
+                        <a href="/jobs/community-jobs-scotland/vacancies/p19v/{{../_source.slug}}" class="mdc-card__action">{{../_source.title}}</a>
+                      {{/compare}}
+                    </h3>
+                    {{#if ../_source.organisation.name ~}}
+                    <div class="mdc-typography--body1 v-margin">
+                      {{../_source.organisation.name}}
+                    </div>
+                    {{/if ~}}
+                    <div class="mdc-typography--body2">
+                      {{#compare ../_type "===" "goodmoves-vacancy"}}
+                        <a href="https://goodmoves.com/vacancy/{{../_source.slug}}" class="mdc-card__action">Find out more on Goodmoves</a>
+                      {{else}}
+                        <a href="/jobs/community-jobs-scotland/vacancies/p19v/{{../_source.slug}}" class="mdc-card__action">Find out more</a>
+                      {{/compare}}
+                    </div>
+                  </div>
+                </marker>
+              {{/each ~}}
+            {{/if ~}}
+          {{/each ~}}
+          <script src="/assets/js/scvo/all-vacancies.js"></script>
+        </div>
+      </div>
+    </div>
+    <div class="mdc-layout-grid">
+      <div class="mdc-layout-grid__inner">
+        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone top-jobs content page-content">
+          <h2>Top jobs on <strong>good</strong>moves</h2>
+          <div class="mdc-layout-grid">
+            <div class="mdc-layout-grid__inner">
+              {{#each @root.data.supplimentaryResponses.goodmoves_latest.hits.hits ~}}
+              <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet  mdc-layout-grid__cell--span-4-phone">
+                {{{_source.rendered.scvo_gist}}}
+              </div>
+              {{/each ~}}
+            </div>
+          </div>
+          <p>
+            <a href="/jobs/search" class="mdc-button mdc-button--raised">Find more jobs</a>
+          </p>
+        </div>
+        {{#compare @root.data.supplimentaryResponses.related_training.hits.total ">" 0 ~}}
+        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone related page-related">
+          <h2>Our training courses</h2>
+          <div class="mdc-layout-grid">
+            <div class="mdc-layout-grid__inner">
+              {{#each @root.data.supplimentaryResponses.related_training.hits.hits ~}}
+              <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet  mdc-layout-grid__cell--span-4-phone">
+                {{{_source.rendered.scvo_gist}}}
+              </div>
+              {{/each ~}}
+            </div>
+          </div>
+          <p>
+            <a href="/events?course_type=Training+Course" class="mdc-button mdc-button--raised">See all courses</a>
+          </p>
+        </div>
+        {{/compare ~}}
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,99 @@
+{
+  "size": 10000,
+  "from": 0,
+  "_source": [
+    "geo_vacancy_coords",
+    "geo_organisation_coords",
+    "geo_coords",
+    "organisation.name",
+    "slug",
+    "title"
+  ],
+  "query": {
+    "bool": {
+      "minimum_should_match": "1",
+      "should": [
+        {
+          "bool": {
+            "must": [
+              {
+                "term": {
+                  "_type": {
+                    "value" : "goodmoves-vacancy"
+                  }
+                }
+              },
+              {
+                "term": {
+                  "vacancy_status": "vacancy-open"
+                }
+              },
+              {
+                "term": {
+                  "country_slug": "scotland"
+                }
+              }
+            ]
+          }
+        },
+        {
+          "bool": {
+            "must": [
+              {
+                "term": {
+                  "_type": {
+                    "value" : "cjs-vacancy"
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "bool": {
+            "must": [
+              {
+                "term": {
+                  "_type": {
+                    "value" : "milo-volunteering-opportunity"
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "bool": {
+            "must": [
+              {
+                "term": {
+                  "_type": {
+                    "value" : "scvo-event"
+                  }
+                }
+              }
+            ]
+          }
+        },
+        {
+          "bool": {
+            "must": [
+              {
+                "term": {
+                  "_type": {
+                    "value" : "goodhq-organisation"
+                  }
+                }
+              },
+              {
+                "term": {
+                  "status": "Open"
+                }
+              }
+            ]
+          }
+        }
+      ]
+    }
+  }
+}

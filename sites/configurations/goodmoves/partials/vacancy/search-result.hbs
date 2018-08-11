@@ -2,18 +2,22 @@
   {{> vacancy_key_info}}
   <hr class="mdc-list-divider" />
   {{#if description_short ~}}
-  <div class="search-result-article__snippet mdc-typography--body1">
-    {{{description_short}}}
-    {{#if (getProperty @root.data.notes Id)}}
-      <hr />
-      <div class="b-padding-full">
-        <h3 class="mdc-typography--headline6">Your notes</h3>
+    <div class="search-result-article__snippet mdc-typography--body1">
+      {{{description_short}}}
+    </div>
+    <!-- <hr class="mdc-list-divider" /> -->
+  {{/if}}
+  {{#compare (trim (getProperty @root.data.notes Id)) "!==" "" ~}}
+    <div class="search-result-article__notes">
+      <h4 class="mdc-typography--headline7">
+        Your notes&ensp;
+        <a href="/vacancy/{{slug}}" class="mdc-typography--body2">Edit</a>
+      </h4>
+      <div class="mdc-typography--body1">
         {{{regexReplace (getProperty @root.data.notes Id) "(\r\n)|(\r|\n)" "gi" "<br />"}}}
       </div>
-    {{/if}}
-  </div>
-  <hr class="mdc-list-divider" />
-  {{/if}}
+    </div>
+  {{/compare ~}}
   <div class="mdc-card__actions">
     <div class="mdc-card__action-buttons demo-card__action-buttons--text-only mdc-card__actions--full-bleed">
       {{#ifAll @root.request.params.query.location @root.request.params.query.lat @root.request.params.query.lng ~}}
