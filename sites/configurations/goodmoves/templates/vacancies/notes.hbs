@@ -17,7 +17,7 @@
 
   {{#compare @root.data.notes_vacancies.open.hits.total ">" 0}}
   {{#each @root.data.notes_vacancies.open.hits.hits ~}}
-  {{#compare (trim (getProperty @root.data.notes Id)) "!==" "" ~}}
+  {{#compare (trim (getProperty @root.data.notes _source.Id)) "!==" "" ~}}
   {{> vacancy_search_result _source}}
   {{/compare ~}}
   {{/each ~}}
@@ -31,7 +31,7 @@
     Closed jobs
   </h2>
   {{#each @root.data.notes_vacancies.closed.hits.hits ~}}
-  {{#compare (trim (getProperty @root.data.notes Id)) "!==" "" ~}}
+  {{#compare (trim (getProperty @root.data.notes _source.Id)) "!==" "" ~}}
   {{> vacancy_search_result _source}}
   {{/compare ~}}
   {{/each ~}}
