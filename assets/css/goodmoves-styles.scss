@@ -2,8 +2,9 @@ $mdc-theme-primary: #42842A;
 $mdc-theme-primary-light: #9cd986;
 $mdc-theme-primary-dark: #336621;
 
-$mdc-theme-complimentary: #C1D0B1;
-$mdc-theme-complimentary-light: #dee6d6;
+$mdc-theme-complimentary: #A7D0AC;
+$mdc-theme-complimentary-light: #e4f1e6;
+$mdc-theme-complimentary-dark: #76b67e;
 
 $mdc-theme-secondary: #E0E0E0; // Gray 300
 $mdc-theme-secondary-light: #F5F5F5; // Gray 100
@@ -689,7 +690,7 @@ a:hover {
   }
 }
 .mdc-card .mdc-chip {
-  background-color: $mdc-theme-complimentary
+  background-color: $mdc-theme-complimentary-dark;
 }
 .mdc-card .mdc-chip.mdc-chip--selected,
 .mdc-chip.mdc-chip--selected {
@@ -925,7 +926,7 @@ a {
   }
   .mdc-card__actions {
     border-radius: 0 0 2px 2px;
-    background-color: $mdc-theme-complimentary-light;
+    background-color: $mdc-theme-complimentary;
     min-height: auto;
     a {
       color: $mdc-theme-primary-dark;
@@ -964,6 +965,7 @@ a {
     padding: $unit/2;
   }
   .search-result-article__snippet,
+  .search-result-article__notes,
   .mdc-card__info--vacancy-row {
     flex: 1 0 auto;
   }
@@ -973,14 +975,24 @@ a {
   .mdc-card__media--organisation {
     margin-right: $unit;
   }
-  .search-result-article__snippet {
+  .search-result-article__snippet,
+  .search-result-article__notes {
     padding: 0 $unit $unit/2;
+  }
+  .search-result-article__notes {
+    background-color: $mdc-theme-complimentary-light;
+    .mdc-typography--headline7 {
+      margin-top: $unit*(3/4);
+    }
+    .mdc-typography--body2 {
+      font-weight: 600;
+    }
   }
   .user-notes {
     display: none;
   }
   .mdc-card__actions {
-    background-color: $mdc-theme-complimentary-light;
+    background-color: $mdc-theme-complimentary;
     .mdc-card__action {
       color: $mdc-theme-primary-dark;
     }
@@ -1076,7 +1088,7 @@ a {
   opacity: 1;
 }
 .panel-heading {
-  margin: 0;
+  margin: -$unit/3 0 0;
   padding: $unit*(2/3) $unit;
   background: $mdc-theme-error;
   color: white;
@@ -1745,7 +1757,7 @@ body {
     padding-right: 0;
   }
   li.current-page {
-    background-color: $mdc-theme-complimentary;
+    background-color: $mdc-theme-complimentary-dark;
     border-radius: 50%;
   }
   li:hover,
