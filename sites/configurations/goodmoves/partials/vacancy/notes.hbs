@@ -1,0 +1,18 @@
+{{#compare (trim (getProperty @root.data.notes Id)) "!==" "" ~}}
+  <div class="search-result-article__notes">
+    <h4 class="mdc-typography--headline7">
+      Your notes&ensp;
+      <a href="/vacancy/{{slug}}" class="mdc-typography--body2">Edit</a>
+    </h4>
+    <div class="mdc-typography--body1">
+      {{#if limit ~}}
+      {{{truncate (getProperty @root.data.notes Id) limit}}}
+      {{#compare (length (getProperty @root.data.notes Id)) ">" limit ~}}
+      <a href="/vacancy/{{slug}}">Read more</a>
+      {{/compare ~}}
+      {{else}}
+      {{{regexReplace (getProperty @root.data.notes Id) "(\r\n)|(\r|\n)" "gi" "<br />"}}}
+      {{/if ~}}
+    </div>
+  </div>
+{{/compare ~}}
