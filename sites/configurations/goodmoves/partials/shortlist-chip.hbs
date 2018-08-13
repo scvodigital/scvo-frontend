@@ -5,7 +5,7 @@
     onText="Shortlist"
     offText="Shortlist"
     iconClasses="far fa-star"
-    on=(contains (map @root.data.shortlist.items (getProp "id")) id)
+    on=(contains (map @root.data.shortlist.items.[0] (getProp "value")) id)
   }}
   {
     "extraAttributes": "data-vacancy-id=\"{{../id}}\"",

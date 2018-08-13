@@ -213,7 +213,7 @@ export class Helpers {
   }
 
   static helper_parse(str: string) {
-    //console.log('Parsing:', str);
+    console.log('Parsing:', str);
     const obj = JSON.parse(str);
     return obj;
   }
@@ -490,7 +490,7 @@ export class Helpers {
 
   static helper_sort(items: any[]) {
     if (!Array.isArray(items)) {
-      return null;
+      return items;
     }
     const out = items.sort();
     return out;

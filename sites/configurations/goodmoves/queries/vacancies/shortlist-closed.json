@@ -28,7 +28,7 @@
       "must": [
         {
           "terms": {
-            "Id": {{{stringify (map data.shortlist.items (getProp "id"))}}}
+            "Id": {{{stringify (map data.shortlist.items.[0] (getProp "value"))}}}
           }
         }
       ]

@@ -1,10 +1,1 @@
-SELECT 
-  p.`value` AS id,
-  s.subscribed
-FROM 
-  subscriptions s 
-  JOIN subscriptionParameters p ON s.email = p.email AND s.campaign = p.campaign
-WHERE 
-  s.email = '{{data.auth.email}}' AND
-  s.campaign = '{{context.metaData.shortlistCampaignName}}' AND
-  p.`parameter` = 'id';
+CALL _getSubscriptionParameters('{{@root.data.auth.email}}', '{{@root.context.metaData.shortlistCampaignName}}', 'Shortlist');
