@@ -213,7 +213,7 @@ export class Helpers {
   }
 
   static helper_parse(str: string) {
-    console.log('Parsing:', str);
+    //console.log('Parsing:', str);
     const obj = JSON.parse(str);
     return obj;
   }
