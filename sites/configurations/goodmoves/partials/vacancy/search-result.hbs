@@ -6,7 +6,7 @@
       {{{description_short}}}
     </div>
   {{/if}}
-  {{> vacancy_notes limit=280}}
+  {{> vacancy_notes limit="4rem"}}
   <div class="mdc-card__actions">
     <div class="mdc-card__action-buttons demo-card__action-buttons--text-only mdc-card__actions--full-bleed">
       {{#ifAll @root.request.params.query.location @root.request.params.query.lat @root.request.params.query.lng ~}}
@@ -33,7 +33,9 @@
       <a href="/vacancy/{{slug}}{{@root.request.url.search}}" class="mdc-card__action">Find out more</a>
     </div>
     <div class="mdc-card__action-icons pull-right">
-      {{> shortlist_chip id=Id}}
+      <div class="mdc-chip-set mdc-chip-set--filter">
+        {{> shortlist_chip id=Id}}
+      </div>
     </div>
   </div>
 </div>

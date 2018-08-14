@@ -28,7 +28,7 @@ tabs.listen("MDCTabBar:change", function(t) {
   if (mdeEditors.length > 0) {
     window.setTimeout(function() {
       mdeEditors.forEach(function(editor) {
-        editor.codemirror.refresh(); 
+        editor.codemirror.refresh();
       });
     }, 0);
   }
@@ -38,7 +38,11 @@ tabs.listen("MDCTabBar:change", function(t) {
 var mdeEditors = [];
 $(document).ready(function() {
   $('textarea[data-simple-mde]').each(function(i, o) {
-    var mdeEditor = new SimpleMDE({ element: o, forceSync: true });
+    var mdeEditor = new SimpleMDE({
+      element: o,
+      forceSync: true,
+      toolbar: ["heading-1", "heading-2", "bold", "italic", "|", "unordered-list", "ordered-list", "link"]
+    });
     o.mde = mdeEditor;
     mdeEditors.push(mdeEditor);
   });

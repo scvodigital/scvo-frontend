@@ -7,15 +7,15 @@
     <div class="mdc-typography--body1">
       {{#if limit ~}}
         {{#compare @root.route.name "===" "notes" ~}}
-          {{{regexReplace (stripTags (getProperty @root.data.notes Id)) "(\r\n)|(\r|\n)" "gi" "<br />"}}}
+          {{{markdown (getProperty @root.data.notes Id)}}}
         {{else}}
-          {{{truncate (stripTags (getProperty @root.data.notes Id)) limit}}}
-          {{#compare (length (getProperty @root.data.notes Id)) ">" limit ~}}
-            <a href="/vacancy/{{slug}}">Read more</a>
-          {{/compare ~}}
+          <div style="height: {{limit}};" class="faded-overflow">
+          {{{markdown (truncate (getProperty @root.data.notes Id) limit)}}}
+          </div>
+          <a href="/vacancy/{{slug}}">Read more</a>
         {{/compare ~}}
       {{else}}
-        {{{regexReplace (stripTags (getProperty @root.data.notes Id)) "(\r\n)|(\r|\n)" "gi" "<br />"}}}
+        {{{markdown (getProperty @root.data.notes Id)}}}
       {{/if ~}}
     </div>
   </div>

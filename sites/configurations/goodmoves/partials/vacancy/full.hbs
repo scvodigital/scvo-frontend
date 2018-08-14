@@ -189,11 +189,11 @@
       <div class="panel mdc-card--full-content mdc-typography--body1" role="tabpanel" aria-hidden="true" id="panel-3">
         <div class="text-field-container user-notes">
           {{#if @root.data.auth ~}}
-            <form action="/save-notes" method="POST" data-ajax-form="true" data-success-message="Note saved" data-failure-message="Failed to save note">
+            <form action="/save-notes" method="POST" data-ajax-form="true" data-success-message="Notes saved" data-failure-message="Failed to save notes">
               <div>
-                <label class="mdc-floating-label" for="user-notes">
+                <!-- <label class="mdc-floating-label" for="user-notes">
                   Your notes
-                </label>
+                </label> -->
                 <textarea class="mdc-text-field__input" data-simple-mde="true" name="notes">{{getProperty @root.data.notes Id}}</textarea>
                 <input type="hidden" name="id" value="{{Id}}">
               </div>
@@ -219,7 +219,9 @@
         <a href="/organisation/{{organisation.slug}}" class="mdc-card__action">Find out more about {{organisation.name}}</a>
       </div>
       <div class="mdc-card__action-icons pull-right">
-        {{> shortlist_chip id=Id}}
+        <div class="mdc-chip-set mdc-chip-set--filter">
+          {{> shortlist_chip id=Id}}
+        </div>
       </div>
     </div>
   </div>

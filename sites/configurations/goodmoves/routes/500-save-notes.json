@@ -13,7 +13,7 @@
         "appName": "scvo",
         "pathTemplate": "/notes/{{data.auth.uid}}/{{request.body.id}}",
         "setOrUpdate": "set",
-        "dataTemplate": "{{{stringify @root.request.body.notes}}}"
+        "dataTemplate": "{{{stringify (stripTags @root.request.body.notes)}}}"
       }
     },
     {
