@@ -1,5 +1,5 @@
 {{#if @root.data.auth}}
-  {{#with @root.data.shortlist.items.[0]}}
+  {{#with @root.data.shortlist.items.[0].[0]}}
     {{#> ajax_chip
       onUrl="/toggle-shortlist-subscription"
       onMethod="POST"
@@ -8,7 +8,7 @@
       onText="Send 'closing soon' alerts"
       offText="Send 'closing soon' alerts"
       iconClasses="far fa-envelope"
-      on=this.subscribed
+      on=this.active
     }}
     {}
     {{/ajax_chip}}

@@ -1,3 +1,4 @@
+<script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
 <script type="text/javascript">
 var tabs = new mdc.tabs.MDCTabBar(document.querySelector("#vacancy-tab-bar"));
 var panels = document.querySelector(".panels");
@@ -24,22 +25,22 @@ tabs.listen("MDCTabBar:change", function(t) {
       map.invalidateSize();
     }, 0);
   }
+  if (mdeEditors.length > 0) {
+    window.setTimeout(function() {
+      mdeEditors.forEach(function(editor) {
+        editor.codemirror.refresh(); 
+      });
+    }, 0);
+  }
 });
 
 {{#if data.auth}}
+var mdeEditors = [];
 $(document).ready(function() {
-  $('button[data-user-notes]').on('click', function(evt) {
-    var id = $(evt.currentTarget).data('user-notes');
-    var userNotes = $('textarea[data-user-notes="' + id + '"]').val();
-    var path = '/notes/{{@root.data.auth.uid}}/' + id;
-    console.log('About to save to path:', path, ', the following notes:\n', userNotes);
-    goodmoves.app.database().ref(path).set(userNotes).then(function(result) {
-      goodmoves.snackbarShow({
-        message: 'Notes saved'
-      });
-    }).catch(function(err) {
-      console.error('Failed to save notes:', err);
-    });  
+  $('textarea[data-simple-mde]').each(function(i, o) {
+    var mdeEditor = new SimpleMDE({ element: o, forceSync: true });
+    o.mde = mdeEditor;
+    mdeEditors.push(mdeEditor);
   });
 });
 {{/if}}

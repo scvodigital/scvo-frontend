@@ -1,0 +1,38 @@
+{
+  "name": "save-notes",
+  "pattern": "/save-notes",
+  "debug": true,
+  "acceptedVerbs": "POST",
+  "tasks": [
+    "metaData.commonTasks.authRequired",
+    {
+      "name": "notes",
+      "taskModule": "firebaseRtbSet",
+      "renderer": "handlebars",
+      "config": {
+        "appName": "scvo",
+        "pathTemplate": "/notes/{{data.auth.uid}}/{{request.body.id}}",
+        "setOrUpdate": "set",
+        "dataTemplate": "{{{stringify @root.request.body.notes}}}"
+      }
+    },
+    {
+      "name": "redirectUrl",
+      "taskModule": "render",
+      "renderer": "handlebars",
+      "config": {
+        "output": "data",
+        "template": "{{{request.headers.referer}}}#notes-{{request.body.id}}"
+      }
+    },
+    {
+      "name": "destination",
+      "taskModule": "render",
+      "renderer": "handlebars",
+      "config": {
+        "output": "body",
+        "template": "Saved"
+      }
+    }
+  ]
+}

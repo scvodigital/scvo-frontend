@@ -490,7 +490,7 @@ export class Helpers {
 
   static helper_sort(items: any[]) {
     if (!Array.isArray(items)) {
-      return null;
+      return items;
     }
     const out = items.sort();
     return out;

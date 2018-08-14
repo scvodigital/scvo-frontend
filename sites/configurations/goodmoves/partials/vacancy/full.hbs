@@ -189,18 +189,21 @@
       <div class="panel mdc-card--full-content mdc-typography--body1" role="tabpanel" aria-hidden="true" id="panel-3">
         <div class="text-field-container user-notes">
           {{#if @root.data.auth ~}}
-            <div class="mdc-text-field text-field mdc-text-field--fullwidth mdc-text-field--dense mdc-text-field--textarea" data-mdc-auto-init="MDCTextField">
-              <textarea class="mdc-text-field__input" data-user-notes="{{Id}}" data-autosize="true">{{{getProperty @root.data.notes Id}}}</textarea>
-              <label class="mdc-floating-label" for="user-notes">
-                Your notes
-              </label>
-            </div>
-            <div class="save-button-block">
-              <button type="button" class="mdc-button mdc-button--raised" data-user-notes="{{Id}}">
-                <span class="far fa-save mdc-list-item__graphic" aria-hidden="true"></span>
-                Save notes
-              </button>
-            </div>
+            <form action="/save-notes" method="POST" data-ajax-form="true" data-success-message="Note saved" data-failure-message="Failed to save note">
+              <div>
+                <label class="mdc-floating-label" for="user-notes">
+                  Your notes
+                </label>
+                <textarea class="mdc-text-field__input" data-simple-mde="true" name="notes">{{getProperty @root.data.notes Id}}</textarea>
+                <input type="hidden" name="id" value="{{Id}}">
+              </div>
+              <div class="save-button-block">
+                <button type="submit" class="mdc-button mdc-button--raised">
+                  <span class="far fa-save mdc-list-item__graphic" aria-hidden="true"></span>
+                  Save notes
+                </button>
+              </div>
+            </form>
           {{else}}
             <div class="detailed-info">
               <p class="mdc-typography--body1">

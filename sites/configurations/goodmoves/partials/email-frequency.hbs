@@ -1,6 +1,6 @@
 {{#if @root.data.auth}}
-  {{#if (length (filter @root.data.searches.items "subscribed" "===" 1))}}
-    {{#with @root.data.searches.items.[0]}}
+  {{#if (length (filter @root.data.searches.items.[0] "partitionActive" "===" 1))}}
+    {{#with @root.data.searches.items.[0].[0]}}
       <div class="mdc-form-field">
         <div class="mdc-radio">
           <input class="mdc-radio__native-control" type="radio" id="daily" name="frequency" {{#compare days "1234567"}}checked{{/compare}}>
@@ -55,7 +55,10 @@
           request.data[days[d]] = true;
         }
       } else if (evt.currentTarget.id === 'weekly') {
-        var day = new Date().getDay();
+        var day = new Date().getDay() + 2;
+        if (day > 7) {
+          day = 1;
+        }
         request.data[days[day]] = true;
       }
       $.ajax(request);

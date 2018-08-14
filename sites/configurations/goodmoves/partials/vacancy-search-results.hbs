@@ -103,13 +103,13 @@
               lng=@root.request.params.query.lng
               location=@root.request.params.query.location
             ) ~}}
-    {{#if (itemAt @root.data.searches.items (indexOf (map @root.data.searches.items (getProp 'querystring')) this)) ~}}
-    {{#with (itemAt @root.data.searches.items (indexOf (map @root.data.searches.items (getProp 'querystring')) this)) ~}}
+    {{#if (itemAt @root.data.searches.items.[0] (indexOf (map @root.data.searches.items.[0] (getProp 'querystring')) this)) ~}}
+    {{#with (itemAt @root.data.searches.items.[0] (indexOf (map @root.data.searches.items.[0] (getProp 'querystring')) this)) ~}}
     <header class="mdc-dialog__header">
       <h2 id="edit-search-dialog-label" class="mdc-dialog__header__title">
         Your search&ensp;
         <span class="mdc-typography--body1">
-          <strong>{{{name}}}</strong>
+          <strong>{{{partition}}}</strong>
         </span>
       </h2>
     </header>
@@ -122,14 +122,14 @@
         onMethod="POST"
         offMethod="POST"
         iconClasses="far fa-envelope"
-        on=subscribed
+        on=partitionActive
       }}
       {
         "onData": {
-          "name": {{{stringify ../name}}}
+          "name": {{{stringify ../partition}}}
         },
         "offData": {
-          "name": {{{stringify ../name}}}
+          "name": {{{stringify ../partition}}}
         }
       }
       {{/ajax_chip}}
@@ -168,15 +168,15 @@
         <script>
           document.addEventListener('DOMContentLoaded', function() {
             console.log('Current Query String:', {{{stringify this}}});
-            console.log('Saved Search Query Strings:', {{{stringify (map @root.data.searches.items (getProp 'querystring'))}}});
+            console.log('Saved Search Query Strings:', {{{stringify (map @root.data.searches.items.[0] (getProp 'querystring'))}}});
           });
         </script>
-        {{#if (itemAt @root.data.searches.items (indexOf (map @root.data.searches.items (getProp 'querystring')) this)) ~}}
-        {{#with (itemAt @root.data.searches.items (indexOf (map @root.data.searches.items (getProp 'querystring')) this))}}
+        {{#if (itemAt @root.data.searches.items.[0] (indexOf (map @root.data.searches.items.[0] (getProp 'querystring')) this)) ~}}
+        {{#with (itemAt @root.data.searches.items.[0] (indexOf (map @root.data.searches.items.[0] (getProp 'querystring')) this))}}
           <h3 class="mdc-typography--headline6">
             Your search&ensp;
             <span class="mdc-typography--body1">
-              <a name="#" data-dialog-target="#edit-search-dialog" style="cursor:pointer;">{{{name}}}</a>
+              <a name="#" data-dialog-target="#edit-search-dialog" style="cursor:pointer;">{{{partition}}}</a>
             </span>
           </h3>
           <!-- {{#> ajax_chip

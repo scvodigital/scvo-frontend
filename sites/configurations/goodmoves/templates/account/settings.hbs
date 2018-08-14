@@ -47,8 +47,8 @@
             Unsubscribe
           </h3>
           {{#ifAny
-            (compare (length (filter @root.data.searches.items "subscribed" "===" 1)) ">" 0)
-            @root.data.shortlist.items.[0].subscribed
+            (compare (length (filter @root.data.searches.items.[0] "partitionActive" "===" 1)) ">" 0)
+            @root.data.shortlist.items.[0].active
           }}
             <a href="/stop-all-emails" class="mdc-button mdc-button--raised mdc-button--fullwidth">
               <span class="far fa-envelope mdc-list-item__graphic" aria-hidden="true"></span>

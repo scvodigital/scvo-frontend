@@ -69,6 +69,56 @@ var GoodmovesController = Class.extend({
       color: $snackbar.css('color')
     });
 
+    // Ajax Forms
+    $('form[data-ajax-form][data-success-message][data-failure-message]').submit(function(evt) {
+      evt.preventDefault();
+      var $o = $(event.currentTarget);
+      var url = $o.attr('action');
+      var method = $o.attr('method') || 'GET';
+      var dataType = $o.attr('data-response-type') || 'html';
+      var successMessage = $o.attr('data-success-message');
+      var failureMessage = $o.attr('data-failure-message');
+      
+      var request = {
+        url: url,
+        method: method,
+        dataType: dataType,
+        success: function(data, status, xhr) {
+          goodmoves.snackbarShow({
+            message: successMessage
+          });
+        },
+        error: function(xhr, status, err) {
+          goodmoves.snackbarShow({
+            message: failureMessage,
+            backgroundColor: '#dd4b39'
+          });
+        }
+      };
+
+      if (method.toUpperCase() === 'GET') {
+        request.url += (request.url.indexOf('?') > -1 ? '&' : '') + $o.serialize();
+      } else {
+        var data = {};
+        var params = $o.serializeArray();
+        console.log('PARAMS:', params);
+        for (var p = 0; p < params.length; p++) {
+          var param = params[p];
+          if (!data.hasOwnProperty(param.name)) {
+            data[param.name] = param.value;
+          } else {
+            if (!$.isArray(data[param.name])) {
+              data[param.name] = [data[param.name]];
+            }
+            data[param.name].push(param.value);
+          }
+        }
+        request.data = data;
+      }
+      console.log('REQUEST:', request);
+      $.ajax(request);
+    });
+
     // Menu buttons
     $('[data-menu-target]').each(function(i, o) {
       var selector = $(o).attr('data-menu-target');

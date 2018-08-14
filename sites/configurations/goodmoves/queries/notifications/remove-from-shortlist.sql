@@ -1,7 +1,7 @@
-DELETE FROM subscriptionParameters
-WHERE
-  campaign = '{{@root.context.metaData.shortlistCampaignName}}' AND
-  email = '{{@root.data.auth.email}}' AND 
-  name = '{{@root.context.metaData.shortlistCampaignName}}' AND 
-  value = '{{@root.request.params.query.id}}';
-
+CALL _removeSubscriptionParameter(
+  '{{@root.data.auth.email}}', 
+  '{{@root.context.metaData.shortlistCampaignName}}', 
+  'Shortlist', 
+  'id', 
+  '{{@root.request.params.query.id}}'
+);

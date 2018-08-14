@@ -34,15 +34,23 @@
   {{/compare ~}}
 {{else}}
   {{#if home_based ~}}
+    {{#if regions ~}}
+      {
+        "exists": {
+          "field": "title"
+        }
+      },
+    {{/if ~}}
     {
       "term": {
         "home_based": true
       }
-    },
-  {{/if ~}}
-  {
-    "exists": {
-      "field": "title"
     }
-  }
+  {{else}}
+    {
+      "exists": {
+        "field": "title"
+      }
+    }
+  {{/if ~}}
 {{/ifAll ~}}
