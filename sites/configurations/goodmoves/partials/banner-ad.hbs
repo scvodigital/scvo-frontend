@@ -1,0 +1,9 @@
+{{#compare @root.data.supplimentaryResponses.banner.hits.total ">" 0 ~}}
+{{#with @root.data.supplimentaryResponses.banner.hits.hits.[0]._source ~}}
+<div class="x-items">
+  <a href="{{url}}" class="x-item mdc-theme--secondary-bg mdc-elevation--z1" target="_blank">
+    <img class="responsive-img" src="{{og_image}}" alt="{{title}}" height="90">
+  </a>
+</div>
+{{/with ~}}
+{{/compare ~}}

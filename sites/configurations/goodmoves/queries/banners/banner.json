@@ -1,0 +1,37 @@
+{
+  "size": 1,
+  "_source": [
+    "title",
+    "description",
+    "url",
+    "og_image"
+  ],
+  "query": {
+    "function_score": {
+      "query": {
+        "bool": {
+          "filter": [
+            {
+              "range": {
+                "start_at": {
+                  "lt": "now",
+                  "boost": 1
+                }
+              }
+            },
+            {
+              "range": {
+                "end_at": {
+                  "gt": "now",
+                  "boost": 1
+                }
+              }
+            }
+          ]
+        }
+      },
+      "random_score": {},
+      "boost_mode":"multiply"
+    }
+  }
+}
