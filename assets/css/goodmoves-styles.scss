@@ -2559,6 +2559,21 @@ form.inline-form {
   }
 }
 
+.faded-overflow {
+  overflow: hidden;
+  position: relative;
+  &:before {
+    margin-top: -1rem;
+    height: 1rem;
+    width: 100%;
+    background: linear-gradient(rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.3));
+    content: "";
+    display: block;
+    position: absolute;
+    top: 100%;
+  }
+}
+
 /*
 body.map {
 header#top-bar, footer.mdc-layout__footer {
