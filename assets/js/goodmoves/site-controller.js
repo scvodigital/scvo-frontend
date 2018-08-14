@@ -205,6 +205,7 @@ var GoodmovesController = Class.extend({
                   $(selector)[!selected ? 'removeClass' : 'addClass'](cssClass);
                 }
               }
+              $chip.find('.mdc-chip__icon--leading')[selected ? 'removeClass' : 'addClass']('mdc-chip__icon--leading-hidden');
               $chip.find('.mdc-chip__text').text(!selected ? options.onText : options.offText);
               chip.foundation.setSelected(!selected);
               $chip.data('disabled', false);
