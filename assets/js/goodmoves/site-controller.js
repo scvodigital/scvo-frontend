@@ -46,15 +46,22 @@ var GoodmovesController = Class.extend({
 
   displayModeChanged: function() {
     // console.log('Display Mode:', this.displayMode);
-    if (this.displayMode === 'desktop') {
-      //$('#sidebar-temporary')
-      //  .removeClass('mdc-drawer--temporary')
-      //  .addClass('mdc-drawer--permanent');
-    } else {
-      //$('#sidebar-temporary')
-      //  .removeClass('mdc-drawer--permanent')
-      //  .addClass('mdc-drawer--temporary');
-    }
+    var that = this;
+    $('.mdc-drawer--occasional').each(function(i, o) {
+      if (that.displayMode === 'desktop') {
+        //console.log(that.displayMode, o);
+        o.MDCTemporaryDrawer.destroy();
+        //$('#sidebar-temporary')
+        //  .removeClass('mdc-drawer--temporary')
+        //  .addClass('mdc-drawer--permanent');
+      } else {
+        //console.log(that.displayMode, o);
+        o.MDCTemporaryDrawer.initialize();
+        //$('#sidebar-temporary')
+        //  .removeClass('mdc-drawer--permanent')
+        //  .addClass('mdc-drawer--temporary');
+      }
+    });
   },
 
   setupComponents: function() {
