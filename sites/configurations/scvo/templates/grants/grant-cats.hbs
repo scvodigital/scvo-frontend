@@ -1,5 +1,6 @@
+{{#with @root.data.primaryResponse.hits.hits.[0]._source ~}}
 <div class="grant-charter">
-  {{> header_splash}}
+  {{> header_splash headerTextOverride=title headerTextCaptionOverride=recipient_name}}
   <div class="container-fluid">
     <ul class="breadcrumbs">
       <li><a href="/">Home</a></li>
@@ -7,14 +8,15 @@
       <li><a href="/running-your-organisation/funding">Funding</a></li>
       <li><a href="/running-your-organisation/funding/carers-act-transformation-support-fund">Carers Act Transformation Support (CATS) Fund </a></li>
       <li><a href="/running-your-organisation/funding/carers-act-transformation-support-fund/projects">Projects</a></li>
-      <li>{{{@root.data.primaryResponse.hits.hits.[0]._source.title}}}</li>
+      <li>{{{title}}}</li>
     </ul>
     <div class="mdc-layout-grid">
       <div class="mdc-layout-grid__inner">
         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 content grant-content">
-          {{{@root.data.primaryResponse.hits.hits.[0]._source.rendered.scvo_full}}}
+          {{{rendered.scvo_full}}}
         </div>
       </div>
     </div>
   </div>
 </div>
+{{/with ~}}
