@@ -1,6 +1,13 @@
 {
   "name": "_default",
   "pattern": "/*path",
+  "metaData": {
+    "sidebarButton": {
+      "icon": "search",
+      "tooltip": "Search",
+      "classes": "hide-md hide-lg"
+    }
+  },
   "tasks": [
     "metaData.commonTasks.authNotRequired",
     {
@@ -36,7 +43,8 @@
             "layout": ">context.metaData.handlebars.layouts.default",
             "parts": {
               "head": ">context.metaData.handlebars.templates.pages_page-head-tags",
-              "body": ">context.metaData.handlebars.templates.pages_page"
+              "body": ">context.metaData.handlebars.templates.pages_page",
+              "sidebar": ">context.metaData.handlebars.templates.vacancies_search-form"
             },
             "contentType": "text/html"
           }
