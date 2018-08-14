@@ -461,7 +461,7 @@ function initMap() {
   handleLocationBoxes();
 }
 $(document).ready(function() {
-  handleLocationBoxes();
+  //handleLocationBoxes();
 });
 
 function handleLocationBoxes() {
