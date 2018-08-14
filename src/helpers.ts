@@ -1,6 +1,7 @@
 import arrDiff = require('arr-diff');
 import deepDiff = require('deep-diff');
 import stripHtml = require('string-strip-html');
+import markdown = require('markdown');
 import * as dot from 'dot-object';
 import * as moment from 'moment';
 import * as querystring from 'querystring';
@@ -44,6 +45,15 @@ export class Helpers {
       return null;
     }
     return Object.keys(input);
+  }
+
+  static helper_markdown(input: string) {
+    if (!input) {
+      return '';
+    }
+
+    var html = markdown.markdown.toHTML(input);
+    return html;
   }
 
   static helper_firstItem(arr: any[]) {
