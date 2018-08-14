@@ -9,7 +9,7 @@
         {{#compare @root.route.name "===" "notes" ~}}
           {{{markdown (getProperty @root.data.notes Id)}}}
         {{else}}
-          <div style="height: {{limit}}px;" class="faded-overflow">
+          <div style="height: {{limit}};" class="faded-overflow">
           {{{markdown (truncate (getProperty @root.data.notes Id) limit)}}}
           </div>
           <a href="/vacancy/{{slug}}">Read more</a>
