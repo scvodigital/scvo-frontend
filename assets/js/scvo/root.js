@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
             switch (event.data.event) {
                 case ('resize'):
                     document.querySelector('iframe[src*="' + event.origin + '"]').style.height = (40+event.data.height) + 'px';
+                    window.scrollTo(0, 0);
                     break;
             }
         }
