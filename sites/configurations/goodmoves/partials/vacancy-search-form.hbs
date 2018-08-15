@@ -149,7 +149,7 @@
             <i class="far {{#if (getProperty @root.request.params.query this)}}fa-chevron-up{{else}}fa-chevron-down{{/if}}" aria-hidden="true"></i>
           </span>
         </h3>
-        <div id="{{../instance_id}}-{{this}}-collapse"{{#unless (getProperty @root.request.params.query this)}} class="mdc-drawer--occasional-ie11" style="display: none;"{{/unless}}>
+        <div class="mdc-drawer--occasional-ie11" id="{{../instance_id}}-{{this}}-collapse"{{#unless (getProperty @root.request.params.query this)}} style="display: none;"{{/unless}}>
           {{#compare this "===" "regions" ~}}
             {{#each @root.data.supplimentaryResponses.types.aggregations.countries.buckets ~}}
               {{#if key ~}}

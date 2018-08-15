@@ -9,11 +9,16 @@ var GoodmovesController = Class.extend({
   ],
   snackbar: null,
   maps: {},
+  ie: false,
 
   init: function(firebaseConfig) {
     this.firebaseConfig = firebaseConfig;
     this.setupComponents();
     this.setupFirebase();
+
+    if (navigator.appName.indexOf('Microsoft') > -1 || navigator.userAgent.indexOf('Trident') > -1) {
+      this.ie = true;
+    }
 
     var that = this;
     $(window).on('resize', function() {
@@ -42,6 +47,7 @@ var GoodmovesController = Class.extend({
       this.displayMode = newDisplayMode;
       this.displayModeChanged();
     }
+    this.fie();
   },
 
   displayModeChanged: function() {
@@ -49,18 +55,27 @@ var GoodmovesController = Class.extend({
     var that = this;
     $('.mdc-drawer--occasional').each(function(i, o) {
       if (that.displayMode === 'desktop') {
-        //console.log(that.displayMode, o);
+        console.log(that.displayMode, o);
         o.MDCTemporaryDrawer.destroy();
         //$('#sidebar-temporary')
         //  .removeClass('mdc-drawer--temporary')
         //  .addClass('mdc-drawer--permanent');
       } else {
-        //console.log(that.displayMode, o);
+        console.log(that.displayMode, o);
         o.MDCTemporaryDrawer.initialize();
         //$('#sidebar-temporary')
         //  .removeClass('mdc-drawer--permanent')
         //  .addClass('mdc-drawer--temporary');
       }
+    });
+  },
+
+  fie: function() {
+    if (!this.ie) return;
+    $('.mdc-drawer--occasional .mdc-drawer__drawer').each(function(i, o) {
+      var $o = $(o);
+      var parentHeight = $o.parent().height();
+      $o.css('height', parentHeight);
     });
   },
 
