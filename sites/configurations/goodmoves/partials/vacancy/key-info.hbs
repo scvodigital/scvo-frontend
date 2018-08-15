@@ -26,6 +26,20 @@
       </p>
     </div> -->
     <ul class="fa-ul first">
+      {{#if role_status_list ~}}
+      <li class="mdc-card__info--vacancy-status mdc-typography--body1">
+        <span class="fa-li"><span class="far fa-clock fa-fw" title="Status"></span></span>
+        {{role_status_list}}
+      </li>
+      {{/if ~}}
+      {{#if salary ~}}
+      <li class="mdc-card__info--vacancy-salary mdc-typography--body1">
+        <span class="fa-li"><span class="far fa-calculator fa-fw" title="Salary"></span></span>
+        {{{trim salary}}}
+      </li>
+      {{/if ~}}
+    </ul>
+    <ul class="fa-ul last">
       {{#if location ~}}
       <li class="mdc-card__info--vacancy-location mdc-typography--body1">
         <span class="fa-li"><span class="far fa-map-marker-alt fa-fw" title="Location"></span></span>
@@ -37,20 +51,6 @@
         <span class="fa-li"><span class="far fa-calendar-alt fa-fw" title="Closing date"></span></span>
         Closing
         {{{momentFormat (moment closing_date "x") "Do MMMM YYYY"}}}
-      </li>
-      {{/if ~}}
-    </ul>
-    <ul class="fa-ul last">
-      {{#if role_status_list ~}}
-      <li class="mdc-card__info--vacancy-status mdc-typography--body1">
-        <span class="fa-li"><span class="far fa-clock fa-fw" title="Status"></span></span>
-        {{role_status_list}}
-      </li>
-      {{/if ~}}
-      {{#if salary ~}}
-      <li class="mdc-card__info--vacancy-salary mdc-typography--body1">
-        <span class="fa-li"><span class="far fa-calculator fa-fw" title="Salary"></span></span>
-        {{{trim salary}}}
       </li>
       {{/if ~}}
     </ul>
