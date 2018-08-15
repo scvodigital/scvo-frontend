@@ -364,27 +364,92 @@ footer h3,
   background-color: $mdc-theme-primary;
 }
 
-.login-form {
-  margin: 10vh auto;
+.sign-in-form {
+  padding: $unit*1.5 0;
   .mdc-card {
+    // min-height: 40vh;
+    max-width: 500px;
+    margin: 0 auto;
     position: relative;
+    padding: $unit;
+    background-color: rgba(255, 255, 255, 0.6);
   }
-  #login-message {
+  .mdc-text-field {
+    margin: 0 0 $unit;
+  }
+  .mdc-button {
+    margin-bottom: 0;
+  }
+  .middle-line-text {
+    margin: $unit*2 0 $unit;
+    border-bottom: 2px solid #dfdfdf;
+    line-height: 0;
+    text-align: center;
+    vertical-align: middle;
+    span {
+      background-color: $mdc-theme-secondary-light;
+      padding: $unit;
+      color: #555;
+    }
+  }
+  .mdc-button {
+    position: relative;
+    display: block;
+    margin-bottom: $unit/2;
+    width: 100%;
+    color: white;
+    width: 100%;
+    color: white;
+    line-height: $unit*3;
+    height: $unit*3;
+    .fa-2x {
+      position: absolute;
+      top: .6rem;
+      left: .5rem;
+    }
+  }
+  #sign-in-message,
+  #sign-up-message {
     display: none;
   }
+}
+#sign-out-loader {
+  display: flex;
 }
 
 .card-loader {
   position: absolute;
   height: 100%;
   width: 100%;
-  background-color: $mdc-theme-complimentary-light;
+  top: 0;
+  left: 0;
+  background-color: $mdc-theme-secondary-light;
   opacity: 0.7;
   display: none;
-  align-items: center;
-  justify-content: center;
   .card-loader-inner {
+    color: $mdc-theme-primary-dark;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 100%;
   }
+}
+
+.provider-google.mdc-chip--selected,
+.provider-google.mdc-chip--selected:hover,
+#continue-with-google {
+  background-color: #DB3633 !important;
+}
+.provider-twitter.mdc-chip--selected,
+.provider-twitter.mdc-chip--selected:hover,
+#continue-with-twitter {
+  background-color: #007DA3 !important;
+}
+.provider-facebook.mdc-chip--selected,
+.provider-facebook.mdc-chip--selected:hover,
+#continue-with-facebook {
+  background-color: #2C5797 !important;
 }
 
 .fundingscotland-page {

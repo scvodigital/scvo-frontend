@@ -83,7 +83,7 @@ var FundingScotlandController = Class.extend({
         console.log('User logged in', user);
         that.uid = user.uid;
         user.getIdToken().then(function(idToken) {
-          that.setCookie('gm_token', idToken, 7);
+          that.setCookie('fs_token', idToken, 7);
           that.getUserProfile(user, function() {});
         });
       } else {

@@ -2,16 +2,15 @@
   <!-- <div class="banner-search overlay" style="background-image: url('{{#if data.supplimentaryResponses.splash.hits.hits.[0]._source.original_image}}{{data.supplimentaryResponses.splash.hits.hits.[0]._source.original_image}}{{/if}}');"> -->
   <div class="banner-search overlay" style="background-image: url('http://cms.scvo.org/wp-content/uploads/2018/03/THEGATHERING-22.02.18_0366.jpg');">
     <div class="content page-content">
-      <!-- <div class="mdc-typography--headline5">Charity and voluntary sector recruitment</div> -->
       <div class="overlay-content">
         <div class="mdc-layout-grid">
           <div class="mdc-layout-grid__inner">
             <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone">
-              <h1 class="header-text">
+              <!-- <h1 class="header-text">
                 <span class="header-text-banner">
                   <span class="normal welcome">Welcome to</span><br /><span class="normal brand">Funding Scotland</span>
                 </span>
-              </h1>
+              </h1> -->
               <p class="header-extra">
                 Find funding for your charity, community group or social enterprise using our free online search engine. From small grants to funding for big capital projects, we can help you track down the funding you need to make a difference in your community.
               </p>
@@ -19,68 +18,62 @@
           </div>
         </div>
       </div>
-      <form id="search-view" class="search-form mdc-elevation--z5" action="/search" method="GET">
-        <input type="hidden" name="lat" value="">
-        <input type="hidden" name="lng" value="">
-        <div class="mdc-layout-grid">
-          <div class="mdc-layout-grid__inner">
-            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-10-desktop mdc-layout-grid__cell--span-7-tablet mdc-layout-grid__cell--span-4-phone">
-              <div class="mdc-text-field mdc-text-field--box mdc-text-field--with-leading-icon mdc-text-field-tt" data-mdc-auto-init="MDCTextField">
-                <span class="far fa-search mdc-text-field__icon" tabindex="0" role="button"></span>
-                <input type="text" id="what-jobs" name="keywords" class="mdc-text-field__input">
-                <label for="what-jobs" class="mdc-floating-label">
-                  Keywords
-                </label>
-                <div class="mdc-line-ripple"></div>
+      {{#if @root.data.auth ~}}
+        <form id="search-view" class="search-form mdc-elevation--z5" action="/search" method="GET">
+          <input type="hidden" name="lat" value="">
+          <input type="hidden" name="lng" value="">
+          <div class="mdc-layout-grid">
+            <div class="mdc-layout-grid__inner">
+              <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-10-desktop mdc-layout-grid__cell--span-7-tablet mdc-layout-grid__cell--span-4-phone">
+                <div class="mdc-text-field mdc-text-field--box mdc-text-field--with-leading-icon mdc-text-field-tt" data-mdc-auto-init="MDCTextField">
+                  <span class="far fa-search mdc-text-field__icon" tabindex="0" role="button"></span>
+                  <input type="text" id="keywords" name="keywords" class="mdc-text-field__input">
+                  <label for="keywords" class="mdc-floating-label">
+                    Keywords
+                  </label>
+                  <div class="mdc-line-ripple"></div>
+                </div>
+              </div>
+              <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-2-desktop mdc-layout-grid__cell--span-1-tablet mdc-layout-grid__cell--span-4-phone">
+                <button type="submit" id="search-funds" class="mdc-button mdc-button--raised mdc-text-field--box mdc-button--search mdc-ripple-surface mdc-ripple-surface--primary" data-mdc-auto-init="MDCRipple">
+                  Search
+                  <span class="far fa-search" aria-hidden="true"></span>
+                </button>
               </div>
             </div>
-            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-2-desktop mdc-layout-grid__cell--span-1-tablet mdc-layout-grid__cell--span-4-phone">
-              <button type="submit" id="search-jobs" class="mdc-button mdc-button--raised mdc-text-field--box mdc-button--search mdc-ripple-surface mdc-ripple-surface--primary" data-mdc-auto-init="MDCRipple">
-                Search
-                <span class="far fa-search" aria-hidden="true"></span>
-              </button>
+            <div class="mdc-layout-grid__inner">
+              <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-7-tablet mdc-layout-grid__cell--span-4-phone">
+                <div id="search-terms" class="mdc-chip-set"></div>
+              </div>
             </div>
           </div>
+        </form>
+      {{else}}
+        <div class="mdc-layout-grid">
           <div class="mdc-layout-grid__inner">
-            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-10-desktop mdc-layout-grid__cell--span-7-tablet mdc-layout-grid__cell--span-4-phone">
-              <div id="search-terms" class="mdc-chip-set"></div>
+            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-2-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
             </div>
-            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-2-desktop mdc-layout-grid__cell--span-1-tablet mdc-layout-grid__cell--span-4-phone">
-              <div class="extra-options">
-                <a href="/browse">Browse</a><span class="noselect"> | </span><a href="/search">Advanced</a>
-              </div>
+            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
+              {{> account_sign_in}}
+            </div>
+            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
+              {{> account_sign_up}}
             </div>
           </div>
         </div>
-      </form>
+      {{/if ~}}
     </div>
   </div>
 
-  <div class="mdc-layout-grid home-jobs">
+  <div class="mdc-layout-grid home-funds">
     <div class="mdc-layout-grid__inner">
-      <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone v-margin-full latest-jobs">
+      <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone v-margin-full latest-funds">
         <div class="mdc-typography--headline5 v-margin-full">
           Latest funds
         </div>
         {{#each data.primaryResponse.hits.hits ~}}
         {{> fund_mini _source}}
         {{/each ~}}
-      </div>
-      <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone v-margin-full top-jobs">
-        <div class="mdc-typography--headline5 v-margin-full">
-
-        </div>
-        {{#each data.supplimentaryResponses.top.hits.hits ~}}
-        {{> fund_mini _source}}
-        {{/each ~}}
-      </div>
-      <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone v-margin-full shortlist">
-        <div class="mdc-typography--headline5 v-margin-full">
-          Shortlist &amp; notes
-        </div>
-        <p>
-          There are currently no jobs in your shortlist, if you star or write notes on a job it will appear here for easy reference.
-        </p>
       </div>
     </div>
   </div>

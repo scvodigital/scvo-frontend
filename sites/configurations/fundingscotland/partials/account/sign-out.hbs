@@ -1,0 +1,21 @@
+  <form id="sign-out-form" method="POST" class="sign-out-form">
+    <div class="mdc-card">
+      <div class="mdc-card__info--fund">
+        <div class="mdc-card__info--fund-title mdc-typography--headline4">
+          Signing out&hellip;
+        </div>
+      </div>
+    </div>
+  </form>
+  <script>
+    document.addEventListener("DOMContentLoaded", function(event) {
+      window.setTimeout(function() {
+        fundingscotland.app.auth().signOut().then(function() {
+          window.location.href = '/';
+          fundingscotland.setCookie('fs_token');
+        }).catch(function(err) {
+          console.error('Error logging out:', err);
+        });
+      }, 1000);
+    });
+  </script>

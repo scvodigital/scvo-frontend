@@ -1,8 +1,8 @@
-  <form id="logout-form" method="POST" class="logout-form">
+  <form id="sign-out-form" method="POST" class="sign-out-form">
     <div class="mdc-card">
       <div class="mdc-card__info--fund">
         <div class="mdc-card__info--fund-title mdc-typography--headline4">
-          Logging out&hellip;
+          You are not signed in&hellip;
         </div>
       </div>
     </div>
@@ -12,7 +12,7 @@
       window.setTimeout(function() {
         fundingscotland.app.auth().signOut().then(function() {
           window.location.href = '/';
-          fundingscotland.setCookie('gm_token');
+          fundingscotland.setCookie('fs_token');
         }).catch(function(err) {
           console.error('Error logging out:', err);
         });
