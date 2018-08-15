@@ -1,11 +1,11 @@
 <div class="mdc-card goodmoves-vacancy list{{if top_job " top-job"}}" data-vacancy-id="{{Id}}">
   {{> vacancy_key_info}}
   <hr class="mdc-list-divider" />
-  {{#if description_short ~}}
-    <div class="search-result-article__snippet mdc-typography--body1">
-      {{{description_short}}}
-    </div>
-  {{/if}}
-  {{> vacancy_notes}}
-  {{> vacancy_actions}}
+  {{#compare (trim (getProperty @root.data.notes Id)) "!==" "" ~}}
+    {{> vacancy_description limit="4rem" description=description}}
+    {{> vacancy_notes limit="5rem"}}
+  {{else}}
+    {{> vacancy_description limit="8rem" description=description}}
+  {{/compare ~}}
+  {{> vacancy_actions slug=slug Id=Id home_based=home_based distance=distance}}
 </div>

@@ -1170,7 +1170,7 @@ a {
     margin: $unit/2 0 $unit/2 $unit/2;
   }
   .mdc-card__info--vacancy {
-    .fa-ul.last {
+    .mdc-card__info--vacancy-closing {
       display: none;
     }
   }
@@ -2044,6 +2044,9 @@ footer,
   }
 }
 @media screen and (max-width: $mobile-breakpoint) {
+  .search-info .pull-right {
+    display: none;
+  }
   header .container-fluid .mdc-top-app-bar__title svg {
     margin-top: $unit;
   }
@@ -2677,14 +2680,19 @@ form.inline-form {
   overflow: hidden;
   position: relative;
   &:before {
+    display: block;
     margin-top: -$unit*2.5;
     height: $unit*2.5;
     width: 100%;
-    background: linear-gradient(rgba(236, 242, 233, 0), rgba(236, 242, 233, 1));
     content: "";
-    display: block;
     position: absolute;
     top: 100%;
+    background: linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 1));
+  }
+}
+.search-result-article__notes .faded-overflow {
+  &:before {
+    background: linear-gradient(rgba(236, 242, 233, 0), rgba(236, 242, 233, 1));
   }
 }
 
