@@ -1167,7 +1167,7 @@ a {
     padding: $unit/3 $unit;
   }
   .mdc-card__media--organisation {
-    margin: $unit/2 0 $unit/2 $unit/2;
+    margin: $unit/2 0 $unit/2 $unit;
   }
   .mdc-card__info--vacancy {
     .mdc-card__info--vacancy-closing {
@@ -1695,6 +1695,11 @@ body {
     }
   }
 }
+.mdc-card__info--organisation-row {
+  .mdc-card__media--organisation {
+    margin: 0;
+  }
+}
 .goodmoves-organisation {
   .mdc-card.list {
     .mdc-card__media--organisation {
@@ -1728,7 +1733,7 @@ body {
       align-items: flex-start;
       mix-blend-mode: multiply;
       // max-width: 200px;
-      margin-top: $unit/2;
+      // margin-top: $unit/2;
     }
     .mdc-card__media--organisation::before {
       margin-top: 0;
@@ -2044,6 +2049,7 @@ footer,
   }
 }
 @media screen and (max-width: $mobile-breakpoint) {
+  .scroll-icon,
   .search-info .pull-right {
     display: none;
   }
@@ -2098,6 +2104,13 @@ footer,
     .mdc-card__media--organisation::before {
       margin: 0;
     }
+  }
+  .mdc-card__action-buttons + .mdc-card__action-icons,
+  .mdc-card .mdc-card__actions .mdc-card__action-buttons {
+    margin-left: 0;
+  }
+  .mdc-card .mdc-card__actions .mdc-card__action {
+    margin-right: $unit/2;
   }
   #search-view {
     padding-top: $unit;
