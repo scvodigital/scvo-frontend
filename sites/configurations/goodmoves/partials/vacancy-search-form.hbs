@@ -143,13 +143,13 @@
       </div> -->
 
       {{#each (split "statuses,regions,roles,sectors" ",")}}
-        <h3 class="mdc-drawer__content-heading cursor-pointer noselect" data-collapse-target="#{{../instance_id}}-{{this}}-collapse" role="button" aria-pressed="false" aria-label="Show {{getProperty @root.context.metaData.termTypeLabels (concat this ".plural")}}" tabindex="0">
+        <h3 class="mdc-drawer__content-heading cursor-pointer noselect mdc-drawer--occasional-ie11" data-collapse-target="#{{../instance_id}}-{{this}}-collapse" role="button" aria-pressed="false" aria-label="Show {{getProperty @root.context.metaData.termTypeLabels (concat this ".plural")}}" tabindex="0">
           {{getProperty @root.context.metaData.termTypeLabels (concat this ".plural")}}
           <span class="mdc-icon-toggle pull-right">
             <i class="far {{#if (getProperty @root.request.params.query this)}}fa-chevron-up{{else}}fa-chevron-down{{/if}}" aria-hidden="true"></i>
           </span>
         </h3>
-        <div id="{{../instance_id}}-{{this}}-collapse"{{#unless (getProperty @root.request.params.query this)}} style="display: none;"{{/unless}}>
+        <div id="{{../instance_id}}-{{this}}-collapse"{{#unless (getProperty @root.request.params.query this)}} class="mdc-drawer--occasional-ie11" style="display: none;"{{/unless}}>
           {{#compare this "===" "regions" ~}}
             {{#each @root.data.supplimentaryResponses.types.aggregations.countries.buckets ~}}
               {{#if key ~}}
@@ -177,7 +177,7 @@
         </div>
       {{/each}}
 
-      <div class="h-margin v-margin">
+      <div class="h-margin v-margin mdc-drawer--occasional-ie11">
         <button class="mdc-button mdc-button--raised mdc-button--large mdc-button--fullwidth mdc-ripple-surface mdc-ripple-surface--primary" type="submit" id="{{instance_id}}-search-submit" data-mdc-auto-init="MDCRipple">
           <span class="far fa-search fa-fw mdc-list-item__graphic" aria-hidden="true"></span>
           Search
