@@ -686,6 +686,7 @@ a:hover {
 }
 
 .mdc-chip-set {
+  padding: 0;
   .v-margin {
     display: block;
     width: 100%;
@@ -1068,11 +1069,11 @@ a {
     }
   }
 }
-.goodmoves-vacancy-inactive.mdc-card,
-.goodmoves-vacancy-not-published.mdc-card,
-.goodmoves-vacancy-closed.mdc-card {
-  border-top: none !important;
-}
+// .goodmoves-vacancy-inactive.mdc-card,
+// .goodmoves-vacancy-not-published.mdc-card,
+// .goodmoves-vacancy-closed.mdc-card {
+//   border-top: none !important;
+// }
 .goodmoves-vacancy.mdc-card.list,
 .goodmoves-vacancy.mdc-card.gist,
 .goodmoves-vacancy.mdc-card.mini {
@@ -1144,6 +1145,14 @@ a {
   .panel-heading {
     padding: $unit/3 $unit;
   }
+  .mdc-card__media--organisation {
+    margin: $unit/2 0 $unit/2 $unit/2;
+  }
+  .mdc-card__info--vacancy {
+    .fa-ul.last {
+      display: none;
+    }
+  }
 }
 .mdc-card.full {
   .panel-heading {
@@ -1160,6 +1169,19 @@ a {
     margin: $unit/2 0 $unit;
     small {
       font-size: 0.92rem;
+    }
+  }
+  .mdc-card__info--vacancy {
+    .fa-ul {
+      float: left;
+    }
+    .fa-ul.first {
+      clear: left;
+      width: 18vw;
+    }
+    .fa-ul.last {
+      width: 16vw;
+      margin-left: 2.5rem !important;
     }
   }
   .mdc-card__info--vacancy-title a,
@@ -1576,6 +1598,11 @@ body {
 
 .mdc-card {
   padding: 0;
+  .mdc-card__info--vacancy {
+    .mdc-layout-grid__inner {
+      grid-gap: 0;
+    }
+  }
   .mdc-card__info--organisation-row,
   .mdc-card__info--vacancy-row {
     display: flex;
@@ -1618,11 +1645,11 @@ body {
         margin-bottom: $unit/2;
       }
     }
-    .fa-ul.last {
-      li:last-child {
-        margin-bottom: 0;
-      }
-    }
+    // .fa-ul.last {
+    //   li:last-child {
+    //     margin-bottom: 0;
+    //   }
+    // }
     .mdc-card__info--vacancy-title a:hover {
       text-decoration: none;
       .hover-underline {
@@ -1692,10 +1719,10 @@ body {
     .mdc-card__media--organisation {
       align-items: flex-start;
       mix-blend-mode: multiply;
-      max-width: 200px;
+      // max-width: 200px;
       margin-top: $unit/2;
     }
-    .mdc-card__media--square::before {
+    .mdc-card__media--organisation::before {
       margin-top: 0;
     }
   }
@@ -2031,7 +2058,7 @@ footer,
       display: block;
       margin: 1rem auto 0;
     }
-    .mdc-card__media--square::before {
+    .mdc-card__media--organisation::before {
       margin: 0;
     }
   }
@@ -2663,7 +2690,7 @@ background-color: #42842A;
     padding-top: $header-upper-height;
   }
   .hide-sm {
-    display: none;
+    display: none !important;
   }
 }
 
@@ -2672,7 +2699,7 @@ background-color: #42842A;
 
 @media screen and (min-width: $mobile-breakpoint + 1) and (max-width: $mobile-landscape-breakpoint) {
   .hide-md {
-    display: none;
+    display: none !important;
   }
   .mdc-top-app-bar {
     height: $header-upper-height;
@@ -2684,7 +2711,7 @@ background-color: #42842A;
 
 @media screen and (min-width: $mobile-landscape-breakpoint + 1) {
   .hide-lg {
-    display: none;
+    display: none !important;
   }
 
   .mdc-drawer--occasional {
