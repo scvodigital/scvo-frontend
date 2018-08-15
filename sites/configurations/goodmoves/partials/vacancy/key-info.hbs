@@ -1,6 +1,13 @@
 {{>vacancy_status}}
 <div class="mdc-card__info--vacancy-row">
   <div class="mdc-card__info--vacancy">
+    {{#if organisation.has_logo ~}}
+    <div class="mdc-card__media mdc-card__media--organisation pull-right hide-sm">
+      <a href="/organisation/{{organisation.slug}}{{@root.request.url.search}}">
+        <img src="{{organisation.logo_url}}" alt="{{organisation.name}}" />
+      </a>
+    </div>
+    {{/if ~}}
     <h2 class="mdc-card__info--vacancy-title mdc-typography--headline5">
       <a href="/vacancy/{{slug}}{{@root.request.url.search}}">
         {{#if top_job}}<span class="top-job">Top job!</span>{{/if}}
@@ -18,53 +25,34 @@
         {{#compare (trim location) "===" ""}}This is a {{lowercase role_status_list}} position{{else}}This {{lowercase role_status_list}} position is based in {{trim (replace location "Based in" "")}}{{/compare}}{{#compare salary "!==" "TBC"}}{{#compare (trim salary) "!==" "Unpaid"}}{{#compare (trim salary) "!==" "Sessional"}}, with a salary of {{{trim (lowercase salary)}}}{{/compare}}{{else}} and is unpaid{{/compare}}{{/compare}}. The closing date for applications is the {{{momentFormat (moment closing_date "x") "Do \o\f MMMM YYYY"}}}.
       </p>
     </div> -->
-    <div class="mdc-layout-grid">
-      <div class="mdc-layout-grid__inner">
-        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone">
-          <ul class="fa-ul first">
-            {{#if location ~}}
-            <li class="mdc-card__info--vacancy-location mdc-typography--body1">
-              <span class="fa-li"><span class="far fa-map-marker-alt fa-fw" title="Location"></span></span>
-              {{location}}
-            </li>
-            {{/if ~}}
-            {{#if role_status_list ~}}
-            <li class="mdc-card__info--vacancy-status mdc-typography--body1">
-              <span class="fa-li"><span class="far fa-clock fa-fw" title="Status"></span></span>
-              {{role_status_list}}
-            </li>
-            {{/if ~}}
-          </ul>
-        </div>
-        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone">
-          <ul class="fa-ul last">
-            {{#if salary ~}}
-            <li class="mdc-card__info--vacancy-salary mdc-typography--body1">
-              <span class="fa-li"><span class="far fa-calculator fa-fw" title="Salary"></span></span>
-              {{{trim salary}}}
-            </li>
-            {{/if ~}}
-            {{#if closing_date ~}}
-            <li class="mdc-card__info--vacancy-closing mdc-typography--body1">
-              <span class="fa-li"><span class="far fa-calendar-alt fa-fw" title="Closing date"></span></span>
-              {{#compare vacancy_status "===" "vacancy-closed" ~}}
-              Closed
-              {{else}}
-              Closing
-              {{/compare ~}}
-              {{{momentFormat (moment closing_date "x") "Do MMMM YYYY"}}}
-            </li>
-            {{/if ~}}
-          </ul>
-        </div>
-      </div>
-    </div>
+    <ul class="fa-ul first">
+      {{#if location ~}}
+      <li class="mdc-card__info--vacancy-location mdc-typography--body1">
+        <span class="fa-li"><span class="far fa-map-marker-alt fa-fw" title="Location"></span></span>
+        {{location}}
+      </li>
+      {{/if ~}}
+      {{#if closing_date ~}}
+      <li class="mdc-card__info--vacancy-closing mdc-typography--body1">
+        <span class="fa-li"><span class="far fa-calendar-alt fa-fw" title="Closing date"></span></span>
+        Closing
+        {{{momentFormat (moment closing_date "x") "Do MMMM YYYY"}}}
+      </li>
+      {{/if ~}}
+    </ul>
+    <ul class="fa-ul last">
+      {{#if role_status_list ~}}
+      <li class="mdc-card__info--vacancy-status mdc-typography--body1">
+        <span class="fa-li"><span class="far fa-clock fa-fw" title="Status"></span></span>
+        {{role_status_list}}
+      </li>
+      {{/if ~}}
+      {{#if salary ~}}
+      <li class="mdc-card__info--vacancy-salary mdc-typography--body1">
+        <span class="fa-li"><span class="far fa-calculator fa-fw" title="Salary"></span></span>
+        {{{trim salary}}}
+      </li>
+      {{/if ~}}
+    </ul>
   </div>
-  {{#if organisation.has_logo ~}}
-  <div class="mdc-card__media mdc-card__media--square mdc-card__media--organisation hide-sm">
-    <a href="/organisation/{{organisation.slug}}">
-      <img src="{{organisation.logo_url}}" alt="{{organisation.name}}" />
-    </a>
-  </div>
-  {{/if ~}}
 </div>
