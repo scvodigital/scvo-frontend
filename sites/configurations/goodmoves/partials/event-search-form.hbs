@@ -1,8 +1,8 @@
 <div class="mdc-drawer__content">
-  <h2 class="mdc-drawer__content-heading hide-sm">Search SCVO training courses</h2>
+  <h2 class="mdc-drawer__content-heading hide-sm mdc-drawer--occasional-ie11">Search SCVO training courses</h2>
   <form action="/training" method="GET">
     <div class="h-padding">
-      <div class="mdc-text-field mdc-text-field--box mdc-text-field--with-leading-icon" data-mdc-auto-init="MDCTextField">
+      <div class="mdc-text-field mdc-text-field--box mdc-text-field--with-leading-icon mdc-drawer--occasional-ie11" data-mdc-auto-init="MDCTextField">
         <span class="far fa-search mdc-text-field__icon" tabindex="0" role="button"></span>
         <input type="text" id="{{instance_id}}-keywords" name="keywords" class="mdc-text-field__input mdc-text-field--fullwidth" value="{{@root.request.params.query.keywords}}">
         <label class="mdc-floating-label mdc-floating-label--float-above" for="keywords">
@@ -11,7 +11,7 @@
         <div class="mdc-line-ripple"></div>
       </div>
     </div>
-    <div class="h-margin v-margin">
+    <div class="h-margin v-margin mdc-drawer--occasional-ie11">
       <button class="mdc-button mdc-button--raised mdc-button--fullwidth" type="submit" id="{{instance_id}}-search-submit">
         <span class="far fa-search fa-fw mdc-list-item__graphic" aria-hidden="true"></span>
         Search
