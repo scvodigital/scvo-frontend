@@ -351,21 +351,21 @@ if(location.host.indexOf('.local') > -1){
                     </li>
                   </ul>
                 </div>
-                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone info">
-                  <h3>Information</h3>
-                  <ul class="mdc-list">
-                    {{#each @root.context.metaData.menus.footer-info ~}}
-                    <li class="mdc-list-item">
-                      <a href="{{path}}">{{{label}}}</a>
-                    </li>
-                    {{/each ~}}
-                  </ul>
-                  <div id="google_translate_element"></div>
-                </div>
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone help">
                   <h3>Help</h3>
                   <ul class="mdc-list">
                     {{#each @root.context.metaData.menus.footer-help ~}}
+                    <li class="mdc-list-item">
+                      <a href="{{path}}">{{{label}}}</a>
+                    </li>
+                    {{/each ~}}
+                    <div id="google_translate_element"></div>
+                  </ul>
+                </div>
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone info">
+                  <h3>Information</h3>
+                  <ul class="mdc-list">
+                    {{#each @root.context.metaData.menus.footer-info ~}}
                     <li class="mdc-list-item">
                       <a href="{{path}}">{{{label}}}</a>
                     </li>
