@@ -1,3 +1,4 @@
+{{#if @root.data.auth ~}}
 {{> fund_search_form}}
 
 <div class="container-content fundingscotland-organisation">
@@ -28,3 +29,6 @@
   </p>
   {{/compare}}
 </div>
+{{else}}
+{{> account_redirect_home}}
+{{/if ~}}
