@@ -1011,7 +1011,7 @@ a {
     padding: $unit;
   }
   .mdc-card__media--organisation {
-    margin-right: $unit;
+    // margin-right: $unit;
   }
   .search-result-article__snippet,
   .search-result-article__notes {
@@ -1067,6 +1067,11 @@ a {
     .mdc-chip.mdc-chip--selected {
       background-color: $mdc-theme-primary-dark;
     }
+  }
+}
+.goodmoves-vacancy.mdc-card.gist {
+  .mdc-card__action-icons {
+    display: none;
   }
 }
 // .goodmoves-vacancy-inactive.mdc-card,
@@ -2025,6 +2030,19 @@ footer,
     background-image: linear-gradient(60deg, rgba(66, 132, 42, 0.89), rgba(66, 132, 42, 0.91) 66%, transparent 66.08%, transparent);
   }
 }
+@media screen and (max-width: $mobile-landscape-breakpoint) {
+  .mdc-card.full,
+  .mdc-card.search-result {
+    .mdc-card__info--vacancy {
+      .fa-ul.first {
+        width: 30vw;
+      }
+      .fa-ul.last {
+        width: 25vw;
+      }
+    }
+  }
+}
 @media screen and (max-width: $mobile-breakpoint) {
   header .container-fluid .mdc-top-app-bar__title svg {
     margin-top: $unit;
@@ -2051,6 +2069,19 @@ footer,
       .header-extra {
         font-size: 1.1rem;
         padding: $unit/4 0;
+      }
+    }
+  }
+  .mdc-card.full,
+  .mdc-card.search-result {
+    .mdc-card__info--vacancy {
+      .fa-ul {
+        float: none;
+      }
+      .fa-ul.first,
+      .fa-ul.last {
+        width: auto;
+        margin-left: 1.65rem !important;
       }
     }
   }

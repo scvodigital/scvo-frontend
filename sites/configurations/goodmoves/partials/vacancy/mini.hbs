@@ -1,18 +1,4 @@
 <div class="mdc-card goodmoves-vacancy mini{{if top_job " top-job"}}" data-vacancy-id="{{Id}}">
   {{> vacancy_key_info}}
-  <div class="mdc-card__actions">
-    <div class="mdc-card__action-buttons demo-card__action-buttons--text-only mdc-card__actions--full-bleed">
-      <a href="/vacancy/{{slug}}{{@root.request.url.search}}" class="mdc-card__action hide-sm">Find out more</a>
-      <a href="/vacancy/{{slug}}{{@root.request.url.search}}" class="mdc-card__action hide-md hide-lg"><span class="fal fa-info-circle fa-fw fa-2x" aria-hidden="true"></span></a>
-      {{#compare (trim (getProperty @root.data.notes Id)) "!==" "" ~}}
-      <a href="/vacancy/{{slug}}{{@root.request.url.search}}#notes" class="mdc-card__action hide-sm">Your notes</a>
-      <a href="/vacancy/{{slug}}{{@root.request.url.search}}#notes" class="mdc-card__action hide-md hide-lg"><span class="fal fa-edit fa-fw fa-2x" aria-hidden="true"></span></a>
-      {{/compare ~}}
-    </div>
-    <div class="mdc-card__action-icons pull-right">
-      <div class="mdc-chip-set mdc-chip-set--filter">
-        {{> shortlist_chip id=Id}}
-      </div>
-    </div>
-  </div>
+  {{> vacancy_actions}}
 </div>
