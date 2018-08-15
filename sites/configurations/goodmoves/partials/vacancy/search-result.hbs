@@ -7,35 +7,5 @@
     </div>
   {{/if}}
   {{> vacancy_notes limit="4rem"}}
-  <div class="mdc-card__actions">
-    <div class="mdc-card__action-buttons demo-card__action-buttons--text-only mdc-card__actions--full-bleed">
-      {{#ifAll @root.request.params.query.location @root.request.params.query.lat @root.request.params.query.lng ~}}
-      {{#if home_based ~}}
-      {{else}}
-      {{#if distance ~}}
-      <ul class="fa-ul mdc-card__action">
-        <li class="mdc-card__info--search-distance mdc-typography--body2">
-          <span class="fa-li"><span class="far fa-location-arrow fa-fw" title="Distance"></span></span>
-          {{#compare distance "<" 4 ~}}
-            Less than {{inflect (round distance "up") "mile" "miles" true}} away
-          {{else}}
-            {{#compare distance "<" 10 ~}}
-              Within {{round distance "up"}} miles
-            {{else}}
-              {{round distance "up"}} miles away
-            {{/compare ~}}
-          {{/compare ~}}
-        </li>
-      </ul>
-      {{/if ~}}
-      {{/if ~}}
-      {{/ifAll ~}}
-      <a href="/vacancy/{{slug}}{{@root.request.url.search}}" class="mdc-card__action">Find out more</a>
-    </div>
-    <div class="mdc-card__action-icons pull-right">
-      <div class="mdc-chip-set mdc-chip-set--filter">
-        {{> shortlist_chip id=Id}}
-      </div>
-    </div>
-  </div>
+  {{> vacancy_actions}}
 </div>
