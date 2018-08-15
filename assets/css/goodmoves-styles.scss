@@ -54,7 +54,7 @@ body {
   word-break: break-word;
   -webkit-tap-highlight-color: transparent;
 }
-x.mdc-theme--background {
+.mdc-theme--background {
   background-color: $mdc-theme-secondary-light !important;
 }
 .mdc-toolbar-fixed-adjust {
@@ -370,6 +370,11 @@ footer h3,
     background-color: $mdc-theme-primary;
   }
 }
+.mdc-drawer--occasional-ie11 {
+  box-sizing: border-box;
+  position: relative;
+  z-index: 4;
+}
 .mdc-tab .mdc-tab--label,
 .mdc-button {
   transition: 0.1s;
@@ -583,6 +588,17 @@ footer h3,
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  padding: 0;
+  bottom: 0 !important;
+  right: 0 !important;
+}
+.saved-search-remove .far:hover,
+.saved-search-remove:hover .far {
+  color: $mdc-theme-error !important;
+}
+.saved-search-remove:focus::before,
+.saved-search-remove:hover::before {
+  opacity: 0;
 }
 
 .icon-toggle-off {
@@ -669,8 +685,15 @@ a:hover {
   color: $mdc-theme-tfn;
 }
 
-.mdc-chip-set .mdc-chip {
-  margin: 0;
+.mdc-chip-set {
+  padding: 0;
+  .v-margin {
+    display: block;
+    width: 100%;
+  }
+  .mdc-chip {
+    margin: 0;
+  }
 }
 #search-terms.mdc-chip-set {
   float: left;
@@ -988,7 +1011,7 @@ a {
     padding: $unit;
   }
   .mdc-card__media--organisation {
-    margin-right: $unit;
+    // margin-right: $unit;
   }
   .search-result-article__snippet,
   .search-result-article__notes {
@@ -1046,11 +1069,16 @@ a {
     }
   }
 }
-.goodmoves-vacancy-inactive.mdc-card,
-.goodmoves-vacancy-not-published.mdc-card,
-.goodmoves-vacancy-closed.mdc-card {
-  border-top: none !important;
+.goodmoves-vacancy.mdc-card.gist {
+  .mdc-card__action-icons {
+    display: none;
+  }
 }
+// .goodmoves-vacancy-inactive.mdc-card,
+// .goodmoves-vacancy-not-published.mdc-card,
+// .goodmoves-vacancy-closed.mdc-card {
+//   border-top: none !important;
+// }
 .goodmoves-vacancy.mdc-card.list,
 .goodmoves-vacancy.mdc-card.gist,
 .goodmoves-vacancy.mdc-card.mini {
@@ -1082,6 +1110,22 @@ a {
 .mdc-card.search-result {
   .mdc-list-divider {
     border: none;
+  }
+}
+.mdc-card.full,
+.mdc-card.search-result {
+  .mdc-card__info--vacancy {
+    .fa-ul {
+      float: left;
+    }
+    .fa-ul.first {
+      clear: left;
+      width: 18vw;
+    }
+    .fa-ul.last {
+      width: 16vw;
+      margin-left: 2.5rem !important;
+    }
   }
 }
 .mdc-card.list:last-child,
@@ -1121,6 +1165,14 @@ a {
 .mdc-card.mini {
   .panel-heading {
     padding: $unit/3 $unit;
+  }
+  .mdc-card__media--organisation {
+    margin: $unit/2 0 $unit/2 $unit/2;
+  }
+  .mdc-card__info--vacancy {
+    .fa-ul.last {
+      display: none;
+    }
   }
 }
 .mdc-card.full {
@@ -1328,8 +1380,6 @@ hr {
   border: none;
   background: transparent;
   font-size: 1.5rem;
-  bottom: 8px !important;
-  right: 8px !important;
   .far:hover {
     color: $mdc-theme-primary-dark;
   }
@@ -1556,6 +1606,11 @@ body {
 
 .mdc-card {
   padding: 0;
+  .mdc-card__info--vacancy {
+    .mdc-layout-grid__inner {
+      grid-gap: 0;
+    }
+  }
   .mdc-card__info--organisation-row,
   .mdc-card__info--vacancy-row {
     display: flex;
@@ -1598,11 +1653,11 @@ body {
         margin-bottom: $unit/2;
       }
     }
-    .fa-ul.last {
-      li:last-child {
-        margin-bottom: 0;
-      }
-    }
+    // .fa-ul.last {
+    //   li:last-child {
+    //     margin-bottom: 0;
+    //   }
+    // }
     .mdc-card__info--vacancy-title a:hover {
       text-decoration: none;
       .hover-underline {
@@ -1672,10 +1727,10 @@ body {
     .mdc-card__media--organisation {
       align-items: flex-start;
       mix-blend-mode: multiply;
-      max-width: 200px;
+      // max-width: 200px;
       margin-top: $unit/2;
     }
-    .mdc-card__media--square::before {
+    .mdc-card__media--organisation::before {
       margin-top: 0;
     }
   }
@@ -1831,14 +1886,16 @@ footer,
         color: $mdc-theme-primary;
       }
     }
+    .mdc-list-item {
+      .mdc-list-item__meta {
+        text-decoration: none;
+        white-space: nowrap;
+      }
+    }
     .mdc-list-item:hover {
       text-decoration: none;
       .mdc-list-item__text {
         text-decoration: underline;
-      }
-      .mdc-list-item__meta {
-        text-decoration: none;
-        white-space: nowrap;
       }
     }
     .mdc-list-item:hover::before,
@@ -1973,6 +2030,19 @@ footer,
     background-image: linear-gradient(60deg, rgba(66, 132, 42, 0.89), rgba(66, 132, 42, 0.91) 66%, transparent 66.08%, transparent);
   }
 }
+@media screen and (max-width: $mobile-landscape-breakpoint) {
+  .mdc-card.full,
+  .mdc-card.search-result {
+    .mdc-card__info--vacancy {
+      .fa-ul.first {
+        width: 30vw;
+      }
+      .fa-ul.last {
+        width: 25vw;
+      }
+    }
+  }
+}
 @media screen and (max-width: $mobile-breakpoint) {
   header .container-fluid .mdc-top-app-bar__title svg {
     margin-top: $unit;
@@ -2002,6 +2072,19 @@ footer,
       }
     }
   }
+  .mdc-card.full,
+  .mdc-card.search-result {
+    .mdc-card__info--vacancy {
+      .fa-ul {
+        float: none;
+      }
+      .fa-ul.first,
+      .fa-ul.last {
+        width: auto;
+        margin-left: 1.65rem !important;
+      }
+    }
+  }
   .mdc-card .mdc-card__info--vacancy-row,
   .mdc-card .mdc-card__info--organisation-row {
     display: block;
@@ -2009,7 +2092,7 @@ footer,
       display: block;
       margin: 1rem auto 0;
     }
-    .mdc-card__media--square::before {
+    .mdc-card__media--organisation::before {
       margin: 0;
     }
   }
@@ -2484,6 +2567,7 @@ form.inline-form {
   -webkit-flex-wrap: nowrap;
   flex-wrap: nowrap;
   overflow-x: auto;
+  overflow-y: hidden;
   -webkit-justify-content: space-between;
   -webkit-overflow-scrolling: touch;
   -ms-overflow-style: -ms-autohiding-scrollbar;
@@ -2640,7 +2724,7 @@ background-color: #42842A;
     padding-top: $header-upper-height;
   }
   .hide-sm {
-    display: none;
+    display: none !important;
   }
 }
 
@@ -2649,7 +2733,7 @@ background-color: #42842A;
 
 @media screen and (min-width: $mobile-breakpoint + 1) and (max-width: $mobile-landscape-breakpoint) {
   .hide-md {
-    display: none;
+    display: none !important;
   }
   .mdc-top-app-bar {
     height: $header-upper-height;
@@ -2661,7 +2745,7 @@ background-color: #42842A;
 
 @media screen and (min-width: $mobile-landscape-breakpoint + 1) {
   .hide-lg {
-    display: none;
+    display: none !important;
   }
 
   .mdc-drawer--occasional {

@@ -1,4 +1,4 @@
-<div class="mdc-card goodmoves-vacancy goodmoves-{{vacancy_status}} full {{if top_job "top-job"}}" data-vacancy-id="{{Id}}">
+<div class="mdc-card goodmoves-vacancy full{{if top_job " top-job"}}" data-vacancy-id="{{Id}}">
   {{> vacancy_key_info}}
   <hr class="mdc-list-divider" />
   <div class="vacancy-info-container">
@@ -23,7 +23,7 @@
         <div class="key-info-extra">
           <ul class="fa-ul">
             {{#if start_at ~}}
-            <li class="mdc-card__info--vacancy-closing mdc-typography--body1">
+            <li class="mdc-card__info--vacancy-from mdc-typography--body1">
               <span class="fa-li"><span class="far fa-calendar-plus fa-fw" title="Start date"></span></span>
               Advertised from {{momentFormat (moment start_at "x") "Do MMMM YYYY"}}
             </li>
@@ -63,7 +63,7 @@
               {{reference_number}}
             </li>
             {{/if ~}}
-            {{#if closing_date ~}}
+            <!-- {{#if closing_date ~}}
             <li class="mdc-card__info--vacancy-closing mdc-typography--body1">
               <span class="fa-li"><span class="far fa-calendar-alt fa-fw" title="Closing date"></span></span>
               {{#compare vacancy_status "===" "vacancy-closed" ~}}
@@ -74,7 +74,7 @@
               on
               {{momentFormat (moment closing_date "x") "dddd \t\h\e Do \o\f MMMM YYYY \a\t h:mm a"}}
             </li>
-            {{/if ~}}
+            {{/if ~}} -->
           </ul>
         </div>
         <div class="detailed-info">

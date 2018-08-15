@@ -1,6 +1,6 @@
 {
   "size": 12,
-  "from": {{multiply (subtract (default request.params.query.page 1) 1) 12}},
+  "from": {{multiply (subtract (default @root.request.params.query.page 1) 1) 12}},
   "_source": [
     "Id",
     "slug",
@@ -23,7 +23,7 @@
   "query": {
     "bool": {
       "filter": [
-        {{>queries_organisation_common_filters request.params.query}}
+        {{>queries_organisation_common_filters @root.request.params.query}}
       ],
       "must": [
         {
@@ -36,10 +36,10 @@
             "has_vacancies": "true"
           }
         },
-        {{#if request.params.query.keywords ~}}
+        {{#if @root.request.params.query.keywords ~}}
         {
           "query_string": {
-            "query": {{{stringify request.params.query.keywords}}},
+            "query": {{{stringify @root.request.params.query.keywords}}},
             "fields": ["text_bag_boost^5", "text_bag"],
             "default_operator": "AND",
             "analyzer": "snowball"
@@ -52,5 +52,14 @@
         {{/if ~}}
       ]
     }
-  }
+  },
+  "sort": [
+    {{#if @root.request.params.query.keywords ~}}
+    "_score"
+    {{else}}
+    {
+      "title_sort": "asc"
+    }
+    {{/if ~}}
+  ]
 }

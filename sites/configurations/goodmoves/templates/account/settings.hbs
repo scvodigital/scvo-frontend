@@ -40,7 +40,9 @@
           <h3 class="mdc-typography--headline6 v-margin-full">
             Shortlist alerts
           </h3>
-          {{> shortlist_alerts}}
+          <div class="mdc-chip-set mdc-chip-set--filter">
+            {{> shortlist_alerts}}
+          </div>
         </div>
         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-6-tablet mdc-layout-grid__cell--span-12-phone">
           <h3 class="mdc-typography--headline6 v-margin-full">
@@ -111,7 +113,7 @@
           <h3 class="mdc-typography--headline6">
             Linked accounts
           </h3>
-          <div class="v-margin-full">
+          <div class="mdc-chip-set mdc-chip-set--filter">
             {{#each (split "google,facebook,twitter" ",") ~}}
               <div class="v-margin">
                 {{> linkChip

@@ -114,25 +114,27 @@
       </h2>
     </header>
     <section id="edit-search-dialog-description" class="mdc-dialog__body">
-      {{#> ajax_chip
-        onUrl="/toggle-subscription"
-        offUrl="/toggle-subscription"
-        onText="Send jobs matching this search by email"
-        offText="Send jobs matching this search by email"
-        onMethod="POST"
-        offMethod="POST"
-        iconClasses="far fa-envelope"
-        on=partitionActive
-      }}
-      {
-        "onData": {
-          "name": {{{stringify ../partition}}}
-        },
-        "offData": {
-          "name": {{{stringify ../partition}}}
+      <div class="mdc-chip-set mdc-chip-set--filter">
+        {{#> ajax_chip
+          onUrl="/toggle-subscription"
+          offUrl="/toggle-subscription"
+          onText="Send jobs matching this search by email"
+          offText="Send jobs matching this search by email"
+          onMethod="POST"
+          offMethod="POST"
+          iconClasses="far fa-envelope"
+          on=partitionActive
+        }}
+        {
+          "onData": {
+            "name": {{{stringify ../partition}}}
+          },
+          "offData": {
+            "name": {{{stringify ../partition}}}
+          }
         }
-      }
-      {{/ajax_chip}}
+        {{/ajax_chip}}
+      </div>
     </section>
     <footer class="mdc-dialog__footer">
       <button type="button" class="mdc-button mdc-dialog__footer__button mdc-dialog__footer__button--cancel">Cancel</button>
