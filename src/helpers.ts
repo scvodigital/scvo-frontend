@@ -2,6 +2,7 @@ import arrDiff = require('arr-diff');
 import deepDiff = require('deep-diff');
 import stripHtml = require('string-strip-html');
 import markdown = require('markdown');
+import sqlstring = require('sqlstring');
 import * as dot from 'dot-object';
 import * as moment from 'moment';
 import * as querystring from 'querystring';
@@ -54,6 +55,22 @@ export class Helpers {
 
     var html = markdown.markdown.toHTML(input);
     return html;
+  }
+
+  static helper_mysqlEscape(input: string, stripQuotes: boolean = false) {
+    if (typeof input !== 'string') {
+      return '';
+    }
+    var escaped = sqlstring.escape(input);
+    if (typeof stripQuotes === 'boolean' && stripQuotes === true) {
+      if (escaped.charAt(0) === '\'') {
+        escaped = escaped.substr(1);
+      }
+      if (escaped.charAt(escaped.length - 1) === '\'') {
+        escaped = escaped.substr(0, escaped.length - 1);
+      }
+    }
+    return escaped; 
   }
 
   static helper_firstItem(arr: any[]) {
