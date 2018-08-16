@@ -2,9 +2,7 @@
 {
   "terms": {
     "Id": [
-      {{each @root.data.organisationsWithVacancies.vacancies.hits.hits ~}}
-        {{stringify _source.organisation.id}}{{#unless @last}},{{/unless}}
-      {{/each ~}}
+      {{join (stringify (map @root.data.organisationsWithVacancies.vacancies.hits.hits (getProperty "_source.organisation.id")))}}
     ]
   }
 },
