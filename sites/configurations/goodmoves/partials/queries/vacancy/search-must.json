@@ -10,8 +10,4 @@
 {{#if salary_max ~}}
   {{>queries_number_range field="salary_min" lte=salary_max}},
 {{/if ~}}
-{
-  "exists": {
-    "field": "title"
-  }
-}
+{{>queries_do_nothing}}

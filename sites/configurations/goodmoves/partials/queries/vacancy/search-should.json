@@ -1,11 +1,7 @@
 {{#if regions ~}}
   {{>queries_terms field="region_group_slug" terms=regions}},
 {{else}}
-  {
-    "exists": {
-      "field": "title"
-    }
-  },
+  {{>queries_do_nothing}},
 {{/if ~}}
 {{#ifAll location lat lng distance ~}}
   {
@@ -35,11 +31,7 @@
 {{else}}
   {{#if home_based ~}}
     {{#if regions ~}}
-      {
-        "exists": {
-          "field": "title"
-        }
-      },
+      {{>queries_do_nothing}},
     {{/if ~}}
     {
       "term": {
@@ -47,10 +39,6 @@
       }
     }
   {{else}}
-    {
-      "exists": {
-        "field": "title"
-      }
-    }
+    {{>queries_do_nothing}}
   {{/if ~}}
 {{/ifAll ~}}
