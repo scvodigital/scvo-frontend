@@ -1,5 +1,14 @@
 {{>queries_common_country}},
 {
+  "terms": {
+    "Id": [
+      {{each @root.data.organisationsWithVacancies.vacancies.hits.hits ~}}
+        {{stringify _source.organisation.id}}{{#unless @last}},{{/unless}}
+      {{/each ~}}
+    ]
+  }
+},
+{
   "exists": {
     "field": "title"
   }

@@ -22,7 +22,7 @@
   "query": {
     "bool": {
       "filter": [
-        {{>queries_vacancy_common_filters request.params.query}}
+        {{>queries_vacancy_common_filters_open request.params.query}}
       ],
       "must": [
         {{>queries_terms field="Id" terms=(getKeys data.notes)}}
