@@ -155,6 +155,7 @@ header {
       }
     }
     #main-tab-bar,
+    #unauthenticated-tab-bar,
     #main-extra-tab-bar {
       .mdc-tab {
         color: white;
@@ -364,21 +365,9 @@ footer h3,
   background-color: $mdc-theme-primary;
 }
 
+.sign-up-form,
 .sign-in-form {
-  padding: $unit*1.5 0;
-  .mdc-card {
-    // min-height: 40vh;
-    max-width: 500px;
-    margin: 0 auto;
-    position: relative;
-    background-color: rgba(255, 255, 255, 0.6);
-  }
-  .mdc-text-field {
-    margin: 0 0 $unit;
-  }
-  .mdc-button {
-    margin-bottom: 0;
-  }
+  padding: 0 !important;
   .middle-line-text {
     margin: $unit*2 0 $unit;
     border-bottom: 2px solid #dfdfdf;
@@ -391,20 +380,25 @@ footer h3,
       color: #555;
     }
   }
-  .mdc-button {
-    position: relative;
-    display: block;
-    margin-bottom: $unit/2;
-    width: 100%;
-    color: white;
-    width: 100%;
-    color: white;
-    line-height: $unit*3;
-    height: $unit*3;
-    .fa-2x {
-      position: absolute;
-      top: .6rem;
-      left: .5rem;
+  .mdc-card {
+    .mdc-text-field {
+      margin: 0;
+    }
+    .mdc-button {
+      position: relative;
+      display: block;
+      margin-bottom: $unit/2;
+      width: 100%;
+      color: white;
+      width: 100%;
+      color: white;
+      line-height: 56px;
+      height: 56px;
+      .fa-2x {
+        position: absolute;
+        top: .6rem;
+        left: .5rem;
+      }
     }
   }
   #sign-in-message,
@@ -416,6 +410,23 @@ footer h3,
 #sign-out-loader {
   display: flex;
   background-color: transparent;
+}
+.sign-up-form {
+  padding: $unit*1.5 0 !important;
+  .mdc-card {
+    max-width: 500px;
+    margin: 0 auto;
+    position: relative;
+    background-color: rgba(255, 255, 255, 0.6);
+    .mdc-text-field {
+      margin: 0 0 $unit;
+    }
+    .mdc-button {
+      margin-bottom: 0;
+      line-height: $unit*3;
+      height: $unit*3;
+    }
+  }
 }
 
 .card-loader {

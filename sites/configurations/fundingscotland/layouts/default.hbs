@@ -49,7 +49,7 @@ gtag('js', new Date());
 // NEEDS TO BE SET UP WITH THE CORRECT TRACKING ID
 gtag('config', 'UA-3467930-12', { 'send_page_view': true, 'anonymize_ip': true });
 
-{{#each route.primaryResponse.hits.hits ~}}
+{{#each @root.route.primaryResponse.hits.hits ~}}
 gtag('event', 'document_hit', {
   'event_category': '{{_type}}',
   'event_label': '{{_id}}'
@@ -92,9 +92,9 @@ if(location.host.indexOf('.local') > -1){
               <button class="mdc-top-app-bar__navigation-icon hide-lg" data-drawer-target="#mobile-menu">
                 <span class="far fa-fw fa-2x fa-bars"></span>
               </button>
-              {{#if route.metaData.sidebarButton}}
-              <button class="mdc-top-app-bar__navigation-icon {{route.metaData.sidebarButton.classes}}" data-drawer-target="#sidebar-temporary" title="{{route.metaData.sidebarButton.tooltip}}">
-                <span class="far fa-fw fa-{{route.metaData.sidebarButton.icon}}"></span>
+              {{#if @root.route.metaData.sidebarButton}}
+              <button class="mdc-top-app-bar__navigation-icon {{@root.route.metaData.sidebarButton.classes}}" data-drawer-target="#sidebar-temporary" title="{{@root.route.metaData.sidebarButton.tooltip}}">
+                <span class="far fa-fw fa-{{@root.route.metaData.sidebarButton.icon}}"></span>
               </button>
               {{/if}}
               <span class="mdc-top-app-bar__title hide-md hide-lg">
@@ -108,8 +108,8 @@ if(location.host.indexOf('.local') > -1){
             </section>
             <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end">
               <nav class="mdc-tab-bar mdc-tab-bar__right hide-sm hide-md" id="upper-tab-bar">
-                {{#each context.metaData.menus.upper ~}}
-                <a class="mdc-tab{{#if (regexMatch ../request.url.pathname route "gi")}} mdc-tab--active{{/if}}" href="{{stripTrailingSlash path}}">
+                {{#each @root.context.metaData.menus.upper ~}}
+                <a class="mdc-tab{{#if (regexMatch @root.request.url.pathname route "gi")}} mdc-tab--active{{/if}}" href="{{stripTrailingSlash path}}">
                   <span class="mdc-tab--label">{{{label}}}</span>
                 </a>
                 {{/each ~}}
@@ -119,33 +119,32 @@ if(location.host.indexOf('.local') > -1){
           <div class="mdc-top-app-bar__row mdc-top-app-bar__lower hide-sm hide-md">
             <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start mdc-top-app-bar__main">
               <nav class="mdc-tab-bar mdc-tab-bar__left" id="main-tab-bar">
-                {{#each context.metaData.menus.main ~}}
-                <a class="mdc-tab{{#if (regexMatch ../request.url.pathname route "gi")}} mdc-tab--active{{/if}}" href="{{stripTrailingSlash path}}">
+                {{#each @root.context.metaData.menus.main ~}}
+                <a class="mdc-tab{{#if (regexMatch @root.request.url.pathname route "gi")}} mdc-tab--active{{/if}}" href="{{stripTrailingSlash path}}">
                   <span class="mdc-tab--label">{{{label}}}</span>
                 </a>
                 {{/each ~}}
               </nav>
               <nav class="mdc-tab-bar mdc-tab-bar__left" id="main-extra-tab-bar">
-                {{#each context.metaData.menus.main-extra ~}}
-                <a class="mdc-tab{{#if (regexMatch ../request.url.pathname route "gi")}} mdc-tab--active{{/if}}" href="{{stripTrailingSlash path}}">
+                {{#each @root.context.metaData.menus.main-extra ~}}
+                <a class="mdc-tab{{#if (regexMatch @root.request.url.pathname route "gi")}} mdc-tab--active{{/if}}" href="{{stripTrailingSlash path}}">
                   <span class="mdc-tab--label">{{{label}}}</span>
                 </a>
                 {{/each ~}}
               </nav>
             </section>
             <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end mdc-top-app-bar__user">
+              {{#if @root.data.auth ~}}
               <div class="mdc-menu-anchor">
-                <!-- Logged in: -->
-                {{#if data.auth.email ~}}
                 <button class="mdc-button" data-menu-target="#user-menu">
                   <span class="far fa-fw fa-user-circle"></span>
-                    {{data.auth.email}}
+                    {{@root.data.auth.email}}
                   <span class="far fa-fw fa-angle-down"></span>
                 </button>
                 <div class="mdc-menu" tabindex="-1" data-mdc-auto-init="MDCMenu" id="user-menu">
                   <div class="mdc-menu__items mdc-list" role="menu" aria-hidden="true">
-                    {{#each context.metaData.menus.user ~}}
-                    <a class="mdc-list-item {{#if (regexMatch ../request.url.pathname route "gi")}} mdc-list-item--activated{{/if}}" href="{{stripTrailingSlash path}}" role="menuitem">
+                    {{#each @root.context.metaData.menus.user ~}}
+                    <a class="mdc-list-item {{#if (regexMatch @root.request.url.pathname route "gi")}} mdc-list-item--activated{{/if}}" href="{{stripTrailingSlash path}}" role="menuitem">
                       {{#if icon ~}}
                       <span class="far fa-{{icon}} mdc-list-item__graphic" aria-hidden="true"></span>
                       {{/if ~}}
@@ -154,8 +153,16 @@ if(location.host.indexOf('.local') > -1){
                     {{/each ~}}
                   </div>
                 </div>
-                {{/if ~}}
               </div>
+              {{else}}
+              <nav class="mdc-tab-bar mdc-tab-bar__right" id="unauthenticated-tab-bar">
+                {{#each @root.context.metaData.menus.unauthenticated ~}}
+                <a class="mdc-tab{{#if (regexMatch @root.request.url.pathname route "gi")}} mdc-tab--active{{/if}}" href="{{stripTrailingSlash path}}">
+                  <span class="mdc-tab--label">{{{label}}}</span>
+                </a>
+                {{/each ~}}
+              </nav>
+              {{/if ~}}
             </section>
           </div>
         </div>
@@ -169,16 +176,16 @@ if(location.host.indexOf('.local') > -1){
             </div>
           </header>
           <nav class="mdc-drawer__content mdc-list">
-            {{#each context.metaData.menus.main ~}}
-            <a class="mdc-list-item {{#if (regexMatch ../request.url.pathname route "gi")}} mdc-list-item--activated{{/if}}" href="{{stripTrailingSlash path}}">
+            {{#each @root.context.metaData.menus.main ~}}
+            <a class="mdc-list-item {{#if (regexMatch @root.request.url.pathname route "gi")}} mdc-list-item--activated{{/if}}" href="{{stripTrailingSlash path}}">
               {{#if icon ~}}
               <span class="far fa-{{icon}} mdc-list-item__graphic" aria-hidden="true"></span>
               {{/if ~}}
               {{{label}}}
             </a>
             {{/each ~}}
-            {{#each context.metaData.menus.main-extra ~}}
-            <a class="mdc-list-item{{#if (regexMatch ../request.url.pathname route "gi")}} mdc-list-item--activated{{/if}}" href="{{stripTrailingSlash path}}">
+            {{#each @root.context.metaData.menus.main-extra ~}}
+            <a class="mdc-list-item{{#if (regexMatch @root.request.url.pathname route "gi")}} mdc-list-item--activated{{/if}}" href="{{stripTrailingSlash path}}">
               {{#if icon ~}}
               <span class="far fa-{{icon}} mdc-list-item__graphic" aria-hidden="true"></span>
               {{/if ~}}
@@ -186,19 +193,30 @@ if(location.host.indexOf('.local') > -1){
             </a>
             {{/each ~}}
             <div role="separator" class="mdc-list-divider"></div>
-            {{#each (reverse context.metaData.menus.unauthenticated) ~}}
-            <a class="mdc-list-item{{#if (regexMatch ../request.url.pathname route "gi")}} mdc-list-item--activated{{/if}}" href="{{stripTrailingSlash path}}">
+            {{#if @root.data.auth ~}}
+            {{#each @root.context.metaData.menus.user ~}}
+            <a class="mdc-list-item{{#if (regexMatch @root.request.url.pathname route "gi")}} mdc-list-item--activated{{/if}}" href="{{stripTrailingSlash path}}">
               {{#if icon ~}}
               <span class="far fa-{{icon}} mdc-list-item__graphic" aria-hidden="true"></span>
               {{/if ~}}
               {{{label}}}
             </a>
             {{/each ~}}
+            {{else}}
+            {{#each @root.context.metaData.menus.unauthenticated ~}}
+            <a class="mdc-list-item{{#if (regexMatch @root.request.url.pathname route "gi")}} mdc-list-item--activated{{/if}}" href="{{stripTrailingSlash path}}">
+              {{#if icon ~}}
+              <span class="far fa-{{icon}} mdc-list-item__graphic" aria-hidden="true"></span>
+              {{/if ~}}
+              {{{label}}}
+            </a>
+            {{/each ~}}
+            {{/if ~}}
           </nav>
         </nav>
       </aside>
 
-      <main class="mdc-theme--background mdc-toolbar-fixed-adjust {{#if route.metaData.sidebarIcon}}drawer-container-temporary{{else}}drawer-container-permanent{{/if}}">
+      <main class="mdc-theme--background mdc-toolbar-fixed-adjust {{#if @root.route.metaData.sidebarIcon}}drawer-container-temporary{{else}}drawer-container-permanent{{/if}}">
         {{{layoutParts.body}}}
       </main>
 
@@ -227,7 +245,7 @@ if(location.host.indexOf('.local') > -1){
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone help">
                   <h3>Help</h3>
                   <ul class="mdc-list">
-                    {{#each context.metaData.menus.footer-help ~}}
+                    {{#each @root.context.metaData.menus.footer-help ~}}
                     <li class="mdc-list-item">
                       <a href="{{path}}">{{{label}}}</a>
                     </li>
@@ -237,7 +255,7 @@ if(location.host.indexOf('.local') > -1){
                 <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone info">
                   <h3>Information</h3>
                   <ul class="mdc-list">
-                    {{#each context.metaData.menus.footer-info ~}}
+                    {{#each @root.context.metaData.menus.footer-info ~}}
                     <li class="mdc-list-item">
                       <a href="{{path}}">{{{label}}}</a>
                     </li>
