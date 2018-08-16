@@ -1,5 +1,10 @@
 {{>queries_common_country}},
 {
+  "terms": {
+    "Id": {{{stringify (map @root.data.organisationsWithVacancies.vacancies.aggregations.organisations.buckets (getProp "key"))}}}
+  }
+},
+{
   "exists": {
     "field": "title"
   }

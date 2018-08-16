@@ -415,7 +415,8 @@ footer h3,
   background-color: $mdc-theme-primary;
 }
 
-.sign-in-form {
+.sign-in-form,
+.reset-password-form {
   padding: $unit*1.5 0;
   .mdc-card {
     min-height: 40vh;
@@ -452,7 +453,8 @@ footer h3,
     }
   }
   #sign-in-message,
-  #sign-up-message {
+  #sign-up-message,
+  #reset-password-message {
     display: none;
   }
 }
@@ -1101,6 +1103,9 @@ a {
   .mdc-card__info--event-title {
     margin: 0 0 $unit/2;
   }
+  .mdc-card__info--search-distance {
+    margin-right: $unit;
+  }
 }
 .mdc-card.full,
 .mdc-card.list,
@@ -1197,6 +1202,14 @@ a {
     pointer-events: none;
     cursor: default;
     text-decoration: none;
+  }
+  .editor-toolbar,
+  .CodeMirror {
+    border: none;
+    border-bottom: 1px solid $mdc-theme-secondary;
+  }
+  .editor-statusbar {
+    float: right;
   }
   .text-field-container.user-notes {
     width: 100%;
@@ -1303,7 +1316,7 @@ a {
       }
     }
     .save-button-block {
-      margin: 0 $unit $unit;
+      margin: $unit;
     }
   }
 }
@@ -1695,8 +1708,10 @@ body {
   }
 }
 .mdc-card__info--organisation-row {
+  flex: 1 0 auto;
   .mdc-card__media--organisation {
-    margin: 0;
+    float: right;
+    margin: $unit $unit $unit/2 $unit/2;
   }
 }
 .goodmoves-organisation {
@@ -1722,8 +1737,11 @@ body {
     .mdc-card__media {
       margin: 0 auto;
     }
-    .fa-li .fa-fw {
-      color: $mdc-theme-secondary-dark;
+    .fa-li {
+      top: 0;
+      .fa-fw {
+        color: $mdc-theme-secondary-dark;
+      }
     }
   }
   .mdc-card__info--vacancy-row,

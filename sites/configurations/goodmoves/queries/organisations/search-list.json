@@ -26,16 +26,6 @@
         {{>queries_organisation_common_filters @root.request.params.query}}
       ],
       "must": [
-        {
-          "term": {
-            "has_logo": true
-          }
-        },
-        {
-          "term": {
-            "has_vacancies": "true"
-          }
-        },
         {{#if @root.request.params.query.keywords ~}}
         {
           "query_string": {

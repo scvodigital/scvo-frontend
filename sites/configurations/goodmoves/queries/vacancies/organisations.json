@@ -1,0 +1,19 @@
+{
+  "size": 0,
+  "_source": false,
+  "query": {
+    "bool": {
+      "filter": [
+        {{>queries_vacancy_common_filters request.params.query}}
+      ]
+    }
+  },
+  "aggs": {
+    "organisations": {
+      "terms": {
+        "field": "organisation.id",
+        "size": 10000
+      }
+    }
+  }
+}

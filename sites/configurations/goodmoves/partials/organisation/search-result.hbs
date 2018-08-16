@@ -1,20 +1,20 @@
 <div class="mdc-card search-result" data-organisation-id="{{Id}}">
   <div class="mdc-card__info--organisation-row">
     <div class="mdc-card__info--organisation">
+      {{#if has_logo ~}}
+      <div class="mdc-card__media mdc-card__media--organisation">
+        <a href="/organisation/{{slug}}">
+          <img src="{{logo_url}}" alt="{{title}}" />
+        </a>
+      </div>
+      {{/if ~}}
       <div class="mdc-card__info--organisation-title mdc-typography--headline6">
         <a href="/organisation/{{slug}}">{{title}}</a>
       </div>
+      <div class="search-result-article__snippet mdc-typography--body1">
+        {{{og_summary}}}
+      </div>
     </div>
-    {{#if has_logo ~}}
-    <div class="mdc-card__media mdc-card__media--square mdc-card__media--organisation">
-      <a href="/organisation/{{slug}}">
-        <img src="{{logo_url}}" alt="{{title}}" />
-      </a>
-    </div>
-    {{/if ~}}
-  </div>
-  <div class="search-result-article__snippet mdc-typography--body1">
-    {{{og_summary}}}
   </div>
   <div class="mdc-card__actions">
     <div class="mdc-card__action-buttons demo-card__action-buttons--text-only mdc-card__actions--full-bleed">
