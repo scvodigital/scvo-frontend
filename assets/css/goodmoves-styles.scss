@@ -1103,6 +1103,9 @@ a {
   .mdc-card__info--event-title {
     margin: 0 0 $unit/2;
   }
+  .mdc-card__info--search-distance {
+    margin-right: $unit;
+  }
 }
 .mdc-card.full,
 .mdc-card.list,
@@ -1199,6 +1202,14 @@ a {
     pointer-events: none;
     cursor: default;
     text-decoration: none;
+  }
+  .editor-toolbar,
+  .CodeMirror {
+    border: none;
+    border-bottom: 1px solid $mdc-theme-secondary;
+  }
+  .editor-statusbar {
+    float: right;
   }
   .text-field-container.user-notes {
     width: 100%;
@@ -1305,7 +1316,7 @@ a {
       }
     }
     .save-button-block {
-      margin: 0 $unit $unit;
+      margin: $unit;
     }
   }
 }
@@ -1724,8 +1735,11 @@ body {
     .mdc-card__media {
       margin: 0 auto;
     }
-    .fa-li .fa-fw {
-      color: $mdc-theme-secondary-dark;
+    .fa-li {
+      top: 0;
+      .fa-fw {
+        color: $mdc-theme-secondary-dark;
+      }
     }
   }
   .mdc-card__info--vacancy-row,
