@@ -1,9 +1,7 @@
 {{>queries_common_country}},
 {
   "terms": {
-    "Id": [
-      {{join (stringify (map @root.data.organisationsWithVacancies.vacancies.hits.hits (getProperty "_source.organisation.id")))}}
-    ]
+    "Id": {{{stringify (map @root.data.organisationsWithVacancies.vacancies.hits.hits (getProp "_source.organisation.id"))}}}
   }
 },
 {
