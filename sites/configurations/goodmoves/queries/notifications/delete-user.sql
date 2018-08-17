@@ -1,5 +1,6 @@
-DELETE FROM subscriptions
-WHERE 
-  email = '{{data.auth.email}}' AND
-  campaign IN ('{{context.metaData.emailCampaignName}}', '{{context.metaData.shortlistCampaignName}}');
+CALL _removeSubscriptionPartition(
+  {{{mysqlEscape @root.data.auth.email}}},
+  {{{mysqlEscape @root.context.metaData.emailCampaignName}}},
+  NULL
+);
 

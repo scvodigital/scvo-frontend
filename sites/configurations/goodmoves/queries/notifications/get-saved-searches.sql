@@ -1,1 +1,5 @@
-CALL _getSubscriptions('{{@root.data.auth.email}}', '{{@root.context.metaData.emailCampaignName}}', NULL);
+CALL _getSubscriptions(
+  {{{mysqlEscape @root.data.auth.email}}}, 
+  {{{mysqlEscape @root.context.metaData.emailCampaignName}}}, 
+  NULL
+);

@@ -1,8 +1,8 @@
 CALL _addSubscriptionParameter(
-  '{{@root.data.auth.email}}', 
-  '{{@root.context.metaData.shortlistCampaignName}}', 
-  'id', 
-  '{{@root.request.params.query.id}}',
+  {{{mysqlEscape @root.data.auth.email}}}, 
+  {{{mysqlEscape @root.context.metaData.shortlistCampaignName}}}, 
+  {{{mysqlEscape id}}}, 
+  {{{mysqlEscape @root.request.params.query.id}}},
   'Shortlist',
   NULL
 );
