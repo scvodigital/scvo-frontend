@@ -504,19 +504,21 @@ function handleLocationBoxes() {
 
           $(latSelector).val(lat);
           $(lngSelector).val(lng);
-          
+
           var base = 'https://maps.googleapis.com/maps/api/geocode/json?latlng=';
           var coords = lat + ',' + lng;
           var key = 'AIzaSyCT7vZkJdto5JoAUDx3asuHu7mHcl8UanQ';
           var url = base + coords + '&key=' + key + '&result_type=locality';
           $.getJSON(url, function(place) {
             if (place.results && place.results.length > 0) {
-              var locality = place.results[0].formatted_address;
+              var locality = place.results[0].address_components[0].short_name;
+            }
+            if (locality) {
               $(o).val(locality);
             } else {
               $(o).val(lat + ', ' + lng);
               goodmoves.snackbarShow({
-                message: 'Could not work out a place name for your location'
+                message: 'Could not find a name for your location'
               });
             }
           });
