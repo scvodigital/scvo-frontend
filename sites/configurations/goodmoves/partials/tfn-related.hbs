@@ -8,7 +8,21 @@
         <div class="mdc-layout-grid__inner">
           {{#each @root.data.posts.tfn_related.hits.hits ~}}
           <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
-            {{{_source.rendered.scvo_gist}}}
+            {{#with _source ~}}
+            <div class="gist tfn-post {{../_type}}" style="background-image: url({{image_wide}});">
+              <div class="mdc-card">
+                <h3 class="mdc-card__title mdc-typography--headline">
+                  <a href="{{url}}">{{{title}}}</a>
+                </h3>
+                <h4 class="mdc-card__subtitle post-info">
+                  <div class="post-info-item post-info-date">
+                    <span class="far fa-calendar-edit" aria-hidden="true"></span>
+                    {{{momentFormat (moment date_published "x") "Do MMMM YYYY"}}}
+                  </div>
+                </h4>
+              </div>
+            </div>
+            {{/with ~}}
           </div>
           {{/each ~}}
         </div>
