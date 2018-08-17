@@ -1792,6 +1792,17 @@ body {
   .mdc-floating-label {
     transform: translateY(-50%) scale(0.75);
   }
+  .geo-lookup {
+    color: $mdc-theme-primary !important;
+  }
+  .geo-lookup:hover {
+    font-weight: 600;
+    color: $mdc-theme-primary-dark !important;
+    cursor: pointer;
+  }
+  .geo-lookup:focus {
+    outline: none;
+  }
   .search-distance {
     font-variant: all-small-caps;
     font-size: 0.9rem;
@@ -2152,14 +2163,16 @@ footer,
 }
 .home-browse,
 .browse main {
-  .mdc-layout-grid__inner {
-    grid-gap: $unit*4;
-  }
   .browse-title {
     margin: $unit/2 0 $unit/2;
   }
   .mdc-list-item {
     height: auto;
+  }
+}
+.home-browse {
+  .mdc-layout-grid__inner {
+    grid-gap: $unit*4;
   }
 }
 
@@ -2705,8 +2718,8 @@ form.inline-form {
   position: relative;
   &:before {
     display: block;
-    margin-top: -$unit*2.5;
-    height: $unit*2.5;
+    margin-top: -$unit*1.5;
+    height: $unit*1.5;
     width: 100%;
     content: "";
     position: absolute;
