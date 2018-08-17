@@ -47,15 +47,12 @@
                       Keywords: <strong>{{{keywords}}}</strong>
                     {{/if ~}}
 
-                    {{#ifAny salary_min salary_max ~}}
-                      Salary
-                    {{/ifAny ~}}
                     {{#if salary_min ~}}
-                      minimum: <strong>£{{addCommas salary_min}}</strong>
+                    Minimum salary: <strong>&pound;{{addCommas salary_min}}</strong>
                     {{/if ~}}
                     {{#if salary_max ~}}
-                      {{#if salary_min ~}}and{{/if}}
-                      maximum: <strong>£{{addCommas salary_max}}</strong>
+                    {{#if salary_min ~}}and{{/if}}
+                    Maximum salary: <strong>&pound;{{addCommas salary_max}}</strong>
                     {{/if ~}}
 
                     {{#if roles ~}}

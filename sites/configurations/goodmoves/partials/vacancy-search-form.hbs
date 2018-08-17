@@ -49,19 +49,20 @@
           <div class="mdc-layout-grid__inner">
             <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-8-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone">
               <div class="mdc-text-field mdc-text-field--box mdc-text-field--with-leading-icon" data-mdc-auto-init="MDCTextField">
-                <span class="far fa-map-marker-alt mdc-text-field__icon" tabindex="0" role="button"></span>
+                <span class="far fa-map-marker-alt mdc-text-field__icon geo-lookup" tabindex="0" title="Find my location" role="button" style="pointer-events: initial !important;"></span>
                 <input type="text" id="{{instance_id}}-location" name="location" class="mdc-text-field__input mdc-text-field--fullwidth search-location" value="{{@root.request.params.query.location}}" placeholder="" data-lpignore="true" data-location-options='
                   {
                     "types": ["(regions)"],
                     "componentRestrictions": {
                       "country": "gb"
                     }
-                  }' data-location-lat="[name='lat']" data-location-lng="[name='lng']">
+                  }' data-location-lat="[name='lat']" data-location-lng="[name='lng']" data-location-services=".geo-lookup">
                 <label class="mdc-floating-label" for="{{instance_id}}-location">
                   Location
                 </label>
                 <div class="mdc-line-ripple"></div>
               </div>
+              <!-- <div class="after-textfield-action geo-lookup">Find me</div> -->
             </div>
             <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone">
               <div class="mdc-select mdc-select--box mdc-drawer--occasional-ie11" data-mdc-auto-init="MDCSelect">
@@ -100,7 +101,7 @@
         <div class="h-padding">
           <div class="mdc-text-field mdc-text-field--box mdc-text-field--with-leading-icon" data-mdc-auto-init="MDCTextField">
             <span class="far fa-arrow-alt-from-left mdc-text-field__icon" tabindex="-1"></span>
-            <input type="number" id="{{instance_id}}-salary_min" step="1000" min="0" max="1000000" name="salary_min" class="mdc-text-field__input mdc-text-field--fullwidth" value="{{@root.request.params.query.salary_min}}" data-lpignore="true">
+            <input type="number" id="{{instance_id}}-salary_min" min="0" max="1000000" name="salary_min" class="mdc-text-field__input mdc-text-field--fullwidth" value="{{@root.request.params.query.salary_min}}" data-lpignore="true">
             <label class="mdc-floating-label" for="{{instance_id}}-salary_min">
               Minimum salary
             </label>
@@ -111,7 +112,7 @@
         <div class="h-padding">
           <div class="mdc-text-field mdc-text-field--box mdc-text-field--with-leading-icon" data-mdc-auto-init="MDCTextField">
             <span class="far fa-arrow-alt-to-right mdc-text-field__icon" tabindex="-1"></span>
-            <input type="number" id="{{instance_id}}-salary_max" step="1000" min="0" max="1000000" name="salary_max" class="mdc-text-field__input mdc-text-field--fullwidth" value="{{@root.request.params.query.salary_max}}" data-lpignore="true">
+            <input type="number" id="{{instance_id}}-salary_max" min="0" max="1000000" name="salary_max" class="mdc-text-field__input mdc-text-field--fullwidth" value="{{@root.request.params.query.salary_max}}" data-lpignore="true">
             <label class="mdc-floating-label" for="{{instance_id}}-salary_max">
               Maximum salary
             </label>

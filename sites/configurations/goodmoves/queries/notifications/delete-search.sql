@@ -1,5 +1,5 @@
 CALL _removeSubscriptionPartition(
-  '{{@root.data.auth.email}}',
-  '{{@root.context.metaData.emailCampaignName}}',
-  '{{{@root.request.body.name}}}'
+  {{{mysqlEscape @root.data.auth.email}}},
+  {{{mysqlEscape @root.context.metaData.emailCampaignName}}},
+  {{{mysqlEscape @root.request.body.name}}}
 );

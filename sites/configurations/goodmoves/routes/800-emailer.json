@@ -1,0 +1,64 @@
+{
+  "name": "emailer",
+  "pattern": "/emailer",
+  "debug": true,
+  "metaData": {
+    "campaign": "goodmoves-saved-searches",
+    "pageSize": "5"
+  },
+  "tasks": [
+    "context.metaData.commonTasks.authRequired",
+    {
+      "name": "notifications",
+      "taskModule": "mysql",
+      "config": {
+        "connectionName": "notifications",
+        "queryTemplates": {
+          "subscriptions": "CALL _getPage({{{mysqlEscape @root.route.metaData.campaign}}}, {{@root.route.metaData.pageSize}});"
+        }
+      },
+      "renderer": "handlebars"
+    },
+    {
+      "name": "generate_es_task",
+      "taskModule": "render",
+      "renderer": "handlebars",
+      "config": {
+        "output": "data",
+        "parseJson": true,
+        "template": ">context.metaData.handlebars.templates.vacancies_dynamic-es-task"
+      }
+    },
+    "data.generate_es_task",
+    {
+      "name": "render_emails",
+      "taskModule": "render",
+      "renderer": "handlebars",
+      "config": {
+        "output": "data",
+        "template": ">context.metaData.handlebars.templates.vacancies_email"
+      }
+    },
+    {
+      "name": "reset",
+      "taskModule": "mysql",
+      "config": {
+        "connectionName": "notifications",
+        "queryTemplates": {
+          "reset": "CALL _resetProcessing({{{mysqlEscape @root.route.metaData.campaign}}});"
+        }
+      },
+      "renderer": "handlebars"
+    },
+    {
+      "name": "destination",
+      "taskModule": "render",
+      "renderer": "handlebars",
+      "config": {
+        "output": "body",
+        "template": "{{{@root.data.render_emails}}}",
+        "parseJson": false
+      }
+    }
+  ]
+}

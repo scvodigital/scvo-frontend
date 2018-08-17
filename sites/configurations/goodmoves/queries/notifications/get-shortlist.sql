@@ -1,1 +1,5 @@
-CALL _getSubscriptionParameters('{{@root.data.auth.email}}', '{{@root.context.metaData.shortlistCampaignName}}', 'Shortlist');
+CALL _getSubscriptionParameters(
+  {{{mysqlEscape @root.data.auth.email}}}, 
+  {{{mysqlEscape @root.context.metaData.shortlistCampaignName}}}, 
+  'Shortlist'
+);
