@@ -87,12 +87,17 @@ header {
     .mdc-top-app-bar__title {
       font-weight: $heading-font-weight;
       font-family: $heading-font-family;
-      font-variant: all-small-caps;
-      letter-spacing: -0.1rem;
+      // font-variant: all-small-caps;
+      letter-spacing: -0.2rem;
       font-size: 3rem;
-      line-height: 3rem;
+      line-height: 4rem;
       padding: 0;
       margin: 0 $unit;
+      .scotland {
+        letter-spacing: -0.3rem;
+        font-weight: $heading-light-font-weight;
+        margin-left: -$unit/3;
+      }
       a {
         display: block;
       }
@@ -119,7 +124,7 @@ header {
       height: $header-lower-height;
     }
     .mdc-top-app-bar__lower .mdc-top-app-bar__section--align-start {
-      background-image: linear-gradient(60deg, $mdc-theme-primary-dark, $mdc-theme-primary-dark 310px, $mdc-theme-primary 311px, $mdc-theme-primary);
+      background-image: linear-gradient(60deg, $mdc-theme-primary-dark, $mdc-theme-primary-dark 220px, $mdc-theme-primary 221px, $mdc-theme-primary);
     }
     .mdc-top-app-bar__lower .mdc-top-app-bar__section--align-end {
       background-color: $mdc-theme-primary;
@@ -210,12 +215,21 @@ header {
     }
     .mdc-top-app-bar__section {
       padding: 0;
+      .mdc-menu-anchor {
+        .user-avatar {
+          height: 30px;
+          width: 30px;
+          border-radius: 50%;
+        }
+      }
       .mdc-top-app-bar__action-item {
         height: $header-lower-height;
         color: $mdc-theme-secondary !important;
       }
       #user-menu {
         top: $header-lower-height !important;
+        left: auto !important;
+        right: $unit/4 !important;
         border-radius: 0 0 2px 2px;
       }
       .mdc-top-app-bar__action-item::before,
