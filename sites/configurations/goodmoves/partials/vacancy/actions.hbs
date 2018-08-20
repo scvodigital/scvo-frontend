@@ -1,5 +1,9 @@
 <div class="mdc-card__actions">
   <div class="mdc-card__action-buttons demo-card__action-buttons--text-only mdc-card__actions--full-bleed">
+    {{#compare action "===" "organisation" ~}}
+    <a href="/organisation/{{organisation.slug}}{{@root.request.url.search}}" class="mdc-card__action hide-sm">Find out more about {{organisation.name}}</a>
+    <!-- <a href="/organisation/{{organisation.slug}}{{@root.request.url.search}}" class="mdc-card__action hide-md hide-lg"><span class="fal fa-info-circle fa-fw fa-2x" aria-hidden="true"></span></a> -->
+    {{else}}
     {{#compare @root.route.name "===" "vacancy_search" ~}}
     {{#ifAll @root.request.params.query.location @root.request.params.query.lat @root.request.params.query.lng ~}}
     {{#if home_based ~}}
@@ -28,6 +32,7 @@
     {{#compare (trim (getProperty @root.data.notes Id)) "!==" "" ~}}
     <a href="/vacancy/{{slug}}{{@root.request.url.search}}#notes" class="mdc-card__action mdc-card__action-notes hide-sm">Your notes</a>
     <a href="/vacancy/{{slug}}{{@root.request.url.search}}#notes" class="mdc-card__action mdc-card__action-notes hide-md hide-lg"><span class="fal fa-edit fa-fw fa-2x" aria-hidden="true"></span></a>
+    {{/compare ~}}
     {{/compare ~}}
   </div>
   <div class="mdc-card__action-icons pull-right">
