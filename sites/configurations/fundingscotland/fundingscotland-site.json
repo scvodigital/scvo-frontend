@@ -24,6 +24,38 @@
         "{$./queries/**/*.*}": ""
       }
     },
+    "commonTasks": {
+      "authNotRequired": {
+        "name": "auth",
+        "taskModule": "firebaseAuth",
+        "config": {
+          "tokenPath": "request.cookies.fs_token",
+          "cookieName": "fs_cookie",
+          "cookieOptions": {
+            "maxAge": 1209600000,
+            "secure": true
+          },
+          "appName": "scvo",
+          "noTokenRoute": "",
+          "notAuthenticatedRoute": ""
+        }
+      },
+      "authRequired": {
+        "name": "auth",
+        "taskModule": "firebaseAuth",
+        "config": {
+          "tokenPath": "request.cookies.fs_token",
+          "cookieName": "fs_cookie",
+          "cookieOptions": {
+            "maxAge": 1209600000,
+            "secure": true
+          },
+          "appName": "scvo",
+          "noTokenRoute": "sign_in",
+          "notAuthenticatedRoute": "sign_in"
+        }
+      }
+    },
     "firebaseDefaultDomain": {
       "name": "scvo",
       "label": "SCVO",
@@ -39,16 +71,16 @@
     },
     "firebaseDomains": [
       {
-        "name": "goodmoves",
-        "label": "Goodmoves",
+        "name": "fundingscotland",
+        "label": "Funding Scotland",
         "logoUrl": "",
         "config": {
-          "apiKey": "AIzaSyAuGAacoIdUgbtfI42UXTHDosMS4pP5Teg",
-          "authDomain": "goodmoves-frontend.firebaseapp.com",
-          "databaseURL": "https://goodmoves-frontend.firebaseio.com",
-          "projectId": "goodmoves-frontend",
-          "storageBucket": "goodmoves-frontend.appspot.com",
-          "messagingSenderId": "639831727728"
+          "apiKey": "AIzaSyAdecxsam31jfcXk5riBTKFjjZN6H68FMI",
+          "authDomain": "scvo-auth-fs.firebaseapp.com",
+          "databaseURL": "https://scvo-auth-fs.firebaseio.com",
+          "projectId": "scvo-auth-fs",
+          "storageBucket": "scvo-auth-fs.appspot.com",
+          "messagingSenderId": "35877130739"
         }
       }
     ]
