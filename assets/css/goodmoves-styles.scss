@@ -366,8 +366,10 @@ footer h3,
     padding-top: $header-upper-height;
   }
   .mdc-drawer__header-content {
-    align-items: center;
     background-color: $mdc-theme-primary;
+    align-items: center;
+    justify-content: center;
+    padding: $unit 0 0;
   }
 }
 .mdc-drawer--occasional-ie11 {
@@ -1385,6 +1387,9 @@ hr {
     box-sizing: border-box;
   }
 }
+.mdc-drawer__content.mdc-list {
+  padding: 0;
+}
 .mdc-drawer__content-padded {
   padding: $unit;
 }
@@ -1971,6 +1976,14 @@ footer,
 .mdc-tab-bar .mdc-list-item__graphic {
   margin: 0;
 }
+.mdc-list.downloads {
+  .mdc-list-item__graphic {
+    width: $unit;
+    height: $unit;
+    margin-left: -.75rem;
+    margin-right: 0;
+  }
+}
 
 .home-banner {
   .banner-search {
@@ -2135,12 +2148,99 @@ footer,
       }
     }
   }
-
+  .mdc-card .mdc-card__info--organisation, .mdc-card .mdc-card__info--vacancy {
+    padding: 0;
+  }
+  .mdc-card.list,
+  .mdc-card.mini,
+  .mdc-card.gist,
+  .mdc-card.search-result {
+    .search-result-article__snippet,
+    .search-result-article__notes {
+      padding: 0 $unit/2 $unit/2;
+    }
+  }
+  .mdc-card .mdc-card__actions .mdc-card__action-buttons,
+  .panel-heading,
+  .mdc-typography--body1 {
+    font-size: 0.9rem;
+  }
+  .mdc-typography--headline3 {
+    font-size: 1.6rem;
+    line-height: 1.7rem;
+  }
+  .mdc-typography--headline4 {
+    font-size: 1.5rem;
+    line-height: 1.6rem;
+  }
+  .mdc-typography--headline5 {
+    font-size: 1.4rem;
+    line-height: 1.5rem;
+  }
+  .mdc-card.full .mdc-card--full-content h4,
+  .mdc-typography--headline6 {
+    font-size: 1.2rem;
+    line-height: 1.3rem;
+  }
+  .mdc-typography--headline7 {
+    font-size: 1.1rem;
+    line-height: 1.05rem;
+  }
+  .panel-heading {
+    padding: $unit/3 $unit;
+  }
+  hr {
+    margin: $unit*(2/3) 0;
+  }
+  .search-form {
+    .mdc-layout-grid__inner {
+      grid-gap: 0;
+    }
+    .mdc-text-field,
+    .mdc-select--box {
+      margin: $unit/2 0 0;
+    }
+    .mdc-form-field > label {
+      font-size: 0.85rem;
+    }
+  }
 }
 @media screen and (max-width: $mobile-breakpoint) {
+  .mdc-typography--headline3 {
+    font-size: 1.5rem;
+    line-height: 1.6rem;
+  }
+  .mdc-typography--headline4 {
+    font-size: 1.4rem;
+    line-height: 1.5rem;
+  }
+  #vacancy-tab-bar {
+    height: 48px;
+    .mdc-tab {
+      height: 48px;
+      line-height: 48px;
+      .fa-fw {
+        font-size: 2em;
+        font-weight: 300;
+        line-height: 48px;
+      }
+      .label {
+        display: none;
+      }
+    }
+  }
   .scroll-icon,
   .search-info .pull-right {
     display: none;
+  }
+  .scroll-button {
+    width: $unit !important;
+  }
+  .scroll-button.scroll-left {
+    background-image: linear-gradient(to left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.3)) !important;
+  }
+  .scroll-button.scroll-right {
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.3)) !important;
   }
   header .container-fluid .mdc-top-app-bar__title svg {
     margin-top: $unit;
@@ -2499,8 +2599,16 @@ footer.mdc-layout__footer {
   }
 }
 @media screen and (max-width: $mobile-landscape-breakpoint) {
-  .container-content.container-map {
+  .container-content {
     margin: 0;
+    padding: 0 $unit/2 !important;
+    box-sizing: border-box;
+  }
+  .mdc-card.full .mdc-card--full-content .key-info-extra {
+    padding: $unit/2 $unit/2 0;
+  }
+  .mdc-card.full .mdc-card--full-content .detailed-info {
+    padding: $unit/2;
   }
   .home-browse {
     .mdc-layout-grid__inner {
