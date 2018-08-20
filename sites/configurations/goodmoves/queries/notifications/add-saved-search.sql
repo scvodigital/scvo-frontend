@@ -1,3 +1,4 @@
+{{#if @root.data.auth ~}}
 CALL _addSubscriptionParameters(
   {{{mysqlEscape @root.data.auth.email}}},
   {{{mysqlEscape @root.context.metaData.emailCampaignName}}},
@@ -18,3 +19,6 @@ CALL _addSubscriptionParameters(
   {{{mysqlEscape @root.request.body.name}}},
   {{#if @root.request.body.subscribe}}1{{else}}0{{/if}}
 );
+{{else}}
+SET @query=false;
+{{/if ~}}
