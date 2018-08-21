@@ -140,6 +140,13 @@ export class Helpers {
     return json;
   }
 
+  static helper_blockStringify(context: any, options: any) {
+    var block = options.fn(context);
+    var json = JSON.stringify(block, null, 4);
+    console.log('BLOCKSTRINGIFY', json);
+    return json;
+  }
+
   static helper_indexOf(haystack: any[], needle: any): number|null {
     if (!Array.isArray(haystack)) {
       return null;

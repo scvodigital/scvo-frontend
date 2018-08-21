@@ -1,55 +1,59 @@
-{{~#if @root.data.search_data ~}}
-{{#each @root.data.notifications.subscriptions.[0]}}
-<div>
-  <h1>Goodmoves Job Alert!</h1>
-  <p>
-    <strong>Hey there {{email}}!</strong>
-  <p>
-  {{#with (getProperty @root.data.search_data (regexReplace email "\." "gi" "_"))}}
-    <p>
-      Inside with!
-    </p>
-    {{#if hits.hits.[0]}}
-      <p>
-        Here are jobs since the (Need to get date last sent here) that match your saved search preferences 
-      </p>
-      {{#each hits.hits}}
-      <h2>
-        <a href="https://goodmoves.com/vacancy/{{_source.slug}}">
-        {{_source.title}}
-        </a>
-      </h2>
-      <ul>
-        <li>
-          <strong>Organisation:</strong>
-          <a href="https://goodmoves.com/organisation/{{_source.organisation.slug}}">
-            {{_source.organisation.name}}
-          </a>
-        </li>
-        <li>
-          <strong>Salary:</strong>
-          {{_source.salary}}
-        </li>
-        <li>
-          <strong>Location:</strong>
-          {{_source.location}}
-        </li>
-      </ul>
-      <div>
-        {{{_source.description}}}
-      </div>
-      {{/each}}
-    {{else}}
-      <p>We have nothing for you this week</p>
-    {{/if}}
-  {{else}}
-    <p>We have nothing for you this week... aaand something seems to have gone wrong!</p>
-  {{/with}}
-</div>
-{{#unless @last}}
-## UNLIKELY STRING ##
-{{/unless}}
-{{/each}}
-{{~else~}}
-nothing
-{{~/if~}}
+[
+{{#if @root.data.search_data}}
+  {{#each @root.data.notifications.subscriptions.[0]}}
+    {
+      "from": {{{stringify @root.route.metaData.from}}},
+      "to": {{{stringify email}}},
+      "subject": {{{stringify @root.route.metaData.subject}}},
+      "o:tag": {{{stringify @root.context.metaData.emailCampaignName}}},
+      "tag": {{{stringify @root.context.metaData.emailCampaignName}}},
+      "id": {{{stringify @root.context.metaData.emailCampaignName}}},
+      "html": {{#blockStringify this}}
+        <div>
+          <h1>Goodmoves Job Alert!</h1>
+          <p>
+            <strong>Hey there {{email}}!</strong>
+          <p>
+          {{#with (getProperty @root.data.search_data (regexReplace email "\." "gi" "_"))}}
+            {{#if hits.hits.[0]}}
+              <p>
+                Here are jobs since the (Need to get date last sent here) that match your saved search preferences 
+              </p>
+              {{#each hits.hits}}
+              <h2>
+                <a href="https://goodmoves.com/vacancy/{{_source.slug}}">
+                {{_source.title}}
+                </a>
+              </h2>
+              <ul>
+                <li>
+                  <strong>Organisation:</strong>
+                  <a href="https://goodmoves.com/organisation/{{_source.organisation.slug}}">
+                    {{_source.organisation.name}}
+                  </a>
+                </li>
+                <li>
+                  <strong>Salary:</strong>
+                  {{_source.salary}}
+                </li>
+                <li>
+                  <strong>Location:</strong>
+                  {{_source.location}}
+                </li>
+              </ul>
+              <div>
+                {{{_source.description}}}
+              </div>
+              {{/each}}
+            {{else}}
+              <p>We have nothing for you this week</p>
+            {{/if}}
+          {{else}}
+            <p>We have nothing for you this week... aaand something seems to have gone wrong!</p>
+          {{/with}}
+        </div>
+      {{/blockStringify}}
+    }{{#unless @last}},{{/unless}}
+  {{/each}}
+{{/if}}
+]

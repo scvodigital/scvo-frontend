@@ -4,7 +4,9 @@
   "debug": true,
   "metaData": {
     "campaign": "goodmoves-saved-searches",
-    "pageSize": "5"
+    "pageSize": "5",
+    "from": "no-reply@goodmoves.com",
+    "subject": "Goodmoves job alerts"
   },
   "tasks": [
     "context.metaData.commonTasks.authRequired",
@@ -31,11 +33,11 @@
     },
     "data.generate_es_task",
     {
-      "name": "render_emails",
-      "taskModule": "render",
+      "name": "send_emails",
+      "taskModule": "mailgun",
       "renderer": "handlebars",
       "config": {
-        "output": "data",
+        "connectionName": "goodmoves-saved-searches",
         "template": ">context.metaData.handlebars.templates.vacancies_email"
       }
     },
@@ -56,7 +58,7 @@
       "renderer": "handlebars",
       "config": {
         "output": "body",
-        "template": "{{{@root.data.render_emails}}}",
+        "template": "{{{stringify @root.data.send_emails}}}",
         "parseJson": false
       }
     }
