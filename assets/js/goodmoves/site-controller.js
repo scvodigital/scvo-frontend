@@ -141,6 +141,10 @@ var GoodmovesController = Class.extend({
       $.ajax(request);
     });
 
+    $('[data-mdc-auto-init="MDCTextField"][novalidate]').each(function(i, o) {
+      o.MDCTextField.getDefaultFoundation().useCustomValidityChecking = true;
+    });
+
     // Menu buttons
     $('[data-menu-target]').each(function(i, o) {
       var selector = $(o).attr('data-menu-target');
