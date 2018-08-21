@@ -2,16 +2,7 @@
   "name": "browse",
   "pattern": "/browse",
   "tasks": [
-    {
-      "name": "auth",
-      "taskModule": "firebaseAuth",
-      "config": {
-        "tokenPath": "request.cookies.gm_token",
-        "appName": "scvo",
-        "noTokenRoute": "",
-        "notAuthenticatedRoute": ""
-      }
-    },
+    "context.metaData.commonTasks.authRequired",
     {
       "name": "primaryResponse",
       "taskModule": "elasticsearch",

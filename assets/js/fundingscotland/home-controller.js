@@ -16,23 +16,6 @@ typeaheadController.addListener(function(field, term) {
   refreshChips();
 });
 
-$where.on('keypress', function(evt) {
-  var keyCode = evt.keyCode || evt.which;
-  if (keyCode === 13) {
-    evt.preventDefault();
-    return false;
-  }
-});
-
-function searchView() {
-  $searchView.show();
-  $browseView.hide();
-}
-function browseView() {
-  $searchView.hide();
-  $browseView.show();
-}
-
 function addChip(field, term) {
   var slug = slugify(term);
   var $chip = $('<div />')

@@ -493,6 +493,7 @@ footer h3,
   .head {
     margin-bottom: $unit/2;
     .mdc-button.saved-search,
+    .mdc-button.filter-search,
     .mdc-button.save-search,
     .mdc-text-field,
     .mdc-select {
@@ -512,22 +513,6 @@ footer h3,
     }
     .pagination {
       margin-top: $unit*1.25;
-    }
-  }
-}
-@media screen and (max-width: 1100px) {
-  .goodmoves-vacancy-search .head {
-    .mdc-layout-grid__cell.action {
-      grid-column-end: span 6;
-    }
-    .mdc-layout-grid__cell.pagination-desktop {
-      display: none;
-    }
-    .mdc-layout-grid__cell.pagination-mobile {
-      display: block !important;
-      .pagination {
-        margin-top: -$unit;
-      }
     }
   }
 }
@@ -2586,6 +2571,45 @@ footer.mdc-layout__footer {
       font-size: 0.85rem;
     }
   }
+  // #detailed-results-container .head .save-search {
+  //   display: none;
+  // }
+  // #detailed-results-container .foot .save-search-mobile {
+  //   display: block;
+  // }
+}
+@media screen and (max-width: 1100px) {
+  .goodmoves-vacancy-search .head {
+    .mdc-layout-grid__cell.action {
+      grid-column-end: span 6;
+    }
+    .mdc-layout-grid__cell.pagination-desktop {
+      display: none;
+    }
+    .mdc-layout-grid__cell.pagination-mobile {
+      display: block !important;
+      .pagination {
+        margin-top: -$unit;
+      }
+    }
+  }
+}
+@media screen and (max-width: 839px) {
+  #detailed-results-container .head .pagination {
+    display: none !important;
+  }
+  .goodmoves-vacancy-search .head {
+    .mdc-layout-grid__cell.action {
+      grid-column-end: span 4;
+    }
+  }
+}
+@media screen and (max-width: 479px) {
+  .goodmoves-vacancy-search .head {
+    .mdc-layout-grid__cell.action {
+      grid-column-end: span 2;
+    }
+  }
 }
 @media screen and (max-width: $mobile-breakpoint) {
   .mdc-typography--headline3 {
@@ -2614,6 +2638,16 @@ footer.mdc-layout__footer {
   .scroll-icon,
   .search-info .pull-right {
     display: none;
+  }
+  .search-info {
+    margin-top: $unit;
+  }
+  .filter-search,
+  .save-search {
+    width: 100%;
+  }
+  .goodmoves-vacancy-search .head {
+    margin-bottom: 0;
   }
   .scroll-button {
     width: $unit !important;
@@ -2751,7 +2785,7 @@ footer.mdc-layout__footer {
     padding: 0 $unit/2 $unit !important;
     box-sizing: border-box;
     .settings,
-    .pull-right {
+    .goodmoves-shortlist .pull-right {
       float: none;
     }
   }
@@ -2904,6 +2938,10 @@ footer.mdc-layout__footer {
 }
 .v-margin-full-bottom {
   margin-bottom: $unit;
+}
+.v-margin-none {
+  margin-top: 0;
+  margin-bottom: 0;
 }
 .h-margin {
   margin-left: $unit/2;

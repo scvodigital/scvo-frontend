@@ -11,7 +11,7 @@
         <span class="far fa-map-marker-alt fa-fw" aria-hidden="true"></span>
         <span class="label">Location</span>
       </a>
-      <a class="mdc-tab" role="tab" aria-controls="panel-3">
+      <a class="mdc-tab" role="tab" aria-controls="notes">
         <span class="far fa-edit fa-fw" aria-hidden="true"></span>
         <span class="label">Your notes</span>
       </a>
@@ -186,7 +186,7 @@
           {{/compare ~}}
         </div>
       </div>
-      <div class="panel mdc-card--full-content mdc-typography--body1" role="tabpanel" aria-hidden="true" id="panel-3">
+      <div class="panel mdc-card--full-content mdc-typography--body1" role="tabpanel" aria-hidden="true" id="notes">
         <div class="text-field-container user-notes">
           {{#if @root.data.auth ~}}
             <form action="/save-notes" method="POST" data-ajax-form="true" data-success-message="Notes saved" data-failure-message="Failed to save notes">

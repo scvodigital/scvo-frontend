@@ -1,35 +1,24 @@
 {
-  "name": "funder_search",
-  "pattern": "/funders",
-  "metaData": {
-    "sidebarButton": {
-      "icon": "search",
-      "tooltip": "Search",
-      "classes": "hide-md hide-lg"
-    }
-  },
-  "defaultParams": {
-    "context": "results"
+  "name": "page_digital_evolution_senior_leaders",
+  "pattern": {
+    "index": "/digital/evolution/senior-leaders",
+    "section": "/digital/evolution/senior-leaders/:path"
   },
   "tasks": [
-    "context.metaData.commonTasks.authRequired",
     {
-      "name": "search_data",
+      "name": "primaryResponse",
       "taskModule": "elasticsearch",
       "config": {
         "connectionStringTemplate": "{$../../elasticsearch-url.txt}",
         "elasticsearchConfig": {
-          "apiVersion": "5.6",
-          "log": "debug"
+          "apiVersion": "5.6"
         },
-        "queryTemplates": [
-          {
-            "name": "detailed_results",
-            "index": "web-content-production",
-            "type": "fundingscotland-organisation",
-            "template": ">context.metaData.handlebars.queries.funders_search-list"
-          }
-        ]
+        "queryTemplates": {
+          "index": "web-content-production",
+          "type": "scvo-cms-page",
+          "template": ">context.metaData.handlebars.queries.pages_page",
+          "noResultsRoute": "four_oh_four"
+        }
       },
       "renderer": "handlebars"
     },
@@ -43,16 +32,16 @@
         },
         "queryTemplates": [
           {
-            "name": "types",
+            "name": "related_posts",
             "index": "web-content-production",
-            "type": "fundingscotland-fund",
-            "template": ">context.metaData.handlebars.queries.funds_types"
+            "type": "scvo-cms-post",
+            "template": ">context.metaData.handlebars.queries.pages_page-posts-related-random"
           },
           {
-            "name": "not_found",
+            "name": "splash",
             "index": "web-content-production",
-            "type": "fundingscotland-fund",
-            "template": ">context.metaData.handlebars.queries.pages_not-found"
+            "type": "scvo-cms-media",
+            "template": ">context.metaData.handlebars.queries.pages_splash"
           }
         ]
       },
@@ -73,8 +62,9 @@
           "default": {
             "layout": ">context.metaData.handlebars.layouts.default",
             "parts": {
-              "head": ">context.metaData.handlebars.templates.funders_search-head-tags",
-              "body": ">context.metaData.handlebars.templates.funders_search"
+              "head": ">context.metaData.handlebars.templates.pages_page-head-tags",
+              "body": ">context.metaData.handlebars.templates.pages_page-digital-evolution-senior-leaders",
+              "foot": ""
             },
             "contentType": "text/html"
           }

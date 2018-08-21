@@ -25,7 +25,7 @@ import * as S from 'string';
 // Router modules
 import {Helpers} from './helpers';
 
-import {Router, RouterConfiguration, RouterRequest, RouterResponse, HttpVerb, RendererHandlebars, TaskElasticsearch, TaskMySQL, TaskRedirect, TaskRenderLayout, TaskRender, TaskFirebaseAuth, TaskFirebaseRtbGet, TaskFirebaseRtbSet, TaskTransform} from '@scvo/router';
+import {Router, RouterConfiguration, RouterRequest, RouterResponse, HttpVerb, RendererHandlebars, TaskElasticsearch, TaskMySQL, TaskRedirect, TaskRenderLayout, TaskRender, TaskFirebaseAuth, TaskFirebaseRtbGet, TaskFirebaseRtbSet, TaskTransform, TaskMailgun} from '@scvo/router';
 
 // Import internal modules
 import {SECRETS} from './secrets';
@@ -436,7 +436,8 @@ async function loadRouters(): Promise<any> {
       firebaseAuth: new TaskFirebaseAuth(firebaseApps),
       firebaseRtbGet: new TaskFirebaseRtbGet(firebaseApps),
       firebaseRtbSet: new TaskFirebaseRtbSet(firebaseApps),
-      transform: new TaskTransform({ querystring: querystring, url: url })
+      transform: new TaskTransform({ querystring: querystring, url: url }),
+      mailgun: new TaskMailgun(SECRETS.mailgun)
     }
 
     routers = {};

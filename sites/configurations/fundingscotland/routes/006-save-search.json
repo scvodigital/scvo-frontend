@@ -2,16 +2,7 @@
   "name": "save-search",
   "pattern": "/save-search",
   "tasks": [
-    {
-      "name": "auth",
-      "taskModule": "firebaseAuth",
-      "config": {
-        "tokenPath": "request.cookies.gm_token",
-        "appName": "scvo",
-        "noTokenRoute": "four_oh_four",
-        "notAuthenticatedRoute": "four_oh_four"
-      }
-    },
+    "context.metaData.commonTasks.authRequired",
     {
       "name": "save-search",
       "taskModule": "mysql",

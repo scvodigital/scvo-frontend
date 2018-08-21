@@ -18,7 +18,7 @@
 
 -->
 
-<link rel="shortcut icon" href="https://storage.googleapis.com/scvo-assets/scvo-frontend/assets/images/icons/fundingscotland/favicon.ico">
+<!-- <link rel="shortcut icon" href="https://storage.googleapis.com/scvo-assets/scvo-frontend/assets/images/icons/fundingscotland/favicon.ico">
 <link rel="apple-touch-icon" sizes="57x57" href="https://storage.googleapis.com/scvo-assets/scvo-frontend/assets/images/icons/fundingscotland/apple-icon-57x57.png">
 <link rel="apple-touch-icon" sizes="60x60" href="https://storage.googleapis.com/scvo-assets/scvo-frontend/assets/images/icons/fundingscotland/apple-icon-60x60.png">
 <link rel="apple-touch-icon" sizes="72x72" href="https://storage.googleapis.com/scvo-assets/scvo-frontend/assets/images/icons/fundingscotland/apple-icon-72x72.png">
@@ -35,7 +35,7 @@
 <link rel="manifest" href="https://storage.googleapis.com/scvo-assets/scvo-frontend/assets/images/icons/fundingscotland/manifest.json">
 <meta name="msapplication-TileColor" content="#3c7524">
 <meta name="msapplication-TileImage" content="https://storage.googleapis.com/scvo-assets/scvo-frontend/assets/images/icons/fundingscotland/ms-icon-144x144.png">
-<meta name="theme-color" content="#3c7524">
+<meta name="theme-color" content="#3c7524"> -->
 <link rel="search" type="application/opensearchdescription+xml" title="Funding Scotland" href="/assets/opensearch.xml" />
 
 <link rel="canonical" href="https://fundingscotland.com{{request.params.uri.pathname}}" />
@@ -98,11 +98,11 @@ if(location.host.indexOf('.local') > -1){
               </button>
               {{/if}}
               <span class="mdc-top-app-bar__title hide-md hide-lg">
-                Funding Scotland
+                Funding <span class="scotland">Scotland</span>
               </span>
               <span class="mdc-top-app-bar__title hide-sm">
                 <a href="/">
-                  Funding Scotland
+                  Funding <span class="scotland">Scotland</span>
                 </a>
               </span>
             </section>
@@ -137,13 +137,17 @@ if(location.host.indexOf('.local') > -1){
               {{#if @root.data.auth ~}}
               <div class="mdc-menu-anchor">
                 <button class="mdc-button" data-menu-target="#user-menu">
+                  {{#if @root.data.auth.photoURL ~}}
+                  <img src="{{data.auth.photoURL}}" class="far fa-fw user-avatar" />
+                  {{else}}
                   <span class="far fa-fw fa-user-circle"></span>
-                    {{@root.data.auth.email}}
+                  {{/if ~}}
+                  {{{data.auth.email}}}
                   <span class="far fa-fw fa-angle-down"></span>
                 </button>
                 <div class="mdc-menu" tabindex="-1" data-mdc-auto-init="MDCMenu" id="user-menu">
                   <div class="mdc-menu__items mdc-list" role="menu" aria-hidden="true">
-                    {{#each @root.context.metaData.menus.user ~}}
+                    {{#each @root.context.metaData.menus.user-signed-in ~}}
                     <a class="mdc-list-item {{#if (regexMatch @root.request.url.pathname route "gi")}} mdc-list-item--activated{{/if}}" href="{{stripTrailingSlash path}}" role="menuitem">
                       {{#if icon ~}}
                       <span class="far fa-{{icon}} mdc-list-item__graphic" aria-hidden="true"></span>
@@ -155,8 +159,8 @@ if(location.host.indexOf('.local') > -1){
                 </div>
               </div>
               {{else}}
-              <nav class="mdc-tab-bar mdc-tab-bar__right" id="unauthenticated-tab-bar">
-                {{#each @root.context.metaData.menus.unauthenticated ~}}
+              <nav class="mdc-tab-bar mdc-tab-bar__right" id="user-not-signed-in-tab-bar">
+                {{#each @root.context.metaData.menus.user-not-signed-in ~}}
                 <a class="mdc-tab{{#if (regexMatch @root.request.url.pathname route "gi")}} mdc-tab--active{{/if}}" href="{{stripTrailingSlash path}}">
                   <span class="mdc-tab--label">{{{label}}}</span>
                 </a>
@@ -171,8 +175,8 @@ if(location.host.indexOf('.local') > -1){
       <aside class="mdc-drawer mdc-drawer--temporary" id="mobile-menu" data-mdc-auto-init="MDCTemporaryDrawer">
         <nav class="mdc-drawer__drawer">
           <header class="mdc-drawer__header">
-            <div class="mdc-drawer__header-content">
-              Funding Scotland
+            <div class="mdc-drawer__header-content mdc-top-app-bar__title">
+              Funding <span class="scotland">Scotland</span>
             </div>
           </header>
           <nav class="mdc-drawer__content mdc-list">

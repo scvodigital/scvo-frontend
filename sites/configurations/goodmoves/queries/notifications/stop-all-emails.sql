@@ -1,5 +1,5 @@
 {{#if @root.data.auth ~}}
-UPDATE subscriptions
+UPDATE subscriptionPartitions
 SET active = 0
 WHERE
   campaign IN ({{{mysqlEscape @root.context.metaData.emailCampaignName}}}, {{{mysqlEscape @root.context.metaData.shortlistCampaignName}}}) AND
