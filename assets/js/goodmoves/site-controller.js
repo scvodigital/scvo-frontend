@@ -479,9 +479,6 @@ $(document).ready(function() {
 function initMap() {
   handleLocationBoxes();
 }
-$(document).ready(function() {
-  //handleLocationBoxes();
-});
 
 function handleLocationBoxes() {
   $('[data-location-options]').each(function(i, o) {

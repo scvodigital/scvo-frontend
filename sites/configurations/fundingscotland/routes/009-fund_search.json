@@ -1,6 +1,11 @@
 {
   "name": "fund_search",
-  "pattern": "/search",
+  "debug": true,
+  "pattern": {
+    "search": "/search",
+    "browse_activities_search": "/browse/activities/:activities_slug",
+    "browse_beneficiaries_search": "/browse/beneficiaries/:beneficiaries_slug"
+  },
   "metaData": {
     "sidebarButton": {
       "icon": "search",
@@ -33,31 +38,7 @@
       },
       "renderer": "handlebars"
     },
-    {
-      "name": "supplimentaryResponses",
-      "taskModule": "elasticsearch",
-      "config": {
-        "connectionStringTemplate": "{$../../elasticsearch-url.txt}",
-        "elasticsearchConfig": {
-          "apiVersion": "5.6"
-        },
-        "queryTemplates": [
-          {
-            "name": "types",
-            "index": "web-content-production",
-            "type": "fundingscotland-fund",
-            "template": ">context.metaData.handlebars.queries.funds_types"
-          },
-          {
-            "name": "not_found",
-            "index": "web-content-production",
-            "type": "fundingscotland-fund",
-            "template": ">context.metaData.handlebars.queries.pages_not-found"
-          }
-        ]
-      },
-      "renderer": "handlebars"
-    },
+    "context.metaData.commonTasks.supplimentaryResponses",
     {
       "name": "destination",
       "taskModule": "renderLayout",

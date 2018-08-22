@@ -11,6 +11,36 @@
     "title": "Funding Scotland",
     "menus": "{:./fundingscotland-menus.json}",
     "elasticsearchUrl": "{$../elasticsearch-url.txt}",
+    "termTypeLabels": {
+      "geographical_areas_funded": {
+        "singular": "Region",
+        "plural": "Regions"
+      },
+      "type_of_cost": {
+        "singular": "Type of cost",
+        "plural": "Type of cost"
+      },
+      "type_of_funding": {
+        "singular": "Type of funding",
+        "plural": "Type of funding"
+      },
+      "fund_status": {
+        "singular": "Status",
+        "plural": "Status"
+      },
+      "charities_only": {
+        "singular": "Charities only",
+        "plural": "Charities only"
+      },
+      "activities": {
+        "singular": "Activity",
+        "plural": "Activities"
+      },
+      "beneficiaries": {
+        "singular": "Beneficiary",
+        "plural": "Beneficiaries"
+      }
+    },
     "handlebars": {
       "partials": {
         "{$./partials/**/*.*}": "includeRelativePath=false&regexExpression=(-)&regexOptions=gi&regexReplace=_"
@@ -54,6 +84,91 @@
           "appName": "scvo",
           "noTokenRoute": "sign_in",
           "notAuthenticatedRoute": "sign_in"
+        }
+      },
+      "termsMaps": {
+        "name": "termsMaps",
+        "taskModule": "render",
+        "renderer": "handlebars",
+        "config": {
+          "template": ">context.metaData.handlebars.partials.terms_maps",
+          "output": "data",
+          "parseJson": true
+        }
+      },
+      "supplimentaryResponses": {
+        "name": "supplimentaryResponses",
+        "taskModule": "elasticsearch",
+        "config": {
+          "connectionStringTemplate": "{$../elasticsearch-url.txt}",
+          "elasticsearchConfig": {
+            "apiVersion": "5.6"
+          },
+          "queryTemplates": [
+            {
+              "name": "types",
+              "index": "web-content-production",
+              "type": "fundingscotland-fund",
+              "template": ">context.metaData.handlebars.queries.funds_types"
+            },
+            {
+              "name": "not_found",
+              "index": "web-content-production",
+              "type": "fundingscotland-fund",
+              "template": ">context.metaData.handlebars.queries.pages_not-found"
+            }
+          ]
+        },
+        "renderer": "handlebars"
+      },
+      "fundersWithFunds": {
+        "name": "fundersWithFunds",
+        "taskModule": "elasticsearch",
+        "config": {
+          "connectionStringTemplate": "{$../elasticsearch-url.txt}",
+          "elasticsearchConfig": {
+            "apiVersion": "5.6"
+          },
+          "queryTemplates": [
+            {
+              "name": "funds",
+              "index": "web-content-production",
+              "type": "fundingscotland-fund",
+              "template": ">context.metaData.handlebars.queries.funds_funders"
+            }
+          ]
+        },
+        "renderer": "handlebars"
+      },
+      "searchesData": {
+        "name": "searches",
+        "taskModule": "mysql",
+        "config": {
+          "connectionName": "notifications",
+          "queryTemplates": {
+            "items": ">context.metaData.handlebars.queries.notifications_get-saved-searches"
+          }
+        },
+        "renderer": "handlebars"
+      },
+      "shortlistData": {
+        "name": "shortlist",
+        "taskModule": "mysql",
+        "config": {
+          "connectionName": "notifications",
+          "queryTemplates": {
+            "items": ">context.metaData.handlebars.queries.notifications_get-shortlist"
+          }
+        },
+        "renderer": "handlebars"
+      },
+      "notesData": {
+        "name": "notes",
+        "taskModule": "firebaseRtbGet",
+        "renderer": "handlebars",
+        "config": {
+          "appName": "fundingscotland",
+          "pathTemplate": "/notes/{{data.auth.uid}}"
         }
       }
     },

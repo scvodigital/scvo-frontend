@@ -1,0 +1,28 @@
+{
+  "domains": [
+    "auth.local"
+  ],
+  "routes": [
+    "{:./routes/*.json}"
+  ],
+  "metaData": {
+    "title": "SCVO Emailer",
+    "menus": {},
+    "campaignConfig": "{:./emailer-campaigns.json}",
+    "elasticsearchUrl": "{$../elasticsearch-url.txt}",
+    "handlebars": {
+      "partials": {
+        "{$./partials/**/*.*}": "includeRelativePath=false&regexExpression=(-)&regexOptions=gi&regexReplace=_"
+      },
+      "templates": {
+        "{$./templates/**/*.*}": ""
+      },
+      "layouts": {
+        "{$./layouts/**/*.*}": ""
+      },
+      "queries": {
+        "{$./queries/**/*.*}": ""
+      }
+    }
+  }
+}

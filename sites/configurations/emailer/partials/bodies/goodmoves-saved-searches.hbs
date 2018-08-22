@@ -1,0 +1,43 @@
+<div>
+  <h1>Goodmoves Job Alert!</h1>
+  <p>
+    <strong>Hey there {{subscription.email}}!</strong>
+  <p>
+  {{#with searchData}}
+    {{#if hits.hits.[0]}}
+      <p>
+        Here are jobs since the (Need to get date last sent here) that match your saved search preferences 
+      </p>
+      {{#each hits.hits}}
+      <h2>
+        <a href="https://goodmoves.com/vacancy/{{_source.slug}}">
+        {{_source.title}}
+        </a>
+      </h2>
+      <ul>
+        <li>
+          <strong>Organisation:</strong>
+          <a href="https://goodmoves.com/organisation/{{_source.organisation.slug}}">
+            {{_source.organisation.name}}
+          </a>
+        </li>
+        <li>
+          <strong>Salary:</strong>
+          {{_source.salary}}
+        </li>
+        <li>
+          <strong>Location:</strong>
+          {{_source.location}}
+        </li>
+      </ul>
+      <div>
+        {{{_source.description}}}
+      </div>
+      {{/each}}
+    {{else}}
+      <p>We have nothing for you this week</p>
+    {{/if}}
+  {{else}}
+    <p>We have nothing for you this week... aaand something seems to have gone wrong!</p>
+  {{/with}}
+</div>

@@ -1,6 +1,4 @@
 var FundingScotlandController = Class.extend({
-  userProfile: null,
-  uid: null,
   app: null,
   config: null,
   displayMode: null,
@@ -9,11 +7,17 @@ var FundingScotlandController = Class.extend({
     { name: 'tablet', min: 600, max: 959 },
     { name: 'desktop', min: 960, max: 20000 }
   ],
+  snackbar: null,
+  ie: false,
 
   init: function(firebaseConfig) {
     this.firebaseConfig = firebaseConfig;
-    this.setupMaterialDesignComponents();
+    this.setupComponents();
     this.setupFirebase();
+
+    if (navigator.appName.indexOf('Microsoft') > -1 || navigator.userAgent.indexOf('Trident') > -1) {
+      this.ie = true;
+    }
 
     var that = this;
     $(window).on('resize', function() {
@@ -24,8 +28,8 @@ var FundingScotlandController = Class.extend({
     // Headroom
     var header = document.querySelector("header.top-bar-stuck");
     var headroom  = new Headroom(header, {
-        "offset": 138,
-        "tolerance": 5
+      "offset": 138,
+      "tolerance": 5
     });
     headroom.init();
   },
@@ -42,14 +46,103 @@ var FundingScotlandController = Class.extend({
       this.displayMode = newDisplayMode;
       this.displayModeChanged();
     }
+    this.fie();
   },
 
   displayModeChanged: function() {
-    console.log('Display Mode:', this.displayMode);
+    // console.log('Display Mode:', this.displayMode);
+    var that = this;
+    $('.mdc-drawer--occasional').each(function(i, o) {
+      if (that.displayMode === 'desktop') {
+        console.log(that.displayMode, o);
+        o.MDCTemporaryDrawer.destroy();
+        //$('#sidebar-temporary')
+        //  .removeClass('mdc-drawer--temporary')
+        //  .addClass('mdc-drawer--permanent');
+      } else {
+        console.log(that.displayMode, o);
+        o.MDCTemporaryDrawer.initialize();
+        //$('#sidebar-temporary')
+        //  .removeClass('mdc-drawer--permanent')
+        //  .addClass('mdc-drawer--temporary');
+      }
+    });
   },
 
-  setupMaterialDesignComponents: function() {
+  fie: function() {
+    if (!this.ie) return;
+    $('.mdc-drawer--occasional .mdc-drawer__drawer').each(function(i, o) {
+      var $o = $(o);
+      var parentHeight = $o.parent().height();
+      $o.css('height', parentHeight);
+    });
+  },
+
+  setupComponents: function() {
+    var that = this;
     mdc.autoInit();
+
+    // Think we just need the one global snackbar
+    var $snackbar = $('#app-snackbar');
+    this.snackbar = new mdc.snackbar.MDCSnackbar($snackbar[0]);
+    $snackbar.data('defaultCss', {
+      'background-color': $snackbar.css('background-color'),
+      color: $snackbar.css('color')
+    });
+
+    // Ajax Forms
+    $('form[data-ajax-form][data-success-message][data-failure-message]').submit(function(evt) {
+      evt.preventDefault();
+      var $o = $(event.currentTarget);
+      var url = $o.attr('action');
+      var method = $o.attr('method') || 'GET';
+      var dataType = $o.attr('data-response-type') || 'html';
+      var successMessage = $o.attr('data-success-message');
+      var failureMessage = $o.attr('data-failure-message');
+
+      var request = {
+        url: url,
+        method: method,
+        dataType: dataType,
+        success: function(data, status, xhr) {
+          goodmoves.snackbarShow({
+            message: successMessage
+          });
+        },
+        error: function(xhr, status, err) {
+          goodmoves.snackbarShow({
+            message: failureMessage,
+            backgroundColor: '#dd4b39'
+          });
+        }
+      };
+
+      if (method.toUpperCase() === 'GET') {
+        request.url += (request.url.indexOf('?') > -1 ? '&' : '') + $o.serialize();
+      } else {
+        var data = {};
+        var params = $o.serializeArray();
+        console.log('PARAMS:', params);
+        for (var p = 0; p < params.length; p++) {
+          var param = params[p];
+          if (!data.hasOwnProperty(param.name)) {
+            data[param.name] = param.value;
+          } else {
+            if (!$.isArray(data[param.name])) {
+              data[param.name] = [data[param.name]];
+            }
+            data[param.name].push(param.value);
+          }
+        }
+        request.data = data;
+      }
+      console.log('REQUEST:', request);
+      $.ajax(request);
+    });
+
+    $('[data-mdc-auto-init="MDCTextField"][novalidate]').each(function(i, o) {
+      o.MDCTextField.getDefaultFoundation().useCustomValidityChecking = true;
+    });
 
     // Menu buttons
     $('[data-menu-target]').each(function(i, o) {
@@ -57,6 +150,15 @@ var FundingScotlandController = Class.extend({
       var menuEl = $(selector)[0];
       $(o).on('click', function() {
         menuEl.MDCMenu.open = !menuEl.MDCMenu.open;
+      });
+    });
+
+    // Dialog activator buttons
+    $('[data-dialog-target]').each(function(i, o) {
+      var selector = $(o).attr('data-dialog-target');
+      var dialogEl = $(selector)[0];
+      $(o).on('click', function() {
+        dialogEl.MDCDialog.show();
       });
     });
 
@@ -71,28 +173,106 @@ var FundingScotlandController = Class.extend({
         });
       }
     });
+
+    // Collapsibles
+    $('[data-collapse-target]').off('click').on('click', function(evt) {
+      // console.log('Collapse click:', evt);
+      var $el = $(evt.currentTarget);
+      var selector = $el.attr('data-collapse-target');
+      var $target = $(selector);
+      var $icon = $el.find('.far');
+      if ($target.is(':visible')) {
+        $target.hide();
+        $icon.removeClass('fa-chevron-up').addClass('fa-chevron-down');
+      } else {
+        $target.show();
+        $icon.removeClass('fa-chevron-down').addClass('fa-chevron-up');
+      }
+    });
+
+    // Ajax Chips
+    $('[data-ajax-chip]').each(function(i, o) {
+      var $chip = $(o);
+      var options = $chip.data('ajax-chip');
+      var chip = new mdc.chips.MDCChip(o);
+
+      options.onUrl = options.onUrl || options.toggleUrl;
+      options.offUrl = options.offUrl || options.onUrl;
+      options.onData = options.onData || options.toggleData || null;
+      options.offData = options.offData || options.onData;
+      options.onMethod = options.onMethod || options.toggleMethod || 'GET';
+      options.offMethod = options.offMethod || options.onMethod;
+
+      $chip.on('click', function() {
+        if (!$chip.data('disabled')) {
+          $chip.data('disabled', true);
+          $chip.css('opacity', 0.5);
+          var selected = $chip.hasClass('mdc-chip--selected');
+          var ajax = {
+            url: selected ? options.offUrl || options.onUrl : options.onUrl,
+            method: selected ? options.offMethod || options.onMethod : options.onMethod,
+            data: selected ? options.offData || options.onData || null : options.onData || null,
+            dataType: 'html',
+            success: function() {
+              if (options.onClasses) {
+                var selectors = Object.keys(options.onClasses);
+                for (var s = 0; s < selectors.length; ++s) {
+                  var selector = selectors[s];
+                  var cssClass = options.onClasses[selector];
+                  $(selector)[selected ? 'removeClass' : 'addClass'](cssClass);
+                }
+              }
+              if (options.offClasses) {
+                var selectors = Object.keys(options.offClasses);
+                for (var s = 0; s < selectors.length; ++s) {
+                  var selector = selectors[s];
+                  var cssClass = options.offClasses[selector];
+                  $(selector)[!selected ? 'removeClass' : 'addClass'](cssClass);
+                }
+              }
+              // $chip.find('.mdc-chip__icon--leading')[selected ? 'removeClass' : 'addClass']('mdc-chip__icon--leading-hidden');
+              $chip.find('.mdc-chip__text').text(!selected ? options.onText : options.offText);
+              chip.foundation.setSelected(!selected);
+              $chip.data('disabled', false);
+              $chip.css('opacity', 1);
+            },
+            error: function() {
+              console.error('Failed toggle', options, arguments);
+              $chip.data('disabled', false);
+              $chip.css('opacity', 1);
+            }
+          };
+          $.ajax(ajax);
+        }
+      });
+    });
+
+    $('textarea[data-autosize]').each(function() {
+      var offset = this.offsetHeight - this.clientHeight;
+
+      var resizeTextarea = function(el) {
+        var $el = $(el);
+        if ($el.is(':visible')) {
+          $el.css('height', 'auto').css('height', Math.max(el.scrollHeight, offset));
+        } else {
+          var hiddenParent = $el;
+          while (hiddenParent.parent()[0] && !hiddenParent.parent().is(':visible')) {
+            hiddenParent = hiddenParent.parent();
+          }
+          var state = hiddenParent.attr('style') || '';
+          hiddenParent.css({ 'visibility': 'hidden', 'display': 'block' });
+          $el.css('height', 'auto').css('height', Math.max(el.scrollHeight, offset));
+          hiddenParent.attr('style', state);
+        }
+      };
+      $(this).on('keyup input', function() { resizeTextarea(this); });
+      resizeTextarea(this);
+    });
   },
 
   setupFirebase: function() {
     // Initialize Firebase
     this.app = firebase.initializeApp(this.firebaseConfig);
-    var that = this;
-    // Firebase Auth Functions
-    this.app.auth().onAuthStateChanged(function(user) {
-      if (user) {
-        console.log('User logged in', user);
-        that.uid = user.uid;
-        user.getIdToken().then(function(idToken) {
-          that.setCookie('fs_token', idToken, 7);
-          that.getUserProfile(user, function() {});
-        });
-      } else {
-        console.log('User logged out');
-        that.userProfile = null;
-        that.uid = null;
-        that.updateComponents.call(that);
-      }
-    });
   },
 
   // Utility functions
@@ -106,176 +286,39 @@ var FundingScotlandController = Class.extend({
     document.cookie = name + "=" + (value || "")  + expires + "; path=/; secure";
   },
 
-  getUserProfile: function(user, cb) {
-    var that = this;
-    this.app.database().ref('/users/' + user.uid).once('value').then(function(response) {
-      if (response.exists()) {
-        that.userProfile = response.val();
-        that.userProfile.email = user.email;
-        that.userProfile.displayName = user.displayName;
-        console.log(that.userProfile);
-        that.setUserProfileDefaults().then(function() { }).catch(function(err) { });
-      } else {
-        console.error('User profile does not exist');
-      }
-      if (cb) cb.call(that);
-    }).catch(function(err) {
-      console.error('Failed to get user profile info', err);
-    });
+  disable: function(elements, disable) {
+    disable = typeof disable === 'undefined' ? true : disable;
+    for (var e = 0; e < elements.length; ++e) {
+      var element = elements[e];
+      var opacity = disable ? 0.5 : 1;
+      $(element).prop('disabled', disable).css('opacity', opacity);
+    }
   },
 
-  getSavedSearches: function(user, cb) {
-    if (!user.email) return;
-    var that = this;
-    var url = 'https://scvo.net/subscriber/' + user.email + '/fundingscotland-weekly';
-    $.getJSON(url, function(response) {
-      that.savedSearches = [];
-      if (response.message === 'Found') {
-        response.subscriptions.forEach(function(subscription) {
-          var savedSearch = new SavedSearch(subscription);
-          that.savedSearches.push(savedSearch);
-        });
-      }
-      if (cb) cb.call(that);
-    });
-  },
+  snackbarShow: function(options) {
+    var $snackbar = $('#app-snackbar');
+    $snackbar.css($snackbar.data('defaultCss'));
 
-  updateComponents: function() {
-    $('[data-collapse-target]').off('click').on('click', function(evt) {
-      console.log('Collapse click:', evt);
-      var $el = $(evt.currentTarget);
-      var selector = $el.attr('data-collapse-target');
-      var $target = $(selector);
-      var $icon = $el.find('.far');
-      if ($target.is(':visible')) {
-        $target.hide();
-        $icon.removeClass('fa-chevron-up').addClass('fa-chevron-down');
-      } else {
-        $target.show();
-        $icon.removeClass('fa-chevron-down').addClass('fa-chevron-up');
-      }
-    });
-  },
-
-  setUserProfileDefaults: function() {
-    var that = this;
-    return new Promise(function(resolve, reject) {
-      var userProfile = that.userProfile;
-      if (userProfile === that.userProfile) {
-        that.updateComponents();
-        resolve();
-      } else {
-        that.updateUserProfile(userProfile).then(function(userProfile) {
-          console.log('Saved default profile');
-          resolve();
-        }).catch(function(err) {
-          console.error('Error saving default profile', err);
-          resolve();
-        });
-      }
-    });
-  },
-
-  updateUserProfile: function(userProfile) {
-    var that = this;
-    return new Promise(function(resolve, reject) {
-      var path = '/users/' + that.uid;
-      that.app.database().ref(path).update(that.userProfile).then(function() {
-        console.log('User profile updated', path);
-        that.userProfile = userProfile;
-        that.updateComponents();
-        resolve();
-      }).catch(function(err) {
-        console.error('Failed to update user profile:', path, this.userProfile);
-        reject();
-      });
-    });
+    if (options.backgroundColor) {
+      $snackbar.css('background-color', options.backgroundColor);
+      delete options.backgroundColor;
+    }
+    if (options.color) {
+      $snackbar.css('color', options.color);
+      delete options.color;
+    }
+    this.snackbar.show(options);
   }
 });
 
 var fundingscotland = null;
 $(document).ready(function() {
   fundingscotland = new FundingScotlandController({
-      apiKey: "AIzaSyDIUNnyGeZY3sO8gGIf-_2dgO49xKij5zI",
-      authDomain: "scvo-net.firebaseapp.com",
-      databaseURL: "https://scvo-net.firebaseio.com",
-      projectId: "scvo-net",
-      storageBucket: "scvo-net.appspot.com",
-      messagingSenderId: "782194712584"
-    });
+    apiKey: "AIzaSyDIUNnyGeZY3sO8gGIf-_2dgO49xKij5zI",
+    authDomain: "scvo-net.firebaseapp.com",
+    databaseURL: "https://scvo-net.firebaseio.com",
+    projectId: "scvo-net",
+    storageBucket: "scvo-net.appspot.com",
+    messagingSenderId: "782194712584"
+  });
 });
-
-function initMap() {
-  handleLocationBoxes();
-  handleMaps();
-}
-
-function handleLocationBoxes() {
-  var boxes = $('[data-location-options]');
-  boxes.each(function(i, o) {
-    var options = $(o).data('location-options');
-    var latSelector = $(o).data('location-lat');
-    var lngSelector = $(o).data('location-lng');
-
-    var autocomplete = new google.maps.places.Autocomplete(o, options);
-    autocomplete.addListener('place_changed', function(evt) {
-      var place = this.getPlace();
-      // console.log(place.formatted_address);
-      if (place.geometry.location) {
-        $(latSelector).val(place.geometry.location.lat());
-        $(lngSelector).val(place.geometry.location.lng());
-        $(o).val(place.formatted_address);
-      }
-    });
-  });
-}
-
-function handleMaps() {
-  var maps = $('[data-map-options]').each(function(i, o) {
-    var options = $(o).data('map-options');
-    var map = new google.maps.Map(o, options);
-
-    var pinOptions = $(o).data('map-pins');
-    var pinBounds = new google.maps.LatLngBounds();
-    var pins = [];
-
-    pinOptions.forEach(function(pinOption) {
-      var markerOptions = {
-        map: map,
-        position: {
-          lat: pinOption.coords.lat,
-          lng: pinOption.coords.lon
-        },
-        icon: {
-          path: google.maps.SymbolPath.CIRCLE,
-          scale: 15,
-          fillColor: '#58a934',
-          fillOpacity: 0.6,
-          strokeColor: '#3c7524',
-          strokeOpacity: 0.8,
-          strokeWeight: 2
-        },
-        title: pinOption.title,
-        opacity: 1
-      };
-      var infoWindowOptions = {
-        content: decodeURIComponent(pinOption.info_window),
-      };
-
-      var marker = new google.maps.Marker(markerOptions);
-      var infoWindow = new google.maps.InfoWindow(infoWindowOptions);
-      marker.addListener('click', function() {
-        pins.forEach(function(pin) {
-          pin.infoWindow.close();
-        });
-        infoWindow.open(map, marker);
-      });
-
-      pins.push({
-        marker: marker,
-        infoWindow: infoWindow
-      });
-      pinBounds.extend(markerOptions.position);
-    });
-  });
-}

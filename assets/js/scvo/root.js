@@ -2,6 +2,8 @@ document.addEventListener('DOMContentLoaded', function() {
     // Material Design Components
     mdc.autoInit();
 
+    google.maps.event.addDomListener(window, 'load', initMap);
+
     // Resize iframes
     window.addEventListener("message", function (event) {
         if (event.data.hasOwnProperty('event')) {
