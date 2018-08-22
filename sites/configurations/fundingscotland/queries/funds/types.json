@@ -2,15 +2,7 @@
   "size": 0,
   "_source": false,
   "query": {
-    "bool": {
-      "must": [
-        {
-          "term": {
-            "fund_status": "Open"
-          }
-        }
-      ]
-    }
+    "match_all": {}
   },
   "aggs": {
     "activities": {
@@ -61,6 +53,30 @@
         "size": 10000
       }
     },
+    "charities_only": {
+      "terms": {
+        "field": "charities_only",
+        "size": 10000
+      }
+    },
+    "charities_only_slugs": {
+      "terms": {
+        "field": "charities_only_slugs",
+        "size": 10000
+      }
+    },
+    "fund_status": {
+      "terms": {
+        "field": "fund_status",
+        "size": 10000
+      }
+    },
+    "fund_status_slugs": {
+      "terms": {
+        "field": "fund_status_slug",
+        "size": 10000
+      }
+    },
     "type_of_cost": {
       "terms": {
         "field": "type_of_cost",
@@ -79,7 +95,7 @@
         "size": 10000
       }
     },
-    "type_of_funding_slug": {
+    "type_of_funding_slugs": {
       "terms": {
         "field": "type_of_funding_slug",
         "size": 10000

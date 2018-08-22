@@ -1,0 +1,31 @@
+{
+  {{#each (split "activities,beneficiaries" ",")}}
+    "{{this}}": {
+      "slugsMap": {
+        {{#each (getProperty @root.data.supplimentaryResponses.types.aggregations (concat this ".buckets")) ~}}
+          "{{slugify key}}": {
+            "term": {{{stringify key}}},
+            "count": {{doc_count}}
+          }{{#unless @last}},{{/unless}}
+        {{/each}}
+      },
+      "termsMap": {
+        {{#each (getProperty @root.data.supplimentaryResponses.types.aggregations (concat this ".buckets")) ~}}
+          {{{stringify key}}}: {
+            "slug": "{{slugify key}}",
+            "count": {{doc_count}}
+          }{{#unless @last}},{{/unless}}
+        {{/each}}
+      },
+      "all": [
+        {{#each (getProperty @root.data.supplimentaryResponses.types.aggregations (concat this ".buckets")) ~}}
+          {
+            "term": "{{key}}",
+            "slug": "{{slugify key}}",
+            "count": {{doc_count}}
+          }{{#unless @last}},{{/unless}}
+        {{/each}}
+      ]
+    }{{#unless @last}},{{/unless}}
+  {{/each}}
+}
