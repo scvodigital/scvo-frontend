@@ -22,45 +22,68 @@
   ],
   "query": {
     "bool": {
-      {{#ifAny request.params.query.activities request.params.query.beneficiaries ~}}
       "filter": [
-        {{#if request.params.query.activities ~}}
-        {
-          "terms": {
-            "activities_slugs": {{{stringify (arrayify request.params.query.activities)}}}
-          }
-        }
-        {{#ifAny request.params.query.beneficiaries}},{{/ifAny}}
-        {{/if ~}}
-        {{#if request.params.query.beneficiaries ~}}
-        {
-          "terms": {
-            "beneficiaries_slugs": {{{stringify (arrayify request.params.query.beneficiaries)}}}
-          }
-        }
-        {{/if ~}}
+        {{>queries_vacancy_common_filters_open request.params.query}},
+        {{>queries_vacancy_search_filters request.params.query}}
       ],
-      {{/ifAny ~}}
       "must": [
-        {{#if request.params.query.keywords ~}}
-        {
-          "query_string": {
-            "query": {{{stringify request.params.query.keywords}}},
-            "fields": ["text_bag_boost^5", "text_bag"],
-            "default_operator": "AND",
-            "analyzer": "snowball"
-          }
-        },
-        {{/if ~}}
-        {
-          "term": {
-            "fund_status": "Open"
-          }
-        }
-      ]
+        {{>queries_vacancy_search_must request.params.query}}
+      ],
+      "should": [
+        {{>queries_vacancy_search_should request.params.query}}
+      ],
+      "minimum_should_match": 2
     }
   },
-  "sort": {
-    "date_last_modified": "desc"
-  }
+  "sort": [
+    {{#if @root.request.params.query.sort ~}}
+    {{#compare @root.request.params.query.sort "===" "max_funded_asc" ~}}
+    {
+      "maximum_award_size": "asc"
+    }
+    {{else}}
+    {{#compare @root.request.params.query.sort "===" "max_funded_desc" ~}}
+    {
+      "maximum_award_size": "desc"
+    }
+    {{else}}
+    {{#compare @root.request.params.query.sort "===" "deadline_date_asc" ~}}
+    {
+      "next_deadline": "asc"
+    }
+    {{else}}
+    {{#compare @root.request.params.query.sort "===" "deadline_date_desc" ~}}
+    {
+      "next_deadline": "desc"
+    }
+    {{else}}
+    {{#compare @root.request.params.query.sort "===" "alphabetical_asc" ~}}
+    {
+      "title": "asc"
+    }
+    {{else}}
+    {{#compare @root.request.params.query.sort "===" "alphabetical_desc" ~}}
+    {
+      "title": "desc"
+    }
+    {{else}}
+    {{#compare @root.request.params.query.sort "===" "date_last_reviewed" ~}}
+    {
+      "date_last_important_activity": "asc"
+    }
+    {{else}}
+    {{#compare @root.request.params.query.sort "===" "relevance" ~}}
+    "_score"
+    {{/compare ~}}
+    {{/compare ~}}
+    {{/compare ~}}
+    {{/compare ~}}
+    {{/compare ~}}
+    {{/compare ~}}
+    {{/compare ~}}
+    {{/compare ~}}
+    {{else}}
+    "_score"
+    {{/if ~}}
+  ]
 }
