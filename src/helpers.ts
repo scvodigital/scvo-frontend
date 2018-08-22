@@ -394,6 +394,7 @@ export class Helpers {
     if (!obj || !path) {
       return null;
     }
+    console.log('Looking for "', path, '"');
     const val = dot.pick(path, obj);
     return val;
   }
@@ -475,6 +476,13 @@ export class Helpers {
       return -1;
     }
     return input.length;
+  }
+
+  static helper_any(input: any[]) {
+    if (!Array.isArray(input)) {
+      return false;
+    }
+    return input.length > 0;
   }
 
   static helper_pluck(items: any[], path: string) {

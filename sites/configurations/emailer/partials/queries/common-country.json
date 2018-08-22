@@ -1,0 +1,64 @@
+{{#compare @root.request.url.hostname "===" "goodmoves.local" ~}}
+  {
+    "terms": {
+      "country": [
+        "Scotland",
+        "England",
+        "Wales",
+        "Northern Ireland"
+      ]
+    }
+  },
+{{/compare ~}}
+{{#compare @root.request.url.hostname "===" "goodmoves.org.uk" ~}}
+  {
+    "terms": {
+      "country": [
+        "Scotland",
+        "England",
+        "Wales",
+        "Northern Ireland"
+      ]
+    }
+  },
+{{/compare ~}}
+{{#compare @root.request.url.hostname "===" "test.goodmoves.com" ~}}
+  {
+    "terms": {
+      "country": [
+        "Scotland",
+        "England",
+        "Wales",
+        "Northern Ireland"
+      ]
+    }
+  },
+{{/compare ~}}
+{{#compare @root.request.url.hostname "===" "goodmoves.scot" ~}}
+  {
+    "terms": {
+      "country": [
+        "Scotland"
+      ]
+    }
+  },
+{{/compare ~}}
+{{#compare @root.request.url.hostname "===" "goodmoves.be" ~}}
+  {
+    "terms": {
+      "country": [
+        "Belgium"
+      ]
+    }
+  },
+{{/compare ~}}
+{{#compare @root.request.url.hostname "===" "goodmovesjobs.de" ~}}
+  {
+    "terms": {
+      "country": [
+        "Germany"
+      ]
+    }
+  },
+{{/compare ~}}
+{{>queries_do_nothing}}

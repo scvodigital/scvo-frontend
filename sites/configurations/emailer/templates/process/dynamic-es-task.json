@@ -1,0 +1,38 @@
+{{#if (any @root.data.notifications.subscriptions.[0])}}
+{
+  "name": "search_data",
+  "taskModule": "elasticsearch",
+  "renderer": "handlebars",
+  "subs": {{{stringify @root.data.notifications}}},
+  "config": {
+    "connectionStringTemplate": "{{{@root.context.metaData.elasticsearchUrl}}}",
+    "elasticsearchConfig": {
+      "apiVersion": "5.6",
+      "log": "trace"
+    },
+    "queryTemplates": [
+      {{#each @root.data.notifications.subscriptions.[0]}}
+      {
+        "name": "{{{slugify email}}}",
+        "index": "web-content-production",
+        "type": "goodmoves-vacancy",
+        "template": "{{{getProperty @root.context.metaData.campaignConfig (concat campaign '.queryTemplate')}}}",
+        "metaData": {{{stringify this}}}
+      }{{#unless @last}},{{/unless}}
+      {{/each}}
+    ]
+  }
+}
+{{else}}
+{
+  "name": "search_data",
+  "taskModule": "render",
+  "renderer": "handlebars",
+  "config": {
+    "output": "data",
+    "template": "{ \"status\": \"No more subscriptions to process\" }",
+    "parseJson": true
+  },
+  "subs": {{{stringify @root.data.notifications}}}
+}
+{{/if}}

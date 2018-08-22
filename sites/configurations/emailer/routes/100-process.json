@@ -1,0 +1,61 @@
+{
+  "name": "process",
+  "pattern": "/process",
+  "debug": true,
+  "tasks": [
+    {
+      "name": "notifications",
+      "taskModule": "mysql",
+      "config": {
+        "connectionName": "notifications",
+        "queryTemplates": {
+          "subscriptions": "CALL _getPage(NULL, 5);"
+        }
+      },
+      "renderer": "handlebars"
+    },
+    {
+      "name": "generate_es_task",
+      "taskModule": "render",
+      "renderer": "handlebars",
+      "config": {
+        "output": "data",
+        "parseJson": true,
+        "template": ">context.metaData.handlebars.templates.process_dynamic-es-task"
+      }
+    },
+    "data.generate_es_task",
+    {
+      "name": "send_emails",
+      "taskModule": "render",
+      "renderer": "handlebars",
+      "config": {
+        "output": "data",
+        "parseJson": true,
+        "connectionName": "goodmoves-saved-searches",
+        "template": ">context.metaData.handlebars.templates.process_email-data"
+      }
+    },
+    {
+      "name": "reset",
+      "taskModule": "mysql",
+      "config": {
+        "connectionName": "notifications",
+        "queryTemplates": {
+          "reset": "CALL _resetProcessing(NULL);"
+        }
+      },
+      "renderer": "handlebars"
+    },
+    {
+      "name": "destination",
+      "taskModule": "render",
+      "renderer": "handlebars",
+      "config": {
+        "output": "body",
+        "template": "{{{stringify @root.data.send_emails}}}",
+        "parseJson": false
+      }
+    }
+  ]
+}
