@@ -527,11 +527,24 @@ footer h3,
 .fundingscotland-fund-search {
   .head {
     margin-bottom: $unit/2;
+    .mdc-button.saved-search,
+    .mdc-button.filter-search,
+    .mdc-button.save-search,
+    .mdc-text-field,
     .mdc-select {
-      margin-top: 0;
+      margin: $unit/2 0 $unit;
     }
-    .mdc-button.save-search {
-      margin-top: $unit;
+    .mdc-button.saved-search {
+      color: $mdc-theme-secondary-dark;
+      label {
+        margin: 0 $unit;
+        .far {
+          color: $mdc-theme-primary-light;
+        }
+      }
+    }
+    .mdc-button.saved-search:hover {
+      cursor: default;
     }
     .pagination {
       margin-top: $unit*1.25;
@@ -1611,7 +1624,7 @@ footer,
 
 .home-funds {
   background-color: $mdc-theme-secondary-light;
-  padding: 0 $unit*1.5 $unit !important;
+  padding: 0 $unit 0 !important;
 }
 // .currently-recruiting,
 // .home-funds {

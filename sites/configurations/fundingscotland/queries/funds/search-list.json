@@ -23,10 +23,12 @@
   "query": {
     "bool": {
       "filter": [
-        {{>queries_fund_search_filters request.params.query}}
+        {{>queries_fund_search_filters @root.request.params.query}}{{#if @root.request.params.activities_slug}},
+        {{>queries_term field="activities_slugs" term=@root.request.params.activities_slug}}{{/if}}{{#if @root.request.params.beneficiaries_slug}},
+        {{>queries_term field="beneficiaries_slugs" term=@root.request.params.beneficiaries_slug}}{{/if}}
       ],
       "must": [
-        {{>queries_fund_search_must request.params.query}}
+        {{>queries_fund_search_must @root.request.params.query}}
       ]
     }
   },
