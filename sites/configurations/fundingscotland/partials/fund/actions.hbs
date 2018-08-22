@@ -1,0 +1,19 @@
+<div class="mdc-card__actions">
+  <div class="mdc-card__action-buttons demo-card__action-buttons--text-only mdc-card__actions--full-bleed">
+    {{#compare action "===" "funder" ~}}
+    <a href="/funder/{{funder_organisation.slug}}{{@root.request.url.search}}" class="mdc-card__action hide-sm">Find out more about {{funder_organisation.name}}</a>
+    {{else}}
+    <a href="/vacancy/{{slug}}{{@root.request.url.search}}" class="mdc-card__action hide-sm">Find out more</a>
+    <a href="/vacancy/{{slug}}{{@root.request.url.search}}" class="mdc-card__action hide-md hide-lg"><span class="fal fa-info-circle fa-fw fa-2x" aria-hidden="true"></span></a>
+    {{#compare (trim (getProperty @root.data.notes Id)) "!==" "" ~}}
+    <a href="/vacancy/{{slug}}{{@root.request.url.search}}#notes" class="mdc-card__action mdc-card__action-notes hide-sm">Your notes</a>
+    <a href="/vacancy/{{slug}}{{@root.request.url.search}}#notes" class="mdc-card__action mdc-card__action-notes hide-md hide-lg"><span class="fal fa-edit fa-fw fa-2x" aria-hidden="true"></span></a>
+    {{/compare ~}}
+    {{/compare ~}}
+  </div>
+  <div class="mdc-card__action-icons pull-right">
+    <div class="mdc-chip-set mdc-chip-set--filter">
+      {{> shortlist_chip id=Id}}
+    </div>
+  </div>
+</div>

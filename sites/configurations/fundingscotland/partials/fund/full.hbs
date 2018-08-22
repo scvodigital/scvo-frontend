@@ -9,7 +9,7 @@
       </a>
       <a class="mdc-tab" role="tab" aria-controls="panel-2">
         <span class="far fa-map-marker-alt fa-fw" aria-hidden="true"></span>
-        Extra?
+        Location
       </a>
       <a class="mdc-tab" role="tab" aria-controls="panel-3">
         <span class="far fa-edit fa-fw" aria-hidden="true"></span>
@@ -22,34 +22,24 @@
       <div class="panel panel--active mdc-card--full-content" role="tabpanel" aria-hidden="false" id="panel-1">
         <div class="key-info-extra">
           <ul class="fa-ul">
-            {{#if start_at ~}}
+            {{#if activities ~}}
             <li class="mdc-card__info--fund-closing mdc-typography--body1">
-              <span class="fa-li"><span class="far fa-calendar-plus fa-fw" title="Start date"></span></span>
-              Advertised from {{momentFormat (moment start_at "x") "Do MMMM YYYY"}}
+              <span class="fa-li"><span class="far fa-tags fa-fw" title="Activities"></span></span>
+              {{#each activities ~}}
+                <a href="/browse/activities/{{lookup ../activities_slugs @index}}" class="mdc-chip">
+                  {{{this}}}
+                </a>
+              {{/each ~}}
             </li>
             {{/if ~}}
-            {{#if salary_info ~}}
+            {{#if beneficiaries ~}}
             <li class="mdc-card__info--fund-location mdc-typography--body1">
-              <span class="fa-li"><span class="far fa-info-circle fa-fw" title="Salary information"></span></span>
-              {{salary_info}}
-            </li>
-            {{/if ~}}
-            {{#if benefits ~}}
-            <li class="mdc-card__info--fund-salary mdc-typography--body1">
-              <span class="fa-li"><span class="far fa-smile fa-fw" title="Benefits"></span></span>
-              {{{benefits}}}
-            </li>
-            {{/if ~}}
-            {{#if reference_number ~}}
-            <li class="mdc-card__info--fund-reference mdc-typography--body1">
-              <span class="fa-li"><span class="far fa-hashtag fa-fw" title="Reference"></span></span>
-              {{reference_number}}
-            </li>
-            {{/if ~}}
-            {{#if closing_date ~}}
-            <li class="mdc-card__info--fund-closing mdc-typography--body1">
-              <span class="fa-li"><span class="far fa-calendar-alt fa-fw" title="Closing date"></span></span>
-              Closing on {{momentFormat (moment closing_date "x") "dddd \t\h\e Do \o\f MMMM YYYY \a\t h:mm a"}}
+              <span class="fa-li"><span class="far fa-tags fa-fw" title="Beneficiaries"></span></span>
+              {{#each beneficiaries ~}}
+              <a href="/browse/beneficiaries/{{lookup ../beneficiaries_slugs @index}}" class="mdc-chip">
+                {{{this}}}
+              </a>
+              {{/each ~}}
             </li>
             {{/if ~}}
           </ul>
@@ -62,12 +52,10 @@
           </div>
           {{/if ~}}
 
-          {{{rendered.goodmoves_sponsor_logos}}}
-
-          {{#if application_notes ~}}
-          <h4 class="mdc-typography--headline6">Application notes</h4>
+          {{#if exclusions ~}}
+          <h4 class="mdc-typography--headline6">Exclusions</h4>
           <div class="mdc-typography--body1">
-            {{{application_notes}}}
+            {{{exclusions}}}
           </div>
           {{/if ~}}
         </div>
