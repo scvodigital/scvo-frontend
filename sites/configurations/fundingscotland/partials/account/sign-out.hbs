@@ -1,13 +1,14 @@
 {{> account_sign_out_loader message="Signing out&hellip;"}}
 <script>
-  document.addEventListener("DOMContentLoaded", function(event) {
-    window.setTimeout(function() {
-      fundingscotland.app.auth().signOut().then(function() {
-        window.location.href = '/';
-        fundingscotland.setCookie('fs_token');
-      }).catch(function(err) {
-        console.error('Error logging out:', err);
-      });
-    }, 1000);
-  });
+document.addEventListener("DOMContentLoaded", function(event) {
+  window.setTimeout(function() {
+    fundingscotland.app.auth().signOut().then(function() {
+      fundingscotland.setCookie('fs_token');
+      fundingscotland.setCookie('fs_cookie');
+      window.location.href = '/';
+    }).catch(function(err) {
+      console.error('Error signing out:', err);
+    });
+  }, 1000);
+});
 </script>

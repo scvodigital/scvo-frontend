@@ -12,17 +12,33 @@
       {{> pagination paging=@root.data.search_data.detailed_results.pagination}}
     </div>
     <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
-      <div class="mdc-select mdc-select--box pull-right" data-mdc-auto-init="MDCSelect">
-        <select class="mdc-select__native-control" id="sort" name="sort">
-          <option value="undefined">Relevance</option>
-          <option value="date_deadline-asc">Deadline soon</option>
-          <option value="start_at-desc">Newest</option>
-          <option value="start_at-asc">Oldest</option>
-        </select>
-        <label class="mdc-floating-label mdc-floating-label--float-above" for="sort">
-          Sort
-        </label>
-      </div>
+      {{#compare @root.data.search_data.detailed_results.hits.total ">" 0 ~}}
+      <form action="{{{@root.request.url.path}}}" method="GET">
+        <input type="hidden" name="keywords" value="{{@root.request.params.query.keywords}}" />
+        <input type="hidden" name="fund_status" value="{{@root.request.params.query.fund_status}}" />
+        <input type="hidden" name="charities_only" value="{{@root.request.params.query.charities_only}}" />
+        <input type="hidden" name="geographical_areas_funded" value="{{@root.request.params.query.geographical_areas_funded}}" />
+        <input type="hidden" name="type_of_cost" value="{{@root.request.params.query.type_of_cost}}" />
+        <input type="hidden" name="type_of_funding" value="{{@root.request.params.query.type_of_funding}}" />
+        <input type="hidden" name="activities" value="{{@root.request.params.query.activities}}" />
+        <input type="hidden" name="beneficiaries" value="{{@root.request.params.query.beneficiaries}}" />
+        <div class="mdc-select mdc-select--box pull-right" data-mdc-auto-init="MDCSelect">
+          <select class="mdc-select__native-control" id="sort" name="sort" onchange="this.form.submit();">
+            <option value="relevance"{{#compare @root.request.params.query.sort "===" "relevance"}} selected{{/compare}}>Relevance</option>
+            <option value="max_funded_asc"{{#compare @root.request.params.query.sort "===" "max_funded_asc"}} selected{{/compare}}>Maximum funded - low to high</option>
+            <option value="max_funded_desc"{{#compare @root.request.params.query.sort "===" "max_funded_desc"}} selected{{/compare}}>Maximum funded - high to low</option>
+            <option value="deadline_date_asc"{{#compare @root.request.params.query.sort "===" "deadline_date_asc"}} selected{{/compare}}>Deadline date - soonest first</option>
+            <option value="deadline_date_desc"{{#compare @root.request.params.query.sort "===" "deadline_date_desc"}} selected{{/compare}}>Deadline date - soonest last</option>
+            <option value="date_last_reviewed"{{#compare @root.request.params.query.sort "===" "date_last_reviewed"}} selected{{/compare}}>Date last reviewed</option>
+            <option value="alphabetical_asc"{{#compare @root.request.params.query.sort "===" "alphabetical_asc"}} selected{{/compare}}>Alphabetical - a to z</option>
+            <option value="alphabetical_desc"{{#compare @root.request.params.query.sort "===" "alphabetical_desc"}} selected{{/compare}}>Alphabetical - z to a</option>
+            </select>
+          <label class="mdc-floating-label mdc-floating-label--float-above" for="sort">
+            Sort
+          </label>
+        </div>
+      </form>
+      {{/compare ~}}
     </div>
   </div>
 </div>

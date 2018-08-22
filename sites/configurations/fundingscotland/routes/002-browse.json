@@ -19,25 +19,7 @@
       },
       "renderer": "handlebars"
     },
-    {
-      "name": "supplimentaryResponses",
-      "taskModule": "elasticsearch",
-      "config": {
-        "connectionStringTemplate": "{$../../elasticsearch-url.txt}",
-        "elasticsearchConfig": {
-          "apiVersion": "5.6"
-        },
-        "queryTemplates": [
-          {
-            "name": "types",
-            "index": "web-content-production",
-            "type": "fundingscotland-fund",
-            "template": ">context.metaData.handlebars.queries.funds_types"
-          }
-        ]
-      },
-      "renderer": "handlebars"
-    },
+    "context.metaData.commonTasks.supplimentaryResponses",
     {
       "name": "destination",
       "taskModule": "renderLayout",
@@ -55,7 +37,8 @@
             "parts": {
               "head": ">context.metaData.handlebars.templates.pages_page-head-tags",
               "body": ">context.metaData.handlebars.templates.pages_browse",
-              "foot": ""
+              "foot": "",
+              "sidebar": ">context.metaData.handlebars.templates.funds_search-form"
             },
             "contentType": "text/html"
           }

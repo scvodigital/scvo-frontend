@@ -1,19 +1,14 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"></script>
 <script>
 var terms = {
-  sectors: [
-    {{#each data.supplimentaryResponses.types.aggregations.sectors.buckets ~}}
-    { field: 'sectors', term: {{{stringify key}}} },
+  activities: [
+    {{#each data.supplimentaryResponses.types.aggregations.activities.buckets ~}}
+    { field: 'activities', term: {{{stringify key}}} },
     {{/each ~}}
   ],
-  roles: [
-    {{#each data.supplimentaryResponses.types.aggregations.roles.buckets ~}}
-    { field: 'roles', term: {{{stringify key}}} },
-    {{/each ~}}
-  ],
-  role_status: [
-    {{#each data.supplimentaryResponses.types.aggregations.role_status.buckets ~}}
-    { field: 'role_status', term: {{{stringify key}}} },
+  beneficiaries: [
+    {{#each data.supplimentaryResponses.types.aggregations.beneficiaries.buckets ~}}
+    { field: 'beneficiaries', term: {{{stringify key}}} },
     {{/each ~}}
   ]
 };

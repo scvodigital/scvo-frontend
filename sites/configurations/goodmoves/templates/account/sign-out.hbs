@@ -3,8 +3,8 @@
 document.addEventListener("DOMContentLoaded", function(event) {
   window.setTimeout(function() {
     goodmoves.app.auth().signOut().then(function() {
-      goodmoves.setCookie('fs_token');
-      goodmoves.setCookie('fs_cookie');
+      goodmoves.setCookie('gm_token');
+      goodmoves.setCookie('gm_cookie');
       window.location.href = '/';
     }).catch(function(err) {
       console.error('Error signing out:', err);

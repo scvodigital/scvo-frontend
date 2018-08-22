@@ -201,17 +201,25 @@
           {{> delete_search name=name formClasses="inline-form"}}
           {{/with}} -->
         {{else}}
-          <button class="mdc-button mdc-button--raised mdc-button--large save-search" id="save-search-button" data-dialog-target="#save-search-dialog">
+          <button class="mdc-button mdc-button--raised mdc-button--large save-search hide-sm hide-md" id="save-search-button" data-dialog-target="#save-search-dialog">
             <span class="far fa-search-plus mdc-list-item__graphic" aria-hidden="true"></span>
             Save/email this search
+          </button>
+          <button class="mdc-button mdc-button--raised mdc-button--large filter-search hide-lg" id="filter-search-button" data-drawer-target="#sidebar-temporary">
+            <span class="far fa-search mdc-list-item__graphic" aria-hidden="true"></span>
+            Search filters
           </button>
         {{/if ~}}
       {{/with ~}}
       {{else}}
-      <a href="/sign-up" class="mdc-button mdc-button--raised mdc-button--large save-search" id="save-search-button">
+      <a href="/sign-up" class="mdc-button mdc-button--raised mdc-button--large save-search hide-sm hide-md" id="save-search-button">
         <span class="far fa-sign-in-alt mdc-list-item__graphic" aria-hidden="true"></span>
         Sign up to create email alerts
       </a>
+      <button class="mdc-button mdc-button--raised mdc-button--large filter-search hide-lg" id="filter-search-button" data-drawer-target="#sidebar-temporary">
+        <span class="far fa-search mdc-list-item__graphic" aria-hidden="true"></span>
+        Search filters
+      </button>
       {{/if ~}}
     </div>
     <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone pagination-desktop">
@@ -260,4 +268,9 @@
 
 <div class="foot">
   {{> pagination paging=@root.data.search_data.detailed_results.pagination}}
+
+  <button class="mdc-button mdc-button--raised mdc-button--large save-search hide-lg" id="save-search-button-foot" data-dialog-target="#save-search-dialog">
+    <span class="far fa-search-plus mdc-list-item__graphic" aria-hidden="true"></span>
+    Save/email this search
+  </button>
 </div>
