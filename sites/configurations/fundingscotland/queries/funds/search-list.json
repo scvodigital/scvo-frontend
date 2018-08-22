@@ -18,21 +18,16 @@
     "funder_organisation.name",
     "funder_organisation.has_logo",
     "funder_organisation.logo_url",
-    "rendered.goodmoves_rss"
+    "rendered.fundingscotland_rss"
   ],
   "query": {
     "bool": {
       "filter": [
-        {{>queries_vacancy_common_filters_open request.params.query}},
-        {{>queries_vacancy_search_filters request.params.query}}
+        {{>queries_fund_search_filters request.params.query}}
       ],
       "must": [
-        {{>queries_vacancy_search_must request.params.query}}
-      ],
-      "should": [
-        {{>queries_vacancy_search_should request.params.query}}
-      ],
-      "minimum_should_match": 2
+        {{>queries_fund_search_must request.params.query}}
+      ]
     }
   },
   "sort": [
