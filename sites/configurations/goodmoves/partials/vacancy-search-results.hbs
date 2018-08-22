@@ -153,73 +153,54 @@
   <div class="mdc-layout-grid__inner">
     <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone action">
       {{#if data.auth ~}}
-      {{#with (
-                querystringify (obj)
-                keywords=@root.request.params.query.keywords
-                salary_min=@root.request.params.query.salary_min
-                salary_max=@root.request.params.query.salary_max
-                roles=@root.request.params.query.roles
-                sectors=@root.request.params.query.sectors
-                statuses=@root.request.params.query.statuses
-                distance=@root.request.params.query.distance
-                lat=@root.request.params.query.lat
-                lng=@root.request.params.query.lng
-                location=@root.request.params.query.location
-              ) ~}}
-        <script>
-          document.addEventListener('DOMContentLoaded', function() {
-            console.log('Current Query String:', {{{stringify this}}});
-            console.log('Saved Search Query Strings:', {{{stringify (map @root.data.searches.items.[0] (getProp 'querystring'))}}});
-          });
-        </script>
-        {{#if (itemAt @root.data.searches.items.[0] (indexOf (map @root.data.searches.items.[0] (getProp 'querystring')) this)) ~}}
-        {{#with (itemAt @root.data.searches.items.[0] (indexOf (map @root.data.searches.items.[0] (getProp 'querystring')) this))}}
-          <h3 class="mdc-typography--headline6">
-            Your search&ensp;
-            <span class="mdc-typography--body1">
-              <a name="#" data-dialog-target="#edit-search-dialog" style="cursor:pointer;">{{{partition}}}</a>
-            </span>
-          </h3>
-          <!-- {{#> ajax_chip
-            onUrl="/toggle-subscription"
-            offUrl="/toggle-subscription"
-            onText="Email"
-            offText="Email"
-            onMethod="POST"
-            offMethod="POST"
-            iconClasses="far fa-envelope"
-            on=subscribed}}
-          {
-            "onData": {
-              "name": {{{stringify name}}}
-            },
-            "offData": {
-              "name": {{{stringify name}}}
-            }
-          }
-          {{/ajax_chip}}
-          {{> delete_search name=name formClasses="inline-form"}}
-          {{/with}} -->
+        {{#with (
+                  querystringify (obj)
+                  keywords=@root.request.params.query.keywords
+                  salary_min=@root.request.params.query.salary_min
+                  salary_max=@root.request.params.query.salary_max
+                  roles=@root.request.params.query.roles
+                  sectors=@root.request.params.query.sectors
+                  statuses=@root.request.params.query.statuses
+                  distance=@root.request.params.query.distance
+                  lat=@root.request.params.query.lat
+                  lng=@root.request.params.query.lng
+                  location=@root.request.params.query.location
+                ) ~}}
+          <script>
+            document.addEventListener('DOMContentLoaded', function() {
+              console.log('Current Query String:', {{{stringify this}}});
+              console.log('Saved Search Query Strings:', {{{stringify (map @root.data.searches.items.[0] (getProp 'querystring'))}}});
+            });
+          </script>
+          {{#if (itemAt @root.data.searches.items.[0] (indexOf (map @root.data.searches.items.[0] (getProp 'querystring')) this)) ~}}
+            {{#with (itemAt @root.data.searches.items.[0] (indexOf (map @root.data.searches.items.[0] (getProp 'querystring')) this))}}
+              <h3 class="mdc-typography--headline6">
+                Your search&ensp;
+                <span class="mdc-typography--body1">
+                  <a name="#" data-dialog-target="#edit-search-dialog" style="cursor:pointer;">{{{partition}}}</a>
+                </span>
+              </h3>
+            {{/with ~}}
+          {{else}}
+            <button class="mdc-button mdc-button--raised mdc-button--large save-search hide-sm hide-md" id="save-search-button" data-dialog-target="#save-search-dialog">
+              <span class="far fa-search-plus mdc-list-item__graphic" aria-hidden="true"></span>
+              Save/email this search
+            </button>
+            <button class="mdc-button mdc-button--raised mdc-button--large filter-search hide-lg" id="filter-search-button" data-drawer-target="#sidebar-temporary">
+              <span class="far fa-search mdc-list-item__graphic" aria-hidden="true"></span>
+              Search filters
+            </button>
+          {{/if ~}}
         {{else}}
-          <button class="mdc-button mdc-button--raised mdc-button--large save-search hide-sm hide-md" id="save-search-button" data-dialog-target="#save-search-dialog">
-            <span class="far fa-search-plus mdc-list-item__graphic" aria-hidden="true"></span>
-            Save/email this search
-          </button>
-          <button class="mdc-button mdc-button--raised mdc-button--large filter-search hide-lg" id="filter-search-button" data-drawer-target="#sidebar-temporary">
-            <span class="far fa-search mdc-list-item__graphic" aria-hidden="true"></span>
-            Search filters
-          </button>
-        {{/if ~}}
-      {{/with ~}}
-      {{else}}
-      <a href="/sign-up" class="mdc-button mdc-button--raised mdc-button--large save-search hide-sm hide-md" id="save-search-button">
-        <span class="far fa-sign-in-alt mdc-list-item__graphic" aria-hidden="true"></span>
-        Sign up to create email alerts
-      </a>
-      <button class="mdc-button mdc-button--raised mdc-button--large filter-search hide-lg" id="filter-search-button" data-drawer-target="#sidebar-temporary">
-        <span class="far fa-search mdc-list-item__graphic" aria-hidden="true"></span>
-        Search filters
-      </button>
+        <a href="/sign-up" class="mdc-button mdc-button--raised mdc-button--large save-search hide-sm hide-md" id="save-search-button">
+          <span class="far fa-sign-in-alt mdc-list-item__graphic" aria-hidden="true"></span>
+          Sign up to create email alerts
+        </a>
+        <button class="mdc-button mdc-button--raised mdc-button--large filter-search hide-lg" id="filter-search-button" data-drawer-target="#sidebar-temporary">
+          <span class="far fa-search mdc-list-item__graphic" aria-hidden="true"></span>
+          Search filters
+        </button>
+        {{/with ~}}
       {{/if ~}}
     </div>
     <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone pagination-desktop">

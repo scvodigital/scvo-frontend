@@ -1,0 +1,25 @@
+{{#if @root.data.auth ~}}
+  {{#> ajax_chip
+    onUrl=(concat "/add-to-shortlist?id=" id)
+    offUrl=(concat "/remove-from-shortlist?id=" id)
+    onText="Shortlist"
+    offText="Shortlist"
+    iconClasses="far fa-star"
+    on=(contains (map @root.data.shortlist.items.[0] (getProp "value")) id)
+  }}
+  {
+    "extraAttributes": "data-vacancy-id=\"{{../id}}\"",
+    "onClasses": {
+      ".mdc-card[data-vacancy-id=\"{{../id}}\"]": "added-to-shortlist"
+      },
+    "offClasses": {
+      ".mdc-card[data-vacancy-id=\"{{../id}}\"]": "removed-from-shortlist"
+    }
+  }
+  {{/ajax_chip}}
+{{else}}
+  <div class="mdc-chip" data-dialog-target="#shortlist-dialog">
+    <span class="far fa-star mdc-chip__icon mdc-chip__icon--leading" aria-hidden="true"></span>
+    <div class="mdc-chip__text noselect">Shortlist</div>
+  </div>
+{{/if ~}}
