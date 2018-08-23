@@ -141,6 +141,25 @@
         },
         "renderer": "handlebars"
       },
+      "organisationsWithOpenVacancies": {
+        "name": "organisationsWithVacancies",
+        "taskModule": "elasticsearch",
+        "config": {
+          "connectionStringTemplate": "{$../elasticsearch-url.txt}",
+          "elasticsearchConfig": {
+            "apiVersion": "5.6"
+          },
+          "queryTemplates": [
+            {
+              "name": "vacancies",
+              "index": "web-content-production",
+              "type": "goodmoves-vacancy",
+              "template": ">context.metaData.handlebars.queries.vacancies_organisations-currently-recruiting"
+            }
+          ]
+        },
+        "renderer": "handlebars"
+      },
       "searchesData": {
         "name": "searches",
         "taskModule": "mysql",
