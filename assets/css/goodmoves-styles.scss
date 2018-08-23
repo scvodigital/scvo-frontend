@@ -2193,29 +2193,34 @@ footer,
   }
 }
 .currently-recruiting {
-  padding: $unit/4 $unit*1.5 $unit/3 !important;
+  padding: $unit/4 0 $unit/3 !important;
   background-color: white;
+  .mdc-layout-grid__inner {
+    grid-gap: 0;
+  }
   .organisation-logo:before {
     content: "";
     display: block;
     padding-top: 100%;
   }
   .organisation-logo {
-    border-radius: 5px;
+    border-radius: 0;
+    padding: 0 $unit*1.5 $unit*1.5;
     position: relative;
     width: 100%;
     background-color: transparent;
     display: flex;
     justify-content: center;
     align-items: center;
+    box-sizing: border-box;
     img {
       mix-blend-mode: multiply;
       max-width: 100%;
       max-height: 100%;
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
+      // position: absolute;
+      // top: 50%;
+      // left: 50%;
+      // transform: translate(-50%, -50%);
       transition: 0.3s;
     }
   }
