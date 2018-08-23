@@ -1,9 +1,10 @@
-$mdc-theme-primary: #00796A;
-$mdc-theme-primary-light: #198678;
-$mdc-theme-primary-dark: #006054;
+$mdc-theme-primary: #88B84A;
+$mdc-theme-primary-light: #B3D5F4;
+$mdc-theme-primary-dark: #5FA43D;
 
-$mdc-theme-complimentary: #b2cfcb;
-$mdc-theme-complimentary-light: #e5efed;
+$mdc-theme-complimentary: #f8ecdb;
+$mdc-theme-complimentary-light: #fefde7;
+$mdc-theme-complimentary-dark: #f6e5e1;
 
 $mdc-theme-secondary: #E0E0E0; // Gray 300
 $mdc-theme-secondary-light: #F5F5F5; // Gray 100
@@ -1049,6 +1050,16 @@ a {
 }
 
 .mdc-chip-set {
+  padding: 0;
+  .v-margin {
+    display: block;
+    width: 100%;
+  }
+  .mdc-chip {
+    margin: 0;
+  }
+}
+#search-terms.mdc-chip-set {
   float: left;
   padding: 0;
   margin-bottom: 0;
@@ -1056,6 +1067,44 @@ a {
     margin: 0 $unit/2 $unit/4 0;
   }
 }
+.mdc-chip {
+  background-color: $mdc-theme-secondary;
+  color: $mdc-theme-secondary-dark;
+  margin: 0;
+  font-weight: 600;
+  .mdc-chip__icon.mdc-chip__icon--leading {
+    color: $mdc-theme-secondary-dark;
+    display: inline-block;
+  }
+  .mdc-chip__icon.mdc-chip__icon--leading-hidden {
+    display: none;
+  }
+  .mdc-chip__text {
+    margin-left: $unit/2;
+  }
+  .mdc-chip__checkmark-path {
+    stroke: white !important;
+  }
+}
+.mdc-chip:hover {
+  .mdc-chip__icon--leading {
+    color: #000;
+  }
+}
+.mdc-card .mdc-chip {
+  background-color: $mdc-theme-complimentary-dark;
+}
+.mdc-card .mdc-chip.mdc-chip--selected,
+.mdc-chip.mdc-chip--selected {
+  background-color: $mdc-theme-primary;
+  color: white;
+}
+.mdc-card .mdc-chip.mdc-chip--selected:hover,
+.mdc-chip.mdc-chip--selected:hover {
+  background-color: $mdc-theme-primary-dark;
+  color: white;
+}
+
 .pagination-mobile,
 .fundingscotland-organisation .mdc-card.list .mdc-card__info--fund-funder {
   display: none !important;
