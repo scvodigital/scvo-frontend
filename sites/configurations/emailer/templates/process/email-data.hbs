@@ -1,6 +1,6 @@
 [
 {{#if @root.data.search_data}}
-  {{#each @root.data.notifications.subscriptions.[0]}}
+  {{#eachJoin @root.data.notifications.subscriptions.[0] ","}}
     {{#ifAny
       (getProperty @root.context.metaData.campaignConfig (concat campaign '.sendIfEmpty'))
       (any (getProperty @root.data.search_data (concat (slugify email) '.hits.hits')))
@@ -21,9 +21,8 @@
               campaignConfig=(getProperty @root.context.metaData.campaignConfig campaign)          
             ~}}
           {{~/blockStringify}}
-      },
+      }
     {{/ifAny}}
-  {{/each}}
-  null
+  {{/eachJoin}}
 {{/if}}
 ]

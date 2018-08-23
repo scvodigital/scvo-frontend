@@ -143,8 +143,23 @@ export class Helpers {
   static helper_blockStringify(context: any, options: any) {
     var block = options.fn(context);
     var json = JSON.stringify(block, null, 4);
-    console.log('BLOCKSTRINGIFY', json);
+    //console.log('BLOCKSTRINGIFY', json);
     return json;
+  }
+
+  static helper_eachJoin(input: any[], separator: string, options: any) {
+    var items: string[] = [];
+
+    for (var i = 0; i < input.length; i++) {
+      items.push(options.fn(input[i]));
+    }
+
+    items = items.filter((item: string) => {
+      return !!item.replace(/\s|\r|\n/gi, '');
+    });
+    
+    var out = items.join(', ');
+    return out;
   }
 
   static helper_indexOf(haystack: any[], needle: any): number|null {
