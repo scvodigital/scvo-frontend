@@ -23,6 +23,7 @@ $base-font-weight:                  400;
 
 $heading-font-family:               "Montserrat", Helvetica, Arial, sans-serif;
 $heading-font-weight:               700;
+$heading-medium-font-weight:        600;
 $heading-light-font-weight:         500;
 
 $footer-font-family:                "Open Sans", Helvetica, Arial, sans-serif;
@@ -39,7 +40,7 @@ $desktop-landscape-breakpoint: 1280px;
 
 @import "./node_modules/material-components-web/material-components-web.scss";
 @import url('//cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css');
-@import url('//fonts.googleapis.com/css?family=Montserrat:500,700|Open+Sans:400,500,600');
+@import url('//fonts.googleapis.com/css?family=Montserrat:500,600,700|Open+Sans:400,500,600');
 
 body {
   background-color: $mdc-theme-footer-dark;
@@ -63,9 +64,9 @@ h3,
 h4 {
   margin-bottom: $unit/2;
   font-family: $heading-font-family, $base-font-family, Helvetica, Arial, sans-serif;
-  font-weight: $base-font-weight;
+  font-weight: $heading-font-weight;
   strong {
-    font-weight: 700;
+    font-weight: $heading-font-weight;
   }
 }
 .headroom {
@@ -306,10 +307,19 @@ footer h3,
 .mdc-textfield__label,
 .mdc-typography--title,
 .mdc-typography--headline,
+.mdc-typography--headline1,
+.mdc-typography--headline2,
+.mdc-typography--headline3,
+.mdc-typography--headline4,
+.mdc-typography--headline5,
+.mdc-typography--headline6,
+.mdc-typography--headline7,
+.mdc-typography--headline,
 .supplimentary-list-title {
   font-family: $heading-font-family, $base-font-family, Helvetica, Arial, sans-serif;
   font-weight: $heading-font-weight;
 }
+.mdc-drawer__content-heading,
 .mdc-typography--headline1,
 .mdc-typography--headline2,
 .mdc-typography--headline3,
@@ -318,7 +328,10 @@ footer h3,
 .mdc-typography--headline6,
 .mdc-typography--headline7,
 .mdc-typography--headline {
-  font-weight: $base-font-weight;
+  font-weight: $heading-medium-font-weight;
+  a {
+    font-weight: $heading-medium-font-weight;
+  }
 }
 .mdc-typography--body1 {
   font-size: 1rem;
@@ -1282,7 +1295,7 @@ a {
     h4 {
       margin: 0 0 $unit;
       font-size: 1.5rem;
-      font-weight: $heading-light-font-weight;
+      font-weight: $heading-medium-font-weight;
     }
     .key-info-extra {
       padding: $unit $unit 0;
@@ -1393,6 +1406,7 @@ hr {
 .mdc-drawer__content-heading {
   margin: 0;
   padding: $unit $unit/2;
+  font-weight: $heading-medium-font-weight;
   .mdc-icon-toggle {
     margin-top: -$unit*(3/4);
   }
@@ -1538,7 +1552,7 @@ body.shortlist {
   }
   .mdc-chip:hover {
     .mdc-chip__icon {
-      font-weight: 700;
+      font-weight: 600;
     }
   }
 }
@@ -1669,7 +1683,7 @@ body {
         margin-right: $unit/5;
         display: inline-block;
         padding: .22222222rem $unit/2;
-        font-weight: 700;
+        font-weight: $heading-medium-font-weight;
         line-height: 1;
         text-align: center;
         white-space: nowrap;
@@ -2076,6 +2090,7 @@ footer,
           font-size: 4.5rem;
           line-height: 4.5rem;
           letter-spacing: -0.3rem;
+          font-weight: $heading-font-weight;
           .normal {
             letter-spacing: -0.4rem;
             font-weight: $heading-light-font-weight;
@@ -2193,12 +2208,12 @@ footer,
   }
   .gist {
     .mdc-typography--headline {
-      font-weight: $heading-light-font-weight;
+      font-weight: $heading-medium-font-weight;
       font-size: 1.1rem;
       margin: 0;
     }
     .mdc-card__subtitle {
-      font-weight: $heading-light-font-weight;
+      font-weight: $heading-medium-font-weight;
       margin: $unit/2 0;
       color: $mdc-theme-secondary-dark;
     }
@@ -3039,6 +3054,11 @@ form.inline-form {
 .search-result-article__notes .faded-overflow {
   &:before {
     background: linear-gradient(rgba(236, 242, 233, 0), rgba(236, 242, 233, 1));
+  }
+}
+.top-job .search-result-article__notes .faded-overflow {
+  &:before {
+    background: linear-gradient(rgba(198, 218, 191, 0), rgba(198, 218, 191, 1));
   }
 }
 
