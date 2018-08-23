@@ -13,7 +13,7 @@
     "queryTemplates": [
       {{#each @root.data.notifications.subscriptions.[0]}}
       {
-        "name": "{{{slugify email}}}",
+        "name": "{{{concat (slugify campaign) '-' (slugify email)}}}",
         "index": "web-content-production",
         "type": "goodmoves-vacancy",
         "template": "{{{getProperty @root.context.metaData.campaignConfig (concat campaign '.queryTemplate')}}}",
