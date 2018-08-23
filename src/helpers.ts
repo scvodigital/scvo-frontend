@@ -394,7 +394,7 @@ export class Helpers {
     if (!obj || !path) {
       return null;
     }
-    console.log('Looking for "', path, '"');
+    // console.log('Looking for "', path, '"');
     const val = dot.pick(path, obj);
     return val;
   }
