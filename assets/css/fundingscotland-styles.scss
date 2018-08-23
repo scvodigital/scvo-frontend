@@ -117,6 +117,14 @@ header {
         display: none;
       }
     }
+    .mdc-top-app-bar__upper .mdc-top-app-bar__section--align-start {
+      background-image: url('https://storage.googleapis.com/scvo-assets/assets/images/fs-legacy-logo.png');
+      background-repeat: no-repeat;
+      background-position: $unit center;
+      .mdc-top-app-bar__title .brand-text {
+        display: none;
+      }
+    }
     .mdc-top-app-bar__row.mdc-top-app-bar__upper {
       height: $header-upper-height;
     }
@@ -448,6 +456,8 @@ footer h3,
 .sign-out-form .mdc-card,
 #sign-out-loader {
   display: flex;
+  align-items: center;
+  justify-content: center;
   background-color: transparent;
 }
 .sign-up-form {
@@ -469,14 +479,15 @@ footer h3,
 }
 
 .card-loader {
+  display: none;
   position: absolute;
   height: 100%;
   width: 100%;
   top: 0;
   left: 0;
   background-color: $mdc-theme-secondary-light;
-  opacity: 0.7;
-  display: none;
+  opacity: 0.8;
+  z-index: 2;
   .card-loader-inner {
     color: $mdc-theme-primary-dark;
     display: flex;
@@ -1048,7 +1059,7 @@ hr {
 }
 
 .page-content {
-  padding: $unit 0 $unit*2;
+  padding: $unit 0 $unit;
 }
 .mdc-drawer__content {
   padding: 0 $unit/2 $unit;
@@ -1408,7 +1419,7 @@ body {
     grid-gap: $unit/2;
   }
   .mdc-text-field {
-    z-index: 4;
+    z-index: 1;
     overflow: visible;
   }
   .mdc-text-field--box::before,
@@ -1568,9 +1579,9 @@ footer,
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
-    min-height: 40vh;
+    min-height: 23vh;
     .page-content {
-      min-height: 40vh;
+      min-height: 23vh;
       .search-form {
         position: relative;
         background-color: rgba(255, 255, 255, 0.6);
@@ -1581,13 +1592,15 @@ footer,
     }
   }
   .banner-search.overlay {
-    display: block;
+    background-image: url(https://storage.googleapis.com/scvo-assets/assets/images/fs-legacy-banner-back.png);
+    background-size: cover;
+    background-position: center center;
     .content {
-      background-image: linear-gradient(60deg, rgba(0, 121, 106, 0.89), rgba(0, 121, 106, 0.91) 47%, transparent 47.08%, transparent);
+      // background-image: linear-gradient(60deg, rgba(0, 121, 106, 0.89), rgba(0, 121, 106, 0.91) 47%, transparent 47.08%, transparent);
       display: flex;
-      justify-content: space-between;
-      flex-direction: column;
-      min-height: 40vh;
+      align-items: center;
+      justify-content: center;
+      min-height: 23vh;
       background-color: transparent;
       // padding: 0 0 $unit*2;
       .mdc-card__actions {
