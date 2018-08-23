@@ -33,7 +33,52 @@
       ]
     }
   },
-  "sort": {
-    "closing_date": "desc"
-  }
+  "sort": [
+    {{#if @root.request.params.query.sort ~}}
+    {{#compare @root.request.params.query.sort "===" "salary_low" ~}}
+    {
+      "salary_min": "asc"
+    },
+    {
+      "salary_max": "asc"
+    }
+    {{else}}
+    {{#compare @root.request.params.query.sort "===" "salary_high" ~}}
+    {
+      "salary_min": "desc"
+    },
+    {
+      "salary_max": "desc"
+    }
+    {{else}}
+    {{#compare @root.request.params.query.sort "===" "newest" ~}}
+    {
+      "start_at": "desc"
+    }
+    {{else}}
+    {{#compare @root.request.params.query.sort "===" "oldest" ~}}
+    {
+      "start_at": "asc"
+    }
+    {{else}}
+    {{#compare @root.request.params.query.sort "===" "closing_soon" ~}}
+    {
+      "closing_date": "asc"
+    }
+    {{else}}
+    {
+      "closing_date": "asc"
+    }
+    {{/compare ~}}
+    {{/compare ~}}
+    {{/compare ~}}
+    {{/compare ~}}
+    {{/compare ~}}
+    {{/compare ~}}
+    {{else}}
+    {
+      "closing_date": "asc"
+    }
+    {{/if ~}}
+  ]
 }
