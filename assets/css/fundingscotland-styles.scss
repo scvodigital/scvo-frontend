@@ -1,9 +1,10 @@
 $mdc-theme-primary: #00796A;
 $mdc-theme-primary-light: #198678;
-$mdc-theme-primary-dark: #006054;
+$mdc-theme-primary-dark: #00796A;
 
-$mdc-theme-complimentary: #b2cfcb;
-$mdc-theme-complimentary-light: #e5efed;
+$mdc-theme-complimentary: #c6dabf;
+$mdc-theme-complimentary-light: #ecf2e9;
+$mdc-theme-complimentary-dark: #d9e6d4;
 
 $mdc-theme-secondary: #E0E0E0; // Gray 300
 $mdc-theme-secondary-light: #F5F5F5; // Gray 100
@@ -22,6 +23,7 @@ $base-font-weight:                  400;
 
 $heading-font-family:               "Montserrat", Helvetica, Arial, sans-serif;
 $heading-font-weight:               700;
+$heading-medium-font-weight:        600;
 $heading-light-font-weight:         500;
 
 $footer-font-family:                "Open Sans", Helvetica, Arial, sans-serif;
@@ -38,7 +40,7 @@ $desktop-landscape-breakpoint: 1280px;
 
 @import "./node_modules/material-components-web/material-components-web.scss";
 @import url('//cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css');
-@import url('//fonts.googleapis.com/css?family=Montserrat:500,700|Open+Sans:400,500,600');
+@import url('//fonts.googleapis.com/css?family=Montserrat:500,600,700|Open+Sans:400,500,600');
 
 body {
   background-color: $mdc-theme-footer-dark;
@@ -62,9 +64,9 @@ h3,
 h4 {
   margin-bottom: $unit/2;
   font-family: $heading-font-family, $base-font-family, Helvetica, Arial, sans-serif;
-  font-weight: $base-font-weight;
+  font-weight: $heading-font-weight;
   strong {
-    font-weight: 700;
+    font-weight: $heading-font-weight;
   }
 }
 .headroom {
@@ -142,7 +144,7 @@ header {
       height: $header-lower-height;
     }
     .mdc-top-app-bar__lower .mdc-top-app-bar__section--align-start {
-      background-image: linear-gradient(60deg, $mdc-theme-primary-dark, $mdc-theme-primary-dark 220px, $mdc-theme-primary 221px, $mdc-theme-primary);
+      background-image: linear-gradient(60deg, #328c19, #328c19 220px, #6CC439 221px, $mdc-theme-primary);
     }
     .mdc-top-app-bar__lower .mdc-top-app-bar__section--align-end {
       background-color: $mdc-theme-primary;
@@ -335,10 +337,20 @@ footer h3,
 .mdc-card__title,
 .mdc-textfield__label,
 .mdc-typography--title,
+.mdc-typography--headline,
+.mdc-typography--headline1,
+.mdc-typography--headline2,
+.mdc-typography--headline3,
+.mdc-typography--headline4,
+.mdc-typography--headline5,
+.mdc-typography--headline6,
+.mdc-typography--headline7,
+.mdc-typography--headline,
 .supplimentary-list-title {
   font-family: $heading-font-family, $base-font-family, Helvetica, Arial, sans-serif;
   font-weight: $heading-font-weight;
 }
+.mdc-drawer__content-heading,
 .mdc-typography--headline1,
 .mdc-typography--headline2,
 .mdc-typography--headline3,
@@ -347,7 +359,10 @@ footer h3,
 .mdc-typography--headline6,
 .mdc-typography--headline7,
 .mdc-typography--headline {
-  font-weight: $base-font-weight;
+  font-weight: $heading-medium-font-weight;
+  a {
+    font-weight: $heading-medium-font-weight;
+  }
 }
 .mdc-typography--body1 {
   font-size: 1rem;
@@ -759,7 +774,7 @@ a {
   }
   .mdc-card__actions {
     border-radius: 0 0 2px 2px;
-    background-color: $mdc-theme-complimentary;
+    background-color: $mdc-theme-complimentary-light;
     min-height: auto;
     a {
       color: $mdc-theme-primary-dark;
@@ -834,7 +849,7 @@ a {
     display: none;
   }
   .mdc-card__actions {
-    background-color: $mdc-theme-complimentary;
+    background-color: $mdc-theme-complimentary-light;
     .mdc-card__action {
       color: $mdc-theme-primary-dark;
     }
@@ -844,7 +859,7 @@ a {
 .fundingscotland-fund.mdc-card.mini,
 .fundingscotland-fund.mdc-card.gist,
 .fundingscotland-fund.mdc-card.search-result {
-  border-top: $unit/3 solid $mdc-theme-complimentary;
+  border-top: $unit/3 solid $mdc-theme-complimentary-light;
   .mdc-card__info--vacancy-row {
     padding-top: $unit/4;
     padding-bottom: 0;
@@ -958,7 +973,7 @@ a {
   }
   #fund-tab-bar {
     width: 100%;
-    background-color: $mdc-theme-complimentary;
+    background-color: $mdc-theme-complimentary-light;
     display: flex;
     border-radius: 2px 2px 0 0;
     .mdc-tab {
@@ -987,7 +1002,7 @@ a {
     h4 {
       margin: 0 0 $unit;
       font-size: 1.5rem;
-      font-weight: $heading-light-font-weight;
+      font-weight: $heading-medium-font-weight;
     }
     .key-info-extra {
       padding: $unit;
@@ -999,7 +1014,7 @@ a {
         vertical-align: top;
         font-weight: 600;
         color: $mdc-theme-secondary-dark;
-        background-color: $mdc-theme-complimentary;
+        background-color: $mdc-theme-complimentary-light;
       }
       .mdc-chip:hover {
         text-decoration: none;
@@ -1049,6 +1064,16 @@ a {
 }
 
 .mdc-chip-set {
+  padding: 0;
+  .v-margin {
+    display: block;
+    width: 100%;
+  }
+  .mdc-chip {
+    margin: 0;
+  }
+}
+#search-terms.mdc-chip-set {
   float: left;
   padding: 0;
   margin-bottom: 0;
@@ -1056,6 +1081,44 @@ a {
     margin: 0 $unit/2 $unit/4 0;
   }
 }
+.mdc-chip {
+  background-color: $mdc-theme-secondary;
+  color: $mdc-theme-secondary-dark;
+  margin: 0;
+  font-weight: 600;
+  .mdc-chip__icon.mdc-chip__icon--leading {
+    color: $mdc-theme-secondary-dark;
+    display: inline-block;
+  }
+  .mdc-chip__icon.mdc-chip__icon--leading-hidden {
+    display: none;
+  }
+  .mdc-chip__text {
+    margin-left: $unit/2;
+  }
+  .mdc-chip__checkmark-path {
+    stroke: white !important;
+  }
+}
+.mdc-chip:hover {
+  .mdc-chip__icon--leading {
+    color: #000;
+  }
+}
+.mdc-card .mdc-chip {
+  background-color: $mdc-theme-complimentary-dark;
+}
+.mdc-card .mdc-chip.mdc-chip--selected,
+.mdc-chip.mdc-chip--selected {
+  background-color: $mdc-theme-primary;
+  color: white;
+}
+.mdc-card .mdc-chip.mdc-chip--selected:hover,
+.mdc-chip.mdc-chip--selected:hover {
+  background-color: $mdc-theme-primary-dark;
+  color: white;
+}
+
 .pagination-mobile,
 .fundingscotland-organisation .mdc-card.list .mdc-card__info--fund-funder {
   display: none !important;
@@ -1087,6 +1150,7 @@ hr {
 .mdc-drawer__content-heading {
   margin: 0;
   padding: $unit $unit/2;
+  font-weight: $heading-medium-font-weight;
   .mdc-icon-toggle {
     margin-top: -$unit*(3/4);
   }
@@ -1305,26 +1369,6 @@ body {
     padding: 0 $unit/2;
     .mdc-card__info--fund-title {
       margin: $unit/2 0 $unit*(3/4);
-      a .top-job {
-        margin-left: 0;
-        margin-right: .2rem;
-        display: inline-block;
-        padding: .22222222rem $unit/2;
-        font-weight: 700;
-        line-height: 1;
-        text-align: center;
-        white-space: nowrap;
-        vertical-align: baseline;
-        color: $mdc-theme-secondary-dark;
-        background-color: $mdc-theme-secondary !important;
-        border-radius: $unit;
-        position: relative;
-        top: -2px;
-        left: 0;
-        font-size: 1rem;
-        height: $unit*1.5;
-        box-sizing: border-box;
-      }
     }
     .fa-ul {
       li {
@@ -1504,7 +1548,7 @@ body {
     padding-right: 0;
   }
   li.current-page {
-    background-color: $mdc-theme-complimentary;
+    background-color: $mdc-theme-complimentary-dark;
     border-radius: 50%;
   }
   li:hover,
@@ -1594,7 +1638,7 @@ footer,
       min-height: 23vh;
       .search-form {
         position: relative;
-        background-color: rgba(255, 255, 255, 0.6);
+        background-color: rgba(255, 255, 255, 0.75);
         width: 100%;
         padding: 0 $unit $unit/2;
         box-sizing: border-box;
@@ -1679,6 +1723,7 @@ footer,
           font-size: 4.8rem;
           line-height: 4rem;
           letter-spacing: -0.2rem;
+          font-weight: $heading-font-weight;
           .normal {
             letter-spacing: -0.4rem;
             font-weight: $heading-light-font-weight;
@@ -1733,12 +1778,12 @@ footer,
   }
   .gist {
     .mdc-typography--headline {
-      font-weight: $heading-light-font-weight;
+      font-weight: $heading-medium-font-weight;
       font-size: 1.1rem;
       margin: 0;
     }
     .mdc-card__subtitle {
-      font-weight: $heading-light-font-weight;
+      font-weight: $heading-medium-font-weight;
       margin: $unit/2 0;
       color: $mdc-theme-secondary-dark;
     }

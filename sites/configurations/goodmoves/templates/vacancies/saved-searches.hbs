@@ -6,7 +6,7 @@
   </div>
   {{/compare}}
   <h1 class="mdc-typography--headline3 v-margin-full">
-    Searches
+    Saved searches &amp; email
   </h1>
 
   {{#compare (length @root.data.searches.items.[0]) ">" 0 ~}}
@@ -15,17 +15,17 @@
       <span class="mdc-list-item__graphic far" aria-hidden="true"></span>
       <div class="mdc-layout-grid">
         <div class="mdc-layout-grid__inner">
-          <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-9-desktop mdc-layout-grid__cell--span-5-tablet mdc-layout-grid__cell--span-2-phone saved-search">
+          <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-8-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone saved-search">
             <span class="mdc-list-item__text">
-              <strong>Search name</strong>
+              <strong>Search</strong>
             </span>
           </div>
-          <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-2-desktop mdc-layout-grid__cell--span-2-tablet mdc-layout-grid__cell--span-1-phone align-centre">
+          <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-2-desktop mdc-layout-grid__cell--span-2-tablet mdc-layout-grid__cell--span-2-phone align-centre">
             <span class="mdc-list-item__text">
-              <strong>Include in email</strong>
+              <strong>Email</strong>
             </span>
           </div>
-          <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-1-desktop mdc-layout-grid__cell--span-1-tablet mdc-layout-grid__cell--span-1-phone align-centre">
+          <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-2-desktop mdc-layout-grid__cell--span-2-tablet mdc-layout-grid__cell--span-2-phone align-centre">
             <span class="mdc-list-item__text">
               <strong>Delete</strong>
             </span>
@@ -38,7 +38,7 @@
         <span class="mdc-list-item__graphic far fa-search fa-2x" aria-hidden="true"></span>
         <div class="mdc-layout-grid">
           <div class="mdc-layout-grid__inner">
-            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-9-desktop mdc-layout-grid__cell--span-5-tablet mdc-layout-grid__cell--span-2-phone saved-search">
+            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-8-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone saved-search">
               <span class="mdc-list-item__text">
                 <a href="/search?{{{this.querystring}}}">{{{partition}}}</a>
                 <div class="mdc-list-item__secondary-text">
@@ -90,7 +90,7 @@
                 </div>
               </span>
             </div>
-            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-2-desktop mdc-layout-grid__cell--span-2-tablet mdc-layout-grid__cell--span-1-phone align-centre">
+            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-2-desktop mdc-layout-grid__cell--span-2-tablet mdc-layout-grid__cell--span-2-phone align-centre">
               <div class="mdc-chip-set mdc-chip-set--filter">
                 {{#> ajax_chip
                   onUrl="/toggle-subscription"
@@ -113,7 +113,7 @@
                 {{/ajax_chip}}
               </div>
             </div>
-            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-1-desktop mdc-layout-grid__cell--span-1-tablet mdc-layout-grid__cell--span-1-phone">
+            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-2-desktop mdc-layout-grid__cell--span-2-tablet mdc-layout-grid__cell--span-2-phone">
               {{> delete_search name=partition}}
             </div>
           </div>
