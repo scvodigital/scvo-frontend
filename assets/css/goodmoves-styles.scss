@@ -167,7 +167,7 @@ header {
         color: white;
       }
       .mdc-tab:hover .mdc-tab--label {
-        border-bottom-color: rgba(255, 255, 255, 0.6);
+        border-bottom-color: rgba(255, 255, 255, 0.75);
       }
       .mdc-tab.mdc-tab--active .mdc-tab--label {
         border-bottom-color: rgba(255, 255, 255, 0.9);
@@ -1734,15 +1734,14 @@ body {
     padding: $unit;
   }
   .mdc-card__media--organisation {
-    max-width: 150px;
-    max-height: 150px;
-    /*height: auto;*/
     display: flex;
     align-items: flex-start;
-    margin: $unit/2 $unit/2 0 $unit/2;
+    margin: $unit/2 0 $unit/2 $unit/2;
     padding: 0;
+    overflow: hidden;
     img {
-      width: 100%;
+      max-width: $unit*8;
+      max-height: $unit*8;
       object-fit: contain;
     }
   }
@@ -1751,7 +1750,7 @@ body {
   flex: 1 0 auto;
   .mdc-card__media--organisation {
     float: right;
-    margin: $unit $unit $unit/2 $unit/2;
+    margin: $unit 0 $unit/2 $unit/2;
   }
 }
 .goodmoves-organisation {
