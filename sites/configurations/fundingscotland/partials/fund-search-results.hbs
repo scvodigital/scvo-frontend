@@ -1,12 +1,17 @@
-{{#if @root.request.params.activities_slug ~}}
-  <div class="browse-heading">
-    <h1>{{{@root.request.params.activities_slug}}}</h1>
-  </div>
-{{/if ~}}
-{{#if @root.request.params.beneficiaries_slug ~}}
-<div class="browse-heading">
-  <h1>{{{@root.request.params.beneficiaries_slug}}}</h1>
-</div>
+{{#if @root.request.params.browse_slug ~}}
+  {{#if @root.request.params.browse_type ~}}
+    {{#compare @root.request.params.browse_type "===" "activities" ~}}
+      <div class="browse-heading">
+        <h1>Activity: {{{@root.request.params.activities_slug}}}</h1>
+      </div>
+    {{else}}
+      {{#compare @root.request.params.browse_type "===" "beneficiaries" ~}}
+        <div class="browse-heading">
+          <h1>Beneficiary: {{{@root.request.params.activities_slug}}}</h1>
+        </div>
+      {{/compare ~}}
+    {{/compare ~}}
+  {{/if ~}}
 {{/if ~}}
 
 {{> search_info paging=@root.data.search_data.detailed_results.pagination}}
@@ -180,16 +185,16 @@
     <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone action">
       {{#if @root.data.auth ~}}
         {{#with (
-                  querystringify (obj)
-                  keywords=@root.request.params.query.keywords
-                  activities=(sort @root.request.params.query.activities)
-                  beneficiaries=(sort @root.request.params.query.beneficiaries)
-                  fund_status=(sort @root.request.params.query.fund_status)
-                  charities_only=(sort @root.request.params.query.charities_only)
-                  geographical_areas_funded=(sort @root.request.params.query.geographical_areas_funded)
-                  type_of_cost=(sort @root.request.params.query.type_of_cost)
-                  type_of_funding=(sort @root.request.params.query.type_of_funding)
-                ) ~}}
+          querystringify (obj)
+          keywords=@root.request.params.query.keywords
+          activities=(sort @root.request.params.query.activities)
+          beneficiaries=(sort @root.request.params.query.beneficiaries)
+          fund_status=(sort @root.request.params.query.fund_status)
+          charities_only=(sort @root.request.params.query.charities_only)
+          geographical_areas_funded=(sort @root.request.params.query.geographical_areas_funded)
+          type_of_cost=(sort @root.request.params.query.type_of_cost)
+          type_of_funding=(sort @root.request.params.query.type_of_funding)
+        ) ~}}
           <script>
             document.addEventListener('DOMContentLoaded', function() {
               console.log('Current Query String:', {{{stringify this}}});
@@ -266,7 +271,11 @@
 </div>
 
 {{#each @root.data.search_data.detailed_results.hits.hits ~}}
-{{> fund_search_result _source sort=sort}}
+  {{#compare @root.route.name "===" "search" ~}}
+    {{> fund_search_result _source sort=sort}}
+  {{else}}
+    {{> fund_mini _source sort=sort}}
+  {{/compare ~}}
 {{/each ~}}
 
 <div class="foot">
