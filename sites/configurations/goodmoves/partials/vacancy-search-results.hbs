@@ -209,17 +209,19 @@
     <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone action">
       {{#compare @root.data.search_data.detailed_results.hits.total ">" 0 ~}}
       <form action="{{{@root.request.url.path}}}" method="GET">
-        <input type="hidden" name="keywords" value="{{@root.request.params.query.keywords}}" />
-        <input type="hidden" name="location" value="{{@root.request.params.query.location}}" />
-        <input type="hidden" name="distance" value="{{#if @root.request.params.query.distance}}{{@root.request.params.query.distance}}{{else}}8.04672{{/if}}" />
-        <input type="hidden" name="roles" value="{{@root.request.params.query.roles}}" />
-        <input type="hidden" name="sectors" value="{{@root.request.params.query.sectors}}" />
-        <input type="hidden" name="regions" value="{{@root.request.params.query.regions}}" />
-        <input type="hidden" name="statuses" value="{{@root.request.params.query.statuses}}" />
-        <input type="hidden" name="lat" value="{{@root.request.params.query.lat}}" />
-        <input type="hidden" name="lng" value="{{@root.request.params.query.lng}}" />
-        <input type="hidden" name="salary_min" value="{{@root.request.params.query.salary_min}}" />
-        <input type="hidden" name="salary_max" value="{{@root.request.params.query.salary_max}}" />
+        {{#each (split "roles,sectors,regions,statuses" ",")}}
+          {{#if (getProperty @root.request.params.query this) ~}}
+            {{#each (arrayify (getProperty @root.request.params.query this)) ~}}
+              <input type="hidden" name="{{../this}}[]" value="{{this}}" />
+            {{/each ~}}
+          {{/if ~}}
+        {{/each ~}}
+        {{#each (split "keywords,location,lat,lng,salary_min,salary_max" ",")}}
+          {{#if (getProperty @root.request.params.query this) ~}}
+            <input type="hidden" name="{{this}}" value="{{getProperty @root.request.params.query this}}" />
+          {{/if ~}}
+        {{/each ~}}
+        <input type="hidden" name="distance" value="{{#if @root.request.params.query.distance}}{{@root.request.params.query.distance}}{{else}}16.09344{{/if}}" />
         <div class="mdc-select mdc-select--box pull-right" data-mdc-auto-init="MDCSelect">
           <select class="mdc-select__native-control" id="sort" name="sort" onchange="this.form.submit();">
             <option value="relevance"{{#compare @root.request.params.query.sort "===" "relevance"}} selected{{/compare}}>Relevance</option>
