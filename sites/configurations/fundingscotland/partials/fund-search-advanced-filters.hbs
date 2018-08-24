@@ -21,7 +21,7 @@
 
 <div class="mdc-drawer__content">
   <!-- <h2 class="mdc-drawer__content-heading hide-sm mdc-drawer--occasional-ie11">Search funds</h2> -->
-  <form action="{{{@root.request.url.pathname}}}" method="GET" class="search-form">
+  <form action="/search/advanced" method="GET" class="search-form">
     {{#each (split "keywords,sort" ",")}}
       {{#if (getProperty @root.request.params.query this) ~}}
         <input type="hidden" name="{{this}}" value="{{getProperty @root.request.params.query this}}" />
