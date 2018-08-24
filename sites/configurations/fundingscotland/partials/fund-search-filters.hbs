@@ -1,7 +1,7 @@
 {{#*inline "term_checkbox"}}
 <div class="mdc-form-field">
   <div class="mdc-checkbox">
-    <input type="checkbox" class="mdc-checkbox__native-control" id="{{instance_id}}_{{field}}_{{slug}}" name="{{#compare field "===" "type"}}{{field}}{{else}}{{field}}[]{{/compare}}" value="{{slug}}"{{#if (contains selected slug)}} checked{{/if}} />
+    <input type="checkbox" class="mdc-checkbox__native-control" id="{{instance_id}}_{{field}}_{{slug}}" name="{{#compare field "===" "type"}}{{field}}{{else}}{{field}}[]{{/compare}}" value="{{slug}}"{{#if (contains selected slug)}} checked{{/if}} onchange="this.form.submit();" />
     <div class="mdc-checkbox__background">
       <svg class="mdc-checkbox__checkmark"
       viewBox="0 0 24 24">
