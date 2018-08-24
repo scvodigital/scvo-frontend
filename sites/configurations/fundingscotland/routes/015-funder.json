@@ -1,11 +1,15 @@
 {
   "name": "funder",
   "pattern": "/funder/:slug",
+  "debug": true,
   "defaultParams": {
     "context": "detail"
   },
   "tasks": [
     "context.metaData.commonTasks.authRequired",
+    "context.metaData.commonTasks.shortlistData",
+    "context.metaData.commonTasks.notesData",
+    "context.metaData.commonTasks.fundersWithFunds",
     {
       "name": "primaryResponse",
       "taskModule": "elasticsearch",

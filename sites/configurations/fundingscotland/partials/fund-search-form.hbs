@@ -19,41 +19,41 @@
 </div>
 {{/inline}}
 
-  <div class="mdc-drawer__content">
-    <h2 class="mdc-drawer__content-heading hide-sm mdc-drawer--occasional-ie11">Search funds</h2>
-    <form action="/search" method="GET" class="search-form">
-      <div class="h-padding">
-        <div class="mdc-text-field mdc-text-field--box mdc-text-field--with-leading-icon" data-mdc-auto-init="MDCTextField">
-          <span class="far fa-search mdc-text-field__icon" tabindex="-1"></span>
-          <input type="text" id="{{instance_id}}-keywords" name="keywords" class="mdc-text-field__input mdc-text-field--fullwidth" value="{{@root.request.params.query.keywords}}" data-lpignore="true" autocomplete="off">
-          <label class="mdc-floating-label" for="keywords">
-            Keywords
-          </label>
-          <div class="mdc-line-ripple"></div>
-        </div>
+<div class="mdc-drawer__content">
+  <h2 class="mdc-drawer__content-heading hide-sm mdc-drawer--occasional-ie11">Search funds</h2>
+  <form action="/search" method="GET" class="search-form">
+    <div class="h-padding">
+      <div class="mdc-text-field mdc-text-field--box mdc-text-field--with-leading-icon" data-mdc-auto-init="MDCTextField">
+        <span class="far fa-search mdc-text-field__icon" tabindex="-1"></span>
+        <input type="text" id="{{instance_id}}-keywords" name="keywords" class="mdc-text-field__input mdc-text-field--fullwidth" value="{{@root.request.params.query.keywords}}" data-lpignore="true" autocomplete="off">
+        <label class="mdc-floating-label" for="keywords">
+          Keywords
+        </label>
+        <div class="mdc-line-ripple"></div>
       </div>
+    </div>
 
-      {{#each (split "fund_status,charities_only,geographical_areas_funded,type_of_cost,type_of_funding" ",")}}
-        <h3 class="mdc-drawer__content-heading cursor-pointer noselect mdc-drawer--occasional-ie11" data-collapse-target="#{{../instance_id}}-{{this}}-collapse" role="button" aria-pressed="false" aria-label="Show {{getProperty @root.context.metaData.termTypeLabels (concat this ".plural")}}" tabindex="0">
-          {{getProperty @root.context.metaData.termTypeLabels (concat this ".plural")}}
-          <span class="mdc-icon-toggle pull-right">
-            <i class="far {{#if (getProperty @root.request.params.query this)}}fa-chevron-up{{else}}fa-chevron-down{{/if}}" aria-hidden="true"></i>
-          </span>
-        </h3>
-        <div class="mdc-drawer--occasional-ie11" id="{{../instance_id}}-{{this}}-collapse"{{#unless (getProperty @root.request.params.query this)}} style="display: none;"{{/unless}}>
-          {{#each (getProperty @root.data.supplimentaryResponses.types.aggregations (concat this "_slugs.buckets")) ~}}
-            {{#if key ~}}
-              {{> term_checkbox slug=key field=../this selected=(getProperty @root.request.params.query ../this) instance_id=../../instance_id value=(lookup (getProperty @root.data.supplimentaryResponses.types.aggregations (concat ../this ".buckets")) @index)}}
-            {{/if ~}}
-          {{/each ~}}
-        </div>
-      {{/each}}
-
-      <div class="h-margin v-margin mdc-drawer--occasional-ie11">
-        <button class="mdc-button mdc-button--raised mdc-button--large mdc-button--fullwidth mdc-ripple-surface mdc-ripple-surface--primary" type="submit" id="{{instance_id}}-search-submit" data-mdc-auto-init="MDCRipple">
-          <span class="far fa-search fa-fw mdc-list-item__graphic" aria-hidden="true"></span>
-          Search
-        </button>
+    {{#each (split "fund_status,charities_only,geographical_areas_funded,type_of_cost,type_of_funding" ",")}}
+      <h3 class="mdc-drawer__content-heading cursor-pointer noselect mdc-drawer--occasional-ie11" data-collapse-target="#{{../instance_id}}-{{this}}-collapse" role="button" aria-pressed="false" aria-label="Show {{getProperty @root.context.metaData.termTypeLabels (concat this ".plural")}}" tabindex="0">
+        {{getProperty @root.context.metaData.termTypeLabels (concat this ".plural")}}
+        <span class="mdc-icon-toggle pull-right">
+          <i class="far {{#if (getProperty @root.request.params.query this)}}fa-chevron-up{{else}}fa-chevron-down{{/if}}" aria-hidden="true"></i>
+        </span>
+      </h3>
+      <div class="mdc-drawer--occasional-ie11" id="{{../instance_id}}-{{this}}-collapse"{{#unless (getProperty @root.request.params.query this)}} style="display: none;"{{/unless}}>
+        {{#each (getProperty @root.data.supplimentaryResponses.types.aggregations (concat this "_slugs.buckets")) ~}}
+          {{#if key ~}}
+            {{> term_checkbox slug=key field=../this selected=(getProperty @root.request.params.query ../this) instance_id=../../instance_id value=(lookup (getProperty @root.data.supplimentaryResponses.types.aggregations (concat ../this ".buckets")) @index)}}
+          {{/if ~}}
+        {{/each ~}}
       </div>
-    </form>
-  </div>
+    {{/each}}
+
+    <div class="h-margin v-margin mdc-drawer--occasional-ie11">
+      <button class="mdc-button mdc-button--raised mdc-button--large mdc-button--fullwidth mdc-ripple-surface mdc-ripple-surface--primary" type="submit" id="{{instance_id}}-search-submit" data-mdc-auto-init="MDCRipple">
+        <span class="far fa-search fa-fw mdc-list-item__graphic" aria-hidden="true"></span>
+        Search
+      </button>
+    </div>
+  </form>
+</div>

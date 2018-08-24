@@ -1,3 +1,14 @@
+{{#if @root.request.params.activities_slug ~}}
+  <div class="browse-heading">
+    <h1>{{{@root.request.params.activities_slug}}}</h1>
+  </div>
+{{/if ~}}
+{{#if @root.request.params.beneficiaries_slug ~}}
+<div class="browse-heading">
+  <h1>{{{@root.request.params.beneficiaries_slug}}}</h1>
+</div>
+{{/if ~}}
+
 {{> search_info paging=@root.data.search_data.detailed_results.pagination}}
 
 <aside id="save-search-dialog"

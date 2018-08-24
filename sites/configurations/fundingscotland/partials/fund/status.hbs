@@ -1,0 +1,27 @@
+{{#unless active}}
+  <div class="panel-heading red white-text fund-inactive">
+    <i class="fa fa-info-circle fa-fw"></i>
+    This fund is no longer active
+  </div>
+{{else}}
+  {{#compare closing_date "<" (dateMath "now")}}
+  <div class="panel-heading red white-text fund-closed">
+    <i class="fa fa-info-circle fa-fw"></i>
+    This fund has now closed
+  </div>
+  {{else}}
+    {{#compare start_at ">" (dateMath "now")}}
+      <div class="panel-heading red white-text fund-not-published">
+        <i class="fa fa-info-circle fa-fw"></i>
+        This fund has not yet been published
+      </div>
+    {{else}}
+      {{#compare end_at "<" (dateMath "now")}}
+        <div class="panel-heading red white-text fund-no-longer-listed">
+          <i class="fa fa-info-circle fa-fw"></i>
+          This fund is no longer listed
+        </div>
+      {{/compare}}
+    {{/compare}}
+  {{/compare ~}}
+{{/unless}}

@@ -1,6 +1,13 @@
 {{{rendered.fund_status}}}
 <div class="mdc-card__info--fund-row">
   <div class="mdc-card__info--fund">
+    {{#if funder_organisation.has_logo ~}}
+    <div class="mdc-card__media mdc-card__media--funder pull-right hide-sm">
+      <a href="/funder/{{funder_organisation.slug}}{{@root.request.url.search}}">
+        <img src="{{funder_organisation.logo_url}}" alt="{{funder_organisation.name}}" />
+      </a>
+    </div>
+    {{/if ~}}
     <h2 class="mdc-card__info--fund-title mdc-typography--headline5">
       <a href="/fund/{{slug}}{{@root.request.url.search}}">
         <span class="hover-underline">{{title}}</span>
@@ -12,48 +19,39 @@
         <a href="/funder/{{funder_organisation.slug}}{{@root.request.url.search}}">{{funder_organisation.name}}</a>
       </li>
     </ul>
-    <div class="mdc-layout-grid">
-      <div class="mdc-layout-grid__inner">
-        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone">
-          <ul class="fa-ul first">
-            {{#if location ~}}
-            <li class="mdc-card__info--fund-location mdc-typography--body1">
-              <span class="fa-li"><span class="far fa-map-marker-alt fa-fw" title="Location"></span></span>
-              {{location}}
-            </li>
-            {{/if ~}}
-            {{#if role_status_list ~}}
-            <li class="mdc-card__info--fund-status mdc-typography--body1">
-              <span class="fa-li"><span class="far fa-clock fa-fw" title="Status"></span></span>
-              {{role_status_list}}
-            </li>
-            {{/if ~}}
-          </ul>
-        </div>
-        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone">
-          <ul class="fa-ul last">
-            {{#if salary ~}}
-            <li class="mdc-card__info--fund-salary mdc-typography--body1">
-              <span class="fa-li"><span class="far fa-calculator fa-fw" title="Salary"></span></span>
-              {{{salary}}}
-            </li>
-            {{/if ~}}
-            {{#if closing_date ~}}
-            <li class="mdc-card__info--fund-closing mdc-typography--body1">
-              <span class="fa-li"><span class="far fa-calendar-alt fa-fw" title="Closing date"></span></span>
-              Closing {{{momentFormat (moment closing_date "x") "Do MMMM YYYY"}}}
-            </li>
-            {{/if ~}}
-          </ul>
-        </div>
-      </div>
-    </div>
+    <ul class="fa-ul first">
+      {{#if geographical_areas_funded ~}}
+      <li class="mdc-card__info--fund-location mdc-typography--body1">
+        <span class="fa-li"><span class="far fa-map-marker-alt fa-fw" title="Areas funded"></span></span>
+        {{#each geographical_areas_funded ~}}
+          {{{this}}}{{#unless @last}}, {{/unless}}
+        {{/each}}
+      </li>
+      {{/if ~}}
+      {{#if fund_status ~}}
+      <li class="mdc-card__info--fund-status mdc-typography--body1">
+        <span class="fa-li"><span class="far fa-clock fa-fw" title="Status"></span></span>
+        {{{fund_status}}}
+      </li>
+      {{/if ~}}
+    </ul>
+    <ul class="fa-ul last">
+      {{#if type_of_funding ~}}
+      <li class="mdc-card__info--fund-salary mdc-typography--body1">
+        <span class="fa-li"><span class="far fa-calculator fa-fw" title="Type of funding"></span></span>
+        {{#each type_of_funding ~}}
+          {{{this}}}{{#unless @last}}, {{/unless}}
+        {{/each}}
+      </li>
+      {{/if ~}}
+      {{#if type_of_cost ~}}
+      <li class="mdc-card__info--fund-closing mdc-typography--body1">
+        <span class="fa-li"><span class="far fa-calendar-alt fa-fw" title="Type of cost"></span></span>
+        {{#each type_of_cost ~}}
+          {{{this}}}{{#unless @last}}, {{/unless}}
+        {{/each}}
+      </li>
+      {{/if ~}}
+    </ul>
   </div>
-  {{#if funder.has_logo ~}}
-  <div class="mdc-card__media mdc-card__media--square mdc-card__media--funder">
-    <a href="/funder/{{funder.slug}}">
-      <img src="{{funder.logo_url}}" alt="{{funder.name}}" />
-    </a>
-  </div>
-  {{/if ~}}
 </div>

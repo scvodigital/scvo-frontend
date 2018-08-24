@@ -23,7 +23,32 @@
     "rendered.goodmoves_rss"
   ],
   "query": {
-    "match_none": {}
+    "bool": {
+      "filter": [
+        {
+          "term": {
+            "active": true
+          }
+        },
+        {
+          "range": {
+            "closing_date": {
+              "gt": "now+2d/d",
+              "lt": "now+3d/d"
+            }
+          }
+        },
+        {
+          "ids": {
+            "values": [
+              {{~#with (querystring (regexReplace templateMetaData.querystrings '/&&/' 'gi' '&'))~}}
+                {{#eachJoin id ", "}}{{{stringify this}}}{{/eachJoin}}
+              {{~/with~}}
+            ]
+          }
+        }
+      ]
+    }
   },
   "sort": [
     {

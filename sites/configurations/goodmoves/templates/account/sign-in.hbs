@@ -101,7 +101,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
         $loader.css('display', 'none');
       }
     }).catch(function(err) {
-      $message.text(err.message).show();
+      $message.html(err.message+' <a href="/reset-password">Reset password</a>').show();
       $loader.css('display', 'none');
     });
   });

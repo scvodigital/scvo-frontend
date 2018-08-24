@@ -1,9 +1,10 @@
 $mdc-theme-primary: #00796A;
 $mdc-theme-primary-light: #198678;
-$mdc-theme-primary-dark: #006054;
+$mdc-theme-primary-dark: #00796A;
 
-$mdc-theme-complimentary: #b2cfcb;
-$mdc-theme-complimentary-light: #e5efed;
+$mdc-theme-complimentary: #c6dabf;
+$mdc-theme-complimentary-light: #ecf2e9;
+$mdc-theme-complimentary-dark: #d9e6d4;
 
 $mdc-theme-secondary: #E0E0E0; // Gray 300
 $mdc-theme-secondary-light: #F5F5F5; // Gray 100
@@ -22,6 +23,7 @@ $base-font-weight:                  400;
 
 $heading-font-family:               "Montserrat", Helvetica, Arial, sans-serif;
 $heading-font-weight:               700;
+$heading-medium-font-weight:        600;
 $heading-light-font-weight:         500;
 
 $footer-font-family:                "Open Sans", Helvetica, Arial, sans-serif;
@@ -38,7 +40,7 @@ $desktop-landscape-breakpoint: 1280px;
 
 @import "./node_modules/material-components-web/material-components-web.scss";
 @import url('//cdnjs.cloudflare.com/ajax/libs/normalize/7.0.0/normalize.min.css');
-@import url('//fonts.googleapis.com/css?family=Montserrat:500,700|Open+Sans:400,500,600');
+@import url('//fonts.googleapis.com/css?family=Montserrat:500,600,700|Open+Sans:400,500,600');
 
 body {
   background-color: $mdc-theme-footer-dark;
@@ -62,9 +64,9 @@ h3,
 h4 {
   margin-bottom: $unit/2;
   font-family: $heading-font-family, $base-font-family, Helvetica, Arial, sans-serif;
-  font-weight: $base-font-weight;
+  font-weight: $heading-font-weight;
   strong {
-    font-weight: 700;
+    font-weight: $heading-font-weight;
   }
 }
 .headroom {
@@ -84,19 +86,29 @@ header {
     .mdc-top-app-bar__section--align-end {
       padding-right: $unit/2 !important;
     }
+    .mdc-top-app-bar__title.hide-sm {
+      width: 12rem;
+      height: 100%;
+      a {
+        height: 100%;
+        width: 100%;
+      }
+    }
     .mdc-top-app-bar__title {
-      font-weight: $heading-font-weight;
-      font-family: $heading-font-family;
-      // font-variant: all-small-caps;
-      letter-spacing: -0.2rem;
-      font-size: 3rem;
-      line-height: 4rem;
       padding: 0;
       margin: 0 $unit;
-      .scotland {
-        letter-spacing: -0.25rem;
-        font-weight: $heading-light-font-weight;
-        margin-left: -$unit/3;
+      display: block;
+      .brand-text {
+        font-weight: $heading-font-weight;
+        font-family: $heading-font-family;
+        letter-spacing: -0.2rem;
+        font-size: 3rem;
+        line-height: 4rem;
+        .scotland {
+          letter-spacing: -0.25rem;
+          font-weight: $heading-light-font-weight;
+          margin-left: -$unit/3;
+        }
       }
       a {
         display: block;
@@ -117,6 +129,14 @@ header {
         display: none;
       }
     }
+    .mdc-top-app-bar__upper .mdc-top-app-bar__section--align-start {
+      background-image: url('https://storage.googleapis.com/scvo-assets/assets/images/fs-legacy-logo.png');
+      background-repeat: no-repeat;
+      background-position: $unit center;
+      .mdc-top-app-bar__title .brand-text {
+        display: none;
+      }
+    }
     .mdc-top-app-bar__row.mdc-top-app-bar__upper {
       height: $header-upper-height;
     }
@@ -124,7 +144,7 @@ header {
       height: $header-lower-height;
     }
     .mdc-top-app-bar__lower .mdc-top-app-bar__section--align-start {
-      background-image: linear-gradient(60deg, $mdc-theme-primary-dark, $mdc-theme-primary-dark 220px, $mdc-theme-primary 221px, $mdc-theme-primary);
+      background-image: linear-gradient(60deg, #328c19, #328c19 220px, #6CC439 221px, $mdc-theme-primary);
     }
     .mdc-top-app-bar__lower .mdc-top-app-bar__section--align-end {
       background-color: $mdc-theme-primary;
@@ -317,10 +337,20 @@ footer h3,
 .mdc-card__title,
 .mdc-textfield__label,
 .mdc-typography--title,
+.mdc-typography--headline,
+.mdc-typography--headline1,
+.mdc-typography--headline2,
+.mdc-typography--headline3,
+.mdc-typography--headline4,
+.mdc-typography--headline5,
+.mdc-typography--headline6,
+.mdc-typography--headline7,
+.mdc-typography--headline,
 .supplimentary-list-title {
   font-family: $heading-font-family, $base-font-family, Helvetica, Arial, sans-serif;
   font-weight: $heading-font-weight;
 }
+.mdc-drawer__content-heading,
 .mdc-typography--headline1,
 .mdc-typography--headline2,
 .mdc-typography--headline3,
@@ -329,7 +359,10 @@ footer h3,
 .mdc-typography--headline6,
 .mdc-typography--headline7,
 .mdc-typography--headline {
-  font-weight: $base-font-weight;
+  font-weight: $heading-medium-font-weight;
+  a {
+    font-weight: $heading-medium-font-weight;
+  }
 }
 .mdc-typography--body1 {
   font-size: 1rem;
@@ -448,6 +481,8 @@ footer h3,
 .sign-out-form .mdc-card,
 #sign-out-loader {
   display: flex;
+  align-items: center;
+  justify-content: center;
   background-color: transparent;
 }
 .sign-up-form {
@@ -469,14 +504,15 @@ footer h3,
 }
 
 .card-loader {
+  display: none;
   position: absolute;
   height: 100%;
   width: 100%;
   top: 0;
   left: 0;
   background-color: $mdc-theme-secondary-light;
-  opacity: 0.7;
-  display: none;
+  opacity: 0.8;
+  z-index: 2;
   .card-loader-inner {
     color: $mdc-theme-primary-dark;
     display: flex;
@@ -748,6 +784,9 @@ a {
       margin-right: $unit;
       color: $mdc-theme-primary-dark;
     }
+    ul.mdc-card__action {
+      cursor: default;
+    }
     .mdc-card__action:last-child {
       margin-right: 0;
     }
@@ -770,16 +809,42 @@ a {
   width: 100%;
   background-color: #fff;
   margin-bottom: $unit*1.5;
-  .mdc-card__info--funder-title {
+  .mdc-card__info--vacancy-row {
+    padding: $unit/2;
+  }
+  .search-result-article__snippet,
+  .search-result-article__notes,
+  .mdc-card__info--vacancy-row {
+    flex: 1 0 auto;
+  }
+  .mdc-card__info--organisation-title {
     padding: $unit;
   }
-  .mdc-card__media--funder {
-    margin-right: $unit;
+  .mdc-card__media--organisation {
+    // margin-right: $unit;
+    z-index: 3;
   }
-  // .search-result-article__snippet {
-  //   padding: $unit;
-  //   background-color: $mdc-theme-complimentary-light;
-  // }
+  .search-result-article__snippet,
+  .search-result-article__notes {
+    padding: 0 $unit $unit/2;
+  }
+  .search-result-article__notes {
+    background-color: $mdc-theme-complimentary-light;
+    .mdc-typography--headline7 {
+      margin-top: $unit*(3/4);
+    }
+    .mdc-typography--body2 {
+      font-weight: 600;
+    }
+    h1 {
+      font-size: 1.4rem;
+      margin: $unit/2 0 $unit/4;
+    }
+    h2 {
+      font-size: 1.2rem;
+      margin: $unit/4 0 $unit/5;
+    }
+  }
   .user-notes {
     display: none;
   }
@@ -790,6 +855,32 @@ a {
     }
   }
 }
+.fundingscotland-fund.mdc-card.list,
+.fundingscotland-fund.mdc-card.mini,
+.fundingscotland-fund.mdc-card.gist,
+.fundingscotland-fund.mdc-card.search-result {
+  border-top: $unit/3 solid $mdc-theme-complimentary-light;
+  .mdc-card__info--vacancy-row {
+    padding-top: $unit/4;
+    padding-bottom: 0;
+  }
+}
+.fundingscotland-fund.mdc-card.list .mdc-card__action-notes,
+.fundingscotland-fund.mdc-card.gist .mdc-card__action-icons {
+  display: none;
+}
+.fundingscotland-fund.mdc-card.list,
+.fundingscotland-fund.mdc-card.gist,
+.fundingscotland-fund.mdc-card.mini {
+  .mdc-typography--headline5 {
+    font-size: 1.2rem;
+    line-height: 1.3rem;
+  }
+  .mdc-card .mdc-card__actions {
+    padding: $unit/3 $unit/2;
+  }
+}
+
 .mdc-card.gist.tfn-post,
 .mdc-card.gist.tfn-feature {
   background-color: transparent;
@@ -882,7 +973,7 @@ a {
   }
   #fund-tab-bar {
     width: 100%;
-    background-color: $mdc-theme-complimentary;
+    background-color: $mdc-theme-complimentary-light;
     display: flex;
     border-radius: 2px 2px 0 0;
     .mdc-tab {
@@ -911,7 +1002,7 @@ a {
     h4 {
       margin: 0 0 $unit;
       font-size: 1.5rem;
-      font-weight: $heading-light-font-weight;
+      font-weight: $heading-medium-font-weight;
     }
     .key-info-extra {
       padding: $unit;
@@ -919,10 +1010,11 @@ a {
       .mdc-chip {
         margin-bottom: $unit/4;
         padding: $unit/5 $unit/2;
+        height: $unit*1.5;
         vertical-align: top;
         font-weight: 600;
         color: $mdc-theme-secondary-dark;
-        background-color: $mdc-theme-complimentary;
+        background-color: $mdc-theme-complimentary-light;
       }
       .mdc-chip:hover {
         text-decoration: none;
@@ -963,7 +1055,25 @@ a {
   background-color: #fff;
 }
 
+.browse-heading {
+  h1 {
+    background: white;
+    height: 200px;
+    padding: .25rem 1rem 1rem;
+  }
+}
+
 .mdc-chip-set {
+  padding: 0;
+  .v-margin {
+    display: block;
+    width: 100%;
+  }
+  .mdc-chip {
+    margin: 0;
+  }
+}
+#search-terms.mdc-chip-set {
   float: left;
   padding: 0;
   margin-bottom: 0;
@@ -971,6 +1081,44 @@ a {
     margin: 0 $unit/2 $unit/4 0;
   }
 }
+.mdc-chip {
+  background-color: $mdc-theme-secondary;
+  color: $mdc-theme-secondary-dark;
+  margin: 0;
+  font-weight: 600;
+  .mdc-chip__icon.mdc-chip__icon--leading {
+    color: $mdc-theme-secondary-dark;
+    display: inline-block;
+  }
+  .mdc-chip__icon.mdc-chip__icon--leading-hidden {
+    display: none;
+  }
+  .mdc-chip__text {
+    margin-left: $unit/2;
+  }
+  .mdc-chip__checkmark-path {
+    stroke: white !important;
+  }
+}
+.mdc-chip:hover {
+  .mdc-chip__icon--leading {
+    color: #000;
+  }
+}
+.mdc-card .mdc-chip {
+  background-color: $mdc-theme-complimentary-dark;
+}
+.mdc-card .mdc-chip.mdc-chip--selected,
+.mdc-chip.mdc-chip--selected {
+  background-color: $mdc-theme-primary;
+  color: white;
+}
+.mdc-card .mdc-chip.mdc-chip--selected:hover,
+.mdc-chip.mdc-chip--selected:hover {
+  background-color: $mdc-theme-primary-dark;
+  color: white;
+}
+
 .pagination-mobile,
 .fundingscotland-organisation .mdc-card.list .mdc-card__info--fund-funder {
   display: none !important;
@@ -984,7 +1132,7 @@ hr {
 }
 
 .page-content {
-  padding: $unit 0 $unit*2;
+  padding: $unit 0 $unit;
 }
 .mdc-drawer__content {
   padding: 0 $unit/2 $unit;
@@ -1002,6 +1150,7 @@ hr {
 .mdc-drawer__content-heading {
   margin: 0;
   padding: $unit $unit/2;
+  font-weight: $heading-medium-font-weight;
   .mdc-icon-toggle {
     margin-top: -$unit*(3/4);
   }
@@ -1220,26 +1369,6 @@ body {
     padding: 0 $unit/2;
     .mdc-card__info--fund-title {
       margin: $unit/2 0 $unit*(3/4);
-      a .top-job {
-        margin-left: 0;
-        margin-right: .2rem;
-        display: inline-block;
-        padding: .22222222rem $unit/2;
-        font-weight: 700;
-        line-height: 1;
-        text-align: center;
-        white-space: nowrap;
-        vertical-align: baseline;
-        color: $mdc-theme-secondary-dark;
-        background-color: $mdc-theme-secondary !important;
-        border-radius: $unit;
-        position: relative;
-        top: -2px;
-        left: 0;
-        font-size: 1rem;
-        height: $unit*1.5;
-        box-sizing: border-box;
-      }
     }
     .fa-ul {
       li {
@@ -1344,7 +1473,7 @@ body {
     grid-gap: $unit/2;
   }
   .mdc-text-field {
-    z-index: 4;
+    z-index: 1;
     overflow: visible;
   }
   .mdc-text-field--box::before,
@@ -1419,7 +1548,7 @@ body {
     padding-right: 0;
   }
   li.current-page {
-    background-color: $mdc-theme-complimentary;
+    background-color: $mdc-theme-complimentary-dark;
     border-radius: 50%;
   }
   li:hover,
@@ -1504,12 +1633,12 @@ footer,
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
-    min-height: 40vh;
+    min-height: 23vh;
     .page-content {
-      min-height: 40vh;
+      min-height: 23vh;
       .search-form {
         position: relative;
-        background-color: rgba(255, 255, 255, 0.6);
+        background-color: rgba(255, 255, 255, 0.75);
         width: 100%;
         padding: 0 $unit $unit/2;
         box-sizing: border-box;
@@ -1517,13 +1646,15 @@ footer,
     }
   }
   .banner-search.overlay {
-    display: block;
+    background-image: url(https://storage.googleapis.com/scvo-assets/assets/images/fs-legacy-banner-back.png);
+    background-size: cover;
+    background-position: center center;
     .content {
-      background-image: linear-gradient(60deg, rgba(0, 121, 106, 0.89), rgba(0, 121, 106, 0.91) 47%, transparent 47.08%, transparent);
+      // background-image: linear-gradient(60deg, rgba(0, 121, 106, 0.89), rgba(0, 121, 106, 0.91) 47%, transparent 47.08%, transparent);
       display: flex;
-      justify-content: space-between;
-      flex-direction: column;
-      min-height: 40vh;
+      align-items: center;
+      justify-content: center;
+      min-height: 23vh;
       background-color: transparent;
       // padding: 0 0 $unit*2;
       .mdc-card__actions {
@@ -1592,6 +1723,7 @@ footer,
           font-size: 4.8rem;
           line-height: 4rem;
           letter-spacing: -0.2rem;
+          font-weight: $heading-font-weight;
           .normal {
             letter-spacing: -0.4rem;
             font-weight: $heading-light-font-weight;
@@ -1646,12 +1778,12 @@ footer,
   }
   .gist {
     .mdc-typography--headline {
-      font-weight: $heading-light-font-weight;
+      font-weight: $heading-medium-font-weight;
       font-size: 1.1rem;
       margin: 0;
     }
     .mdc-card__subtitle {
-      font-weight: $heading-light-font-weight;
+      font-weight: $heading-medium-font-weight;
       margin: $unit/2 0;
       color: $mdc-theme-secondary-dark;
     }
@@ -1965,7 +2097,7 @@ footer.mdc-layout__footer {
 }
 
 @media screen and (max-width: 1100px) {
-  .goodmoves-vacancy-search .head {
+  .fundingscotland-fund-search .head {
     .mdc-layout-grid__cell.action {
       grid-column-end: span 6;
     }
@@ -1984,14 +2116,14 @@ footer.mdc-layout__footer {
   #detailed-results-container .head .pagination {
     display: none !important;
   }
-  .goodmoves-vacancy-search .head {
+  .fundingscotland-fund-search .head {
     .mdc-layout-grid__cell.action {
       grid-column-end: span 4;
     }
   }
 }
 @media screen and (max-width: 479px) {
-  .goodmoves-vacancy-search .head {
+  .fundingscotland-fund-search .head {
     .mdc-layout-grid__cell.action {
       grid-column-end: span 2;
     }

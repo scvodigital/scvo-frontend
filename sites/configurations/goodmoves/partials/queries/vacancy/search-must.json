@@ -8,6 +8,10 @@
   {{>queries_number_range field="salary_min" gte=salary_min}},
 {{/if ~}}
 {{#if salary_max ~}}
+{{#compare salary_max "===" "0" ~}}
+  {{>queries_term field="remuneration_type" term="Unpaid"}},
+{{else}}
   {{>queries_number_range field="salary_min" lte=salary_max}},
+{{/compare ~}}
 {{/if ~}}
 {{>queries_do_nothing}}

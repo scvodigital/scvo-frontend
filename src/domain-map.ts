@@ -46,5 +46,6 @@ export const DOMAIN_MAP: {[domain: string]: string} = {
   'scvo-net.firebaseapp.com': 'scvo',
   'auth.local': 'auth',
   'test.local': 'test',
-  'emailer.local': 'emailer'
+  'emailer.local': 'emailer',
+  'emailer.scvo.net': 'emailer'
 };

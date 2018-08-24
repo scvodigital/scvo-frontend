@@ -24,8 +24,17 @@
     "rendered.fundingscotland_charity_info"
   ],
   "query": {
-    "term": {
-      "slug": "{{request.params.slug}}"
+    "bool": {
+      "filter": [
+        {{>queries_funder_common_filters @root.request.params.query}}
+      ],
+      "must": [
+        {
+          "term": {
+            "slug": "{{request.params.slug}}"
+          }
+        }
+      ]
     }
   }
 }

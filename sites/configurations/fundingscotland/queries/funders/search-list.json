@@ -1,6 +1,6 @@
 {
   "size": 12,
-  "from": {{multiply (subtract (default request.params.query.page 1) 1) 12}},
+  "from": {{multiply (subtract (default @root.request.params.query.page 1) 1) 12}},
   "_source": [
     "Id",
     "slug",
@@ -21,32 +21,21 @@
   ],
   "query": {
     "bool": {
+      "filter": [
+        {{>queries_funder_common_filters @root.request.params.query}}
+      ],
       "must": [
-        {
-          "term": {
-            "has_logo": true
-          }
-        },
-        {
-          "term": {
-            "has_funds": "true"
-          }
-        },
-        {{#if request.params.query.keywords ~}}
-        {
-          "query_string": {
-            "query": {{{stringify request.params.query.keywords}}},
-            "fields": ["text_bag_boost^5", "text_bag"],
-            "default_operator": "AND",
-            "analyzer": "snowball"
-          }
-        }
-        {{else}}
-        {
-          "match_all": {}
-        }
-        {{/if ~}}
+        {{>queries_fund_search_must @root.request.params.query}}
       ]
     }
-  }
+  },
+  "sort": [
+    {{#if @root.request.params.query.keywords ~}}
+    "_score"
+    {{else}}
+    {
+      "name": "asc"
+    }
+    {{/if ~}}
+  ]
 }

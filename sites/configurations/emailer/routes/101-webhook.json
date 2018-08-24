@@ -1,0 +1,28 @@
+{
+  "name": "webhook",
+  "pattern": "/webhook",
+  "debug": true,
+  "tasks": [
+    {
+      "name": "notifications",
+      "taskModule": "mysql",
+      "config": {
+        "connectionName": "notifications",
+        "queryTemplates": {
+          "webhook-log": ">context.metaData.handlebars.queries.webhook-log"
+        }
+      },
+      "renderer": "handlebars"
+    },
+    {
+      "name": "destination",
+      "taskModule": "render",
+      "renderer": "handlebars",
+      "config": {
+        "output": "body",
+        "template": "done",
+        "parseJson": false
+      }
+    }
+  ]
+}
