@@ -1,12 +1,12 @@
 <div class="mdc-card search-result" data-fund-id="{{Id}}">
   {{> fund_key_info}}
   <hr class="mdc-list-divider" />
-  {{#if description ~}}
-  <div class="search-result-article__snippet mdc-typography--body1">
-    {{{description}}}
-  </div>
-  <hr class="mdc-list-divider" />
-  {{/if}}
+  {{#compare (trim (getProperty @root.data.notes Id)) "!==" "" ~}}
+    {{> fund_description limit="3rem" description=description}}
+    {{> fund_notes limit="3rem"}}
+  {{else}}
+    {{> fund_description limit="6rem" description=description}}
+  {{/compare ~}}
   <div class="mdc-card__actions">
     <div class="mdc-card__action-buttons demo-card__action-buttons--text-only mdc-card__actions--full-bleed">
       <a href="/fund/{{slug}}{{@root.request.url.search}}" class="mdc-card__action">Find out more</a>

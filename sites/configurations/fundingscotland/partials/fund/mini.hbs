@@ -1,4 +1,10 @@
 <div class="mdc-card mini" data-fund-id="{{Id}}">
   {{> fund_key_info}}
+  {{#compare (trim (getProperty @root.data.notes Id)) "!==" "" ~}}
+    {{> fund_description limit="2rem" description=description}}
+    {{> fund_notes limit="2rem"}}
+  {{else}}
+    {{> fund_description limit="4rem" description=description}}
+  {{/compare ~}}
   {{> fund_actions slug=slug Id=Id}}
 </div>

@@ -804,6 +804,25 @@ a {
   }
 }
 
+dl {
+  dt, dd {
+    float: left;
+    margin: 0;
+  }
+  dt {
+    font-weight: 600;
+    clear: both;
+  }
+  dd {
+    .fund-status {
+      font-weight: 600;
+    }
+    .fund-status.fund-open {
+      color: #328c19;
+    }
+  }
+}
+
 .mdc-card.list,
 .mdc-card.mini,
 .mdc-card.gist,
@@ -814,6 +833,19 @@ a {
   width: 100%;
   background-color: #fff;
   margin-bottom: $unit*1.5;
+  .fund-details {
+    h4 {
+      display: none;
+    }
+  }
+  dl{
+    dt {
+      clear: none;
+    }
+    dd {
+      margin: 0 $unit 0 $unit/2;
+    }
+  }
   .mdc-card__info--fund-row {
     padding: $unit/2;
   }
@@ -857,22 +889,6 @@ a {
     background-color: $mdc-theme-complimentary-light;
     .mdc-card__action {
       color: $mdc-theme-primary-dark;
-    }
-  }
-}
-.mdc-card.full,
-.mdc-card.search-result {
-  .mdc-card__info--fund {
-    .fa-ul {
-      float: left;
-    }
-    .fa-ul.first {
-      clear: left;
-      width: 18vw;
-    }
-    .fa-ul.last {
-      width: 16vw;
-      margin-left: 2.5rem !important;
     }
   }
 }
