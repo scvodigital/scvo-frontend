@@ -1,18 +1,8 @@
 {
-  "name": "fund_search",
-  "debug": true,
+  "name": "fund_browse",
   "pattern": {
-    "search": "/search"
-  },
-  "metaData": {
-    "sidebarButton": {
-      "icon": "search",
-      "tooltip": "Search",
-      "classes": "hide-md hide-lg"
-    }
-  },
-  "defaultParams": {
-    "context": "results"
+    "browse": "/browse",
+    "browse_selection": "/browse/:browse_type/:browse_slug"
   },
   "tasks": [
     "context.metaData.commonTasks.authRequired",
@@ -40,7 +30,6 @@
       "renderer": "handlebars"
     },
     "context.metaData.commonTasks.supplimentaryResponses",
-    "context.metaData.commonTasks.termsMaps",
     {
       "name": "destination",
       "taskModule": "renderLayout",
@@ -48,43 +37,17 @@
       "config": {
         "logic": {
           "if": [
-            {
-              "in": [
-                "view=rss",
-                {
-                  "var": "request.fullUrl"
-                }
-              ]
-            },
-            "rss",
-            {
-              "in": [
-                "view=json",
-                {
-                  "var": "request.fullUrl"
-                }
-              ]
-            },
-            "data",
             "default"
           ]
         },
         "output": "body",
         "layouts": {
-          "rss": {
-            "layout": ">context.metaData.handlebars.layouts.rss",
-            "parts": {
-              "head": ">context.metaData.handlebars.templates.funds_search-rss-head-tags",
-              "body": ">context.metaData.handlebars.templates.funds_search-rss"
-            },
-            "contentType": "application/rss+xml"
-          },
           "default": {
             "layout": ">context.metaData.handlebars.layouts.default",
             "parts": {
-              "head": ">context.metaData.handlebars.templates.funds_search-head-tags",
+              "head": ">context.metaData.handlebars.templates.pages_page-head-tags",
               "header": ">context.metaData.handlebars.templates.funds_search-header",
-              "sidebar": ">context.metaData.handlebars.templates.funds_search-form",
+              "sidebar": ">context.metaData.handlebars.templates.funds_browse-form",
               "body": ">context.metaData.handlebars.templates.funds_search",
               "foot": ">context.metaData.handlebars.templates.funds_search-foot"
             },

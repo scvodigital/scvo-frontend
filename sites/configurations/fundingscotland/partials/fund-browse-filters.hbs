@@ -33,7 +33,7 @@
       </div>
     </div> -->
 
-    {{#each (split "fund_status,charities_only,geographical_areas_funded,type_of_cost,type_of_funding" ",")}}
+    {{#each (split "activities,beneficiaries,geographical_areas_funded,fund_status,charities_only,type_of_cost,type_of_funding" ",")}}
       <h3 class="mdc-drawer__content-heading cursor-pointer noselect mdc-drawer--occasional-ie11" data-collapse-target="#{{../instance_id}}-{{this}}-collapse" role="button" aria-pressed="false" aria-label="Show {{getProperty @root.context.metaData.termTypeLabels (concat this ".plural")}}" tabindex="0">
         {{getProperty @root.context.metaData.termTypeLabels (concat this ".plural")}}
         <span class="mdc-icon-toggle pull-right">
