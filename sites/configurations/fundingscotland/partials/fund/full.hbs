@@ -1,85 +1,93 @@
 <div class="mdc-card full" data-fund-id="{{Id}}">
   {{> fund_key_info}}
+  <ul class="fa-ul first">
+    {{#if (length (arrayify geographical_areas_funded)) ~}}
+      <li class="mdc-typography--body1 mdc-chip-set">
+        <span class="fa-li"><span class="far fa-map-marker-alt fa-fw" title="Geographical areas funded"></span></span>
+        {{#each (arrayify geographical_areas_funded) ~}}
+          <a href="/search?geographical_areas_funded={{lookup ../geographical_areas_funded_slugs @index}}" class="mdc-chip">
+            {{{this}}}
+          </a>
+        {{/each ~}}
+      </li>
+    {{/if ~}}
+    {{#if (length (arrayify activities)) ~}}
+      <li class="mdc-typography--body1 mdc-chip-set">
+        <span class="fa-li"><span class="far fa-hands-helping fa-fw" title="Activities"></span></span>
+        {{#each (arrayify activities) ~}}
+          <a href="/search?activities={{lookup ../activities_slugs @index}}" class="mdc-chip">
+            {{{this}}}
+          </a>
+        {{/each ~}}
+      </li>
+    {{/if ~}}
+    {{#if (length (arrayify activities)) ~}}
+      <li class="mdc-typography--body1 mdc-chip-set">
+        <span class="fa-li"><span class="far fa-user-alt fa-fw" title="Beneficiaries"></span></span>
+        {{#each (arrayify beneficiaries) ~}}
+        <a href="/search?beneficiaries={{lookup ../beneficiaries_slugs @index}}" class="mdc-chip">
+          {{{this}}}
+        </a>
+        {{/each ~}}
+      </li>
+    {{/if ~}}
+  </ul>
+
   <hr class="mdc-list-divider" />
+
+  {{#if description ~}}
+  <h4 class="mdc-typography--headline6">Summary</h4>
+  <div class="mdc-typography--body1">
+    {{{description}}}
+  </div>
+  {{/if ~}}
+
+  {{#if who_can_apply ~}}
+  <h4 class="mdc-typography--headline6">Who can apply?</h4>
+  <div class="mdc-typography--body1">
+    {{{who_can_apply}}}
+  </div>
+  {{/if ~}}
+
+  {{#if exclusions ~}}
+  <h4 class="mdc-typography--headline6">Exclusions</h4>
+  <div class="mdc-typography--body1">
+    {{{exclusions}}}
+  </div>
+  {{/if ~}}
+
+  {{#if when_to_apply ~}}
+  <h4 class="mdc-typography--headline6">When to apply?</h4>
+  <div class="mdc-typography--body1">
+    {{{when_to_apply}}}
+  </div>
+  {{/if ~}}
+
+  <h4 class="mdc-typography--headline6">Your notes</h4>
   <div class="fund-info-container">
-    <div id="fund-tab-bar" class="mdc-tab-bar" data-mdc-auto-init="MDCTabBar" role="tablist">
-      <a class="mdc-tab mdc-tab--active" role="tab" aria-controls="panel-1">
-        <span class="far fa-list-ul fa-fw" aria-hidden="true"></span>
-        Information
-      </a>
-      <a class="mdc-tab" role="tab" aria-controls="panel-2">
-        <span class="far fa-map-marker-alt fa-fw" aria-hidden="true"></span>
-        Location
-      </a>
-      <a class="mdc-tab" role="tab" aria-controls="panel-3">
-        <span class="far fa-edit fa-fw" aria-hidden="true"></span>
-        Your notes
-      </a>
-      <span class="mdc-tab-bar__indicator"></span>
-    </div>
-    <hr class="mdc-list-divider" />
-    <div class="panels" for="fund-tab-bar">
-      <div class="panel panel--active mdc-card--full-content" role="tabpanel" aria-hidden="false" id="panel-1">
-        <div class="key-info-extra">
-          <ul class="fa-ul">
-            {{#if activities ~}}
-            <li class="mdc-card__info--fund-closing mdc-typography--body1">
-              <span class="fa-li"><span class="far fa-tags fa-fw" title="Activities"></span></span>
-              {{#each activities ~}}
-                <a href="/browse/activities/{{lookup ../activities_slugs @index}}" class="mdc-chip">
-                  {{{this}}}
-                </a>
-              {{/each ~}}
-            </li>
-            {{/if ~}}
-            {{#if beneficiaries ~}}
-            <li class="mdc-card__info--fund-location mdc-typography--body1">
-              <span class="fa-li"><span class="far fa-tags fa-fw" title="Beneficiaries"></span></span>
-              {{#each beneficiaries ~}}
-              <a href="/browse/beneficiaries/{{lookup ../beneficiaries_slugs @index}}" class="mdc-chip">
-                {{{this}}}
-              </a>
-              {{/each ~}}
-            </li>
-            {{/if ~}}
-          </ul>
-        </div>
+    <div class="text-field-container user-notes">
+      {{#if @root.data.auth ~}}
+        <form action="/save-notes" method="POST" data-ajax-form="true" data-success-message="Notes saved" data-failure-message="Failed to save notes">
+          <div>
+            <textarea class="mdc-text-field__input" data-simple-mde="true" name="notes">{{getProperty @root.data.notes Id}}</textarea>
+            <input type="hidden" name="id" value="{{Id}}">
+          </div>
+          <div class="save-button-block">
+            <button type="submit" class="mdc-button mdc-button--raised">
+              <span class="far fa-save mdc-list-item__graphic" aria-hidden="true"></span>
+              Save notes
+            </button>
+          </div>
+        </form>
+      {{else}}
         <div class="detailed-info">
-          {{#if description ~}}
-          <h4 class="mdc-typography--headline6">Summary</h4>
-          <div class="mdc-typography--body1">
-            {{{description}}}
-          </div>
-          {{/if ~}}
-
-          {{#if exclusions ~}}
-          <h4 class="mdc-typography--headline6">Exclusions</h4>
-          <div class="mdc-typography--body1">
-            {{{exclusions}}}
-          </div>
-          {{/if ~}}
+          <p class="mdc-typography--body1">
+            If you <a href="/sign-up">sign up</a> you'll be able to save notes on active jobs.
+          </p>
         </div>
-      </div>
-      <div class="panel mdc-card--full-content mdc-typography--body1" role="tabpanel" aria-hidden="true" id="panel-2">
-        <div class="detailed-info">
-
-        </div>
-      </div>
-      <div class="panel mdc-card--full-content mdc-typography--body1" role="tabpanel" aria-hidden="true" id="panel-3">
-        <div class="text-field-container user-notes">
-          <div class="mdc-text-field text-field mdc-text-field--fullwidth mdc-text-field--dense mdc-text-field--textarea" data-mdc-auto-init="MDCTextField">
-            <textarea id="user-notes" class="mdc-text-field__input"></textarea>
-            <label class="mdc-floating-label" for="user-notes">
-              Your notes
-            </label>
-          </div>
-        </div>
-      </div>
+      {{/if ~}}
     </div>
     <div class="mdc-card__actions">
-      <div class="mdc-card__action-buttons demo-card__action-buttons--text-only mdc-card__actions--full-bleed">
-        <a href="/funder/{{funder_organisation.slug}}" class="mdc-card__action">Find out more about {{funder_organisation.name}}</a>
-      </div>
       <div class="mdc-card__action-icons mdc-chip-set pull-right">
         <div class="mdc-chip" onclick="goodmoves.toggleShortlistItem('{{Id}}');" data-mdc-auto-init="MDCChip">
           <span class="far fa-star mdc-chip__icon mdc-chip__icon--leading" aria-hidden="true"></span>
