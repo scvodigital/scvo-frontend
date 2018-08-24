@@ -245,7 +245,7 @@
             {{/each ~}}
           {{/if ~}}
         {{/each ~}}
-        {{#each (split "keywords,sort" ",")}}
+        {{#each (split "keywords" ",")}}
           {{#if (getProperty @root.request.params.query this) ~}}
             <input type="hidden" name="{{this}}" value="{{getProperty @root.request.params.query this}}" />
           {{/if ~}}
