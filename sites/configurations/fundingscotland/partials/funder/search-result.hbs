@@ -2,12 +2,12 @@
   <div class="mdc-card__info--funder-row">
     <div class="mdc-card__info--funder">
       <div class="mdc-card__info--funder-title mdc-typography--headline6">
-        <a href="/funder/{{slug}}">{{title}}</a>
+        <a href="/funder/{{slug}}{{@root.request.url.search}}">{{title}}</a>
       </div>
     </div>
     {{#if has_logo ~}}
     <div class="mdc-card__media mdc-card__media--square mdc-card__media--funder">
-      <a href="/funder/{{slug}}">
+      <a href="/funder/{{slug}}{{@root.request.url.search}}">
         <img src="{{logo_url}}" alt="{{title}}" />
       </a>
     </div>
@@ -22,7 +22,7 @@
   {{/if}}
   <div class="mdc-card__actions">
     <div class="mdc-card__action-buttons demo-card__action-buttons--text-only mdc-card__actions--full-bleed">
-      <a href="/funder/{{slug}}" class="mdc-card__action">Find out more</a>
+      <a href="/funder/{{slug}}{{@root.request.url.search}}" class="mdc-card__action">Find out more</a>
     </div>
   </div>
 </div>

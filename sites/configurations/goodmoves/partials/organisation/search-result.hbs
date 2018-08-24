@@ -3,13 +3,13 @@
     <div class="mdc-card__info--organisation">
       {{#if has_logo ~}}
       <div class="mdc-card__media mdc-card__media--organisation">
-        <a href="/organisation/{{slug}}">
+        <a href="/organisation/{{slug}}{{@root.request.url.search}}">
           <img src="{{logo_url}}" alt="{{title}}" />
         </a>
       </div>
       {{/if ~}}
       <div class="mdc-card__info--organisation-title mdc-typography--headline6">
-        <a href="/organisation/{{slug}}">{{title}}</a>
+        <a href="/organisation/{{slug}}{{@root.request.url.search}}">{{title}}</a>
       </div>
       <div class="search-result-article__snippet mdc-typography--body1">
         {{{og_summary}}}
