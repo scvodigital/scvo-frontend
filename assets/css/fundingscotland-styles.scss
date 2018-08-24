@@ -814,18 +814,18 @@ a {
   width: 100%;
   background-color: #fff;
   margin-bottom: $unit*1.5;
-  .mdc-card__info--vacancy-row {
+  .mdc-card__info--fund-row {
     padding: $unit/2;
   }
   .search-result-article__snippet,
   .search-result-article__notes,
-  .mdc-card__info--vacancy-row {
+  .mdc-card__info--fund-row {
     flex: 1 0 auto;
   }
-  .mdc-card__info--organisation-title {
+  .mdc-card__info--funder-title {
     padding: $unit;
   }
-  .mdc-card__media--organisation {
+  .mdc-card__media--funder {
     // margin-right: $unit;
     z-index: 3;
   }
@@ -860,12 +860,28 @@ a {
     }
   }
 }
+.mdc-card.full,
+.mdc-card.search-result {
+  .mdc-card__info--fund {
+    .fa-ul {
+      float: left;
+    }
+    .fa-ul.first {
+      clear: left;
+      width: 18vw;
+    }
+    .fa-ul.last {
+      width: 16vw;
+      margin-left: 2.5rem !important;
+    }
+  }
+}
 .fundingscotland-fund.mdc-card.list,
 .fundingscotland-fund.mdc-card.mini,
 .fundingscotland-fund.mdc-card.gist,
 .fundingscotland-fund.mdc-card.search-result {
   border-top: $unit/3 solid $mdc-theme-complimentary-light;
-  .mdc-card__info--vacancy-row {
+  .mdc-card__info--fund-row {
     padding-top: $unit/4;
     padding-bottom: 0;
   }

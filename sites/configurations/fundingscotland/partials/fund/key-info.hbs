@@ -20,37 +20,37 @@
       </li>
     </ul>
     <ul class="fa-ul first">
-      {{#if geographical_areas_funded ~}}
-      <li class="mdc-card__info--fund-location mdc-typography--body1">
-        <span class="fa-li"><span class="far fa-map-marker-alt fa-fw" title="Areas funded"></span></span>
-        {{#each geographical_areas_funded ~}}
-          {{{this}}}{{#unless @last}}, {{/unless}}
-        {{/each}}
-      </li>
-      {{/if ~}}
       {{#if fund_status ~}}
-      <li class="mdc-card__info--fund-status mdc-typography--body1">
-        <span class="fa-li"><span class="far fa-clock fa-fw" title="Status"></span></span>
-        {{{fund_status}}}
-      </li>
+        <li class="mdc-card__info--fund-status mdc-typography--body1">
+          <span class="fa-li"><span class="far fa-clock fa-fw" title="Status"></span></span>
+          {{{fund_status}}}
+        </li>
+      {{/if ~}}
+      {{#if type_of_funding ~}}
+        <li class="mdc-card__info--fund-salary mdc-typography--body1">
+          <span class="fa-li"><span class="far fa-calculator fa-fw" title="Type of funding"></span></span>
+          {{#each type_of_funding ~}}
+          {{{this}}}{{#unless @last}}, {{/unless}}
+          {{/each}}
+        </li>
       {{/if ~}}
     </ul>
     <ul class="fa-ul last">
-      {{#if type_of_funding ~}}
-      <li class="mdc-card__info--fund-salary mdc-typography--body1">
-        <span class="fa-li"><span class="far fa-calculator fa-fw" title="Type of funding"></span></span>
-        {{#each type_of_funding ~}}
-          {{{this}}}{{#unless @last}}, {{/unless}}
-        {{/each}}
-      </li>
-      {{/if ~}}
       {{#if type_of_cost ~}}
-      <li class="mdc-card__info--fund-closing mdc-typography--body1">
-        <span class="fa-li"><span class="far fa-calendar-alt fa-fw" title="Type of cost"></span></span>
-        {{#each type_of_cost ~}}
+        <li class="mdc-card__info--fund-closing mdc-typography--body1">
+          <span class="fa-li"><span class="far fa-calendar-alt fa-fw" title="Type of cost"></span></span>
+          {{#each type_of_cost ~}}
+            {{{this}}}{{#unless @last}}, {{/unless}}
+          {{/each}}
+        </li>
+      {{/if ~}}
+      {{#if geographical_areas_funded ~}}
+        <li class="mdc-card__info--fund-location mdc-typography--body1">
+          <span class="fa-li"><span class="far fa-map-marker-alt fa-fw" title="Areas funded"></span></span>
+          {{#each geographical_areas_funded ~}}
           {{{this}}}{{#unless @last}}, {{/unless}}
-        {{/each}}
-      </li>
+          {{/each}}
+        </li>
       {{/if ~}}
     </ul>
   </div>

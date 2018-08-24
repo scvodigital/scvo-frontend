@@ -275,7 +275,7 @@
 </div>
 
 {{#each @root.data.search_data.detailed_results.hits.hits ~}}
-  {{#compare @root.route.name "===" "search" ~}}
+  {{#compare @root.route.name "===" "fund_search" ~}}
     {{> fund_search_result _source sort=sort}}
   {{else}}
     {{> fund_mini _source sort=sort}}

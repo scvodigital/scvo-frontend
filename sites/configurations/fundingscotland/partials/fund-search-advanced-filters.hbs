@@ -22,6 +22,11 @@
 <div class="mdc-drawer__content">
   <!-- <h2 class="mdc-drawer__content-heading hide-sm mdc-drawer--occasional-ie11">Search funds</h2> -->
   <form action="{{{@root.request.url.pathname}}}" method="GET" class="search-form">
+    {{#each (split "keywords,sort" ",")}}
+      {{#if (getProperty @root.request.params.query this) ~}}
+        <input type="hidden" name="{{this}}" value="{{getProperty @root.request.params.query this}}" />
+      {{/if ~}}
+    {{/each ~}}
     <!-- <div class="h-padding">
       <div class="mdc-text-field mdc-text-field--box mdc-text-field--with-leading-icon" data-mdc-auto-init="MDCTextField">
         <span class="far fa-search mdc-text-field__icon" tabindex="-1"></span>
