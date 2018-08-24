@@ -1,65 +1,34 @@
 <div class="container-fluid home-banner">
-  <!-- <div class="banner-search overlay" style="background-image: url('{{#if data.supplimentaryResponses.splash.hits.hits.[0]._source.original_image}}{{data.supplimentaryResponses.splash.hits.hits.[0]._source.original_image}}{{/if}}');"> -->
-  <div class="banner-search overlay">
-    <div class="content page-content">
-      <!-- <div class="overlay-content">
-
-      </div> -->
-      {{#if @root.data.auth ~}}
-        <form id="search-view" class="search-form mdc-elevation--z5" action="/search" method="GET">
-          <div class="mdc-layout-grid">
-            <div class="mdc-layout-grid__inner">
-              <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-10-desktop mdc-layout-grid__cell--span-7-tablet mdc-layout-grid__cell--span-4-phone">
-                <div class="mdc-text-field mdc-text-field--box mdc-text-field--with-leading-icon mdc-text-field-tt" data-mdc-auto-init="MDCTextField">
-                  <span class="far fa-search mdc-text-field__icon" tabindex="0" role="button"></span>
-                  <input type="text" id="keywords" name="keywords" class="mdc-text-field__input">
-                  <label for="keywords" class="mdc-floating-label">
-                    Keywords
-                  </label>
-                  <div class="mdc-line-ripple"></div>
-                </div>
-              </div>
-              <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-2-desktop mdc-layout-grid__cell--span-1-tablet mdc-layout-grid__cell--span-4-phone">
-                <button type="submit" id="search-funds" class="mdc-button mdc-button--raised mdc-text-field--box mdc-button--search mdc-ripple-surface mdc-ripple-surface--primary" data-mdc-auto-init="MDCRipple">
-                  Search
-                  <span class="far fa-search" aria-hidden="true"></span>
-                </button>
-              </div>
-            </div>
-            <div class="mdc-layout-grid__inner">
-              <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-7-tablet mdc-layout-grid__cell--span-4-phone">
-                <div id="search-terms" class="mdc-chip-set"></div>
-              </div>
-            </div>
-          </div>
-        </form>
-      {{else}}
-        {{> account_sign_in}}
-      {{/if ~}}
-    </div>
-  </div>
-
+  {{> fund_search_header}}
   <div class="mdc-layout-grid home-funds">
     <div class="mdc-layout-grid__inner">
-      <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone v-margin-full latest-funds">
+      <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-8-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone v-margin-full latest-funds">
         <p>
           Funding Scotland exists to help charities, community groups and social enterprises find the money they need to realise their vision. From small grants to funding for big capital projects, we can help you track down the funding you need. We provide information on over 1200 funds which support Scottish projects. Funding Scotland only lists funders with a track record of supporting projects in Scotland. It includes grants, loans, prizes and other support. It does not include funding opportunities for individuals or private businesses. This website is owned and maintained by the <a href="https://scvo.org">Scottish Council for Voluntary Organisations</a>, champions of the third sector in Scotland.
         </p>
+        <h2 class="mdc-typography--headline4">Blogs/advice</h2>
+        <ul>
+          <li>&hellip;</li>
+          <li>&hellip;</li>
+          <li>&hellip;</li>
+        </ul>
+        <h2 class="mdc-typography--headline4">Go premium</h2>
         <p>
           To start searching for funds, <a href="/">sign in</a>. For features such as email alerts, adding notes to your funds, and more, <a href="/premium">go premium</a>.
         </p>
+        <h2 class="mdc-typography--headline4">Go local</h2>
         <p>
-          Or, go local. For information on funding in your area, check out:
+        For information on funding in your area, check out:
         </p>
         <ul>
           <li><a href="">Fife Funding Search</a></li>
           <li><a href="">SRN Funding Search</a></li>
-          <li><a href="">etc</a></li>
+          <li><a href="">South Lanarkshire</a></li>
         </ul>
       </div>
-      <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-8-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone v-margin-full latest-funds">
+      <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone v-margin-full latest-funds">
         <div class="mdc-typography--headline5 v-margin-full">
-          Latest funds
+          Recently updated funds
         </div>
         {{#each data.primaryResponse.hits.hits ~}}
         {{> fund_mini _source}}

@@ -1,0 +1,35 @@
+<div class="banner-search overlay">
+  <div class="content page-content">
+    {{#if @root.data.auth ~}}
+      <form id="search-view" class="search-form mdc-elevation--z5" action="/search" method="GET">
+        <div class="mdc-layout-grid">
+          <div class="mdc-layout-grid__inner">
+            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-10-desktop mdc-layout-grid__cell--span-7-tablet mdc-layout-grid__cell--span-4-phone">
+              <div class="header mdc-text-field mdc-text-field--box mdc-text-field--with-leading-icon mdc-text-field-tt" data-mdc-auto-init="MDCTextField">
+                <span class="far fa-search mdc-text-field__icon" tabindex="0" role="button"></span>
+                <input type="text" id="keywords" name="keywords" value="{{@root.request.params.query.keywords}}" class="mdc-text-field__input" />
+                <label for="keywords" class="mdc-floating-label">
+                  Keywords
+                </label>
+                <div class="mdc-line-ripple"></div>
+              </div>
+            </div>
+            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-2-desktop mdc-layout-grid__cell--span-1-tablet mdc-layout-grid__cell--span-4-phone">
+              <button type="submit" id="search-funds" class="mdc-button mdc-button--raised mdc-text-field--box mdc-button--search mdc-ripple-surface mdc-ripple-surface--primary" data-mdc-auto-init="MDCRipple">
+                Search
+                <span class="far fa-search" aria-hidden="true"></span>
+              </button>
+            </div>
+          </div>
+          <div class="mdc-layout-grid__inner">
+            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-7-tablet mdc-layout-grid__cell--span-4-phone">
+              <div id="search-terms" class="mdc-chip-set"></div>
+            </div>
+          </div>
+        </div>
+      </form>
+    {{else}}
+      {{> account_sign_in}}
+    {{/if ~}}
+  </div>
+</div>

@@ -20,9 +20,9 @@
 {{/inline}}
 
 <div class="mdc-drawer__content">
-  <h2 class="mdc-drawer__content-heading hide-sm mdc-drawer--occasional-ie11">Search funds</h2>
+  <!-- <h2 class="mdc-drawer__content-heading hide-sm mdc-drawer--occasional-ie11">Search funds</h2> -->
   <form action="/search" method="GET" class="search-form">
-    <div class="h-padding">
+    <!-- <div class="h-padding">
       <div class="mdc-text-field mdc-text-field--box mdc-text-field--with-leading-icon" data-mdc-auto-init="MDCTextField">
         <span class="far fa-search mdc-text-field__icon" tabindex="-1"></span>
         <input type="text" id="{{instance_id}}-keywords" name="keywords" class="mdc-text-field__input mdc-text-field--fullwidth" value="{{@root.request.params.query.keywords}}" data-lpignore="true" autocomplete="off">
@@ -31,7 +31,7 @@
         </label>
         <div class="mdc-line-ripple"></div>
       </div>
-    </div>
+    </div> -->
 
     {{#each (split "fund_status,charities_only,geographical_areas_funded,type_of_cost,type_of_funding" ",")}}
       <h3 class="mdc-drawer__content-heading cursor-pointer noselect mdc-drawer--occasional-ie11" data-collapse-target="#{{../instance_id}}-{{this}}-collapse" role="button" aria-pressed="false" aria-label="Show {{getProperty @root.context.metaData.termTypeLabels (concat this ".plural")}}" tabindex="0">
@@ -51,8 +51,8 @@
 
     <div class="h-margin v-margin mdc-drawer--occasional-ie11">
       <button class="mdc-button mdc-button--raised mdc-button--large mdc-button--fullwidth mdc-ripple-surface mdc-ripple-surface--primary" type="submit" id="{{instance_id}}-search-submit" data-mdc-auto-init="MDCRipple">
-        <span class="far fa-search fa-fw mdc-list-item__graphic" aria-hidden="true"></span>
-        Search
+        <span class="far fa-search-plus fa-fw mdc-list-item__graphic" aria-hidden="true"></span>
+        Filter
       </button>
     </div>
   </form>
