@@ -1,6 +1,11 @@
 <div class="mdc-card full" data-funder-id="{{Id}}">
   <div class="mdc-card__info--funder-row">
     <div class="mdc-card__info--funder">
+      {{#if has_logo ~}}
+      <div class="mdc-card__media mdc-card__media--organisation">
+        <img src="{{logo_url}}" alt="{{title}}" />
+      </div>
+      {{/if ~}}
       <div class="mdc-card__info--funder-title mdc-typography--headline3">
         {{{title}}}
       </div>
@@ -57,10 +62,5 @@
         </ul>
       </div>
     </div>
-    {{#if has_logo ~}}
-    <div class="mdc-card__media mdc-card__media--square mdc-card__media--funder">
-      <img src="{{logo_url}}" alt="{{title}}" />
-    </div>
-    {{/if ~}}
   </div>
 </div>

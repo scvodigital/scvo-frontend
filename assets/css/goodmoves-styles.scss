@@ -314,12 +314,13 @@ footer h3,
 .mdc-typography--headline5,
 .mdc-typography--headline6,
 .mdc-typography--headline7,
-.mdc-typography--headline,
+.mdc-drawer__content-heading,
 .supplimentary-list-title {
   font-family: $heading-font-family, $base-font-family, Helvetica, Arial, sans-serif;
   font-weight: $heading-font-weight;
 }
 .mdc-drawer__content-heading,
+.mdc-typography--headline,
 .mdc-typography--headline1,
 .mdc-typography--headline2,
 .mdc-typography--headline3,
@@ -327,7 +328,7 @@ footer h3,
 .mdc-typography--headline5,
 .mdc-typography--headline6,
 .mdc-typography--headline7,
-.mdc-typography--headline {
+.mdc-drawer__content-heading {
   font-weight: $heading-medium-font-weight;
   a {
     font-weight: $heading-medium-font-weight;
@@ -526,7 +527,8 @@ footer h3,
   }
 }
 
-.goodmoves-shortlist {
+.goodmoves-shortlist,
+.goodmoves-notes {
   .mdc-layout-grid {
     .mdc-select {
       margin-bottom: $unit;
@@ -1404,8 +1406,10 @@ hr {
   padding: $unit;
 }
 .mdc-drawer__content-heading {
+  font-size: 1.1rem;
+  display: block;
   margin: 0;
-  padding: $unit $unit/2;
+  padding: $unit 0 $unit $unit/2;
   font-weight: $heading-medium-font-weight;
   .mdc-icon-toggle {
     margin-top: -$unit*(3/4);
@@ -1413,6 +1417,15 @@ hr {
   .far.pull-right {
     line-height: $unit*1.7;
   }
+  .mdc-typography--caption {
+    margin-left: $unit;
+  }
+}
+a.mdc-drawer__content-heading {
+  color: rgba(0, 0, 0, 0.87);
+}
+a.mdc-drawer__content-heading:hover {
+  text-decoration: none;
 }
 .mdc-drawer__content-heading:focus {
   outline: none;

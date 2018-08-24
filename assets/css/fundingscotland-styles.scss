@@ -345,12 +345,13 @@ footer h3,
 .mdc-typography--headline5,
 .mdc-typography--headline6,
 .mdc-typography--headline7,
-.mdc-typography--headline,
+.mdc-drawer__content-heading,
 .supplimentary-list-title {
   font-family: $heading-font-family, $base-font-family, Helvetica, Arial, sans-serif;
   font-weight: $heading-font-weight;
 }
 .mdc-drawer__content-heading,
+.mdc-typography--headline,
 .mdc-typography--headline1,
 .mdc-typography--headline2,
 .mdc-typography--headline3,
@@ -358,7 +359,7 @@ footer h3,
 .mdc-typography--headline5,
 .mdc-typography--headline6,
 .mdc-typography--headline7,
-.mdc-typography--headline {
+.mdc-drawer__content-heading {
   font-weight: $heading-medium-font-weight;
   a {
     font-weight: $heading-medium-font-weight;
@@ -416,6 +417,9 @@ footer h3,
 }
 .mdc-button--large {
   height: 56px;
+  .far {
+    font-size: 1.25rem;
+  }
 }
 .drawer-container-permanent {
   display: flex;
@@ -464,8 +468,8 @@ footer h3,
       color: white;
       width: 100%;
       color: white;
-      line-height: 56px;
-      height: 56px;
+      line-height: $unit*3;
+      height: $unit*3;
       .fa-2x {
         position: absolute;
         top: .6rem;
@@ -474,7 +478,8 @@ footer h3,
     }
   }
   #sign-in-message,
-  #sign-up-message {
+  #sign-up-message,
+  #reset-password-message  {
     display: none;
   }
 }
@@ -799,6 +804,25 @@ a {
   }
 }
 
+dl {
+  dt, dd {
+    float: left;
+    margin: 0;
+  }
+  dt {
+    font-weight: 600;
+    clear: both;
+  }
+  dd {
+    .fund-status {
+      font-weight: 600;
+    }
+    .fund-status.fund-open {
+      color: #328c19;
+    }
+  }
+}
+
 .mdc-card.list,
 .mdc-card.mini,
 .mdc-card.gist,
@@ -809,18 +833,31 @@ a {
   width: 100%;
   background-color: #fff;
   margin-bottom: $unit*1.5;
-  .mdc-card__info--vacancy-row {
+  .fund-details {
+    h4 {
+      display: none;
+    }
+  }
+  dl{
+    dt {
+      clear: none;
+    }
+    dd {
+      margin: 0 $unit 0 $unit/2;
+    }
+  }
+  .mdc-card__info--fund-row {
     padding: $unit/2;
   }
   .search-result-article__snippet,
   .search-result-article__notes,
-  .mdc-card__info--vacancy-row {
+  .mdc-card__info--fund-row {
     flex: 1 0 auto;
   }
-  .mdc-card__info--organisation-title {
+  .mdc-card__info--funder-title {
     padding: $unit;
   }
-  .mdc-card__media--organisation {
+  .mdc-card__media--funder {
     // margin-right: $unit;
     z-index: 3;
   }
@@ -860,7 +897,7 @@ a {
 .fundingscotland-fund.mdc-card.gist,
 .fundingscotland-fund.mdc-card.search-result {
   border-top: $unit/3 solid $mdc-theme-complimentary-light;
-  .mdc-card__info--vacancy-row {
+  .mdc-card__info--fund-row {
     padding-top: $unit/4;
     padding-bottom: 0;
   }
@@ -938,6 +975,12 @@ a {
   }
   .mdc-card__info--funder-title {
     margin: 0 0 $unit/2;
+  }
+  dl {
+    dt {
+      min-width: 130px;
+      margin-right: $unit;
+    }
   }
   .mdc-card__info--fund .detailed-info,
   .funder-type {
@@ -1119,6 +1162,18 @@ a {
   color: white;
 }
 
+// Grid Cards ==================================================================
+
+.mdc-layout-grid.equal-height .mdc-layout-grid__cell {
+  display: flex;
+  .mdc-card {
+    justify-content: start;
+    .mdc-card__supporting-text {
+      flex: 1 0 auto;
+    }
+  }
+}
+
 .pagination-mobile,
 .fundingscotland-organisation .mdc-card.list .mdc-card__info--fund-funder {
   display: none !important;
@@ -1151,13 +1206,16 @@ hr {
   font-size: 1.1rem;
   display: block;
   margin: 0;
-  padding: $unit $unit/2;
+  padding: $unit 0 $unit $unit/2;
   font-weight: $heading-medium-font-weight;
   .mdc-icon-toggle {
     margin-top: -$unit*(3/4);
   }
   .far.pull-right {
     line-height: $unit*1.7;
+  }
+  .mdc-typography--caption {
+    margin-left: $unit;
   }
 }
 a.mdc-drawer__content-heading {
@@ -1615,13 +1673,16 @@ footer,
         color: $mdc-theme-primary;
       }
     }
+    .mdc-list-item {
+      .mdc-list-item__meta {
+        text-decoration: none;
+        white-space: nowrap;
+      }
+    }
     .mdc-list-item:hover {
       text-decoration: none;
       .mdc-list-item__text {
         text-decoration: underline;
-      }
-      .mdc-list-item__meta {
-        text-decoration: none;
       }
     }
     .mdc-list-item:hover::before,
@@ -2092,6 +2153,50 @@ footer.mdc-layout__footer {
   margin: 0;
 }
 
+form.inline-form {
+  display: inline-block;
+}
+
+#app-snackbar {
+  z-index: 1000;
+  background-color: $mdc-theme-primary-dark;
+  .mdc-snackbar__text {
+    padding: 0;
+  }
+  .mdc-snackbar__action-wrapper {
+    display: none;
+  }
+}
+
+.faded-overflow {
+  overflow: hidden;
+  position: relative;
+  &:before {
+    display: block;
+    margin-top: -$unit*1.5;
+    height: $unit*1.5;
+    width: 100%;
+    content: "";
+    position: absolute;
+    top: 100%;
+    background: linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 1));
+  }
+}
+.search-result-article__notes .faded-overflow {
+  &:before {
+    background: linear-gradient(rgba(236, 242, 233, 0), rgba(236, 242, 233, 1));
+  }
+}
+
+.after-textfield-action {
+  float: right;
+  margin-top: -10px;
+  font-size: 0.8rem;
+  color: $mdc-theme-primary-dark;
+  text-decoration: underline;
+  cursor: pointer;
+}
+
 @media screen and (max-width: $mobile-breakpoint) {
   .mdc-toolbar-fixed-adjust {
     padding-top: $header-upper-height;
@@ -2195,7 +2300,7 @@ footer.mdc-layout__footer {
       pointer-events: all;
     }
   }
-  .fund_browse {
+  .fund_search_advanced {
     .mdc-drawer--occasional,
     .mdc-drawer--occasional .mdc-drawer__drawer {
       width: 960px;

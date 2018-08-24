@@ -4,7 +4,7 @@
   <strong>Current page:</strong> {{addCommas paging.currentPage}} of {{addCommas paging.totalPages}}
 </div>
 {{else}}
-{{#ifAny @root.request.params.query.type @root.request.params.query.regions @root.request.params.query.sectors @root.request.params.query.statuses @root.request.params.query.location @root.request.params.query.job_number @root.request.params.query.q ~}}
+{{#ifAny @root.request.params.query.keywords @root.request.params.query.activities @root.request.params.query.beneficiaries @root.request.params.query.geographical_areas_funded @root.request.params.query.fund_status @root.request.params.query.charities_only @root.request.params.query.type_of_cost @root.request.params.query.type_of_funding ~}}
 <div class="search-info mdc-elevation--z1">
   No results, please try a different search query
 </div>

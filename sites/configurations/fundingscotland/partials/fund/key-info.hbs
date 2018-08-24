@@ -15,43 +15,90 @@
     </h2>
     <ul class="fa-ul funder">
       <li class="mdc-card__info--fund-funder mdc-typography--body1">
-        <span class="fa-li"><span class="far fa-building fa-fw" title="funder"></span></span>
+        <span class="fa-li"><span class="far fa-building fa-fw" title="Funder"></span></span>
         <a href="/funder/{{funder_organisation.slug}}{{@root.request.url.search}}">{{funder_organisation.name}}</a>
       </li>
     </ul>
-    <ul class="fa-ul first">
-      {{#if geographical_areas_funded ~}}
-      <li class="mdc-card__info--fund-location mdc-typography--body1">
-        <span class="fa-li"><span class="far fa-map-marker-alt fa-fw" title="Areas funded"></span></span>
-        {{#each geographical_areas_funded ~}}
-          {{{this}}}{{#unless @last}}, {{/unless}}
-        {{/each}}
-      </li>
-      {{/if ~}}
-      {{#if fund_status ~}}
-      <li class="mdc-card__info--fund-status mdc-typography--body1">
-        <span class="fa-li"><span class="far fa-clock fa-fw" title="Status"></span></span>
-        {{{fund_status}}}
-      </li>
-      {{/if ~}}
-    </ul>
-    <ul class="fa-ul last">
-      {{#if type_of_funding ~}}
-      <li class="mdc-card__info--fund-salary mdc-typography--body1">
-        <span class="fa-li"><span class="far fa-calculator fa-fw" title="Type of funding"></span></span>
-        {{#each type_of_funding ~}}
-          {{{this}}}{{#unless @last}}, {{/unless}}
-        {{/each}}
-      </li>
-      {{/if ~}}
-      {{#if type_of_cost ~}}
-      <li class="mdc-card__info--fund-closing mdc-typography--body1">
-        <span class="fa-li"><span class="far fa-calendar-alt fa-fw" title="Type of cost"></span></span>
-        {{#each type_of_cost ~}}
-          {{{this}}}{{#unless @last}}, {{/unless}}
-        {{/each}}
-      </li>
-      {{/if ~}}
-    </ul>
+    <div class="fund-details">
+      <h4 class="mdc-typography--headline6">Fund details</h4>
+      <dl>
+        {{#if fund_status ~}}
+          <dt>Status</dt>
+          <dd>
+            <span class="fund-status fund-{{fund_status_slug}}">{{{fund_status}}}</span>
+          </dd>
+        {{/if ~}}
+        {{#if (length (arrayify type_of_funding)) ~}}
+          <dt>Type of funding</dt>
+          <dd>
+            {{#each (arrayify type_of_funding) ~}}
+              {{{this}}}{{#unless @last}}, {{/unless}}
+            {{/each}}
+          </dd>
+        {{/if ~}}
+        {{#if source_of_fund ~}}
+          <dt>Source</dt>
+          <dd>
+            {{{source_of_fund}}}
+          </dd>
+        {{/if ~}}
+        {{#if (length (arrayify type_of_cost)) ~}}
+          <dt>Type of cost</dt>
+          <dd>
+            {{#each (arrayify type_of_cost) ~}}
+              {{{this}}}{{#unless @last}}, {{/unless}}
+            {{/each}}
+          </dd>
+        {{/if ~}}
+        {{#if when_to_apply ~}}
+          <dt>When to apply</dt>
+          <dd>
+            {{{when_to_apply}}}
+          </dd>
+        {{/if ~}}
+        {{#if next_deadline ~}}
+          <dt>Next deadline</dt>
+          <dd>
+            {{{next_deadline}}}
+          </dd>
+        {{/if ~}}
+        {{#if for_charities_only ~}}
+          <dt>Charities only</dt>
+          <dd>
+            {{{for_charities_only}}}
+          </dd>
+        {{/if ~}}
+        {{#if website ~}}
+          <dt>Website</dt>
+          <dd>
+            {{{website}}}
+          </dd>
+        {{/if ~}}
+        {{#if email ~}}
+          <dt>Email</dt>
+          <dd>
+            {{{email}}}
+          </dd>
+        {{/if ~}}
+        {{#if phone ~}}
+          <dt>Phone</dt>
+          <dd>
+            {{{phone}}}
+          </dd>
+        {{/if ~}}
+        {{#if how_to_apply ~}}
+          <dt>How to apply</dt>
+          <dd>
+            {{{how_to_apply}}}
+          </dd>
+        {{/if ~}}
+        {{#if exclusions ~}}
+          <dt>Exclusions</dt>
+          <dd>
+            {{{exclusions}}}
+          </dd>
+        {{/if ~}}
+      </dl>
+    </div>
   </div>
 </div>

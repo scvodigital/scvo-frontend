@@ -1,42 +1,66 @@
 <div id="detailed-results-container" class="container-content goodmoves-notes">
-  <h1 class="mdc-typography--headline3 v-margin-full">
-    Notes
-  </h1>
+  <div class="mdc-layout-grid">
+    <div class="mdc-layout-grid__inner">
+      <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
+        <h1 class="mdc-typography--headline3 v-margin-full">
+          Notes
+        </h1>
+      </div>
+      <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop hide-md hide-sm">
+      </div>
+      <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
+        <form action="{{{@root.request.url.path}}}" method="GET">
+          <div class="mdc-select mdc-select--box pull-right" data-mdc-auto-init="MDCSelect">
+            <select class="mdc-select__native-control" id="sort" name="sort" onchange="this.form.submit();">
+              <option value="closing_soon"{{#compare @root.request.params.query.sort "===" "closing_soon"}} selected{{/compare}}>Closing soon</option>
+              <option value="newest"{{#compare @root.request.params.query.sort "===" "newest"}} selected{{/compare}}>Newest</option>
+              <option value="oldest"{{#compare @root.request.params.query.sort "===" "oldest"}} selected{{/compare}}>Oldest</option>
+              <option value="salary_high"{{#compare @root.request.params.query.sort "===" "salary_high"}} selected{{/compare}}>Salary - high to low</option>
+              <option value="salary_low"{{#compare @root.request.params.query.sort "===" "salary_low"}} selected{{/compare}}>Salary - low to high</option>
+            </select>
+            <label class="mdc-floating-label mdc-select__label--float-above" for="sort">
+              Sort
+            </label>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
 
   {{#compare @root.data.notes_vacancies.open.hits.total "===" 0}}
-  {{#compare @root.data.notes_vacancies.closed.hits.total "===" 0}}
-  <p class="mdc-typography--body1">
-    You haven't yet written notes on any jobs. To write a note, navigate to the full details of a job then enter the&ensp;<strong><span class="far fa-edit mdc-chip__icon mdc-chip__icon--leading" aria-hidden="true"></span>Notes</strong>&ensp;tab, type some text then click the&ensp;<strong><span class="far fa-save mdc-chip__icon mdc-chip__icon--leading" aria-hidden="true"></span>Save notes</strong>&ensp;button.
-  </p>
-  {{else}}
-  <p class="mdc-typography--body1">
-    You don't have notes on any open jobs.
-  </p>
-  {{/compare}}
+    {{#compare @root.data.notes_vacancies.closed.hits.total "===" 0}}
+      <p class="mdc-typography--body1">
+        You haven't yet written notes on any jobs. To write a note, navigate to the full details of a job then enter the&ensp;<strong><span class="far fa-edit mdc-chip__icon mdc-chip__icon--leading" aria-hidden="true"></span>Notes</strong>&ensp;tab, type some text then click the&ensp;<strong><span class="far fa-save mdc-chip__icon mdc-chip__icon--leading" aria-hidden="true"></span>Save notes</strong>&ensp;button.
+      </p>
+    {{else}}
+      <p class="mdc-typography--body1">
+        You don't have notes on any open jobs.
+      </p>
+    {{/compare}}
   {{/compare}}
 
   {{#compare @root.data.notes_vacancies.open.hits.total ">" 0}}
-  {{#each @root.data.notes_vacancies.open.hits.hits ~}}
-  {{#compare (trim (getProperty @root.data.notes _source.Id)) "!==" "" ~}}
-  {{> vacancy_search_result _source}}
-  {{/compare ~}}
-  {{/each ~}}
-  <div class="foot">
-    {{> pagination paging=@root.data.notes_vacancies.open.pagination}}
-  </div>
+    {{#each @root.data.notes_vacancies.open.hits.hits ~}}
+      {{#compare (trim (getProperty @root.data.notes _source.Id)) "!==" "" ~}}
+        {{> vacancy_search_result _source}}
+      {{/compare ~}}
+    {{/each ~}}
+    <div class="foot">
+      {{> pagination paging=@root.data.notes_vacancies.open.pagination}}
+    </div>
   {{/compare}}
 
   {{#compare @root.data.notes_vacancies.closed.hits.total ">" 0}}
-  <h2 class="mdc-typography--headline5 v-margin-full">
-    Closed jobs
-  </h2>
-  {{#each @root.data.notes_vacancies.closed.hits.hits ~}}
-  {{#compare (trim (getProperty @root.data.notes _source.Id)) "!==" "" ~}}
-  {{> vacancy_search_result _source}}
-  {{/compare ~}}
-  {{/each ~}}
-  <div class="foot">
-    {{> pagination paging=@root.data.notes_vacancies.closed.pagination}}
-  </div>
+    <h2 class="mdc-typography--headline5 v-margin-full">
+      Closed jobs
+    </h2>
+    {{#each @root.data.notes_vacancies.closed.hits.hits ~}}
+      {{#compare (trim (getProperty @root.data.notes _source.Id)) "!==" "" ~}}
+        {{> vacancy_search_result _source}}
+      {{/compare ~}}
+    {{/each ~}}
+    <div class="foot">
+      {{> pagination paging=@root.data.notes_vacancies.closed.pagination}}
+    </div>
   {{/compare}}
 </div>

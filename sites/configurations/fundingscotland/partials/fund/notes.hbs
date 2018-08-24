@@ -2,7 +2,7 @@
   <div class="search-result-article__notes">
     <h4 class="mdc-typography--headline7">
       Your notes&ensp;
-      <a href="/fund/{{slug}}#notes" class="mdc-typography--body2">Edit</a>
+      <a href="/fund/{{slug}}{{@root.request.url.search}}#notes" class="mdc-typography--body2">Edit</a>
     </h4>
     <div class="mdc-typography--body1">
       {{#if limit ~}}
@@ -12,7 +12,7 @@
           <div style="max-height: {{limit}};" class="faded-overflow">
           {{{markdown (truncate (getProperty @root.data.notes Id) limit)}}}
           </div>
-          <a href="/fund/{{slug}}#notes">Read more</a>
+          <a href="/fund/{{slug}}{{@root.request.url.search}}#notes">Read more</a>
         {{/compare ~}}
       {{else}}
         {{{markdown (getProperty @root.data.notes Id)}}}

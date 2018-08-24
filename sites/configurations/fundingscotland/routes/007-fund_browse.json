@@ -1,0 +1,67 @@
+{
+  "name": "fund_browse",
+  "pattern": {
+    "browse": "/browse",
+    "browse_selection": "/browse/:browse_type/:browse_slug"
+  },
+  "tasks": [
+    "context.metaData.commonTasks.authRequired",
+    "context.metaData.commonTasks.searchesData",
+    "context.metaData.commonTasks.shortlistData",
+    "context.metaData.commonTasks.notesData",
+    {
+      "name": "search_data",
+      "taskModule": "elasticsearch",
+      "config": {
+        "connectionStringTemplate": "{$../../elasticsearch-url.txt}",
+        "elasticsearchConfig": {
+          "apiVersion": "5.6",
+          "log": "debug"
+        },
+        "queryTemplates": [
+          {
+            "name": "detailed_results",
+            "index": "web-content-production",
+            "type": "fundingscotland-fund",
+            "template": ">context.metaData.handlebars.queries.funds_search-list"
+          }
+        ]
+      },
+      "renderer": "handlebars"
+    },
+    "context.metaData.commonTasks.supplimentaryResponses",
+    {
+      "name": "destination",
+      "taskModule": "renderLayout",
+      "renderer": "handlebars",
+      "config": {
+        "logic": {
+          "if": [
+            "default"
+          ]
+        },
+        "output": "body",
+        "layouts": {
+          "default": {
+            "layout": ">context.metaData.handlebars.layouts.default",
+            "parts": {
+              "head": ">context.metaData.handlebars.templates.pages_page-head-tags",
+              "header": ">context.metaData.handlebars.templates.funds_search-header",
+              "sidebar": ">context.metaData.handlebars.templates.funds_search-form",
+              "body": ">context.metaData.handlebars.templates.funds_browse",
+              "foot": ""
+            },
+            "contentType": "text/html"
+          },
+          "data": {
+            "layout": ">context.metaData.handlebars.layouts.data",
+            "parts": {
+              "content": ">context.metaData.handlebars.templates.funds_search-json"
+            },
+            "contentType": "application/json"
+          }
+        }
+      }
+    }
+  ]
+}
