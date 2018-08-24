@@ -43,13 +43,14 @@
       {{#if (getProperty @root.request.params.query this) ~}}
         <a href="/browse{{@root.request.url.search}}" class="mdc-drawer__content-heading cursor-pointer noselect mdc-drawer--occasional-ie11">
           {{getProperty @root.context.metaData.termTypeLabels (concat this ".plural")}}
-          <!-- <span class="mdc-typography--caption">
-            {{length (getKeys (getProperty @root.request.params.query this))}} selected
-          </span> -->
+          <span class="mdc-typography--caption">
+            {{length (arrayify (getProperty @root.request.params.query this))}} selected
+          </span>
           <span class="mdc-icon-toggle pull-right">
             <i class="far fa-chevron-right" aria-hidden="true"></i>
           </span>
         </a>
+        <input type="hidden" name="{{this}}" value="{{getProperty @root.request.params.query this}}" />
       {{/if ~}}
     {{/each ~}}
 
