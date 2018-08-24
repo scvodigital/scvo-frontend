@@ -1,0 +1,33 @@
+<script>
+$(document).ready(function() {
+  var $form = $('#sign-in-form');
+  var $message = $('#sign-in-message');
+  var $email = $('#sign-in-email');
+  var $password = $('#sign-in-password');
+  var $login = $('#sign-in-submit');
+  var $loader = $('#sign-in-loader');
+
+  $form.on('submit', function(evt) {
+    var email = $email.val();
+    var password = $password.val();
+    $loader.css('display', 'flex');
+    evt.preventDefault();
+    firebase.auth().signInWithEmailAndPassword(email, password).then(function(user) {
+      if (user) {
+        console.log('Logged in:', user);
+        user.user.getIdTokenResult().then(function(idTokenResult) {
+          console.log('ID Token Result', idTokenResult);
+          setCookie('emailer_token', idTokenResult.token, 7);
+          window.location.href = '/status';
+        });
+      } else {
+        $message.html('<div class="v-padding">Something went wrong, signed in but no user?</div>').show();
+        $loader.css('display', 'none');
+      }
+    }).catch(function(err) {
+      $message.html('<div class="v-padding">' + err.message + ' <a href="/reset-password" class="mdl-color-text--accent-contrast">Reset password</a></div>').show();
+      $loader.css('display', 'none');
+    });
+  });
+});
+</script>

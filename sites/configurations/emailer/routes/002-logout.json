@@ -1,11 +1,11 @@
 {
-  "name": "home",
-  "pattern": "/",
+  "name": "logout",
+  "pattern": "/logout",
   "metaData": {
-    "title": "Home"
+    "title": "Logout"
   },
   "tasks": [
-    "context.metaData.commonTasks.authNotRequired",
+    "context.metaData.commonTasks.authRequired",
     {
       "name": "destination",
       "taskModule": "renderLayout",
@@ -22,8 +22,8 @@
             "layout": ">context.metaData.handlebars.layouts.default",
             "parts": {
               "head": "",
-              "body": ">context.metaData.handlebars.templates.home",
-              "foot": ">context.metaData.handlebars.templates.home-foot"
+              "body": ">context.metaData.handlebars.templates.logout",
+              "foot": ">context.metaData.handlebars.templates.logout-foot"
             },
             "contentType": "text/html"
           }

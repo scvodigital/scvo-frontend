@@ -10,6 +10,51 @@
     "menus": {},
     "campaignConfig": "{:./emailer-campaigns.json}",
     "elasticsearchUrl": "{$../elasticsearch-url.txt}",
+    "firebaseDefaultDomain": {
+      "name": "scvo",
+      "label": "SCVO",
+      "logoUrl": "",
+      "config": {
+        "apiKey": "AIzaSyDIUNnyGeZY3sO8gGIf-_2dgO49xKij5zI",
+        "authDomain": "scvo-net.firebaseapp.com",
+        "databaseURL": "https://scvo-net.firebaseio.com",
+        "projectId": "scvo-net",
+        "storageBucket": "scvo-net.appspot.com",
+        "messagingSenderId": "782194712584"
+      }
+    },
+    "commonTasks": {
+      "authNotRequired": {
+        "name": "auth",
+        "taskModule": "firebaseAuth",
+        "config": {
+          "tokenPath": "request.cookies.emailer_token",
+          "cookieName": "emailer_cookie",
+          "cookieOptions": {
+            "maxAge": 1209600000,
+            "secure": true
+          },
+          "appName": "scvo",
+          "noTokenRoute": "",
+          "notAuthenticatedRoute": ""
+        }
+      },
+      "authRequired": {
+        "name": "auth",
+        "taskModule": "firebaseAuth",
+        "config": {
+          "tokenPath": "request.cookies.emailer_token",
+          "cookieName": "emailer_cookie",
+          "cookieOptions": {
+            "maxAge": 1209600000,
+            "secure": true
+          },
+          "appName": "scvo",
+          "noTokenRoute": "home",
+          "notAuthenticatedRoute": "home"
+        }
+      }
+    },
     "handlebars": {
       "partials": {
         "{$./partials/**/*.*}": "includeRelativePath=false&regexExpression=(-)&regexOptions=gi&regexReplace=_"

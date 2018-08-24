@@ -1,3 +1,37 @@
-<h1>Welcome</h1>
-<p>This is a test site to see how login works</p>
-{{> login}}
+{{#ifAll @root.data.auth.email ~}}
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    window.setTimeout(function() {
+      window.location.href = '/status';
+    }, 100);
+  });
+</script>
+{{else}}
+<form id="sign-in-form" method="POST" class="sign-in-form">
+  <div class="mdl-grid demo-content">
+    <div class="mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--6-col-desktop mdl-cell--8-tablet mdl-cell--12-phone mdl-cell--3-offset-desktop mdl-cell--2-offset-tablet">
+      <div class="mdl-card__title mdl-color--primary mdl-color-text--primary-contrast">
+        <h2 class="mdl-card__title-text">Login</h2>
+      </div>
+      <div class="mdl-card__supporting-text mdl-card--border hide mdl-color--accent mdl-color-text--accent-contrast" id="sign-in-message">
+        
+      </div>
+      <div class="mdl-card__supporting-text">
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-textfield__fullwidth">
+          <input type="email" id="sign-in-email" class="mdl-textfield__input" />
+          <label class="mdl-textfield__label" for="sign-in-email">Email</label>
+        </div>
+        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label mdl-textfield__fullwidth">
+          <input type="password" id="sign-in-password" class="mdl-textfield__input" />
+          <label class="mdl-textfield__label" for="sign-in-password">Password</label>
+        </div>
+      </div>
+      <div class="mdl-card__actions mdl-card--border">
+        <button class="mdl-button mdl-button--colored" id="sign-in-submit">
+          Login
+        </button>
+      </div>
+    </div>
+  </div>
+</form>
+{{/ifAll ~}}
