@@ -216,7 +216,7 @@
             {{/each ~}}
           {{/if ~}}
         {{/each ~}}
-        {{#each (split "keywords,location,lat,lng,salary_min,salary_max" ",")}}
+        {{#each (split "keywords,location,lat,lng,salary_min,salary_max,sort" ",")}}
           {{#if (getProperty @root.request.params.query this) ~}}
             <input type="hidden" name="{{this}}" value="{{getProperty @root.request.params.query this}}" />
           {{/if ~}}
