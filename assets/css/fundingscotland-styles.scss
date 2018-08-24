@@ -345,12 +345,13 @@ footer h3,
 .mdc-typography--headline5,
 .mdc-typography--headline6,
 .mdc-typography--headline7,
-.mdc-typography--headline,
+.mdc-drawer__content-heading,
 .supplimentary-list-title {
   font-family: $heading-font-family, $base-font-family, Helvetica, Arial, sans-serif;
   font-weight: $heading-font-weight;
 }
 .mdc-drawer__content-heading,
+.mdc-typography--headline,
 .mdc-typography--headline1,
 .mdc-typography--headline2,
 .mdc-typography--headline3,
@@ -358,7 +359,7 @@ footer h3,
 .mdc-typography--headline5,
 .mdc-typography--headline6,
 .mdc-typography--headline7,
-.mdc-typography--headline {
+.mdc-drawer__content-heading {
   font-weight: $heading-medium-font-weight;
   a {
     font-weight: $heading-medium-font-weight;
@@ -416,6 +417,9 @@ footer h3,
 }
 .mdc-button--large {
   height: 56px;
+  .far {
+    font-size: 1.25rem;
+  }
 }
 .drawer-container-permanent {
   display: flex;
@@ -464,8 +468,8 @@ footer h3,
       color: white;
       width: 100%;
       color: white;
-      line-height: 56px;
-      height: 56px;
+      line-height: $unit*3;
+      height: $unit*3;
       .fa-2x {
         position: absolute;
         top: .6rem;
@@ -474,7 +478,8 @@ footer h3,
     }
   }
   #sign-in-message,
-  #sign-up-message {
+  #sign-up-message,
+  #reset-password-message  {
     display: none;
   }
 }
