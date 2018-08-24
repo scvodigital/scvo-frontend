@@ -8,31 +8,31 @@ CALL _log(
     {{{stringify message.headers.message-id}}}, -- messageId
     {{{stringify tags.[0]}}}, -- campaign
     {{{stringify recipient}}}, -- email
-    {{#compare event "failed"~}}
+    {{#compare event "failed"}}
       {{{stringify (concat "failed-" severity)}}}
     {{else}}
       {{{stringify event}}}
-    {{~/compare}}, -- event
-    {{{stringify log-level}}}, -- logLevel
+    {{/compare}}, -- event
+    {{{stringify (default log-level "none")}}}, -- logLevel
     {{#compare event "delivered"~}}
-      {{{stringify storage.url}}}
+      {{{stringify (default storage.url "")}}}
     {{else}}
-      {{~#compare event "failed"~}}
-        {{{stringify delivery-status.code}}}
+      {{#compare event "failed"~}}
+        {{{stringify (default delivery-status.code 999)}}}
       {{else}}
-        {{~#compare event "clicked"~}}
-          {{{stringify url}}}
+        {{#compare event "clicked"~}}
+          {{{stringify (default url "https://url.not/found-in?data=from#webhook")}}}
         {{else}}
           ''
-        {{~/compare~}}
-      {{~/compare~}}
-    {{~/compare}}, -- other
-  {{~/with}}
-  {{~#with @root.request.body.signature~}}
+        {{/compare}}
+      {{/compare}}
+    {{/compare}}, -- other
+  {{/with}}
+  {{#with @root.request.body.signature~}}
     {{{stringify timestamp}}}, -- timestamp
     {{{stringify token}}}, -- token
     {{{stringify signature}}} -- signature
-  {{~/with}}
+  {{/with}}
 );
 {{else}}
 SET @query=false;
