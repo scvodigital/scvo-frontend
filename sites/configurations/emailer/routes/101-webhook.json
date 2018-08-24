@@ -1,6 +1,7 @@
 {
   "name": "webhook",
   "pattern": "/webhook",
+  "acceptedVerbs": ["POST", "GET"],
   "debug": true,
   "tasks": [
     {
@@ -20,8 +21,8 @@
       "renderer": "handlebars",
       "config": {
         "output": "body",
-        "template": "done",
-        "parseJson": false
+        "template": "{ \"data\": {{{stringify @root.data}}}, \"errors\": {{{stringify @root.errors}}} }",
+        "parseJson": true
       }
     }
   ]

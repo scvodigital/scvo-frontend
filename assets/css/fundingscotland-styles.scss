@@ -1299,7 +1299,7 @@ hr {
 .container-content {
   width: 100%;
   padding-right: $unit;
-  margin-left: $unit;
+  margin-left: $unit*1.5;
   margin-right: $unit;
   position: relative;
   max-width: 1200px;
@@ -1480,6 +1480,9 @@ body {
   .mdc-text-field--box::after {
     background-color: transparent;
     width: 100%;
+  }
+  .header.mdc-text-field--box:not(.mdc-text-field--disabled) {
+    background-color: transparent;
   }
   .mdc-floating-label {
     transform: translateY(-50%) scale(0.75);
@@ -1736,6 +1739,13 @@ footer,
         }
       }
     }
+  }
+}
+.results-banner {
+  .banner-search,
+  .banner-search.page-content,
+  .banner-search.overlay .content {
+    min-height: 13vh;
   }
 }
 
@@ -2151,7 +2161,7 @@ footer.mdc-layout__footer {
     z-index: 1;
     width: 320px;
     min-height: 655px;
-    margin-right: $unit/2;
+    margin-right: 0;
     margin-bottom: 0;
     padding-bottom: $unit;
     border-right: none;
