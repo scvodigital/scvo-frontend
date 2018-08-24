@@ -37,35 +37,35 @@
   </div>
 
   {{#compare @root.data.shortlist_vacancies.open.hits.total "===" 0}}
-  {{#compare @root.data.shortlist_vacancies.closed.hits.total "===" 0}}
-  <p class="mdc-typography--body1">
-    You don't yet have any jobs on your shortlist. To add a job, click the &ensp;<strong><span class="far fa-star mdc-chip__icon mdc-chip__icon--leading" aria-hidden="true"></span>Shortlist</strong>&ensp;button.
-  </p>
-  {{else}}
-  <p class="mdc-typography--body1">
-    You don't have any open jobs on your shortlist.
-  </p>
-  {{/compare}}
+    {{#compare @root.data.shortlist_vacancies.closed.hits.total "===" 0}}
+      <p class="mdc-typography--body1">
+        You don't yet have any jobs on your shortlist. To add a job, click the &ensp;<strong><span class="far fa-star mdc-chip__icon mdc-chip__icon--leading" aria-hidden="true"></span>Shortlist</strong>&ensp;button.
+      </p>
+    {{else}}
+      <p class="mdc-typography--body1">
+        You don't have any open jobs on your shortlist.
+      </p>
+    {{/compare}}
   {{/compare}}
 
   {{#compare @root.data.shortlist_vacancies.open.hits.total ">" 0}}
-  {{#each @root.data.shortlist_vacancies.open.hits.hits ~}}
-  {{> vacancy_search_result _source}}
-  {{/each ~}}
-  <div class="foot">
-    {{> pagination paging=@root.data.shortlist_vacancies.open.pagination}}
-  </div>
+    {{#each @root.data.shortlist_vacancies.open.hits.hits ~}}
+      {{> vacancy_search_result _source}}
+    {{/each ~}}
+    <div class="foot">
+      {{> pagination paging=@root.data.shortlist_vacancies.open.pagination}}
+    </div>
   {{/compare}}
 
   {{#compare @root.data.shortlist_vacancies.closed.hits.total ">" 0}}
-  <h2 class="mdc-typography--headline5 v-margin-full">
-    Closed jobs
-  </h2>
-  {{#each @root.data.shortlist_vacancies.closed.hits.hits ~}}
-  {{> vacancy_search_result _source}}
-  {{/each ~}}
-  <div class="foot">
-    {{> pagination paging=@root.data.shortlist_vacancies.closed.pagination}}
-  </div>
+    <h2 class="mdc-typography--headline5 v-margin-full">
+      Closed jobs
+    </h2>
+    {{#each @root.data.shortlist_vacancies.closed.hits.hits ~}}
+      {{> vacancy_search_result _source}}
+    {{/each ~}}
+    <div class="foot">
+      {{> pagination paging=@root.data.shortlist_vacancies.closed.pagination}}
+    </div>
   {{/compare}}
 </div>

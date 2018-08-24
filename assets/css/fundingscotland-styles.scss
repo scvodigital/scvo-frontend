@@ -1124,6 +1124,18 @@ a {
   color: white;
 }
 
+// Grid Cards ==================================================================
+
+.mdc-layout-grid.equal-height .mdc-layout-grid__cell {
+  display: flex;
+  .mdc-card {
+    justify-content: start;
+    .mdc-card__supporting-text {
+      flex: 1 0 auto;
+    }
+  }
+}
+
 .pagination-mobile,
 .fundingscotland-organisation .mdc-card.list .mdc-card__info--fund-funder {
   display: none !important;
@@ -2098,6 +2110,50 @@ footer.mdc-layout__footer {
 }
 .mdc-tab-bar--left {
   margin: 0;
+}
+
+form.inline-form {
+  display: inline-block;
+}
+
+#app-snackbar {
+  z-index: 1000;
+  background-color: $mdc-theme-primary-dark;
+  .mdc-snackbar__text {
+    padding: 0;
+  }
+  .mdc-snackbar__action-wrapper {
+    display: none;
+  }
+}
+
+.faded-overflow {
+  overflow: hidden;
+  position: relative;
+  &:before {
+    display: block;
+    margin-top: -$unit*1.5;
+    height: $unit*1.5;
+    width: 100%;
+    content: "";
+    position: absolute;
+    top: 100%;
+    background: linear-gradient(rgba(255, 255, 255, 0), rgba(255, 255, 255, 1));
+  }
+}
+.search-result-article__notes .faded-overflow {
+  &:before {
+    background: linear-gradient(rgba(236, 242, 233, 0), rgba(236, 242, 233, 1));
+  }
+}
+
+.after-textfield-action {
+  float: right;
+  margin-top: -10px;
+  font-size: 0.8rem;
+  color: $mdc-theme-primary-dark;
+  text-decoration: underline;
+  cursor: pointer;
 }
 
 @media screen and (max-width: $mobile-breakpoint) {
