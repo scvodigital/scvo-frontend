@@ -238,14 +238,17 @@
     <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
       {{#compare @root.data.search_data.detailed_results.hits.total ">" 0 ~}}
       <form action="{{{@root.request.url.path}}}" method="GET">
-        <input type="hidden" name="keywords" value="{{@root.request.params.query.keywords}}" />
         {{#each (split "activities,beneficiaries,geographical_areas_funded" ",")}}
-          {{#each (arrayify (getProperty @root.request.params.query this)) ~}}
-            <input type="hidden" name="{{../this}}[]" value="{{this}}" />
-          {{/each ~}}
+          {{#if (getProperty @root.request.params.query this) ~}}
+            {{#each (arrayify (getProperty @root.request.params.query this)) ~}}
+              <input type="hidden" name="{{../this}}[]" value="{{this}}" />
+            {{/each ~}}
+          {{/if ~}}
         {{/each ~}}
-        {{#each (split "fund_status,charities_only,type_of_cost,type_of_funding" ",")}}
-          <input type="hidden" name="{{this}}" value="{{getProperty @root.request.params.query this}}" />
+        {{#each (split "keywords,fund_status,charities_only,type_of_cost,type_of_funding" ",")}}
+          {{#if (getProperty @root.request.params.query this) ~}}
+            <input type="hidden" name="{{this}}" value="{{getProperty @root.request.params.query this}}" />
+          {{/if ~}}
         {{/each ~}}
         <div class="mdc-select mdc-select--box pull-right" data-mdc-auto-init="MDCSelect">
           <select class="mdc-select__native-control" id="sort" name="sort" onchange="this.form.submit();">
