@@ -5,16 +5,6 @@
   "debug": true,
   "tasks": [
     {
-      "name": "debugQuery",
-      "taskModule": "render",
-      "renderer": "handlebars",
-      "config": {
-        "output": "data",
-        "template": ">context.metaData.handlebars.queries.webhook-log",
-        "parseJson": false
-      }
-    },
-    {
       "name": "notifications",
       "taskModule": "mysql",
       "config": {
@@ -31,7 +21,7 @@
       "renderer": "handlebars",
       "config": {
         "output": "body",
-        "template": "{ \"data\": {{{stringify @root.data}}}, \"errors\": {{{stringify @root.errors}}} }",
+        "template": "{ \"errors\": {{{stringify @root.errors}}} }",
         "parseJson": true
       }
     }
