@@ -11,7 +11,7 @@ CALL _log(
       {{{stringify (concat "failed-" severity)}}},
     {{else}}
       {{{stringify event}}},
-    {{/~compare}}
+    {{~/compare}}
     {{{stringify log-level}}},
     {{#compare event "delivered"~}}
       {{{stringify storage.url}}}
