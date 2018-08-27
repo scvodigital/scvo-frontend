@@ -854,7 +854,7 @@ dl {
   }
   .search-result-article__snippet,
   .search-result-article__notes,
-  .mdc-card__info--fund-row {
+  .mdc-card__info--funder-row {
     flex: 1 0 auto;
   }
   .mdc-card__info--funder-title {
@@ -867,6 +867,7 @@ dl {
   .search-result-article__snippet,
   .search-result-article__notes {
     padding: 0 $unit $unit/2;
+    display: flex;
   }
   .search-result-article__notes {
     background-color: $mdc-theme-complimentary-light;
@@ -1350,12 +1351,14 @@ a.mdc-drawer__content-heading:hover {
 
 .container-content {
   width: 100%;
+  padding-left: $unit;
   padding-right: $unit;
-  margin-left: $unit;
-  margin-right: $unit;
+  // margin-left: $unit;
+  // margin-right: $unit;
   position: relative;
   max-width: 1200px;
   align-items: flex-end;
+  box-sizing: border-box;
   .mdc-tab-bar {
     width: 100%;
   }
@@ -1438,6 +1441,7 @@ body {
   width: 100%;
   margin: 0 auto;
   padding: 0;
+  box-sizing: border-box;
 }
 .cookieinfo {
   box-shadow: $toolbar-shadow-reverse;
@@ -1448,6 +1452,7 @@ body {
   .mdc-card__info--funder-row,
   .mdc-card__info--fund-row {
     display: flex;
+    flex-shrink: 1;
   }
   .mdc-card__info--fund-row {
     padding: $unit/2;
