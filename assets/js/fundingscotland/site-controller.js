@@ -181,11 +181,14 @@ var FundingScotlandController = Class.extend({
       var selector = $el.attr('data-collapse-target');
       var $target = $(selector);
       var $icon = $el.find('.far');
+      var $caption = $el.find('.mdc-typography--caption');
       if ($target.is(':visible')) {
         $target.hide();
+        $caption.show();
         $icon.removeClass('fa-chevron-up').addClass('fa-chevron-down');
       } else {
         $target.show();
+        $caption.hide();
         $icon.removeClass('fa-chevron-down').addClass('fa-chevron-up');
       }
     });

@@ -65,6 +65,7 @@ h4 {
   margin-bottom: $unit/2;
   font-family: $heading-font-family, $base-font-family, Helvetica, Arial, sans-serif;
   font-weight: $heading-font-weight;
+  letter-spacing: -0.03rem;
   strong {
     font-weight: $heading-font-weight;
   }
@@ -132,7 +133,7 @@ header {
     .mdc-top-app-bar__upper .mdc-top-app-bar__section--align-start {
       background-image: url('https://storage.googleapis.com/scvo-assets/assets/images/fs-legacy-logo.png');
       background-repeat: no-repeat;
-      background-position: $unit center;
+      background-position: $unit (-$unit*3.25);
       .mdc-top-app-bar__title .brand-text {
         display: none;
       }
@@ -349,6 +350,7 @@ footer h3,
 .supplimentary-list-title {
   font-family: $heading-font-family, $base-font-family, Helvetica, Arial, sans-serif;
   font-weight: $heading-font-weight;
+  letter-spacing: -0.03rem;
 }
 .mdc-drawer__content-heading,
 .mdc-typography--headline,
@@ -426,13 +428,22 @@ footer h3,
 }
 .mdc-drawer--permanent {
   align-items: flex-start;
-  z-index: 20;
+  z-index: 1;
   width: 320px;
   margin-right: $unit*1.5;
   margin-bottom: 0;
   padding-bottom: $unit;
   border-right: none;
   background-color: white !important;
+}
+.mdc-dialog__backdrop {
+  z-index: 10;
+}
+.mdc-dialog--open .mdc-dialog__surface {
+  z-index: 11;
+}
+.mdc-dialog__body {
+  padding-bottom: 0;
 }
 
 .mdc-checkbox__native-control:enabled:checked ~ .mdc-checkbox__background,
@@ -468,8 +479,8 @@ footer h3,
       color: white;
       width: 100%;
       color: white;
-      line-height: $unit*3;
-      height: $unit*3;
+      line-height: 56px;
+      height: 56px;
       .fa-2x {
         position: absolute;
         top: .6rem;
@@ -531,6 +542,8 @@ footer h3,
   display: flex;
   min-height: 50vh;
   width: 100%;
+  align-items: center;
+  justify-content: center;
 }
 
 .provider-google.mdc-chip--selected,
@@ -814,12 +827,6 @@ dl {
     clear: both;
   }
   dd {
-    .fund-status {
-      font-weight: 600;
-    }
-    .fund-status.fund-open {
-      color: #328c19;
-    }
   }
 }
 
@@ -851,7 +858,7 @@ dl {
   }
   .search-result-article__snippet,
   .search-result-article__notes,
-  .mdc-card__info--fund-row {
+  .mdc-card__info--funder-row {
     flex: 1 0 auto;
   }
   .mdc-card__info--funder-title {
@@ -864,6 +871,7 @@ dl {
   .search-result-article__snippet,
   .search-result-article__notes {
     padding: 0 $unit $unit/2;
+    display: flex;
   }
   .search-result-article__notes {
     background-color: $mdc-theme-complimentary-light;
@@ -1334,15 +1342,54 @@ a.mdc-drawer__content-heading:hover {
   }
 }
 
-/* Maps */
-.container-content.container-map {
-  margin-left: -1.5rem;
-  max-width: none !important;
-  padding-right: 0;
+.container-content,
+#search-tab-bar,
+#home-tab-bar {
+  .mdc-tab {
+    color: $mdc-theme-secondary-dark;
+  }
+  .mdc-tab-bar__indicator {
+    background-color: $mdc-theme-secondary-dark;
+  }
 }
-#map-full {
-  width: 100% !important;
-  height: 100% !important;
+
+.container-content {
+  width: 100%;
+  padding-left: $unit;
+  padding-right: $unit;
+  // margin-left: $unit;
+  // margin-right: $unit;
+  position: relative;
+  max-width: 1200px;
+  align-items: flex-end;
+  box-sizing: border-box;
+  .mdc-tab-bar {
+    width: 100%;
+  }
+  .container-fluid {
+    position: relative;
+  }
+}
+.container-content.fundingscotland-page {
+  margin: $unit*1.5 auto 0;
+  padding-bottom: $unit*1.5;
+  .x-items {
+    margin-top: 0;
+  }
+  .mdc-card.full {
+    width: 100%;
+    background-color: #fff;
+  }
+  .mdc-card {
+    padding: $unit;
+    .mdc-typography--headline4 {
+      margin-top: 0;
+    }
+  }
+  h1,
+  h2 {
+    margin-top: 0;
+  }
 }
 
 .map-content {
@@ -1362,30 +1409,11 @@ a.mdc-drawer__content-heading:hover {
   }
 }
 
-.container-content {
-  width: 100%;
-  padding-right: $unit;
-  margin-left: $unit*1.5;
-  margin-right: $unit;
-  position: relative;
-  max-width: 1200px;
-  align-items: flex-end;
-  .mdc-tab-bar {
-    width: 100%;
-  }
-  .container-fluid {
-    position: relative;
-  }
-}
-.container-fluid .container-content {
-  width: auto;
-}
-
 /*=====End Maps=====*/
 /*=====Top Bar=====*/
-#top-bar {
-  z-index: 100;
-}
+// #top-bar {
+//   z-index: 100;
+// }
 .top-bar-stuck {
   position: fixed;
   top: 0;
@@ -1417,6 +1445,7 @@ body {
   width: 100%;
   margin: 0 auto;
   padding: 0;
+  box-sizing: border-box;
 }
 .cookieinfo {
   box-shadow: $toolbar-shadow-reverse;
@@ -1427,6 +1456,7 @@ body {
   .mdc-card__info--funder-row,
   .mdc-card__info--fund-row {
     display: flex;
+    flex-shrink: 1;
   }
   .mdc-card__info--fund-row {
     padding: $unit/2;
@@ -1448,6 +1478,34 @@ body {
     .fa-ul.last {
       li:last-child {
         margin-bottom: 0;
+      }
+    }
+    .mdc-card__info--fund-title a {
+      .fund-status {
+        margin-left: 0;
+        margin-right: $unit/5;
+        display: inline-block;
+        padding: 0.22222rem $unit/2;
+        line-height: 1;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: baseline;
+        border-radius: $unit;
+        color: white;
+        position: relative;
+        top: -2px;
+        left: 0;
+        font-size: 1rem;
+        height: 1.5rem;
+        box-sizing: border-box;
+        font-weight: 600;
+        background-color: #8c1932;
+      }
+      .fund-status.fund-open {
+        background-color: #328c19;
+      }
+      .hover-underline {
+        margin-right: $unit/2;
       }
     }
     .mdc-card__info--fund-title a:hover {
@@ -1553,26 +1611,9 @@ body {
   .header.mdc-text-field--box:not(.mdc-text-field--disabled) {
     background-color: transparent;
   }
-  .mdc-floating-label {
-    transform: translateY(-50%) scale(0.75);
-  }
-  .geo-lookup {
-    color: $mdc-theme-primary !important;
-  }
-  .geo-lookup:hover {
-    font-weight: 600;
-    color: $mdc-theme-primary-dark !important;
-    cursor: pointer;
-  }
-  .geo-lookup:focus {
-    outline: none;
-  }
-  .search-distance {
-    font-variant: all-small-caps;
-    font-size: 0.9rem;
-    font-weight: 600;
-    color: rgba(0, 0, 0, 0.7);
-  }
+  // .mdc-floating-label {
+  //   transform: translateY(-50%) scale(0.75);
+  // }
 }
 
 /* End Search results card */
@@ -1817,7 +1858,7 @@ footer,
   .banner-search,
   .banner-search.page-content,
   .banner-search.overlay .content {
-    min-height: 13vh;
+    min-height: 14vh;
   }
 }
 
@@ -1930,7 +1971,7 @@ footer.mdc-layout__footer {
   background-color: $mdc-theme-footer;
   box-shadow: $toolbar-shadow-reverse;
   position: relative;
-  z-index: 30;
+  z-index: 4;
   p, li, div {
     font-family: $footer-font-family;
     font-weight: $footer-font-weight;
