@@ -23,26 +23,30 @@
     "bool": {
       "filter": [
         {{>queries_vacancy_common_filters_open request.params.query}}
-      ]
-      {{#ifAll @root.data.auth @root.data.searches.items.[0]}}
-      ,"should": [
-        {{#each @root.data.searches.items}}
-          {{#with (querystring querystring)}}
-          {
-            "bool": {
-              "filter": [
-                {{>queries_vacancy_search_filters request.params.query}}
-              ],
-              "must": [
-                {{>queries_vacancy_search_must request.params.query}}
-              ]
+        {{#ifAll @root.data.auth @root.data.searches.items.[0]}},{{/ifAll}}
+        {{#each @root.data.searches.items.[0] ~}}
+          {{#with (querystring querystring) ~}}
+            {{>queries_vacancy_search_filters this}}
+            {{#unless @last}},{{/unless}}
+          {{/with ~}}
+        {{/each ~}}
+      ]{{#ifAll @root.data.auth @root.data.searches.items.[0] ~}},
+      "should": [
+        {{#each @root.data.searches.items.[0] ~}}
+          {{#with (querystring querystring) ~}}
+            {
+              "bool": {
+                "must": [
+                  {{>queries_vacancy_search_must this}}
+                ]
+              }
             }
-          }
-          {{/with}}
-          {{#unless @last}},{{/unless}}
-        {{/each}}
-      ]
-      {{/ifAll}}
+            {{#unless @last}},{{/unless}}
+          {{/with ~}}
+        {{/each ~}}
+      ],
+      "minimum_should_match": 1
+      {{/ifAll ~}}
     }
   },
   "sort": {

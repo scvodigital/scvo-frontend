@@ -1334,15 +1334,52 @@ a.mdc-drawer__content-heading:hover {
   }
 }
 
-/* Maps */
-.container-content.container-map {
-  margin-left: -1.5rem;
-  max-width: none !important;
-  padding-right: 0;
+.container-content,
+#search-tab-bar,
+#home-tab-bar {
+  .mdc-tab {
+    color: $mdc-theme-secondary-dark;
+  }
+  .mdc-tab-bar__indicator {
+    background-color: $mdc-theme-secondary-dark;
+  }
 }
-#map-full {
-  width: 100% !important;
-  height: 100% !important;
+
+.container-content {
+  width: 100%;
+  padding-right: $unit;
+  margin-left: $unit;
+  margin-right: $unit;
+  position: relative;
+  max-width: 1200px;
+  align-items: flex-end;
+  .mdc-tab-bar {
+    width: 100%;
+  }
+  .container-fluid {
+    position: relative;
+  }
+}
+.container-content.fundingscotland-page {
+  margin: $unit*1.5 auto 0;
+  padding-bottom: $unit*1.5;
+  .x-items {
+    margin-top: 0;
+  }
+  .mdc-card.full {
+    width: 100%;
+    background-color: #fff;
+  }
+  .mdc-card {
+    padding: $unit;
+    .mdc-typography--headline4 {
+      margin-top: 0;
+    }
+  }
+  h1,
+  h2 {
+    margin-top: 0;
+  }
 }
 
 .map-content {
@@ -1360,25 +1397,6 @@ a.mdc-drawer__content-heading:hover {
   .mdc-tab-bar__indicator {
     background-color: $mdc-theme-secondary-dark;
   }
-}
-
-.container-content {
-  width: 100%;
-  padding-right: $unit;
-  margin-left: $unit*1.5;
-  margin-right: $unit;
-  position: relative;
-  max-width: 1200px;
-  align-items: flex-end;
-  .mdc-tab-bar {
-    width: 100%;
-  }
-  .container-fluid {
-    position: relative;
-  }
-}
-.container-fluid .container-content {
-  width: auto;
 }
 
 /*=====End Maps=====*/
