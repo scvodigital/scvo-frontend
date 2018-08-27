@@ -95,7 +95,7 @@ document.addEventListener("DOMContentLoaded", function(event) {
         user.user.getIdTokenResult().then(function(idTokenResult) {
           console.log('ID Token Result', idTokenResult);
           fundingscotland.setCookie('fs_token', idTokenResult.token, 7);
-          window.location.href = '{{#if (contains @root.request.headers.referer "sign-out")}}/{{else}}{{default @root.request.headers.referer "/"}}{{/if}}';
+          window.location.href = '{{default @root.request.fullUrl "/"}}';
         });
       } else {
         $message.text('Something went wrong, signed in but no user?').show();
