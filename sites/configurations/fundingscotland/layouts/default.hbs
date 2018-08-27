@@ -200,9 +200,17 @@ if(location.host.indexOf('.local') > -1){
               {{{label}}}
             </a>
             {{/each ~}}
+            {{#each @root.context.metaData.menus.upper ~}}
+            <a class="mdc-list-item{{#if (regexMatch @root.request.url.pathname route "gi")}} mdc-list-item--activated{{/if}}" href="{{stripTrailingSlash path}}">
+              {{#if icon ~}}
+              <span class="far fa-{{icon}} mdc-list-item__graphic" aria-hidden="true"></span>
+              {{/if ~}}
+              {{{label}}}
+            </a>
+            {{/each ~}}
             <div role="separator" class="mdc-list-divider"></div>
             {{#if @root.data.auth ~}}
-            {{#each @root.context.metaData.menus.user ~}}
+            {{#each @root.context.metaData.menus.user-signed-in ~}}
             <a class="mdc-list-item{{#if (regexMatch @root.request.url.pathname route "gi")}} mdc-list-item--activated{{/if}}" href="{{stripTrailingSlash path}}">
               {{#if icon ~}}
               <span class="far fa-{{icon}} mdc-list-item__graphic" aria-hidden="true"></span>
@@ -211,7 +219,7 @@ if(location.host.indexOf('.local') > -1){
             </a>
             {{/each ~}}
             {{else}}
-            {{#each @root.context.metaData.menus.unauthenticated ~}}
+            {{#each @root.context.metaData.menus.user-not-signed-in ~}}
             <a class="mdc-list-item{{#if (regexMatch @root.request.url.pathname route "gi")}} mdc-list-item--activated{{/if}}" href="{{stripTrailingSlash path}}">
               {{#if icon ~}}
               <span class="far fa-{{icon}} mdc-list-item__graphic" aria-hidden="true"></span>
