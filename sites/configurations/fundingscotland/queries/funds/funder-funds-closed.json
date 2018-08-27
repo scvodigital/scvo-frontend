@@ -1,0 +1,39 @@
+{
+  "size": 100,
+  "_source": [
+    "Id",
+    "slug",
+    "title",
+    "description",
+    "geographical_areas_funded",
+    "fund_status",
+    "type_of_cost",
+    "type_of_funding",
+    "funder_organisation.slug",
+    "funder_organisation.name",
+    "funder_organisation.has_logo",
+    "funder_organisation.logo_url",
+    "funder_organisation.website",
+    "funder_organisation.profile",
+    "funder_organisation_website_url"
+  ],
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "term": {
+            "funder_organisation.id": "{{data.primaryResponse.hits.hits.[0]._source.Id}}"
+          }
+        },
+        {
+          "term": {
+            "fund_status_slug": "currently-closed"
+          }
+        }
+      ]
+    }
+  },
+  "sort": {
+    "start_at": "desc"
+  }
+}

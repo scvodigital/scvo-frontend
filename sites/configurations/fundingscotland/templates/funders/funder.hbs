@@ -1,23 +1,39 @@
 {{#if @root.data.auth ~}}
 <div class="container-content fundingscotland-organisation">
-  {{#compare data.primaryResponse.hits.total ">" 0}}
-  {{#with data.primaryResponse.hits.hits.[0]._source as |funder| ~}}
+  {{#compare @root.data.primaryResponse.hits.total ">" 0 ~}}
+  {{#with @root.data.primaryResponse.hits.hits.[0]._source as |funder| ~}}
 
   {{> funder_full funder}}
 
-  {{#compare ../data.supplimentaryResponses.funds.hits.total ">" 0 ~}}
+  {{#compare @root.data.supplimentaryResponses.funds_open.hits.total ">" 0 ~}}
   <hr />
-  <div class="mdc-typography--headline4">
+  <div class="mdc-typography--headline5">
     Current funds
   </div>
-  {{#each ../data.supplimentaryResponses.funds.hits.hits ~}}
+  {{#each @root.data.supplimentaryResponses.funds_open.hits.hits ~}}
   {{> fund_list _source}}
   {{/each ~}}
-  {{else}}
+  {{/compare ~}}
+
+  {{#compare @root.data.supplimentaryResponses.funds_closed.hits.total ">" 0 ~}}
+  {{#compare @root.data.supplimentaryResponses.funds_open.hits.total "===" 0 ~}}
   <hr />
-  <div class="mdc-typography--headline4">
-    No current funds
+  {{/compare}}
+  <div class="mdc-typography--headline5">
+    Closed funds
   </div>
+  {{#each @root.data.supplimentaryResponses.funds_closed.hits.hits ~}}
+  {{> fund_list _source}}
+  {{/each ~}}
+  {{/compare ~}}
+
+  {{#compare @root.data.supplimentaryResponses.funds_open.hits.total "===" 0 ~}}
+  {{#compare @root.data.supplimentaryResponses.funds_closed.hits.total "===" 0 ~}}
+  <hr />
+  <div class="mdc-typography--headline6">
+    There are no current or recently closed funds available
+  </div>
+  {{/compare ~}}
   {{/compare ~}}
 
   {{/with ~}}
@@ -25,7 +41,7 @@
   <p>
     <strong>Error:</strong> the requested funder could not be found.
   </p>
-  {{/compare}}
+  {{/compare ~}}
 </div>
 {{else}}
 {{> account_redirect_home}}

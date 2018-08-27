@@ -65,7 +65,7 @@
       <h3 class="mdc-drawer__content-heading cursor-pointer noselect mdc-drawer--occasional-ie11" data-collapse-target="#{{../instance_id}}-{{this}}-collapse" role="button" aria-pressed="false" aria-label="Show {{getProperty @root.context.metaData.termTypeLabels (concat this ".plural")}}" tabindex="0">
         {{getProperty @root.context.metaData.termTypeLabels (concat this ".plural")}}
         {{#if (getProperty @root.request.params.query this) ~}}
-        <span class="mdc-typography--caption">
+        <span class="mdc-typography--caption"{{#if (getProperty @root.request.params.query this)}} style="display: none;"{{/if}}>
           {{length (arrayify (getProperty @root.request.params.query this))}} selected
         </span>
         {{/if ~}}
