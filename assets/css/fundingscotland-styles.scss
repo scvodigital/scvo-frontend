@@ -132,7 +132,7 @@ header {
     .mdc-top-app-bar__upper .mdc-top-app-bar__section--align-start {
       background-image: url('https://storage.googleapis.com/scvo-assets/assets/images/fs-legacy-logo.png');
       background-repeat: no-repeat;
-      background-position: $unit center;
+      background-position: $unit (-$unit*3.25);
       .mdc-top-app-bar__title .brand-text {
         display: none;
       }
@@ -426,13 +426,22 @@ footer h3,
 }
 .mdc-drawer--permanent {
   align-items: flex-start;
-  z-index: 20;
+  z-index: 1;
   width: 320px;
   margin-right: $unit*1.5;
   margin-bottom: 0;
   padding-bottom: $unit;
   border-right: none;
   background-color: white !important;
+}
+.mdc-dialog__backdrop {
+  z-index: 10;
+}
+.mdc-dialog--open .mdc-dialog__surface {
+  z-index: 11;
+}
+.mdc-dialog__body {
+  padding-bottom: 0;
 }
 
 .mdc-checkbox__native-control:enabled:checked ~ .mdc-checkbox__background,
@@ -1401,9 +1410,9 @@ a.mdc-drawer__content-heading:hover {
 
 /*=====End Maps=====*/
 /*=====Top Bar=====*/
-#top-bar {
-  z-index: 100;
-}
+// #top-bar {
+//   z-index: 100;
+// }
 .top-bar-stuck {
   position: fixed;
   top: 0;
@@ -1931,7 +1940,7 @@ footer.mdc-layout__footer {
   background-color: $mdc-theme-footer;
   box-shadow: $toolbar-shadow-reverse;
   position: relative;
-  z-index: 30;
+  z-index: 4;
   p, li, div {
     font-family: $footer-font-family;
     font-weight: $footer-font-weight;
