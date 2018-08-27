@@ -183,9 +183,11 @@ var FundingScotlandController = Class.extend({
       var $icon = $el.find('.far');
       if ($target.is(':visible')) {
         $target.hide();
+        $caption.show();
         $icon.removeClass('fa-chevron-up').addClass('fa-chevron-down');
       } else {
         $target.show();
+        $caption.hide();
         $icon.removeClass('fa-chevron-down').addClass('fa-chevron-up');
       }
     });
