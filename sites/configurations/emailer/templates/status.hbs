@@ -1,1 +1,33 @@
-STATUS
+<div class="mdl-grid demo-content">
+  <div class="mdl-color--white mdl-shadow--2dp mdl-cell mdl-cell--6-col-desktop mdl-cell--8-tablet mdl-cell--12-phone mdl-cell--3-offset-desktop mdl-cell--2-offset-tablet">
+    <div class="mdl-card__title mdl-color--primary mdl-color-text--primary-contrast">
+      <h2 class="mdl-card__title-text">Queue Sizes</h2>
+    </div>
+    <div class="mdl-card__supporting-text">
+      <table class="mdl-data-table mdl-js-data-table" style="width: 100%;">
+        <thead>
+          <tr>
+            <th class="mdl-data-table__cell--non-numeric">Campaign</th>
+            <th>Items left</ht>
+          </tr>
+        </thead>
+        <tbody>
+          {{#if @root.data.queueSize.items.[0].[0]}}
+            {{#each @root.data.queueSize.items.[0]}}
+              <tr>
+                <td class="mdl-data-table__cell--non-numeric">{{campaign}}</td>
+                <td>{{queueSize}}</td>
+              </tr>
+            {{/each}}
+          {{else}}
+            <tr>
+              <td colspan="2">
+                Queue empty
+              </td>
+            </tr>
+          {{/if}}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

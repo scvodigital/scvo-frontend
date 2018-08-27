@@ -7,6 +7,17 @@
   "tasks": [
     "context.metaData.commonTasks.authRequired",
     {
+      "name": "queueSize",
+      "taskModule": "mysql",
+      "renderer": "handlebars",
+      "config": {
+        "connectionName": "notifications",
+        "queryTemplates": {
+          "items": "CALL _getQueueSize();"
+        }
+      }
+    },
+    {
       "name": "destination",
       "taskModule": "renderLayout",
       "renderer": "handlebars",
