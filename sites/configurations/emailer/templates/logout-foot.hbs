@@ -1,0 +1,13 @@
+<script>
+$(document).ready(function() {
+  window.setTimeout(function() {
+    firebase.auth().signOut().then(function() {
+      setCookie('emailer_token');
+      setCookie('emailer_cookie');
+      window.location.href = '/';
+    }).catch(function(err) {
+      console.error('Error signing out:', err);
+    });
+  }, 1000);
+});
+</script>

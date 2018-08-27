@@ -1,11 +1,11 @@
 {
-  "name": "home",
-  "pattern": "/",
+  "name": "status",
+  "pattern": "/status",
   "metaData": {
-    "title": "Home"
+    "title": "Status"
   },
   "tasks": [
-    "context.metaData.commonTasks.authNotRequired",
+    "context.metaData.commonTasks.authRequired",
     {
       "name": "destination",
       "taskModule": "renderLayout",
@@ -22,8 +22,8 @@
             "layout": ">context.metaData.handlebars.layouts.default",
             "parts": {
               "head": "",
-              "body": ">context.metaData.handlebars.templates.home",
-              "foot": ">context.metaData.handlebars.templates.home-foot"
+              "body": ">context.metaData.handlebars.templates.status",
+              "foot": ""
             },
             "contentType": "text/html"
           }
