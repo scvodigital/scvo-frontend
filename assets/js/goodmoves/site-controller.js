@@ -181,12 +181,15 @@ var GoodmovesController = Class.extend({
       var $el = $(evt.currentTarget);
       var selector = $el.attr('data-collapse-target');
       var $target = $(selector);
+      // var $caption = $el.find('.mdc-typography--caption');
       var $icon = $el.find('.far');
       if ($target.is(':visible')) {
         $target.hide();
+        // $caption.show();
         $icon.removeClass('fa-chevron-up').addClass('fa-chevron-down');
       } else {
         $target.show();
+        // $caption.hide();
         $icon.removeClass('fa-chevron-down').addClass('fa-chevron-up');
       }
     });
