@@ -180,8 +180,8 @@ var FundingScotlandController = Class.extend({
       var $el = $(evt.currentTarget);
       var selector = $el.attr('data-collapse-target');
       var $target = $(selector);
-      var $icon = $el.find('.far');
       var $caption = $el.find('.mdc-typography--caption');
+      var $icon = $el.find('.far');
       if ($target.is(':visible')) {
         $target.hide();
         $caption.show();

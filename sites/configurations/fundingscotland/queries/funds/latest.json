@@ -16,17 +16,9 @@
     "funder_organisation.logo_url"
   ],
   "query": {
-    "bool": {
-      "must": [
-        {
-          "term": {
-            "fund_status_slug": "open"
-          }
-        }
-      ]
-    }
+    "match_all": {}
   },
   "sort": {
-    "start_at": "desc"
+    "date_last_important_activity": "desc"
   }
 }
