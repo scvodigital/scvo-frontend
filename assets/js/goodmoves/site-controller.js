@@ -467,12 +467,12 @@ var GoodmovesController = Class.extend({
 var goodmoves = null;
 $(document).ready(function() {
   goodmoves = new GoodmovesController({
-    apiKey: "AIzaSyDIUNnyGeZY3sO8gGIf-_2dgO49xKij5zI",
-    authDomain: "scvo-net.firebaseapp.com",
-    databaseURL: "https://scvo-net.firebaseio.com",
-    projectId: "scvo-net",
-    storageBucket: "scvo-net.appspot.com",
-    messagingSenderId: "782194712584"
+    apiKey: "AIzaSyAuGAacoIdUgbtfI42UXTHDosMS4pP5Teg",
+    authDomain: "goodmoves-frontend.firebaseapp.com",
+    databaseURL: "https://goodmoves-frontend.firebaseio.com",
+    projectId: "goodmoves-frontend",
+    storageBucket: "goodmoves-frontend.appspot.com",
+    messagingSenderId: "639831727728"
   });
 });
 
