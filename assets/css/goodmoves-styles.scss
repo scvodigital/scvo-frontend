@@ -385,6 +385,14 @@ footer h3,
   box-sizing: border-box;
   position: relative;
   z-index: 4;
+  .mdc-typography--headline7 {
+    font-size: 1rem;
+    padding: $unit/2;
+    margin: $unit/2 0 0;
+  }
+  .mdc-button--fullwidth {
+    margin-top: $unit;
+  }
 }
 .mdc-tab .mdc-tab--label,
 .mdc-button {
@@ -717,7 +725,7 @@ a:hover {
   padding: 0;
   margin-bottom: 0;
   .mdc-chip {
-    margin: 0 $unit/2 $unit/4 0;
+    margin: $unit/2 $unit/2 0 0;
   }
 }
 .mdc-chip {
@@ -1356,6 +1364,10 @@ a {
     }
     .save-button-block {
       margin: $unit;
+      .mdc-typography--caption {
+        color: #2c3e50;
+        margin-top: $unit/2;
+      }
     }
   }
 }
@@ -1408,10 +1420,10 @@ hr {
   padding: $unit;
 }
 .mdc-drawer__content-heading {
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   display: block;
   margin: 0;
-  padding: $unit 0 $unit $unit/2;
+  padding: $unit*1.5 0 0 $unit/2;
   font-weight: $heading-medium-font-weight;
   .mdc-icon-toggle {
     margin-top: -$unit*(3/4);
@@ -1422,6 +1434,9 @@ hr {
   .mdc-typography--caption {
     margin-left: $unit;
   }
+}
+h2.mdc-drawer__content-heading {
+  padding: $unit 0 $unit $unit/2;
 }
 a.mdc-drawer__content-heading {
   color: rgba(0, 0, 0, 0.87);
@@ -1827,16 +1842,17 @@ body {
     margin-top: $unit*1.5;
     margin-left: $unit;
   }
-  .mdc-typography--headline7 {
-    margin: 0;
-    padding: 11px;
-  }
+  // .mdc-typography--headline7 {
+  //   margin: 0;
+  //   padding: 11px;
+  // }
   .mdc-layout-grid__inner {
     grid-gap: $unit/2;
   }
   .mdc-text-field {
     z-index: 4;
     overflow: visible;
+    margin-bottom: 0;
   }
   .mdc-text-field--box::before,
   .mdc-text-field--box::after {
@@ -2017,7 +2033,7 @@ footer,
       .search-form {
         background-color: rgba(255, 255, 255, 0.75);
         width: 100%;
-        padding: $unit $unit $unit/2;
+        padding: $unit;
         box-sizing: border-box;
         .mdc-text-field,
         .mdc-select,

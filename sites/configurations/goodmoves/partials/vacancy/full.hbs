@@ -97,7 +97,7 @@
           {{{rendered.goodmoves_sponsor_logos}}}
         </div>
       </div>
-      <div class="panel mdc-card--full-content mdc-typography--body1" role="tabpanel" aria-hidden="true" id="panel-2">
+      <div class="panel mdc-card--full-content" role="tabpanel" aria-hidden="true" id="panel-2">
         {{!--
         {{#ifAny organisation.profile organisation_website organisation_twitter organisation_facebook organisation_linkedin ~}}
         <div class="key-info-extra">
@@ -186,7 +186,7 @@
           {{/compare ~}}
         </div>
       </div>
-      <div class="panel mdc-card--full-content mdc-typography--body1" role="tabpanel" aria-hidden="true" id="notes">
+      <div class="panel mdc-card--full-content" role="tabpanel" aria-hidden="true" id="notes">
         <div class="text-field-container user-notes">
           {{#if @root.data.auth ~}}
             <form action="/save-notes" method="POST" data-ajax-form="true" data-success-message="Notes saved" data-failure-message="Failed to save notes">
@@ -199,6 +199,9 @@
                   <span class="far fa-save mdc-list-item__graphic" aria-hidden="true"></span>
                   Save notes
                 </button>
+                <div class="mdc-typography--caption">
+                  Any notes you write here are private on your account and are not shared with {{organisation.name}}
+                </div>
               </div>
             </form>
           {{else}}
