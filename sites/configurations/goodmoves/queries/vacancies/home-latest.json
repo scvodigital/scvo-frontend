@@ -23,11 +23,10 @@
     "bool": {
       "filter": [
         {{>queries_vacancy_common_filters_open request.params.query}}
-        {{#ifAll @root.data.auth @root.data.searches.items.[0]}},{{/ifAll}}
+        {{#ifAll @root.data.auth @root.data.searches.items.[0].[0].querystring}},{{/ifAll}}
         {{#each @root.data.searches.items.[0] ~}}
           {{#with (querystring querystring) ~}}
             {{>queries_vacancy_search_filters this}}
-            {{#unless @last}},{{/unless}}
           {{/with ~}}
         {{/each ~}}
       ]{{#ifAll @root.data.auth @root.data.searches.items.[0] ~}},

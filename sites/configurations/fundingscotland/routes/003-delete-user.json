@@ -1,0 +1,41 @@
+{
+  "name": "delete-user",
+  "pattern": "/delete-user",
+  "tasks": [
+    "context.metaData.commonTasks.authRequired",
+    {
+      "name": "notifications",
+      "taskModule": "mysql",
+      "config": {
+        "connectionName": "notifications",
+        "queryTemplates": {
+          "delete_user": ">context.metaData.handlebars.queries.notifications_delete-user"
+        }
+      },
+      "renderer": "handlebars"
+    },
+    {
+      "name": "destination",
+      "taskModule": "renderLayout",
+      "renderer": "handlebars",
+      "config": {
+        "logic": {
+          "if": [
+            "default"
+          ]
+        },
+        "output": "body",
+        "layouts": {
+          "default": {
+            "layout": ">context.metaData.handlebars.layouts.default",
+            "parts": {
+              "head": ">context.metaData.handlebars.templates.pages_page-head-tags",
+              "body": ">context.metaData.handlebars.templates.account_delete-user"
+            },
+            "contentType": "text/html"
+          }
+        }
+      }
+    }
+  ]
+}
