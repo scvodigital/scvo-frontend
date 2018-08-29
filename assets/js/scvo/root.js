@@ -151,6 +151,19 @@ function handleLocationBoxes() {
         $(o).val(place.formatted_address);
       }
     });
+
+    $(o).on('focus', function(evt) {
+      if ($(latSelector).val() !== '') {
+        $(o).val('');
+        $(latSelector).val('');
+        $(lngSelector).val('');
+      }
+    }).on('blur', function(evt) {
+      if ($(latSelector).val() === '') {
+        $(o).val('');
+      }
+    });
+
   }).on('keypress', function(evt) {
     if (evt.which === 13) {
       evt.preventDefault();

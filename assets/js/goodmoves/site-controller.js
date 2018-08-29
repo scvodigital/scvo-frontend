@@ -494,9 +494,21 @@ function handleLocationBoxes() {
     autocomplete.addListener('place_changed', function(evt) {
       var place = this.getPlace();
       if (place.geometry.location) {
+        $(o).val(place.formatted_address);
         $(latSelector).val(place.geometry.location.lat());
         $(lngSelector).val(place.geometry.location.lng());
-        $(o).val(place.formatted_address);
+      }
+    });
+
+    $(o).on('focus', function(evt) {
+      if ($(latSelector).val() !== '') {
+        $(o).val('');
+        $(latSelector).val('');
+        $(lngSelector).val('');
+      }
+    }).on('blur', function(evt) {
+      if ($(latSelector).val() === '') {
+        $(o).val('');
       }
     });
 
