@@ -88,6 +88,21 @@ if(location.host.indexOf('.local') > -1){
             Route Task Errors (F12)
           </div>
         {{/if}}
+        {{#if logs.[0]}}
+          <div style="z-index:100;position:fixed;bottom:0;right:0;padding:5px;background-color:#0000ff;color:#ffffff;" 
+               onclick="document.querySelector('#route-debug-log').style.display='block';">
+            Route Log
+          </div>
+          <div style="z-index:100;position:fixed;bottom:0;left:0;right:0;padding:5px;background-color:#ededed;color:#000000;overflow:auto;height:50vh;display:none;border-top:1px solid #cccccc;" id="route-debug-log">
+            <a style="position:fixed;right:25px;" onclick="document.querySelector('#route-debug-log').style.display='none';">x</a>
+<pre style="white-space: pre-wrap;">
+{{~#each logs}}
+{{{this}}}
+
+{{/each~}}
+</pre>
+          </div>
+        {{/if}}
       {{/ifAny}}
       <header class="mdc-top-app-bar mdc-elevation--z5 top-bar-stuck" id="top-bar">
         <div class="container-fluid">
