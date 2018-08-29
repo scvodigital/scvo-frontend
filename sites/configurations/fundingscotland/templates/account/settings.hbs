@@ -1,0 +1,182 @@
+{{#*inline "linkChip"}}
+  <div class="mdc-chip{{#if linked}} mdc-chip--selected{{/if}} provider-{{provider}}" data-provider-link="{{provider}}">
+    <span class="fab fa-{{provider}} mdc-chip__icon mdc-chip__icon--leading {{#if linked}}mdc-chip__icon--leading-hidden{{/if}}" aria-hidden="true"></span>
+    <div class="mdc-chip__checkmark">
+      <svg class="mdc-chip__checkmark-svg" viewBox="-2 -3 30 30">
+        <path class="mdc-chip__checkmark-path" fill="none" stroke="#ffffff" d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+      </svg>
+    </div>
+    <div class="mdc-chip__text noselect">
+      <span class="link-action">
+        {{#if linked}}
+          Unlink from
+        {{else}}
+          Link to
+        {{/if}}
+      </span>
+      {{capitalize provider}}
+    </div>
+  </div>
+{{/inline}}
+
+<div id="detailed-results-container" class="container-content goodmoves-settings">
+  <h1 class="mdc-typography--headline3 v-margin-full">
+    Settings
+  </h1>
+
+  <section class="settings-section goodmoves-settings-email">
+    <h2 class="mdc-typography--headline5 v-margin-full">
+      Email alerts
+    </h2>
+    <div class="mdc-layout-grid">
+      <div class="mdc-layout-grid__inner">
+        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-6-tablet mdc-layout-grid__cell--span-12-phone">
+          <h3 class="mdc-typography--headline6 v-margin-full">
+            Email frequency for new job alerts
+          </h3>
+          {{> email_frequency}}
+        </div>
+        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-6-tablet mdc-layout-grid__cell--span-12-phone">
+          <h3 class="mdc-typography--headline6 v-margin-full">
+            Shortlist alerts
+          </h3>
+          <div class="mdc-chip-set mdc-chip-set--filter">
+            {{> shortlist_alerts}}
+          </div>
+        </div>
+        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-6-tablet mdc-layout-grid__cell--span-12-phone">
+          <h3 class="mdc-typography--headline6 v-margin-full">
+            Unsubscribe
+          </h3>
+          {{#ifAny
+            (compare (length (filter @root.data.searches.items.[0] "partitionActive" "===" 1)) ">" 0)
+            @root.data.shortlist.items.[0].[0].active
+          }}
+            <a href="/stop-all-emails" class="mdc-button mdc-button--raised mdc-button--fullwidth">
+              <span class="far fa-envelope mdc-list-item__graphic" aria-hidden="true"></span>
+              Stop all emails
+            </a>
+          {{else}}
+            You currently have no subscriptions.
+          {{/ifAny}}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <hr />
+
+  <section class="settings-section goodmoves-settings-account">
+    <h2 class="mdc-typography--headline5 v-margin-full">
+      Account
+    </h2>
+
+    <div class="mdc-layout-grid">
+      <div class="mdc-layout-grid__inner">
+        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-6-tablet mdc-layout-grid__cell--span-12-phone">
+          {{#if (contains (map @root.data.auth.providerData (getProp "providerId")) "password") ~}}
+          <h3 class="mdc-typography--headline6">
+            Change password
+          </h3>
+          {{else}}
+          <h3 class="mdc-typography--headline6">
+            Set password
+          </h3>
+          <span class="mdc-typography--body1">You are currently using a social media account to sign in. If you set a password you will also be able to sign in with your email address.</span>
+          {{/if ~}}
+          <div class="mdc-text-field mdc-text-field--box mdc-text-field--with-leading-icon" data-mdc-auto-init="MDCTextField">
+            <span class="far fa-key mdc-text-field__icon" tabindex="-1"></span>
+            <input type="password" id="change-password-password" class="mdc-text-field__input" data-lpignore="true" autocomplete="off" />
+            <label class="mdc-floating-label mdc-floating-label--float-above" for="change-password">
+              Password
+            </label>
+            <div class="mdc-line-ripple"></div>
+          </div>
+          <div class="mdc-text-field mdc-text-field--box mdc-text-field--with-leading-icon" data-mdc-auto-init="MDCTextField">
+            <span class="far fa-key mdc-text-field__icon" tabindex="-1"></span>
+            <input type="password" id="change-password-confirm" class="mdc-text-field__input" data-lpignore="true" autocomplete="off" />
+            <label class="mdc-floating-label mdc-floating-label--float-above" for="change-password-confirm">
+              Confirm password
+            </label>
+            <div class="mdc-line-ripple"></div>
+          </div>
+          <button class="mdc-button mdc-button--raised mdc-button--change_password mdc-button--fullwidth" id="change-password">
+            <span class="far fa-lock mdc-list-item__graphic" aria-hidden="true"></span>
+            {{#if (contains (map @root.data.auth.providerData (getProp "providerId")) "password") ~}}
+            Change password
+            {{else}}
+            Set password
+            {{/if ~}}
+          </button>
+        </div>
+        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-6-tablet mdc-layout-grid__cell--span-12-phone">
+          <h3 class="mdc-typography--headline6">
+            Linked accounts
+          </h3>
+          <div class="mdc-chip-set mdc-chip-set--filter">
+            {{#each (split "google,facebook,twitter" ",") ~}}
+              <div class="v-margin">
+                {{> linkChip
+                    provider=this
+                    linked=(contains (map @root.data.auth.providerData (getProp "providerId")) (concat this ".com"))
+                }}
+              </div>
+            {{/each ~}}
+          </div>
+        </div>
+        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-6-tablet mdc-layout-grid__cell--span-12-phone">
+          <h3 class="mdc-typography--headline6">
+            Account data
+          </h3>
+          <button class="mdc-button mdc-button--raised mdc-button--export mdc-button--fullwidth v-margin" data-dialog-target="#export-user-dialog">
+            <span class="far fa-upload mdc-list-item__graphic" aria-hidden="true"></span>
+            Export account settings
+          </button>
+          <button class="mdc-button mdc-button--raised mdc-button--import mdc-button--fullwidth v-margin" data-dialog-target="#import-user-dialog">
+            <span class="far fa-download mdc-list-item__graphic" aria-hidden="true"></span>
+            Import account settings
+          </button>
+          <button class="mdc-button mdc-button--raised mdc-button--delete mdc-button--fullwidth v-margin" data-dialog-target="#delete-user-dialog">
+            <span class="far fa-trash mdc-list-item__graphic" aria-hidden="true"></span>
+            Delete account
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<aside id="delete-user-dialog"
+  class="mdc-dialog"
+  role="alertdialog"
+  aria-labelledby="delete-user-dialog-label"
+  aria-describedby="delete-user-dialog-description"
+  data-mdc-auto-init="MDCDialog">
+  <div action="/delete-user" method="GET" class="mdc-dialog__surface">
+    <header class="mdc-dialog__header">
+      <h2 id="delete-user-dialog-label" class="mdc-dialog__header__title">
+        Are you sure you want to delete your account?
+      </h2>
+    </header>
+    <section id="delete-user-dialog-description" class="mdc-dialog__body">
+      <p>
+        Deleting your account will:
+      </p>
+      <ul>
+        <li>Stop all email alerts</li>
+        <li>Delete your saved searches</li>
+        <li>Delete your shortlist</li>
+        <li>Delete your notes on vacancies</li>
+        <li>Fully remove your account from the Goodmoves system</li>
+      </ul>
+      <p>
+        If you only want to stop your email alerts, please see the options on <a href="/searches">searches &amp; email</a>.
+      </p>
+    </section>
+    <footer class="mdc-dialog__footer">
+      <button type="button" class="mdc-button mdc-dialog__footer__button mdc-dialog__footer__button--cancel">Cancel</button>
+      <a href="/delete-user" class="mdc-button mdc-dialog__footer__button mdc-dialog__footer__button--accept">Delete account</a>
+    </footer>
+  </div>
+  <div class="mdc-dialog__backdrop"></div>
+</aside>

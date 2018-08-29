@@ -8,11 +8,11 @@
   <script>
     document.addEventListener("DOMContentLoaded", function(event) {
       window.setTimeout(function() {
-        goodmoves.app.auth().onAuthStateChanged(function(user) {
+        fundingscotland.app.auth().onAuthStateChanged(function(user) {
           if (user) {
             user.delete().then(function() {
-              goodmoves.setCookie('gm_token');
-              goodmoves.setCookie('gm_cookie');
+              fundingscotland.setCookie('fs_token');
+              fundingscotland.setCookie('fs_cookie');
               window.location.href = '/';
             }).catch(function(err) {
               console.error('Failed to delete user', user, err);

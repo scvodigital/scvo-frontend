@@ -1,0 +1,154 @@
+<script>
+  $(document).ready(function() {
+    var $changePassword = $('#change-password');
+    var $password1 = $('#change-password-password');
+    var $password2 = $('#change-password-confirm');
+
+    var providers = {
+      google: {
+        getProvider: function() { return new firebase.auth.GoogleAuthProvider(); },
+        scopes: [ 'email' ],
+        label: 'Google'
+      },
+      facebook: {
+        getProvider: function() { return new firebase.auth.FacebookAuthProvider(); },
+        scopes: [ 'email' ],
+        label: 'Facebook'
+      },
+      twitter: {
+        getProvider: function() { return new firebase.auth.TwitterAuthProvider(); },
+        label: 'Twitter'
+      },
+      github: {
+        gitProvider: function() { return new firebase.auth.GithubAuthProvider(); },
+        scopes: [ 'user:email' ],
+        label: 'Github'
+      }
+    };
+    var currentUser;
+    fundingscotland.app.auth().onAuthStateChanged(function(user) {
+      currentUser = user;
+      if (user) {
+        checkProviders();
+      }
+    });
+
+    $('[data-provider-link]').each(function(i, o) {
+      var $chip = $(o);
+      var $linkAction = $chip.find('.link-action');
+      var chip = new mdc.chips.MDCChip(o);
+      var providerName = $chip.data('provider-link');
+      var providerInfo = providers[providerName];
+      var provider = providerInfo.getProvider();
+
+      $chip.on('click', function(evt) {
+        if (!$chip.data('disabled')) {
+          $chip.data('disabled', true);
+          $chip.css('opacity', 0.5);
+          if (currentUser) {
+            var selected = $chip.hasClass('mdc-chip--selected');
+            if (!selected) {
+              currentUser.linkWithPopup(provider).then(function(result) {
+                console.log('Linked to', providerName, result);
+                chip.foundation.setSelected(!selected);
+                $linkAction.text('Unlink from');
+                $chip.data('disabled', false);
+                $chip.css('opacity', 1);
+                checkProviders();
+              }).catch(function(err) {
+                console.error('Failed to link to', providerName, err);
+                $chip.data('disabled', false);
+                $chip.css('opacity', 1);
+                checkProviders();
+                window.setTimeout(function() {
+                  window.location.href = '/sign-in?reauth=true';
+                }, 1000);
+              });
+            } else {
+              currentUser.unlink(provider.providerId).then(function(result) {
+                console.log('Unlinked from', providerName, result);
+                chip.foundation.setSelected(!selected);
+                $linkAction.text('Link to');
+                $chip.data('disabled', false);
+                $chip.css('opacity', 1);
+                checkProviders();
+              }).catch(function(err) {
+                console.error('Failed to unlink from', providerName, err);
+                $chip.data('disabled', false);
+                $chip.css('opacity', 1);
+                checkProviders();
+                if (err.code === 'auth/requires-recent-login') {
+                  window.setTimeout(function() {
+                    window.location.href = '/sign-in?reauth=true';
+                  }, 1000);
+                }
+              });
+            }
+          }
+        }
+      });
+    });
+
+    function checkProviders() {
+      var enabled = currentUser.providerData.length > 1;
+      $('.mdc-chip--selected[data-provider-link]')
+        .data('disabled', !enabled)
+        .css({
+          'opacity': enabled ? 1 : 0.5,
+          'cursor': enabled ? 'pointer' : 'default'
+        })
+        .attr('title', !enabled ? 'You must have at least one account linked to your Funding Scotland account' : '');
+    }
+
+    $changePassword.on('click', changePassword);
+    $password1.on('keypress', function(evt) {
+      if (evt.which === 13) {
+        $password2.focus();
+      }
+    });
+    $password2.on('keypress', function(evt) {
+      if (evt.which === 13) {
+        changePassword();
+      }
+    });
+
+    function changePassword() {
+      var password1 = $password1.val();
+      var password2 = $password2.val();
+
+      fundingscotland.disable([$changePassword, $password1, $password2]);
+
+      if (password1 !== password2) {
+        fundingscotland.disable([$changePassword, $password1, $password2], false);
+        $password1.val('');
+        $password2.val('');
+        $password1.focus();
+        fundingscotland.snackbarShow({
+          message: 'The two passwords entered do not match'
+        });
+        return;
+      }
+
+      var hasEmailProvider = false;
+      currentUser.updatePassword(password1).then(function(result) {
+        fundingscotland.snackbarShow({
+          message: 'Password changed, please wait',
+        });
+        window.setTimeout(function() {
+          window.location.reload();
+        }, 1000);
+      }).catch(function(err) {
+        fundingscotland.disable([$changePassword, $password1, $password2], false);
+        fundingscotland.snackbarShow({
+          message: err.message,
+          backgroundColor: '#dd4b39'
+        });
+        if (err.code === 'auth/requires-recent-login') {
+          window.setTimeout(function() {
+            window.location.href = '/sign-in?reauth=true';
+          }, 1000);
+        }
+      });
+    }
+  });
+</script>
