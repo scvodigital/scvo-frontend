@@ -142,7 +142,11 @@ var GoodmovesController = Class.extend({
     });
 
     $('[data-mdc-auto-init="MDCTextField"][novalidate]').each(function(i, o) {
-      o.MDCTextField.getDefaultFoundation().useCustomValidityChecking = true;
+      var foundation = o.MDCTextField.foundation_;
+      foundation.useCustomValidityChecking = true;
+      $(o).find('input').on('blur', function() {
+        o.MDCTextField.valid = true;
+      });
     });
 
     // Menu buttons
