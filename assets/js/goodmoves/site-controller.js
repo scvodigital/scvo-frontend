@@ -94,36 +94,36 @@ var GoodmovesController = Class.extend({
     $('[data-ajax-button]').on('click', function(evt) {
       evt.preventDefault();
       var $o = $(event.currentTarget);
-      var data = $o.data('ajax-button');
+      var config = $o.data('ajax-button');
 
       var request = {
-        url: data.url,
-        method: ['POST', 'GET', 'PUT', 'DELETE'].indexOf(data.method.toUpperCase()) > -1 ? data.method.toUpperCase() : 'GET',
-        dataType: data.responseType || 'html',
+        url: config.url,
+        method: ['POST', 'GET', 'PUT', 'DELETE'].indexOf(config.method.toUpperCase()) > -1 ? config.method.toUpperCase() : 'GET',
+        dataType: config.responseType || 'html',
         success: function(response, status, xhr) {
-          if (data.successMessage) {
+          if (config.successMessage) {
             goodmoves.snackbarShow({
-              message: data.successMessage
+              message: config.successMessage
             });
           }
           
-          if (data.successCallback) {
-            window[data.successCallback].call(this, evt, data, response, status, xhr);
+          if (config.successCallback) {
+            window[config.successCallback].call(this, evt, config, response, status, xhr);
           }
         },
         error: function(xhr, status, err) {
-          if (data.failureMessage) {
+          if (config.failureMessage) {
             goodmoves.snackbarShow({
-              message: data.failureMessage,
+              message: config.failureMessage,
               backgroundColor: '#dd4b39'
             });
           }
 
-          if (data.failureCallback) {
-            window[data.failureCallback].call(this, evt, data, xhr, status, err);
+          if (config.failureCallback) {
+            window[config.failureCallback].call(this, evt, config, xhr, status, err);
           }
         },
-        data: data.postBody
+        data: config.postBody
       };
 
       console.log('REQUEST:', request);
@@ -131,29 +131,41 @@ var GoodmovesController = Class.extend({
     });
 
     // Ajax Forms
-    $('form[data-ajax-form][data-success-message][data-failure-message]').submit(function(evt) {
+    $('form[data-ajax-form]').submit(function(evt) {
       evt.preventDefault();
       var $o = $(event.currentTarget);
+      var config = $o.data('ajax-form');
       var url = $o.attr('action');
       var method = $o.attr('method') || 'GET';
-      var dataType = $o.attr('data-response-type') || 'html';
-      var successMessage = $o.attr('data-success-message');
-      var failureMessage = $o.attr('data-failure-message');
 
       var request = {
         url: url,
-        method: method,
-        dataType: dataType,
-        success: function(data, status, xhr) {
-          goodmoves.snackbarShow({
-            message: successMessage
-          });
+        method: ['POST', 'GET', 'PUT', 'DELETE'].indexOf(method.toUpperCase()) > -1 ? method.toUpperCase() : 'GET',
+        dataType: config.responseType || 'html',
+        success: function(response, status, xhr) {
+          console.log('AJAX Form Success', response, status, xhr, config, config);
+          if (config.successMessage) {
+            goodmoves.snackbarShow({
+              message: config.successMessage
+            });
+          }
+          
+          if (config.successCallback) {
+            window[config.successCallback].call(this, evt, config, response, status, xhr);
+          }
         },
         error: function(xhr, status, err) {
-          goodmoves.snackbarShow({
-            message: failureMessage,
-            backgroundColor: '#dd4b39'
-          });
+          console.log('AJAX Form Failure', xhr, status, err);
+          if (config.failureMessage) {
+            goodmoves.snackbarShow({
+              message: config.failureMessage,
+              backgroundColor: '#dd4b39'
+            });
+          }
+
+          if (config.failureCallback) {
+            window[config.failureCallback].call(this, evt, config, xhr, status, err);
+          }
         }
       };
 

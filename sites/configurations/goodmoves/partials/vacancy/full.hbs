@@ -189,9 +189,14 @@
       <div class="panel mdc-card--full-content" role="tabpanel" aria-hidden="true" id="notes">
         <div class="text-field-container user-notes">
           {{#if @root.data.auth ~}}
-            <form action="/save-notes" method="POST" data-ajax-form="true" data-success-message="Notes saved" data-failure-message="Failed to save notes">
+            <form action="/save-notes" method="POST" data-ajax-form='{
+                  "successMessage": "Notes saved",
+                  "failureMessage": "Failed to save notes",
+                  "successCallback": "notesSaved",
+                  "id": "{{Id}}"
+                }'>
               <div>
-                <textarea class="mdc-text-field__input" data-simple-mde="true" name="notes" id="notes-{{Id}}">{{getProperty @root.data.notes Id}}</textarea>
+                <textarea class="mdc-text-field__input" data-simple-mde="true" name="notes" id="notes-{{Id}}" data-id="{{Id}}">{{getProperty @root.data.notes Id}}</textarea>
                 <input type="hidden" name="id" value="{{Id}}">
               </div>
               <div class="save-button-block">
@@ -199,7 +204,7 @@
                   <span class="far fa-save mdc-list-item__graphic" aria-hidden="true"></span>
                   Save notes
                 </button>
-                <button type="button" class="mdc-button mdc-button--raised" id="delete-notes-{{Id}}"
+                <button type="button" class="mdc-button mdc-button--raised mdc-button--warning" id="delete-notes-{{Id}}" data-id="{{Id}}"
                     data-ajax-button='{
                       "url": "/delete-notes",
                       "method": "POST",
@@ -207,7 +212,7 @@
                       "failureMessage": "Failed to delete notes",
                       "successCallback": "clearNotes",
                       "postBody": { "id": "{{Id}}" }
-                    }'>
+                      }' {{#unless (getProperty @root.data.notes Id)}}disabled{{/unless}}>
                   <span class="far fa-remove mdc-list-item__graphic" aria-hidden="true"></span>
                   Delete notes
                 </button>
@@ -233,5 +238,10 @@
   function clearNotes(evt, data) {
     console.log('clearNotes Arguments:', arguments);
     $('#notes-' + data.postBody.id)[0].mde.value('');
+    $(evt.currentTarget).prop('disabled', true);
+  }
+  function notesSaved(evt, data) {
+    console.log('notesSaved Arguments:', arguments);
+    $('#delete-notes-' + data.id).prop('disabled', false);
   }
 </script>
