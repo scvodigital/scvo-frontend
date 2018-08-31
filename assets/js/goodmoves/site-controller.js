@@ -475,6 +475,12 @@ var GoodmovesController = Class.extend({
     document.cookie = name + "=" + (value || "")  + expires + "; path=/; secure";
   },
 
+  getCookie: function(name) {
+    var value = "; " + document.cookie;
+    var parts = value.split("; " + name + "=");
+    if (parts.length == 2) return parts.pop().split(";").shift();
+  },
+
   disable: function(elements, disable) {
     disable = typeof disable === 'undefined' ? true : disable;
     for (var e = 0; e < elements.length; ++e) {

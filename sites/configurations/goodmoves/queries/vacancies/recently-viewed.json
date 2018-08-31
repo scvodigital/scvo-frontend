@@ -1,0 +1,45 @@
+{
+  "size": 10,
+  "_source": [
+    "Id",
+    "slug",
+    "top_job",
+    "description",
+    "title",
+    "geo_vacancy_coords",
+    "location",
+    "salary",
+    "role_status_list",
+    "active",
+    "closing_date",
+    "start_at",
+    "end_at",
+    "organisation.slug",
+    "organisation.name",
+    "organisation.has_logo",
+    "organisation.logo_url"
+  ],
+  "query": {
+    "bool": {
+      "filter": [
+        {{>queries_vacancy_common_filters_open request.params.query}}
+      ],
+      "must": [
+        {{#if @root.request.cookies.recently_viewed}}
+        {
+          "terms": {
+            "Id": {{{stringify (split @root.request.cookies.recently_viewed ',')}}}
+          }
+        }
+        {{else}}
+        {
+          "match_none": {}
+        }
+        {{/if}}
+      ]
+    }
+  },
+  "sort": {
+    "start_at": "desc"
+  }
+}

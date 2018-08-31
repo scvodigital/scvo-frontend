@@ -49,9 +49,9 @@ tabs.listen("MDCTabBar:change", function(t) {
   }
 });
 
-{{#if data.auth}}
 var mdeEditors = [];
 $(document).ready(function() {
+{{#if data.auth}}
   $('textarea[data-simple-mde]').each(function(i, o) {
     var mdeEditor = new SimpleMDE({
       element: o,
@@ -61,6 +61,20 @@ $(document).ready(function() {
     o.mde = mdeEditor;
     mdeEditors.push(mdeEditor);
   });
-});
+  var recentlyViewed = goodmoves.getCookie('recently_viewed') || '';
+  console.log('Recently Viewed:', recentlyViewed, '| Vacancy Id:', vacancyId);
+  recentlyViewed = recentlyViewed.split(',');
+  recentlyViewed.unshift(vacancyId);
+  var newRecentlyViewed = [];
+  for (var i = 0; i < Math.min(recentlyViewed.length, 10); ++i) {
+    var item = recentlyViewed[i];
+    if (item && newRecentlyViewed.indexOf(item) === -1) {
+      newRecentlyViewed.push(item);
+    }
+  };
+  newRecentlyViewed = newRecentlyViewed.join(',');
+  console.log('New Recently Viewed:', newRecentlyViewed);
+  goodmoves.setCookie('recently_viewed', newRecentlyViewed, 7);
 {{/if}}
+});
 </script>

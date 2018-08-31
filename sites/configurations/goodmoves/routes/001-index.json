@@ -16,11 +16,20 @@
         "elasticsearchConfig": {
           "apiVersion": "5.6"
         },
-        "queryTemplates": {
-          "index": "web-content-production",
-          "type": "goodmoves-vacancy",
-          "template": ">context.metaData.handlebars.queries.vacancies_home-latest"
-        }
+        "queryTemplates": [
+          {
+            "name": "home_latest",
+            "index": "web-content-production",
+            "type": "goodmoves-vacancy",
+            "template": ">context.metaData.handlebars.queries.vacancies_home-latest"
+          },
+          {
+            "name": "recently_viewed",
+            "index": "web-content-production",
+            "type": "goodmoves-vacancy",
+            "template": ">context.metaData.handlebars.queries.vacancies_recently-viewed"
+          }
+        ]
       },
       "renderer": "handlebars"
     },

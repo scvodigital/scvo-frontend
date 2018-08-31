@@ -28,6 +28,7 @@
           {{#with (querystring querystring) ~}}
             {{>queries_vacancy_search_filters this}}
           {{/with ~}}
+          {{#unless @last}},{{/unless}}
         {{/each ~}}
       ]{{#ifAll @root.data.auth @root.data.searches.items.[0] ~}},
       "should": [
