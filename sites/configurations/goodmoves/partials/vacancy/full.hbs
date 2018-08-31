@@ -191,13 +191,17 @@
           {{#if @root.data.auth ~}}
             <form action="/save-notes" method="POST" data-ajax-form="true" data-success-message="Notes saved" data-failure-message="Failed to save notes">
               <div>
-                <textarea class="mdc-text-field__input" data-simple-mde="true" name="notes">{{getProperty @root.data.notes Id}}</textarea>
+                <textarea class="mdc-text-field__input" data-simple-mde="true" name="notes" id="notes-{{Id}}">{{getProperty @root.data.notes Id}}</textarea>
                 <input type="hidden" name="id" value="{{Id}}">
               </div>
               <div class="save-button-block">
                 <button type="submit" class="mdc-button mdc-button--raised">
                   <span class="far fa-save mdc-list-item__graphic" aria-hidden="true"></span>
                   Save notes
+                </button>
+                <button type="button" class="mdc-button mdc-button--raised" onclick="clearNotes('{{Id}}');">
+                  <span class="far fa-remove mdc-list-item__graphic" aria-hidden="true"></span>
+                  Delete notes
                 </button>
                 <div class="mdc-typography--caption">
                   Any notes you write here are private on your account and are not shared with {{organisation.name}}
@@ -217,3 +221,10 @@
     {{> vacancy_actions slug=slug Id=Id action="organisation"}}
   </div>
 </div>
+<script>
+  function clearNotes(id) {
+    var notes = document.querySelector('#notes-' + id);
+    notes.mde.value('');
+    $(notes.form).find('button[type="submit"]')[0].click();
+  }
+</script>
