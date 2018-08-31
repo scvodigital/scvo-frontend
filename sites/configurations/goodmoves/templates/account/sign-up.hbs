@@ -101,11 +101,15 @@ document.addEventListener("DOMContentLoaded", function(event) {
 
     if (email !== emailConfirm) {
       $message.text('The two email addresses entered do not match').show();
+      $loader.css('display', 'none');
+      document.body.scrollTop = document.documentElement.scrollTop = 0;
       return;
     }
 
     if (password !== passwordConfirm) {
       $message.text('The two passwords entered do not match').show();
+      $loader.css('display', 'none');
+      document.body.scrollTop = document.documentElement.scrollTop = 0;
       return;
     }
 
@@ -120,10 +124,12 @@ document.addEventListener("DOMContentLoaded", function(event) {
       } else {
         $message.text('Something went wrong, signed up but no user?').show();
         $loader.css('display', 'none');
+        document.body.scrollTop = document.documentElement.scrollTop = 0;
       }
     }).catch(function(err) {
       $message.text(err.message).show();
       $loader.css('display', 'none');
+      document.body.scrollTop = document.documentElement.scrollTop = 0;
     });
   });
 });
