@@ -91,6 +91,45 @@ var GoodmovesController = Class.extend({
       color: $snackbar.css('color')
     });
 
+    $('[data-ajax-button]').on('click', function(evt) {
+      evt.preventDefault();
+      var $o = $(event.currentTarget);
+      var data = $o.data('ajax-button');
+
+      var request = {
+        url: data.url,
+        method: ['POST', 'GET', 'PUT', 'DELETE'].indexOf(data.method.toUpperCase()) > -1 ? data.method.toUpperCase() : 'GET',
+        dataType: data.responseType || 'html',
+        success: function(response, status, xhr) {
+          if (data.successMessage) {
+            goodmoves.snackbarShow({
+              message: data.successMessage
+            });
+          }
+          
+          if (data.successCallback) {
+            window[data.successCallback].call(this, evt, data, response, status, xhr);
+          }
+        },
+        error: function(xhr, status, err) {
+          if (data.failureMessage) {
+            goodmoves.snackbarShow({
+              message: data.failureMessage,
+              backgroundColor: '#dd4b39'
+            });
+          }
+
+          if (data.failureCallback) {
+            window[data.failureCallback].call(this, evt, data, xhr, status, err);
+          }
+        },
+        data: data.postBody
+      };
+
+      console.log('REQUEST:', request);
+      $.ajax(request);
+    });
+
     // Ajax Forms
     $('form[data-ajax-form][data-success-message][data-failure-message]').submit(function(evt) {
       evt.preventDefault();

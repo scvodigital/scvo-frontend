@@ -199,7 +199,15 @@
                   <span class="far fa-save mdc-list-item__graphic" aria-hidden="true"></span>
                   Save notes
                 </button>
-                <button type="button" class="mdc-button mdc-button--raised" onclick="clearNotes('{{Id}}');">
+                <button type="button" class="mdc-button mdc-button--raised" id="delete-notes-{{Id}}"
+                    data-ajax-button='{
+                      "url": "/delete-notes",
+                      "method": "POST",
+                      "successMessage": "Notes deleted",
+                      "failureMessage": "Failed to delete notes",
+                      "successCallback": "clearNotes",
+                      "postBody": { "id": "{{Id}}" }
+                    }'>
                   <span class="far fa-remove mdc-list-item__graphic" aria-hidden="true"></span>
                   Delete notes
                 </button>
@@ -222,9 +230,8 @@
   </div>
 </div>
 <script>
-  function clearNotes(id) {
-    var notes = document.querySelector('#notes-' + id);
-    notes.mde.value('');
-    $(notes.form).find('button[type="submit"]')[0].click();
+  function clearNotes(evt, data) {
+    console.log('clearNotes Arguments:', arguments);
+    $('#notes-' + data.postBody.id)[0].mde.value('');
   }
 </script>

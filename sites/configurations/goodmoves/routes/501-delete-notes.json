@@ -1,0 +1,28 @@
+{
+  "name": "delete-notes",
+  "pattern": "/delete-notes",
+  "acceptedVerbs": "POST",
+  "tasks": [
+    "context.metaData.commonTasks.authRequired",
+    {
+      "name": "notes",
+      "taskModule": "firebaseRtbSet",
+      "renderer": "handlebars",
+      "config": {
+        "appName": "goodmoves",
+        "pathTemplate": "/notes/{{data.auth.uid}}/{{request.body.id}}",
+        "setOrUpdate": "set",
+        "dataTemplate": "null"
+      }
+    },
+    {
+      "name": "destination",
+      "taskModule": "render",
+      "renderer": "handlebars",
+      "config": {
+        "output": "body",
+        "template": "Deleted"
+      }
+    }
+  ]
+}
