@@ -23,19 +23,15 @@
     "bool": {
       "filter": [
         {{>queries_vacancy_common_filters_open request.params.query}}
-        {{#ifAll @root.data.auth @root.data.searches.items.[0].[0].querystring}},{{/ifAll}}
-        {{#each @root.data.searches.items.[0] ~}}
-          {{#with (querystring querystring) ~}}
-            {{>queries_vacancy_search_filters this}}
-          {{/with ~}}
-          {{#unless @last}},{{/unless}}
-        {{/each ~}}
       ]{{#ifAll @root.data.auth @root.data.searches.items.[0] ~}},
       "should": [
         {{#each @root.data.searches.items.[0] ~}}
           {{#with (querystring querystring) ~}}
             {
               "bool": {
+                "filter": [
+                  {{>queries_vacancy_search_filters this}}
+                ],
                 "must": [
                   {{>queries_vacancy_search_must this}}
                 ]
