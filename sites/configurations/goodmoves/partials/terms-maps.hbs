@@ -1,29 +1,35 @@
 {
-  {{#each (split "roles,sectors,statuses" ",")}}
+  {{#each (split "regions,roles,sectors,statuses" ",")}}
     "{{this}}": {
       "slugsMap": {
         {{#each (getProperty @root.data.supplimentaryResponses.types.aggregations (concat this ".buckets")) ~}}
+          {{#if key ~}}
           "{{slugify key}}": {
             "term": {{{stringify key}}},
             "count": {{doc_count}}
           }{{#unless @last}},{{/unless}}
+          {{/if ~}}
         {{/each}}
       },
       "termsMap": {
         {{#each (getProperty @root.data.supplimentaryResponses.types.aggregations (concat this ".buckets")) ~}}
+          {{#if key ~}}
           {{{stringify key}}}: {
             "slug": "{{slugify key}}",
             "count": {{doc_count}}
           }{{#unless @last}},{{/unless}}
+          {{/if ~}}
         {{/each}}
       },
       "all": [
         {{#each (getProperty @root.data.supplimentaryResponses.types.aggregations (concat this ".buckets")) ~}}
+          {{#if key ~}}
           {
-            "term": "{{key}}",
+            "term": {{{stringify key}}},
             "slug": "{{slugify key}}",
             "count": {{doc_count}}
           }{{#unless @last}},{{/unless}}
+          {{/if ~}}
         {{/each}}
       ]
     }{{#unless @last}},{{/unless}}

@@ -2182,7 +2182,7 @@ footer,
 .home-heading {
   padding: 0 $unit*1.5;
   .mdc-typography--headline5 {
-    margin: $unit*1.5 0 $unit/2;
+    margin: $unit*1.5 0 $unit;
   }
 }
 .home-content {
@@ -2362,7 +2362,7 @@ footer,
   justify-content: center;
   position: absolute;
   height: 100%;
-  width: $unit*4;
+  width: $unit*3;
   border-radius: $unit/4;
   z-index: 2;
   // opacity: 0.7;
@@ -2374,6 +2374,7 @@ footer,
     height: $unit*3;
     width: $unit*3;
     border-radius: 50%;
+    box-shadow: 0px 3px 5px -1px rgba(0, 0, 0, 0.2), 0px 5px 8px 0px rgba(0, 0, 0, 0.14), 0px 1px 14px 0px rgba(0, 0, 0, 0.12);
   }
 }
 .scroll-button:hover {
@@ -2387,7 +2388,7 @@ footer,
 }
 .scroll-button.scroll-left {
   left: $unit;
-  background-image: linear-gradient(to left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 0.1));
+  background-image: linear-gradient(to left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0) 10%, rgba(0, 0, 0, 0.1) 50%, $mdc-theme-secondary-light 50.01%, $mdc-theme-secondary-light);
 }
 .fa-angle-left:before {
   width: 1.5rem;
@@ -2396,7 +2397,7 @@ footer,
 }
 .scroll-button.scroll-right {
   right: $unit;
-  background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 0.1));
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0) 10%, rgba(0, 0, 0, 0.1) 50%, $mdc-theme-secondary-light 50.01%, $mdc-theme-secondary-light);
 }
 .fa-angle-right:before {
   width: 1.5rem;
@@ -2404,10 +2405,10 @@ footer,
   text-align: right;
 }
 .scroll-button.scroll-left:hover {
-  background-image: linear-gradient(to left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 0.3));
+  background-image: linear-gradient(to left, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0) 10%, rgba(0, 0, 0, 0.3) 50%, $mdc-theme-secondary-light 50.01%, $mdc-theme-secondary-light);
 }
 .scroll-button.scroll-right:hover {
-  background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 0.3));
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0) 10%, rgba(0, 0, 0, 0.3) 50%, $mdc-theme-secondary-light 50.01%, $mdc-theme-secondary-light);
 }
 
 // Footer ======================================================================
@@ -2773,7 +2774,7 @@ footer.mdc-layout__footer {
   .home-heading {
     padding: 0 $unit/2;
     .mdc-typography--headline5 {
-      margin: $unit/2 0 $unit/5;
+      margin: $unit/2 0 $unit;
     }
   }
   .home-browse .mdc-drawer__content-heading,
@@ -2941,6 +2942,16 @@ footer.mdc-layout__footer {
   .gist .thumbnail img {
     height: 64px;
     width: 64px;
+  }
+  .mdc-card .mdc-card__info--vacancy-row .mdc-card__media,
+  .mdc-card .mdc-card__info--organisation-row .mdc-card__media {
+    display: block;
+    margin: 0 auto $unit;
+    width: 100%;
+    img {
+      margin: 0 auto;
+      display: block;
+    }
   }
 }
 @media screen and (max-width: 330px) {

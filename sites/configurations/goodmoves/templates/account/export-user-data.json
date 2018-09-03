@@ -1,0 +1,66 @@
+{
+  "dataComment": {
+    "description": "This is a JSON export of ALL data we currently have stored about you and associated with your Goodmoves account. In the stored data, vacancies are only referenced by their ID. You can use the `vacancyLookup` field included in this export to find details on any vacancy still stored within our search index.",
+    "location": "Various, but all withing the Google Cloud Platform ecosystem"
+  },
+  "user": {
+    "dataComment": {
+      "description": "This is all of the information stored about you for the purposes of authentication and storing other information you have chosen to store such as Shortlisted items, Saved searches, and Notes.",
+      "location": "Within Google's Firebase system. For more information visit https://firebase.google.com"
+    },
+    "email": {{{stringify @root.data.auth.email}}},
+    "emailVerified": {{{stringify @root.data.auth.emailVerified}}},
+    "metadata": {{{stringify @root.data.auth.metadata}}},
+    "providerData": {
+      "dataComment": "Each account can be linked to several authentication providers (Email and password, Google, Facebook, Twitter). Here is all of the information we store and have access to related to each linked provider",
+      "items": {{{stringify @root.data.auth.providerData}}}
+    }
+  },
+  "notes": {
+    "dataComment": {
+      "description": "A list of vacancy Ids with any notes you may have stored against them. See the `vacancyLookup` field for information about each Vacancy's ID",
+      "location": "Within Google's Firebase Database system. For more information visit https://firebase.google.com"
+    },
+    "items": {{{stringify @root.data.notes}}}
+  },
+  "shortlist": {
+    "dataComment": {
+      "description": "A list of all your shortlisted items. See the `vacancyLookup` field for information about each Vacancy's ID",
+      "location": "On a MySQL database located at Google's 'europe-west2-c' (London, United Kingdom) data centre. For more information visit https://cloud.google.com/compute/docs/regions-zones/"
+    },
+    "items": {{{stringify @root.data.shortlist.items.[0]}}}
+  },
+  "savedSearches": {
+    "dataComment": {
+      "description": "A list of each of your saved searches",
+      "location": "On a MySQL database located at Google's 'europe-west2-c' (London, United Kingdom) data centre. For more information visit https://cloud.google.com/compute/docs/regions-zones/"
+    },
+    "items": {{{stringify @root.data.searches.items.[0]}}}
+  },
+  "recentlyViewed": {
+    "dataComment": {
+      "description": "Here is a list of (up to) the last 10 vacancies you have viewed.",
+      "location": "Your browser's cookies though our web servers have the ability to read this information. These servers are located at Google's 'europe-west2' (London, United Kingdom) data centres. For more information visit https://cloud.google.com/computer/docs/regions-zones/"
+    },
+    "items": {{{stringify (split @root.request.cookies.recently_viewed ",")}}}  
+  },
+  "vacancyLookup": {
+    "dataComment": {
+      "description": "Use this list to find details about vacancies that appear in your Notes, Shortlist, and Recently Viewed lists. Please note that if a vacancy is no longer in our search index, it will not appear in this list",
+      "location": "In an Elasticsearch index located at Google's 'europe-west3' (Frankfurt, Germany) data centre. For more information visit https://cloud.google.com/compute/docs/regions-zones/. It should be noted that only data owned by Goodmoves is stored at this location and no user's information is ever transferred there."
+    },
+    "items": [
+      {{#each @root.data.vacancy_lookup.hits.hits}}
+        {{#with _source}}
+          {
+            "id": {{{stringify Id}}},
+            "title": {{{stringify title}}},
+            "organisation": {{{stringify organisation.name}}},
+            "url": {{{stringify (concat "https://goodmoves.com/vacancy/" slug)}}}
+          }{{#unless @last}},{{/unless}}
+        {{/with}}
+      {{/each}}
+    ]
+  },
+  "exported": {{{stringify (momentFormat (moment) "YYYY-MM-DD HH:mm:SS")}}}
+}
