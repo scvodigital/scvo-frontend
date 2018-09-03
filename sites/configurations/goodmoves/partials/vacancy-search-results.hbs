@@ -20,6 +20,13 @@
 {{~#with @root.request.params.query~}}
   {{~#if keywords~}}
     {{~keywords~}}
+    {{~#ifAny regions roles sectors statuses}}, {{/ifAny~}}
+  {{~/if~}}
+  {{~#if regions~}}
+    {{~#each (arrayify regions)~}}
+      {{~getProperty (getProperty @root.data.termsMaps.regions.slugsMap this) "term"~}}
+      {{~#unless @last}}, {{/unless~}}
+    {{~/each~}}
     {{~#ifAny roles sectors statuses}}, {{/ifAny~}}
   {{~/if~}}
   {{~#if roles~}}
@@ -95,6 +102,7 @@
         keywords=@root.request.params.query.keywords
         salary_min=@root.request.params.query.salary_min
         salary_max=@root.request.params.query.salary_max
+        regions=(sort @root.request.params.query.regions)
         roles=(sort @root.request.params.query.roles)
         sectors=(sort @root.request.params.query.sectors)
         statuses=(sort @root.request.params.query.statuses)
@@ -158,6 +166,7 @@
           keywords=@root.request.params.query.keywords
           salary_min=@root.request.params.query.salary_min
           salary_max=@root.request.params.query.salary_max
+          regions=@root.request.params.query.regions
           roles=@root.request.params.query.roles
           sectors=@root.request.params.query.sectors
           statuses=@root.request.params.query.statuses
@@ -209,7 +218,7 @@
     <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone action">
       {{#compare @root.data.search_data.detailed_results.hits.total ">" 0 ~}}
       <form action="{{{@root.request.url.path}}}" method="GET">
-        {{#each (split "roles,sectors,regions,statuses" ",")}}
+        {{#each (split "regions,roles,sectors,statuses" ",")}}
           {{#if (getProperty @root.request.params.query this) ~}}
             {{#each (arrayify (getProperty @root.request.params.query this)) ~}}
               <input type="hidden" name="{{../this}}[]" value="{{this}}" />

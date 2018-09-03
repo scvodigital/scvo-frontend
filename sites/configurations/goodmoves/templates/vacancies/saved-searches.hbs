@@ -48,11 +48,18 @@
                     {{/if ~}}
 
                     {{#if salary_min ~}}
-                    Minimum salary: <strong>&pound;{{addCommas salary_min}}</strong>
+                      Minimum salary: <strong>&pound;{{addCommas salary_min}}</strong>
                     {{/if ~}}
                     {{#if salary_max ~}}
-                    {{#if salary_min ~}}and{{/if}}
-                    Maximum salary: <strong>&pound;{{addCommas salary_max}}</strong>
+                      {{#if salary_min ~}}and{{/if}}
+                      Maximum salary: <strong>&pound;{{addCommas salary_max}}</strong>
+                    {{/if ~}}
+
+                    {{#if regions ~}}
+                      {{inflect (length (arrayify regions)) "Region" "Regions"}}:
+                      {{#each (arrayify regions) ~}}
+                        <strong>{{{getProperty @root.data.termsMaps.regions.slugsMap (concat this ".term")}}}{{#unless @last}}, {{/unless}}</strong>
+                      {{/each ~}}
                     {{/if ~}}
 
                     {{#if roles ~}}
@@ -77,7 +84,7 @@
                     {{/if ~}}
 
                     {{#ifAll location distance ~}}
-                      {{#ifAny keywords roles sectors statuses ~}}
+                      {{#ifAny keywords roles regions sectors statuses salary_min salary_max ~}}
                         Within
                       {{else}}
                         within
