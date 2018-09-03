@@ -23,6 +23,19 @@
     "bool": {
       "filter": [
         {{>queries_vacancy_common_filters_open request.params.query}}
+      ],
+      "must": [
+        {{#if @root.request.cookies.recently_viewed}}
+        {
+          "terms": {
+            "Id": {{{stringify (split @root.request.cookies.recently_viewed ',')}}}
+          }
+        }
+        {{else}}
+        {
+          "match_none": {}
+        }
+        {{/if}}
       ]
     }
   },

@@ -1,6 +1,6 @@
 {
-  "name": "save-notes",
-  "pattern": "/save-notes",
+  "name": "delete-notes",
+  "pattern": "/delete-notes",
   "acceptedVerbs": "POST",
   "tasks": [
     "context.metaData.commonTasks.authRequired",
@@ -12,7 +12,7 @@
         "appName": "goodmoves",
         "pathTemplate": "/notes/{{data.auth.uid}}/{{request.body.id}}",
         "setOrUpdate": "set",
-        "dataTemplate": "{{{stringify (stripTags @root.request.body.notes)}}}"
+        "dataTemplate": "null"
       }
     },
     {
@@ -21,7 +21,7 @@
       "renderer": "handlebars",
       "config": {
         "output": "body",
-        "template": "Saved"
+        "template": "Deleted"
       }
     }
   ]

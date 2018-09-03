@@ -91,30 +91,81 @@ var GoodmovesController = Class.extend({
       color: $snackbar.css('color')
     });
 
-    // Ajax Forms
-    $('form[data-ajax-form][data-success-message][data-failure-message]').submit(function(evt) {
+    $('[data-ajax-button]').on('click', function(evt) {
       evt.preventDefault();
       var $o = $(event.currentTarget);
+      var config = $o.data('ajax-button');
+
+      var request = {
+        url: config.url,
+        method: ['POST', 'GET', 'PUT', 'DELETE'].indexOf(config.method.toUpperCase()) > -1 ? config.method.toUpperCase() : 'GET',
+        dataType: config.responseType || 'html',
+        success: function(response, status, xhr) {
+          if (config.successMessage) {
+            goodmoves.snackbarShow({
+              message: config.successMessage
+            });
+          }
+          
+          if (config.successCallback) {
+            window[config.successCallback].call(this, evt, config, response, status, xhr);
+          }
+        },
+        error: function(xhr, status, err) {
+          if (config.failureMessage) {
+            goodmoves.snackbarShow({
+              message: config.failureMessage,
+              backgroundColor: '#dd4b39'
+            });
+          }
+
+          if (config.failureCallback) {
+            window[config.failureCallback].call(this, evt, config, xhr, status, err);
+          }
+        },
+        data: config.postBody
+      };
+
+      console.log('REQUEST:', request);
+      $.ajax(request);
+    });
+
+    // Ajax Forms
+    $('form[data-ajax-form]').submit(function(evt) {
+      evt.preventDefault();
+      var $o = $(event.currentTarget);
+      var config = $o.data('ajax-form');
       var url = $o.attr('action');
       var method = $o.attr('method') || 'GET';
-      var dataType = $o.attr('data-response-type') || 'html';
-      var successMessage = $o.attr('data-success-message');
-      var failureMessage = $o.attr('data-failure-message');
 
       var request = {
         url: url,
-        method: method,
-        dataType: dataType,
-        success: function(data, status, xhr) {
-          goodmoves.snackbarShow({
-            message: successMessage
-          });
+        method: ['POST', 'GET', 'PUT', 'DELETE'].indexOf(method.toUpperCase()) > -1 ? method.toUpperCase() : 'GET',
+        dataType: config.responseType || 'html',
+        success: function(response, status, xhr) {
+          console.log('AJAX Form Success', response, status, xhr, config, config);
+          if (config.successMessage) {
+            goodmoves.snackbarShow({
+              message: config.successMessage
+            });
+          }
+          
+          if (config.successCallback) {
+            window[config.successCallback].call(this, evt, config, response, status, xhr);
+          }
         },
         error: function(xhr, status, err) {
-          goodmoves.snackbarShow({
-            message: failureMessage,
-            backgroundColor: '#dd4b39'
-          });
+          console.log('AJAX Form Failure', xhr, status, err);
+          if (config.failureMessage) {
+            goodmoves.snackbarShow({
+              message: config.failureMessage,
+              backgroundColor: '#dd4b39'
+            });
+          }
+
+          if (config.failureCallback) {
+            window[config.failureCallback].call(this, evt, config, xhr, status, err);
+          }
         }
       };
 
@@ -142,7 +193,11 @@ var GoodmovesController = Class.extend({
     });
 
     $('[data-mdc-auto-init="MDCTextField"][novalidate]').each(function(i, o) {
-      o.MDCTextField.getDefaultFoundation().useCustomValidityChecking = true;
+      var foundation = o.MDCTextField.foundation_;
+      foundation.useCustomValidityChecking = true;
+      $(o).find('input').on('blur', function() {
+        o.MDCTextField.valid = true;
+      });
     });
 
     // Menu buttons
@@ -418,6 +473,12 @@ var GoodmovesController = Class.extend({
       expires = "; expires=" + date.toUTCString();
     }
     document.cookie = name + "=" + (value || "")  + expires + "; path=/; secure";
+  },
+
+  getCookie: function(name) {
+    var value = "; " + document.cookie;
+    var parts = value.split("; " + name + "=");
+    if (parts.length == 2) return parts.pop().split(";").shift();
   },
 
   disable: function(elements, disable) {

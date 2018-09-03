@@ -556,11 +556,11 @@ footer h3,
 }
 .settings {
   float: right;
-  .mdc-typography--body1 {
+  .settings-heading {
     position: relative;
     display: inline;
-    top: $unit/10;
     margin-right: $unit/2;
+    font-weight: 600;
   }
   .mdc-form-field {
     .mdc-radio {
@@ -597,7 +597,7 @@ footer h3,
     }
     .mdc-list-item--header {
       height: auto;
-      padding: 0;
+      padding: 0 $unit;
     }
     .mdc-layout-grid {
       width: 100%;
@@ -2026,7 +2026,7 @@ footer,
 .home-banner {
   .banner-search {
     background-size: cover;
-    background-position: center bottom;
+    background-position: center center;
     background-repeat: no-repeat;
     min-height: 40vh;
     .page-content {
@@ -2132,7 +2132,7 @@ footer,
           }
         }
         .header-extra {
-          max-width: 45%;
+          max-width: 55%;
         }
       }
     }
@@ -2540,14 +2540,19 @@ footer.mdc-layout__footer {
     }
   }
 }
-@media screen and (min-width: $desktop-landscape-breakpoint + 1) {
-  .home-banner .banner-search.overlay .content {
-    background-image: linear-gradient(60deg, rgba(66, 132, 42, 0.89), rgba(66, 132, 42, 0.91) 42%, transparent 42.08%, transparent);
+@media screen and (max-width: 1710px) {
+  .home-banner .banner-search.overlay .content .overlay-content {
+    padding-left: $unit;
   }
 }
-@media screen and (min-width: $mobile-landscape-breakpoint + 1) and (max-width: $desktop-landscape-breakpoint) {
+@media screen and (min-width: 1601px) {
   .home-banner .banner-search.overlay .content {
-    background-image: linear-gradient(60deg, rgba(66, 132, 42, 0.89), rgba(66, 132, 42, 0.91) 48%, transparent 48.08%, transparent);
+    background-image: linear-gradient(60deg, rgba(66, 132, 42, 0.89), rgba(66, 132, 42, 0.91) 34%, transparent 34.08%, transparent);
+  }
+}
+@media screen and (min-width: $mobile-landscape-breakpoint + 1) and (max-width: 1600px) {
+  .home-banner .banner-search.overlay .content {
+    background-image: linear-gradient(60deg, rgba(66, 132, 42, 0.89), rgba(66, 132, 42, 0.91) 55%, transparent 55.08%, transparent);
   }
 }
 @media screen and (min-width: $mobile-breakpoint + 1) and (max-width: $mobile-landscape-breakpoint) {
@@ -3102,6 +3107,21 @@ form.inline-form {
   text-decoration: underline;
   cursor: pointer;
 }
+
+.mdc-button--warning {
+  background-color: transparent !important;
+  color: $mdc-theme-error !important;
+}
+
+.mdc-button--raised.mdc-button--warning {
+  background-color: $mdc-theme-error !important;
+  color: #fff !important;
+}
+
+.mdc-button--warning:disabled {
+  opacity: 0.8;
+}
+
 /*
 body.map {
 header#top-bar, footer.mdc-layout__footer {
