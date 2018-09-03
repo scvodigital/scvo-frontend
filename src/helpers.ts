@@ -3,6 +3,7 @@ import deepDiff = require('deep-diff');
 import stripHtml = require('string-strip-html');
 import markdown = require('markdown');
 import sqlstring = require('sqlstring');
+import stringify = require('json-stringify-safe');
 import * as dot from 'dot-object';
 import * as moment from 'moment';
 import * as querystring from 'querystring';
@@ -144,6 +145,11 @@ export class Helpers {
     var block = options.fn(context);
     var json = JSON.stringify(block, null, 4);
     //console.log('BLOCKSTRINGIFY', json);
+    return json;
+  }
+
+  static helper_safeStringify(obj: any) {
+    var json = stringify(obj, null, 4);
     return json;
   }
 

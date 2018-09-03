@@ -1,0 +1,14 @@
+{
+  "size": 1000,
+  "_source": [
+    "Id",
+    "slug",
+    "title",
+    "organisation.name"
+  ],
+  "query": {
+    "ids": {
+      "values": {{{stringify (split (concat (map @root.data.shortlist.items.[0] (getProp "value")) "," (getKeys @root.data.notes) "," @root.request.cookies.recently_viewed) ",")}}}
+    }
+  } 
+}
