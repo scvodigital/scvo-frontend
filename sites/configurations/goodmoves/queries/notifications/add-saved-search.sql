@@ -7,6 +7,7 @@ CALL _addSubscriptionParameters(
       keywords=@root.request.params.query.keywords
       salary_min=@root.request.params.query.salary_min
       salary_max=@root.request.params.query.salary_max
+      regions=(sort @root.request.params.query.regions)
       roles=(sort @root.request.params.query.roles)
       sectors=(sort @root.request.params.query.sectors)
       statuses=(sort @root.request.params.query.statuses)
