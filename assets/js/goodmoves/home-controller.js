@@ -136,7 +136,7 @@ $(document).ready(function() {
     var $leftButton = $o.parent().find('.scroll-left');
     var $rightButton = $o.parent().find('.scroll-right');
     var currentLeft = $o.scrollLeft();
-    var maxLeft = $o[0].scrollWidth - $o.width();
+    var maxLeft = $o[0].scrollWidth - $o.width() - 1;
 
     if (currentLeft <= 0) {
       $leftButton.hide();
