@@ -15,15 +15,15 @@
   </div>
   <hr class="mdc-list-divider" />
   <div class="search-result-article__snippet mdc-typography--body1">
-    <p>
-      {{#if course_overview_short ~}}
-      {{{course_overview_short}}}
+    <div style="max-height: 4rem;" class="faded-overflow">
+      {{#if description ~}}
+      {{{description}}}
       {{else}}
-      {{#if description_short ~}}
-      {{{description_short}}}
+      {{#if course_overview ~}}
+      {{{course_overview}}}
       {{/if ~}}
       {{/if ~}}
-    </p>
+    </div>
   </div>
   <div class="mdc-card__actions">
     <div class="mdc-card__action-buttons demo-card__action-buttons--text-only mdc-card__actions--full-bleed">
