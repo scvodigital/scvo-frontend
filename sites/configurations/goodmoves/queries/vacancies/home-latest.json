@@ -23,30 +23,7 @@
     "bool": {
       "filter": [
         {{>queries_vacancy_common_filters_open request.params.query}}
-      ]{{#ifAll @root.data.auth @root.data.searches.items.[0] ~}},
-      "should": [
-        {{#each @root.data.searches.items.[0] ~}}
-          {{#with (querystring querystring) ~}}
-            {
-              "bool": {
-                "filter": [
-                  {{>queries_vacancy_search_filters this}}
-                ],
-                "must": [
-                  {{>queries_vacancy_search_must this}}
-                ],
-                "should": [
-                  {{>queries_vacancy_search_should this}}
-                ],
-                "minimum_should_match": 2
-              }
-            }
-            {{#unless @last}},{{/unless}}
-          {{/with ~}}
-        {{/each ~}}
-      ],
-      "minimum_should_match": 1
-      {{/ifAll ~}}
+      ]
     }
   },
   "sort": {
