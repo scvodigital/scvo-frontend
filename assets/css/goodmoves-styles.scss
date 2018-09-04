@@ -1760,6 +1760,9 @@ body {
   }
   .mdc-card__info--organisation {
     padding: 0;
+    .key-info-extra li:last-child {
+      margin-bottom: 0;
+    }
   }
   .mdc-card__info--event {
     padding: $unit;
@@ -1781,9 +1784,21 @@ body {
   flex: 1 0 auto;
   .mdc-card__media--organisation {
     float: right;
-    margin: $unit 0 $unit/2 $unit/2;
+    margin: $unit $unit $unit/2 $unit/2;
   }
 }
+@media screen and (max-width: 1280px) {
+  .mdc-card.search-result .mdc-card__info--organisation-row .mdc-card__media--organisation {
+    float: none;
+    display: block;
+    margin: $unit $unit $unit/2;
+    img {
+      display: block;
+      margin: 0 auto;
+    }
+  }
+}
+
 .goodmoves-organisation {
   .mdc-card.list {
     .mdc-card__media--organisation {
@@ -1801,6 +1816,11 @@ body {
   margin-top: $unit;
   .mdc-card__info--vacancy-row {
     padding: 0 0 $unit;
+    .mdc-card__media--organisation {
+      line-height: 1;
+      background-color: white;
+      box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
+    }
     .mdc-card__info--vacancy {
       padding: 0;
     }
@@ -1825,6 +1845,11 @@ body {
     .mdc-card__media--organisation::before {
       margin-top: 0;
     }
+  }
+  .mdc-card__info--organisation-row {
+    background-color: white;
+    padding: $unit 0 $unit $unit;
+    box-shadow: 0px 3px 1px -2px rgba(0, 0, 0, 0.2), 0px 2px 2px 0px rgba(0, 0, 0, 0.14), 0px 1px 5px 0px rgba(0, 0, 0, 0.12);
   }
 }
 .goodmoves-organisation {
