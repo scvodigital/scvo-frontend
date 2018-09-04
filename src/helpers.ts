@@ -168,6 +168,25 @@ export class Helpers {
     return out;
   }
 
+  static helper_eachMap(input: any, options: any) {
+    if (!input) return null;
+    var output = [];
+    var entries = (Object as any).entries(input);
+    var count = entries.length;
+    var current = 0;
+    for (const [key, value] of entries) {
+      var context = {
+        '@key': key,
+        '@value': value,
+        '@first': current === 0,
+        '@last': current === count - 1 
+      };
+      output.push(options.fn(context));
+      current++;
+    }
+    return output.join('\n');
+  }
+
   static helper_indexOf(haystack: any[], needle: any): number|null {
     if (!Array.isArray(haystack)) {
       return null;
