@@ -1781,9 +1781,21 @@ body {
   flex: 1 0 auto;
   .mdc-card__media--organisation {
     float: right;
-    margin: $unit 0 $unit/2 $unit/2;
+    margin: $unit $unit $unit/2 $unit/2;
   }
 }
+@media screen and (max-width: 1280px) {
+  .mdc-card.search-result .mdc-card__info--organisation-row .mdc-card__media--organisation {
+    float: none;
+    display: block;
+    margin: $unit $unit $unit/2;
+    img {
+      display: block;
+      margin: 0 auto;
+    }
+  }
+}
+
 .goodmoves-organisation {
   .mdc-card.list {
     .mdc-card__media--organisation {
