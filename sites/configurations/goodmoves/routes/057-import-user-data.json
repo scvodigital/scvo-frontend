@@ -1,0 +1,41 @@
+{
+  "name": "import-user-data",
+  "pattern": "/import-user-data",
+  "acceptedVerbs": "POST",
+  "debug": true,
+  "defaultParams": {
+    "context": "results"
+  },
+  "tasks": [
+    "context.metaData.commonTasks.authRequired",
+    {
+      "name": "notes",
+      "taskModule": "firebaseRtbSet",
+      "renderer": "handlebars",
+      "config": {
+        "appName": "goodmoves",
+        "pathTemplate": "/notes/{{data.auth.uid}}",
+        "setOrUpdate": "update",
+        "dataTemplate": "{{{stringify (getProperty (parse @root.request.body.json) 'notes.items')}}}"
+      }
+    },
+    {
+      "name": "dynamic_notifications_task",
+      "taskModule": "render",
+      "renderer": "handlebars",
+      "config": {
+        "output": "data",
+        "parseJson": true,
+        "template": ">context.metaData.handlebars.templates.account_dynamic-notifications-task"
+      }
+    },
+    "data.dynamic_notifications_task",
+    {
+      "name": "destination",
+      "taskModule": "redirect",
+      "config": {
+        "location": "/settings"
+      }
+    }
+  ]
+}

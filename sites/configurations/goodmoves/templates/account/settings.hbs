@@ -180,3 +180,29 @@
   </div>
   <div class="mdc-dialog__backdrop"></div>
 </aside>
+
+<aside id="import-user-dialog"
+  class="mdc-dialog"
+  role="alertdialog"
+  aria-labelledby="import-user-dialog-label"
+  aria-describedby="import-user-dialog-description"
+  data-mdc-auto-init="MDCDialog">
+  <form action="/import-user-data" method="POST" class="mdc-dialog__surface">
+    <header class="mdc-dialog__header">
+      <h2 id="import-user-dialog-label" class="mdc-dialog__header__title">
+        Import user data
+      </h2>
+    </header>
+    <section id="import-user-dialog-description" class="mdc-dialog__body">
+      <div class="mdc-text-field mdc-text-field--textarea mdc-text-field--fullwidth" data-mdc-auto-init="MDCTextField">
+        <textarea id="import-user-json" name="json" class="mdc-text-field__input" rows="10"></textarea>
+        <label for="import-user-json" class="mdc-floating-label">Paste exported data here</label>
+      </div>
+    </section>
+    <footer class="mdc-dialog__footer">
+      <button type="button" class="mdc-button mdc-dialog__footer__button mdc-dialog__footer__button--cancel">Cancel</button>
+      <button type="submit" class="mdc-button mdc-dialog__footer__button mdc-dialog__footer__button--accept">Import User</a>
+    </footer>
+  </form>
+  <div class="mdc-dialog__backdrop"></div>
+</aside>
