@@ -1,4 +1,9 @@
+<script src="/assets/js/downloader.js"></script>
 <script>
+  function exportUserData() {
+    var dataUrl = 'data:application/json;base64,{{{btoa @root.data.export_user_data}}}';
+    download(dataUrl, 'user-export.json', 'application/json');
+  };
   $(document).ready(function() {
     var $changePassword = $('#change-password');
     var $password1 = $('#change-password-password');
