@@ -11,7 +11,7 @@
       "should": [
         {
           "simple_query_string": {
-            "query": "{{data.primaryResponse.hits.hits.[0]._source.title}} {{join data.primaryResponse.hits.hits.[0]._source.categories}} {{join data.primaryResponse.hits.hits.[0]._source.post_tags}}",
+            "query": "{{@root.data.primaryResponse.hits.hits.[0]._source.title}} {{join @root.data.primaryResponse.hits.hits.[0]._source.categories}} {{join @root.data.primaryResponse.hits.hits.[0]._source.post_tags}}",
             "default_operator": "or",
             "fields": ["text_bag"],
             "analyzer": "snowball"

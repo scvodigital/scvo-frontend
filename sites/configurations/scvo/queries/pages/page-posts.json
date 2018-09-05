@@ -6,7 +6,7 @@
     "rendered.scvo_sidebar_mini"
   ],
   "query": {
-    {{#if data.primaryResponse.hits.hits.[0]}}
+    {{#if @root.data.primaryResponse.hits.hits.[0] ~}}
     "bool": {
       "must": {
         "match_all": {}
@@ -15,7 +15,7 @@
         {
           "terms": {
             "categories_id": [
-              {{join data.primaryResponse.hits.hits.[0]._source.categories_id}}
+              {{join @root.data.primaryResponse.hits.hits.[0]._source.categories_id}}
             ]
           }
         }
@@ -24,7 +24,7 @@
     }
     {{else}}
     "match_none": {}
-    {{/if}}
+    {{/if ~}}
   },
   "sort": {
     "publish_on": "desc"
