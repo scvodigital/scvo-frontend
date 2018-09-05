@@ -8,8 +8,8 @@
 
 {{#ifAny organisation.logo_url og_image ../og_image ~}}
 <meta property="og:image" content="{{default organisation.logo_url og_image ../og_image}}" data-dynamic="true">
-<meta property="og:image:height" content="250px">
-<meta property="og:image:width" content="250px">
+<meta property="og:image:height" content="125">
+<meta property="og:image:width" content="125">
 <meta itemprop="image" content="{{default organisation.logo_url og_image ../og_image}}" data-dynamic="true">
 <meta name="twitter:card" content="{{default organisation.logo_url og_image ../og_image}}" data-dynamic="true">
 {{/ifAny ~}}
@@ -35,11 +35,11 @@
 {{/if ~}}
 <meta property="og:site_name" content="Goodmoves" />
 
-{{#if rendered.json_ld ~}}
+<!-- {{#if rendered.json_ld ~}} -->
 <script type="application/ld+json" data-dynamic="true">
   {{> vacancy_json_ld}}
 </script>
-{{/if ~}}
+<!-- {{/if ~}} -->
 
 {{/with ~}}
 {{else}}

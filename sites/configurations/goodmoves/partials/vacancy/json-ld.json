@@ -10,7 +10,7 @@
     "value": {
       "@type": "QuantitativeValue",
       "unitText": "YEAR",
-      "value": "{{stripTags (regexReplace salary '\r|\n' 'gi' '')}}",
+      "value": "{{stripTags (regexReplace salary '\r|\n|£|€|,' 'gi' '')}}",
       "minValue": "{{salary_min}}",
       "maxValue": "{{salary_max}}"
     }
