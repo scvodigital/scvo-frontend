@@ -47,11 +47,11 @@
         Working patterns
       </div>
       <ul class="mdc-list">
-        {{#each @root.data.supplimentaryResponses.types.aggregations.statuses_slugs.buckets ~}}
+        {{#each @root.data.supplimentaryResponses.types.aggregations.working_patterns_slugs.buckets ~}}
           {{#if key ~}}
-            <a class="mdc-list-item" href="/search?statuses%5B%5D={{urlencode key}}" role="menuitem">
+            <a class="mdc-list-item" href="/search?working_patterns%5B%5D={{urlencode key}}" role="menuitem">
               <span class="mdc-list-item__text">
-                {{#with (lookup @root.data.supplimentaryResponses.types.aggregations.statuses.buckets @index) ~}}
+                {{#with (lookup @root.data.supplimentaryResponses.types.aggregations.working_patterns.buckets @index) ~}}
                   {{{key}}}
                 {{/with ~}}
               </span>

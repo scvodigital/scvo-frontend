@@ -1,5 +1,5 @@
 {
-  {{#each (split "regions,roles,sectors,statuses" ",")}}
+  {{#each (split "working_patterns,regions,roles,sectors" ",")}}
     "{{this}}": {
       "slugsMap": {
         {{#each (getProperty @root.data.supplimentaryResponses.types.aggregations (concat this ".buckets")) ~}}
