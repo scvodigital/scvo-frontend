@@ -2381,19 +2381,24 @@ footer,
   }
   .mdc-layout-grid__cell {
     flex: 0 0 auto;
-    @media screen and (min-width: $mobile-landscape-breakpoint + 1) {
+    @media screen and (min-width: $desktop-landscape-breakpoint + 1) {
       .mdc-card {
         width: 30vw;
       }
     }
+    @media screen and (min-width: $mobile-landscape-breakpoint + 1) and (max-width: $desktop-landscape-breakpoint) {
+      .mdc-card {
+        width: 40vw;
+      }
+    }
     @media screen and (min-width: $mobile-breakpoint + 1) and (max-width: $mobile-landscape-breakpoint) {
       .mdc-card {
-        width: 47vw;
+        width: 66vw;
       }
     }
     @media screen and (max-width: $mobile-breakpoint) {
       .mdc-card {
-        width: 70vw;
+        width: 78vw;
       }
     }
   }

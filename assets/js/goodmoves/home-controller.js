@@ -104,7 +104,7 @@ $(document).ready(function() {
     $(o).parent().find('.scroll-left').on('click', function() {
       var $o = $(o);
       var currentLeft = $o.scrollLeft();
-      var third = $o.width() * (4/5);
+      var third = $o.width() * (3/5);
       var by = currentLeft - third;
       if (o.scroll) {
         o.scroll({ left: by, top: 0, behavior: 'smooth'});
@@ -115,7 +115,7 @@ $(document).ready(function() {
     $(o).parent().find('.scroll-right').on('click', function() {
       var $o = $(o);
       var currentLeft = $o.scrollLeft();
-      var third = $o.width() * (4/5);
+      var third = $o.width() * (3/5);
       var by = currentLeft + third;
       if (o.scroll) {
         o.scroll({ left: by, top: 0, behavior: 'smooth'});
