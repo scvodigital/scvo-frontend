@@ -63,18 +63,6 @@
               {{reference_number}}
             </li>
             {{/if ~}}
-            <!-- {{#if closing_date ~}}
-            <li class="mdc-card__info--vacancy-closing mdc-typography--body1">
-              <span class="fa-li"><span class="far fa-calendar-alt fa-fw" title="Closing date"></span></span>
-              {{#compare vacancy_status "===" "vacancy-closed" ~}}
-              Closed
-              {{else}}
-              Closing
-              {{/compare ~}}
-              on
-              {{momentFormat (moment closing_date "x") "dddd \t\h\e Do \o\f MMMM YYYY \a\t h:mm a"}}
-            </li>
-            {{/if ~}} -->
           </ul>
         </div>
         <div class="detailed-info">
@@ -234,7 +222,11 @@
     {{> vacancy_actions slug=slug Id=Id action="organisation"}}
   </div>
 </div>
-{{>ga documentType="goodmoves-vacancy" documentId=Id hitType=(if @root.request.params.query.email "full-from-email" "full")}}
+{{#if @root.request.params.query.email ~}}
+  {{> ga documentType="goodmoves-vacancy" documentId=Id hitType="full-from-email"}}
+{{else}}
+  {{> ga documentType="goodmoves-vacancy" documentId=Id hitType="full"}}
+{{/if ~}}
 <script>
   function clearNotes(evt, data) {
     console.log('clearNotes Arguments:', arguments);

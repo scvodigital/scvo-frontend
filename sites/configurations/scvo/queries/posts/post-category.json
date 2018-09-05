@@ -1,6 +1,6 @@
 {
   "size": 10,
-  "from": {{multiply (subtract (default request.params.query.page 1) 1) 10}},
+  "from": {{multiply (subtract (default @root.request.params.query.page 1) 1) 10}},
   "_source": [
     "categories",
     "categories_id",
@@ -10,17 +10,19 @@
   ],
   "query": {
     "bool": {
-      "should": [{
-        "terms": {
-          "categories_slug": [
-            "{{request.params.category_slug}}"
-          ]
+      "should": [
+        {
+          "terms": {
+            "categories_slug": [
+              "{{request.params.category_slug}}"
+            ]
+          }
         }
-        }],
-        "minimum_should_match": 1
-      }
-    },
-    "sort": {
-      "publish_on": "desc"
+      ],
+      "minimum_should_match": 1
     }
+  },
+  "sort": {
+    "publish_on": "desc"
   }
+}

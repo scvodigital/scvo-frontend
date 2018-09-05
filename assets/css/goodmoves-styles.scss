@@ -1798,14 +1798,14 @@ body {
   flex: 1 0 auto;
   .mdc-card__media--organisation {
     float: right;
-    margin: $unit $unit $unit/2 $unit/2;
+    margin: $unit $unit/2 $unit/2;
   }
 }
 @media screen and (max-width: 1280px) {
   .mdc-card.search-result .mdc-card__info--organisation-row .mdc-card__media--organisation {
     float: none;
     display: block;
-    margin: $unit $unit $unit/2;
+    margin: $unit $unit/2 $unit/2;
     img {
       display: block;
       margin: 0 auto;
@@ -1821,7 +1821,7 @@ body {
   }
   .mdc-card {
     .mdc-card__media--organisation {
-      margin-top: 0;
+      margin-top: -($unit/2);
     }
   }
 }
@@ -2223,7 +2223,7 @@ footer,
 .home-heading {
   padding: 0 $unit*1.5;
   .mdc-typography--headline5 {
-    margin: $unit*1.5 0 $unit;
+    margin: $unit*1.5 0 $unit/2;
   }
 }
 .home-content {
@@ -2233,6 +2233,9 @@ footer,
   background-color: $mdc-theme-secondary-light;
   padding: 0 $unit 0 !important;
   position: relative;
+  .mdc-layout-grid {
+    display: inline-block;
+  }
 }
 .home {
   .currently-recruiting {
@@ -2362,7 +2365,7 @@ footer,
   -webkit-justify-content: space-between;
   -webkit-overflow-scrolling: touch;
   -ms-overflow-style: -ms-autohiding-scrollbar;
-  padding: $unit*1.5 0 $unit;
+  padding: $unit*(3/4) 0 $unit;
   margin: 0 0 $unit/2;
   .mdc-layout-grid__cell.shortlist-jobs,
   .mdc-layout-grid__cell.latest-jobs,
@@ -2381,19 +2384,24 @@ footer,
   }
   .mdc-layout-grid__cell {
     flex: 0 0 auto;
-    @media screen and (min-width: $mobile-landscape-breakpoint + 1) {
+    @media screen and (min-width: $desktop-landscape-breakpoint + 1) {
       .mdc-card {
         width: 30vw;
       }
     }
+    @media screen and (min-width: $mobile-landscape-breakpoint + 1) and (max-width: $desktop-landscape-breakpoint) {
+      .mdc-card {
+        width: 40vw;
+      }
+    }
     @media screen and (min-width: $mobile-breakpoint + 1) and (max-width: $mobile-landscape-breakpoint) {
       .mdc-card {
-        width: 47vw;
+        width: 66vw;
       }
     }
     @media screen and (max-width: $mobile-breakpoint) {
       .mdc-card {
-        width: 70vw;
+        width: 78vw;
       }
     }
   }
@@ -2821,7 +2829,7 @@ footer.mdc-layout__footer {
   .home-heading {
     padding: 0 $unit/2;
     .mdc-typography--headline5 {
-      margin: $unit/2 0 $unit;
+      margin: $unit/2 0 $unit/2;
     }
   }
   .home-browse .mdc-drawer__content-heading,
@@ -2853,6 +2861,12 @@ footer.mdc-layout__footer {
     .mdc-layout-grid__cell.top-jobs {
       margin: 0 $unit 0 $unit/5;
     }
+  }
+  .currently-recruiting .organisation-logo {
+    padding: 0 $unit/2 $unit;
+  }
+  .home .tfn-latest {
+    padding: 0 $unit/2 !important
   }
   .mdc-card.full,
   .mdc-card.search-result {

@@ -8,7 +8,7 @@
       "must": [
         {
           "term": {
-            "author": {{data.primaryResponse.hits.hits.[0]._source.author}}
+            "author": {{@root.data.primaryResponse.hits.hits.[0]._source.author}}
           }
         },
         {
@@ -21,7 +21,7 @@
         "bool": {
           "must_not": {
             "match": {
-              "wpid": {{data.primaryResponse.hits.hits.[0]._source.wpid}}
+              "wpid": {{@root.data.primaryResponse.hits.hits.[0]._source.wpid}}
             }
           }
         }
