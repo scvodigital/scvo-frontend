@@ -2,6 +2,7 @@
   gtag('event', 'document_hit', {
     'event_category': {{{stringify documentType}}},
     'event_label': {{{stringify documentId}}},
-    'hit_type': {{{stringify (default hitType 'other')}}}
+    'hit_type': {{{stringify (default hitType 'other')}}},
+    {{#if parentDocument}}'parent_document': {{{stringify parentDocument}}}{{/if}}
   });
 </script>
