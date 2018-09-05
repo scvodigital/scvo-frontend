@@ -47,14 +47,14 @@ function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 
 // NEEDS TO BE SET UP WITH THE CORRECT TRACKING ID
-gtag('config', 'UA-3467930-6', { 'send_page_view': true, 'anonymize_ip': true });
-
-{{#each route.primaryResponse.hits.hits ~}}
-gtag('event', 'document_hit', {
-  'event_category': '{{_type}}',
-  'event_label': '{{_id}}'
+gtag('config', 'UA-3467930-6', { 
+  'send_page_view': true, 
+  'anonymize_ip': true,
+  'cookieDomain': 'none',
+  'custom_map': {
+    'dimension1': 'hit_type'
+  }
 });
-{{/each ~}}
 
 {{#ifAny request.params.query.debug (compare request.url.hostname "goodmoves.local") ~}}
 console.log('#### DEBUG MODE ON ####');
