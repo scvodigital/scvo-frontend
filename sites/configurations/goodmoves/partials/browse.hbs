@@ -7,7 +7,7 @@
       <ul class="mdc-list">
         {{#each @root.data.supplimentaryResponses.types.aggregations.roles_slugs.buckets ~}}
           {{#if key ~}}
-            <a class="mdc-list-item" href="/search?roles%5B%5D={{urlencode key}}" role="menuitem">
+            <a class="mdc-list-item" href="/search?roles%5B%5D={{urlencode key}}" role="menuitem" onclick="gtag('event', 'navigation', { event_category: '{{default ../eventContext "category-browser"}}', event_label: 'Role: {{key}}' })">
               <span class="mdc-list-item__text">
                 {{#with (lookup @root.data.supplimentaryResponses.types.aggregations.roles.buckets @index) ~}}
                   {{{key}}}
@@ -28,7 +28,7 @@
       <ul class="mdc-list">
         {{#each @root.data.supplimentaryResponses.types.aggregations.sectors_slugs.buckets ~}}
           {{#if key ~}}
-            <a class="mdc-list-item" href="/search?sectors%5B%5D={{urlencode key}}" role="menuitem">
+            <a class="mdc-list-item" href="/search?sectors%5B%5D={{urlencode key}}" role="menuitem" onclick="gtag('event', 'navigation', { event_category: '{{default ../eventContext "category-browser"}}', event_label: 'Sector: {{key}}' })">
               <span class="mdc-list-item__text">
                 {{#with (lookup @root.data.supplimentaryResponses.types.aggregations.sectors.buckets @index) ~}}
                   {{{key}}}
@@ -49,7 +49,7 @@
       <ul class="mdc-list">
         {{#each @root.data.supplimentaryResponses.types.aggregations.working_patterns_slugs.buckets ~}}
           {{#if key ~}}
-            <a class="mdc-list-item" href="/search?working_patterns%5B%5D={{urlencode key}}" role="menuitem">
+            <a class="mdc-list-item" href="/search?working_patterns%5B%5D={{urlencode key}}" role="menuitem" onclick="gtag('event', 'navigation', { event_category: '{{default ../eventContext "category-browser"}}', event_label: 'Working pattern: {{key}}' })">
               <span class="mdc-list-item__text">
                 {{#with (lookup @root.data.supplimentaryResponses.types.aggregations.working_patterns.buckets @index) ~}}
                   {{{key}}}
@@ -77,7 +77,7 @@
           {{/if ~}}
           {{#each this.regions_slugs.buckets ~}}
             {{#if key ~}}
-              <a class="mdc-list-item" href="/search?regions%5B%5D={{urlencode key}}" role="menuitem">
+              <a class="mdc-list-item" href="/search?regions%5B%5D={{urlencode key}}" role="menuitem" onclick="gtag('event', 'navigation', { event_category: '{{default ../../eventContext "category-browser"}}', event_label: 'Region: {{key}}' })">
                 <span class="mdc-list-item__text">
                   {{#with (lookup ../regions.buckets @index) ~}}
                     {{{key}}}

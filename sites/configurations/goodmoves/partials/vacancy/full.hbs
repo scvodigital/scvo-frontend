@@ -234,7 +234,7 @@
     {{> vacancy_actions slug=slug Id=Id action="organisation"}}
   </div>
 </div>
-{{>ga documentType="goodmoves-vacancy" documentId=Id hitType="full"}}
+{{>ga documentType="goodmoves-vacancy" documentId=Id hitType=(if @root.request.params.query.email "full-from-email" "full")}}
 <script>
   function clearNotes(evt, data) {
     console.log('clearNotes Arguments:', arguments);

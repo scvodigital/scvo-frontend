@@ -96,7 +96,7 @@
 
   <div class="home-browse h-padding">
     <h3 class="mdc-drawer__content-heading cursor-pointer h-padding-full" data-collapse-target="#home-browse-collapse" role="button" aria-pressed="false" aria-label="Show browse section" tabindex="0">
-      <span class="mdc-button mdc-button--raised">
+      <span class="mdc-button mdc-button--raised" onclick="gtag('event', 'ui-interaction', { event_category: 'home-page', event_label: 'Browse menu click' })">
         Browse
         <span class="mdc-icon-toggle">
           <span class="far fa-chevron-down" aria-hidden="true"></span>
@@ -107,7 +107,7 @@
       </span>
     </h3>
     <div id="home-browse-collapse" style="display: none;">
-      {{> browse}}
+      {{> browse eventContext="category-browser-home"}}
     </div>
   </div>
 
