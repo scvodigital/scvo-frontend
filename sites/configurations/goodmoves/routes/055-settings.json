@@ -27,6 +27,31 @@
     },
     "context.metaData.commonTasks.supplimentaryResponses",
     {
+      "name": "vacancy_lookup",
+      "taskModule": "elasticsearch",
+      "config": {
+        "connectionStringTemplate": "{$../../elasticsearch-url.txt}",
+        "elasticsearchConfig": {
+          "apiVersion": "5.6"
+        },
+        "queryTemplates": {
+          "index": "web-content-production",
+          "type": "goodmoves-vacancy",
+          "template": ">context.metaData.handlebars.queries.account_shortlist"
+        }
+      },
+      "renderer": "handlebars"
+    },
+    {
+      "name": "export_user_data",
+      "taskModule": "render",
+      "renderer": "handlebars",
+      "config": {
+        "output": "data",
+        "template": ">context.metaData.handlebars.templates.account_export-user-data"
+      }
+    },
+    {
       "name": "destination",
       "taskModule": "renderLayout",
       "renderer": "handlebars",

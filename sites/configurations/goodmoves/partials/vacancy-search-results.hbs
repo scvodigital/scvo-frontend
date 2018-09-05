@@ -20,32 +20,32 @@
 {{~#with @root.request.params.query~}}
   {{~#if keywords~}}
     {{~keywords~}}
-    {{~#ifAny regions roles sectors statuses}}, {{/ifAny~}}
+    {{~#ifAny regions roles sectors working_patterns}}, {{/ifAny~}}
   {{~/if~}}
   {{~#if regions~}}
     {{~#each (arrayify regions)~}}
       {{~getProperty (getProperty @root.data.termsMaps.regions.slugsMap this) "term"~}}
       {{~#unless @last}}, {{/unless~}}
     {{~/each~}}
-    {{~#ifAny roles sectors statuses}}, {{/ifAny~}}
+    {{~#ifAny roles sectors working_patterns}}, {{/ifAny~}}
   {{~/if~}}
   {{~#if roles~}}
     {{~#each (arrayify roles)~}}
       {{~getProperty (getProperty @root.data.termsMaps.roles.slugsMap this) "term"~}}
       {{~#unless @last}}, {{/unless~}}
     {{~/each~}}
-    {{~#ifAny sectors statuses}}, {{/ifAny~}}
+    {{~#ifAny sectors working_patterns}}, {{/ifAny~}}
   {{~/if~}}
   {{~#if sectors~}}
     {{~#each (arrayify sectors)~}}
       {{~getProperty (getProperty @root.data.termsMaps.sectors.slugsMap this) "term"~}}
       {{~#unless @last}}, {{/unless~}}
     {{~/each~}}
-    {{~#ifAny statuses}}, {{/ifAny~}}
+    {{~#ifAny working_patterns}}, {{/ifAny~}}
   {{~/if~}}
-  {{~#if statuses~}}
-    {{~#each (arrayify statuses)~}}
-      {{~getProperty (getProperty @root.data.termsMaps.statuses.slugsMap this) "term"~}}
+  {{~#if working_patterns~}}
+    {{~#each (arrayify working_patterns)~}}
+      {{~getProperty (getProperty @root.data.termsMaps.working_patterns.slugsMap this) "term"~}}
       {{~#unless @last}}, {{/unless~}}
     {{~/each~}}
   {{~/if}}
@@ -105,7 +105,7 @@
         regions=(sort @root.request.params.query.regions)
         roles=(sort @root.request.params.query.roles)
         sectors=(sort @root.request.params.query.sectors)
-        statuses=(sort @root.request.params.query.statuses)
+        working_patterns=(sort @root.request.params.query.working_patterns)
         distance=@root.request.params.query.distance
         lat=@root.request.params.query.lat
         lng=@root.request.params.query.lng
@@ -169,7 +169,7 @@
           regions=@root.request.params.query.regions
           roles=@root.request.params.query.roles
           sectors=@root.request.params.query.sectors
-          statuses=@root.request.params.query.statuses
+          working_patterns=@root.request.params.query.working_patterns
           distance=@root.request.params.query.distance
           lat=@root.request.params.query.lat
           lng=@root.request.params.query.lng
@@ -218,7 +218,7 @@
     <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone action">
       {{#compare @root.data.search_data.detailed_results.hits.total ">" 0 ~}}
       <form action="{{{@root.request.url.path}}}" method="GET">
-        {{#each (split "regions,roles,sectors,statuses" ",")}}
+        {{#each (split "working_patterns,regions,roles,sectors" ",")}}
           {{#if (getProperty @root.request.params.query this) ~}}
             {{#each (arrayify (getProperty @root.request.params.query this)) ~}}
               <input type="hidden" name="{{../this}}[]" value="{{this}}" />

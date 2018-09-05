@@ -38,7 +38,7 @@
 <meta name="theme-color" content="#3c7524">
 <link rel="search" type="application/opensearchdescription+xml" title="Goodmoves" href="/assets/opensearch.xml" />
 
-<link rel="canonical" href="https://goodmoves.com{{request.params.uri.pathname}}" />
+<!-- <link rel="canonical" href="https://goodmoves.com{{request.params.uri.pathname}}" /> -->
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script async src="https://www.googletagmanager.com/gtag/js?id=UA-3467930-6"></script>
 <script>
@@ -47,14 +47,15 @@ function gtag(){dataLayer.push(arguments);}
 gtag('js', new Date());
 
 // NEEDS TO BE SET UP WITH THE CORRECT TRACKING ID
-gtag('config', 'UA-3467930-6', { 'send_page_view': true, 'anonymize_ip': true });
-
-{{#each route.primaryResponse.hits.hits ~}}
-gtag('event', 'document_hit', {
-  'event_category': '{{_type}}',
-  'event_label': '{{_id}}'
+gtag('config', 'UA-3467930-6', {
+  'send_page_view': true,
+  'anonymize_ip': true,
+  'cookieDomain': 'none',
+  'custom_map': {
+    'dimension1': 'hit_type',
+    'dimension2': 'parent_document'
+  }
 });
-{{/each ~}}
 
 {{#ifAny request.params.query.debug (compare request.url.hostname "goodmoves.local") ~}}
 console.log('#### DEBUG MODE ON ####');

@@ -76,15 +76,15 @@
                       {{/each ~}}
                     {{/if ~}}
 
-                    {{#if statuses ~}}
-                      Working {{inflect (length (arrayify statuses)) "pattern" "patterns"}}:
-                      {{#each (arrayify statuses)}}
-                        <strong>{{{getProperty @root.data.termsMaps.statuses.slugsMap (concat this ".term")}}}{{#unless @last}}, {{/unless}}</strong>
+                    {{#if working_patterns ~}}
+                      Working {{inflect (length (arrayify working_patterns)) "pattern" "patterns"}}:
+                      {{#each (arrayify working_patterns)}}
+                        <strong>{{{getProperty @root.data.termsMaps.working_patterns.slugsMap (concat this ".term")}}}{{#unless @last}}, {{/unless}}</strong>
                       {{/each ~}}
                     {{/if ~}}
 
                     {{#ifAll location distance ~}}
-                      {{#ifAny keywords roles regions sectors statuses salary_min salary_max ~}}
+                      {{#ifAny keywords roles regions sectors working_patterns salary_min salary_max ~}}
                         Within
                       {{else}}
                         within

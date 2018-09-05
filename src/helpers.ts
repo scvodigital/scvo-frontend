@@ -168,6 +168,25 @@ export class Helpers {
     return out;
   }
 
+  static helper_eachMap(input: any, options: any) {
+    if (!input) return null;
+    var output = [];
+    var entries = (Object as any).entries(input);
+    var count = entries.length;
+    var current = 0;
+    for (const [key, value] of entries) {
+      var context = {
+        '@key': key,
+        '@value': value,
+        '@first': current === 0,
+        '@last': current === count - 1 
+      };
+      output.push(options.fn(context));
+      current++;
+    }
+    return output.join('\n');
+  }
+
   static helper_indexOf(haystack: any[], needle: any): number|null {
     if (!Array.isArray(haystack)) {
       return null;
@@ -557,6 +576,29 @@ export class Helpers {
     }
     const out = items.sort();
     return out;
+  }
+  
+  static helper_sortByIndex(items: any[], index: any[], property: string) {
+    if (!Array.isArray(items) || !Array.isArray(index) || typeof property !== 'string') {
+      return items;
+    }
+
+    var clone: any[] = (JSON.parse(JSON.stringify(items)) as any[]);
+
+    clone.sort((a: any, b: any) => {
+      var prop1 = dot.pick(property, a);
+      var prop2 = dot.pick(property, b);
+
+      var ind1 = index.indexOf(prop1);
+      var ind2 = index.indexOf(prop2);
+
+      ind1 = ind1 > -1 ? ind1 : Math.max(items.length, index.length) + 1;
+      ind2 = ind2 > -1 ? ind2 : Math.max(items.length, index.length) + 1;
+
+      return ind1 - ind2;
+    });
+
+    return clone;
   }
 
   static helper_component(partialName: string, options: any) {

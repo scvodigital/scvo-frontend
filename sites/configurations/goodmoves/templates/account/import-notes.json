@@ -1,0 +1,9 @@
+{
+{{~#with (parse @root.request.body.json)~}}
+{{~#if (any (getKeys notes.items))~}}
+{{~#each (getKeys notes.items)~}}
+  {{{stringify this}}}: {{{stringify (getProperty ../notes.items this)}}}{{#unless @last}},{{/unless}}
+{{~/each~}}
+{{~/if~}}
+{{~/with~}}
+}

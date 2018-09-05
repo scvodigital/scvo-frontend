@@ -128,10 +128,10 @@
           <h3 class="mdc-typography--headline6">
             Account data
           </h3>
-          <a href="/export-user-data" class="mdc-button mdc-button--raised mdc-button--export mdc-button--fullwidth v-margin">
+          <button type="button" class="mdc-button mdc-button--raised mdc-button--export mdc-button--fullwidth v-margin" onclick="exportUserData();">
             <span class="far fa-upload mdc-list-item__graphic" aria-hidden="true"></span>
             Export account settings
-          </a>
+          </button>
           <button class="mdc-button mdc-button--raised mdc-button--import mdc-button--fullwidth v-margin" data-dialog-target="#import-user-dialog">
             <span class="far fa-download mdc-list-item__graphic" aria-hidden="true"></span>
             Import account settings
@@ -187,7 +187,10 @@
   aria-labelledby="import-user-dialog-label"
   aria-describedby="import-user-dialog-description"
   data-mdc-auto-init="MDCDialog">
-  <form action="/import-user-data" method="POST" class="mdc-dialog__surface">
+  <form action="/import-user-data" method="POST" class="mdc-dialog__surface" data-ajax-form='{
+        "successMessage": "Data imported successfully",
+        "failureMessage": "Failed to import data"    
+      }'>
     <header class="mdc-dialog__header">
       <h2 id="import-user-dialog-label" class="mdc-dialog__header__title">
         Import user data

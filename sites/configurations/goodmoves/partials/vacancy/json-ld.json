@@ -10,9 +10,9 @@
     "value": {
       "@type": "QuantitativeValue",
       "unitText": "YEAR",
-      "value": "{{stripTags (regexReplace salary '\r|\n' 'gi' '')}}",
-      "minValue": "{{salary_min}}",
-      "maxValue": "{{salary_max}}"
+      "value": "{{default (stripTags (regexReplace salary '\r|\n|£|€|,' 'gi' '')) salary_min}}",
+      "minValue": "{{default salary_min salary_max}}",
+      "maxValue": "{{default salary_max salary_min}}"
     }
   },
   "jobBenefits": "{{benefits}}",
