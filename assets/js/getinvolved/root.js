@@ -2,6 +2,14 @@ document.addEventListener('DOMContentLoaded', function() {
     // Material Design Components
     mdc.autoInit();
 
+    // Headroom
+    var header = document.querySelector("header.mdc-toolbar");
+    var headroom  = new Headroom(header, {
+        "offset": 138,
+        "tolerance": 5
+    });
+    headroom.init();
+
     // Menu buttons
     $('[data-menu-target]').each(function(i, o) {
       var selector = $(o).attr('data-menu-target');

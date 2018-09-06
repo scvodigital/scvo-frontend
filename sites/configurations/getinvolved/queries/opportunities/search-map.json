@@ -1,0 +1,32 @@
+{
+  "size": 1000,
+  "_source": [
+    "Id",
+    "title",
+    "organisation.name",
+    "organisation.logo",
+    "geo_opportunity_coords",
+    "active",
+    "closing_date",
+    "start_at",
+    "end_at",
+    "home_based",
+    "salary",
+    "role_status_list",
+    "slug"
+  ],
+  "query": {
+    "bool": {
+      "filter": [
+        {{>queries_opportunity_common_filters request.params.query}},
+        {{>queries_opportunity_search_filters request.params.query}}
+      ],
+      "must": [
+        {{>queries_opportunity_search_must request.params.query}}
+      ]
+    }
+  },
+  "sort": {
+    "closing_date": "asc"
+  }
+}
