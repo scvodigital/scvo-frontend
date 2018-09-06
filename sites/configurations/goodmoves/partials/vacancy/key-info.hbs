@@ -11,7 +11,7 @@
     {{#compare @root.route.name "===" "vacancy" ~}}
     {{#if @root.request.url.search ~}}
     {{#ifAny @root.request.params.query.keywords @root.request.params.query.location @root.request.params.query.salary_min @root.request.params.query.salary_max @root.request.params.query.working_patterns @root.request.params.query.regions @root.request.params.query.roles @root.request.params.query.sectors @root.request.params.query.home_based ~}}
-    <a href="/search{{@root.request.url.search}}" class="mdc-typography--body2 back-to-results"><span class="far fa-chevron-circle-left" aria-hidden="true"></span> <span class="underline">Back to search results</span></a>
+    <a href="/search{{@root.request.url.search}}" class="back-to-results"><span class="far fa-chevron-circle-left" aria-hidden="true"></span> <span class="underline">Back to search results</span></a>
     {{/ifAny ~}}
     {{/if ~}}
     {{/compare ~}}
