@@ -18,19 +18,15 @@
   </div>
 {{/inline}}
 
+<div class="mdc-drawer__header">
+  <h3 class="mdc-drawer__title">Search jobs</h3>
+</div>
 <div class="mdc-drawer__content">
-  <h2 class="mdc-drawer__content-heading hide-sm mdc-drawer--occasional-ie11">Search jobs</h2>
-  <div id="search-tab-bar" class="mdc-tab-bar mdc-tab-bar--fullwidth search-tab-bar mdc-drawer--occasional-ie11" data-mdc-auto-init="MDCTabBar">
-    <a href="/search{{@root.request.url.search}}" class="mdc-tab{{#compare @root.request.url.pathname "===" "/search"}} mdc-tab--active{{/compare}} details-tab" id="detailed-results">
-      <span class="far fa-list fa-fw" title="List"></span>
-      List
-    </a>
-    <a href="/map{{@root.request.url.search}}" class="mdc-tab{{#compare @root.request.url.pathname "===" "/map"}} mdc-tab--active{{/compare}} map-tab">
-      <span class="far fa-map-marker-alt fa-fw" title="Map"></span>
-      Map
-    </a>
-    <span class="mdc-tab-bar__indicator"></span>
-  </div>
+  {{#>components_tab_bar}}
+    {{>components_tab url=(concat "/search" @root.request.url.search) iconClasses="far fa-list fa-fw" label="List" active=(compare @root.request.url.pathname "===" "/search")}}
+    {{>components_tab url=(concat "/map" @root.request.url.search) iconClasses="far fa-map-marker-alt fa-fw" label="Map" active=(compare @root.request.url.pathname "===" "/map")}}
+  {{/components_tab_bar}}
+
   <form action="/{{#compare @root.request.url.pathname "/map"}}map{{else}}search{{/compare}}" method="GET" class="search-form" novalidate>
     <input type="hidden" name="sort" value="{{@root.request.params.query.sort}}" id="{{instance_id}}-sort">
     <div class="h-padding">
