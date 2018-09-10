@@ -9,6 +9,7 @@ var $lng = $('[name="lng"]');
 var $searchView = $('#search-view');
 var $browseView = $('#browse-view');
 
+/*
 var typeaheadController = new TypeaheadController($what, terms, { highlight: true, minlength: 0 });
 
 typeaheadController.addListener(function(field, term) {
@@ -18,6 +19,7 @@ typeaheadController.addListener(function(field, term) {
     $search[0].click();
   }
 });
+*/
 
 $where.on('keypress', function(evt) {
   var keyCode = evt.keyCode || evt.which;
@@ -64,6 +66,7 @@ function reverseLookup(latitude, longitude) {
   });
 }
 
+/*
 function addChip(field, term) {
   var slug = slugify(term);
   if ($('input[name="' + field + '[]"][value="' + slug + '"]').length > 0) return;
@@ -88,6 +91,7 @@ function addChip(field, term) {
     })
     .appendTo($chip);
 }
+*/
 
 function slugify(text) {
   return text.toString().toLowerCase()
