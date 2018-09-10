@@ -19,7 +19,7 @@ typeaheadController.addListener(function(field, term) {
     $search[0].click();
   }
 });
-*/
+
 
 $where.on('keypress', function(evt) {
   var keyCode = evt.keyCode || evt.which;
@@ -65,7 +65,7 @@ function reverseLookup(latitude, longitude) {
     }
   });
 }
-
+*/
 /*
 function addChip(field, term) {
   var slug = slugify(term);

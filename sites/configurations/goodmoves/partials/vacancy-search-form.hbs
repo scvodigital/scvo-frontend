@@ -46,13 +46,17 @@
           <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-8-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone">
             <div class="mdc-text-field mdc-text-field--box mdc-text-field--with-leading-icon" data-mdc-auto-init="MDCTextField">
               <span class="far fa-map-marker-alt mdc-text-field__icon geo-lookup" tabindex="0" title="Find my location" role="button" style="pointer-events: initial !important;"></span>
-              <input type="text" id="{{instance_id}}-location" name="location" class="mdc-text-field__input mdc-text-field--fullwidth search-location" value="{{#ifAll @root.request.params.query.lat @root.request.params.query.lng}}{{@root.request.params.query.location}}{{/ifAll}}" placeholder="" data-lpignore="true" data-location-options='
-                {
-                  "types": ["(regions)"],
-                  "componentRestrictions": {
-                    "country": "gb"
-                  }
-                }' data-location-lat="[name='lat']" data-location-lng="[name='lng']" data-location-services=".geo-lookup">
+              <input type="text" id="{{instance_id}}-location" name="location" class="mdc-text-field__input mdc-text-field--fullwidth search-location" value="{{#ifAll @root.request.params.query.lat @root.request.params.query.lng}}{{@root.request.params.query.location}}{{/ifAll}}" placeholder="" data-lpignore="true" data-location-search='{
+                  "googleMapsOptions": {
+                    "type": ["(regions)"],
+                    "componentRestrictions": {
+                      "country": "gb"
+                    }
+                  },
+                  "latSelector": "[name=\"lat\"]",
+                  "lngSelector": "[name=\"lng\"]",
+                  "locationServicesSelector": ".geo-lookup"
+                }'>
               <label class="mdc-floating-label" for="{{instance_id}}-location">
                 Location
               </label>
@@ -78,13 +82,8 @@
         </div>
       </div>
     </div>
-
-    <!-- <input type="hidden" data-location-inner-ne="{{instance_id}}-location" name="inner-ne" value="{{@root.request.params.query.inner-ne}}" id="{{instance_id}}-location-inner-ne">
-    <input type="hidden" data-location-inner-sw="{{instance_id}}-location" name="inner-sw" value="{{@root.request.params.query.inner-sw}}" id="{{instance_id}}-location-inner-sw">
-    <input type="hidden" data-location-outer-ne="{{instance_id}}-location" name="outer-ne" value="{{@root.request.params.query.outer-ne}}" id="{{instance_id}}-location-outer-ne">
-    <input type="hidden" data-location-outer-sw="{{instance_id}}-location" name="outer-sw" value="{{@root.request.params.query.outer-sw}}" id="{{instance_id}}-location-outer-sw"> -->
-    <input type="hidden" name="lat" value="{{@root.request.params.query.lat}}" id="{{instance_id}}-lat">
-    <input type="hidden" name="lng" value="{{@root.request.params.query.lng}}" id="{{instance_id}}-lng">
+    <input type="hidden" name="lat" value="{{@root.request.params.query.lat}}">
+    <input type="hidden" name="lng" value="{{@root.request.params.query.lng}}">
 
     <h3 class="mdc-drawer__content-heading cursor-pointer noselect mdc-drawer--occasional-ie11" data-collapse-target="#{{instance_id}}-salary-collapse" role="button" aria-pressed="false" aria-label="Show salary search options" tabindex="0">
       Salary
