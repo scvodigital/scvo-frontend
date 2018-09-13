@@ -31,10 +31,8 @@
     "pretest": "npm run compile",
     "posttest": "npm run check",
     "assets": "mkdir -p build/assets/goodmoves; cd ../assets; npm run compile; cp build/goodmoves/*.* ../frontend/build/assets/goodmoves/; cd ../frontend;",
-    "uglify": "npm run uglify-goodmoves-main; npm run uglify-goodmoves-search; npm run uglify-goodmoves-home; npm run uglify-fundingscotland-main; npm run uglify-fundingscotland-search; npm run uglify-fundingscotland-home",
-    "uglify-goodmoves-main": "node_modules/uglify-js/bin/uglifyjs --compress --output=./build/assets/js/goodmoves/main.js ./build/assets/js/jquery-deserialize.js ./build/assets/js/cookieinfo.min.js ./build/assets/js/class-inheritance.js ./build/assets/js/goodmoves/site-controller.js",
-    "uglify-goodmoves-home": "node_modules/uglify-js/bin/uglifyjs --compress --output=./build/assets/js/goodmoves/home.js ./build/assets/js/goodmoves/typeahead-controller.js ./build/assets/js/goodmoves/home-controller.js",
-    "uglify-goodmoves-search": "node_modules/uglify-js/bin/uglifyjs --compress --output=./build/assets/js/goodmoves/search.js ./build/assets/js/goodmoves/typeahead-controller.js ./build/assets/js/goodmoves/search-controller.js",
+    "uglify": "npm run uglify-goodmoves-main; npm run uglify-fundingscotland-main; npm run uglify-fundingscotland-search; npm run uglify-fundingscotland-home",
+    "uglify-goodmoves-main": "node_modules/uglify-js/bin/uglifyjs --compress --output=./build/assets/js/goodmoves/main.js ./build/assets/js/jquery-deserialize.js ./build/assets/js/cookieinfo.min.js",
     "uglify-fundingscotland-main": "node_modules/uglify-js/bin/uglifyjs --compress --output=./build/assets/js/fundingscotland/main.js ./build/assets/js/jquery-deserialize.js ./build/assets/js/cookieinfo.min.js ./build/assets/js/class-inheritance.js ./build/assets/js/fundingscotland/site-controller.js",
     "uglify-fundingscotland-home": "node_modules/uglify-js/bin/uglifyjs --compress --output=./build/assets/js/fundingscotland/home.js ./build/assets/js/fundingscotland/typeahead-controller.js ./build/assets/js/fundingscotland/home-controller.js",
     "uglify-fundingscotland-search": "node_modules/uglify-js/bin/uglifyjs --compress --output=./build/assets/js/fundingscotland/search.js ./build/assets/js/fundingscotland/typeahead-controller.js ./build/assets/js/fundingscotland/search-controller.js"
