@@ -134,6 +134,7 @@ $(document).ready(function() {
   $('.scrolling-grid').on('scroll', function(evt) {
     showHideScrollButtons(evt.currentTarget);
   });
+
   function showHideScrollButtons(o) {
     var $o = $(o);
 

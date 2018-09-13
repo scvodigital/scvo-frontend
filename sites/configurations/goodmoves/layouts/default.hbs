@@ -226,11 +226,13 @@ if(location.host.indexOf('.local') > -1){
                 {{#>components_tab_bar
                     extraClasses="mdc-tab-bar__auto-width"
                     id="user-not-signed-in-tab-bar"}}
-                  {{>components_tab
-                      url=(stripTrailingSlash path)
-                      labelClasses="mdc-theme--on-primary"
-                      active=(regexMatch @root.request.url.pathname route "gi")
-                      label=label}}
+                  {{#each @root.context.metaData.menus.user-not-signed-in ~}}
+                    {{>components_tab
+                        url=(stripTrailingSlash path)
+                        labelClasses="mdc-theme--on-primary"
+                        active=(regexMatch @root.request.url.pathname route "gi")
+                        label=label}}
+                  {{/each}}
                 {{/components_tab_bar}}
               {{/if ~}}
             </section>

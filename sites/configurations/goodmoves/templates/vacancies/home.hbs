@@ -200,47 +200,22 @@
         </div>
       </div>
       <div class="home-jobs">
-        <div class="mdc-layout-grid equal-height home-shortlist">
-          <div class="scroll-button scroll-left">
-            <span class="fal fa-fw fa-angle-left scroll-icon"></span>
-          </div>
-          <div class="scroll-button scroll-right">
-            <span class="fal fa-fw fa-angle-right scroll-icon"></span>
-          </div>
-          <div class="mdc-layout-grid__inner scrolling-grid">
-            {{#compare @root.data.supplimentaryResponses.shortlist_vacancies_open.hits.total ">" 0}}
-            {{#each @root.data.supplimentaryResponses.shortlist_vacancies_open.hits.hits ~}}
-            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone shortlist-jobs">
-              {{> vacancy_mini _source}}
-            </div>
-            {{/each ~}}
-            {{#compare @root.data.supplimentaryResponses.shortlist_vacancies_closed.hits.total ">" 0}}
-            {{#each @root.data.supplimentaryResponses.shortlist_vacancies_closed.hits.hits ~}}
-            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone shortlist-jobs">
-              {{> vacancy_mini _source}}
-            </div>
-            {{/each ~}}
-            {{/compare}}
-            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone shortlist-jobs last-card">
-              <div class="mdc-card align-centre mdc-typography--body1">
-                <a href="/search">Find more jobs for your shortlist</a>
-              </div>
-            </div>
-            {{else}}
-            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone">
-              {{#compare @root.data.supplimentaryResponses.shortlist_vacancies_closed.hits.total ">" 0}}
-              <p class="mdc-typography--body1 h-padding v-margin-none">
-                There are currently no open jobs in your shortlist. <a href="/shortlist">See closed jobs</a>.
-              </p>
-              {{else}}
-              <p class="mdc-typography--body1 h-padding v-margin-none">
-                There are currently no jobs in your shortlist, if you shortlist a job it will appear here for easy reference.
-              </p>
-              {{/compare}}
-            </div>
-            {{/compare}}
-          </div>
-        </div>
+        {{#>components_horizontal_card_scroller
+            outerClasses="home-shortlist"
+            scrollLeftIconClasses="fal fa-fw fa-angle-left"
+            scrollRightIconClasses="fal fa-fw fa-angle-right"
+            itemClasses="shortlist-jobs"
+            items=(arrayConcat
+              (map @root.data.supplimentaryResponses.shortlist_vacancies_open.hits.hits (getProp "_source"))
+              (map @root.data.supplimentaryResponses.shortlist_vacancies_closed.hits.hits (getProp "_source"))
+            )
+            itemsPartial="vacancy_mini"
+            moreUrl="/search"
+            moreText="Find more jobs for your shortlist"}}
+          <p class="mdc-typography--body1 h-padding v-margin-none">
+            There are currently no jobs in your shortlist, if you shortlist a job it will appear here for easy reference.
+          </p>
+        {{/components_horizontal_card_scroller}}
       </div>
     {{/if}}
 
@@ -267,37 +242,27 @@
       </div>
     </div>
     <div class="home-jobs">
-      <div class="mdc-layout-grid equal-height home-latest">
-        <div class="scroll-button scroll-left">
-          <span class="fal fa-fw fa-angle-left scroll-icon"></span>
-        </div>
-        <div class="scroll-button scroll-right">
-          <span class="fal fa-fw fa-angle-right scroll-icon"></span>
-        </div>
-        <div class="mdc-layout-grid__inner scrolling-grid">
-          {{#compare @root.data.primaryResponse.home_latest_personalised.hits.total ">" 0}}
-          {{#each @root.data.primaryResponse.home_latest_personalised.hits.hits ~}}
-          <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone latest-jobs latest-jobs-personalised">
-            {{> vacancy_mini _source}}
-          </div>
-          {{/each ~}}
-          {{else}}
-          {{#each @root.data.primaryResponse.home_latest.hits.hits ~}}
-          <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone latest-jobs">
-            {{> vacancy_mini _source}}
-          </div>
-          {{/each ~}}
-          {{/compare ~}}
-          <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone latest-jobs last-card">
-            <div class="mdc-card align-centre mdc-typography--body1">
-              {{#compare @root.data.primaryResponse.home_latest_personalised.hits.total ">" 0}}
-              <a href="/search?sort=newest">All latest jobs</a>
-              {{else}}
-              <a href="/search?sort=newest&page=2">Find more jobs</a>
-              {{/compare ~}}
-            </div>
-          </div>
-        </div>
+      {{#>components_horizontal_card_scroller
+          outerClasses="home-latest"
+          scrollLeftIconClasses="fal fa-fw fa-angle-left"
+          scrollRightIconClasses="fal fa-fw fa-angle-right"
+          itemClasses="latest-jobs latest-jobs-personalised"
+          items=(if (any @root.data.primaryResponse.home_latest_personalised.hits.hits)
+            (map @root.data.primaryResponse.home_latest_personalised.hits.hits (getProp "_source"))
+            else=(map @root.data.primaryResponse.home_latest.hits.hits (getProp "_source"))
+          )
+          itemsPartial="vacancy_mini"
+          moreUrl=(if
+            (compare @root.data.primaryResponse.home_latest_personalised.hits.total ">" 0)
+            "/search?sort=newest"
+            else="/search?sort=newest&page=2"
+          )
+          moreText=(if
+            (compare @root.data.primaryResponse.home_latest_personalised.hits.total ">" 0)
+            "All latest jobs"
+            else="Find more jobs"
+          )}}
+        {{/components_horizontal_card_scroller}}
       </div>
     </div>
     {{/compare}}
@@ -317,28 +282,18 @@
       </div>
     </div>
     <div class="home-jobs">
-      <div class="mdc-layout-grid equal-height home-latest">
-        <div class="scroll-button scroll-left">
-          <span class="fal fa-fw fa-angle-left scroll-icon"></span>
-        </div>
-        <div class="scroll-button scroll-right">
-          <span class="fal fa-fw fa-angle-right scroll-icon"></span>
-        </div>
-        <div class="mdc-layout-grid__inner scrolling-grid">
-          {{#with (sortByIndex @root.data.primaryResponse.recently_viewed.hits.hits (split @root.request.cookies.recently_viewed ',') '_id') ~}}
-            {{#each this ~}}
-            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone latest-jobs">
-              {{> vacancy_mini _source}}
-            </div>
-            {{/each ~}}
-          {{/with ~}}
-          <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone latest-jobs last-card">
-            <div class="mdc-card align-centre mdc-typography--body1">
-              <a href="/search?sort=newest&page=1">Find more jobs</a>
-            </div>
-          </div>
-        </div>
-      </div>
+      {{#>components_horizontal_card_scroller
+          outerClasses="home-latest"
+          scrollLeftIconClasses="fal fa-fw fa-angle-left"
+          scrollRightIconClasses="fal fa-fw fa-angle-right"
+          itemClasses="latest-jobs"
+          items=(map
+            (sortByIndex @root.data.primaryResponse.recently_viewed.hits.hits (split @root.request.cookies.recently_viewed ',') '_id') (getProp "_source")
+          )
+          itemsPartial="vacancy_mini"
+          moreUrl="/search?sort=newest&page=1"
+          moreText="Find more jobs"}}
+      {{/components_horizontal_card_scroller}}
     </div>
     {{/compare}}
     {{/if}}
@@ -357,26 +312,16 @@
       </div>
     </div>
     <div class="home-jobs">
-      <div class="mdc-layout-grid equal-height home-top">
-        <div class="scroll-button scroll-left">
-          <span class="fal fa-fw fa-angle-left scroll-icon"></span>
-        </div>
-        <div class="scroll-button scroll-right">
-          <span class="fal fa-fw fa-angle-right scroll-icon"></span>
-        </div>
-        <div class="mdc-layout-grid__inner scrolling-grid">
-          {{#each @root.data.supplimentaryResponses.top.hits.hits ~}}
-          <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone top-jobs">
-            {{> vacancy_mini _source}}
-          </div>
-          {{/each ~}}
-          <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone top-jobs last-card">
-            <div class="mdc-card align-centre mdc-typography--body1">
-              <a href="/search">Find more jobs</a>
-            </div>
-          </div>
-        </div>
-      </div>
+      {{#>components_horizontal_card_scroller
+          outerClasses="home-top"
+          scrollLeftIconClasses="fal fa-fw fa-angle-left"
+          scrollRightIconClasses="fal fa-fw fa-angle-right"
+          itemClasses="top-jobs"
+          items=(map @root.data.supplimentaryResponses.top.hits.hits (getProp "_source"))
+          itemsPartial="vacancy_mini"
+          moreUrl="/search"
+          moreText="Find more jobs"}}
+      {{/components_horizontal_card_scroller}}
     </div>
     {{/compare}}
   </div>

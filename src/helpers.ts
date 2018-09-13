@@ -187,6 +187,16 @@ export class Helpers {
     return output.join('\n');
   }
 
+  static helper_arrayConcat() {
+    var output = [];
+    for (var i = 0; i < arguments.length; ++i) {
+      if (Array.isArray(arguments[i])) {
+        output.push(...arguments[i]);
+      }
+    }
+    return output;
+  }
+
   static helper_indexOf(haystack: any[], needle: any): number|null {
     if (!Array.isArray(haystack)) {
       return null;
