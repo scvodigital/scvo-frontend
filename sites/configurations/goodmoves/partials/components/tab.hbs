@@ -1,5 +1,6 @@
-<a href="{{{url}}}" class="mdc-tab {{linkClasses}} {{#if active}} mdc-tab--active{{/if}}"
-    role="tab" {{#if active}}aria-selected="true"{{else}}aria-hidden="true"{{/if}} tabindex="0">
+<{{#if url}}a href="{{{url}}}"{{else}}button{{/if}} class="mdc-tab {{linkClasses}} {{#if active}} mdc-tab--active{{/if}}"
+    role="tab" {{#if active}}aria-selected="true"{{else}}aria-hidden="true"{{/if}} tabindex="0" 
+    {{#if tabName}}data-tab-name="{{tabName}}"{{/if}}>
   <span class="mdc-tab__content {{contentClasses}}">
     {{#if iconClasses}}<span class="mdc-tab__icon {{iconClasses}}"></span>{{/if}}
     <span class="mdc-tab__text-label {{labelClasses}}">{{label}}</span>
@@ -8,4 +9,4 @@
     <span class="mdc-tab-indicator__content {{indicatorContentClasses}} mdc-tab-indicator__content--underline"></span>
   </span>
   <span class="mdc-tab__ripple"></span>
-</a>
+</{{#if url}}a{{else}}button{{/if}}>

@@ -2,24 +2,14 @@
   {{> vacancy_key_info}}
   <hr class="mdc-list-divider" />
   <div class="vacancy-info-container">
-    <div id="vacancy-tab-bar" class="mdc-tab-bar" role="tablist">
-      <a class="mdc-tab mdc-tab--active" role="tab" aria-controls="panel-1">
-        <span class="far fa-list-ul fa-fw" aria-hidden="true"></span>
-        <span class="label">Information</span>
-      </a>
-      <a class="mdc-tab" role="tab" aria-controls="panel-2">
-        <span class="far fa-map-marker-alt fa-fw" aria-hidden="true"></span>
-        <span class="label">Location</span>
-      </a>
-      <a class="mdc-tab" role="tab" aria-controls="notes">
-        <span class="far fa-edit fa-fw" aria-hidden="true"></span>
-        <span class="label">Your notes</span>
-      </a>
-      <span class="mdc-tab-bar__indicator"></span>
-    </div>
+    {{#>components_tab_bar id="vacancy-tab-bar" defaultTabIdentifier="tab"}}
+      {{>components_tab iconClasses="far fa-list-ul fa-fw" label="Information" active=true tabName="panel-1"}}
+      {{>components_tab iconClasses="far fa-map-marker-alt fa-fw" label="Location" active=false tabName="panel-2"}}
+      {{>components_tab iconClasses="far fa-edit fa-fw" label="Notes" active=false tabName="notes"}}
+    {{/components_tab_bar}}
     <hr class="mdc-list-divider" />
     <div class="panels" for="vacancy-tab-bar">
-      <div class="panel panel--active mdc-card--full-content" role="tabpanel" aria-hidden="false" id="panel-1">
+      <div class="panel panel--active mdc-card--full-content" role="tabpanel" aria-hidden="false" data-tab-name="panel-1">
         <div class="key-info-extra">
           <ul class="fa-ul">
             {{#if start_at ~}}
@@ -85,7 +75,7 @@
           {{{rendered.goodmoves_sponsor_logos}}}
         </div>
       </div>
-      <div class="panel mdc-card--full-content" role="tabpanel" aria-hidden="true" id="panel-2">
+      <div class="panel mdc-card--full-content" role="tabpanel" aria-hidden="true" data-tab-name="panel-2">
         {{!--
         {{#ifAny organisation.profile organisation_website organisation_twitter organisation_facebook organisation_linkedin ~}}
         <div class="key-info-extra">
@@ -174,7 +164,7 @@
           {{/compare ~}}
         </div>
       </div>
-      <div class="panel mdc-card--full-content" role="tabpanel" aria-hidden="true" id="notes">
+      <div class="panel mdc-card--full-content" role="tabpanel" aria-hidden="true" data-tab-name="notes">
         <div class="text-field-container user-notes">
           {{#if @root.data.auth ~}}
             <form action="/save-notes" method="POST" data-ajax-form='{
@@ -184,7 +174,10 @@
                   "id": "{{Id}}"
                 }'>
               <div>
-                <textarea class="mdc-text-field__input" data-simple-mde="true" name="notes" id="notes-{{Id}}" data-id="{{Id}}">{{getProperty @root.data.notes Id}}</textarea>
+                <textarea class="mdc-text-field__input" data-simple-mde='{
+                      "forceSync": true,
+                      "toolbar": ["heading-1", "heading-2", "bold", "italic", "|", "unordered-list", "ordered-list", "link"]
+                    }' name="notes" id="notes-{{Id}}" data-id="{{Id}}">{{getProperty @root.data.notes Id}}</textarea>
                 <input type="hidden" name="id" value="{{Id}}">
               </div>
               <div class="save-button-block">
@@ -228,10 +221,9 @@
   {{> ga documentType="goodmoves-vacancy" documentId=Id hitType="full"}}
 {{/if ~}}
 <script>
-  function clearNotes(evt, data) {
-    console.log('clearNotes Arguments:', arguments);
-    $('#notes-' + data.postBody.id)[0].mde.value('');
-    $(evt.currentTarget).prop('disabled', true);
+  function clearNotes(data) {
+    $('#notes-' + this.request.data.id)[0].mde.value('');
+    this.$button.prop('disabled', true);
   }
   function notesSaved(evt, data) {
     console.log('notesSaved Arguments:', arguments);
