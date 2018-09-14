@@ -1,0 +1,21 @@
+{{#with (default menuId (concat "menu-" (random 1000 9999))) as |menuId|}}
+<div class="mdc-menu-surface--anchor {{../anchorClasses}}">
+  <button class="mdc-button {{../buttonClasses}}" id="{{menuId}}-trigger">
+    {{#if ../imageUrl ~}}
+      <img src="{{../imageUrl}}" class="{{../imageClasses}}" />
+    {{/if}}
+    {{#if ../iconClasses}}
+      <span class="{{../iconClasses}}"></span>
+    {{/if ~}}
+    {{{../buttonLabel}}}
+    {{#if ../arrowClasses}}
+      <span class="{{../arrowClasses}}"></span>
+    {{/if}}
+  </button>
+  <div class="mdc-menu mdc-menu-surface {{../menuClasses}}" tabindex="-1" id="{{menuId}}" data-menu-trigger="#{{menuId}}-trigger">
+    <ul class="mdc-menu__items mdc-list {{../menuListClasses}}" role="menu" aria-hidden="true">
+      {{> @partial-block}}
+    </ul>
+  </div>
+</div>
+{{/with}}

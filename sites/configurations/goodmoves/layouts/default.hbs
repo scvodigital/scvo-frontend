@@ -199,29 +199,22 @@ if(location.host.indexOf('.local') > -1){
             </section>
             <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end mdc-top-app-bar__user">
               {{#if @root.data.auth ~}}
-              <div class="mdc-menu-anchor">
-                <button class="mdc-button" data-menu-target="#user-menu">
-                  {{#if @root.data.auth.photoURL ~}}
-                  <img src="{{data.auth.photoURL}}" class="far fa-fw user-avatar" />
-                  {{else}}
-                  <span class="far fa-fw fa-user-circle"></span>
-                  {{/if ~}}
-                  {{{data.auth.email}}}
-                  <span class="far fa-fw fa-angle-down"></span>
-                </button>
-                <div class="mdc-menu mdc-menu-surface" tabindex="-1" data-mdc-auto-init="MDCMenu" id="user-menu">
-                  <div class="mdc-menu__items mdc-list" role="menu" aria-hidden="true">
-                    {{#each @root.context.metaData.menus.user-signed-in ~}}
-                      <a class="mdc-list-item {{#if (regexMatch @root.request.url.pathname route "gi")}} mdc-list-item--activated{{/if}}" href="{{stripTrailingSlash path}}" role="menuitem">
-                        {{#if icon ~}}
-                        <span class="far fa-{{icon}} mdc-list-item__graphic" aria-hidden="true"></span>
-                        {{/if ~}}
-                        {{{label}}}
-                      </a>
-                    {{/each ~}}
-                  </div>
-                </div>
-              </div>
+                {{#>components_anchored_menu
+                    buttonClasses="mdc-theme--on-primary"
+                    imageUrl=(default @root.data.auth.photoURL false)
+                    imageClasses="far fa-fw user-avatar"
+                    iconClasses=(if (if @root.data.auth.photoURL false else=true) "far fa-fw fa-user-circle" else=false)
+                    buttonLabel=@root.data.auth.email
+                    arrowClasses="far fa-fw fa-angle-down"}}
+                  {{#each @root.context.metaData.menus.user-signed-in ~}}
+                    <a class="mdc-list-item {{#if (regexMatch @root.request.url.pathname route "gi")}} mdc-list-item--activated{{/if}}" href="{{stripTrailingSlash path}}" role="menuitem">
+                      {{#if icon ~}}
+                      <span class="far fa-{{icon}} mdc-list-item__graphic" aria-hidden="true"></span>
+                      {{/if ~}}
+                      {{{label}}}
+                    </a>
+                  {{/each ~}}
+                {{/components_anchored_menu}}
               {{else}}
                 {{#>components_tab_bar
                     extraClasses="mdc-tab-bar__auto-width"
