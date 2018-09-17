@@ -30,7 +30,7 @@
     "prepare": "npm run compile",
     "pretest": "npm run compile",
     "posttest": "npm run check",
-    "assets": "mkdir -p build/assets/goodmoves; cd ../assets; npm run compile; cp build/goodmoves/*.* ../frontend/build/assets/goodmoves/; cd ../frontend;",
+    "assets": "mkdir -p build/assets/goodmoves build/assets/getinvolved; cd ../assets; npm run compile; cp build/goodmoves/*.* ../frontend/build/assets/goodmoves/; cp build/getinvolved/*.* ../frontend/build/assets/getinvolved/; cd ../frontend;",
     "uglify": "npm run uglify-fundingscotland-main; npm run uglify-fundingscotland-search; npm run uglify-fundingscotland-home",
     "uglify-fundingscotland-main": "node_modules/uglify-js/bin/uglifyjs --compress --output=./build/assets/js/fundingscotland/main.js ./build/assets/js/cookieinfo.min.js ./build/assets/js/class-inheritance.js ./build/assets/js/fundingscotland/site-controller.js",
     "uglify-fundingscotland-home": "node_modules/uglify-js/bin/uglifyjs --compress --output=./build/assets/js/fundingscotland/home.js ./build/assets/js/fundingscotland/typeahead-controller.js ./build/assets/js/fundingscotland/home-controller.js",

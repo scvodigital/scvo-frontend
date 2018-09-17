@@ -1,11 +1,18 @@
 {
-  "name": "index",
-  "pattern": "/",
+  "name": "opportunity",
+  "pattern": "/opportunity/:slug",
+  "debug": true,
+  "metaData": {
+    "sidebarButton": {
+      "icon": "search",
+      "tooltip": "Search",
+      "classes": "hide-md hide-lg"
+    }
+  },
+  "defaultParams": {
+    "context": "detail"
+  },
   "tasks": [
-    "context.metaData.commonTasks.authNotRequired",
-    "context.metaData.commonTasks.searchesData",
-    "context.metaData.commonTasks.shortlistData",
-    "context.metaData.commonTasks.notesData",
     {
       "name": "primaryResponse",
       "taskModule": "elasticsearch",
@@ -16,8 +23,8 @@
         },
         "queryTemplates": {
           "index": "web-content-production",
-          "type": "fundingscotland-fund",
-          "template": ">context.metaData.handlebars.queries.funds_latest"
+          "type": "milo-volunteering-opportunity",
+          "template": ">context.metaData.handlebars.queries.opportunities_opportunity"
         }
       },
       "renderer": "handlebars"
@@ -34,20 +41,25 @@
           {
             "name": "types",
             "index": "web-content-production",
-            "type": "fundingscotland-fund",
-            "template": ">context.metaData.handlebars.queries.funds_types"
+            "type": "milo-volunteering-opportunity",
+            "template": ">context.metaData.handlebars.queries.opportunities_types"
           },
           {
-            "name": "splash",
+            "name": "related",
             "index": "web-content-production",
-            "type": "scvo-cms-media",
-            "template": ">context.metaData.handlebars.queries.pages_splash"
+            "type": "milo-volunteering-opportunity",
+            "template": ">context.metaData.handlebars.queries.opportunities_related"
+          },
+          {
+            "name": "not_found",
+            "index": "web-content-production",
+            "type": "milo-volunteering-opportunity",
+            "template": ">context.metaData.handlebars.queries.pages_not-found"
           }
         ]
       },
       "renderer": "handlebars"
     },
-    "context.metaData.commonTasks.termsMaps",
     {
       "name": "posts",
       "taskModule": "elasticsearch",
@@ -60,7 +72,7 @@
           {
             "name": "tfn_latest",
             "index": "web-content-production",
-            "type": "tfn-news-post,tfn-feature",
+            "type": "tfn-news-post,tfn-blog-post,tfn-feature",
             "template": ">context.metaData.handlebars.queries.posts_tfn-latest"
           }
         ]
@@ -82,9 +94,10 @@
           "default": {
             "layout": ">context.metaData.handlebars.layouts.default",
             "parts": {
-              "head": ">context.metaData.handlebars.templates.pages_home-head-tags",
-              "body": ">context.metaData.handlebars.templates.pages_home",
-              "foot": ">context.metaData.handlebars.templates.pages_home-foot"
+              "head": ">context.metaData.handlebars.templates.opportunities_opportunity-head-tags",
+              "body": ">context.metaData.handlebars.templates.opportunities_opportunity",
+              "foot": ">context.metaData.handlebars.templates.opportunities_opportunity-foot",
+              "sidebar": ">context.metaData.handlebars.templates.opportunities_search-form"
             },
             "contentType": "text/html"
           }
