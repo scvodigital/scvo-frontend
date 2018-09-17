@@ -1,0 +1,95 @@
+{
+  "name": "home",
+  "pattern": "/",
+  "tasks": [
+    "context.metaData.commonTasks.authNotRequired",
+    "context.metaData.commonTasks.searchesData",
+    "context.metaData.commonTasks.shortlistData",
+    "context.metaData.commonTasks.notesData",
+    {
+      "name": "primaryResponse",
+      "taskModule": "elasticsearch",
+      "config": {
+        "connectionStringTemplate": "{$../../elasticsearch-url.txt}",
+        "elasticsearchConfig": {
+          "apiVersion": "5.6"
+        },
+        "queryTemplates": {
+          "index": "web-content-production",
+          "type": "fundingscotland-fund",
+          "template": ">context.metaData.handlebars.queries.funds_latest"
+        }
+      },
+      "renderer": "handlebars"
+    },
+    {
+      "name": "supplimentaryResponses",
+      "taskModule": "elasticsearch",
+      "config": {
+        "connectionStringTemplate": "{$../../elasticsearch-url.txt}",
+        "elasticsearchConfig": {
+          "apiVersion": "5.6"
+        },
+        "queryTemplates": [
+          {
+            "name": "types",
+            "index": "web-content-production",
+            "type": "fundingscotland-fund",
+            "template": ">context.metaData.handlebars.queries.funds_types"
+          },
+          {
+            "name": "splash",
+            "index": "web-content-production",
+            "type": "scvo-cms-media",
+            "template": ">context.metaData.handlebars.queries.pages_splash"
+          }
+        ]
+      },
+      "renderer": "handlebars"
+    },
+    "context.metaData.commonTasks.termsMaps",
+    {
+      "name": "posts",
+      "taskModule": "elasticsearch",
+      "config": {
+        "connectionStringTemplate": "{$../../elasticsearch-url.txt}",
+        "elasticsearchConfig": {
+          "apiVersion": "5.6"
+        },
+        "queryTemplates": [
+          {
+            "name": "tfn_latest",
+            "index": "web-content-production",
+            "type": "tfn-news-post,tfn-feature",
+            "template": ">context.metaData.handlebars.queries.posts_tfn-latest"
+          }
+        ]
+      },
+      "renderer": "handlebars"
+    },
+    {
+      "name": "destination",
+      "taskModule": "renderLayout",
+      "renderer": "handlebars",
+      "config": {
+        "logic": {
+          "if": [
+            "default"
+          ]
+        },
+        "output": "body",
+        "layouts": {
+          "default": {
+            "layout": ">context.metaData.handlebars.layouts.default",
+            "parts": {
+              "head": ">context.metaData.handlebars.templates.pages_home-head-tags",
+              "body": ">context.metaData.handlebars.templates.pages_home",
+              "foot": ">context.metaData.handlebars.templates.pages_home-foot"
+            },
+            "contentType": "text/html"
+          }
+        }
+      }
+    }
+  ]
+}

@@ -5,19 +5,6 @@
   <base href="/{{#if request.params.path}}{{replace request.params.path '_' ''}}{{else}}{{/if}}">
   {{{layoutParts.head}}}
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <!--
-
-  Powered by:
-  ███████╗ ██████╗██╗   ██╗ ██████╗ ██╗  ██████╗  ██████╗ ██╗   ██╗████████╗███████╗██████╗
-  ██╔════╝██╔════╝██║   ██║██╔═══██╗╚██╗ ██╔══██╗██╔═══██╗██║   ██║╚══██╔══╝██╔════╝██╔══██╗
-  ███████╗██║     ██║   ██║██║   ██║ ╚██╗██████╔╝██║   ██║██║   ██║   ██║   █████╗  ██████╔╝
-  ╚════██║██║     ╚██╗ ██╔╝██║   ██║ ██╔╝██╔══██╗██║   ██║██║   ██║   ██║   ██╔══╝  ██╔══██╗
-  ███████║╚██████╗ ╚████╔╝ ╚██████╔╝██╔╝ ██║  ██║╚██████╔╝╚██████╔╝   ██║   ███████╗██║  ██║
-  ╚══════╝ ╚═════╝  ╚═══╝   ╚═════╝ ╚═╝  ╚═╝  ╚═╝ ╚═════╝  ╚═════╝    ╚═╝   ╚══════╝╚═╝  ╚═╝
-
-  -->
-
   <link rel="apple-touch-icon" sizes="57x57" href="https://storage.googleapis.com/scvo-assets/assets/icons/apple-icon-57x57.png">
   <link rel="apple-touch-icon" sizes="60x60" href="https://storage.googleapis.com/scvo-assets/assets/icons/apple-icon-60x60.png">
   <link rel="apple-touch-icon" sizes="72x72" href="https://storage.googleapis.com/scvo-assets/assets/icons/apple-icon-72x72.png">
@@ -35,11 +22,10 @@
   <meta name="msapplication-TileColor" content="#00838f">
   <meta name="msapplication-TileImage" content="https://storage.googleapis.com/scvo-assets/assets/icons/ms-icon-144x144.png">
   <meta name="theme-color" content="#00838f">
-  <link rel="search" type="application/opensearchdescription+xml" title="Get Involved" href="https://storage.googleapis.com/scvo-assets/assets/opensearch.xml" />
+  <link rel="search" type="application/opensearchdescription+xml" title="SCVO" href="https://storage.googleapis.com/scvo-assets/assets/opensearch.xml" />
   <!-- <link type="text/css" rel="stylesheet" href="https://unpkg.com/material-components-web@0.37.1/dist/material-components-web.min.css"> -->
   <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-TXfwrfuHVznxCssTxWoPZjhcss/hp38gEOH8UPZG/JcXonvBQ6SlsIF49wUzsGno" crossorigin="anonymous">
-  <!-- <link type="text/css" rel="stylesheet" href="/assets/css/getinvolved-styles.css"> -->
-  <link type="text/css" rel="stylesheet" href="/assets/getinvolved/main.css">
+  <link type="text/css" rel="stylesheet" href="/assets/css/getinvolved-legacy-styles.css">
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-3467930-4"></script>
   <script>
   window.dataLayer = window.dataLayer || [];
@@ -57,7 +43,7 @@
   {{/ifAny ~}}
   </script>
 </head>
-<body class="mdc-theme--site-bg {{#if request.params.path}}{{replace request.params.path '_' ' '}}{{else}}home{{/if}}">
+<body class="{{#if request.params.path}}{{replace request.params.path '_' ' '}}{{else}}home{{/if}}">
   <scvo-site>
     <div class="mdc-typography">
       <header class="mdc-top-app-bar mdc-elevation--z5 top-bar-stuck" id="top-bar">
@@ -96,7 +82,7 @@
         </div>
       </header>
 
-      <aside class="mdc-drawer mdc-drawer--modal" id="mobile-menu" data-mdc-auto-init="MDCDrawer">
+      <aside class="mdc-drawer mdc-drawer--temporary" id="mobile-menu" data-mdc-auto-init="MDCTemporaryDrawer">
         <nav class="mdc-drawer__drawer">
           <header class="mdc-drawer__header">
             <div class="mdc-temporary-drawer__header-content mdc-theme--text-primary-on-primary">
@@ -116,21 +102,20 @@
         </nav>
       </aside>
 
-      <div class="mdc-drawer-scrim"></div>
-
       <main class="mdc-theme--background mdc-toolbar-fixed-adjust {{#if layoutParts.sidebar}}drawer-container-permanent{{else}}drawer-container-temporary{{/if}}">
         {{#if layoutParts.sidebar ~}}
-        <aside class="mdc-drawer mdc-elevation--z3 mdc-drawer--occasional" id="sidebar-temporary" data-menu-button="#sidebar-button">
-          {{{layoutParts.sidebar}}}
+        <aside class="mdc-drawer mdc-drawer--temporary mdc-drawer--occasional mdc-elevation--z3" id="sidebar-temporary" data-mdc-auto-init="MDCTemporaryDrawer">
+          <div class="mdc-drawer__drawer">
+            {{{layoutParts.sidebar}}}
+          </div>
         </aside>
-        <div class="mdc-drawer-scrim"></div>
         {{/if}}
         <div class="container-fluid">
           {{{layoutParts.body}}}
         </div>
       </main>
 
-      <footer class="mdc-layout__footer">
+      <footer>
         <div class="footer-main">
           <div class="container-fluid">
             <div class="mdc-layout-grid">
@@ -177,6 +162,19 @@
       </footer>
     </div>
   </scvo-site>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script type="text/javascript" src="/assets/js/headroom.min.js"></script>
+  {{#if (contains request.url.host '.local')}}
+  <script type="text/javascript" src="https://unpkg.com/material-components-web@0.37.1/dist/material-components-web.js"></script>
+  {{else}}
+  <script type="text/javascript" src="https://unpkg.com/material-components-web@0.37.1/dist/material-components-web.min.js"></script>
+  {{/if}}
+  <script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js"
+    integrity="sha512-tAGcCfR4Sc5ZP5ZoVz0quoZDYX5aCtEm/eu1KhSLj2c9eFrylXZknQYmxUssFaVJKvvc0dJQixhGjG2yXWiV9Q=="
+    crossorigin=""></script>
+  <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js'></script>
+  <script src="https://cdn.jsdelivr.net/npm/promise-polyfill@7/dist/polyfill.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/string.js/3.3.3/string.min.js"></script>
   <script type="text/javascript">
   var $buoop = {required:{e:-3,f:-3,o:-3,s:-1,c:-3},insecure:true,unsupported:true,api:2018.07 };
   function $buo_f(){
@@ -187,38 +185,8 @@
   try {document.addEventListener("DOMContentLoaded", $buo_f,false)}
   catch(e){window.attachEvent("onload", $buo_f)}
   </script>
-  <script type="text/javascript" src="/assets/getinvolved/main.js"></script>
-  <script>
-    var getinvolved = null; readyListeners = [];
-    $(document).ready(function() {
-      getinvolved = new GetInvolved.GetInvolved({
-        apiKey: "AIzaSyDCHiGp3FllVnjPcn0_LjcZrUe_5nC7LAc",
-        authDomain: "scvo-getinvolved.firebaseapp.com",
-        databaseURL: "https://scvo-getinvolved.firebaseio.com",
-        projectId: "scvo-getinvolved",
-        storageBucket: "",
-        messagingSenderId: "815398681377"
-      });
-      ready = true;
-      readyListeners.forEach(function(listener) {
-        listener();
-      });
-    });
-
-    function registerReadyListener(listener) {
-      if (getinvolved) {
-        listener();
-      } else {
-        readyListeners.push(listener);
-      }
-    }
-
-    function initMap() {
-      registerReadyListener(function() {
-        getinvolved.componentsInitialiser.initialiseGMapsDependents('AIzaSyCT7vZkJdto5JoAUDx3asuHu7mHcl8UanQ');
-      });
-    }
-  </script>
+  <script type="text/javascript" id="cookieinfo" src="/assets/js/cookieinfo.min.js" data-message="We use cookies to track anonymous usage statistics and do not collect any personal information that can be used to identify you. By continuing to visit this site you agree to our use of cookies." data-font-family="'Open Sans',Helvetica,Arial,sans-serif" data-bg="#fff" data-link="#c2185b" data-divlink="#fff" data-divlinkbg="#c2185b" data-position="bottom" data-accept-on-scroll="true" data-moreinfo="/cookies" data-cookie="CookieInfoScript" data-text-align="left"></script>
+  <script type="text/javascript" src="/assets/js/getinvolved-legacy/root.js"></script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBJdxcQpVKQ6HdrjnPXycUoZqsmp-Ep3l0&libraries=places&region=uk&callback=initMap" async defer></script>
 
   {{{layoutParts.foot}}}

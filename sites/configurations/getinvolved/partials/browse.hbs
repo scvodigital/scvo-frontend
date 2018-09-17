@@ -1,0 +1,46 @@
+<div class="mdc-layout-grid home-jobs">
+  <div class="mdc-layout-grid__inner">
+    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone content page-content">
+      <div class="browse-title browse-title-roles mdc-typography--headline5">
+        Client Groups
+      </div>
+      <ul class="mdc-list">
+        {{#each @root.data.supplimentaryResponses.types.aggregations.client_groups_slugs.buckets ~}}
+          {{#if key ~}}
+            <a class="mdc-list-item" href="/search?client_groups%5B%5D={{urlencode key}}" role="menuitem" onclick="gtag('event', 'navigation', { event_category: '{{default ../eventContext "category-browser"}}', event_label: 'Client group: {{key}}' })">
+              <span class="mdc-list-item__text">
+                {{#with (lookup @root.data.supplimentaryResponses.types.aggregations.client_groups.buckets @index) ~}}
+                  {{{key}}}
+                {{/with ~}}
+              </span>
+              <span class="mdc-list-item__meta" aria-label="{{doc_count}} vacancies">
+                {{doc_count}}
+              </span>
+            </a>
+          {{/if ~}}
+        {{/each ~}}
+      </ul>
+    </div>
+    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone content page-content">
+      <div class="browse-title browse-title-work_types mdc-typography--headline5">
+        Work types
+      </div>
+      <ul class="mdc-list">
+        {{#each @root.data.supplimentaryResponses.types.aggregations.work_types_slugs.buckets ~}}
+          {{#if key ~}}
+            <a class="mdc-list-item" href="/search?work_types%5B%5D={{urlencode key}}" role="menuitem" onclick="gtag('event', 'navigation', { event_category: '{{default ../eventContext "category-browser"}}', event_label: 'Work type: {{key}}' })">
+              <span class="mdc-list-item__text">
+                {{#with (lookup @root.data.supplimentaryResponses.types.aggregations.work_types.buckets @index) ~}}
+                  {{{key}}}
+                {{/with ~}}
+              </span>
+              <span class="mdc-list-item__meta" aria-label="{{doc_count}} vacancies">
+                {{doc_count}}
+              </span>
+            </a>
+          {{/if ~}}
+        {{/each ~}}
+      </ul>
+    </div>
+  </div>
+</div>
