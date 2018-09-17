@@ -4,33 +4,61 @@
     {{> breadcrumbs}}
     <div class="mdc-layout-grid">
       <div class="mdc-layout-grid__inner">
-        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone content page-content">
+        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-9-desktop mdc-layout-grid__cell--span-6-tablet mdc-layout-grid__cell--span-4-phone content page-content">
           {{{@root.data.primaryResponse.hits.hits.[0]._source.rendered.scvo_full}}}
-    
+        </div>
+        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-2-tablet mdc-layout-grid__cell--span-4-phone content sidebar-content">
           <h3 class="blogs">Case studies</h3>
-          <div class="mdc-layout-grid equal-height linked-cards">
-            <div class="mdc-layout-grid__inner">
-              {{#each @root.data.supplimentaryResponses.related_posts.hits.hits ~}}
-              <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
-                <div class="mdc-card">
-                  <section class="mdc-card__primary mdc-theme--primary-bg">
-                    <h1 class="mdc-card__title mdc-card__title--large v-margin-full">
-                      <a href="{{regexReplace _source.slug "_" "ig" "/"}}" class="mdc-theme--on-primary">{{_source.title}}</a>
-                    </h1>
-                  </section>
-                  <section class="mdc-card__media">
-                    <a href="{{regexReplace _source.slug "_" "ig" "/"}}">
-                      <img src="{{_source.featured_image.sizes.full.source_url}}" class="responsive">
-                    </a>
-                  </section>
-                </div>
-              </div>
-              {{/each ~}}
-            </div>
+          <div class="mdc-card">
+            <section class="mdc-card__primary mdc-theme--primary-bg">
+              <h1 class="mdc-card__title mdc-card__title--large v-margin-full">
+                <a href="/digital/evolution/senior-leaders/craig-wilson-of-big-hearts-on-the-slp/" class="mdc-theme--on-primary">Craig Wilson of Big Hearts</a>
+              </h1>
+            </section>
+            <section class="mdc-card__media">
+              <a href="/digital/evolution/senior-leaders/craig-wilson-of-big-hearts-on-the-slp/">
+                <img src="https://storage.googleapis.com/scvo-assets/scvo-frontend/temporary/big-hearts.png" class="responsive">
+              </a>
+            </section>
+          </div>
+          <div class="mdc-card">
+            <section class="mdc-card__primary mdc-theme--primary-bg">
+              <h1 class="mdc-card__title mdc-card__title--large v-margin-full">
+                <a href="/digital/evolution/senior-leaders/biddy-kelly-of-fresh-start-on-the-slp/" class="mdc-theme--on-primary">Biddy Kelly of Fresh Start</a>
+              </h1>
+            </section>
+            <section class="mdc-card__media">
+              <a href="/digital/evolution/senior-leaders/biddy-kelly-of-fresh-start-on-the-slp/">
+                <img src="https://storage.googleapis.com/scvo-assets/scvo-frontend/temporary/fresh-start.png" class="responsive">
+              </a>
+            </section>
+          </div>
+          <div class="mdc-card">
+            <section class="mdc-card__primary mdc-theme--primary-bg">
+              <h1 class="mdc-card__title mdc-card__title--large v-margin-full">
+                <a href="/digital/evolution/senior-leaders/jane-griffin-of-lgbt-youth-scotland-on-the-slp/" class="mdc-theme--on-primary">Jane Griffin of LGBT Youth Scotland</a>
+              </h1>
+            </section>
+            <section class="mdc-card__media">
+              <a href="/digital/evolution/senior-leaders/jane-griffin-of-lgbt-youth-scotland-on-the-slp/">
+                <img src="https://storage.googleapis.com/scvo-assets/scvo-frontend/temporary/lgbtys.png" class="responsive">
+              </a>
+            </section>
+          </div>
+          <div class="mdc-card">
+            <section class="mdc-card__primary mdc-theme--primary-bg">
+              <h1 class="mdc-card__title mdc-card__title--large v-margin-full">
+                <a href="/digital/evolution/senior-leaders/justina-murray-of-scottish-families-affected-by-alcohol-and-drugs-on-the-slp/" class="mdc-theme--on-primary">Justina Murray of Scottish Families affected by Alcohol and Drugs</a>
+              </h1>
+            </section>
+            <section class="mdc-card__media">
+              <a href="/digital/evolution/senior-leaders/justina-murray-of-scottish-families-affected-by-alcohol-and-drugs-on-the-slp/">
+                <img src="https://storage.googleapis.com/scvo-assets/scvo-frontend/temporary/sfad.png" class="responsive">
+              </a>
+            </section>
           </div>
         </div>
       </div>
-    </div> 
-    
+    </div>
   </div>
 </div>
