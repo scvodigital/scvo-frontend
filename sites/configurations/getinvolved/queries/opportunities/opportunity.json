@@ -1,0 +1,63 @@
+{
+  "size": 1,
+  "_source": [
+    "Id",
+    "slug",
+    "work_type",
+    "work_type-slugs",
+    "client_group",
+    "client_group-slugs",
+    "description",
+    "title",
+    "geo_opportunity_coords",
+    "geo_opportunity_info",
+    "location",
+    "salary",
+    "salary_info",
+    "salary_min",
+    "remuneration_type",
+    "benefits",
+    "reference_number",
+    "application_notes",
+    "active",
+    "closing_date",
+    "start_at",
+    "end_at",
+    "organisation.slug",
+    "organisation.name",
+    "organisation.street_address",
+    "organisation.postcode",
+    "organisation.has_logo",
+    "organisation.logo_url",
+    "organisation.profile",
+    "organisation_website",
+    "organisation_website_url",
+    "organisation_twitter",
+    "organisation_twitter_url",
+    "organisation_facebook",
+    "organisation_facebook_url",
+    "organisation_linkedin",
+    "organisation_linkedin_url",
+    "rendered.goodmoves_sponsor_logos",
+    "rendered.goodmoves_downloads",
+    "rendered.goodmoves_rss"
+  ],
+  "query": {
+    "bool": {
+      "filter": [
+        {{>queries_opportunity_common_filters request.params.query}}
+      ],
+      "must": [
+        {
+          "term": {
+            {{#if (includes request.params.slug "-") ~}}
+            "slug": "{{request.params.slug}}"
+            {{else}}
+            "Id": "{{request.params.slug}}"
+            {{/if ~}}
+          }
+        }
+      ]
+    }
+  }
+}

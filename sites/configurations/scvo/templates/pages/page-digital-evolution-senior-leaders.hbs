@@ -4,14 +4,33 @@
     {{> breadcrumbs}}
     <div class="mdc-layout-grid">
       <div class="mdc-layout-grid__inner">
-        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-9-desktop mdc-layout-grid__cell--span-5-tablet mdc-layout-grid__cell--span-4-phone content page-content">
+        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-12-tablet mdc-layout-grid__cell--span-12-phone content page-content">
           {{{@root.data.primaryResponse.hits.hits.[0]._source.rendered.scvo_full}}}
+    
+          <h3 class="blogs">Case studies</h3>
+          <div class="mdc-layout-grid equal-height linked-cards">
+            <div class="mdc-layout-grid__inner">
+              {{#each @root.data.supplimentaryResponses.related_posts.hits.hits ~}}
+              <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
+                <div class="mdc-card">
+                  <section class="mdc-card__primary mdc-theme--primary-bg">
+                    <h1 class="mdc-card__title mdc-card__title--large v-margin-full">
+                      <a href="{{regexReplace _source.slug "_" "ig" "/"}}" class="mdc-theme--on-primary">{{_source.title}}</a>
+                    </h1>
+                  </section>
+                  <section class="mdc-card__media">
+                    <a href="{{regexReplace _source.slug "_" "ig" "/"}}">
+                      <img src="{{_source.featured_image.sizes.full.source_url}}" class="responsive">
+                    </a>
+                  </section>
+                </div>
+              </div>
+              {{/each ~}}
+            </div>
+          </div>
         </div>
-        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-3-tablet mdc-layout-grid__cell--span-4-phone sidebar page-sidebar">
-          {{> menu_digital_evolution_senior_leaders}}
-        </div>
-        {{> related_posts}}
       </div>
-    </div>
+    </div> 
+    
   </div>
 </div>

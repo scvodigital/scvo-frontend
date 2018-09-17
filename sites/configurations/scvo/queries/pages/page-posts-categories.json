@@ -1,0 +1,25 @@
+{
+  "size": 5,
+  "_source": [
+    "slug",
+    "title",
+    "featured_image.sizes.full.source_url"
+  ],
+  "query": {
+    "function_score": {
+      "query": {
+        "bool": {
+          "must": [
+            {
+              "terms": {
+                "categories_slug": {{{stringify templateMetaData.category_slugs}}}
+              }
+            }
+          ]
+        }
+      },
+      "random_score": {},
+      "score_mode": "sum"
+    }
+  }
+}
