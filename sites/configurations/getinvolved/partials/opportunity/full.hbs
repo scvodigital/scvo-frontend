@@ -37,7 +37,9 @@
 
             <h4 class="mdc-typography--headline6">Availability</h4>
             <div class="mdc-typography--body1">
-              <!--{{>opportunity_timings_display}}-->
+              {{#if @root.data.transformTimes.any}}
+                {{>opportunity_timings_display}}
+              {{/if}}
             </div>
 
 

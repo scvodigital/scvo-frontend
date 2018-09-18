@@ -13,132 +13,28 @@
     </tr>
     </thead>
     <tbody>
-    <tr>
-      <th>Morning</th>
-      <td style="text-align:center;font-weight:bold;">
-        {{#if monday_morning}}
-          <i class="fa fa-fw fa-check-square-o"></i><span class="visible-print">✓</span>
-        {{/if}}
-        {{#unless monday_morning}}
-          <i class="fa fa-fw fa-square-o"></i>
-        {{/unless}}
-      </td>
-      <td style="text-align:center;font-weight:bold;">
-        {{#if tuesday_morning}}
-          <i class="fa fa-fw fa-check-square-o"></i><span class="visible-print">✓</span>
-        {{/if}}
-        {{#unless tuesday_morning}}
-          <i class="fa fa-fw fa-square-o"></i>
-        {{/unless}}
-      </td>
-      <td style="text-align:center;font-weight:bold;">
-        {{#if wednesday_morning}}
-          <i class="fa fa-fw fa-check-square-o"></i><span class="visible-print">✓</span>
-        {{/if}}
-        {{#unless wednesday_morning}}
-          <i class="fa fa-fw fa-square-o"></i>
-        {{/unless}}
-      </td>
-      <td style="text-align:center;font-weight:bold;">
-        {{#if thursday_morning}}
-          <i class="fa fa-fw fa-check-square-o"></i><span class="visible-print">✓</span>
-        {{/if}}
-        {{#unless thursday_morning}}
-          <i class="fa fa-fw fa-square-o"></i>
-        {{/unless}}
-      </td>
-      <td style="text-align:center;font-weight:bold;">
-        {{#if friday_morning}}
-          <i class="fa fa-fw fa-check-square-o"></i><span class="visible-print">✓</span>
-        {{/if}}
-        {{#unless friday_morning}}
-          <i class="fa fa-fw fa-square-o"></i>
-        {{/unless}}
-      </td>
-      <td style="text-align:center;font-weight:bold;">
-        {{#if saturday_morning}}
-          <i class="fa fa-fw fa-check-square-o"></i><span class="visible-print">✓</span>
-        {{/if}}
-        {{#unless saturday_morning}}
-          <i class="fa fa-fw fa-square-o"></i>
-        {{/unless}}
-      </td>
-      <td style="text-align:center;font-weight:bold;">
-        {{#if sunday_morning}}
-          <i class="fa fa-fw fa-check-square-o"></i><span class="visible-print">✓</span>
-        {{/if}}
-        {{#unless sunday_morning}}
-          <i class="fa fa-fw fa-square-o"></i>
-        {{/unless}}
-      </td>
 
-      <td style="text-align:center;font-weight:bold;">
-        <i class="fa fa-fw fa-square-o"></i>{{#if monday_morning}}<span class="visible-print">✓</span>{{/if}}
-      </td>
-      <td style="text-align:center;font-weight:bold;">
-        <i class="fa fa-fw fa-square-o"></i>
-      </td>
-      <td style="text-align:center;font-weight:bold;">
-        <i class="fa fa-fw fa-square-o"></i>
-      </td>
-      <td style="text-align:center;font-weight:bold;">
-        <i class="fa fa-fw fa-square-o"></i>
-      </td>
-      <td style="text-align:center;font-weight:bold;">
-        <i class="fa fa-fw fa-square-o"></i>
-      </td>
-      <td style="text-align:center;font-weight:bold;">
-        <i class="fa fa-fw fa-square-o"></i>
-      </td>
-    </tr>
-    <tr>
-      <th>Afternoon</th>
-      <td style="text-align:center;font-weight:bold;">
-        <i class="fa fa-fw fa-square-o"></i>
-      </td>
-      <td style="text-align:center;font-weight:bold;">
-        <i class="fa fa-fw fa-square-o"></i>
-      </td>
-      <td style="text-align:center;font-weight:bold;">
-        <i class="fa fa-fw fa-square-o"></i>
-      </td>
-      <td style="text-align:center;font-weight:bold;">
-        <i class="fa fa-fw fa-square-o"></i>
-      </td>
-      <td style="text-align:center;font-weight:bold;">
-        <i class="fa fa-fw fa-square-o"></i>
-      </td>
-      <td style="text-align:center;font-weight:bold;">
-        <i class="fa fa-fw fa-square-o"></i>
-      </td>
-      <td style="text-align:center;font-weight:bold;">
-        <i class="fa fa-fw fa-square-o"></i>
-      </td>
-    </tr>
-    <tr>
-      <th>Evening</th>
-      <td style="text-align:center;font-weight:bold;">
-        <i class="fa fa-fw fa-square-o"></i>
-      </td>
-      <td style="text-align:center;font-weight:bold;">
-        <i class="fa fa-fw fa-square-o"></i>
-      </td>
-      <td style="text-align:center;font-weight:bold;">
-        <i class="fa fa-fw fa-square-o"></i>
-      </td>
-      <td style="text-align:center;font-weight:bold;">
-        <i class="fa fa-fw fa-square-o"></i>
-      </td>
-      <td style="text-align:center;font-weight:bold;">
-        <i class="fa fa-fw fa-square-o"></i>
-      </td>
-      <td style="text-align:center;font-weight:bold;">
-        <i class="fa fa-fw fa-square-o"></i>
-      </td>
-      <td style="text-align:center;font-weight:bold;">
-        <i class="fa fa-fw fa-square-o"></i>
-      </td>
-    </tr>
+      {{#each @root.data.transformTimes.times}}
+        <tr>
+        <th>{{capitalize @key}}</th>
+          {{#each this}}
+            <td style="text-align:center;font-weight:bold;">
+              <div class="mdc-checkbox">
+                <input disabled type="checkbox" name="type"
+                       class="mdc-checkbox__native-control"
+                       {{#if this}}checked{{/if}}>
+                <div class="mdc-checkbox__background">
+                  <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
+                    <path class="mdc-checkbox__checkmark__path" fill="none" stroke="white" d="M1.73,12.91 8.1,19.28 22.79,4.59"></path>
+                  </svg>
+                  <div class="mdc-checkbox__mixedmark"></div>
+                </div>
+              </div>
+            </td>
+          {{/each}}
+        </tr>
+      {{/each}}
+
     </tbody>
   </table>
 </div>
