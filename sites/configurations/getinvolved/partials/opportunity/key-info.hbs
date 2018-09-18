@@ -33,13 +33,14 @@
     </div> -->
     <ul class="fa-ul first">
       {{#if milo_ref ~}}
-      <li class="mdc-card__info--opportunity-status mdc-typography--body1">
-        <span class="fa-li"><span class="far fa-clock fa-hashtag" title="Reference"></span></span>
-        {{milo_ref}}
-      </li>
+        <li class="mdc-card__info--opportunity-reference mdc-typography--body1">
+          <span class="fa-li"><span class="far fa-hashtag fa-fw" title="Reference"></span></span>
+          {{milo_ref}}
+        </li>
       {{/if ~}}
+
       {{#if work_type ~}}
-      <li class="mdc-card__info--opportunity-salary mdc-typography--body1">
+      <li class="mdc-card__info--opportunity-work-type reference mdc-typography--body1">
         <span class="fa-li"><span class="far fa-briefcase fa-fw" title="Work Type"></span></span>
       {{#each work_type}}
         {{{this}}}{{#unless @last}}, {{/unless}}
@@ -47,7 +48,7 @@
       </li>
       {{/if ~}}
       {{#if client_group ~}}
-        <li class="mdc-card__info--opportunity-salary mdc-typography--body1">
+        <li class="mdc-card__info--opportunity-client-group mdc-typography--body1">
           <span class="fa-li"><span class="far fa-users fa-fw" title="Work Type"></span></span>
           {{#each client_group}}
             {{{this}}}{{#unless @last}}, {{/unless}}
