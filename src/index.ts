@@ -16,6 +16,9 @@ import * as stream from 'stream';
 import * as url from 'url';
 import * as querystring from 'querystring';
 import * as util from 'util';
+import * as chokidar from 'chokidar';
+
+import { JsonInc } from '@scvo/json-inc';
 
 const Dot = require('dot-object');
 const hbsFactory = require('clayhandlebars');
@@ -162,6 +165,26 @@ async function index(
     return;
   }
 }
+
+if (process.env.devmode) {
+  var watcher = chokidar.watch('./sites/configurations', { persistent: true });
+  watcher.on('change', (path) => {
+    console.log('CONFIGURATIONS WATCHER -> File', path, 'has changed, Rebuilding sites JSON');
+    var jsonInput = fs.readFileSync('./sites/sites.inc.json').toString();
+    var jsonInc = new JsonInc({});
+    jsonInc.transpile(jsonInput, './sites').then((output: string) => {
+      console.log('CONFIGURATIONS WATCHER -> Sites JSON rebuilt, clearing routers');
+      fs.writeFileSync('./sites/sites.json', output);
+      if (routers) {
+        for (var name in routers) {
+          delete routers[name];
+        };
+        routers = null;
+      }
+    });
+  });
+}
+
 async function menuUpdate(
     req: express.Request, res: express.Response,
     next: express.NextFunction): Promise<any> {
