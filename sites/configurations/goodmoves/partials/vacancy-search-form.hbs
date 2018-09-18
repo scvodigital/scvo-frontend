@@ -22,10 +22,12 @@
   <h3 class="mdc-drawer__title">Search jobs</h3>
 </div>
 <div class="mdc-drawer__content">
-  {{#>components_tab_bar}}
-    {{>components_tab url=(concat "/search" @root.request.url.search) iconClasses="far fa-list fa-fw" label="List" active=(compare @root.request.url.pathname "===" "/search")}}
-    {{>components_tab url=(concat "/map" @root.request.url.search) iconClasses="far fa-map-marker-alt fa-fw" label="Map" active=(compare @root.request.url.pathname "===" "/map")}}
-  {{/components_tab_bar}}
+  <div class="h-padding">
+    {{#>components_tab_bar}}
+      {{>components_tab url=(concat "/search" @root.request.url.search) iconClasses="far fa-list fa-fw" label="List" active=(compare @root.request.url.pathname "===" "/search")}}
+      {{>components_tab url=(concat "/map" @root.request.url.search) iconClasses="far fa-map-marker-alt fa-fw" label="Map" active=(compare @root.request.url.pathname "===" "/map")}}
+    {{/components_tab_bar}}
+  </div>
 
   <form action="/{{#compare @root.request.url.pathname "/map"}}map{{else}}search{{/compare}}" method="GET" class="search-form" novalidate>
     <input type="hidden" name="sort" value="{{@root.request.params.query.sort}}" id="{{instance_id}}-sort">
