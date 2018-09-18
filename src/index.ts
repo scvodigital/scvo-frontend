@@ -12,6 +12,7 @@ import * as admin from 'firebase-admin';
 import * as fs from 'fs';
 import * as https from 'https';
 import * as path from 'path';
+import { exec } from 'child_process'
 import * as stream from 'stream';
 import * as url from 'url';
 import * as querystring from 'querystring';
@@ -167,8 +168,8 @@ async function index(
 }
 
 if (process.env.devmode) {
-  var watcher = chokidar.watch('./sites/configurations', { persistent: true });
-  watcher.on('change', (path) => {
+  var configWatcher = chokidar.watch('./sites/configurations', { persistent: true });
+  configWatcher.on('change', (path) => {
     console.log('CONFIGURATIONS WATCHER -> File', path, 'has changed, Rebuilding sites JSON');
     var jsonInput = fs.readFileSync('./sites/sites.inc.json').toString();
     var jsonInc = new JsonInc({});
@@ -181,6 +182,14 @@ if (process.env.devmode) {
         };
         routers = null;
       }
+    });
+  });
+
+  var assetsWatcher = chokidar.watch(['../assets/sites', '../assets/lib'], { persistent: true });
+  assetsWatcher.on('change', (path) => { 
+    console.log('ASSETS WATCHER -> FILE', path, 'has changed. Rebuilding assets');
+    exec('npm run assets', (error, stdout, stderr) => {
+      console.log('ASSETS WATCHER -> Assets rebuilt', error, stdout, stderr);
     });
   });
 }
