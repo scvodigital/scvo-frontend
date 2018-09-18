@@ -17,7 +17,6 @@
     {{/compare ~}}
     <h2 class="mdc-card__info--opportunity-title mdc-typography--headline5">
       <a href="/opportunity/{{slug}}{{@root.request.url.search}}">
-        {{#if top_job}}<span class="top-job">Top job!</span>{{/if}}
         <span class="hover-underline">{{title}}</span>
       </a>
     </h2>
@@ -33,31 +32,49 @@
       </p>
     </div> -->
     <ul class="fa-ul first">
-      {{#if role_status_list ~}}
+      {{#if milo_ref ~}}
       <li class="mdc-card__info--opportunity-status mdc-typography--body1">
-        <span class="fa-li"><span class="far fa-clock fa-fw" title="Status"></span></span>
-        {{role_status_list}}
+        <span class="fa-li"><span class="far fa-clock fa-hashtag" title="Reference"></span></span>
+        {{milo_ref}}
       </li>
       {{/if ~}}
-      {{#if salary ~}}
+      {{#if work_type ~}}
       <li class="mdc-card__info--opportunity-salary mdc-typography--body1">
-        <span class="fa-li"><span class="far fa-calculator fa-fw" title="Salary"></span></span>
-        {{{trim salary}}}
+        <span class="fa-li"><span class="far fa-briefcase fa-fw" title="Work Type"></span></span>
+      {{#each work_type}}
+        {{{this}}}{{#unless @last}}, {{/unless}}
+      {{/each}}
       </li>
+      {{/if ~}}
+      {{#if client_group ~}}
+        <li class="mdc-card__info--opportunity-salary mdc-typography--body1">
+          <span class="fa-li"><span class="far fa-users fa-fw" title="Work Type"></span></span>
+          {{#each client_group}}
+            {{{this}}}{{#unless @last}}, {{/unless}}
+          {{/each}}
+        </li>
       {{/if ~}}
     </ul>
     <ul class="fa-ul last">
-      {{#if location ~}}
+      {{#compare work_location "===" "At Home"~}}
       <li class="mdc-card__info--opportunity-location mdc-typography--body1">
-        <span class="fa-li"><span class="far fa-map-marker-alt fa-fw" title="Location"></span></span>
-        {{location}}
+        <span class="fa-li"><span class="far fa-home fa-fw" title="Location"></span></span>
+        Work from home
       </li>
-      {{/if ~}}
-      {{#if closing_date ~}}
+      {{/compare ~}}
+      {{#compare work_location "!==" "At Home"~}}
+        {{#if postcode}}
+          <li class="mdc-card__info--opportunity-location mdc-typography--body1">
+            <span class="fa-li"><span class="far fa-map-marker-alt fa-fw" title="Postcode"></span></span>
+            {{postcode}}
+          </li>
+        {{/if}}
+      {{/compare ~}}
+      {{#if end_date ~}}
       <li class="mdc-card__info--opportunity-closing mdc-typography--body1">
-        <span class="fa-li"><span class="far fa-calendar-alt fa-fw" title="Closing date"></span></span>
-        Closing
-        {{{momentFormat (moment closing_date "x") "Do MMMM YYYY"}}}
+        <span class="fa-li"><span class="far fa-calendar-alt fa-fw" title="End date"></span></span>
+        <strong>Closing</strong>
+        {{{momentFormat (moment end_date "x") "Do MMMM YYYY"}}}
       </li>
       {{/if ~}}
     </ul>
