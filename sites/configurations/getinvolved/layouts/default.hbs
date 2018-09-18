@@ -39,7 +39,11 @@
   <!-- <link type="text/css" rel="stylesheet" href="https://unpkg.com/material-components-web@0.37.1/dist/material-components-web.min.css"> -->
   <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-TXfwrfuHVznxCssTxWoPZjhcss/hp38gEOH8UPZG/JcXonvBQ6SlsIF49wUzsGno" crossorigin="anonymous">
   <!-- <link type="text/css" rel="stylesheet" href="/assets/css/getinvolved-styles.css"> -->
-  <link type="text/css" rel="stylesheet" href="/assets/getinvolved/main.css">
+  {{#compare request.url.hostname "getinvolved.local"}}
+    <link type="text/css" rel="stylesheet" href="/assets/getinvolved/main.css">
+  {{else}}
+    <link type="text/css" rel="stylesheet" href="https://storage.googleapis.com/scvo-assets/scvo-frontend/getinvolved/main.css">
+  {{/compare}}
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-3467930-4"></script>
   <script>
   window.dataLayer = window.dataLayer || [];
@@ -58,7 +62,7 @@
   </script>
 </head>
 <body class="mdc-theme--site-bg {{#if request.params.path}}{{replace request.params.path '_' ' '}}{{else}}home{{/if}}">
-  <scvo-site>
+  <getinvolved-site>
     <div class="mdc-typography">
       {{#ifAny request.params.query.debug (compare request.url.hostname "getinvolved.local") ~}}
         {{#if errors.[0]}}
@@ -182,14 +186,15 @@
           <div class="container-fluid">
             <div class="mdc-layout-grid">
               <div class="mdc-layout-grid__inner">
-                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-phone mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-9-desktop">
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-10-desktop mdc-layout-grid__cell--span-6-tablet mdc-layout-grid__cell--span-4-phone">
                   <p>
-                    &copy; {{momentFormat (moment) "YYYY"}}. The Scottish Council for Voluntary Organisations (SCVO) is a Scottish Charitable Incorporated Organisation. Charity registered in Scotland <a href="https://www.oscr.org.uk/about-charities/search-the-register/charity-details?number=SC003558">SC003558</a>. Registered office Mansfield Traquair Centre, 15 Mansfield Place, Edinburgh EH3 6BB.
+                    &copy; {{momentFormat (moment) "YYYY"}}. The Scottish Council for Voluntary Organisations (SCVO) is a Scottish Charitable Incorporated Organisation.<br />
+                    Charity registered in Scotland <a href="https://www.oscr.org.uk/about-charities/search-the-register/charity-details?number=SC003558">SC003558</a>. Registered office Mansfield Traquair Centre, 15 Mansfield Place, Edinburgh EH3 6BB.
                   </p>
                 </div>
-                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-phone mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-3-desktop">
-                  <a href="https://scvo.org" title="Scottish Council for Voluntary Organisations">
-                    <img src="https://storage.googleapis.com/scvo-assets/scvo-frontend/assets/images/logos/scvo.png" alt="Scottish Council for Voluntary Organisations" class="logo scvo" />
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-2-desktop mdc-layout-grid__cell--span-2-tablet mdc-layout-grid__cell--span-4-phone">
+                  <a href="https://scvo.org" class="brand-logo" title="Scottish Council for Voluntary Organisations">
+                    <img src="https://storage.googleapis.com/scvo-assets/scvo-frontend/assets/images/logos/scvo.png" alt="Scottish Council for Voluntary Organisations" />
                   </a>
                 </div>
               </div>
@@ -198,7 +203,17 @@
         </div>
       </footer>
     </div>
-  </scvo-site>
+    <div class="mdc-snackbar mdc-elevation--z10"
+         aria-live="assertive"
+         aria-atomic="true"
+         aria-hidden="true"
+         id="app-snackbar">
+      <div class="mdc-snackbar__text"></div>
+      <div class="mdc-snackbar__action-wrapper">
+        <button type="button" class="mdc-snackbar__action-button"></button>
+      </div>
+    </div>
+  </getinvolved-site>
   <script type="text/javascript">
   var $buoop = {required:{e:-3,f:-3,o:-3,s:-1,c:-3},insecure:true,unsupported:true,api:2018.07 };
   function $buo_f(){

@@ -75,7 +75,11 @@
   <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-TXfwrfuHVznxCssTxWoPZjhcss/hp38gEOH8UPZG/JcXonvBQ6SlsIF49wUzsGno" crossorigin="anonymous">
   <!--<link type="text/css" rel="stylesheet" href="/assets/css/goodmoves-styles.css">-->
   <!-- <link type="text/css" rel="stylesheet" href="/assets/goodmoves/main.css"> -->
-  <link type="text/css" rel="stylesheet" href="https://storage.googleapis.com/scvo-assets/scvo-frontend/goodmoves/main.css">
+  {{#compare request.url.hostname "goodmoves.local"}}
+    <link type="text/css" rel="stylesheet" href="/assets/goodmoves/main.css">
+  {{else}}
+    <link type="text/css" rel="stylesheet" href="https://storage.googleapis.com/scvo-assets/scvo-frontend/goodmoves/main.css">
+  {{/compare}}
   <script>
   if(location.host.indexOf('.local') > -1){
     //document.write('<script src="https://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')
@@ -445,8 +449,11 @@
       data-cookie="CookieInfoScript"
       data-text-align="left"
       ></script>-->
-  <!-- <script type="text/javascript" src="/assets/goodmoves/main.js"></script> -->
-  <script type="text/javascript" src="https://storage.googleapis.com/scvo-assets/scvo-frontend/goodmoves/main.js"></script>
+  {{#compare request.url.hostname "goodmoves.local"}}
+    <script type="text/javascript" src="/assets/goodmoves/main.js"></script>
+  {{else}}
+    <script type="text/javascript" src="https://storage.googleapis.com/scvo-assets/scvo-frontend/goodmoves/main.js"></script>
+  {{/compare}}
   <script>
     var goodmoves = null; readyListeners = [];
     $(document).ready(function() {

@@ -142,19 +142,20 @@
           {{#compare (length geo_vacancy_coords) ">" 0 ~}}
             <div class="container-content container-map">
               <div id="map-vacancy" data-map-name="vacancyMap" data-map-options='{
-                "center": {
-                  "lat": {{geo_vacancy_coords.0.lat}},
-                  "lng": {{geo_vacancy_coords.0.lon}}
-                },
-                "zoom": 13
-              }'></div>
+                  "center": {
+                    "lat": {{geo_vacancy_coords.0.lat}},
+                    "lng": {{geo_vacancy_coords.0.lon}}
+                  },
+                  "zoom": 13
+                  }'>
+                {{#each (arrayify geo_vacancy_coords) ~}}
+                  <marker style="display:none;" data-map="vacancyMap" data-lat="{{lat}}" data-lng="{{lon}}" data-title="{{../organisation.name}} - {{../title}}">
+                    <h3 class="mdc-typography--headline7">{{../organisation.name}}</h3>
+                    <p class="mdc-typography--body2">{{../title}}</p>
+                  </marker>
+                {{/each ~}}
+              </div>
             </div>
-            {{#each (arrayify geo_vacancy_coords) ~}}
-              <marker style="display:none;" data-map="vacancyMap" data-lat="{{lat}}" data-lng="{{lon}}" data-title="{{../organisation.name}} - {{../title}}">
-                <h3 class="mdc-typography--headline7">{{../organisation.name}}</h3>
-                <p class="mdc-typography--body2">{{../title}}</p>
-              </marker>
-            {{/each ~}}
           {{else}}
             <div class="container-content v-margin-full">
               <p class="mdc-typography--body1">
