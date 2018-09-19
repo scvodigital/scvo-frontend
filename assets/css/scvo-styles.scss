@@ -890,7 +890,6 @@ footer h3,
 .mdc-form-field,
 .mdc-text-field,
 .mdc-dialog__body,
-.mdc-card__subtitle,
 .mdc-floating-label,
 .mdc-card__subtitle,
 .mdc-snackbar__text,
@@ -2268,6 +2267,17 @@ body.the-gathering:not(.post) .full {
 }
 body.the-gathering-2019 {
   #gathering-menu {
+    box-shadow: none;
+    margin: -($unit/2) 0 0;
+    box-shadow: none;
+    table-layout: fixed;
+    display: inline-table;
+    min-width: 100%;
+    .mdc-button {
+      display: table-cell;
+      border-radius: 0;
+      text-align: center;
+    }
     .mdc-button:first-child {
       content: "Home";
     }
@@ -2577,8 +2587,11 @@ body.i-love-charity .page-info,
 .mdc-card__media a:hover {
   text-decoration: none;
 }
-.mdc-card__subtitle .post-info-item {
-  font-weight: 500;
+.mdc-card__subtitle {
+  margin: 0;
+  .post-info-item {
+    font-weight: 500;
+  }
 }
 .mdc-card__title--large {
   font-size: 1.2rem;
