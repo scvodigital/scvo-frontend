@@ -1,5 +1,5 @@
 <div class="mdc-card goodmoves-vacancy list{{if top_job " top-job"}}" data-vacancy-id="{{Id}}">
-  {{> vacancy_key_info}}
+  {{> vacancy_key_info view="list"}}
   <hr class="mdc-list-divider" />
   {{#compare (trim (getProperty @root.data.notes Id)) "!==" "" ~}}
     {{> vacancy_description limit="3rem" description=description}}

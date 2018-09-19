@@ -29,7 +29,7 @@ import * as S from 'string';
 // Router modules
 import {Helpers} from './helpers';
 
-import {Router, RouterConfiguration, RouterRequest, RouterResponse, HttpVerb, RendererHandlebars, TaskElasticsearch, TaskMySQL, TaskRedirect, TaskRenderLayout, TaskRender, TaskFirebaseAuth, TaskFirebaseRtbGet, TaskFirebaseRtbSet, TaskTransform, TaskMailgun} from '@scvo/router';
+import {Router, RouterConfiguration, RouterRequest, RouterResponse, HttpVerb, RendererHandlebars, TaskElasticsearch, TaskMySQL, TaskRedirect, TaskRenderLayout, TaskRequest, TaskRender, TaskFirebaseAuth, TaskFirebaseRtbGet, TaskFirebaseRtbSet, TaskTransform, TaskMailgun} from '@scvo/router';
 
 // Import internal modules
 import {SECRETS} from './secrets';
@@ -186,7 +186,7 @@ if (process.env.devmode) {
   });
 
   var assetsWatcher = chokidar.watch(['../assets/sites', '../assets/lib'], { persistent: true });
-  assetsWatcher.on('change', (path) => { 
+  assetsWatcher.on('change', (path) => {
     console.log('ASSETS WATCHER -> FILE', path, 'has changed. Rebuilding assets');
     exec('npm run assets', (error, stdout, stderr) => {
       console.log('ASSETS WATCHER -> Assets rebuilt', error, stdout, stderr);
@@ -469,7 +469,8 @@ async function loadRouters(): Promise<any> {
       firebaseRtbGet: new TaskFirebaseRtbGet(firebaseApps),
       firebaseRtbSet: new TaskFirebaseRtbSet(firebaseApps),
       transform: new TaskTransform({ querystring: querystring, url: url }),
-      mailgun: new TaskMailgun(SECRETS.mailgun)
+      mailgun: new TaskMailgun(SECRETS.mailgun),
+      request: new TaskRequest()
     }
 
     routers = {};
