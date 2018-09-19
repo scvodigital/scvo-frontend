@@ -16,5 +16,18 @@ $(document).ready(function() {
   console.log('New Recently Viewed:', newRecentlyViewed);
   goodmoves.setCookie('recently_viewed', newRecentlyViewed, 7);
 {{/if}}
+
+  var downloads = [].slice.call(document.querySelectorAll);
+  $('[href*="goodmoves-files"]').on('click', function(evt) {
+    var url = $(evt.currentTarget).attr('href');
+    var parts = url.split('/');
+    var filename = parts[parts.length - 1];
+    
+    gtag('event', 'document_hit', {
+      'event_category': 'goodmoves-vacancy',
+      'event_label': vacancyId,
+      'hit_type': filename
+    });
+  });
 });
 </script>
