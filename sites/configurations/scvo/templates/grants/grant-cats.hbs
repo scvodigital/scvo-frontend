@@ -1,6 +1,6 @@
 {{#with @root.data.primaryResponse.hits.hits.[0]._source ~}}
 <div class="grant-charter">
-  {{> header_splash headerTextOverride=title headerTextCaptionOverride=recipient_name}}
+  {{> header_splash headerTextOverride=title}}
   <div class="container-fluid">
     <ul class="breadcrumbs">
       <li><a href="/">Home</a></li>
@@ -13,7 +13,81 @@
     <div class="mdc-layout-grid">
       <div class="mdc-layout-grid__inner">
         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12 content grant-content">
-          {{{rendered.scvo_full}}}
+          <div class="full scvo-grant scvo-grant-cats">
+            {{#if recipient_overview}}
+            <div>
+              {{{recipient_overview}}}
+            </div>
+            {{/if}}
+
+            <ul class="fa-ul">
+              {{#if planned_start}}
+              {{#if planned_end}}
+              <li>
+                <span class="fa-li far fa-calendar-alt"></span>
+                From {{momentFormat (moment planned_start "x") "Do MMMM YYYY"}}
+                to {{momentFormat (moment planned_end "x") "Do MMMM YYYY"}}
+              </li>
+              {{/if}}
+              {{/if}}
+              {{#if call}}
+              <li>
+                <span class="fa-li far fa-money-bill"></span>
+                {{#if amount_awarded}}
+                Award: &pound;{{addCommas amount_awarded}} via {{call}}
+                {{else}}
+                {{#if amount_requested_total}}
+                Award: &pound;{{addCommas amount_requested_total}} via {{call}}
+                {{else}}
+                {{#if amount_requested}}
+                Award: &pound;{{addCommas amount_requested}} via {{call}}
+                {{/if}}
+                {{/if}}
+                {{/if}}
+              </li>
+              {{/if}}
+              <li>
+                <span class="fa-li far fa-database"></span>
+                <a href="http://grantnav.threesixtygiving.org/grant/360G-SCVO-{{Id}}" target="_blank">Data published on 360Giving</a>
+              </li>
+              {{#if recipient_charity_number}}
+              <li>
+                <span class="fa-li far fa-info-circle"></span>
+                Charity registered in Scotland <a href="http://www.oscr.org.uk/about-charities/search-the-register/charity-details?number={{recipient_charity_number}}">{{recipient_charity_number}}</a>
+              </li>
+              {{/if}}
+              {{#if recipient_url}}
+              <li>
+                <span class="fa-li far fa-link"></span>
+                <a href="{{fixUrl recipient_url "http"}}">
+                  {{recipient_url}}
+                </a>
+              </li>
+              {{/if}}
+              {{#if recipient_twitter}}
+              <li>
+                <span class="fa-li fab fa-twitter"></span>
+                <a href="{{fixUrl recipient_twitter "http"}}">
+                  Twitter
+                </a>
+              {{/if}}
+              {{#if recipient_facebook}}
+              <li>
+                <span class="fa-li fab fa-facebook"></span>
+                <a href="{{fixUrl recipient_facebook "http"}}">
+                  Facebook
+                </a>
+              </li>
+              {{/if}}
+            </ul>
+
+            {{#if description}}
+            <h3 class="project-overview">Project description</h3>
+            <div class="project-overview">
+              {{{description}}}
+            </div>
+            {{/if}}
+          </div>
         </div>
       </div>
     </div>
