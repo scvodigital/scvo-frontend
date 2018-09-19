@@ -71,7 +71,7 @@ export class Helpers {
         escaped = escaped.substr(0, escaped.length - 1);
       }
     }
-    return escaped; 
+    return escaped;
   }
 
   static helper_firstItem(arr: any[]) {
@@ -93,7 +93,7 @@ export class Helpers {
     return slug;
   }
 
-  static helper_fixUrl(url: string, protocol: string = 'https') {
+  static helper_fixUrl(url: string, protocol: string = 'http') {
     if (!url) {
       return '';
     }
@@ -163,7 +163,7 @@ export class Helpers {
     items = items.filter((item: string) => {
       return !!item.replace(/\s|\r|\n/gi, '');
     });
-    
+
     var out = items.join(', ');
     return out;
   }
@@ -179,7 +179,7 @@ export class Helpers {
         '@key': key,
         '@value': value,
         '@first': current === 0,
-        '@last': current === count - 1 
+        '@last': current === count - 1
       };
       output.push(options.fn(context));
       current++;
@@ -587,7 +587,7 @@ export class Helpers {
     const out = items.sort();
     return out;
   }
-  
+
   static helper_sortByIndex(items: any[], index: any[], property: string) {
     if (!Array.isArray(items) || !Array.isArray(index) || typeof property !== 'string') {
       return items;

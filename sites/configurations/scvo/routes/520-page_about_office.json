@@ -6,6 +6,28 @@
   },
   "tasks": [
     {
+      "name": "bicyclesEdinburgh",
+      "taskModule": "request",
+      "config": {
+        "options": {
+          "url": "https://api.citybik.es/v2/networks/edinburgh-cycle-hire",
+          "json": true
+        }
+      },
+      "renderer": "handlebars"
+    },
+    {
+      "name": "bicyclesGlasgow",
+      "taskModule": "request",
+      "config": {
+        "options": {
+          "url": "https://api.citybik.es/v2/networks/nextbike-glasgow",
+          "json": true
+        }
+      },
+      "renderer": "handlebars"
+    },
+    {
       "name": "supplimentaryResponses",
       "taskModule": "elasticsearch",
       "config": {
