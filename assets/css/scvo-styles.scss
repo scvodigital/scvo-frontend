@@ -890,7 +890,6 @@ footer h3,
 .mdc-form-field,
 .mdc-text-field,
 .mdc-dialog__body,
-.mdc-card__subtitle,
 .mdc-floating-label,
 .mdc-card__subtitle,
 .mdc-snackbar__text,
@@ -2233,9 +2232,9 @@ body.the-gathering:not(.post) {
   .full {
     margin-left: auto;
     margin-right: auto;
-    .mdc-button {
-      width: 100%;
-    }
+    // .mdc-button {
+    //   width: 100%;
+    // }
     .gallery-caption {
       font-weight: 600;
       margin-bottom: $unit;
@@ -2267,12 +2266,34 @@ body.the-gathering:not(.post) .full {
   width: 60%;
 }
 body.the-gathering-2019 {
+  .dark-menu {
+    background: black;
+  }
   #gathering-menu {
+    box-shadow: none;
+    margin: -($unit/2) 0 0;
+    box-shadow: none;
+    table-layout: fixed;
+    display: inline-table;
+    min-width: 100%;
+    .mdc-button {
+      display: table-cell;
+      border-radius: 0;
+      text-align: center;
+      color: rgba(255, 255, 255, 0.8);
+    }
     .mdc-button:first-child {
       content: "Home";
     }
     .menu-level-2 {
       padding-left: $unit;
+    }
+  }
+  .wp-block-table {
+    border-collapse: collapse;
+    td {
+      border: 1px solid rgba(0, 0, 0, 0.5);
+      padding: $unit/10 $unit/4;
     }
   }
 }
@@ -2577,8 +2598,11 @@ body.i-love-charity .page-info,
 .mdc-card__media a:hover {
   text-decoration: none;
 }
-.mdc-card__subtitle .post-info-item {
-  font-weight: 500;
+.mdc-card__subtitle {
+  margin: 0;
+  .post-info-item {
+    font-weight: 500;
+  }
 }
 .mdc-card__title--large {
   font-size: 1.2rem;
