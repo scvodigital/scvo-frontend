@@ -36,6 +36,36 @@
       }
     },
     "commonTasks": {
+      "authNotRequired": {
+        "name": "auth",
+        "taskModule": "firebaseAuth",
+        "config": {
+          "tokenPath": "request.cookies.gi_token",
+          "cookieName": "gi_cookie",
+          "cookieOptions": {
+            "maxAge": 1209600000,
+            "secure": true
+          },
+          "appName": "getinvolved",
+          "noTokenRoute": "",
+          "notAuthenticatedRoute": ""
+        }
+      },
+      "authRequired": {
+        "name": "auth",
+        "taskModule": "firebaseAuth",
+        "config": {
+          "tokenPath": "request.cookies.gi_token",
+          "cookieName": "gi_cookie",
+          "cookieOptions": {
+            "maxAge": 1209600000,
+            "secure": true
+          },
+          "appName": "getinvolved",
+          "noTokenRoute": "sign_in",
+          "notAuthenticatedRoute": "sign_in"
+        }
+      },
       "termsMaps": {
         "name": "termsMaps",
         "taskModule": "render",

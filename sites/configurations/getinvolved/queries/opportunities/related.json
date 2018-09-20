@@ -62,28 +62,35 @@
                 "work_type_slugs": {{{stringify (arrayify @root.data.primaryResponse.hits.hits.[0]._source.work_type_slugs)}}}
               }
             }
-          ],
-          "must_not": [
-            {
-              "term": {
-                "Id": "{{@root.data.primaryResponse.hits.hits.[0]._source.Id}}"
-              }
-            }
-          ]
-        }
-      }{{#if data.primaryResponse.hits.hits.[0]._source.salary_min ~}},
-      "functions": [
+          }
+        },
         {
-          "gauss": {
-            "salary_min": {
-              "origin": "{{@root.data.primaryResponse.hits.hits.[0]._source.salary_min}}",
-              "scale": "1000",
-              "offset": "10000",
-              "decay": 0.1
+          "match": {
+            "title" : {
+              "query" : "{{@root.data.primaryResponse.hits.hits.[0]._source.title}}",
+              "operator" : "and",
+              "zero_terms_query": "all"
             }
           }
+        },
+        {
+          "terms": {
+            "client_group-slugs": {{{stringify (arrayify @root.data.primaryResponse.hits.hits.[0]._source.client_group-slugs)}}}
+          }
+        },
+        {
+          "terms": {
+            "work_type-slugs": {{{stringify (arrayify @root.data.primaryResponse.hits.hits.[0]._source.work_type-slugs)}}}
+          }
         }
-      ]{{/if ~}}
+      ],
+      "must_not": [
+        {
+          "term": {
+            "Id": "{{@root.data.primaryResponse.hits.hits.[0]._source.Id}}"
+          }
+        }
+      ]
     }
   }
 }
