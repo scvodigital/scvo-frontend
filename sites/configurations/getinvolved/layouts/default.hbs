@@ -364,11 +364,11 @@
   catch(e){window.attachEvent("onload", $buo_f)}
   </script>
 
-  {{#compare request.url.hostname "getinvolved.local"}}
+  {{#compare request.url.hostname "getinvolved.local" ~}}
     <script type="text/javascript" src="/assets/getinvolved/main.js"></script>
   {{else}}
     <script type="text/javascript" src="https://storage.googleapis.com/scvo-assets/getinvolved/main-{{@root.context.metaData.assetsVersion}}.js"></script>
-  {{/compare}}
+  {{/compare ~}}
   <script>
     var getinvolved = null; readyListeners = [];
     $(document).ready(function() {
@@ -377,7 +377,7 @@
         authDomain: "scvo-getinvolved.firebaseapp.com",
         databaseURL: "https://scvo-getinvolved.firebaseio.com",
         projectId: "scvo-getinvolved",
-        storageBucket: "",
+        storageBucket: "scvo-getinvolved.appspot.com",
         messagingSenderId: "815398681377"
       });
       ready = true;
