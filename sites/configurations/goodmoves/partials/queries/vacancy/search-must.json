@@ -14,14 +14,12 @@
   {{>queries_number_range field="salary_min" lte=salary_max}},
 {{/compare ~}}
 {{/if ~}}
-{{#ifAny regions location home_based ~}}
+{{#ifAny regions location home_based various_locations ~}}
 {
   "bool": {
     "should": [
       {{#if regions ~}}
         {{>queries_terms field="region_group_slug" terms=regions}},
-      {{else}}
-        {{>queries_do_nothing}},
       {{/if ~}}
       {{#ifAll location lat lng distance ~}}
         {
@@ -32,36 +30,57 @@
               "lon": {{lng}}
             }
           }
-        }
-        {{#compare @root.route.name "!==" "vacancy_map" ~}},
+        },
+        {{#compare @root.route.name "!==" "vacancy_map" ~}}
           {
-            "term": {
-              "home_based": true
+            "bool": {
+              "should": [
+                {
+                  "term": {
+                    "home_based": true
+                  }
+                },
+                {
+                  "term": {
+                    "various_locations": true
+                  }
+                }
+              ]
             }
-          }
+          },
         {{else}}
-          {{#if home_based ~}},
+          {{#if home_based ~}}
             {
               "term": {
                 "home_based": true
               }
-            }
+            },
+          {{/if ~}}
+          {{#if various_locations ~}}
+            {
+              "term": {
+                "various_locations": true
+              }
+            },
           {{/if ~}}
         {{/compare ~}}
       {{else}}
         {{#if home_based ~}}
-          {{#if regions ~}}
-            {{>queries_do_nothing}},
-          {{/if ~}}
           {
             "term": {
               "home_based": true
             }
-          }
-        {{else}}
-          {{>queries_do_nothing}}
+          },
+        {{/if ~}}
+        {{#if various_locations ~}}
+          {
+            "term": {
+              "various_locations": true
+            }
+          },
         {{/if ~}}
       {{/ifAll ~}}
+      {{>queries_do_nothing}}
     ],
     "minimum_should_match": 2
   }
