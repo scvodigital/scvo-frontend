@@ -6,7 +6,7 @@
     "top_job",
     "description",
     "title",
-    "geo_vacancy_coords",
+    "geo_coords",
     "location",
     "salary",
     "salary_min",
@@ -24,63 +24,47 @@
     "remuneration_type"
   ],
   "query": {
-    "function_score": {
-      "query": {
-        "bool": {
-          "filter": [
-            {{>queries_opportunity_common_filters request.params.query}}
-          ],
-          "should": [
-            {
-              "match": {
-                "remuneration_type" : {
-                  "query" : "{{@root.data.primaryResponse.hits.hits.[0]._source.remuneration_type}}",
-                  "operator" : "and",
-                  "zero_terms_query": "all"
-                }
-              }
-            },
-            {
-              "match": {
-                "title" : {
-                  "query" : "{{@root.data.primaryResponse.hits.hits.[0]._source.title}}",
-                  "operator" : "and",
-                  "zero_terms_query": "all"
-                }
-              }
-            },
-            {
-              "terms": {
-                "client_group-slugs": {{{stringify (arrayify @root.data.primaryResponse.hits.hits.[0]._source.client_group-slugs)}}}
-              }
-            },
-            {
-              "terms": {
-                "work_type-slugs": {{{stringify (arrayify @root.data.primaryResponse.hits.hits.[0]._source.work_type-slugs)}}}
-              }
-            }
-          ],
-          "must_not": [
-            {
-              "term": {
-                "Id": "{{@root.data.primaryResponse.hits.hits.[0]._source.Id}}"
-              }
-            }
-          ]
-        }
-      }{{#if data.primaryResponse.hits.hits.[0]._source.salary_min ~}},
-      "functions": [
+    "bool": {
+      "filter": [
+        {{>queries_opportunity_common_filters request.params.query}}
+      ],
+      "should": [
         {
-          "gauss": {
-            "salary_min": {
-              "origin": "{{@root.data.primaryResponse.hits.hits.[0]._source.salary_min}}",
-              "scale": "1000",
-              "offset": "10000",
-              "decay": 0.1
+          "match": {
+            "remuneration_type" : {
+              "query" : "{{@root.data.primaryResponse.hits.hits.[0]._source.remuneration_type}}",
+              "operator" : "and",
+              "zero_terms_query": "all"
             }
           }
+        },
+        {
+          "match": {
+            "title" : {
+              "query" : "{{@root.data.primaryResponse.hits.hits.[0]._source.title}}",
+              "operator" : "and",
+              "zero_terms_query": "all"
+            }
+          }
+        },
+        {
+          "terms": {
+            "client_group-slugs": {{{stringify (arrayify @root.data.primaryResponse.hits.hits.[0]._source.client_group-slugs)}}}
+          }
+        },
+        {
+          "terms": {
+            "work_type-slugs": {{{stringify (arrayify @root.data.primaryResponse.hits.hits.[0]._source.work_type-slugs)}}}
+          }
         }
-      ]{{/if ~}}
+      ],
+      "must_not": [
+        {
+          "term": {
+            "Id": "{{@root.data.primaryResponse.hits.hits.[0]._source.Id}}"
+          }
+        }
+      ]
     }
   }
 }

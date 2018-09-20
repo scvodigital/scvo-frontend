@@ -1,0 +1,87 @@
+<div class="mdc-card full" data-organisation-id="{{Id}}">
+  <div class="mdc-card__info--organisation-row">
+    <div class="mdc-card__info--organisation">
+      {{#if has_logo ~}}
+      <div class="mdc-card__media mdc-card__media--organisation">
+        <img src="{{logo_url}}" alt="{{title}}" />
+      </div>
+      {{/if ~}}
+      <div class="mdc-card__info--organisation-title mdc-typography--headline3">
+        {{{title}}}
+      </div>
+      {{{rendered.goodmoves_charity_info}}}
+      <div class="detailed-info">
+        {{#if description ~}}
+        <div class="mdc-typography--body1 v-margin">
+          {{{description}}}
+        </div>
+        {{/if ~}}
+      </div>
+      <div class="key-info-extra">
+        <ul class="fa-ul last">
+          {{#if website ~}}
+          {{#compare website "!==" null ~}}
+          {{#compare website "!==" "http://" ~}}
+          <li class="mdc-card__info--opportunity-website mdc-typography--body1">
+            <span class="fa-li"><span class="far fa-link fa-fw" title="Website"></span></span>
+            <a href="{{website_url}}">{{website}}</a>
+          </li>
+          {{/compare ~}}
+          {{/compare ~}}
+          {{/if ~}}
+          {{#if twitter ~}}
+          {{#compare twitter "!==" null ~}}
+          {{#compare twitter "!==" "http://" ~}}
+          <li class="mdc-card__info--opportunity-twitter mdc-typography--body1">
+            <span class="fa-li"><span class="fab fa-twitter fa-fw" title="Twitter"></span></span>
+            <a href="{{twitter_url}}">{{twitter}}</a>
+          </li>
+          {{/compare ~}}
+          {{/compare ~}}
+          {{/if ~}}
+          {{#if facebook ~}}
+          {{#compare facebook "!==" null ~}}
+          {{#compare facebook "!==" "http://" ~}}
+          <li class="mdc-card__info--opportunity-facebook mdc-typography--body1">
+            <span class="fa-li"><span class="fab fa-facebook fa-fw" title="Facebook"></span></span>
+            <a href="{{facebook_url}}">{{facebook}}</a>
+          </li>
+          {{/compare ~}}
+          {{/compare ~}}
+          {{/if ~}}
+          {{#if linkedin ~}}
+          {{#compare linkedin "!==" null ~}}
+          {{#compare linkedin "!==" "http://" ~}}
+          <li class="mdc-card__info--opportunity-linkedin mdc-typography--body1">
+            <span class="fa-li"><span class="fab fa-linkedin fa-fw" title="LinkedIn"></span></span>
+            <a href="{{linkedin_url}}">{{linkedin}}</a>
+          </li>
+          {{/compare ~}}
+          {{/compare ~}}
+          {{/if ~}}
+          {{#if goodhq_organisation ~}}
+          {{#compare goodhq_organisation.xid "!==" null ~}}
+          <li class="mdc-card__info--opportunity-goodhq mdc-typography--body1">
+            <span class="fa-li"><span class="fas fa-heart fa-fw" title="Good HQ"></span></span>
+            <a href="https://goodhq.org/{{goodhq_organisation.xid}}">@{{goodhq_organisation.xid}}</a>
+            {{#compare goodhq_organisation.status "===" "Open" ~}}
+            –
+            {{#compare @root.data.goodhq.reviews.hits.total ">" 0 ~}}
+            <a href="https://goodhq.org/{{goodhq_organisation.xid}}?mode=reviews">{{inflect @root.data.goodhq.reviews.hits.total "review" "reviews" true}}</a>{{#compare @root.data.goodhq.posts.hits.total ">" 0}}{{#compare @root.data.goodhq.volunteering.hits.total "===" 0}} and {{else}}, {{/compare}}{{else}}{{#compare @root.data.goodhq.volunteering.hits.total ">" 0}} and {{/compare}}{{/compare}}{{/compare ~}}
+            {{#compare @root.data.goodhq.posts.hits.total ">" 0 ~}}
+            <a href="https://goodhq.org/{{goodhq_organisation.xid}}?mode=posts">{{inflect @root.data.goodhq.posts.hits.total "post" "posts" true}}</a>{{#compare @root.data.goodhq.volunteering.hits.total ">" 0}}, and{{/compare}}
+            {{/compare ~}}
+            {{#compare @root.data.goodhq.volunteering.hits.total ">" 0 ~}}
+            <a href="https://goodhq.org/{{goodhq_organisation.xid}}?mode=volunteer">{{inflect @root.data.goodhq.volunteering.hits.total "volunteering opportunity" "volunteering opportunities" true}}</a>
+            {{/compare ~}}
+            {{/compare ~}}
+            on
+            <a href="https://goodhq.org/{{goodhq_organisation.xid}}">Good HQ</a>
+          </li>
+          {{/compare ~}}
+          {{/if ~}}
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

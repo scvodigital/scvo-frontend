@@ -1,0 +1,27 @@
+{{> search_info paging=@root.data.search_data.detailed_results.pagination}}
+
+<div class="mdc-layout-grid head">
+  <div class="mdc-layout-grid__inner">
+    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone">
+    </div>
+    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-6-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
+      {{> pagination paging=@root.data.search_data.detailed_results.pagination}}
+    </div>
+    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
+    </div>
+  </div>
+</div>
+
+<div class="mdc-layout-grid equal-height">
+  <div class="mdc-layout-grid__inner">
+    {{#each @root.data.search_data.detailed_results.hits.hits ~}}
+    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
+      {{> organisation_search_result _source}}
+    </div>
+    {{/each ~}}
+  </div>
+</div>
+
+<div class="foot">
+  {{> pagination paging=@root.data.search_data.detailed_results.pagination}}
+</div>
