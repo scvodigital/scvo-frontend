@@ -5,11 +5,7 @@
         <div class="mdc-layout-grid">
           <div class="mdc-layout-grid__inner">
             <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone">
-              <h1 class="header-text">
-                <span class="header-text-banner">
-                  <span class="normal welcome">Welcome to</span><br />good<span class="normal moves">moves</span>
-                </span>
-              </h1>
+              {{> logo welcome="true"}}
               <p class="header-extra">
                 Charity and voluntary sector recruitment
               </p>
@@ -29,13 +25,13 @@
                   <input type="text" id="what-jobs" name="keywords" class="mdc-text-field__input" placeholder="" data-lpignore="true" data-typeahead='{
                     "typeaheadOptions": {
                       "highlight": true,
-                      "minlength": 0        
+                      "minlength": 0
                     },
                     "outputs": [
                       {
                         "type": "element",
                         "options": {
-                          "containerSelectorTemplate": "#search-terms", 
+                          "containerSelectorTemplate": "#search-terms",
                           "testSelectorTemplate": "#\{{dataset.name}}-\{{item.value}}",
                           "removeSelectorTemplate": "#remove-\{{dataset.name}}-\{{item.value}}",
                           "template": {{#blockStringify this~}}
@@ -100,7 +96,7 @@
                           {{/each ~}}
                         ]
                       }
-                    ]  
+                    ]
                   }'>
                   <label for="what-jobs" class="mdc-floating-label">
                     Keywords
