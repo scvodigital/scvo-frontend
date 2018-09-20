@@ -20,7 +20,7 @@
     "dev-router": "npm run router; npm run dev",
     "deploy-dispatch": "gcloud app deploy dispatch.yaml --quiet",
     "clear-cache": "curl -s https://scvo.org.uk/reload-sites",
-    "deploy-db": "npm run build-db; firebase database:set -y /contexts ./sites/sites.json; npm run clear-cache",
+    "deploy-db": "npm run build-db && node bump-assets-version.js && firebase database:set -y /contexts ./sites/sites.json && npm run clear-cache",
     "deploy-app": "npm run build; npm run secrets; npm run deploy-dispatch; gcloud beta app deploy --quiet; npm run deploy-db",
     "router": "cd ../router2; npm run link; cd ../frontend;",
     "check": "gts fix; gts check",
