@@ -1,0 +1,14 @@
+{{> account_sign_out_loader}}
+<script>
+document.addEventListener("DOMContentLoaded", function(event) {
+  window.setTimeout(function() {
+    getinvolved.app.auth().signOut().then(function() {
+      getinvolved.setCookie('gi_token');
+      getinvolved.setCookie('gi_cookie');
+      window.location.href = '/';
+    }).catch(function(err) {
+      console.error('Error signing out:', err);
+    });
+  }, 1000);
+});
+</script>

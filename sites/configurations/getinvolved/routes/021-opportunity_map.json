@@ -1,6 +1,6 @@
 {
-  "name": "opportunity_search",
-  "pattern": "/search",
+  "name": "opportunity_map",
+  "pattern": "/map",
   "debug": true,
   "metaData": {
     "sidebarButton": {
@@ -13,20 +13,22 @@
     "context": "results"
   },
   "tasks": [
+    "context.metaData.commonTasks.authNotRequired",
     {
       "name": "search_data",
       "taskModule": "elasticsearch",
       "config": {
         "connectionStringTemplate": "{$../../elasticsearch-url.txt}",
         "elasticsearchConfig": {
-          "apiVersion": "5.6"
+          "apiVersion": "5.6",
+          "log": "debug"
         },
         "queryTemplates": [
           {
-            "name": "detailed_results",
+            "name": "map_results",
             "index": "web-content-production",
             "type": "milo-volunteering-opportunity",
-            "template": ">context.metaData.handlebars.queries.opportunities_search-list"
+            "template": ">context.metaData.handlebars.queries.opportunities_search-map"
           }
         ]
       },
@@ -43,7 +45,7 @@
           "if": [
             {
               "in": [
-                "rss",
+                "view=rss",
                 {
                   "var": "request.fullUrl"
                 }
@@ -76,8 +78,8 @@
             "layout": ">context.metaData.handlebars.layouts.default",
             "parts": {
               "head": ">context.metaData.handlebars.templates.opportunities_search-head-tags",
-              "body": ">context.metaData.handlebars.templates.opportunities_search",
-              "foot": ">context.metaData.handlebars.templates.opportunities_search-foot",
+              "body": ">context.metaData.handlebars.templates.opportunities_map",
+              "foot": ">context.metaData.handlebars.templates.opportunities_map-foot",
               "sidebar": ">context.metaData.handlebars.templates.opportunities_search-form"
             },
             "contentType": "text/html"

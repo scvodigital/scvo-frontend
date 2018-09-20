@@ -39,14 +39,11 @@
   <link rel="search" type="application/opensearchdescription+xml" title="Goodmoves" href="/assets/opensearch.xml" />
 
   <!-- <link rel="canonical" href="https://goodmoves.com{{request.params.uri.pathname}}" /> -->
-  <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-3467930-6"></script>
   <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
-  // NEEDS TO BE SET UP WITH THE CORRECT TRACKING ID
   gtag('config', 'UA-3467930-6', {
     'send_page_view': true,
     'anonymize_ip': true,
@@ -56,7 +53,6 @@
       'dimension2': 'parent_document'
     }
   });
-
   {{#ifAny request.params.query.debug (compare request.url.hostname "goodmoves.local") ~}}
   console.log('#### DEBUG MODE ON ####');
   console.log('Request:', {{{regexReplace (regexReplace (stringify request) "(<\/script)" "gi" '</scr\" + \"ipt') "(\r|\n)" "gi" ""}}});
@@ -73,18 +69,11 @@
     crossorigin=""/>
   <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css' rel='stylesheet' />
   <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-TXfwrfuHVznxCssTxWoPZjhcss/hp38gEOH8UPZG/JcXonvBQ6SlsIF49wUzsGno" crossorigin="anonymous">
-  <!--<link type="text/css" rel="stylesheet" href="/assets/css/goodmoves-styles.css">-->
-  <!-- <link type="text/css" rel="stylesheet" href="/assets/goodmoves/main.css"> -->
   {{#compare @root.request.url.hostname "goodmoves.local" ~}}
     <link type="text/css" rel="stylesheet" href="/assets/goodmoves/main.css">
   {{else}}
     <link type="text/css" rel="stylesheet" href="https://storage.googleapis.com/scvo-assets/goodmoves/main-{{@root.context.metaData.assetsVersion}}.css">
   {{/compare ~}}
-  <script>
-  if(location.host.indexOf('.local') > -1){
-    //document.write('<script src="https://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')
-  }
-  </script>
 </head>
 <body class="mdc-theme--site-bg {{#if request.params.path}}{{replace request.params.path '_' ' '}}{{else}}home{{/if}}">
   <goodmoves-site>
@@ -240,9 +229,6 @@
       </header>
 
       <aside class="mdc-drawer mdc-drawer--modal" id="mobile-menu" data-mdc-auto-init="MDCDrawer">
-        <!-- <div class="mdc-drawer__header">
-          <h3 class="mdc-drawer__title">Goodmoves</h3>
-        </div> -->
         <div class="mdc-drawer__content">
           <nav class="mdc-list">
             <a class="mdc-list-item {{#compare @root.request.url.pathname "/"}} mdc-list-item--activated{{/compare}}"
@@ -394,23 +380,7 @@
       </div>
     </div>
   </goodmoves-site>
-<!--
-  <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-auth.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/5.3.0/firebase-database.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script type="text/javascript" src="/assets/js/headroom.min.js"></script>
-  {{#if (contains request.url.host '.local')}}
-  <script type="text/javascript" src="https://unpkg.com/material-components-web@0.37.1/dist/material-components-web.js"></script>
-  {{else}}
-  <script type="text/javascript" src="https://unpkg.com/material-components-web@0.37.1/dist/material-components-web.min.js"></script>
-  {{/if}}
-  <script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js"
-    integrity="sha512-tAGcCfR4Sc5ZP5ZoVz0quoZDYX5aCtEm/eu1KhSLj2c9eFrylXZknQYmxUssFaVJKvvc0dJQixhGjG2yXWiV9Q=="
-    crossorigin=""></script>
-  <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js'></script>
-  <script src="https://cdn.jsdelivr.net/npm/promise-polyfill@7/dist/polyfill.min.js"></script>
--->
+
   <script type="text/javascript">
   function googleTranslateElementInit() {
     new google.translate.TranslateElement(
@@ -435,21 +405,7 @@
   try {document.addEventListener("DOMContentLoaded", $buo_f,false)}
   catch(e){window.attachEvent("onload", $buo_f)}
   </script>
-  <!--<script type="text/javascript"
-      id="cookieinfo"
-      src="/assets/js/cookieinfo.min.js"
-      data-message="We use cookies to track anonymous usage statistics and do not collect any personal information that can be used to identify you. By continuing to visit this site you agree to our use of cookies."
-      data-font-family="'Open Sans',Helvetica,Arial,sans-serif"
-      data-bg="#fff"
-      data-link="#42842A"
-      data-divlink="#fff"
-      data-divlinkbg="#42842A"
-      data-position="bottom"
-      data-accept-on-scroll="true"
-      data-moreinfo="/cookies"
-      data-cookie="CookieInfoScript"
-      data-text-align="left"
-      ></script>-->
+
   {{#compare request.url.hostname "goodmoves.local"}}
     <script type="text/javascript" src="/assets/goodmoves/main.js"></script>
   {{else}}
