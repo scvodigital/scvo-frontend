@@ -86,7 +86,8 @@
     <input type="hidden" name="lat" value="{{@root.request.params.query.lat}}" id="{{instance_id}}-lat">
     <input type="hidden" name="lng" value="{{@root.request.params.query.lng}}" id="{{instance_id}}-lng">
 
-    {{#each (split "activities,client_groups" ",")}}
+
+    {{#each (split "client_group,work_type" ",")}}
       <h3 class="mdc-drawer__content-heading cursor-pointer noselect mdc-drawer--occasional-ie11" data-collapse-target="#{{../instance_id}}-{{this}}-collapse" role="button" aria-pressed="false" aria-label="Show {{getProperty @root.context.metaData.termTypeLabels (concat this ".plural")}}" tabindex="0">
         {{getProperty @root.context.metaData.termTypeLabels (concat this ".plural")}}
         <span class="mdc-icon-toggle pull-right">
@@ -94,32 +95,11 @@
         </span>
       </h3>
       <div class="mdc-drawer--occasional-ie11" id="{{../instance_id}}-{{this}}-collapse"{{#unless (getProperty @root.request.params.query this)}} style="display: none;"{{/unless}}>
-        {{#compare this "===" "regions" ~}}
-          {{#compare (length @root.data.supplimentaryResponses.types.aggregations.countries.buckets) ">" 1 ~}}
-            {{#each @root.data.supplimentaryResponses.types.aggregations.countries.buckets ~}}
-              {{#if key ~}}
-                {{#compare (length @root.data.supplimentaryResponses.types.aggregations.countries.buckets) ">" 1 ~}}
-                  <h3 class="mdc-typography--headline7">{{{key}}}</h3>
-                {{/compare ~}}
-              {{/if ~}}
-              {{#each this.regions_slugs.buckets ~}}
-                {{#if key ~}}
-                  {{> term_checkbox slug=key field="regions" selected=@root.request.params.query.regions instance_id=../../../instance_id value=(lookup ../this.regions.buckets @index)}}
-                {{/if ~}}
-              {{/each ~}}
-            {{/each ~}}
-            {{#compare (length @root.data.supplimentaryResponses.types.aggregations.home_based.buckets) ">" 1 ~}}
-              <h3 class="mdc-typography--headline7">Other</h3>
-              {{> term_checkbox slug="true" field="home_based" selected=@root.request.params.query.home_based instance_id=../instance_id value="Home-based"}}
-            {{/compare ~}}
-          {{/compare ~}}
-        {{else}}
-          {{#each (getProperty @root.data.supplimentaryResponses.types.aggregations (concat this "_slugs.buckets")) ~}}
-            {{#if key ~}}
+        {{#each (getProperty @root.data.supplimentaryResponses.types.aggregations (concat this "_slugs.buckets")) ~}}
+          {{#if key ~}}
               {{> term_checkbox slug=key field=../this selected=(getProperty @root.request.params.query ../this) instance_id=../../instance_id value=(lookup (getProperty @root.data.supplimentaryResponses.types.aggregations (concat ../this ".buckets")) @index)}}
             {{/if ~}}
           {{/each ~}}
-        {{/compare ~}}
       </div>
     {{/each}}
 

@@ -4,24 +4,29 @@
   "_source": [
     "Id",
     "slug",
+    "milo_ref",
+    "available_from",
+    "client_group",
+    "client_group_slugs",
     "description",
-    "title",
+    "end_date",
     "geo_opportunity_coords",
-    "home_based",
-    "location",
-    "salary",
-    "salary_currency",
-    "role_status_list",
-    "active",
-    "closing_date",
-    "start_at",
-    "end_at",
-    "organisation.slug",
-    "organisation.name",
+    "geo_opportunity_info",
+    "postcode",
+    "organisation_slug",
+    "organisation_name",
+    "organisation_aims_and_objectives",
+    "organisation.street_address",
+    "organisation.postcode",
     "organisation.has_logo",
     "organisation.logo_url",
-    "rendered.goodmoves_rss"
-  ],
+    "organisation.profile",
+    "title",
+    "travel_expenses",
+    "work_location",
+    "work_type",
+    "work_type_slugs",
+],
   "query": {
     "bool": {
       "filter": [
@@ -108,7 +113,7 @@
     {{/compare ~}}
     {{/compare ~}}
     {{else}}
-    "_score",
+    "_score" :
     {
       "start_at": "desc"
     }

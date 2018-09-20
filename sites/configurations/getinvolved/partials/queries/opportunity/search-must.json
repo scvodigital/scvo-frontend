@@ -23,34 +23,6 @@
             }
           }
         }
-        {{#compare @root.route.name "!==" "opportunity_map" ~}},
-          {
-            "term": {
-              "home_based": true
-            }
-          }
-        {{else}}
-          {{#if home_based ~}},
-            {
-              "term": {
-                "home_based": true
-              }
-            }
-          {{/if ~}}
-        {{/compare ~}}
-      {{else}}
-        {{#if home_based ~}}
-          {{#if regions ~}}
-            {{>queries_do_nothing}},
-          {{/if ~}}
-          {
-            "term": {
-              "home_based": true
-            }
-          }
-        {{else}}
-          {{>queries_do_nothing}}
-        {{/if ~}}
       {{/ifAll ~}}
     ],
     "minimum_should_match": 2
