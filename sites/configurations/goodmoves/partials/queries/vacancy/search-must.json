@@ -20,8 +20,6 @@
     "should": [
       {{#if regions ~}}
         {{>queries_terms field="region_group_slug" terms=regions}},
-      {{else}}
-        {{>queries_do_nothing}},
       {{/if ~}}
       {{#ifAll location lat lng distance ~}}
         {
@@ -32,8 +30,8 @@
               "lon": {{lng}}
             }
           }
-        }
-        {{#compare @root.route.name "!==" "vacancy_map" ~}},
+        },
+        {{#compare @root.route.name "!==" "vacancy_map" ~}}
           {
             "bool": {
               "should": [
@@ -49,51 +47,42 @@
                 }
               ]
             }
-          }
+          },
         {{else}}
-          {{#if home_based ~}},
+          {{#if home_based ~}}
             {
               "term": {
                 "home_based": true
               }
-            }
+            },
           {{/if ~}}
-          {{#if various_locations ~}},
+          {{#if various_locations ~}}
             {
               "term": {
                 "various_locations": true
               }
-            }
+            },
           {{/if ~}}
         {{/compare ~}}
       {{else}}
         {{#if home_based ~}}
-          {{#if regions ~}}
-            {{>queries_do_nothing}},
-          {{/if ~}}
           {
             "term": {
               "home_based": true
             }
-          }
-        {{else}}
-          {{>queries_do_nothing}}
+          },
         {{/if ~}}
-        {{#if various_locations ~}},
-          {{#if regions ~}}
-            {{>queries_do_nothing}},
-          {{/if ~}}
+        {{#if various_locations ~}}
           {
             "term": {
               "various_locations": true
             }
-          }
-        {{else}}
-          {{>queries_do_nothing}}
+          },
         {{/if ~}}
       {{/ifAll ~}}
+      {{>queries_do_nothing}}
     ],
-    "minimum_should_match": 3
+    "minimum_should_match": 2
   }
 },
 {{/ifAny ~}}
