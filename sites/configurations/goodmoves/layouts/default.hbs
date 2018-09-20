@@ -72,7 +72,7 @@
   {{#compare @root.request.url.hostname "goodmoves.local" ~}}
     <link type="text/css" rel="stylesheet" href="/assets/goodmoves/main.css">
   {{else}}
-    <link type="text/css" rel="stylesheet" href="https://storage.googleapis.com/scvo-assets/scvo-frontend/goodmoves/main.css">
+    <link type="text/css" rel="stylesheet" href="https://storage.googleapis.com/scvo-assets/goodmoves/main-{{@root.context.metaData.assetsVersion}}.css">
   {{/compare ~}}
 </head>
 <body class="mdc-theme--site-bg {{#if request.params.path}}{{replace request.params.path '_' ' '}}{{else}}home{{/if}}">
@@ -409,7 +409,7 @@
   {{#compare request.url.hostname "goodmoves.local"}}
     <script type="text/javascript" src="/assets/goodmoves/main.js"></script>
   {{else}}
-    <script type="text/javascript" src="https://storage.googleapis.com/scvo-assets/scvo-frontend/goodmoves/main.js"></script>
+    <script type="text/javascript" src="https://storage.googleapis.com/scvo-assets/goodmoves/main-{{@root.context.metaData.assetsVersion}}.js"></script>
   {{/compare}}
   <script>
     var goodmoves = null; readyListeners = [];
