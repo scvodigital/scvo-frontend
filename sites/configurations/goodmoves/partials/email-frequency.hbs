@@ -1,65 +1,42 @@
 {{#if @root.data.auth ~}}
   {{#with @root.data.searches.items.[0].[0] ~}}
-    <div class="mdc-form-field">
-      <div class="mdc-radio">
-        <input class="mdc-radio__native-control" type="radio" id="daily" name="frequency"{{#compare days "1234567"}} checked{{/compare}}>
-        <div class="mdc-radio__background">
-          <div class="mdc-radio__outer-circle"></div>
-          <div class="mdc-radio__inner-circle"></div>
-        </div>
-      </div>
-      <label for="daily">Daily</label>
-    </div>
-    <div class="mdc-form-field">
-      <div class="mdc-radio">
-        <input class="mdc-radio__native-control" type="radio" id="weekly" name="frequency"{{#compare (length days) 1}} checked{{/compare}}>
-        <div class="mdc-radio__background">
-          <div class="mdc-radio__outer-circle"></div>
-          <div class="mdc-radio__inner-circle"></div>
-        </div>
-      </div>
-      <label for="weekly">Weekly</label>
-    </div>
+    {{#>components_radio_button
+        id="daily"
+        name="frequency"
+        label="Daily"
+        active=(compare days "1234567")~}}
+      {
+        "url": "/update-email-preferences",
+        "method": "POST",
+        "successMessage": "Email preferences updated. You will receive your emails every day.",
+        "failureMessage": "Failed to update email preferences",
+        "postBody": {
+          {{~#each (split "sunday,monday,tuesday,wednesday,thursday,friday,saturday" ",")~}}
+            "{{this}}": true
+            {{~#unless @last}},{{/unless~}}
+          {{~/each~}}
+        }
+      }
+    {{~/components_radio_button}}
+    {{#>components_radio_button
+        id="weekly"
+        name="frequency"
+        label="Weekly"
+        active=(compare (length days) 1)~}}
+      {
+        "url": "/update-email-preferences",
+        "method": "POST",
+        "successMessage": "Email preferences updated. You will receive your emails every {{momentFormat (moment (dateMath "now+1d") "x") "dddd"}} starting tomorrow",
+        "failureMessage": "Failed to update email preferences",
+        "postBody": {
+          "{{lowercase (momentFormat (moment (dateMath "now+1d") "x") "dddd")}}": true
+        }
+      }
+    {{~/components_radio_button}}
   {{else}}
     <div class="mdc-form-field">
       <label>You don't have any saved searches</label>
     </div>
   {{/with}}
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      var days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
-      $('input[name="frequency"]').on('change', function(evt) {
-        var request = {
-          url: '/update-email-preferences',
-          data: {},
-          method: 'POST',
-          dataType: 'html',
-          success: function(data, status, xhr) {
-            goodmoves.snackbarShow({
-              message: 'New jobs alert email frequency changed to '+evt.currentTarget.id
-            });
-          },
-          error: function(xhr, status, error) {
-            goodmoves.snackbarShow({
-              message: 'Failed to change email frequency to '+evt.currentTarget.id,
-              backgroundColor: '#A9201E'
-            });
-          }
-        };
-        if (evt.currentTarget.id === 'daily') {
-          for (var d = 0; d < days.length; ++d) {
-            request.data[days[d]] = true;
-          }
-        } else if (evt.currentTarget.id === 'weekly') {
-          var day = new Date().getDay() + 2;
-          if (day > 7) {
-            day = 1;
-          }
-          request.data[days[day]] = true;
-        }
-        $.ajax(request);
-      });
-    });
-  </script>
 {{/if ~}}
 

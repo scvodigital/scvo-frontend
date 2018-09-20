@@ -1,0 +1,75 @@
+<div class="button-row">
+  <button class="mdc-button mdc-ripple-surface mdc-ripple-surface--primary" id="continue-with-google" type="button">
+    <span class="fab fa-google fa-2x"></span> Continue with Google
+  </button>
+  <button class="mdc-button mdc-ripple-surface mdc-ripple-surface--primary" id="continue-with-twitter" type="button">
+    <span class="fab fa-twitter fa-2x"></span> Continue with Twitter
+  </button>
+  <button class="mdc-button mdc-ripple-surface mdc-ripple-surface--primary" id="continue-with-facebook" type="button">
+    <span class="fab fa-facebook fa-2x"></span> Continue with Facebook
+  </button>
+</div>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var $message = $('{{messageSelector}}');
+    var $loader = $('{{loaderSelector}}');
+    var $google = $('#continue-with-google');
+    var $twitter = $('#continue-with-twitter');
+    var $facebook = $('#continue-with-facebook');
+
+    var providers = {
+      google: {
+        getProvider: function() { return new firebase.auth.GoogleAuthProvider(); },
+        scopes: [ 'email' ],
+        label: 'Google'
+      },
+      facebook: {
+        getProvider: function() { return new firebase.auth.FacebookAuthProvider(); },
+        scopes: [ 'email' ],
+        label: 'Facebook'
+      },
+      twitter: {
+        getProvider: function() { return new firebase.auth.TwitterAuthProvider(); },
+        label: 'Twitter'
+      },
+      github: {
+        gitProvider: function() { return new firebase.auth.GithubAuthProvider(); },
+        scopes: [ 'user:email' ],
+        label: 'Github'
+      }
+    };
+
+    $google.on('click', function(evt) { socialSignIn('google'); });
+    $facebook.on('click', function(evt) { socialSignIn('facebook'); });
+    $twitter.on('click', function(evt) { socialSignIn('twitter'); });
+
+    function socialSignIn(providerName) {
+      $loader.show();
+      var providerInfo = providers[providerName];
+      var provider = providerInfo.getProvider();
+      if (providerInfo.scopes) {
+        providerInfo.scopes.forEach(function(scope) {
+          provider.addScope(scope);
+        });
+      }
+      goodmoves.app.auth().signInWithPopup(provider).then(function(result) {
+        if (result) {
+          console.log('Registered user:', result);
+          result.user.getIdTokenResult().then(function(idTokenResult) {
+            console.log('ID Token Result', idTokenResult);
+            goodmoves.setCookie('gm_token', idTokenResult.token, 7);
+            window.location.href = '{{{@root.request.headers.referer}}}';
+          });
+        } else {
+          $message.text('Something went wrong, registerd but no user?').show();
+          $loader.css('display', 'none');
+        }
+      }).catch(function(err) {
+        console.error(providerInfo.label, 'Error:', err);
+        $message.text(err.message).show();
+        $loader.css('display', 'none');
+      });
+    }
+  });
+</script>

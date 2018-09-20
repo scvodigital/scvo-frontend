@@ -176,17 +176,17 @@
       {{/ifAny ~}}
       --}}
       <div class="location-info">
-        {{#compare (length geo_opportunity_coords) ">" 0 ~}}
+        {{#compare (length geo_coords) ">" 0 ~}}
           <div class="container-content container-map">
             <div id="map-opportunity" data-map-name="opportunityMap" data-map-options='{
                 "center": {
-                  "lat": {{geo_opportunity_coords.0.lat}},
-                  "lng": {{geo_opportunity_coords.0.lon}}
+                  "lat": {{geo_coords.0.lat}},
+                  "lng": {{geo_coords.0.lon}}
                 },
                 "zoom": 13
               }'></div>
           </div>
-          {{#each (arrayify geo_opportunity_coords) ~}}
+          {{#each (arrayify geo_coords) ~}}
             <marker style="display:none;" data-map="opportunityMap" data-lat="{{lat}}" data-lng="{{lon}}" data-title="{{../organisation.name}} - {{../title}}">
               <h3 class="mdc-typography--headline7">{{../organisation.name}}</h3>
               <p class="mdc-typography--body2">{{../title}}</p>
@@ -201,9 +201,8 @@
         {{/compare ~}}
       </div>
     </div>
+    {{> opportunity_actions slug=slug Id=Id action="organisation"}}
   </div>
-  {{> opportunity_actions slug=slug Id=Id action="organisation"}}
-</div>
 </div>
 {{#if @root.request.params.query.email ~}}
   {{> ga documentType="milo-volunteering-opportunity" documentId=Id hitType="full-from-email"}}
