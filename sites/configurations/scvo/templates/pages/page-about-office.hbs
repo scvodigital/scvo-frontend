@@ -1,9 +1,70 @@
 <div class="page page-full-width">
-  {{> header_splash}}
+  {{> header_splash headerTextOverride="SCVO Offices"}}
   <div class="container-fluid">
     {{> breadcrumbs}}
     <div class="content page-content">
-      
+      <h1>This is a test page</h1>
+      <h2>Edinburgh</h2>
+      <p>
+        <strong>Mansfield Traquair Centre</strong>, 15 Mansfield Place, Edinburgh EH3 6BB
+      </p>
+      <p>
+        Bicycles nearby:<br />
+        {{#each @root.data.bicyclesEdinburgh.network.stations ~}}
+        {{#compare name "===" "Canonmills" ~}}
+        {{free_bikes}} available and {{empty_slots}} spaces at {{name}}<br />
+        {{/compare ~}}
+        {{#compare name "===" "Brunswick Place" ~}}
+        {{free_bikes}} available and {{empty_slots}} spaces at {{name}}<br />
+        {{/compare ~}}
+        {{/each}}
+      </p>
+      <p>
+        <strong>Hayweight House</strong>, 23 Lauriston Street, Edinburgh EH3 9DQ
+      </p>
+      <p>
+        Bicycles nearby:<br />
+        {{#each @root.data.bicyclesEdinburgh.network.stations ~}}
+        {{#compare name "===" "Lauriston Place" ~}}
+        {{free_bikes}} available and {{empty_slots}} spaces at {{name}}<br />
+        {{/compare ~}}
+        {{#compare name "===" "Fountainbridge" ~}}
+        {{free_bikes}} available and {{empty_slots}} spaces at {{name}}<br />
+        {{/compare ~}}
+        {{/each}}
+      </p>
+
+      <h2>Glasgow</h2>
+      <p>
+        <strong>Brunswick House</strong>, 51 Wilson Street, Glasgow G1 1UZ
+      </p>
+      <p>
+        Bicycles nearby:<br />
+        {{#each @root.data.bicyclesGlasgow.network.stations ~}}
+        {{#compare name "===" "Gallery of Modern Art" ~}}
+        {{free_bikes}} available and {{empty_slots}} spaces at {{name}}<br />
+        {{/compare ~}}
+        {{#compare name "===" "Argyle Street Railway Station" ~}}
+        {{free_bikes}} available and {{empty_slots}} spaces at {{name}}<br />
+        {{/compare ~}}
+        {{/each}}
+      </p>
+      <p>
+        <strong>Edward House</strong>, 199 Sauchiehall Street, Glasgow G2 3BX
+      </p>
+      <p>
+        Bicycles nearby:<br />
+        {{#each @root.data.bicyclesGlasgow.network.stations ~}}
+        {{#compare name "===" "Sauchiehall Street" ~}}
+        {{free_bikes}} available and {{empty_slots}} spaces at {{name}}<br />
+        {{/compare ~}}
+        {{/each}}
+      </p>
+
+      <h2>Inverness</h2>
+      <p>
+        <strong>Fairways House</strong>, Fairways Business Park, Slackbuie Avenue, Inverness IV2 6AA
+      </p>
     </div>
   </div>
 </div>
