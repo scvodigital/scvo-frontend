@@ -1,0 +1,55 @@
+{
+  "size": 12,
+  "from": {{multiply (subtract (default @root.request.params.query.page 1) 1) 12}},
+  "_source": [
+    "Id",
+    "slug",
+    "charity_number",
+    "title",
+    "alias",
+    "description",
+    "og_summary",
+    "goodhq_organisation",
+    "geo_organisation_coords",
+    "postcode",
+    "has_logo",
+    "logo_url",
+    "facebook",
+    "twitter",
+    "website",
+    "website_url",
+    "rendered.json_ld"
+  ],
+  "query": {
+    "bool": {
+      "filter": [
+        {{>queries_organisation_common_filters @root.request.params.query}}
+      ],
+      "must": [
+        {{#if @root.request.params.query.keywords ~}}
+        {
+          "query_string": {
+            "query": {{{stringify @root.request.params.query.keywords}}},
+            "fields": ["text_bag_boost^5", "text_bag"],
+            "default_operator": "AND",
+            "analyzer": "snowball"
+          }
+        }
+        {{else}}
+        {
+          "match_all": {}
+        }
+        {{/if ~}}
+      ]
+    }
+  },
+  "sort": [
+    {{#if @root.request.params.query.keywords ~}}
+    "_score"
+    {{else}}
+    {
+      "title_sort": "asc"
+    }
+    {{/if ~}}
+  ]
+}

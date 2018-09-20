@@ -1,6 +1,6 @@
 {
-  "name": "browse",
-  "pattern": "/browse",
+  "name": "organisation_search",
+  "pattern": "/organisations",
   "debug": true,
   "metaData": {
     "sidebarButton": {
@@ -9,27 +9,32 @@
       "classes": "hide-md hide-lg"
     }
   },
+  "defaultParams": {
+    "context": "results"
+  },
   "tasks": [
     "context.metaData.commonTasks.authNotRequired",
     {
-      "name": "supplimentaryResponses",
+      "name": "search_data",
       "taskModule": "elasticsearch",
       "config": {
         "connectionStringTemplate": "{$../../elasticsearch-url.txt}",
         "elasticsearchConfig": {
-          "apiVersion": "5.6"
+          "apiVersion": "5.6",
+          "log": "debug"
         },
         "queryTemplates": [
           {
-            "name": "types",
+            "name": "detailed_results",
             "index": "web-content-production",
-            "type": "milo-volunteering-opportunity",
-            "template": ">context.metaData.handlebars.queries.opportunities_types"
+            "type": "milo-organisation",
+            "template": ">context.metaData.handlebars.queries.organisations_search-list"
           }
         ]
       },
       "renderer": "handlebars"
     },
+    "context.metaData.commonTasks.supplimentaryResponses",
     {
       "name": "destination",
       "taskModule": "renderLayout",
@@ -45,10 +50,10 @@
           "default": {
             "layout": ">context.metaData.handlebars.layouts.default",
             "parts": {
-              "head": ">context.metaData.handlebars.templates.pages_page-head-tags",
-              "body": ">context.metaData.handlebars.templates.opportunities_browse",
-              "foot": "",
-              "sidebar": ">context.metaData.handlebars.templates.opportunities_search-form"
+              "head": ">context.metaData.handlebars.templates.organisations_search-head-tags",
+              "body": ">context.metaData.handlebars.templates.organisations_search",
+              "sidebar": ">context.metaData.handlebars.templates.organisations_organisation-search-form"
+
             },
             "contentType": "text/html"
           }
