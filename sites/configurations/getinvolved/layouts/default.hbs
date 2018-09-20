@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en">
-<head>
+<head prefix="og: http://ogp.me/ns#">
   <meta charset="utf-8">
   <base href="/{{#if request.params.path}}{{replace request.params.path '_' ''}}{{else}}{{/if}}">
   {{{layoutParts.head}}}
@@ -36,21 +36,21 @@
   <meta name="msapplication-TileImage" content="https://storage.googleapis.com/scvo-assets/assets/icons/ms-icon-144x144.png">
   <meta name="theme-color" content="#00838f">
   <link rel="search" type="application/opensearchdescription+xml" title="Get Involved" href="https://storage.googleapis.com/scvo-assets/assets/opensearch.xml" />
-  <!-- <link type="text/css" rel="stylesheet" href="https://unpkg.com/material-components-web@0.37.1/dist/material-components-web.min.css"> -->
-  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-TXfwrfuHVznxCssTxWoPZjhcss/hp38gEOH8UPZG/JcXonvBQ6SlsIF49wUzsGno" crossorigin="anonymous">
-  {{#compare @root.request.url.hostname "getinvolved.local" ~}}
-    <link type="text/css" rel="stylesheet" href="/assets/getinvolved/main.css">
-  {{else}}
-    <link type="text/css" rel="stylesheet" href="https://storage.googleapis.com/scvo-assets/scvo-frontend/getinvolved/main.css">
-  {{/compare ~}}
+
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-3467930-4"></script>
   <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
-  gtag('config', 'UA-3467930-4', { 'send_page_view': true, 'anonymize_ip': true });
-
+  gtag('config', 'UA-3467930-4', {
+    'send_page_view': true,
+    'anonymize_ip': true,
+    'cookieDomain': 'none',
+    'custom_map': {
+      'dimension1': 'hit_type',
+      'dimension2': 'parent_document'
+    }
+  });
   {{#ifAny request.params.query.debug (compare request.url.hostname "getinvolved.local") ~}}
   console.log('#### DEBUG MODE ON ####');
   console.log('Request:', {{{regexReplace (regexReplace (stringify request) "(<\/script)" "gi" '</scr\" + \"ipt') "(\r|\n)" "gi" ""}}});
@@ -59,6 +59,16 @@
   console.log('Menus:', {{{regexReplace (regexReplace (stringify context.metaData.menus) "(<\/script)" "gi" '</scr\" + \"ipt') "(\r|\n)" "gi" ""}}});
   {{/ifAny ~}}
   </script>
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.3/dist/leaflet.css"
+    integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
+    crossorigin=""/>
+  <link href='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/leaflet.fullscreen.css' rel='stylesheet' />
+  <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-TXfwrfuHVznxCssTxWoPZjhcss/hp38gEOH8UPZG/JcXonvBQ6SlsIF49wUzsGno" crossorigin="anonymous">
+  {{#compare @root.request.url.hostname "getinvolved.local" ~}}
+    <link type="text/css" rel="stylesheet" href="/assets/getinvolved/main.css">
+  {{else}}
+    <link type="text/css" rel="stylesheet" href="https://storage.googleapis.com/scvo-assets/scvo-frontend/getinvolved/main.css">
+  {{/compare ~}}
 </head>
 <body class="mdc-theme--site-bg {{#if request.params.path}}{{replace request.params.path '_' ' '}}{{else}}home{{/if}}">
   <getinvolved-site>
@@ -89,56 +99,158 @@
         <div class="container-fluid">
           <div class="mdc-top-app-bar__row mdc-top-app-bar__upper">
             <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
-              <span class="mdc-toolbar__title catalog-title">
-                <a href="/" class="brand-logo" title="Get Involved!">
-                  <img src="https://storage.googleapis.com/scvo-assets/scvo-frontend/assets/images/logos/get-involved.png" class="brand-logo-mobile" />
-                  <img src="https://storage.googleapis.com/scvo-assets/scvo-frontend/assets/images/logos/get-involved.png" class="brand-logo-desktop" />
-                </a>
-              </span>
-            </section>
-            <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end mdc-top-app-bar__section--shrink-to-fit hide-lg">
-              <button class="mdc-top-app-bar__navigation-icon" data-drawer-target="#mobile-menu">
-                <span class="far fa-fw fa-2x fa-bars"></span>
-              </button>
-              {{#unless route.metaData.hideSearch}}
-              <button class="mdc-top-app-bar__navigation-icon hide-lg" data-drawer-target="#sidebar-temporary" title="Search">
+              {{#unless @root.route.metaData.hideSearch ~}}
+              {{#compare @root.route.name "!==" "home" ~}}
+              <button class="mdc-top-app-bar__navigation-icon hide-lg" id="sidebar-button" title="Search">
                 <span class="far fa-fw fa-2x fa-search"></span>
               </button>
-              {{/unless}}
+              {{/compare ~}}
+              {{/unless ~}}
+              <span class="mdc-top-app-bar__title">
+                {{> logo link="true"}}
+              </span>
+            </section>
+            <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end">
+              <button class="mdc-top-app-bar__navigation-icon hide-lg" data-drawer-target="#mobile-menu">
+                <span class="far fa-fw fa-2x fa-bars"></span>
+              </button>
+              {{#>components_tab_bar
+                  extraClasses="mdc-tab-bar__auto-width hide-sm hide-md"
+                  id="upper-tab-bar"}}
+                {{#if @root.data.auth ~}}
+                  {{#each @root.context.metaData.menus.upper-signed-in ~}}
+                    {{>components_tab
+                        url=(stripTrailingSlash path)
+                        active=(regexMatch @root.request.url.pathname route "gi")
+                        label=label}}
+                  {{/each ~}}
+                {{else}}
+                  {{#each @root.context.metaData.menus.upper-not-signed-in ~}}
+                    {{>components_tab
+                        url=(stripTrailingSlash path)
+                        active=(regexMatch @root.request.url.pathname route "gi")
+                        label=label}}
+                  {{/each ~}}
+                {{/if ~}}
+                {{#each @root.context.metaData.menus.upper ~}}
+                  {{>components_tab
+                      url=(stripTrailingSlash path)
+                      active=(regexMatch @root.request.url.pathname route "gi")
+                      label=label}}
+                {{/each ~}}
+              {{/components_tab_bar}}
             </section>
           </div>
           <div class="mdc-top-app-bar__row mdc-top-app-bar__lower hide-sm hide-md">
-            <section class="mdc-top-app-bar__section mdc-top-app-bar__main">
-              <nav id="main-tab-bar" class="mdc-tab-bar" [menu]="'main'" [menulinkselector]="''" [menulabelselector]="'span.mdc-tab--label'" [menuactiveclass]="'active'">
-                {{#each context.metaData.menus.main}}
-                <a class="mdc-tab{{#if (regexMatch ../request.url.pathname route "gi")}} mdc-tab--active{{/if}}" href="{{path}}">
-                  <span class="mdc-tab--label">{{{label}}}</span>
-                </a>
-                {{/each}}
-              </nav>
+            <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start mdc-top-app-bar__main">
+              {{#>components_tab_bar
+                  extraClasses="mdc-tab-bar__auto-width"
+                  id="main-tab-bar"}}
+                {{#each @root.context.metaData.menus.main ~}}
+                  {{>components_tab
+                      url=(stripTrailingSlash path)
+                      labelClasses="mdc-theme--on-primary"
+                      active=(regexMatch @root.request.url.pathname route "gi")
+                      label=label}}
+                {{/each ~}}
+                {{#each @root.context.metaData.menus.main-extra ~}}
+                  {{>components_tab
+                      url=(stripTrailingSlash path)
+                      labelClasses="mdc-theme--on-primary"
+                      active=(regexMatch @root.request.url.pathname route "gi")
+                      label=label}}
+                {{/each ~}}
+              {{/components_tab_bar}}
+            </section>
+            <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end mdc-top-app-bar__user">
+              {{#if @root.data.auth ~}}
+                {{#>components_anchored_menu
+                    buttonClasses="mdc-theme--on-primary"
+                    imageUrl=(default @root.data.auth.photoURL false)
+                    imageClasses="far fa-fw user-avatar"
+                    iconClasses=(if (if @root.data.auth.photoURL false else=true) "far fa-fw fa-user-circle" else=false)
+                    buttonLabel=@root.data.auth.email
+                    arrowClasses="far fa-fw fa-angle-down"}}
+                  {{#each @root.context.metaData.menus.user-signed-in ~}}
+                    <a class="mdc-list-item {{#if (regexMatch @root.request.url.pathname route "gi")}} mdc-list-item--activated{{/if}}" href="{{stripTrailingSlash path}}" role="menuitem">
+                      {{#if icon ~}}
+                      <span class="far fa-{{icon}} mdc-list-item__graphic" aria-hidden="true"></span>
+                      {{/if ~}}
+                      {{{label}}}
+                    </a>
+                  {{/each ~}}
+                {{/components_anchored_menu}}
+              {{else}}
+                {{#>components_tab_bar
+                    extraClasses="mdc-tab-bar__auto-width"
+                    id="user-not-signed-in-tab-bar"}}
+                  {{#each @root.context.metaData.menus.user-not-signed-in ~}}
+                    {{>components_tab
+                        url=(stripTrailingSlash path)
+                        labelClasses="mdc-theme--on-primary"
+                        active=(regexMatch @root.request.url.pathname route "gi")
+                        label=label}}
+                  {{/each}}
+                {{/components_tab_bar}}
+              {{/if ~}}
             </section>
           </div>
         </div>
       </header>
 
       <aside class="mdc-drawer mdc-drawer--modal" id="mobile-menu" data-mdc-auto-init="MDCDrawer">
-        <nav class="mdc-drawer__drawer">
-          <header class="mdc-drawer__header">
-            <div class="mdc-temporary-drawer__header-content mdc-theme--text-primary-on-primary">
-              <img src="https://storage.googleapis.com/scvo-assets/scvo-frontend/assets/images/logos/get-involved.png" class="brand-logo-mobile" />
-            </div>
-          </header>
-          <nav class="mdc-drawer__content mdc-list">
-            {{#each @root.context.metaData.menus.mobile ~}}
-            <a class="mdc-list-item{{#if (regexMatch @root.request.url.pathname route "gi")}} mdc-list-item--activated{{/if}}" href="{{stripTrailingSlash path}}">
+        <div class="mdc-drawer__content">
+          <nav class="mdc-list">
+            <a class="mdc-list-item {{#compare @root.request.url.pathname "/"}} mdc-list-item--activated{{/compare}}"
+               href="/" {{#compare @root.request.url.pathname "/"}}aria-selected="true"{{else}}aria-hidden="true"{{/compare}}>
+              <span class="far fa-home mdc-list-item__graphic" aria-hidden="true"></span>
+              Home
+            </a>
+            {{#each @root.context.metaData.menus.main ~}}
+            <a class="mdc-list-item {{#if (regexMatch @root.request.url.pathname route "gi")}} mdc-list-item--activated{{/if}}"
+               href="{{stripTrailingSlash path}}" {{#if (regexMatch @root.request.url.pathname route "gi")}}aria-selected="true"{{else}}aria-hidden="true"{{/if}}>
               {{#if icon ~}}
               <span class="far fa-{{icon}} mdc-list-item__graphic" aria-hidden="true"></span>
               {{/if ~}}
               {{{label}}}
             </a>
             {{/each ~}}
+            {{#each @root.context.metaData.menus.main-extra ~}}
+            <a class="mdc-list-item {{#if (regexMatch @root.request.url.pathname route "gi")}} mdc-list-item--activated{{/if}}"
+               href="{{stripTrailingSlash path}}" {{#if (regexMatch @root.request.url.pathname route "gi")}}aria-selected="true"{{else}}aria-hidden="true"{{/if}}>
+              {{#if icon ~}}
+              <span class="far fa-{{icon}} mdc-list-item__graphic" aria-hidden="true"></span>
+              {{/if ~}}
+              {{{label}}}
+            </a>
+            {{/each ~}}
+            <div role="separator" class="mdc-list-divider"></div>
+            {{#if @root.data.auth ~}}
+            {{#each @root.context.metaData.menus.user-signed-in ~}}
+            {{#compare path "===" "/" ~}}
+            {{else}}
+            <a class="mdc-list-item {{#if (regexMatch @root.request.url.pathname route "gi")}} mdc-list-item--activated{{/if}}"
+               href="{{stripTrailingSlash path}}" {{#if (regexMatch @root.request.url.pathname route "gi")}}aria-selected="true"{{else}}aria-hidden="true"{{/if}}>
+              {{#if icon ~}}
+              <span class="far fa-{{icon}} mdc-list-item__graphic" aria-hidden="true"></span>
+              {{/if ~}}
+              {{{label}}}
+            </a>
+            {{/compare ~}}
+            {{/each ~}}
+            {{else}}
+            {{#each @root.context.metaData.menus.user-not-signed-in ~}}
+            <a class="mdc-list-item {{#if (regexMatch @root.request.url.pathname route "gi")}} mdc-list-item--activated{{/if}}"
+               href="{{stripTrailingSlash path}}" {{#if (regexMatch @root.request.url.pathname route "gi")}}aria-selected="true"{{else}}aria-hidden="true"{{/if}}>
+              {{#if icon ~}}
+              <span class="far fa-{{icon}} mdc-list-item__graphic" aria-hidden="true"></span>
+              {{/if ~}}
+              {{{label}}}
+            </a>
+            {{/each ~}}
+            {{/if ~}}
           </nav>
-        </nav>
+        </div>
       </aside>
 
       <div class="mdc-drawer-scrim"></div>
@@ -160,22 +272,49 @@
           <div class="container-fluid">
             <div class="mdc-layout-grid">
               <div class="mdc-layout-grid__inner">
-                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-phone mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-9-desktop">
-                  <h3>About</h3>
-                  <p>
-                    <strong>Get Involved</strong> is run by the
-                    <a href="https://scvo.org">Scottish Council for Voluntary Organisations</a> and powered by a collaboration of infrastructure organisations across Scotland. <a href="/about">Read more</a>
-                  </p>
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone contact">
+                  <h3>Contact</h3>
+                  <ul class="fa-ul">
+                    <li>
+                      <span class="fa-li"><span class="fas fa-envelope"></span></span>
+                      <a href="mailto:enquiries@goodmoves.org.uk">enquiries@goodmoves.org.uk</a>
+                    </li>
+                    <li>
+                      <span class="fa-li"><span class="fas fa-phone"></span></span>
+                      <a href="tel:+448000192149">0800&nbsp;0192&nbsp;149</a>
+                    </li>
+                    <li>
+                      <span class="fa-li"><span class="fab fa-twitter"></span></span>
+                      <a href="https://twitter.com/goodmovesjobs" target="_blank">Twitter</a>
+                    </li>
+                  </ul>
                 </div>
-                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-phone mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-3-desktop">
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone help">
                   <h3>Help</h3>
                   <ul class="mdc-list">
-                    {{#each context.metaData.menus.footer}}
+                    {{#each @root.context.metaData.menus.footer-help ~}}
                     <li class="mdc-list-item">
                       <a href="{{path}}">{{{label}}}</a>
                     </li>
-                    {{/each}}
+                    {{/each ~}}
+                    <div id="google_translate_element"></div>
                   </ul>
+                </div>
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone info">
+                  <h3>Information</h3>
+                  <ul class="mdc-list">
+                    {{#each @root.context.metaData.menus.footer-info ~}}
+                    <li class="mdc-list-item">
+                      <a href="{{path}}">{{{label}}}</a>
+                    </li>
+                    {{/each ~}}
+                  </ul>
+                </div>
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone about">
+                  <h3>About</h3>
+                  <p>
+                    <strong>Get Involved</strong> is run by the <a href="https://scvo.org">Scottish Council for Voluntary Organisations</a> and powered by a collaboration of infrastructure organisations across Scotland. <a href="/about">Read more</a>
+                  </p>
                 </div>
               </div>
             </div>
@@ -213,6 +352,7 @@
       </div>
     </div>
   </getinvolved-site>
+  
   <script type="text/javascript">
   var $buoop = {required:{e:-3,f:-3,o:-3,s:-1,c:-3},insecure:true,unsupported:true,api:2018.07 };
   function $buo_f(){
@@ -223,7 +363,12 @@
   try {document.addEventListener("DOMContentLoaded", $buo_f,false)}
   catch(e){window.attachEvent("onload", $buo_f)}
   </script>
-  <script type="text/javascript" src="/assets/getinvolved/main.js"></script>
+
+  {{#compare request.url.hostname "getinvolved.local"}}
+    <script type="text/javascript" src="/assets/getinvolved/main.js"></script>
+  {{else}}
+    <script type="text/javascript" src="https://storage.googleapis.com/scvo-assets/scvo-frontend/getinvolved/main.js"></script>
+  {{/compare}}
   <script>
     var getinvolved = null; readyListeners = [];
     $(document).ready(function() {
