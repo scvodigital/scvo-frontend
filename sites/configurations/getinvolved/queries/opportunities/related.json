@@ -28,6 +28,7 @@
           "filter": [
             {{>queries_opportunity_common_filters request.params.query}}
           ],
+          {{#if @root.data.primaryResponse.hits.hits.[0] ~}}
           "should": [
             {
               "match": {
@@ -57,35 +58,17 @@
                 "work_type_slugs": {{{stringify (arrayify @root.data.primaryResponse.hits.hits.[0]._source.work_type_slugs)}}}
               }
             }
-          }
-        },
-        {
-          "match": {
-            "title" : {
-              "query" : "{{@root.data.primaryResponse.hits.hits.[0]._source.title}}",
-              "operator" : "and",
-              "zero_terms_query": "all"
+          ],
+          {{/if ~}}
+          "must_not": [
+            {
+              "term": {
+                "Id": "{{@root.data.primaryResponse.hits.hits.[0]._source.Id}}"
+              }
             }
-          }
-        },
-        {
-          "terms": {
-            "client_group-slugs": {{{stringify (arrayify @root.data.primaryResponse.hits.hits.[0]._source.client_group-slugs)}}}
-          }
-        },
-        {
-          "terms": {
-            "work_type-slugs": {{{stringify (arrayify @root.data.primaryResponse.hits.hits.[0]._source.work_type-slugs)}}}
-          }
+          ]
         }
-      ],
-      "must_not": [
-        {
-          "term": {
-            "Id": "{{@root.data.primaryResponse.hits.hits.[0]._source.Id}}"
-          }
-        }
-      ]
+      }
     }
   }
 }
