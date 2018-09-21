@@ -19,8 +19,9 @@
 {{/inline}}
 
 <div class="mdc-drawer__content">
-  <h2 class="mdc-drawer__content-heading hide-sm mdc-drawer--occasional-ie11">Search opportunities</h2>
-  <div id="search-tab-bar" class="mdc-tab-bar mdc-tab-bar--fullwidth search-tab-bar mdc-drawer--occasional-ie11" data-mdc-auto-init="MDCTabBar">
+  <h2 class="mdc-drawer__content-heading hide-sm mdc-drawer--occasional">Search opportunities</h2>
+  <!-- TODO Replace this with component from goodmoves-->
+  <div id="search-tab-bar" class="mdc-tab-bar mdc-tab-bar--fullwidth search-tab-bar mdc-drawer--occasional">
     <a href="/search{{@root.request.url.search}}" class="mdc-tab{{#compare @root.request.url.pathname "===" "/search"}} mdc-tab--active{{/compare}} details-tab" id="detailed-results">
       <span class="far fa-list fa-fw" title="List"></span>
       List
@@ -65,7 +66,7 @@
             <!-- <div class="after-textfield-action geo-lookup">Find me</div> -->
           </div>
           <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone">
-            <div class="mdc-select mdc-select--box mdc-drawer--occasional-ie11" data-mdc-auto-init="MDCSelect">
+            <div class="mdc-select mdc-select--box mdc-drawer--occasional" data-mdc-auto-init="MDCSelect">
               <select data-location="{{instance_id}}-location" class="mdc-select__native-control search-distance" id="{{instance_id}}-distance" name="distance">
                 <option value="8.04672"{{#compare @root.request.params.query.distance "8.04672"}} selected{{/compare}}>5 miles</option>
                 <option value="16.09344"{{#compare @root.request.params.query.distance "16.09344"}} selected{{/compare}}>10 miles</option>
@@ -88,13 +89,13 @@
 
 
     {{#each (split "client_group,work_type" ",")}}
-      <h3 class="mdc-drawer__content-heading cursor-pointer noselect mdc-drawer--occasional-ie11" data-collapse-target="#{{../instance_id}}-{{this}}-collapse" role="button" aria-pressed="false" aria-label="Show {{getProperty @root.context.metaData.termTypeLabels (concat this ".plural")}}" tabindex="0">
+      <h3 class="mdc-drawer__content-heading cursor-pointer noselect mdc-drawer--occasional" data-collapse-target="#{{../instance_id}}-{{this}}-collapse" role="button" aria-pressed="false" aria-label="Show {{getProperty @root.context.metaData.termTypeLabels (concat this ".plural")}}" tabindex="0">
         {{getProperty @root.context.metaData.termTypeLabels (concat this ".plural")}}
         <span class="mdc-icon-toggle pull-right">
           <i class="far {{#if (getProperty @root.request.params.query this)}}fa-chevron-up{{else}}fa-chevron-down{{/if}}" aria-hidden="true"></i>
         </span>
       </h3>
-      <div class="mdc-drawer--occasional-ie11" id="{{../instance_id}}-{{this}}-collapse"{{#unless (getProperty @root.request.params.query this)}} style="display: none;"{{/unless}}>
+      <div class="mdc-drawer--occasional" id="{{../instance_id}}-{{this}}-collapse"{{#unless (getProperty @root.request.params.query this)}} style="display: none;"{{/unless}}>
         {{#each (getProperty @root.data.supplimentaryResponses.types.aggregations (concat this "_slugs.buckets")) ~}}
           {{#if key ~}}
               {{> term_checkbox slug=key field=../this selected=(getProperty @root.request.params.query ../this) instance_id=../../instance_id value=(lookup (getProperty @root.data.supplimentaryResponses.types.aggregations (concat ../this ".buckets")) @index)}}
@@ -103,7 +104,7 @@
       </div>
     {{/each}}
 
-    <div class="h-margin v-margin mdc-drawer--occasional-ie11">
+    <div class="h-margin v-margin mdc-drawer--occasional">
       <button class="mdc-button mdc-button--raised mdc-button--large mdc-button--fullwidth mdc-ripple-surface mdc-ripple-surface--primary" type="submit" id="{{instance_id}}-search-submit" data-mdc-auto-init="MDCRipple">
         <span class="far fa-search fa-fw mdc-list-item__graphic" aria-hidden="true"></span>
         Search
