@@ -41,32 +41,32 @@
                     "radius": {{default @root.request.params.query.distance 0}}
                   }
                   {{/ifAll ~}}
-                }'></div>
-              </div>
-              {{#each @root.data.primaryResponse.hits.hits ~}}
-                {{#if _source.geo_vacancy_coords ~}}
-                  {{#each (arrayify _source.geo_vacancy_coords) ~}}
-                    <marker style="display:none;" data-map="fullMap" data-lat="{{lat}}" data-lng="{{lon}}" data-title="{{../_source.title}}" data-type="{{../_type}}">
-                      {{#with ../_source ~}}
-                      <div class="map-content">
-                        <h3 class="mdc-typography--headline6">
-                          <a href="{{@root.request.url.pathname}}/{{slug}}{{@root.request.url.search}}">{{title}}</a>
-                        </h3>
-                        {{#if organisation.name ~}}
-                        <div class="mdc-typography--body1 v-margin">
-                          {{organisation.name}}
-                        </div>
-                        {{/if ~}}
-                        <div class="mdc-typography--body2">
-                          <a href="{{@root.request.url.pathname}}/{{slug}}{{@root.request.url.search}}" class="mdc-card__action">Find out more</a>
-                        </div>
-                      </div>
-                      {{/with ~}}
-                    </marker>
+                  }'>
+                  {{#each @root.data.primaryResponse.hits.hits ~}}
+                    {{#if _source.geo_vacancy_coords ~}}
+                      {{#each (arrayify _source.geo_vacancy_coords) ~}}
+                        <marker style="display:none;" data-map="fullMap" data-lat="{{lat}}" data-lng="{{lon}}" data-title="{{../_source.title}}" data-type="{{../_type}}">
+                          {{#with ../_source ~}}
+                          <div class="map-content">
+                            <h3 class="mdc-typography--headline6">
+                              <a href="{{@root.request.url.pathname}}/{{slug}}{{@root.request.url.search}}">{{title}}</a>
+                            </h3>
+                            {{#if organisation.name ~}}
+                            <div class="mdc-typography--body1 v-margin">
+                              {{organisation.name}}
+                            </div>
+                            {{/if ~}}
+                            <div class="mdc-typography--body2">
+                              <a href="{{@root.request.url.pathname}}/{{slug}}{{@root.request.url.search}}" class="mdc-card__action">Find out more</a>
+                            </div>
+                          </div>
+                          {{/with ~}}
+                        </marker>
+                      {{/each ~}}
+                    {{/if ~}}
                   {{/each ~}}
-                {{/if ~}}
-              {{/each ~}}
-              <script src="/assets/js/scvo/cjs-vacancies-search.js"></script>
+                </div>
+              </div>
             {{else}}
               {{#compare @root.data.primaryResponse.hits.total ">" 0 ~}}
                 {{> search_info paging=@root.data.primaryResponse.pagination}}

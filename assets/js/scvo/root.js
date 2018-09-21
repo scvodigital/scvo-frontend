@@ -1,8 +1,8 @@
 document.addEventListener('DOMContentLoaded', function() {
     // Material Design Components
-    mdc.autoInit();
+    //mdc.autoInit();
 
-    google.maps.event.addDomListener(window, 'load', initMap);
+    //google.maps.event.addDomListener(window, 'load', initMap);
 
     // Resize iframes
     window.addEventListener("message", function (event) {
@@ -61,12 +61,6 @@ document.addEventListener('DOMContentLoaded', function() {
     // });
 
     // Headroom
-    var header = document.querySelector("header.mdc-toolbar");
-    var headroom  = new Headroom(header, {
-        "offset": 138,
-        "tolerance": 5
-    });
-    headroom.init();
 
     // Share widget
     window.share = function(where) {
@@ -132,42 +126,3 @@ function setCookie(name, value, days) {
   document.cookie = name + "=" + (value || "")  + expires + "; path=/; secure";
 }
 
-function initMap() {
-  handleLocationBoxes();
-}
-
-function handleLocationBoxes() {
-  $('[data-location-options]').each(function(i, o) {
-    var options = $(o).data('location-options');
-    var latSelector = $(o).data('location-lat');
-    var lngSelector = $(o).data('location-lng');
-
-    var autocomplete = new google.maps.places.Autocomplete(o, options);
-    autocomplete.addListener('place_changed', function(evt) {
-      var place = this.getPlace();
-      if (place.geometry.location) {
-        $(latSelector).val(place.geometry.location.lat());
-        $(lngSelector).val(place.geometry.location.lng());
-        $(o).val(place.formatted_address);
-      }
-    });
-
-    $(o).on('focus', function(evt) {
-      if ($(latSelector).val() !== '') {
-        $(o).val('');
-        $(latSelector).val('');
-        $(lngSelector).val('');
-      }
-    }).on('blur', function(evt) {
-      if ($(latSelector).val() === '') {
-        $(o).val('');
-      }
-    });
-
-  }).on('keypress', function(evt) {
-    if (evt.which === 13) {
-      evt.preventDefault();
-      return false;
-    }
-  });
-}
