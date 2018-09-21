@@ -142,25 +142,26 @@
         </div>
       </header>
 
-      <aside class="mdc-drawer mdc-drawer--temporary" id="mobile-menu" data-mdc-auto-init="MDCTemporaryDrawer">
-        <nav class="mdc-drawer__drawer">
-          <header class="mdc-drawer__header">
-            <div class="mdc-drawer__header-content mdc-theme--primary-bg">
-              <img src="https://storage.googleapis.com/scvo-assets/scvo-frontend/assets/images/logos/scvo.png" />
-            </div>
-          </header>
-          <nav class="mdc-drawer__content mdc-list">
-            <a class="mdc-list-item" href="/">Home</a>
-            {{#each context.metaData.menus.main ~}}
-            <a class="mdc-list-item{{#if (regexMatch ../request.url.pathname route "gi")}} mdc-list-item--activated{{/if}}" href="{{stripTrailingSlash path}}">
+      <aside class="mdc-drawer mdc-drawer--modal" id="mobile-menu" data-mdc-auto-init="MDCDrawer">
+        <div class="mdc-drawer__content">
+          <nav class="mdc-list">
+            <a class="mdc-list-item {{#compare @root.request.url.pathname "/"}} mdc-list-item--activated{{/compare}}"
+               href="/" {{#compare @root.request.url.pathname "/"}}aria-selected="true"{{else}}aria-hidden="true"{{/compare}}>
+              <span class="far fa-home mdc-list-item__graphic" aria-hidden="true"></span>
+              Home
+            </a>
+            {{#each @root.context.metaData.menus.main ~}}
+            <a class="mdc-list-item {{#if (regexMatch @root.request.url.pathname route "gi")}} mdc-list-item--activated{{/if}}"
+               href="{{stripTrailingSlash path}}" {{#if (regexMatch @root.request.url.pathname route "gi")}}aria-selected="true"{{else}}aria-hidden="true"{{/if}}>
               {{#if icon ~}}
               <span class="far fa-{{icon}} mdc-list-item__graphic" aria-hidden="true"></span>
               {{/if ~}}
               {{{label}}}
             </a>
             {{/each ~}}
-            {{#each context.metaData.menus.main-upper ~}}
-            <a class="mdc-list-item{{#if (regexMatch ../request.url.pathname route "gi")}} mdc-list-item--activated{{/if}}" href="{{stripTrailingSlash path}}">
+            {{#each @root.context.metaData.menus.main-extra ~}}
+            <a class="mdc-list-item {{#if (regexMatch @root.request.url.pathname route "gi")}} mdc-list-item--activated{{/if}}"
+               href="{{stripTrailingSlash path}}" {{#if (regexMatch @root.request.url.pathname route "gi")}}aria-selected="true"{{else}}aria-hidden="true"{{/if}}>
               {{#if icon ~}}
               <span class="far fa-{{icon}} mdc-list-item__graphic" aria-hidden="true"></span>
               {{/if ~}}
@@ -168,8 +169,10 @@
             </a>
             {{/each ~}}
           </nav>
-        </nav>
+        </div>
       </aside>
+
+      <div class="mdc-drawer-scrim"></div>
 
       <main class="mdc-toolbar-fixed-adjust mdc-theme--background">
         <div class="container-content">
@@ -273,9 +276,9 @@
   </scvo-site>
 
   {{#if (contains request.url.host '.local')}}
-  <script type="text/javascript" src="https://unpkg.com/material-components-web@0.37.1/dist/material-components-web.js"></script>
+  <script type="text/javascript" src="https://unpkg.com/material-components-web@0.39.1/dist/material-components-web.js"></script>
   {{else}}
-  <script type="text/javascript" src="https://unpkg.com/material-components-web@0.37.1/dist/material-components-web.min.js"></script>
+  <script type="text/javascript" src="https://unpkg.com/material-components-web@0.39.1/dist/material-components-web.min.js"></script>
   {{/if}}
   <script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js"
     integrity="sha512-tAGcCfR4Sc5ZP5ZoVz0quoZDYX5aCtEm/eu1KhSLj2c9eFrylXZknQYmxUssFaVJKvvc0dJQixhGjG2yXWiV9Q=="
@@ -306,7 +309,7 @@
   {{else}}
     <script type="text/javascript" src="https://storage.googleapis.com/scvo-assets/scvo/main-{{@root.context.metaData.assetsVersion}}.js"></script>
   {{/compare ~}}
-  
+
   {{{layoutParts.foot}}}
 </body>
 </html>
