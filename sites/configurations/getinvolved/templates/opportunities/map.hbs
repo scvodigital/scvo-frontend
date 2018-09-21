@@ -10,8 +10,8 @@
   }'></div>
 </div>
 {{#each @root.data.search_data.map_results.hits.hits ~}}
-  {{#if _source.geo_opportunity_coords ~}}
-    {{#each (arrayify _source.geo_opportunity_coords) ~}}
+  {{#if _source.geo_coords ~}}
+    {{#each (arrayify _source.geo_coords) ~}}
       <marker style="display:none;" data-map="fullMap" data-lat="{{lat}}" data-lng="{{lon}}" data-shortlisted="{{#each @root.data.shortlist.items}}{{#compare id "===" ../../_source.Id}}true{{/compare}}{{/each}}" data-homebased="{{#if ../_source.home_based}}true{{/if}}" data-title="{{../_source.title}}">
         {{>opportunity_map ../_source}}
       </marker>
