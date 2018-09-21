@@ -116,7 +116,7 @@
       </div>
     </div>
 
-    {{#each (split "working_patterns,regions,roles,sectors" ",")}}
+    {{#each (split "working_patterns,regions,roles,sectors" ",") ~}}
       <h3 class="mdc-drawer__content-heading cursor-pointer noselect mdc-drawer--occasional-ie11" data-collapse-target="#{{../instance_id}}-{{this}}-collapse" role="button" aria-pressed="false" aria-label="Show {{getProperty @root.context.metaData.termTypeLabels (concat this ".plural")}}" tabindex="0">
         {{getProperty @root.context.metaData.termTypeLabels (concat this ".plural")}}
         <span class="mdc-icon-toggle pull-right">
@@ -158,7 +158,7 @@
           {{/each ~}}
         {{/compare ~}}
       </div>
-    {{/each}}
+    {{/each ~}}
 
     <div class="h-margin v-margin mdc-drawer--occasional-ie11">
       <button class="mdc-button mdc-button--raised mdc-button--large mdc-button--fullwidth mdc-ripple-surface mdc-ripple-surface--primary" type="submit" id="{{instance_id}}-search-submit" data-mdc-auto-init="MDCRipple">

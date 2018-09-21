@@ -30,6 +30,7 @@
           "filter": [
             {{>queries_vacancy_common_filters_open request.params.query}}
           ],
+          {{#if @root.data.primaryResponse.hits.hits.[0] ~}}
           "should": [
             {
               "match": {
@@ -60,6 +61,7 @@
               }
             }
           ],
+          {{/if ~}}
           "must_not": [
             {
               "term": {
