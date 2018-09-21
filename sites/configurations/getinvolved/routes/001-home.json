@@ -7,6 +7,24 @@
   },
   "tasks": [
     "context.metaData.commonTasks.authNotRequired",
+    {
+      "name": "supplimentaryResponses",
+      "taskModule": "elasticsearch",
+      "config": {
+        "connectionStringTemplate": "{$../../elasticsearch-url.txt}",
+        "elasticsearchConfig": {
+          "apiVersion": "5.6"
+        },
+        "queryTemplates": [
+          {
+            "name": "types",
+            "index": "web-content-production",
+            "type": "goodmoves-vacancy",
+            "template": ">context.metaData.handlebars.queries.opportunities_types"
+          }
+        ]
+      }
+    },
     "context.metaData.commonTasks.termsMaps",
     {
       "name": "posts",
