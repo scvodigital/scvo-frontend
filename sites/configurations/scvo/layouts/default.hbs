@@ -300,6 +300,13 @@
   <script src="https://www.gstatic.com/firebasejs/5.2.0/firebase.js"></script>
   <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBJdxcQpVKQ6HdrjnPXycUoZqsmp-Ep3l0&libraries=places&region=uk" defer></script>
   <script type="text/javascript" src="/assets/js/scvo/root.js"></script>
+
+  {{#compare request.url.hostname "scvo.local" ~}}
+    <script type="text/javascript" src="/assets/scvo/main.js"></script>
+  {{else}}
+    <script type="text/javascript" src="https://storage.googleapis.com/scvo-assets/scvo/main-{{@root.context.metaData.assetsVersion}}.js"></script>
+  {{/compare ~}}
+  
   {{{layoutParts.foot}}}
 </body>
 </html>

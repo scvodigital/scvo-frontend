@@ -41,7 +41,7 @@
   console.log('Menus:', {{{regexReplace (regexReplace (stringify context.metaData.menus) "(<\/script)" "gi" '</scr\" + \"ipt') "(\r|\n)" "gi" ""}}});
   {{/ifAny ~}}
   </script>
-  
+
   {{#compare @root.request.url.hostname "digitalparticipation.local" ~}}
     <link type="text/css" rel="stylesheet" href="/assets/digitalparticipation/main.css">
   {{else}}
@@ -187,6 +187,13 @@
   </script>
   <script type="text/javascript" id="cookieinfo" src="/assets/js/cookieinfo.min.js" data-message="We use cookies to track anonymous usage statistics and do not collect any personal information that can be used to identify you. By continuing to visit this site you agree to our use of cookies." data-font-family="'Open Sans',Helvetica,Arial,sans-serif" data-bg="#fff" data-link="#022347" data-divlink="#fff" data-divlinkbg="#022347" data-position="bottom" data-accept-on-scroll="true" data-moreinfo="/cookies" data-cookie="CookieInfoScript" data-text-align="left"></script>
   <script type="text/javascript" src="/assets/js/digitalparticipation/root.js"></script>
+
+  {{#compare request.url.hostname "digitalparticipation.local" ~}}
+    <script type="text/javascript" src="/assets/digitalparticipation/main.js"></script>
+  {{else}}
+    <script type="text/javascript" src="https://storage.googleapis.com/scvo-assets/digitalparticipation/main-{{@root.context.metaData.assetsVersion}}.js"></script>
+  {{/compare ~}}
+
   {{{layoutParts.foot}}}
 </body>
 </html>
