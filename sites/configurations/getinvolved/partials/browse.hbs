@@ -5,11 +5,11 @@
         Client Groups
       </div>
       <ul class="mdc-list">
-        {{#each @root.data.supplimentaryResponses.types.aggregations.client_groups_slugs.buckets ~}}
+        {{#each @root.data.supplimentaryResponses.types.aggregations.client_group_slugs.buckets ~}}
           {{#if key ~}}
             <a class="mdc-list-item" href="/search?client_groups%5B%5D={{urlencode key}}" role="menuitem" onclick="gtag('event', 'navigation', { event_category: '{{default ../eventContext "category-browser"}}', event_label: 'Client group: {{key}}' })">
               <span class="mdc-list-item__text">
-                {{#with (lookup @root.data.supplimentaryResponses.types.aggregations.client_groups.buckets @index) ~}}
+                {{#with (lookup @root.data.supplimentaryResponses.types.aggregations.client_group.buckets @index) ~}}
                   {{{key}}}
                 {{/with ~}}
               </span>
@@ -26,11 +26,11 @@
         Work types
       </div>
       <ul class="mdc-list">
-        {{#each @root.data.supplimentaryResponses.types.aggregations.work_types_slugs.buckets ~}}
+        {{#each @root.data.supplimentaryResponses.types.aggregations.work_type_slugs.buckets ~}}
           {{#if key ~}}
             <a class="mdc-list-item" href="/search?work_types%5B%5D={{urlencode key}}" role="menuitem" onclick="gtag('event', 'navigation', { event_category: '{{default ../eventContext "category-browser"}}', event_label: 'Work type: {{key}}' })">
               <span class="mdc-list-item__text">
-                {{#with (lookup @root.data.supplimentaryResponses.types.aggregations.work_types.buckets @index) ~}}
+                {{#with (lookup @root.data.supplimentaryResponses.types.aggregations.work_type.buckets @index) ~}}
                   {{{key}}}
                 {{/with ~}}
               </span>
