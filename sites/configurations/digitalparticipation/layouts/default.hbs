@@ -80,11 +80,12 @@
           </div>
         </header>
 
-        <aside class="mdc-drawer mdc-drawer--temporary" id="mobile-menu" data-mdc-auto-init="MDCTemporaryDrawer">
-          <nav class="mdc-drawer__drawer">
-            <nav class="mdc-drawer__content mdc-list">
+        <aside class="mdc-drawer mdc-drawer--modal" id="mobile-menu" data-mdc-auto-init="MDCDrawer">
+          <div class="mdc-drawer__content">
+            <nav class="mdc-list">
               {{#each @root.context.metaData.menus.main ~}}
-              <a class="mdc-list-item{{#if (regexMatch @root.request.url.pathname route "gi")}} mdc-list-item--activated{{/if}}" href="{{stripTrailingSlash path}}">
+              <a class="mdc-list-item {{#if (regexMatch @root.request.url.pathname route "gi")}} mdc-list-item--activated{{/if}}"
+                 href="{{stripTrailingSlash path}}" {{#if (regexMatch @root.request.url.pathname route "gi")}}aria-selected="true"{{else}}aria-hidden="true"{{/if}}>
                 {{#if icon ~}}
                 <span class="far fa-{{icon}} mdc-list-item__graphic" aria-hidden="true"></span>
                 {{/if ~}}
@@ -92,8 +93,10 @@
               </a>
               {{/each ~}}
             </nav>
-          </nav>
+          </div>
         </aside>
+
+        <div class="mdc-drawer-scrim"></div>
 
         <div class="container-fluid">
           {{{layoutParts.body}}}
@@ -170,9 +173,9 @@
     </div>
   </charter-site>
   {{#if (contains request.url.host '.local')}}
-  <script type="text/javascript" src="https://unpkg.com/material-components-web@0.37.1/dist/material-components-web.js"></script>
+  <script type="text/javascript" src="https://unpkg.com/material-components-web@0.39.1/dist/material-components-web.js"></script>
   {{else}}
-  <script type="text/javascript" src="https://unpkg.com/material-components-web@0.37.1/dist/material-components-web.min.js"></script>
+  <script type="text/javascript" src="https://unpkg.com/material-components-web@0.39.1/dist/material-components-web.min.js"></script>
   {{/if}}
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script type="text/javascript">
