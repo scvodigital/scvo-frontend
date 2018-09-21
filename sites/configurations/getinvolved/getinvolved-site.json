@@ -9,6 +9,7 @@
     "{:./routes/*.json}"
   ],
   "metaData": {
+    "favouritesCampaignName": "getinvolved-favourites",
     "menus": "{:./getinvolved-menus.json}",
     "elasticsearchUrl": "{$../elasticsearch-url.txt}",
     "termTypeLabels": {
@@ -89,6 +90,17 @@
           "output": "data",
           "parseJson": true
         }
+      },
+      "favouritesData": {
+        "name": "favourites",
+        "taskModule": "mysql",
+        "config": {
+          "connectionName": "notifications",
+          "queryTemplates": {
+            "items": ">context.metaData.handlebars.queries.notifications_get-favourites"
+          }
+        },
+        "renderer": "handlebars"
       },
       "supplimentaryResponses": {
         "name": "supplimentaryResponses",
