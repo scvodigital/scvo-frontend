@@ -1,14 +1,10 @@
 {
-  "size": 10000,
+  "size": 0,
   "_source": false,
   "query": {
     "bool": {
       "filter": [
-        {{>queries_opportunity_common_filters request.params.query}},
-        {{>queries_opportunity_search_filters @root.request.params.query}}
-      ],
-      "must": [
-        {{>queries_opportunity_search_must @root.request.params.query}}
+        {{>queries_opportunity_common_filters @root.request.params.query}}
       ]
     }
   },
@@ -24,10 +20,7 @@
     },
     "client_group_slugs": {
       "terms": {
-        "field": "client_group_slug",
-        "order": {
-          "_term": "asc"
-        },
+        "field": "client_group_slugs",
         "size": 10000
       }
     },
@@ -42,10 +35,7 @@
     },
     "work_type_slugs": {
       "terms": {
-        "field": "work_type_slug",
-        "order": {
-          "_term": "asc"
-        },
+        "field": "work_type_slugs",
         "size": 10000
       }
     }
