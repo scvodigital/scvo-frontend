@@ -18,19 +18,7 @@
         {{/if ~}}
       </div>
       <div class="key-info-extra">
-        <ul class="fa-ul first">
-          {{#if email ~}}
-            <li class="mdc-card__info--opportunity-twitter mdc-typography--body1">
-              <span class="fa-li"><span class="fas fa-envelope fa-fw" title="E-mail"></span></span>
-              <a href="mailto:{{email}}">{{email}}</a>
-            </li>
-          {{/if}}
-          {{#if phone ~}}
-            <li class="mdc-card__info--opportunity-twitter mdc-typography--body1">
-              <span class="fa-li"><span class="fas fa-phone fa-fw" title="Phone"></span></span>
-              <a href="tel:{{phone}}">{{phone}}</a>
-            </li>
-          {{/if}}
+        <ul class="fa-ul">
           {{#if website ~}}
           {{#compare website "!==" null ~}}
           {{#compare website "!==" "http://" ~}}
@@ -73,18 +61,17 @@
           {{/if ~}}
           {{#if goodhq_organisation ~}}
           {{#compare goodhq_organisation.xid "!==" null ~}}
+
           <li class="mdc-card__info--opportunity-goodhq mdc-typography--body1">
             <span class="fa-li"><span class="fas fa-heart fa-fw" title="Good HQ"></span></span>
             <a href="https://goodhq.org/{{goodhq_organisation.xid}}">@{{goodhq_organisation.xid}}</a>
             {{#compare goodhq_organisation.status "===" "Open" ~}}
             –
             {{#compare @root.data.goodhq.reviews.hits.total ">" 0 ~}}
-            <a href="https://goodhq.org/{{goodhq_organisation.xid}}?mode=reviews">{{inflect @root.data.goodhq.reviews.hits.total "review" "reviews" true}}</a>{{#compare @root.data.goodhq.posts.hits.total ">" 0}}{{#compare @root.data.goodhq.volunteering.hits.total "===" 0}} and {{else}}, {{/compare}}{{else}}{{#compare @root.data.goodhq.volunteering.hits.total ">" 0}} and {{/compare}}{{/compare}}{{/compare ~}}
-            {{#compare @root.data.goodhq.posts.hits.total ">" 0 ~}}
-            <a href="https://goodhq.org/{{goodhq_organisation.xid}}?mode=posts">{{inflect @root.data.goodhq.posts.hits.total "post" "posts" true}}</a>{{#compare @root.data.goodhq.volunteering.hits.total ">" 0}}, and{{/compare}}
+            <a href="https://goodhq.org/{{goodhq_organisation.xid}}?mode=reviews">{{inflect @root.data.goodhq.reviews.hits.total "review" "reviews" true}} </a>{{#compare @root.data.goodhq.posts.hits.total ">" 0}}and {{/compare ~}}
             {{/compare ~}}
-            {{#compare @root.data.goodhq.volunteering.hits.total ">" 0 ~}}
-            <a href="https://goodhq.org/{{goodhq_organisation.xid}}?mode=volunteer">{{inflect @root.data.goodhq.volunteering.hits.total "volunteering opportunity" "volunteering opportunities" true}}</a>
+              {{#compare @root.data.goodhq.posts.hits.total ">" 0 ~}}
+            <a href="https://goodhq.org/{{goodhq_organisation.xid}}?mode=posts">{{inflect @root.data.goodhq.posts.hits.total "post" "posts" true}}</a>
             {{/compare ~}}
             {{/compare ~}}
             on
@@ -93,15 +80,6 @@
           {{/compare ~}}
           {{/if ~}}
         </ul>
-        <ul class="fa-ul last">Activities
-        {{#each main_activities_global}}
-          <li class="mdc-card__info--opportunity-twitter mdc-typography--body1">
-            <span class="fa-li"><span class="fab fa-twitter fa-fw" title="{{this}}"></span></span>
-            {{this}}
-          </li>
-        {{/each}}
-        </ul>
-
       </div>
     </div>
   </div>
