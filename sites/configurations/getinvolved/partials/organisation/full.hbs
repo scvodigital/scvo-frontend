@@ -18,7 +18,19 @@
         {{/if ~}}
       </div>
       <div class="key-info-extra">
-        <ul class="fa-ul last">
+        <ul class="fa-ul first">
+          {{#if email ~}}
+            <li class="mdc-card__info--opportunity-twitter mdc-typography--body1">
+              <span class="fa-li"><span class="fas fa-envelope fa-fw" title="E-mail"></span></span>
+              <a href="mailto:{{email}}">{{email}}</a>
+            </li>
+          {{/if}}
+          {{#if phone ~}}
+            <li class="mdc-card__info--opportunity-twitter mdc-typography--body1">
+              <span class="fa-li"><span class="fas fa-phone fa-fw" title="Phone"></span></span>
+              <a href="tel:{{phone}}">{{phone}}</a>
+            </li>
+          {{/if}}
           {{#if website ~}}
           {{#compare website "!==" null ~}}
           {{#compare website "!==" "http://" ~}}
@@ -81,6 +93,15 @@
           {{/compare ~}}
           {{/if ~}}
         </ul>
+        <ul class="fa-ul last">Activities
+        {{#each main_activities_global}}
+          <li class="mdc-card__info--opportunity-twitter mdc-typography--body1">
+            <span class="fa-li"><span class="fab fa-twitter fa-fw" title="{{this}}"></span></span>
+            {{this}}
+          </li>
+        {{/each}}
+        </ul>
+
       </div>
     </div>
   </div>
