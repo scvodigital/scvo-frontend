@@ -1,0 +1,30 @@
+{{#with (parse (@partial-block))}}
+  <div class="mdc-chip {{if ../on "mdc-chip--selected"}}" {{{extraAttributes}}} data-ajax-chip='{
+      "onUrl": "{{../onUrl}}",
+      "offUrl": "{{../offUrl}}",
+      "onMethod": "{{default ../onMethod "GET"}}",
+      "offMethod": "{{default ../offMethod "GET"}}",
+      {{#if onData}}
+        "onData": {{{stringify onData}}},
+      {{/if}}
+      {{#if offData}}
+        "offData": {{{stringify offData}}},
+      {{/if}}
+      {{#if onClasses}}
+      "onClasses": {{{stringify onClasses}}},
+      {{/if}}
+      {{#if offClasses}}
+      "offClasses": {{{stringify offClasses}}},
+      {{/if}}
+      "onText": "{{../onText}}",
+      "offText": "{{../offText}}"
+    }'>
+    <span class="{{../iconClasses}} mdc-chip__icon mdc-chip__icon--leading {{if ../on "mdc-chip__icon--leading-hidden"}}" aria-hidden="true"></span>
+    <div class="mdc-chip__checkmark">
+      <svg class="mdc-chip__checkmark-svg" viewBox="-2 -3 30 30">
+        <path class="mdc-chip__checkmark-path" fill="none" stroke="#ffffff" d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+      </svg>
+    </div>
+    <div class="mdc-chip__text noselect">{{if ../on ../onText else=../offText}}</div>
+  </div>
+{{/with}}
