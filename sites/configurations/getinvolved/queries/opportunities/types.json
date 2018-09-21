@@ -44,6 +44,44 @@
         },
         "size": 10000
       }
+    },
+    "region": {
+      "terms": {
+        "field": "region_group",
+        "order": {
+          "_term": "asc"
+        },
+        "size": 10000
+      }
+    },
+    "region_slugs": {
+      "terms": {
+        "field": "region_group_slug",
+        "order": {
+          "_term": "asc"
+        },
+        "size": 10000
+      }
+    },
+    "countries": {
+      "terms": {
+        "field": "country",
+        "size": 10000
+      },
+      "aggs": {
+        "regions": {
+          "terms": {
+            "field": "region_group",
+            "size": 10000
+          }
+        },
+        "regions_slugs": {
+          "terms": {
+            "field": "region_group_slug",
+            "size": 10000
+          }
+        }
+      }
     }
   }
 }
