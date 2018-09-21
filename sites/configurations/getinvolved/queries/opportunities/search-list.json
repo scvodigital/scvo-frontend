@@ -9,21 +9,13 @@
     "client_group",
     "client_group_slugs",
     "description",
-    "end_date",
-    "geo_opportunity_coords",
-    "geo_opportunity_info",
+    "geo_coords",
+    "geo_info",
     "postcode",
     "organisation_slug",
     "organisation_name",
     "organisation_aims_and_objectives",
-    "organisation.street_address",
-    "organisation.postcode",
-    "organisation.has_logo",
-    "organisation.logo_url",
-    "organisation.profile",
     "title",
-    "travel_expenses",
-    "work_location",
     "work_type",
     "work_type_slugs"
 ],
@@ -42,7 +34,7 @@
   "script_fields" : {
     "distance" : {
       "script" : {
-        "inline": "doc['geo_opportunity_coords'].arcDistance(params.lat,params.lon) * 0.000621371",
+        "inline": "doc['geo_coords'].arcDistance(params.lat,params.lon) * 0.000621371",
         "lang": "painless",
         "params": {
           "lat": {{request.params.query.lat}},
@@ -58,7 +50,7 @@
     {{#ifAll @root.request.params.query.location @root.request.params.query.lat @root.request.params.query.lng ~}}
     {
       "_geo_distance": {
-        "geo_opportunity_coords": {
+        "geo_coords": {
           "lat": {{request.params.query.lat}},
           "lon": {{request.params.query.lng}}
         },

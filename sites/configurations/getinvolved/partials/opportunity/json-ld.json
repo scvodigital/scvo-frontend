@@ -21,25 +21,25 @@
   "description": "{{stripTags (regexReplace description '\r|\n' 'gi' '')}}",
   "employmentType": "{{{role_status_list}}}",
   "industry": {{{stringify sectors}}},
-  {{#ifAny geo_opportunity_info.[0] organisation.street_address organisation.postcode ~}}
+  {{#ifAny geo_info.[0] organisation.street_address organisation.postcode ~}}
   "jobLocation": {
     "@type": "Place",
     "address": {
       "@type": "PostalAddress",
-      {{#compare organisation.postcode "===" geo_opportunity_info.[0].postcode ~}}
+      {{#compare organisation.postcode "===" geo_info.[0].postcode ~}}
       {{#if organisation.street_address ~}}
       "streetAddress": "{{organisation.street_address}}",
       {{else}}
-      "streetAddress": "{{geo_opportunity_info.[0].admin_ward}}",
+      "streetAddress": "{{geo_info.[0].admin_ward}}",
       {{/if ~}}
       {{else}}
-      "streetAddress": "{{geo_opportunity_info.[0].admin_ward}}",
+      "streetAddress": "{{geo_info.[0].admin_ward}}",
       {{/compare ~}}
-      {{#if geo_opportunity_info.[0] ~}}
-      "addressLocality": "{{geo_opportunity_info.[0].parliamentary_constituency}}",
-      "addressRegion": "{{geo_opportunity_info.[0].admin_district}}",
-      "addressCountry": "{{geo_opportunity_info.[0].country}}",
-      "postalCode": "{{geo_opportunity_info.[0].postcode}}"
+      {{#if geo_info.[0] ~}}
+      "addressLocality": "{{geo_info.[0].parliamentary_constituency}}",
+      "addressRegion": "{{geo_info.[0].admin_district}}",
+      "addressCountry": "{{geo_info.[0].country}}",
+      "postalCode": "{{geo_info.[0].postcode}}"
       {{else}}
       "postalCode": "{{organisation.postcode}}"
       {{/if ~}}
@@ -59,8 +59,8 @@
         {{#if organisation.street_address ~}}
         "streetAddress": "{{organisation.street_address}}",
         {{/if ~}}
-        {{#if geo_opportunity_info.[0] ~}}
-        "addressCountry": "{{geo_opportunity_info.[0].country}}",
+        {{#if geo_info.[0] ~}}
+        "addressCountry": "{{geo_info.[0].country}}",
         {{/if ~}}
         "postalCode": "{{organisation.postcode}}"
       }

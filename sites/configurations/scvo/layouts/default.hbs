@@ -120,23 +120,18 @@
               </nav>
             </section>
             {{#if data.auth ~}}
-            <section class="toolbar-user">
-              <div class="mdc-menu-anchor">
-                <button class="mdc-button" data-menu-target="#user-menu">
-                  <span class="far fa-fw fa-user-circle"></span>
-                  {{{data.auth.email}}}
-                  <span class="far fa-fw fa-angle-down"></span>
-                </button>
-                <div class="mdc-menu" tabindex="-1" data-mdc-auto-init="MDCMenu" id="user-menu">
-                  <div class="mdc-menu__items mdc-list" role="menu" aria-hidden="true">
-                    <a class="mdc-list-item " href="/jobs/community-jobs-scotland/vacancies/sign-out" role="menuitem">
-                      <span class="far fa-sign-out-alt mdc-list-item__graphic" aria-hidden="true"></span>
-                      Sign out
-                    </a>
-                  </div>
-                </div>
-              </div>
-            </section>
+            {{#>components_anchored_menu
+                buttonClasses="mdc-theme--on-primary"
+                imageUrl=(default @root.data.auth.photoURL false)
+                imageClasses="far fa-fw user-avatar"
+                iconClasses=(if (if @root.data.auth.photoURL false else=true) "far fa-fw fa-user-circle" else=false)
+                buttonLabel=@root.data.auth.email
+                arrowClasses="far fa-fw fa-angle-down"}}
+              <a class="mdc-list-item " href="/jobs/community-jobs-scotland/vacancies/sign-out" role="menuitem">
+                <span class="far fa-sign-out-alt mdc-list-item__graphic" aria-hidden="true"></span>
+                Sign out
+              </a>
+            {{/components_anchored_menu}}
             {{/if ~}}
           </div>
         </div>
@@ -275,18 +270,6 @@
     </div>
   </scvo-site>
 
-  {{#if (contains request.url.host '.local')}}
-  <script type="text/javascript" src="https://unpkg.com/material-components-web@0.39.1/dist/material-components-web.js"></script>
-  {{else}}
-  <script type="text/javascript" src="https://unpkg.com/material-components-web@0.39.1/dist/material-components-web.min.js"></script>
-  {{/if}}
-  <script src="https://unpkg.com/leaflet@1.3.3/dist/leaflet.js"
-    integrity="sha512-tAGcCfR4Sc5ZP5ZoVz0quoZDYX5aCtEm/eu1KhSLj2c9eFrylXZknQYmxUssFaVJKvvc0dJQixhGjG2yXWiV9Q=="
-    crossorigin=""></script>
-  <script src='https://api.mapbox.com/mapbox.js/plugins/leaflet-fullscreen/v1.0.1/Leaflet.fullscreen.min.js'></script>
-  <script src="https://cdn.jsdelivr.net/npm/promise-polyfill@7/dist/polyfill.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/string.js/3.3.3/string.min.js"></script>
   <script type="text/javascript">
   var $buoop = {required:{e:-3,f:-3,o:-3,s:-1,c:-3},insecure:true,unsupported:true,api:2018.07 };
   function $buo_f(){
@@ -297,11 +280,9 @@
   try {document.addEventListener("DOMContentLoaded", $buo_f,false)}
   catch(e){window.attachEvent("onload", $buo_f)}
   </script>
-  <script type="text/javascript" src="/assets/js/headroom.min.js"></script>
   <script type="text/javascript" src="/assets/js/swiper.min.js"></script>
   <script type="text/javascript" id="cookieinfo" src="/assets/js/cookieinfo.min.js" data-message="We use cookies to track anonymous usage statistics and do not collect any personal information that can be used to identify you. By continuing to visit this site you agree to our use of cookies." data-font-family="'Open Sans',Helvetica,Arial,sans-serif" data-bg="#fff" data-link="#c2185b" data-divlink="#fff" data-divlinkbg="#c2185b" data-position="bottom" data-accept-on-scroll="true" data-moreinfo="/cookies" data-cookie="CookieInfoScript" data-text-align="left"></script>
   <script src="https://www.gstatic.com/firebasejs/5.2.0/firebase.js"></script>
-  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBJdxcQpVKQ6HdrjnPXycUoZqsmp-Ep3l0&libraries=places&region=uk" defer></script>
   <script type="text/javascript" src="/assets/js/scvo/root.js"></script>
 
   {{#compare request.url.hostname "scvo.local" ~}}
@@ -309,6 +290,31 @@
   {{else}}
     <script type="text/javascript" src="https://storage.googleapis.com/scvo-assets/scvo/main-{{@root.context.metaData.assetsVersion}}.js"></script>
   {{/compare ~}}
+
+  <script>
+    var scvo = null, readyListeners = [];
+    $(document).ready(function() {
+      scvo = new SCVO.SCVO();
+      ready = true;readyListeners.forEach(function(listener) {
+        listener();
+      });
+    });
+    
+    function registerReadyListener(listener) {
+      if (scvo) {
+        listener();
+      } else {
+        readyListeners.push(listener);
+      }
+    }
+
+    function initMap() {
+      registerReadyListener(function() {
+        scvo.componentsInitialiser.initialiseGMapsDependents('AIzaSyCT7vZkJdto5JoAUDx3asuHu7mHcl8UanQ');
+      });
+    }
+  </script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBJdxcQpVKQ6HdrjnPXycUoZqsmp-Ep3l0&libraries=places&region=uk&callback=initMap" defer></script>
 
   {{{layoutParts.foot}}}
 </body>
