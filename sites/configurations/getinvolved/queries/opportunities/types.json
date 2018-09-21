@@ -9,24 +9,6 @@
     }
   },
   "aggs": {
-    "activities": {
-      "terms": {
-        "field": "work_type",
-        "order": {
-          "_term": "asc"
-        },
-        "size": 10000
-      }
-    },
-    "activities_slugs": {
-      "terms": {
-        "field": "work_type-slugs",
-        "order": {
-          "_term": "asc"
-        },
-        "size": 10000
-      }
-    },
     "client_groups": {
       "terms": {
         "field": "client_group",
@@ -38,11 +20,67 @@
     },
     "client_groups_slugs": {
       "terms": {
-        "field": "client_group-slugs",
+        "field": "client_group_slugs",
         "order": {
           "_term": "asc"
         },
         "size": 10000
+      }
+    },
+    "work_types": {
+      "terms": {
+        "field": "work_type",
+        "order": {
+          "_term": "asc"
+        },
+        "size": 10000
+      }
+    },
+    "work_types_slugs": {
+      "terms": {
+        "field": "work_type_slugs",
+        "order": {
+          "_term": "asc"
+        },
+        "size": 10000
+      }
+    },
+    "regions": {
+      "terms": {
+        "field": "region_group",
+        "order": {
+          "_term": "asc"
+        },
+        "size": 10000
+      }
+    },
+    "regions_slugs": {
+      "terms": {
+        "field": "region_group_slug",
+        "order": {
+          "_term": "asc"
+        },
+        "size": 10000
+      }
+    },
+    "countries": {
+      "terms": {
+        "field": "country",
+        "size": 10000
+      },
+      "aggs": {
+        "regions": {
+          "terms": {
+            "field": "region_group",
+            "size": 10000
+          }
+        },
+        "regions_slugs": {
+          "terms": {
+            "field": "region_group_slug",
+            "size": 10000
+          }
+        }
       }
     }
   }

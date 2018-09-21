@@ -18,16 +18,11 @@
 <form action="/jobs/community-jobs-scotland/vacancies/{{@root.request.params.phase}}" method="GET" [searchroute]="'cjs_job_search'" data-auto-search="false">
   <input type="hidden" name="view" value="{{@root.request.params.query.view}}" />
 
-  <div id="search-tab-bar" class="mdc-tab-bar mdc-tab-bar--fullwidth search-tab-bar" data-mdc-auto-init="MDCTabBar">
-    <a href="/jobs/community-jobs-scotland/vacancies/{{@root.request.params.phase}}?q={{@root.request.params.query.q}}&sector={{@root.request.params.query.sector}}&region={{@root.request.params.query.region}}&location={{@root.request.params.query.location}}&distance={{@root.request.params.query.distance}}&lat={{@root.request.params.query.lat}}&lng={{@root.request.params.query.lng}}&job_number={{@root.request.params.query.job_number}}" class="mdc-tab{{#compare @root.request.params.query.view "!==" "map"}} mdc-tab--active{{/compare}} details-tab" id="detailed-results">
-      <span class="far fa-list fa-fw" title="List"></span>
-      List
-    </a>
-    <a href="/jobs/community-jobs-scotland/vacancies/{{@root.request.params.phase}}?q={{@root.request.params.query.q}}&sector={{@root.request.params.query.sector}}&region={{@root.request.params.query.region}}&location={{@root.request.params.query.location}}&distance={{@root.request.params.query.distance}}&lat={{@root.request.params.query.lat}}&lng={{@root.request.params.query.lng}}&job_number={{@root.request.params.query.job_number}}&view=map" class="mdc-tab{{#compare @root.request.params.query.view "===" "map"}} mdc-tab--active{{/compare}} map-tab">
-      <span class="far fa-map-marker-alt fa-fw" title="Map"></span>
-      Map
-    </a>
-    <span class="mdc-tab-bar__indicator"></span>
+  <div class="h-padding">
+    {{#>components_tab_bar}}
+      {{>components_tab url=(concat "/jobs/community-jobs-scotland/vacancies/" @root.request.params.phase "?" (querystringify @root.request.params.query view="list")) iconClasses="far fa-list fa-fw" label="List" active=(compare @root.request.params.query.view "===" "list")}}
+      {{>components_tab url=(concat "/jobs/community-jobs-scotland/vacancies/" @root.request.params.phase "?" (querystringify @root.request.params.query view="map")) iconClasses="far fa-map-marker-alt fa-fw" label="Map" active=(compare @root.request.params.query.view "===" "map")}}
+    {{/components_tab_bar}}
   </div>
 
   <div class="mdc-text-field mdc-text-field--box mdc-text-field--with-leading-icon" data-mdc-auto-init="MDCTextField">
@@ -40,15 +35,19 @@
   <div class="mdc-layout-grid">
     <div class="mdc-layout-grid__inner">
       <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-7-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone">
-        <div class="mdc-text-field mdc-text-field--box mdc-text-field--with-leading-icon" data-mdc-auto-init="MDCTextField">
+        <div class="mdc-text-field mdc-text-field--box mdc-text-field--with-leading-icon" data-mdc-auto-init="MDCTextField" style="    margin-top: 16px;">
           <span class="far fa-map-marker-alt mdc-text-field__icon" tabindex="0" role="button"></span>
-          <input type="text" id="location" name="location" class="mdc-text-field__input mdc-text-field--fullwidth search-location" value="{{#ifAll @root.request.params.query.lat @root.request.params.query.lng}}{{@root.request.params.query.location}}{{/ifAll}}" placeholder="" data-lpignore="true" data-location-options='
-            {
-              "types": ["(regions)"],
-              "componentRestrictions": {
-                "country": "gb"
-              }
-            }' data-location-lat="[name='lat']" data-location-lng="[name='lng']">
+          <input type="text" id="location" name="location" class="mdc-text-field__input mdc-text-field--fullwidth search-location" value="{{#ifAll @root.request.params.query.lat @root.request.params.query.lng}}{{@root.request.params.query.location}}{{/ifAll}}" placeholder="" data-lpignore="true" data-location-search='{
+                  "googleMapsOptions": {
+                    "type": ["(regions)"],
+                    "componentRestrictions": {
+                      "country": "gb"
+                    }
+                  },
+                  "latSelector": "[name=\"lat\"]",
+                  "lngSelector": "[name=\"lng\"]",
+                  "locationServicesSelector": ".geo-lookup"
+                }'>
           <label class="mdc-floating-label" for="location">
             Location
           </label>

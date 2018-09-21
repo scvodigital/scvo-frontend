@@ -9,10 +9,15 @@
     "{:./routes/*.json}"
   ],
   "metaData": {
+    "favouritesCampaignName": "getinvolved-favourites",
     "menus": "{:./getinvolved-menus.json}",
     "elasticsearchUrl": "{$../elasticsearch-url.txt}",
     "termTypeLabels": {
-      "activities": {
+      "regions": {
+        "singular": "Region",
+        "plural": "Regions"
+      },
+      "work_types": {
         "singular": "Activity",
         "plural": "Activities"
       },
@@ -81,10 +86,21 @@
         "taskModule": "render",
         "renderer": "handlebars",
         "config": {
-          "template": ">context.metaData.handlebars.templates.transform-times",
+          "template": ">context.metaData.handlebars.templates.opportunities_transform-times",
           "output": "data",
           "parseJson": true
         }
+      },
+      "favouritesData": {
+        "name": "favourites",
+        "taskModule": "mysql",
+        "config": {
+          "connectionName": "notifications",
+          "queryTemplates": {
+            "items": ">context.metaData.handlebars.queries.notifications_get-favourites"
+          }
+        },
+        "renderer": "handlebars"
       },
       "supplimentaryResponses": {
         "name": "supplimentaryResponses",
@@ -98,18 +114,31 @@
             {
               "name": "types",
               "index": "web-content-production",
-              "type": "milo-voluteering-opportunity",
+              "type": "milo-volunteering-opportunity",
               "template": ">context.metaData.handlebars.queries.opportunities_types"
             },
             {
               "name": "not_found",
               "index": "web-content-production",
-              "type": "milo-voluteering-opportunity",
+              "type": "milo-volunteering-opportunity",
               "template": ">context.metaData.handlebars.queries.pages_not-found"
             }
           ]
         },
         "renderer": "handlebars"
+      }
+    },
+    "firebaseDefaultDomain": {
+      "name": "getinvolved",
+      "label": "Get Involved",
+      "logoUrl": "",
+      "config": {
+        "apiKey": "AIzaSyDCHiGp3FllVnjPcn0_LjcZrUe_5nC7LAc",
+        "authDomain": "auth.getinvolved.scot",
+        "databaseURL": "https://scvo-getinvolved.firebaseio.com",
+        "projectId": "scvo-getinvolved",
+        "storageBucket": "scvo-getinvolved.appspot.com",
+        "messagingSenderId": "815398681377"
       }
     }
   }

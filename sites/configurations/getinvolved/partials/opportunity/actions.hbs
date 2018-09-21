@@ -27,8 +27,13 @@
     {{/if ~}}
     {{/ifAll ~}}
     {{/compare ~}}
-    <a href="/opportunity/{{slug}}{{@root.request.url.search}}" class="mdc-card__action hide-sm">Find out more</a>
+    <a href="/opportunity/{{slug}}{{@root.request.url.search}}" class="mdc-card__action hide-sm">Find out more about {{organisation_name}}</a>
     <a href="/opportunity/{{slug}}{{@root.request.url.search}}" class="mdc-card__action hide-md hide-lg"><span class="fal fa-info-circle fa-fw fa-2x" aria-hidden="true"></span></a>
     {{/compare ~}}
+  </div>
+  <div class="mdc-card__action-icons pull-right">
+    <div class="mdc-chip-set mdc-chip-set--filter">
+      {{> favourite_chip id=Id}}
+    </div>
   </div>
 </div>

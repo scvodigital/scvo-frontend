@@ -37,43 +37,6 @@
       "queries": {
         "{$./queries/**/*.*}": ""
       }
-    },
-    "commonTasks": {
-      "termsMaps": {
-        "name": "termsMaps",
-        "taskModule": "render",
-        "renderer": "handlebars",
-        "config": {
-          "template": ">context.metaData.handlebars.partials.terms_maps",
-          "output": "data",
-          "parseJson": true
-        }
-      },
-      "supplimentaryResponses": {
-        "name": "supplimentaryResponses",
-        "taskModule": "elasticsearch",
-        "config": {
-          "connectionStringTemplate": "{$../elasticsearch-url.txt}",
-          "elasticsearchConfig": {
-            "apiVersion": "5.6"
-          },
-          "queryTemplates": [
-            {
-              "name": "types",
-              "index": "web-content-production",
-              "type": "milo-voluteering-opportunity",
-              "template": ">context.metaData.handlebars.queries.opportunities_types"
-            },
-            {
-              "name": "not_found",
-              "index": "web-content-production",
-              "type": "milo-voluteering-opportunity",
-              "template": ">context.metaData.handlebars.queries.pages_not-found"
-            }
-          ]
-        },
-        "renderer": "handlebars"
-      }
     }
   }
 }

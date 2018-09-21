@@ -232,7 +232,7 @@
         <div class="mdc-drawer__content">
           <nav class="mdc-list">
             <a class="mdc-list-item {{#compare @root.request.url.pathname "/"}} mdc-list-item--activated{{/compare}}"
-               href="/" {{#compare @root.request.url.pathname "/"}}aria-selected="true"{{else}}aria-hidden="true"{{/compare}}>
+               href="/" aria-selected="true" tabindex="1">
               <span class="far fa-home mdc-list-item__graphic" aria-hidden="true"></span>
               Home
             </a>
@@ -416,7 +416,7 @@
     $(document).ready(function() {
       goodmoves = new Goodmoves.Goodmoves({
         apiKey: "AIzaSyAuGAacoIdUgbtfI42UXTHDosMS4pP5Teg",
-        authDomain: "goodmoves-frontend.firebaseapp.com",
+        authDomain: "auth.goodmoves.com",
         databaseURL: "https://goodmoves-frontend.firebaseio.com",
         projectId: "goodmoves-frontend",
         storageBucket: "goodmoves-frontend.appspot.com",

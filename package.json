@@ -31,7 +31,7 @@
     "prepare": "npm run compile",
     "pretest": "npm run compile",
     "posttest": "npm run check",
-    "assets": "mkdir -p build/assets/goodmoves build/assets/getinvolved; cd ../assets; npm run dev; cp build/goodmoves/*.* ../frontend/build/assets/goodmoves/; cp build/getinvolved/*.* ../frontend/build/assets/getinvolved/; cd ../frontend;",
+    "assets": "mkdir -p build/assets/digitalparticipation build/assets/fundingscotland build/assets/getinvolved build/assets/goodmoves build/assets/humanrightsdeclaration build/assets/scotlandforeurope build/assets/scvo; cd ../assets; npm run dev; cp build/digitalparticipation/*.* ../frontend/build/assets/digitalparticipation/; cp build/fundingscotland/*.* ../frontend/build/assets/fundingscotland/; cp build/getinvolved/*.* ../frontend/build/assets/getinvolved/; cp build/goodmoves/*.* ../frontend/build/assets/goodmoves/; cp build/humanrightsdeclaration/*.* ../frontend/build/assets/humanrightsdeclaration/; cp build/scotlandforeurope/*.* ../frontend/build/assets/scotlandforeurope/; cp build/scvo/*.* ../frontend/build/assets/scvo/; cd ../frontend;",
     "uglify": "npm run uglify-fundingscotland-main; npm run uglify-fundingscotland-search; npm run uglify-fundingscotland-home",
     "uglify-fundingscotland-main": "node_modules/uglify-js/bin/uglifyjs --compress --output=./build/assets/js/fundingscotland/main.js ./build/assets/js/cookieinfo.min.js ./build/assets/js/class-inheritance.js ./build/assets/js/fundingscotland/site-controller.js",
     "uglify-fundingscotland-home": "node_modules/uglify-js/bin/uglifyjs --compress --output=./build/assets/js/fundingscotland/home.js ./build/assets/js/fundingscotland/typeahead-controller.js ./build/assets/js/fundingscotland/home-controller.js",
@@ -97,5 +97,8 @@
     "string-strip-html": "^3.1.0",
     "typescript": "^2.9.2",
     "uglify-js": "^3.4.3"
+  },
+  "devDependencies": {
+    "mjml": "^4.2.0-beta.2"
   }
 }

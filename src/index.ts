@@ -192,6 +192,16 @@ if (process.env.devmode) {
       console.log('ASSETS WATCHER -> Assets rebuilt', error, stdout, stderr);
     });
   });
+} else {
+  fb.database().ref('/contexts/').on('child_changed', (snapshot: any) => {
+    console.log('FIREBASE WATCHER -> Sites configurations changed, clearing routers');
+    if (routers) {
+      for (var name in routers) {
+        delete routers[name];
+      }
+      routers = null;
+    }
+  });
 }
 
 async function menuUpdate(

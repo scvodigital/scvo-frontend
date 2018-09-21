@@ -1,0 +1,28 @@
+{
+  "name": "remove-from-favourites",
+  "pattern": "/remove-from-favourites",
+  "acceptedVerbs": "GET",
+  "tasks": [
+    "context.metaData.commonTasks.authRequired",
+    {
+      "name": "notifications",
+      "taskModule": "mysql",
+      "config": {
+        "connectionName": "notifications",
+        "queryTemplates": {
+          "remove_from_shortlist": ">context.metaData.handlebars.queries.notifications_remove-from-favourites"
+        }
+      },
+      "renderer": "handlebars"
+    },
+    {
+      "name": "destination",
+      "taskModule": "render",
+      "renderer": "handlebars",
+      "config": {
+        "output": "body",
+        "template": "Removed {{@root.request.params.query.id}}"
+      }
+    }
+  ]
+}
