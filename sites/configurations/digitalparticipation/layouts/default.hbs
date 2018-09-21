@@ -24,7 +24,6 @@
   <meta name="theme-color" content="#00838f">
   <!-- <link type="text/css" rel="stylesheet" href="https://unpkg.com/material-components-web@0.37.1/dist/material-components-web.min.css"> -->
   <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-TXfwrfuHVznxCssTxWoPZjhcss/hp38gEOH8UPZG/JcXonvBQ6SlsIF49wUzsGno" crossorigin="anonymous">
-  <link type="text/css" rel="stylesheet" href="/assets/css/digitalparticipation-styles.css">
   <!-- Global site tag (gtag.js) - Google Analytics -->
   <script async src="https://www.googletagmanager.com/gtag/js?id=UA-3467930-19"></script>
   <script>
@@ -42,6 +41,12 @@
   console.log('Menus:', {{{regexReplace (regexReplace (stringify context.metaData.menus) "(<\/script)" "gi" '</scr\" + \"ipt') "(\r|\n)" "gi" ""}}});
   {{/ifAny ~}}
   </script>
+  
+  {{#compare @root.request.url.hostname "digitalparticipation.local" ~}}
+    <link type="text/css" rel="stylesheet" href="/assets/digitalparticipation/main.css">
+  {{else}}
+    <link type="text/css" rel="stylesheet" href="https://storage.googleapis.com/scvo-assets/digitalparticipation/main-{{@root.context.metaData.assetsVersion}}.css">
+  {{/compare ~}}
 </head>
 <body class="{{#if request.params.path}}{{replace request.params.path '_' ' '}}{{else}}home{{/if}}">
   <charter-site>

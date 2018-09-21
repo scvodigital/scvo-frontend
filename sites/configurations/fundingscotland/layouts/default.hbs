@@ -68,12 +68,11 @@ console.log('Menus:', {{{regexReplace (regexReplace (stringify @root.context.met
 {{/ifAny ~}}
 </script>
 <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-TXfwrfuHVznxCssTxWoPZjhcss/hp38gEOH8UPZG/JcXonvBQ6SlsIF49wUzsGno" crossorigin="anonymous">
-<link type="text/css" rel="stylesheet" href="/assets/css/fundingscotland-styles.css">
-<script>
-if(location.host.indexOf('.local') > -1){
-  //document.write('<script src="https://' + (location.host || 'localhost').split(':')[0] + ':35729/livereload.js?snipver=1"></' + 'script>')
-}
-</script>
+{{#compare @root.request.url.hostname "fundingscotland.local" ~}}
+  <link type="text/css" rel="stylesheet" href="/assets/fundingscotland/main.css">
+{{else}}
+  <link type="text/css" rel="stylesheet" href="https://storage.googleapis.com/scvo-assets/fundingscotland/main-{{@root.context.metaData.assetsVersion}}.css">
+{{/compare ~}}
 </head>
 <body class="mdc-theme--site-bg {{#if request.params.path}}{{replace request.params.path '_' ' '}}{{else}}home{{/if}}">
   <fundingscotland-site>
