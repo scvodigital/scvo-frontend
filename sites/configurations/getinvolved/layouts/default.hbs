@@ -67,7 +67,7 @@
   {{#compare @root.request.url.hostname "getinvolved.local" ~}}
     <link type="text/css" rel="stylesheet" href="/assets/getinvolved/main.css">
   {{else}}
-    <link type="text/css" rel="stylesheet" href="https://storage.googleapis.com/scvo-assets/scvo-frontend/getinvolved/main.css">
+    <link type="text/css" rel="stylesheet" href="https://storage.googleapis.com/scvo-assets/getinvolved/main-{{@root.context.metaData.assetsVersion}}.css">
   {{/compare ~}}
 </head>
 <body class="mdc-theme--site-bg {{#if request.params.path}}{{replace request.params.path '_' ' '}}{{else}}home{{/if}}">
