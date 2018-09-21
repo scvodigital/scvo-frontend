@@ -86,7 +86,6 @@
     <input type="hidden" name="lat" value="{{@root.request.params.query.lat}}" id="{{instance_id}}-lat">
     <input type="hidden" name="lng" value="{{@root.request.params.query.lng}}" id="{{instance_id}}-lng">
 
-
     {{#each (split "client_group,work_type" ",")}}
       <h3 class="mdc-drawer__content-heading cursor-pointer noselect mdc-drawer--occasional-ie11" data-collapse-target="#{{../instance_id}}-{{this}}-collapse" role="button" aria-pressed="false" aria-label="Show {{getProperty @root.context.metaData.termTypeLabels (concat this ".plural")}}" tabindex="0">
         {{getProperty @root.context.metaData.termTypeLabels (concat this ".plural")}}
