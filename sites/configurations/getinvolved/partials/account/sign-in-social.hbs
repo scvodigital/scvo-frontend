@@ -53,12 +53,12 @@
           provider.addScope(scope);
         });
       }
-      goodmoves.app.auth().signInWithPopup(provider).then(function(result) {
+      getinvolved.app.auth().signInWithPopup(provider).then(function(result) {
         if (result) {
           console.log('Registered user:', result);
           result.user.getIdTokenResult().then(function(idTokenResult) {
             console.log('ID Token Result', idTokenResult);
-            goodmoves.setCookie('gm_token', idTokenResult.token, 7);
+            getinvolved.setCookie('gi_token', idTokenResult.token, 7);
             window.location.href = '{{{@root.request.headers.referer}}}';
           });
         } else {
