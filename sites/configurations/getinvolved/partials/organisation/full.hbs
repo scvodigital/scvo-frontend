@@ -1,12 +1,12 @@
 <div class="mdc-card full" data-organisation-id="{{Id}}">
-  <div class="mdc-card__info--organisation-row">
-    <div class="mdc-card__info--organisation">
+  <div class="mdc-card__info--content-secondary-row">
+    <div class="mdc-card__info--content-secondary">
       {{#if has_logo ~}}
-      <div class="mdc-card__media mdc-card__media--organisation">
+      <div class="mdc-card__media mdc-card__media--content-secondary">
         <img src="{{logo_url}}" alt="{{title}}" />
       </div>
       {{/if ~}}
-      <div class="mdc-card__info--organisation-title mdc-typography--headline3">
+      <div class="mdc-card__info--content-secondary-title mdc-typography--headline3">
         {{{title}}}
       </div>
       {{{rendered.goodmoves_charity_info}}}
@@ -22,7 +22,7 @@
           {{#if website ~}}
           {{#compare website "!==" null ~}}
           {{#compare website "!==" "http://" ~}}
-          <li class="mdc-card__info--opportunity-website mdc-typography--body1">
+          <li class="mdc-card__info--content-secondary-website mdc-typography--body1">
             <span class="fa-li"><span class="far fa-link fa-fw" title="Website"></span></span>
             <a href="{{website_url}}">{{website}}</a>
           </li>
@@ -32,7 +32,7 @@
           {{#if twitter ~}}
           {{#compare twitter "!==" null ~}}
           {{#compare twitter "!==" "http://" ~}}
-          <li class="mdc-card__info--opportunity-twitter mdc-typography--body1">
+          <li class="mdc-card__info--content-secondary-twitter mdc-typography--body1">
             <span class="fa-li"><span class="fab fa-twitter fa-fw" title="Twitter"></span></span>
             <a href="{{twitter_url}}">{{twitter}}</a>
           </li>
@@ -42,7 +42,7 @@
           {{#if facebook ~}}
           {{#compare facebook "!==" null ~}}
           {{#compare facebook "!==" "http://" ~}}
-          <li class="mdc-card__info--opportunity-facebook mdc-typography--body1">
+          <li class="mdc-card__info--content-secondary-facebook mdc-typography--body1">
             <span class="fa-li"><span class="fab fa-facebook fa-fw" title="Facebook"></span></span>
             <a href="{{facebook_url}}">{{facebook}}</a>
           </li>
@@ -52,7 +52,7 @@
           {{#if linkedin ~}}
           {{#compare linkedin "!==" null ~}}
           {{#compare linkedin "!==" "http://" ~}}
-          <li class="mdc-card__info--opportunity-linkedin mdc-typography--body1">
+          <li class="mdc-card__info--content-secondary-linkedin mdc-typography--body1">
             <span class="fa-li"><span class="fab fa-linkedin fa-fw" title="LinkedIn"></span></span>
             <a href="{{linkedin_url}}">{{linkedin}}</a>
           </li>
@@ -62,7 +62,7 @@
           {{#if goodhq_organisation ~}}
           {{#compare goodhq_organisation.xid "!==" null ~}}
 
-          <li class="mdc-card__info--opportunity-goodhq mdc-typography--body1">
+          <li class="mdc-card__info--content-secondary-goodhq mdc-typography--body1">
             <span class="fa-li"><span class="fas fa-heart fa-fw" title="Good HQ"></span></span>
             <a href="https://goodhq.org/{{goodhq_organisation.xid}}">@{{goodhq_organisation.xid}}</a>
             {{#compare goodhq_organisation.status "===" "Open" ~}}
