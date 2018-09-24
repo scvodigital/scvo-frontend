@@ -1,0 +1,22 @@
+<div id="detailed-results-container" class="container-content container-map">
+  <div id="map-full" data-map-name="fullMap" data-map-options='{
+    {{#ifAll @root.request.params.query.location @root.request.params.query.lat @root.request.params.query.lng ~}}
+      "circle": {
+        "lat": {{@root.request.params.query.lat}},
+        "lng": {{@root.request.params.query.lng}},
+        "radius": {{default @root.request.params.query.distance 0}},
+        "color": "#AD1457"
+      }
+    {{/ifAll ~}}
+    }'>
+    {{#each @root.data.search_data.map_results.hits.hits ~}}
+      {{#if _source.geo_coords ~}}
+        {{#each (arrayify _source.geo_coords) ~}}
+          <marker style="display:none;" data-map="fullMap" data-lat="{{lat}}" data-lng="{{lon}}" data-shortlisted="{{#each @root.data.shortlist.items}}{{#compare id "===" ../../_source.Id}}true{{/compare}}{{/each}}" data-title="{{../_source.title}}">
+            {{>opportunity_map ../_source}}
+          </marker>
+        {{/each ~}}
+      {{/if ~}}
+    {{/each ~}}
+  </div>
+</div>

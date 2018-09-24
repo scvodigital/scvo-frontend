@@ -1,6 +1,6 @@
 {
-  "name": "organisation_search",
-  "pattern": "/organisations/search",
+  "name": "organisation_map",
+  "pattern": "/organisations/map",
   "debug": true,
   "metaData": {
     "sidebarButton": {
@@ -14,6 +14,7 @@
   },
   "tasks": [
     "context.metaData.commonTasks.authNotRequired",
+    "context.metaData.commonTasks.favouritesData",
     {
       "name": "search_data",
       "taskModule": "elasticsearch",
@@ -25,16 +26,17 @@
         },
         "queryTemplates": [
           {
-            "name": "detailed_results",
+            "name": "map_results",
             "index": "web-content-production",
             "type": "milo-organisation",
-            "template": ">context.metaData.handlebars.queries.organisations_search-list"
+            "template": ">context.metaData.handlebars.queries.organisations_search-map"
           }
         ]
       },
       "renderer": "handlebars"
     },
     "context.metaData.commonTasks.supplimentaryResponses",
+    "context.metaData.commonTasks.termsMaps",
     {
       "name": "destination",
       "taskModule": "renderLayout",
@@ -42,6 +44,24 @@
       "config": {
         "logic": {
           "if": [
+            {
+              "in": [
+                "view=rss",
+                {
+                  "var": "request.fullUrl"
+                }
+              ]
+            },
+            "rss",
+            {
+              "in": [
+                "view=json",
+                {
+                  "var": "request.fullUrl"
+                }
+              ]
+            },
+            "data",
             "default"
           ]
         },
@@ -51,11 +71,18 @@
             "layout": ">context.metaData.handlebars.layouts.default",
             "parts": {
               "head": ">context.metaData.handlebars.templates.organisations_search-head-tags",
-              "body": ">context.metaData.handlebars.templates.organisations_search",
+              "body": ">context.metaData.handlebars.templates.organisations_map",
+              "foot": ">context.metaData.handlebars.templates.organisations_map-foot",
               "sidebar": ">context.metaData.handlebars.templates.organisations_search-form"
-
             },
             "contentType": "text/html"
+          },
+          "data": {
+            "layout": ">context.metaData.handlebars.layouts.data",
+            "parts": {
+              "content": ">context.metaData.handlebars.templates.organisations_search-json"
+            },
+            "contentType": "application/json"
           }
         }
       }

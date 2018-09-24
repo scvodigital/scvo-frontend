@@ -1,5 +1,13 @@
 <div class="mdc-drawer__content">
   <h2 class="mdc-drawer__content-heading hide-sm mdc-drawer--occasional-ie11">Search organisations</h2>
+
+  <div class="h-padding">
+    {{#>components_tab_bar}}
+      {{>components_tab url=(concat "organisations/search" @root.request.url.search) iconClasses="far fa-list fa-fw" label="List" active=(compare @root.request.url.pathname "===" "organisations/search")}}
+      {{>components_tab url=(concat "organisations/map" @root.request.url.search) iconClasses="far fa-map-marker-alt fa-fw" label="Map" active=(compare @root.request.url.pathname "===" "organisations/map")}}
+    {{/components_tab_bar}}
+  </div>
+
   <form action="/organisations" method="GET">
     <div class="h-padding">
       <div class="mdc-text-field mdc-text-field--box mdc-text-field--with-leading-icon mdc-drawer--occasional-ie11" data-mdc-auto-init="MDCTextField">
