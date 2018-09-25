@@ -336,8 +336,41 @@ async function goodmovesVacancyFilesAnalytics(
 async function genericAnalytics(
     req: express.Request, res: express.Response,
     next: express.NextFunction): Promise<any> {
-  console.log('TEST CRON JOB');
-  res.send('Not yet implemented');
+  const analyticsProcessor = new AnalyticsProcessor(
+      ANALYTICS_SECRETS.googleCredentials.goodmoves,
+      ANALYTICS_SECRETS.salesforceCredentials.scvoProduction);
+  await analyticsProcessor.setup();
+  let response: any = null;
+  let gmHits: ViewCount[] = [];
+  let startDate = new Date();
+  try {
+    if (req.query.year && req.query.month) {
+      const year = Number(req.query.year);
+      const month = Number(req.query.month) - 1;
+      startDate = new Date(year, month, 1);
+    }
+  } catch (err) {
+    console.error(
+        'Failed to parse date from querystring. Using beginning of this month.',
+        err);
+    startDate = new Date();
+  }
+  try {
+    console.log(
+        'Starting Analytics import of Goodmoves Vacancy Files for',
+        format(startDate, 'YYYY-MM-DD'));
+    gmHits = await analyticsProcessor.getGenericHitEvents('goodmoves.org.uk', startDate);
+    response = await analyticsProcessor.updateSalesforce(gmHits);
+  } catch (err) {
+    response = err;
+  }
+  res.send(
+      '<html><body>' +
+      '<h1>File Download Hits</h1>' +
+      '<pre>' + util.inspect(gmHits, false, null) + '</pre>' +
+      '<h1>Response</h1>' +
+      '<pre>' + util.inspect(response, false, null) + '</pre>' +
+      '</body></html>');
   return next();
 }
 
