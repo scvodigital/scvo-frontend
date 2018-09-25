@@ -297,7 +297,7 @@ function startEmailer(ms: number = defaultEmailerInterval) {
     });
   }, ms);
 }
-//startEmailer();
+startEmailer();
 
 async function processEmails() {
   if (routers && routers.hasOwnProperty('emailer')) {
