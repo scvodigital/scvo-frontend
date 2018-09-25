@@ -60,12 +60,12 @@
   "query": {
     "bool": {
       "filter": [
-        {{>queries_opportunity_common_filters request.params.query}}
+        {{>queries_opportunity_common_filters @root.request.params.query}}
       ],
       "must": [
         {
           "term": {
-            {{#if (includes request.params.slug "-") ~}}
+            {{#if (includes @root.request.params.slug "-") ~}}
             "slug": "{{request.params.slug}}"
             {{else}}
             "Id": "{{request.params.slug}}"

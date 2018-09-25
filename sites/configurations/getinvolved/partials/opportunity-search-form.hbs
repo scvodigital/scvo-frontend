@@ -129,7 +129,11 @@
       </div>
     {{/each ~}}
 
-    <div class="h-margin v-margin mdc-drawer--occasional-ie11">
+    <div class="v-margin-full">
+      {{> term_checkbox slug="true" field="recently_updated" selected=@root.request.params.query.recently_updated instance_id=instance_id value="Only show opportunities updated in the last year"}}
+    </div>
+
+    <div class="h-margin mdc-drawer--occasional-ie11">
       <button class="mdc-button mdc-button--raised mdc-button--large mdc-button--fullwidth mdc-ripple-surface mdc-ripple-surface--primary" type="submit" id="{{instance_id}}-search-submit" data-mdc-auto-init="MDCRipple">
         <span class="far fa-search fa-fw mdc-list-item__graphic" aria-hidden="true"></span>
         Search
