@@ -83,13 +83,13 @@
                           ]
                         },
                         {
-                          "name": "role_status",
+                          "name": "working_patterns",
                           "templates": {
-                            "header": "<h3>Working pattern</h3>"
+                            "header": "<h3>Working patterns</h3>"
                           },
                           "display": "label",
                           "items": [
-                            {{#each @root.data.supplimentaryResponses.types.aggregations.role_status.buckets ~}}
+                            {{#each @root.data.supplimentaryResponses.types.aggregations.working_patterns.buckets ~}}
                             {
                               "label": {{{stringify key}}},
                               "value": {{{stringify (slugify key)}}}

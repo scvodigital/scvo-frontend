@@ -5,13 +5,21 @@
         Client Groups
       </div>
       <ul class="mdc-list">
+<<<<<<< HEAD
         {{#each @root.data.opportunitySupplimentary.types.aggregations.client_groups_slugs.buckets ~}}
+=======
+        {{#each @root.data.supplimentaryResponses.types.aggregations.client_groups.buckets ~}}
+>>>>>>> 0248b0f6d6e502bf73720c0af3be3680de268ced
           {{#if key ~}}
-            <a class="mdc-list-item" href="/search?client_groups%5B%5D={{urlencode key}}" role="menuitem" onclick="gtag('event', 'navigation', { event_category: '{{default ../eventContext "category-browser"}}', event_label: 'Client group: {{key}}' })">
+            <a class="mdc-list-item" href="/search?client_groups%5B%5D={{urlencode (slugify (replace key "/" "-"))}}" role="menuitem" onclick="gtag('event', 'navigation', { event_category: '{{default ../eventContext "category-browser"}}', event_label: 'Client group: {{slugify (replace key "/" "-")}}' })">
               <span class="mdc-list-item__text">
+<<<<<<< HEAD
                 {{#with (lookup @root.data.opportunitySupplimentary.types.aggregations.client_groups.buckets @index) ~}}
                   {{{key}}}
                 {{/with ~}}
+=======
+                {{{key}}}
+>>>>>>> 0248b0f6d6e502bf73720c0af3be3680de268ced
               </span>
               <span class="mdc-list-item__meta" aria-label="{{doc_count}} opportunities">
                 {{doc_count}}
@@ -26,13 +34,11 @@
         Work types
       </div>
       <ul class="mdc-list">
-        {{#each @root.data.opportunitySupplimentary.types.aggregations.work_types_slugs.buckets ~}}
+        {{#each @root.data.opportunitySupplimentary.types.aggregations.work_types.buckets ~}}
           {{#if key ~}}
-            <a class="mdc-list-item" href="/search?work_types%5B%5D={{urlencode key}}" role="menuitem" onclick="gtag('event', 'navigation', { event_category: '{{default ../eventContext "category-browser"}}', event_label: 'Work type: {{key}}' })">
+            <a class="mdc-list-item" href="/search?work_types%5B%5D={{urlencode (slugify (replace key "/" "-"))}}" role="menuitem" onclick="gtag('event', 'navigation', { event_category: '{{default ../eventContext "category-browser"}}', event_label: 'Work type: {{slugify (replace key "/" "-")}}' })">
               <span class="mdc-list-item__text">
-                {{#with (lookup @root.data.opportunitySupplimentary.types.aggregations.work_types.buckets @index) ~}}
-                  {{{key}}}
-                {{/with ~}}
+                {{{key}}}
               </span>
               <span class="mdc-list-item__meta" aria-label="{{doc_count}} opportunities">
                 {{doc_count}}
@@ -55,13 +61,11 @@
             </li>
             {{/compare ~}}
           {{/if ~}}
-          {{#each this.regions_slugs.buckets ~}}
+          {{#each this.regions.buckets ~}}
             {{#if key ~}}
-              <a class="mdc-list-item" href="/search?regions%5B%5D={{urlencode key}}" role="menuitem" onclick="gtag('event', 'navigation', { event_category: '{{default ../../eventContext "category-browser"}}', event_label: 'Region: {{key}}' })">
+              <a class="mdc-list-item" href="/search?regions%5B%5D={{urlencode (slugify (replace key "/" "-"))}}" role="menuitem" onclick="gtag('event', 'navigation', { event_category: '{{default ../../eventContext "category-browser"}}', event_label: 'Region: {{slugify (replace key "/" "-")}}' })">
                 <span class="mdc-list-item__text">
-                  {{#with (lookup ../regions.buckets @index) ~}}
-                    {{{key}}}
-                  {{/with ~}}
+                  {{{key}}}
                 </span>
                 <span class="mdc-list-item__meta" aria-label="{{doc_count}} vacancies">
                   {{doc_count}}
