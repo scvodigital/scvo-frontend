@@ -1,10 +1,14 @@
 /* tslint:disable:no-any */
+import * as util from 'util';
 import {endOfMonth, format, startOfMonth} from 'date-fns';
 import * as gapis from 'googleapis';
 import {google} from 'googleapis';
 import * as jsforce from 'jsforce';
 
 const analytics = google.analytics('v3');
+const sobjectMap: { [name: string]: string } = {
+  'goodmoves-vacancy': 'Vacancy__c'
+}
 
 export class AnalyticsProcessor {
   jwtClient: any|null = null;
@@ -39,6 +43,58 @@ export class AnalyticsProcessor {
 
     this.jwtClient.setCredentials(credentials);
     google.options({auth: this.jwtClient});
+  }
+
+  async getGenericHitEvents(domain: string, startDate = new Date()): Promise<ViewCount[]> {
+    const today = new Date();
+    startDate = startOfMonth(startDate);
+    let endDate = endOfMonth(startDate);
+    endDate = endDate > today ? today : endDate;
+    
+    const startDateString = format(startDate, 'YYYY-MM-DD');
+    const endDateString = format(endDate, 'YYYY-MM-DD');
+
+    const params = {
+      'ids': 'ga:89145164',
+      'start-date': startDateString,
+      'end-date': endDateString,
+      'metrics': 'ga:totalEvents',
+      'dimensions': 'ga:eventCategory,ga:eventLabel,ga:dimension1',
+      'filters': 'ga:eventAction==document_hit',
+    };
+
+    const options = {auth: this.jwtClient};
+    
+    const viewCounts: ViewCountCollection = {};
+    const hitType = 'Page View';
+    const res = await analytics.data.ga.get(params, options);
+
+    if (!res.data.rows) return [];
+
+    res.data.rows.forEach((row) => {
+      const documentType = row[0];
+      const id = row[1];
+      const hitType = row[2];
+      const count = Number(row[3]);
+      const sobjectType: string = sobjectMap[documentType] || '';
+
+      if (id && sobjectType) {
+        const viewCount = new ViewCount(
+            sobjectType, id, startDate, hitType, domain);
+
+        if (!viewCounts.hasOwnProperty(viewCount.name)) {
+          viewCounts[id] = viewCount;
+        }
+
+        viewCounts[id].addHits(count);
+      }
+    });
+
+    const viewCountArray = Object.keys(viewCounts).map((key) => {
+      return viewCounts[key];
+    });
+
+    return viewCountArray;
   }
 
   /*
