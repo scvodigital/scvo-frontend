@@ -5,11 +5,11 @@
         Client Groups
       </div>
       <ul class="mdc-list">
-        {{#each @root.data.supplimentaryResponses.types.aggregations.client_groups_slugs.buckets ~}}
+        {{#each @root.data.opportunitySupplimentary.types.aggregations.client_groups_slugs.buckets ~}}
           {{#if key ~}}
             <a class="mdc-list-item" href="/search?client_groups%5B%5D={{urlencode key}}" role="menuitem" onclick="gtag('event', 'navigation', { event_category: '{{default ../eventContext "category-browser"}}', event_label: 'Client group: {{key}}' })">
               <span class="mdc-list-item__text">
-                {{#with (lookup @root.data.supplimentaryResponses.types.aggregations.client_groups.buckets @index) ~}}
+                {{#with (lookup @root.data.opportunitySupplimentary.types.aggregations.client_groups.buckets @index) ~}}
                   {{{key}}}
                 {{/with ~}}
               </span>
@@ -26,11 +26,11 @@
         Work types
       </div>
       <ul class="mdc-list">
-        {{#each @root.data.supplimentaryResponses.types.aggregations.work_types_slugs.buckets ~}}
+        {{#each @root.data.opportunitySupplimentary.types.aggregations.work_types_slugs.buckets ~}}
           {{#if key ~}}
             <a class="mdc-list-item" href="/search?work_types%5B%5D={{urlencode key}}" role="menuitem" onclick="gtag('event', 'navigation', { event_category: '{{default ../eventContext "category-browser"}}', event_label: 'Work type: {{key}}' })">
               <span class="mdc-list-item__text">
-                {{#with (lookup @root.data.supplimentaryResponses.types.aggregations.work_types.buckets @index) ~}}
+                {{#with (lookup @root.data.opportunitySupplimentary.types.aggregations.work_types.buckets @index) ~}}
                   {{{key}}}
                 {{/with ~}}
               </span>
@@ -47,9 +47,9 @@
         Regions
       </div>
       <ul class="mdc-list">
-        {{#each @root.data.supplimentaryResponses.types.aggregations.countries.buckets ~}}
+        {{#each @root.data.opportunitySupplimentary.types.aggregations.countries.buckets ~}}
           {{#if key ~}}
-          {{#compare (length @root.data.supplimentaryResponses.types.aggregations.countries.buckets) ">" 1 ~}}
+          {{#compare (length @root.data.opportunitySupplimentary.types.aggregations.countries.buckets) ">" 1 ~}}
             <li class="mdc-list-item mdc-list-item--{{@index}}">
               <h3 class="mdc-typography--headline7">{{{key}}}</h3>
             </li>

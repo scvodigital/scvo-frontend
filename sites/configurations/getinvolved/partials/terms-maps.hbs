@@ -2,7 +2,7 @@
   {{#each (split "client_group,work_type,region" ",")}}
     "{{this}}": {
       "slugsMap": {
-        {{#each (getProperty @root.data.supplimentaryResponses.types.aggregations (concat this ".buckets")) ~}}
+        {{#each (getProperty @root.data.opportunitySupplimentary.types.aggregations (concat this ".buckets")) ~}}
           {{#if key ~}}
           "{{slugify key}}": {
             "term": {{{stringify key}}},
@@ -12,7 +12,7 @@
         {{/each}}
       },
       "termsMap": {
-        {{#each (getProperty @root.data.supplimentaryResponses.types.aggregations (concat this ".buckets")) ~}}
+        {{#each (getProperty @root.data.opportunitySupplimentary.types.aggregations (concat this ".buckets")) ~}}
           {{#if key ~}}
           {{{stringify key}}}: {
             "slug": "{{slugify key}}",
@@ -22,7 +22,7 @@
         {{/each}}
       },
       "all": [
-        {{#each (getProperty @root.data.supplimentaryResponses.types.aggregations (concat this ".buckets")) ~}}
+        {{#each (getProperty @root.data.opportunitySupplimentary.types.aggregations (concat this ".buckets")) ~}}
           {{#if key ~}}
           {
             "term": {{{stringify key}}},

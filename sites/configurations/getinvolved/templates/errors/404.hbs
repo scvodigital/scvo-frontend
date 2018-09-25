@@ -6,9 +6,9 @@
         <p>
           We recently relaunched our website and some page addresses may have changed.
         </p>
-        {{#ifAll data.supplimentaryResponses.not_found (compare data.supplimentaryResponses.not_found.hits.total ">" 0) ~}}
+        {{#ifAll data.opportunitySupplimentary.not_found (compare data.opportunitySupplimentary.not_found.hits.total ">" 0) ~}}
         <h3>Did you mean?</h3>
-        {{#each data.supplimentaryResponses.not_found.hits.hits ~}}
+        {{#each data.opportunitySupplimentary.not_found.hits.hits ~}}
         {{#compare @index "===" 0 ~}}
         {{>highlight_result}}
         {{else}}

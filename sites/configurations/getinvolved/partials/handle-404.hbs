@@ -8,9 +8,9 @@
       <p>
         We recently relaunched our website and some page addresses may have changed.
       </p>
-      {{#ifAll @root.data.supplimentaryResponses.not_found (compare @root.data.supplimentaryResponses.not_found.hits.total ">" 0) ~}}
+      {{#ifAll @root.data.opportunitySupplimentary.not_found (compare @root.data.opportunitySupplimentary.not_found.hits.total ">" 0) ~}}
       <h3>Did you mean?</h3>
-      {{#each @root.data.supplimentaryResponses.not_found.hits.hits ~}}
+      {{#each @root.data.opportunitySupplimentary.not_found.hits.hits ~}}
       {{#compare @index "===" 0 ~}}
       {{>highlight_result}}
       {{else}}
@@ -23,10 +23,10 @@
     </div>
   </div>
 </div>
-{{#ifAll @root.data.supplimentaryResponses.not_found (compare @root.data.supplimentaryResponses.not_found.hits.total ">" 1) ~}}
+{{#ifAll @root.data.opportunitySupplimentary.not_found (compare @root.data.opportunitySupplimentary.not_found.hits.total ">" 1) ~}}
 <hr />
 <h3>Other relevant content</h3>
-{{#each @root.data.supplimentaryResponses.not_found.hits.hits ~}}
+{{#each @root.data.opportunitySupplimentary.not_found.hits.hits ~}}
 {{#compare @index "===" 0 ~}}
 {{else}}
 {{>highlight_result}}

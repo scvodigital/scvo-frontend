@@ -9,7 +9,6 @@
       <div class="mdc-card__info--content-secondary-title mdc-typography--headline3">
         {{{title}}}
       </div>
-      {{{rendered.goodmoves_charity_info}}}
       <div class="detailed-info">
         {{#if description ~}}
         <div class="mdc-typography--body1 v-margin">
@@ -19,6 +18,25 @@
       </div>
       <div class="key-info-extra">
         <ul class="fa-ul">
+
+  {{#compare (length main_activities_global) ">" 0 ~}}
+          <li class="mdc-card__info--content-primary-work-type reference mdc-typography--body1">
+            <span class="fa-li"><span class="far fa-briefcase fa-fw" title="Activities"></span></span>
+            <strong>Activities:</strong>
+          {{#each main_activities_global}}
+            {{{this}}}{{#unless @last}}, {{/unless}}
+          {{/each}}
+        </li>
+  {{/compare ~}}
+
+    {{#compare (length region_group) ">" 0 ~}}
+
+      <li class="mdc-card__info--content-primary-work-type reference mdc-typography--body1">
+        <span class="fa-li"><span class="far fa-map-marker fa-fw" title="Region"></span></span>
+        {{region_group}}
+      </li>
+    {{/compare}}
+
           {{#if website ~}}
           {{#compare website "!==" null ~}}
           {{#compare website "!==" "http://" ~}}
@@ -61,7 +79,6 @@
           {{/if ~}}
           {{#if goodhq_organisation ~}}
           {{#compare goodhq_organisation.xid "!==" null ~}}
-
           <li class="mdc-card__info--content-secondary-goodhq mdc-typography--body1">
             <span class="fa-li"><span class="fas fa-heart fa-fw" title="Good HQ"></span></span>
             <a href="https://goodhq.org/{{goodhq_organisation.xid}}">@{{goodhq_organisation.xid}}</a>
