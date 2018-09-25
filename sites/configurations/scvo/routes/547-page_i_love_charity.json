@@ -1,6 +1,9 @@
 {
   "name": "page_i_love_charity",
-  "pattern": "/projects-campaigns/i-love-charity",
+  "pattern": {
+    "i_love_charity_campaign": "/projects-campaigns/i-love-charity",
+    "i_love_charity_campaign_section": "/projects-campaigns/i-love-charity/:section"
+  },
   "tasks": [
     {
       "name": "primaryResponse",
@@ -54,7 +57,7 @@
             "layout": ">context.metaData.handlebars.layouts.default",
             "parts": {
               "head": ">context.metaData.handlebars.templates.pages_page-head-tags",
-              "body": ">context.metaData.handlebars.templates.pages_page-no-margin",
+              "body": ">context.metaData.handlebars.templates.pages_page-i-love-charity",
               "foot": ""
             },
             "contentType": "text/html"
