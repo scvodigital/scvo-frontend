@@ -33,6 +33,26 @@
     },
     "context.metaData.commonTasks.organisationSupplimentary",
     "context.metaData.commonTasks.opportunitySupplimentary",
+
+    {
+      "name": "organisationOpportunities",
+      "taskModule": "elasticsearch",
+      "config": {
+        "connectionStringTemplate": "{$../../elasticsearch-url.txt}",
+        "elasticsearchConfig": {
+          "apiVersion": "5.6"
+        },
+        "queryTemplates": [
+          {
+            "name": "opportunities_open",
+            "index": "web-content-production",
+            "type": "milo-volunteering-opportunity",
+            "template": ">context.metaData.handlebars.queries.opportunities_organisation-opportunities-open"
+          }
+        ]
+      },
+      "renderer": "handlebars"
+    },
     {
       "name": "goodhq",
       "taskModule": "elasticsearch",

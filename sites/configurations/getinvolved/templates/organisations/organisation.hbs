@@ -6,30 +6,30 @@
 
   {{> organisation_full organisation}}
 
-  {{#compare @root.data.opportunitySupplimentary.opportunities_open.hits.total ">" 0 ~}}
+  {{#compare @root.data.organisationOpportunities.opportunities_open.hits.total ">" 0 ~}}
   <hr />
   <div class="mdc-typography--headline5">
     Current opportunities
   </div>
-  {{#each @root.data.opportunitySupplimentary.opportunities_open.hits.hits ~}}
+  {{#each @root.data.organisationOpportunities.opportunities_open.hits.hits ~}}
   {{> opportunity_list _source}}
   {{/each ~}}
   {{/compare ~}}
 
-  {{#compare @root.data.opportunitySupplimentary.opportunities_closed.hits.total ">" 0 ~}}
-  {{#compare @root.data.opportunitySupplimentary.opportunities_open.hits.total "===" 0 ~}}
+  {{#compare @root.data.organisationOpportunities.opportunities_closed.hits.total ">" 0 ~}}
+  {{#compare @root.data.organisationOpportunities.opportunities_open.hits.total "===" 0 ~}}
   <hr />
   {{/compare}}
   <div class="mdc-typography--headline5">
     Closed opportunities
   </div>
-  {{#each @root.data.opportunitySupplimentary.opportunities_closed.hits.hits ~}}
+  {{#each @root.data.organisationOpportunities.opportunities_closed.hits.hits ~}}
   {{> opportunity_list _source}}
   {{/each ~}}
   {{/compare ~}}
 
-  {{#compare @root.data.opportunitySupplimentary.opportunities_open.hits.total "===" 0 ~}}
-  {{#compare @root.data.opportunitySupplimentary.opportunities_closed.hits.total "===" 0 ~}}
+  {{#compare @root.data.organisationOpportunities.opportunities_open.hits.total "===" 0 ~}}
+  {{#compare @root.data.organisationOpportunities.opportunities_closed.hits.total "===" 0 ~}}
   <hr />
   <div class="mdc-typography--headline6">
     There are no current or recently closed opportunities available
