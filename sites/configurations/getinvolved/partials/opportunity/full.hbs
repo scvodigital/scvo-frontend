@@ -8,7 +8,7 @@
     {{/components_tab_bar}}
     <hr class="mdc-list-divider" />
     <div class="panels" for="content-primary-tab-bar">
-      <div class="panel panel--active mdc-card--full-content" role="tabpanel" aria-hidden="false" id="panel-1">
+      <div class="panel panel--active mdc-card--full-content" role="tabpanel" aria-hidden="false" data-tab-name="panel-1">
         <div class="key-info-extra">
           <ul class="fa-ul">
             {{#if available_from ~}}
@@ -175,30 +175,29 @@
       </div>
       {{/ifAny ~}}
       --}}
-      <div class="location-info">
-        {{#compare (length geo_coords) ">" 0 ~}}
-          <div class="container-content container-map">
-            <div id="map-opportunity" data-map-name="opportunityMap" data-map-options='{
-                "center": {
-                  "lat": {{geo_coords.0.lat}},
-                  "lng": {{geo_coords.0.lon}}
-                },
-                "zoom": 13
-              }'></div>
-          </div>
-          {{#each (arrayify geo_coords) ~}}
-            <marker style="display:none;" data-map="opportunityMap" data-lat="{{lat}}" data-lng="{{lon}}" data-title="{{../organisation.name}} - {{../title}}">
-              <h3 class="mdc-typography--headline7">{{../organisation.name}}</h3>
-              <p class="mdc-typography--body2">{{../title}}</p>
-            </marker>
-          {{/each ~}}
-        {{else}}
-          <!--<div class="container-content v-margin-full">-->
-          <!--<p class="mdc-typography--body1">-->
-          <!--Area: {{{location}}}. Specific job location not provided.-->
-          <!--</p>-->
-          <!--</div>-->
-        {{/compare ~}}
+      <div class="panel mdc-card--full-content" role="tabpanel" aria-hidden="true" data-tab-name="panel-2">
+        <div class="location-info">
+          {{#compare (length (arrayify geo_coords)) ">" 0 ~}}
+            <div class="container-content container-map">
+              <div id="map-content-primary" data-map-name="vacancyMap" data-map-options='{
+                  }'>
+                {{#each (arrayify geo_coords) ~}}
+                  <marker style="display:none;" data-map="vacancyMap" data-lat="{{lat}}" data-lng="{{lon}}" data-title="{{../organisation.name}} - {{../title}}">
+                    <h3 class="mdc-typography--headline7">{{../organisation.name}}</h3>
+                    <p class="mdc-typography--body2">{{../title}}</p>
+                  </marker>
+                {{/each ~}}
+              </div>
+            </div>
+          {{else}}
+            <div class="container-content v-margin-full">
+              <p class="mdc-typography--body1">
+                {{stringify geo_coords}}
+                Area: {{{location}}}. Specific opportunity location not provided.
+              </p>
+            </div>
+          {{/compare ~}}
+        </div>
       </div>
     </div>
     {{> opportunity_actions slug=slug Id=Id action="organisation"}}

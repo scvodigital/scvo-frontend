@@ -10,7 +10,11 @@
     "bool": {
       "filter": [
         {{>queries_organisation_common_filters request.params.query}}
+      ],
+      "must": [
+        {{>queries_organisation_search_must request.params.query}}
       ]
+
     }
   }
 }
