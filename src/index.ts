@@ -79,6 +79,9 @@ app.get('/analytics/goodmoves-vacancies', goodmovesVacanciesAnalytics);
 app.get('/analytics/goodmoves-vacancy-files', goodmovesVacancyFilesAnalytics);
 app.get('/analytics/generic', genericAnalytics);
 
+app.get('/emailer/start', handleStartEmailer);
+app.get('/emailer/stop', handleStopEmailer);
+
 app.get('*', index);
 app.post('*', index);
 
@@ -249,6 +252,71 @@ async function favicon(
   res.send('Naw');
   res.end();
   return next();
+}
+
+const defaultEmailerInterval = 5000;
+let emailerInterval: NodeJS.Timer | null = null;
+async function handleStopEmailer(
+    req: express.Request, res: express.Response,
+    next: express.NextFunction): Promise<any> {
+  stopEmailer();
+  res.send('Done');
+  res.end();
+  return next();
+}
+
+async function handleStartEmailer(
+    req: express.Request, res: express.Response,
+    next: express.NextFunction): Promise<any> {
+  const ms = req.query.ms ? Number(req.query.ms) || defaultEmailerInterval : defaultEmailerInterval;
+  startEmailer(ms);
+  res.send('Done');
+  res.end();
+  return next();
+}
+
+function stopEmailer() {
+  if (emailerInterval) {
+    console.log('Stopping emailer interval');
+    try {
+      clearInterval(emailerInterval);
+    } catch(err) {
+      console.error('Failed to clear emailer interval timer', err);
+    }
+  }
+  emailerInterval = null;
+}
+
+function startEmailer(ms: number = defaultEmailerInterval) {
+  stopEmailer();
+  console.log('Starting emailer interval at', ms, 'ms');
+  emailerInterval = setInterval(function() {
+    processEmails().then(() => {
+    }).catch(err => {
+      console.error('processEmails Promise Rejected?', err);
+    });
+  }, ms);
+}
+startEmailer();
+
+async function processEmails() {
+  if (routers && routers.hasOwnProperty('emailer')) {
+    const request: RouterRequest = {
+      url: url.parse('https://emailer.scvo.net/process'),
+      fullUrl: 'https://emailer.scvo.net/process',
+      params: {},
+      headers: {},
+      cookies: {},
+      verb: 'GET',
+      body: null
+    }; 
+    try {
+      const response = await routers.emailer.go(request);
+    } catch(err) {
+      console.error('Error mocking emailer.go with request:', request, err);
+    }
+  }
+  return;
 }
 
 async function goodmovesVacanciesAnalytics(
