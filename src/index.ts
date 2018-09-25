@@ -168,7 +168,10 @@ async function index(
 }
 
 if (process.env.devmode) {
-  var configWatcher = chokidar.watch('./sites/configurations', { persistent: true });
+  var configWatcher = chokidar.watch('./sites/configurations', { 
+    ignored: /\.mjml/,
+    persistent: true
+  });
   configWatcher.on('change', (path) => {
     console.log('CONFIGURATIONS WATCHER -> File', path, 'has changed, Rebuilding sites JSON');
     var jsonInput = fs.readFileSync('./sites/sites.inc.json').toString();
@@ -182,6 +185,14 @@ if (process.env.devmode) {
         };
         routers = null;
       }
+    });
+  });
+
+  var emailsWatcher = chokidar.watch(['./sites/configurations/**/*.mjml'], { persistent: true });
+  emailsWatcher.on('change', (path) => {
+    console.log('EMAILS WATCHER -> File', path, 'has changed, Rebuilding emails');
+    exec('npm run emails', (error, stdout, stderr) => {
+      console.log('EMAILS WATCHER -> Emails rebuilt', error, stdout, stderr);
     });
   });
 
