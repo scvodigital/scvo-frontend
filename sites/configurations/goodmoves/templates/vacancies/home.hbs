@@ -14,315 +14,323 @@
         </div>
       </div>
       <div class="search-content">
-        <form id="search-view" class="search-form mdc-elevation--z5" action="/search" method="GET">
-          <input type="hidden" name="lat" value="{{@root.request.params.query.lat}}" id="location-lat">
-          <input type="hidden" name="lng" value="{{@root.request.params.query.lng}}" id="location-lng">
-          <div class="mdc-layout-grid">
-            <div class="mdc-layout-grid__inner">
-              <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-5-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone">
-                <div class="mdc-text-field mdc-text-field--box mdc-text-field--with-leading-icon mdc-text-field-tt" data-mdc-auto-init="MDCTextField">
-                  <span class="far fa-search mdc-text-field__icon" tabindex="0" role="button"></span>
-                  <input type="text" id="what-primary-content" name="keywords" class="mdc-text-field__input" placeholder="" data-lpignore="true" data-typeahead='{
-                    "typeaheadOptions": {
-                      "highlight": true,
-                      "minlength": 0
-                    },
-                    "outputs": [
-                      {
-                        "type": "element",
-                        "options": {
-                          "containerSelectorTemplate": "#search-terms",
-                          "testSelectorTemplate": "#\{{dataset.name}}-\{{item.value}}",
-                          "removeSelectorTemplate": "#remove-\{{dataset.name}}-\{{item.value}}",
-                          "template": {{#blockStringify this~}}
-                            <div class="mdc-chip mdc-theme--primary-bg" tabindex="0" id="\{{dataset.name}}-\{{item.value}}">
-                              <div class="mdc-chip__text">\{{item.label}}</div>
-                              <input type="hidden" name="\{{dataset.name}}[]" value="\{{item.value}}">
-                              <i class="far fa-times-circle mdc-chip__icon mdc-chip__icon--trailing" tabindex="0" role="button" id="remove-\{{dataset.name}}-\{{item.value}}"></i>
-                            </div>
-                          {{~/blockStringify}}
+        {{#compare @root.data.supplimentaryResponses.types.hits.total ">" 0 ~}}
+          <form id="search-view" class="search-form mdc-elevation--z5" action="/search" method="GET">
+            <input type="hidden" name="lat" value="{{@root.request.params.query.lat}}" id="location-lat">
+            <input type="hidden" name="lng" value="{{@root.request.params.query.lng}}" id="location-lng">
+            <div class="mdc-layout-grid">
+              <div class="mdc-layout-grid__inner">
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-5-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone">
+                  <div class="mdc-text-field mdc-text-field--box mdc-text-field--with-leading-icon mdc-text-field-tt" data-mdc-auto-init="MDCTextField">
+                    <span class="far fa-search mdc-text-field__icon" tabindex="0" role="button"></span>
+                    <input type="text" id="what-primary-content" name="keywords" class="mdc-text-field__input" placeholder="" data-lpignore="true" data-typeahead='{
+                      "typeaheadOptions": {
+                        "highlight": true,
+                        "minlength": 0
+                      },
+                      "outputs": [
+                        {
+                          "type": "element",
+                          "options": {
+                            "containerSelectorTemplate": "#search-terms",
+                            "testSelectorTemplate": "#\{{dataset.name}}-\{{item.value}}",
+                            "removeSelectorTemplate": "#remove-\{{dataset.name}}-\{{item.value}}",
+                            "template": {{#blockStringify this~}}
+                              <div class="mdc-chip mdc-theme--primary-bg" tabindex="0" id="\{{dataset.name}}-\{{item.value}}">
+                                <div class="mdc-chip__text">\{{item.label}}</div>
+                                <input type="hidden" name="\{{dataset.name}}[]" value="\{{item.value}}">
+                                <i class="far fa-times-circle mdc-chip__icon mdc-chip__icon--trailing" tabindex="0" role="button" id="remove-\{{dataset.name}}-\{{item.value}}"></i>
+                              </div>
+                            {{~/blockStringify}}
+                          }
+                        },
+                        {
+                          "type": "prop",
+                          "options": {
+                            "selectorTemplate": "[name=\"\{{value}}\"]"
+                          }
                         }
-                      },
-                      {
-                        "type": "prop",
-                        "options": {
-                          "selectorTemplate": "[name=\"\{{value}}\"]"
+                      ],
+                      "datasets": [
+                        {
+                          "name": "sectors",
+                          "templates": {
+                            "header": "<h3>Sectors</h3>"
+                          },
+                          "display": "label",
+                          "items": [
+                            {{#each @root.data.supplimentaryResponses.types.aggregations.sectors.buckets ~}}
+                            {
+                              "label": {{{stringify key}}},
+                              "value": {{{stringify (slugify key)}}}
+                            }{{#unless @last}},{{/unless}}
+                            {{/each ~}}
+                          ]
+                        },
+                        {
+                          "name": "roles",
+                          "templates": {
+                            "header": "<h3>Roles</h3>"
+                          },
+                          "display": "label",
+                          "items": [
+                            {{#each @root.data.supplimentaryResponses.types.aggregations.roles.buckets ~}}
+                            {
+                              "label": {{{stringify key}}},
+                              "value": {{{stringify (slugify key)}}}
+                            }{{#unless @last}},{{/unless}}
+                            {{/each ~}}
+                          ]
+                        },
+                        {
+                          "name": "role_status",
+                          "templates": {
+                            "header": "<h3>Working pattern</h3>"
+                          },
+                          "display": "label",
+                          "items": [
+                            {{#each @root.data.supplimentaryResponses.types.aggregations.role_status.buckets ~}}
+                            {
+                              "label": {{{stringify key}}},
+                              "value": {{{stringify (slugify key)}}}
+                            }{{#unless @last}},{{/unless}}
+                            {{/each ~}}
+                          ]
                         }
-                      }
-                    ],
-                    "datasets": [
-                      {
-                        "name": "sectors",
-                        "templates": {
-                          "header": "<h3>Sectors</h3>"
-                        },
-                        "display": "label",
-                        "items": [
-                          {{#each @root.data.supplimentaryResponses.types.aggregations.sectors.buckets ~}}
-                          {
-                            "label": {{{stringify key}}},
-                            "value": {{{stringify (slugify key)}}}
-                          }{{#unless @last}},{{/unless}}
-                          {{/each ~}}
-                        ]
-                      },
-                      {
-                        "name": "roles",
-                        "templates": {
-                          "header": "<h3>Roles</h3>"
-                        },
-                        "display": "label",
-                        "items": [
-                          {{#each @root.data.supplimentaryResponses.types.aggregations.roles.buckets ~}}
-                          {
-                            "label": {{{stringify key}}},
-                            "value": {{{stringify (slugify key)}}}
-                          }{{#unless @last}},{{/unless}}
-                          {{/each ~}}
-                        ]
-                      },
-                      {
-                        "name": "role_status",
-                        "templates": {
-                          "header": "<h3>Working pattern</h3>"
-                        },
-                        "display": "label",
-                        "items": [
-                          {{#each @root.data.supplimentaryResponses.types.aggregations.role_status.buckets ~}}
-                          {
-                            "label": {{{stringify key}}},
-                            "value": {{{stringify (slugify key)}}}
-                          }{{#unless @last}},{{/unless}}
-                          {{/each ~}}
-                        ]
-                      }
-                    ]
-                  }'>
-                  <label for="what-primary-content" class="mdc-floating-label">
-                    Keywords
-                  </label>
-                  <div class="mdc-line-ripple"></div>
-                </div>
-              </div>
-              <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
-                <div class="mdc-text-field mdc-text-field--box mdc-text-field--with-leading-icon" data-mdc-auto-init="MDCTextField">
-                  <span class="far fa-map-marker-alt mdc-text-field__icon geo-lookup" tabindex="0" title="Find my location"></span>
-                  <input type="text" id="where-primary-content" name="location" class="mdc-text-field__input" value="{{@root.request.params.query.location}}" placeholder="" data-lpignore="true" data-location-search='{
-                    "googleMapsOptions": {
-                      "type": ["(regions)"],
-                      "componentRestrictions": {
-                        "country": "gb"
-                      }
-                    },
-                    "latSelector": "[name=\"lat\"]",
-                    "lngSelector": "[name=\"lng\"]",
-                    "locationServicesSelector": ".geo-lookup"
-                  }'>
-                  <label for="where-primary-content" class="mdc-floating-label">
-                    Location
-                  </label>
-                  <div class="mdc-line-ripple"></div>
-                </div>
-                <!-- <div class="after-textfield-action geo-lookup">Find me</div> -->
-              </div>
-              <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-2-desktop mdc-layout-grid__cell--span-2-tablet mdc-layout-grid__cell--span-4-phone">
-                <div class="mdc-form-field">
-                  <div class="mdc-select mdc-select--box" data-mdc-auto-init="MDCSelect">
-                    <select data-location="where-primary-content" class="mdc-select__native-control" name="distance" id="distance-primary-content">
-                      <option value="8.04672">within 5 miles</option>
-                      <option value="16.09344" selected>within 10 miles</option>
-                      <option value="40.2336">within 25 miles</option>
-                      <option value="80.4672">within 50 miles</option>
-                      <option value="">any distance</option>
-                    </select>
-                    <label class="mdc-floating-label mdc-floating-label--float-above" for="distance-primary-content">
-                      Distance
+                      ]
+                    }'>
+                    <label for="what-primary-content" class="mdc-floating-label">
+                      Keywords
                     </label>
+                    <div class="mdc-line-ripple"></div>
                   </div>
                 </div>
-              </div>
-              <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-2-desktop mdc-layout-grid__cell--span-2-tablet mdc-layout-grid__cell--span-4-phone">
-                <button type="submit" id="search-primary-content" class="mdc-button mdc-button--raised mdc-button--large mdc-text-field--box mdc-button--search mdc-ripple-surface mdc-ripple-surface--primary" data-mdc-auto-init="MDCRipple">
-                  Search
-                  <span class="far fa-search" aria-hidden="true"></span>
-                </button>
-              </div>
-            </div>
-            <div class="mdc-layout-grid__inner">
-              <!-- <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-10-desktop mdc-layout-grid__cell--span-7-tablet mdc-layout-grid__cell--span-4-phone"> -->
-              <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone">
-                <div id="search-terms" class="mdc-chip-set"></div>
-              </div>
-              <!-- <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-2-desktop mdc-layout-grid__cell--span-1-tablet mdc-layout-grid__cell--span-4-phone">
-                <div class="extra-options">
-                  <a href="/browse">Browse</a><span class="noselect"> | </span><a href="/search">Advanced</a>
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
+                  <div class="mdc-text-field mdc-text-field--box mdc-text-field--with-leading-icon" data-mdc-auto-init="MDCTextField">
+                    <span class="far fa-map-marker-alt mdc-text-field__icon geo-lookup" tabindex="0" title="Find my location"></span>
+                    <input type="text" id="where-primary-content" name="location" class="mdc-text-field__input" value="{{@root.request.params.query.location}}" placeholder="" data-lpignore="true" data-location-search='{
+                      "googleMapsOptions": {
+                        "type": ["(regions)"],
+                        "componentRestrictions": {
+                          "country": "gb"
+                        }
+                      },
+                      "latSelector": "[name=\"lat\"]",
+                      "lngSelector": "[name=\"lng\"]",
+                      "locationServicesSelector": ".geo-lookup"
+                    }'>
+                    <label for="where-primary-content" class="mdc-floating-label">
+                      Location
+                    </label>
+                    <div class="mdc-line-ripple"></div>
+                  </div>
+                  <!-- <div class="after-textfield-action geo-lookup">Find me</div> -->
                 </div>
-              </div> -->
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-2-desktop mdc-layout-grid__cell--span-2-tablet mdc-layout-grid__cell--span-4-phone">
+                  <div class="mdc-form-field">
+                    <div class="mdc-select mdc-select--box" data-mdc-auto-init="MDCSelect">
+                      <select data-location="where-primary-content" class="mdc-select__native-control" name="distance" id="distance-primary-content">
+                        <option value="8.04672">within 5 miles</option>
+                        <option value="16.09344" selected>within 10 miles</option>
+                        <option value="40.2336">within 25 miles</option>
+                        <option value="80.4672">within 50 miles</option>
+                        <option value="">any distance</option>
+                      </select>
+                      <label class="mdc-floating-label mdc-floating-label--float-above" for="distance-primary-content">
+                        Distance
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-2-desktop mdc-layout-grid__cell--span-2-tablet mdc-layout-grid__cell--span-4-phone">
+                  <button type="submit" id="search-primary-content" class="mdc-button mdc-button--raised mdc-button--large mdc-text-field--box mdc-button--search mdc-ripple-surface mdc-ripple-surface--primary" data-mdc-auto-init="MDCRipple">
+                    Search
+                    <span class="far fa-search" aria-hidden="true"></span>
+                  </button>
+                </div>
+              </div>
+              <div class="mdc-layout-grid__inner">
+                <!-- <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-10-desktop mdc-layout-grid__cell--span-7-tablet mdc-layout-grid__cell--span-4-phone"> -->
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone">
+                  <div id="search-terms" class="mdc-chip-set"></div>
+                </div>
+                <!-- <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-2-desktop mdc-layout-grid__cell--span-1-tablet mdc-layout-grid__cell--span-4-phone">
+                  <div class="extra-options">
+                    <a href="/browse">Browse</a><span class="noselect"> | </span><a href="/search">Advanced</a>
+                  </div>
+                </div> -->
+              </div>
             </div>
+          </form>
+        {{else}}
+          <div class="mdc-typography--headline6" style="color:white;">
+            No jobs are currently listed
           </div>
-        </form>
+        {{/compare ~}}
       </div>
     </div>
   </div>
 
-  <div class="home-browse h-padding">
-    <h3 class="mdc-drawer__content-heading cursor-pointer h-padding-full" data-collapse-target="#home-browse-collapse" role="button" aria-pressed="false" aria-label="Show browse section" tabindex="0">
-      <span class="mdc-button mdc-button--raised" onclick="gtag('event', 'ui-interaction', { event_category: 'home-page', event_label: 'Browse menu click' })">
-        Browse
-        <span class="mdc-icon-toggle">
-          <span class="far fa-chevron-down" aria-hidden="true"></span>
+  {{#compare @root.data.supplimentaryResponses.types.hits.total ">" 0 ~}}
+    <div class="home-browse h-padding">
+      <h3 class="mdc-drawer__content-heading cursor-pointer h-padding-full" data-collapse-target="#home-browse-collapse" role="button" aria-pressed="false" aria-label="Show browse section" tabindex="0">
+        <span class="mdc-button mdc-button--raised" onclick="gtag('event', 'ui-interaction', { event_category: 'home-page', event_label: 'Browse menu click' })">
+          Browse
+          <span class="mdc-icon-toggle">
+            <span class="far fa-chevron-down" aria-hidden="true"></span>
+          </span>
         </span>
-      </span>
-      <span class="mdc-typography--body2">
-        By role, sector, working pattern, or region
-      </span>
-    </h3>
-    <div id="home-browse-collapse" style="display: none;">
-      {{> browse eventContext="category-browser-home"}}
+        <span class="mdc-typography--body2">
+          By role, sector, working pattern, or region
+        </span>
+      </h3>
+      <div id="home-browse-collapse" style="display: none;">
+        {{> browse eventContext="category-browser-home"}}
+      </div>
     </div>
-  </div>
 
-  <div class="home-content">
-    {{> dialog_shortlist}}
+    <div class="home-content">
+      {{> dialog_shortlist}}
 
-    {{#if @root.data.auth}}
+      {{#if @root.data.auth}}
+        <div class="mdc-layout-grid home-heading">
+          <div class="mdc-layout-grid__inner">
+            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone">
+              <h2 class="mdc-typography--headline5">
+                Your shortlist
+              </h2>
+            </div>
+          </div>
+        </div>
+        <div class="home-content-primary">
+          {{#>components_horizontal_card_scroller
+              outerClasses="home-shortlist"
+              scrollLeftIconClasses="fal fa-fw fa-angle-left"
+              scrollRightIconClasses="fal fa-fw fa-angle-right"
+              itemClasses="shortlist-primary-content"
+              items=(arrayConcat
+                (map @root.data.supplimentaryResponses.shortlist_vacancies_open.hits.hits (getProp "_source"))
+                (map @root.data.supplimentaryResponses.shortlist_vacancies_closed.hits.hits (getProp "_source"))
+              )
+              itemsPartial="vacancy_mini"
+              moreUrl="/search"
+              moreText="Find more jobs for your shortlist"}}
+            <p class="mdc-typography--body1 h-padding v-margin-none">
+              There are currently no jobs in your shortlist, if you shortlist a job it will appear here for easy reference.
+            </p>
+          {{/components_horizontal_card_scroller}}
+        </div>
+      {{/if}}
+
+      {{#compare @root.data.primaryResponse.home_latest.hits.total ">" 0}}
+      <div class="mdc-layout-grid home-heading">
+        <div class="mdc-layout-grid__inner">
+          <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone">
+            {{#compare @root.data.primaryResponse.home_latest_personalised.hits.total ">" 0}}
+            <h2 class="mdc-typography--headline5">
+              Your latest jobs&ensp;
+              <span class="mdc-typography--body1">
+                <a href="/searches">Your searches</a>
+              </span>
+            </h2>
+            {{else}}
+            <div class="mdc-typography--headline5">
+              Latest jobs&ensp;
+              <span class="mdc-typography--body1">
+                <a href="/search?sort=newest&page=2">Find more</a>
+              </span>
+            </div>
+            {{/compare}}
+          </div>
+        </div>
+      </div>
+      <div class="home-content-primary">
+        {{#>components_horizontal_card_scroller
+            outerClasses="home-latest"
+            scrollLeftIconClasses="fal fa-fw fa-angle-left"
+            scrollRightIconClasses="fal fa-fw fa-angle-right"
+            itemClasses="latest-primary-content latest-primary-content-personalised"
+            items=(if (any @root.data.primaryResponse.home_latest_personalised.hits.hits)
+              (map @root.data.primaryResponse.home_latest_personalised.hits.hits (getProp "_source"))
+              else=(map @root.data.primaryResponse.home_latest.hits.hits (getProp "_source"))
+            )
+            itemsPartial="vacancy_mini"
+            moreUrl=(if
+              (compare @root.data.primaryResponse.home_latest_personalised.hits.total ">" 0)
+              "/search?sort=newest"
+              else="/search?sort=newest&page=2"
+            )
+            moreText=(if
+              (compare @root.data.primaryResponse.home_latest_personalised.hits.total ">" 0)
+              "All latest jobs"
+              else="Find more jobs"
+            )}}
+          {{/components_horizontal_card_scroller}}
+        </div>
+      </div>
+      {{/compare}}
+
+      {{#if @root.data.auth.email}}
+      {{#compare @root.data.primaryResponse.recently_viewed.hits.total ">" 0}}
+      <div class="mdc-layout-grid home-heading">
+        <div class="mdc-layout-grid__inner">
+          <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone">
+            <div class="mdc-typography--headline5">
+              Recently viewed&ensp;
+              <span class="mdc-typography--body1">
+                <a href="/search?sort=newest&page=1">Find more</a>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="home-content-primary">
+        {{#>components_horizontal_card_scroller
+            outerClasses="home-latest"
+            scrollLeftIconClasses="fal fa-fw fa-angle-left"
+            scrollRightIconClasses="fal fa-fw fa-angle-right"
+            itemClasses="latest-primary-content"
+            items=(map
+              (sortByIndex @root.data.primaryResponse.recently_viewed.hits.hits (split @root.request.cookies.recently_viewed ',') '_id') (getProp "_source")
+            )
+            itemsPartial="vacancy_mini"
+            moreUrl="/search?sort=newest&page=1"
+            moreText="Find more jobs"}}
+        {{/components_horizontal_card_scroller}}
+      </div>
+      {{/compare}}
+      {{/if}}
+
+      {{#compare @root.data.supplimentaryResponses.top.hits.total ">" 0}}
       <div class="mdc-layout-grid home-heading">
         <div class="mdc-layout-grid__inner">
           <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone">
             <h2 class="mdc-typography--headline5">
-              Your shortlist
+              Top jobs&ensp;
+              <span class="mdc-typography--body1">
+                <a href="/search">Find more</a>
+              </span>
             </h2>
           </div>
         </div>
       </div>
       <div class="home-content-primary">
         {{#>components_horizontal_card_scroller
-            outerClasses="home-shortlist"
+            outerClasses="home-top"
             scrollLeftIconClasses="fal fa-fw fa-angle-left"
             scrollRightIconClasses="fal fa-fw fa-angle-right"
-            itemClasses="shortlist-primary-content"
-            items=(arrayConcat
-              (map @root.data.supplimentaryResponses.shortlist_vacancies_open.hits.hits (getProp "_source"))
-              (map @root.data.supplimentaryResponses.shortlist_vacancies_closed.hits.hits (getProp "_source"))
-            )
+            itemClasses="top-primary-content"
+            items=(map @root.data.supplimentaryResponses.top.hits.hits (getProp "_source"))
             itemsPartial="vacancy_mini"
             moreUrl="/search"
-            moreText="Find more jobs for your shortlist"}}
-          <p class="mdc-typography--body1 h-padding v-margin-none">
-            There are currently no jobs in your shortlist, if you shortlist a job it will appear here for easy reference.
-          </p>
+            moreText="Find more jobs"}}
         {{/components_horizontal_card_scroller}}
       </div>
-    {{/if}}
+      {{/compare}}
+    </div>
 
-    {{#compare @root.data.primaryResponse.home_latest.hits.total ">" 0}}
-    <div class="mdc-layout-grid home-heading">
-      <div class="mdc-layout-grid__inner">
-        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone">
-          {{#compare @root.data.primaryResponse.home_latest_personalised.hits.total ">" 0}}
-          <h2 class="mdc-typography--headline5">
-            Your latest jobs&ensp;
-            <span class="mdc-typography--body1">
-              <a href="/searches">Your searches</a>
-            </span>
-          </h2>
-          {{else}}
-          <div class="mdc-typography--headline5">
-            Latest jobs&ensp;
-            <span class="mdc-typography--body1">
-              <a href="/search?sort=newest&page=2">Find more</a>
-            </span>
-          </div>
-          {{/compare}}
-        </div>
-      </div>
-    </div>
-    <div class="home-content-primary">
-      {{#>components_horizontal_card_scroller
-          outerClasses="home-latest"
-          scrollLeftIconClasses="fal fa-fw fa-angle-left"
-          scrollRightIconClasses="fal fa-fw fa-angle-right"
-          itemClasses="latest-primary-content latest-primary-content-personalised"
-          items=(if (any @root.data.primaryResponse.home_latest_personalised.hits.hits)
-            (map @root.data.primaryResponse.home_latest_personalised.hits.hits (getProp "_source"))
-            else=(map @root.data.primaryResponse.home_latest.hits.hits (getProp "_source"))
-          )
-          itemsPartial="vacancy_mini"
-          moreUrl=(if
-            (compare @root.data.primaryResponse.home_latest_personalised.hits.total ">" 0)
-            "/search?sort=newest"
-            else="/search?sort=newest&page=2"
-          )
-          moreText=(if
-            (compare @root.data.primaryResponse.home_latest_personalised.hits.total ">" 0)
-            "All latest jobs"
-            else="Find more jobs"
-          )}}
-        {{/components_horizontal_card_scroller}}
-      </div>
-    </div>
-    {{/compare}}
-
-    {{#if @root.data.auth.email}}
-    {{#compare @root.data.primaryResponse.recently_viewed.hits.total ">" 0}}
-    <div class="mdc-layout-grid home-heading">
-      <div class="mdc-layout-grid__inner">
-        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone">
-          <div class="mdc-typography--headline5">
-            Recently viewed&ensp;
-            <span class="mdc-typography--body1">
-              <a href="/search?sort=newest&page=1">Find more</a>
-            </span>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="home-content-primary">
-      {{#>components_horizontal_card_scroller
-          outerClasses="home-latest"
-          scrollLeftIconClasses="fal fa-fw fa-angle-left"
-          scrollRightIconClasses="fal fa-fw fa-angle-right"
-          itemClasses="latest-primary-content"
-          items=(map
-            (sortByIndex @root.data.primaryResponse.recently_viewed.hits.hits (split @root.request.cookies.recently_viewed ',') '_id') (getProp "_source")
-          )
-          itemsPartial="vacancy_mini"
-          moreUrl="/search?sort=newest&page=1"
-          moreText="Find more jobs"}}
-      {{/components_horizontal_card_scroller}}
-    </div>
-    {{/compare}}
-    {{/if}}
-
-    {{#compare @root.data.supplimentaryResponses.top.hits.total ">" 0}}
-    <div class="mdc-layout-grid home-heading">
-      <div class="mdc-layout-grid__inner">
-        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone">
-          <h2 class="mdc-typography--headline5">
-            Top jobs&ensp;
-            <span class="mdc-typography--body1">
-              <a href="/search">Find more</a>
-            </span>
-          </h2>
-        </div>
-      </div>
-    </div>
-    <div class="home-content-primary">
-      {{#>components_horizontal_card_scroller
-          outerClasses="home-top"
-          scrollLeftIconClasses="fal fa-fw fa-angle-left"
-          scrollRightIconClasses="fal fa-fw fa-angle-right"
-          itemClasses="top-primary-content"
-          items=(map @root.data.supplimentaryResponses.top.hits.hits (getProp "_source"))
-          itemsPartial="vacancy_mini"
-          moreUrl="/search"
-          moreText="Find more jobs"}}
-      {{/components_horizontal_card_scroller}}
-    </div>
-    {{/compare}}
-  </div>
-
-  {{> currently_recruiting}}
+    {{> currently_recruiting}}
+  {{/compare ~}}
 
   {{> tfn_latest}}
 

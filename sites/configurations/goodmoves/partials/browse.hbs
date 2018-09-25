@@ -1,3 +1,4 @@
+{{#compare @root.data.supplimentaryResponses.types.hits.total ">" 0 ~}}
 <div class="mdc-layout-grid home-content-primary">
   <div class="mdc-layout-grid__inner">
     <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone content page-content">
@@ -94,3 +95,12 @@
     </div>
   </div>
 </div>
+{{else}}
+<div class="home-content-primary">
+  <div class="content page-content">
+    <div class="browse-title mdc-typography--headline5">
+      No jobs are currently listed
+    </div>
+  </div>
+</div>
+{{/compare ~}}
