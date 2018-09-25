@@ -64,7 +64,7 @@
           <li class="mdc-card__info--content-secondary-goodhq mdc-typography--body1">
             <span class="fa-li"><span class="fas fa-heart fa-fw" title="Good HQ"></span></span>
             <a href="https://goodhq.org/{{goodhq_organisation.xid}}">@{{goodhq_organisation.xid}}</a>
-            {{#compare goodhq_organisation.status "===" "Open" ~}}
+            {{#compare goodhq_organisation.status "===" "Open"}}
             –
             {{#compare @root.data.goodhq.reviews.hits.total ">" 0 ~}}
             <a href="https://goodhq.org/{{goodhq_organisation.xid}}?mode=reviews">{{inflect @root.data.goodhq.reviews.hits.total "review" "reviews" true}}</a>{{#compare @root.data.goodhq.posts.hits.total ">" 0}}{{#compare @root.data.goodhq.volunteering.hits.total "===" 0}} and {{else}}, {{/compare}}{{else}}{{#compare @root.data.goodhq.volunteering.hits.total ">" 0}} and {{/compare}}{{/compare}}{{/compare ~}}
@@ -74,7 +74,7 @@
             {{#compare @root.data.goodhq.volunteering.hits.total ">" 0 ~}}
             <a href="https://goodhq.org/{{goodhq_organisation.xid}}?mode=volunteer">{{inflect @root.data.goodhq.volunteering.hits.total "volunteering opportunity" "volunteering opportunities" true}}</a>
             {{/compare ~}}
-            {{/compare ~}}
+            {{/compare}}
             on
             <a href="https://goodhq.org/{{goodhq_organisation.xid}}">Good HQ</a>
           </li>
