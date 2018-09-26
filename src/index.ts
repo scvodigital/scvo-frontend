@@ -207,7 +207,7 @@ if (process.env.devmode) {
     });
   });
 
-  startEmailer(5000);
+  //startEmailer(5000);
 } else {
   fb.database().ref('/contexts/').on('child_changed', (snapshot: any) => {
     console.log('FIREBASE WATCHER -> Sites configurations changed, clearing routers');

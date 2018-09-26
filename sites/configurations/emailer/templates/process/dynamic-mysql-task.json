@@ -7,11 +7,10 @@
     "connectionName": "notifications",
     "queryTemplates": [
       {{#eachJoin @root.data.notifications.subscriptions.[1] ","}}
-        {{#ifAll
+        {{#ifNone
           (getProperty @root.context.metaData.campaignConfig (concat campaign '.sendIfEmpty'))
-          (compare (length (getProperty @root.data.search_data (slugify (concat campaign " " email) '.hits.hits'))) "===" 0)
+          (any (getProperty @root.data.search_data (concat (slugify (concat campaign " " email) '.hits.hits'))))
         }}
-        "{{slugify (concat campaign ' ' email)}}": 
           {{~#blockStringify this ~}}
             CALL _setSendStatus(
               {{{mysqlEscape email}}},
@@ -19,7 +18,7 @@
               {{{mysqlEscape 'Nothing to send'}}}
             );
           {{~/blockStringify ~}}
-        {{/ifAll}}
+        {{/ifNone}}
       {{/eachJoin}}
     ]
   }
