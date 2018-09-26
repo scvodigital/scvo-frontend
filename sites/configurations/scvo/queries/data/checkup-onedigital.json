@@ -1,5 +1,37 @@
 {
   "size": 0,
-  "aggs" : {
+  "aggs": {
+    "group_by_income_band": {
+      "terms": {
+        "field": "income_band"
+      },
+      "aggs": {
+        "total_stats": {
+          "extended_stats": {
+            "field": "score_total"
+          }
+        },
+        "content_marketing_and_data_stats": {
+          "extended_stats": {
+            "field": "score_content_marketing_and_data"
+          }
+        },
+        "cyber_resilience_stats": {
+          "extended_stats": {
+            "field": "score_cyber_resilience"
+          }
+        },
+        "leadership_culture_and_skills_stats": {
+          "extended_stats": {
+            "field": "score_leadership_culture_and_skills"
+          }
+        },
+        "tools_and_equipment_stats": {
+          "extended_stats": {
+            "field": "score_tools_and_equipment"
+          }
+        }
+      }
+    }
   }
 }
