@@ -34,38 +34,20 @@
           {{milo_ref}}
         </li>
       {{/if ~}}
-
-      {{#if work_type ~}}
-      <li class="mdc-card__info--content-primary-work-type reference mdc-typography--body1">
-        <span class="fa-li"><span class="far fa-briefcase fa-fw" title="Work Type"></span></span>
-      {{#each work_type}}
-        {{{this}}}{{#unless @last}}, {{/unless}}
-      {{/each}}
-      </li>
-      {{/if ~}}
-      {{#if client_group ~}}
-        <li class="mdc-card__info--content-primary-client-group mdc-typography--body1">
-          <span class="fa-li"><span class="far fa-users fa-fw" title="Work Type"></span></span>
-          {{#each client_group}}
-            {{{this}}}{{#unless @last}}, {{/unless}}
-          {{/each}}
-        </li>
-      {{/if ~}}
     </ul>
     <ul class="fa-ul last">
-      {{#compare work_location "===" "At Home"~}}
-      <li class="mdc-card__info--content-primary-location mdc-typography--body1">
-        <span class="fa-li"><span class="far fa-home fa-fw" title="Location"></span></span>
-        Work from home
-      </li>
-      {{/compare ~}}
-      {{#compare work_location "!==" "At Home"~}}
-        {{#if postcode}}
+      {{#compare work_location "===" "At Home" ~}}
+        <li class="mdc-card__info--content-primary-location mdc-typography--body1">
+          <span class="fa-li"><span class="far fa-map-marker-alt fa-fw" title="Location"></span></span>
+          Work from home
+        </li>
+      {{else}}
+        {{#if geo ~}}
           <li class="mdc-card__info--content-primary-location mdc-typography--body1">
-            <span class="fa-li"><span class="far fa-map-marker-alt fa-fw" title="Postcode"></span></span>
-            {{postcode}}
+            <span class="fa-li"><span class="far fa-map-marker-alt fa-fw" title="Location"></span></span>
+            {{{geo.msoa}}}
           </li>
-        {{/if}}
+        {{/if ~}}
       {{/compare ~}}
       <!-- {{#if end_date ~}}
       <li class="mdc-card__info--content-primary-closing mdc-typography--body1">
