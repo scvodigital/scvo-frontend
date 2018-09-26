@@ -22,7 +22,7 @@
   "query": {
     "bool": {
       "filter": [
-        {{>queries_opportunity_common_filters request.params.query}},
+        {{>queries_opportunity_common_filters @root.request.params.query}},
         {{>queries_opportunity_search_filters @root.request.params.query}}
       ],
       "must": [
@@ -37,8 +37,8 @@
         "inline": "doc['geo_coords'].arcDistance(params.lat,params.lon) * 0.000621371",
         "lang": "painless",
         "params": {
-          "lat": {{request.params.query.lat}},
-          "lon": {{request.params.query.lng}}
+          "lat": {{@root.request.params.query.lat}},
+          "lon": {{@root.request.params.query.lng}}
         }
       }
     }
@@ -46,32 +46,32 @@
   {{/ifAll ~}}
   "sort": [
     {{#if @root.request.params.query.sort ~}}
-    {{#compare @root.request.params.query.sort "===" "distance" ~}}
-    {{#ifAll @root.request.params.query.location @root.request.params.query.lat @root.request.params.query.lng ~}}
-    {
-      "_geo_distance": {
-        "geo_coords": {
-          "lat": {{request.params.query.lat}},
-          "lon": {{request.params.query.lng}}
-        },
-        "order": "asc",
-        "unit": "km",
-        "mode": "min",
-        "distance_type": "arc"
+      {{#compare @root.request.params.query.sort "===" "distance" ~}}
+        {{#ifAll @root.request.params.query.location @root.request.params.query.lat @root.request.params.query.lng ~}}
+          {
+            "_geo_distance": {
+              "geo_coords": {
+                "lat": {{request.params.query.lat}},
+                "lon": {{request.params.query.lng}}
+              },
+              "order": "asc",
+              "unit": "km",
+              "mode": "min",
+              "distance_type": "arc"
+            }
+          }
+        {{else}}
+          "_score"
+        {{/ifAll ~}}
+      {{else}}
+        {{#compare @root.request.params.query.sort "===" "relevance" ~}}
+          "_score",
+        {{/compare ~}}
+      {{/compare ~}}
+    {{else}}
+      {
+        "available_from": "desc"
       }
-    }
-    {{else}}
-    "_score"
-    {{/ifAll ~}}
-    {{else}}
-    {{#compare @root.request.params.query.sort "===" "relevance" ~}}
-    "_score",
-    {{/compare ~}}
-    {{/compare ~}}
-    {{else}}
-    {
-      "available_from": "desc"
-    }
     {{/if ~}}
   ]
 }
