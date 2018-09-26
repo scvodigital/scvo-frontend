@@ -1,6 +1,7 @@
 {
-  "name": "member-page",
-  "pattern": "/about/members/:slug",
+  "name": "page_digital_evolution_checkup_results",
+  "pattern": "/digital/evolution/check-up/results",
+  "debug": true,
   "tasks": [
     {
       "name": "primaryResponse",
@@ -12,8 +13,8 @@
         },
         "queryTemplates": {
           "index": "web-content-production",
-          "type": "scvo-member",
-          "template": ">context.metaData.handlebars.queries.members_member",
+          "type": "scvo-cms-page",
+          "template": ">context.metaData.handlebars.queries.pages_page",
           "noResultsRoute": "four_oh_four"
         }
       },
@@ -29,10 +30,22 @@
         },
         "queryTemplates": [
           {
+            "name": "related_posts",
+            "index": "web-content-production",
+            "type": "scvo-cms-post",
+            "template": ">context.metaData.handlebars.queries.pages_page-posts-related-random"
+          },
+          {
+            "name": "data_averages",
+            "index": "web-content-production",
+            "type": "scvo-checkup-onedigital",
+            "template": ">context.metaData.handlebars.queries.data_checkup-onedigital"
+          },
+          {
             "name": "splash",
             "index": "web-content-production",
             "type": "scvo-cms-media",
-            "template": ">context.metaData.handlebars.queries.pages_gathering-splash"
+            "template": ">context.metaData.handlebars.queries.pages_splash"
           }
         ]
       },
@@ -54,7 +67,7 @@
             "layout": ">context.metaData.handlebars.layouts.default",
             "parts": {
               "head": ">context.metaData.handlebars.templates.pages_page-head-tags",
-              "body": ">context.metaData.handlebars.templates.members_member",
+              "body": ">context.metaData.handlebars.templates.pages_page-digital-evolution",
               "foot": ""
             },
             "contentType": "text/html"
