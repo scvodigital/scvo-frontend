@@ -7,7 +7,7 @@
             <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone">
               {{> logo welcome="true"}}
               <p class="header-extra">
-
+                Find a volunteering opportunity to suit you
               </p>
             </div>
           </div>
@@ -58,7 +58,7 @@
                         },
                         "display": "label",
                         "items": [
-                          {{#each @root.data.supplimentaryResponses.types.aggregations.client_group.buckets ~}}
+                          {{#each @root.data.opportunitySupplimentary.types.aggregations.client_group.buckets ~}}
                           {
                             "label": {{{stringify key}}},
                             "value": {{{stringify (slugify key)}}}
@@ -73,7 +73,7 @@
                         },
                         "display": "label",
                         "items": [
-                          {{#each @root.data.supplimentaryResponses.types.aggregations.work_type.buckets ~}}
+                          {{#each @root.data.opportunitySupplimentary.types.aggregations.work_type.buckets ~}}
                           {
                             "label": {{{stringify key}}},
                             "value": {{{stringify (slugify key)}}}
@@ -134,15 +134,9 @@
               </div>
             </div>
             <div class="mdc-layout-grid__inner">
-              <!-- <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-10-desktop mdc-layout-grid__cell--span-7-tablet mdc-layout-grid__cell--span-4-phone"> -->
               <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone">
                 <div id="search-terms" class="mdc-chip-set"></div>
               </div>
-              <!-- <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-2-desktop mdc-layout-grid__cell--span-1-tablet mdc-layout-grid__cell--span-4-phone">
-                <div class="extra-options">
-                  <a href="/browse">Browse</a><span class="noselect"> | </span><a href="/search">Advanced</a>
-                </div>
-              </div> -->
             </div>
           </div>
         </form>
@@ -159,7 +153,7 @@
         </span>
       </span>
       <span class="mdc-typography--body2">
-        By client group or work type
+        By client group, work type, or region
       </span>
     </h3>
     <div id="home-browse-collapse" style="display: none;">

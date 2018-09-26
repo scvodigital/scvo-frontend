@@ -79,6 +79,9 @@ app.get('/analytics/goodmoves-vacancies', goodmovesVacanciesAnalytics);
 app.get('/analytics/goodmoves-vacancy-files', goodmovesVacancyFilesAnalytics);
 app.get('/analytics/generic', genericAnalytics);
 
+app.get('/emailer/start', handleStartEmailer);
+app.get('/emailer/stop', handleStopEmailer);
+
 app.get('*', index);
 app.post('*', index);
 
@@ -168,7 +171,10 @@ async function index(
 }
 
 if (process.env.devmode) {
-  var configWatcher = chokidar.watch('./sites/configurations', { persistent: true });
+  var configWatcher = chokidar.watch('./sites/configurations', { 
+    ignored: /\.mjml/,
+    persistent: true
+  });
   configWatcher.on('change', (path) => {
     console.log('CONFIGURATIONS WATCHER -> File', path, 'has changed, Rebuilding sites JSON');
     var jsonInput = fs.readFileSync('./sites/sites.inc.json').toString();
@@ -182,6 +188,14 @@ if (process.env.devmode) {
         };
         routers = null;
       }
+    });
+  });
+
+  var emailsWatcher = chokidar.watch(['./sites/configurations/**/*.mjml'], { persistent: true });
+  emailsWatcher.on('change', (path) => {
+    console.log('EMAILS WATCHER -> File', path, 'has changed, Rebuilding emails');
+    exec('npm run emails', (error, stdout, stderr) => {
+      console.log('EMAILS WATCHER -> Emails rebuilt', error, stdout, stderr);
     });
   });
 
@@ -238,6 +252,71 @@ async function favicon(
   res.send('Naw');
   res.end();
   return next();
+}
+
+const defaultEmailerInterval = 5000;
+let emailerInterval: NodeJS.Timer | null = null;
+async function handleStopEmailer(
+    req: express.Request, res: express.Response,
+    next: express.NextFunction): Promise<any> {
+  stopEmailer();
+  res.send('Done');
+  res.end();
+  return next();
+}
+
+async function handleStartEmailer(
+    req: express.Request, res: express.Response,
+    next: express.NextFunction): Promise<any> {
+  const ms = req.query.ms ? Number(req.query.ms) || defaultEmailerInterval : defaultEmailerInterval;
+  startEmailer(ms);
+  res.send('Done');
+  res.end();
+  return next();
+}
+
+function stopEmailer() {
+  if (emailerInterval) {
+    console.log('Stopping emailer interval');
+    try {
+      clearInterval(emailerInterval);
+    } catch(err) {
+      console.error('Failed to clear emailer interval timer', err);
+    }
+  }
+  emailerInterval = null;
+}
+
+function startEmailer(ms: number = defaultEmailerInterval) {
+  stopEmailer();
+  console.log('Starting emailer interval at', ms, 'ms');
+  emailerInterval = setInterval(function() {
+    processEmails().then(() => {
+    }).catch(err => {
+      console.error('processEmails Promise Rejected?', err);
+    });
+  }, ms);
+}
+startEmailer();
+
+async function processEmails() {
+  if (routers && routers.hasOwnProperty('emailer')) {
+    const request: RouterRequest = {
+      url: url.parse('https://emailer.scvo.net/process'),
+      fullUrl: 'https://emailer.scvo.net/process',
+      params: {},
+      headers: {},
+      cookies: {},
+      verb: 'GET',
+      body: null
+    }; 
+    try {
+      const response = await routers.emailer.go(request);
+    } catch(err) {
+      console.error('Error mocking emailer.go with request:', request, err);
+    }
+  }
+  return;
 }
 
 async function goodmovesVacanciesAnalytics(
@@ -325,8 +404,41 @@ async function goodmovesVacancyFilesAnalytics(
 async function genericAnalytics(
     req: express.Request, res: express.Response,
     next: express.NextFunction): Promise<any> {
-  console.log('TEST CRON JOB');
-  res.send('Not yet implemented');
+  const analyticsProcessor = new AnalyticsProcessor(
+      ANALYTICS_SECRETS.googleCredentials.goodmoves,
+      ANALYTICS_SECRETS.salesforceCredentials.scvoProduction);
+  await analyticsProcessor.setup();
+  let response: any = null;
+  let gmHits: ViewCount[] = [];
+  let startDate = new Date();
+  try {
+    if (req.query.year && req.query.month) {
+      const year = Number(req.query.year);
+      const month = Number(req.query.month) - 1;
+      startDate = new Date(year, month, 1);
+    }
+  } catch (err) {
+    console.error(
+        'Failed to parse date from querystring. Using beginning of this month.',
+        err);
+    startDate = new Date();
+  }
+  try {
+    console.log(
+        'Starting Analytics import of Goodmoves Vacancy Files for',
+        format(startDate, 'YYYY-MM-DD'));
+    gmHits = await analyticsProcessor.getGenericHitEvents('goodmoves.org.uk', startDate);
+    response = await analyticsProcessor.updateSalesforce(gmHits);
+  } catch (err) {
+    response = err;
+  }
+  res.send(
+      '<html><body>' +
+      '<h1>File Download Hits</h1>' +
+      '<pre>' + util.inspect(gmHits, false, null) + '</pre>' +
+      '<h1>Response</h1>' +
+      '<pre>' + util.inspect(response, false, null) + '</pre>' +
+      '</body></html>');
   return next();
 }
 

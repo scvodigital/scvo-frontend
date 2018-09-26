@@ -23,29 +23,38 @@
   "query": {
     "bool": {
       "filter": [
-        {{>queries_organisation_common_filters @root.request.params.query}}
+        {{>queries_organisation_common_filters @root.request.params.query}},
+        {{>queries_organisation_search_filters @root.request.params.query}}
       ],
       "must": [
-        {{#if @root.request.params.query.keywords ~}}
-        {
-          "query_string": {
-            "query": {{{stringify @root.request.params.query.keywords}}},
-            "fields": ["text_bag_boost^5", "text_bag"],
-            "default_operator": "AND",
-            "analyzer": "snowball"
-          }
-        }
-        {{else}}
-        {
-          "match_all": {}
-        }
-        {{/if ~}}
+        {{>queries_organisation_search_must @root.request.params.query}}
       ]
     }
   },
   "sort": [
     {{#if @root.request.params.query.keywords ~}}
+    {{#compare @root.request.params.query.sort "===" "distance" ~}}
+    {{#ifAll @root.request.params.query.location @root.request.params.query.lat @root.request.params.query.lng ~}}
+    {
+    "_geo_distance": {
+    "geo_coords": {
+    "lat": {{request.params.query.lat}},
+    "lon": {{request.params.query.lng}}
+    },
+    "order": "asc",
+    "unit": "km",
+    "mode": "min",
+    "distance_type": "arc"
+    }
+    }
+    {{else}}
     "_score"
+    {{/ifAll ~}}
+    {{else}}
+    {{#compare @root.request.params.query.sort "===" "relevance" ~}}
+    "_score",
+    {{/compare ~}}
+    {{/compare ~}}
     {{else}}
     {
       "title_sort": "asc"

@@ -4,4 +4,7 @@
 {{#if client_groups ~}}
   {{>queries_terms field="client_group_slugs" terms=client_groups}},
 {{/if ~}}
+{{#if recently_updated ~}}
+  {{>queries_date_range field="date_last_modified" gt="now-12M"}},
+{{/if ~}}
 {{>queries_do_nothing}}

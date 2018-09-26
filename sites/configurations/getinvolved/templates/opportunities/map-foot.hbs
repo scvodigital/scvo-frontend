@@ -2,12 +2,12 @@
 <script type="text/javascript">
 var terms = {
   activities: [
-    {{#each data.supplimentaryResponses.types.aggregations.activities.buckets ~}}
+    {{#each data.opportunitySupplimentary.types.aggregations.activities.buckets ~}}
     { field: 'client_groups', term: {{{stringify key}}} },
     {{/each ~}}
   ],
   work_types: [
-    {{#each data.supplimentaryResponses.types.aggregations.work_types.buckets ~}}
+    {{#each data.opportunitySupplimentary.types.aggregations.work_types.buckets ~}}
     { field: 'work_types', term: {{{stringify key}}} },
     {{/each ~}}
   ]

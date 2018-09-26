@@ -8,7 +8,7 @@
       "config": {
         "connectionName": "notifications",
         "queryTemplates": {
-          "subscriptions": "CALL _getPage(NULL, 5);"
+          "subscriptions": "CALL _getPage(NULL, 25);"
         }
       },
       "renderer": "handlebars"
@@ -26,7 +26,7 @@
     "data.generate_es_task",
     {
       "name": "send_emails",
-      "taskModule": "render",
+      "taskModule": "mailgun",
       "renderer": "handlebars",
       "config": {
         "output": "data",

@@ -1,37 +1,37 @@
-<div class="mdc-card goodmoves-vacancy full{{if top_job " top-job"}}" data-vacancy-id="{{Id}}">
+<div class="mdc-card content-primary full{{if top_job " top-content"}}" data-vacancy-id="{{Id}}">
   {{> vacancy_key_info view="full"}}
   <hr class="mdc-list-divider" />
-  <div class="vacancy-info-container">
-    {{#>components_tab_bar id="vacancy-tab-bar" defaultTabIdentifier="tab"}}
+  <div class="content-primary-info-container">
+    {{#>components_tab_bar id="content-primary-tab-bar" defaultTabIdentifier="tab"}}
       {{>components_tab iconClasses="far fa-list-ul fa-fw" label="Information" active=true tabName="panel-1"}}
       {{>components_tab iconClasses="far fa-map-marker-alt fa-fw" label="Location" active=false tabName="panel-2"}}
       {{>components_tab iconClasses="far fa-edit fa-fw" label="Notes" active=false tabName="notes"}}
     {{/components_tab_bar}}
     <hr class="mdc-list-divider" />
-    <div class="panels" for="vacancy-tab-bar">
+    <div class="panels" for="content-primary-tab-bar">
       <div class="panel panel--active mdc-card--full-content" role="tabpanel" aria-hidden="false" data-tab-name="panel-1">
         <div class="key-info-extra">
           <ul class="fa-ul">
             {{#if start_at ~}}
-            <li class="mdc-card__info--vacancy-from mdc-typography--body1">
+            <li class="mdc-card__info--content-primary-from mdc-typography--body1">
               <span class="fa-li"><span class="far fa-calendar-plus fa-fw" title="Start date"></span></span>
               Advertised from {{momentFormat (moment start_at "x") "Do MMMM YYYY"}}
             </li>
             {{/if ~}}
             {{#if salary_info ~}}
-            <li class="mdc-card__info--vacancy-location mdc-typography--body1">
+            <li class="mdc-card__info--content-primary-location mdc-typography--body1">
               <span class="fa-li"><span class="far fa-info-circle fa-fw" title="Salary information"></span></span>
               {{salary_info}}
             </li>
             {{/if ~}}
             {{#if benefits ~}}
-            <li class="mdc-card__info--vacancy-salary mdc-typography--body1">
+            <li class="mdc-card__info--content-primary-salary mdc-typography--body1">
               <span class="fa-li"><span class="far fa-smile fa-fw" title="Benefits"></span></span>
               {{{benefits}}}
             </li>
             {{/if ~}}
             {{#if reference_number ~}}
-            <li class="mdc-card__info--vacancy-reference mdc-typography--body1">
+            <li class="mdc-card__info--content-primary-reference mdc-typography--body1">
               <span class="fa-li"><span class="far fa-hashtag fa-fw" title="Reference"></span></span>
               {{reference_number}}
             </li>
@@ -62,7 +62,7 @@
         <div class="location-info">
           {{#compare (length geo_vacancy_coords) ">" 0 ~}}
             <div class="container-content container-map">
-              <div id="map-vacancy" data-map-name="vacancyMap" data-map-options='{
+              <div id="map-content-primary" data-map-name="vacancyMap" data-map-options='{
                   }'>
                 {{#each (arrayify geo_vacancy_coords) ~}}
                   <marker style="display:none;" data-map="vacancyMap" data-lat="{{lat}}" data-lng="{{lon}}" data-title="{{../organisation.name}} - {{../title}}">

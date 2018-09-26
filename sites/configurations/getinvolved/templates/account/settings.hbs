@@ -38,10 +38,10 @@
         </div>
         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-6-tablet mdc-layout-grid__cell--span-12-phone">
           <h3 class="mdc-typography--headline6 v-margin-full">
-            Shortlist alerts
+            Favourites alerts
           </h3>
           <div class="mdc-chip-set mdc-chip-set--filter">
-            {{> shortlist_alerts}}
+            {{> favourites_alerts}}
           </div>
         </div>
         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-6-tablet mdc-layout-grid__cell--span-12-phone">
@@ -50,7 +50,7 @@
           </h3>
           {{#ifAny
             (compare (length (filter @root.data.searches.items.[0] "partitionActive" "===" 1)) ">" 0)
-            @root.data.shortlist.items.[0].[0].active
+            @root.data.favourites.items.[0].[0].active
           }}
             <a href="/stop-all-emails" class="mdc-button mdc-button--raised mdc-button--fullwidth">
               <span class="far fa-envelope mdc-list-item__graphic" aria-hidden="true"></span>
@@ -165,7 +165,7 @@
       <ul>
         <li>Stop all email alerts</li>
         <li>Delete your saved searches</li>
-        <li>Delete your shortlist</li>
+        <li>Delete your favourites</li>
         <li>Delete your notes on vacancies</li>
         <li>Fully remove your account from the Goodmoves system</li>
       </ul>

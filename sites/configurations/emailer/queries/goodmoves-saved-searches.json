@@ -1,12 +1,11 @@
 {
-  "size": 200,
+  "size": 1000,
   "_source": [
     "Id",
     "slug",
     "top_job",
     "description",
     "title",
-    "geo_vacancy_coords",
     "home_based",
     "location",
     "salary",
@@ -17,53 +16,41 @@
     "start_at",
     "end_at",
     "organisation.slug",
-    "organisation.name",
-    "organisation.has_logo",
-    "organisation.logo_url",
-    "rendered.goodmoves_rss"
+    "organisation.name"
   ],
   "query": {
-    "function_score": {
-      "query": {
-        "bool": {
-          "must": [
-            {{#each (split templateMetaData.querystrings "&&")}}
-              {{#with (querystring this)}}
-              {
-                "bool": {
-                  "filter": [
-                    {{>queries_vacancy_common_filters_open this}},
-                    {{>queries_vacancy_search_filters this}}
-                  ],
-                  "must": [
-                    {{>queries_vacancy_search_must this}}
-                  ],
-                  "should": [
-                    {{>queries_vacancy_search_should this}}
-                  ],
-                  "minimum_should_match": 2
-                }
-                {{/with}}
-              }{{#unless @last}},{{/unless}}
-            {{/each}}
-          ]
-        }
-      },
-      "boost": 1,
-      "functions": [
+    "bool": {
+      "filter": [
+        {{>queries_vacancy_common_filters_open this}},
         {
-          "filter": {
-            "match": {
-              "top_job": true
+          "range": {
+            "start_at": {
+              {{#if templateMetaData.lastSent}}
+              "gte": {{momentFormat (moment templateMetaData.lastSent "") "x"}}
+              {{else}}
+              "gte": "now-1w/d"
+              {{/if}}
             }
-          },
-          "weight": 20
+          }
         }
       ],
-      "max_boost": 50,
-      "score_mode": "max",
-      "boost_mode": "multiply",
-      "min_score" : 0
+      "should": [
+        {{#each (split templateMetaData.querystrings "&&")}}
+          {{#with (querystring this)}}
+            {
+              "bool": {
+                "filter": [
+                  {{>queries_vacancy_search_filters this}}
+                ],
+                "must": [
+                  {{>queries_vacancy_search_must this}}
+                ]
+              }
+            }
+          {{/with}}
+        {{/each}}
+      ],
+      "minimum_should_match": 1
     }
   },
   "sort": [

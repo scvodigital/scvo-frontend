@@ -1,6 +1,6 @@
 [
 {{#if @root.data.search_data}}
-  {{#eachJoin @root.data.notifications.subscriptions.[0] ","}}
+  {{#eachJoin @root.data.notifications.subscriptions.[1] ","}}
     {{#ifAny
       (getProperty @root.context.metaData.campaignConfig (concat campaign '.sendIfEmpty'))
       (any (getProperty @root.data.search_data (concat (slugify campaign) "-" (slugify email) '.hits.hits')))
@@ -10,6 +10,7 @@
         "to": {{{stringify email}}},
         "o:tag": {{{stringify campaign}}},
         "o:tracking": true,
+        "o:testmode": true,
         "tag": {{{stringify campaign}}},
         "id": {{{stringify campaign}}},
         "connectionName": {{{stringify (getProperty @root.context.metaData.campaignConfig (concat campaign '.mailgunConnection'))}}},
@@ -18,7 +19,7 @@
             {{~> 
               (getProperty @root.context.metaData.campaignConfig (concat campaign '.subjectPartial'))
               subscription=this
-              searchData=(getProperty @root.data.search_data (concat (slugify campaign) "-" (slugify email)))
+              searchData=(getProperty @root.data.search_data (slugify (concat campaign " " email)))
               campaignConfig=(getProperty @root.context.metaData.campaignConfig campaign)          
             ~}}
           {{~/blockStringify}},
@@ -27,7 +28,7 @@
             {{~> 
               (getProperty @root.context.metaData.campaignConfig (concat campaign '.bodyPartial'))
               subscription=this
-              searchData=(getProperty @root.data.search_data (concat (slugify campaign) "-" (slugify email)))
+              searchData=(getProperty @root.data.search_data (slugify (concat campaign " " email)))
               campaignConfig=(getProperty @root.context.metaData.campaignConfig campaign)          
             ~}}
           {{~/blockStringify}}

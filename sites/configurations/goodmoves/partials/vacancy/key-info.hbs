@@ -1,8 +1,8 @@
 {{>vacancy_status}}
-<div class="mdc-card__info--vacancy-row">
-  <div class="mdc-card__info--vacancy">
+<div class="mdc-card__info--content-primary-row">
+  <div class="mdc-card__info--content-primary">
     {{#if organisation.has_logo ~}}
-    <div class="mdc-card__media mdc-card__media--organisation pull-right">
+    <div class="mdc-card__media mdc-card__media--content-secondary pull-right">
       <a href="/organisation/{{organisation.slug}}{{@root.request.url.search}}">
         <img src="{{organisation.logo_url}}" alt="{{organisation.name}}" />
       </a>
@@ -17,14 +17,14 @@
     {{/if ~}}
     {{/compare ~}}
     {{/compare ~}}
-    <h2 class="mdc-card__info--vacancy-title mdc-typography--headline5">
+    <h2 class="mdc-card__info--content-primary-title mdc-typography--headline5">
       <a href="/vacancy/{{slug}}{{@root.request.url.search}}">
-        {{#if top_job}}<span class="top-job">Top job!</span>{{/if}}
+        {{#if top_job}}<span class="top-content">Top job!</span>{{/if}}
         <span class="hover-underline">{{title}}</span>
       </a>
     </h2>
     <ul class="fa-ul organisation">
-      <li class="mdc-card__info--vacancy-organisation mdc-typography--body1">
+      <li class="mdc-card__info--content-primary-secondary mdc-typography--body1">
         <span class="fa-li"><span class="far fa-building fa-fw" title="Organisation"></span></span>
         <a href="/organisation/{{organisation.slug}}{{@root.request.url.search}}">{{organisation.name}}</a>
       </li>
@@ -36,13 +36,13 @@
     </div> -->
     <ul class="fa-ul first">
       {{#if role_status_list ~}}
-      <li class="mdc-card__info--vacancy-status mdc-typography--body1">
+      <li class="mdc-card__info--content-primary-status mdc-typography--body1">
         <span class="fa-li"><span class="far fa-clock fa-fw" title="Status"></span></span>
         {{role_status_list}}
       </li>
       {{/if ~}}
       {{#if salary ~}}
-      <li class="mdc-card__info--vacancy-salary mdc-typography--body1">
+      <li class="mdc-card__info--content-primary-salary mdc-typography--body1">
         <span class="fa-li"><span class="far fa-calculator fa-fw" title="Salary"></span></span>
         {{{trim salary}}}
       </li>
@@ -50,13 +50,13 @@
     </ul>
     <ul class="fa-ul last">
       {{#if location ~}}
-      <li class="mdc-card__info--vacancy-location mdc-typography--body1">
+      <li class="mdc-card__info--content-primary-location mdc-typography--body1">
         <span class="fa-li"><span class="far fa-map-marker-alt fa-fw" title="Location"></span></span>
         {{location}}
       </li>
       {{/if ~}}
       {{#if closing_date ~}}
-      <li class="mdc-card__info--vacancy-closing mdc-typography--body1">
+      <li class="mdc-card__info--content-primary-closing mdc-typography--body1">
         <span class="fa-li"><span class="far fa-calendar-alt fa-fw" title="Closing date"></span></span>
         Closing
         {{{momentFormat (moment closing_date "x") "Do MMMM YYYY"}}}

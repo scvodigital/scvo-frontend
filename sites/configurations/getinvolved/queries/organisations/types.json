@@ -1,0 +1,69 @@
+{
+  "size": 0,
+  "_source": false,
+  "query": {
+    "bool": {
+      "filter": [
+        {{>queries_organisation_common_filters @root.request.params.query}}
+      ]
+    }
+  },
+  "aggs": {
+    "organisation_activities": {
+      "terms": {
+        "field": "main_activities_global",
+        "order": {
+          "_term": "asc"
+        },
+        "size": 10000
+      }
+    },
+    "organisation_activities_slugs": {
+      "terms": {
+        "field": "main_activities_global_slugs",
+        "order": {
+          "_term": "asc"
+        },
+        "size": 10000
+      }
+    },
+    "regions": {
+      "terms": {
+        "field": "region_group",
+        "order": {
+          "_term": "asc"
+        },
+        "size": 10000
+      }
+    },
+    "regions_slugs": {
+      "terms": {
+        "field": "region_group_slug",
+        "order": {
+          "_term": "asc"
+        },
+        "size": 10000
+      }
+    },
+    "countries": {
+      "terms": {
+        "field": "country",
+        "size": 10000
+      },
+      "aggs": {
+        "regions": {
+          "terms": {
+            "field": "region_group",
+            "size": 10000
+          }
+        },
+        "regions_slugs": {
+          "terms": {
+            "field": "region_group_slug",
+            "size": 10000
+          }
+        }
+      }
+    }
+  }
+}

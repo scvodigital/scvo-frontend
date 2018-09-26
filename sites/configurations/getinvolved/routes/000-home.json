@@ -1,26 +1,14 @@
 {
-  "name": "page_gathering",
-  "pattern": "/the-gathering",
+  "name": "home",
+  "pattern": "/",
+  "debug": true,
+  "metaData": {
+    "title": "Get Involved"
+  },
   "tasks": [
+    "context.metaData.commonTasks.authNotRequired",
     {
-      "name": "primaryResponse",
-      "taskModule": "elasticsearch",
-      "config": {
-        "connectionStringTemplate": "{$../../elasticsearch-url.txt}",
-        "elasticsearchConfig": {
-          "apiVersion": "5.6"
-        },
-        "queryTemplates": {
-          "index": "web-content-production",
-          "type": "scvo-cms-page",
-          "template": ">context.metaData.handlebars.queries.pages_page",
-          "noResultsRoute": "four_oh_four"
-        }
-      },
-      "renderer": "handlebars"
-    },
-    {
-      "name": "supplimentaryResponses",
+      "name": "opportunitySupplimentary",
       "taskModule": "elasticsearch",
       "config": {
         "connectionStringTemplate": "{$../../elasticsearch-url.txt}",
@@ -29,10 +17,30 @@
         },
         "queryTemplates": [
           {
-            "name": "splash",
+            "name": "types",
             "index": "web-content-production",
-            "type": "scvo-cms-media",
-            "template": ">context.metaData.handlebars.queries.pages_splash"
+            "type": "milo-volunteering-opportunity",
+            "template": ">context.metaData.handlebars.queries.opportunities_types"
+          }
+        ]
+      },
+      "renderer": "handlebars"
+    },
+    "context.metaData.commonTasks.termsMaps",
+    {
+      "name": "posts",
+      "taskModule": "elasticsearch",
+      "config": {
+        "connectionStringTemplate": "{$../../elasticsearch-url.txt}",
+        "elasticsearchConfig": {
+          "apiVersion": "5.6"
+        },
+        "queryTemplates": [
+          {
+            "name": "tfn_latest",
+            "index": "web-content-production",
+            "type": "tfn-news-post,tfn-feature",
+            "template": ">context.metaData.handlebars.queries.posts_tfn-latest"
           }
         ]
       },
@@ -54,7 +62,7 @@
             "layout": ">context.metaData.handlebars.layouts.default",
             "parts": {
               "head": ">context.metaData.handlebars.templates.pages_page-head-tags",
-              "body": ">context.metaData.handlebars.templates.pages_page-gathering",
+              "body": ">context.metaData.handlebars.templates.opportunities_home",
               "foot": ""
             },
             "contentType": "text/html"
