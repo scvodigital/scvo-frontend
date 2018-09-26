@@ -42,20 +42,22 @@
           Work from home
         </li>
       {{else}}
-        {{#if geo ~}}
+        {{#compare (length geo) ">" 1 ~}}
           <li class="mdc-card__info--content-primary-location mdc-typography--body1">
             <span class="fa-li"><span class="far fa-map-marker-alt fa-fw" title="Location"></span></span>
-            {{{geo.msoa}}}
+            {{#each geo ~}}
+              {{{this.msoa}}}{{#unless @last}}, {{/unless}}
+            {{/each ~}}
           </li>
-        {{/if ~}}
+        {{else}}
+          {{#if geo ~}}
+            <li class="mdc-card__info--content-primary-location mdc-typography--body1">
+              <span class="fa-li"><span class="far fa-map-marker-alt fa-fw" title="Location"></span></span>
+              {{{geo.msoa}}}
+            </li>
+          {{/if ~}}
+        {{/compare ~}}
       {{/compare ~}}
-      <!-- {{#if end_date ~}}
-      <li class="mdc-card__info--content-primary-closing mdc-typography--body1">
-        <span class="fa-li"><span class="far fa-calendar-alt fa-fw" title="End date"></span></span>
-        <strong>Closing</strong>
-        {{{momentFormat (moment end_date "x") "Do MMMM YYYY"}}}
-      </li>
-      {{/if ~}} -->
     </ul>
   </div>
 </div>

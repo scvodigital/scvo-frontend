@@ -9,7 +9,8 @@
     "description",
     "email",
     "goodhq_organisation",
-    "geo_organisation_coords",
+    "geo",
+    "geo_coords",
     "main_activities_global",
     "main_activities_global_slugs",
     "region_group",
@@ -33,7 +34,7 @@
   "query": {
     "bool": {
       "filter": [
-        {{>queries_organisation_common_filters request.params.query}}
+        {{>queries_organisation_common_filters @root.request.params.query}}
       ],
       "must": [
         {
