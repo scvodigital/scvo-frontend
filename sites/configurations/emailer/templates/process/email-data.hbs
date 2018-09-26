@@ -1,6 +1,8 @@
 [
 {{#if @root.data.search_data}}
   {{#eachJoin @root.data.notifications.subscriptions.[1] ","}}
+    "{{slugify (concat campaign " " email)}}",
+    {{{slugify @root.data.search_data.goodmoves-saved-searches-tonicbluegmailcom}}},
     {{#ifAny
       (getProperty @root.context.metaData.campaignConfig (concat campaign '.sendIfEmpty'))
       (any (getProperty @root.data.search_data (slugify (concat campaign " " email)) '.hits.hits'))
@@ -33,6 +35,8 @@
             ~}}
           {{~/blockStringify}}
       }
+    {{else}}
+    "Nothing to send"
     {{/ifAny}}
   {{/eachJoin}}
 {{/if}}
