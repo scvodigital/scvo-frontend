@@ -5,33 +5,28 @@
         <mj-column padding="0px">
           <mj-image src="https://storage.googleapis.com/scvo-assets/emailer/goodmoves-logo-white.png" width="352px" align="left" padding="0px"></mj-image>
         </mj-column>
-      </mj-section>  
-   
+      </mj-section>
+
       <mj-raw>{{#with searchData}}
         {{#if hits.hits.[0]}}</mj-raw>
-          <mj-section> 
+          <mj-section>
             <mj-column padding="0px">
-              <mj-text font-size="16px" color="#000000" font-family="Montserrat, helvetica, Arial, sans-serif">
-                <p>Hello,</p>
-                <p>Here are jobs since the {{momentFormat (moment subscription.lastSent "") "Do MMMM"}} that match your saved search preferences</p>
+              <mj-text font-size="16px" color="#000000" font-family="Montserrat, Helvetica, Arial, sans-serif">
+                <p>{{hits.total}} jobs matching your saved search preferences were added to Goodmoves since the {{momentFormat (moment subscription.lastSent "") "Do \o\f MMMM"}}.</p>
               </mj-text>
             </mj-column>
           </mj-section>
 
           <mj-raw>{{#each hits.hits}}</mj-raw>
-          <mj-section padding="5px 0"> 
+          <mj-section padding="5px 0">
             <mj-column padding="0">
-              <mj-text font-size="16px" color="#000000" font-family="Montserrat, helvetica, Arial, sans-serif" padding-top="0" padding-bottom="0">
+              <mj-text font-size="16px" color="#000000" font-family="Montserrat, Helvetica, Arial, sans-serif" padding-top="0" padding-bottom="0">
                 <h2>
-                  <a href="https://goodmoves.com/vacancy/{{_source.slug}}" color="#42842A" style="color:#42842A;">
-                  {{{_source.title}}}
-                  </a>
+                  <a href="https://goodmoves.com/vacancy/{{_source.slug}}?utm_source=alert&utm_medium=email" color="#42842A" style="color:#42842A;font-weight:bold;">{{{_source.title}}}</a>
                 </h2>
                 <p>
                   <strong>Organisation:</strong>
-                  <a href="https://goodmoves.com/organisation/{{_source.organisation.slug}}" color="#42842A" style="color:#42842A;">
-                    {{{_source.organisation.name}}}
-                  </a><br />
+                  <a href="https://goodmoves.com/organisation/{{_source.organisation.slug}}?utm_source=alert&utm_medium=email" color="#42842A" style="color:#42842A;font-weight:bold;">{{{_source.organisation.name}}}</a><br />
                   <strong>Salary:</strong>
                   {{{_source.salary}}}<br />
                   <strong>Location:</strong>
@@ -40,31 +35,27 @@
                 <div>
                   {{{truncate (stripTags _source.description) 250}}}
                 </div>
-                <p style="text-align: right;">
-                  <a href="https://goodmoves.com/vacancy/{{_source.slug}}" color="#42842A" style="color:#42842A;">
-                    View job &gt;
-                  </a>
+                <p style="text-align:right;">
+                  <a href="https://goodmoves.com/vacancy/{{_source.slug}}?utm_source=alert&utm_medium=email" color="#42842A" style="color:#42842A;font-weight:bold;">View job &gt;</a>
                 </p>
               </mj-text>
             </mj-column>
           </mj-section>
           <mj-raw>{{/each}}
         {{else}}</mj-raw>
-          <mj-section> 
+          <mj-section>
             <mj-column padding="0px">
               <mj-text font-size="16px" color="#000000" font-family="Montserrat, helvetica, Arial, sans-serif">
-                <p>Hello,</p>
                 <p>There is nothing in your Goodmoves job alert today</p>
               </mj-text>
             </mj-column>
           </mj-section>
         <mj-raw>{{/if}}
       {{else}}</mj-raw>
-        <mj-section> 
+        <mj-section>
           <mj-column padding="0px">
             <mj-text font-size="16px" color="#000000" font-family="Montserrat, helvetica, Arial, sans-serif">
-              <p>Hello,</p>
-              <p>There is nothing in your Goodmoves job alert today... aaand something seems to have gone wrong!</p>
+              <p>There is nothing in your Goodmoves job alert today</p>
             </mj-text>
           </mj-column>
         </mj-section>
@@ -74,13 +65,11 @@
         <mj-column padding="0px">
           <mj-text font-size="14px" color="#ffffff" font-family="Montserrat, helvetica, Arial, sans-serif" padding="0px">
             <p>
-              &#169; 2018 The Scottish Council for Voluntary Organisations (SCVO) is a Scottish Charitable Incorporated Organisation. Charity registered in Scotland SC003558.
-            </p>
-            <p>
-              15 Mansfield Place, Edinburgh, EH3 6BB
+              &#169; 2018. The Scottish Council for Voluntary Organisations (SCVO) is a Scottish Charitable Incorporated Organisation.<br />
+              Charity registered in Scotland SC003558. Registered office Mansfield Traquair Centre, 15 Mansfield Place, Edinburgh EH3 6BB.
             </p>
           </mj-text>
-          
+
           <mj-image src="https://storage.googleapis.com/scvo-assets/emailer/scvo-logo.png" align="right" width="119px" padding="0px"></mj-image>
         </mj-column>
       </mj-section>
