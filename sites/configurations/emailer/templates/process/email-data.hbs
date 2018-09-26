@@ -3,7 +3,7 @@
   {{#eachJoin @root.data.notifications.subscriptions.[1] ","}}
     {{#ifAny
       (getProperty @root.context.metaData.campaignConfig (concat campaign '.sendIfEmpty'))
-      (any (getProperty @root.data.search_data (concat (slugify campaign) "-" (slugify email) '.hits.hits')))
+      (any (getProperty @root.data.search_data (slugify (concat campaign " " email)) '.hits.hits'))
     }}
       {
         "from": {{{stringify (getProperty @root.context.metaData.campaignConfig (concat campaign '.from'))}}},

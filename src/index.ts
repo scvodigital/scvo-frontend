@@ -206,6 +206,8 @@ if (process.env.devmode) {
       console.log('ASSETS WATCHER -> Assets rebuilt', error, stdout, stderr);
     });
   });
+
+  startEmailer(5000);
 } else {
   fb.database().ref('/contexts/').on('child_changed', (snapshot: any) => {
     console.log('FIREBASE WATCHER -> Sites configurations changed, clearing routers');
@@ -214,6 +216,21 @@ if (process.env.devmode) {
         delete routers[name];
       }
       routers = null;
+    }
+  });
+  fb.database().ref('/emailer-interval/').on('value', (snapshot: admin.database.DataSnapshot | null) => {
+    if (snapshot && snapshot.exists()) {
+      try {
+        const val: any = snapshot.val();
+        const ms = Number(val) || 0;
+        if (ms > 5000) {
+          startEmailer(ms);
+        }
+      } catch (err) {
+        stopEmailer();
+      }
+    } else {
+      stopEmailer();
     }
   });
 }
@@ -297,7 +314,6 @@ function startEmailer(ms: number = defaultEmailerInterval) {
     });
   }, ms);
 }
-startEmailer();
 
 async function processEmails() {
   if (routers && routers.hasOwnProperty('emailer')) {

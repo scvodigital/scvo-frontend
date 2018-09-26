@@ -1,6 +1,7 @@
 {
   "name": "process",
   "pattern": "/process",
+  "debug": true,
   "tasks": [
     {
       "name": "notifications",
@@ -24,6 +25,17 @@
       }
     },
     "data.generate_es_task",
+    {
+      "name": "generate_mysql_task",
+      "taskModule": "render",
+      "renderer": "handlebars",
+      "config": {
+        "output": "data",
+        "parseJson": true,
+        "template": ">context.metaData.handlebars.templates.process_dynamic-mysql-task"
+      }
+    },
+    "data.generate_mysql_task",
     {
       "name": "send_emails",
       "taskModule": "mailgun",

@@ -1,0 +1,38 @@
+{{#ifAll (any @root.data.notifications.subscriptions.[1]) @root.data.search_data}}
+{
+  "name": "nothing_to_send",
+  "taskModule": "mysql",
+  "renderer": "handlebars",
+  "config": {
+    "connectionName": "notifications",
+    "queryTemplates": [
+      {{#eachJoin @root.data.notifications.subscriptions.[1] ","}}
+        {{#ifAll
+          (getProperty @root.context.metaData.campaignConfig (concat campaign '.sendIfEmpty'))
+          (compare (length (getProperty @root.data.search_data (slugify (concat campaign " " email) '.hits.hits'))) "===" 0)
+        }}
+        "{{slugify (concat campaign ' ' email)}}": 
+          {{~#blockStringify this ~}}
+            CALL _setSendStatus(
+              {{{mysqlEscape email}}},
+              {{{mysqlEscape campaign}}},
+              {{{mysqlEscape 'Nothing to send'}}}
+            );
+          {{~/blockStringify ~}}
+        {{/ifAll}}
+      {{/eachJoin}}
+    ]
+  }
+}
+{{else}}
+{
+  "name": "nothing_to_send",
+  "taskModule": "render",
+  "renderer": "handlebars",
+  "config": {
+    "output": "data",
+    "template": "{ \"status\": \"No more subscriptions to process\" }",
+    "parseJson": true
+  }
+}
+{{/ifAll}}
