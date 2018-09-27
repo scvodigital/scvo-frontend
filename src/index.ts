@@ -330,35 +330,18 @@ function startEmailer(ms: number = defaultEmailerInterval) {
 async function handleEmailerProcess(
     req: express.Request, res: express.Response,
     next: express.NextFunction): Promise<any> {
-  const response = await processEmails();
 
-  if (!response) {
-    res.send('Nothing');
-    return next();
+  const responses: any[] = [];
+
+  for (let i = 0; i < 12; i++) {
+    const response = await processEmails();
+    responses.push(response);
   }
 
-  res.status(response.statusCode || 500);
-  res.contentType(response.contentType || 'text/html');
+  res.status(200);
+  res.contentType('application/json');
 
-  Object.keys(response.headers).forEach((header) => {
-    res.setHeader(header, response.headers[header]);
-  });
-
-  Object.keys(response.cookies).forEach((cookieName) => {
-    const cookie = response.cookies[cookieName];
-    res.cookie(cookieName, cookie.value, cookie.options || {});
-  });
-
-  if (response.clearCookies) {
-    Object.keys(response.clearCookies).forEach((cookieName) => {
-      if (response.clearCookies) { // weird that I need to do this in here too to satisfy TSC
-        const cookie = response.clearCookies[cookieName];
-        res.clearCookie(cookieName, cookie.options || {});
-      }
-    });
-  }
-
-  res.send(response.body || 'Something went bad');
+  res.json(responses);
   res.end();
 
   return next();
