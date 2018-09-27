@@ -1,6 +1,7 @@
 {
   "name": "process",
   "pattern": "/process",
+  "debug": true,
   "tasks": [
     {
       "name": "notifications",
@@ -51,7 +52,7 @@
       "renderer": "handlebars",
       "config": {
         "output": "body",
-        "template": "{ {{#if @root.route.debug}} \"notifications\": {{{stringify @root.data.notifications}}}, \"search_data\": {{{stringify (default @root.data.search_data \"none\")}}}, \"mysql_task\": {{{stringify @root.data.generate_mysql_task}}}, \"email_data\": {{{stringify @root.data.send_emails}}} {{/if}} }",
+        "template": "{ {{#if @root.route.debug}} \"notifications\": {{{stringify @root.data.notifications}}}, \"search_task\": {{{stringify @root.data.generate_es_task}}}, \"search_data\": {{{stringify (default @root.data.search_data \"none\")}}}, \"mysql_task\": {{{stringify @root.data.generate_mysql_task}}}, \"email_data\": {{{stringify @root.data.send_emails}}} {{/if}} }",
         "parseJson": false
       }
     }
