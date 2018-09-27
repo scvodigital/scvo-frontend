@@ -155,8 +155,26 @@
           ]
         },
         "renderer": "handlebars"
+      },
+      "organisationsWithOpportunities": {
+        "name": "organisationsWithOpportunities",
+        "taskModule": "elasticsearch",
+        "config": {
+          "connectionStringTemplate": "{$../elasticsearch-url.txt}",
+          "elasticsearchConfig": {
+            "apiVersion": "5.6"
+          },
+          "queryTemplates": [
+            {
+              "name": "opportunities",
+              "index": "web-content-production",
+              "type": "milo-volunteering-opportunity",
+              "template": ">context.metaData.handlebars.queries.opportunities_organisations"
+            }
+          ]
+        },
+        "renderer": "handlebars"
       }
-
     },
     "firebaseDefaultDomain": {
       "name": "getinvolved",

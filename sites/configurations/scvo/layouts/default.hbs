@@ -142,10 +142,18 @@
           <nav class="mdc-list">
             <a class="mdc-list-item {{#compare @root.request.url.pathname "/"}} mdc-list-item--activated{{/compare}}"
                href="/" {{#compare @root.request.url.pathname "/"}}aria-selected="true"{{else}}aria-hidden="true"{{/compare}}>
-              <span class="far fa-home mdc-list-item__graphic" aria-hidden="true"></span>
               Home
             </a>
             {{#each @root.context.metaData.menus.main ~}}
+            <a class="mdc-list-item {{#if (regexMatch @root.request.url.pathname route "gi")}} mdc-list-item--activated{{/if}}"
+               href="{{stripTrailingSlash path}}" {{#if (regexMatch @root.request.url.pathname route "gi")}}aria-selected="true"{{else}}aria-hidden="true"{{/if}}>
+              {{#if icon ~}}
+              <span class="far fa-{{icon}} mdc-list-item__graphic" aria-hidden="true"></span>
+              {{/if ~}}
+              {{{label}}}
+            </a>
+            {{/each ~}}
+            {{#each @root.context.metaData.menus.main-upper ~}}
             <a class="mdc-list-item {{#if (regexMatch @root.request.url.pathname route "gi")}} mdc-list-item--activated{{/if}}"
                href="{{stripTrailingSlash path}}" {{#if (regexMatch @root.request.url.pathname route "gi")}}aria-selected="true"{{else}}aria-hidden="true"{{/if}}>
               {{#if icon ~}}

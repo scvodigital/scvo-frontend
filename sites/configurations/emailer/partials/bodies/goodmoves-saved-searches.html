@@ -224,9 +224,8 @@
                                       <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="" width="100%">
                                         <tr>
                                           <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
-                                            <div style="font-family:Montserrat, helvetica, Arial, sans-serif;font-size:16px;line-height:1;text-align:left;color:#000000;">
-                                              <p>Hello,</p>
-                                              <p>Here are jobs since the {{momentFormat (moment subscription.lastSent "") "Do MMMM"}} that match your saved search preferences</p>
+                                            <div style="font-family:Montserrat, Helvetica, Arial, sans-serif;font-size:16px;line-height:1;text-align:left;color:#000000;">
+                                              <p>{{hits.total}} jobs matching your saved search preferences were added to Goodmoves since the {{momentFormat (moment subscription.lastSent "") "Do \o\f MMMM"}}.</p>
                                             </div>
                                           </td>
                                         </tr>
@@ -291,23 +290,21 @@
                                         <table border="0" cellpadding="0" cellspacing="0" role="presentation" style="" width="100%">
                                           <tr>
                                             <td align="left" style="font-size:0px;padding:10px 25px;padding-top:0;padding-bottom:0;word-break:break-word;">
-                                              <div style="font-family:Montserrat, helvetica, Arial, sans-serif;font-size:16px;line-height:1;text-align:left;color:#000000;">
+                                              <div style="font-family:Montserrat, Helvetica, Arial, sans-serif;font-size:16px;line-height:1;text-align:left;color:#000000;">
                                                 <h2>
-                                                  <a href="https://goodmoves.com/vacancy/{{_source.slug}}" color="#42842A" style="color:#42842A;">
-                                                    {{{_source.title}}} </a>
+                                                  <a href="https://goodmoves.com/vacancy/{{_source.slug}}?utm_source=alert&utm_medium=email" color="#42842A" style="color:#42842A;font-weight:bold;">{{{_source.title}}}</a>
                                                 </h2>
                                                 <p>
                                                   <strong>Organisation:</strong>
-                                                  <a href="https://goodmoves.com/organisation/{{_source.organisation.slug}}" color="#42842A" style="color:#42842A;">
-                                                    {{{_source.organisation.name}}} </a><br />
+                                                  <a href="https://goodmoves.com/organisation/{{_source.organisation.slug}}?utm_source=alert&utm_medium=email" color="#42842A" style="color:#42842A;font-weight:bold;">{{{_source.organisation.name}}}</a><br />
                                                   <strong>Salary:</strong>
                                                   {{{_source.salary}}}<br />
                                                   <strong>Location:</strong>
                                                   {{{_source.location}}} <p>
                                                     <div>
                                                       {{{truncate (stripTags _source.description) 250}}} </div>
-                                                    <p style="text-align: right;">
-                                                      <a href="https://goodmoves.com/vacancy/{{_source.slug}}" color="#42842A" style="color:#42842A;"> View job &gt; </a>
+                                                    <p style="text-align:right;">
+                                                      <a href="https://goodmoves.com/vacancy/{{_source.slug}}?utm_source=alert&utm_medium=email" color="#42842A" style="color:#42842A;font-weight:bold;">View job &gt;</a>
                                                     </p>
                                               </div>
                                             </td>
@@ -375,7 +372,6 @@
                                         <tr>
                                           <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
                                             <div style="font-family:Montserrat, helvetica, Arial, sans-serif;font-size:16px;line-height:1;text-align:left;color:#000000;">
-                                              <p>Hello,</p>
                                               <p>There is nothing in your Goodmoves job alert today</p>
                                             </div>
                                           </td>
@@ -443,8 +439,7 @@
                                         <tr>
                                           <td align="left" style="font-size:0px;padding:10px 25px;word-break:break-word;">
                                             <div style="font-family:Montserrat, helvetica, Arial, sans-serif;font-size:16px;line-height:1;text-align:left;color:#000000;">
-                                              <p>Hello,</p>
-                                              <p>There is nothing in your Goodmoves job alert today... aaand something seems to have gone wrong!</p>
+                                              <p>There is nothing in your Goodmoves job alert today</p>
                                             </div>
                                           </td>
                                         </tr>
@@ -510,8 +505,7 @@
                                     <tr>
                                       <td align="left" style="font-size:0px;padding:0px;word-break:break-word;">
                                         <div style="font-family:Montserrat, helvetica, Arial, sans-serif;font-size:14px;line-height:1;text-align:left;color:#ffffff;">
-                                          <p> &#169; 2018 The Scottish Council for Voluntary Organisations (SCVO) is a Scottish Charitable Incorporated Organisation. Charity registered in Scotland SC003558. </p>
-                                          <p> 15 Mansfield Place, Edinburgh, EH3 6BB </p>
+                                          <p> &#169; 2018. The Scottish Council for Voluntary Organisations (SCVO) is a Scottish Charitable Incorporated Organisation.<br /> Charity registered in Scotland SC003558. Registered office Mansfield Traquair Centre, 15 Mansfield Place, Edinburgh EH3 6BB. </p>
                                         </div>
                                       </td>
                                     </tr>
