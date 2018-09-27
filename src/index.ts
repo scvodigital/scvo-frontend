@@ -219,17 +219,24 @@ if (process.env.devmode) {
     }
   });
   fb.database().ref('/emailer-interval/').on('value', (snapshot: admin.database.DataSnapshot | null) => {
+    console.log('EMAILER INTERVAL MONITOR -> Emailer interval changed');
     if (snapshot && snapshot.exists()) {
       try {
         const val: any = snapshot.val();
         const ms = Number(val) || 0;
-        if (ms > 5000) {
+        if (ms >= 5000) {
+          console.log('EMAILER INTERVAL MONITOR -> Starting emailer with an interval of', ms, 'ms');
           startEmailer(ms);
+        } else {
+          console.log('EMAILER INTERVAL MONITOR -> Stopping emailer as an interval of', ms, 'ms was set. Minimum limit value is 5000ms');
+          stopEmailer();
         }
       } catch (err) {
+        console.log('EMAILER INTERVAL MONITOR -> There was an error parsing new value or starting the emailer', err);
         stopEmailer();
       }
     } else {
+      console.log('EMAILER INTERVAL MONITOR -> Got no value in snapshot so stopping emailer')
       stopEmailer();
     }
   });
