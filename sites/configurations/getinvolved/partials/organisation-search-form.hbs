@@ -27,7 +27,6 @@
       {{>components_tab url=(concat "organisations/map" @root.request.url.search) iconClasses="far fa-map-marker-alt fa-fw" label="Map" active=(compare @root.request.url.pathname "===" "/organisations/map")}}
     {{/components_tab_bar}}
   </div>
-{{@root.request.url.pathname}}
   <form action="/{{#compare @root.request.url.pathname "/organisations/map"}}organisations/map{{else}}organisations/search{{/compare}}" method="GET" class="search-form" novalidate>
     <input type="hidden" name="sort" value="{{@root.request.params.query.sort}}" id="{{instance_id}}-sort">
     <div class="h-padding">
