@@ -9,13 +9,21 @@
       {{#eachJoin @root.data.notifications.subscriptions.[1] ","}}
         {{#ifNone
           (getProperty @root.context.metaData.campaignConfig (concat campaign '.sendIfEmpty'))
-          (any (getProperty @root.data.search_data (concat (slugify (concat campaign " " email) '.hits.hits'))))
+          (any (getProperty @root.data.search_data (concat (slugify (concat campaign " " email)) '.hits.hits')))
         }}
           {{~#blockStringify this ~}}
             CALL _setSendStatus(
               {{{mysqlEscape email}}},
               {{{mysqlEscape campaign}}},
               {{{mysqlEscape 'Nothing to send'}}}
+            );
+          {{~/blockStringify ~}}
+        {{~else~}}
+          {{~#blockStringify this ~}}
+            CALL _setSendStatus(
+              {{{mysqlEscape email}}},
+              {{{mysqlEscape campaign}}},
+              {{{mysqlEscape 'Sending'}}}
             );
           {{~/blockStringify ~}}
         {{/ifNone}}
