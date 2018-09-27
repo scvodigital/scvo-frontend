@@ -22,7 +22,7 @@
               {{{mysqlEscape 'sent-to-mailgun'}}}
             {{~/ifNone~}},
             {{{mysqlEscape 'info'}}},
-            NULL,
+            {{{mysqlEscape (concat 'jobId: ' jobId)}}},
             {{{mysqlEscape (momentFormat (moment "") "X")}}},
             NULL,
             NULL            
