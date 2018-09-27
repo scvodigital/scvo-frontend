@@ -35,7 +35,7 @@
         }
       ],
       "should": [
-        {{#each (split templateMetaData.querystrings "&&")}}
+        {{#eachJoin (split templateMetaData.querystrings "&&") ","}}
           {{#with (querystring this)}}
             {
               "bool": {
@@ -48,7 +48,7 @@
               }
             }
           {{/with}}
-        {{/each}}
+        {{/eachJoin}}
       ],
       "minimum_should_match": 1
     }

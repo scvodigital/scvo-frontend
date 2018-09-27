@@ -1,17 +1,20 @@
 {
-  "name": "save-search",
-  "pattern": "/save-search",
+  "name": "four_oh_four",
+  "pattern": "/404",
+  "defaultStatusCode": 404,
   "tasks": [
-    "context.metaData.commonTasks.authRequired",
     {
-      "name": "save-search",
-      "taskModule": "mysql",
+      "name": "not_found",
+      "taskModule": "elasticsearch",
       "config": {
-        "connectionName": "notifications",
+        "connectionStringTemplate": "{$../../elasticsearch-url.txt}",
+        "elasticsearchConfig": {
+          "apiVersion": "5.6"
+        },
         "queryTemplates": {
-          "create_or_replace_subscriber": ">context.metaData.handlebars.queries.notifications_create-replace-subscriber",
-          "add_saved_search": ">context.metaData.handlebars.queries.notifications_add-saved-search",
-          "add_saved_search_parameters": ">context.metaData.handlebars.queries.notifications_add-saved-search-parameters"
+          "index": "web-content-production",
+          "type": "fundingscotland-page",
+          "template": ">context.metaData.handlebars.queries.errors_404"
         }
       },
       "renderer": "handlebars"
@@ -32,7 +35,8 @@
             "layout": ">context.metaData.handlebars.layouts.default",
             "parts": {
               "head": ">context.metaData.handlebars.templates.pages_page-head-tags",
-              "body": ">context.metaData.handlebars.templates.pages_login"
+              "body": ">context.metaData.handlebars.templates.errors_404",
+              "foot": ""
             },
             "contentType": "text/html"
           }
