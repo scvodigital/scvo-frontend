@@ -1,6 +1,19 @@
-<div class="banner-search overlay">
+<div class="banner-search overlay" style="background-image: url('https://storage.googleapis.com/scvo-assets/assets/images/fs-legacy-banner-back.png');">
   <div class="content page-content">
+    <div class="overlay-content">
+      <div class="mdc-layout-grid">
+        <div class="mdc-layout-grid__inner">
+          <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone">
+            {{> logo welcome="true"}}
+            <p class="header-extra">
+              Find a funds for your organisation
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
     {{#if @root.data.auth ~}}
+    <div class="search-content">
       <form id="search-view" class="search-form mdc-elevation--z5" action="/search" method="GET">
         {{#each (split "activities,beneficiaries,geographical_areas_funded,fund_status,charities_only,type_of_cost,type_of_funding" ",")}}
           {{#if (getProperty @root.request.params.query this) ~}}
@@ -40,20 +53,7 @@
           </div>
         </div>
       </form>
-    {{else}}
-      <h1 class="mdc-typography--headline3">
-        Search <strong>Funding Scotland</strong> for grants, loans, and support for your organisation
-      </h1>
-      {{> account_sign_in}}
-      <div class="mdc-typography--body1 v-margin-full">
-        Forgot your password? <a href="/reset-password">Reset password</a>
-      </div>
-      <div class="mdc-typography--body1 v-margin-full">
-        Don't have an account? <a href="/sign-up">Sign up</a>
-      </div>
-      <div class="mdc-typography--body1 v-margin-full">
-        Read our <a href="/privacy" target="_blank">privacy notice</a>
-      </div>
+    </div>
     {{/if ~}}
   </div>
 </div>

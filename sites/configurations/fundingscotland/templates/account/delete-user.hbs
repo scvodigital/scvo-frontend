@@ -1,24 +1,24 @@
-  <div class="mdc-card">
-    <div class="mdc-card__info--vacancy">
-      <div class="mdc-card__info--vacancy-title mdc-typography--headline4">
-        Deleting your account&hellip;
-      </div>
+<div class="mdc-card">
+  <div class="mdc-card__info--content-primary">
+    <div class="mdc-card__info--content-primary-title mdc-typography--headline4">
+      Deleting your account&hellip;
     </div>
   </div>
-  <script>
-    document.addEventListener("DOMContentLoaded", function(event) {
-      window.setTimeout(function() {
-        fundingscotland.app.auth().onAuthStateChanged(function(user) {
-          if (user) {
-            user.delete().then(function() {
-              fundingscotland.setCookie('fs_token');
-              fundingscotland.setCookie('fs_cookie');
-              window.location.href = '/';
-            }).catch(function(err) {
-              console.error('Failed to delete user', user, err);
-            });
-          }
-        });
-      }, 1000);
-    });
-  </script>
+</div>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    window.setTimeout(function() {
+      fundingscotland.app.auth().onAuthStateChanged(function(user) {
+        if (user) {
+          user.delete().then(function() {
+            fundingscotland.setCookie('fs_token');
+            fundingscotland.setCookie('fs_cookie');
+            window.location.href = '/';
+          }).catch(function(err) {
+            console.error('Failed to delete user', user, err);
+          });
+        }
+      });
+    }, 1000);
+  });
+</script>
