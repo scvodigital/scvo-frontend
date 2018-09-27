@@ -51,7 +51,7 @@
       "renderer": "handlebars",
       "config": {
         "output": "body",
-        "template": "{{{stringify @root.data.send_emails}}}",
+        "template": "{ {{#if @root.route.debug}} \"notifications\": {{{stringify @root.data.notifications}}}, \"search_data\": {{{stringify (default @root.data.search_data \"none\")}}}, \"mysql_task\": {{{stringify @root.data.generate_mysql_task}}}, \"email_data\": {{{stringify @root.data.send_emails}}} {{/if}} }",
         "parseJson": false
       }
     }
