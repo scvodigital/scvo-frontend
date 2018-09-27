@@ -6,31 +6,29 @@
   "config": {
     "connectionName": "notifications",
     "queryTemplates": [
-      {{#with (random 1000000000 9999999999) as |rnd|}}
-        {{#eachJoin @root.data.notifications.subscriptions.[1] ","}}
-          {{~#blockStringify this ~}}
-            CALL _log(
-              NULL,
-              {{{stringify (slugify (concat campaign " " email " " ../rnd))}}}
-              {{{mysqlEscape campaign}}},
-              {{{mysqlEscape email}}},
-              {{~#ifNone
-                (getProperty @root.context.metaData.campaignConfig (concat campaign '.sendIfEmpty'))
-                (any (getProperty @root.data.search_data (concat (slugify (concat campaign " " email)) '.hits.hits')))
-              ~}}
-                {{{mysqlEscape 'nothing-to-send'}}}
-              {{~else~}}
-                {{{mysqlEscape 'sent-to-mailgun'}}}
-              {{~/ifNone~}},
-              {{{mysqlEscape 'info'}}},
-              NULL,
-              {{{mysqlEscape (momentFormat (moment "") "x")}}},
-              NULL,
-              NULL            
-            );
-          {{~/blockStringify ~}}
-        {{/eachJoin}}
-      {{/with}}
+      {{#eachJoin @root.data.notifications.subscriptions.[1] ","}}
+        {{~#blockStringify this ~}}
+          CALL _log(
+            NULL,
+            {{{mysqlEscape (slugify (concat campaign " " email " " (random 1000000000 9999999999)))}}},
+            {{{mysqlEscape campaign}}},
+            {{{mysqlEscape email}}},
+            {{~#ifNone
+              (getProperty @root.context.metaData.campaignConfig (concat campaign '.sendIfEmpty'))
+              (any (getProperty @root.data.search_data (concat (slugify (concat campaign " " email)) '.hits.hits')))
+            ~}}
+              {{{mysqlEscape 'nothing-to-send'}}}
+            {{~else~}}
+              {{{mysqlEscape 'sent-to-mailgun'}}}
+            {{~/ifNone~}},
+            {{{mysqlEscape 'info'}}},
+            NULL,
+            {{{mysqlEscape (momentFormat (moment "") "X")}}},
+            NULL,
+            NULL            
+          );
+        {{~/blockStringify ~}}
+      {{/eachJoin}}
     ]
   }
 }
