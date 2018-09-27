@@ -79,8 +79,9 @@ app.get('/analytics/goodmoves-vacancies', goodmovesVacanciesAnalytics);
 app.get('/analytics/goodmoves-vacancy-files', goodmovesVacancyFilesAnalytics);
 app.get('/analytics/generic', genericAnalytics);
 
-app.get('/emailer/start', handleStartEmailer);
-app.get('/emailer/stop', handleStopEmailer);
+//app.get('/emailer/start', handleStartEmailer);
+//app.get('/emailer/stop', handleStopEmailer);
+app.get('/emailer/process-proxy', handleEmailerProcess);
 
 app.get('*', index);
 app.post('*', index);
@@ -218,6 +219,7 @@ if (process.env.devmode) {
       routers = null;
     }
   });
+  /*
   fb.database().ref('/emailer-interval/').on('value', (snapshot: admin.database.DataSnapshot | null) => {
     console.log('EMAILER INTERVAL MONITOR -> Emailer interval changed');
     if (snapshot && snapshot.exists()) {
@@ -240,6 +242,7 @@ if (process.env.devmode) {
       stopEmailer();
     }
   });
+  */
 }
 
 async function menuUpdate(
@@ -278,6 +281,7 @@ async function favicon(
   return next();
 }
 
+/*
 const defaultEmailerInterval = 5000;
 let emailerInterval: NodeJS.Timer | null = null;
 async function handleStopEmailer(
@@ -321,8 +325,46 @@ function startEmailer(ms: number = defaultEmailerInterval) {
     });
   }, ms);
 }
+*/
 
-async function processEmails() {
+async function handleEmailerProcess(
+    req: express.Request, res: express.Response,
+    next: express.NextFunction): Promise<any> {
+  const response = await processEmails();
+
+  if (!response) {
+    res.send('Nothing');
+    return next();
+  }
+
+  res.status(response.statusCode || 500);
+  res.contentType(response.contentType || 'text/html');
+
+  Object.keys(response.headers).forEach((header) => {
+    res.setHeader(header, response.headers[header]);
+  });
+
+  Object.keys(response.cookies).forEach((cookieName) => {
+    const cookie = response.cookies[cookieName];
+    res.cookie(cookieName, cookie.value, cookie.options || {});
+  });
+
+  if (response.clearCookies) {
+    Object.keys(response.clearCookies).forEach((cookieName) => {
+      if (response.clearCookies) { // weird that I need to do this in here too to satisfy TSC
+        const cookie = response.clearCookies[cookieName];
+        res.clearCookie(cookieName, cookie.options || {});
+      }
+    });
+  }
+
+  res.send(response.body || 'Something went bad');
+  res.end();
+
+  return next();
+}
+
+async function processEmails(): Promise<RouterResponse|null> {
   if (routers && routers.hasOwnProperty('emailer')) {
     const request: RouterRequest = {
       url: url.parse('https://emailer.scvo.net/process'),
@@ -335,11 +377,12 @@ async function processEmails() {
     }; 
     try {
       const response = await routers.emailer.go(request);
+      return response;
     } catch(err) {
       console.error('Error mocking emailer.go with request:', request, err);
     }
   }
-  return;
+  return null;
 }
 
 async function goodmovesVacanciesAnalytics(
