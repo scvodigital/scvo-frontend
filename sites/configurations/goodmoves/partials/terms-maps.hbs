@@ -33,5 +33,48 @@
         {{/each}}
       ]
     }{{#unless @last}},{{/unless}}
-  {{/each}}
+  {{/each}},
+  "districts": {
+    "slugsMap": {
+      {{#each @root.data.supplimentaryResponses.types.aggregations.districts.buckets}}
+        {{#if key ~}}
+        "{{slugify key}}": {
+          "term": {{{stringify key}}},
+          "count": {{doc_count}},
+          "wards": {
+            {{#each wards.buckets ~}}
+              {{~#if key}}
+                "{{slugify key}}" : {
+                  "term": {{{stringify key}}},
+                  "count": {{doc_count}}
+                }{{#unless @last}},{{/unless}}
+              {{/if ~}}
+            {{/each}}
+          }
+        }{{#unless @last}},{{/unless}}
+        {{/if ~}}
+      {{/each}}
+    },
+    "termsMap": {
+      {{#each @root.data.supplimentaryResponses.types.aggregations.districts.buckets ~}}
+        {{#if key ~}}
+        {{{stringify key}}}: {
+          "slug": "{{slugify key}}",
+          "count": {{doc_count}},
+          "wards": {
+            {{#each wards.buckets ~}}
+              {{#if key ~}}
+              {{{stringify key}}}: {
+                "term": {{{stringify key}}},
+                "slug": "{{slugify key}}",
+                "count": {{doc_count}}
+              }{{#unless @last}},{{/unless}}
+              {{/if ~}}
+            {{/each}}
+          }
+        }{{#unless @last}},{{/unless}}
+        {{/if ~}}
+      {{/each}}
+    }
+  }
 }

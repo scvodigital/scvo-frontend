@@ -20,15 +20,25 @@
 
 <div class="mdc-drawer__header">
   <h3 class="mdc-drawer__title">Search jobs</h3>
+  {{#compare @root.route.name "jobs_in"}}
+    <h6 class="mdc-drawer__subtitle">
+      in {{getProperty @root.data.termsMaps.districts.slugsMap (concat @root.request.params.district ".term")}}
+      {{~#if @root.request.params.ward}}, 
+        {{getProperty @root.data.termsMaps.districts.slugsMap (concat @root.request.params.district ".wards." @root.request.params.ward ".term")}}
+      {{/if}}
+    </h6>
+  {{/compare}}
 </div>
 {{#compare @root.data.supplimentaryResponses.types.hits.total ">" 0 ~}}
   <div class="mdc-drawer__content">
+    {{#compare @root.route.name "!==" "jobs_in"}}
     <div class="h-padding">
       {{#>components_tab_bar}}
         {{>components_tab url=(concat "/search" @root.request.url.search) iconClasses="far fa-list fa-fw" label="List" active=(compare @root.request.url.pathname "===" "/search")}}
         {{>components_tab url=(concat "/map" @root.request.url.search) iconClasses="far fa-map-marker-alt fa-fw" label="Map" active=(compare @root.request.url.pathname "===" "/map")}}
       {{/components_tab_bar}}
     </div>
+    {{/compare}}
 
     <form action="/{{#compare @root.request.url.pathname "/map"}}map{{else}}search{{/compare}}" method="GET" class="search-form" novalidate>
       <input type="hidden" name="sort" value="{{@root.request.params.query.sort}}" id="{{instance_id}}-sort">
@@ -43,6 +53,7 @@
         </div>
       </div>
 
+      {{#compare @root.route.name "!==" "jobs_in"}}
       <div class="h-padding">
         <div class="mdc-layout-grid">
           <div class="mdc-layout-grid__inner">
@@ -86,6 +97,7 @@
       </div>
       <input type="hidden" name="lat" value="{{@root.request.params.query.lat}}">
       <input type="hidden" name="lng" value="{{@root.request.params.query.lng}}">
+      {{/compare}}
 
       <h3 class="mdc-drawer__content-heading cursor-pointer noselect mdc-drawer--occasional-ie11" data-collapse-target="#{{instance_id}}-salary-collapse" role="button" aria-pressed="false" aria-label="Show salary search options" tabindex="0">
         Salary
@@ -117,7 +129,15 @@
         </div>
       </div>
 
-      {{#each (split "working_patterns,regions,roles,sectors" ",") ~}}
+      {{#each 
+        (split 
+          (concat
+            "working_patterns,"
+            (if @root.request.params.district "" else="regions,")
+            "roles,sectors" 
+          )
+        ",")
+      ~}}
         <h3 class="mdc-drawer__content-heading cursor-pointer noselect mdc-drawer--occasional-ie11" data-collapse-target="#{{../instance_id}}-{{this}}-collapse" role="button" aria-pressed="false" aria-label="Show {{getProperty @root.context.metaData.termTypeLabels (concat this ".plural")}}" tabindex="0">
           {{getProperty @root.context.metaData.termTypeLabels (concat this ".plural")}}
           <span class="mdc-icon-toggle pull-right">

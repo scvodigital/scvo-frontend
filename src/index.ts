@@ -341,7 +341,7 @@ async function handleEmailerProcess(
 
   const responses: any[] = [];
 
-  for (let i = 0; i < 12; i++) {
+  for (let i = 0; i < 6; i++) {
     const response = await processEmails();
     responses.push(response);
     await sleep(5000);

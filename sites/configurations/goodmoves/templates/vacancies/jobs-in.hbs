@@ -1,0 +1,40 @@
+<div id="detailed-results-container" class="container-content content-primary-search">
+  <h1>
+      {{getProperty @root.data.termsMaps.districts.slugsMap (concat @root.request.params.district ".term")}}
+      {{~#if @root.request.params.ward}}, 
+        {{getProperty @root.data.termsMaps.districts.slugsMap (concat @root.request.params.district ".wards." @root.request.params.ward ".term")}}
+      {{/if}}
+  </h1>
+ 
+  <h2>
+    Areas of 
+    {{getProperty @root.data.termsMaps.districts.slugsMap (concat @root.request.params.district ".term")}}
+  </h2>  
+  <div class="mdc-layout-grid">
+    <div class="mdc-layout-grid__inner" style="grid-gap:0!important">
+      {{#each (getProperty @root.data.termsMaps.districts.slugsMap (concat @root.request.params.district ".wards"))}}
+        <div class="mdc-layout-grid__cell">
+          <a href="/jobs-in/{{@root.request.params.district}}/{{@key}}">
+            {{term}} 
+            <span class="count">({{count}})</span>
+          </a>
+        </div>
+      {{/each}}
+    </div>
+  </div>
+
+  <div class="search-info mdc-elevation--z3">
+    <strong>
+      Total number of jobs in
+      {{getProperty @root.data.termsMaps.districts.slugsMap (concat @root.request.params.district ".term")}}
+      {{~#if @root.request.params.ward}}, 
+        {{getProperty @root.data.termsMaps.districts.slugsMap (concat @root.request.params.district ".wards." @root.request.params.ward ".term")}}
+      {{/if}}
+      :
+    </strong> {{@root.data.search_data.detailed_results.hits.total}}
+  </div>
+  
+  {{#each @root.data.search_data.detailed_results.hits.hits ~}}
+  {{> vacancy_search_result _source sort=sort distance=fields.distance.[0]}}
+  {{/each ~}}
+</div>

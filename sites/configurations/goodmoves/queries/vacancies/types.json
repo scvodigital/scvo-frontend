@@ -106,6 +106,20 @@
           }
         }
       }
+    },
+    "districts": {
+      "terms": {
+        "field": "admin_district",
+        "size": 10000
+      },
+      "aggs": {
+        "wards": {
+          "terms": {
+            "field": "admin_ward",
+            "size": 10000
+          }
+        }
+      }
     }
   }
 }
