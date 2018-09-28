@@ -79,8 +79,9 @@ app.get('/analytics/goodmoves-vacancies', goodmovesVacanciesAnalytics);
 app.get('/analytics/goodmoves-vacancy-files', goodmovesVacancyFilesAnalytics);
 app.get('/analytics/generic', genericAnalytics);
 
-app.get('/emailer/start', handleStartEmailer);
-app.get('/emailer/stop', handleStopEmailer);
+//app.get('/emailer/start', handleStartEmailer);
+//app.get('/emailer/stop', handleStopEmailer);
+app.get('/emailer/process-proxy', handleEmailerProcess);
 
 app.get('*', index);
 app.post('*', index);
@@ -218,6 +219,7 @@ if (process.env.devmode) {
       routers = null;
     }
   });
+  /*
   fb.database().ref('/emailer-interval/').on('value', (snapshot: admin.database.DataSnapshot | null) => {
     console.log('EMAILER INTERVAL MONITOR -> Emailer interval changed');
     if (snapshot && snapshot.exists()) {
@@ -240,6 +242,7 @@ if (process.env.devmode) {
       stopEmailer();
     }
   });
+  */
 }
 
 async function menuUpdate(
@@ -278,6 +281,7 @@ async function favicon(
   return next();
 }
 
+/*
 const defaultEmailerInterval = 5000;
 let emailerInterval: NodeJS.Timer | null = null;
 async function handleStopEmailer(
@@ -321,8 +325,29 @@ function startEmailer(ms: number = defaultEmailerInterval) {
     });
   }, ms);
 }
+*/
 
-async function processEmails() {
+async function handleEmailerProcess(
+    req: express.Request, res: express.Response,
+    next: express.NextFunction): Promise<any> {
+
+  const responses: any[] = [];
+
+  for (let i = 0; i < 12; i++) {
+    const response = await processEmails();
+    responses.push(response);
+  }
+
+  res.status(200);
+  res.contentType('application/json');
+
+  res.json(responses);
+  res.end();
+
+  return next();
+}
+
+async function processEmails(): Promise<RouterResponse|null> {
   if (routers && routers.hasOwnProperty('emailer')) {
     const request: RouterRequest = {
       url: url.parse('https://emailer.scvo.net/process'),
@@ -335,11 +360,12 @@ async function processEmails() {
     }; 
     try {
       const response = await routers.emailer.go(request);
+      return response;
     } catch(err) {
       console.error('Error mocking emailer.go with request:', request, err);
     }
   }
-  return;
+  return null;
 }
 
 async function goodmovesVacanciesAnalytics(
