@@ -327,6 +327,14 @@ function startEmailer(ms: number = defaultEmailerInterval) {
 }
 */
 
+function sleep(ms: number): Promise<void> {
+  return new Promise<void>((resolve, reject) => {
+    setTimeout(() => {
+      resolve();
+    }, ms);
+  });
+}
+
 async function handleEmailerProcess(
     req: express.Request, res: express.Response,
     next: express.NextFunction): Promise<any> {
@@ -336,6 +344,7 @@ async function handleEmailerProcess(
   for (let i = 0; i < 12; i++) {
     const response = await processEmails();
     responses.push(response);
+    await sleep(5000);
   }
 
   res.status(200);
