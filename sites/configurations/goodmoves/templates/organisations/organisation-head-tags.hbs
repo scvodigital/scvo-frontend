@@ -1,7 +1,7 @@
-{{#if data.primaryResponse.hits.hits.[0] ~}}
-{{#with data.primaryResponse.hits.hits.[0]._source ~}}
-<title>Goodmoves – Vacancies with {{title}}</title>
-<meta property="og:title" content="Goodmoves – Vacancies with {{title}}" data-dynamic="true">
+{{#if @root.data.primaryResponse.hits.hits.[0] ~}}
+{{#with @root.data.primaryResponse.hits.hits.[0]._source ~}}
+<title>Vacancies with {{title}} – {{momentFormat (moment now) "MMMM YYYY"}} – Goodmoves</title>
+<meta property="og:title" content="Vacancies with {{title}} – {{momentFormat (moment now) "MMMM YYYY"}} – Goodmoves" data-dynamic="true">
 {{#ifAny logo_url og_image ../og_image ~}}
 <meta property="og:image" content="{{default logo_url og_image ../og_image}}" data-dynamic="true">
 {{/ifAny ~}}
@@ -16,6 +16,6 @@
 {{/if ~}}
 {{/with ~}}
 {{else}}
-<title>Goodmoves – Organisation</title>
-<meta property="og:title" content="Goodmoves – Organisation" data-dynamic="true">
+<title>Goodmoves – charity and voluntary sector recruitment</title>
+<meta property="og:title" content="Goodmoves – charity and voluntary sector recruitment" data-dynamic="true">
 {{/if ~}}
