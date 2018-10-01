@@ -89,7 +89,7 @@ export class Helpers {
   }
 
   static helper_slugify(str: string) {
-    const slug = s(str).slugify().s;
+    const slug = s(str.replace(/\//g, '-')).slugify().s;
     return slug;
   }
 
@@ -545,6 +545,36 @@ export class Helpers {
       output.push(val);
     });
 
+    return output;
+  }
+
+  static helper_flatten(items: any[]) {
+    if (!Array.isArray(items)) {
+      return null;
+    }
+
+    var output: any[] = [];
+    items.forEach(item => {
+      if (Array.isArray(item)) {
+        output.push(...item);
+      } else {
+        output.push(item);
+      }
+    });
+
+    return output;
+  }
+
+  static helper_distinct(items: any[]) {
+    if (!Array.isArray(items)) {
+      return null;
+    }
+    const output: any[] = [];
+    items.forEach(item => {
+      if (output.indexOf(item) === -1) {
+        output.push(item);
+      }
+    });
     return output;
   }
 

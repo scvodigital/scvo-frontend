@@ -1,0 +1,154 @@
+{
+  "size": 1000,
+  "_source": [
+    "Id",
+    "slug",
+    "top_job",
+    "description",
+    "title",
+    "geo_vacancy_coords",
+    "geo_vacancy_info",
+    "home_based",
+    "various_locations",
+    "location",
+    "salary",
+    "salary_currency",
+    "role_status_list",
+    "active",
+    "closing_date",
+    "start_at",
+    "end_at",
+    "organisation.slug",
+    "organisation.name",
+    "organisation.has_logo",
+    "organisation.logo_url",
+    "rendered.goodmoves_rss",
+    "admin_district",
+    "admin_district_slug",
+    "admin_ward",
+    "admin_ward_slug"
+  ],
+  "query": {
+    "function_score": {
+      "query": {
+        "bool": {
+          "filter": [
+            {{>queries_vacancy_common_filters_open @root.request.params.query}},
+            {{>queries_vacancy_search_filters @root.request.params.query}},
+            {
+              "term": {
+                "admin_district_slug": {{{stringify @root.request.params.district}}}
+              }
+            }
+            {{#if @root.request.params.ward}}
+              , {
+                "term": {
+                  "admin_ward_slug": {{{stringify @root.request.params.ward}}}
+                }
+              }              
+            {{/if}}
+          ],
+          "must": [
+            {{>queries_vacancy_search_must @root.request.params.query}}
+          ]
+        }
+      },
+      "boost": 1,
+      "functions": [
+        {
+          "filter": {
+            "match": {
+              "top_job": true
+            }
+          },
+          "weight": 2
+        }
+      ],
+      "max_boost": 10,
+      "score_mode": "max",
+      "boost_mode": "multiply",
+      "min_score" : 0
+    }
+  },
+  {{#ifAll @root.request.params.query.location @root.request.params.query.lat @root.request.params.query.lng ~}}
+  "script_fields" : {
+    "distance" : {
+      "script" : {
+        "inline": "doc['geo_vacancy_coords'].arcDistance(params.lat,params.lon) * 0.000621371",
+        "lang": "painless",
+        "params": {
+          "lat": {{request.params.query.lat}},
+          "lon": {{request.params.query.lng}}
+        }
+      }
+    }
+  },
+  {{/ifAll ~}}
+  "sort": [
+    {{#if @root.request.params.query.sort ~}}
+    {{#compare @root.request.params.query.sort "===" "salary_low" ~}}
+    {
+      "salary_min": "asc"
+    },
+    {
+      "salary_max": "asc"
+    }
+    {{else}}
+    {{#compare @root.request.params.query.sort "===" "salary_high" ~}}
+    {
+      "salary_min": "desc"
+    },
+    {
+      "salary_max": "desc"
+    }
+    {{else}}
+    {{#compare @root.request.params.query.sort "===" "newest" ~}}
+    {
+      "start_at": "desc"
+    }
+    {{else}}
+    {{#compare @root.request.params.query.sort "===" "oldest" ~}}
+    {
+      "start_at": "asc"
+    }
+    {{else}}
+    {{#compare @root.request.params.query.sort "===" "closing_soon" ~}}
+    {
+      "closing_date": "asc"
+    }
+    {{else}}
+    {{#compare @root.request.params.query.sort "===" "distance" ~}}
+    {{#ifAll @root.request.params.query.location @root.request.params.query.lat @root.request.params.query.lng ~}}
+    {
+      "_geo_distance": {
+        "geo_vacancy_coords": {
+          "lat": {{request.params.query.lat}},
+          "lon": {{request.params.query.lng}}
+        },
+        "order": "asc",
+        "unit": "km",
+        "mode": "min",
+        "distance_type": "arc"
+      }
+    }
+    {{else}}
+    "_score"
+    {{/ifAll ~}}
+    {{else}}
+    {{#compare @root.request.params.query.sort "===" "relevance" ~}}
+    "_score",
+    {{/compare ~}}
+    {{/compare ~}}
+    {{/compare ~}}
+    {{/compare ~}}
+    {{/compare ~}}
+    {{/compare ~}}
+    {{/compare ~}}
+    {{else}}
+    "_score",
+    {
+      "start_at": "desc"
+    }
+    {{/if ~}}
+  ]
+}

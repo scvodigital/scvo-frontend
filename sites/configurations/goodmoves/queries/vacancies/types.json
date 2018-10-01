@@ -106,6 +106,34 @@
           }
         }
       }
+    },
+    "districts": {
+      "nested": {
+        "path": "districts"
+      },
+      "aggs": {
+        "district_names": {
+          "terms": {
+            "field": "districts.name",
+            "size": 1000
+          },
+          "aggs": {
+            "wards": {
+              "nested": {
+                "path": "districts.wards"
+              },
+              "aggs": {
+                "ward_names": {
+                  "terms": {
+                    "field": "districts.wards.name",
+                    "size": 1000
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   }
 }
