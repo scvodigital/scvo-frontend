@@ -21,10 +21,13 @@
 <div class="mdc-drawer__header">
   <h3 class="mdc-drawer__title">Search jobs</h3>
   {{#compare @root.route.name "jobs_in"}}
-    <h6 class="mdc-drawer__subtitle">in {{getProperty @root.data.termsMaps.districts.slugsMap (concat @root.request.params.district ".term")}}
-      {{~#if @root.request.params.ward}}, 
-        {{getProperty @root.data.termsMaps.districts.slugsMap (concat @root.request.params.district ".wards." @root.request.params.ward ".term")}}
+    <h6 class="mdc-drawer__subtitle">
+      in
+      {{#if @root.request.params.ward}}
+        {{{replace (getProperty @root.data.termsMaps.districts.slugsMap (concat @root.request.params.district ".wards." @root.request.params.ward ".term")) "/" " &amp; "}}},
       {{/if}}
+      {{getProperty @root.data.termsMaps.districts.slugsMap (concat @root.request.params.district ".term")}}
+      <a href="/search{{{@root.request.url.search}}}">All areas</a>
     </h6>
   {{/compare}}
 </div>
@@ -132,12 +135,12 @@
         </div>
       </div>
 
-      {{#each 
-        (split 
+      {{#each
+        (split
           (concat
             "working_patterns,"
             (if @root.request.params.district "" else="regions,")
-            "roles,sectors" 
+            "roles,sectors"
           )
         ",")
       ~}}
