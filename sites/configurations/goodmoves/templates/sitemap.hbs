@@ -47,19 +47,25 @@
       }}
     {{/each}} 
   {{/each}}
+  <!-- Vacancies -->
+  {{#each @root.data.supplimentaryResponses.aggs.hits.hits}}
+    {{> url
+      loc=(concat "https://goodmoves.com/vacancy/" _source.slug)
+      lastmod=(momentFormat (moment _source.start_at "x") "YYYY-MM-DD")
+    }}
+  {{/each}}
   <!-- Organisations -->
-  {{#each @root.data.supplimentaryResponses.organisations.aggregations.organisations.buckets}}
+  {{#each @root.data.supplimentaryResponses.aggs.aggregations.organisations.buckets}}
     {{> url
       loc=(concat "https://goodmoves.com/organisation/" key)
       lastmod=last_updated.value_as_string
       changefreq="weekly"
-      priortiy="0.75"
     }}
   {{/each}}
   <!-- CMS Pages -->
   {{#each @root.data.supplimentaryResponses.pages.hits.hits}}
     {{> url 
-      loc=(concat "https://goodmoves.com/jobs-in/" _source.slug)
+      loc=(concat "https://goodmoves.com/" _source.slug)
       lastmod=(momentFormat (moment _source.updated "x") "YYYY-MM-DD")
       changefreq="monthly"
     }}
