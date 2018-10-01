@@ -5,17 +5,36 @@
         {{getProperty @root.data.termsMaps.districts.slugsMap (concat @root.request.params.district ".wards." @root.request.params.ward ".term")}}
       {{/if}}
   </h1>
- 
+
+  <div class="container-content container-map">
+    <div id="map-content-primary" data-map-name="vacancyMap" data-map-options='{}'>
+      {{#each @root.data.search_data.detailed_results.hits.hits ~}}
+        {{#if _source.geo_vacancy_info ~}}
+          {{#each (arrayify _source.geo_vacancy_info) ~}}
+            {{#compare @root.request.params.district (slugify admin_district)}}
+              {{#ifAny (if @root.request.params.ward false else=true) (compare @root.request.params.ward "===" (slugify admin_ward))}}
+              <marker style="display:none;" data-map="vacancyMap" data-lat="{{latitude}}" data-lng="{{longitude}}" data-shortlisted="{{#each @root.data.shortlist.items}}{{#compare id "===" ../../_source.Id}}true{{/compare}}{{/each}}" data-homebased="{{#if ../_source.home_based}}true{{/if}}" data-variouslocations="{{#if ../_source.various_locations}}true{{/if}}" data-title="{{../_source.title}}">
+                {{>vacancy_map ../_source}}
+              </marker>
+              {{/ifAny}}
+            {{/compare}}
+          {{/each ~}}
+        {{/if ~}}
+      {{/each ~}}
+    </div>
+  </div>
+
   <h2>
-    Areas of 
+    Areas in 
     {{getProperty @root.data.termsMaps.districts.slugsMap (concat @root.request.params.district ".term")}}
+    with jobs
   </h2>  
   <div class="mdc-layout-grid">
     <div class="mdc-layout-grid__inner" style="grid-gap:0!important">
       {{#each (getProperty @root.data.termsMaps.districts.slugsMap (concat @root.request.params.district ".wards"))}}
         <div class="mdc-layout-grid__cell">
           <a href="/jobs-in/{{@root.request.params.district}}/{{@key}}">
-            {{term}} 
+            {{term}}
             <span class="count">({{count}})</span>
           </a>
         </div>

@@ -36,13 +36,13 @@
   {{/each}},
   "districts": {
     "slugsMap": {
-      {{#each @root.data.supplimentaryResponses.types.aggregations.districts.buckets}}
+      {{#each @root.data.supplimentaryResponses.types.aggregations.districts.district_names.buckets}}
         {{#if key ~}}
         "{{slugify key}}": {
           "term": {{{stringify key}}},
           "count": {{doc_count}},
           "wards": {
-            {{#each wards.buckets ~}}
+            {{#each wards.ward_names.buckets ~}}
               {{~#if key}}
                 "{{slugify key}}" : {
                   "term": {{{stringify key}}},
@@ -56,13 +56,13 @@
       {{/each}}
     },
     "termsMap": {
-      {{#each @root.data.supplimentaryResponses.types.aggregations.districts.buckets ~}}
+      {{#each @root.data.supplimentaryResponses.types.aggregations.districts.district_names.buckets ~}}
         {{#if key ~}}
         {{{stringify key}}}: {
           "slug": "{{slugify key}}",
           "count": {{doc_count}},
           "wards": {
-            {{#each wards.buckets ~}}
+            {{#each wards.ward_names.buckets ~}}
               {{#if key ~}}
               {{{stringify key}}}: {
                 "term": {{{stringify key}}},

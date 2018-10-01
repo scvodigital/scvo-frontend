@@ -108,15 +108,29 @@
       }
     },
     "districts": {
-      "terms": {
-        "field": "admin_district",
-        "size": 10000
+      "nested": {
+        "path": "districts"
       },
       "aggs": {
-        "wards": {
+        "district_names": {
           "terms": {
-            "field": "admin_ward",
-            "size": 10000
+            "field": "districts.name",
+            "size": 1000
+          },
+          "aggs": {
+            "wards": {
+              "nested": {
+                "path": "districts.wards"
+              },
+              "aggs": {
+                "ward_names": {
+                  "terms": {
+                    "field": "districts.wards.name",
+                    "size": 1000
+                  }
+                }
+              }
+            }
           }
         }
       }
