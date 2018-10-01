@@ -24,10 +24,9 @@
     </div>
   </div>
 
-  <h2>
-    Areas in 
-    {{getProperty @root.data.termsMaps.districts.slugsMap (concat @root.request.params.district ".term")}}
-    with jobs
+  <h2> 
+    <a href="/jobs-in/{{@root.request.params.district}}">{{getProperty @root.data.termsMaps.districts.slugsMap (concat @root.request.params.district ".term")}}</a>
+    areas with jobs
   </h2>  
   <div class="mdc-layout-grid">
     <div class="mdc-layout-grid__inner" style="grid-gap:0!important">
