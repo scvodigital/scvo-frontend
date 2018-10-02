@@ -15,23 +15,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <!-- Static Routes -->
-  {{> url 
+  {{> url
     loc=(concat "https://goodmoves.com/")
     lastmod=(momentFormat (moment "" "") "YYYY-MM-DD")
     changefreq="daily"
     priority="0.75"
   }}
-  {{> url 
+  {{> url
     loc=(concat "https://goodmoves.com/sign-in")
     changefreq="yearly"
   }}
-  {{> url 
+  {{> url
     loc=(concat "https://goodmoves.com/sign-up")
     changefreq="yearly"
   }}
   <!-- Districts -->
   {{#each @root.data.termsMaps.districts.slugsMap}}
-    {{> url 
+    {{> url
       loc=(concat "https://goodmoves.com/jobs-in/" @key)
       lastmod=(momentFormat (moment "" "") "YYYY-MM-DD")
       changefreq="daily"
@@ -39,13 +39,13 @@
     }}
     <!-- {{term}} Wards: -->
     {{#each wards}}
-      {{> url 
+      {{> url
         loc=(concat "https://goodmoves.com/jobs-in/" @../key "/" @key)
         lastmod=(momentFormat (moment "" "") "YYYY-MM-DD")
         changefreq="daily"
         priority="0.75"
       }}
-    {{/each}} 
+    {{/each}}
   {{/each}}
   <!-- Vacancies -->
   {{#each @root.data.supplimentaryResponses.aggs.hits.hits}}
@@ -64,8 +64,8 @@
   {{/each}}
   <!-- CMS Pages -->
   {{#each @root.data.supplimentaryResponses.pages.hits.hits}}
-    {{> url 
-      loc=(concat "https://goodmoves.com/" _source.slug)
+    {{> url
+      loc=(concat "https://goodmoves.com/" (replace _source.slug "_" "/"))
       lastmod=(momentFormat (moment _source.updated "x") "YYYY-MM-DD")
       changefreq="monthly"
     }}
