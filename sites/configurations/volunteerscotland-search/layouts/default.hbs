@@ -97,7 +97,7 @@
           </div>
         {{/if}}
       {{/ifAny}}
-      <header class="mdc-top-app-bar mdc-elevation--z5 top-bar-stuck" id="top-bar">
+      <header class="mdc-top-app-bar top-bar-stuck" id="top-bar">
         <div class="container-fluid">
           <div class="mdc-top-app-bar__row mdc-top-app-bar__upper">
             <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
@@ -119,6 +119,12 @@
               {{#>components_tab_bar
                   extraClasses="mdc-tab-bar__auto-width hide-sm hide-md"
                   id="upper-tab-bar"}}
+                {{#each @root.context.metaData.menus.upper ~}}
+                  {{>components_tab
+                      url=(stripTrailingSlash path)
+                      active=(regexMatch @root.request.url.pathname route "gi")
+                      label=label}}
+                {{/each ~}}
                 {{#if @root.data.auth ~}}
                   {{#each @root.context.metaData.menus.upper-signed-in ~}}
                     {{>components_tab
@@ -134,12 +140,6 @@
                         label=label}}
                   {{/each ~}}
                 {{/if ~}}
-                {{#each @root.context.metaData.menus.upper ~}}
-                  {{>components_tab
-                      url=(stripTrailingSlash path)
-                      active=(regexMatch @root.request.url.pathname route "gi")
-                      label=label}}
-                {{/each ~}}
               {{/components_tab_bar}}
             </section>
           </div>
@@ -259,7 +259,7 @@
 
       <main class="mdc-theme--background mdc-toolbar-fixed-adjust {{#if layoutParts.sidebar}}drawer-container-permanent{{else}}drawer-container-temporary{{/if}}">
         {{#if layoutParts.sidebar ~}}
-        <aside class="mdc-drawer mdc-elevation--z3 mdc-drawer--occasional" id="sidebar-temporary" data-menu-button="#sidebar-button">
+        <aside class="mdc-drawer mdc-elevation--z0 mdc-drawer--occasional" id="sidebar-temporary" data-menu-button="#sidebar-button">
           {{{layoutParts.sidebar}}}
         </aside>
         <div class="mdc-drawer-scrim"></div>
