@@ -1,10 +1,10 @@
 {{#if data.primaryResponse.hits.hits.[0] ~}}
 {{#with data.primaryResponse.hits.hits.[0]._source ~}}
 
-<title>Goodmoves – Vacancy with {{organisation.name}} – {{title}}</title>
-<meta property="og:title" content="Goodmoves – Vacancy with {{organisation.name}} – {{title}}" data-dynamic="true">
-<meta itemprop="name" content="Goodmoves – Vacancy with {{organisation.name}} – {{title}}" data-dynamic="true">
-<meta name="twitter:title" content="Goodmoves – Vacancy with {{organisation.name}} – {{title}}" data-dynamic="true">
+<title>{{title}} with {{organisation.name}} – Goodmoves</title>
+<meta property="og:title" content="{{title}} with {{organisation.name}} – Goodmoves" data-dynamic="true">
+<meta itemprop="name" content="{{title}} with {{organisation.name}} – Goodmoves" data-dynamic="true">
+<meta name="twitter:title" content="{{title}} with {{organisation.name}} – Goodmoves" data-dynamic="true">
 
 {{#ifAny organisation.logo_url og_image ../og_image ~}}
 <meta property="og:image" content="{{default organisation.logo_url og_image ../og_image}}" data-dynamic="true">
@@ -42,7 +42,7 @@
 
 {{/with ~}}
 {{else}}
-<title>Goodmoves – Vacancy</title>
-<meta property="og:title" content="Goodmoves – Vacancy" data-dynamic="true">
+<title>Job vacancy – Goodmoves</title>
+<meta property="og:title" content="Job vacancy – Goodmoves" data-dynamic="true">
 {{/if ~}}
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">

@@ -1,0 +1,65 @@
+{
+  "name": "favourites",
+  "pattern": "/favourites",
+  "debug": true,
+  "metaData": {
+    "sidebarButton": {
+      "icon": "search",
+      "tooltip": "Search",
+      "classes": "hide-md hide-lg"
+    }
+  },
+  "defaultParams": {
+    "context": "results"
+  },
+  "tasks": [
+    "context.metaData.commonTasks.authRequired",
+    "context.metaData.commonTasks.favouritesData",
+    {
+      "name": "favourite_opportunities",
+      "taskModule": "elasticsearch",
+      "config": {
+        "connectionStringTemplate": "{$../../elasticsearch-url.txt}",
+        "elasticsearchConfig": {
+          "apiVersion": "5.6",
+          "log": "warning"
+        },
+        "queryTemplates": [
+          {
+            "name": "current",
+            "index": "web-content-production",
+            "type": "goodmoves-vacancy",
+            "template": ">context.metaData.handlebars.queries.opportunities_favourites-current"
+          }
+        ]
+      },
+      "renderer": "handlebars"
+    },
+    "context.metaData.commonTasks.opportunitySupplimentary",
+    {
+      "name": "destination",
+      "taskModule": "renderLayout",
+      "renderer": "handlebars",
+      "config": {
+        "logic": {
+          "if": [
+            "default"
+          ]
+        },
+        "output": "body",
+        "layouts": {
+          "default": {
+            "layout": ">context.metaData.handlebars.layouts.default",
+            "parts": {
+              "head": ">context.metaData.handlebars.templates.pages_page-head-tags",
+              "body": ">context.metaData.handlebars.templates.opportunities_favourites",
+              "sidebar": ">context.metaData.handlebars.templates.opportunities_search-form"
+
+            },
+            "contentType": "text/html"
+          }
+        }
+      }
+    }
+  ]
+}

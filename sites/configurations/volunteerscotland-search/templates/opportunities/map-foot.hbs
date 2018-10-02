@@ -1,0 +1,15 @@
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/typeahead.js/0.11.1/typeahead.bundle.min.js"></script>
+<script type="text/javascript">
+var terms = {
+  activities: [
+    {{#each data.opportunitySupplimentary.types.aggregations.activities.buckets ~}}
+    { field: 'client_groups', term: {{{stringify key}}} },
+    {{/each ~}}
+  ],
+  work_types: [
+    {{#each data.opportunitySupplimentary.types.aggregations.work_types.buckets ~}}
+    { field: 'work_types', term: {{{stringify key}}} },
+    {{/each ~}}
+  ]
+};
+</script>

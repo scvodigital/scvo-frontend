@@ -1,7 +1,7 @@
-{{#if data.primaryResponse.hits.hits.[0] ~}}
-<title>Goodmoves – Search results</title>
-<meta property="og:title" content="Goodmoves – Search results" data-dynamic="true">
+{{#if @root.request.params.district ~}}
+<title>Jobs in {{#if @root.request.params.ward}}{{{replace (getProperty @root.data.termsMaps.districts.slugsMap (concat @root.request.params.district ".wards." @root.request.params.ward ".term")) "/" " &amp; "}}}, {{/if}}{{getProperty @root.data.termsMaps.districts.slugsMap (concat @root.request.params.district ".term")}} – {{momentFormat (moment now) "MMMM YYYY"}} – Goodmoves</title>
+<meta property="og:title" content="Jobs in {{#if @root.request.params.ward}}{{{replace (getProperty @root.data.termsMaps.districts.slugsMap (concat @root.request.params.district ".wards." @root.request.params.ward ".term")) "/" " &amp; "}}}, {{/if}}{{getProperty @root.data.termsMaps.districts.slugsMap (concat @root.request.params.district ".term")}} – {{momentFormat (moment now) "MMMM YYYY"}} – Goodmoves" data-dynamic="true">
 {{else}}
-<title>Goodmoves – Search results</title>
+<title>Job search results – Goodmoves</title>
 <meta property="og:title" content="Goodmoves – Search results" data-dynamic="true">
 {{/if ~}}

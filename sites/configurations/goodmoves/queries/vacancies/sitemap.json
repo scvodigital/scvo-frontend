@@ -1,0 +1,26 @@
+{
+  "size": 1000,
+  "_source": ["slug", "start_at"],
+  "query": {
+    "bool": {
+      "filter": [
+        {{>queries_vacancy_common_filters_open request.params.query}}
+      ]
+    }
+  },
+  "aggs": {
+    "organisations": {
+      "terms": {
+        "field": "organisation.slug",
+        "size": 10000
+      },
+      "aggs": {
+        "last_updated": {
+          "max": {
+            "field": "start_at"
+          }
+        }
+      }
+    }
+  }
+}

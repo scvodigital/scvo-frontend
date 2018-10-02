@@ -1,0 +1,61 @@
+{
+  "name": "sitemap",
+  "pattern": "/sitemap.xml",
+  "debug": true,
+  "tasks": [
+    {
+      "name": "supplimentaryResponses",
+      "taskModule": "elasticsearch",
+      "config": {
+        "connectionStringTemplate": "{$../../elasticsearch-url.txt}",
+        "elasticsearchConfig": {
+          "apiVersion": "5.6"
+        },
+        "queryTemplates": [
+          {
+            "name": "types",
+            "index": "web-content-production",
+            "type": "goodmoves-vacancy",
+            "template": ">context.metaData.handlebars.queries.vacancies_types"
+          },
+          {
+            "name": "pages",
+            "index": "web-content-production",
+            "type": "goodmoves-page",
+            "template": ">context.metaData.handlebars.queries.pages_sitemap"
+          },
+          {
+            "name": "aggs",
+            "index": "web-content-production",
+            "type": "goodmoves-vacancy",
+            "template": ">context.metaData.handlebars.queries.vacancies_sitemap"
+          }
+        ]
+      },
+      "renderer": "handlebars"
+    },
+    "context.metaData.commonTasks.termsMaps",
+    {
+      "name": "destination",
+      "taskModule": "renderLayout",
+      "renderer": "handlebars",
+      "config": {
+        "logic": {
+          "if": [
+            "default"
+          ]
+        },
+        "output": "body",
+        "layouts": {
+          "default": {
+            "layout": ">context.metaData.handlebars.layouts.data",
+            "parts": {
+              "content": ">context.metaData.handlebars.templates.sitemap"
+            },
+            "contentType": "application/xml"
+          }
+        }
+      }
+    }
+  ]
+}

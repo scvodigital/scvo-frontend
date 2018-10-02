@@ -28,6 +28,8 @@ export const DOMAIN_MAP: {[domain: string]: string} = {
   'getinvolved-legacy.local': 'getinvolved-legacy',
   'getinvolved.scot': 'getinvolved-legacy',
   'getinvolved.org.uk': 'getinvolved-legacy',
+  'volunteerscotland-search.local': 'volunteerscotland-search',
+  'search.volunteerscotland.net': 'volunteerscotland-search',
   'goodmoves.eu': 'goodmoves',
   'goodmoves.be': 'goodmoves',
   'goodmoves.com': 'goodmoves',

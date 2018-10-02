@@ -1,0 +1,75 @@
+<div class="container-content content-secondary">
+  {{#compare data.primaryResponse.hits.total ">" 0 ~}}
+  {{> dialog_shortlist}}
+
+  {{#with @root.data.primaryResponse.hits.hits.[0]._source as |organisation| ~}}
+
+  {{> organisation_full organisation}}
+
+  {{#compare @root.data.organisationOpportunities.opportunities_open.hits.total ">" 0 ~}}
+  <hr />
+  <div class="mdc-typography--headline5">
+    Current opportunities
+  </div>
+  {{#each @root.data.organisationOpportunities.opportunities_open.hits.hits ~}}
+  {{> opportunity_list _source}}
+  {{/each ~}}
+  {{/compare ~}}
+
+  {{#compare @root.data.organisationOpportunities.opportunities_closed.hits.total ">" 0 ~}}
+  {{#compare @root.data.organisationOpportunities.opportunities_open.hits.total "===" 0 ~}}
+  <hr />
+  {{/compare}}
+  <div class="mdc-typography--headline5">
+    Closed opportunities
+  </div>
+  {{#each @root.data.organisationOpportunities.opportunities_closed.hits.hits ~}}
+  {{> opportunity_list _source}}
+  {{/each ~}}
+  {{/compare ~}}
+
+  {{#compare @root.data.organisationOpportunities.opportunities_open.hits.total "===" 0 ~}}
+  {{#compare @root.data.organisationOpportunities.opportunities_closed.hits.total "===" 0 ~}}
+  <hr />
+  <div class="mdc-typography--headline6">
+    There are no current or recently closed opportunities available
+  </div>
+  {{/compare ~}}
+  {{/compare ~}}
+
+  {{#if goodhq_organisation.xid ~}}
+  {{#compare goodhq_organisation.status "===" "Open" ~}}
+  <hr />
+  <!--<div class="mdc-typography--headline6">-->
+    <!--Find out more about <a href="https://goodhq.org/{{goodhq_organisation.xid}}">{{{organisation.title}}}</a> on <a href="https://goodhq.org">Good HQ</a>-->
+  <!--</div>-->
+  {{#compare @root.data.goodhq.posts.hits.total ">" 0 ~}}
+  <p class="mdc-typography--headline7">
+    <strong>Posts from <a href="https://goodhq.org/{{goodhq_organisation.xid}}">{{{organisation.title}}}</a> on <a href="https://goodhq.org">Good HQ</a></strong>
+  </p>
+  <div class="mdc-layout-grid equal-height">
+    <div class="mdc-layout-grid__inner">
+      {{#each @root.data.goodhq.posts.hits.hits ~}}
+      <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone">
+        {{{_source.rendered.goodmoves_list}}}
+      </div>
+      {{/each ~}}
+    </div>
+  </div>
+  {{#compare @root.data.goodhq.posts.hits.total ">" 3 ~}}
+  <p class="mdc-typography--body1">
+    <a href="https://goodhq.org/{{organisation.goodhq_organisation.xid}}?mode=volopp">More posts on Good HQ</a>
+  </p>
+  {{/compare ~}}
+  {{/compare ~}}
+
+  {{/compare ~}}
+  {{/if ~}}
+
+  {{/with ~}}
+  {{else}}
+  <p>
+    <strong>Error:</strong> the requested organisation could not be found.
+  </p>
+  {{/compare ~}}
+</div>

@@ -1,0 +1,73 @@
+{{~#*inline "url"~}}
+  <url>
+    <loc>{{loc}}</loc>
+    {{#if lastmod~}}
+    <lastmod>{{lastmod}}</lastmod>
+    {{~/if}}
+    {{#if changefreq~}}
+    <changefreq>{{changefreq}}</changefreq>
+    {{~/if}}
+    {{#if priority~}}
+    <priority>{{priority}}</priority>
+    {{~/if}}
+  </url>
+{{~/inline~}}
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Static Routes -->
+  {{> url
+    loc=(concat "https://goodmoves.com/")
+    lastmod=(momentFormat (moment "" "") "YYYY-MM-DD")
+    changefreq="daily"
+    priority="0.75"
+  }}
+  {{> url
+    loc=(concat "https://goodmoves.com/sign-in")
+    changefreq="yearly"
+  }}
+  {{> url
+    loc=(concat "https://goodmoves.com/sign-up")
+    changefreq="yearly"
+  }}
+  <!-- Districts -->
+  {{#each @root.data.termsMaps.districts.slugsMap}}
+    {{> url
+      loc=(concat "https://goodmoves.com/jobs-in/" @key)
+      lastmod=(momentFormat (moment "" "") "YYYY-MM-DD")
+      changefreq="daily"
+      priority="0.75"
+    }}
+    <!-- {{term}} Wards: -->
+    {{#each wards}}
+      {{> url
+        loc=(concat "https://goodmoves.com/jobs-in/" @../key "/" @key)
+        lastmod=(momentFormat (moment "" "") "YYYY-MM-DD")
+        changefreq="daily"
+        priority="0.75"
+      }}
+    {{/each}}
+  {{/each}}
+  <!-- Vacancies -->
+  {{#each @root.data.supplimentaryResponses.aggs.hits.hits}}
+    {{> url
+      loc=(concat "https://goodmoves.com/vacancy/" _source.slug)
+      lastmod=(momentFormat (moment _source.start_at "x") "YYYY-MM-DD")
+    }}
+  {{/each}}
+  <!-- Organisations -->
+  {{#each @root.data.supplimentaryResponses.aggs.aggregations.organisations.buckets}}
+    {{> url
+      loc=(concat "https://goodmoves.com/organisation/" key)
+      lastmod=(momentFormat (moment last_updated.value "x") "YYYY-MM-DD")
+      changefreq="weekly"
+    }}
+  {{/each}}
+  <!-- CMS Pages -->
+  {{#each @root.data.supplimentaryResponses.pages.hits.hits}}
+    {{> url
+      loc=(concat "https://goodmoves.com/" (replace _source.slug "_" "/"))
+      lastmod=(momentFormat (moment _source.updated "x") "YYYY-MM-DD")
+      changefreq="monthly"
+    }}
+  {{/each}}
+</urlset>

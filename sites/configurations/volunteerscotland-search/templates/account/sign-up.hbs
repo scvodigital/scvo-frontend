@@ -1,0 +1,137 @@
+{{#if @root.data.auth ~}}
+{{> account_sign_out_loader}}
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    window.setTimeout(function() {
+      window.location.href = '/';
+    }, 100);
+  });
+</script>
+{{else}}
+<form id="sign-up-form" method="POST" class="sign-in-form sign-up-form">
+  <div class="mdc-card mdc-elevation--z0">
+    <div class="mdc-card__info--content-primary">
+      <div class="mdc-card__info--content-primary-title mdc-typography--headline4 x-padding">
+        Sign up
+      </div>
+    </div>
+    <div class="mdc-card__info x-padding-full mdc-theme--primary-bg mdc-theme--on-primary" id="sign-up-message">
+      <span id="form-message"></span>
+    </div>
+    <div class="mdc-card__info x-padding-full">
+      <div class="mdc-typography--body1" id="form-section-email">
+        {{> account_sign_in_social loaderSelector="#sign-up-loader" messageSelector="#sign-up-message"}}
+
+        <div class="middle-line-text">
+          <span>or</span>
+        </div>
+        <div class="mdc-text-field mdc-text-field--box mdc-text-field--with-leading-icon" data-mdc-auto-init="MDCTextField">
+          <span class="far fa-at mdc-text-field__icon" tabindex="-1"></span>
+          <input type="email" id="sign-up-email" class="mdc-text-field__input mdc-text-field--fullwidth" data-lpignore="true" autocomplete="off" />
+          <label class="mdc-floating-label" for="sign-up-email">
+            Email
+          </label>
+          <div class="mdc-line-ripple"></div>
+        </div>
+        <div class="mdc-text-field mdc-text-field--box mdc-text-field--with-leading-icon" data-mdc-auto-init="MDCTextField">
+          <span class="far fa-at mdc-text-field__icon" tabindex="-1"></span>
+          <input type="email" id="sign-up-email-confirm" class="mdc-text-field__input mdc-text-field--fullwidth" data-lpignore="true" autocomplete="off" />
+          <label class="mdc-floating-label" for="sign-up-email-confirm">
+            Confirm email
+          </label>
+          <div class="mdc-line-ripple"></div>
+        </div>
+
+        <div class="mdc-text-field mdc-text-field--box mdc-text-field--with-leading-icon" data-mdc-auto-init="MDCTextField">
+          <span class="far fa-key mdc-text-field__icon" tabindex="-1"></span>
+          <input type="password" id="sign-up-password" class="mdc-text-field__input mdc-text-field--fullwidth" data-lpignore="true" autocomplete="off" />
+          <label class="mdc-floating-label" for="sign-up-password">
+            Password
+          </label>
+          <div class="mdc-line-ripple"></div>
+        </div>
+        <div class="mdc-text-field mdc-text-field--box mdc-text-field--with-leading-icon" data-mdc-auto-init="MDCTextField">
+          <span class="far fa-key mdc-text-field__icon" tabindex="-1"></span>
+          <input type="password" id="sign-up-password-confirm" class="mdc-text-field__input mdc-text-field--fullwidth" data-lpignore="true" autocomplete="off" />
+          <label class="mdc-floating-label" for="sign-up-password-confirm">
+            Confirm password
+          </label>
+          <div class="mdc-line-ripple"></div>
+        </div>
+      </div>
+      <div id="form-section-sign-up-buttons">
+        <button class="mdc-button mdc-button--raised" type="submit" id="sign-up-submit">
+          Sign up
+        </button>
+        <div class="mdc-typography--body1 v-margin-full">
+          Already have an account? <a href="/sign-in">Sign in</a>
+        </div>
+        <div class="mdc-typography--body1 v-margin-full">
+          Read our <a href="/privacy" target="_blank">privacy notice</a>
+        </div>
+      </div>
+      <div class="card-loader" id="sign-up-loader">
+        <div class="card-loader-inner">
+          <span class="far fa-2x fa-circle-notch fa-spin"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+<script>
+document.addEventListener("DOMContentLoaded", function(event) {
+  var $form = $('#sign-up-form');
+  var $message = $('#sign-up-message');
+  var $emailForm = $('#email-password-form');
+  var $email = $('#sign-up-email');
+  var $emailConfirm = $('#sign-up-email-confirm');
+  var $password = $('#sign-up-password');
+  var $passwordConfirm = $('#sign-up-password-confirm');
+  var $register = $('#sign-up-submit');
+  var $loader = $('#sign-up-loader');
+
+  $form.on('submit', function(evt) {
+    $loader.css('display', 'flex');
+    evt.preventDefault();
+
+    var email = $email.val();
+    var emailConfirm = $emailConfirm.val();
+    var password = $password.val();
+    var passwordConfirm = $passwordConfirm.val();
+
+    if (email !== emailConfirm) {
+      $message.text('The two email addresses entered do not match').show();
+      $loader.css('display', 'none');
+      document.body.scrollTop = document.documentElement.scrollTop = 0;
+      return;
+    }
+
+    if (password !== passwordConfirm) {
+      $message.text('The two passwords entered do not match').show();
+      $loader.css('display', 'none');
+      document.body.scrollTop = document.documentElement.scrollTop = 0;
+      return;
+    }
+
+    volunteerscotland.app.auth().createUserWithEmailAndPassword(email, password).then(function(user) {
+      if (user) {
+        console.log('Registered user:', user);
+        user.user.getIdTokenResult().then(function(idTokenResult) {
+          console.log('ID Token Result', idTokenResult);
+          volunteerscotland.setCookie('gi_token', idTokenResult.token, 7);
+          window.location.href = '/';
+        });
+      } else {
+        $message.text('Something went wrong, signed up but no user?').show();
+        $loader.css('display', 'none');
+        document.body.scrollTop = document.documentElement.scrollTop = 0;
+      }
+    }).catch(function(err) {
+      $message.text(err.message).show();
+      $loader.css('display', 'none');
+      document.body.scrollTop = document.documentElement.scrollTop = 0;
+    });
+  });
+});
+</script>
+{{/if ~}}

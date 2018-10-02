@@ -1,0 +1,55 @@
+{
+  "size": 100,
+  "_source": [
+    "Id",
+    "slug",
+    "description",
+    "title",
+    "geo_coords",
+    "organisation_slug",
+    "organisation_name"
+  ],
+  "query": {
+    "bool": {
+      "filter": [
+        {{>queries_opportunity_common_filters request.params.query}}
+      ],
+      "must": [
+        {
+          "terms": {
+            "Id": {{{stringify (map @root.data.favourites.items.[0] (getProp "value"))}}}
+          }
+        }
+      ]
+    }
+  },
+  "sort": [
+    {{#if @root.request.params.query.sort ~}}
+    {{#compare @root.request.params.query.sort "===" "newest" ~}}
+    {
+      "start_at": "desc"
+    }
+    {{else}}
+    {{#compare @root.request.params.query.sort "===" "oldest" ~}}
+    {
+      "start_at": "asc"
+    }
+    {{else}}
+    {{#compare @root.request.params.query.sort "===" "closing_soon" ~}}
+    {
+      "closing_date": "asc"
+    }
+    {{else}}
+    {
+      "closing_date": "asc"
+    }
+    {{/compare ~}}
+    {{/compare ~}}
+    {{/compare ~}}
+    {{else}}
+    {
+      "closing_date": "asc"
+    }
+    {{/if ~}}
+  ]
+}

@@ -1,0 +1,19 @@
+<div class="mdc-card content-primary gist" data-opportunity-id="{{Id}}">
+  <div class="mdc-card__info--content-primary-row">
+    <div class="mdc-card__media mdc-card__media--square demo-card__media search-result-card__media--content-secondary" style="background-image:url({{organisation.logo_url}});"></div>
+    <div class="mdc-card__info--content-primary">
+      <div class="mdc-card__info--content-primary-title mdc-typography--headline7">
+        {{title}}
+      </div>
+      <div class="mdc-card__info--content-primary-secondary mdc-typography--body1">
+        <a href="/organisation/{{organisation.slug}}{{@root.request.url.search}}">{{organisation.name}}</a>
+      </div>
+      <div class="mdc-card__info--content-primary-details mdc-typography--caption">
+        <span class="far fa-calendar-alt fa-fw" title="Closing date"></span>
+        {{{momentFormat (moment closing_date "x") "Do MMMM YYYY"}}}
+      </div>
+    </div>
+  </div>
+  {{> opportunity_actions slug=slug Id=Id}}
+</div>
+{{>ga documentType="milo-volunteering-opportunity" documentId=Id hitType=(default hitContext "summary")}}

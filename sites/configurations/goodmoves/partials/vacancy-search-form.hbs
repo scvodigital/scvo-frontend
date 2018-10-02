@@ -21,24 +21,25 @@
 <div class="mdc-drawer__header">
   <h3 class="mdc-drawer__title">Search jobs</h3>
   {{#compare @root.route.name "jobs_in"}}
-    <h6 class="mdc-drawer__subtitle">
-      in {{getProperty @root.data.termsMaps.districts.slugsMap (concat @root.request.params.district ".term")}}
-      {{~#if @root.request.params.ward}}, 
-        {{getProperty @root.data.termsMaps.districts.slugsMap (concat @root.request.params.district ".wards." @root.request.params.ward ".term")}}
+    <h6 class="mdc-drawer__subtitle">in
+      {{#if @root.request.params.ward}}
+        {{{replace (getProperty @root.data.termsMaps.districts.slugsMap (concat @root.request.params.district ".wards." @root.request.params.ward ".term")) "/" " &amp; "}}},
       {{/if}}
+      {{getProperty @root.data.termsMaps.districts.slugsMap (concat @root.request.params.district ".term")}}
+      <a href="/search{{{@root.request.url.search}}}">All areas</a>
     </h6>
   {{/compare}}
 </div>
 {{#compare @root.data.supplimentaryResponses.types.hits.total ">" 0 ~}}
   <div class="mdc-drawer__content">
-    {{#compare @root.route.name "!==" "jobs_in"}}
+    {{#compare @root.route.name "!==" "jobs_in" ~}}
     <div class="h-padding">
       {{#>components_tab_bar}}
         {{>components_tab url=(concat "/search" @root.request.url.search) iconClasses="far fa-list fa-fw" label="List" active=(compare @root.request.url.pathname "===" "/search")}}
         {{>components_tab url=(concat "/map" @root.request.url.search) iconClasses="far fa-map-marker-alt fa-fw" label="Map" active=(compare @root.request.url.pathname "===" "/map")}}
       {{/components_tab_bar}}
     </div>
-    {{/compare}}
+    {{/compare ~}}
 
       {{#if (regexMatch @root.request.url.pathname "^/jobs-in" "gi")}}
         <form action="{{@root.request.url.pathname}}" method="GET" class="search-form" novalidate>
@@ -133,12 +134,12 @@
         </div>
       </div>
 
-      {{#each 
-        (split 
+      {{#each
+        (split
           (concat
             "working_patterns,"
             (if @root.request.params.district "" else="regions,")
-            "roles,sectors" 
+            "roles,sectors"
           )
         ",")
       ~}}

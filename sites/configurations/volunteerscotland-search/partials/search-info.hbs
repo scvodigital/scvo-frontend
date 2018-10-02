@@ -1,0 +1,20 @@
+{{#if paging.totalResults ~}}
+<div class="search-info mdc-elevation--z3">
+  <strong>Total results:</strong> {{addCommas paging.totalResults}}
+  {{#compare paging.totalResults ">" 10 ~}} |
+  <strong>Current page:</strong> {{addCommas paging.currentPage}} of {{addCommas paging.totalPages}}
+  {{/compare ~}}
+  {{#compare @root.request.params.path "===" "search" ~}}
+  <a href="/map{{@root.request.url.search}}" class="pull-right">
+    <span class="far fa-map-marker-alt fa-fw mdc-list-item__graphic" title="Map"></span>
+    <span class="underline">Show {{inflect paging.totalResults "opportunity" "opportunities"}} on map</a>
+  </a>
+  {{/compare ~}}
+</div>
+{{else}}
+{{#ifAny @root.request.params.query.keywords @root.request.params.query.location @root.request.params.query.regions @root.request.params.query.work_types @root.request.params.query.client_groups @root.request.params.query.organisation_activities @root.request.params.query.recently_updated @root.request.params.query.has_opportunities ~}}
+<div class="search-info mdc-elevation--z1">
+  No results could be found, please try a different search query
+</div>
+{{/ifAny ~}}
+{{/if ~}}
