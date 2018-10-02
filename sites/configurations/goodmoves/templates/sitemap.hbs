@@ -58,7 +58,7 @@
   {{#each @root.data.supplimentaryResponses.aggs.aggregations.organisations.buckets}}
     {{> url
       loc=(concat "https://goodmoves.com/organisation/" key)
-      lastmod=last_updated.value_as_string
+      lastmod=(momentFormat (moment last_updated.value "x") "YYYY-MM-DD")
       changefreq="weekly"
     }}
   {{/each}}
