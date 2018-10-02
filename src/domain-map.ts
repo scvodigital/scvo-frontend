@@ -24,7 +24,7 @@ export const DOMAIN_MAP: {[domain: string]: string} = {
   'digitalparticipation.scot': 'digitalparticipation',
   'test.digitalparticipation.scot': 'digitalparticipation',
   'getinvolved.local': 'getinvolved',
-  'test.getinvolved.scot': 'getinvolved',
+  'test.getinvolved.scot': 'volunteerscotland-search',
   'getinvolved-legacy.local': 'getinvolved-legacy',
   'getinvolved.scot': 'getinvolved-legacy',
   'getinvolved.org.uk': 'getinvolved-legacy',
