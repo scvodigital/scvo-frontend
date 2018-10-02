@@ -2,9 +2,9 @@
 {{#with data.primaryResponse.hits.hits.[0]._source ~}}
 
 <title>Get Involved – Opportunity with {{organisation.name}} – {{title}}</title>
-<meta property="og:title" content="Goodmoves – opportunity with {{organisation.name}} – {{title}}" data-dynamic="true">
-<meta itemprop="name" content="Goodmoves – opportunity with {{organisation.name}} – {{title}}" data-dynamic="true">
-<meta name="twitter:title" content="Goodmoves – opportunity with {{organisation.name}} – {{title}}" data-dynamic="true">
+<meta property="og:title" content="Goodmoves – opportunity with {{organisation_name}} – {{title}}" data-dynamic="true">
+<meta itemprop="name" content="Goodmoves – opportunity with {{organisation_name}} – {{title}}" data-dynamic="true">
+<meta name="twitter:title" content="Goodmoves – opportunity with {{organisation_name}} – {{title}}" data-dynamic="true">
 
 {{#ifAny organisation.logo_url og_image ../og_image ~}}
 <meta property="og:image" content="{{default organisation.logo_url og_image ../og_image}}" data-dynamic="true">
@@ -32,7 +32,7 @@
 <!-- Open Graph data -->
 <meta property="og:type" content="website" />
 {{#if slug ~}}
-<!-- <meta property="og:url" content="https://goodmoves.com/opportunity/{{slug}}" /> -->
+<!-- <meta property="og:url" content="https://test.getinvolved.scot/opportunity/{{slug}}" /> -->
 {{/if ~}}
 <meta property="og:site_name" content="Get Involved" />
 

@@ -1,6 +1,6 @@
 {
-  "name": "opportunity_map",
-  "pattern": "/map",
+  "name": "jobs_in",
+  "pattern": "/jobs-in/:district(/:ward)",
   "debug": true,
   "metaData": {
     "sidebarButton": {
@@ -14,35 +14,29 @@
   },
   "tasks": [
     "context.metaData.commonTasks.authNotRequired",
-    "context.metaData.commonTasks.favouritesData",
+    "context.metaData.commonTasks.searchesData",
+    "context.metaData.commonTasks.shortlistData",
+    "context.metaData.commonTasks.notesData",
     {
       "name": "search_data",
       "taskModule": "elasticsearch",
       "config": {
         "connectionStringTemplate": "{$../../elasticsearch-url.txt}",
         "elasticsearchConfig": {
-          "apiVersion": "5.6",
-          "log": "debug"
+          "apiVersion": "5.6"
         },
         "queryTemplates": [
           {
-            "name": "map_results",
+            "name": "detailed_results",
             "index": "web-content-production",
-            "type": "milo-volunteering-opportunity",
-            "template": ">context.metaData.handlebars.queries.opportunities_search-map"
-          },
-          {
-            "name": "map_agg_results",
-            "index": "web-content-production",
-            "type": "milo-volunteering-opportunity",
-            "template": ">context.metaData.handlebars.queries.opportunities_aggregation-map"
+            "type": "goodmoves-vacancy",
+            "template": ">context.metaData.handlebars.queries.vacancies_jobs-in-list"
           }
-
         ]
       },
       "renderer": "handlebars"
     },
-    "context.metaData.commonTasks.opportunitySupplimentary",
+    "context.metaData.commonTasks.supplimentaryResponses",
     "context.metaData.commonTasks.termsMaps",
     {
       "name": "destination",
@@ -53,7 +47,7 @@
           "if": [
             {
               "in": [
-                "view=rss",
+                "rss",
                 {
                   "var": "request.fullUrl"
                 }
@@ -77,25 +71,25 @@
           "rss": {
             "layout": ">context.metaData.handlebars.layouts.rss",
             "parts": {
-              "head": ">context.metaData.handlebars.templates.opportunities_search-rss-head-tags",
-              "body": ">context.metaData.handlebars.templates.opportunities_search-rss"
+              "head": ">context.metaData.handlebars.templates.vacancies_search-rss-head-tags",
+              "body": ">context.metaData.handlebars.templates.vacancies_search-rss"
             },
             "contentType": "application/rss+xml"
           },
           "default": {
             "layout": ">context.metaData.handlebars.layouts.default",
             "parts": {
-              "head": ">context.metaData.handlebars.templates.opportunities_search-head-tags",
-              "body": ">context.metaData.handlebars.templates.opportunities_map",
-              "foot": ">context.metaData.handlebars.templates.opportunities_map-foot",
-              "sidebar": ">context.metaData.handlebars.templates.opportunities_search-form"
+              "head": ">context.metaData.handlebars.templates.vacancies_search-head-tags",
+              "body": ">context.metaData.handlebars.templates.vacancies_jobs-in",
+              "foot": ">context.metaData.handlebars.templates.vacancies_search-foot",
+              "sidebar": ">context.metaData.handlebars.templates.vacancies_search-form"
             },
             "contentType": "text/html"
           },
           "data": {
             "layout": ">context.metaData.handlebars.layouts.data",
             "parts": {
-              "content": ">context.metaData.handlebars.templates.opportunities_search-json"
+              "content": ">context.metaData.handlebars.templates.vacancies_search-json"
             },
             "contentType": "application/json"
           }

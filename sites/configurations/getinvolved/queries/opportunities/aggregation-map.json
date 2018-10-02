@@ -1,0 +1,30 @@
+{
+  "size": 0,
+  "query": {
+    "bool": {
+      "filter": [
+        {{>queries_opportunity_common_filters request.params.query}},
+        {{>queries_opportunity_search_filters request.params.query}}
+      ],
+      "must": [
+        {{>queries_opportunity_search_must request.params.query}}
+      ]
+    }
+  },
+  "aggregations" : {
+    "grid" : {
+      "geohash_grid" : {
+        "field" : "geo_coords",
+        "precision" : 4
+      },
+      "aggregations" : {
+        "centroid" : {
+          "geo_centroid" : { "field" : "geo_coords" }
+        }
+      }
+
+    }
+  }
+
+
+}

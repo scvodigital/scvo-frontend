@@ -62,7 +62,7 @@ $(document).ready(function() {
     mdeEditors.push(mdeEditor);
   });
   var recentlyViewed = goodmoves.getCookie('recently_viewed') || '';
-  console.log('Recently Viewed:', recentlyViewed, '| opportunity Id:', opportunityId);
+  // console.log('Recently Viewed:', recentlyViewed, '| opportunity Id:', opportunityId);
   recentlyViewed = recentlyViewed.split(',');
   recentlyViewed.unshift(opportunityId);
   var newRecentlyViewed = [];
@@ -73,7 +73,7 @@ $(document).ready(function() {
     }
   };
   newRecentlyViewed = newRecentlyViewed.join(',');
-  console.log('New Recently Viewed:', newRecentlyViewed);
+  // console.log('New Recently Viewed:', newRecentlyViewed);
   goodmoves.setCookie('recently_viewed', newRecentlyViewed, 7);
 {{/if}}
 });

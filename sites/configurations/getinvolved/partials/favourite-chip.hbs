@@ -4,7 +4,7 @@
     offUrl=(concat "/remove-from-favourties?id=" id)
     onText="Favourite"
     offText="Favourite"
-    iconClasses="far fa-star"
+    iconClasses="far fa-heart"
     on=(contains (map @root.data.favourites.items.[0] (getProp "value")) id)
   }}
   {
@@ -19,7 +19,7 @@
   {{/ajax_chip}}
 {{else}}
   <div class="mdc-chip" data-dialog-target="#favourite-dialog">
-    <span class="far fa-star mdc-chip__icon mdc-chip__icon--leading" aria-hidden="true"></span>
+    <span class="far fa-heart mdc-chip__icon mdc-chip__icon--leading" aria-hidden="true"></span>
     <div class="mdc-chip__text noselect">Favourite</div>
   </div>
 {{/if ~}}
