@@ -1,0 +1,226 @@
+<div class="mdc-card content-primary full" data-opportunity-id="{{Id}}">
+  {{> opportunity_key_info}}
+  <hr class="mdc-list-divider" />
+  <div class="content-primary-info-container">
+    {{#>components_tab_bar id="content-primary-tab-bar" defaultTabIdentifier="tab"}}
+      {{>components_tab iconClasses="far fa-list-ul fa-fw" label="Information" active=true tabName="panel-1"}}
+      {{>components_tab iconClasses="far fa-map-marker-alt fa-fw" label="Location" active=false tabName="panel-2"}}
+    {{/components_tab_bar}}
+    <hr class="mdc-list-divider" />
+    <div class="panels" for="content-primary-tab-bar">
+      <div class="panel panel--active mdc-card--full-content" role="tabpanel" aria-hidden="false" data-tab-name="panel-1">
+        <div class="key-info-extra">
+          <ul class="fa-ul">
+            {{#if work_type ~}}
+            <li class="mdc-card__info--content-primary-work-type reference mdc-typography--body1">
+              <span class="fa-li"><span class="far fa-briefcase fa-fw" title="Activites"></span></span>
+              {{#each work_type}}
+                <a href="/search?work_types%5B%5D={{urlencode (slugify (replace this "/" "-"))}}">{{{this}}}</a>{{#unless @last}}, {{/unless}}
+              {{/each}}
+            </li>
+            {{/if ~}}
+            {{#if client_group ~}}
+              <li class="mdc-card__info--content-primary-client-group mdc-typography--body1">
+                <span class="fa-li"><span class="far fa-users fa-fw" title="Client groups"></span></span>
+                {{#each client_group}}
+                  <a href="/search?client_groups%5B%5D={{urlencode (slugify (replace this "/" "-"))}}">{{{this}}}</a>{{#unless @last}}, {{/unless}}
+                {{/each}}
+              </li>
+            {{/if ~}}
+            {{#if available_from ~}}
+              <li class="mdc-card__info--content-primary-from mdc-typography--body1">
+                <span class="fa-li"><span class="far fa-calendar-plus fa-fw" title="Start date"></span></span>
+                Advertised from {{momentFormat (moment available_from "x") "Do MMMM YYYY"}}
+              </li>
+            {{/if ~}}
+          </ul>
+        </div>
+        <div class="detailed-info">
+          {{#if description ~}}
+            <h4 class="mdc-typography--headline6">Description</h4>
+            <div class="mdc-typography--body1">
+              {{{description}}}
+            </div>
+          {{/if ~}}
+
+          {{#if organisation_aims_and_objectives ~}}
+            <h4 class="mdc-typography--headline6">Organisation Aims and objectives</h4>
+            <div class="mdc-typography--body1">
+              {{{organisation_aims_and_objectives}}}
+            </div>
+          {{/if ~}}
+
+          {{#if @root.data.transformTimes.any}}
+          <h4 class="mdc-typography--headline6">Availability</h4>
+          <div class="mdc-typography--body1">
+              {{>opportunity_timings_display}}
+          </div>
+          {{/if}}
+
+          {{#ifAny experience_required travel_details minimum_age ~}}
+            <h4 class="mdc-typography--headline6">Restrictions</h4>
+            {{#if experience_required ~}}
+              <div class="mdc-typography--body1">
+                <strong>Experience Required: </strong> {{{experience_required}}}
+              </div>
+            {{/if ~}}
+
+            {{#if travel_details ~}}
+              <div class="mdc-typography--body1">
+                <strong>Travel Details: </strong> {{{travel_details}}}
+              </div>
+            {{/if ~}}
+
+            {{#if minimum_age ~}}
+              <div class="mdc-typography--body1">
+                <strong>Minimum Age: </strong> {{{minimum_age}}}
+              </div>
+            {{/if ~}}
+          {{/ifAny ~}}
+
+          {{#ifAny travel_expenses expenses_paid support_options ~}}
+            <h4 class="mdc-typography--headline6">Support</h4>
+            {{#if travel_expenses~}}
+              <div class="mdc-typography--body1">
+                <strong>Travel Expenses: </strong> {{{travel_expenses}}}
+              </div>
+            {{/if ~}}
+
+            {{#if expenses_paid ~}}
+              <div class="mdc-typography--body1">
+                <strong>Expenses Paid: </strong> {{#compare expenses_paid "===" true}}Yes{{else}}No{{/compare}}
+              </div>
+            {{/if ~}}
+
+            {{#if support_options ~}}
+              <div class="mdc-typography--body1">
+                <strong>Support Options: </strong>
+                <ul>
+                  {{#each support_options}}
+                    <li>{{{this}}}</li>
+                  {{/each}}
+                </ul>
+              </div>
+            {{/if ~}}
+
+          {{/ifAny ~}}
+
+          {{#ifAny organisation_contact_last_name organisation_contact_email organisation_website ~}}
+            <h4 class="mdc-typography--headline6">Contact</h4>
+            {{#ifAny organisation_contact_first_name organisation_contact_last_name ~}}
+              <div class="mdc-typography--body1">
+                <strong>Name: </strong> {{{organisation_contact_first_name}}} {{{organisation_contact_last_name}}}
+              </div>
+            {{/ifAny ~}}
+
+            {{#if organisation_contact_email ~}}
+              <div class="mdc-typography--body1">
+                <strong>Email: </strong> <a href="mailto:{{{organisation_contact_email}}}">{{{organisation_contact_email}}}</a>
+              </div>
+            {{/if ~}}
+
+            {{#if organisation_website ~}}
+              <div class="mdc-typography--body1">
+                <strong>Website: </strong> <a href="{{fixUrl organisation_website 'http'}}">{{{organisation_website}}}</a>
+              </div>
+            {{/if ~}}
+
+          {{/ifAny ~}}
+
+        </div>
+      </div>
+      {{!--
+      {{#ifAny organisation.profile organisation_website organisation_twitter organisation_facebook organisation_linkedin ~}}
+      <div class="key-info-extra">
+        {{#if organisation.profile ~}}
+        <h4 class="mdc-typography--headline6">Organisation profile</h4>
+        <div class="mdc-typography--body1">
+          {{{organisation.profile}}}
+        </div>
+        {{/if ~}}
+        <ul class="fa-ul">
+          {{#if organisation_website ~}}
+          {{#compare organisation_website "!==" null ~}}
+          {{#compare organisation_website "!==" "http://" ~}}
+          <li class="mdc-card__info--content-primary-website mdc-typography--body1">
+            <span class="fa-li"><span class="far fa-link fa-fw" title="Website"></span></span>
+            <a href="{{organisation_website_url}}">
+              {{organisation_website}}
+            </a>
+          </li>
+          {{/compare ~}}
+          {{/compare ~}}
+          {{/if ~}}
+          {{#if organisation_twitter ~}}
+          {{#compare organisation_twitter "!==" null ~}}
+          {{#compare organisation_twitter "!==" "http://" ~}}
+          <li class="mdc-card__info--content-primary-twitter mdc-typography--body1">
+            <span class="fa-li"><span class="fab fa-twitter fa-fw" title="Twitter"></span></span>
+            <a href="{{organisation_twitter_url}}">
+              {{organisation_twitter}}
+            </a>
+          </li>
+          {{/compare ~}}
+          {{/compare ~}}
+          {{/if ~}}
+          {{#if organisation_facebook ~}}
+          {{#compare organisation.acebook "!==" null ~}}
+          {{#compare organisation_facebook "!==" "http://" ~}}
+          <li class="mdc-card__info--content-primary-facebook mdc-typography--body1">
+            <span class="fa-li"><span class="fab fa-facebook fa-fw" title="Facebook"></span></span>
+            <a href="{{organisation_facebook_url}}">
+              {{organisation_facebook}}
+            </a>
+          </li>
+          {{/compare ~}}
+          {{/compare ~}}
+          {{/if ~}}
+          {{#if organisation_linkedin ~}}
+          {{#compare organisation_linkedin "!==" null ~}}
+          {{#compare organisation_linkedin "!==" "http://" ~}}
+          <li class="mdc-card__info--content-primary-linkedin mdc-typography--body1">
+            <span class="fa-li"><span class="fab fa-linkedin fa-fw" title="LinkedIn"></span></span>
+            <a href="{{organisation_linkedin_url}}">
+              {{organisation_linkedin}}
+            </a>
+          </li>
+          {{/compare ~}}
+          {{/compare ~}}
+          {{/if ~}}
+        </ul>
+      </div>
+      {{/ifAny ~}}
+      --}}
+      <div class="panel mdc-card--full-content" role="tabpanel" aria-hidden="true" data-tab-name="panel-2">
+        <div class="location-info">
+          {{#compare (length (arrayify geo_coords)) ">" 0 ~}}
+            <div class="container-content container-map">
+              <div id="map-content-primary" data-map-name="vacancyMap" data-map-options='{
+                  }'>
+                {{#each (arrayify geo_coords) ~}}
+                  <marker style="display:none;" data-map="vacancyMap" data-lat="{{lat}}" data-lng="{{lon}}" data-title="{{../organisation.name}} - {{../title}}">
+                    <h3 class="mdc-typography--headline7">{{../organisation.name}}</h3>
+                    <p class="mdc-typography--body2">{{../title}}</p>
+                  </marker>
+                {{/each ~}}
+              </div>
+            </div>
+          {{else}}
+            <div class="container-content v-margin-full">
+              <p class="mdc-typography--body1">
+                {{stringify geo_coords}}
+                Area: {{{location}}}. Specific opportunity location not provided.
+              </p>
+            </div>
+          {{/compare ~}}
+        </div>
+      </div>
+    </div>
+    {{> opportunity_actions slug=slug Id=Id action="organisation"}}
+  </div>
+</div>
+{{#if @root.request.params.query.email ~}}
+  {{> ga documentType="milo-volunteering-opportunity" documentId=Id hitType="full-from-email"}}
+{{else}}
+  {{> ga documentType="milo-volunteering-opportunity" documentId=Id hitType="full"}}
+{{/if ~}}

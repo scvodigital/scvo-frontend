@@ -1,0 +1,48 @@
+{{#if data.primaryResponse.hits.hits.[0] ~}}
+{{#with data.primaryResponse.hits.hits.[0]._source ~}}
+
+<title>{{title}} with {{organisation.name}} – {{title}} – Volunteer Scotland</title>
+<meta property="og:title" content="{{title}} with {{organisation.name}} – {{title}} – Volunteer Scotland" data-dynamic="true">
+<meta itemprop="name" content="{{title}} with {{organisation.name}} – {{title}} – Volunteer Scotland" data-dynamic="true">
+<meta name="twitter:title" content="{{title}} with {{organisation.name}} – {{title}} – Volunteer Scotland" data-dynamic="true">
+
+{{#ifAny organisation.logo_url og_image ../og_image ~}}
+<meta property="og:image" content="{{default organisation.logo_url og_image ../og_image}}" data-dynamic="true">
+<meta property="og:image:height" content="250">
+<meta property="og:image:width" content="250">
+<meta itemprop="image" content="{{default organisation.logo_url og_image ../og_image}}" data-dynamic="true">
+<meta name="twitter:image" content="{{default organisation.logo_url og_image ../og_image}}" data-dynamic="true">
+{{/ifAny ~}}
+
+{{#ifAny og_summary description ../og_summary ../description ~}}
+<meta property="og:summary" content="{{stripTags (regexReplace (default og_summary (default ../og_summary (default description ../description))) '\r|\n' 'gi' '')}}" data-dynamic="true">
+<meta itemprop="description" content="{{stripTags (regexReplace (default description (default ../description (default og_summary ../og_summary))) '\r|\n' 'gi' '')}}" data-dynamic="true">
+<meta name="description" content="{{stripTags (regexReplace (default description (default ../description (default og_summary ../og_summary))) '\r|\n' 'gi' '')}}" data-dynamic="true">
+<meta property="og:description" content="{{stripTags (regexReplace (default description (default ../description (default og_summary ../og_summary))) '\r|\n' 'gi' '')}}" data-dynamic="true">
+<meta name="twitter:description" content="{{stripTags (regexReplace (default description (default ../description (default og_summary ../og_summary))) '\r|\n' 'gi' '')}}" data-dynamic="true">
+{{/ifAny ~}}
+
+<!-- Twitter Card data -->
+<meta name="twitter:card" content="summary" />
+<meta name="twitter:site" content="@scvotweet">
+<meta name="twitter:creator" content="@scvotweet">
+<!-- Twitter summary card with large image must be at least 280x150px -->
+<!-- <meta name="twitter:image:src" content="http://www.example.com/image.jpg"> -->
+
+<!-- Open Graph data -->
+<meta property="og:type" content="website" />
+{{#if slug ~}}
+<!-- <meta property="og:url" content="https://test.getinvolved.scot/opportunity/{{slug}}" /> -->
+{{/if ~}}
+<meta property="og:site_name" content="Volunteer Scotland" />
+
+<script type="application/ld+json" data-dynamic="true">
+  {{> opportunity_json_ld}}
+</script>
+
+{{/with ~}}
+{{else}}
+<title>Opportunity – Volunteer Scotland</title>
+<meta property="og:title" content="Opportunity – Volunteer Scotland" data-dynamic="true">
+{{/if ~}}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">

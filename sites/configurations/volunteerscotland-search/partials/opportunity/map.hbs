@@ -1,0 +1,21 @@
+<div class="map-content">
+  <h3 class="mdc-typography--headline7">
+    <a href="/opportunity/{{slug}}{{@root.request.url.search}}">{{title}}</a>
+  </h3>
+  {{#if organisation_name ~}}
+  <div class="mdc-typography--body1 v-margin">
+    <strong>{{organisation_name}}</strong>
+  </div>
+  {{/if ~}}
+  <div class="mdc-typography--body2 post-info">
+    {{#if description ~}}
+    <div class="post-info-item post-info-description">
+      {{{description}}}
+    </div>
+    {{/if ~}}
+  </div>
+  <div class="mdc-typography--body2">
+    <a href="/opportunity/{{slug}}{{@root.request.url.search}}" class="mdc-card__action">Find out more</a>
+  </div>
+  {{>ga documentType="milo-volunteering-opportunity" documentId=Id hitType="map"}}
+</div>

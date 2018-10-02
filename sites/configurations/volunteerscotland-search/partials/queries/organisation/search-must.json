@@ -1,0 +1,31 @@
+{{#if keywords ~}}
+{{>queries_query_string
+  querystring=keywords
+  fields=(split "text_bag_boost^5,text_bag" ",")
+}},
+{{/if ~}}
+{{#ifAny regions location home_based ~}}
+{
+  "bool": {
+    "should": [
+      {{#if regions ~}}
+        {{>queries_terms field="region_group_slug" terms=regions}},
+      {{/if ~}}
+      {{#ifAll location lat lng distance ~}}
+        {
+          "geo_distance": {
+            "distance": "{{default distance "8.04672"}}km",
+            "geo_coords": {
+              "lat": {{lat}},
+              "lon": {{lng}}
+            }
+          }
+        },
+      {{/ifAll ~}}
+      {{>queries_do_nothing}}
+    ],
+    "minimum_should_match": 2
+  }
+},
+{{/ifAny ~}}
+{{>queries_do_nothing}}

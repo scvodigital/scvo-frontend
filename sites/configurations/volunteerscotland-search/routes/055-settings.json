@@ -1,0 +1,45 @@
+{
+  "name": "settings",
+  "pattern": "/settings",
+  "metaData": {
+    "sidebarButton": {
+      "icon": "cog",
+      "tooltip": "Settings",
+      "classes": "hide-md hide-lg"
+    }
+  },
+  "defaultParams": {
+    "context": "results"
+  },
+  "tasks": [
+    "context.metaData.commonTasks.authRequired",
+    "context.metaData.commonTasks.favouritesData",
+    "context.metaData.commonTasks.opportunitySupplimentary",
+    {
+      "name": "destination",
+      "taskModule": "renderLayout",
+      "renderer": "handlebars",
+      "config": {
+        "logic": {
+          "if": [
+            "default"
+          ]
+        },
+        "output": "body",
+        "layouts": {
+          "default": {
+            "layout": ">context.metaData.handlebars.layouts.default",
+            "parts": {
+              "head": ">context.metaData.handlebars.templates.pages_page-head-tags",
+              "body": ">context.metaData.handlebars.templates.account_settings",
+              "foot": ">context.metaData.handlebars.templates.account_settings-foot",
+              "sidebar": ">context.metaData.handlebars.templates.vacancies_search-form"
+
+            },
+            "contentType": "text/html"
+          }
+        }
+      }
+    }
+  ]
+}

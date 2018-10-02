@@ -1,0 +1,63 @@
+<div class="mdc-card__info--content-primary-row">
+  <div class="mdc-card__info--content-primary">
+    {{#if organisation.has_logo ~}}
+    <div class="mdc-card__media mdc-card__media--content-secondary pull-right">
+      <a href="/organisation/{{organisation_slug}}{{@root.request.url.search}}">
+        <img src="{{organisation.logo_url}}" alt="{{organisation.name}}" />
+      </a>
+    </div>
+    {{/if ~}}
+    {{#compare @root.route.name "===" "opportunity" ~}}
+    {{#if @root.request.url.search ~}}
+    {{/if ~}}
+    {{/compare ~}}
+    <h2 class="mdc-card__info--content-primary-title mdc-typography--headline5">
+      <a href="/opportunity/{{slug}}{{@root.request.url.search}}">
+        <span class="hover-underline">{{title}}</span>
+      </a>
+    </h2>
+    <ul class="fa-ul organisation">
+      <li class="mdc-card__info--content-primary-organisation mdc-typography--body1">
+        <span class="fa-li"><span class="far fa-building fa-fw" title="Organisation"></span></span>
+        <a href="/organisation/{{organisation_slug}}{{@root.request.url.search}}">{{organisation_name}}</a>
+      </li>
+    </ul>
+    <!-- <div class="mdc-layout-grid hide-md hide-lg">
+      <p class="mdc-typography--body2 v-margin-full-bottom">
+        {{#compare (trim location) "===" ""}}This is a {{lowercase role_status_list}} position{{else}}This {{lowercase role_status_list}} position is based in {{trim (replace location "Based in" "")}}{{/compare}}{{#compare salary "!==" "TBC"}}{{#compare (trim salary) "!==" "Unpaid"}}{{#compare (trim salary) "!==" "Sessional"}}, with a salary of {{{trim (lowercase salary)}}}{{/compare}}{{else}} and is unpaid{{/compare}}{{/compare}}. The closing date for applications is the {{{momentFormat (moment closing_date "x") "Do \o\f MMMM YYYY"}}}.
+      </p>
+    </div> -->
+    <ul class="fa-ul first">
+      {{#if milo_ref ~}}
+        <li class="mdc-card__info--content-primary-reference mdc-typography--body1">
+          <span class="fa-li"><span class="far fa-hashtag fa-fw" title="Reference"></span></span>
+          {{milo_ref}}
+        </li>
+      {{/if ~}}
+    </ul>
+    <ul class="fa-ul last">
+      {{#compare work_location "===" "At Home" ~}}
+        <li class="mdc-card__info--content-primary-location mdc-typography--body1">
+          <span class="fa-li"><span class="far fa-map-marker-alt fa-fw" title="Location"></span></span>
+          Work from home
+        </li>
+      {{else}}
+        {{#compare (length geo) ">" 1 ~}}
+          <li class="mdc-card__info--content-primary-location mdc-typography--body1">
+            <span class="fa-li"><span class="far fa-map-marker-alt fa-fw" title="Location"></span></span>
+            {{#each geo ~}}
+              {{{this.msoa}}}{{#unless @last}}, {{/unless}}
+            {{/each ~}}
+          </li>
+        {{else}}
+          {{#if geo ~}}
+            <li class="mdc-card__info--content-primary-location mdc-typography--body1">
+              <span class="fa-li"><span class="far fa-map-marker-alt fa-fw" title="Location"></span></span>
+              {{{geo.msoa}}}
+            </li>
+          {{/if ~}}
+        {{/compare ~}}
+      {{/compare ~}}
+    </ul>
+  </div>
+</div>

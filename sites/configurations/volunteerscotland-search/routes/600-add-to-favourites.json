@@ -1,0 +1,29 @@
+{
+  "name": "add-to-favourites",
+  "pattern": "/add-to-favourites",
+  "acceptedVerbs": "GET",
+  "debug": true,
+  "tasks": [
+    "context.metaData.commonTasks.authRequired",
+    {
+      "name": "notifications",
+      "taskModule": "mysql",
+      "config": {
+        "connectionName": "notifications",
+        "queryTemplates": {
+          "add_to_shortlist": ">context.metaData.handlebars.queries.notifications_add-to-favourites"
+        }
+      },
+      "renderer": "handlebars"
+    },
+    {
+      "name": "destination",
+      "taskModule": "render",
+      "renderer": "handlebars",
+      "config": {
+        "output": "body",
+        "template": "Added {{@root.request.params.query.id}}"
+      }
+    }
+  ]
+}

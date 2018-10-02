@@ -1,0 +1,98 @@
+{
+  "name": "opportunity_search",
+  "pattern": "/search",
+  "debug": true,
+  "metaData": {
+    "sidebarButton": {
+      "icon": "search",
+      "tooltip": "Search",
+      "classes": "hide-md hide-lg"
+    }
+  },
+  "defaultParams": {
+    "context": "results"
+  },
+  "tasks": [
+    "context.metaData.commonTasks.authNotRequired",
+    "context.metaData.commonTasks.favouritesData",
+    {
+      "name": "search_data",
+      "taskModule": "elasticsearch",
+      "config": {
+        "connectionStringTemplate": "{$../../elasticsearch-url.txt}",
+        "elasticsearchConfig": {
+          "apiVersion": "5.6"
+        },
+        "queryTemplates": [
+          {
+            "name": "detailed_results",
+            "index": "web-content-production",
+            "type": "milo-volunteering-opportunity",
+            "template": ">context.metaData.handlebars.queries.opportunities_search-list"
+          }
+        ]
+      },
+      "renderer": "handlebars"
+    },
+    "context.metaData.commonTasks.opportunitySupplimentary",
+    "context.metaData.commonTasks.termsMaps",
+    {
+      "name": "destination",
+      "taskModule": "renderLayout",
+      "renderer": "handlebars",
+      "config": {
+        "logic": {
+          "if": [
+            {
+              "in": [
+                "rss",
+                {
+                  "var": "request.fullUrl"
+                }
+              ]
+            },
+            "rss",
+            {
+              "in": [
+                "view=json",
+                {
+                  "var": "request.fullUrl"
+                }
+              ]
+            },
+            "data",
+            "default"
+          ]
+        },
+        "output": "body",
+        "layouts": {
+          "rss": {
+            "layout": ">context.metaData.handlebars.layouts.rss",
+            "parts": {
+              "head": ">context.metaData.handlebars.templates.opportunities_search-rss-head-tags",
+              "body": ">context.metaData.handlebars.templates.opportunities_search-rss"
+            },
+            "contentType": "application/rss+xml"
+          },
+          "default": {
+            "layout": ">context.metaData.handlebars.layouts.default",
+            "parts": {
+              "head": ">context.metaData.handlebars.templates.opportunities_search-head-tags",
+              "body": ">context.metaData.handlebars.templates.opportunities_search",
+              "foot": ">context.metaData.handlebars.templates.opportunities_search-foot",
+              "sidebar": ">context.metaData.handlebars.templates.opportunities_search-form"
+            },
+            "contentType": "text/html"
+          },
+          "data": {
+            "layout": ">context.metaData.handlebars.layouts.data",
+            "parts": {
+              "content": ">context.metaData.handlebars.templates.opportunities_search-json"
+            },
+            "contentType": "application/json"
+          }
+        }
+      }
+    }
+  ]
+}
