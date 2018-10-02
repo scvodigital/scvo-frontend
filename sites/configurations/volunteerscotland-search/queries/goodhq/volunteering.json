@@ -1,0 +1,24 @@
+{
+  "size": 3,
+  "query": {
+    "bool": {
+      "filter": [
+        {
+          "term": {
+            "goodhq_organisation.xid": "{{data.primaryResponse.hits.hits.[0]._source.goodhq_organisation.xid}}"
+          }
+        }
+      ],
+      "must_not": [
+        {
+          "terms": {
+            "work_type_slugs": ["committee-work"]
+          }
+        }
+      ]
+    }
+  },
+  "sort": {
+    "available_from": "desc"
+  }
+}

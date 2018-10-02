@@ -1,0 +1,7 @@
+<div class="mdc-card content-primary list" data-opportunity-id="{{Id}}">
+  {{> opportunity_key_info}}
+  <hr class="mdc-list-divider" />
+  {{> opportunity_description limit="10.5rem" description=description}}
+  {{> opportunity_actions slug=slug Id=Id}}
+</div>
+{{>ga documentType="milo-volunteering-opportunity" documentId=Id hitType=(default hitContext "list")}}

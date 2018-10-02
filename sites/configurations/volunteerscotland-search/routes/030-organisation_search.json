@@ -1,0 +1,67 @@
+{
+  "name": "organisation_search",
+  "pattern": "/organisations/search",
+  "debug": true,
+  "metaData": {
+    "sidebarButton": {
+      "icon": "search",
+      "tooltip": "Search",
+      "classes": "hide-md hide-lg"
+    }
+  },
+  "defaultParams": {
+    "context": "results"
+  },
+  "tasks": [
+    "context.metaData.commonTasks.authNotRequired",
+    "context.metaData.commonTasks.organisationsWithOpportunities",
+    {
+      "name": "search_data",
+      "taskModule": "elasticsearch",
+      "config": {
+        "connectionStringTemplate": "{$../../elasticsearch-url.txt}",
+        "elasticsearchConfig": {
+          "apiVersion": "5.6",
+          "log": "debug"
+        },
+        "queryTemplates": [
+          {
+            "name": "detailed_results",
+            "index": "web-content-production",
+            "type": "milo-organisation",
+            "template": ">context.metaData.handlebars.queries.organisations_search-list"
+          }
+        ]
+      },
+      "renderer": "handlebars"
+    },
+    "context.metaData.commonTasks.opportunitySupplimentary",
+    "context.metaData.commonTasks.organisationSupplimentary",
+    "context.metaData.commonTasks.termsMaps",
+    {
+      "name": "destination",
+      "taskModule": "renderLayout",
+      "renderer": "handlebars",
+      "config": {
+        "logic": {
+          "if": [
+            "default"
+          ]
+        },
+        "output": "body",
+        "layouts": {
+          "default": {
+            "layout": ">context.metaData.handlebars.layouts.default",
+            "parts": {
+              "head": ">context.metaData.handlebars.templates.organisations_search-head-tags",
+              "body": ">context.metaData.handlebars.templates.organisations_search",
+              "sidebar": ">context.metaData.handlebars.templates.organisations_search-form"
+
+            },
+            "contentType": "text/html"
+          }
+        }
+      }
+    }
+  ]
+}

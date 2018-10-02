@@ -1,0 +1,46 @@
+{
+  "size": 4,
+  "_source": [
+    "Id",
+    "slug",
+    "milo_ref",
+    "available_from",
+    "client_group",
+    "client_group_slugs",
+    "description",
+    "end_date",
+    "geo_coords",
+    "geo",
+    "postcode",
+    "organisation_slug",
+    "organisation_name",
+    "organisation_aims_and_objectives",
+    "title",
+    "travel_expenses",
+    "work_location",
+    "work_type",
+    "work_type_slugs"
+  ],
+  "query": {
+    "function_score": {
+      "query": {
+        "bool": {
+          "filter": [
+            {{>queries_opportunity_common_filters request.params.query}}
+          ],
+          "must": [
+            {
+              "match": {
+                "organisation_id" : "{{data.primaryResponse.hits.hits.[0]._source.Id}}"
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  "sort": {
+    "start_date": "asc"
+  }
+}
+

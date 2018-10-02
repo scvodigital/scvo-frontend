@@ -1,0 +1,25 @@
+{{#if @root.data.auth ~}}
+  {{#> ajax_chip
+    onUrl=(concat "/add-to-favourties?id=" id)
+    offUrl=(concat "/remove-from-favourties?id=" id)
+    onText="Favourite"
+    offText="Favourite"
+    iconClasses="far fa-heart"
+    on=(contains (map @root.data.favourites.items.[0] (getProp "value")) id)
+  }}
+  {
+    "extraAttributes": "data-opportunity-id=\"{{../id}}\"",
+    "onClasses": {
+      ".mdc-card[data-opportunity-id=\"{{../id}}\"]": "added-to-favourites"
+      },
+    "offClasses": {
+      ".mdc-card[data-opportunity-id=\"{{../id}}\"]": "removed-from-favourites"
+    }
+  }
+  {{/ajax_chip}}
+{{else}}
+  <div class="mdc-chip" data-dialog-target="#favourite-dialog">
+    <span class="far fa-heart mdc-chip__icon mdc-chip__icon--leading" aria-hidden="true"></span>
+    <div class="mdc-chip__text noselect">Favourite</div>
+  </div>
+{{/if ~}}

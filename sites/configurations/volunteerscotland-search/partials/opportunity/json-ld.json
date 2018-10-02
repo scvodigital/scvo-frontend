@@ -1,0 +1,80 @@
+{
+  "@context": "http://schema.org",
+  "@type": "JobPosting",
+  "@id": "https://getinvolved.scot/opportunity/{{slug}}",
+  "url": "https://getinvolved.scot/opportunity/{{slug}}",
+  "identifier": "{{reference_number}}",
+  "baseSalary": {
+    "@type": "MonetaryAmount",
+    "currency": "GBP",
+    "value": {
+      "@type": "QuantitativeValue",
+      "unitText": "YEAR",
+      "value": "{{default (stripTags (regexReplace salary '\r|\n|£|€|,' 'gi' '')) salary_min}}",
+      "minValue": "{{default salary_min salary_max}}",
+      "maxValue": "{{default salary_max salary_min}}"
+    }
+  },
+  "jobBenefits": "{{benefits}}",
+  "datePosted": "{{momentFormat (moment start_at 'x') 'YYYY-MM-DDTHH:mm:ss'}}",
+  "validThrough": "{{momentFormat (moment closing_date 'x') 'YYYY-MM-DDTHH:mm:ss'}}",
+  "description": "{{stripTags (regexReplace description '\r|\n' 'gi' '')}}",
+  "employmentType": "{{{role_status_list}}}",
+  "industry": {{{stringify sectors}}},
+  {{#ifAny geo_info.[0] organisation.street_address organisation.postcode ~}}
+  "jobLocation": {
+    "@type": "Place",
+    "address": {
+      "@type": "PostalAddress",
+      {{#compare organisation.postcode "===" geo_info.[0].postcode ~}}
+      {{#if organisation.street_address ~}}
+      "streetAddress": "{{organisation.street_address}}",
+      {{else}}
+      "streetAddress": "{{geo_info.[0].admin_ward}}",
+      {{/if ~}}
+      {{else}}
+      "streetAddress": "{{geo_info.[0].admin_ward}}",
+      {{/compare ~}}
+      {{#if geo_info.[0] ~}}
+      "addressLocality": "{{geo_info.[0].parliamentary_constituency}}",
+      "addressRegion": "{{geo_info.[0].admin_district}}",
+      "addressCountry": "{{geo_info.[0].country}}",
+      "postalCode": "{{geo_info.[0].postcode}}"
+      {{else}}
+      "postalCode": "{{organisation.postcode}}"
+      {{/if ~}}
+    }
+  },
+  {{else}}
+  "jobLocation": "{{location}}",
+  {{/ifAny ~}}
+  "hiringOrganization": {
+    "@type": "Organization",
+    "name": "{{organisation.name}}",
+    "logo": "{{organisation.logo_url}}",
+    "location": {
+      "@type": "Place",
+      "address": {
+        "@type": "PostalAddress",
+        {{#if organisation.street_address ~}}
+        "streetAddress": "{{organisation.street_address}}",
+        {{/if ~}}
+        {{#if geo_info.[0] ~}}
+        "addressCountry": "{{geo_info.[0].country}}",
+        {{/if ~}}
+        "postalCode": "{{organisation.postcode}}"
+      }
+    },
+    {{#if organisation.website}}
+    "website": "{{fixUrl organisation.website 'http'}}",
+    {{/if}}
+    "description": "{{organisation.profile}}"
+  },
+  "occupationalCategory": "{{join roles ', '}}",
+  "qualifications": "None specified",
+  "responsibilities": "None specified",
+  "salaryCurrency": "GBP",
+  "skills": "None specified",
+  "title": "{{default title_full title}}",
+  "workHours": "{{stripTags (regexReplace salary_info '(\r|\n)' 'gi' '')}}"
+}

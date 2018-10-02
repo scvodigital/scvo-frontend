@@ -1,0 +1,19 @@
+{
+  "range": {
+    "{{field}}": {
+      {{#if lte~}}
+      "lte": {{replace (trim lte) "," ""}},
+      {{~/if}}
+      {{#if lt~}}
+      "lt": {{replace (trim lt) "," ""}},
+      {{~/if}}
+      {{#if gte~}}
+      "gte": {{replace (trim gte) "," ""}},
+      {{~/if}}
+      {{#if gt~}}
+      "gt": {{replace (trim gt) "," ""}},
+      {{~/if}}
+      "boost": {{default boost 1.0}}
+    }
+  }
+}
