@@ -151,14 +151,14 @@
                 {{#each @root.context.metaData.menus.main ~}}
                   {{>components_tab
                       url=(stripTrailingSlash path)
-                      labelClasses="mdc-theme--on-primary"
+                      labelClasses="mdc-theme--on-secondary"
                       active=(regexMatch @root.request.url.pathname route "gi")
                       label=label}}
                 {{/each ~}}
                 {{#each @root.context.metaData.menus.main-extra ~}}
                   {{>components_tab
                       url=(stripTrailingSlash path)
-                      labelClasses="mdc-theme--on-primary"
+                      labelClasses="mdc-theme--on-secondary"
                       active=(regexMatch @root.request.url.pathname route "gi")
                       label=label}}
                 {{/each ~}}
@@ -167,7 +167,7 @@
             <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-end mdc-top-app-bar__user">
               {{#if @root.data.auth ~}}
                 {{#>components_anchored_menu
-                    buttonClasses="mdc-theme--on-primary"
+                    buttonClasses="mdc-theme--on-secondary"
                     imageUrl=(default @root.data.auth.photoURL false)
                     imageClasses="far fa-fw user-avatar"
                     iconClasses=(if (if @root.data.auth.photoURL false else=true) "far fa-fw fa-user-circle" else=false)
@@ -189,7 +189,7 @@
                   {{#each @root.context.metaData.menus.user-not-signed-in ~}}
                     {{>components_tab
                         url=(stripTrailingSlash path)
-                        labelClasses="mdc-theme--on-primary"
+                        labelClasses="mdc-theme--on-secondary"
                         active=(regexMatch @root.request.url.pathname route "gi")
                         label=label}}
                   {{/each}}
@@ -277,15 +277,7 @@
                   <ul class="fa-ul">
                     <li>
                       <span class="fa-li"><span class="fas fa-envelope"></span></span>
-                      <a href="mailto:enquiries@volunteerscotland.net">enquiries@volunteerscotland.net</a>
-                    </li>
-                    <li>
-                      <span class="fa-li"><span class="fas fa-phone"></span></span>
-                      <a href="tel:+448000192149">0800&nbsp;0192&nbsp;149</a>
-                    </li>
-                    <li>
-                      <span class="fa-li"><span class="fab fa-twitter"></span></span>
-                      <a href="https://twitter.com/volunteerscotland" target="_blank">Twitter</a>
+                      <a href="https://www.volunteerscotland.net/about-us/contact-us/tick-to-hear-from-us/">Sign up to hear from us</a>
                     </li>
                   </ul>
                 </div>
@@ -324,14 +316,16 @@
           <div class="container-fluid">
             <div class="mdc-layout-grid">
               <div class="mdc-layout-grid__inner">
-                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-10-desktop mdc-layout-grid__cell--span-6-tablet mdc-layout-grid__cell--span-4-phone">
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-9-desktop mdc-layout-grid__cell--span-6-tablet mdc-layout-grid__cell--span-4-phone">
                   <p>
-                    &copy; {{momentFormat (moment) "YYYY"}}. The Scottish Council for Voluntary Organisations (SCVO) is a Scottish Charitable Incorporated Organisation.<br />
-                    Charity registered in Scotland <a href="https://www.oscr.org.uk/about-charities/search-the-register/charity-details?number=SC003558">SC003558</a>. Registered office Mansfield Traquair Centre, 15 Mansfield Place, Edinburgh EH3 6BB.
+                    &copy; {{momentFormat (moment) "YYYY"}}. Volunteer Development Scotland Ltd. (also known as Volunteer Scotland) is a registered Scottish charity No. <a href="https://www.oscr.org.uk/about-charities/search-the-register/charity-details?number=SC013740">SC013740</a> and a company limited by guarantee, registered in Scotland, No. SC106743. Our registered Office is Jubilee House, Forthside Way, Stirling. FK8 1QZ.
                   </p>
                 </div>
-                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-2-desktop mdc-layout-grid__cell--span-2-tablet mdc-layout-grid__cell--span-4-phone">
-                  <a href="https://scvo.org" class="brand-logo" title="Scottish Council for Voluntary Organisations">
+                <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-2-tablet mdc-layout-grid__cell--span-4-phone">
+                  <a href="https://www.volunteerscotland.net" class="brand-logo vs" title="Volunteer Scotland">
+                    <img src="https://www.volunteerscotland.net/media/333407/volunteer_scotland_hi-res_png.png" alt="Volunteer Scotland" />
+                  </a>
+                  <a href="https://scvo.org" class="brand-logo scvo" title="Scottish Council for Voluntary Organisations">
                     <img src="https://storage.googleapis.com/scvo-assets/scvo-frontend/assets/images/logos/scvo.png" alt="Scottish Council for Voluntary Organisations" />
                   </a>
                 </div>
