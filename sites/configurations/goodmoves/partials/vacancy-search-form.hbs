@@ -177,10 +177,8 @@
               {{/ifAny ~}}
             {{/if ~}}
           {{else}}
-            {{#each (getProperty @root.data.supplimentaryResponses.types.aggregations (concat this "_slugs.buckets")) ~}}
-              {{#if key ~}}
-                {{> term_checkbox slug=key field=../this selected=(getProperty @root.request.params.query ../this) instance_id=../../instance_id value=(lookup (getProperty @root.data.supplimentaryResponses.types.aggregations (concat ../this ".buckets")) @index)}}
-              {{/if ~}}
+            {{#each (getProperty @root.data.termsMaps (concat this ".all")) ~}}
+              {{> term_checkbox slug=slug field=../this selected=(getProperty @root.request.params.query ../this) instance_id=../../instance_id value=term}}
             {{/each ~}}
           {{/compare ~}}
         </div>
