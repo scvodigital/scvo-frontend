@@ -6,7 +6,7 @@
   "subtitle" : "{{_source.organisation_name}}",
   "URL" : "/opportunity/{{_source.slug}}{{@root.request.url.search}}",
   "geo_coords" : {"lat" : {{_source.geo_coords.lat}}, "lon" : {{_source.geo_coords.lon}} }
-  }
+  }{{#unless @last}},{{/unless}}
   {{/ifAll}}
 {{/each}}
 
