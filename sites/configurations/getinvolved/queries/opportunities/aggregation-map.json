@@ -11,20 +11,14 @@
       ]
     }
   },
-  "aggregations" : {
-    "grid" : {
-      "geohash_grid" : {
-        "field" : "geo_coords",
-        "precision" : 4
-      },
-      "aggregations" : {
+  "aggs" : {
+    "regions" : {
+      "terms" : { "field" : "geo.admin_district", "size" : 1000 },
+      "aggs" : {
         "centroid" : {
           "geo_centroid" : { "field" : "geo_coords" }
         }
       }
-
     }
   }
-
-
 }
