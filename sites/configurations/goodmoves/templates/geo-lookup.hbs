@@ -1,0 +1,14 @@
+[
+{{#eachJoin @root.data.search_data.hits.hits ","}}
+  {
+    "place": {{{stringify _source.place}}},
+    {{#if _source.district}}
+      "district": {{{stringify _source.district}}},
+    {{/if}}
+    {{#if _source.ward}}
+      "ward": {{{stringify _source.ward}}},
+    {{/if}}
+    "point": {{{stringify _source.point}}}
+  }  
+{{/eachJoin}}
+]

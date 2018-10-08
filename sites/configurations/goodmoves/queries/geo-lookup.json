@@ -1,0 +1,29 @@
+{
+  "size": 6,
+  "_source": ["place", "textbag", "point", "district", "ward"],
+  "query": {
+    "bool": {
+      "filter": [
+        {
+          "terms": {
+            "_type": [
+            {{#if (regexMatch @root.request.params.query.q "^([A-Z]{1,2})(([0-9][A-Z])|([0-9]{1,2}))" "ig")}}
+              "postcode"      
+            {{else}}
+              "electoral-ward", "local-authority-district"
+            {{/if}}
+            ]
+          }
+        },
+        {
+          "query_string": {
+            {{#unless (regexMatch @root.request.params.query.q "^([A-Z]{1,2})(([0-9][A-Z])|([0-9]{1,2}))" "ig")}}
+              "default_field": "textbag",
+            {{/unless}}
+            "query": {{{stringify @root.request.params.query.q}}}
+          }
+        }
+      ]
+    }
+  }
+}
