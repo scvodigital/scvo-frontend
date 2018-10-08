@@ -10,6 +10,43 @@
           </h2>
           <div class="mdc-layout-grid">
             <div class="mdc-layout-grid__inner">
+              <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
+                <div class="mdc-text-field mdc-text-field--box mdc-text-field--with-leading-icon" data-mdc-auto-init="MDCTextField">
+                  <span class="far fa-map-marker-alt mdc-text-field__icon geo-lookup" tabindex="0" title="Find my location"></span>
+                  <input type="text" id="where-jobs" name="location" class="mdc-text-field__input" value="{{@root.request.params.query.location}}" placeholder="" data-lpignore="true" data-location-search='{
+                    "googleMapsOptions": {
+                      "type": ["(regions)"],
+                      "componentRestrictions": {
+                        "country": "gb"
+                      }
+                    },
+                    "latSelector": "[name=\"lat\"]",
+                    "lngSelector": "[name=\"lng\"]",
+                    "locationServicesSelector": ".geo-lookup"
+                  }'>
+                  <label for="where-jobs" class="mdc-floating-label">
+                    Location
+                  </label>
+                  <div class="mdc-line-ripple"></div>
+                </div>
+                <!-- <div class="after-textfield-action geo-lookup">Find me</div> -->
+              </div>
+              <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-2-desktop mdc-layout-grid__cell--span-2-tablet mdc-layout-grid__cell--span-4-phone">
+                <div class="mdc-form-field">
+                  <div class="mdc-select mdc-select--box" data-mdc-auto-init="MDCSelect">
+                    <select data-location="where-jobs" class="mdc-select__native-control" name="distance" id="distance-jobs">
+                      <option value="8.04672">within 5 miles</option>
+                      <option value="16.09344" selected>within 10 miles</option>
+                      <option value="40.2336">within 25 miles</option>
+                      <option value="80.4672">within 50 miles</option>
+                      <option value="">any distance</option>
+                    </select>
+                    <label class="mdc-floating-label mdc-floating-label--float-above" for="distance-jobs">
+                      Distance
+                    </label>
+                  </div>
+                </div>
+              </div>
               <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-5-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone">
                 <div class="mdc-text-field mdc-text-field--box mdc-text-field--with-leading-icon mdc-text-field-tt" data-mdc-auto-init="MDCTextField">
                   <span class="far fa-search mdc-text-field__icon" tabindex="0" role="button"></span>
@@ -78,43 +115,6 @@
                     Keywords
                   </label>
                   <div class="mdc-line-ripple"></div>
-                </div>
-              </div>
-              <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
-                <div class="mdc-text-field mdc-text-field--box mdc-text-field--with-leading-icon" data-mdc-auto-init="MDCTextField">
-                  <span class="far fa-map-marker-alt mdc-text-field__icon geo-lookup" tabindex="0" title="Find my location"></span>
-                  <input type="text" id="where-jobs" name="location" class="mdc-text-field__input" value="{{@root.request.params.query.location}}" placeholder="" data-lpignore="true" data-location-search='{
-                    "googleMapsOptions": {
-                      "type": ["(regions)"],
-                      "componentRestrictions": {
-                        "country": "gb"
-                      }
-                    },
-                    "latSelector": "[name=\"lat\"]",
-                    "lngSelector": "[name=\"lng\"]",
-                    "locationServicesSelector": ".geo-lookup"
-                  }'>
-                  <label for="where-jobs" class="mdc-floating-label">
-                    Location
-                  </label>
-                  <div class="mdc-line-ripple"></div>
-                </div>
-                <!-- <div class="after-textfield-action geo-lookup">Find me</div> -->
-              </div>
-              <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-2-desktop mdc-layout-grid__cell--span-2-tablet mdc-layout-grid__cell--span-4-phone">
-                <div class="mdc-form-field">
-                  <div class="mdc-select mdc-select--box" data-mdc-auto-init="MDCSelect">
-                    <select data-location="where-jobs" class="mdc-select__native-control" name="distance" id="distance-jobs">
-                      <option value="8.04672">within 5 miles</option>
-                      <option value="16.09344" selected>within 10 miles</option>
-                      <option value="40.2336">within 25 miles</option>
-                      <option value="80.4672">within 50 miles</option>
-                      <option value="">any distance</option>
-                    </select>
-                    <label class="mdc-floating-label mdc-floating-label--float-above" for="distance-jobs">
-                      Distance
-                    </label>
-                  </div>
                 </div>
               </div>
               <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-2-desktop mdc-layout-grid__cell--span-2-tablet mdc-layout-grid__cell--span-4-phone">
