@@ -154,7 +154,7 @@
             {{#if (any @root.data.supplimentaryResponses.types_regions.aggregations.countries.buckets) ~}}
               {{#each @root.data.supplimentaryResponses.types_regions.aggregations.countries.buckets ~}}
                 {{#if key ~}}
-                  {{#compare (length @root.data.supplimentaryResponses.types_regions.aggregations.countries.buckets) ">=" 1 ~}}
+                  {{#compare (length @root.data.supplimentaryResponses.types_regions.aggregations.countries.buckets) ">" 1 ~}}
                     <h3 class="mdc-typography--headline7">{{{key}}}</h3>
                   {{/compare ~}}
                 {{/if ~}}
@@ -166,7 +166,7 @@
               {{/each ~}}
             {{/if ~}}
             {{#ifAny (length @root.data.supplimentaryResponses.types.aggregations.home_based.buckets) (length @root.data.supplimentaryResponses.types.aggregations.various_locations.buckets) ~}}
-              {{#compare (length @root.data.supplimentaryResponses.types_regions.aggregations.countries.buckets) ">=" 1 ~}}
+              {{#compare (length @root.data.supplimentaryResponses.types_regions.aggregations.countries.buckets) ">" 1 ~}}
                 <h3 class="mdc-typography--headline7">Other</h3>
               {{/compare ~}}
               {{#compare (length @root.data.supplimentaryResponses.types.aggregations.home_based.buckets) ">=" 1 ~}}
