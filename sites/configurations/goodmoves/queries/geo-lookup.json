@@ -18,13 +18,13 @@
         {
           "match": {
             "textbag": {
-              "query": {{{stringify @root.request.params.query.q}}}
+              "query": {{{stringify (lowercase @root.request.params.query.q)}}}
             }
           }
         },
         {
           "query_string": {
-            "query": {{{stringify @root.request.params.query.q}}}
+            "query": {{{stringify (lowercase @root.request.params.query.q)}}}
           }
         }
       ],
