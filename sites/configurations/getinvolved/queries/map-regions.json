@@ -1,0 +1,24 @@
+{
+  "size": 1000,
+  "query": {
+    "bool": {
+      "filter": [
+        {{>queries_opportunity_common_filters request.params.query}},
+        {{>queries_opportunity_search_filters request.params.query}}
+      ],
+      "must": [
+        {{>queries_opportunity_search_must request.params.query}}
+      ]
+    }
+  },
+  "aggs" : {
+    "regions" : {
+      "terms" : { "field" : "geo.admin_district", "size" : 1000 },
+      "aggs" : {
+        "centroid" : {
+          "geo_centroid" : { "field" : "geo_coords" }
+        }
+      }
+    }
+  }
+}
