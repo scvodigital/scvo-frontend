@@ -84,7 +84,7 @@
           {{/each ~}}
         {{/each ~}}
         {{#ifAny (length @root.data.supplimentaryResponses.types.aggregations.home_based.buckets) (length @root.data.supplimentaryResponses.types.aggregations.various_locations.buckets) ~}}
-          {{#compare (length @root.data.supplimentaryResponses.types_regions.aggregations.countries.buckets) ">=" 1 ~}}
+          {{#compare (length @root.data.supplimentaryResponses.types_regions.aggregations.countries.buckets) ">" 1 ~}}
             <li class="mdc-list-item mdc-list-item--other">
               <h3 class="mdc-typography--headline7">Other</h3>
             </li>
