@@ -169,11 +169,11 @@
               {{#compare (length @root.data.supplimentaryResponses.types_regions.aggregations.countries.buckets) ">" 1 ~}}
                 <h3 class="mdc-typography--headline7">Other</h3>
               {{/compare ~}}
-              {{#compare (length @root.data.supplimentaryResponses.types.aggregations.home_based.buckets) ">=" 1 ~}}
-                {{> term_checkbox slug="true" field="home_based" selected=@root.request.params.query.home_based instance_id=../instance_id value="Home-based"}}
-              {{/compare ~}}
               {{#compare (length @root.data.supplimentaryResponses.types.aggregations.various_locations.buckets) ">=" 1 ~}}
                 {{> term_checkbox slug="true" field="various_locations" selected=@root.request.params.query.various_locations instance_id=../instance_id value="Various locations"}}
+              {{/compare ~}}
+              {{#compare (length @root.data.supplimentaryResponses.types.aggregations.home_based.buckets) ">=" 1 ~}}
+                {{> term_checkbox slug="true" field="home_based" selected=@root.request.params.query.home_based instance_id=../instance_id value="Home-based"}}
               {{/compare ~}}
             {{/ifAny ~}}
           {{else}}
