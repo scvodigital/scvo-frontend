@@ -7,4 +7,7 @@
 {{#if recently_updated ~}}
   {{>queries_date_range field="date_last_modified" gt="now-12M"}},
 {{/if ~}}
+{{#ifAll ne_lat ne_lon sw_lat sw_lon ~}}
+{{>queries_bounding_box ne_lat=ne_lat ne_lon=ne_lon sw_lat=sw_lat sw_lon=sw_lon}},
+{{/ifAll ~}}
 {{>queries_do_nothing}}

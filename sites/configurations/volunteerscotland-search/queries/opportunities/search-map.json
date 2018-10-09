@@ -18,6 +18,26 @@
       ]
     }
   },
+  "aggs" : {
+    "admin_district": {
+      "terms": {
+        "field": "geo.admin_district",
+        "size": 1000
+      }
+    },
+    "parliamentary_constituency": {
+      "terms": {
+        "field": "geo.parliamentary_constituency",
+        "size": 1000
+      }
+    },
+    "nuts": {
+      "terms": {
+        "field": "geo.nuts",
+        "size": 1000
+      }
+    }
+  },
   "sort": {
     "closing_date": "asc"
   }
