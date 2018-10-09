@@ -62,9 +62,9 @@
         Regions
       </div>
       <ul class="mdc-list">
-        {{#each @root.data.supplimentaryResponses.types.aggregations.countries.buckets ~}}
+        {{#each @root.data.supplimentaryResponses.types_regions.aggregations.countries.buckets ~}}
           {{#if key ~}}
-          {{#compare (length @root.data.supplimentaryResponses.types.aggregations.countries.buckets) ">" 1 ~}}
+          {{#compare (length @root.data.supplimentaryResponses.types_regions.aggregations.countries.buckets) ">" 1 ~}}
             <li class="mdc-list-item mdc-list-item--{{@index}}">
               <h3 class="mdc-typography--headline7">{{{key}}}</h3>
             </li>
@@ -83,6 +83,33 @@
             {{/if ~}}
           {{/each ~}}
         {{/each ~}}
+        {{#ifAny (length @root.data.supplimentaryResponses.types.aggregations.home_based.buckets) (length @root.data.supplimentaryResponses.types.aggregations.various_locations.buckets) ~}}
+          {{#compare (length @root.data.supplimentaryResponses.types_regions.aggregations.countries.buckets) ">=" 1 ~}}
+            <li class="mdc-list-item mdc-list-item--other">
+              <h3 class="mdc-typography--headline7">Other</h3>
+            </li>
+          {{/compare ~}}
+          {{#compare (length @root.data.supplimentaryResponses.types.aggregations.home_based.buckets) ">=" 1 ~}}
+            <a class="mdc-list-item" href="/search?home_based%5B%5D=true" role="menuitem" onclick="gtag('event', 'navigation', { event_category: '{{default eventContext "category-browser"}}', event_label: 'Home-based' })">
+              <span class="mdc-list-item__text">
+                Home-based
+              </span>
+              <span class="mdc-list-item__meta" aria-label="{{@root.data.supplimentaryResponses.types.aggregations.home_based.buckets.0.doc_count}} vacancies">
+                {{@root.data.supplimentaryResponses.types.aggregations.home_based.buckets.0.doc_count}}
+              </span>
+            </a>
+          {{/compare ~}}
+          {{#compare (length @root.data.supplimentaryResponses.types.aggregations.various_locations.buckets) ">=" 1 ~}}
+            <a class="mdc-list-item" href="/search?various_locations%5B%5D=true" role="menuitem" onclick="gtag('event', 'navigation', { event_category: '{{default eventContext "category-browser"}}', event_label: 'Various locations' })">
+              <span class="mdc-list-item__text">
+                Various locations
+              </span>
+              <span class="mdc-list-item__meta" aria-label="{{@root.data.supplimentaryResponses.types.aggregations.various_locations.buckets.0.doc_count}} vacancies">
+                {{@root.data.supplimentaryResponses.types.aggregations.various_locations.buckets.0.doc_count}}
+              </span>
+            </a>
+          {{/compare ~}}
+        {{/ifAny ~}}
       </ul>
     </div>
   </div>

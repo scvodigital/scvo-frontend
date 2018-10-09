@@ -87,26 +87,6 @@
         "size": 10000
       }
     },
-    "countries": {
-      "terms": {
-        "field": "country",
-        "size": 10000
-      },
-      "aggs": {
-        "regions": {
-          "terms": {
-            "field": "region_group",
-            "size": 10000
-          }
-        },
-        "regions_slugs": {
-          "terms": {
-            "field": "region_group_slug",
-            "size": 10000
-          }
-        }
-      }
-    },
     "districts": {
       "nested": {
         "path": "districts"
