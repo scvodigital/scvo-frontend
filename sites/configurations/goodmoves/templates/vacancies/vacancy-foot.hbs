@@ -29,5 +29,33 @@ $(document).ready(function() {
       'hit_type': filename
     });
   });
+  $('.detailed-info a').on('click', function(evt) {
+    var url = $(evt.currentTarget).attr('href');
+    var hitType = 'unknown-link-click';
+
+    if (url.indexOf('mailto:') === 0) {
+      var parts = url.split(':');
+      hitType = parts[1].split('?')[0];
+    } else if (url.indexOf('tel:') === 0) {
+      var parts = url.split(':');
+      hitType = parts[1].split('?')[0];
+    } else if (url.indexOf('goodmoves-files') > -1) {
+      var parts = url.split('/');
+      hitType = parts[parts.length - 1];
+    } else if (url.indexOf('//') > -1) {
+      var parts = url.split('//');
+      parts = parts[1].split('/');
+      hitType = parts[0];
+      if (parts.length > 1) {
+        hitType = hitType + '...' + parts[parts.length - 1].split('?')[0];
+      }
+    }    
+
+    gtag('event', 'document_hit', {
+      'event_category': 'goodmoves-vacancy',
+      'event_label': vacancyId,
+      'hit_type': hitType
+    });
+  });
 });
 </script>

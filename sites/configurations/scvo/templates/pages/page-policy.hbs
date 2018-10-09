@@ -64,122 +64,61 @@
     </div>
   </div>
 
-  <div class="cta-content callout-image policy-stats v-margin-full">
-    <div class="container-fluid">
-      <h2>
-        The Scottish third sector
-        <span class="mdc-typography--caption">(Detailed statistics will be published soon)</span>
-      </h2>
-      <div class="mdc-layout-grid">
-        <div class="mdc-layout-grid__inner v-margin">
-          <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
-            <span class="fal fa-fw fa-hands-heart fa-5x"> </span>
-            <p>
-              <strong>1,200,000+ volunteers</strong>
-            </p>
-          </div>
-          <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
-            <span class="fal fa-fw fa-bullhorn fa-5x"> </span>
-            <p>
-              <strong>250,000+ trustees</strong>
-            </p>
-          </div>
-          <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
-            <span class="fal fa-fw fa-users fa-5x"> </span>
-            <p>
-              <strong>106,000+ paid staff</strong>
-            </p>
-          </div>
-          <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
-            <span class="fal fa-fw fa-building fa-5x"> </span>
-            <p>
-              <strong>40,000+ voluntary organisations</strong>
-            </p>
-          </div>
-        </div>
-        <div class="mdc-layout-grid__inner v-margin">
-          <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
-            <span class="fal fa-fw fa-hand-holding-heart fa-5x"> </span>
-            <p>
-              <strong><a href="http://www.volunteerscotland.net/policy-and-research/">More than a quarter of Scottish adults volunteered in 2016</a></strong>
-              </p>
-            </div>
-            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
-              <span class="fal fa-fw fa-chart-bar fa-5x"> </span>
-              <p>
-                <strong>£11,713,200,000 in assets</strong>
-              </p>
-            </div>
-            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
-              <span class="fal fa-fw fa-chart-line fa-5x"> </span>
-              <p>
-                <strong>£5.9billion annual turnover in 2017</strong>
-              </p>
-            </div>
-            <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
-              <span class="fal fa-fw fa-home-heart fa-5x"> </span>
-              <p>
-                <strong>937 new charities in 2017</strong>
-              </p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+  {{> sector_stats}}
 
-    <div class="container-fluid content page-content">
-      <div class="mdc-layout-grid equal-height support support-policy">
-        <div class="mdc-layout-grid__inner">
-          <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
-            <div class="mdc-card">
-              <section class="mdc-card__primary">
-                <h1 class="mdc-card__title mdc-card__title--large">
-                  <a href="/policy-research/events"><span class="fal fa-fw fa-comments fa-2x"> </span>Events</a>
-                </h1>
-              </section>
-              <section class="mdc-card__supporting-text">
-                {{#with @root.data.supplimentaryResponses.events_total.hits ~}}
-                {{#compare total ">" 0 ~}}
-                We have {{total}} upcoming event{{#compare total ">" 1}}s{{/compare}}
-                {{else}}
-                We don't have any upcoming events
-                {{/compare ~}}
-              </section>
+  <div class="container-fluid content page-content">
+    <div class="mdc-layout-grid equal-height support support-policy">
+      <div class="mdc-layout-grid__inner">
+        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
+          <div class="mdc-card">
+            <section class="mdc-card__primary">
+              <h1 class="mdc-card__title mdc-card__title--large">
+                <a href="/policy-research/events"><span class="fal fa-fw fa-comments fa-2x"> </span>Events</a>
+              </h1>
+            </section>
+            <section class="mdc-card__supporting-text">
+              {{#with @root.data.supplimentaryResponses.events_total.hits ~}}
               {{#compare total ">" 0 ~}}
-              <section class="mdc-card__actions">
-                <a class="mdc-card__action" href="/policy-research/events">Find out more</a>
-              </section>
+              We have {{total}} upcoming event{{#compare total ">" 1}}s{{/compare}}
+              {{else}}
+              We don't have any upcoming events
               {{/compare ~}}
-              {{/with ~}}
-            </div>
+            </section>
+            {{#compare total ">" 0 ~}}
+            <section class="mdc-card__actions">
+              <a class="mdc-card__action" href="/policy-research/events">Find out more</a>
+            </section>
+            {{/compare ~}}
+            {{/with ~}}
           </div>
-          <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
-            <div class="mdc-card">
-              <section class="mdc-card__primary">
-                <h1 class="mdc-card__title mdc-card__title--large">
-                  <a href="/policy-research/evidence-library"><span class="fal fa-fw fa-folder-open fa-2x"> </span>Evidence Library</a>
-                </h1>
-              </section>
-              <section class="mdc-card__supporting-text">
-                A resource for anyone interested in learning about the third sector in Scotland
-              </section>
-              <section class="mdc-card__actions"><a class="mdc-card__action" href="/policy-research/evidence-library">Find out more</a></section>
-            </div>
+        </div>
+        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
+          <div class="mdc-card">
+            <section class="mdc-card__primary">
+              <h1 class="mdc-card__title mdc-card__title--large">
+                <a href="/policy-research/evidence-library"><span class="fal fa-fw fa-folder-open fa-2x"> </span>Evidence Library</a>
+              </h1>
+            </section>
+            <section class="mdc-card__supporting-text">
+              A resource for anyone interested in learning about the third sector in Scotland
+            </section>
+            <section class="mdc-card__actions"><a class="mdc-card__action" href="/policy-research/evidence-library">Find out more</a></section>
           </div>
-          <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
-            <div class="mdc-card">
-              <section class="mdc-card__primary">
-                <h1 class="mdc-card__title mdc-card__title--large">
-                  <a href="/policy-research/policy-committee"><span class="fal fa-fw fa-book-heart fa-2x"> </span>Policy Committee</a>
-                </h1>
-              </section>
-              <section class="mdc-card__supporting-text">
-                Advising us on policies which reflect the best interests of the third sector in Scotland
-              </section>
-              <section class="mdc-card__actions"><a class="mdc-card__action" href="/policy-research/policy-committee">Find out more</a></section>
-            </div>
+        </div>
+        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
+          <div class="mdc-card">
+            <section class="mdc-card__primary">
+              <h1 class="mdc-card__title mdc-card__title--large">
+                <a href="/policy-research/policy-committee"><span class="fal fa-fw fa-book-heart fa-2x"> </span>Policy Committee</a>
+              </h1>
+            </section>
+            <section class="mdc-card__supporting-text">
+              Advising us on policies which reflect the best interests of the third sector in Scotland
+            </section>
+            <section class="mdc-card__actions"><a class="mdc-card__action" href="/policy-research/policy-committee">Find out more</a></section>
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>
