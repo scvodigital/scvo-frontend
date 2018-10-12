@@ -54,7 +54,7 @@ export class AnalyticsProcessor {
     const startDateString = format(startDate, 'YYYY-MM-DD');
     const endDateString = format(endDate, 'YYYY-MM-DD');
 
-    const params = {
+    const params: gapis.analytics_v3.Params$Resource$Data$Ga$Get = {
       'ids': 'ga:89145164',
       'start-date': startDateString,
       'end-date': endDateString,
@@ -67,11 +67,9 @@ export class AnalyticsProcessor {
     
     const viewCounts: ViewCountCollection = {};
     const hitType = 'Page View';
-    const res = await analytics.data.ga.get(params, options);
+    const rows = await this.getData(params, options);
 
-    if (!res.data.rows) return [];
-
-    res.data.rows.forEach((row) => {
+    rows.forEach((row) => {
       const documentType = row[0];
       const id = row[1];
       const hitType = row[2];
@@ -83,18 +81,29 @@ export class AnalyticsProcessor {
             sobjectType, id, startDate, hitType, domain);
 
         if (!viewCounts.hasOwnProperty(viewCount.name)) {
-          viewCounts[id] = viewCount;
+          viewCounts[viewCount.name] = viewCount;
         }
-
-        viewCounts[id].addHits(count);
-      }
+        viewCounts[viewCount.name].addHits(count);
+      } 
     });
 
-    const viewCountArray = Object.keys(viewCounts).map((key) => {
-      return viewCounts[key];
-    });
+    const viewCountArray = (Object as any).values(viewCounts);
 
     return viewCountArray;
+  }
+
+  async getData(params: gapis.analytics_v3.Params$Resource$Data$Ga$Get, options: any): Promise<any[]> {
+    const startIndex: number = params.hasOwnProperty('start-index') ? params['start-index'] || 0 : 0;
+    const res = await analytics.data.ga.get(params, options);
+    if (!res || !res.data || !res.data.rows) return [];
+    const rows: any[] = res.data.rows || [];
+    const totalResults = res.data.totalResults || 0;
+    if (startIndex + rows.length < totalResults) {
+      params['start-index'] = startIndex + rows.length;
+      const nextPage = await this.getData(params, options);
+      rows.push(...nextPage);
+    }
+    return rows;
   }
 
   /*

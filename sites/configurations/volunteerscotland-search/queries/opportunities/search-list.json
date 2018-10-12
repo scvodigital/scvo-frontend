@@ -1,0 +1,77 @@
+{
+  "size": 10,
+  "from": {{multiply (subtract (default @root.request.params.query.page 1) 1) 10}},
+  "_source": [
+    "Id",
+    "slug",
+    "milo_ref",
+    "available_from",
+    "client_group",
+    "client_group_slugs",
+    "description",
+    "geo_coords",
+    "geo",
+    "postcode",
+    "organisation_slug",
+    "organisation_name",
+    "organisation_aims_and_objectives",
+    "title",
+    "work_type",
+    "work_type_slugs"
+],
+  "query": {
+    "bool": {
+      "filter": [
+        {{>queries_opportunity_common_filters @root.request.params.query}},
+        {{>queries_opportunity_search_filters @root.request.params.query}}
+      ],
+      "must": [
+        {{>queries_opportunity_search_must @root.request.params.query}}
+      ]
+    }
+  },
+  {{#ifAll @root.request.params.query.location @root.request.params.query.lat @root.request.params.query.lng ~}}
+  "script_fields" : {
+    "distance" : {
+      "script" : {
+        "inline": "doc['geo_coords'].arcDistance(params.lat,params.lon) * 0.000621371",
+        "lang": "painless",
+        "params": {
+          "lat": {{@root.request.params.query.lat}},
+          "lon": {{@root.request.params.query.lng}}
+        }
+      }
+    }
+  },
+  {{/ifAll ~}}
+  "sort": [
+    {{#if @root.request.params.query.sort ~}}
+      {{#compare @root.request.params.query.sort "===" "distance" ~}}
+        {{#ifAll @root.request.params.query.location @root.request.params.query.lat @root.request.params.query.lng ~}}
+          {
+            "_geo_distance": {
+              "geo_coords": {
+                "lat": {{request.params.query.lat}},
+                "lon": {{request.params.query.lng}}
+              },
+              "order": "asc",
+              "unit": "km",
+              "mode": "min",
+              "distance_type": "arc"
+            }
+          }
+        {{else}}
+          "_score"
+        {{/ifAll ~}}
+      {{else}}
+        {{#compare @root.request.params.query.sort "===" "relevance" ~}}
+          "_score",
+        {{/compare ~}}
+      {{/compare ~}}
+    {{else}}
+      {
+        "available_from": "desc"
+      }
+    {{/if ~}}
+  ]
+}

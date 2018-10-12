@@ -1,0 +1,17 @@
+{{#ifAll ne_lat ne_lon sw_lat sw_lon ~}}
+{
+  "geo_bounding_box": {
+    "geo_coords": {
+      "top_right": {
+        "lat": {{ne_lat}},
+        "lon": {{ne_lon}}
+      },
+      "bottom_left": {
+        "lat": {{sw_lat}},
+        "lon": {{sw_lon}}
+      }
+    }
+  }
+},
+{{/ifAll ~}}
+{{>queries_do_nothing}}

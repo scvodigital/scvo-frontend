@@ -1,0 +1,143 @@
+<div class="container-fluid home-banner">
+  <div class="banner-search overlay" style="background-image: url('http://cms.scvo.org/wp-content/uploads/2017/11/Teapot-Trust-14.jpg');">
+    <div class="content page-content">
+      <div class="search-content">
+        <form id="search-view" class="search-form mdc-elevation--z5" action="/search" method="GET">
+          <input type="hidden" name="lat" value="{{@root.request.params.query.lat}}" id="location-lat">
+          <input type="hidden" name="lng" value="{{@root.request.params.query.lng}}" id="location-lng">
+          <h2 class="mdc-typography--headline4">
+            Find a volunteering opportunity to suit you
+          </h2>
+          <div class="mdc-layout-grid">
+            <div class="mdc-layout-grid__inner">
+              <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
+                <div class="mdc-text-field mdc-text-field--box mdc-text-field--with-leading-icon" data-mdc-auto-init="MDCTextField">
+                  <span class="far fa-map-marker-alt mdc-text-field__icon geo-lookup" tabindex="0" title="Find my location"></span>
+                  <input type="text" id="where-jobs" name="location" class="mdc-text-field__input" value="{{@root.request.params.query.location}}" placeholder="" data-lpignore="true" data-location-search='{
+                    "googleMapsOptions": {
+                      "type": ["(regions)"],
+                      "componentRestrictions": {
+                        "country": "gb"
+                      }
+                    },
+                    "latSelector": "[name=\"lat\"]",
+                    "lngSelector": "[name=\"lng\"]",
+                    "locationServicesSelector": ".geo-lookup"
+                  }'>
+                  <label for="where-jobs" class="mdc-floating-label">
+                    Location
+                  </label>
+                  <div class="mdc-line-ripple"></div>
+                </div>
+                <!-- <div class="after-textfield-action geo-lookup">Find me</div> -->
+              </div>
+              <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-2-desktop mdc-layout-grid__cell--span-2-tablet mdc-layout-grid__cell--span-4-phone">
+                <div class="mdc-form-field">
+                  <div class="mdc-select mdc-select--box" data-mdc-auto-init="MDCSelect">
+                    <select data-location="where-jobs" class="mdc-select__native-control" name="distance" id="distance-jobs">
+                      <option value="8.04672">within 5 miles</option>
+                      <option value="16.09344" selected>within 10 miles</option>
+                      <option value="40.2336">within 25 miles</option>
+                      <option value="80.4672">within 50 miles</option>
+                      <option value="">any distance</option>
+                    </select>
+                    <label class="mdc-floating-label mdc-floating-label--float-above" for="distance-jobs">
+                      Distance
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-5-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone">
+                <div class="mdc-text-field mdc-text-field--box mdc-text-field--with-leading-icon mdc-text-field-tt" data-mdc-auto-init="MDCTextField">
+                  <span class="far fa-search mdc-text-field__icon" tabindex="0" role="button"></span>
+                  <input type="text" id="what-jobs" name="keywords" class="mdc-text-field__input" placeholder="" data-lpignore="true" data-typeahead='{
+                    "typeaheadOptions": {
+                      "highlight": true,
+                      "minlength": 0
+                    },
+                    "outputs": [
+                      {
+                        "type": "element",
+                        "options": {
+                          "containerSelectorTemplate": "#search-terms",
+                          "testSelectorTemplate": "#\{{dataset.name}}-\{{item.value}}",
+                          "removeSelectorTemplate": "#remove-\{{dataset.name}}-\{{item.value}}",
+                          "template": {{#blockStringify this~}}
+                            <div class="mdc-chip mdc-theme--primary-bg" tabindex="0" id="\{{dataset.name}}-\{{item.value}}">
+                              <div class="mdc-chip__text">\{{item.label}}</div>
+                              <input type="hidden" name="\{{dataset.name}}[]" value="\{{item.value}}">
+                              <i class="far fa-times-circle mdc-chip__icon mdc-chip__icon--trailing" tabindex="0" role="button" id="remove-\{{dataset.name}}-\{{item.value}}"></i>
+                            </div>
+                          {{~/blockStringify}}
+                        }
+                      },
+                      {
+                        "type": "prop",
+                        "options": {
+                          "selectorTemplate": "[name=\"\{{value}}\"]"
+                        }
+                      }
+                    ],
+                    "datasets": [
+                      {
+                        "name": "client_group",
+                        "templates": {
+                          "header": "<h3>Client group</h3>"
+                        },
+                        "display": "label",
+                        "items": [
+                          {{#each @root.data.opportunitySupplimentary.types.aggregations.client_group.buckets ~}}
+                          {
+                            "label": {{{stringify key}}},
+                            "value": {{{stringify (slugify key)}}}
+                          }{{#unless @last}},{{/unless}}
+                          {{/each ~}}
+                        ]
+                      },
+                      {
+                        "name": "work_type",
+                        "templates": {
+                          "header": "<h3>Work type</h3>"
+                        },
+                        "display": "label",
+                        "items": [
+                          {{#each @root.data.opportunitySupplimentary.types.aggregations.work_type.buckets ~}}
+                          {
+                            "label": {{{stringify key}}},
+                            "value": {{{stringify (slugify key)}}}
+                          }{{#unless @last}},{{/unless}}
+                          {{/each ~}}
+                        ]
+                      }
+                    ]
+                  }'>
+                  <label for="what-jobs" class="mdc-floating-label">
+                    Keywords
+                  </label>
+                  <div class="mdc-line-ripple"></div>
+                </div>
+              </div>
+              <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-2-desktop mdc-layout-grid__cell--span-2-tablet mdc-layout-grid__cell--span-4-phone">
+                <button type="submit" id="search-jobs" class="mdc-button mdc-button--raised mdc-button--large mdc-text-field--box mdc-button--search mdc-ripple-surface mdc-ripple-surface--primary" data-mdc-auto-init="MDCRipple">
+                  Search
+                  <span class="far fa-search" aria-hidden="true"></span>
+                </button>
+              </div>
+            </div>
+            <div class="mdc-layout-grid__inner">
+              <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-12-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone">
+                <div id="search-terms" class="mdc-chip-set"></div>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="home-browse h-padding">
+    <div id="home-browse-collapse">
+      {{> browse eventContext="category-browser-home"}}
+    </div>
+  </div>
+</div>

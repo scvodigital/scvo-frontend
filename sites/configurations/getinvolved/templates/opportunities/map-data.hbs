@@ -1,0 +1,16 @@
+{"results" : [
+{{#each @root.data.search_data.map_results.hits.hits ~}}
+  {{#ifAll _source.geo_coords.lat _source.geo_coords.lon}}
+  {
+  "title" : "{{_source.title}}",
+  "subtitle" : "{{_source.organisation_name}}",
+  "URL" : "/opportunity/{{_source.slug}}{{@root.request.url.search}}",
+  "geo_coords" : {"lat" : {{_source.geo_coords.lat}}, "lon" : {{_source.geo_coords.lon}} }
+  }{{#unless @last}},{{/unless}}
+  {{/ifAll}}
+{{/each}}
+
+],
+"aggregations" : {{{safeStringify @root.data.search_data.map_results.aggregations}}}
+
+}

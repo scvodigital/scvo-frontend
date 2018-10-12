@@ -1,0 +1,39 @@
+
+{
+ "zoom" : "{{@root.request.params.query.zoom }}",
+{{#compare @root.request.params.query.zoom "<=" 12}}
+
+  "areas": [
+  {{#each @root.data.search_data.map_regions.hits.hits ~}}
+    {
+    "place" : {{{safeStringify _source.place.[0]}}},
+    "point" : {{{safeStringify _source.point}}},
+    "Id" : "{{_source.Id}}",
+    "shape" : {{{safeStringify _source.shape}}}
+    }
+    {{#unless @last}},{{/unless}}
+  {{/each}}
+  ]
+  {{#if @root.data.search_data.map_results.hits.hits}}
+    ,
+    "aggregations" : {{{safeStringify @root.data.search_data.map_aggregations.aggregations}}}
+  {{/if}}
+
+{{else}}
+
+  "points" : [
+  {{#each @root.data.search_data.map_results.hits.hits ~}}
+    {{#ifAll _source.geo_coords.lat _source.geo_coords.lon}}
+      {
+      "title" : "{{_source.title}}",
+      "subtitle" : "{{_source.organisation_name}}",
+      "URL" : "/opportunity/{{_source.slug}}{{@root.request.url.search}}",
+      "geo_coords" : {"lat" : {{_source.geo_coords.lat}}, "lon" : {{_source.geo_coords.lon}} }
+      }{{#unless @last}},{{/unless}}
+    {{/ifAll}}
+  {{/each}}
+  ]
+
+{{/compare}}
+}
+

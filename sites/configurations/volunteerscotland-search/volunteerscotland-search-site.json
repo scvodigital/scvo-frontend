@@ -1,0 +1,205 @@
+{
+  "domains": [
+    "localhost",
+    "volunteerscotland-search.local",
+    "127.0.0.1",
+    "test.getinvolved.scot"
+  ],
+  "routes": [
+    "{:./routes/*.json}"
+  ],
+  "metaData": {
+    "favouritesCampaignName": "vs-favourites",
+    "menus": "{:./volunteerscotland-search-menus.json}",
+    "elasticsearchUrl": "{$../elasticsearch-url.txt}",
+    "termTypeLabels": {
+      "age_groups": {
+        "singular": "Age Group",
+        "plural": "Age Groups"
+      },
+      "availability": {
+        "singular": "Availability",
+        "plural": "Availability"
+      },
+      "services": {
+        "singular": "Services",
+        "plural": "Services"
+      },
+      "regions": {
+        "singular": "Region",
+        "plural": "Regions"
+      },
+      "work_types": {
+        "singular": "Activity",
+        "plural": "Activities"
+      },
+      "organisation_activities": {
+        "singular": "Activity",
+        "plural": "Activities"
+      },
+      "client_groups": {
+        "singular": "Client group",
+        "plural": "Client groups"
+      }
+    },
+    "handlebars": {
+      "partials": {
+        "{$./partials/**/*.*}": "includeRelativePath=false&regexExpression=(-)&regexOptions=gi&regexReplace=_"
+      },
+      "templates": {
+        "{$./templates/**/*.*}": ""
+      },
+      "layouts": {
+        "{$./layouts/**/*.*}": ""
+      },
+      "queries": {
+        "{$./queries/**/*.*}": ""
+      }
+    },
+    "commonTasks": {
+      "authNotRequired": {
+        "name": "auth",
+        "taskModule": "firebaseAuth",
+        "config": {
+          "tokenPath": "request.cookies.gi_token",
+          "cookieName": "gi_cookie",
+          "cookieOptions": {
+            "maxAge": 1209600000,
+            "secure": true
+          },
+          "appName": "volunteerscotland",
+          "noTokenRoute": "",
+          "notAuthenticatedRoute": ""
+        }
+      },
+      "authRequired": {
+        "name": "auth",
+        "taskModule": "firebaseAuth",
+        "config": {
+          "tokenPath": "request.cookies.gi_token",
+          "cookieName": "gi_cookie",
+          "cookieOptions": {
+            "maxAge": 1209600000,
+            "secure": true
+          },
+          "appName": "volunteerscotland",
+          "noTokenRoute": "sign_in",
+          "notAuthenticatedRoute": "sign_in"
+        }
+      },
+      "termsMaps": {
+        "name": "termsMaps",
+        "taskModule": "render",
+        "renderer": "handlebars",
+        "config": {
+          "template": ">context.metaData.handlebars.partials.terms_maps",
+          "output": "data",
+          "parseJson": true
+        }
+      },
+      "transformTimes": {
+        "name": "transformTimes",
+        "taskModule": "render",
+        "renderer": "handlebars",
+        "config": {
+          "template": ">context.metaData.handlebars.templates.opportunities_transform-times",
+          "output": "data",
+          "parseJson": true
+        }
+      },
+      "favouritesData": {
+        "name": "favourites",
+        "taskModule": "mysql",
+        "config": {
+          "connectionName": "notifications",
+          "queryTemplates": {
+            "items": ">context.metaData.handlebars.queries.notifications_get-favourites"
+          }
+        },
+        "renderer": "handlebars"
+      },
+      "opportunitySupplimentary": {
+        "name": "opportunitySupplimentary",
+        "taskModule": "elasticsearch",
+        "config": {
+          "connectionStringTemplate": "{$../elasticsearch-url.txt}",
+          "elasticsearchConfig": {
+            "apiVersion": "5.6"
+          },
+          "queryTemplates": [
+            {
+              "name": "types",
+              "index": "web-content-production",
+              "type": "milo-volunteering-opportunity",
+              "template": ">context.metaData.handlebars.queries.opportunities_types"
+            },
+            {
+              "name": "not_found",
+              "index": "web-content-production",
+              "type": "milo-volunteering-opportunity",
+              "template": ">context.metaData.handlebars.queries.pages_not-found"
+            }
+          ]
+        },
+        "renderer": "handlebars"
+      },
+      "organisationSupplimentary": {
+        "name": "organisationSupplimentary",
+        "taskModule": "elasticsearch",
+        "config": {
+          "connectionStringTemplate": "{$../elasticsearch-url.txt}",
+          "elasticsearchConfig": {
+            "apiVersion": "5.6"
+          },
+          "queryTemplates": [
+            {
+              "name": "types",
+              "index": "web-content-production",
+              "type": "milo-organisation",
+              "template": ">context.metaData.handlebars.queries.organisations_types"
+            },
+            {
+              "name": "not_found",
+              "index": "web-content-production",
+              "type": "milo-organisation",
+              "template": ">context.metaData.handlebars.queries.pages_not-found"
+            }
+          ]
+        },
+        "renderer": "handlebars"
+      },
+      "organisationsWithOpportunities": {
+        "name": "organisationsWithOpportunities",
+        "taskModule": "elasticsearch",
+        "config": {
+          "connectionStringTemplate": "{$../elasticsearch-url.txt}",
+          "elasticsearchConfig": {
+            "apiVersion": "5.6"
+          },
+          "queryTemplates": [
+            {
+              "name": "opportunities",
+              "index": "web-content-production",
+              "type": "milo-volunteering-opportunity",
+              "template": ">context.metaData.handlebars.queries.opportunities_organisations"
+            }
+          ]
+        },
+        "renderer": "handlebars"
+      }
+    },
+    "firebaseDefaultDomain": {
+      "name": "volunteerscotland",
+      "label": "Volunteer Scotland",
+      "logoUrl": "",
+      "config": {
+        "apiKey": "AIzaSyDCHiGp3FllVnjPcn0_LjcZrUe_5nC7LAc",
+        "authDomain": "auth.getinvolved.scot",
+        "databaseURL": "https://scvo-getinvolved.firebaseio.com",
+        "projectId": "scvo-getinvolved",
+        "storageBucket": "scvo-getinvolved.appspot.com",
+        "messagingSenderId": "815398681377"
+      }
+    }
+  }
+}

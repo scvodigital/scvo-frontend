@@ -2,7 +2,7 @@
 $(document).ready(function() {
 {{#if data.auth}}
   var recentlyViewed = goodmoves.getCookie('recently_viewed') || '';
-  console.log('Recently Viewed:', recentlyViewed, '| Vacancy Id:', vacancyId);
+  // console.log('Recently Viewed:', recentlyViewed, '| Vacancy Id:', vacancyId);
   recentlyViewed = recentlyViewed.split(',');
   recentlyViewed.unshift(vacancyId);
   var newRecentlyViewed = [];
@@ -13,7 +13,7 @@ $(document).ready(function() {
     }
   };
   newRecentlyViewed = newRecentlyViewed.join(',');
-  console.log('New Recently Viewed:', newRecentlyViewed);
+  // console.log('New Recently Viewed:', newRecentlyViewed);
   goodmoves.setCookie('recently_viewed', newRecentlyViewed, 7);
 {{/if}}
 
@@ -22,11 +22,39 @@ $(document).ready(function() {
     var url = $(evt.currentTarget).attr('href');
     var parts = url.split('/');
     var filename = parts[parts.length - 1];
-    
+
     gtag('event', 'document_hit', {
       'event_category': 'goodmoves-vacancy',
       'event_label': vacancyId,
       'hit_type': filename
+    });
+  });
+  $('.detailed-info a').on('click', function(evt) {
+    var url = $(evt.currentTarget).attr('href');
+    var hitType = 'unknown-link-click';
+
+    if (url.indexOf('mailto:') === 0) {
+      var parts = url.split(':');
+      hitType = parts[1].split('?')[0];
+    } else if (url.indexOf('tel:') === 0) {
+      var parts = url.split(':');
+      hitType = parts[1].split('?')[0];
+    } else if (url.indexOf('goodmoves-files') > -1) {
+      var parts = url.split('/');
+      hitType = parts[parts.length - 1];
+    } else if (url.indexOf('//') > -1) {
+      var parts = url.split('//');
+      parts = parts[1].split('/');
+      hitType = parts[0];
+      if (parts.length > 1) {
+        hitType = hitType + '...' + parts[parts.length - 1].split('?')[0];
+      }
+    }    
+
+    gtag('event', 'document_hit', {
+      'event_category': 'goodmoves-vacancy',
+      'event_label': vacancyId,
+      'hit_type': hitType
     });
   });
 });

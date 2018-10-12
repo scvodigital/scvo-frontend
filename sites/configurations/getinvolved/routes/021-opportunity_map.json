@@ -30,7 +30,14 @@
             "index": "web-content-production",
             "type": "milo-volunteering-opportunity",
             "template": ">context.metaData.handlebars.queries.opportunities_search-map"
+          },
+          {
+            "name": "map_agg_results",
+            "index": "web-content-production",
+            "type": "milo-volunteering-opportunity",
+            "template": ">context.metaData.handlebars.queries.opportunities_aggregation-map"
           }
+
         ]
       },
       "renderer": "handlebars"
@@ -88,7 +95,7 @@
           "data": {
             "layout": ">context.metaData.handlebars.layouts.data",
             "parts": {
-              "content": ">context.metaData.handlebars.templates.opportunities_search-json"
+              "content": ">context.metaData.handlebars.templates.opportunities_search-map-json"
             },
             "contentType": "application/json"
           }

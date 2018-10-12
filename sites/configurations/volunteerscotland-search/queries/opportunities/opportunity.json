@@ -1,0 +1,78 @@
+{
+  "size": 1,
+  "_source": [
+    "Id",
+    "slug",
+    "milo_ref",
+    "available_from",
+    "client_group",
+    "client_group_slugs",
+    "description",
+    "end_date",
+    "expenses_paid",
+    "experience_required",
+    "geo_coords",
+    "geo",
+    "minimum_age",
+    "postcode",
+    "organisation_slug",
+    "organisation_name",
+    "organisation_aims_and_objectives",
+    "organisation_website",
+    "organisation_website_url",
+    "organisation_twitter",
+    "organisation_twitter_url",
+    "organisation_facebook",
+    "organisation_facebook_url",
+    "organisation_linkedin",
+    "organisation_linkedin_url",
+    "organisation_contact_first_name",
+    "organisation_contact_last_name",
+    "organisation_contact_email",
+    "support_options",
+    "title",
+    "travel_expenses",
+    "work_location",
+    "work_type",
+    "work_type_slugs",
+    "monday_afternoon",
+    "monday_evening",
+    "monday_morning",
+    "tuesday_afternoon",
+    "tuesday_evening",
+    "tuesday_morning",
+    "wednesday_afternoon",
+    "wednesday_evening",
+    "wednesday_morning",
+    "thursday_afternoon",
+    "thursday_evening",
+    "thursday_morning",
+    "friday_afternoon",
+    "friday_evening",
+    "friday_morning",
+    "saturday_afternoon",
+    "saturday_evening",
+    "saturday_morning",
+    "sunday_afternoon",
+    "sunday_evening",
+    "sunday_morning"
+  ],
+  "query": {
+    "bool": {
+      "filter": [
+        {{>queries_opportunity_common_filters @root.request.params.query}}
+      ],
+      "must": [
+        {
+          "term": {
+            {{#if (includes @root.request.params.slug "-") ~}}
+            "slug": "{{request.params.slug}}"
+            {{else}}
+            "Id": "{{request.params.slug}}"
+            {{/if ~}}
+          }
+        }
+      ]
+    }
+  }
+}

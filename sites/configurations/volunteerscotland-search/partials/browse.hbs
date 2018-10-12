@@ -1,0 +1,70 @@
+<div class="mdc-layout-grid home-content-primary">
+  <div class="mdc-layout-grid__inner">
+    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone content page-content">
+      <div class="browse-title browse-title-roles mdc-typography--headline5">
+        Client Groups
+      </div>
+      <ul class="mdc-list">
+        {{#each @root.data.opportunitySupplimentary.types.aggregations.client_groups.buckets ~}}
+          {{#if key ~}}
+            <a class="mdc-list-item" href="/search?client_groups%5B%5D={{urlencode (slugify (replace key "/" "-"))}}" role="menuitem" onclick="gtag('event', 'navigation', { event_category: '{{default ../eventContext "category-browser"}}', event_label: 'Client group: {{slugify (replace key "/" "-")}}' })">
+              <span class="mdc-list-item__text">
+                {{{key}}}
+              </span>
+              <span class="mdc-list-item__meta" aria-label="{{doc_count}} opportunities">
+                {{doc_count}}
+              </span>
+            </a>
+          {{/if ~}}
+        {{/each ~}}
+      </ul>
+    </div>
+    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone content page-content">
+      <div class="browse-title browse-title-work_types mdc-typography--headline5">
+        Activities
+      </div>
+      <ul class="mdc-list">
+        {{#each @root.data.opportunitySupplimentary.types.aggregations.work_types.buckets ~}}
+          {{#if key ~}}
+            <a class="mdc-list-item" href="/search?work_types%5B%5D={{urlencode (slugify (replace key "/" "-"))}}" role="menuitem" onclick="gtag('event', 'navigation', { event_category: '{{default ../eventContext "category-browser"}}', event_label: 'Work type: {{slugify (replace key "/" "-")}}' })">
+              <span class="mdc-list-item__text">
+                {{{key}}}
+              </span>
+              <span class="mdc-list-item__meta" aria-label="{{doc_count}} opportunities">
+                {{doc_count}}
+              </span>
+            </a>
+          {{/if ~}}
+        {{/each ~}}
+      </ul>
+    </div>
+    <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone content page-content">
+      <div class="browse-title browse-title-regions mdc-typography--headline5">
+        Regions
+      </div>
+      <ul class="mdc-list">
+        {{#each @root.data.opportunitySupplimentary.types.aggregations.countries.buckets ~}}
+          {{#if key ~}}
+          {{#compare (length @root.data.opportunitySupplimentary.types.aggregations.countries.buckets) ">" 1 ~}}
+            <li class="mdc-list-item mdc-list-item--{{@index}}">
+              <h3 class="mdc-typography--headline7">{{{key}}}</h3>
+            </li>
+            {{/compare ~}}
+          {{/if ~}}
+          {{#each this.regions.buckets ~}}
+            {{#if key ~}}
+              <a class="mdc-list-item" href="/search?regions%5B%5D={{urlencode (slugify (replace key "/" "-"))}}" role="menuitem" onclick="gtag('event', 'navigation', { event_category: '{{default ../../eventContext "category-browser"}}', event_label: 'Region: {{slugify (replace key "/" "-")}}' })">
+                <span class="mdc-list-item__text">
+                  {{{key}}}
+                </span>
+                <span class="mdc-list-item__meta" aria-label="{{doc_count}} vacancies">
+                  {{doc_count}}
+                </span>
+              </a>
+            {{/if ~}}
+          {{/each ~}}
+        {{/each ~}}
+      </ul>
+    </div>
+  </div>
+</div>

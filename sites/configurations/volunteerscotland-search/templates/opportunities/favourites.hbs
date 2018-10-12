@@ -1,0 +1,48 @@
+<div id="detailed-results-container" class="container-content content-shortlist">
+  <div class="mdc-layout-grid">
+    <div class="mdc-layout-grid__inner">
+      <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
+        <h1 class="mdc-typography--headline3 v-margin-full">
+          Favourites
+        </h1>
+      </div>
+      <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
+      </div>
+      <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-1-desktop mdc-layout-grid__cell--span-4-tablet hide-sm">
+      </div>
+      <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
+        <form action="{{{@root.request.url.path}}}" method="GET">
+          <div class="mdc-select mdc-select--box pull-right" data-mdc-auto-init="MDCSelect">
+            <select class="mdc-select__native-control" id="sort" name="sort" onchange="this.form.submit();">
+              <option value="closing_soon"{{#compare @root.request.params.query.sort "===" "closing_soon"}} selected{{/compare}}>Closing soon</option>
+              <option value="newest"{{#compare @root.request.params.query.sort "===" "newest"}} selected{{/compare}}>Newest</option>
+              <option value="oldest"{{#compare @root.request.params.query.sort "===" "oldest"}} selected{{/compare}}>Oldest</option>
+            </select>
+            <label class="mdc-floating-label mdc-select__label--float-above" for="sort">
+              Sort
+            </label>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  {{#compare @root.data.favourite_opportunities.current.hits.total "===" 0}}
+    <p class="mdc-typography--body1">
+      You don't yet have any opportunities in your favourites. To add an opportunity, click the &ensp;<strong><span class="far fa-star mdc-chip__icon mdc-chip__icon--leading" aria-hidden="true"></span>Favourite</strong>&ensp;button.
+    </p>
+  {{else}}
+    <p class="mdc-typography--body1">
+      You don't have any opportunities in your favourites.
+    </p>
+  {{/compare}}
+
+  {{#compare @root.data.favourite_opportunities.current.hits.total ">" 0}}
+    {{#each @root.data.favourite_opportunities.current.hits.hits ~}}
+      {{> opportunity_search_result _source}}
+    {{/each ~}}
+    <div class="foot">
+      {{> pagination paging=@root.data.favourite_opportunities.current.pagination}}
+    </div>
+  {{/compare}}
+</div>

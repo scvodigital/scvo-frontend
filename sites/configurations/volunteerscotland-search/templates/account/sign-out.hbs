@@ -1,0 +1,14 @@
+{{> account_sign_out_loader}}
+<script>
+document.addEventListener("DOMContentLoaded", function(event) {
+  window.setTimeout(function() {
+    volunteerscotland.app.auth().signOut().then(function() {
+      volunteerscotland.setCookie('gi_token');
+      volunteerscotland.setCookie('gi_cookie');
+      window.location.href = '/';
+    }).catch(function(err) {
+      console.error('Error signing out:', err);
+    });
+  }, 1000);
+});
+</script>

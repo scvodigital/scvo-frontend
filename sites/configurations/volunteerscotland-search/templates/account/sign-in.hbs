@@ -1,0 +1,110 @@
+{{#ifAll @root.data.auth (compare @root.request.params.query.reauth "!==" "true") ~}}
+{{> account_sign_out_loader}}
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    window.setTimeout(function() {
+      window.location.href = '/';
+    }, 100);
+  });
+</script>
+{{else}}
+<form id="sign-in-form" method="POST" class="sign-in-form">
+  <div class="mdc-card mdc-elevation--z0">
+    <div class="mdc-card__info--content-primary">
+      <div class="mdc-card__info--content-primary-title mdc-typography--headline4 x-padding">
+        {{#if @root.request.params.query.reauth}}
+          Reauthenticate
+        {{else}}
+          Sign in
+        {{/if}}
+      </div>
+      {{#if @root.request.params.query.reauth}}
+        <div class="mdc-card__info--content-primary-title mdc-typography--headline5 x-padding">
+          Before you can do that you must sign in again
+        </div>
+      {{/if}}
+    </div>
+    <div class="mdc-card__info x-padding-full mdc-theme--primary-bg mdc-theme--on-primary" id="sign-in-message">
+      <span id="form-message"></span>
+    </div>
+    <div class="mdc-card__info x-padding-full">
+      <div class="mdc-typography--body1" id="form-section-email">
+        {{> account_sign_in_social loaderSelector="#sign-in-loader" messageSelector="#sign-in-message"}}
+
+        <div class="middle-line-text">
+          <span>or</span>
+        </div>
+        <div class="mdc-text-field mdc-text-field--box mdc-text-field--with-leading-icon" data-mdc-auto-init="MDCTextField">
+          <span class="far fa-at mdc-text-field__icon" tabindex="-1"></span>
+          <input type="email" id="sign-in-email" class="mdc-text-field__input mdc-text-field--fullwidth" />
+          <label class="mdc-floating-label" for="sign-in-email">
+            Email
+          </label>
+          <div class="mdc-line-ripple"></div>
+        </div>
+
+        <div class="mdc-text-field mdc-text-field--box mdc-text-field--with-leading-icon" data-mdc-auto-init="MDCTextField">
+          <span class="far fa-key mdc-text-field__icon" tabindex="-1"></span>
+          <input type="password" id="sign-in-password" class="mdc-text-field__input mdc-text-field--fullwidth" />
+          <label class="mdc-floating-label" for="sign-in-password">
+            Password
+          </label>
+          <div class="mdc-line-ripple"></div>
+        </div>
+      </div>
+      <div id="form-section-sign-in-buttons">
+        <button class="mdc-button mdc-button--raised" type="submit" id="sign-in-submit">
+          Sign in
+        </button>
+        <div class="mdc-typography--body1 v-margin-full">
+          Forgot your password? <a href="/reset-password">Reset password</a>
+        </div>
+        <div class="mdc-typography--body1 v-margin-full">
+          Don't have an account? <a href="/sign-up">Sign up</a>
+        </div>
+        <div class="mdc-typography--body1 v-margin-full">
+          Read our <a href="/privacy" target="_blank">privacy notice</a>
+        </div>
+      </div>
+      <div class="card-loader" id="sign-in-loader">
+        <div class="card-loader-inner">
+          <span class="far fa-2x fa-circle-notch fa-spin"></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+<script>
+document.addEventListener("DOMContentLoaded", function(event) {
+  var $form = $('#sign-in-form');
+  var $message = $('#sign-in-message');
+  var $email = $('#sign-in-email');
+  var $password = $('#sign-in-password');
+  var $login = $('#sign-in-submit');
+  var $loader = $('#sign-in-loader');
+
+  $form.on('submit', function(evt) {
+    var email = $email.val();
+    var password = $password.val();
+    $loader.css('display', 'flex');
+    evt.preventDefault();
+    volunteerscotland.app.auth().signInWithEmailAndPassword(email, password).then(function(user) {
+      if (user) {
+        console.log('Logged in:', user);
+        user.user.getIdTokenResult().then(function(idTokenResult) {
+          console.log('ID Token Result', idTokenResult);
+          volunteerscotland.setCookie('gi_token', idTokenResult.token, 7);
+          window.location.href = '{{#if (contains @root.request.headers.referer "sign-out")}}/{{else}}{{default @root.request.headers.referer "/"}}{{/if}}';
+        });
+      } else {
+        $message.text('Something went wrong, signed in but no user?').show();
+        $loader.css('display', 'none');
+      }
+    }).catch(function(err) {
+      $message.html(err.message+' <a href="/reset-password">Reset password</a>').show();
+      $loader.css('display', 'none');
+    });
+  });
+});
+</script>
+{{/ifAll ~}}

@@ -1,0 +1,38 @@
+<div class="mdc-card__actions">
+  <div class="mdc-card__action-buttons demo-card__action-buttons--text-only mdc-card__actions--full-bleed">
+    {{#compare action "===" "organisation" ~}}
+    <a href="/organisation/{{organisation_slug}}{{@root.request.url.search}}" class="mdc-card__action hide-sm">Find out more about {{organisation_name}}</a>
+    <!-- <a href="/organisation/{{organisation.slug}}{{@root.request.url.search}}" class="mdc-card__action hide-md hide-lg"><span class="fal fa-info-circle fa-fw fa-2x" aria-hidden="true"></span></a> -->
+    {{else}}
+    {{#compare @root.route.name "===" "opportunity_search" ~}}
+    {{#ifAll @root.request.params.query.location @root.request.params.query.lat @root.request.params.query.lng ~}}
+    {{#if home_based ~}}{{else}}
+    {{#if distance ~}}
+    <ul class="fa-ul mdc-card__action hide-sm">
+      <li class="mdc-card__info--search-distance mdc-typography--body2">
+        <span class="fa-li"><span class="far fa-location-arrow fa-fw" title="Distance"></span></span>
+        {{#compare distance "<" 4 ~}}
+          Less than {{inflect (round distance "up") "mile" "miles" true}} away
+        {{else}}
+          {{#compare distance "<" 10 ~}}
+            Within {{round distance "up"}} miles
+          {{else}}
+            {{round distance "up"}} miles away
+          {{/compare ~}}
+        {{/compare ~}}
+      </li>
+    </ul>
+    {{/if ~}}
+    {{/if ~}}
+    {{/ifAll ~}}
+    {{/compare ~}}
+    <a href="/opportunity/{{slug}}{{@root.request.url.search}}" class="mdc-card__action hide-sm">Find out more</a>
+    <a href="/opportunity/{{slug}}{{@root.request.url.search}}" class="mdc-card__action hide-md hide-lg"><span class="fal fa-info-circle fa-fw fa-2x" aria-hidden="true"></span></a>
+    {{/compare ~}}
+  </div>
+  <div class="mdc-card__action-icons pull-right">
+    <div class="mdc-chip-set mdc-chip-set--filter">
+      {{> favourite_chip id=Id}}
+    </div>
+  </div>
+</div>

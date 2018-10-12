@@ -1,0 +1,143 @@
+{{#*inline "term_checkbox"}}
+  <div class="mdc-form-field">
+    <div class="mdc-checkbox">
+      <input type="checkbox" class="mdc-checkbox__native-control" id="{{instance_id}}_{{field}}_{{slug}}" name="{{#compare field "===" "type"}}{{field}}{{else}}{{field}}[]{{/compare}}" value="{{slug}}"{{#if (contains selected slug)}} checked{{/if}} />
+      <div class="mdc-checkbox__background">
+        <svg class="mdc-checkbox__checkmark"
+             viewBox="0 0 24 24">
+          <path class="mdc-checkbox__checkmark-path"
+                fill="none"
+                stroke="white"
+                d="M1.73,12.91 8.1,19.28 22.79,4.59"/></svg>
+        <div class="mdc-checkbox__mixedmark"></div>
+      </div>
+    </div>
+    <label for="{{instance_id}}_{{field}}_{{slug}}">
+      {{{default value.key value}}}
+    </label>
+  </div>
+{{/inline}}
+
+<div class="mdc-drawer__content">
+  <h2 class="mdc-drawer__content-heading hide-sm mdc-drawer--occasional-ie11">Search organisations</h2>
+
+  <div class="h-padding">
+    {{#>components_tab_bar}}
+      {{>components_tab url=(concat "organisations/search" @root.request.url.search) iconClasses="far fa-list fa-fw" label="List" active=(compare @root.request.url.pathname "===" "/organisations/search")}}
+      {{>components_tab url=(concat "organisations/map" @root.request.url.search) iconClasses="far fa-map-marker-alt fa-fw" label="Map" active=(compare @root.request.url.pathname "===" "/organisations/map")}}
+    {{/components_tab_bar}}
+  </div>
+
+  <form action="/{{#compare @root.request.url.pathname "/organisations/map"}}organisations/map{{else}}organisations/search{{/compare}}" method="GET" class="search-form" novalidate>
+    <input type="hidden" name="sort" value="{{@root.request.params.query.sort}}" id="{{instance_id}}-sort">
+    <div class="h-padding">
+      <div class="mdc-text-field mdc-text-field--box mdc-text-field--with-leading-icon" data-mdc-auto-init="MDCTextField">
+        <span class="far fa-search mdc-text-field__icon" tabindex="-1"></span>
+        <input type="text" id="{{instance_id}}-keywords" name="keywords" class="mdc-text-field__input mdc-text-field--fullwidth" value="{{@root.request.params.query.keywords}}" data-lpignore="true" autocomplete="off">
+        <label class="mdc-floating-label" for="keywords">
+          Keywords
+        </label>
+        <div class="mdc-line-ripple"></div>
+      </div>
+    </div>
+
+    <div class="h-padding">
+      <div class="mdc-layout-grid">
+        <div class="mdc-layout-grid__inner">
+          <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-8-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone">
+            <div class="mdc-text-field mdc-text-field--box mdc-text-field--with-leading-icon" data-mdc-auto-init="MDCTextField">
+              <span class="far fa-map-marker-alt mdc-text-field__icon geo-lookup" tabindex="0" title="Find my location" role="button" style="pointer-events: initial !important;"></span>
+              <input type="text" id="{{instance_id}}-location" name="location" class="mdc-text-field__input mdc-text-field--fullwidth search-location" value="{{#ifAll @root.request.params.query.lat @root.request.params.query.lng}}{{@root.request.params.query.location}}{{/ifAll}}" placeholder="" data-lpignore="true" data-location-search='{
+                  "googleMapsOptions": {
+                    "type": ["(regions)"],
+                    "componentRestrictions": {
+                      "country": "gb"
+                    }
+                  },
+                  "latSelector": "[name=\"lat\"]",
+                  "lngSelector": "[name=\"lng\"]",
+                  "locationServicesSelector": ".geo-lookup"
+                }'>
+              <label class="mdc-floating-label" for="{{instance_id}}-location">
+                Location
+              </label>
+              <div class="mdc-line-ripple"></div>
+            </div>
+          </div>
+          <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone">
+            <div class="mdc-select mdc-select--box mdc-drawer--occasional-ie11" data-mdc-auto-init="MDCSelect">
+              <select data-location="{{instance_id}}-location" class="mdc-select__native-control search-distance" id="{{instance_id}}-distance" name="distance">
+                <option value="8.04672"{{#compare @root.request.params.query.distance "8.04672"}} selected{{/compare}}>5 miles</option>
+                <option value="16.09344"{{#compare @root.request.params.query.distance "16.09344"}} selected{{/compare}}>10 miles</option>
+                <option value="40.2336"{{#compare @root.request.params.query.distance "40.2336"}} selected{{/compare}}>25 miles</option>
+                <option value="80.4672"{{#compare @root.request.params.query.distance "80.4672"}} selected{{/compare}}>50 miles</option>
+                <option value=""{{#compare @root.request.params.query.distance ""}} selected{{/compare}}>no limit</option>
+              </select>
+              <label class="mdc-floating-label" for="{{instance_id}}-distance">
+                Within
+              </label>
+              <div class="mdc-line-ripple"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <input type="hidden" name="lat" value="{{@root.request.params.query.lat}}">
+    <input type="hidden" name="lng" value="{{@root.request.params.query.lng}}">
+
+    {{#each (split "regions,organisation_activities" ",") ~}}
+      <h3 class="mdc-drawer__content-heading cursor-pointer noselect mdc-drawer--occasional-ie11" data-collapse-target="#{{../instance_id}}-{{this}}-collapse" role="button" aria-pressed="false" aria-label="Show {{getProperty @root.context.metaData.termTypeLabels (concat this ".plural")}}" tabindex="0">
+        {{getProperty @root.context.metaData.termTypeLabels (concat this ".plural")}}
+        <span class="mdc-icon-toggle pull-right">
+          <i class="far {{#if (getProperty @root.request.params.query this)}}fa-chevron-up{{else}}fa-chevron-down{{/if}}" aria-hidden="true"></i>
+        </span>
+      </h3>
+      <div class="mdc-drawer--occasional-ie11" id="{{../instance_id}}-{{this}}-collapse"{{#unless (getProperty @root.request.params.query this)}} style="display: none;"{{/unless}}>
+        {{#compare this "===" "regions" ~}}
+          {{#if (any @root.data.organisationSupplimentary.types.aggregations.countries.buckets) ~}}
+            {{#each @root.data.organisationSupplimentary.types.aggregations.countries.buckets ~}}
+              {{#if key ~}}
+                {{#compare (length @root.data.organisationSupplimentary.types.aggregations.countries.buckets) ">=" 1 ~}}
+                  <h3 class="mdc-typography--headline7">{{{key}}}</h3>
+                {{/compare ~}}
+              {{/if ~}}
+              {{#each this.regions_slugs.buckets ~}}
+                {{#if key ~}}
+                  {{> term_checkbox slug=key field="regions" selected=@root.request.params.query.regions instance_id=../../../instance_id value=(lookup ../this.regions.buckets @index)}}
+                {{/if ~}}
+              {{/each ~}}
+            {{/each ~}}
+            {{#ifAny (length @root.data.organisationSupplimentary.types.aggregations.home_based.buckets) (length @root.data.organisationSupplimentary.types.aggregations.various_locations.buckets) ~}}
+              {{#compare (length @root.data.organisationSupplimentary.types.aggregations.countries.buckets) ">=" 1 ~}}
+                <h3 class="mdc-typography--headline7">Other</h3>
+              {{/compare ~}}
+              {{#compare (length @root.data.organisationSupplimentary.types.aggregations.home_based.buckets) ">=" 1 ~}}
+                {{> term_checkbox slug="true" field="home_based" selected=@root.request.params.query.home_based instance_id=../instance_id value="Home-based"}}
+              {{/compare ~}}
+              {{#compare (length @root.data.organisationSupplimentary.types.aggregations.various_locations.buckets) ">=" 1 ~}}
+                {{> term_checkbox slug="true" field="various_locations" selected=@root.request.params.query.various_locations instance_id=../instance_id value="Various locations"}}
+              {{/compare ~}}
+            {{/ifAny ~}}
+          {{/if ~}}
+        {{else}}
+          {{#each (getProperty @root.data.organisationSupplimentary.types.aggregations (concat this "_slugs.buckets")) ~}}
+            {{#if key ~}}
+              {{> term_checkbox slug=key field=../this selected=(getProperty @root.request.params.query ../this) instance_id=../../instance_id value=(lookup (getProperty @root.data.organisationSupplimentary.types.aggregations (concat ../this ".buckets")) @index)}}
+            {{/if ~}}
+          {{/each ~}}
+        {{/compare ~}}
+      </div>
+    {{/each ~}}
+
+    <div class="v-margin-full">
+      {{> term_checkbox slug="true" field="has_opportunities" selected=@root.request.params.query.has_opportunities instance_id=instance_id value="Only show organisations with current opportunities"}}
+    </div>
+
+    <div class="h-margin v-margin mdc-drawer--occasional-ie11">
+      <button class="mdc-button mdc-button--raised mdc-button--large mdc-button--fullwidth mdc-ripple-surface mdc-ripple-surface--primary" type="submit" id="{{instance_id}}-search-submit" data-mdc-auto-init="MDCRipple">
+        <span class="far fa-search fa-fw mdc-list-item__graphic" aria-hidden="true"></span>
+        Search
+      </button>
+    </div>
+  </form>
+</div>

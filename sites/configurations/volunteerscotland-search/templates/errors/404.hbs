@@ -1,0 +1,43 @@
+<div class="container-fluid container-content">
+  <div class="mdc-layout-grid">
+    <div class="mdc-layout-grid__inner">
+      <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-8-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone content page-content">
+        <h2>The page you requested could not be found</h2>
+        <p>
+          We recently relaunched our website and some page addresses may have changed.
+        </p>
+        {{#ifAll data.opportunitySupplimentary.not_found (compare data.opportunitySupplimentary.not_found.hits.total ">" 0) ~}}
+        <h3>Did you mean?</h3>
+        {{#each data.opportunitySupplimentary.not_found.hits.hits ~}}
+        {{#compare @index "===" 0 ~}}
+        {{>highlight_result}}
+        {{else}}
+        {{/compare ~}}
+        {{/each ~}}
+        {{/ifAll ~}}
+      </div>
+      <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-4-tablet mdc-layout-grid__cell--span-4-phone">
+        <img src="/assets/images/404.png" class="responsive">
+      </div>
+    </div>
+  </div>
+  {{#ifAll data.not_found (compare data.not_found.hits.total ">" 1) ~}}
+  <hr />
+  <h3>Other relevant content</h3>
+  {{#each data.not_found.hits.hits ~}}
+  {{#compare @index "===" 0 ~}}
+  {{else}}
+  {{>highlight_result}}
+  {{/compare ~}}
+  {{/each ~}}
+  {{else}}
+  <!-- <h3>Try searching for a topic</h3> -->
+  {{/ifAll ~}}
+
+  <script>
+  gtag('event', '404', {
+    event_category: '{{name}}',
+    event_label: '{{request.params.uri.pathname}}'
+  });
+  </script>
+</div>

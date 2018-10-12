@@ -480,6 +480,7 @@ export class Helpers {
     }
     const regex = new RegExp(expression, options);
     const output = regex.test(input);
+    //console.log('REGEX MATCH -> input:', input, '| expression:', regex, '| options:', options, '| output:', output); 
     return output;
   }
 

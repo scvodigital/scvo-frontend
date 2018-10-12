@@ -1,0 +1,33 @@
+{
+  "name": "geo-lookup",
+  "pattern": "/geo-lookup",
+  "tasks": [
+    {
+      "name": "search_data",
+      "taskModule": "elasticsearch",
+      "config": {
+        "connectionStringTemplate": "{$../../elasticsearch-url.txt}",
+        "elasticsearchConfig": {
+          "apiVersion": "5.6"
+        },
+        "queryTemplates": {
+          "name": "detailed_results",
+          "index": "geo",
+          "type": "postcode,local-authority-district,electoral-ward",
+          "template": ">context.metaData.handlebars.queries.geo-lookup"
+        }
+      },
+      "renderer": "handlebars"
+    },
+    {
+      "name": "destination",
+      "taskModule": "render",
+      "renderer": "handlebars",
+      "config": {
+        "output": "body",
+        "template": ">context.metaData.handlebars.templates.geo-lookup",
+        "parseJson": "true"
+      }
+    }
+  ]
+}
