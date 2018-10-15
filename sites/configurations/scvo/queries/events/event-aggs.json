@@ -52,7 +52,17 @@
     "months": {
       "terms": {
         "field": "month",
+        "order": {
+          "date": "asc"
+        },
         "size": 10000
+      },
+      "aggs": {
+         "date": {
+            "max": {
+               "field": "date_start"
+            }
+         }
       }
     },
     "locations": {
