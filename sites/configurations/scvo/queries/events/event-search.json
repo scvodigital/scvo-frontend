@@ -1,6 +1,6 @@
 {
   "size": 10,
-  "from": {{multiply (subtract (default request.params.query.page 1) 1) 10}},
+  "from": {{multiply (subtract (default @root.request.params.query.page 1) 1) 10}},
   "_source": [
     "slug",
     "title",
@@ -13,10 +13,10 @@
   "query": {
     "bool": {
       "must_not": [
-        {{#if request.params.query.free ~}}
+        {{#if @root.request.params.query.free ~}}
         {
           "exists": {
-            "field": "cost"
+            "field": "rate"
           }
         },
         {{/if ~}}
@@ -26,29 +26,45 @@
           }
         }
       ],
-      "must": [
-        {{#if request.params.query.course_type ~}}
+      "filter": [
+        {{#if @root.request.params.query.course_type ~}}
         {
           "term": {
             "course_type": "{{request.params.query.course_type}}"
           }
         },
         {{/if ~}}
-        {{#if request.params.query.month ~}}
+        {{#if @root.request.params.query.month ~}}
         {
           "term": {
             "month": "{{request.params.query.month}}"
           }
         },
         {{/if ~}}
-        {{#if request.params.query.location ~}}
+        {{#if @root.request.params.query.location ~}}
         {
           "term": {
             "city": "{{request.params.query.location}}"
           }
         },
         {{/if ~}}
-        {{#if request.params.query.q ~}}
+        {
+          "range" : {
+            "date_start" : {
+              "gte" : "now/d"
+            }
+          }
+        }
+      ],
+      "must": [
+        {{#if @root.request.params.query.hide_full ~}}
+        {
+          "exists": {
+            "field": "places_available"
+          }
+        },
+        {{/if ~}}
+        {{#if @root.request.params.query.q ~}}
         {
           "query_string": {
             "query": {{{stringify (default request.params.query.q "")}}},
@@ -59,10 +75,8 @@
         },
         {{/if ~}}
         {
-          "range" : {
-            "date_start" : {
-              "gte" : "now/d"
-            }
+          "exists": {
+            "field": "title"
           }
         }
       ],

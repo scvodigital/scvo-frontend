@@ -9,42 +9,57 @@
     <div class="mdc-layout-grid">
       <div class="mdc-layout-grid__inner">
         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-2-tablet mdc-layout-grid__cell--span-4-phone sidebar events-sidebar">
-          <form action="/events" method="GET" [searchroute]="'event_search'" data-auto-search="true">
-            <div class="mdc-textfield mdc-textfield--upgraded">
-              <input type="text" class="mdc-textfield__input" name="q" id="events-keywords" placeholder="Keywords" value="{{@root.request.params.query.q}}">
+          <form action="/events" method="GET" [searchroute]="'event_search'" data-auto-search="false">
+            <div class="mdc-text-field mdc-text-field--with-leading-icon">
+              <span class="far fa-search mdc-text-field__icon" tabindex="0" role="button"></span>
+              <input type="text" id="events-keywords" name="q" class="mdc-text-field__input" value="{{@root.request.params.query.q}}">
+              <label for="events-keywords" class="mdc-floating-label mdc-floating-label--float-above">Keywords</label>
+              <div class="mdc-line-ripple"></div>
             </div>
             <h3>Filter</h3>
             <div class="mdc-form-field">
-              <select class="mdc-select" role="listbox" id="events-course_type" name="course_type">
-                <option value="" {{#if @root.request.params.query.course_type}}{{else}}selected{{/if}}>Select event type</option>
-                {{#each @root.data.supplimentaryResponses.types.aggregations.types.buckets ~}}
-                <option value="{{key}}" {{#compare @root.request.params.query.course_type "===" key}}selected{{/compare}}>{{key}}</option>
-                {{/each ~}}
-              </select>
+              <div class="mdc-select">
+                <select class="mdc-select__native-control" id="events-course_type" name="course_type">
+                  <option value="" {{#if @root.request.params.query.course_type}}{{else}}selected{{/if}}>Any type</option>
+                  {{#each @root.data.supplimentaryResponses.types.aggregations.types.buckets ~}}
+                  <option value="{{key}}" {{#compare @root.request.params.query.course_type "===" key}}selected{{/compare}}>{{key}}</option>
+                  {{/each ~}}
+                </select>
+                <label class="mdc-floating-label mdc-floating-label--float-above">Event type</label>
+                <div class="mdc-line-ripple"></div>
+              </div>
             </div>
             <div class="mdc-form-field">
-              <select class="mdc-select" role="listbox" id="events-month" name="month">
-                <option value="" {{#if @root.request.params.query.month}}{{else}}selected{{/if}}>Any month</option>
-                {{#each @root.data.supplimentaryResponses.types.aggregations.months.buckets ~}}
-                {{#if key ~}}
-                <option value="{{key}}" {{#compare @root.request.params.query.month "===" key}}selected{{/compare}}>{{key}}</option>
-                {{/if ~}}
-                {{/each ~}}
-              </select>
+              <div class="mdc-select">
+                <select class="mdc-select__native-control" id="events-month" name="month">
+                  <option value="" {{#if @root.request.params.query.month}}{{else}}selected{{/if}}>Any month</option>
+                  {{#each @root.data.supplimentaryResponses.types.aggregations.months.buckets ~}}
+                  {{#if key ~}}
+                  <option value="{{key}}" {{#compare @root.request.params.query.month "===" key}}selected{{/compare}}>{{key}}</option>
+                  {{/if ~}}
+                  {{/each ~}}
+                </select>
+                <label class="mdc-floating-label mdc-floating-label--float-above">Month</label>
+                <div class="mdc-line-ripple"></div>
+              </div>
             </div>
             <div class="mdc-form-field">
-              <select class="mdc-select" role="listbox" id="events-locations" name="location">
-                <option value="" {{#if @root.request.params.query.location}}{{else}}selected{{/if}}>Any location</option>
-                {{#each @root.data.supplimentaryResponses.types.aggregations.locations.buckets ~}}
-                {{#if key ~}}
-                <option value="{{key}}" {{#compare @root.request.params.query.location "===" key}}selected{{/compare}}>{{key}}</option>
-                {{/if ~}}
-                {{/each ~}}
-              </select>
+              <div class="mdc-select">
+                <select class="mdc-select__native-control" id="events-locations" name="location">
+                  <option value="" {{#if @root.request.params.query.location}}{{else}}selected{{/if}}>Any location</option>
+                  {{#each @root.data.supplimentaryResponses.types.aggregations.locations.buckets ~}}
+                  {{#if key ~}}
+                  <option value="{{key}}" {{#compare @root.request.params.query.location "===" key}}selected{{/compare}}>{{key}}</option>
+                  {{/if ~}}
+                  {{/each ~}}
+                </select>
+                <label class="mdc-floating-label mdc-floating-label--float-above">Location</label>
+                <div class="mdc-line-ripple"></div>
+              </div>
             </div>
             <div class="mdc-form-field">
               <div class="mdc-checkbox">
-                <input type="checkbox" class="mdc-checkbox__native-control" id="events-free" name="free" {{#if request.params.query.free}}checked{{/if}} />
+                <input type="checkbox" class="mdc-checkbox__native-control" id="events-free" name="free"{{#if request.params.query.free}} checked{{/if}} />
                 <div class="mdc-checkbox__background">
                   <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
                     <path class="mdc-checkbox__checkmark__path" fill="none" stroke="white" d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
@@ -54,6 +69,19 @@
               </div>
               <label for="events-free">Only free events</label>
             </div>
+            <div class="mdc-form-field">
+              <div class="mdc-checkbox">
+                <input type="checkbox" class="mdc-checkbox__native-control" id="events-hide_full" name="hide_full"{{#if request.params.query.hide_full}} checked{{/if}} />
+                <div class="mdc-checkbox__background">
+                  <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
+                    <path class="mdc-checkbox__checkmark__path" fill="none" stroke="white" d="M1.73,12.91 8.1,19.28 22.79,4.59"/>
+                  </svg>
+                  <div class="mdc-checkbox__mixedmark"></div>
+                </div>
+              </div>
+              <label for="events-hide_full">Hide fully booked events</label>
+            </div>
+            <br />
             <button class="mdc-button mdc-button--raised" type="submit">
               Search
             </button>
