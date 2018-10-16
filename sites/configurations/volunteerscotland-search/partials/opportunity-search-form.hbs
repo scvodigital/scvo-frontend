@@ -1,7 +1,7 @@
 {{#*inline "term_filter"}}
 <h3 class="mdc-drawer__content-heading cursor-pointer noselect mdc-drawer--occasional-ie11" data-collapse-target="#{{../instance_id}}-{{type}}-collapse" role="button" aria-pressed="false" aria-label="Show {{getProperty @root.context.metaData.termTypeLabels (concat type ".plural")}}" tabindex="0">
   {{#compare type "===" "regions" ~}}
-    <strong>OR</strong> Region
+    Region
   {{else}}
     {{getProperty @root.context.metaData.termTypeLabels (concat type ".plural")}}
   {{/compare ~}}
