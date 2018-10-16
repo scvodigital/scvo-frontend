@@ -27,20 +27,18 @@
       }
     }
   }
-
-{{#ifAll request.params.query.lat request.params.query.lon}}
-,
-"sort": {
-"_geo_distance": {
-"geo_coords": {
-"lat": {{request.params.query.lat}},
-"lon": {{request.params.query.lon}}
-},
-"order": "asc",
-"unit": "km",
-"mode": "min",
-"distance_type": "arc"
-}
-}
-{{/ifAll}}
+  {{#ifAll request.params.query.lat request.params.query.lon}},
+  "sort": {
+    "_geo_distance": {
+      "geo_coords": {
+        "lat": {{request.params.query.lat}},
+        "lon": {{request.params.query.lon}}
+      },
+      "order": "asc",
+      "unit": "km",
+      "mode": "min",
+      "distance_type": "arc"
+    }
+  }
+  {{/ifAll}}
 }
