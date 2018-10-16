@@ -1,0 +1,60 @@
+{
+  "name": "send-test",
+  "pattern": "/send-test/:campaign/:email",
+  "debug": true,
+  "tasks": [
+    {
+      "name": "notifications",
+      "taskModule": "mysql",
+      "config": {
+        "connectionName": "notifications",
+        "queryTemplates": {
+          "subscriptions": ">context.metaData.handlebars.queries.get-test"
+        }
+      },
+      "renderer": "handlebars"
+    },
+    {
+      "name": "generate_es_task",
+      "taskModule": "render",
+      "renderer": "handlebars",
+      "config": {
+        "output": "data",
+        "parseJson": true,
+        "template": ">context.metaData.handlebars.templates.process_dynamic-es-task"
+      }
+    },
+    "data.generate_es_task",
+    {
+      "name": "generate_mysql_task",
+      "taskModule": "render",
+      "renderer": "handlebars",
+      "config": {
+        "output": "data",
+        "parseJson": true,
+        "template": ">context.metaData.handlebars.templates.process_dynamic-mysql-task"
+      }
+    },
+    "data.generate_mysql_task",
+    {
+      "name": "send_emails",
+      "taskModule": "mailgun",
+      "renderer": "handlebars",
+      "config": {
+        "output": "data",
+        "parseJson": true,
+        "template": ">context.metaData.handlebars.templates.process_email-data"
+      }
+    },
+    {
+      "name": "destination",
+      "taskModule": "render",
+      "renderer": "handlebars",
+      "config": {
+        "output": "body",
+        "template": "{ {{#if @root.route.debug}} \"notifications\": {{{stringify @root.data.notifications}}}, \"search_task\": {{{stringify @root.data.generate_es_task}}}, \"search_data\": {{{stringify (default @root.data.search_data \"none\")}}}, \"mysql_task\": {{{stringify @root.data.generate_mysql_task}}}, \"email_data\": {{{stringify @root.data.send_emails}}} {{/if}} }",
+        "parseJson": false
+      }
+    }
+  ]
+}
