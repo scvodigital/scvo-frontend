@@ -82,6 +82,15 @@
                 <strong>Minimum Age: </strong> {{{minimum_age}}}
               </div>
             {{/if ~}}
+
+            {{#if maximum_age ~}}
+              {{#compare maximum_age "<=" 26}}
+                <div class="mdc-typography--body1">
+                  <strong>Maximum Age: </strong> {{{maximum_age}}}
+                </div>
+              {{/compare}}
+            {{/if ~}}
+
           {{/ifAny ~}}
 
           {{#ifAny travel_expenses expenses_paid support_options ~}}
@@ -98,6 +107,13 @@
               </div>
             {{/if ~}}
 
+            {{#if taster_available ~}}
+              <div class="mdc-typography--body1">
+                <strong>Taster Available: </strong> {{#compare taster_available "===" true}}Yes{{else}}No{{/compare}}
+              </div>
+            {{/if ~}}
+
+
             {{#if support_options ~}}
               <div class="mdc-typography--body1">
                 <strong>Support Options: </strong>
@@ -105,6 +121,9 @@
                   {{#each support_options}}
                     <li>{{{this}}}</li>
                   {{/each}}
+                  {{#compare (getType support_options) "===" "string"}}
+                    <li>{{{support_options}}}</li>
+                  {{/compare}}
                 </ul>
               </div>
             {{/if ~}}

@@ -4,16 +4,13 @@
 {{#if client_groups ~}}
   {{>queries_terms field="client_group_slugs" terms=client_groups}},
 {{/if ~}}
-{{#if volunteersearch_support_options ~}}
-{{>queries_terms field="volunteersearch_support_option_slugs" terms=volunteersearch_support_options}},
+{{#if services ~}}
+{{>queries_terms field="volunteersearch_support_option_slugs" terms=services}},
 {{/if ~}}
-{{#if volunteersearch_age_ranges ~}}
-{{>queries_terms field="volunteersearch_age_range_slugs" terms=volunteersearch_age_ranges}},
+{{#if age_groups ~}}
+{{>queries_terms field="volunteersearch_age_group_slugs" terms=age_groups}},
 {{/if ~}}
 
-{{#if age-range ~}}
-  {{>queries_age_range terms=age_ranges}}
-{{/if ~}}
 {{#if recently_updated ~}}
   {{>queries_date_range field="date_last_modified" gt="now-12M"}},
 {{/if ~}}
