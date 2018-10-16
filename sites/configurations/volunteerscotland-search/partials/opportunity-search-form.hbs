@@ -131,11 +131,7 @@
       </div>
     </div>
 
-    {{#each (split "work_types,client_groups" ",") ~}}
-      {{> term_filter type=this instance_id=instance_id ~}}
-    {{/each ~}}
-
-    {{#each (split "availability,services" ",") ~}}
+    {{#each (split "work_types,client_groups,availability,services,age_groups,support_options" ",") ~}}
       {{> term_filter type=this instance_id=instance_id ~}}
     {{/each ~}}
 

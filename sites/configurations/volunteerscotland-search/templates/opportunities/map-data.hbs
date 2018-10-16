@@ -1,7 +1,7 @@
 
 {
-{{#compare @root.request.params.query.zoom "<=" 7}}
-"areas": [
+{{#if @root.request.params.query.returnRegionsNotPoints}}
+  "areas": [
 {{#each @root.data.search_data.map_regions.hits.hits ~}}
   {
   "place" : {{{safeStringify _source.place.[0]}}},
@@ -28,5 +28,5 @@
   }{{#unless @last}},{{/unless}}
 {{/each}}
 ]
-{{/compare}}
+{{/if}}
 }
