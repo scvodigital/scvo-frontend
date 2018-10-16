@@ -13,7 +13,7 @@
             <mj-column padding="0px">
               <mj-text font-size="16px" padding="0px" color="#000000" font-family="Montserrat, Helvetica, Arial, sans-serif">
                 <p>
-                  <strong>{{inflect hits.total "job" "jobs" true}}</strong> matching your preferences {{inflect hits.total "was" "were"}} added to Goodmoves since the {{momentFormat (moment ../subscription.lastSent "") "Do \o\f MMMM"}}.
+                  <strong>{{inflect hits.total "job" "jobs" true}}</strong> in your shortlist will close on the {{momentFormat (dateMath "now+3d/d") "Do \o\f MMMM"}}.
                 </p>
               </mj-text>
             </mj-column>
@@ -65,7 +65,7 @@
         <mj-column padding="10px">
           <mj-text font-size="16px" color="#ffffff" font-family="Montserrat, helvetica, Arial, sans-serif" padding="0px">
             <p style="margin:0px;">
-              <a href="https://goodmoves.com/searches" color="#fff" style="color:#fff;font-weight:bold;text-decoration:none;">Change your alert preferences</a> or <a href="%unsubscribe_url%" color="#fff" style="color:#fff;font-weight:bold;text-decoration:none;">unsubscribe</a>
+              <a href="https://goodmoves.com/shortlist" color="#fff" style="color:#fff;font-weight:bold;text-decoration:none;">Change your alert preferences</a> or <a href="%unsubscribe_url%" color="#fff" style="color:#fff;font-weight:bold;text-decoration:none;">unsubscribe</a>
             </p>
           </mj-text>
         </mj-column>

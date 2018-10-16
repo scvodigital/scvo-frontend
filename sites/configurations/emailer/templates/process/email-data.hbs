@@ -7,10 +7,10 @@
     }}
       {
         "from": {{{stringify (getProperty @root.context.metaData.campaignConfig (concat campaign '.from'))}}},
-        "to": {{{stringify email}}},
-        "o:tag": {{{stringify campaign}}},
+        "to": {{{stringify (default testEmail email)}}},
+        "o:tag": {{{stringify (if testEmail (concat 'test-' campaign) else=campaign)}}},
         "o:tracking": true,
-        {{!--"o:testmode": true,--}}
+        {{!-"o:testmode": true,--}}
         "tag": {{{stringify campaign}}},
         "id": {{{stringify campaign}}},
         "connectionName": {{{stringify (getProperty @root.context.metaData.campaignConfig (concat campaign '.mailgunConnection'))}}},
