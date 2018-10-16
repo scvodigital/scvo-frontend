@@ -7,6 +7,7 @@
     }}
       {
         "from": {{{stringify (getProperty @root.context.metaData.campaignConfig (concat campaign '.from'))}}},
+        "h:sender": {{{stringify (getProperty @root.context.metaData.campaignConfig (concat campaign '.from'))}}},
         "to": {{{stringify (default testEmail email)}}},
         "o:tag": {{{stringify (if testEmail (concat 'test-' campaign) else=campaign)}}},
         "o:tracking": true,
@@ -14,22 +15,22 @@
         "tag": {{{stringify campaign}}},
         "id": {{{stringify campaign}}},
         "connectionName": {{{stringify (getProperty @root.context.metaData.campaignConfig (concat campaign '.mailgunConnection'))}}},
-        "subject": 
+        "subject":
           {{~#blockStringify this ~}}
-            {{~> 
+            {{~>
               (getProperty @root.context.metaData.campaignConfig (concat campaign '.subjectPartial'))
               subscription=this
               searchData=(getProperty @root.data.search_data (concat (slugify (concat campaign " " email))))
-              campaignConfig=(getProperty @root.context.metaData.campaignConfig campaign)          
+              campaignConfig=(getProperty @root.context.metaData.campaignConfig campaign)
             ~}}
           {{~/blockStringify}},
-        "html": 
+        "html":
           {{~#blockStringify this ~}}
-            {{~> 
+            {{~>
               (getProperty @root.context.metaData.campaignConfig (concat campaign '.bodyPartial'))
               subscription=this
               searchData=(getProperty @root.data.search_data (concat (slugify (concat campaign " " email))))
-              campaignConfig=(getProperty @root.context.metaData.campaignConfig campaign)          
+              campaignConfig=(getProperty @root.context.metaData.campaignConfig campaign)
             ~}}
           {{~/blockStringify}}
       }

@@ -97,7 +97,7 @@
           </div>
         {{/if}}
       {{/ifAny}}
-      <header class="mdc-top-app-bar top-bar-stuck" id="top-bar">
+      <header class="mdc-top-app-bar" id="top-bar">
         <div class="container-fluid">
           <div class="mdc-top-app-bar__row mdc-top-app-bar__upper">
             <section class="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
@@ -257,7 +257,7 @@
 
       <div class="mdc-drawer-scrim"></div>
 
-      <main class="mdc-theme--background mdc-toolbar-fixed-adjust {{#if layoutParts.sidebar}}drawer-container-permanent{{else}}drawer-container-temporary{{/if}}">
+      <main class="mdc-theme--background {{#if layoutParts.sidebar}}drawer-container-permanent{{else}}drawer-container-temporary{{/if}}">
         {{#if layoutParts.sidebar ~}}
         <aside class="mdc-drawer mdc-elevation--z0 mdc-drawer--occasional" id="sidebar-temporary" data-menu-button="#sidebar-button">
           {{{layoutParts.sidebar}}}

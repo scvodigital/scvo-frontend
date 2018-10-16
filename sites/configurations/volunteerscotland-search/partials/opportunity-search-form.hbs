@@ -14,15 +14,17 @@
     {{#if (any @root.data.opportunitySupplimentary.types.aggregations.countries.buckets) ~}}
       {{#each @root.data.opportunitySupplimentary.types.aggregations.countries.buckets ~}}
         {{#if key ~}}
-          {{#compare (length @root.data.opportunitySupplimentary.types.aggregations.countries.buckets) ">=" 1 ~}}
+          {{!-- #compare (length @root.data.opportunitySupplimentary.types.aggregations.countries.buckets) ">=" 1 ~}}
             <h3 class="mdc-typography--headline7">{{{key}}}</h3>
-          {{/compare ~}}
+          {{/compare ~ --}}
         {{/if ~}}
-        {{#each this.regions_slugs.buckets ~}}
-          {{#if key ~}}
-            {{> term_checkbox slug=key field="regions" selected=@root.request.params.query.regions instance_id=../../../instance_id value=(lookup ../this.regions.buckets @index)}}
-          {{/if ~}}
-        {{/each ~}}
+        {{#compare key "Scotland" ~}}
+          {{#each this.regions_slugs.buckets ~}}
+            {{#if key ~}}
+              {{> term_checkbox slug=key field="regions" selected=@root.request.params.query.regions instance_id=../../../instance_id value=(lookup ../this.regions.buckets @index)}}
+            {{/if ~}}
+          {{/each ~}}
+        {{/compare ~}}
       {{/each ~}}
       {{#ifAny (length @root.data.opportunitySupplimentary.types.aggregations.home_based.buckets) (length @root.data.opportunitySupplimentary.types.aggregations.various_locations.buckets) ~}}
         {{#compare (length @root.data.opportunitySupplimentary.types.aggregations.countries.buckets) ">=" 1 ~}}
