@@ -17,22 +17,22 @@
       <div class="panel panel--active mdc-card--full-content" role="tabpanel" aria-hidden="false" data-tab-name="panel-1">
         <div class="key-info-extra">
           <ul class="fa-ul">
-            {{#if work_type ~}}
+            {{#compare (length work_type) ">" 0 ~}}
             <li class="mdc-card__info--content-primary-work-type reference mdc-typography--body1">
               <span class="fa-li"><span class="far fa-briefcase fa-fw" title="Activites"></span></span>
               {{#each work_type}}
                 <a href="/search?work_types%5B%5D={{urlencode (slugify (replace this "/" "-"))}}">{{{this}}}</a>{{#unless @last}}, {{/unless}}
               {{/each}}
             </li>
-            {{/if ~}}
-            {{#if client_group ~}}
+            {{/compare ~}}
+            {{#compare (length client_group) ">" 0 ~}}
               <li class="mdc-card__info--content-primary-client-group mdc-typography--body1">
                 <span class="fa-li"><span class="far fa-users fa-fw" title="Client groups"></span></span>
                 {{#each client_group}}
                   <a href="/search?client_groups%5B%5D={{urlencode (slugify (replace this "/" "-"))}}">{{{this}}}</a>{{#unless @last}}, {{/unless}}
                 {{/each}}
               </li>
-            {{/if ~}}
+            {{/compare ~}}
             {{#if available_from ~}}
               <li class="mdc-card__info--content-primary-from mdc-typography--body1">
                 <span class="fa-li"><span class="far fa-calendar-plus fa-fw" title="Start date"></span></span>
