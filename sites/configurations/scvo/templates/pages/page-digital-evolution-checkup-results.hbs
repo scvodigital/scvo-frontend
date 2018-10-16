@@ -1,0 +1,47 @@
+{{#*inline "to_percentage"}}{{round (multiply (divide (subtract score lower) (subtract upper lower)) 100) "up"}}{{/inline}}
+<div class="page">
+  {{> header_splash}}
+  <div class="container-fluid">
+    {{> breadcrumbs}}
+    <div class="mdc-layout-grid">
+      <div class="mdc-layout-grid__inner">
+        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-9-desktop mdc-layout-grid__cell--span-5-tablet mdc-layout-grid__cell--span-4-phone content page-content">
+          <h2>
+            Digital Check-up, overall score: {{> to_percentage score=@root.request.params.query.overall lower=-18 upper=138}}% <span class="mdc-typography--body1">(average: {{round @root.data.supplimentaryResponses.data_averages.aggregations.total_stats.avg "up"}}%)</span>
+          </h2>
+          <p>
+            <strong>Section 1 - Leadership, Culture and Skills</strong><br />
+            You scored: {{> to_percentage score=@root.request.params.query.s1 lower=-4 upper=20}}% in this section (average: {{round @root.data.supplimentaryResponses.data_averages.aggregations.leadership_culture_and_skills_stats.avg "up"}}%)
+            <br />
+            <strong>Section 2 - ICT (Tools and equipment)</strong><br />
+            You scored: {{> to_percentage score=@root.request.params.query.s2 lower=-2 upper=35}}% in this section (average: {{round @root.data.supplimentaryResponses.data_averages.aggregations.tools_and_equipment_stats.avg "up"}}%)
+            <br />
+            <strong>Section 3 - Content, marketing and data</strong><br />
+            You scored: {{> to_percentage score=@root.request.params.query.s3 lower=-10 upper=66}}% in this section (average: {{round @root.data.supplimentaryResponses.data_averages.aggregations.content_marketing_and_data_stats.avg "up"}}%)
+            <br />
+            <strong>Section 4 - Cyber resilience and online threats</strong><br />
+            You scored: {{> to_percentage score=@root.request.params.query.s4 lower=-2 upper=17}}% in this section (average: {{round @root.data.supplimentaryResponses.data_averages.aggregations.cyber_resilience_stats.avg "up"}}%)
+            <br />
+          </p>
+          <p>
+            Thank you{{#if @root.request.params.query.name}} {{@root.request.params.query.name}}{{/if}}, you have completed the digital checkup. If you have asked for support, we will be in touch to arrange a call. Or you can go ahead and <a href="http://calendly.com/john-fitzgerald/check-up">book a time</a>.
+          </p>
+          <h2>
+            Next steps
+          </h2>
+          <p>
+            <a href="https://scvo.org/digital">Sign up to our e-bulletin</a> to get details of our events, training and other support for digital change. 
+          </p>
+          <p>
+            If you'd like to arrange a followup support call to discuss your results and explore next steps, <a href="http://calendly.com/john-fitzgerald/check-up">you can do this online</a>.
+          </p>
+          {{{@root.data.primaryResponse.hits.hits.[0]._source.rendered.scvo_full}}}
+        </div>
+        <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-3-desktop mdc-layout-grid__cell--span-3-tablet mdc-layout-grid__cell--span-4-phone sidebar page-sidebar">
+          {{> menu_digital_evolution}}
+        </div>
+        {{> related_posts}}
+      </div>
+    </div>
+  </div>
+</div>
