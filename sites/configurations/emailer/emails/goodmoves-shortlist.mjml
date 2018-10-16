@@ -1,0 +1,87 @@
+<mjml>
+  <mj-body background-color="#F5F5F5">
+    <mj-wrapper background-color="#ffffff" padding="10px">
+      <mj-section background-color="#42842A" padding="10px">
+        <mj-column padding="0px">
+          <mj-image src="https://storage.googleapis.com/scvo-assets/emailer/goodmoves-logo-white.png" width="352px" align="left" padding="0px"></mj-image>
+        </mj-column>
+      </mj-section>
+
+      <mj-raw>{{#with searchData}}
+        {{#if hits.hits.[0]}}</mj-raw>
+          <mj-section>
+            <mj-column padding="0px">
+              <mj-text font-size="16px" padding="0px" color="#000000" font-family="Montserrat, Helvetica, Arial, sans-serif">
+                <p>
+                  <strong>{{inflect hits.total "job" "jobs" true}}</strong> closing in 3 days.
+                </p>
+              </mj-text>
+            </mj-column>
+          </mj-section>
+
+          <mj-raw>{{#each hits.hits}}</mj-raw>
+          <mj-section padding="5px 0px">
+            <mj-column padding="0px">
+              <mj-text font-size="16px" padding="0px" color="#000000" font-family="Montserrat, Helvetica, Arial, sans-serif">
+                <h2 style="margin:10px 0 0;">
+                  <a href="https://goodmoves.com/vacancy/{{_source.slug}}?utm_source=alert&utm_medium=email" color="#42842A" style="color:#42842A;font-weight:bold;">{{{_source.title}}}</a>
+                </h2>
+                <p>
+                  <strong>Organisation:</strong>
+                  <a href="https://goodmoves.com/organisation/{{_source.organisation.slug}}?utm_source=alert&utm_medium=email" color="#42842A" style="color:#42842A;font-weight:bold;">{{{_source.organisation.name}}}</a><br />
+                  <strong>Salary:</strong>
+                  {{{_source.salary}}}<br />
+                  <strong>Location:</strong>
+                  {{{_source.location}}}
+                </p>
+                <p>
+                  {{{truncate (stripTags _source.description) 250}}}
+                  <a href="https://goodmoves.com/vacancy/{{_source.slug}}?utm_source=alert&utm_medium=email" color="#42842A" style="color:#42842A;font-weight:bold;">Find out more</a>
+                </p>
+              </mj-text>
+            </mj-column>
+          </mj-section>
+          <mj-raw>{{/each}}
+        {{else}}</mj-raw>
+          <mj-section>
+            <mj-column padding="0px">
+              <mj-text font-size="16px" padding="0px" color="#000000" font-family="Montserrat, helvetica, Arial, sans-serif">
+                <p>There is nothing in your Goodmoves job alert today</p>
+              </mj-text>
+            </mj-column>
+          </mj-section>
+        <mj-raw>{{/if}}
+      {{else}}</mj-raw>
+        <mj-section>
+          <mj-column padding="0px">
+            <mj-text font-size="16px" padding="0px" color="#000000" font-family="Montserrat, helvetica, Arial, sans-serif">
+              <p>There is nothing in your Goodmoves job alert today</p>
+            </mj-text>
+          </mj-column>
+        </mj-section>
+      <mj-raw>{{/with}}</mj-raw>
+
+      <mj-section background-color="#37474F" padding="0px">
+        <mj-column padding="10px">
+          <mj-text font-size="16px" color="#ffffff" font-family="Montserrat, helvetica, Arial, sans-serif" padding="0px">
+            <p style="margin:0px;">
+              <a href="https://goodmoves.com/searches" color="#fff" style="color:#fff;font-weight:bold;text-decoration:none;">Change your alert preferences</a> or <a href="%unsubscribe_url%" color="#fff" style="color:#fff;font-weight:bold;text-decoration:none;">unsubscribe</a>
+            </p>
+          </mj-text>
+        </mj-column>
+      </mj-section>
+
+      <mj-section background-color="#263238" padding="0px">
+        <mj-column padding="10px">
+          <mj-text font-size="14px" color="#ffffff" font-family="Montserrat, helvetica, Arial, sans-serif" padding="0px 0px 15px">
+            <p style="margin:0px;">
+              &#169; 2018. The Scottish Council for Voluntary Organisations (SCVO) is a Scottish Charitable Incorporated Organisation. Charity registered in Scotland SC003558. Registered office Mansfield Traquair Centre, 15 Mansfield Place, Edinburgh EH3 6BB.
+            </p>
+          </mj-text>
+
+          <mj-image src="https://storage.googleapis.com/scvo-assets/emailer/scvo-logo.png" align="center" width="125px" padding="0px"></mj-image>
+        </mj-column>
+      </mj-section>
+    </mj-wrapper>
+  </mj-body>
+</mjml>
