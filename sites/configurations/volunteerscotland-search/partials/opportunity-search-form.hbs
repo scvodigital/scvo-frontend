@@ -49,15 +49,24 @@
 {{#compare type "!==" regions ~}}
   <div id="{{../instance_id}}-{{type}}-list">
   <ul id="{{../instance_id}}-{{type}}-list-ul">
-    I'm a list!
+    {{#each (getProperty @root.data.opportunitySupplimentary.types.aggregations (concat type "_slugs.buckets")) ~}}
+      {{#if (contains (getProperty @root.request.params.query ../type) key ) }}
+        {{> list_item slug=key field=../type instance_id=../../instance_id value=(lookup (getProperty @root.data.opportunitySupplimentary.types.aggregations (concat ../type ".buckets")) @index)}}
+      {{/if}}
+    {{/each ~}}
   </ul>
   </div>
 {{/compare}}
 {{/inline}}
+{{#*inline "list_item"}}
+  <li>{{{default value.key value}}}</li>
+{{/inline}}
 {{#*inline "term_checkbox"}}
   <div class="mdc-form-field">
     <div class="mdc-checkbox">
-      <input type="checkbox" class="mdc-checkbox__native-control" id="{{instance_id}}_{{field}}_{{slug}}" name="{{#compare field "===" "type"}}{{field}}{{else}}{{field}}[]{{/compare}}" value="{{slug}}"{{#if (contains selected slug)}} checked{{/if}} />
+      <input type="checkbox" data-list-target="#{{../instance_id}}-{{field}}-list-ul" data-list-value="{{default value.key value}}" class="mdc-checkbox__native-control" id="{{instance_id}}_{{field}}_{{slug}}"
+             field="{{field}}" slug="{{slug}}"
+             name="{{#compare field "===" "type"}}{{field}}{{else}}{{field}}[]{{/compare}}" value="{{slug}}"{{#if (contains selected slug)}} checked{{/if}} />
       <div class="mdc-checkbox__background">
         <svg class="mdc-checkbox__checkmark"
         viewBox="0 0 24 24">
@@ -156,3 +165,27 @@
     </div>
   </form>
 </div>
+
+<script>
+  console.log("hello?");
+  $(document).ready(function(){
+    console.log("hello?");
+    $(".mdc-checkbox__native-control").change(function() {
+      // Need to get
+      console.log("hello?");
+      var instance_id = {{instance_id}};
+      var field = $(this).attr("field");
+      debugger;
+      var slug = $(this).attr("slug");
+      var label = $("label[for='"+ $(this).attr("id") + "']").text()
+      if(this.checked) {
+        // Get UL Ref
+        var ul = $(instance_id + "-" + field + "-list-ul");
+        ul.append('<li id="' + instance_id + '-' + field + '-' + slug + '-list-li">' + label + '</li>');
+      } else {
+        var li = $(instance_id + "-" + field + "-" + slug + "-list-li");
+        li.remove();
+      }
+    });
+  });
+</script>
