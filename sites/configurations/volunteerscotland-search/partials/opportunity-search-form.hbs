@@ -46,8 +46,7 @@
     {{/each ~}}
   {{/compare ~}}
 </div>
-{{#compare type "!==" regions ~}}
-  <div id="{{../instance_id}}-{{type}}-list">
+<div id="{{../instance_id}}-{{type}}-list">
   <ul id="{{../instance_id}}-{{type}}-list-ul">
     {{#each (getProperty @root.data.opportunitySupplimentary.types.aggregations (concat type "_slugs.buckets")) ~}}
       {{#if (contains (getProperty @root.request.params.query ../type) key ) }}
@@ -55,8 +54,7 @@
       {{/if}}
     {{/each ~}}
   </ul>
-  </div>
-{{/compare}}
+</div>
 {{/inline}}
 {{#*inline "list_item"}}
   <li>{{{default value.key value}}}</li>
