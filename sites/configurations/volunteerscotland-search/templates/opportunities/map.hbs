@@ -1,15 +1,6 @@
 <div id="detailed-results-container" class="container-content content-primary-search container-map">
   <div class="mdc-layout-grid head h-padding-full v-margin-full">
     <div class="mdc-layout-grid__inner">
-      <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-8-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone">
-        <div class="h-padding-full">
-          {{> search_info paging=@root.data.search_data.map_results.pagination}}
-        </div>
-      </div>
-      <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone">
-      </div>
-    </div>
-    <div class="mdc-layout-grid__inner">
       <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-4-desktop mdc-layout-grid__cell--span-8-tablet mdc-layout-grid__cell--span-4-phone action">
         {{#>components_tab_bar}}
           {{>components_tab url=(concat "/search" @root.request.url.search) iconClasses="far fa-list fa-fw" label="List" active=(compare @root.request.url.pathname "===" "/search")}}

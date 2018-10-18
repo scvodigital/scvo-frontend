@@ -4,14 +4,14 @@
   fields=(split "text_bag_boost^5,text_bag" ",")
 }},
 {{/if ~}}
-{{#ifAny regions location ~}}
+{{#ifAny regions distance~}}
 {
   "bool": {
     "should": [
       {{#if regions ~}}
         {{>queries_terms field="region_group_slug" terms=regions}},
       {{/if ~}}
-      {{#ifAll location lat lng distance ~}}
+      {{#ifAll lat lng distance ~}}
         {
           "geo_distance": {
             "distance": "{{default distance "8.04672"}}km",
