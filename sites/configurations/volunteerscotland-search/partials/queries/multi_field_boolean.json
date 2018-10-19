@@ -1,0 +1,12 @@
+{
+  "bool" : {
+    "should" : [
+      {{#eachJoin this ","}}
+        {{#if this}}
+          {{stringify @key}} : {{this}}
+        {{/if}}
+      {{/each}}
+    ]
+  }
+}
+

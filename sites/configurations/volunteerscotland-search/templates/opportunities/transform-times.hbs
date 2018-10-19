@@ -1,4 +1,4 @@
-{{#with @root.data.primaryResponse.hits.hits.[0]._source ~}}
+{{#with @root.request.query.hits.hits.[0]._source ~}}
 {
   "any" : {{#ifAny monday_morning monday_afternoon monday_evening tuesday_morning tuesday_afternoon tuesday_evening
                    wednesday_morning wednesday_afternoon wednesday_evening thursday_morning thursday_afternoon thursday_evening
@@ -10,6 +10,5 @@
     "afternoon" : { "monday" : {{#if monday_afternoon}}true{{else}}false{{/if}}, "tuesday" : {{#if tuesday_afternoon}}true{{else}}false{{/if}}, "wednesday" : {{#if wednesday_afternoon}}true{{else}}false{{/if}}, "thursday" : {{#if thursday_afternoon}}true{{else}}false{{/if}}, "friday" : {{#if friday_afternoon}}true{{else}}false{{/if}}, "saturday" : {{#if saturday_afternoon}}true{{else}}false{{/if}}, "sunday" : {{#if sunday_afternoon}}true{{else}}false{{/if}} },
     "evening" : { "monday" : {{#if monday_evening}}true{{else}}false{{/if}}, "tuesday" : {{#if tuesday_evening}}true{{else}}false{{/if}}, "wednesday" : {{#if wednesday_evening}}true{{else}}false{{/if}}, "thursday" : {{#if thursday_evening}}true{{else}}false{{/if}}, "friday" : {{#if friday_evening}}true{{else}}false{{/if}}, "saturday" : {{#if saturday_evening}}true{{else}}false{{/if}}, "sunday" : {{#if sunday_evening}}true{{else}}false{{/if}} }
   }
-
 }
 {{/with ~}}

@@ -10,7 +10,9 @@
 {{#if age_groups ~}}
 {{>queries_terms field="volunteersearch_age_group_slugs" terms=age_groups}},
 {{/if ~}}
-
+{{#if @root.data.transformTimesQuery.any}}
+{{>queries_multi_field_boolean @root.data.transformTimesQuery.raw}}
+{{/if}}
 {{#if recently_updated ~}}
   {{>queries_date_range field="date_last_modified" gt="now-12M"}},
 {{/if ~}}

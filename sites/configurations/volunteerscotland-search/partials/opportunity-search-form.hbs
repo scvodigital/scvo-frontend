@@ -50,19 +50,37 @@
   <ul id="{{../instance_id}}-{{type}}-list-ul">
     {{#each (getProperty @root.data.opportunitySupplimentary.types.aggregations (concat type "_slugs.buckets")) ~}}
       {{#if (contains (getProperty @root.request.params.query ../type) key ) }}
-        {{> list_item slug=key field=../type instance_id=../../instance_id value=(lookup (getProperty @root.data.opportunitySupplimentary.types.aggregations (concat ../type ".buckets")) @index)}}
+        <li>{{> list_item value=(lookup (getProperty @root.data.opportunitySupplimentary.types.aggregations (concat ../type ".buckets")) @index)}}</li>
       {{/if}}
     {{/each ~}}
   </ul>
 </div>
 {{/inline}}
+
 {{#*inline "list_item"}}
-  <li>{{{default value.key value}}}</li>
+  {{{default value.key value}}}
+{{/inline}}
+
+{{#*inline "availability_filter"}}
+  <h3 class="mdc-drawer__content-heading cursor-pointer noselect mdc-drawer--occasional-ie11" data-collapse-target="#{{../instance_id}}-availability-collapse" data-collapse-inverse="#{{../instance_id}}-availability-list" role="button" aria-pressed="false" aria-label="Show {{getProperty @root.context.metaData.termTypeLabels (concat type ".plural")}}" tabindex="0">
+      Availability
+    <span class="mdc-icon-toggle pull-right">
+    <i class="far fa-chevron-down" aria-hidden="true"></i>
+  </span>
+  </h3>
+  <div class="mdc-drawer--occasional-ie11" id="{{../instance_id}}-availability-collapse" style="display: none;">
+    {{>opportunity_timings_selector}}
+  </div>
+  <div id="{{../instance_id}}-availability-list">
+    <ul id="{{../instance_id}}-availability-list-ul">
+
+    </ul>
+  </div>
 {{/inline}}
 {{#*inline "term_checkbox"}}
   <div class="mdc-form-field">
     <div class="mdc-checkbox">
-      <input type="checkbox" data-list-target="#{{../instance_id}}-{{field}}-list-ul" data-list-value="{{default value.key value}}" class="mdc-checkbox__native-control" id="{{instance_id}}_{{field}}_{{slug}}"
+      <input type="checkbox" data-list-target="#{{../instance_id}}-{{field}}-list-ul" data-list-value="{{default value.key value}}" data-list-content="{{>list_item value=(default value.key value)}}"class="mdc-checkbox__native-control" id="{{instance_id}}_{{field}}_{{slug}}"
              field="{{field}}" slug="{{slug}}"
              name="{{#compare field "===" "type"}}{{field}}{{else}}{{field}}[]{{/compare}}" value="{{slug}}"{{#if (contains selected slug)}} checked{{/if}} />
       <div class="mdc-checkbox__background">
@@ -130,6 +148,8 @@
     <input type="hidden" name="lat" value="{{@root.request.params.query.lat}}">
     <input type="hidden" name="lng" value="{{@root.request.params.query.lng}}">
 
+    {{> availability_filter instance_id=instance_id ~}}
+
     {{> term_filter type="regions" instance_id=instance_id ~}}
 
     <div class="h-padding">
@@ -163,27 +183,3 @@
     </div>
   </form>
 </div>
-
-<script>
-  console.log("hello?");
-  $(document).ready(function(){
-    console.log("hello?");
-    $(".mdc-checkbox__native-control").change(function() {
-      // Need to get
-      console.log("hello?");
-      var instance_id = {{instance_id}};
-      var field = $(this).attr("field");
-      debugger;
-      var slug = $(this).attr("slug");
-      var label = $("label[for='"+ $(this).attr("id") + "']").text()
-      if(this.checked) {
-        // Get UL Ref
-        var ul = $(instance_id + "-" + field + "-list-ul");
-        ul.append('<li id="' + instance_id + '-' + field + '-' + slug + '-list-li">' + label + '</li>');
-      } else {
-        var li = $(instance_id + "-" + field + "-" + slug + "-list-li");
-        li.remove();
-      }
-    });
-  });
-</script>

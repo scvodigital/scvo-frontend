@@ -1,0 +1,36 @@
+<div class="table-responsive">
+  <table class="table table-condensed">
+    <thead>
+    <tr>
+      <th></th>
+      <th style="text-align:center;font-weight:bold;">AM</th>
+      <th style="text-align:center;font-weight:bold;">PM</th>
+      <th style="text-align:center;font-weight:bold;">Eve</th>
+    </tr>
+    </thead>
+    <tbody>
+
+    {{#each @root.data.transformTimesQuery.times_select}}
+      <tr>
+        <th>{{capitalize @key}}</th>
+        {{#each this}}
+          <td style="text-align:center;font-weight:bold;">
+            <div class="mdc-checkbox">
+              <input type="checkbox" name="{{@key}}"
+                     class="mdc-checkbox__native-control"
+                     {{#if this}}checked{{/if}}>
+              <div class="mdc-checkbox__background">
+                <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
+                  <path class="mdc-checkbox__checkmark__path" fill="none" stroke="white" d="M1.73,12.91 8.1,19.28 22.79,4.59"></path>
+                </svg>
+                <div class="mdc-checkbox__mixedmark"></div>
+              </div>
+            </div>
+          </td>
+        {{/each}}
+      </tr>
+    {{/each}}
+
+    </tbody>
+  </table>
+</div>
