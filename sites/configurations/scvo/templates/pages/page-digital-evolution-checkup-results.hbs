@@ -7,9 +7,13 @@
       <div class="mdc-layout-grid__inner">
         <div class="mdc-layout-grid__cell mdc-layout-grid__cell--span-9-desktop mdc-layout-grid__cell--span-5-tablet mdc-layout-grid__cell--span-4-phone content page-content">
           <h2>
-            Digital Check-up, overall score: {{> to_percentage score=@root.request.params.query.overall lower=-18 upper=138}}% <span class="mdc-typography--body1">(average: {{round @root.data.supplimentaryResponses.data_averages.aggregations.total_stats.avg "up"}}%)</span>
+            Your digital checkup result
           </h2>
           <p>
+            Your overall score was {{> to_percentage score=@root.request.params.query.overall lower=-18 upper=138}}% <span class="mdc-typography--body1">(average: {{round @root.data.supplimentaryResponses.data_averages.aggregations.total_stats.avg "up"}}%)</span>
+          </p>
+          
+          <!-- <p>
             <strong>Section 1 - Leadership, Culture and Skills</strong><br />
             You scored: {{> to_percentage score=@root.request.params.query.s1 lower=-4 upper=20}}% in this section (average: {{round @root.data.supplimentaryResponses.data_averages.aggregations.leadership_culture_and_skills_stats.avg "up"}}%)
             <br />
@@ -22,22 +26,21 @@
             <strong>Section 4 - Cyber resilience and online threats</strong><br />
             You scored: {{> to_percentage score=@root.request.params.query.s4 lower=-2 upper=17}}% in this section (average: {{round @root.data.supplimentaryResponses.data_averages.aggregations.cyber_resilience_stats.avg "up"}}%)
             <br />
-          </p>
-          <p>
-            Thank you{{#if @root.request.params.query.name}} {{@root.request.params.query.name}}{{/if}}, you have completed the digital checkup. If you have asked for support, we will be in touch to arrange a call. Or you can go ahead and <a href="http://calendly.com/john-fitzgerald/check-up">book a time</a>.
-          </p>
-          <h2>
-            Next steps
-          </h2>
-          <p>
-            <a href="https://scvo.org/digital">Sign up to our e-bulletin</a> to get details of our events, training and other support for digital change. 
-          </p>
-          <p>
-            If you'd like to arrange a followup support call to discuss your results and explore next steps, <a href="http://calendly.com/john-fitzgerald/check-up">you can do this online</a>.
-          </p>
+          </p> -->
 
+          <h3>
+            How does your digital capability compare to other organisations of a similar size?
+          </h3>
           <div class="radarChart"></div>
 
+          <h3>
+            Suggested next steps for &hellip;
+          </h3>
+
+
+          <h3>
+            Book a follow-up call to review your results and explore next steps
+          </h3>
           <!-- Calendly inline widget begin -->
           <div class="calendly-inline-widget" data-url="https://calendly.com/john-fitzgerald/check-up" style="width:100%;height:620px;"></div>
           <script type="text/javascript" src="https://assets.calendly.com/assets/external/widget.js"></script>
@@ -56,6 +59,7 @@
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
 <script>
+
 /////////////////////////////////////////////////////////
 /////////////// The Radar Chart Function ////////////////
 /////////////// Written by Nadieh Bremer ////////////////
@@ -67,8 +71,8 @@ function RadarChart(id, data, options) {
 	var cfg = {
 	 w: 600,				//Width of the circle
 	 h: 600,				//Height of the circle
-	 margin: {top: 20, right: 20, bottom: 20, left: 20}, //The margins of the SVG
-	 levels: 3,				//How many levels or inner circles should there be drawn
+	 margin: {top: 5, right: 5, bottom: 5, left: 5}, //The margins of the SVG
+	 levels: 4,				//How many levels or inner circles should there be drawn
 	 maxValue: 0, 			//What is the value that the biggest circle will represent
 	 labelFactor: 1.2, 	//How much farther than the radius of the outer circle should the labels be placed
 	 wrapWidth: 60, 		//The number of pixels after which a label needs to be given a new line
@@ -401,12 +405,13 @@ function RadarChart(id, data, options) {
     w: width,
     h: height,
     margin: margin,
-    maxValue: 1,
+    maxValue: 0,
     levels: 5,
     roundStrokes: true,
     color: color
   };
   //Call function to draw the Radar chart
   RadarChart(".radarChart", data, radarChartOptions);
+
 </script>
 
