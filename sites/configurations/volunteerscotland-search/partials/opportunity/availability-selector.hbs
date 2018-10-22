@@ -10,15 +10,16 @@
     </thead>
     <tbody>
 
-    {{#each @root.data.transformTimesQuery.times_select}}
+    {{#each (split "monday,tuesday,wednesday,thursday,friday,saturday,sunday" ",")}}
       <tr>
-        <th>{{capitalize @key}}</th>
-        {{#each this}}
+        <th>{{capitalize this}}</th>
+
+        {{#each (split "morning,afternoon,evening" ",")}}
           <td style="text-align:center;font-weight:bold;">
             <div class="mdc-checkbox">
-              <input type="checkbox" name="{{@key}}"
-                     class="mdc-checkbox__native-control" value="true"
-                     {{#if this}}checked{{/if}}>
+              <input type="checkbox" name="availability[]"
+                     class="mdc-checkbox__native-control" value="{{concat ../this "-" this}}"
+                     {{#if (contains @root.request.params.query.availability (concat ../this "-" this))}}checked{{/if}}>
               <div class="mdc-checkbox__background">
                 <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
                   <path class="mdc-checkbox__checkmark__path" fill="none" stroke="white" d="M1.73,12.91 8.1,19.28 22.79,4.59"></path>
@@ -34,3 +35,6 @@
     </tbody>
   </table>
 </div>
+
+
+

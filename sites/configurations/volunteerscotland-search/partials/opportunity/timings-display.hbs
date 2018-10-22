@@ -14,15 +14,15 @@
     </thead>
     <tbody>
 
-      {{#each @root.data.transformTimes.times}}
+      {{#each (split "morning,afternoon,evening" ",")}}
         <tr>
-        <th>{{capitalize @key}}</th>
-          {{#each this}}
+          <th>{{capitalize this}}</th>
+          {{#each (split "monday,tuesday,wednesday,thursday,friday,saturday,sunday" ",")}}
             <td style="text-align:center;font-weight:bold;">
               <div class="mdc-checkbox">
-                <input disabled type="checkbox" name="type"
-                       class="mdc-checkbox__native-control"
-                       {{#if this}}checked{{/if}}>
+                <input type="checkbox" name="availability[]"
+                       class="mdc-checkbox__native-control" value="{{concat this "-" ../this}}"
+                       {{#if (contains ../../this (concat this "-" ../this))}}checked{{/if}}>
                 <div class="mdc-checkbox__background">
                   <svg class="mdc-checkbox__checkmark" viewBox="0 0 24 24">
                     <path class="mdc-checkbox__checkmark__path" fill="none" stroke="white" d="M1.73,12.91 8.1,19.28 22.79,4.59"></path>
