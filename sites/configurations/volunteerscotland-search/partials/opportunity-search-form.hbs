@@ -27,9 +27,9 @@
         {{/compare ~}}
       {{/each ~}}
       {{#ifAny (length @root.data.opportunitySupplimentary.types.aggregations.home_based.buckets) (length @root.data.opportunitySupplimentary.types.aggregations.various_locations.buckets) ~}}
-        {{#compare (length @root.data.opportunitySupplimentary.types.aggregations.countries.buckets) ">=" 1 ~}}
+        {{!-- #compare (length @root.data.opportunitySupplimentary.types.aggregations.countries.buckets) ">=" 1 ~}}
           <h3 class="mdc-typography--headline7">Other</h3>
-        {{/compare ~}}
+        {{/compare ~ --}}
         {{#compare (length @root.data.opportunitySupplimentary.types.aggregations.home_based.buckets) ">=" 1 ~}}
           {{> term_checkbox slug="true" field="home_based" selected=@root.request.params.query.home_based instance_id=../instance_id value="Home-based"}}
         {{/compare ~}}
