@@ -47,17 +47,22 @@
   {{/compare ~}}
 </div>
 <div id="{{../instance_id}}-{{type}}-list">
-  <ul id="{{../instance_id}}-{{type}}-list-ul">
+  <ul id="{{../instance_id}}-{{type}}-list-target">
     {{#each (getProperty @root.data.opportunitySupplimentary.types.aggregations (concat type "_slugs.buckets")) ~}}
       {{#if (contains (getProperty @root.request.params.query ../type) key ) }}
-        <li>{{> list_item value=(lookup (getProperty @root.data.opportunitySupplimentary.types.aggregations (concat ../type ".buckets")) @index)}}</li>
+        <li>{{> list_item type=../type value=(lookup (getProperty @root.data.opportunitySupplimentary.types.aggregations (concat ../type ".buckets")) @index)}}</li>
       {{/if}}
     {{/each ~}}
   </ul>
 </div>
 {{/inline}}
 
-{{#*inline "list_item"}}{{{default value.key value}}}{{/inline}}
+{{#*inline "list_item"}}
+  <div class="mdc-chip mdc-theme--primary-bg" tabindex="0" id="">
+    <div class="mdc-chip__text">{{value}}</div>
+    <i class="far fa-times-circle mdc-chip__icon mdc-chip__icon--trailing remove_element" tabindex="0" role="button"></i>
+  </div>
+{{/inline}}
 
 {{#*inline "availability_filter"}}
   <h3 class="mdc-drawer__content-heading cursor-pointer noselect mdc-drawer--occasional-ie11" data-collapse-target="#{{../instance_id}}-availability-collapse" data-collapse-inverse="#{{../instance_id}}-availability-list" role="button" aria-pressed="false" aria-label="Show {{getProperty @root.context.metaData.termTypeLabels (concat type ".plural")}}" tabindex="0">
@@ -69,16 +74,11 @@
   <div class="mdc-drawer--occasional-ie11" id="{{../instance_id}}-availability-collapse" style="{{#unless @root.request.params.query.availability}}display:none{{/unless}}">
     {{>opportunity_availability_selector type="availability"}}
   </div>
-  <div id="{{../instance_id}}-availability-list">
-    <ul id="{{../instance_id}}-availability-list-ul">
-
-    </ul>
-  </div>
 {{/inline}}
 {{#*inline "term_checkbox"}}
   <div class="mdc-form-field">
     <div class="mdc-checkbox">
-      <input type="checkbox" data-list-target="#{{../instance_id}}-{{field}}-list-ul" data-list-content="{{>list_item value=(default value.key value)}}"class="mdc-checkbox__native-control" id="{{instance_id}}_{{field}}_{{slug}}"
+      <input type="checkbox"  data-chip-checkbox-target="#{{../instance_id}}-{{field}}-list-target" data-list-content='{ "data" : {{#blockStringify this ~}}{{>list_item value=(default value.key value)}}{{~/blockStringify}} }' class="mdc-checkbox__native-control" id="{{instance_id}}_{{field}}_{{slug}}"
              field="{{field}}" slug="{{slug}}"
              name="{{#compare field "===" "type"}}{{field}}{{else}}{{field}}[]{{/compare}}" value="{{slug}}"{{#if (contains selected slug)}} checked{{/if}} />
       <div class="mdc-checkbox__background">
