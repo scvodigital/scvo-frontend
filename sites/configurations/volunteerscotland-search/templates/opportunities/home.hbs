@@ -79,36 +79,23 @@
                       }
                     ],
                     "datasets": [
+                    {{#each (split "work_types,client_groups,services,age_groups,regions" ",") ~}}
                       {
-                        "name": "client_group",
+                        "name": "{{this}}",
                         "templates": {
-                          "header": "<h3>Client group</h3>"
+                          "header": "<h3>{{getProperty @root.context.metaData.termTypeLabels (concat this ".plural")}}</h3>"
                         },
                         "display": "label",
                         "items": [
-                          {{#each @root.data.opportunitySupplimentary.types.aggregations.client_group.buckets ~}}
-                          {
+                          {{#each (getProperty @root.data.opportunitySupplimentary.types.aggregations (concat this ".buckets"))}}
+                            {
                             "label": {{{stringify key}}},
                             "value": {{{stringify (slugify key)}}}
-                          }{{#unless @last}},{{/unless}}
-                          {{/each ~}}
-                        ]
-                      },
-                      {
-                        "name": "work_type",
-                        "templates": {
-                          "header": "<h3>Work type</h3>"
-                        },
-                        "display": "label",
-                        "items": [
-                          {{#each @root.data.opportunitySupplimentary.types.aggregations.work_type.buckets ~}}
-                          {
-                            "label": {{{stringify key}}},
-                            "value": {{{stringify (slugify key)}}}
-                          }{{#unless @last}},{{/unless}}
-                          {{/each ~}}
-                        ]
-                      }
+                            }{{#unless @last}},{{/unless}}
+                          {{/each}}
+                          ]
+                    }{{#unless @last}},{{/unless}}
+                  {{/each}}
                     ]
                   }'>
                   <label for="what-jobs" class="mdc-floating-label">
