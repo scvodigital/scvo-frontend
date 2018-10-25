@@ -1,53 +1,53 @@
 <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
 <script type="text/javascript">
-if (window.location.hash) {
-  var hash = window.location.hash.replace('#', '');
-  var tab = $('[aria-controls="' + hash + '"]');
-  if (tab.length > 0) {
-    tab.addClass('mdc-tab--active');
-    var panel = $('#' + tab.attr('aria-controls')).addClass('panel--active');
-    var activeTab = tab.siblings('.mdc-tab--active');
-    if (activeTab[0]) {
-      var activePanel = $('#' + activeTab.attr('aria-controls'));
-      activeTab.removeClass('mdc-tab--active');
-      activePanel.removeClass('panel--active');
-    }
-  }
-}
+//if (window.location.hash) {
+//  var hash = window.location.hash.replace('#', '');
+//  var tab = $('[aria-controls="' + hash + '"]');
+//  if (tab.length > 0) {
+//    tab.addClass('mdc-tab--active');
+//    var panel = $('#' + tab.attr('aria-controls')).addClass('panel--active');
+//    var activeTab = tab.siblings('.mdc-tab--active');
+//    if (activeTab[0]) {
+//      var activePanel = $('#' + activeTab.attr('aria-controls'));
+//      activeTab.removeClass('mdc-tab--active');
+//      activePanel.removeClass('panel--active');
+//    }
+//  }
+//}
 
-var tabs = new mdc.tabs.MDCTabBar(document.querySelector("#opportunity-tab-bar"));
-var panels = document.querySelector(".panels");
-tabs.preventDefaultOnClick = true;
-function updatePanel(index) {
-  var activePanel = panels.querySelector(".panel.panel--active");
-  if (activePanel) {
-    activePanel.classList.remove("panel--active");
-  }
-  var newActivePanel = panels.querySelector(
-    ".panel:nth-child(" + (index + 1) + ")"
-  );
-  if (newActivePanel) {
-    newActivePanel.classList.add("panel--active");
-  }
-}
-tabs.listen("MDCTabBar:change", function(t) {
-  var tabs = t.detail;
-  var nthChildIndex = tabs.activeTabIndex;
-  updatePanel(nthChildIndex);
-  if (goodmoves.maps.opportunityMap) {
-    window.setTimeout(function() {
-      var map = goodmoves.maps.opportunityMap;
-      map.invalidateSize();
-    }, 0);
-  }
-  if (mdeEditors.length > 0) {
-    window.setTimeout(function() {
-      mdeEditors.forEach(function(editor) {
-        editor.codemirror.refresh();
-      });
-    }, 0);
-  }
-});
+//var tabs = new mdc.tabs.MDCTabBar(document.querySelector("#opportunity-tab-bar"));
+//var panels = document.querySelector(".panels");
+//tabs.preventDefaultOnClick = true;
+//function updatePanel(index) {
+//  var activePanel = panels.querySelector(".panel.panel--active");
+//  if (activePanel) {
+//    activePanel.classList.remove("panel--active");
+//  }
+//  var newActivePanel = panels.querySelector(
+//    ".panel:nth-child(" + (index + 1) + ")"
+//  );
+//  if (newActivePanel) {
+//    newActivePanel.classList.add("panel--active");
+//  }
+//}
+//tabs.listen("MDCTabBar:change", function(t) {
+//  var tabs = t.detail;
+//  var nthChildIndex = tabs.activeTabIndex;
+//  updatePanel(nthChildIndex);
+//  if (goodmoves.maps.opportunityMap) {
+//    window.setTimeout(function() {
+//      var map = goodmoves.maps.opportunityMap;
+//      map.invalidateSize();
+//    }, 0);
+//  }
+//  if (mdeEditors.length > 0) {
+//    window.setTimeout(function() {
+//      mdeEditors.forEach(function(editor) {
+//        editor.codemirror.refresh();
+//      });
+//    }, 0);
+//  }
+//});
 
 var mdeEditors = [];
 $(document).ready(function() {
