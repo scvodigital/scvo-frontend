@@ -14,5 +14,7 @@
     </div>
   </div>
 
-  {{> sector_stats}}
+  {{#compare @root.request.params.path "!==" "projects-campaigns_i-love-charity_sector-stats" ~}}
+    {{> sector_stats}}
+  {{/compare ~}}
 </div>
