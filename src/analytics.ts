@@ -355,10 +355,16 @@ export class ViewCount {
       private source: string,
       private hits = 0,
   ) {}
-
+  //TODO: TEST THIS AND RUN IT
   get name(): string {
+    const trim = 30;
+    let ht = this.hitType;
+    let overlap = 80 - (ht.length + 30);
+    if (overlap < 0) {
+      ht = ht.substr(0 - overlap);
+    }
     return this.entityId + '-' + format(this.month, 'YYYY-MM-DD') + '-' +
-        this.hitType;
+        ht;
   }
 
   get sObject(): SObjectViewCount {
